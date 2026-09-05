@@ -8,12 +8,12 @@ specifications, and release gates.
 
 ## Current status
 
-The repository is at the specification stage. No semantic declaration has passed the project's
-acceptance gates, so the public Lean modules currently provide package structure only. QB-001 and
-DEF-001 remain specification work items awaiting their required external pre-Lean,
-implementation-review, and release gates. The source ledgers are initial audit seeds, not a
-complete source inventory, and the project claims no quantitative Olver theorem or source coverage
-yet.
+The repository contains a candidate implementation of the externally authorized BOOTSTRAP-0
+packets QB-001 and DEF-001. The candidate exposes foundational finite-error predicates and transport
+lemmas and transparent wrappers around Mathlib's Gamma function. It is awaiting implementation
+review and release; these declarations must not yet be described as accepted or released. The
+source ledgers are initial audit seeds, not a complete source inventory, and the project claims no
+quantitative Olver theorem or source coverage yet.
 
 Planning and review artifacts are kept explicit:
 
@@ -25,12 +25,16 @@ Planning and review artifacts are kept explicit:
 ## Library layout
 
 - `LMLF/Basic.lean` provides narrow shared imports for foundational quantitative algebra.
-- `LMLF/Definitions.lean` is an empty public umbrella reserved for accepted definitions.
-- `LMLF/Results.lean` is an empty public umbrella reserved for accepted semantic results.
-- `LMLF.lean` imports the public package modules.
+- `LMLF/Definitions/Gamma.lean` provides the four candidate wrappers around `Complex.Gamma`.
+- `LMLF/Quantitative/Basic.lean` provides the eight candidate finite-error declarations.
+- `LMLF/Definitions.lean` and `LMLF/Results.lean` are the public semantic umbrellas.
+- `LMLF/Audit/Definitions.lean` is a separately built regression consumer and is not imported by
+  `LMLF.lean`.
+- `LMLF.lean` imports only the public semantic package modules.
 
-The `LMLF` library target lists only these public modules. Keep semantic dependencies flowing from
-shared foundations to definitions to results.
+The `LMLF` library target explicitly lists both semantic and audit modules. Semantic dependencies
+flow from shared foundations to definitions and results; the audit module only consumes semantic
+modules.
 
 ## Getting started
 

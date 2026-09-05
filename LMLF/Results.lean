@@ -1,7 +1,8 @@
 import LMLF.Definitions
+import LMLF.Quantitative.Basic
 
 /-!
 # LMLF.Results
 
-Empty semantic umbrella reserved for accepted results.
+Public umbrella for candidate semantic results.
 -/

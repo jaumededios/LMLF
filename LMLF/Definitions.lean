@@ -1,7 +1,7 @@
-import LMLF.Basic
+import LMLF.Definitions.Gamma
 
 /-!
 # LMLF.Definitions
 
-Empty semantic umbrella reserved for accepted definitions.
+Public umbrella for candidate semantic definitions.
 -/

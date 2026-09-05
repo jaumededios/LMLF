@@ -18,4 +18,12 @@ rev = "v4.33.1"
 
 [[lean_lib]]
 name = "LMLF"
-globs = ["LMLF", "LMLF.Basic", "LMLF.Definitions", "LMLF.Results"]
+globs = [
+  "LMLF",
+  "LMLF.Basic",
+  "LMLF.Definitions",
+  "LMLF.Definitions.Gamma",
+  "LMLF.Quantitative.Basic",
+  "LMLF.Results",
+  "LMLF.Audit.Definitions",
+]
