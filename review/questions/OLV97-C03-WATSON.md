@@ -1,115 +1,191 @@
-# Review questions: Olver 1997 Watson packet
+# Architecture decision memo: Watson packet
 
-**Audience:** independent source, analysis, and Lean-library referees
-**Status:** questions for a draft; no implementation authorization
-**Source snapshot:** `SRC-OLV-1997-USER-PDF-20260905`
-**Primary occurrence:** `OLV97-C03-WATSON`, Theorem 3.1, printed pp. 71-72
-**Related source formulas:** `OLV97-C03-WATSON-BOUNDS`, section 9.1-9.2,
-printed pp. 89-90
+**Audience:** an external model used for high-leverage library-design decisions
 
-Please review from the attached/source-bound pages rather than from memory or a
-modern statement of Watson's lemma. Answers should distinguish source fidelity,
-mathematical correctness, and desirable generalization.
+**Status:** decision request for draft theorem cards; no Lean authorization
 
-## A. Source transcription
+**Repository snapshot:** commit `773ef08b0fd536813a0b14c5883bb9801d5198ec`
 
-1. Does the normalized transcription of (3.02)-(3.08) preserve every exponent,
-   index boundary, quantifier, strict inequality, and endpoint convention?
-2. Does Olver intend \(q\) and \(a_s\) to be real-valued, complex-valued, or
-   either? What nearby convention in this edition supports the answer?
-3. Is `t -> 0` in (3.02) unambiguously `t -> 0+` because `t` is positive?
-4. Is the source's expansion convention exactly captured by
-   \(\phi_n(t)=O(t^{(n+\lambda-\mu)/\mu})\) for every fixed \(n\), with the
-   empty sum at \(n=0\)?
-5. Does “the integral converges throughout its range” require separate
-   convergence at each permitted interior infinity, or only convergence of a
-   globally specified improper integral?
-6. Does the proof require one baseline \(X\) for each fixed \(n\), or can a
-   single \(X\) be chosen independently of \(n\) from the theorem hypothesis?
+**Relevant drafts:** `blueprint/theorem_cards/QL-001.yaml`,
+`blueprint/theorem_cards/OLV-001.yaml`, `blueprint/proofs/QL-001.md`, and
+`blueprint/proofs/OLV-001.md`
 
-## B. Proof extracted from pp. 71-72
+## Purpose and boundary
 
-7. Verify the exact finite identity (3.05), including the Gamma argument and
-   power of \(x\).
-8. Verify that the local bound (3.06) is valid for every \(n\ge0\) solely from
-   \(\lambda,\mu>0\) and the local remainder estimate.
-9. Verify that convergence at the chosen baseline \(X\) makes
-   \(\Phi_n(t)=\int_{k_n}^t e^{-Xv}\phi_n(v)\,dv\) bounded on
-   \([k_n,\infty)\), including conditionally convergent cases.
-10. Verify the integration-by-parts identity (3.07), both boundary terms, and
-    the constant in (3.08).
-11. Verify that
-    \[
-      K_n\Gamma(\beta_n)x^{-\beta_n}
-      +L_ne^{-(x-X)k_n}
-    \]
-    implies the exact source expansion for each fixed \(n\), with no hidden
-    uniformity claim.
-12. Identify any extra regularity needed to make the source's proof rigorous
-    for functions with finitely many discontinuities or infinities.
+Please decide the public semantic and dependency architecture for the first
+Watson-lemma packet. We will handle transcription comparison, pinned-Mathlib
+search, routine edge cases, proof details, and Lean implementation locally.
+Do not spend review time checking equations line by line.
 
-## C. Quantitative packet boundary
+The mathematical core is the following. If a remainder `phi` obeys a local
+bound
 
-13. Should the first reusable theorem accept the local constants
-    \(k,K,X,L\) as explicit data and prove the two-term bound, while a separate
-    bridge derives existence of those constants from Olver's qualitative
-    hypotheses?
-14. Should the supplied-global-majorant implication (9.01) -> (9.02) be a
-    separate card? The current recommendation is yes, because it uses stronger
-    hypotheses than Theorem 3.1.
-15. Should the best-exponent definitions (9.03) and (9.05) be deferred until
-    extended-real suprema, zero coefficients, and logarithmic quotients have a
-    dedicated card?
-16. Is the proposed novelty split correct?
-    - proof-level local-tail inequality: `strengthened_conclusion` or
-      `equivalent_reformulation` of the proof;
-    - qualitative bridge: `source_equivalent`;
-    - global bound (9.02): direct source target;
-    - Banach-valued generalization: `generalized`.
+\[
+  \|\phi(t)\|\le Kt^{\beta-1}\quad(0<t\le k),\qquad \beta,k>0,
+\]
 
-## D. Lean semantics
+and its baseline weighted primitive
 
-17. What is the smallest robust interface for the source's possibly
-    conditional improper integral? In particular, should it be expressed as a
-    `Tendsto` of finite `intervalIntegral`s rather than a totalized whole-line
-    Bochner integral?
-18. How should finite interior singularities be represented without making the
-    first packet depend on an unnecessarily large integration framework?
-19. Is a complex-valued first theorem preferable, with the real-valued source
-    statement as a corollary, or would that make source recovery harder to
-    audit?
-20. Which exact pinned Mathlib declarations already provide:
-    - the real power-exponential Gamma moment;
-    - finite-interval integration by parts for the tail primitive;
-    - exponential decay versus arbitrary real powers;
-    - conversion between interval-integral limits and set integrals when
-      absolute integrability is available?
-21. Can the generic finite theorem be stated over a complete normed real vector
-    space without complicating the source-facing complex/real specialization?
+\[
+  F(t)=\int_k^t e^{-Xv}\phi(v)\,dv
+\]
 
-## E. Anti-laundering tests
+obeys `norm (F t) <= L` for `t >= k`, then for `x > max X 0` the
+improper Laplace integral exists and
 
-22. Give a counterexample showing that local asymptotic data without a tail
-    convergence or tail-majorant hypothesis cannot imply any global Laplace
-    bound.
-23. Give a counterexample showing that eventual convergence alone cannot
-    supply a useful numerical tail constant uniformly in a family.
-24. Check `n=0`, `a_n=0`, `0<lambda<mu`, `mu>1`, and `sigma_n<0` explicitly.
-25. Confirm that no theorem assumes (9.01), (9.02), or the final asymptotic
-    conclusion inside a structure field under a different name.
+\[
+ \left\|\int_0^\infty e^{-xt}\phi(t)\,dt\right\|
+ \le K\Gamma(\beta)x^{-\beta}+Le^{-(x-X)k}.
+\]
 
-## Requested review output
+Olver's qualitative hypotheses produce the constants existentially for each
+fixed truncation order. Named-function applications will instead supply
+effective constants. The source allows improper convergence and does not
+clearly require absolute convergence, so replacing its integral by Mathlib's
+totalized whole-ray Bochner integral would strengthen or distort the theorem.
 
-Please return:
+## Decisions requested
 
-1. answers or findings keyed to questions 1-25;
-2. a corrected mathematical transcription if any symbol or hypothesis is wrong;
-3. a recommended packet split and scalar/integral semantics;
-4. a verdict for source fidelity and a separate verdict for the local-tail
-   natural-language proof;
-5. explicit unresolved issues that must block theorem-card freezing;
-6. model/runtime identity and a statement that the review used a fresh context.
+### D1. Canonical improper-integral semantics
 
-The review may approve the source collation while requesting changes to the
-quantitative theorem design. It must not set `lean_ready`; that remains a later
-external-envelope decision after frozen cards, signatures, proofs, and quorum.
+Choose the canonical public representation of a possibly conditionally
+convergent integral.
+
+- **A — relational limit predicate (current recommendation):** define a
+  predicate relating an integrand and value through `Tendsto` of finite
+  interval integrals. State theorems using that relation; add bridges to
+  Mathlib set integrals after absolute integrability is known.
+- **B — partial-value API:** package convergence evidence with a uniquely
+  determined integral value and make that package the primary theorem input
+  and output.
+- **C — Bochner/set-integral API:** state the public theorem with
+  `MeasureTheory.Integrable` and the ordinary set integral, accepting absolute
+  convergence as the library contract.
+
+A is source-faithful and keeps existence explicit, but creates a small new
+integration layer. B may improve downstream ergonomics but risks premature
+packaging. C maximizes immediate Mathlib reuse but loses the conditional case.
+
+Please decide whether A, B, C, or a precisely described hybrid should be the
+canonical layer. If A or B, specify whether the primitive relation should be
+one-sided at infinity plus an explicit split point, or a single two-endpoint
+relation on `(0, infinity)`.
+
+### D2. Scalar and codomain generality
+
+Choose the generality boundary between reusable analysis and source-facing
+theorems.
+
+- **A — generic kernel, scalar wrappers (current recommendation):** prove the
+  local-tail estimate for a complete normed real vector space, then state the
+  Gamma-moment/Watson layer for real and complex scalars as appropriate.
+- **B — complex-first:** use complex-valued amplitudes throughout and derive
+  the real theorem by coercion or specialization.
+- **C — real-first:** formalize only the real case until a concrete complex
+  consumer appears.
+
+A exposes the genuinely vector-valued integration-by-parts argument without
+forcing Gamma-moment algebra into an over-general statement. B gives one
+scalar API but may couple generic infrastructure to complex coercions. C is
+smallest but likely creates later duplication.
+
+Please decide the stable public boundary, including whether the generic
+kernel is worthwhile before a second concrete consumer exists.
+
+### D3. Quantitative witness packaging
+
+The reusable theorem needs `k`, `K`, `X`, and `L` as usable data; the
+source-facing theorem only proves that such witnesses exist.
+
+- **A — flat theorem arguments (current recommendation):** expose the four
+  constants and their hypotheses directly. Introduce a structure only after
+  repeated consumers reveal a stable abstraction.
+- **B — certificate structure:** define a reusable local-tail certificate
+  containing the constants, domain facts, local majorant, and primitive
+  bound; make application theorems construct certificates.
+- **C — existential-only public API:** hide the witnesses in the generic
+  theorem and provide separate extraction results when needed.
+
+A is transparent and resists a one-use wrapper. B may become the right input
+to automation and named-function instances, but fixes fields and coercion
+choices early. C is closest to the qualitative source and least useful for
+quantitative applications.
+
+Please decide what should be public in the first release and what should be
+deliberately deferred.
+
+### D4. Interior singularities and the scope of the first integration layer
+
+Olver permits finitely many discontinuities or infinities. There are three
+plausible scopes:
+
+- **A — singularity-agnostic core (current recommendation):** formulate the
+  generic local-tail theorem only in terms of the finite interval integrals
+  and limit relations it actually uses. Put finite-breakpoint bookkeeping in
+  source adapters when a source example requires it.
+- **B — finite-breakpoint API now:** make a finite ordered singularity set and
+  componentwise improper convergence part of the foundational integral
+  definition.
+- **C — locally Bochner-integrable first release:** support unbounded points
+  only when the function is still locally absolutely integrable; postpone
+  conditionally convergent interior singularities.
+
+A keeps the core small but must be designed carefully enough that an adapter
+can represent all source cases without changing theorem statements. B is most
+literal but creates substantial framework before a concrete use. C is
+pragmatic but records a real source-coverage limitation.
+
+Please decide the supported semantics for the first release and state exactly
+which source cases, if any, may be deferred.
+
+### D5. Packet and module dependency graph
+
+The proposed layering is:
+
+1. a small improper-integration module containing limit predicates,
+   uniqueness, linearity, splitting, and bridges to Mathlib integrals;
+2. a generic Laplace local-tail module proving the bounded-primitive estimate;
+3. a finite Watson module combining that estimate with Gamma moments;
+4. an `Olver1997` source adapter deriving existential witnesses and recovering
+   the printed qualitative asymptotic expansion;
+5. a separate later packet for the stronger global-majorant estimate in
+   section 9 and, later still, its best-exponent suprema.
+
+This direction prevents source-specific definitions from entering reusable
+analysis and prevents the stronger section 9 hypothesis from being silently
+used in the Chapter 3 theorem. The cost is several public layers for the first
+example.
+
+Please approve this graph or give a replacement graph. In particular, decide
+whether layers 2 and 3 should remain separate, which declarations should be
+public, and whether the qualitative recovery belongs in the source module or
+in a general asymptotics bridge.
+
+## Constraints not being reopened in this review
+
+- The proof-derived local-tail inequality and the stronger section 9 global
+  majorant remain distinct theorem packets.
+- No infinite series is integrated; every conclusion is at a fixed finite
+  truncation order.
+- Quantitative constants may depend on the truncation order unless uniformity
+  is explicitly assumed.
+- Source-facing declarations must not encode the desired conclusion or a
+  stronger section 9 hypothesis inside an opaque structure field.
+- Natural-language proof review and source-fidelity review remain separate
+  gates. This memo is only for architecture.
+
+## Requested response
+
+Return one decisive recommendation for each of D1-D5, with a brief reason and
+the principal rejected alternative. Then give:
+
+1. one coherent module/dependency diagram;
+2. pseudocode-level signatures for the canonical improper-integral relation,
+   generic local-tail theorem, and source-facing Watson theorem;
+3. a short list of decisions that must be frozen before Lean work, separated
+   from choices safe to defer.
+
+Optimize for a durable LMLF-wide foundation, not merely the shortest Watson
+proof. If two decisions interact, resolve them together rather than returning
+an unranked menu. Do not set `lean_ready`; implementation authorization remains
+a separate review-envelope decision.
