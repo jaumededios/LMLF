@@ -128,6 +128,7 @@ dependency_bindings:
 classification_schema_binding:
   path: review/classifications-v2.json
   schema_version: lmlf-classification-v2
+  artifact_revision: REPLACE_WITH_IMMUTABLE_REVISION
   sha256: REPLACE_WITH_SHA256
 
 structural_circularity_review:
@@ -171,7 +172,7 @@ complete and nonoverlapping.
 ### 3.2 Legacy artifacts
 
 Legacy-format proof artifacts such as QB-001 remain interpreted under their
-recorded format.  QB-001 revision 4 has no current external review binding;
+recorded format.  QB-001 revision 5 has no current external review binding;
 earlier candidate-owned summaries are non-quorum.  A future material successor
 uses this schema or the then-current reviewed version rather than silently
 inventing missing fields.

@@ -13,12 +13,12 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5
       - name: Validate specification inventory
         run: python3 scripts/validate_inventory.py
       - name: Exercise inventory negative invariants
         run: python3 scripts/validate_inventory.py --negative-tests
       - name: Build public Lean package
-        uses: leanprover/lean-action@v1
+        uses: leanprover/lean-action@50fcf42d2e460296f1a34b402e990d1b24f8b596 # v1
         with:
           build: true

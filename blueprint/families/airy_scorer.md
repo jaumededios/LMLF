@@ -132,7 +132,7 @@ Prove conjugation symmetry or another reality theorem, then pointwise real agree
 
 ## Provisional theorem-card queue
 
-| Provisional ID | Bounded target | Provisional theorem class | Coverage class | Principal prerequisites |
+| Provisional ID | Bounded target | Provisional packet theorem class | Packet coverage class | Principal prerequisites |
 |---|---|---|---|---|
 | `CON-AIR-001` | One generic entire solution constructor for the Airy IVP, including existence and uniqueness | `existence_uniqueness` | `infrastructure` | Pin audit; shared series/ODE support; `NLP-AIR-IVP-001` |
 | `DEF-AIR-001` | `Ai` and `Bi` as the two exact normalized IVP solutions, with expanded characterizations | `definition_identification` | `entity_identification` | `CON-AIR-001`; collated normalization before any source claim; `NLP-AIR-NAMED-001` |

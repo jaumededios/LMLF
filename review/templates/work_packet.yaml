@@ -11,6 +11,7 @@ specification_owner: REPLACE_WITH_PERSON_OR_TEAM
 classification_schema:
   path: review/classifications-v2.json
   schema_version: lmlf-classification-v2
+  artifact_revision: REPLACE_WITH_IMMUTABLE_REVISION
   sha256: REPLACE_WITH_CLASSIFICATION_SCHEMA_DIGEST
 packet_classification:
   theorem_class: REPLACE_WITH_PACKET_THEOREM_CLASS

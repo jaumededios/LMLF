@@ -40,13 +40,13 @@ into a certified upper bound by changing its name.
 All IDs are provisional and remain `planning_only` until a bounded theorem card
 and reviewed proof artifact exist.
 
-| Order | Card | Theorem / coverage / novelty class | Bounded content | Dependencies |
+| Order | Card | Packet theorem / coverage / novelty class | Bounded content | Dependencies |
 |---:|---|---|---|---|
 | 1 | SUM-001 | `foundational_calculus` / `infrastructure` / `equivalent_reformulation` | finite summation-by-parts identities and Dirichlet bound | QB-001 and Mathlib finite sums |
 | 2 | BER-001 | `definition_identification` / `infrastructure` / `novel` project periodic wrapper | periodic Bernoulli definition, unit-interval calculus, and explicit finite envelope | pinned Bernoulli polynomials |
 | 3 | EM-001 | `exact_identity` / `infrastructure` / `equivalent_reformulation` | half-open Euler--Maclaurin exact identity | SUM-001, BER-001, interval integration by parts |
 | 4 | EM-002 | `finite_remainder_bound` / `infrastructure` / `novel` explicit packaging | natural integral remainder bound and explicit constant corollaries | EM-001, QB-001 |
-| 5 | CF-001 | `exact_identity` plus `finite_remainder_bound` / `infrastructure` / `equivalent_reformulation` | circle coefficient identity and Cauchy coefficient bound | pinned Cauchy integral infrastructure |
+| 5 | CF-001 | `mixed` / `infrastructure` / `equivalent_reformulation` | circle coefficient identity and Cauchy coefficient bound | pinned Cauchy integral infrastructure |
 | 6 | CF-002 | `finite_remainder_bound` / `infrastructure` / `generalized` | finite singular expansion plus remainder coefficient transfer | CF-001; CT-001/CT-002 only for noncircular contours |
 | 7 | DAR-001 | `finite_remainder_bound` / `infrastructure` / `novel` | one constructed Darboux/keyhole contour with explicit local and remote bounds | CF-002 and branch/domain support |
 | 8 | ILT-001 | unclassified pending occurrence collation | inverse-Laplace/Haar coefficient or sequence transfer | CF-002 and accepted integral/contour packets selected by its statement |
@@ -54,8 +54,10 @@ and reviewed proof artifact exist.
 The packets are intentionally split.  In particular, elementary finite
 summation can proceed without Bernoulli polynomials, and circle coefficient
 bounds can proceed without Euler--Maclaurin or a general contour framework.
-Classification is ultimately per declaration, so the CF-001 row is only queue
-shorthand.
+The table uses the packet-level v2 axes.  `exact_identity` is valid for a pure
+identity packet such as EM-001; `mixed` records that CF-001 has both an identity
+and a quantitatively distinct bound.  Exact declarations receive separate
+target-level classifications only after a bounded card exists.
 
 ### Planned proof artifacts
 

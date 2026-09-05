@@ -1,7 +1,7 @@
 # Gamma-related family programme
 
 **Status:** planning only; no provisional ID below is registered or authorized  
-**Existing implemented/card boundary:** `DEF-001` only, covering four thin wrappers around `Complex.Gamma`  
+**Current registered-card boundary:** `DEF-001` only, specifying four proposed thin wrappers around `Complex.Gamma`
 **Potential source territory:** Chapter 2 §§1–2 and §5, the Chapter 4 incomplete-Gamma heading, and later occurrences found by the locked-edition audit
 
 ## Family boundary and source honesty
@@ -125,7 +125,7 @@ For every public real object actually used later, prove pointwise agreement on a
 
 These rows are not cards and are not members of any manifest.
 
-| Provisional ID | Bounded target | Provisional theorem class | Coverage class | Principal prerequisites |
+| Provisional ID | Bounded target | Provisional packet theorem class | Packet coverage class | Principal prerequisites |
 |---|---|---|---|---|
 | `DEF-GAM-002` | One reciprocal-Gamma object; equality with the inverse off poles; entire continuation; values at nonpositive integers | `definition_identification` | `entity_identification` | Locked normalization audit for any source claim; `DEF-001`; `NLP-GAM-RECIP-001` |
 | `DEF-GAM-003` | One Beta object; defining integral; Gamma relation on an explicit domain; symmetry and real agreement | `definition_identification` | `entity_identification` | Pin reuse audit; collated argument order; `NLP-GAM-BETA-001` |

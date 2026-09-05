@@ -66,7 +66,7 @@ Chapter 14 reconciliation and named remainder applications
 - `NLP-EI-CONT-001`: continuation from the base domain, overlap uniqueness, boundary values, singular/logarithmic behavior at zero, and exceptional-value policy.
 - `NLP-EI-REL-001`: each confirmed relation among `Ei`, `E1`, logarithmic, sine, and cosine integrals, with phases and additive constants.
 
-| Provisional ID | Bounded target | Class / coverage | Prerequisites |
+| Provisional ID | Bounded target | Packet theorem / coverage class | Prerequisites |
 |---|---|---|---|
 | `DEF-EI-001` | The single object resolved from `OLV10P-O0007`, on its base integral domain | `definition_identification` / `entity_identification` | Locked symbol/formula collation; reuse audit; `NLP-EI-BASE-001` |
 | `DEF-EI-002` | Cut-plane continuation and boundary convention for that object | `definition_identification` / `entity_identification` | `DEF-EI-001`; `NLP-EI-CONT-001`; structural review |
@@ -115,7 +115,7 @@ Gaussian saddle and transition applications
 - `NLP-DAW-001`: actual construction, exact scale relative to accepted error functions if used, ODE/integral characterization, and uniqueness.
 - `NLP-FRE-001`: exact sine/cosine phase, convergence, entire continuation, parity, derivatives, and real agreement.
 
-| Provisional ID | Bounded target | Class / coverage | Prerequisites |
+| Provisional ID | Bounded target | Packet theorem / coverage class | Prerequisites |
 |---|---|---|---|
 | `DEF-ERF-001` | Base error function and exactly one confirmed complementary normalization | `definition_identification` / `entity_identification` | Body collation; `NLP-ERF-001` |
 | `DEF-ERF-002` | Finite list of source-confirmed scaled error variants | `definition_identification` / `entity_identification` | `DEF-ERF-001`; exact scale audit |
@@ -164,7 +164,7 @@ accepted Kummer M/U + branch support    or    independent normalized ODE constru
 - `NLP-PCY-001`: source parameter convention, construction, differential equation, exact Kummer conversion or IVP normalization, branches, and real agreement.
 - `NLP-PCY-BASIS-001`: second solution/basis, exceptional parameters, Wronskian, and conversion among every confirmed notation.
 
-| Provisional ID | Bounded target | Class / coverage | Prerequisites |
+| Provisional ID | Bounded target | Packet theorem / coverage class | Prerequisites |
 |---|---|---|---|
 | `DEF-PCY-001` | One primary source-confirmed parabolic-cylinder object | `definition_identification` / `entity_identification` | Locked member audit; `DEF-KUM-001/002` or accepted ODE support; `NLP-PCY-001` |
 | `DEF-PCY-002` | Finite set of alternate parameterizations and a normalized basis | `definition_identification` / `entity_identification` | `DEF-PCY-001`; `NLP-PCY-BASIS-001`; structural review |
@@ -247,7 +247,7 @@ pin reuse audit
 - `NLP-ZETA-001`: pin reuse, Dirichlet-series convergence/equality, continuation domain, pole and totalized values, real agreement, and only the functional identities included in the bounded card.
 - `NLP-BERN-001`: exact match of numbers, polynomials, periodic function, $B_1$ convention, derivative identity, endpoint behavior, and source notation.
 
-| Provisional ID | Bounded target | Class / coverage | Prerequisites |
+| Provisional ID | Bounded target | Packet theorem / coverage class | Prerequisites |
 |---|---|---|---|
 | `DEF-ZETA-001` | Riemann zeta only, if confirmed, with one conventional identification and pole policy | `definition_identification` / `entity_identification` | Locked body confirmation; pin audit; `NLP-ZETA-001` |
 | `DEF-BERN-001` | Source-confirmed Bernoulli numbers and polynomials via pinned Mathlib | `definition_identification` / `entity_identification` | Locked normalization audit; `NLP-BERN-001` |
@@ -292,7 +292,7 @@ large-order saddle/coalescing applications
 - `NLP-STRUVE-001`: exact source member, construction, equation/forcing, exceptional orders, and Bessel connection.
 - `NLP-NICH-001`: exact Bessel combination, normalization, and proof that a new public object is warranted.
 
-| Provisional ID | Bounded target | Class / coverage | Prerequisites |
+| Provisional ID | Bounded target | Packet theorem / coverage class | Prerequisites |
 |---|---|---|---|
 | `DEF-ANGER-001` | Finite source-confirmed Anger/Weber member set, split if more than one construction packet | `definition_identification` / `entity_identification` | Locked factor audit; `NLP-ANGER-001` |
 | `DEF-STRUVE-001` | One source-confirmed Struve normalization | `definition_identification` / `entity_identification` | Locked body occurrence; accepted Bessel dependencies; `NLP-STRUVE-001` |

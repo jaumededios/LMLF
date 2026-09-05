@@ -14,6 +14,11 @@ fidelity, attest reviewer independence, or mutate lifecycle states.  Filled
 review envelopes, verdicts, and disposition ledgers remain external to the
 candidate head as required by `review/PROTOCOL.md`.
 
+The baseline workflow pins Lean, Mathlib, and workflow actions, but it runs
+on GitHub's moving `ubuntu-latest` hosted-runner image.  The job therefore does
+not claim a hermetic or bit-for-bit reproducible operating-system environment;
+its reproducibility claims concern the pinned project and action inputs.
+
 ## 1. Invariants
 
 Every maintained branch and candidate head preserves these invariants:
@@ -76,11 +81,19 @@ from the artifact's declared state.  It does not infer a more advanced state.
 Run the source-card validators against explicit manifest IDs:
 
 - recompute locally available source-snapshot and transcription digests;
+- reject every verified digest that is not `sha256` with exactly 64 lowercase
+  hexadecimal digits;
 - verify edition, snapshot, occurrence, notation, entity, card, and manifest
   joins;
+- require resolved occurrences/notations and confirmed semantic links to use
+  available, non-placeholder, digest-verified, edition-reconciled snapshots with
+  matched page mappings, and require an exact snapshot ID unless a separately
+  represented equivalence permits a cross-edition join;
 - distinguish planning-only placeholders from closure-ready records;
 - compare declared and actual distinct occurrence/card totals;
 - reject generic/named/source-recovery role mismatches;
+- derive all three card-registry classification axes and every required registry
+  example from `review/classifications-v2.json`; and
 - require exact-source reconciliation only for the closed manifest under test;
   and
 - emit unresolved inventory debt without turning it into coverage.

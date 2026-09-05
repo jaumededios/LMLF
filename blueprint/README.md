@@ -25,8 +25,8 @@ As of this specification:
 |---|---|---|
 | `DEMO-0` | candidate M0--M4 work | open and `planning_only`; not execution-ready |
 | `BOOTSTRAP-0` | exactly `QB-001` and `DEF-001` | closed and `execution_ready`; zero source occurrences |
-| `QB-001` | eight signatures only | card revision 5, proof revision 4, and signature revision 2 are frozen; proof complete, external review not started, no Lean authorization |
-| `DEF-001` | four Gamma reuse wrappers | card revision 3 frozen; proof not required, external review not started, implementation not started, prototype absent in the exact specification snapshot |
+| `QB-001` | eight signatures only | card revision 6, proof revision 5, and signature revision 2 are frozen; proof complete, external review not started, no Lean authorization |
+| `DEF-001` | four Gamma reuse wrappers | card revision 4 frozen; proof not required, external review not started, implementation not started, prototype absent in the exact specification snapshot |
 | `OLV-MVP-1` | one selected Watson occurrence | open and `planning_only`; occurrence selected but the locked text is not yet collated |
 | Olver theorem coverage | none | no quantitative Olver theorem or qualitative source recovery is currently claimed |
 
@@ -107,10 +107,11 @@ The [source-manifest policy](source_manifest.md) and
 - packet-local concepts such as `ErrorOn` and `HasErrorFamily`, which are not
   source entities merely because the project uses them.
 
-The sole current classification authority is the frozen
+The sole current classification authority is frozen artifact revision 2 of the
 [`lmlf-classification-v2`](../review/classifications-v2.json) JSON artifact.
-It supersedes immutable v1 and keeps packet theorem shapes separate from source
-coverage roles.
+It supersedes immutable v1, keeps packet theorem shapes separate from source
+coverage roles, and marks registry examples as required or illustrative in
+machine-readable form.
 
 The canonical normalized tables live in [`inventory/`](inventory/).  Closed
 release manifests have finite card and occurrence membership, exact totals,
@@ -273,7 +274,8 @@ incomplete or inconsistent artifact, but it cannot decide truth, source
 fidelity, proof correctness, or reviewer independence.
 
 Only the CSV inventory validator is implemented today; it consumes v2 packet
-classification enums/examples and CI runs its positive and negative suites.
+classification enums and derives required registry rows from machine-readable
+`registry_binding` values.  CI runs its positive and negative suites.
 YAML/Markdown lifecycle, target-level card/packet classification, digest, and
 external-review validation remains manual/planned; the contract-linter rules
 describe future behavior, not a gate that has already run.

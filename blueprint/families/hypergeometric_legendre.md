@@ -157,7 +157,7 @@ Prove the exact real-domain agreement used downstream. For Ferrers/Legendre dist
 
 ## Provisional theorem-card queue
 
-| Provisional ID | Bounded target | Provisional theorem class | Coverage class | Principal prerequisites |
+| Provisional ID | Bounded target | Provisional packet theorem class | Packet coverage class | Principal prerequisites |
 |---|---|---|---|---|
 | `DEF-HG0F1-001` | Readable regularized $0F1$ coefficient and entire-series identification | `definition_identification` | `infrastructure` | Pin audit; `NLP-HG0F1-001` |
 | `DEF-HG-001` | Local ordinary Gauss ${}_2F_1$ wrapper on the convergence disk, including terminating cases | `definition_identification` | `entity_identification` | Body entity confirmation; `NLP-HG-GAUSS-LOCAL-001` |

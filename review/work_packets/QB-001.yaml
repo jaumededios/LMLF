@@ -4,14 +4,15 @@ schema_version: 4
 # An external review envelope binds those values after the packet is frozen.
 work_item_id: QB-001
 title: Bootstrap finite error predicates and five transport lemmas
-packet_revision: 2
+packet_revision: 3
 lifecycle_state: frozen
 specification_owner: jaumededios
 
 classification_schema:
   path: review/classifications-v2.json
   schema_version: lmlf-classification-v2
-  sha256: 698626606570827fcc8c78b69865d7cd4bc94de96bc6d5d45c23a5f6611aeeab
+  artifact_revision: 2
+  sha256: 8c9f8dbb5ab351771a433a9901fe176a66ec214092c5d5880b3ec57c9a5b23e9
 packet_classification:
   theorem_class: foundational_calculus
   coverage_class: infrastructure
@@ -27,8 +28,8 @@ novelty_assessment:
 
 source:
   kind: original
-  citation: LMLF internal natural-language proof packet QB-001, revision 4
-  edition_or_version: revision 4
+  citation: LMLF internal natural-language proof packet QB-001, revision 5
+  edition_or_version: revision 5
   isbn_doi_or_stable_id: not_applicable
   location: >-
     Scope and standing assumptions; QB-001.1, QB-001.2, QB-001.3, forward
@@ -36,7 +37,7 @@ source:
   snapshot:
     uri_or_archive_ref: blueprint/proofs/QB-001.md
     accessed_utc: 2026-09-05
-    sha256: 3513fb1acf141066eb9a4920c1ea238c778d66976ff8479d31c742df93d3a2a5
+    sha256: 167629f117dc0609809162b5a5247d05e0c9a193d96b84d9cda5247e930ecd4c
   original_statement_or_formula: |
     Define ErrorOn, NormBoundOn, and HasErrorFamily. Prove exact zero error,
     domain restriction, majorant weakening, additive error transitivity, and
@@ -44,19 +45,19 @@ source:
 
 upstream_artifacts:
   theorem_cards:
-    - artifact_id: TC-QB-001-R5
+    - artifact_id: TC-QB-001-R6
       path_or_uri: blueprint/theorem_cards/QB-001.yaml
-      revision: 5
-      sha256: de0ed8cae076e7dfe074b4eacc0e5a8875e245c1ddedf8230851bbfd920f0ce4
+      revision: 6
+      sha256: 7e83195fd3b6ff9ea884e29f6d857a4673c9de5fe44327d914e595e6b798468f
     - artifact_id: SIG-QB-001-R2
       path_or_uri: blueprint/theorem_cards/QB-001-signatures.md
       revision: 2
       sha256: 93e4e30a93087de95342abdb1e986676924cd93512e771737d0d3f3ed7973b39
   natural_language_proofs:
-    - artifact_id: NLP-QB-001-R4
+    - artifact_id: NLP-QB-001-R5
       path_or_uri: blueprint/proofs/QB-001.md
-      revision: 4
-      sha256: 3513fb1acf141066eb9a4920c1ea238c778d66976ff8479d31c742df93d3a2a5
+      revision: 5
+      sha256: 167629f117dc0609809162b5a5247d05e0c9a193d96b84d9cda5247e930ecd4c
   historical_context:
     - artifact_id: HIST-QB-001-REV3
       path_or_uri: blueprint/reviews/QB-001-rev3.md
@@ -75,8 +76,8 @@ targets:
     relationship_to_source: >-
       Exact formalization of the reviewed internal definition; mathematically
       routine and non-novel, with no external source coverage.
-    theorem_card_id: TC-QB-001-R5
-    natural_language_proof_id: NLP-QB-001-R4
+    theorem_card_id: TC-QB-001-R6
+    natural_language_proof_id: NLP-QB-001-R5
     exact_lean_signature: |
       def ErrorOn {X E : Type*} [NormedAddCommGroup E]
           (D : Set X) (f a : X → E) (b : X → ℝ) : Prop
@@ -99,8 +100,8 @@ targets:
     relationship_to_source: >-
       Exact formalization of the reviewed internal definition; mathematically
       routine and non-novel, with no external source coverage.
-    theorem_card_id: TC-QB-001-R5
-    natural_language_proof_id: NLP-QB-001-R4
+    theorem_card_id: TC-QB-001-R6
+    natural_language_proof_id: NLP-QB-001-R5
     exact_lean_signature: |
       def NormBoundOn {X E : Type*} [NormedAddCommGroup E]
           (D : Set X) (f : X → E) (b : X → ℝ) : Prop
@@ -123,8 +124,8 @@ targets:
     relationship_to_source: >-
       Exact formalization of the reviewed internal definition; mathematically
       routine and non-novel, with no external source coverage.
-    theorem_card_id: TC-QB-001-R5
-    natural_language_proof_id: NLP-QB-001-R4
+    theorem_card_id: TC-QB-001-R6
+    natural_language_proof_id: NLP-QB-001-R5
     exact_lean_signature: |
       def HasErrorFamily {X E : Type*} [NormedAddCommGroup E]
           (f : X → E) (a : ℕ → X → E)
@@ -149,8 +150,8 @@ targets:
     relationship_to_source: >-
       Exact formalization of the reviewed routine consequence of equality and
       norm_zero; no new mathematical claim.
-    theorem_card_id: TC-QB-001-R5
-    natural_language_proof_id: NLP-QB-001-R4
+    theorem_card_id: TC-QB-001-R6
+    natural_language_proof_id: NLP-QB-001-R5
     exact_lean_signature: |
       theorem ErrorOn.exact {X E : Type*} [NormedAddCommGroup E]
           {D : Set X} {f a : X → E} (h : Set.EqOn f a D) :
@@ -173,8 +174,8 @@ targets:
     relationship_to_source: >-
       Exact formalization of the reviewed routine predicate restriction; no new
       mathematical claim.
-    theorem_card_id: TC-QB-001-R5
-    natural_language_proof_id: NLP-QB-001-R4
+    theorem_card_id: TC-QB-001-R6
+    natural_language_proof_id: NLP-QB-001-R5
     exact_lean_signature: |
       theorem ErrorOn.restrict {X E : Type*} [NormedAddCommGroup E]
           {D D' : Set X} {f a : X → E} {b : X → ℝ}
@@ -197,8 +198,8 @@ targets:
     relationship_to_source: >-
       Exact formalization of the reviewed routine transitivity of real
       inequalities; no new mathematical claim.
-    theorem_card_id: TC-QB-001-R5
-    natural_language_proof_id: NLP-QB-001-R4
+    theorem_card_id: TC-QB-001-R6
+    natural_language_proof_id: NLP-QB-001-R5
     exact_lean_signature: |
       theorem ErrorOn.weaken {X E : Type*} [NormedAddCommGroup E]
           {D : Set X} {f a : X → E} {b d : X → ℝ}
@@ -221,8 +222,8 @@ targets:
     relationship_to_source: >-
       Exact formalization of the reviewed routine triangle-inequality
       composition; no new mathematical claim.
-    theorem_card_id: TC-QB-001-R5
-    natural_language_proof_id: NLP-QB-001-R4
+    theorem_card_id: TC-QB-001-R6
+    natural_language_proof_id: NLP-QB-001-R5
     exact_lean_signature: |
       theorem ErrorOn.trans {X E : Type*} [NormedAddCommGroup E]
           {D : Set X} {f a c : X → E} {b d : X → ℝ}
@@ -246,8 +247,8 @@ targets:
     relationship_to_source: >-
       Exact formalization of the reviewed routine precomposition transport; no
       new mathematical claim.
-    theorem_card_id: TC-QB-001-R5
-    natural_language_proof_id: NLP-QB-001-R4
+    theorem_card_id: TC-QB-001-R6
+    natural_language_proof_id: NLP-QB-001-R5
     exact_lean_signature: |
       theorem ErrorOn.comp {X Y E : Type*} [NormedAddCommGroup E]
           {D : Set X} {f a : X → E} {b : X → ℝ}

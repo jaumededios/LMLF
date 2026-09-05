@@ -2,7 +2,7 @@ schema_version: 2
 id: QB-001
 title: Bootstrap finite error predicates and transport
 owner: jaumededios
-artifact_revision: 5
+artifact_revision: 6
 baseline_spec_commit: pending_external_record_after_commit
 
 theorem_class: foundational_calculus
@@ -24,7 +24,8 @@ status_authority: >-
 classification_schema:
   path: review/classifications-v2.json
   schema_version: lmlf-classification-v2
-  sha256: 698626606570827fcc8c78b69865d7cd4bc94de96bc6d5d45c23a5f6611aeeab
+  artifact_revision: 2
+  sha256: 8c9f8dbb5ab351771a433a9901fe176a66ec214092c5d5880b3ec57c9a5b23e9
 
 manifest: BOOTSTRAP-0
 source_occurrences: []
@@ -109,7 +110,7 @@ novelty:
 
 natural_language_proof:
   artifact: blueprint/proofs/QB-001.md
-  artifact_revision: 4
+  artifact_revision: 5
   artifact_state: frozen
   proof_status: complete
   normative_sections:
@@ -120,8 +121,9 @@ natural_language_proof:
     - QB-001.5 forward exactness only
     - QB-001.7 precomposition
   note: >-
-    Revision 4 preserves revision 3's mathematical text and corrects governance
-    metadata.  Extra dossier sections do not enlarge this bootstrap card.
+    Revision 5 preserves the eight normative proofs and signatures while
+    labeling every non-target declaration discussion as prospective.  Extra
+    dossier sections do not enlarge this bootstrap card.
 
 target_classifications:
   - target_id: QB-001-T01
@@ -209,8 +211,8 @@ implementation:
   implementation_status: not_started
   authorization_source: external_review_envelope_only
   blocking_condition: >-
-    No external envelope currently binds the frozen packet, card revision 5,
-    proof revision 4, and signature artifact revision 2 with passing theorem-
+    No external envelope currently binds the frozen packet, card revision 6,
+    proof revision 5, and signature artifact revision 2 with passing theorem-
     card and proof gates, an externally recorded not_required structural-
     circularity gate, and a passing lean_ready gate.
   file: null

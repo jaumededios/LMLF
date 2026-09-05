@@ -157,7 +157,7 @@ After collation enumerates the objects, define each modulus, phase, or envelope 
 
 ## Provisional theorem-card queue
 
-| Provisional ID | Bounded target | Provisional theorem class | Coverage class | Principal prerequisites |
+| Provisional ID | Bounded target | Provisional packet theorem class | Packet coverage class | Principal prerequisites |
 |---|---|---|---|---|
 | `DEF-BES-001` | Principal-cut `J` plus separately stated integer-order/origin facts | `definition_identification` | `entity_identification` | `DEF-HG0F1-001`; reciprocal Gamma as needed; `NLP-BES-J-001` |
 | `DEF-BES-002` | Principal-cut `I` and exact modified-equation normalization | `definition_identification` | `entity_identification` | `DEF-HG0F1-001`; `NLP-BES-I-001` |

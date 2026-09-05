@@ -2,7 +2,7 @@ schema_version: 2
 id: DEF-001
 title: Bootstrap audit of mathlib Complex.Gamma
 owner: jaumededios
-artifact_revision: 3
+artifact_revision: 4
 baseline_spec_commit: pending_external_record_after_commit
 
 theorem_class: definition_identification
@@ -24,7 +24,8 @@ status_authority: >-
 classification_schema:
   path: review/classifications-v2.json
   schema_version: lmlf-classification-v2
-  sha256: 698626606570827fcc8c78b69865d7cd4bc94de96bc6d5d45c23a5f6611aeeab
+  artifact_revision: 2
+  sha256: 8c9f8dbb5ab351771a433a9901fe176a66ec214092c5d5880b3ec57c9a5b23e9
 
 manifest: BOOTSTRAP-0
 source_occurrences: []

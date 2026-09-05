@@ -1,6 +1,7 @@
 {
   "schema_version": "lmlf-classification-v2",
   "record_kind": "classification_vocabulary",
+  "artifact_revision": 2,
   "status": "frozen",
   "normative_owner": "jaumededios",
   "supersedes": {
@@ -16,11 +17,20 @@
       "allowed": [
         "foundational_calculus",
         "definition_identification",
+        "exact_identity",
         "finite_remainder_bound",
         "existence_uniqueness",
+        "qualitative_support",
         "qualitative_bridge",
+        "audit_regression",
         "mixed"
-      ]
+      ],
+      "value_semantics": {
+        "exact_identity": "A packet whose principal public results are exact identities and which does not also package a quantitatively distinct bound.",
+        "qualitative_support": "A packet of non-asymptotic regularity, branch, or supporting propositions not chiefly defining an entity or giving a finite remainder bound.",
+        "audit_regression": "A downstream packet of exact audit and regression declarations; it earns no source credit without a separate coverage role.",
+        "mixed": "A packet with principal targets from more than one packet theorem shape, such as an exact identity and a finite remainder bound."
+      }
     },
     "coverage_class": {
       "meaning": "Role of the packet in source and infrastructure coverage.",
@@ -81,39 +91,55 @@
       ]
     }
   },
+  "registry_binding": {
+    "allowed": [
+      "required",
+      "illustrative"
+    ],
+    "semantics": {
+      "required": "A card-registry row with this ID is required and its packet-level classes must match this example exactly.",
+      "illustrative": "The row demonstrates a representable combination but does not require a card-registry entry."
+    }
+  },
   "required_packet_examples": [
     {
       "id": "QB-001",
+      "registry_binding": "required",
       "theorem_class": "foundational_calculus",
       "coverage_class": "infrastructure",
       "novelty_class": "non_novel"
     },
     {
       "id": "DEF-001",
+      "registry_binding": "required",
       "theorem_class": "definition_identification",
       "coverage_class": "entity_identification",
       "novelty_class": "non_novel"
     },
     {
       "id": "QL-001",
+      "registry_binding": "required",
       "theorem_class": "finite_remainder_bound",
       "coverage_class": "infrastructure",
       "novelty_class": "novel"
     },
     {
       "id": "OLV-001",
+      "registry_binding": "required",
       "theorem_class": "finite_remainder_bound",
       "coverage_class": "exact_source_generic",
       "novelty_class": "strengthened_conclusion"
     },
     {
       "id": "SR-001",
+      "registry_binding": "required",
       "theorem_class": "qualitative_bridge",
       "coverage_class": "audit_source_recovery",
       "novelty_class": "source_equivalent"
     },
     {
       "id": "NAMED-EXAMPLE",
+      "registry_binding": "illustrative",
       "theorem_class": "finite_remainder_bound",
       "coverage_class": "named_source_application",
       "novelty_class": "source_equivalent"
@@ -131,6 +157,7 @@
     "Packet-level and target-level values must be taken from their own tables.",
     "Every frozen card and work packet records this exact schema version and digest.",
     "Every packet target has all three classifications and relationship prose.",
+    "Every required_packet_examples row has registry_binding required or illustrative; required rows must exist in the card registry with exactly matching packet-level classes, while illustrative rows test vocabulary expressibility without requiring a registry entry.",
     "An internal proof artifact alone can never justify source_equivalent.",
     "A packet summary may use mixed only when its targets use more than one value.",
     "Classifications do not imply reviewer pass, lean_ready, coverage, or release."

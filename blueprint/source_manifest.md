@@ -45,12 +45,14 @@ Repository review ledgers are historical context and count as zero reviewers.
 
 ## Classification fields
 
-Every card records theorem, coverage, and novelty axes under the frozen
+Every card records theorem, coverage, and novelty axes under frozen artifact
+revision 2 of the
 [`lmlf-classification-v2`](../review/classifications-v2.json) vocabulary, which
 supersedes rather than mutates frozen v1.  That
 schema distinguishes packet summaries from exact declaration-level target
-values.  In particular, a routine target uses `non_novel`; it cannot use
-`source_equivalent` merely because it matches an internal proof.
+values and marks registry examples `required` or `illustrative` in a
+machine-readable field.  In particular, a routine target uses `non_novel`; it
+cannot use `source_equivalent` merely because it matches an internal proof.
 
 Packet-level coverage values include:
 
@@ -107,7 +109,7 @@ DEMO-0 lists candidate M0-M4 work, but it is neither closed nor execution-ready
 until every selected candidate has a fully specified card.  Listing a row does
 not authorize review or Lean.
 
-| Candidate | Coverage class | Planning target |
+| Candidate | Packet coverage class | Planning target |
 |---|---|---|
 | QB-001 | infrastructure | finite error predicates and basic transport |
 | QA-002 | infrastructure | later algebra, inversion, and nonlinear composition |
@@ -132,7 +134,7 @@ separate BOOTSTRAP-0 manifest; the remaining rows stay candidates.
 - `work_packets`: `review/work_packets/QB-001.yaml`,
   `review/work_packets/DEF-001.yaml`
 
-| Card | Theorem class | Coverage class | Specification | Proof | Review | Implementation |
+| Card | Packet theorem class | Packet coverage class | Specification | Proof | Review | Implementation |
 |---|---|---|---|---|---|---|
 | QB-001 | foundational_calculus | infrastructure | frozen | complete | not_started | not_started |
 | DEF-001 | definition_identification | entity_identification | frozen | not_required | not_started | not_started |
@@ -158,7 +160,7 @@ this manifest.
 - `manifest_status`: `planning_only`
 - `occurrence_count`: 1
 
-| Occurrence | Locked locator | Coverage class | Cross-check |
+| Occurrence | Locked locator | Planned packet coverage class | Cross-check |
 |---|---|---|---|
 | OLV97-C03-WATSON | Chapter 3, pp. 71-72, Watson's lemma | exact_source_generic | [DLMF §2.3(ii)](https://dlmf.nist.gov/2.3.ii) cites these pages |
 
@@ -169,7 +171,7 @@ the notation and source-entity inventories.
 
 Planned cards are finite but not yet specified:
 
-| Card | Theorem class | Coverage class | Obligation |
+| Card | Packet theorem class | Packet coverage class | Obligation |
 |---|---|---|---|
 | QL-001 | finite_remainder_bound | infrastructure | reusable finite Laplace identity and bound |
 | OLV-001 | finite_remainder_bound | exact_source_generic | match the collated Watson hypotheses and prove the explicit quantitative strengthening |
@@ -191,8 +193,9 @@ DEF-001 / Gamma facts - - -> QL-001 or OLV-001
 Airy, Cauchy transport, coefficient residual automation, ODE stability, and
 comparison systems are explicitly off this path.
 
-Only the CSV inventory validator currently exists.  It consumes v2 packet
-classification enums/examples and CI runs positive and negative suites.
+Only the CSV inventory validator currently exists.  It consumes all three v2
+packet-classification axes and derives required registry rows from
+`registry_binding`; CI runs positive and negative suites.
 YAML/Markdown lifecycle, target-level card/packet joins, digest, and external-
 review-envelope validation remains manual/planned.
 

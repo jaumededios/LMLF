@@ -11,7 +11,7 @@ review evidence.
 
 ## Three classifications, two levels
 
-The current versioned vocabulary is
+The current versioned vocabulary is artifact revision 2 of
 [`review/classifications-v2.json`](../../review/classifications-v2.json), which
 supersedes the immutable v1 file.  It
 separates packet-level summary values from declaration-level target values.
@@ -19,7 +19,9 @@ Every card has three independent axes:
 
 - `theorem_class` describes the mathematical shape, for example
   `foundational_calculus`, `definition_identification`,
-  `finite_remainder_bound`, `existence_uniqueness`, or `qualitative_bridge`.
+  `exact_identity`, `finite_remainder_bound`, `existence_uniqueness`,
+  `qualitative_support`, `qualitative_bridge`, or `audit_regression`.
+  `mixed` applies only when principal targets span more than one shape.
 - `coverage_class` describes the coverage claim:
   - `infrastructure`: no source-occurrence credit;
   - `entity_identification`: identifies an entity but covers no source theorem;
@@ -59,7 +61,7 @@ Natural-language proof frontmatter records intrinsic `proof_status` directly.
 Review and implementation fields in a candidate-owned card are temporal,
 nonauthoritative projections; only an externally stored envelope and bound
 verdicts can establish reviewer quorum, gate pass, or Lean authorization.
-QB-001 card revision 5 and proof revision 4 are `complete`/`frozen` as
+QB-001 card revision 6 and proof revision 5 are `complete`/`frozen` as
 applicable, but externally unreviewed and
 unauthorized.  Its revision-3 repository ledger is historical context and
 counts as zero reviewers.  Manifest execution readiness never authorizes
@@ -71,7 +73,7 @@ it never advances `implementation_status` or `review_status` by itself.
 
 Each YAML card records:
 
-- stable ID, normative owner, both classifications, and every status axis;
+- stable ID, normative owner, all three classifications, and every status axis;
 - manifest membership and any source occurrence, notation, and source-entity
   IDs;
 - packet-local concepts separately from source entities;
@@ -127,6 +129,7 @@ no DEF-001 implementation or prototype; bytes in another commit or dirty
 worktree have no review status until an external envelope binds them.
 
 Only the CSV inventory validator currently exists.  It consumes v2 packet
-classification enums/examples and CI runs positive and negative suites.  The
+classification enums and derives required registry rows from each example's
+`registry_binding`; CI runs positive and negative suites.  The
 YAML/Markdown lifecycle, target-level card/packet joins, digest, and review-
 quorum validation described by the blueprint remains manual/planned.

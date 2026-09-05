@@ -9,10 +9,11 @@ packets, proof artifacts, review bindings, and later Lean declarations
 cannot approve mathematics, source fidelity, or review independence
 
 **Current implementation boundary:** the CSV inventory validator is the only
-executable contract checker.  It loads packet theorem/coverage enums and
-required examples from `review/classifications-v2.json`, and CI runs its
-positive and negative suites.  YAML/Markdown lifecycle checks, target-level
-card/packet joins, digest bindings, structural-circularity requirements, and
+executable contract checker.  It loads all three packet-classification enums and
+derives required registry rows from the `registry_binding` values in
+`review/classifications-v2.json`; illustrative examples impose no registry
+row.  CI runs its positive and negative suites.  YAML/Markdown lifecycle
+checks, target-level card/packet joins, digest bindings, structural-circularity requirements, and
 external review quorums described below remain manual/planned; this document
 must not be cited as evidence that they ran.
 
@@ -98,7 +99,8 @@ The linter validates:
 9. no unknown field at frozen levels unless the schema explicitly permits an
    extension namespace.
 
-The current versioned vocabulary is `review/classifications-v2.json`, which
+The current versioned vocabulary is artifact revision 2 of
+`review/classifications-v2.json`, which
 supersedes without mutating frozen v1.  It deliberately
 has separate packet-level and target-level tables: values such as packet
 `infrastructure` and target `reusable_infrastructure` are not raw-string
@@ -106,6 +108,11 @@ equivalents.  A future validator checks each field against its proper table and
 requires exact declaration-level classifications in both card and work packet.
 It rejects an unversioned vocabulary, a card/packet schema-version mismatch, or
 an unexplained target mismatch as `SCHEMA-CLASS-001`.
+
+For packet theorem shape, `exact_identity` is a pure identity packet and
+`mixed` is required when principal targets span distinct shapes, such as an
+identity plus a finite bound.  The same lexical class at target level is still
+validated against the target table, not inferred from the packet summary.
 
 In particular, `non_novel` is a canonical target novelty value.
 `source_equivalent` requires a bound external source target or pinned-library

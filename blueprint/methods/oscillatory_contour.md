@@ -40,13 +40,13 @@ semantics remain separate.
 
 Every ID in this table is provisional.
 
-| Order | Card | Theorem / coverage / novelty class | Bounded content | Dependencies |
+| Order | Card | Packet theorem / coverage / novelty class | Bounded content | Dependencies |
 |---:|---|---|---|---|
 | 1 | OI-001 | `finite_remainder_bound` / `infrastructure` / `equivalent_reformulation` | one-step finite oscillatory integration by parts and sharp first remainder | QB-001 and Mathlib interval integration by parts |
 | 2 | OI-002 | `finite_remainder_bound` / `infrastructure` / `generalized` | repeated exact operator identity and recursive derivative constants | OI-001, finite sums |
 | 3 | OI-003 | `finite_remainder_bound` / `infrastructure` / `generalized` | improper endpoint-limit version and explicit nonstationary tails | OI-002 |
 | 4 | CT-001 | `foundational_calculus` / `infrastructure` / `equivalent_reformulation` | parameterized-curve semantics, orientation, concatenation, length bound | QB-001 and Mathlib curve integrals |
-| 5 | CT-002 | `exact_identity` / `infrastructure` / `generalized` | deformation on an explicit homotopy plus connector estimates | CT-001 and pinned Cauchy/Goursat primitives |
+| 5 | CT-002 | `mixed` / `infrastructure` / `generalized` | deformation on an explicit homotopy plus connector estimates | CT-001 and pinned Cauchy/Goursat primitives |
 | 6 | SP-001 | `exact_identity` / `infrastructure` / `equivalent_reformulation` | damped Gaussian/Fresnel model moments with the correct improper-limit meaning | QL-002 only for the selected Gamma proof route |
 | 7 | SP-002 | `finite_remainder_bound` / `infrastructure` / `novel` | quantitative one-dimensional Morse chart and localized stationary phase | OI-002, SP-001 |
 | 8 | SD-001 | `finite_remainder_bound` / `infrastructure` / `novel` | simple complex saddle path with Gaussian decay and explicit local/nonlocal bounds | CT-001, CT-002, SP-001 |
@@ -57,8 +57,11 @@ normal form, coefficient bounds, and admissible contour may support a
 conditional lemma, but it does not complete this construction packet or any
 named application.
 
-The table is queue shorthand, not a frozen card.  A card with both an identity
-and a bound classifies its declarations separately in the work packet.
+The table uses the packet-level v2 axes and is queue shorthand, not a frozen
+card.  `exact_identity` describes the pure model-identity scope of SP-001;
+`mixed` describes CT-002 because connector bounds accompany its deformation
+identity.  A bounded card classifies every declaration separately at the target
+level.
 
 ### Planned proof artifacts
 

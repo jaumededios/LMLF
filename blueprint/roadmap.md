@@ -62,8 +62,8 @@ Packet state is recorded on orthogonal axes, never one overloaded status:
 specification, natural-language proof, review, implementation, coverage, and
 manifest membership.  The vocabulary is normative in
 [`theorem_cards/README.md`](theorem_cards/README.md).  Candidate-owned status
-fields are temporal and nonauthoritative.  QB-001 card revision 5 and proof
-revision 4 are
+fields are temporal and nonauthoritative.  QB-001 card revision 6 and proof
+revision 5 are
 currently `specification_status: frozen`, `proof_status: complete`,
 `review_status: not_started`, and `implementation_status: not_started`.  Its
 revision-3 repository ledger is historical, non-quorum context.  Only an
@@ -104,8 +104,11 @@ identification, an `exact_source_generic` theorem, a named source application,
 or audit-only source recovery.
 
 The frozen machine authority for both packet-level and target-level values is
+artifact revision 2 of
 [`lmlf-classification-v2`](../review/classifications-v2.json).  It supersedes
-immutable v1; coverage roles never appear on the theorem-shape axis.
+immutable v1; coverage roles never appear on the theorem-shape axis.  Its
+machine-readable `registry_binding` determines which examples require card
+registry rows and which are merely illustrative.
 
 Watson's lemma is generic in its amplitude and parameters.  Its coverage class
 is `exact_source_generic`, not `named_source_application`.  Named-function
@@ -334,8 +337,9 @@ theorems.  Compile cost, import cost, readability, reuse, constant quality, and
 version robustness are tracked separately.
 
 Only the CSV inventory validator is implemented at present; it consumes v2
-packet classification enums/examples and CI runs its positive and negative
-suites.  Broader YAML/Markdown lifecycle, target-level classification, digest,
+packet classification enums and derives required registry rows from
+`registry_binding`; CI runs its positive and negative suites.  Broader
+YAML/Markdown lifecycle, target-level classification, digest,
 and external-review contract checks remain manual/planned; passing inventory
 checks cannot establish any review or authorization gate.
 

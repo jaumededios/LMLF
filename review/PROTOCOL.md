@@ -80,7 +80,7 @@ An in-repository review summary is historical, non-quorum context.
 
 ## Orthogonal target classifications
 
-The frozen controlled vocabulary is
+The frozen controlled vocabulary is artifact revision 2 of
 [`classifications-v2.json`](classifications-v2.json), which supersedes the
 immutable v1 artifact.  It separates packet-level
 summaries from declaration-level target values.  Every target in `targets` has
@@ -105,10 +105,19 @@ target or pinned-library statement; equivalence to an internal proof dossier
 does not qualify.  Packet-level
 classes summarize the packet and never replace exact target classifications.
 At packet level, `theorem_class` is a mathematical shape such as
-`finite_remainder_bound` or `qualitative_bridge`; `coverage_class` is a role
-such as `infrastructure`, `exact_source_generic`,
+`exact_identity`, `finite_remainder_bound`, `qualitative_support`,
+`qualitative_bridge`, or `audit_regression`.  `mixed` is reserved for a packet
+whose principal targets have more than one shape, such as a distinct exact
+identity and finite bound.  `coverage_class` is a role such as
+`infrastructure`, `exact_source_generic`,
 `named_source_application`, or `audit_source_recovery`.  A source role may
 never occupy the theorem-shape axis.
+
+Each v2 example carries a machine-readable `registry_binding`.  `required`
+means that the card registry must contain the ID with exactly those packet
+classes; `illustrative` tests that a combination is representable without
+requiring a registry row.  Validators derive that distinction from the JSON
+rather than a hardcoded packet list.
 
 ## Pre-Lean gates
 

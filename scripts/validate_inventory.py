@@ -16,7 +16,7 @@ ROOT = Path(__file__).resolve().parents[1]
 INVENTORY = ROOT / "blueprint" / "inventory"
 CLASSIFICATION_AUTHORITY = ROOT / "review" / "classifications-v2.json"
 CLASSIFICATION_SCHEMA_VERSION = "lmlf-classification-v2"
-REQUIRED_SOURCE_CARD_EXAMPLES = {"QL-001", "OLV-001", "SR-001"}
+DIRECT_SOURCE_EVIDENCE_TYPES = {"direct_formula", "direct_prose"}
 
 
 HEADERS: dict[str, list[str]] = {
@@ -158,6 +158,7 @@ HEADERS: dict[str, list[str]] = {
         "card_id",
         "theorem_class",
         "coverage_class",
+        "novelty_class",
         "manifest_id",
         "registration_status",
         "artifact_status",
@@ -320,6 +321,7 @@ REQUIRED.update(
         + (
             "theorem_class",
             "coverage_class",
+            "novelty_class",
             "manifest_id",
             "registration_status",
             "artifact_status",
@@ -601,7 +603,28 @@ def load_classification_authority(
                 add_error(errors, filename, None, f"{level}.{axis}.allowed contains duplicates")
             allowed_by_level[(level, axis)] = set(values)
 
+    binding_data = document.get("registry_binding")
+    binding_values = (
+        binding_data.get("allowed") if isinstance(binding_data, dict) else None
+    )
+    if not isinstance(binding_values, list) or not binding_values:
+        add_error(errors, filename, None, "registry_binding.allowed must be a nonempty list")
+        binding_allowed: set[str] = set()
+    elif not all(isinstance(value, str) and value for value in binding_values):
+        add_error(
+            errors,
+            filename,
+            None,
+            "registry_binding.allowed must contain only nonempty strings",
+        )
+        binding_allowed = set()
+    else:
+        binding_allowed = set(binding_values)
+        if len(binding_values) != len(binding_allowed):
+            add_error(errors, filename, None, "registry_binding.allowed contains duplicates")
+
     examples: dict[str, dict[str, str]] = {}
+    registry_examples: dict[str, dict[str, str]] = {}
     raw_examples = document.get("required_packet_examples")
     if not isinstance(raw_examples, list):
         add_error(errors, filename, None, "required_packet_examples must be a list")
@@ -611,7 +634,13 @@ def load_classification_authority(
         if not isinstance(example, dict):
             add_error(errors, filename, None, f"{label} must be an object")
             continue
-        required_fields = ("id", "theorem_class", "coverage_class", "novelty_class")
+        required_fields = (
+            "id",
+            "theorem_class",
+            "coverage_class",
+            "novelty_class",
+            "registry_binding",
+        )
         if not all(isinstance(example.get(field), str) and example[field] for field in required_fields):
             add_error(errors, filename, None, f"{label} must define nonempty {required_fields!r}")
             continue
@@ -620,6 +649,15 @@ def load_classification_authority(
             add_error(errors, filename, None, f"duplicate required packet example id {example_id!r}")
             continue
         examples[example_id] = {field: example[field] for field in required_fields}
+        if example["registry_binding"] not in binding_allowed:
+            add_error(
+                errors,
+                filename,
+                None,
+                f"{label}.registry_binding={example['registry_binding']!r} is not allowed",
+            )
+        elif example["registry_binding"] == "required":
+            registry_examples[example_id] = examples[example_id]
         for axis in ("theorem_class", "coverage_class", "novelty_class"):
             allowed = allowed_by_level.get(("packet_level", axis), set())
             if example[axis] not in allowed:
@@ -632,10 +670,10 @@ def load_classification_authority(
 
     card_enums = {
         ("cards.csv", axis): allowed_by_level[("packet_level", axis)]
-        for axis in ("theorem_class", "coverage_class")
+        for axis in ("theorem_class", "coverage_class", "novelty_class")
         if ("packet_level", axis) in allowed_by_level
     }
-    return card_enums, examples
+    return card_enums, registry_examples
 
 
 def read_tables(errors: list[str]) -> dict[str, list[dict[str, str]]]:
@@ -846,20 +884,53 @@ def editions_are_fully_equivalent(
     return False
 
 
+def is_lowercase_sha256(value: str) -> bool:
+    return len(value) == 64 and all(character in "0123456789abcdef" for character in value)
+
+
+def source_snapshot_is_ready(snapshot: dict[str, str] | None) -> bool:
+    return bool(
+        snapshot
+        and snapshot["snapshot_kind"] != "locked_copy_placeholder"
+        and snapshot["availability_status"] == "available"
+        and snapshot["digest_status"] == "verified"
+        and snapshot["digest_algorithm"] == "sha256"
+        and is_lowercase_sha256(snapshot["digest_value"])
+        and snapshot["edition_reconciliation_status"] == "matched"
+        and snapshot["page_mapping_status"] == "matched"
+    )
+
+
+def occurrence_is_source_ready(
+    occurrence: dict[str, str] | None,
+    snapshots: dict[str, dict[str, str]],
+) -> bool:
+    return bool(
+        occurrence
+        and occurrence["resolution_status"] == "resolved"
+        and occurrence["transcription_status"] == "verified"
+        and occurrence["reconciliation_status"] == "matched"
+        and source_snapshot_is_ready(snapshots.get(occurrence["source_snapshot_id"]))
+    )
+
+
 def source_provenance_is_compatible(
     left_snapshot_id: str,
     right_snapshot_id: str,
     snapshots: dict[str, dict[str, str]],
     relations: list[dict[str, str]],
 ) -> bool:
-    """Permit same-edition evidence or a fully reconciled equivalent-edition join."""
+    """Permit an exact-snapshot join or a fully reconciled equivalent-edition join."""
 
     left = snapshots.get(left_snapshot_id)
     right = snapshots.get(right_snapshot_id)
-    if not left or not right:
+    if not source_snapshot_is_ready(left) or not source_snapshot_is_ready(right):
         return False
-    if left_snapshot_id == right_snapshot_id or left["edition_id"] == right["edition_id"]:
+    if left_snapshot_id == right_snapshot_id:
         return True
+    if left["edition_id"] == right["edition_id"]:
+        # No reviewed snapshot-equivalence relation exists in inventory-v1.0.0.
+        return False
     return (
         left["edition_reconciliation_status"] == "matched"
         and right["edition_reconciliation_status"] == "matched"
@@ -909,6 +980,22 @@ def check_semantics(
                 line_of(row),
                 "verified digest requires digest_algorithm and digest_value",
             )
+        if row["digest_status"] == "verified" and row["digest_algorithm"] != "sha256":
+            add_error(
+                errors,
+                "source_snapshots.csv",
+                line_of(row),
+                "verified source digest requires digest_algorithm='sha256'",
+            )
+        if row["digest_status"] == "verified" and not is_lowercase_sha256(
+            row["digest_value"]
+        ):
+            add_error(
+                errors,
+                "source_snapshots.csv",
+                line_of(row),
+                "verified source digest must be exactly 64 lowercase hexadecimal digits",
+            )
         if row["digest_status"] == "unresolved" and any(digest_fields):
             add_error(
                 errors,
@@ -929,13 +1016,14 @@ def check_semantics(
         if (
             row["evidence_status"] == "confirmed"
             and snapshot
-            and snapshot["edition_reconciliation_status"] != "matched"
+            and not source_snapshot_is_ready(snapshot)
         ):
             add_error(
                 errors,
                 "entity_evidence.csv",
                 line_of(row),
-                "confirmed entity evidence requires a snapshot reconciled to its edition",
+                "confirmed entity evidence requires an available non-placeholder snapshot "
+                "with a valid verified digest and matched edition/page reconciliation",
             )
 
     for row in tables["page_audits.csv"]:
@@ -1040,6 +1128,25 @@ def check_semantics(
                 line_of(row),
                 "verified transcription requires hash, collator, and date",
             )
+        if (
+            row["transcription_status"] == "verified"
+            and row["transcription_hash_algorithm"] != "sha256"
+        ):
+            add_error(
+                errors,
+                "occurrences.csv",
+                line_of(row),
+                "verified transcription requires transcription_hash_algorithm='sha256'",
+            )
+        if row["transcription_status"] == "verified" and not is_lowercase_sha256(
+            row["transcription_hash"]
+        ):
+            add_error(
+                errors,
+                "occurrences.csv",
+                line_of(row),
+                "verified transcription hash must be exactly 64 lowercase hexadecimal digits",
+            )
         if row["resolution_status"] == "resolved":
             if row["transcription_status"] != "verified":
                 add_error(
@@ -1055,7 +1162,25 @@ def check_semantics(
                     line_of(row),
                     "resolved occurrence requires matched reconciliation",
                 )
-            if row["target_class"] == "source_definition":
+            if not source_snapshot_is_ready(snapshot):
+                add_error(
+                    errors,
+                    "occurrences.csv",
+                    line_of(row),
+                    "resolved occurrence requires an available non-placeholder source snapshot "
+                    "with a valid verified digest and matched edition/page reconciliation",
+                )
+            if (
+                row["target_class"] != "project_extra"
+                and row["evidence_type"] not in DIRECT_SOURCE_EVIDENCE_TYPES
+            ):
+                add_error(
+                    errors,
+                    "occurrences.csv",
+                    line_of(row),
+                    "resolved source occurrence requires evidence_type direct_formula or direct_prose",
+                )
+            if row["target_class"] in {"source_definition", "source_theorem"}:
                 confirmed_notations = any(
                     link["link_status"] == "confirmed"
                     for link in occurrence_notations[row["occurrence_id"]]
@@ -1069,7 +1194,7 @@ def check_semantics(
                         errors,
                         "occurrences.csv",
                         line_of(row),
-                        "resolved source definition requires confirmed notation and entity links",
+                        "resolved source definition or theorem requires confirmed notation and entity links",
                     )
 
     for row in tables["notation.csv"]:
@@ -1085,13 +1210,22 @@ def check_semantics(
                 line_of(row),
                 "2010-preview notation IDs must use the OLV10P- prefix",
             )
-        if row["resolution_status"] == "resolved" and row["transcription_status"] != "verified":
-            add_error(
-                errors,
-                "notation.csv",
-                line_of(row),
-                "resolved notation requires verified transcription",
-            )
+        if row["resolution_status"] == "resolved":
+            if row["transcription_status"] != "verified":
+                add_error(
+                    errors,
+                    "notation.csv",
+                    line_of(row),
+                    "resolved notation requires verified transcription",
+                )
+            if not source_snapshot_is_ready(snapshot):
+                add_error(
+                    errors,
+                    "notation.csv",
+                    line_of(row),
+                    "resolved notation requires an available non-placeholder source snapshot "
+                    "with a valid verified digest and matched edition/page reconciliation",
+                )
 
     occurrences = index_by(tables, "occurrences.csv", "occurrence_id")
     notations = index_by(tables, "notation.csv", "notation_id")
@@ -1100,6 +1234,26 @@ def check_semantics(
             continue
         occurrence = occurrences.get(link["occurrence_id"])
         notation = notations.get(link["notation_id"])
+        if occurrence and not occurrence_is_source_ready(occurrence, snapshots):
+            add_error(
+                errors,
+                "occurrence_notations.csv",
+                line_of(link),
+                "confirmed occurrence-notation association requires a resolved verified "
+                "occurrence on a ready source snapshot",
+            )
+        if notation and not (
+            notation["resolution_status"] == "resolved"
+            and notation["transcription_status"] == "verified"
+            and source_snapshot_is_ready(snapshots.get(notation["source_snapshot_id"]))
+        ):
+            add_error(
+                errors,
+                "occurrence_notations.csv",
+                line_of(link),
+                "confirmed occurrence-notation association requires a resolved verified "
+                "notation on a ready source snapshot",
+            )
         if occurrence and notation and not source_provenance_is_compatible(
             occurrence["source_snapshot_id"],
             notation["source_snapshot_id"],
@@ -1110,8 +1264,8 @@ def check_semantics(
                 errors,
                 "occurrence_notations.csv",
                 line_of(link),
-                "confirmed occurrence-notation association crosses source provenance "
-                "without a fully matched equivalent-edition relation",
+                "confirmed occurrence-notation association lacks ready matching source "
+                "provenance or a fully matched equivalent-edition relation",
             )
 
     evidence_by_entity: defaultdict[str, list[dict[str, str]]] = defaultdict(list)
@@ -1122,6 +1276,14 @@ def check_semantics(
             continue
         occurrence = occurrences.get(link["occurrence_id"])
         compatible_evidence = False
+        if occurrence and not occurrence_is_source_ready(occurrence, snapshots):
+            add_error(
+                errors,
+                "occurrence_entities.csv",
+                line_of(link),
+                "confirmed occurrence-entity association requires a resolved verified "
+                "occurrence on a ready source snapshot",
+            )
         if occurrence:
             compatible_evidence = any(
                 evidence["evidence_status"] == "confirmed"
@@ -1231,6 +1393,44 @@ def check_semantics(
                 f"{card['coverage_class']!r}",
             )
 
+    ready_states = {"execution_ready", "active", "complete"}
+    source_card_coverages = {
+        "exact_source_generic",
+        "named_source_application",
+        "audit_source_recovery",
+    }
+    links_by_card: defaultdict[str, list[dict[str, str]]] = defaultdict(list)
+    for link in tables["occurrence_cards.csv"]:
+        links_by_card[link["card_id"]].append(link)
+    for card in tables["cards.csv"]:
+        if (
+            card["registration_status"] not in ready_states
+            or card["coverage_class"] not in source_card_coverages
+        ):
+            continue
+        source_links = links_by_card[card["card_id"]]
+        if not source_links:
+            add_error(
+                errors,
+                "cards.csv",
+                line_of(card),
+                "ready source-dependent card requires at least one occurrence association",
+            )
+        for link in source_links:
+            occurrence = occurrences.get(link["occurrence_id"])
+            if occurrence and not occurrence_is_source_ready(occurrence, snapshots):
+                add_error(
+                    errors,
+                    "cards.csv",
+                    line_of(card),
+                    f"ready source-dependent card {card['card_id']!r} depends on "
+                    f"unresolved or unverified occurrence {link['occurrence_id']!r}",
+                )
+
+    manifest_occurrence_links: defaultdict[str, list[dict[str, str]]] = defaultdict(list)
+    for link in tables["occurrence_manifests.csv"]:
+        if link["coverage_role"] == "source_coverage":
+            manifest_occurrence_links[link["manifest_id"]].append(link)
     for row in tables["manifests.csv"]:
         scope_closed = row["scope_closed"] == "true"
         if row["manifest_status"] == "execution_ready" and not scope_closed:
@@ -1265,8 +1465,18 @@ def check_semantics(
                 line_of(row),
                 "source manifest must state whether occurrence selection is locked",
             )
+        if scope_closed or row["manifest_status"] in ready_states:
+            for link in manifest_occurrence_links[row["manifest_id"]]:
+                occurrence = occurrences.get(link["occurrence_id"])
+                if occurrence and not occurrence_is_source_ready(occurrence, snapshots):
+                    add_error(
+                        errors,
+                        "manifests.csv",
+                        line_of(row),
+                        f"closed or ready manifest {row['manifest_id']!r} depends on "
+                        f"unresolved or unverified occurrence {link['occurrence_id']!r}",
+                    )
 
-    occurrences = index_by(tables, "occurrences.csv", "occurrence_id")
     for row in tables["occurrence_manifests.csv"]:
         occurrence = occurrences.get(row["occurrence_id"])
         if row["coverage_role"] == "source_coverage" and occurrence:
@@ -1324,20 +1534,13 @@ def check_classification_examples(
     examples: dict[str, dict[str, str]],
     errors: list[str],
 ) -> None:
-    """Bind source-card registry axes to the authority's required positive examples."""
+    """Bind registry rows to every authority example marked registry_binding=required."""
 
     filename = str(CLASSIFICATION_AUTHORITY.relative_to(ROOT))
     cards = index_by(tables, "cards.csv", "card_id")
-    for card_id in sorted(REQUIRED_SOURCE_CARD_EXAMPLES):
-        example = examples.get(card_id)
-        if not example:
-            add_error(
-                errors,
-                filename,
-                None,
-                f"missing required packet example {card_id!r}",
-            )
-            continue
+    if not examples:
+        add_error(errors, filename, None, "no required registry-bound packet examples")
+    for card_id, example in sorted(examples.items()):
         card = cards.get(card_id)
         if not card:
             add_error(
@@ -1347,7 +1550,7 @@ def check_classification_examples(
                 f"missing registry row for required classification example {card_id!r}",
             )
             continue
-        for axis in ("theorem_class", "coverage_class"):
+        for axis in ("theorem_class", "coverage_class", "novelty_class"):
             if card[axis] != example[axis]:
                 add_error(
                     errors,
@@ -1442,6 +1645,154 @@ def run_negative_invariant_tests(
             }
         )
 
+    def mutate_invalid_source_hash(copy: dict[str, list[dict[str, str]]]) -> None:
+        snapshot = next(
+            row
+            for row in copy["source_snapshots.csv"]
+            if row["source_snapshot_id"] == "SRC-OLV-2010-PREVIEW"
+        )
+        snapshot["digest_status"] = "verified"
+        snapshot["digest_algorithm"] = "md5"
+        snapshot["digest_value"] = "A" * 64
+
+    def mutate_invalid_transcription_hash(
+        copy: dict[str, list[dict[str, str]]]
+    ) -> None:
+        occurrence = next(
+            row
+            for row in copy["occurrences.csv"]
+            if row["occurrence_id"] == "OLV97-C03-WATSON"
+        )
+        occurrence["transcription_status"] = "verified"
+        occurrence["transcription_hash_algorithm"] = "md5"
+        occurrence["transcription_hash"] = "A" * 64
+        occurrence["transcribed_by"] = "negative-fixture"
+        occurrence["transcription_date"] = "2026-09-05"
+
+    def mutate_resolved_watson_on_placeholder(
+        copy: dict[str, list[dict[str, str]]]
+    ) -> None:
+        occurrence = next(
+            row
+            for row in copy["occurrences.csv"]
+            if row["occurrence_id"] == "OLV97-C03-WATSON"
+        )
+        occurrence["resolution_status"] = "resolved"
+        occurrence["transcription_status"] = "verified"
+        occurrence["transcription_hash_algorithm"] = "sha256"
+        occurrence["transcription_hash"] = "0" * 64
+        occurrence["transcribed_by"] = "negative-fixture"
+        occurrence["transcription_date"] = "2026-09-05"
+        occurrence["reconciliation_status"] = "matched"
+
+    def mutate_same_edition_placeholder_notation(
+        copy: dict[str, list[dict[str, str]]]
+    ) -> None:
+        notation = next(
+            row
+            for row in copy["notation.csv"]
+            if row["notation_id"] == "OLV10P-N0001"
+        )
+        notation["source_snapshot_id"] = "SRC-OLV-1997-COLLATION-PENDING"
+        notation["resolution_status"] = "resolved"
+        notation["transcription_status"] = "verified"
+        copy["occurrence_notations.csv"].append(
+            {
+                "schema_version": SCHEMA_VERSION,
+                "occurrence_id": "OLV97-C03-WATSON",
+                "notation_id": "OLV10P-N0001",
+                "notation_role": "used_notation",
+                "link_status": "confirmed",
+                "notes": "Intentional invalid same-edition placeholder fixture.",
+                "__line__": "999",
+            }
+        )
+
+    def mutate_confirmed_summary_notation(
+        copy: dict[str, list[dict[str, str]]]
+    ) -> None:
+        link = next(
+            row
+            for row in copy["occurrence_notations.csv"]
+            if row["occurrence_id"] == "OLV10P-O0001"
+            and row["notation_id"] == "OLV10P-N0001"
+        )
+        link["link_status"] = "confirmed"
+
+    def mutate_ready_olv_manifest(copy: dict[str, list[dict[str, str]]]) -> None:
+        manifest = next(
+            row
+            for row in copy["manifests.csv"]
+            if row["manifest_id"] == "OLV-MVP-1"
+        )
+        manifest["scope_closed"] = "true"
+        manifest["manifest_status"] = "execution_ready"
+        for card in copy["cards.csv"]:
+            if card["manifest_id"] == "OLV-MVP-1":
+                card["registration_status"] = "execution_ready"
+
+    def mutate_ql_novelty(copy: dict[str, list[dict[str, str]]]) -> None:
+        card = next(
+            row for row in copy["cards.csv"] if row["card_id"] == "QL-001"
+        )
+        card["novelty_class"] = "non_novel"
+
+    def mutate_distinct_ready_same_edition_snapshots(
+        copy: dict[str, list[dict[str, str]]]
+    ) -> None:
+        first = next(
+            row
+            for row in copy["source_snapshots.csv"]
+            if row["source_snapshot_id"] == "SRC-OLV-1997-COLLATION-PENDING"
+        )
+        first["snapshot_kind"] = "local_scan"
+        first["access_date"] = "2026-09-05"
+        first["availability_status"] = "available"
+        first["digest_algorithm"] = "sha256"
+        first["digest_value"] = "0" * 64
+        first["digest_status"] = "verified"
+        first["edition_reconciliation_status"] = "matched"
+        first["page_mapping_status"] = "matched"
+        copy["source_snapshots.csv"].append(
+            {
+                "schema_version": SCHEMA_VERSION,
+                "source_snapshot_id": "SRC-OLV-1997-SECOND-READY",
+                "edition_id": "olver_1997b",
+                "snapshot_kind": "local_scan",
+                "impression_year": "1997",
+                "publisher": "A K Peters",
+                "identifier": "negative-fixture-second-snapshot",
+                "url": "",
+                "access_date": "2026-09-05",
+                "availability_status": "available",
+                "digest_algorithm": "sha256",
+                "digest_value": "1" * 64,
+                "digest_status": "verified",
+                "edition_reconciliation_status": "matched",
+                "page_mapping_status": "matched",
+                "rights_status": "unknown",
+                "notes": "Intentional second ready snapshot for a negative fixture.",
+                "__line__": "999",
+            }
+        )
+        notation = next(
+            row
+            for row in copy["notation.csv"]
+            if row["notation_id"] == "OLV10P-N0001"
+        )
+        notation["source_snapshot_id"] = "SRC-OLV-1997-SECOND-READY"
+        copy["occurrence_notations.csv"].append(
+            {
+                "schema_version": SCHEMA_VERSION,
+                "occurrence_id": "OLV97-C03-WATSON",
+                "notation_id": "OLV10P-N0001",
+                "notation_role": "used_notation",
+                "link_status": "confirmed",
+                "notes": "Intentional distinct-snapshot same-edition negative fixture.",
+                "__line__": "999",
+            }
+        )
+
     cases = [
         (
             "edition/snapshot mismatch",
@@ -1471,12 +1822,73 @@ def run_negative_invariant_tests(
         (
             "Watson linked to 2010-preview notation",
             mutate_watson_preview_notation,
-            "confirmed occurrence-notation association crosses source provenance",
+            "confirmed occurrence-notation association lacks ready matching source provenance",
         ),
         (
             "Watson linked to 2010-preview entity",
             mutate_watson_preview_entity,
             "confirmed occurrence-entity association has no confirmed entity evidence",
+        ),
+        (
+            "verified source digest with unsupported algorithm and uppercase hash",
+            mutate_invalid_source_hash,
+            (
+                "verified source digest requires digest_algorithm='sha256'",
+                "verified source digest must be exactly 64 lowercase hexadecimal digits",
+            ),
+        ),
+        (
+            "verified transcription with unsupported algorithm and uppercase hash",
+            mutate_invalid_transcription_hash,
+            (
+                "verified transcription requires transcription_hash_algorithm='sha256'",
+                "verified transcription hash must be exactly 64 lowercase hexadecimal digits",
+            ),
+        ),
+        (
+            "resolved Watson occurrence on uninspected placeholder",
+            mutate_resolved_watson_on_placeholder,
+            (
+                "resolved occurrence requires an available non-placeholder source snapshot",
+                "resolved source occurrence requires evidence_type direct_formula or direct_prose",
+                "resolved source definition or theorem requires confirmed notation and entity links",
+            ),
+        ),
+        (
+            "same-edition confirmed notation join through pending placeholder",
+            mutate_same_edition_placeholder_notation,
+            (
+                "resolved notation requires an available non-placeholder source snapshot",
+                "confirmed occurrence-notation association requires a resolved verified occurrence",
+                "confirmed occurrence-notation association lacks ready matching source provenance",
+            ),
+        ),
+        (
+            "confirmed notation link with unresolved summary-only endpoints",
+            mutate_confirmed_summary_notation,
+            (
+                "confirmed occurrence-notation association requires a resolved verified occurrence",
+                "confirmed occurrence-notation association requires a resolved verified notation",
+            ),
+        ),
+        (
+            "ready closed source manifest with unresolved member and cards",
+            mutate_ready_olv_manifest,
+            (
+                "ready source-dependent card 'OLV-001' depends on unresolved or unverified occurrence",
+                "ready source-dependent card 'SR-001' depends on unresolved or unverified occurrence",
+                "closed or ready manifest 'OLV-MVP-1' depends on unresolved or unverified occurrence",
+            ),
+        ),
+        (
+            "registry novelty differs from required classification example",
+            mutate_ql_novelty,
+            "QL-001 novelty_class='non_novel' does not match the frozen classification example 'novel'",
+        ),
+        (
+            "distinct ready snapshots of the same edition are not equivalent",
+            mutate_distinct_ready_same_edition_snapshots,
+            "confirmed occurrence-notation association lacks ready matching source provenance",
         ),
     ]
 
@@ -1489,10 +1901,13 @@ def run_negative_invariant_tests(
             classification_enums,
             classification_examples,
         )
-        if not any(expected in error for error in errors):
-            failures.append(
-                f"negative test {name!r} did not produce expected diagnostic {expected!r}"
-            )
+        expected_diagnostics = expected if isinstance(expected, tuple) else (expected,)
+        for diagnostic in expected_diagnostics:
+            if not any(diagnostic in error for error in errors):
+                failures.append(
+                    f"negative test {name!r} did not produce expected diagnostic "
+                    f"{diagnostic!r}"
+                )
     return failures, len(cases)
 
 
@@ -1551,6 +1966,7 @@ def main() -> int:
     manifest_summary = ", ".join(
         f"{manifest_id}={total}" for manifest_id, total in sorted(totals.items())
     )
+    classification_summary = ", ".join(sorted(classification_examples))
     print(
         "inventory validation passed: "
         f"{len(tables['occurrences.csv'])} occurrences, "
@@ -1558,7 +1974,7 @@ def main() -> int:
         f"{len(tables['entities.csv'])} entities, "
         f"{len(tables['entity_evidence.csv'])} entity evidence rows, "
         f"{association_rows} occurrence associations; "
-        "classification examples [OLV-001, QL-001, SR-001]; "
+        f"classification examples [{classification_summary}]; "
         f"manifest totals [{manifest_summary}]"
     )
     return 0

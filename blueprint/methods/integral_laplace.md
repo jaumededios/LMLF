@@ -44,13 +44,13 @@ registry. `EX-002` and every other additional ID in this file are provisional.
 Listing an ID is not a card, manifest entry, source claim, or implementation
 authorization.
 
-| Order | Provisional card | Theorem / coverage / novelty class | Depends on | Status |
+| Order | Provisional card | Packet theorem / coverage / novelty class | Depends on | Status |
 |---:|---|---|---|---|
 | 1 | QL-001 | `finite_remainder_bound` / `infrastructure` / provisionally `novel` | QB-001 | planning only; registered but not specified |
 | 2 | QL-002 | `finite_remainder_bound` / `infrastructure` / provisionally `generalized` | QL-001; DEF-001 only if the public proof is routed through Gamma | provisional |
 | 3 | QL-003 | `finite_remainder_bound` / `infrastructure` / provisionally `novel` | the smallest accepted slice of QL-001/QL-002 | provisional |
 | 4 | EX-002 | `finite_remainder_bound` / `infrastructure` / `equivalent_reformulation` of the finite geometric identity | QL-001 | provisional; not registered and no card exists |
-| 5 | OLV-001 | `finite_remainder_bound` / `exact_source_generic` / unclassified until collation | locked occurrence, QB-001, and only the selected Laplace targets | planning only; source transcription absent |
+| 5 | OLV-001 | `finite_remainder_bound` / `exact_source_generic` / provisionally `strengthened_conclusion`, subject to collation | locked occurrence, QB-001, and only the selected Laplace targets | planning only; source transcription absent |
 | 6 | SR-001 | `qualitative_bridge` / `audit_source_recovery` / intended `source_equivalent`, subject to collation | OLV-001 | planning only; audit module only |
 
 `QL-002` and `QL-003` may be merged into a later revision of `QL-001` only if

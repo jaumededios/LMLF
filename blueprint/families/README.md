@@ -143,6 +143,13 @@ The family files add concrete sign, branch, exceptional-order, and scaling regre
 
 Provisional IDs are stable planning handles within this directory, not registry entries. Before registration, the specification owner must:
 
+The queue tables use the packet-level axes from artifact revision 2 of
+`review/classifications-v2.json`.  Thus `exact_identity`,
+`qualitative_support`, and `audit_regression` in those tables describe whole
+packet shape; they do not pre-classify each future declaration.  `mixed` is
+used when the principal targets span more than one packet shape.  Every bounded
+card must later supply independent target-level rows.
+
 1. split any row that cannot be expressed as a bounded declaration packet;
 2. assign exact theorem and coverage classes using the theorem-card vocabulary;
 3. add exact signatures, imports, source/entity/notation IDs, exclusions, dependencies, consumers, and an owner;

@@ -18,6 +18,7 @@ specification_binding:
   classification_schema:
     path: review/classifications-v2.json
     schema_version: lmlf-classification-v2
+    artifact_revision: REPLACE_WITH_IMMUTABLE_REVISION
     sha256: REPLACE_WITH_SHA256
 
 toolchain_binding:

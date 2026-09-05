@@ -4,14 +4,15 @@ schema_version: 4
 # An external review envelope binds those values after the packet is frozen.
 work_item_id: DEF-001
 title: Bootstrap reuse and audit wrappers for mathlib Complex.Gamma
-packet_revision: 2
+packet_revision: 3
 lifecycle_state: frozen
 specification_owner: jaumededios
 
 classification_schema:
   path: review/classifications-v2.json
   schema_version: lmlf-classification-v2
-  sha256: 698626606570827fcc8c78b69865d7cd4bc94de96bc6d5d45c23a5f6611aeeab
+  artifact_revision: 2
+  sha256: 8c9f8dbb5ab351771a433a9901fe176a66ec214092c5d5880b3ec57c9a5b23e9
 packet_classification:
   theorem_class: definition_identification
   coverage_class: entity_identification
@@ -49,10 +50,10 @@ source:
 
 upstream_artifacts:
   theorem_cards:
-    - artifact_id: TC-DEF-001-R3
+    - artifact_id: TC-DEF-001-R4
       path_or_uri: blueprint/theorem_cards/DEF-001.yaml
-      revision: 3
-      sha256: b6515349f7fb4d8d8dbc26bf7c24f3e1f6c6d02106ea8200c068282d6ada9dfc
+      revision: 4
+      sha256: eff82b06afaa61b67d13c3a399494525ed452e42c203a390ba40e56b93ec9daa
   natural_language_proofs: []
 
 targets:
@@ -65,7 +66,7 @@ targets:
     relationship_to_source: >-
       Readable wrapper around Complex.GammaIntegral_convergent with the Euler
       integrand expanded; no new convergence theorem.
-    theorem_card_id: TC-DEF-001-R3
+    theorem_card_id: TC-DEF-001-R4
     natural_language_proof_id: not_applicable
     exact_lean_signature: |
       theorem gamma_eulerIntegrable {s : ℂ} (hs : 0 < s.re) :
@@ -91,7 +92,7 @@ targets:
     novelty_class: equivalent_reformulation
     relationship_to_source: >-
       Readable wrapper around Complex.Gamma_eq_integral and Complex.GammaIntegral.
-    theorem_card_id: TC-DEF-001-R3
+    theorem_card_id: TC-DEF-001-R4
     natural_language_proof_id: not_applicable
     exact_lean_signature: |
       theorem gamma_eq_eulerIntegral {s : ℂ} (hs : 0 < s.re) :
@@ -116,7 +117,7 @@ targets:
     coverage_class: source_prerequisite
     novelty_class: source_equivalent
     relationship_to_source: Exact wrapper around Complex.Gamma_ofReal.
-    theorem_card_id: TC-DEF-001-R3
+    theorem_card_id: TC-DEF-001-R4
     natural_language_proof_id: not_applicable
     exact_lean_signature: |
       theorem gamma_ofReal (s : ℝ) :
@@ -137,7 +138,7 @@ targets:
     coverage_class: source_prerequisite
     novelty_class: source_equivalent
     relationship_to_source: Exact wrapper around Complex.Gamma_neg_nat_eq_zero.
-    theorem_card_id: TC-DEF-001-R3
+    theorem_card_id: TC-DEF-001-R4
     natural_language_proof_id: not_applicable
     exact_lean_signature: |
       theorem gamma_neg_nat_eq_zero (n : ℕ) :
