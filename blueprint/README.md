@@ -25,7 +25,7 @@ As of this specification:
 |---|---|---|
 | `DEMO-0` | candidate M0--M4 work | open and `planning_only`; not execution-ready |
 | `BOOTSTRAP-0` | exactly `QB-001` and `DEF-001` | closed and `execution_ready`; zero source occurrences |
-| `QB-001` | eight signatures only | card revision 6, proof revision 5, and signature revision 2 are frozen; proof complete, external review not started, no Lean authorization |
+| `QB-001` | eight signatures only | card revision 7, proof revision 6, and signature revision 2 are frozen; proof complete, external review not started, no Lean authorization |
 | `DEF-001` | four Gamma reuse wrappers | card revision 4 frozen; proof not required, external review not started, implementation not started, prototype absent in the exact specification snapshot |
 | `OLV-MVP-1` | one selected Watson occurrence | open and `planning_only`; occurrence selected but the locked text is not yet collated |
 | Olver theorem coverage | none | no quantitative Olver theorem or qualitative source recovery is currently claimed |

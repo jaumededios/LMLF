@@ -17,6 +17,23 @@ INVENTORY = ROOT / "blueprint" / "inventory"
 CLASSIFICATION_AUTHORITY = ROOT / "review" / "classifications-v2.json"
 CLASSIFICATION_SCHEMA_VERSION = "lmlf-classification-v2"
 DIRECT_SOURCE_EVIDENCE_TYPES = {"direct_formula", "direct_prose"}
+RESERVED_PENDING_SNAPSHOT_ID = "SRC-OLV-1997-COLLATION-PENDING"
+RESERVED_PENDING_SNAPSHOT_FIELDS = {
+    "edition_id": "olver_1997b",
+    "snapshot_kind": "locked_copy_placeholder",
+    "impression_year": "1997",
+    "publisher": "A K Peters",
+    "identifier": "ISBN 1-56881-069-5",
+    "url": "",
+    "access_date": "",
+    "availability_status": "pending",
+    "digest_algorithm": "",
+    "digest_value": "",
+    "digest_status": "unresolved",
+    "edition_reconciliation_status": "unresolved",
+    "page_mapping_status": "unresolved",
+    "rights_status": "unknown",
+}
 
 
 HEADERS: dict[str, list[str]] = {
@@ -901,6 +918,34 @@ def source_snapshot_is_ready(snapshot: dict[str, str] | None) -> bool:
     )
 
 
+def page_audit_is_complete_and_independent(audit: dict[str, str]) -> bool:
+    return bool(
+        audit["audit_status"] == "complete"
+        and audit["audited_by"]
+        and audit["audit_date"]
+        and audit["reviewed_by"]
+        and audit["review_date"]
+        and audit["reviewed_by"] != audit["audited_by"]
+    )
+
+
+def page_audit_covers_printed_range(
+    audit: dict[str, str], start_text: str, end_text: str
+) -> bool:
+    if not (start_text and end_text):
+        return True
+    if not (audit["printed_page_start"] and audit["printed_page_end"]):
+        return False
+    try:
+        start = int(start_text)
+        end = int(end_text)
+        audit_start = int(audit["printed_page_start"])
+        audit_end = int(audit["printed_page_end"])
+    except ValueError:
+        return False
+    return audit_start <= start and end <= audit_end
+
+
 def occurrence_is_source_ready(
     occurrence: dict[str, str] | None,
     snapshots: dict[str, dict[str, str]],
@@ -948,7 +993,14 @@ def check_semantics(
     editions = index_by(tables, "editions.csv", "edition_id")
     snapshots = index_by(tables, "source_snapshots.csv", "source_snapshot_id")
     edition_relations = tables["edition_relations.csv"]
+    complete_audits_by_snapshot: defaultdict[str, list[dict[str, str]]] = defaultdict(
+        list
+    )
+    for audit in tables["page_audits.csv"]:
+        if page_audit_is_complete_and_independent(audit):
+            complete_audits_by_snapshot[audit["source_snapshot_id"]].append(audit)
 
+    relation_pairs: dict[tuple[str, str], int] = {}
     for row in tables["edition_relations.csv"]:
         if row["from_edition_id"] == row["to_edition_id"]:
             add_error(
@@ -957,6 +1009,17 @@ def check_semantics(
                 line_of(row),
                 "edition relation must connect distinct edition IDs",
             )
+        endpoint_pair = tuple(sorted((row["from_edition_id"], row["to_edition_id"])))
+        if endpoint_pair in relation_pairs:
+            add_error(
+                errors,
+                "edition_relations.csv",
+                line_of(row),
+                f"duplicate unordered edition endpoint pair {endpoint_pair!r}; "
+                f"first relation is on line {relation_pairs[endpoint_pair]}",
+            )
+        else:
+            relation_pairs[endpoint_pair] = line_of(row)
         fully_matched = (
             row["content_equivalence_status"] == "matched"
             and row["page_locator_equivalence_status"] == "matched"
@@ -970,6 +1033,25 @@ def check_semantics(
                 f"join_semantics must be {required_join!r} for the recorded "
                 "content/page equivalence statuses",
             )
+
+    reserved_snapshot = snapshots.get(RESERVED_PENDING_SNAPSHOT_ID)
+    if not reserved_snapshot:
+        add_error(
+            errors,
+            "source_snapshots.csv",
+            None,
+            f"missing reserved planning placeholder {RESERVED_PENDING_SNAPSHOT_ID!r}",
+        )
+    else:
+        for field, expected in RESERVED_PENDING_SNAPSHOT_FIELDS.items():
+            if reserved_snapshot[field] != expected:
+                add_error(
+                    errors,
+                    "source_snapshots.csv",
+                    line_of(reserved_snapshot),
+                    f"reserved placeholder {RESERVED_PENDING_SNAPSHOT_ID!r} requires "
+                    f"{field}={expected!r}; acquisition must use a new snapshot ID",
+                )
 
     for row in tables["source_snapshots.csv"]:
         digest_fields = (row["digest_algorithm"], row["digest_value"])
@@ -1025,6 +1107,18 @@ def check_semantics(
                 "confirmed entity evidence requires an available non-placeholder snapshot "
                 "with a valid verified digest and matched edition/page reconciliation",
             )
+        if (
+            row["evidence_status"] == "confirmed"
+            and source_snapshot_is_ready(snapshot)
+            and not complete_audits_by_snapshot[row["source_snapshot_id"]]
+        ):
+            add_error(
+                errors,
+                "entity_evidence.csv",
+                line_of(row),
+                "confirmed entity evidence requires a complete independently reviewed "
+                "page audit for its exact source snapshot",
+            )
 
     for row in tables["page_audits.csv"]:
         parse_page_pair(
@@ -1049,6 +1143,17 @@ def check_semantics(
                 "page_audits.csv",
                 line_of(row),
                 "complete page audit requires reviewed_by and review_date",
+            )
+        if (
+            row["audit_status"] == "complete"
+            and row["reviewed_by"]
+            and row["reviewed_by"] == row["audited_by"]
+        ):
+            add_error(
+                errors,
+                "page_audits.csv",
+                line_of(row),
+                "complete page audit requires reviewed_by distinct from audited_by",
             )
 
     occurrence_notations: defaultdict[str, list[dict[str, str]]] = defaultdict(list)
@@ -1169,6 +1274,31 @@ def check_semantics(
                     line_of(row),
                     "resolved occurrence requires an available non-placeholder source snapshot "
                     "with a valid verified digest and matched edition/page reconciliation",
+                )
+            complete_audits = complete_audits_by_snapshot[row["source_snapshot_id"]]
+            if not complete_audits:
+                add_error(
+                    errors,
+                    "occurrences.csv",
+                    line_of(row),
+                    "resolved occurrence requires a complete independently reviewed page "
+                    "audit for its exact source snapshot",
+                )
+            elif row["printed_page_start"] and row["printed_page_end"] and not any(
+                page_audit_covers_printed_range(
+                    audit,
+                    row["printed_page_start"],
+                    row["printed_page_end"],
+                )
+                for audit in complete_audits
+            ):
+                add_error(
+                    errors,
+                    "occurrences.csv",
+                    line_of(row),
+                    f"resolved occurrence printed range {row['printed_page_start']}-"
+                    f"{row['printed_page_end']} is not covered by a complete independently "
+                    "reviewed page audit for its exact source snapshot",
                 )
             if (
                 row["target_class"] != "project_extra"
@@ -1340,12 +1470,20 @@ def check_semantics(
 
     for row in tables["cards.csv"]:
         if row["artifact_status"] == "file_present":
+            expected_path = f"blueprint/theorem_cards/{row['card_id']}.yaml"
             if not row["target_path"]:
                 add_error(
                     errors,
                     "cards.csv",
                     line_of(row),
                     "file_present card requires target_path",
+                )
+            elif row["target_path"] != expected_path:
+                add_error(
+                    errors,
+                    "cards.csv",
+                    line_of(row),
+                    f"file_present card target_path must be canonical path {expected_path!r}",
                 )
             elif not (ROOT / row["target_path"]).is_file():
                 add_error(
@@ -1394,6 +1532,18 @@ def check_semantics(
             )
 
     ready_states = {"execution_ready", "active", "complete"}
+    for card in tables["cards.csv"]:
+        if (
+            card["registration_status"] in ready_states
+            and card["artifact_status"] != "file_present"
+        ):
+            add_error(
+                errors,
+                "cards.csv",
+                line_of(card),
+                "ready, active, or complete card registration requires artifact_status="
+                "'file_present' at its canonical card path",
+            )
     source_card_coverages = {
         "exact_source_generic",
         "named_source_application",
@@ -1431,6 +1581,9 @@ def check_semantics(
     for link in tables["occurrence_manifests.csv"]:
         if link["coverage_role"] == "source_coverage":
             manifest_occurrence_links[link["manifest_id"]].append(link)
+    cards_by_manifest: defaultdict[str, list[dict[str, str]]] = defaultdict(list)
+    for card in tables["cards.csv"]:
+        cards_by_manifest[card["manifest_id"]].append(card)
     for row in tables["manifests.csv"]:
         scope_closed = row["scope_closed"] == "true"
         if row["manifest_status"] == "execution_ready" and not scope_closed:
@@ -1466,6 +1619,27 @@ def check_semantics(
                 "source manifest must state whether occurrence selection is locked",
             )
         if scope_closed or row["manifest_status"] in ready_states:
+            if not cards_by_manifest[row["manifest_id"]]:
+                add_error(
+                    errors,
+                    "manifests.csv",
+                    line_of(row),
+                    "closed or ready manifest requires at least one registered member card",
+                )
+            for card in cards_by_manifest[row["manifest_id"]]:
+                expected_path = f"blueprint/theorem_cards/{card['card_id']}.yaml"
+                if (
+                    card["artifact_status"] != "file_present"
+                    or card["target_path"] != expected_path
+                    or not (ROOT / expected_path).is_file()
+                ):
+                    add_error(
+                        errors,
+                        "manifests.csv",
+                        line_of(row),
+                        f"closed or ready manifest member {card['card_id']!r} requires a "
+                        "file-present canonical card artifact",
+                    )
             for link in manifest_occurrence_links[row["manifest_id"]]:
                 occurrence = occurrences.get(link["occurrence_id"])
                 if occurrence and not occurrence_is_source_ready(occurrence, snapshots):
@@ -1793,6 +1967,226 @@ def run_negative_invariant_tests(
             }
         )
 
+    def mutate_duplicate_edition_relation(
+        copy: dict[str, list[dict[str, str]]]
+    ) -> None:
+        relation = dict(copy["edition_relations.csv"][0])
+        relation.update(
+            {
+                "edition_relation_id": "REL-OLV-1997-TO-2010-CONFLICT",
+                "from_edition_id": "olver_1997b",
+                "to_edition_id": "olver_crc_2010_preview",
+                "content_equivalence_status": "matched",
+                "page_locator_equivalence_status": "matched",
+                "join_semantics": "equivalent",
+                "evidence": "Intentional conflicting relation fixture.",
+                "notes": "The second row must not override the unresolved relation.",
+                "__line__": "999",
+            }
+        )
+        copy["edition_relations.csv"].append(relation)
+
+    def mutate_reserved_placeholder_to_acquired(
+        copy: dict[str, list[dict[str, str]]]
+    ) -> None:
+        snapshot = next(
+            row
+            for row in copy["source_snapshots.csv"]
+            if row["source_snapshot_id"] == RESERVED_PENDING_SNAPSHOT_ID
+        )
+        snapshot.update(
+            {
+                "snapshot_kind": "local_scan",
+                "access_date": "2026-09-05",
+                "availability_status": "available",
+                "digest_algorithm": "sha256",
+                "digest_value": "2" * 64,
+                "digest_status": "verified",
+                "edition_reconciliation_status": "matched",
+                "page_mapping_status": "matched",
+            }
+        )
+
+    def mutate_page_audit_self_review(
+        copy: dict[str, list[dict[str, str]]]
+    ) -> None:
+        audit = copy["page_audits.csv"][0]
+        audit["audit_status"] = "complete"
+        audit["reviewed_by"] = audit["audited_by"]
+        audit["review_date"] = "2026-09-05"
+
+    def mutate_ql_card_to_arbitrary_file(
+        copy: dict[str, list[dict[str, str]]]
+    ) -> None:
+        card = next(
+            row for row in copy["cards.csv"] if row["card_id"] == "QL-001"
+        )
+        card["artifact_status"] = "file_present"
+        card["target_path"] = "README.md"
+
+    def mutate_empty_demo_manifest_closed(
+        copy: dict[str, list[dict[str, str]]]
+    ) -> None:
+        manifest = next(
+            row
+            for row in copy["manifests.csv"]
+            if row["manifest_id"] == "DEMO-0"
+        )
+        manifest["scope_closed"] = "true"
+        manifest["manifest_status"] = "complete"
+
+    def mutate_ready_card_without_artifact(
+        copy: dict[str, list[dict[str, str]]]
+    ) -> None:
+        card = next(
+            row for row in copy["cards.csv"] if row["card_id"] == "QB-001"
+        )
+        card["artifact_status"] = "planned"
+        card["target_path"] = ""
+
+    def mutate_composed_fake_ready_source(
+        copy: dict[str, list[dict[str, str]]], *, add_noncovering_audit: bool
+    ) -> None:
+        snapshot_id = "SRC-OLV-1997-FAKE-READY"
+        copy["source_snapshots.csv"].append(
+            {
+                "schema_version": SCHEMA_VERSION,
+                "source_snapshot_id": snapshot_id,
+                "edition_id": "olver_1997b",
+                "snapshot_kind": "local_scan",
+                "impression_year": "1997",
+                "publisher": "A K Peters",
+                "identifier": "negative-fixture-unverified-bytes",
+                "url": "",
+                "access_date": "2026-09-05",
+                "availability_status": "available",
+                "digest_algorithm": "sha256",
+                "digest_value": "3" * 64,
+                "digest_status": "verified",
+                "edition_reconciliation_status": "matched",
+                "page_mapping_status": "matched",
+                "rights_status": "unknown",
+                "notes": "Syntactically valid fake metadata for a negative fixture.",
+                "__line__": "990",
+            }
+        )
+        occurrence = next(
+            row
+            for row in copy["occurrences.csv"]
+            if row["occurrence_id"] == "OLV97-C03-WATSON"
+        )
+        occurrence.update(
+            {
+                "source_snapshot_id": snapshot_id,
+                "evidence_type": "direct_prose",
+                "resolution_status": "resolved",
+                "transcription_status": "verified",
+                "transcription_hash_algorithm": "sha256",
+                "transcription_hash": "4" * 64,
+                "transcribed_by": "negative-fixture-collator",
+                "transcription_date": "2026-09-05",
+                "reconciliation_status": "matched",
+            }
+        )
+        copy["notation.csv"].append(
+            {
+                "schema_version": SCHEMA_VERSION,
+                "notation_id": "OLV97-N-WATSON-FAKE",
+                "entity_id": "gamma",
+                "source_snapshot_id": snapshot_id,
+                "source_locator": "Ch. 3, printed pp. 71-72",
+                "printed_symbol": "Gamma",
+                "binder_and_argument_order": "z",
+                "ambient_type": "complex",
+                "parameter_roles": "negative fixture",
+                "domain_and_branch": "negative fixture",
+                "normalization": "negative fixture",
+                "exceptional_values": "negative fixture",
+                "derivative_variable": "",
+                "evidence_type": "direct_prose",
+                "resolution_status": "resolved",
+                "transcription_status": "verified",
+                "notes": "Syntactically complete same-snapshot negative fixture.",
+                "__line__": "991",
+            }
+        )
+        copy["entity_evidence.csv"].append(
+            {
+                "schema_version": SCHEMA_VERSION,
+                "entity_evidence_id": "EE-OLV97-WATSON-FAKE",
+                "entity_id": "gamma",
+                "edition_id": "olver_1997b",
+                "source_snapshot_id": snapshot_id,
+                "evidence_role": "body_naming",
+                "evidence_status": "confirmed",
+                "notes": "Claimed confirmed evidence without an adequate page audit.",
+                "__line__": "992",
+            }
+        )
+        copy["occurrence_notations.csv"].append(
+            {
+                "schema_version": SCHEMA_VERSION,
+                "occurrence_id": "OLV97-C03-WATSON",
+                "notation_id": "OLV97-N-WATSON-FAKE",
+                "notation_role": "used_notation",
+                "link_status": "confirmed",
+                "notes": "Same-snapshot composed negative fixture.",
+                "__line__": "993",
+            }
+        )
+        copy["occurrence_entities.csv"].append(
+            {
+                "schema_version": SCHEMA_VERSION,
+                "occurrence_id": "OLV97-C03-WATSON",
+                "entity_id": "gamma",
+                "entity_role": "uses",
+                "link_status": "confirmed",
+                "notes": "Same-snapshot composed negative fixture.",
+                "__line__": "994",
+            }
+        )
+        manifest = next(
+            row
+            for row in copy["manifests.csv"]
+            if row["manifest_id"] == "OLV-MVP-1"
+        )
+        manifest["scope_closed"] = "true"
+        manifest["manifest_status"] = "execution_ready"
+        for card in copy["cards.csv"]:
+            if card["manifest_id"] == "OLV-MVP-1":
+                card["registration_status"] = "execution_ready"
+        if add_noncovering_audit:
+            copy["page_audits.csv"].append(
+                {
+                    "schema_version": SCHEMA_VERSION,
+                    "page_audit_id": "PA-OLV97-FAKE-NONCOVERING",
+                    "source_snapshot_id": snapshot_id,
+                    "coordinate_system": "printed_page",
+                    "snapshot_page_start": "70",
+                    "snapshot_page_end": "70",
+                    "printed_page_start": "70",
+                    "printed_page_end": "70",
+                    "audit_scope": "intentional_noncoverage_fixture",
+                    "audit_status": "complete",
+                    "audited_by": "negative-fixture-auditor",
+                    "audit_date": "2026-09-05",
+                    "reviewed_by": "negative-fixture-reviewer",
+                    "review_date": "2026-09-05",
+                    "notes": "Complete but does not cover Watson pages 71-72.",
+                    "__line__": "995",
+                }
+            )
+
+    def mutate_composed_fake_ready_source_without_audit(
+        copy: dict[str, list[dict[str, str]]]
+    ) -> None:
+        mutate_composed_fake_ready_source(copy, add_noncovering_audit=False)
+
+    def mutate_composed_fake_ready_source_with_noncovering_audit(
+        copy: dict[str, list[dict[str, str]]]
+    ) -> None:
+        mutate_composed_fake_ready_source(copy, add_noncovering_audit=True)
+
     cases = [
         (
             "edition/snapshot mismatch",
@@ -1889,6 +2283,74 @@ def run_negative_invariant_tests(
             "distinct ready snapshots of the same edition are not equivalent",
             mutate_distinct_ready_same_edition_snapshots,
             "confirmed occurrence-notation association lacks ready matching source provenance",
+        ),
+        (
+            "conflicting duplicate relation for one unordered edition pair",
+            mutate_duplicate_edition_relation,
+            "duplicate unordered edition endpoint pair",
+        ),
+        (
+            "reserved planning snapshot promoted in place",
+            mutate_reserved_placeholder_to_acquired,
+            (
+                f"reserved placeholder {RESERVED_PENDING_SNAPSHOT_ID!r} requires "
+                "snapshot_kind='locked_copy_placeholder'",
+                "acquisition must use a new snapshot ID",
+            ),
+        ),
+        (
+            "completed page audit reviewed by its auditor",
+            mutate_page_audit_self_review,
+            "complete page audit requires reviewed_by distinct from audited_by",
+        ),
+        (
+            "file-present card points to an arbitrary existing file",
+            mutate_ql_card_to_arbitrary_file,
+            (
+                "file_present card target_path must be canonical path "
+                "'blueprint/theorem_cards/QL-001.yaml'"
+            ),
+        ),
+        (
+            "closed complete manifest without a member card",
+            mutate_empty_demo_manifest_closed,
+            "closed or ready manifest requires at least one registered member card",
+        ),
+        (
+            "ready bootstrap member loses its canonical artifact",
+            mutate_ready_card_without_artifact,
+            (
+                "ready, active, or complete card registration requires artifact_status="
+                "'file_present' at its canonical card path",
+                "closed or ready manifest member 'QB-001' requires a file-present "
+                "canonical card artifact",
+            ),
+        ),
+        (
+            "composed fake ready source without a complete page audit",
+            mutate_composed_fake_ready_source_without_audit,
+            (
+                "confirmed entity evidence requires a complete independently reviewed "
+                "page audit for its exact source snapshot",
+                "resolved occurrence requires a complete independently reviewed page audit "
+                "for its exact source snapshot",
+                "ready, active, or complete card registration requires artifact_status="
+                "'file_present' at its canonical card path",
+                "closed or ready manifest member 'OLV-001' requires a file-present "
+                "canonical card artifact",
+            ),
+        ),
+        (
+            "composed fake ready source with a noncovering page audit",
+            mutate_composed_fake_ready_source_with_noncovering_audit,
+            (
+                "resolved occurrence printed range 71-72 is not covered by a complete "
+                "independently reviewed page audit for its exact source snapshot",
+                "ready, active, or complete card registration requires artifact_status="
+                "'file_present' at its canonical card path",
+                "closed or ready manifest member 'SR-001' requires a file-present "
+                "canonical card artifact",
+            ),
         ),
     ]
 

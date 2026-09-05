@@ -139,7 +139,7 @@ does not stop generic work, but it blocks every named theorem about that family.
 Specification, proof, review, implementation, coverage, and manifest membership
 use separate controlled vocabularies from `theorem_cards/README.md`.
 Candidate-owned review and implementation fields are temporal descriptions,
-not gate evidence.  QB-001 card revision 6 and proof revision 5 are frozen and
+not gate evidence.  QB-001 card revision 7 and proof revision 6 are frozen and
 complete as applicable but have
 no current external review or implementation authorization.  Its revision-3
 repository review summary is historical and non-quorum.  DEF-001 revision 4 is

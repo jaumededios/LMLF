@@ -85,11 +85,25 @@ Run the source-card validators against explicit manifest IDs:
   hexadecimal digits;
 - verify edition, snapshot, occurrence, notation, entity, card, and manifest
   joins;
+- reject duplicate rows for one unordered edition pair, including reversed
+  endpoints that would otherwise permit contradictory reconciliation results;
+- preserve the reserved locked-copy placeholder in its exact pending,
+  uninspected state and require any acquired copy to use a new snapshot ID;
 - require resolved occurrences/notations and confirmed semantic links to use
   available, non-placeholder, digest-verified, edition-reconciled snapshots with
   matched page mappings, and require an exact snapshot ID unless a separately
   represented equivalence permits a cross-edition join;
+- require distinct auditor and reviewer identities for every complete page audit;
+- require each resolved occurrence and confirmed entity-evidence row to have a
+  complete, independently reviewed audit for its exact snapshot, with inclusive
+  printed-range coverage whenever the occurrence records printed-page bounds;
 - distinguish planning-only placeholders from closure-ready records;
+- require `file_present` cards to use their exact canonical
+  `blueprint/theorem_cards/<card_id>.yaml` paths, and require every closed or
+  ready manifest to have at least one status-consistent member card with that
+  canonical artifact;
+- reject any `execution_ready`, `active`, or `complete` card registration whose
+  artifact remains planned or absent;
 - compare declared and actual distinct occurrence/card totals;
 - reject generic/named/source-recovery role mismatches;
 - derive all three card-registry classification axes and every required registry
@@ -100,7 +114,9 @@ Run the source-card validators against explicit manifest IDs:
 
 No source is downloaded in CI.  If licensed source bytes cannot be stored in the
 runner, a previously created immutable digest and external evidence reference is
-checked structurally; CI states that it did not inspect the bytes.
+checked structurally; CI states that it did not inspect the bytes.  Hash syntax
+and metadata consistency cannot establish that inaccessible bytes exist or match
+the recorded digest, so that fact remains an external/manual verification duty.
 
 ### 3.3 `lean-narrow`
 

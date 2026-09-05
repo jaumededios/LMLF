@@ -172,7 +172,7 @@ complete and nonoverlapping.
 ### 3.2 Legacy artifacts
 
 Legacy-format proof artifacts such as QB-001 remain interpreted under their
-recorded format.  QB-001 revision 5 has no current external review binding;
+recorded format.  QB-001 revision 6 has no current external review binding;
 earlier candidate-owned summaries are non-quorum.  A future material successor
 uses this schema or the then-current reviewed version rather than silently
 inventing missing fields.

@@ -62,8 +62,8 @@ Packet state is recorded on orthogonal axes, never one overloaded status:
 specification, natural-language proof, review, implementation, coverage, and
 manifest membership.  The vocabulary is normative in
 [`theorem_cards/README.md`](theorem_cards/README.md).  Candidate-owned status
-fields are temporal and nonauthoritative.  QB-001 card revision 6 and proof
-revision 5 are
+fields are temporal and nonauthoritative.  QB-001 card revision 7 and proof
+revision 6 are
 currently `specification_status: frozen`, `proof_status: complete`,
 `review_status: not_started`, and `implementation_status: not_started`.  Its
 revision-3 repository ledger is historical, non-quorum context.  Only an

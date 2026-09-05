@@ -2,7 +2,7 @@ schema_version: 2
 id: QB-001
 title: Bootstrap finite error predicates and transport
 owner: jaumededios
-artifact_revision: 6
+artifact_revision: 7
 baseline_spec_commit: pending_external_record_after_commit
 
 theorem_class: foundational_calculus
@@ -62,10 +62,11 @@ scope:
     - minimum, product, biadditive, inverse, and division estimates
     - HasErrorFamily transport wrappers
   scope_note: >-
-    The natural-language dossier discusses excluded results, but only its
-    definitions and sections QB-001.1, QB-001.2, QB-001.3, the forward exactness
-    statement in QB-001.5, and QB-001.7 are normative for this card.  Every
-    additional declaration requires a later card and manifest revision.
+    The natural-language dossier discusses excluded results, but only its eight
+    target-specific anchors are normative for this card.  Organizational
+    QB-001 section numbers do not bind scope.  Every other statement, variant,
+    counterpart, wrapper, or proposed name requires a later card and manifest
+    revision.
 
 packet_local_concepts:
   items:
@@ -110,59 +111,69 @@ novelty:
 
 natural_language_proof:
   artifact: blueprint/proofs/QB-001.md
-  artifact_revision: 5
+  artifact_revision: 6
   artifact_state: frozen
   proof_status: complete
   normative_sections:
-    - Scope and standing assumptions
-    - QB-001.1 restriction
-    - QB-001.2 weakening
-    - QB-001.3 transitivity
-    - QB-001.5 forward exactness only
-    - QB-001.7 precomposition
+    - qb-001-t01-erroron
+    - qb-001-t02-normboundon
+    - qb-001-t03-haserrorfamily
+    - qb-001-t04-erroron-exact
+    - qb-001-t05-erroron-restrict
+    - qb-001-t06-erroron-weaken
+    - qb-001-t07-erroron-trans
+    - qb-001-t08-erroron-comp
   note: >-
-    Revision 5 preserves the eight normative proofs and signatures while
-    labeling every non-target declaration discussion as prospective.  Extra
-    dossier sections do not enlarge this bootstrap card.
+    Revision 6 preserves the eight normative proofs and signatures, gives every
+    target a stable anchor, and labels every non-target statement as
+    prospective.  Extra dossier sections do not enlarge this bootstrap card.
 
 target_classifications:
   - target_id: QB-001-T01
     declaration: QuantitativeAnalysis.ErrorOn
+    proof_anchor: qb-001-t01-erroron
     theorem_class: definition
     coverage_class: reusable_infrastructure
     novelty_class: non_novel
   - target_id: QB-001-T02
     declaration: QuantitativeAnalysis.NormBoundOn
+    proof_anchor: qb-001-t02-normboundon
     theorem_class: definition
     coverage_class: reusable_infrastructure
     novelty_class: non_novel
   - target_id: QB-001-T03
     declaration: QuantitativeAnalysis.HasErrorFamily
+    proof_anchor: qb-001-t03-haserrorfamily
     theorem_class: definition
     coverage_class: reusable_infrastructure
     novelty_class: non_novel
   - target_id: QB-001-T04
     declaration: QuantitativeAnalysis.ErrorOn.exact
+    proof_anchor: qb-001-t04-erroron-exact
     theorem_class: generic_quantitative
     coverage_class: reusable_infrastructure
     novelty_class: non_novel
   - target_id: QB-001-T05
     declaration: QuantitativeAnalysis.ErrorOn.restrict
+    proof_anchor: qb-001-t05-erroron-restrict
     theorem_class: generic_quantitative
     coverage_class: reusable_infrastructure
     novelty_class: non_novel
   - target_id: QB-001-T06
     declaration: QuantitativeAnalysis.ErrorOn.weaken
+    proof_anchor: qb-001-t06-erroron-weaken
     theorem_class: generic_quantitative
     coverage_class: reusable_infrastructure
     novelty_class: non_novel
   - target_id: QB-001-T07
     declaration: QuantitativeAnalysis.ErrorOn.trans
+    proof_anchor: qb-001-t07-erroron-trans
     theorem_class: generic_quantitative
     coverage_class: reusable_infrastructure
     novelty_class: non_novel
   - target_id: QB-001-T08
     declaration: QuantitativeAnalysis.ErrorOn.comp
+    proof_anchor: qb-001-t08-erroron-comp
     theorem_class: generic_quantitative
     coverage_class: reusable_infrastructure
     novelty_class: non_novel
@@ -211,8 +222,8 @@ implementation:
   implementation_status: not_started
   authorization_source: external_review_envelope_only
   blocking_condition: >-
-    No external envelope currently binds the frozen packet, card revision 6,
-    proof revision 5, and signature artifact revision 2 with passing theorem-
+    No external envelope currently binds the frozen packet, card revision 7,
+    proof revision 6, and signature artifact revision 2 with passing theorem-
     card and proof gates, an externally recorded not_required structural-
     circularity gate, and a passing lean_ready gate.
   file: null

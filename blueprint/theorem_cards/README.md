@@ -61,7 +61,7 @@ Natural-language proof frontmatter records intrinsic `proof_status` directly.
 Review and implementation fields in a candidate-owned card are temporal,
 nonauthoritative projections; only an externally stored envelope and bound
 verdicts can establish reviewer quorum, gate pass, or Lean authorization.
-QB-001 card revision 6 and proof revision 5 are `complete`/`frozen` as
+QB-001 card revision 7 and proof revision 6 are `complete`/`frozen` as
 applicable, but externally unreviewed and
 unauthorized.  Its revision-3 repository ledger is historical context and
 counts as zero reviewers.  Manifest execution readiness never authorizes
