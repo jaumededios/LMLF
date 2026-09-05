@@ -53,7 +53,8 @@ theorem eulerFormula {s : ℂ} (hs : 0 < s.re) :
 
 /-- The Euler normalization gives `Gamma 1 = 1`. -/
 theorem eulerAtOne : Complex.Gamma 1 = 1 := by
-  exact Complex.Gamma_one
+  rw [LMLF.Definitions.gamma_eq_eulerIntegral (s := 1) (by norm_num)]
+  simpa only [Complex.GammaIntegral] using Complex.GammaIntegral_one
 
 /-- The complex and real Mathlib Gamma functions agree on real inputs. -/
 theorem realAgreement (s : ℝ) : Complex.Gamma (s : ℂ) = Real.Gamma s := by
