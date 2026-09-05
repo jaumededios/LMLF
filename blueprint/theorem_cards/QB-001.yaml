@@ -1,0 +1,178 @@
+schema_version: 2
+id: QB-001
+title: Bootstrap finite error predicates and transport
+owner: jaumededios
+artifact_revision: 3
+baseline_spec_commit: pending_external_record_after_commit
+
+theorem_class: foundational_calculus
+coverage_class: infrastructure
+specification_status: specified
+proof_status: approved
+review_status: approved
+implementation_status: authorized
+coverage_status: not_applicable
+manifest_membership_status: execution_ready
+
+manifest: BOOTSTRAP-0
+source_occurrences: []
+source_entities: []
+source_notation: []
+coverage_claim: none
+
+scope:
+  summary: >-
+    Define pointwise error and norm bounds and an order-indexed family of finite
+    bounds, then prove five foundational transport lemmas.  This bootstrap is
+    exactly eight public declarations.
+  module: LMLF.Quantitative.Basic
+  namespace: QuantitativeAnalysis
+  imports:
+    - LMLF.Basic
+  signatures_artifact:
+    path: blueprint/theorem_cards/QB-001-signatures.md
+    revision: 1
+    status: specified
+  public_declarations:
+    - QuantitativeAnalysis.ErrorOn
+    - QuantitativeAnalysis.NormBoundOn
+    - QuantitativeAnalysis.HasErrorFamily
+    - QuantitativeAnalysis.ErrorOn.exact
+    - QuantitativeAnalysis.ErrorOn.restrict
+    - QuantitativeAnalysis.ErrorOn.weaken
+    - QuantitativeAnalysis.ErrorOn.trans
+    - QuantitativeAnalysis.ErrorOn.comp
+  excluded_from_bootstrap:
+    - symmetry and congruence
+    - conversion and zero-error equivalences
+    - addition, subtraction, negation, scalar multiplication, and finite sums
+    - minimum, product, biadditive, inverse, and division estimates
+    - HasErrorFamily transport wrappers
+  scope_note: >-
+    The natural-language dossier discusses excluded results, but only its
+    definitions and sections QB-001.1, QB-001.2, QB-001.3, the forward exactness
+    statement in QB-001.5, and QB-001.7 are normative for this card.  Every
+    additional declaration requires a later card and manifest revision.
+
+packet_local_concepts:
+  items:
+    - id: QB-ERROR-ON
+      role: pointwise finite error predicate
+    - id: QB-NORM-BOUND-ON
+      role: pointwise norm majorization predicate
+    - id: QB-ERROR-FAMILY
+      role: order-indexed finite bounds for one fixed target
+  note: >-
+    These are project-local API concepts, not entries in the Olver source entity
+    inventory.
+
+mathematical_contract:
+  ErrorOn: >-
+    For every x in D, norm (f x - a x) is at most b x.
+  NormBoundOn: >-
+    For every x in D, norm (f x) is at most b x.
+  HasErrorFamily: >-
+    For every natural n, ErrorOn (D n) f (a n) (b n).  The target f is fixed;
+    no convergence, finite-sum representation, or monotone improvement in n is
+    asserted.
+  ambient_assumptions:
+    - X, Y, and E are types.
+    - E is a NormedAddCommGroup.
+    - Domains are ordinary sets and need not be decidable or nonempty.
+  order_convention: n indexes the supplied approximant, domain, and majorant.
+  normalization: not_applicable
+  branch_convention: not_applicable
+  derivative_convention: not_applicable
+  exceptional_values: not_applicable
+
+hypothesis_laundering_check: >-
+  This card is infrastructure and claims no source theorem.  Later source cards
+  must prove their concrete function identifications, domain facts, and bounds.
+choice_laundering_check: No choice occurs in this packet.
+
+novelty:
+  classification: non_novel
+  rationale: Definitions and elementary consequences of set and norm laws.
+  natural_language_proof_required_before_lean: false
+
+natural_language_proof:
+  artifact: blueprint/proofs/QB-001.md
+  artifact_revision: 3
+  proof_status: approved
+  normative_sections:
+    - Scope and standing assumptions
+    - QB-001.1 restriction
+    - QB-001.2 weakening
+    - QB-001.3 transitivity
+    - QB-001.5 forward exactness only
+    - QB-001.7 precomposition
+  note: >-
+    Revision 3 was independently approved by proof_referee_a and
+    proof_referee_b.  Extra dossier sections do not enlarge this bootstrap card.
+
+dependencies:
+  mathlib_concepts:
+    - Set
+    - Set.EqOn
+    - Set.MapsTo
+    - NormedAddCommGroup
+    - norm_add_le
+  accepted_lmlf_packets: []
+downstream_consumers:
+  - QL-001
+
+domain_obligations:
+  nonempty_or_reachable: >-
+    Not required for generic infrastructure.  Exact-source and named coverage
+    cards state their own reachability obligations.
+majorant_obligations:
+  nonnegative: >-
+    The predicates use real-valued majorants without bundling global
+    nonnegativity.  A satisfied bound implies nonnegativity on its own domain;
+    later algebraic lemmas request any additional sign hypotheses they use.
+
+edge_tests:
+  - empty and singleton domains
+  - exact approximation with the zero majorant
+  - zero and nonzero family indices
+  - restriction cannot be reversed
+  - transitivity exposes the sum of majorants
+  - precomposition requires Set.MapsTo
+
+reviews:
+  review_status: approved
+  artifact_revision: 3
+  current_round: round_3_complete
+  approval_ledger: blueprint/reviews/QB-001-rev3.md
+  proof_referees:
+    - reviewer_id: proof_referee_a
+      reviewer_kind: fresh_context_sol_mathematical_referee
+      independent: true
+      verdict: approved
+      summary: >-
+        The bounded eight-signature proof/card is mathematically correct; its
+        hypotheses, domain behavior, and no-convergence limitations are explicit.
+    - reviewer_id: proof_referee_b
+      reviewer_kind: fresh_context_sol_mathematical_referee
+      independent: true
+      verdict: approved
+      summary: >-
+        The definitions and five transport arguments, boundary cases, and
+        signature correspondence are sound; no statement change is required.
+  current_revision_approved: true
+
+implementation:
+  implementation_status: authorized
+  lean_allowed: true
+  authorization_scope: >-
+    Exactly the eight declarations in QB-001-signatures.md revision 1; no result
+    from the proof dossier's excluded sections is authorized.
+  blocking_condition: null
+  file: null
+  declarations_present: false
+
+release_checks:
+  - exact imports, binder order, and declaration count match the signature artifact
+  - no custom axioms, sorry, or admit
+  - no convergence or source-coverage claim
+  - baseline spec commit is recorded externally after the specification commit

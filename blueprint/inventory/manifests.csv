@@ -1,0 +1,4 @@
+"schema_version","manifest_id","manifest_version","scope_closed","occurrence_selection_locked","manifest_status","declared_source_occurrence_total","notes"
+"inventory-v1.0.0","DEMO-0","1","false","not_applicable","planning_only","0","Bounded planning queue; it is neither closed nor execution-ready and claims no Olver source coverage."
+"inventory-v1.0.0","BOOTSTRAP-0","1","true","not_applicable","execution_ready","0","Closed two-card bootstrap manifest; it claims no Olver source coverage."
+"inventory-v1.0.0","OLV-MVP-1","1","false","true","planning_only","1","Occurrence selection is locked, but card scope is incomplete; truth and transcription remain unresolved."

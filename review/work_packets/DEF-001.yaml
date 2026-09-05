@@ -1,0 +1,303 @@
+schema_version: 2
+
+# This packet intentionally does not contain its own path, commit, or digest.
+# An external review envelope binds those values after the packet is frozen.
+work_item_id: DEF-001
+title: Bootstrap reuse and audit wrappers for mathlib Complex.Gamma
+lifecycle_state: frozen
+specification_owner: jaumededios
+
+prototype:
+  status: compiled_unreviewed
+  implementation_status: compiled
+  review_status: not_started
+  authorized: false
+  module_file: LMLF/Definitions/Gamma.lean
+  note: >-
+    The matching Lean code exists and builds, but implementation review is
+    pending.  Treat it as an untrusted candidate, not an approved or released
+    implementation.
+
+source:
+  kind: existing_lean
+  citation: >-
+    mathlib4, Mathlib.Analysis.SpecialFunctions.Gamma.Basic at resolved commit
+    0df444a360eaa60ab8c11dca51a86af692955474
+  edition_or_version: mathlib v4.33.1 resolved commit 0df444a360eaa60ab8c11dca51a86af692955474
+  isbn_doi_or_stable_id: git:0df444a360eaa60ab8c11dca51a86af692955474
+  location: Mathlib/Analysis/SpecialFunctions/Gamma/Basic.lean
+  snapshot:
+    uri_or_archive_ref: .lake/packages/mathlib/Mathlib/Analysis/SpecialFunctions/Gamma/Basic.lean
+    accessed_utc: 2026-09-05
+    sha256: 720a9a72d742fbe1c9a89601dc3a00d82c0261c7368c98cccb58307dbffe3bbf
+  original_statement_or_formula: |
+    Reuse Complex.Gamma. For re(s)>0 its defining Euler integral is convergent
+    and equals Gamma(s); it agrees with Real.Gamma on real inputs; mathlib's
+    total function is zero at negative natural inputs, which are classical poles.
+
+upstream_artifacts:
+  theorem_cards:
+    - artifact_id: TC-DEF-001-R1
+      path_or_uri: blueprint/theorem_cards/DEF-001.yaml
+      revision: 1
+      sha256: 97d3c73d938270e58ddc59be929bd1254baed15ae3585d09a082cf4862d3b024
+  natural_language_proofs: []
+
+targets:
+  - target_id: DEF-001-T01
+    module: LMLF.Definitions.Gamma
+    declaration: LMLF.Definitions.gamma_eulerIntegrable
+    theorem_class: qualitative_support
+    coverage_class: source_prerequisite
+    novelty_class: equivalent_reformulation
+    relationship_to_source: >-
+      Readable wrapper around Complex.GammaIntegral_convergent with the Euler
+      integrand expanded; no new convergence theorem.
+    theorem_card_id: TC-DEF-001-R1
+    natural_language_proof_id: not_applicable
+    exact_lean_signature: |
+      theorem gamma_eulerIntegrable {s : ℂ} (hs : 0 < s.re) :
+          MeasureTheory.IntegrableOn
+            (fun t : ℝ => (Real.exp (-t) : ℂ) * (t : ℂ) ^ (s - 1))
+            (Set.Ioi 0)
+    mathematical_statement: The Euler Gamma integrand is integrable on (0,infinity) when re(s)>0.
+    order_convention: not_applicable
+    domain: Complex s with 0 < s.re; integration variable t lies in Set.Ioi 0.
+    nonempty_witness: s = 1 satisfies the parameter domain.
+    bound: not_applicable
+    derivative_convention: not_applicable
+    branch_convention: >-
+      Positive real t uses mathlib complex power; t>0 avoids zero and the
+      standard slit-plane cut.
+    exceptional_values: The statement is not made outside 0 < s.re.
+    normalization: Euler integrand exp(-t) * t^(s-1), with no scale factor.
+  - target_id: DEF-001-T02
+    module: LMLF.Definitions.Gamma
+    declaration: LMLF.Definitions.gamma_eq_eulerIntegral
+    theorem_class: identification
+    coverage_class: source_prerequisite
+    novelty_class: equivalent_reformulation
+    relationship_to_source: >-
+      Readable wrapper around Complex.Gamma_eq_integral and Complex.GammaIntegral.
+    theorem_card_id: TC-DEF-001-R1
+    natural_language_proof_id: not_applicable
+    exact_lean_signature: |
+      theorem gamma_eq_eulerIntegral {s : ℂ} (hs : 0 < s.re) :
+          Complex.Gamma s =
+            ∫ t in Set.Ioi (0 : ℝ),
+              (Real.exp (-t) : ℂ) * (t : ℂ) ^ (s - 1)
+    mathematical_statement: Gamma(s) equals Euler's integral when re(s)>0.
+    order_convention: not_applicable
+    domain: Complex s with 0 < s.re; integration variable t lies in Set.Ioi 0.
+    nonempty_witness: s = 1 satisfies the parameter domain.
+    bound: not_applicable
+    derivative_convention: not_applicable
+    branch_convention: >-
+      Positive real t uses mathlib complex power; t>0 avoids zero and the
+      standard slit-plane cut.
+    exceptional_values: The equality is not asserted through poles or outside its convergence domain.
+    normalization: Complex.Gamma 1 = 1, consistent with the displayed integral.
+  - target_id: DEF-001-T03
+    module: LMLF.Definitions.Gamma
+    declaration: LMLF.Definitions.gamma_ofReal
+    theorem_class: identification
+    coverage_class: source_prerequisite
+    novelty_class: source_equivalent
+    relationship_to_source: Exact wrapper around Complex.Gamma_ofReal.
+    theorem_card_id: TC-DEF-001-R1
+    natural_language_proof_id: not_applicable
+    exact_lean_signature: |
+      theorem gamma_ofReal (s : ℝ) :
+          Complex.Gamma (s : ℂ) = (Real.Gamma s : ℂ)
+    mathematical_statement: Complex Gamma restricted to real inputs agrees with Real.Gamma.
+    order_convention: not_applicable
+    domain: Every real s, including mathlib's totalized exceptional inputs.
+    nonempty_witness: s = 1.
+    bound: not_applicable
+    derivative_convention: not_applicable
+    branch_convention: not_applicable
+    exceptional_values: Agreement includes the same mathlib totalization at real poles.
+    normalization: Both sides use mathlib's Gamma normalization.
+  - target_id: DEF-001-T04
+    module: LMLF.Definitions.Gamma
+    declaration: LMLF.Definitions.gamma_neg_nat_eq_zero
+    theorem_class: exact_identity
+    coverage_class: source_prerequisite
+    novelty_class: source_equivalent
+    relationship_to_source: Exact wrapper around Complex.Gamma_neg_nat_eq_zero.
+    theorem_card_id: TC-DEF-001-R1
+    natural_language_proof_id: not_applicable
+    exact_lean_signature: |
+      theorem gamma_neg_nat_eq_zero (n : ℕ) :
+          Complex.Gamma (-(n : ℂ)) = 0
+    mathematical_statement: Mathlib's total Complex.Gamma is zero at negative natural inputs.
+    order_convention: not_applicable
+    domain: Every natural n.
+    nonempty_witness: n = 0.
+    bound: not_applicable
+    derivative_convention: not_applicable
+    branch_convention: not_applicable
+    exceptional_values: These inputs are classical poles; zero is a totalization convention.
+    normalization: Documents mathlib's totalization and does not assign a classical finite value.
+
+named_objects:
+  - lean_declaration: Complex.Gamma
+    catalogue_entry: blueprint/theorem_cards/DEF-001.yaml
+    identification_theorem: Complex.Gamma_eq_integral
+    source_location: Mathlib/Analysis/SpecialFunctions/Gamma/Basic.lean
+
+dependencies:
+  mathlib:
+    lean_toolchain: leanprover/lean4:v4.33.1
+    requested_revision: v4.33.1
+    resolved_revision: 0df444a360eaa60ab8c11dca51a86af692955474
+    declarations:
+      - Complex.Gamma
+      - Complex.GammaIntegral_convergent
+      - Complex.Gamma_eq_integral
+      - Complex.Gamma_ofReal
+      - Complex.Gamma_neg_nat_eq_zero
+  accepted_work_items: []
+  permitted_import_layers:
+    - Mathlib.Analysis.SpecialFunctions.Gamma.Basic
+
+assumptions:
+  - name: euler_integral_domain
+    exact_content: 0 < s.re for the convergence and Euler-integral equality wrappers.
+    provenance: explicit input matching the pinned mathlib facts
+    why_not_hidden_goal: It is exactly the classical convergence half-plane.
+
+pre_lean_gate_requirements:
+  theorem_card_review:
+    required: true
+    minimum_distinct_reviewer_ids: 2
+    allowed_reviewer_compositions:
+      - humans: 2
+        agents: 0
+        minimum_distinct_agent_models: 0
+      - humans: 1
+        agents: 1
+        minimum_distinct_agent_models: 1
+      - humans: 0
+        agents: 2
+        minimum_distinct_agent_models: 1
+  natural_language_proof_review:
+    required: false
+    inapplicable_reason: >-
+      Non-novel wrappers around the four explicitly named pinned mathlib facts;
+      no new mathematical argument is proposed.
+    minimum_distinct_reviewer_ids: 0
+    allowed_reviewer_compositions: []
+  gate_evidence:
+    state: pending
+    reason: The theorem-card reuse/semantic review has not yet been recorded.
+  lean_ready:
+    required: true
+    state: pending
+    requires_gate_states:
+      theorem_card_review: pass
+      natural_language_proof_review: not_required
+
+implementation_review_requirements:
+  status: pending
+  overall_minimum_distinct_reviewer_ids: 3
+  rubrics:
+    - rubric: source_fidelity
+      applicability: required
+      inapplicable_reason: null
+      minimum_distinct_reviewer_ids: 2
+      allowed_reviewer_compositions:
+        - humans: 2
+          agents: 0
+          minimum_distinct_agent_models: 0
+        - humans: 1
+          agents: 1
+          minimum_distinct_agent_models: 1
+        - humans: 0
+          agents: 2
+          minimum_distinct_agent_models: 1
+    - rubric: quantitative_correctness
+      applicability: not_applicable
+      inapplicable_reason: No quantitative error bound occurs in this reuse slice.
+      minimum_distinct_reviewer_ids: 0
+      allowed_reviewer_compositions: []
+    - rubric: mathlib_reuse
+      applicability: required
+      inapplicable_reason: null
+      minimum_distinct_reviewer_ids: 2
+      allowed_reviewer_compositions:
+        - humans: 2
+          agents: 0
+          minimum_distinct_agent_models: 0
+        - humans: 1
+          agents: 1
+          minimum_distinct_agent_models: 1
+        - humans: 0
+          agents: 2
+          minimum_distinct_agent_models: 1
+    - rubric: api_dependency
+      applicability: required
+      inapplicable_reason: null
+      minimum_distinct_reviewer_ids: 1
+      allowed_reviewer_compositions:
+        - humans: 1
+          agents: 0
+          minimum_distinct_agent_models: 0
+        - humans: 0
+          agents: 1
+          minimum_distinct_agent_models: 1
+    - rubric: proof_quality
+      applicability: required
+      inapplicable_reason: null
+      minimum_distinct_reviewer_ids: 1
+      allowed_reviewer_compositions:
+        - humans: 1
+          agents: 0
+          minimum_distinct_agent_models: 0
+        - humans: 0
+          agents: 1
+          minimum_distinct_agent_models: 1
+
+regressions:
+  - declaration: LMLFTest.Definitions.Gamma.eulerAtOne
+    protects: Euler normalization and missing scale factors
+    expected_statement: The public integral identity specializes to Complex.Gamma 1 = 1.
+  - declaration: LMLFTest.Definitions.Gamma.realAgreement
+    protects: real/complex coercion convention
+    expected_statement: The public real-agreement wrapper rewrites a real input exactly.
+  - declaration: LMLFTest.Definitions.Gamma.poleTotalization
+    protects: exceptional-value semantics
+    expected_statement: Negative-natural zero is explicitly described as totalization at a pole.
+
+scope:
+  included:
+    - one module with exactly the four wrappers above
+    - no project-local Gamma implementation
+    - focused normalization and exceptional-value audit tests
+  excluded:
+    - reciprocal and incomplete Gamma
+    - reflection, duplication, Stirling, or asymptotic estimates
+    - any extension of the Euler integral outside 0 < s.re
+    - any claim that totalized zero is a classical pole value
+
+verification:
+  commands:
+    - lake env lean LMLF/Definitions/Gamma.lean
+    - lake build
+  public_declarations_requiring_axiom_report:
+    - LMLF.Definitions.gamma_eulerIntegrable
+    - LMLF.Definitions.gamma_eq_eulerIntegral
+    - LMLF.Definitions.gamma_ofReal
+    - LMLF.Definitions.gamma_neg_nat_eq_zero
+  allowed_axioms:
+    - propext
+    - Classical.choice
+    - Quot.sound
+
+acceptance_notes: |
+  No natural-language proof is required because this packet only wraps pinned
+  mathlib facts. The packet is fully bounded but not authorized: theorem-card
+  and all required implementation reviews remain pending. Its implementation
+  status is compiled and its prototype status is compiled_unreviewed; neither
+  fact approves or releases it. The packet
+  intentionally contains no self path, commit, or digest.

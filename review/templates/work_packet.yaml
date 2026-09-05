@@ -1,0 +1,209 @@
+schema_version: 2
+
+# This packet intentionally does not contain its own path, commit, or digest.
+# An external review envelope binds those values after the packet is frozen.
+work_item_id: REPLACE_WITH_STABLE_ID
+title: REPLACE_WITH_BOUNDED_TITLE
+lifecycle_state: draft # draft | frozen | superseded
+specification_owner: REPLACE_WITH_PERSON_OR_TEAM
+
+source:
+  kind: book # book | paper | standard | existing_lean | original
+  citation: REPLACE_WITH_COMPLETE_BIBLIOGRAPHIC_CITATION
+  edition_or_version: REPLACE_WITH_EXACT_EDITION_OR_VERSION
+  isbn_doi_or_stable_id: REPLACE_WITH_IDENTIFIER
+  location: REPLACE_WITH_PAGE_SECTION_EQUATION_OR_EXERCISE
+  snapshot:
+    uri_or_archive_ref: REPLACE_WITH_STABLE_REFERENCE
+    accessed_utc: REPLACE_WITH_YYYY_MM_DD
+    sha256: REPLACE_WITH_SOURCE_DIGEST
+  original_statement_or_formula: |
+    REPLACE_WITH_THE_EXACT_MATHEMATICAL_CONTENT_NEEDED_FOR_REVIEW
+
+upstream_artifacts:
+  theorem_cards:
+    - artifact_id: TC_REPLACE
+      path_or_uri: REPLACE_WITH_THEOREM_CARD_REFERENCE
+      revision: REPLACE_WITH_COMMIT_VERSION_OR_IMMUTABLE_REVISION
+      sha256: REPLACE_WITH_THEOREM_CARD_DIGEST
+  natural_language_proofs:
+    - artifact_id: NLP_REPLACE
+      path_or_uri: REPLACE_WITH_NATURAL_LANGUAGE_PROOF_REFERENCE
+      revision: REPLACE_WITH_COMMIT_VERSION_OR_IMMUTABLE_REVISION
+      sha256: REPLACE_WITH_NATURAL_LANGUAGE_PROOF_DIGEST
+
+# A coherent packet may contain several declarations. Each exact Lean signature
+# is independently classified and tied to its theorem card and proof artifact.
+targets:
+  - target_id: TARGET_REPLACE
+    module: REPLACE_WITH_LEAN_MODULE
+    declaration: REPLACE_WITH_FULLY_QUALIFIED_DECLARATION
+    theorem_class: named_quantitative # definition | identification | exact_identity | existence_uniqueness | qualitative_support | generic_quantitative | named_quantitative | audit_regression
+    coverage_class: direct_source_target # direct_source_target | source_prerequisite | reusable_infrastructure | audit_only
+    novelty_class: source_equivalent # source_equivalent | equivalent_reformulation | generalized | strengthened_conclusion | stronger_hypotheses | novel
+    relationship_to_source: |
+      REPLACE_WITH_EXACT_EQUIVALENCE_GENERALITY_OR_NOVELTY_DETAILS
+    theorem_card_id: TC_REPLACE
+    natural_language_proof_id: NLP_REPLACE
+    exact_lean_signature: |
+      REPLACE_WITH_A_SIGNATURE_COMPILED_IN_THE_SPECIFICATION_PROTOTYPE
+    mathematical_statement: |
+      REPLACE_WITH_READABLE_QUANTIFIERS_FORMULA_AND_INEQUALITY
+    order_convention: REPLACE_WITH_NUMBER_OF_TERMS_LAST_INDEX_AND_N_ZERO_POLICY
+    domain: REPLACE_WITH_COMPLETE_SET_AND_PARAMETER_CONDITIONS
+    nonempty_witness: REPLACE_WITH_THEOREM_OR_CONCRETE_SPECIALIZATION
+    bound: REPLACE_WITH_COMPLETE_EXPLICIT_FORMULA_OR_NOT_APPLICABLE
+    derivative_convention: REPLACE_WITH_VARIABLE_ORDER_AND_SCALING_OR_NOT_APPLICABLE
+    branch_convention: REPLACE_WITH_DOMAIN_BRANCH_AND_BASE_VALUE_OR_NOT_APPLICABLE
+    exceptional_values: REPLACE_WITH_POLES_REMOVABLE_VALUES_TOTALIZATION_OR_NOT_APPLICABLE
+    normalization: REPLACE_WITH_INITIAL_VALUES_WRONSKIAN_INTEGRAL_OR_NOT_APPLICABLE
+
+named_objects:
+  - lean_declaration: REPLACE_WITH_FULLY_QUALIFIED_NAME
+    catalogue_entry: REPLACE_WITH_DEFINITION_AUDIT_REFERENCE
+    identification_theorem: REPLACE_WITH_PROVED_THEOREM_NAME
+    source_location: REPLACE_WITH_EXACT_SOURCE_LOCATION
+
+dependencies:
+  mathlib:
+    lean_toolchain: REPLACE_WITH_CONTENT_OF_LEAN_TOOLCHAIN
+    requested_revision: REPLACE_WITH_LAKEFILE_REVISION
+    resolved_revision: REPLACE_WITH_LAKE_MANIFEST_COMMIT
+    declarations:
+      - REPLACE_WITH_VERIFIED_MATHLIB_DECLARATION
+  accepted_work_items:
+    - work_item_id: REPLACE_WITH_PRIOR_ID_OR_REMOVE_ENTRY
+      declaration: REPLACE_WITH_IMPORTED_DECLARATION
+      accepted_commit: REPLACE_WITH_FULL_COMMIT_SHA
+  permitted_import_layers:
+    - REPLACE_WITH_ALLOWED_MODULE_OR_LAYER
+
+assumptions:
+  - name: REPLACE_WITH_ASSUMPTION_NAME_OR_REMOVE_ENTRY
+    exact_content: REPLACE_WITH_QUANTIFIED_ASSUMPTION
+    provenance: REPLACE_WITH_MATHLIB_ACCEPTED_WORK_ITEM_OR_EXPLICIT_INPUT
+    why_not_hidden_goal: REPLACE_WITH_SHORT_JUSTIFICATION
+
+pre_lean_gate_requirements:
+  # Distinct agent models are optional strengthening, not the source of
+  # independence. The defaults permit distinct fresh-context agents using the
+  # same model; distinct durable reviewer IDs remain mandatory.
+  theorem_card_review:
+    required: true
+    minimum_distinct_reviewer_ids: 2
+    allowed_reviewer_compositions:
+      - humans: 2
+        agents: 0
+        minimum_distinct_agent_models: 0
+      - humans: 1
+        agents: 1
+        minimum_distinct_agent_models: 1
+      - humans: 0
+        agents: 2
+        minimum_distinct_agent_models: 1
+  natural_language_proof_review:
+    required: true
+    inapplicable_reason: null
+    minimum_distinct_reviewer_ids: 2
+    allowed_reviewer_compositions:
+      - humans: 2
+        agents: 0
+        minimum_distinct_agent_models: 0
+      - humans: 1
+        agents: 1
+        minimum_distinct_agent_models: 1
+      - humans: 0
+        agents: 2
+        minimum_distinct_agent_models: 1
+  lean_ready:
+    required: true
+    requires_gate_states:
+      theorem_card_review: pass
+      natural_language_proof_review: pass
+
+implementation_review_requirements:
+  overall_minimum_distinct_reviewer_ids: 3
+  rubrics:
+    - rubric: source_fidelity
+      applicability: required # required | not_applicable
+      inapplicable_reason: null
+      minimum_distinct_reviewer_ids: 2
+      allowed_reviewer_compositions:
+        - humans: 2
+          agents: 0
+          minimum_distinct_agent_models: 0
+        - humans: 1
+          agents: 1
+          minimum_distinct_agent_models: 1
+        - humans: 0
+          agents: 2
+          minimum_distinct_agent_models: 1
+    - rubric: quantitative_correctness
+      applicability: required
+      inapplicable_reason: null
+      minimum_distinct_reviewer_ids: 1
+      allowed_reviewer_compositions:
+        - humans: 1
+          agents: 0
+          minimum_distinct_agent_models: 0
+        - humans: 0
+          agents: 1
+          minimum_distinct_agent_models: 1
+    - rubric: mathlib_reuse
+      applicability: required
+      inapplicable_reason: null
+      minimum_distinct_reviewer_ids: 1
+      allowed_reviewer_compositions:
+        - humans: 1
+          agents: 0
+          minimum_distinct_agent_models: 0
+        - humans: 0
+          agents: 1
+          minimum_distinct_agent_models: 1
+    - rubric: api_dependency
+      applicability: required
+      inapplicable_reason: null
+      minimum_distinct_reviewer_ids: 1
+      allowed_reviewer_compositions:
+        - humans: 1
+          agents: 0
+          minimum_distinct_agent_models: 0
+        - humans: 0
+          agents: 1
+          minimum_distinct_agent_models: 1
+    - rubric: proof_quality
+      applicability: required
+      inapplicable_reason: null
+      minimum_distinct_reviewer_ids: 1
+      allowed_reviewer_compositions:
+        - humans: 1
+          agents: 0
+          minimum_distinct_agent_models: 0
+        - humans: 0
+          agents: 1
+          minimum_distinct_agent_models: 1
+
+regressions:
+  - declaration: REPLACE_WITH_TEST_OR_EXAMPLE_NAME
+    protects: REPLACE_WITH_CONSTANT_DOMAIN_BRANCH_ORDER_OR_EDGE_CASE
+    expected_statement: REPLACE_WITH_EXACT_EXPECTATION
+
+scope:
+  included:
+    - REPLACE_WITH_INCLUDED_DELIVERABLE
+  excluded:
+    - REPLACE_WITH_EXPLICIT_NON_DELIVERABLE
+
+verification:
+  commands:
+    - lake build
+    - REPLACE_WITH_ADDITIONAL_EXACT_COMMAND_OR_REMOVE_ENTRY
+  public_declarations_requiring_axiom_report:
+    - REPLACE_WITH_FULLY_QUALIFIED_DECLARATION
+  allowed_axioms:
+    - propext
+    - Classical.choice
+    - Quot.sound
+
+acceptance_notes: |
+  REPLACE_WITH_ONLY_OBJECTIVE_NOTES_NEEDED_TO_DECIDE_ACCEPTANCE

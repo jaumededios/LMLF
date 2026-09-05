@@ -1,0 +1,52 @@
+schema_version: 1
+record_kind: review_envelope
+storage_requirement: external_to_candidate_head
+work_item_id: REPLACE_WITH_STABLE_ID
+
+specification_binding:
+  spec_commit: REPLACE_WITH_FULL_COMMIT_SHA
+  work_packet_path: REPLACE_WITH_SPECIFICATION_PATH
+  work_packet_sha256: REPLACE_WITH_ORDINARY_SHA256
+  theorem_cards:
+    - artifact_id: TC_REPLACE
+      revision: REPLACE_WITH_IMMUTABLE_REVISION
+      sha256: REPLACE_WITH_SHA256
+  natural_language_proofs:
+    - artifact_id: NLP_REPLACE
+      revision: REPLACE_WITH_IMMUTABLE_REVISION
+      sha256: REPLACE_WITH_SHA256
+
+toolchain_binding:
+  lean_toolchain: REPLACE_WITH_EXACT_TOOLCHAIN
+  mathlib_revision: REPLACE_WITH_RESOLVED_FULL_COMMIT_SHA
+
+candidate_binding:
+  base_sha: null
+  head_sha: null
+  proposer_evidence_ref: null
+
+pre_lean_gates:
+  theorem_card_review:
+    gate_state: pending # pending | pass | fail | blocked
+    distinct_reviewer_ids: []
+    selected_reviewer_composition: null
+    verdict_refs: []
+  natural_language_proof_review:
+    gate_state: pending
+    distinct_reviewer_ids: []
+    selected_reviewer_composition: null
+    verdict_refs: []
+  lean_ready:
+    gate_state: pending
+    decided_by: null
+    evidence_refs: []
+
+implementation_reviews:
+  gate_state: pending
+  overall_distinct_reviewer_ids: []
+  rubric_verdict_refs: []
+
+disposition_ledger_ref: null
+merge_gate_state: pending
+merge_decision_ref: null
+

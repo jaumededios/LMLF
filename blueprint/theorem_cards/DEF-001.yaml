@@ -1,0 +1,155 @@
+schema_version: 2
+id: DEF-001
+title: Bootstrap audit of mathlib Complex.Gamma
+owner: jaumededios
+artifact_revision: 1
+baseline_spec_commit: pending_external_record_after_commit
+
+theorem_class: definition_identification
+coverage_class: entity_identification
+specification_status: specified
+proof_status: not_required
+review_status: not_started
+implementation_status: compiled
+prototype_status: compiled_unreviewed
+coverage_status: not_applicable
+manifest_membership_status: execution_ready
+
+manifest: BOOTSTRAP-0
+source_occurrences: []
+source_notation: []
+source_entities: []
+coverage_claim: >-
+  Identifies the reused mathlib object for later applications; claims no Olver
+  theorem occurrence.
+
+scope:
+  summary: >-
+    Reuse Complex.Gamma and expose a readable Euler-integral identification,
+    convergence wrapper, real agreement, and mathlib's totalization convention
+    at nonpositive integers.  No new Gamma function or analytic continuation is
+    constructed.
+  module: LMLF.Definitions.Gamma
+  namespace: LMLF.Definitions
+  imports:
+    - Mathlib.Analysis.SpecialFunctions.Gamma.Basic
+  public_declarations:
+    - LMLF.Definitions.gamma_eulerIntegrable
+    - LMLF.Definitions.gamma_eq_eulerIntegral
+    - LMLF.Definitions.gamma_ofReal
+    - LMLF.Definitions.gamma_neg_nat_eq_zero
+  excluded:
+    - a new Gamma definition
+    - reciprocal Gamma
+    - incomplete Gamma
+    - reflection, duplication, Stirling, and asymptotic estimates
+    - any claim that zero at a pole is a classical finite Gamma value
+
+packet_local_concepts:
+  items:
+    - id: DEF-GAMMA-EULER-INTEGRAND
+      role: readable notation for the displayed Euler integrand
+  note: >-
+    This packet-local label is not an Olver source-entity row.  A later closed
+    source manifest links source entities explicitly.
+
+reused_object:
+  declaration: Complex.Gamma
+  pinned_import: Mathlib.Analysis.SpecialFunctions.Gamma.Basic
+  existing_facts:
+    - Complex.GammaIntegral_convergent
+    - Complex.Gamma_eq_integral
+    - Complex.Gamma_ofReal
+    - Complex.Gamma_neg_nat_eq_zero
+
+public_signatures:
+  gamma_eulerIntegrable: |-
+    theorem gamma_eulerIntegrable {s : ℂ} (hs : 0 < s.re) :
+        MeasureTheory.IntegrableOn
+          (fun t : ℝ => (Real.exp (-t) : ℂ) * (t : ℂ) ^ (s - 1))
+          (Set.Ioi 0)
+  gamma_eq_eulerIntegral: |-
+    theorem gamma_eq_eulerIntegral {s : ℂ} (hs : 0 < s.re) :
+        Complex.Gamma s =
+          ∫ t in Set.Ioi (0 : ℝ),
+            (Real.exp (-t) : ℂ) * (t : ℂ) ^ (s - 1)
+  gamma_ofReal: |-
+    theorem gamma_ofReal (s : ℝ) :
+        Complex.Gamma (s : ℂ) = (Real.Gamma s : ℂ)
+  gamma_neg_nat_eq_zero: |-
+    theorem gamma_neg_nat_eq_zero (n : ℕ) :
+        Complex.Gamma (-(n : ℂ)) = 0
+
+mathematical_contract:
+  validity_domain: The Euler integral declarations require real part of s > 0.
+  normalization: >-
+    The reused object has Complex.Gamma 1 = 1 and Gamma(s+1) = s*Gamma(s) away
+    from s = 0; these are audit checks, not additional public declarations in
+    this packet.
+  branch_convention: >-
+    The positive real integration variable uses mathlib's complex power on its
+    standard slit-plane convention; t > 0 avoids the cut and zero.
+  derivative_convention: not_applicable
+  exceptional_values: >-
+    Complex.Gamma is totalized to zero at 0 and negative natural numbers.  The
+    card documents that these inputs are classical poles, not finite values.
+  real_agreement: Complex.Gamma_ofReal for every real input.
+
+hypothesis_laundering_check: >-
+  Every public result is a transparent wrapper around a named fact in the pinned
+  mathlib source.  No assumed continuation, convergence, or identification
+  record is introduced.
+choice_laundering_check: No project-local choice occurs.
+
+novelty:
+  classification: non_novel
+  rationale: Reuse and presentation of already proved mathlib facts.
+  natural_language_proof_required_before_lean: false
+
+dependencies:
+  accepted_lmlf_packets: []
+  mathlib_source_file: Mathlib/Analysis/SpecialFunctions/Gamma/Basic.lean
+downstream_consumers:
+  - QL-001 if its chosen formulation uses Gamma moments
+  - OLV-001 if the collated source proof uses Gamma identities
+
+domain_obligations:
+  nonempty_or_reachable: >-
+    The Euler-integral domain is visibly inhabited, for example by s = 1.  This
+    is an identification packet rather than a named estimate.
+majorant_obligations:
+  nonnegative: not_applicable
+
+edge_tests:
+  - Complex.Gamma 1 = 1
+  - real agreement at one positive and one exceptional real input
+  - zero at 0 and at a negative natural is documented as totalization at a pole
+  - the Euler integral is never stated without 0 < s.re
+
+reviews:
+  review_status: not_started
+  required_rubrics:
+    - mathlib_reuse
+    - source_fidelity
+    - api_dependency
+
+implementation:
+  implementation_status: compiled
+  lean_allowed: false
+  blocking_condition: Required reuse, semantic, and API reviews are pending.
+  prototype_status: compiled_unreviewed
+  prototype_authorized: false
+  file: LMLF/Definitions/Gamma.lean
+  declarations_present: true
+  compilation_observed: true
+  note: >-
+    A matching Lean prototype exists and builds, but it was created before the
+    required reviews.  Its existence does not grant authorization, approval, or
+    release status; reviewers must assess it as an untrusted candidate.
+
+release_checks:
+  - exact import and four-declaration bound are preserved
+  - wrappers are proved from the pinned mathlib facts
+  - no duplicate Gamma object or custom axiom is introduced
+  - totalized pole values are not described as classical values
+  - baseline spec commit is recorded externally after the specification commit

@@ -1,0 +1,18 @@
+schema_version: 1
+record_kind: disposition_ledger
+storage_requirement: external_to_candidate_head
+work_item_id: REPLACE_WITH_STABLE_ID
+review_envelope_ref: REPLACE_WITH_IMMUTABLE_EXTERNAL_REFERENCE
+spec_commit: REPLACE_WITH_FULL_COMMIT_SHA
+work_packet_sha256: REPLACE_WITH_ORDINARY_SHA256
+reviewed_head_sha: REPLACE_WITH_FULL_CANDIDATE_SHA
+
+findings:
+  - finding_id: REPLACE_WITH_VERDICT_FINDING_ID
+    originating_verdict_ref: REPLACE_WITH_IMMUTABLE_EXTERNAL_REFERENCE
+    resolution_state: open # open | fixed_pending_rereview | resolved_by_fresh_approval | withdrawn_by_referee | packet_superseded
+    proposer_response: REPLACE_WITH_RESPONSE_OR_NULL
+    proposed_fix_head_sha: null
+    confirming_verdict_ref: null
+    specification_supersession_ref: null
+

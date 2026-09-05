@@ -1,0 +1,68 @@
+{
+  "schema_version": 2,
+  "record_kind": "rubric_verdict",
+  "storage_requirement": "external_to_candidate_head",
+  "work_item_id": "REPLACE_WITH_STABLE_ID",
+  "review_stage": "pre_lean",
+  "gate": "theorem_card_review",
+  "review_identity": {
+    "review_envelope_ref": "REPLACE_WITH_IMMUTABLE_EXTERNAL_REFERENCE",
+    "spec_commit": "REPLACE_WITH_FULL_COMMIT_SHA",
+    "work_packet_path": "REPLACE_WITH_SPECIFICATION_PATH",
+    "work_packet_sha256": "REPLACE_WITH_ORDINARY_SHA256",
+    "theorem_card_bindings": [
+      {
+        "artifact_id": "TC_REPLACE",
+        "revision": "REPLACE_WITH_IMMUTABLE_REVISION",
+        "sha256": "REPLACE_WITH_SHA256"
+      }
+    ],
+    "natural_language_proof_bindings": [
+      {
+        "artifact_id": "NLP_REPLACE",
+        "revision": "REPLACE_WITH_IMMUTABLE_REVISION",
+        "sha256": "REPLACE_WITH_SHA256"
+      }
+    ],
+    "base_sha": null,
+    "head_sha": null,
+    "lean_toolchain": "REPLACE_WITH_EXACT_TOOLCHAIN",
+    "mathlib_revision": "REPLACE_WITH_RESOLVED_FULL_COMMIT_SHA",
+    "rubric": "source_fidelity",
+    "rubric_revision": "REPLACE_WITH_FULL_COMMIT_SHA_OR_FILE_SHA256"
+  },
+  "reviewer": {
+    "id": "REPLACE_WITH_DURABLE_REVIEWER_ID",
+    "kind": "human",
+    "model": null,
+    "runtime": "manual",
+    "isolation_strength": "manual_attestation",
+    "isolation_method": "REPLACE_WITH_ACTUAL_CHECKOUT_CONTEXT_TOOL_AND_BOUNDARIES",
+    "independent_of_proposer": true,
+    "read_only_candidate": true
+  },
+  "verdict": "request_changes",
+  "summary": "Template default: replace this summary and example finding after review.",
+  "evidence": {
+    "proposer_bundle_ref": "REPLACE_WITH_EXTERNAL_PATH_OR_PERMANENT_URL",
+    "source_snapshot_verified": false,
+    "pinned_dependency_source_inspected": false,
+    "commands_rerun": [],
+    "files_and_declarations_inspected": []
+  },
+  "findings": [
+    {
+      "id": "REPLACE_OR_REMOVE_TEMPLATE_FINDING",
+      "priority": "P1",
+      "file": "",
+      "line": 0,
+      "declaration": "",
+      "issue": "Replace this template finding with a material rubric-scoped issue.",
+      "evidence": "Replace with independently verified evidence.",
+      "required_fix": "Replace with a concrete acceptance condition."
+    }
+  ],
+  "prior_finding_dispositions_checked": [],
+  "issued_at_utc": "REPLACE_WITH_ISO_8601_TIMESTAMP"
+}
+

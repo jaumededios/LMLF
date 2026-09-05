@@ -1,0 +1,422 @@
+schema_version: 2
+
+# This packet intentionally does not contain its own path, commit, or digest.
+# An external review envelope binds those values after the packet is frozen.
+work_item_id: QB-001
+title: Bootstrap finite error predicates and five transport lemmas
+lifecycle_state: frozen
+specification_owner: jaumededios
+
+novelty_assessment:
+  classification: non_novel
+  rationale: >-
+    The packet contains project-local definitions and routine consequences of
+    set and norm laws.  Per-target novelty_class uses source_equivalent because
+    the current template has no non_novel enum and each target exactly follows
+    the reviewed internal proof; it does not assert new mathematics.
+
+source:
+  kind: original
+  citation: LMLF internal natural-language proof packet QB-001, revision 3
+  edition_or_version: revision 3
+  isbn_doi_or_stable_id: not_applicable
+  location: >-
+    Scope and standing assumptions; QB-001.1, QB-001.2, QB-001.3, forward
+    exactness in QB-001.5, and QB-001.7
+  snapshot:
+    uri_or_archive_ref: blueprint/proofs/QB-001.md
+    accessed_utc: 2026-09-05
+    sha256: 653b6fba9e597f56e63cf7520b0dbf896b1c3a4980436f2a8c065993aa26754c
+  original_statement_or_formula: |
+    Define ErrorOn, NormBoundOn, and HasErrorFamily. Prove exact zero error,
+    domain restriction, majorant weakening, additive error transitivity, and
+    precomposition transport. No convergence-in-order statement is included.
+
+upstream_artifacts:
+  theorem_cards:
+    - artifact_id: TC-QB-001-R3
+      path_or_uri: blueprint/theorem_cards/QB-001.yaml
+      revision: 3
+      sha256: ad68e05e764d9edcb51960fc00982192a4b964c37d5d342a4e8bb3ccf6f1587c
+    - artifact_id: SIG-QB-001-R1
+      path_or_uri: blueprint/theorem_cards/QB-001-signatures.md
+      revision: 1
+      sha256: 1959a7787ddf31477321b75bec944938f6ac2f1d77c5c14702c33b3446684f12
+  natural_language_proofs:
+    - artifact_id: NLP-QB-001-R3
+      path_or_uri: blueprint/proofs/QB-001.md
+      revision: 3
+      sha256: 653b6fba9e597f56e63cf7520b0dbf896b1c3a4980436f2a8c065993aa26754c
+  review_records:
+    - artifact_id: REVIEW-QB-001-R3
+      path_or_uri: blueprint/reviews/QB-001-rev3.md
+      revision: 1
+      sha256: 2fe44a08209a79c8e37b5d88a9d5aec95f975195d63d4e2b3a123bb0038be9a9
+
+targets:
+  - target_id: QB-001-T01
+    module: LMLF.Quantitative.Basic
+    declaration: QuantitativeAnalysis.ErrorOn
+    theorem_class: definition
+    coverage_class: reusable_infrastructure
+    novelty_class: source_equivalent
+    relationship_to_source: >-
+      Exact formalization of the reviewed internal definition; mathematically
+      routine and non-novel, with no external source coverage.
+    theorem_card_id: TC-QB-001-R3
+    natural_language_proof_id: NLP-QB-001-R3
+    exact_lean_signature: |
+      def ErrorOn {X E : Type*} [NormedAddCommGroup E]
+          (D : Set X) (f a : X → E) (b : X → ℝ) : Prop
+    mathematical_statement: |
+      ErrorOn D f a b means forall x in D, norm (f x - a x) <= b x.
+    order_convention: not_applicable
+    domain: "Arbitrary set D : Set X; empty domains are allowed for infrastructure."
+    nonempty_witness: not_applicable_for_reusable_infrastructure
+    bound: b x
+    derivative_convention: not_applicable
+    branch_convention: not_applicable
+    exceptional_values: not_applicable
+    normalization: not_applicable
+  - target_id: QB-001-T02
+    module: LMLF.Quantitative.Basic
+    declaration: QuantitativeAnalysis.NormBoundOn
+    theorem_class: definition
+    coverage_class: reusable_infrastructure
+    novelty_class: source_equivalent
+    relationship_to_source: >-
+      Exact formalization of the reviewed internal definition; mathematically
+      routine and non-novel, with no external source coverage.
+    theorem_card_id: TC-QB-001-R3
+    natural_language_proof_id: NLP-QB-001-R3
+    exact_lean_signature: |
+      def NormBoundOn {X E : Type*} [NormedAddCommGroup E]
+          (D : Set X) (f : X → E) (b : X → ℝ) : Prop
+    mathematical_statement: |
+      NormBoundOn D f b means forall x in D, norm (f x) <= b x.
+    order_convention: not_applicable
+    domain: "Arbitrary set D : Set X; empty domains are allowed for infrastructure."
+    nonempty_witness: not_applicable_for_reusable_infrastructure
+    bound: b x
+    derivative_convention: not_applicable
+    branch_convention: not_applicable
+    exceptional_values: not_applicable
+    normalization: not_applicable
+  - target_id: QB-001-T03
+    module: LMLF.Quantitative.Basic
+    declaration: QuantitativeAnalysis.HasErrorFamily
+    theorem_class: definition
+    coverage_class: reusable_infrastructure
+    novelty_class: source_equivalent
+    relationship_to_source: >-
+      Exact formalization of the reviewed internal definition; mathematically
+      routine and non-novel, with no external source coverage.
+    theorem_card_id: TC-QB-001-R3
+    natural_language_proof_id: NLP-QB-001-R3
+    exact_lean_signature: |
+      def HasErrorFamily {X E : Type*} [NormedAddCommGroup E]
+          (f : X → E) (a : ℕ → X → E)
+          (D : ℕ → Set X) (b : ℕ → X → ℝ) : Prop
+    mathematical_statement: |
+      For every n, ErrorOn (D n) f (a n) (b n); f is fixed and no convergence
+      in n is asserted.
+    order_convention: n indexes only the supplied approximant, domain, and majorant.
+    domain: "Arbitrary family D : ℕ → Set X."
+    nonempty_witness: not_applicable_for_reusable_infrastructure
+    bound: b n x
+    derivative_convention: not_applicable
+    branch_convention: not_applicable
+    exceptional_values: not_applicable
+    normalization: not_applicable
+  - target_id: QB-001-T04
+    module: LMLF.Quantitative.Basic
+    declaration: QuantitativeAnalysis.ErrorOn.exact
+    theorem_class: generic_quantitative
+    coverage_class: reusable_infrastructure
+    novelty_class: source_equivalent
+    relationship_to_source: >-
+      Exact formalization of the reviewed routine consequence of equality and
+      norm_zero; no new mathematical claim.
+    theorem_card_id: TC-QB-001-R3
+    natural_language_proof_id: NLP-QB-001-R3
+    exact_lean_signature: |
+      theorem ErrorOn.exact {X E : Type*} [NormedAddCommGroup E]
+          {D : Set X} {f a : X → E} (h : Set.EqOn f a D) :
+          ErrorOn D f a (fun _ => 0)
+    mathematical_statement: Equal functions on D have zero error on D.
+    order_convention: not_applicable
+    domain: Arbitrary set D with the explicit Set.EqOn hypothesis.
+    nonempty_witness: not_applicable_for_reusable_infrastructure
+    bound: zero
+    derivative_convention: not_applicable
+    branch_convention: not_applicable
+    exceptional_values: not_applicable
+    normalization: not_applicable
+  - target_id: QB-001-T05
+    module: LMLF.Quantitative.Basic
+    declaration: QuantitativeAnalysis.ErrorOn.restrict
+    theorem_class: generic_quantitative
+    coverage_class: reusable_infrastructure
+    novelty_class: source_equivalent
+    relationship_to_source: >-
+      Exact formalization of the reviewed routine predicate restriction; no new
+      mathematical claim.
+    theorem_card_id: TC-QB-001-R3
+    natural_language_proof_id: NLP-QB-001-R3
+    exact_lean_signature: |
+      theorem ErrorOn.restrict {X E : Type*} [NormedAddCommGroup E]
+          {D D' : Set X} {f a : X → E} {b : X → ℝ}
+          (h : ErrorOn D f a b) (hD : D' ⊆ D) : ErrorOn D' f a b
+    mathematical_statement: An error bound on D restricts to every subset D'.
+    order_convention: not_applicable
+    domain: D' is an arbitrary subset of D.
+    nonempty_witness: not_applicable_for_reusable_infrastructure
+    bound: b x
+    derivative_convention: not_applicable
+    branch_convention: not_applicable
+    exceptional_values: not_applicable
+    normalization: not_applicable
+  - target_id: QB-001-T06
+    module: LMLF.Quantitative.Basic
+    declaration: QuantitativeAnalysis.ErrorOn.weaken
+    theorem_class: generic_quantitative
+    coverage_class: reusable_infrastructure
+    novelty_class: source_equivalent
+    relationship_to_source: >-
+      Exact formalization of the reviewed routine transitivity of real
+      inequalities; no new mathematical claim.
+    theorem_card_id: TC-QB-001-R3
+    natural_language_proof_id: NLP-QB-001-R3
+    exact_lean_signature: |
+      theorem ErrorOn.weaken {X E : Type*} [NormedAddCommGroup E]
+          {D : Set X} {f a : X → E} {b d : X → ℝ}
+          (h : ErrorOn D f a b) (hbd : ∀ x ∈ D, b x ≤ d x) : ErrorOn D f a d
+    mathematical_statement: A valid error bound remains valid with a larger majorant.
+    order_convention: not_applicable
+    domain: The pointwise comparison b <= d is required exactly on D.
+    nonempty_witness: not_applicable_for_reusable_infrastructure
+    bound: d x
+    derivative_convention: not_applicable
+    branch_convention: not_applicable
+    exceptional_values: not_applicable
+    normalization: not_applicable
+  - target_id: QB-001-T07
+    module: LMLF.Quantitative.Basic
+    declaration: QuantitativeAnalysis.ErrorOn.trans
+    theorem_class: generic_quantitative
+    coverage_class: reusable_infrastructure
+    novelty_class: source_equivalent
+    relationship_to_source: >-
+      Exact formalization of the reviewed routine triangle-inequality
+      composition; no new mathematical claim.
+    theorem_card_id: TC-QB-001-R3
+    natural_language_proof_id: NLP-QB-001-R3
+    exact_lean_signature: |
+      theorem ErrorOn.trans {X E : Type*} [NormedAddCommGroup E]
+          {D : Set X} {f a c : X → E} {b d : X → ℝ}
+          (hfa : ErrorOn D f a b) (hac : ErrorOn D a c d) :
+          ErrorOn D f c (fun x => b x + d x)
+    mathematical_statement: Successive error bounds compose with majorant b+d.
+    order_convention: not_applicable
+    domain: Both premise bounds hold on the same arbitrary set D.
+    nonempty_witness: not_applicable_for_reusable_infrastructure
+    bound: b x + d x
+    derivative_convention: not_applicable
+    branch_convention: not_applicable
+    exceptional_values: not_applicable
+    normalization: not_applicable
+  - target_id: QB-001-T08
+    module: LMLF.Quantitative.Basic
+    declaration: QuantitativeAnalysis.ErrorOn.comp
+    theorem_class: generic_quantitative
+    coverage_class: reusable_infrastructure
+    novelty_class: source_equivalent
+    relationship_to_source: >-
+      Exact formalization of the reviewed routine precomposition transport; no
+      new mathematical claim.
+    theorem_card_id: TC-QB-001-R3
+    natural_language_proof_id: NLP-QB-001-R3
+    exact_lean_signature: |
+      theorem ErrorOn.comp {X Y E : Type*} [NormedAddCommGroup E]
+          {D : Set X} {f a : X → E} {b : X → ℝ}
+          (h : ErrorOn D f a b) {S : Set Y} (ψ : Y → X)
+          (hψ : Set.MapsTo ψ S D) :
+          ErrorOn S (f ∘ ψ) (a ∘ ψ) (b ∘ ψ)
+    mathematical_statement: An error bound pulls back along a map from S into D.
+    order_convention: not_applicable
+    domain: Arbitrary S with explicit Set.MapsTo ψ S D.
+    nonempty_witness: not_applicable_for_reusable_infrastructure
+    bound: b (ψ y)
+    derivative_convention: not_applicable
+    branch_convention: not_applicable
+    exceptional_values: not_applicable
+    normalization: not_applicable
+
+named_objects: []
+
+dependencies:
+  mathlib:
+    lean_toolchain: leanprover/lean4:v4.33.1
+    requested_revision: v4.33.1
+    resolved_revision: 0df444a360eaa60ab8c11dca51a86af692955474
+    declarations:
+      - Set.EqOn
+      - Set.MapsTo
+      - NormedAddCommGroup
+      - norm_add_le
+  accepted_work_items: []
+  permitted_import_layers:
+    - LMLF.Basic
+
+assumptions:
+  - name: normed_codomain
+    exact_content: E carries a NormedAddCommGroup instance.
+    provenance: explicit typeclass input
+    why_not_hidden_goal: This is the natural structure required by subtraction and norms.
+
+pre_lean_gate_requirements:
+  theorem_card_review:
+    required: true
+    minimum_distinct_reviewer_ids: 2
+    allowed_reviewer_compositions:
+      - humans: 2
+        agents: 0
+        minimum_distinct_agent_models: 0
+      - humans: 1
+        agents: 1
+        minimum_distinct_agent_models: 1
+      - humans: 0
+        agents: 2
+        minimum_distinct_agent_models: 1
+  natural_language_proof_review:
+    required: true
+    inapplicable_reason: null
+    minimum_distinct_reviewer_ids: 2
+    allowed_reviewer_compositions:
+      - humans: 2
+        agents: 0
+        minimum_distinct_agent_models: 0
+      - humans: 1
+        agents: 1
+        minimum_distinct_agent_models: 1
+      - humans: 0
+        agents: 2
+        minimum_distinct_agent_models: 1
+  gate_evidence:
+    state: pass
+    proof_revision: 3
+    reviewers:
+      - reviewer_id: proof_referee_a
+        kind: fresh_context_sol_mathematical_referee
+        verdict: approve
+      - reviewer_id: proof_referee_b
+        kind: fresh_context_sol_mathematical_referee
+        verdict: approve
+  lean_ready:
+    required: true
+    state: pass
+    requires_gate_states:
+      theorem_card_review: pass
+      natural_language_proof_review: pass
+
+implementation_review_requirements:
+  status: pending
+  overall_minimum_distinct_reviewer_ids: 3
+  rubrics:
+    - rubric: source_fidelity
+      applicability: not_applicable
+      inapplicable_reason: Original reusable infrastructure with no source claim.
+      minimum_distinct_reviewer_ids: 0
+      allowed_reviewer_compositions: []
+    - rubric: quantitative_correctness
+      applicability: required
+      inapplicable_reason: null
+      minimum_distinct_reviewer_ids: 2
+      allowed_reviewer_compositions:
+        - humans: 2
+          agents: 0
+          minimum_distinct_agent_models: 0
+        - humans: 1
+          agents: 1
+          minimum_distinct_agent_models: 1
+        - humans: 0
+          agents: 2
+          minimum_distinct_agent_models: 1
+    - rubric: mathlib_reuse
+      applicability: required
+      inapplicable_reason: null
+      minimum_distinct_reviewer_ids: 1
+      allowed_reviewer_compositions:
+        - humans: 1
+          agents: 0
+          minimum_distinct_agent_models: 0
+        - humans: 0
+          agents: 1
+          minimum_distinct_agent_models: 1
+    - rubric: api_dependency
+      applicability: required
+      inapplicable_reason: null
+      minimum_distinct_reviewer_ids: 1
+      allowed_reviewer_compositions:
+        - humans: 1
+          agents: 0
+          minimum_distinct_agent_models: 0
+        - humans: 0
+          agents: 1
+          minimum_distinct_agent_models: 1
+    - rubric: proof_quality
+      applicability: required
+      inapplicable_reason: null
+      minimum_distinct_reviewer_ids: 1
+      allowed_reviewer_compositions:
+        - humans: 1
+          agents: 0
+          minimum_distinct_agent_models: 0
+        - humans: 0
+          agents: 1
+          minimum_distinct_agent_models: 1
+
+regressions:
+  - declaration: LMLFTest.QB001.emptyDomain
+    protects: generic empty-domain semantics
+    expected_statement: ErrorOn empty f a b holds without extra hypotheses.
+  - declaration: LMLFTest.QB001.exactZero
+    protects: exactness and zero majorant
+    expected_statement: Set.EqOn f a D implies ErrorOn D f a (fun _ => 0).
+  - declaration: LMLFTest.QB001.transSum
+    protects: additive majorant orientation
+    expected_statement: The transitive bound is exactly fun x => b x + d x.
+
+scope:
+  included:
+    - one module importing only LMLF.Basic
+    - exactly the eight targets above with signatures from SIG-QB-001-R1
+    - focused nonpublic regression tests
+  excluded:
+    - every other result discussed in the natural-language proof dossier
+    - named functions and source coverage
+    - convergence, infinite sums, products, inverses, derivatives, and tactics
+
+verification:
+  commands:
+    - lake env lean LMLF/Quantitative/Basic.lean
+    - lake build
+  public_declarations_requiring_axiom_report:
+    - QuantitativeAnalysis.ErrorOn
+    - QuantitativeAnalysis.NormBoundOn
+    - QuantitativeAnalysis.HasErrorFamily
+    - QuantitativeAnalysis.ErrorOn.exact
+    - QuantitativeAnalysis.ErrorOn.restrict
+    - QuantitativeAnalysis.ErrorOn.weaken
+    - QuantitativeAnalysis.ErrorOn.trans
+    - QuantitativeAnalysis.ErrorOn.comp
+  allowed_axioms:
+    - propext
+    - Classical.choice
+    - Quot.sound
+
+acceptance_notes: |
+  The packet is lean_ready because proof/card revision 3 received independent
+  approvals from proof_referee_a and proof_referee_b. Authorization is limited
+  to the eight frozen signatures. Implementation review remains mandatory and
+  the packet intentionally contains no self path, commit, or digest.
