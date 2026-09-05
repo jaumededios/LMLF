@@ -1,11 +1,11 @@
 # OLV97-C03-WATSON - mathematical transcription
 
-**Status:** first collation; independent source review pending  
+**Status:** first collation; independent source review pending
 **Edition:** F. W. J. Olver, *Asymptotics and Special Functions*, corrected
-A K Peters reprint, 1997, ISBN 1-56881-069-5  
-**Source snapshot:** `SRC-OLV-1997-USER-PDF-20260905`  
+A K Peters reprint, 1997, ISBN 1-56881-069-5
+**Source snapshot:** `SRC-OLV-1997-USER-PDF-20260905`
 **Source location:** Chapter 3, section 3, Theorem 3.1, printed pp. 71-72;
-PDF pages 84-85  
+PDF pages 84-85
 **Supporting conventions:** Chapter 1 section 7, printed pp. 16-17; Chapter 3
 section 2.1, printed pp. 67-68
 

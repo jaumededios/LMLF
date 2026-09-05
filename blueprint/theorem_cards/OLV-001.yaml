@@ -33,7 +33,7 @@ source_occurrences:
   - OLV97-C03-WATSON
 source_transcription:
   path: blueprint/source_transcriptions/OLV97-C03-WATSON.md
-  sha256: 7613657ede11fff0494303026a8310934722c9fd27613c4f8848755a18d90020
+  sha256: 8e84ea1c0efe62be77a4bf5d23b7383d5062046e1d8cfd3d6d57b33e6add618f
   status: transcribed_unreconciled
 source_entities:
   - watson_amplitude

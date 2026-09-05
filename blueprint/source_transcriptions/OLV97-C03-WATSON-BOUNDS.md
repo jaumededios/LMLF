@@ -1,11 +1,11 @@
 # OLV97-C03-WATSON-BOUNDS - mathematical transcription
 
-**Status:** first collation; independent source review pending  
+**Status:** first collation; independent source review pending
 **Edition:** F. W. J. Olver, *Asymptotics and Special Functions*, corrected
-A K Peters reprint, 1997, ISBN 1-56881-069-5  
-**Source snapshot:** `SRC-OLV-1997-USER-PDF-20260905`  
+A K Peters reprint, 1997, ISBN 1-56881-069-5
+**Source snapshot:** `SRC-OLV-1997-USER-PDF-20260905`
 **Source location:** Chapter 3, section 9.1-9.2, printed pp. 89-90; PDF pages
-102-103  
+102-103
 **Depends on:** Theorem 3.1 and its remainder \(\phi_n\), equation (3.04)
 
 This file records only the mathematical content needed to distinguish the

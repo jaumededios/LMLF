@@ -1,9 +1,9 @@
 # Review questions: Olver 1997 Watson packet
 
-**Audience:** independent source, analysis, and Lean-library referees  
-**Status:** questions for a draft; no implementation authorization  
-**Source snapshot:** `SRC-OLV-1997-USER-PDF-20260905`  
-**Primary occurrence:** `OLV97-C03-WATSON`, Theorem 3.1, printed pp. 71-72  
+**Audience:** independent source, analysis, and Lean-library referees
+**Status:** questions for a draft; no implementation authorization
+**Source snapshot:** `SRC-OLV-1997-USER-PDF-20260905`
+**Primary occurrence:** `OLV97-C03-WATSON`, Theorem 3.1, printed pp. 71-72
 **Related source formulas:** `OLV97-C03-WATSON-BOUNDS`, section 9.1-9.2,
 printed pp. 89-90
 
