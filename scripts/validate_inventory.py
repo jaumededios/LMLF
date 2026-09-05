@@ -5,9 +5,9 @@ from __future__ import annotations
 
 import csv
 import sys
-from collections import Counter, defaultdict
+from copy import deepcopy
+from collections import defaultdict
 from pathlib import Path
-from typing import Iterable
 
 
 SCHEMA_VERSION = "inventory-v1.0.0"
@@ -16,6 +16,31 @@ INVENTORY = ROOT / "blueprint" / "inventory"
 
 
 HEADERS: dict[str, list[str]] = {
+    "editions.csv": [
+        "schema_version",
+        "edition_id",
+        "author",
+        "title",
+        "publisher",
+        "publication_year",
+        "impression_kind",
+        "target_status",
+        "isbn",
+        "bibliographic_status",
+        "notes",
+    ],
+    "edition_relations.csv": [
+        "schema_version",
+        "edition_relation_id",
+        "from_edition_id",
+        "to_edition_id",
+        "relation_type",
+        "content_equivalence_status",
+        "page_locator_equivalence_status",
+        "join_semantics",
+        "evidence",
+        "notes",
+    ],
     "source_snapshots.csv": [
         "schema_version",
         "source_snapshot_id",
@@ -170,6 +195,8 @@ HEADERS: dict[str, list[str]] = {
 
 
 PRIMARY_KEYS: dict[str, tuple[str, ...]] = {
+    "editions.csv": ("edition_id",),
+    "edition_relations.csv": ("edition_relation_id",),
     "source_snapshots.csv": ("source_snapshot_id",),
     "page_audits.csv": ("page_audit_id",),
     "occurrences.csv": ("occurrence_id",),
@@ -189,6 +216,26 @@ REQUIRED: dict[str, tuple[str, ...]] = {
 }
 REQUIRED.update(
     {
+        "editions.csv": REQUIRED["editions.csv"]
+        + (
+            "author",
+            "title",
+            "publisher",
+            "publication_year",
+            "impression_kind",
+            "target_status",
+            "bibliographic_status",
+        ),
+        "edition_relations.csv": REQUIRED["edition_relations.csv"]
+        + (
+            "from_edition_id",
+            "to_edition_id",
+            "relation_type",
+            "content_equivalence_status",
+            "page_locator_equivalence_status",
+            "join_semantics",
+            "evidence",
+        ),
         "source_snapshots.csv": REQUIRED["source_snapshots.csv"]
         + (
             "edition_id",
@@ -275,6 +322,34 @@ REQUIRED.update(
 
 
 ENUMS: dict[tuple[str, str], set[str]] = {
+    ("editions.csv", "impression_kind"): {
+        "original_edition",
+        "corrected_reprint",
+        "later_reprint_preview",
+        "later_reprint",
+    },
+    ("editions.csv", "target_status"): {"locked_target", "comparison_only"},
+    ("editions.csv", "bibliographic_status"): {
+        "authoritatively_identified",
+        "publisher_preview_identified",
+        "unresolved",
+    },
+    ("edition_relations.csv", "relation_type"): {
+        "reprint_of",
+        "later_reprint_of",
+        "corrected_reprint_of",
+    },
+    ("edition_relations.csv", "content_equivalence_status"): {
+        "matched",
+        "mismatch",
+        "unresolved",
+    },
+    ("edition_relations.csv", "page_locator_equivalence_status"): {
+        "matched",
+        "mismatch",
+        "unresolved",
+    },
+    ("edition_relations.csv", "join_semantics"): {"equivalent", "non_equivalent"},
     ("source_snapshots.csv", "snapshot_kind"): {
         "publisher_preview",
         "locked_copy_placeholder",
@@ -557,6 +632,7 @@ def index_by(
 def check_foreign_keys(
     tables: dict[str, list[dict[str, str]]], errors: list[str]
 ) -> None:
+    editions = index_by(tables, "editions.csv", "edition_id")
     snapshots = index_by(tables, "source_snapshots.csv", "source_snapshot_id")
     occurrences = index_by(tables, "occurrences.csv", "occurrence_id")
     notations = index_by(tables, "notation.csv", "notation_id")
@@ -565,7 +641,11 @@ def check_foreign_keys(
     manifests = index_by(tables, "manifests.csv", "manifest_id")
 
     checks = [
+        ("edition_relations.csv", "from_edition_id", editions),
+        ("edition_relations.csv", "to_edition_id", editions),
+        ("source_snapshots.csv", "edition_id", editions),
         ("page_audits.csv", "source_snapshot_id", snapshots),
+        ("occurrences.csv", "edition_id", editions),
         ("occurrences.csv", "source_snapshot_id", snapshots),
         ("notation.csv", "source_snapshot_id", snapshots),
         ("notation.csv", "entity_id", entities),
@@ -636,6 +716,31 @@ def parse_page_pair(
 def check_semantics(
     tables: dict[str, list[dict[str, str]]], errors: list[str]
 ) -> None:
+    editions = index_by(tables, "editions.csv", "edition_id")
+    snapshots = index_by(tables, "source_snapshots.csv", "source_snapshot_id")
+
+    for row in tables["edition_relations.csv"]:
+        if row["from_edition_id"] == row["to_edition_id"]:
+            add_error(
+                errors,
+                "edition_relations.csv",
+                line_of(row),
+                "edition relation must connect distinct edition IDs",
+            )
+        fully_matched = (
+            row["content_equivalence_status"] == "matched"
+            and row["page_locator_equivalence_status"] == "matched"
+        )
+        required_join = "equivalent" if fully_matched else "non_equivalent"
+        if row["join_semantics"] != required_join:
+            add_error(
+                errors,
+                "edition_relations.csv",
+                line_of(row),
+                f"join_semantics must be {required_join!r} for the recorded "
+                "content/page equivalence statuses",
+            )
+
     for row in tables["source_snapshots.csv"]:
         digest_fields = (row["digest_algorithm"], row["digest_value"])
         if row["digest_status"] == "verified" and not all(digest_fields):
@@ -686,6 +791,33 @@ def check_semantics(
         occurrence_entities[link["occurrence_id"]].append(link)
 
     for row in tables["occurrences.csv"]:
+        snapshot = snapshots.get(row["source_snapshot_id"])
+        if snapshot and row["edition_id"] != snapshot["edition_id"]:
+            add_error(
+                errors,
+                "occurrences.csv",
+                line_of(row),
+                "occurrence edition_id must equal its source snapshot edition_id; "
+                "cross-edition correspondence belongs in edition_relations.csv",
+            )
+        if row["edition_id"] == "olver_crc_2010_preview" and not row[
+            "occurrence_id"
+        ].startswith("OLV10P-"):
+            add_error(
+                errors,
+                "occurrences.csv",
+                line_of(row),
+                "2010-preview occurrence IDs must use the OLV10P- prefix",
+            )
+        if row["edition_id"] == "olver_1997b" and row["occurrence_id"].startswith(
+            "OLV10P-"
+        ):
+            add_error(
+                errors,
+                "occurrences.csv",
+                line_of(row),
+                "locked-1997 occurrence cannot use a preview occurrence ID",
+            )
         parse_page_pair(
             row,
             "occurrences.csv",
@@ -761,12 +893,59 @@ def check_semantics(
                     )
 
     for row in tables["notation.csv"]:
+        snapshot = snapshots.get(row["source_snapshot_id"])
+        if (
+            snapshot
+            and snapshot["edition_id"] == "olver_crc_2010_preview"
+            and not row["notation_id"].startswith("OLV10P-")
+        ):
+            add_error(
+                errors,
+                "notation.csv",
+                line_of(row),
+                "2010-preview notation IDs must use the OLV10P- prefix",
+            )
         if row["resolution_status"] == "resolved" and row["transcription_status"] != "verified":
             add_error(
                 errors,
                 "notation.csv",
                 line_of(row),
                 "resolved notation requires verified transcription",
+            )
+
+    occurrences = index_by(tables, "occurrences.csv", "occurrence_id")
+    links_by_entity: defaultdict[str, list[dict[str, str]]] = defaultdict(list)
+    for link in tables["occurrence_entities.csv"]:
+        links_by_entity[link["entity_id"]].append(link)
+    for entity in tables["entities.csv"]:
+        if entity["identity_status"] != "confirmed":
+            continue
+        qualifying = False
+        for link in links_by_entity[entity["entity_id"]]:
+            occurrence = occurrences.get(link["occurrence_id"])
+            if not occurrence:
+                continue
+            edition = editions.get(occurrence["edition_id"])
+            snapshot = snapshots.get(occurrence["source_snapshot_id"])
+            if (
+                link["link_status"] == "confirmed"
+                and edition
+                and edition["target_status"] == "locked_target"
+                and occurrence["resolution_status"] == "resolved"
+                and occurrence["reconciliation_status"] == "matched"
+                and snapshot
+                and snapshot["edition_id"] == occurrence["edition_id"]
+                and snapshot["edition_reconciliation_status"] == "matched"
+            ):
+                qualifying = True
+                break
+        if not qualifying:
+            add_error(
+                errors,
+                "entities.csv",
+                line_of(entity),
+                "confirmed entity requires a confirmed link to a resolved, "
+                "reconciled occurrence in a locked-target edition",
             )
 
     for row in tables["cards.csv"]:
@@ -912,19 +1091,123 @@ def check_manifest_totals(
     return result
 
 
-def main() -> int:
+def validate_tables(
+    tables: dict[str, list[dict[str, str]]]
+) -> tuple[list[str], dict[str, int]]:
     errors: list[str] = []
-    tables = read_tables(errors)
     check_rows(tables, errors)
     check_foreign_keys(tables, errors)
     check_semantics(tables, errors)
     totals = check_manifest_totals(tables, errors)
+    return errors, totals
+
+
+def run_negative_invariant_tests(
+    tables: dict[str, list[dict[str, str]]]
+) -> list[str]:
+    """Prove that high-risk provenance mutations are rejected in copied data."""
+
+    def mutate_edition_mismatch(copy: dict[str, list[dict[str, str]]]) -> None:
+        row = next(
+            item
+            for item in copy["occurrences.csv"]
+            if item["occurrence_id"] == "OLV10P-O0001"
+        )
+        row["edition_id"] = "olver_1997b"
+
+    def mutate_preview_confirmation(copy: dict[str, list[dict[str, str]]]) -> None:
+        row = next(
+            item for item in copy["entities.csv"] if item["entity_id"] == "gamma"
+        )
+        row["identity_status"] = "confirmed"
+
+    def mutate_relation_join(copy: dict[str, list[dict[str, str]]]) -> None:
+        copy["edition_relations.csv"][0]["join_semantics"] = "equivalent"
+
+    def mutate_preview_prefix(copy: dict[str, list[dict[str, str]]]) -> None:
+        row = next(
+            item
+            for item in copy["occurrences.csv"]
+            if item["occurrence_id"] == "OLV10P-O0001"
+        )
+        row["occurrence_id"] = "OLV97-O0001"
+
+    def mutate_manifest_total(copy: dict[str, list[dict[str, str]]]) -> None:
+        row = next(
+            item
+            for item in copy["manifests.csv"]
+            if item["manifest_id"] == "OLV-MVP-1"
+        )
+        row["declared_source_occurrence_total"] = "2"
+
+    cases = [
+        (
+            "edition/snapshot mismatch",
+            mutate_edition_mismatch,
+            "occurrence edition_id must equal its source snapshot edition_id",
+        ),
+        (
+            "preview-only entity confirmation",
+            mutate_preview_confirmation,
+            "confirmed entity requires a confirmed link",
+        ),
+        (
+            "unresolved relation treated as equivalent",
+            mutate_relation_join,
+            "join_semantics must be 'non_equivalent'",
+        ),
+        (
+            "preview occurrence with locked-edition prefix",
+            mutate_preview_prefix,
+            "2010-preview occurrence IDs must use the OLV10P- prefix",
+        ),
+        (
+            "incorrect manifest denominator",
+            mutate_manifest_total,
+            "declares 2 source occurrences but associations count 1",
+        ),
+    ]
+
+    failures: list[str] = []
+    for name, mutate, expected in cases:
+        copied = deepcopy(tables)
+        mutate(copied)
+        errors, _ = validate_tables(copied)
+        if not any(expected in error for error in errors):
+            failures.append(
+                f"negative test {name!r} did not produce expected diagnostic {expected!r}"
+            )
+    return failures
+
+
+def main() -> int:
+    arguments = set(sys.argv[1:])
+    if arguments - {"--negative-tests"}:
+        print("usage: validate_inventory.py [--negative-tests]", file=sys.stderr)
+        return 2
+
+    read_errors: list[str] = []
+    tables = read_tables(read_errors)
+    validation_errors, totals = validate_tables(tables)
+    errors = read_errors + validation_errors
 
     if errors:
         print(f"inventory validation failed with {len(errors)} error(s):", file=sys.stderr)
         for error in errors:
             print(f"- {error}", file=sys.stderr)
         return 1
+
+    if "--negative-tests" in arguments:
+        negative_failures = run_negative_invariant_tests(tables)
+        if negative_failures:
+            print(
+                f"negative invariant testing failed with {len(negative_failures)} error(s):",
+                file=sys.stderr,
+            )
+            for failure in negative_failures:
+                print(f"- {failure}", file=sys.stderr)
+            return 1
+        print("negative invariant tests passed: 5 intentionally invalid copied fixtures rejected")
 
     association_rows = sum(
         len(tables[name])

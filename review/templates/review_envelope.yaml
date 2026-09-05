@@ -1,4 +1,4 @@
-schema_version: 1
+schema_version: 2
 record_kind: review_envelope
 storage_requirement: external_to_candidate_head
 work_item_id: REPLACE_WITH_STABLE_ID
@@ -15,6 +15,10 @@ specification_binding:
     - artifact_id: NLP_REPLACE
       revision: REPLACE_WITH_IMMUTABLE_REVISION
       sha256: REPLACE_WITH_SHA256
+  classification_schema:
+    path: review/classifications-v1.yaml
+    schema_version: lmlf-classification-v1
+    sha256: REPLACE_WITH_SHA256
 
 toolchain_binding:
   lean_toolchain: REPLACE_WITH_EXACT_TOOLCHAIN
@@ -26,6 +30,7 @@ candidate_binding:
   proposer_evidence_ref: null
 
 pre_lean_gates:
+  overall_distinct_reviewer_ids: []
   theorem_card_review:
     gate_state: pending # pending | pass | fail | blocked
     distinct_reviewer_ids: []
@@ -36,10 +41,22 @@ pre_lean_gates:
     distinct_reviewer_ids: []
     selected_reviewer_composition: null
     verdict_refs: []
+  structural_circularity_review:
+    applicability: required # required | not_applicable
+    inapplicable_reason: null
+    gate_state: pending # pending | pass | fail | blocked | not_required
+    distinct_reviewer_ids: []
+    selected_reviewer_composition: null
+    represented_perspectives: []
+    verdict_refs: []
   lean_ready:
     gate_state: pending
     decided_by: null
     evidence_refs: []
+    requires_gate_states:
+      theorem_card_review: pass
+      natural_language_proof_review: pass
+      structural_circularity_review: pass
 
 implementation_reviews:
   gate_state: pending
@@ -49,4 +66,3 @@ implementation_reviews:
 disposition_ledger_ref: null
 merge_gate_state: pending
 merge_decision_ref: null
-

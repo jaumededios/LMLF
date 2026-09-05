@@ -2,18 +2,28 @@ schema_version: 2
 id: DEF-001
 title: Bootstrap audit of mathlib Complex.Gamma
 owner: jaumededios
-artifact_revision: 1
+artifact_revision: 2
 baseline_spec_commit: pending_external_record_after_commit
 
 theorem_class: definition_identification
 coverage_class: entity_identification
-specification_status: specified
+novelty_class: non_novel
+specification_status: frozen
 proof_status: not_required
 review_status: not_started
-implementation_status: compiled
-prototype_status: compiled_unreviewed
+implementation_status: not_started
+prototype_status: absent
 coverage_status: not_applicable
 manifest_membership_status: execution_ready
+status_as_of: candidate_specification_snapshot
+status_authority: >-
+  Review pass and implementation authorization can be established only by an
+  external review envelope bound to the frozen specification commit and
+  artifact digests.
+
+classification_schema:
+  path: review/classifications-v1.yaml
+  schema_version: lmlf-classification-v1
 
 manifest: BOOTSTRAP-0
 source_occurrences: []
@@ -106,6 +116,28 @@ novelty:
   rationale: Reuse and presentation of already proved mathlib facts.
   natural_language_proof_required_before_lean: false
 
+target_classifications:
+  - target_id: DEF-001-T01
+    declaration: LMLF.Definitions.gamma_eulerIntegrable
+    theorem_class: qualitative_support
+    coverage_class: source_prerequisite
+    novelty_class: equivalent_reformulation
+  - target_id: DEF-001-T02
+    declaration: LMLF.Definitions.gamma_eq_eulerIntegral
+    theorem_class: identification
+    coverage_class: source_prerequisite
+    novelty_class: equivalent_reformulation
+  - target_id: DEF-001-T03
+    declaration: LMLF.Definitions.gamma_ofReal
+    theorem_class: identification
+    coverage_class: source_prerequisite
+    novelty_class: source_equivalent
+  - target_id: DEF-001-T04
+    declaration: LMLF.Definitions.gamma_neg_nat_eq_zero
+    theorem_class: exact_identity
+    coverage_class: source_prerequisite
+    novelty_class: source_equivalent
+
 dependencies:
   accepted_lmlf_packets: []
   mathlib_source_file: Mathlib/Analysis/SpecialFunctions/Gamma/Basic.lean
@@ -134,18 +166,21 @@ reviews:
     - api_dependency
 
 implementation:
-  implementation_status: compiled
-  lean_allowed: false
-  blocking_condition: Required reuse, semantic, and API reviews are pending.
-  prototype_status: compiled_unreviewed
-  prototype_authorized: false
-  file: LMLF/Definitions/Gamma.lean
-  declarations_present: true
-  compilation_observed: true
+  implementation_status: not_started
+  authorization_source: external_review_envelope_only
+  blocking_condition: >-
+    Required reuse, semantic, API, and external lean_ready gates are pending;
+    the exact reviewed specification commit contains no Lean implementation or
+    bound toolchain/package snapshot.
+  prototype_status: absent
+  file: null
+  declarations_present: false
+  compilation_observed: false
   note: >-
-    A matching Lean prototype exists and builds, but it was created before the
-    required reviews.  Its existence does not grant authorization, approval, or
-    release status; reviewers must assess it as an untrusted candidate.
+    This specification makes no claim about files that may exist in a later or
+    dirty worktree.  Such bytes are outside the exact specification snapshot
+    until an external envelope binds a candidate head and independent review
+    evaluates it.
 
 release_checks:
   - exact import and four-declaration bound are preserved
@@ -153,3 +188,4 @@ release_checks:
   - no duplicate Gamma object or custom axiom is introduced
   - totalized pole values are not described as classical values
   - baseline spec commit is recorded externally after the specification commit
+  - schema/lifecycle checks beyond the current CSV validator are manually audited

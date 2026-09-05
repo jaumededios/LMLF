@@ -2,17 +2,25 @@
 
 Date: 2026-09-05
 
-This audit records what was checked against locally installed Lean and Mathlib sources, and what was
-confirmed by compiling small Lean files. It deliberately separates existing Mathlib declarations from
-interfaces that this project still has to define.
+This audit records historical checks against locally installed Lean and Mathlib sources together with
+separately bound external scratch evidence. It deliberately separates existing Mathlib declarations,
+unbound audit-session observations, and interfaces that this project still has to define. The exact
+specification commit `073a5675ffaba33c5bec52de00d525165aa17ff4` contains no Lean project, toolchain
+files, or implementation; this document does not treat untracked working-tree files as evidence for that
+snapshot.
 
 ## Status terminology
 
-- **Verified existing API** means the declaration and its defining import were found in the pinned local
-  Mathlib source. Every identifier listed in the declaration matrix also passed a consolidated `#check`
-  run under that pin.
-- **Compiled spike** means a standalone prototype was accepted by `lake env lean` against the pinned
-  snapshot. Such a theorem is a viable project interface; it is not thereby an existing Mathlib theorem.
+- **Historical API audit** means the declaration and its defining import were found in the audit-session
+  Mathlib source. The identifiers in the declaration matrix were reported to pass a consolidated `#check`
+  in that session. Unless a separate artifact is cited, this is an unbound local observation rather than a
+  reproducible check of the exact specification commit.
+- **Historical compiled spike** means a standalone prototype was reported accepted by `lake env lean` in
+  the earlier audit session. It is feasibility evidence only: no committed implementation or exact-snapshot
+  build is implied.
+- **Bound external scratch evidence** means a separate evidence record supplies the specification commit,
+  source and artifact digests, exact toolchain/Mathlib revisions, command, and exit status. It can establish
+  signature elaboration for the bytes it binds, but is neither repository implementation nor acceptance.
 - **Planned project interface** means a name or abstraction proposed by the blueprint but not currently
   supplied by Mathlib.
 - Negative availability claims below come from searches of the complete local Mathlib trees for both
@@ -28,14 +36,16 @@ Mathlib tag:          v4.33.1
 Resolved Mathlib SHA: 0df444a360eaa60ab8c11dca51a86af692955474
 ```
 
-This is already expressed by the repository's `lean-toolchain`, `lakefile.toml`, and
-`lake-manifest.json`. The cached Mathlib checkout at `.lake/packages/mathlib` is clean, is exactly at
-the SHA above, and is tagged `v4.33.1`.
+The baseline was observed in an earlier local working session, but the exact specification commit does not
+contain `lean-toolchain`, `lakefile.toml`, `lake-manifest.json`, `.lake/packages/mathlib`, or any Lean
+source. Accordingly the historical clean-checkout statement is not a property of that commit. The
+separate QB scratch record below binds this Lean/Mathlib pair for its one compile-only test.
 
-The local machine also has Lean v4.29.0, v4.33.0, v4.33.1, and v4.34.0-rc2. A v4.34.0-rc2 Mathlib
-checkout at commit `69fae596b29969db7afb6ac4a40653e882274410` was searched as a comparison. It did
-not add any of the missing named special-function or Euler--Maclaurin facilities relevant here. A stable
-v4.33.1 pin is therefore preferable to taking an RC without an API benefit.
+The earlier audit session reported local Lean installations at v4.29.0, v4.33.0, v4.33.1, and
+v4.34.0-rc2. It also reported searching a v4.34.0-rc2 Mathlib checkout at commit
+`69fae596b29969db7afb6ac4a40653e882274410` without finding the missing named special-function or
+Euler--Maclaurin facilities relevant here. That comparison is historical search evidence, not an
+exact-specification build record. The stable v4.33.1 pair remains the recommended baseline.
 
 ## Verified import and declaration matrix
 
@@ -235,36 +245,44 @@ space. It does not directly supply complex-holomorphic IVP uniqueness, analytic 
 theory, Frobenius theory, Volterra/factorial iterates, Liouville--Green transformations, progressive
 paths, or analytic Wronskian infrastructure. These are substantial later method modules, not thin wrappers.
 
-## Compiled spikes
+## Compilation evidence
 
-The following facts concern project prototypes compiled with `lake env lean`; their project names are not
-claims about existing Mathlib declarations.
+Project names below are not claims about existing Mathlib declarations. Each subsection says whether its
+evidence is bound external scratch evidence or only an unbound historical audit-session observation.
 
-### Explicit finite-error algebra
+### Explicit finite-error algebra — bound external scratch evidence
 
-The blueprint definitions `ErrorOn`, `NormBoundOn`, and `HasFiniteExpansion`, together with project
-lemmas `ErrorOn.restrict`, `ErrorOn.weaken`, `ErrorOn.trans`, and `ErrorOn.comp`, compiled using only:
+The current frozen QB surface consists of the three definitions `ErrorOn`, `NormBoundOn`, and
+`HasErrorFamily`, together with the five lemmas `ErrorOn.exact`, `ErrorOn.restrict`, `ErrorOn.weaken`,
+`ErrorOn.trans`, and `ErrorOn.comp`. A scratch file reproducing those eight signatures in declaration
+order and importing only `LMLF.Basic` compiled with exit status zero under Lean v4.33.1 and Mathlib
+commit `0df444a360eaa60ab8c11dca51a86af692955474`.
 
-```lean
-import Mathlib.Analysis.Normed.Group.Basic
-import Mathlib.Data.Set.Function
-import Mathlib.Tactic.Abel
-```
+The exact command, revisions, source and manifest digests, and empty standard output/error are recorded in
+[QB-001 scratch build evidence](/home/codex/Documents/Codex/2026-09-05/LMLF-review-evidence/scratch/QB-001-build-evidence.md);
+the compiled source is
+[QB-001-signatures.lean](/home/codex/Documents/Codex/2026-09-05/LMLF-review-evidence/scratch/QB-001-signatures.lean).
+This is external compile-only evidence for signature elaboration. It is not a repository implementation,
+does not establish the frozen proof bodies as an implementation, and does not authorize Lean work.
 
-This confirms that the explicit finite-error layer has a small and stable dependency surface. The
-filter-based Mathlib asymptotics API should support internal derivations rather than replace this public
-layer.
+An earlier unbound audit-session prototype used the now-superseded name `HasFiniteExpansion` and checked
+only four of the five `ErrorOn` lemmas. That historical result must not be cited as validation of the
+current eight-signature QB surface. The current scratch evidence supports the feasibility of the explicit
+finite-error interface; the filter-based Mathlib asymptotics API remains an internal derivation substrate,
+not a replacement for that public layer.
 
-### Gamma identification wrapper
+### Gamma identification wrapper — historical audit-session observation
 
-The blueprint's Euler-integral identification compiled exactly:
+The earlier audit session reported compiling the following theorem body under the obsolete project
+namespace `Olver.Definitions`. The current planned spelling is shown below with `LMLF.Definitions`, but no
+new compile of this renamed declaration is claimed here:
 
 ```lean
 import Mathlib.Analysis.SpecialFunctions.Gamma.Basic
 
 open MeasureTheory Set
 
-namespace Olver.Definitions
+namespace LMLF.Definitions
 
 theorem gamma_eq_eulerIntegral {s : ℂ} (hs : 0 < s.re) :
     Complex.Gamma s =
@@ -272,13 +290,14 @@ theorem gamma_eq_eulerIntegral {s : ℂ} (hs : 0 < s.re) :
         (Real.exp (-t) : ℂ) * (t : ℂ) ^ (s - 1) := by
   simpa only [Complex.GammaIntegral] using Complex.Gamma_eq_integral hs
 
-end Olver.Definitions
+end LMLF.Definitions
 ```
 
-Here `Olver.Definitions.gamma_eq_eulerIntegral` is a planned/project wrapper; the theorem after `using`
-is the verified existing Mathlib result.
+Here `LMLF.Definitions.gamma_eq_eulerIntegral` is a planned project wrapper. The theorem after `using` is
+the Mathlib declaration found in the historical API audit. The old prototype supports the proof idea but,
+without a bound current-namespace compile record, does not establish a repository implementation.
 
-### Regularized hypergeometric summation
+### Regularized hypergeometric summation — historical audit-session observation
 
 A project lemma asserting
 
@@ -288,14 +307,14 @@ HasSum (fun n : ℕ =>
   (Complex.regularizedHGFun a b z)
 ```
 
-under `a.card ≤ b.card` compiled from
+under `a.card ≤ b.card` was reported to compile from
 `Complex.radius_regularizedHGFunSeries_eq_top` and
 `FormalMultilinearSeries.hasSum`. This confirms that regularized `₀F₁` has a working entire-series
 foundation without a new convergence proof.
 
-### Cauchy transport to `ErrorOn`
+### Cauchy transport to `ErrorOn` — historical audit-session observation
 
-The proposed project theorem `errorOn_iteratedDeriv_of_disks` compiled with:
+The proposed project theorem `errorOn_iteratedDeriv_of_disks` was reported to compile with:
 
 ```lean
 import Mathlib.Analysis.Complex.Liouville
@@ -311,11 +330,12 @@ ErrorOn D (iteratedDeriv k f) (iteratedDeriv k a)
 ```
 
 The proof applies `Complex.norm_iteratedDeriv_le_of_forall_mem_sphere_norm_le` to `f - a` and rewrites
-with `iteratedDeriv_sub`. Thus the intended Cauchy derivative-transport layer is feasible on the pinned
-release.
+with `iteratedDeriv_sub`. This is historical feasibility evidence at the audit-session dependency version,
+not an exact-specification build claim.
 
-These spikes did not compile a complete geometric-series case study, named Airy family, or complete
-Euler--Maclaurin/ODE method module; this report does not claim those milestones are already proved.
+Neither the bound QB scratch check nor the historical spikes compiled a complete geometric-series case
+study, named Airy family, or complete Euler--Maclaurin/ODE method module; this report does not claim those
+milestones are already proved.
 
 ## Confirmed major gaps
 
@@ -336,13 +356,16 @@ parameter regularity, continuation, or connection formulas.
 
 ## Recommended smallest foundation milestone
 
-The smallest milestone already supported by compiled evidence is an **M0/M1 bootstrap**, not the full
-special-function roadmap:
+The smallest milestone supported by current bound scratch evidence is the QB portion of an **M0/M1
+bootstrap**, not a repository implementation and not the full special-function roadmap:
 
-1. Establish the pinned package and a minimal quantitative core containing `ErrorOn`, `NormBoundOn`,
-   `HasFiniteExpansion`, and the four verified error-algebra lemmas.
-2. Add the thin Gamma definition/identification wrapper and an umbrella definitions import.
-3. Add the verified Cauchy derivative-transport theorem as the next independent analytic module.
+1. Establish a committed package and exact pin, then implement the externally scratch-checked QB surface:
+   `ErrorOn`, `NormBoundOn`, `HasErrorFamily`, `ErrorOn.exact`, `ErrorOn.restrict`, `ErrorOn.weaken`,
+   `ErrorOn.trans`, and `ErrorOn.comp`, behind the single frozen `LMLF.Basic` import.
+2. Compile the current `LMLF.Definitions` Gamma wrapper and bind the result; the present evidence for that
+   wrapper is only the superseded-namespace historical spike.
+3. Re-run and bind the Cauchy derivative-transport theorem before treating it as executable milestone
+   evidence.
 4. Use a small exact finite example, such as the geometric remainder, as the first end-to-end acceptance
    theorem. This example itself was not part of the compiled spikes and must still be checked.
 

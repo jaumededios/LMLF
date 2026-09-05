@@ -90,8 +90,8 @@ global axiom may bypass a missing edge.
 
 | Node | Manifest | Current gate | Next legitimate edge |
 |---|---|---|---|
-| `QB-001` | `BOOTSTRAP-0` | proof/card revision 3 approved; implementation authorized for exactly eight signatures | implement/review only those signatures, then audit and release |
-| `DEF-001` | `BOOTSTRAP-0` | four declarations compile as an unauthorized prototype; proof not required; review not started; `lean_allowed: false` | exact reuse, API, proof-quality, and implementation reviews at the candidate head |
+| `QB-001` | `BOOTSTRAP-0` | frozen eight-signature specification is complete; candidate-owned review summaries are not externally bound, so authoritative review and `lean_ready` remain pending and implementation is unauthorized | bind the exact successor specification externally, obtain protocol-valid reviews, then authorize only if that external gate passes |
+| `DEF-001` | `BOOTSTRAP-0` | frozen four-declaration specification; implementation is `not_started`, and no prototype is present in the exact specification snapshot | bind and review the exact specification; treat any earlier local compile as unbound historical feasibility evidence, not candidate implementation |
 | `QL-001` | `OLV-MVP-1` planning | registered planning row, no complete card | select a bounded target subset after/alongside Watson collation, then write proof/card |
 | `OLV-001` | `OLV-MVP-1` planning | occurrence selected but untranscribed | locked collation, exact-source card, full proof, two independent reviews |
 | `SR-001` | `OLV-MVP-1` planning | no card or proof | accepted `OLV-001`, eventual-domain/scale/notation bridge, audit-only implementation |
@@ -105,7 +105,7 @@ approve `DEF-001` or release `QB-001`.
 ```mermaid
 flowchart LR
   LOCK["Edition lock: complete"] --> COL["OLV97-C03-WATSON direct 1997 collation: blocked"]
-  QB["QB-001 finite core: pre-Lean approved"] --> QL["Minimal QL-001 Laplace slice: planning"]
+  QB["QB-001 finite core: frozen; external gate pending"] --> QL["Minimal QL-001 Laplace slice: planning"]
   COL --> QL
   QL --> NEED{"Does the selected proof need generalized Gamma moments?"}
   NEED -- "no" --> OLV["OLV-001 exact_source_generic"]
@@ -278,8 +278,8 @@ TP-002 + TP-006 -> TP-007 original value/derivative transport
 TP-007 + accepted outer expansion -> TP-008 overlap matching
 TP-006 + parameter-Cauchy infrastructure -> TP-009 mixed derivatives
 
-identified Bessel basis + branch support + ODE-002 -> BP-001 normal form
-BP-001 + ODE-011 + Bessel frame/envelopes -> BP-002 pole-domain stability
+branch support + ODE-002 -> BP-001 normal form
+BP-001 + ODE-011 + identified Bessel basis/frame/envelopes -> BP-002 pole-domain stability
 ```
 
 Every transition node uses the three-review gate.  Coordinates, paths,

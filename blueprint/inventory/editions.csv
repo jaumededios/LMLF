@@ -1,0 +1,3 @@
+"schema_version","edition_id","author","title","publisher","publication_year","impression_kind","target_status","isbn","bibliographic_status","notes"
+"inventory-v1.0.0","olver_1997b","F. W. J. Olver","Asymptotics and Special Functions","A K Peters","1997","corrected_reprint","locked_target","1-56881-069-5","authoritatively_identified","Corrected reprint of the 1974 Academic Press original; source coverage is locked to this edition."
+"inventory-v1.0.0","olver_crc_2010_preview","F. W. J. Olver","Asymptotics and Special Functions","CRC Press","2010","later_reprint_preview","comparison_only","","publisher_preview_identified","Distinct later-reprint edition identity for the available preview; no mathematical or locator equivalence to olver_1997b is asserted."

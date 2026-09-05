@@ -1,7 +1,7 @@
 # Airy and Scorer family programme
 
 **Status:** planning only; no provisional ID below is registered or authorized  
-**Current source evidence:** contents-only leads `olv97-o0012` and `olv97-o0021`; no resolved Airy or Scorer entity row  
+**Current source evidence:** contents-only leads `OLV10P-O0012` and `OLV10P-O0021`; no resolved Airy or Scorer entity row  
 **Mathlib position at the pin:** no named `Ai` or `Bi` implementation found; regularized hypergeometric infrastructure is a promising construction substrate
 
 ## Family boundary and edition-scoped claim
@@ -10,8 +10,8 @@ This file plans the baseline Airy functions, their integral/rotation identificat
 
 The evidence currently justifies much less than that programme:
 
-- `olv97-o0012` records the contents headings “Airy Integral” in Chapter 2 §8 and a Chapter 4 Airy-integral heading. It is `occurrence_unresolved` and does not establish that the printed object is already `Ai`, `Bi`, a contour integral, or a particular normalization.
-- `olv97-o0021` records Chapter 11 Airy-function and auxiliary-function headings. It is also contents-only. No derivative, rotation, modulus, phase, or envelope symbol has been collated.
+- `OLV10P-O0012` records the contents headings “Airy Integral” in Chapter 2 §8 and a Chapter 4 Airy-integral heading. It is `occurrence_unresolved` and does not establish that the printed object is already `Ai`, `Bi`, a contour integral, or a particular normalization.
+- `OLV10P-O0021` records Chapter 11 Airy-function and auxiliary-function headings. It is also contents-only. No derivative, rotation, modulus, phase, or envelope symbol has been collated.
 - DLMF gives modern Airy conventions and points to Olver's modulus/phase and Scorer-related treatment. Those are convention warnings and locator aids, not evidence that a particular Scorer name or notation occurs in the locked edition.
 
 Accordingly, `Ai`, `Bi`, `Gi`, `Hi`, rotated Airy solutions, modulus, phase, and envelopes are planning concepts here. Source entities and named source applications are created only after a locked-edition body audit confirms them. A project-required inhomogeneous solution absent from the source is recorded as `project_extra` and excluded from source-completeness totals.

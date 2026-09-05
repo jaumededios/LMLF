@@ -1,7 +1,7 @@
 # LMLF design decisions
 
 **Normative owner:** `jaumededios`  
-**Document specification status:** `specified`  
+**Document specification status:** `frozen`  
 **Baseline specification commit:** recorded in an external review/release record
 after the specification commit exists, never self-referentially in that commit.
 
@@ -48,9 +48,12 @@ approximants converge as the order increases.
 ## DD-005 — New mathematics is reviewed before Lean
 
 Genuinely new mathematics receives a complete natural-language proof and at
-least two independent reviews before Lean implementation begins.  High-risk
-definition, continuation, transition, zero, and connection packets require a
-third structural review.  Kernel checking does not replace mathematical review.
+least two independent external reviews before Lean implementation begins.
+Construction, continuation, identification through existence/uniqueness,
+nontrivial source recovery, and theorem-sized hypothesis structures require a
+separately represented `structural_circularity_review`.  Every packet marks it
+required or supplies a reviewable inapplicability reason.  Kernel checking does
+not replace mathematical review.
 
 ## DD-006 — Theorem class is not coverage class
 
@@ -134,11 +137,14 @@ does not stop generic work, but it blocks every named theorem about that family.
 ## DD-015 — Status axes are orthogonal
 
 Specification, proof, review, implementation, coverage, and manifest membership
-use separate controlled vocabularies from `theorem_cards/README.md`.  QB-001
-proof/card revision 3 is `approved`, and implementation is `authorized` for only
-its eight frozen signatures.  Manifest execution readiness does not by itself
-imply Lean authorization.  A separate prototype status records code, such as
-DEF-001, that compiles before review without granting approval or release.
+use separate controlled vocabularies from `theorem_cards/README.md`.
+Candidate-owned review and implementation fields are temporal descriptions,
+not gate evidence.  QB-001 card/proof revision 4 is frozen and complete but has
+no current external review or implementation authorization.  Its revision-3
+repository review summary is historical and non-quorum.  DEF-001 revision 2 is
+frozen with `implementation_status: not_started` and `prototype_status: absent`
+for the exact specification snapshot.  Manifest execution readiness never
+implies Lean authorization.
 
 ## DD-016 — Packet concepts are not source entities
 
@@ -149,7 +155,23 @@ entity, notation, and occurrence IDs remain reserved for source reconciliation.
 
 ## DD-017 — Watson has a narrow critical path
 
-The first source MVP depends only on the edition/occurrence lock, QB-001 finite
-calculus, the finite integral/Laplace core, and DEF-001 Gamma facts if the chosen
-moment proof uses them.  Airy, Cauchy derivative transport, exact ODE residuals,
-and ODE/comparison systems are parallel tracks, not blockers.
+The edition/occurrence collation and QB-001 finite calculus are independent,
+parallel predecessors of the selected finite integral/Laplace slice.  That
+slice leads to OLV-001 and then SR-001.  DEF-001 Gamma facts feed QL-001 or
+OLV-001 only if the collated formulation uses Gamma moments.  Airy, Cauchy
+derivative transport, exact ODE residuals, and ODE/comparison systems are
+parallel tracks, not blockers.
+
+## DD-018 — Classification and review authority are versioned
+
+`review/classifications-v1.yaml` separately controls packet-level and
+declaration-level theorem, coverage, and novelty values.  Every frozen card and
+packet carries exact target classifications.  `non_novel` is canonical for
+routine internal definitions and consequences; `source_equivalent` requires a
+bound external source target.
+
+Passing review, `lean_ready`, and authorization exist only in an external
+envelope that binds the frozen specification commit and artifact digests.
+Candidate-owned ledgers are historical and count as zero reviewers.  Only the
+CSV inventory validator is implemented today; broader schema/lifecycle and
+review-contract validation remains manual/planned.

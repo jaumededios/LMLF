@@ -1,4 +1,4 @@
-schema_version: 2
+schema_version: 3
 
 # This packet intentionally does not contain its own path, commit, or digest.
 # An external review envelope binds those values after the packet is frozen.
@@ -7,18 +7,27 @@ title: Bootstrap finite error predicates and five transport lemmas
 lifecycle_state: frozen
 specification_owner: jaumededios
 
+classification_schema:
+  path: review/classifications-v1.yaml
+  schema_version: lmlf-classification-v1
+  sha256: 7a4f322bb56dbb40d5d44a7eceb50b5a49ea6ae69f414b920341e3b12ea9d71e
+packet_classification:
+  theorem_class: foundational_calculus
+  coverage_class: infrastructure
+  novelty_class: non_novel
+
 novelty_assessment:
   classification: non_novel
   rationale: >-
     The packet contains project-local definitions and routine consequences of
-    set and norm laws.  Per-target novelty_class uses source_equivalent because
-    the current template has no non_novel enum and each target exactly follows
-    the reviewed internal proof; it does not assert new mathematics.
+    set and norm laws.  Every target uses the canonical non_novel value; an
+    internal proof dossier is not an external source and cannot justify
+    source_equivalent.
 
 source:
   kind: original
-  citation: LMLF internal natural-language proof packet QB-001, revision 3
-  edition_or_version: revision 3
+  citation: LMLF internal natural-language proof packet QB-001, revision 4
+  edition_or_version: revision 4
   isbn_doi_or_stable_id: not_applicable
   location: >-
     Scope and standing assumptions; QB-001.1, QB-001.2, QB-001.3, forward
@@ -26,7 +35,7 @@ source:
   snapshot:
     uri_or_archive_ref: blueprint/proofs/QB-001.md
     accessed_utc: 2026-09-05
-    sha256: 653b6fba9e597f56e63cf7520b0dbf896b1c3a4980436f2a8c065993aa26754c
+    sha256: 3513fb1acf141066eb9a4920c1ea238c778d66976ff8479d31c742df93d3a2a5
   original_statement_or_formula: |
     Define ErrorOn, NormBoundOn, and HasErrorFamily. Prove exact zero error,
     domain restriction, majorant weakening, additive error transitivity, and
@@ -34,24 +43,26 @@ source:
 
 upstream_artifacts:
   theorem_cards:
-    - artifact_id: TC-QB-001-R3
+    - artifact_id: TC-QB-001-R4
       path_or_uri: blueprint/theorem_cards/QB-001.yaml
-      revision: 3
-      sha256: ad68e05e764d9edcb51960fc00982192a4b964c37d5d342a4e8bb3ccf6f1587c
-    - artifact_id: SIG-QB-001-R1
+      revision: 4
+      sha256: f470845b382e563ea23dbc850ab223cc5a11bc1504fe97cfb399eb9f457b6d46
+    - artifact_id: SIG-QB-001-R2
       path_or_uri: blueprint/theorem_cards/QB-001-signatures.md
-      revision: 1
-      sha256: 1959a7787ddf31477321b75bec944938f6ac2f1d77c5c14702c33b3446684f12
+      revision: 2
+      sha256: 93e4e30a93087de95342abdb1e986676924cd93512e771737d0d3f3ed7973b39
   natural_language_proofs:
-    - artifact_id: NLP-QB-001-R3
+    - artifact_id: NLP-QB-001-R4
       path_or_uri: blueprint/proofs/QB-001.md
-      revision: 3
-      sha256: 653b6fba9e597f56e63cf7520b0dbf896b1c3a4980436f2a8c065993aa26754c
-  review_records:
-    - artifact_id: REVIEW-QB-001-R3
+      revision: 4
+      sha256: 3513fb1acf141066eb9a4920c1ea238c778d66976ff8479d31c742df93d3a2a5
+  historical_context:
+    - artifact_id: HIST-QB-001-REV3
       path_or_uri: blueprint/reviews/QB-001-rev3.md
-      revision: 1
-      sha256: 2fe44a08209a79c8e37b5d88a9d5aec95f975195d63d4e2b3a123bb0038be9a9
+      revision: 2
+      authority: none
+      counts_toward_quorum: false
+      sha256: 4b0e8157ebaeb5101916154515094dc82ddffbace4b753ba8b892877cc0df055
 
 targets:
   - target_id: QB-001-T01
@@ -59,12 +70,12 @@ targets:
     declaration: QuantitativeAnalysis.ErrorOn
     theorem_class: definition
     coverage_class: reusable_infrastructure
-    novelty_class: source_equivalent
+    novelty_class: non_novel
     relationship_to_source: >-
       Exact formalization of the reviewed internal definition; mathematically
       routine and non-novel, with no external source coverage.
-    theorem_card_id: TC-QB-001-R3
-    natural_language_proof_id: NLP-QB-001-R3
+    theorem_card_id: TC-QB-001-R4
+    natural_language_proof_id: NLP-QB-001-R4
     exact_lean_signature: |
       def ErrorOn {X E : Type*} [NormedAddCommGroup E]
           (D : Set X) (f a : X → E) (b : X → ℝ) : Prop
@@ -83,12 +94,12 @@ targets:
     declaration: QuantitativeAnalysis.NormBoundOn
     theorem_class: definition
     coverage_class: reusable_infrastructure
-    novelty_class: source_equivalent
+    novelty_class: non_novel
     relationship_to_source: >-
       Exact formalization of the reviewed internal definition; mathematically
       routine and non-novel, with no external source coverage.
-    theorem_card_id: TC-QB-001-R3
-    natural_language_proof_id: NLP-QB-001-R3
+    theorem_card_id: TC-QB-001-R4
+    natural_language_proof_id: NLP-QB-001-R4
     exact_lean_signature: |
       def NormBoundOn {X E : Type*} [NormedAddCommGroup E]
           (D : Set X) (f : X → E) (b : X → ℝ) : Prop
@@ -107,12 +118,12 @@ targets:
     declaration: QuantitativeAnalysis.HasErrorFamily
     theorem_class: definition
     coverage_class: reusable_infrastructure
-    novelty_class: source_equivalent
+    novelty_class: non_novel
     relationship_to_source: >-
       Exact formalization of the reviewed internal definition; mathematically
       routine and non-novel, with no external source coverage.
-    theorem_card_id: TC-QB-001-R3
-    natural_language_proof_id: NLP-QB-001-R3
+    theorem_card_id: TC-QB-001-R4
+    natural_language_proof_id: NLP-QB-001-R4
     exact_lean_signature: |
       def HasErrorFamily {X E : Type*} [NormedAddCommGroup E]
           (f : X → E) (a : ℕ → X → E)
@@ -133,12 +144,12 @@ targets:
     declaration: QuantitativeAnalysis.ErrorOn.exact
     theorem_class: generic_quantitative
     coverage_class: reusable_infrastructure
-    novelty_class: source_equivalent
+    novelty_class: non_novel
     relationship_to_source: >-
       Exact formalization of the reviewed routine consequence of equality and
       norm_zero; no new mathematical claim.
-    theorem_card_id: TC-QB-001-R3
-    natural_language_proof_id: NLP-QB-001-R3
+    theorem_card_id: TC-QB-001-R4
+    natural_language_proof_id: NLP-QB-001-R4
     exact_lean_signature: |
       theorem ErrorOn.exact {X E : Type*} [NormedAddCommGroup E]
           {D : Set X} {f a : X → E} (h : Set.EqOn f a D) :
@@ -157,12 +168,12 @@ targets:
     declaration: QuantitativeAnalysis.ErrorOn.restrict
     theorem_class: generic_quantitative
     coverage_class: reusable_infrastructure
-    novelty_class: source_equivalent
+    novelty_class: non_novel
     relationship_to_source: >-
       Exact formalization of the reviewed routine predicate restriction; no new
       mathematical claim.
-    theorem_card_id: TC-QB-001-R3
-    natural_language_proof_id: NLP-QB-001-R3
+    theorem_card_id: TC-QB-001-R4
+    natural_language_proof_id: NLP-QB-001-R4
     exact_lean_signature: |
       theorem ErrorOn.restrict {X E : Type*} [NormedAddCommGroup E]
           {D D' : Set X} {f a : X → E} {b : X → ℝ}
@@ -181,12 +192,12 @@ targets:
     declaration: QuantitativeAnalysis.ErrorOn.weaken
     theorem_class: generic_quantitative
     coverage_class: reusable_infrastructure
-    novelty_class: source_equivalent
+    novelty_class: non_novel
     relationship_to_source: >-
       Exact formalization of the reviewed routine transitivity of real
       inequalities; no new mathematical claim.
-    theorem_card_id: TC-QB-001-R3
-    natural_language_proof_id: NLP-QB-001-R3
+    theorem_card_id: TC-QB-001-R4
+    natural_language_proof_id: NLP-QB-001-R4
     exact_lean_signature: |
       theorem ErrorOn.weaken {X E : Type*} [NormedAddCommGroup E]
           {D : Set X} {f a : X → E} {b d : X → ℝ}
@@ -205,12 +216,12 @@ targets:
     declaration: QuantitativeAnalysis.ErrorOn.trans
     theorem_class: generic_quantitative
     coverage_class: reusable_infrastructure
-    novelty_class: source_equivalent
+    novelty_class: non_novel
     relationship_to_source: >-
       Exact formalization of the reviewed routine triangle-inequality
       composition; no new mathematical claim.
-    theorem_card_id: TC-QB-001-R3
-    natural_language_proof_id: NLP-QB-001-R3
+    theorem_card_id: TC-QB-001-R4
+    natural_language_proof_id: NLP-QB-001-R4
     exact_lean_signature: |
       theorem ErrorOn.trans {X E : Type*} [NormedAddCommGroup E]
           {D : Set X} {f a c : X → E} {b d : X → ℝ}
@@ -230,12 +241,12 @@ targets:
     declaration: QuantitativeAnalysis.ErrorOn.comp
     theorem_class: generic_quantitative
     coverage_class: reusable_infrastructure
-    novelty_class: source_equivalent
+    novelty_class: non_novel
     relationship_to_source: >-
       Exact formalization of the reviewed routine precomposition transport; no
       new mathematical claim.
-    theorem_card_id: TC-QB-001-R3
-    natural_language_proof_id: NLP-QB-001-R3
+    theorem_card_id: TC-QB-001-R4
+    natural_language_proof_id: NLP-QB-001-R4
     exact_lean_signature: |
       theorem ErrorOn.comp {X Y E : Type*} [NormedAddCommGroup E]
           {D : Set X} {f a : X → E} {b : X → ℝ}
@@ -275,6 +286,7 @@ assumptions:
     why_not_hidden_goal: This is the natural structure required by subtraction and norms.
 
 pre_lean_gate_requirements:
+  overall_minimum_distinct_reviewer_ids: 2
   theorem_card_review:
     required: true
     minimum_distinct_reviewer_ids: 2
@@ -302,22 +314,22 @@ pre_lean_gate_requirements:
       - humans: 0
         agents: 2
         minimum_distinct_agent_models: 1
-  gate_evidence:
-    state: pass
-    proof_revision: 3
-    reviewers:
-      - reviewer_id: proof_referee_a
-        kind: fresh_context_sol_mathematical_referee
-        verdict: approve
-      - reviewer_id: proof_referee_b
-        kind: fresh_context_sol_mathematical_referee
-        verdict: approve
+  structural_circularity_review:
+    applicability: not_applicable
+    inapplicable_reason: >-
+      The packet defines predicates and proves only direct set/norm transports;
+      it has no source-to-named-function identification, continuation,
+      existence/uniqueness construction, or theorem-sized hypothesis object.
+    minimum_distinct_reviewer_ids: 0
+    allowed_reviewer_compositions: []
+    required_perspectives: []
   lean_ready:
     required: true
-    state: pass
+    authoritative_state_source: external_review_envelope_only
     requires_gate_states:
       theorem_card_review: pass
       natural_language_proof_review: pass
+      structural_circularity_review: not_required
 
 implementation_review_requirements:
   status: pending
@@ -390,7 +402,7 @@ regressions:
 scope:
   included:
     - one module importing only LMLF.Basic
-    - exactly the eight targets above with signatures from SIG-QB-001-R1
+    - exactly the eight targets above with signatures from SIG-QB-001-R2
     - focused nonpublic regression tests
   excluded:
     - every other result discussed in the natural-language proof dossier
@@ -416,7 +428,9 @@ verification:
     - Quot.sound
 
 acceptance_notes: |
-  The packet is lean_ready because proof/card revision 3 received independent
-  approvals from proof_referee_a and proof_referee_b. Authorization is limited
-  to the eight frozen signatures. Implementation review remains mandatory and
-  the packet intentionally contains no self path, commit, or digest.
+  The card, proof, signature artifact, and packet are frozen and the target list
+  is bounded to eight declarations.  No candidate-owned field records reviewer
+  pass or Lean authorization.  Historical repository review prose is non-quorum.
+  Fresh verdicts and any lean_ready authorization must live in an external
+  envelope bound to the exact frozen digests and specification commit.  The
+  packet intentionally contains no self path, commit, or digest.

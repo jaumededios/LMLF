@@ -19,6 +19,8 @@ addressed evidence store.
   independent rubric review.
 - [`templates/disposition_ledger.yaml`](templates/disposition_ledger.yaml) tracks
   findings outside the candidate head.
+- [`classifications-v1.yaml`](classifications-v1.yaml) is the frozen, versioned
+  packet-level and target-level classification vocabulary.
 - [`rubrics/`](rubrics/) contains focused referee instructions. Apply one rubric
   at a time.
 
@@ -29,11 +31,13 @@ addressed evidence store.
 2. Freeze the packet in a specification commit. Do not add that commit or the
    packet's own digest to the packet itself.
 3. Create an external review envelope that binds `spec_commit`, packet path and
-   packet digest. Record theorem-card and natural-language-proof reviews in
-   external verdicts.
+   packet digest, upstream artifacts, and the classification schema. Record
+   theorem-card, natural-language-proof, and applicable structural-circularity
+   reviews in external verdicts.
 4. Set the envelope's `lean_ready` gate to `pass` only after its prerequisite
-   pre-Lean gates and reviewer quorums pass. `lean_ready` authorizes Lean work; it
-   is not an implementation approval.
+   pre-Lean gates, perspectives, and reviewer quorums pass. An inapplicable
+   structural gate must be explicitly `not_required` with the packet reason.
+   `lean_ready` authorizes Lean work; it is not an implementation approval.
 5. Implement the packet on a focused branch. At a candidate head, add the full
    base/head SHAs and reproducible evidence to the external envelope.
 6. Run each required implementation rubric independently and store its JSON
@@ -47,10 +51,14 @@ addressed evidence store.
 Templates use controlled values rather than invented placeholder enums:
 
 - `lifecycle_state`: `draft`, `frozen`, `superseded`;
-- `gate_state`: `pending`, `pass`, `fail`, `blocked`;
+- `gate_state`: `pending`, `pass`, `fail`, `blocked`, `not_required`;
+- requirement `applicability`: `required`, `not_applicable`;
 - `verdict`: `approve`, `request_changes`, `block`;
 - reviewer `kind`: `human`, `agent`;
 - verdict `review_stage`: `pre_lean`, `implementation`;
+- verdict `review_perspective`: `source_semantics`, `proof_correctness`,
+  `dependency_direction`, `source_to_target_reachability`, or
+  `hypothesis_and_choice_laundering`;
 - reviewer `isolation_strength`: `manual_attestation`,
   `technically_enforced`;
 - disposition `resolution_state`: `open`, `fixed_pending_rereview`,
@@ -58,6 +66,16 @@ Templates use controlled values rather than invented placeholder enums:
 
 Replace textual `REPLACE_*` fields before use. Keep enum fields at one of their
 documented values.
+
+Candidate-owned cards, packets, proof metadata, and review summaries cannot set
+authoritative `pass`, `lean_ready`, reviewer approval, or implementation
+authorization.  They describe frozen scope and intrinsic proof completeness.
+Only the externally stored envelope and bound verdicts establish gate state;
+repository review ledgers are historical and count as zero reviewers.
+
+Only the CSV inventory validator currently exists.  Validation of YAML/Markdown
+schemas, lifecycle transitions, external bindings, classification joins, and
+review quorums remains a manual process specified for a future contract linter.
 
 ## Manual isolation is limited
 

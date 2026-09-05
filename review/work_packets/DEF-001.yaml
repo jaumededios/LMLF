@@ -1,4 +1,4 @@
-schema_version: 2
+schema_version: 3
 
 # This packet intentionally does not contain its own path, commit, or digest.
 # An external review envelope binds those values after the packet is frozen.
@@ -7,16 +7,24 @@ title: Bootstrap reuse and audit wrappers for mathlib Complex.Gamma
 lifecycle_state: frozen
 specification_owner: jaumededios
 
+classification_schema:
+  path: review/classifications-v1.yaml
+  schema_version: lmlf-classification-v1
+  sha256: 7a4f322bb56dbb40d5d44a7eceb50b5a49ea6ae69f414b920341e3b12ea9d71e
+packet_classification:
+  theorem_class: definition_identification
+  coverage_class: entity_identification
+  novelty_class: non_novel
+
 prototype:
-  status: compiled_unreviewed
-  implementation_status: compiled
+  status: absent
+  implementation_status: not_started
   review_status: not_started
-  authorized: false
-  module_file: LMLF/Definitions/Gamma.lean
+  module_file: null
   note: >-
-    The matching Lean code exists and builds, but implementation review is
-    pending.  Treat it as an untrusted candidate, not an approved or released
-    implementation.
+    No Lean implementation or prototype is present in the exact specification
+    commit reviewed by the source reports.  Files in another commit or dirty
+    worktree have no status until an external envelope binds that candidate.
 
 source:
   kind: existing_lean
@@ -27,9 +35,12 @@ source:
   isbn_doi_or_stable_id: git:0df444a360eaa60ab8c11dca51a86af692955474
   location: Mathlib/Analysis/SpecialFunctions/Gamma/Basic.lean
   snapshot:
-    uri_or_archive_ref: .lake/packages/mathlib/Mathlib/Analysis/SpecialFunctions/Gamma/Basic.lean
+    uri_or_archive_ref: >-
+      dependency checkout at resolved revision
+      0df444a360eaa60ab8c11dca51a86af692955474
     accessed_utc: 2026-09-05
     sha256: 720a9a72d742fbe1c9a89601dc3a00d82c0261c7368c98cccb58307dbffe3bbf
+    availability_in_specification_commit: false
   original_statement_or_formula: |
     Reuse Complex.Gamma. For re(s)>0 its defining Euler integral is convergent
     and equals Gamma(s); it agrees with Real.Gamma on real inputs; mathlib's
@@ -37,10 +48,10 @@ source:
 
 upstream_artifacts:
   theorem_cards:
-    - artifact_id: TC-DEF-001-R1
+    - artifact_id: TC-DEF-001-R2
       path_or_uri: blueprint/theorem_cards/DEF-001.yaml
-      revision: 1
-      sha256: 97d3c73d938270e58ddc59be929bd1254baed15ae3585d09a082cf4862d3b024
+      revision: 2
+      sha256: d0417e324649c3c89419d8bed84708c998a81a9b83e5a84e34ac0270caf4b7b3
   natural_language_proofs: []
 
 targets:
@@ -53,7 +64,7 @@ targets:
     relationship_to_source: >-
       Readable wrapper around Complex.GammaIntegral_convergent with the Euler
       integrand expanded; no new convergence theorem.
-    theorem_card_id: TC-DEF-001-R1
+    theorem_card_id: TC-DEF-001-R2
     natural_language_proof_id: not_applicable
     exact_lean_signature: |
       theorem gamma_eulerIntegrable {s : ℂ} (hs : 0 < s.re) :
@@ -79,7 +90,7 @@ targets:
     novelty_class: equivalent_reformulation
     relationship_to_source: >-
       Readable wrapper around Complex.Gamma_eq_integral and Complex.GammaIntegral.
-    theorem_card_id: TC-DEF-001-R1
+    theorem_card_id: TC-DEF-001-R2
     natural_language_proof_id: not_applicable
     exact_lean_signature: |
       theorem gamma_eq_eulerIntegral {s : ℂ} (hs : 0 < s.re) :
@@ -104,7 +115,7 @@ targets:
     coverage_class: source_prerequisite
     novelty_class: source_equivalent
     relationship_to_source: Exact wrapper around Complex.Gamma_ofReal.
-    theorem_card_id: TC-DEF-001-R1
+    theorem_card_id: TC-DEF-001-R2
     natural_language_proof_id: not_applicable
     exact_lean_signature: |
       theorem gamma_ofReal (s : ℝ) :
@@ -125,7 +136,7 @@ targets:
     coverage_class: source_prerequisite
     novelty_class: source_equivalent
     relationship_to_source: Exact wrapper around Complex.Gamma_neg_nat_eq_zero.
-    theorem_card_id: TC-DEF-001-R1
+    theorem_card_id: TC-DEF-001-R2
     natural_language_proof_id: not_applicable
     exact_lean_signature: |
       theorem gamma_neg_nat_eq_zero (n : ℕ) :
@@ -151,6 +162,7 @@ dependencies:
     lean_toolchain: leanprover/lean4:v4.33.1
     requested_revision: v4.33.1
     resolved_revision: 0df444a360eaa60ab8c11dca51a86af692955474
+    binding_status: pending_external_review_envelope
     declarations:
       - Complex.Gamma
       - Complex.GammaIntegral_convergent
@@ -168,6 +180,7 @@ assumptions:
     why_not_hidden_goal: It is exactly the classical convergence half-plane.
 
 pre_lean_gate_requirements:
+  overall_minimum_distinct_reviewer_ids: 2
   theorem_card_review:
     required: true
     minimum_distinct_reviewer_ids: 2
@@ -188,15 +201,22 @@ pre_lean_gate_requirements:
       no new mathematical argument is proposed.
     minimum_distinct_reviewer_ids: 0
     allowed_reviewer_compositions: []
-  gate_evidence:
-    state: pending
-    reason: The theorem-card reuse/semantic review has not yet been recorded.
+  structural_circularity_review:
+    applicability: not_applicable
+    inapplicable_reason: >-
+      This bounded packet proposes transparent wrappers around four named pinned
+      Mathlib declarations.  It introduces no new construction, continuation,
+      existence/uniqueness route, or theorem-sized hypothesis object.
+    minimum_distinct_reviewer_ids: 0
+    allowed_reviewer_compositions: []
+    required_perspectives: []
   lean_ready:
     required: true
-    state: pending
+    authoritative_state_source: external_review_envelope_only
     requires_gate_states:
       theorem_card_review: pass
       natural_language_proof_review: not_required
+      structural_circularity_review: not_required
 
 implementation_review_requirements:
   status: pending
@@ -296,8 +316,8 @@ verification:
 
 acceptance_notes: |
   No natural-language proof is required because this packet only wraps pinned
-  mathlib facts. The packet is fully bounded but not authorized: theorem-card
-  and all required implementation reviews remain pending. Its implementation
-  status is compiled and its prototype status is compiled_unreviewed; neither
-  fact approves or releases it. The packet
-  intentionally contains no self path, commit, or digest.
+  mathlib facts. The card and packet are frozen and fully bounded, but all
+  theorem-card review, external lean_ready authorization, and implementation
+  reviews remain pending. In the exact specification snapshot, implementation
+  status is not_started and prototype status is absent. The packet contains no
+  self path, commit, digest, or candidate-owned passing gate.

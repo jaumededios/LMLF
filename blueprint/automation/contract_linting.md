@@ -8,6 +8,12 @@ packets, proof artifacts, review bindings, and later Lean declarations
 **Authority boundary:** a linter can reject structurally incomplete evidence; it
 cannot approve mathematics, source fidelity, or review independence
 
+**Current implementation boundary:** only the CSV inventory validator exists.
+All YAML/Markdown schema checks, lifecycle transitions, classification-schema
+joins, digest bindings, structural-circularity requirements, and external review
+quorums described below are manual/planned; this document must not be cited as
+evidence that they ran.
+
 The linter is a read-only consistency checker over frozen artifacts.  It does
 not create theorem cards, invent missing fields, select a source occurrence,
 write reviewer verdicts, or advance a lifecycle state.  Its result is evidence
@@ -90,18 +96,18 @@ The linter validates:
 9. no unknown field at frozen levels unless the schema explicitly permits an
    extension namespace.
 
-The repository currently uses different classification vocabularies at
-different layers.  Theorem cards use coverage values such as `infrastructure`,
-`entity_identification`, and `exact_source_generic`; review packet targets use
-values such as `reusable_infrastructure`, `source_prerequisite`, and
-`direct_source_target`.  A validator must not compare these raw strings or
-guess a mapping.  Before cross-artifact classification linting is activated, a
-versioned mapping table or one canonical vocabulary must be frozen.  Missing or
-ambiguous mapping is `SCHEMA-CLASS-001` at `freeze` level.
+The versioned vocabulary is `review/classifications-v1.yaml`.  It deliberately
+has separate packet-level and target-level tables: values such as packet
+`infrastructure` and target `reusable_infrastructure` are not raw-string
+equivalents.  A future validator checks each field against its proper table and
+requires exact declaration-level classifications in both card and work packet.
+It rejects an unversioned vocabulary, a card/packet schema-version mismatch, or
+an unexplained target mismatch as `SCHEMA-CLASS-001`.
 
-Likewise, roadmap terms such as `foundational_calculus` and review-protocol
-terms such as `generic_quantitative` answer related but nonidentical questions.
-Their relation must be explicit rather than inferred from names.
+In particular, `non_novel` is a canonical target novelty value.
+`source_equivalent` requires a bound external source target; agreement with an
+internal proof artifact is insufficient.  Packet summaries never substitute
+for target rows and never imply coverage or authorization.
 
 ## 5. Reference-integrity checks
 
@@ -115,6 +121,8 @@ All joins are checked in both directions where closure is claimed:
   `upstream_artifacts`;
 - every artifact ID/revision/digest in a work packet agrees with the external
   review envelope;
+- the card, packet, and external envelope bind the same frozen classification
+  schema version and digest;
 - every dependency work item names an accepted commit and public declaration;
 - every downstream consumer is either a present card or explicitly marked
   planning-only by schema;
@@ -268,6 +276,16 @@ The proof schema is specified in `proof_artifact_schema.md`.  The linter checks:
 - every claimed dependency is accepted at the pinned revision;
 - proof status, review status, implementation status, and manifest status are
   kept on separate axes;
+- candidate-owned metadata contains no authoritative passing gate or reviewer
+  quorum; repository review summaries are treated as historical and non-quorum;
+- every packet represents `structural_circularity_review` as `required` or
+  `not_applicable` with a nonempty reason;
+- a required structural gate has the packet's perspectives, distinct-ID
+  minimum, allowed composition, external verdict references, and `pass` state;
+- an inapplicable structural gate is `not_required` in the external envelope,
+  and its theorem-card review accepted the frozen reason;
+- external `lean_ready: pass` depends on every required pre-Lean gate and on the
+  structural gate being `pass` or validly `not_required`;
 - approval counts distinct durable reviewer IDs, never runs or aliases;
 - proposer IDs do not count toward a quorum;
 - reviewer composition and optional model-diversity requirements match one
@@ -280,6 +298,10 @@ The proof schema is specified in `proof_artifact_schema.md`.  The linter checks:
 The linter does not certify that two reviewers were mentally independent.  It
 checks recorded identity, session, runtime, isolation, and structural quorum;
 the attestation remains evidence subject to adjudication.
+
+These lifecycle rules are not currently automated.  Until a reviewed contract
+linter is implemented, the merger must perform them manually and record that
+fact in external evidence; the CSV validator alone cannot support `lean_ready`.
 
 ## 9. Lean candidate checks
 

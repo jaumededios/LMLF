@@ -1,7 +1,7 @@
 # Source manifests and inventories
 
 **Normative owner:** `jaumededios`  
-**Document specification status:** `specified`  
+**Document specification status:** `frozen`  
 **Baseline specification commit:** `pending_external_record_after_commit`
 
 The baseline commit is placed in an external immutable review or release record
@@ -29,7 +29,7 @@ Manifest scope and packet progress are different facts.
 | `scope_closed` | `true`, `false` | whether membership is finite, fully carded, and frozen |
 | `manifest_status` | `planning_only`, `execution_ready`, `active`, `complete`, `superseded` | whether the manifest can be executed through its gates |
 | card `specification_status` | `draft`, `specified`, `frozen`, `superseded` | statement/signature readiness |
-| card `proof_status` | `not_required`, `draft`, `complete`, `under_review`, `approved`, `blocked` | natural-language proof state |
+| card `proof_status` | `not_required`, `draft`, `complete`, `blocked` | intrinsic natural-language proof state |
 | card `review_status` | `not_started`, `under_review`, `approved`, `changes_requested`, `blocked` | independent review state |
 | card `implementation_status` | `not_started`, `authorized`, `in_progress`, `compiled`, `audited`, `released` | Lean work state |
 | card `prototype_status` | `absent`, `present_uncompiled`, `compiled_unreviewed` | observed code outside the authorized lifecycle |
@@ -38,9 +38,20 @@ Manifest scope and packet progress are different facts.
 `execution_ready` means every member is bounded and fully specified; it does not
 bypass proof/review gates or authorize Lean.
 
+Card review and implementation fields are temporal, nonauthoritative summaries.
+Only an external review envelope bound to the specification commit, packet,
+artifacts, and their digests can establish gate pass or Lean authorization.
+Repository review ledgers are historical context and count as zero reviewers.
+
 ## Classification fields
 
-Every card records both:
+Every card records theorem, coverage, and novelty axes under the frozen
+[`lmlf-classification-v1`](../review/classifications-v1.yaml) vocabulary.  That
+schema distinguishes packet summaries from exact declaration-level target
+values.  In particular, a routine target uses `non_novel`; it cannot use
+`source_equivalent` merely because it matches an internal proof.
+
+Packet-level coverage values include:
 
 - `theorem_class`: its mathematical shape;
 - `coverage_class`: one of `infrastructure`, `entity_identification`,
@@ -122,18 +133,19 @@ separate BOOTSTRAP-0 manifest; the remaining rows stay candidates.
 
 | Card | Theorem class | Coverage class | Specification | Proof | Review | Implementation |
 |---|---|---|---|---|---|---|
-| QB-001 | foundational_calculus | infrastructure | specified | approved | approved | authorized |
-| DEF-001 | definition_identification | entity_identification | specified | not_required | not_started | compiled |
+| QB-001 | foundational_calculus | infrastructure | frozen | complete | not_started | not_started |
+| DEF-001 | definition_identification | entity_identification | frozen | not_required | not_started | not_started |
 
 Scope is exactly the eight signatures in
 [`QB-001-signatures.md`](theorem_cards/QB-001-signatures.md) and the four Gamma
-wrappers in [`DEF-001.yaml`](theorem_cards/DEF-001.yaml).  Execution begins with
-the mandated reviews.  QB-001 is authorized for only its eight signatures;
-DEF-001 remains unauthorized while its implementation reviews are pending.
-Its implementation status records the observed build as `compiled`, while the
-separate
-`prototype_status` is `compiled_unreviewed`; this grants no approval or release
-credit.
+wrappers in [`DEF-001.yaml`](theorem_cards/DEF-001.yaml).  Both specifications
+are frozen, but execution begins only after externally recorded mandated
+reviews.  QB-001's proof is complete; its in-repository revision-3 review ledger
+is historical and non-quorum.  DEF-001 requires no new natural-language proof.
+Neither has external `lean_ready` authorization.  In the exact specification
+snapshot, both implementation states are `not_started`, and DEF-001's prototype
+status is `absent`; code in another commit or dirty worktree is not evidence for
+this manifest.
 
 ## OLV-MVP-1 — first source theorem planning manifest
 
@@ -163,18 +175,22 @@ Planned cards are finite but not yet specified:
 Watson earns occurrence coverage only when OLV-001 and SR-001 are proved and
 reconciled.  It requires no named-function application.
 
-Its critical path is:
+Its critical path has two parallel predecessors:
 
 ```text
-edition lock + direct occurrence collation
-  -> QB-001 finite core
-  -> QL-001 finite integral/Laplace core
-  -> DEF-001 only if Gamma moments are used
-  -> OLV-001 -> SR-001
+locked 1997 collation -----\
+                            +-> selected QL-001 -> OLV-001 -> SR-001
+QB-001 finite core --------/
+DEF-001 / Gamma facts - - -> QL-001 or OLV-001
+                           only if the collated formulation uses Gamma moments
 ```
 
 Airy, Cauchy transport, coefficient residual automation, ODE stability, and
 comparison systems are explicitly off this path.
+
+Only the CSV inventory validator currently exists.  Schema/lifecycle,
+classification, digest, and external-review-envelope validation beyond that
+tool remains manual/planned.
 
 ## Future manifests
 

@@ -1,0 +1,87 @@
+schema_version: lmlf-classification-v1
+record_kind: classification_vocabulary
+status: frozen
+normative_owner: jaumededios
+
+purpose: >-
+  Versioned controlled values for packet summaries and declaration-level
+  target classifications.  The three axes are independent and no value grants
+  source coverage, review approval, or implementation authorization.
+
+packet_level:
+  theorem_class:
+    allowed:
+      - foundational_calculus
+      - definition_identification
+      - exact_source_generic
+      - named_application
+      - audit_source_recovery
+      - mixed
+  coverage_class:
+    allowed:
+      - infrastructure
+      - entity_identification
+      - direct_source
+      - named_function
+      - audit_only
+      - mixed
+  novelty_class:
+    allowed:
+      - non_novel
+      - source_equivalent
+      - equivalent_reformulation
+      - generalized
+      - strengthened_conclusion
+      - stronger_hypotheses
+      - novel
+      - mixed
+
+target_level:
+  theorem_class:
+    allowed:
+      - definition
+      - identification
+      - exact_identity
+      - existence_uniqueness
+      - qualitative_support
+      - generic_quantitative
+      - named_quantitative
+      - audit_regression
+  coverage_class:
+    allowed:
+      - direct_source_target
+      - source_prerequisite
+      - reusable_infrastructure
+      - audit_only
+  novelty_class:
+    allowed:
+      - non_novel
+      - source_equivalent
+      - equivalent_reformulation
+      - generalized
+      - strengthened_conclusion
+      - stronger_hypotheses
+      - novel
+
+semantics:
+  non_novel: >-
+    A definition, routine consequence, or direct wrapper for which the packet
+    claims no genuinely new mathematical content.  Relationship prose still
+    identifies any internal proof or reused declaration.
+  source_equivalent: >-
+    Mathematically equivalent to a specifically bound external source target;
+    it is not a synonym for agreement with an internal proof dossier.
+  equivalent_reformulation: >-
+    A specifically bound external or pinned-library statement rewritten into a
+    reviewed equivalent form whose translation is explained.
+  novel: >-
+    Genuinely new mathematics; a complete natural-language proof and its
+    external review gate are mandatory before Lean authorization.
+
+validation_rules:
+  - Packet-level and target-level values must be taken from their own tables.
+  - Every frozen card and work packet records this exact schema version.
+  - Every packet target has all three classifications and relationship prose.
+  - An internal proof artifact alone can never justify source_equivalent.
+  - A packet summary may use mixed only when its targets use more than one value.
+  - Classifications do not imply reviewer pass, lean_ready, coverage, or release.

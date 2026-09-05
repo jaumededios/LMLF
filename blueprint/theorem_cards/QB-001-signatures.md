@@ -1,8 +1,8 @@
 # QB-001 public signatures
 
 **Normative owner:** `jaumededios`  
-**Artifact revision:** 1  
-**Specification status:** `specified`  
+**Artifact revision:** 2  
+**Specification status:** `frozen`  
 **Baseline specification commit:** `pending_external_record_after_commit`
 
 This artifact freezes the import, namespace, declaration order, binder order,
@@ -55,9 +55,11 @@ end QuantitativeAnalysis
 
 ## Freeze rule
 
-Review may change these signatures, but any change increments the artifact
-revision and invalidates approval of the prior revision.  The eventual
+The signatures are unchanged from revision 1.  Revision 2 changes only the
+artifact's governance metadata and records that this bounded specification is
+frozen.  Any later signature change increments the artifact revision and
+invalidates all external gates for the prior revision.  The eventual
 implementation must reproduce these declarations exactly or return to
-specification review.  The baseline commit is recorded externally after the
-commit exists, avoiding a self-referential hash.
-
+specification review.  The baseline commit and all review/authorization state
+are recorded externally after the commit exists, avoiding a self-referential
+hash.

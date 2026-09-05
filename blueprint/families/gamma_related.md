@@ -11,7 +11,7 @@ This wave covers Euler Gamma, reciprocal Gamma, Beta, psi/digamma and named poly
 The current inventory supports only these limited statements:
 
 - `gamma`, `reciprocal_gamma`, `beta`, `digamma`, `trigamma`, and `tetragamma` are evidenced by mathematical-body material in the **2010 publisher preview**; their occurrences remain `located_untranscribed`, their normalization remains unresolved, and reconciliation to the locked 1997 edition is pending.
-- incomplete Gamma is currently only the contents lead `olv97-o0010`, spanning Chapter 2 §5 and a Chapter 4 heading. It is `occurrence_unresolved`; no particular upper, lower, normalized, or regularized member is yet a confirmed source entity.
+- incomplete Gamma is currently only the contents lead `OLV10P-O0010`, spanning Chapter 2 §5 and a Chapter 4 heading. It is `occurrence_unresolved`; no particular upper, lower, normalized, or regularized member is yet a confirmed source entity.
 - `DEF-001` identifies a reusable Mathlib Gamma object for project use and claims no Olver occurrence. It does not resolve any source-inventory row and does not authorize reciprocal Gamma, Beta, polygamma, or incomplete Gamma.
 
 Any source-facing card waits for a locked-edition body occurrence. The definition work may proceed as `entity_identification` when independently motivated, but it must continue to claim no source-theorem coverage.

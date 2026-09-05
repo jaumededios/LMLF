@@ -22,20 +22,20 @@ An item moves from this holding file to a focused family file once the locked bo
 
 | Portfolio | Current evidence | Honest present claim |
 |---|---|---|
-| Exponential-related integrals | `olv97-o0007` is direct 2010-preview body material at Chapter 2 §3.1 but has an unsafe OCR symbol and unresolved entity split; `olv97-o0008` is a contents heading; `olv97-o0023` is a Chapter 14 revisit heading | One unresolved exponential-integral definition is visible in the preview, including a negative-real-axis principal-cut indication; exact `Ei`/`E1` identity and all other members are unresolved. |
-| Error/Dawson/Fresnel | `olv97-o0009`, contents only | The heading is a discovery lead. No variant, scale, or source entity is confirmed. |
-| Parabolic cylinder | `olv97-o0017`, contents only at Chapter 6 §6 | A large-order application family is a lead. `U`, `V`, and `D` parameterizations are not yet confirmed. |
-| Orthogonal polynomials | `olv97-o0011`, contents only at Chapter 2 §§6–7 | The source must enumerate body members; no DLMF family tree may be imported wholesale. |
-| Zeta | `olv97-o0015` and `riemann_zeta_candidate`, contents only | Even the identity as Riemann zeta remains provisional until the body is checked. |
-| Bernoulli | `olv97-o0019`, contents only at Chapter 8 §1 | Bernoulli polynomials are a lead; the separate status of numbers/functions and the $B_1$ convention are unresolved. |
-| Anger/Struve/Nicholson | `olv97-o0020` is an Anger heading; `olv97-o0018` includes Struve in Chapter 7 contents; Nicholson is only a prose audit lead at present | Exact member split and Olver-specific factors are unresolved. |
+| Exponential-related integrals | `OLV10P-O0007` is direct 2010-preview body material at Chapter 2 §3.1 but has an unsafe OCR symbol and unresolved entity split; `OLV10P-O0008` is a contents heading; `OLV10P-O0023` is a Chapter 14 revisit heading | One unresolved exponential-integral definition is visible in the preview, including a negative-real-axis principal-cut indication; exact `Ei`/`E1` identity and all other members are unresolved. |
+| Error/Dawson/Fresnel | `OLV10P-O0009`, contents only | The heading is a discovery lead. No variant, scale, or source entity is confirmed. |
+| Parabolic cylinder | `OLV10P-O0017`, contents only at Chapter 6 §6 | A large-order application family is a lead. `U`, `V`, and `D` parameterizations are not yet confirmed. |
+| Orthogonal polynomials | `OLV10P-O0011`, contents only at Chapter 2 §§6–7 | The source must enumerate body members; no DLMF family tree may be imported wholesale. |
+| Zeta | `OLV10P-O0015` and `riemann_zeta_candidate`, contents only | Even the identity as Riemann zeta remains provisional until the body is checked. |
+| Bernoulli | `OLV10P-O0019`, contents only at Chapter 8 §1 | Bernoulli polynomials are a lead; the separate status of numbers/functions and the $B_1$ convention are unresolved. |
+| Anger/Struve/Nicholson | `OLV10P-O0020` is an Anger heading; `OLV10P-O0018` includes Struve in Chapter 7 contents; Nicholson is only a prose audit lead at present | Exact member split and Olver-specific factors are unresolved. |
 | Auxiliaries | Airy and Bessel contents leads mention auxiliary functions; the architectural blueprint anticipates envelopes/control objects | Each printed auxiliary must be individually collated; project controls are `project_extra`. |
 
 ## Portfolio A — exponential, logarithmic, sine, and cosine integrals
 
 ### Source and normalization questions
 
-- Visually resolve the symbol and formula in `olv97-o0007`: `Ei`, `E1`, another exponential integral, or a local auxiliary.
+- Visually resolve the symbol and formula in `OLV10P-O0007`: `Ei`, `E1`, another exponential integral, or a local auxiliary.
 - Split `Ei`, `E1`, logarithmic integral, sine integral, and cosine integral only when their body definitions or uses are inspected.
 - Record integration interval/path, endpoint interpretation, principal value if any, logarithm branch, cut, and boundary values on the cut.
 - Determine whether real and complex variants are one continued object or distinct source normalizations.
@@ -68,7 +68,7 @@ Chapter 14 reconciliation and named remainder applications
 
 | Provisional ID | Bounded target | Class / coverage | Prerequisites |
 |---|---|---|---|
-| `DEF-EI-001` | The single object resolved from `olv97-o0007`, on its base integral domain | `definition_identification` / `entity_identification` | Locked symbol/formula collation; reuse audit; `NLP-EI-BASE-001` |
+| `DEF-EI-001` | The single object resolved from `OLV10P-O0007`, on its base integral domain | `definition_identification` / `entity_identification` | Locked symbol/formula collation; reuse audit; `NLP-EI-BASE-001` |
 | `DEF-EI-002` | Cut-plane continuation and boundary convention for that object | `definition_identification` / `entity_identification` | `DEF-EI-001`; `NLP-EI-CONT-001`; structural review |
 | `DEF-EI-003` | Finite list of additional confirmed logarithmic/sine/cosine members and exact relations | `definition_identification` / `entity_identification` | Body member split; `NLP-EI-REL-001`; split before registration if declarations are not tightly coupled |
 | `AUD-EI-001` | Expanded cut, additive-constant, sign, and real-agreement regressions | `audit_regression` / `infrastructure` | Accepted public objects |
@@ -129,7 +129,7 @@ The gate requires the locked member list, `HasSum` or path-integral validity, ex
 
 Negative tests detect a missing $2/\sqrt\pi$, `erf`/`erfc` interchange, a wrong Dawson exponential scale, Fresnel sine/cosine interchange, and the factor $\pi/2$ in the quadratic phase. Tests include zero, parity, one derivative, and a rotation identity only after its branch is frozen. Faddeeva or generalized error functions must not appear without source or project-extra registration.
 
-The exact variants, scale factors, and source formulas are all unknown because `olv97-o0009` is contents-only. Prospective consumers are Gaussian/Laplace and saddle models, coalescing configurations, complex continuation estimates, and error-function transition formulas selected by future occurrences.
+The exact variants, scale factors, and source formulas are all unknown because `OLV10P-O0009` is contents-only. Prospective consumers are Gaussian/Laplace and saddle models, coalescing configurations, complex continuation estimates, and error-function transition formulas selected by future occurrences.
 
 ## Portfolio C — parabolic-cylinder functions
 
@@ -213,7 +213,7 @@ The queue reserves the pattern `DEF-ORTH-<MEMBER>-001`; it is not a wildcard car
 
 Each member passes separately: locked source occurrence, exact finite degree, parameter domain, one normalization, reuse comparison, low-degree expansions, and the properties actually needed downstream. Tests distinguish monic from classical/orthonormal forms, degree from parameter, a sign in the leading coefficient, weight normalization, endpoint values, and degenerate parameter cases. A generic orthogonal-polynomial record cannot replace identification of a named sequence.
 
-The entire member list and all source normalizations are unknown because `olv97-o0011` is contents-only. Potential consumers include large-degree endpoint/turning-point asymptotics, recurrence methods, zero location, and hypergeometric specialization, each after an exact occurrence is selected.
+The entire member list and all source normalizations are unknown because `OLV10P-O0011` is contents-only. Potential consumers include large-degree endpoint/turning-point asymptotics, recurrence methods, zero location, and hypergeometric specialization, each after an exact occurrence is selected.
 
 ## Portfolio E — Riemann zeta and Bernoulli objects
 

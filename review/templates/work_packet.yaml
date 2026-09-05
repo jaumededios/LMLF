@@ -1,4 +1,4 @@
-schema_version: 2
+schema_version: 3
 
 # This packet intentionally does not contain its own path, commit, or digest.
 # An external review envelope binds those values after the packet is frozen.
@@ -6,6 +6,15 @@ work_item_id: REPLACE_WITH_STABLE_ID
 title: REPLACE_WITH_BOUNDED_TITLE
 lifecycle_state: draft # draft | frozen | superseded
 specification_owner: REPLACE_WITH_PERSON_OR_TEAM
+
+classification_schema:
+  path: review/classifications-v1.yaml
+  schema_version: lmlf-classification-v1
+  sha256: REPLACE_WITH_CLASSIFICATION_SCHEMA_DIGEST
+packet_classification:
+  theorem_class: REPLACE_WITH_PACKET_THEOREM_CLASS
+  coverage_class: REPLACE_WITH_PACKET_COVERAGE_CLASS
+  novelty_class: REPLACE_WITH_PACKET_NOVELTY_CLASS
 
 source:
   kind: book # book | paper | standard | existing_lean | original
@@ -40,7 +49,7 @@ targets:
     declaration: REPLACE_WITH_FULLY_QUALIFIED_DECLARATION
     theorem_class: named_quantitative # definition | identification | exact_identity | existence_uniqueness | qualitative_support | generic_quantitative | named_quantitative | audit_regression
     coverage_class: direct_source_target # direct_source_target | source_prerequisite | reusable_infrastructure | audit_only
-    novelty_class: source_equivalent # source_equivalent | equivalent_reformulation | generalized | strengthened_conclusion | stronger_hypotheses | novel
+    novelty_class: source_equivalent # non_novel | source_equivalent | equivalent_reformulation | generalized | strengthened_conclusion | stronger_hypotheses | novel
     relationship_to_source: |
       REPLACE_WITH_EXACT_EQUIVALENCE_GENERALITY_OR_NOVELTY_DETAILS
     theorem_card_id: TC_REPLACE
@@ -85,6 +94,7 @@ assumptions:
     why_not_hidden_goal: REPLACE_WITH_SHORT_JUSTIFICATION
 
 pre_lean_gate_requirements:
+  overall_minimum_distinct_reviewer_ids: 3
   # Distinct agent models are optional strengthening, not the source of
   # independence. The defaults permit distinct fresh-context agents using the
   # same model; distinct durable reviewer IDs remain mandatory.
@@ -115,11 +125,28 @@ pre_lean_gate_requirements:
       - humans: 0
         agents: 2
         minimum_distinct_agent_models: 1
+  structural_circularity_review:
+    applicability: required # required | not_applicable
+    inapplicable_reason: null
+    minimum_distinct_reviewer_ids: 1
+    allowed_reviewer_compositions:
+      - humans: 1
+        agents: 0
+        minimum_distinct_agent_models: 0
+      - humans: 0
+        agents: 1
+        minimum_distinct_agent_models: 1
+    required_perspectives:
+      - dependency_direction
+      - source_to_target_reachability
+      - hypothesis_and_choice_laundering
   lean_ready:
     required: true
+    authoritative_state_source: external_review_envelope_only
     requires_gate_states:
       theorem_card_review: pass
       natural_language_proof_review: pass
+      structural_circularity_review: pass
 
 implementation_review_requirements:
   overall_minimum_distinct_reviewer_ids: 3

@@ -15,17 +15,23 @@ review bot, hardened sandbox, identity service, or evidence archive.
 Use these values consistently in templates and records:
 
 - packet `lifecycle_state`: `draft`, `frozen`, `superseded`;
-- gate `gate_state`: `pending`, `pass`, `fail`, `blocked`;
+- gate `gate_state`: `pending`, `pass`, `fail`, `blocked`, `not_required`;
+- requirement `applicability`: `required`, `not_applicable`;
 - rubric `verdict`: `approve`, `request_changes`, `block`;
 - reviewer `kind`: `human`, `agent`;
 - verdict `review_stage`: `pre_lean`, `implementation`;
+- verdict `review_perspective`: `source_semantics`, `proof_correctness`,
+  `dependency_direction`, `source_to_target_reachability`, or
+  `hypothesis_and_choice_laundering`;
 - reviewer `isolation_strength`: `manual_attestation`,
   `technically_enforced`;
 - disposition `resolution_state`: `open`, `fixed_pending_rereview`,
   `resolved_by_fresh_approval`, `withdrawn_by_referee`, `packet_superseded`.
 
 `pass` is used only for a composite gate. `approve` is used only for one
-reviewer's rubric verdict. `fixed_pending_rereview` is not terminal.
+reviewer's rubric verdict. `not_required` is used only when the frozen packet
+marks that gate `not_applicable` with a reason. `fixed_pending_rereview` is not
+terminal.
 
 ## Roles
 
@@ -65,16 +71,26 @@ If the packet is stored in the implementation repository, `spec_commit` must
 refer to an earlier frozen commit and the implementation change must not edit it.
 A separately controlled specification repository is also acceptable.
 
+Candidate-owned status fields are temporal descriptions, never gate evidence.
+They may say that an artifact is `frozen`, a proof is `complete`, or an
+implementation is `not_started`; they cannot certify a reviewer identity,
+`pass`, `approve`, `lean_ready`, implementation authorization, or merge.  Only
+an external envelope and its bound verdicts are authoritative for those facts.
+An in-repository review summary is historical, non-quorum context.
+
 ## Orthogonal target classifications
 
-Every target in `targets` has three independent classifications:
+The frozen controlled vocabulary is
+[`classifications-v1.yaml`](classifications-v1.yaml).  It separates packet-level
+summaries from declaration-level target values.  Every target in `targets` has
+three independent classifications:
 
 - `theorem_class`: `definition`, `identification`, `exact_identity`,
   `existence_uniqueness`, `qualitative_support`, `generic_quantitative`,
   `named_quantitative`, or `audit_regression`;
 - `coverage_class`: `direct_source_target`, `source_prerequisite`,
   `reusable_infrastructure`, or `audit_only`;
-- `novelty_class`: `source_equivalent`, `equivalent_reformulation`,
+- `novelty_class`: `non_novel`, `source_equivalent`, `equivalent_reformulation`,
   `generalized`, `strengthened_conclusion`, `stronger_hypotheses`, or `novel`.
 
 These fields answer different questions. For example, a target can be a
@@ -82,9 +98,16 @@ These fields answer different questions. For example, a target can be a
 those values implies source recovery. The packet's prose explains any relation
 that a single novelty value cannot capture.
 
+`non_novel` is the truthful target value for routine definitions and elementary
+consequences.  `source_equivalent` requires a specifically bound external source
+target; equivalence to an internal proof dossier does not qualify.  Packet-level
+classes summarize the packet and never replace exact target classifications.
+
 ## Pre-Lean gates
 
-Implementation starts only after three externally recorded gates pass.
+Implementation starts only after the externally recorded theorem-card,
+natural-language-proof, applicable structural-circularity, and composite
+`lean_ready` gates are resolved as specified below.
 
 ### Theorem-card review
 
@@ -99,6 +122,22 @@ the conclusion, citing missing infrastructure, confusing fixed and order-depende
 objects, or suppressing analytic side conditions. Definitions or audit-only
 targets may mark this gate inapplicable only with an explicit packet reason.
 
+### `structural_circularity_review`
+
+This independent gate checks the dependency graph and proof route for circular
+identification, theorem-sized hypotheses, hidden choice, and construction or
+continuation steps that already assume the desired object.  It records the
+applicable perspectives from the controlled vocabulary.  It is required for a
+packet that constructs or continues a named object, uses existence/uniqueness to
+identify one, recovers a source theorem through a nontrivial bridge, or exposes
+a hypothesis structure capable of containing the target conclusion.
+
+A thin definition or direct pinned-library wrapper may declare
+`applicability: not_applicable` only with a concrete reason.  The external
+envelope then records `gate_state: not_required`; theorem-card referees must
+confirm the classification.  Absence of a representable gate is never treated
+as inapplicability.
+
 ### `lean_ready`
 
 `lean_ready` is a composite authorization gate, not a referee verdict. It may be
@@ -106,12 +145,15 @@ set to `pass` in the external envelope only when:
 
 - the packet is frozen and externally bound by digest;
 - theorem-card and required natural-language-proof gates are `pass`;
+- the structural-circularity gate is `pass` when required, or externally
+  recorded `not_required` when the frozen packet justifies inapplicability;
 - their distinct-reviewer and structural quorum rules are satisfied;
 - referenced dependencies exist at the recorded revisions;
 - no pre-Lean verdict is `request_changes` or `block`.
 
 Changing the packet, theorem card, natural-language proof, source snapshot,
-dependency pin, or pre-Lean rubric invalidates `lean_ready` and returns it to
+classification schema, dependency pin, or pre-Lean rubric invalidates
+`lean_ready` and returns it to
 `pending`.
 
 ## Reviewer quorum
@@ -134,6 +176,12 @@ reviews” from one ID, two aliases for the same agent run, or two verdicts from
 one session count once. Two fresh sessions with distinct durable reviewer IDs may
 count separately even when their model field is identical.
 
+When the structural-circularity gate is required, its distinct-ID minimum and
+required perspectives are additional to the theorem-card/proof minima.  The
+packet may also require a larger overall union of distinct pre-Lean reviewers.
+An external envelope records the actual reviewer union; candidate-owned names
+or historical summaries never count.
+
 ## External review artifacts
 
 Filled artifacts must live outside the candidate head. Acceptable locations are
@@ -144,7 +192,7 @@ belong in the code repository; instantiated records judging that code do not.
 ### Review envelope
 
 Create `templates/review_envelope.yaml` externally. It binds the specification,
-upstream artifacts, toolchain, candidate SHAs, pre-Lean gates, implementation
+upstream artifacts, classification schema, toolchain, candidate SHAs, pre-Lean gates, implementation
 verdict references, and merge-gate state. It is an index, not a substitute for
 the underlying signed or platform-attributed records.
 
@@ -202,8 +250,8 @@ disposable copy, and that method is recorded.
 - Any new candidate commit invalidates every implementation verdict and merge
   decision for the old head. New verdicts must name the new full SHA.
 - Any change to packet content, theorem-card or natural-language-proof revision
-  or digest, source snapshot, Lean/Mathlib pin, or pre-Lean rubric invalidates all
-  pre-Lean gates and `lean_ready`.
+  or digest, classification schema, source snapshot, Lean/Mathlib pin, or
+  pre-Lean rubric invalidates all pre-Lean gates and `lean_ready`.
 - Any rubric change invalidates verdicts produced under the earlier rubric
   revision.
 - Old artifacts remain historical evidence but never count toward the new
@@ -218,8 +266,10 @@ candidate head:
    `spec_commit`, path, and SHA-256 digest.
 2. Every referenced theorem card and required natural-language proof matches the
    revision/digest recorded in both packet and envelope.
-3. Theorem-card review, natural-language-proof review, and `lean_ready` gates are
-   `pass`, with the packet's distinct-ID and structural quorums satisfied.
+3. Theorem-card review and every required natural-language-proof and
+   structural-circularity review are `pass`; inapplicable gates are explicitly
+   `not_required`; and `lean_ready` is `pass`, with all distinct-ID,
+   perspective, and structural quorum rules satisfied.
 4. The implemented declarations and exact signatures match every entry in the
    packet's `targets` list. Any extra hypothesis, hidden smaller domain, changed
    quantifier order, or altered normalization requires a new packet.

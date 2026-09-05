@@ -63,12 +63,13 @@ Each proof has:
 - the stable `work_item_id` it supports;
 - a positive integer `revision`;
 - an `artifact_state` of `draft`, `frozen`, or `superseded`; and
-- a `proof_status` from the theorem-card vocabulary: `draft`, `complete`,
-  `under_review`, `approved`, or `blocked`.
+- an intrinsic `proof_status` of `draft`, `complete`, or `blocked`.
 
 `artifact_state` concerns byte immutability.  `proof_status` concerns the
-mathematical/review lifecycle.  They are not interchangeable.  A proof is
-normally `frozen` before its status becomes `under_review` or `approved`.
+author's completeness claim.  They are not interchangeable, and neither is a
+review verdict.  Review states live in the external envelope; an old
+candidate-owned `under_review` or `approved` value is only historical metadata
+and never quorum evidence.
 
 The proof does not contain its own SHA-256 or commit.  After freezing, its exact
 stored bytes are hashed with ordinary SHA-256 and the digest is recorded in the
@@ -93,7 +94,7 @@ title: Explicit Cauchy transport for finite remainders
 owner: REPLACE_WITH_NORMATIVE_OWNER
 revision: 1
 artifact_state: draft        # draft | frozen | superseded
-proof_status: draft          # draft | complete | under_review | approved | blocked
+proof_status: draft          # draft | complete | blocked
 
 theorem_card_bindings:
   - card_id: QC-001
@@ -120,8 +121,15 @@ dependency_bindings:
       declaration: QuantitativeAnalysis.ErrorOn
       accepted_commit: REPLACE_WITH_FULL_SHA
 
+structural_circularity_review:
+  applicability: required    # required | not_applicable
+  inapplicable_reason: null
+  required_perspectives:
+    - dependency_direction
+    - source_to_target_reachability
+    - hypothesis_and_choice_laundering
+
 supersedes: null
-approved_by: []              # convenience summary only; external verdicts are authoritative
 ---
 ```
 
@@ -141,9 +149,10 @@ At `frozen` state the artifact requires:
   explicitly empty for infrastructure;
 - exact resolved Mathlib revision;
 - every accepted project dependency with declaration and accepted commit;
+- structural-circularity applicability, an exact reason when inapplicable, and
+  required controlled perspectives when applicable;
 - `supersedes`, either null for revision one or the exact prior artifact ID; and
-- `approved_by`, empty until external approvals exist and nonauthoritative even
-  after it is populated in a later metadata-only successor.
+- no candidate-owned reviewer list, passing gate, or authorization claim.
 
 An artifact never names a target missing from its theorem card.  A card can bind
 several proof artifacts only when its target-to-section mapping makes the split
@@ -151,10 +160,11 @@ complete and nonoverlapping.
 
 ### 3.2 Legacy artifacts
 
-Already frozen proof artifacts such as QB-001 remain interpreted under their
-recorded format and external bindings.  They are not edited merely to adopt
-`nl-proof-v1`, because that would invalidate their digests and approvals.  Any
-substantive successor uses this schema or the then-current reviewed version.
+Legacy-format proof artifacts such as QB-001 remain interpreted under their
+recorded format.  QB-001 revision 4 has no current external review binding;
+earlier candidate-owned summaries are non-quorum.  A future material successor
+uses this schema or the then-current reviewed version rather than silently
+inventing missing fields.
 The contract linter therefore supports explicit legacy versions; it does not
 quietly treat missing new fields as present.
 
@@ -406,14 +416,18 @@ withdraw a finding.
 ### 6.4 Approval and `lean_ready`
 
 When all required external verdicts approve the same frozen revision, the
-external proof gate may become `pass`; the card's review summaries may later be
-updated only through the project's versioned metadata policy.  Proof approval
+external proof gate may become `pass`. Candidate-owned proof/card metadata may
+describe the temporal external state only in a new versioned snapshot and must
+name its external authority; it never becomes evidence itself. Proof approval
 does not authorize more declarations than the frozen target list.
 
 `lean_ready` is a composite external authorization.  It additionally requires a
-frozen packet, theorem-card review, dependency availability, structural quorum,
-and no outstanding `request_changes` or `block`.  It is not a reviewer verdict
-and not an implementation approval after code changes.
+frozen packet, theorem-card review, required natural-language-proof review,
+dependency availability, and a passing structural-circularity gate when
+applicable (or externally recorded `not_required` with a frozen reason).  It
+also requires the packet's perspective and distinct-ID quorums and no
+outstanding `request_changes` or `block`.  It is not a reviewer verdict and not
+an implementation approval after code changes.
 
 ### 6.5 Implementation feedback
 
@@ -442,11 +456,15 @@ which exact proof artifact and review envelope they used.
 | theorem card or signature | invalid | invalid | invalid | new card/proof bindings and review |
 | source snapshot/transcription | invalid for affected targets | invalid | invalid | recollate and rereview |
 | accepted dependency/pin | invalid | invalid | invalid | re-audit proof and implementation |
-| pre-Lean rubric | invalid | invalid | unchanged only if genuinely unrelated and protocol permits | fresh pre-Lean verdicts |
+| pre-Lean rubric, structural applicability, or classification schema | invalid | invalid | unchanged only if genuinely unrelated and protocol permits | fresh pre-Lean verdicts |
 | candidate head only | unchanged | unchanged | invalid | rerun implementation review |
 | prose in external verdict | old verdict replaced, not edited in place | recompute gate | as applicable | issue a new immutable record |
 
 Historical evidence is retained but never counted at the new binding.
+
+Candidate-owned review ledgers are historical summaries only.  Even when they
+quote reviewer IDs or prior verdict text, they contribute zero to all quorums
+unless immutable external records independently bind the current artifacts.
 
 ## 8. Review-artifact minimum content
 

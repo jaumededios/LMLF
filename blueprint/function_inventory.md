@@ -15,9 +15,11 @@ The target edition is:
 - ISBN `1-56881-069-5`.
 - Corrected reprint of the 1974 Academic Press original.
 
-The identity is supported by the [DLMF bibliography entry for Olver (1997b)](https://dlmf.nist.gov/bib/O) and the edition's copyright page and preface as exposed by the [publisher preview](https://api.pageplace.de/preview/DT0400.9781439864548_A38306604/preview-9781439864548_A38306604.pdf).
+The locked bibliographic identity is supported by the [DLMF bibliography entry for Olver (1997b)](https://dlmf.nist.gov/bib/O). The separate [publisher preview](https://api.pageplace.de/preview/DT0400.9781439864548_A38306604/preview-9781439864548_A38306604.pdf) exposes copyright and reprint metadata but is not treated as the locked edition.
 
-An edition is bibliographic; a source snapshot is the exact physical or digital object inspected. Every occurrence therefore has both `edition_id` and `source_snapshot_id`. The available publisher preview identifies itself as a 2010 CRC reprint. It is recorded as `SRC-OLV-2010-PREVIEW`, not silently treated as the locked 1997 printing. Its edition-content reconciliation, printed-page mapping, and digest are unresolved. The preview can support discovery and provisional body-location claims, but it cannot close reconciliation against `olver_1997b`.
+An edition is bibliographic; a source snapshot is the exact physical or digital object inspected. `editions.csv` therefore gives the preview its own `edition_id`, `olver_crc_2010_preview`, distinct from `olver_1997b`. Every occurrence has both `edition_id` and `source_snapshot_id`, and those identities must agree. The preview snapshot `SRC-OLV-2010-PREVIEW` can support discovery and provisional body-location claims for its own 2010 edition. Its digest and printed-page mapping remain unresolved.
+
+`edition_relations.csv` records the 2010-to-1997 relation separately. Both mathematical-content and page-locator equivalence are currently `unresolved`, so its `join_semantics` is `non_equivalent`. This forbids transferring an occurrence, transcription, notation, entity confirmation, or coverage credit across the relation. Notes that two printings “look similar” cannot override the relational fields.
 
 `SRC-OLV-1997-COLLATION-PENDING` is a placeholder for the locked copy required by the source manifest. It is not evidence that a copy has been acquired or inspected. Replacing it requires a new concrete snapshot row, a digest when legally and technically available, and occurrence reassignment or an explicit reconciliation record.
 
@@ -58,7 +60,9 @@ Every CSV has an exact header checked by `scripts/validate_inventory.py`, and ev
 
 ### Core tables
 
-`source_snapshots.csv` records the exact objects inspected: provenance, access date, availability, digest state, edition reconciliation, page mapping, and rights note. A digest marked `verified` must include an algorithm and value. `unresolved` means no digest claim is made.
+`editions.csv` records bibliographic identities and whether an edition is the locked target or comparison-only. `edition_relations.csv` records directed reprint/correction relations, mathematical-content status, page-locator status, and join semantics. Only a relation with both equivalence axes `matched` may be marked `equivalent`; every unresolved or mismatching relation is machine-non-equivalent.
+
+`source_snapshots.csv` records the exact objects inspected: provenance, access date, availability, digest state, reconciliation to its assigned edition, page mapping, and rights note. A digest marked `verified` must include an algorithm and value. `unresolved` means no digest claim is made.
 
 `page_audits.csv` records ranges actually inspected in a snapshot. Snapshot coordinates and printed coordinates are separate. `partial` means candidate discovery, OCR review, or a non-exhaustive pass; only `complete` plus independent review can contribute to the whole-book completion gate.
 
@@ -87,7 +91,7 @@ All many-to-many relationships are explicit:
 
 - `occurrence_notations.csv`: occurrence ↔ notation, including role and whether the link is confirmed or provisional.
 - `occurrence_entities.csv`: occurrence ↔ entity.
-- `occurrence_cards.csv`: occurrence ↔ theorem card, with roles such as named application, source recovery, or generic dependency.
+- `occurrence_cards.csv`: occurrence ↔ theorem card, with roles such as exact-source target, source recovery, or generic dependency.
 - `occurrence_manifests.csv`: occurrence ↔ closed manifest and its coverage role.
 
 There are no comma-packed id lists and no `notation_id`, `entity_id`, `card_id`, or `manifest_id` columns in `occurrences.csv`. `notation.entity_id` remains a normalized many-to-one ownership relation; occurrence meaning is still expressed through both association tables.
@@ -105,7 +109,7 @@ Occurrence `resolution_status`:
 
 Transcription status is independently one of `not_started`, `locator_only`, `summary_only`, `mathematical_transcription`, or `verified`. Reconciliation status is `unresolved`, `matched`, `mismatch`, or `not_applicable`.
 
-Notation resolution is `normalization_unresolved` or `resolved`. Entity identity is `provisional`, `confirmed`, or `excluded`; entity normalization is `unresolved`, `resolved`, or `not_applicable`. Implementation identification is `not_assessed`, `reuse_candidate`, `construction_planned`, `bridge_pending`, or `proved`.
+Notation resolution is `normalization_unresolved` or `resolved`. Entity identity is `provisional`, `confirmed`, or `excluded`; entity normalization is `unresolved`, `resolved`, or `not_applicable`. `confirmed` requires a confirmed association to a resolved, reconciled occurrence in a locked-target edition. A direct body hit in a comparison-only preview is still only `provisional` for this programme. Implementation identification is `not_assessed`, `reuse_candidate`, `construction_planned`, `bridge_pending`, or `proved`.
 
 Association link status is `provisional` or `confirmed`. A provisional association is useful planning data, not a resolved semantic claim.
 
@@ -206,4 +210,4 @@ Run:
 python3 scripts/validate_inventory.py
 ```
 
-The validator uses only the Python standard library. It checks schema versions and exact headers, enums, primary/composite-key uniqueness, foreign keys, association targets, page ranges, digest/transcription invariants, resolved-occurrence gates, and manifest source-occurrence totals. It validates consistency of the present unresolved data; it does not certify source truth or audit completeness.
+The validator uses only the Python standard library. It checks schema versions and exact headers, enums, primary/composite-key uniqueness, edition/snapshot identity, non-equivalent unresolved edition relations, preview-specific IDs, locked-edition confirmation gates, foreign keys, association targets, page ranges, digest/transcription invariants, resolved-occurrence gates, and manifest source-occurrence totals. `--negative-tests` mutates an in-memory copy to prove that the edition join, entity-confirmation, ID-prefix, and manifest-total guards reject bad data. This is an inventory-table validator only; a green result is not source certification, a contract-lint result, or a Lean/review gate.

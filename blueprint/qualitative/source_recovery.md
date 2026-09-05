@@ -261,10 +261,12 @@ and card receive ordinary source and mathematical review.
 ### Snapshot discipline
 
 An edition is a bibliographic target; a snapshot is the exact object inspected.
-The 2010 publisher preview and the pending 1997 copy therefore remain separate
-snapshot rows. The preview can generate leads and provisional transcriptions,
-but only an inspected, reproducibly identified copy of the locked edition can
-close a 1997 occurrence.
+The 2010 CRC preview has its own `olver_crc_2010_preview` edition row as well as
+its own snapshot row. It is not assigned to `olver_1997b`. The pending 1997 copy
+is a distinct locked-edition snapshot placeholder, not evidence of inspection.
+The preview can generate preview-specific leads and provisional transcriptions,
+but only an inspected, reproducibly identified copy assigned to the locked
+edition can close a 1997 occurrence.
 
 For each recovery packet, retain:
 
@@ -283,7 +285,15 @@ For each recovery packet, retain:
 Occurrences are edition-specific. If a 1974 printing, the 1997 corrected
 reprint, and a later CRC reprint contain corresponding material, create
 separate occurrence records and an explicit edition-relation record rather than
-overwriting one locator. Use one of the following outcomes:
+overwriting one locator. The canonical relation has independent
+`content_equivalence_status` and `page_locator_equivalence_status` axes. Unless
+both are `matched`, `join_semantics` is `non_equivalent`: consumers may not join
+or transfer occurrence, notation, entity-confirmation, or coverage identity.
+The current 2010-to-1997 row is unresolved on both axes and therefore expressly
+non-equivalent.
+
+Once concrete corresponding occurrences exist, a reviewed reconciliation may
+classify their mathematical relationship more finely:
 
 | Outcome | Meaning | Coverage effect |
 |---|---|---|

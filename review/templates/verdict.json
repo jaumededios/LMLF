@@ -1,5 +1,5 @@
 {
-  "schema_version": 2,
+  "schema_version": 3,
   "record_kind": "rubric_verdict",
   "storage_requirement": "external_to_candidate_head",
   "work_item_id": "REPLACE_WITH_STABLE_ID",
@@ -24,11 +24,17 @@
         "sha256": "REPLACE_WITH_SHA256"
       }
     ],
+    "classification_schema_binding": {
+      "path": "review/classifications-v1.yaml",
+      "schema_version": "lmlf-classification-v1",
+      "sha256": "REPLACE_WITH_SHA256"
+    },
     "base_sha": null,
     "head_sha": null,
     "lean_toolchain": "REPLACE_WITH_EXACT_TOOLCHAIN",
     "mathlib_revision": "REPLACE_WITH_RESOLVED_FULL_COMMIT_SHA",
     "rubric": "source_fidelity",
+    "review_perspective": "source_semantics",
     "rubric_revision": "REPLACE_WITH_FULL_COMMIT_SHA_OR_FILE_SHA256"
   },
   "reviewer": {
@@ -65,4 +71,3 @@
   "prior_finding_dispositions_checked": [],
   "issued_at_utc": "REPLACE_WITH_ISO_8601_TIMESTAMP"
 }
-

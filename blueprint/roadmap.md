@@ -1,7 +1,7 @@
 # LMLF roadmap
 
 **Normative owner:** `jaumededios`  
-**Document specification status:** `specified`  
+**Document specification status:** `frozen`  
 **Baseline specification commit:** recorded externally after this specification
 commit exists; it is not embedded self-referentially in that commit.
 
@@ -40,9 +40,9 @@ a manifest revision.
 
 `DEMO-0` is currently a planning queue, not closed or execution-ready, because
 most candidate packets do not yet have theorem cards.  The first execution-ready
-manifest is `BOOTSTRAP-0`, containing only the fully specified QB-001 and
+manifest is `BOOTSTRAP-0`, containing only the fully bounded, frozen QB-001 and
 DEF-001 cards.  Manifest readiness does not authorize Lean: each member still
-passes its proof and review gates.
+passes its externally recorded review gates.
 
 Three inventories support every closed manifest:
 
@@ -61,10 +61,13 @@ headings.  See [source_manifest.md](source_manifest.md).
 Packet state is recorded on orthogonal axes, never one overloaded status:
 specification, natural-language proof, review, implementation, coverage, and
 manifest membership.  The vocabulary is normative in
-[`theorem_cards/README.md`](theorem_cards/README.md).  For example, QB-001 is
-currently `specification_status: specified`, `proof_status: approved`,
-`review_status: approved`, and `implementation_status: authorized`, matching
-the revision 3 proof artifact and its two independent approvals.
+[`theorem_cards/README.md`](theorem_cards/README.md).  Candidate-owned status
+fields are temporal and nonauthoritative.  QB-001 card/proof revision 4 is
+currently `specification_status: frozen`, `proof_status: complete`,
+`review_status: not_started`, and `implementation_status: not_started`.  Its
+revision-3 repository ledger is historical, non-quorum context.  Only an
+external envelope bound to the frozen commit and digests may establish review
+pass or Lean authorization.
 
 New mathematics includes a new explicit constant or threshold, stronger
 uniformity or derivative conclusion, a new continuation or exceptional-value
@@ -82,8 +85,11 @@ each other's reports:
 - a proof/quantitative reviewer re-derives the estimates, constants, domains,
   and edge cases.
 
-Named-function construction, continuation, turning-point, zero, and connection
-work also requires a third structural/circularity review.  A substantive edit
+Construction, continuation, identification through existence/uniqueness,
+nontrivial source recovery, turning-point, zero, connection, and theorem-sized
+hypothesis packets also require a separately represented
+`structural_circularity_review`.  A thin packet may mark it not applicable only
+with a concrete frozen reason.  A substantive edit
 to the statement or proof invalidates affected approvals.  No `sorry` skeleton,
 axiom, or structure field asserting the desired theorem is a substitute for
 this gate.
@@ -176,9 +182,10 @@ BOOTSTRAP-0 contains only DEF-001: four thin wrappers around the pinned
 mathlib `Complex.Gamma` construction, covering Euler-integral convergence and
 identification, real agreement, and the totalization convention at negative
 naturals.  It creates no second Gamma object and claims no Olver occurrence.
-The four declarations currently exist and compile, but their status is
-`compiled_unreviewed`: implementation remains unauthorized and review remains
-`not_started`.
+The exact specification snapshot contains no DEF-001 Lean implementation or
+prototype: `implementation_status` is `not_started`, `prototype_status` is
+`absent`, and review is `not_started`.  Bytes in another commit or dirty
+worktree have no standing until an external review envelope binds them.
 
 Airy construction and broader definition sheets remain DEMO-0 planning items
 until independently carded.  Exit: DEF-001 passes reuse, semantic, and API
@@ -239,15 +246,15 @@ for that collation.  M5 then delivers:
 Watson is not a named-function application.  Only completion of this exact
 source-generic packet is the first quantitative-Olver MVP.
 
-The critical path is deliberately short:
+The critical path is deliberately short, with collation and QB-001 proceeding
+as parallel predecessors:
 
 ```text
-Olver edition lock and direct occurrence collation
-  -> QB-001 finite core
-  -> finite integral/Laplace core
-  -> DEF-001 only if the selected proof uses Gamma moments
-  -> OLV-001 exact_source_generic
-  -> SR-001 audit-only source recovery
+locked 1997 collation -----\
+                            +-> selected QL-001 -> OLV-001 -> SR-001
+QB-001 finite core --------/
+DEF-001 / Gamma facts - - -> QL-001 or OLV-001
+                           only if the collated formulation uses Gamma moments
 ```
 
 Airy, Cauchy derivative transport, residual algebra, ODE stability, and
@@ -320,6 +327,11 @@ backward imports, duplicate named functions, unidentified aliases, open release
 manifests, and source-coverage claims backed only by generic conditional
 theorems.  Compile cost, import cost, readability, reuse, constant quality, and
 version robustness are tracked separately.
+
+Only the CSV inventory validator is implemented at present.  The broader
+YAML/Markdown schema, lifecycle, classification, digest, and external-review
+contract checks are specified but remain manual/planned; passing the CSV check
+alone cannot establish any review or authorization gate.
 
 ## Risk register
 

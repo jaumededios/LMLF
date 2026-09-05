@@ -2,17 +2,27 @@ schema_version: 2
 id: QB-001
 title: Bootstrap finite error predicates and transport
 owner: jaumededios
-artifact_revision: 3
+artifact_revision: 4
 baseline_spec_commit: pending_external_record_after_commit
 
 theorem_class: foundational_calculus
 coverage_class: infrastructure
-specification_status: specified
-proof_status: approved
-review_status: approved
-implementation_status: authorized
+novelty_class: non_novel
+specification_status: frozen
+proof_status: complete
+review_status: not_started
+implementation_status: not_started
 coverage_status: not_applicable
 manifest_membership_status: execution_ready
+status_as_of: candidate_specification_snapshot
+status_authority: >-
+  Artifact completeness is intrinsic. Review pass and implementation
+  authorization can be established only by an external review envelope bound
+  to the frozen specification commit and artifact digests.
+
+classification_schema:
+  path: review/classifications-v1.yaml
+  schema_version: lmlf-classification-v1
 
 manifest: BOOTSTRAP-0
 source_occurrences: []
@@ -31,8 +41,8 @@ scope:
     - LMLF.Basic
   signatures_artifact:
     path: blueprint/theorem_cards/QB-001-signatures.md
-    revision: 1
-    status: specified
+    revision: 2
+    status: frozen
   public_declarations:
     - QuantitativeAnalysis.ErrorOn
     - QuantitativeAnalysis.NormBoundOn
@@ -97,8 +107,9 @@ novelty:
 
 natural_language_proof:
   artifact: blueprint/proofs/QB-001.md
-  artifact_revision: 3
-  proof_status: approved
+  artifact_revision: 4
+  artifact_state: frozen
+  proof_status: complete
   normative_sections:
     - Scope and standing assumptions
     - QB-001.1 restriction
@@ -107,8 +118,50 @@ natural_language_proof:
     - QB-001.5 forward exactness only
     - QB-001.7 precomposition
   note: >-
-    Revision 3 was independently approved by proof_referee_a and
-    proof_referee_b.  Extra dossier sections do not enlarge this bootstrap card.
+    Revision 4 preserves revision 3's mathematical text and corrects governance
+    metadata.  Extra dossier sections do not enlarge this bootstrap card.
+
+target_classifications:
+  - target_id: QB-001-T01
+    declaration: QuantitativeAnalysis.ErrorOn
+    theorem_class: definition
+    coverage_class: reusable_infrastructure
+    novelty_class: non_novel
+  - target_id: QB-001-T02
+    declaration: QuantitativeAnalysis.NormBoundOn
+    theorem_class: definition
+    coverage_class: reusable_infrastructure
+    novelty_class: non_novel
+  - target_id: QB-001-T03
+    declaration: QuantitativeAnalysis.HasErrorFamily
+    theorem_class: definition
+    coverage_class: reusable_infrastructure
+    novelty_class: non_novel
+  - target_id: QB-001-T04
+    declaration: QuantitativeAnalysis.ErrorOn.exact
+    theorem_class: generic_quantitative
+    coverage_class: reusable_infrastructure
+    novelty_class: non_novel
+  - target_id: QB-001-T05
+    declaration: QuantitativeAnalysis.ErrorOn.restrict
+    theorem_class: generic_quantitative
+    coverage_class: reusable_infrastructure
+    novelty_class: non_novel
+  - target_id: QB-001-T06
+    declaration: QuantitativeAnalysis.ErrorOn.weaken
+    theorem_class: generic_quantitative
+    coverage_class: reusable_infrastructure
+    novelty_class: non_novel
+  - target_id: QB-001-T07
+    declaration: QuantitativeAnalysis.ErrorOn.trans
+    theorem_class: generic_quantitative
+    coverage_class: reusable_infrastructure
+    novelty_class: non_novel
+  - target_id: QB-001-T08
+    declaration: QuantitativeAnalysis.ErrorOn.comp
+    theorem_class: generic_quantitative
+    coverage_class: reusable_infrastructure
+    novelty_class: non_novel
 
 dependencies:
   mathlib_concepts:
@@ -140,34 +193,23 @@ edge_tests:
   - precomposition requires Set.MapsTo
 
 reviews:
-  review_status: approved
-  artifact_revision: 3
-  current_round: round_3_complete
-  approval_ledger: blueprint/reviews/QB-001-rev3.md
-  proof_referees:
-    - reviewer_id: proof_referee_a
-      reviewer_kind: fresh_context_sol_mathematical_referee
-      independent: true
-      verdict: approved
-      summary: >-
-        The bounded eight-signature proof/card is mathematically correct; its
-        hypotheses, domain behavior, and no-convergence limitations are explicit.
-    - reviewer_id: proof_referee_b
-      reviewer_kind: fresh_context_sol_mathematical_referee
-      independent: true
-      verdict: approved
-      summary: >-
-        The definitions and five transport arguments, boundary cases, and
-        signature correspondence are sound; no statement change is required.
-  current_revision_approved: true
+  review_status: not_started
+  authoritative_record: external_review_envelope_only
+  historical_non_quorum_record: blueprint/reviews/QB-001-rev3.md
+  historical_record_counts_toward_quorum: false
+  current_external_verdict_refs: []
+  note: >-
+    The historical repository ledger records useful mathematical feedback but
+    cannot certify reviewer identity, isolation, exact-current-revision binding,
+    quorum, or authorization.
 
 implementation:
-  implementation_status: authorized
-  lean_allowed: true
-  authorization_scope: >-
-    Exactly the eight declarations in QB-001-signatures.md revision 1; no result
-    from the proof dossier's excluded sections is authorized.
-  blocking_condition: null
+  implementation_status: not_started
+  authorization_source: external_review_envelope_only
+  blocking_condition: >-
+    No external envelope currently binds the frozen packet, card revision 4,
+    proof revision 4, and signature artifact revision 2 with passing theorem-
+    card, proof, structural-circularity, and lean_ready gates.
   file: null
   declarations_present: false
 
@@ -176,3 +218,4 @@ release_checks:
   - no custom axioms, sorry, or admit
   - no convergence or source-coverage claim
   - baseline spec commit is recorded externally after the specification commit
+  - schema/lifecycle checks beyond the current CSV validator are manually audited

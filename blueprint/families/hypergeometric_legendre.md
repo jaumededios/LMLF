@@ -1,7 +1,7 @@
 # Hypergeometric, Legendre, Ferrers, and Whittaker family programme
 
 **Status:** planning only; no provisional ID below is registered or authorized  
-**Current source evidence:** contents-only leads `olv97-o0016`, `olv97-o0018`, and `olv97-o0023`  
+**Current source evidence:** contents-only leads `OLV10P-O0016`, `OLV10P-O0018`, and `OLV10P-O0023`  
 **Mathlib position at the pin:** useful ordinary and regularized hypergeometric series exist, but no audited global named continuation or Legendre/Whittaker identification is presently available
 
 ## Family boundary and source honesty
@@ -10,9 +10,9 @@ This file owns the shared hypergeometric substrates and plans the source-confirm
 
 The current inventory does not yet confirm a mathematical-body occurrence for any object in this file:
 
-- `olv97-o0016` is a Chapter 5 contents lead labelled “Hypergeometric and Legendre Functions.” Its ordinary/regularized hypergeometric and Legendre/Ferrers entity split is unresolved.
-- `olv97-o0018` is a Chapter 7 contents lead including confluent hypergeometric and Whittaker families among several others.
-- `olv97-o0023` is a Chapter 14 contents lead revisiting the exponential integral and confluent hypergeometric function. It may reuse an earlier entity or introduce a new normalization; that cannot be decided from contents.
+- `OLV10P-O0016` is a Chapter 5 contents lead labelled “Hypergeometric and Legendre Functions.” Its ordinary/regularized hypergeometric and Legendre/Ferrers entity split is unresolved.
+- `OLV10P-O0018` is a Chapter 7 contents lead including confluent hypergeometric and Whittaker families among several others.
+- `OLV10P-O0023` is a Chapter 14 contents lead revisiting the exponential integral and confluent hypergeometric function. It may reuse an earlier entity or introduce a new normalization; that cannot be decided from contents.
 - the function-inventory prose also flags generalized hypergeometric and Barnes-integral notation as audit leads. No source-occurrence row currently resolves those objects.
 
 DLMF's distinction between ordinary and regularized Gauss/Kummer functions is a warning against conflation, not evidence that both occur in the locked edition. All family membership, notation, and normalization claims wait for the locked mathematical-body audit.

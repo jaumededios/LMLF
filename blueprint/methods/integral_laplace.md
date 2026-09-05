@@ -39,16 +39,17 @@ expression is never used as a theorem of convergence.
 
 ## 2. Dependency order and packet queue
 
-All IDs other than the already registered `QL-001`, `OLV-001`, `SR-001`, and
-`EX-002` are provisional.  Listing an ID is not a card, manifest entry, source
-claim, or implementation authorization.
+`QL-001`, `OLV-001`, and `SR-001` have planning rows in the canonical card
+registry. `EX-002` and every other additional ID in this file are provisional.
+Listing an ID is not a card, manifest entry, source claim, or implementation
+authorization.
 
 | Order | Provisional card | Theorem / coverage / novelty class | Depends on | Status |
 |---:|---|---|---|---|
 | 1 | QL-001 | `finite_remainder_bound` / `infrastructure` / provisionally `novel` | QB-001 | planning only; registered but not specified |
 | 2 | QL-002 | `finite_remainder_bound` / `infrastructure` / provisionally `generalized` | QL-001; DEF-001 only if the public proof is routed through Gamma | provisional |
 | 3 | QL-003 | `finite_remainder_bound` / `infrastructure` / provisionally `novel` | the smallest accepted slice of QL-001/QL-002 | provisional |
-| 4 | EX-002 | `finite_remainder_bound` / `infrastructure` / `equivalent_reformulation` of the finite geometric identity | QL-001 | planning only; registered candidate |
+| 4 | EX-002 | `finite_remainder_bound` / `infrastructure` / `equivalent_reformulation` of the finite geometric identity | QL-001 | provisional; not registered and no card exists |
 | 5 | OLV-001 | `finite_remainder_bound` / `exact_source_generic` / unclassified until collation | locked occurrence, QB-001, and only the selected Laplace targets | planning only; source transcription absent |
 | 6 | SR-001 | `qualitative_bridge` / `audit_source_recovery` / intended `source_equivalent`, subject to collation | OLV-001 | planning only; audit module only |
 
@@ -59,12 +60,17 @@ Watson.  Otherwise they remain parallel reusable infrastructure.
 The Watson critical path is intentionally no larger than
 
 ```text
-locked 1997 occurrence and verified mathematical transcription
-  -> QB-001
-  -> the minimal QL-001 target slice actually needed by the transcription
-  -> QL-002 / DEF-001 only if generalized Gamma moments are actually needed
-  -> OLV-001 exact_source_generic
-  -> SR-001 in Audit/SourceRecovery
+locked 1997 occurrence and verified mathematical transcription --+
+                                                               +-> selected minimal QL-001 slice
+QB-001 finite core ---------------------------------------------+             |
+                                                                             v
+QL-002 / DEF-001 -- conditional, only if generalized Gamma moments are used -+
+                                                                             |
+                                                                             v
+                                                          OLV-001 exact_source_generic
+                                                                             |
+                                                                             v
+                                                          SR-001 in Audit/SourceRecovery
 ```
 
 In particular, Watson does **not** depend on Airy, a named-function catalogue

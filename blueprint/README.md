@@ -25,8 +25,8 @@ As of this specification:
 |---|---|---|
 | `DEMO-0` | candidate M0--M4 work | open and `planning_only`; not execution-ready |
 | `BOOTSTRAP-0` | exactly `QB-001` and `DEF-001` | closed and `execution_ready`; zero source occurrences |
-| `QB-001` | eight signatures only | proof/card revision 3 approved by two distinct reviewers; Lean implementation authorized, not released |
-| `DEF-001` | four Gamma reuse wrappers | code exists and builds, but is `compiled_unreviewed`, unauthorized, and unreleased; `review_status: not_started` and `lean_allowed: false` |
+| `QB-001` | eight signatures only | card/proof revision 4 and signature revision 2 are frozen; proof complete, external review not started, no Lean authorization |
+| `DEF-001` | four Gamma reuse wrappers | card revision 2 frozen; proof not required, external review not started, implementation not started, prototype absent in the exact specification snapshot |
 | `OLV-MVP-1` | one selected Watson occurrence | open and `planning_only`; occurrence selected but the locked text is not yet collated |
 | Olver theorem coverage | none | no quantitative Olver theorem or qualitative source recovery is currently claimed |
 
@@ -36,8 +36,9 @@ The exact bootstrap specifications are the
 [`DEF-001` card](theorem_cards/DEF-001.yaml), and their bounded
 [`QB-001`](../review/work_packets/QB-001.yaml) and
 [`DEF-001`](../review/work_packets/DEF-001.yaml) work packets.  The
-[QB proof](proofs/QB-001.md) and [revision-3 review ledger](reviews/QB-001-rev3.md)
-record the completed pre-Lean gate.  The theorem-card
+[QB proof](proofs/QB-001.md) is complete and frozen.  The
+[revision-3 review ledger](reviews/QB-001-rev3.md) is historical, non-quorum
+context and records no current gate.  The theorem-card
 [status vocabulary](theorem_cards/README.md) is normative: specification,
 proof, review, implementation, prototype, coverage, and manifest membership
 are independent axes.
@@ -51,8 +52,8 @@ source/reuse evidence and a bounded target
   -> exact theorem card and public-signature artifact
   -> complete natural-language proof
   -> frozen bytes and externally recorded digests
-  -> independent pre-Lean reviews of the same revision
-  -> explicit lean_ready authorization
+  -> independent theorem-card, proof, and applicable structural-circularity reviews
+  -> explicit external lean_ready authorization
   -> Lean implementation of only the frozen targets
   -> build, regression, import, axiom, and implementation reviews
   -> source reconciliation, audit bridge, and closed release manifest as applicable
@@ -62,15 +63,22 @@ Two independent pre-Lean reviewers are the minimum for new mathematics: one
 checks source/semantics and one independently re-derives the proof, domains,
 constants, and edge cases.  Named-function construction, continuation,
 turning-point, zero, and connection work adds a third
-structural/circularity review.  A material statement, proof, dependency,
+separately represented `structural_circularity_review`.  A packet marks this
+gate required or gives an exact inapplicability reason.  A material statement,
+proof, dependency,
 source-snapshot, pin, or candidate-head change invalidates the affected
 approval.  Filled review envelopes and verdicts stay external to the candidate
 head; the baseline specification commit is likewise recorded externally after
 the commit exists, never self-referentially inside it.
 
-Routine source-equivalent reuse can declare that a natural-language proof is
+Routine pinned-library reuse can declare that a natural-language proof is
 not required, but still needs a bounded card, exact pin/signatures, semantic
 review, and implementation review.  Compilation is evidence, not approval.
+
+Candidate-owned cards, packets, proof metadata, and repository review summaries
+cannot certify reviewer pass, quorum, `lean_ready`, or authorization.  Those
+facts exist only in an external envelope bound to the frozen specification
+commit, packet, artifacts, classification schema, and digests.
 
 Every finite named estimate additionally proves all of the following rather
 than storing them as desired fields:
@@ -115,15 +123,15 @@ M0--M4 are a bounded infrastructure demonstrator, not Olver coverage:
 | M4 | finite integral/Laplace identities and bounds | direct Watson prerequisite |
 | M5 | one exact-source quantitative Watson theorem plus audit recovery | first true quantitative-Olver MVP |
 
-The M5 critical path is deliberately only:
+The M5 critical path has two independent predecessors which join at the selected
+Laplace slice:
 
 ```text
-locked 1997 Watson collation
-  -> QB-001
-  -> minimal accepted QL-001 Laplace slice
-  -> QL-002 / DEF-001 only if the chosen moment proof needs Gamma
-  -> OLV-001 exact_source_generic
-  -> SR-001 audit_source_recovery
+locked 1997 collation -----\
+                            +-> selected QL-001 -> OLV-001 -> SR-001
+QB-001 finite core --------/
+DEF-001 / Gamma facts - - -> QL-001 or OLV-001
+                           only if the collated formulation uses Gamma moments
 ```
 
 Watson is generic in an amplitude and parameters.  `OLV-001` is therefore
@@ -195,7 +203,8 @@ named function and discharge all generic hypotheses.
   subset enters the source critical path.
 - M3 complex derivative transport can proceed beside M4 and M5.  It must not be
   inserted into Watson's prerequisites.
-- Gamma implementation review can proceed independently.  Watson waits for
+- Gamma specification review can proceed independently.  Implementation may
+  start only after an external envelope grants `lean_ready`; Watson waits for
   `DEF-001` only if the selected moment proof consumes its public facts.
 - Within Track B, elementary summation, circle-coefficient, finite oscillatory,
   and finite contour infrastructure have deliberately separate roots.
@@ -255,6 +264,11 @@ dependency audits, review-consistency checks, and an immutable proposer-evidence
 bundle.  The [contract linter](automation/contract_linting.md) may reject an
 incomplete or inconsistent artifact, but it cannot decide truth, source
 fidelity, proof correctness, or reviewer independence.
+
+Only the CSV inventory validator is implemented today.  YAML/Markdown schema,
+lifecycle, classification, digest, and external-review validation beyond it is
+manual/planned; the blueprint's contract-linter rules describe future behavior,
+not a gate that has already run.
 
 Release reporting follows [the release strategy](qualitative/release_strategy.md):
 Stage 0 bootstrap, a single-occurrence Watson pilot, bounded definition and

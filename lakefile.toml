@@ -1,0 +1,21 @@
+name = "LMLF"
+version = "0.1.0"
+keywords = ["math"]
+defaultTargets = ["LMLF"]
+
+[leanOptions]
+pp.unicode.fun = true # Pretty-print `fun a ↦ b`.
+relaxedAutoImplicit = false
+weak.linter.mathlibStandardSet = true
+# The mathlib header linter assumes Apache-2.0 file headers; this project uses MIT.
+weak.linter.style.header = false
+maxSynthPendingDepth = 3
+
+[[require]]
+name = "mathlib"
+scope = "leanprover-community"
+rev = "v4.33.1"
+
+[[lean_lib]]
+name = "LMLF"
+globs = ["LMLF", "LMLF.Basic", "LMLF.Definitions", "LMLF.Results"]

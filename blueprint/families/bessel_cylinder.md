@@ -10,10 +10,10 @@ This wave plans first- and second-kind Bessel functions, modified Bessel functio
 
 The present evidence is discovery-level:
 
-- `olv97-o0013` and `bessel_j_candidate` are based on the Chapter 2 §9 contents heading only.
-- `olv97-o0014` and `bessel_i_candidate` are based on the Chapter 2 §10 contents heading only.
-- `olv97-o0018` is a Chapter 7 contents lead to Bessel, Hankel, modified Bessel, “other cylinder,” confluent hypergeometric, Whittaker, and Struve material. Its member split is unresolved.
-- `olv97-o0022` is a Chapter 12 contents lead to Bessel/modified-Bessel simple-pole models and auxiliaries. No comparison basis or auxiliary notation is resolved.
+- `OLV10P-O0013` and `bessel_j_candidate` are based on the Chapter 2 §9 contents heading only.
+- `OLV10P-O0014` and `bessel_i_candidate` are based on the Chapter 2 §10 contents heading only.
+- `OLV10P-O0018` is a Chapter 7 contents lead to Bessel, Hankel, modified Bessel, “other cylinder,” confluent hypergeometric, Whittaker, and Struve material. Its member split is unresolved.
+- `OLV10P-O0022` is a Chapter 12 contents lead to Bessel/modified-Bessel simple-pole models and auxiliaries. No comparison basis or auxiliary notation is resolved.
 
 No current Bessel entity is confirmed from a locked mathematical-body occurrence. DLMF formulas below are convention candidates and adversarial checks, not statements that Olver uses exactly those normalizations.
 
