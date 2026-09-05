@@ -1,0 +1,138 @@
+{
+  "schema_version": "lmlf-classification-v2",
+  "record_kind": "classification_vocabulary",
+  "status": "frozen",
+  "normative_owner": "jaumededios",
+  "supersedes": {
+    "path": "review/classifications-v1.yaml",
+    "schema_version": "lmlf-classification-v1",
+    "sha256": "7a4f322bb56dbb40d5d44a7eceb50b5a49ea6ae69f414b920341e3b12ea9d71e",
+    "reason": "Version 1 placed source-coverage roles on the packet theorem-shape axis. Version 2 separates those axes without mutating the frozen predecessor."
+  },
+  "purpose": "Versioned controlled values for packet summaries and declaration-level target classifications. The three axes are independent and no value grants source coverage, review approval, or implementation authorization.",
+  "packet_level": {
+    "theorem_class": {
+      "meaning": "Mathematical shape of the packet.",
+      "allowed": [
+        "foundational_calculus",
+        "definition_identification",
+        "finite_remainder_bound",
+        "existence_uniqueness",
+        "qualitative_bridge",
+        "mixed"
+      ]
+    },
+    "coverage_class": {
+      "meaning": "Role of the packet in source and infrastructure coverage.",
+      "allowed": [
+        "infrastructure",
+        "entity_identification",
+        "exact_source_generic",
+        "named_source_application",
+        "audit_source_recovery",
+        "mixed"
+      ]
+    },
+    "novelty_class": {
+      "meaning": "Relationship of the packet's mathematics to bound sources and accepted dependencies.",
+      "allowed": [
+        "non_novel",
+        "source_equivalent",
+        "equivalent_reformulation",
+        "generalized",
+        "strengthened_conclusion",
+        "stronger_hypotheses",
+        "novel",
+        "mixed"
+      ]
+    }
+  },
+  "target_level": {
+    "theorem_class": {
+      "allowed": [
+        "definition",
+        "identification",
+        "exact_identity",
+        "existence_uniqueness",
+        "qualitative_support",
+        "generic_quantitative",
+        "named_quantitative",
+        "audit_regression"
+      ]
+    },
+    "coverage_class": {
+      "allowed": [
+        "direct_source_target",
+        "named_source_target",
+        "source_prerequisite",
+        "reusable_infrastructure",
+        "audit_only"
+      ]
+    },
+    "novelty_class": {
+      "allowed": [
+        "non_novel",
+        "source_equivalent",
+        "equivalent_reformulation",
+        "generalized",
+        "strengthened_conclusion",
+        "stronger_hypotheses",
+        "novel"
+      ]
+    }
+  },
+  "required_packet_examples": [
+    {
+      "id": "QB-001",
+      "theorem_class": "foundational_calculus",
+      "coverage_class": "infrastructure",
+      "novelty_class": "non_novel"
+    },
+    {
+      "id": "DEF-001",
+      "theorem_class": "definition_identification",
+      "coverage_class": "entity_identification",
+      "novelty_class": "non_novel"
+    },
+    {
+      "id": "QL-001",
+      "theorem_class": "finite_remainder_bound",
+      "coverage_class": "infrastructure",
+      "novelty_class": "novel"
+    },
+    {
+      "id": "OLV-001",
+      "theorem_class": "finite_remainder_bound",
+      "coverage_class": "exact_source_generic",
+      "novelty_class": "strengthened_conclusion"
+    },
+    {
+      "id": "SR-001",
+      "theorem_class": "qualitative_bridge",
+      "coverage_class": "audit_source_recovery",
+      "novelty_class": "source_equivalent"
+    },
+    {
+      "id": "NAMED-EXAMPLE",
+      "theorem_class": "finite_remainder_bound",
+      "coverage_class": "named_source_application",
+      "novelty_class": "source_equivalent"
+    }
+  ],
+  "semantics": {
+    "non_novel": "A definition, routine consequence, or direct wrapper for which the packet claims no genuinely new mathematical content.",
+    "source_equivalent": "Mathematically equivalent to a specifically bound external source target or pinned-library statement; never a synonym for agreement with an internal proof dossier.",
+    "equivalent_reformulation": "A specifically bound external or pinned-library statement rewritten into a reviewed equivalent form whose translation is explained.",
+    "exact_source_generic": "A packet coverage role for a theorem matching a collated source occurrence while remaining generic in functions or parameters; not a theorem shape and not a named-function application.",
+    "named_source_application": "A packet coverage role requiring an identified named object and discharge of every generic hypothesis, reachability, and majorant-nonnegativity obligation.",
+    "audit_source_recovery": "A packet coverage role confined to downstream Audit/SourceRecovery bridges that recover a collated qualitative source statement."
+  },
+  "validation_rules": [
+    "Packet-level and target-level values must be taken from their own tables.",
+    "Every frozen card and work packet records this exact schema version and digest.",
+    "Every packet target has all three classifications and relationship prose.",
+    "An internal proof artifact alone can never justify source_equivalent.",
+    "A packet summary may use mixed only when its targets use more than one value.",
+    "Classifications do not imply reviewer pass, lean_ready, coverage, or release."
+  ]
+}

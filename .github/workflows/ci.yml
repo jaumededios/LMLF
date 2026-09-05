@@ -16,6 +16,8 @@ jobs:
       - uses: actions/checkout@v5
       - name: Validate specification inventory
         run: python3 scripts/validate_inventory.py
+      - name: Exercise inventory negative invariants
+        run: python3 scripts/validate_inventory.py --negative-tests
       - name: Build public Lean package
         uses: leanprover/lean-action@v1
         with:

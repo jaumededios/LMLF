@@ -139,9 +139,10 @@ does not stop generic work, but it blocks every named theorem about that family.
 Specification, proof, review, implementation, coverage, and manifest membership
 use separate controlled vocabularies from `theorem_cards/README.md`.
 Candidate-owned review and implementation fields are temporal descriptions,
-not gate evidence.  QB-001 card/proof revision 4 is frozen and complete but has
+not gate evidence.  QB-001 card revision 5 and proof revision 4 are frozen and
+complete as applicable but have
 no current external review or implementation authorization.  Its revision-3
-repository review summary is historical and non-quorum.  DEF-001 revision 2 is
+repository review summary is historical and non-quorum.  DEF-001 revision 3 is
 frozen with `implementation_status: not_started` and `prototype_status: absent`
 for the exact specification snapshot.  Manifest execution readiness never
 implies Lean authorization.
@@ -164,11 +165,16 @@ parallel tracks, not blockers.
 
 ## DD-018 — Classification and review authority are versioned
 
-`review/classifications-v1.yaml` separately controls packet-level and
+`review/classifications-v2.json` separately controls packet-level and
 declaration-level theorem, coverage, and novelty values.  Every frozen card and
 packet carries exact target classifications.  `non_novel` is canonical for
 routine internal definitions and consequences; `source_equivalent` requires a
-bound external source target.
+bound external source target or pinned-library statement.
+
+Version 2 supersedes the immutable v1 file.  Packet theorem classes are
+mathematical shapes such as `finite_remainder_bound` and `qualitative_bridge`;
+packet coverage classes carry roles such as `exact_source_generic`,
+`named_source_application`, and `audit_source_recovery`.
 
 Passing review, `lean_ready`, and authorization exist only in an external
 envelope that binds the frozen specification commit and artifact digests.

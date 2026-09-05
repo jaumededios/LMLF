@@ -25,8 +25,8 @@ As of this specification:
 |---|---|---|
 | `DEMO-0` | candidate M0--M4 work | open and `planning_only`; not execution-ready |
 | `BOOTSTRAP-0` | exactly `QB-001` and `DEF-001` | closed and `execution_ready`; zero source occurrences |
-| `QB-001` | eight signatures only | card/proof revision 4 and signature revision 2 are frozen; proof complete, external review not started, no Lean authorization |
-| `DEF-001` | four Gamma reuse wrappers | card revision 2 frozen; proof not required, external review not started, implementation not started, prototype absent in the exact specification snapshot |
+| `QB-001` | eight signatures only | card revision 5, proof revision 4, and signature revision 2 are frozen; proof complete, external review not started, no Lean authorization |
+| `DEF-001` | four Gamma reuse wrappers | card revision 3 frozen; proof not required, external review not started, implementation not started, prototype absent in the exact specification snapshot |
 | `OLV-MVP-1` | one selected Watson occurrence | open and `planning_only`; occurrence selected but the locked text is not yet collated |
 | Olver theorem coverage | none | no quantitative Olver theorem or qualitative source recovery is currently claimed |
 
@@ -71,9 +71,11 @@ approval.  Filled review envelopes and verdicts stay external to the candidate
 head; the baseline specification commit is likewise recorded externally after
 the commit exists, never self-referentially inside it.
 
-Routine pinned-library reuse can declare that a natural-language proof is
-not required, but still needs a bounded card, exact pin/signatures, semantic
-review, and implementation review.  Compilation is evidence, not approval.
+Transparent non-novel pinned-library reuse can set packet
+`natural_language_proof_review.applicability: not_applicable` with a concrete
+reason; the external envelope mirrors it as `gate_state: not_required`.  It
+still needs a bounded card, exact pin/signatures, semantic review, and
+implementation review.  Compilation is evidence, not approval.
 
 Candidate-owned cards, packets, proof metadata, and repository review summaries
 cannot certify reviewer pass, quorum, `lean_ready`, or authorization.  Those
@@ -104,6 +106,11 @@ The [source-manifest policy](source_manifest.md) and
 - canonical source entities and aliases; and
 - packet-local concepts such as `ErrorOn` and `HasErrorFamily`, which are not
   source entities merely because the project uses them.
+
+The sole current classification authority is the frozen
+[`lmlf-classification-v2`](../review/classifications-v2.json) JSON artifact.
+It supersedes immutable v1 and keeps packet theorem shapes separate from source
+coverage roles.
 
 The canonical normalized tables live in [`inventory/`](inventory/).  Closed
 release manifests have finite card and occurrence membership, exact totals,
@@ -265,10 +272,11 @@ bundle.  The [contract linter](automation/contract_linting.md) may reject an
 incomplete or inconsistent artifact, but it cannot decide truth, source
 fidelity, proof correctness, or reviewer independence.
 
-Only the CSV inventory validator is implemented today.  YAML/Markdown schema,
-lifecycle, classification, digest, and external-review validation beyond it is
-manual/planned; the blueprint's contract-linter rules describe future behavior,
-not a gate that has already run.
+Only the CSV inventory validator is implemented today; it consumes v2 packet
+classification enums/examples and CI runs its positive and negative suites.
+YAML/Markdown lifecycle, target-level card/packet classification, digest, and
+external-review validation remains manual/planned; the contract-linter rules
+describe future behavior, not a gate that has already run.
 
 Release reporting follows [the release strategy](qualitative/release_strategy.md):
 Stage 0 bootstrap, a single-occurrence Watson pilot, bounded definition and

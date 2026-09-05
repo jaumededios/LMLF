@@ -62,7 +62,8 @@ Packet state is recorded on orthogonal axes, never one overloaded status:
 specification, natural-language proof, review, implementation, coverage, and
 manifest membership.  The vocabulary is normative in
 [`theorem_cards/README.md`](theorem_cards/README.md).  Candidate-owned status
-fields are temporal and nonauthoritative.  QB-001 card/proof revision 4 is
+fields are temporal and nonauthoritative.  QB-001 card revision 5 and proof
+revision 4 are
 currently `specification_status: frozen`, `proof_status: complete`,
 `review_status: not_started`, and `implementation_status: not_started`.  Its
 revision-3 repository ledger is historical, non-quorum context.  Only an
@@ -101,6 +102,10 @@ definition identification, finite remainder bound, or qualitative bridge.
 `coverage_class` separately says whether the packet is infrastructure, entity
 identification, an `exact_source_generic` theorem, a named source application,
 or audit-only source recovery.
+
+The frozen machine authority for both packet-level and target-level values is
+[`lmlf-classification-v2`](../review/classifications-v2.json).  It supersedes
+immutable v1; coverage roles never appear on the theorem-shape axis.
 
 Watson's lemma is generic in its amplitude and parameters.  Its coverage class
 is `exact_source_generic`, not `named_source_application`.  Named-function
@@ -328,10 +333,11 @@ manifests, and source-coverage claims backed only by generic conditional
 theorems.  Compile cost, import cost, readability, reuse, constant quality, and
 version robustness are tracked separately.
 
-Only the CSV inventory validator is implemented at present.  The broader
-YAML/Markdown schema, lifecycle, classification, digest, and external-review
-contract checks are specified but remain manual/planned; passing the CSV check
-alone cannot establish any review or authorization gate.
+Only the CSV inventory validator is implemented at present; it consumes v2
+packet classification enums/examples and CI runs its positive and negative
+suites.  Broader YAML/Markdown lifecycle, target-level classification, digest,
+and external-review contract checks remain manual/planned; passing inventory
+checks cannot establish any review or authorization gate.
 
 ## Risk register
 

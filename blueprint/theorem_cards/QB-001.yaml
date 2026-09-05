@@ -2,7 +2,7 @@ schema_version: 2
 id: QB-001
 title: Bootstrap finite error predicates and transport
 owner: jaumededios
-artifact_revision: 4
+artifact_revision: 5
 baseline_spec_commit: pending_external_record_after_commit
 
 theorem_class: foundational_calculus
@@ -12,6 +12,7 @@ specification_status: frozen
 proof_status: complete
 review_status: not_started
 implementation_status: not_started
+prototype_status: absent
 coverage_status: not_applicable
 manifest_membership_status: execution_ready
 status_as_of: candidate_specification_snapshot
@@ -21,8 +22,9 @@ status_authority: >-
   to the frozen specification commit and artifact digests.
 
 classification_schema:
-  path: review/classifications-v1.yaml
-  schema_version: lmlf-classification-v1
+  path: review/classifications-v2.json
+  schema_version: lmlf-classification-v2
+  sha256: 698626606570827fcc8c78b69865d7cd4bc94de96bc6d5d45c23a5f6611aeeab
 
 manifest: BOOTSTRAP-0
 source_occurrences: []
@@ -103,7 +105,7 @@ choice_laundering_check: No choice occurs in this packet.
 novelty:
   classification: non_novel
   rationale: Definitions and elementary consequences of set and norm laws.
-  natural_language_proof_required_before_lean: false
+  natural_language_proof_review_applicability: required
 
 natural_language_proof:
   artifact: blueprint/proofs/QB-001.md
@@ -207,9 +209,10 @@ implementation:
   implementation_status: not_started
   authorization_source: external_review_envelope_only
   blocking_condition: >-
-    No external envelope currently binds the frozen packet, card revision 4,
+    No external envelope currently binds the frozen packet, card revision 5,
     proof revision 4, and signature artifact revision 2 with passing theorem-
-    card, proof, structural-circularity, and lean_ready gates.
+    card and proof gates, an externally recorded not_required structural-
+    circularity gate, and a passing lean_ready gate.
   file: null
   declarations_present: false
 

@@ -8,11 +8,13 @@ packets, proof artifacts, review bindings, and later Lean declarations
 **Authority boundary:** a linter can reject structurally incomplete evidence; it
 cannot approve mathematics, source fidelity, or review independence
 
-**Current implementation boundary:** only the CSV inventory validator exists.
-All YAML/Markdown schema checks, lifecycle transitions, classification-schema
-joins, digest bindings, structural-circularity requirements, and external review
-quorums described below are manual/planned; this document must not be cited as
-evidence that they ran.
+**Current implementation boundary:** the CSV inventory validator is the only
+executable contract checker.  It loads packet theorem/coverage enums and
+required examples from `review/classifications-v2.json`, and CI runs its
+positive and negative suites.  YAML/Markdown lifecycle checks, target-level
+card/packet joins, digest bindings, structural-circularity requirements, and
+external review quorums described below remain manual/planned; this document
+must not be cited as evidence that they ran.
 
 The linter is a read-only consistency checker over frozen artifacts.  It does
 not create theorem cards, invent missing fields, select a source occurrence,
@@ -96,7 +98,8 @@ The linter validates:
 9. no unknown field at frozen levels unless the schema explicitly permits an
    extension namespace.
 
-The versioned vocabulary is `review/classifications-v1.yaml`.  It deliberately
+The current versioned vocabulary is `review/classifications-v2.json`, which
+supersedes without mutating frozen v1.  It deliberately
 has separate packet-level and target-level tables: values such as packet
 `infrastructure` and target `reusable_infrastructure` are not raw-string
 equivalents.  A future validator checks each field against its proper table and
@@ -105,8 +108,8 @@ It rejects an unversioned vocabulary, a card/packet schema-version mismatch, or
 an unexplained target mismatch as `SCHEMA-CLASS-001`.
 
 In particular, `non_novel` is a canonical target novelty value.
-`source_equivalent` requires a bound external source target; agreement with an
-internal proof artifact is insufficient.  Packet summaries never substitute
+`source_equivalent` requires a bound external source target or pinned-library
+statement; agreement with an internal proof artifact is insufficient.  Packet summaries never substitute
 for target rows and never imply coverage or authorization.
 
 ## 5. Reference-integrity checks
@@ -278,6 +281,13 @@ The proof schema is specified in `proof_artifact_schema.md`.  The linter checks:
   kept on separate axes;
 - candidate-owned metadata contains no authoritative passing gate or reviewer
   quorum; repository review summaries are treated as historical and non-quorum;
+- every packet represents `natural_language_proof_review.applicability` as
+  `required` or `not_applicable` with a reason in the latter case;
+- a required natural-language-proof gate binds a proof artifact and may be
+  `pass` only through external verdicts; an inapplicable gate binds no empty
+  proof artifact and is `not_required` in the external envelope;
+- NLP inapplicability is limited to definitions, audit-only targets, or
+  transparent non-novel wrappers around specifically bound pinned-library facts;
 - every packet represents `structural_circularity_review` as `required` or
   `not_applicable` with a nonempty reason;
 - a required structural gate has the packet's perspectives, distinct-ID

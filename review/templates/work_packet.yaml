@@ -1,15 +1,16 @@
-schema_version: 3
+schema_version: 4
 
 # This packet intentionally does not contain its own path, commit, or digest.
 # An external review envelope binds those values after the packet is frozen.
 work_item_id: REPLACE_WITH_STABLE_ID
 title: REPLACE_WITH_BOUNDED_TITLE
+packet_revision: REPLACE_WITH_POSITIVE_INTEGER
 lifecycle_state: draft # draft | frozen | superseded
 specification_owner: REPLACE_WITH_PERSON_OR_TEAM
 
 classification_schema:
-  path: review/classifications-v1.yaml
-  schema_version: lmlf-classification-v1
+  path: review/classifications-v2.json
+  schema_version: lmlf-classification-v2
   sha256: REPLACE_WITH_CLASSIFICATION_SCHEMA_DIGEST
 packet_classification:
   theorem_class: REPLACE_WITH_PACKET_THEOREM_CLASS
@@ -48,7 +49,7 @@ targets:
     module: REPLACE_WITH_LEAN_MODULE
     declaration: REPLACE_WITH_FULLY_QUALIFIED_DECLARATION
     theorem_class: named_quantitative # definition | identification | exact_identity | existence_uniqueness | qualitative_support | generic_quantitative | named_quantitative | audit_regression
-    coverage_class: direct_source_target # direct_source_target | source_prerequisite | reusable_infrastructure | audit_only
+    coverage_class: direct_source_target # direct_source_target | named_source_target | source_prerequisite | reusable_infrastructure | audit_only
     novelty_class: source_equivalent # non_novel | source_equivalent | equivalent_reformulation | generalized | strengthened_conclusion | stronger_hypotheses | novel
     relationship_to_source: |
       REPLACE_WITH_EXACT_EQUIVALENCE_GENERALITY_OR_NOVELTY_DETAILS
@@ -112,7 +113,7 @@ pre_lean_gate_requirements:
         agents: 2
         minimum_distinct_agent_models: 1
   natural_language_proof_review:
-    required: true
+    applicability: required # required | not_applicable
     inapplicable_reason: null
     minimum_distinct_reviewer_ids: 2
     allowed_reviewer_compositions:

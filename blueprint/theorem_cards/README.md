@@ -11,8 +11,9 @@ review evidence.
 
 ## Three classifications, two levels
 
-The versioned vocabulary is
-[`review/classifications-v1.yaml`](../../review/classifications-v1.yaml).  It
+The current versioned vocabulary is
+[`review/classifications-v2.json`](../../review/classifications-v2.json), which
+supersedes the immutable v1 file.  It
 separates packet-level summary values from declaration-level target values.
 Every card has three independent axes:
 
@@ -30,8 +31,8 @@ Every card has three independent axes:
     `Audit/SourceRecovery`.
 - `novelty_class` describes the relation to existing mathematics.  In
   particular, `non_novel` is canonical for routine definitions and elementary
-  consequences, while `source_equivalent` requires a bound external source and
-  never means merely “matches our internal proof.”
+  consequences, while `source_equivalent` requires a bound external source or
+  pinned-library statement and never means merely “matches our internal proof.”
 
 Each public target repeats exact target-level theorem, coverage, and novelty
 values.  Packet summaries do not replace those rows or earn source credit.
@@ -58,7 +59,8 @@ Natural-language proof frontmatter records intrinsic `proof_status` directly.
 Review and implementation fields in a candidate-owned card are temporal,
 nonauthoritative projections; only an externally stored envelope and bound
 verdicts can establish reviewer quorum, gate pass, or Lean authorization.
-QB-001 revision 4 is `complete` and `frozen`, but externally unreviewed and
+QB-001 card revision 5 and proof revision 4 are `complete`/`frozen` as
+applicable, but externally unreviewed and
 unauthorized.  Its revision-3 repository ledger is historical context and
 counts as zero reviewers.  Manifest execution readiness never authorizes
 implementation.
@@ -82,6 +84,8 @@ Each YAML card records:
 - majorant nonnegativity and domain reachability/nonemptiness obligations;
 - dependency and downstream-consumer lists;
 - novelty classification and natural-language proof artifact;
+- exact natural-language-proof review applicability, with a reason and no empty
+  proof artifact when it is `not_applicable`;
 - external review-envelope references and implementation/audit evidence when
   those externally bound records exist;
 - adversarial, boundary, and constant-regression tests.
@@ -122,6 +126,7 @@ externally unreviewed and unauthorized.  The exact specification snapshot has
 no DEF-001 implementation or prototype; bytes in another commit or dirty
 worktree have no review status until an external envelope binds them.
 
-Only the CSV inventory validator currently exists.  The YAML/Markdown schema,
-lifecycle, classification, digest, and review-quorum validation described by
-the blueprint remains manual/planned.
+Only the CSV inventory validator currently exists.  It consumes v2 packet
+classification enums/examples and CI runs positive and negative suites.  The
+YAML/Markdown lifecycle, target-level card/packet joins, digest, and review-
+quorum validation described by the blueprint remains manual/planned.

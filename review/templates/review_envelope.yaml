@@ -1,4 +1,4 @@
-schema_version: 2
+schema_version: 3
 record_kind: review_envelope
 storage_requirement: external_to_candidate_head
 work_item_id: REPLACE_WITH_STABLE_ID
@@ -16,8 +16,8 @@ specification_binding:
       revision: REPLACE_WITH_IMMUTABLE_REVISION
       sha256: REPLACE_WITH_SHA256
   classification_schema:
-    path: review/classifications-v1.yaml
-    schema_version: lmlf-classification-v1
+    path: review/classifications-v2.json
+    schema_version: lmlf-classification-v2
     sha256: REPLACE_WITH_SHA256
 
 toolchain_binding:
@@ -37,7 +37,9 @@ pre_lean_gates:
     selected_reviewer_composition: null
     verdict_refs: []
   natural_language_proof_review:
-    gate_state: pending
+    applicability: required # required | not_applicable
+    inapplicable_reason: null
+    gate_state: pending # pending | pass | fail | blocked | not_required
     distinct_reviewer_ids: []
     selected_reviewer_composition: null
     verdict_refs: []
@@ -55,8 +57,8 @@ pre_lean_gates:
     evidence_refs: []
     requires_gate_states:
       theorem_card_review: pass
-      natural_language_proof_review: pass
-      structural_circularity_review: pass
+      natural_language_proof_review: REPLACE_WITH_PASS_OR_VALID_NOT_REQUIRED_FROM_PACKET
+      structural_circularity_review: REPLACE_WITH_PASS_OR_VALID_NOT_REQUIRED_FROM_PACKET
 
 implementation_reviews:
   gate_state: pending

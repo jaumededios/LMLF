@@ -46,7 +46,8 @@ Repository review ledgers are historical context and count as zero reviewers.
 ## Classification fields
 
 Every card records theorem, coverage, and novelty axes under the frozen
-[`lmlf-classification-v1`](../review/classifications-v1.yaml) vocabulary.  That
+[`lmlf-classification-v2`](../review/classifications-v2.json) vocabulary, which
+supersedes rather than mutates frozen v1.  That
 schema distinguishes packet summaries from exact declaration-level target
 values.  In particular, a routine target uses `non_novel`; it cannot use
 `source_equivalent` merely because it matches an internal proof.
@@ -141,7 +142,9 @@ Scope is exactly the eight signatures in
 wrappers in [`DEF-001.yaml`](theorem_cards/DEF-001.yaml).  Both specifications
 are frozen, but execution begins only after externally recorded mandated
 reviews.  QB-001's proof is complete; its in-repository revision-3 review ledger
-is historical and non-quorum.  DEF-001 requires no new natural-language proof.
+is historical and non-quorum.  DEF-001's transparent non-novel pinned-library
+wrappers use a frozen `not_applicable` proof-review reason; an external envelope
+must mirror that gate as `not_required`.
 Neither has external `lean_ready` authorization.  In the exact specification
 snapshot, both implementation states are `not_started`, and DEF-001's prototype
 status is `absent`; code in another commit or dirty worktree is not evidence for
@@ -188,9 +191,10 @@ DEF-001 / Gamma facts - - -> QL-001 or OLV-001
 Airy, Cauchy transport, coefficient residual automation, ODE stability, and
 comparison systems are explicitly off this path.
 
-Only the CSV inventory validator currently exists.  Schema/lifecycle,
-classification, digest, and external-review-envelope validation beyond that
-tool remains manual/planned.
+Only the CSV inventory validator currently exists.  It consumes v2 packet
+classification enums/examples and CI runs positive and negative suites.
+YAML/Markdown lifecycle, target-level card/packet joins, digest, and external-
+review-envelope validation remains manual/planned.
 
 ## Future manifests
 

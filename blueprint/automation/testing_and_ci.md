@@ -1,6 +1,7 @@
 # Testing and continuous-integration blueprint
 
-**Status:** target design; current CI is only a baseline Lean build
+**Status:** target design; current CI runs the baseline Lean build plus positive
+inventory validation and the validator's negative mutation suite
 
 **Applies to:** specification artifacts, semantic Lean modules, audit consumers,
 future proof-producing tactics, and external review evidence

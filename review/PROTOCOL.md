@@ -81,15 +81,16 @@ An in-repository review summary is historical, non-quorum context.
 ## Orthogonal target classifications
 
 The frozen controlled vocabulary is
-[`classifications-v1.yaml`](classifications-v1.yaml).  It separates packet-level
+[`classifications-v2.json`](classifications-v2.json), which supersedes the
+immutable v1 artifact.  It separates packet-level
 summaries from declaration-level target values.  Every target in `targets` has
 three independent classifications:
 
 - `theorem_class`: `definition`, `identification`, `exact_identity`,
   `existence_uniqueness`, `qualitative_support`, `generic_quantitative`,
   `named_quantitative`, or `audit_regression`;
-- `coverage_class`: `direct_source_target`, `source_prerequisite`,
-  `reusable_infrastructure`, or `audit_only`;
+- `coverage_class`: `direct_source_target`, `named_source_target`,
+  `source_prerequisite`, `reusable_infrastructure`, or `audit_only`;
 - `novelty_class`: `non_novel`, `source_equivalent`, `equivalent_reformulation`,
   `generalized`, `strengthened_conclusion`, `stronger_hypotheses`, or `novel`.
 
@@ -100,8 +101,14 @@ that a single novelty value cannot capture.
 
 `non_novel` is the truthful target value for routine definitions and elementary
 consequences.  `source_equivalent` requires a specifically bound external source
-target; equivalence to an internal proof dossier does not qualify.  Packet-level
+target or pinned-library statement; equivalence to an internal proof dossier
+does not qualify.  Packet-level
 classes summarize the packet and never replace exact target classifications.
+At packet level, `theorem_class` is a mathematical shape such as
+`finite_remainder_bound` or `qualitative_bridge`; `coverage_class` is a role
+such as `infrastructure`, `exact_source_generic`,
+`named_source_application`, or `audit_source_recovery`.  A source role may
+never occupy the theorem-shape axis.
 
 ## Pre-Lean gates
 
@@ -119,8 +126,13 @@ The gate binds the theorem-card revision/digest recorded in the packet.
 
 Referees check that the proof plan actually reaches every target without assuming
 the conclusion, citing missing infrastructure, confusing fixed and order-dependent
-objects, or suppressing analytic side conditions. Definitions or audit-only
-targets may mark this gate inapplicable only with an explicit packet reason.
+objects, or suppressing analytic side conditions.  The packet encodes this as
+`applicability: required` or `applicability: not_applicable`; the latter always
+includes a reason.  Definitions, audit-only targets, and transparent non-novel
+wrappers around specifically bound pinned-library facts may use
+`not_applicable`.  An external envelope then records the same applicability and
+`gate_state: not_required`.  A merely short, plausible, or conditional proof is
+not grounds for omitting the gate.
 
 ### `structural_circularity_review`
 

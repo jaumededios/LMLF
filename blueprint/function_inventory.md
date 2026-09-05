@@ -79,7 +79,7 @@ Every CSV has an exact header checked by `scripts/validate_inventory.py`, and ev
 
 `notation.csv` records exact glyph, binder/argument order, ambient type, parameter roles, branch, normalization, exceptional values, and derivative variable. A notation row is omitted when OCR cannot safely identify the glyph.
 
-`entities.csv` records canonical mathematical objects, aliases, object kind, source basis, normalization state, a DLMF cross-check, possible Lean reuse, and identification-bridge state. DLMF is a convention check, not source-occurrence evidence.
+`entities.csv` records canonical mathematical objects, aliases, object kind, a concise source-basis summary, normalization state, a DLMF cross-check, possible Lean reuse, and identification-bridge state. DLMF is a convention check, not source-occurrence evidence. `entity_evidence.csv` is the normalized provenance ledger: every evidence row binds one entity to an edition and source snapshot and records whether that evidence is provisional or confirmed. The evidence edition must equal the snapshot's edition.
 
 `cards.csv` and `manifests.csv` are small target registries. Cards keep `theorem_class` and `coverage_class` orthogonal: mathematical shape is not a source-coverage claim. `registration_status` mirrors manifest membership readiness, while `artifact_status` says only whether a card file is present. Neither duplicates proof, review, implementation, or coverage workflow axes from the cards themselves. Manifests separately record `scope_closed`, `occurrence_selection_locked`, and `manifest_status`, plus the source-occurrence total against which the validator counts normalized associations.
 
@@ -95,6 +95,8 @@ All many-to-many relationships are explicit:
 - `occurrence_manifests.csv`: occurrence ↔ closed manifest and its coverage role.
 
 There are no comma-packed id lists and no `notation_id`, `entity_id`, `card_id`, or `manifest_id` columns in `occurrences.csv`. `notation.entity_id` remains a normalized many-to-one ownership relation; occurrence meaning is still expressed through both association tables.
+
+A `confirmed` occurrence↔notation link must remain within the same snapshot or edition. A cross-edition link is permitted only when an explicit edition-relation row has `matched` mathematical-content and page-locator equivalence, `join_semantics=equivalent`, and both snapshots are reconciled to their own editions. A `confirmed` occurrence↔entity link additionally requires a `confirmed` row in `entity_evidence.csv` with the same compatible provenance. The current 2010-to-1997 relation is unresolved and `non_equivalent`, so neither preview notation nor preview entity evidence can be transferred to `OLV97-C03-WATSON`.
 
 ## Enumerated statuses
 
@@ -113,7 +115,7 @@ Notation resolution is `normalization_unresolved` or `resolved`. Entity identity
 
 Association link status is `provisional` or `confirmed`. A provisional association is useful planning data, not a resolved semantic claim.
 
-Card theorem classes currently used are `foundational_calculus`, `definition_identification`, `finite_remainder_bound`, and `qualitative_bridge`. Coverage classes are independently `infrastructure`, `entity_identification`, `exact_source_generic`, `named_source_application`, and `audit_source_recovery`. Registry status is `planning_only`, `execution_ready`, `active`, `complete`, or `superseded`; artifact status is `planned` or `file_present`.
+Card theorem and coverage classes are not duplicated in the inventory validator. Their executable allowed sets come directly from the frozen [`review/classifications-v2.json`](../review/classifications-v2.json) packet-level axes. Its required examples bind `QL-001`, `OLV-001`, and `SR-001` to the intended independent theorem/coverage pairs, and the validator compares those examples with `cards.csv`. Registry status is `planning_only`, `execution_ready`, `active`, `complete`, or `superseded`; artifact status is `planned` or `file_present`.
 
 Manifest status is `planning_only`, `execution_ready`, `active`, `complete`, or `superseded`. `scope_closed` is an independent Boolean. `occurrence_selection_locked` is `true`, `false`, or `not_applicable`, because a zero-source bootstrap has no occurrence selection to lock.
 
@@ -208,6 +210,7 @@ Run:
 
 ```bash
 python3 scripts/validate_inventory.py
+python3 scripts/validate_inventory.py --negative-tests
 ```
 
-The validator uses only the Python standard library. It checks schema versions and exact headers, enums, primary/composite-key uniqueness, edition/snapshot identity, non-equivalent unresolved edition relations, preview-specific IDs, locked-edition confirmation gates, foreign keys, association targets, page ranges, digest/transcription invariants, resolved-occurrence gates, and manifest source-occurrence totals. `--negative-tests` mutates an in-memory copy to prove that the edition join, entity-confirmation, ID-prefix, and manifest-total guards reject bad data. This is an inventory-table validator only; a green result is not source certification, a contract-lint result, or a Lean/review gate.
+The validator uses only the Python standard library. It loads packet class enums and required positive examples from the frozen classification JSON, then checks schema versions and exact headers, primary/composite-key uniqueness, edition/snapshot identity, non-equivalent unresolved edition relations, preview-specific IDs, entity-evidence provenance, locked-edition confirmation gates, foreign keys, association targets, page ranges, digest/transcription invariants, resolved-occurrence gates, and manifest source-occurrence totals. `--negative-tests` mutates independent in-memory copies to prove that seven high-risk guards reject bad data, including concrete confirmed Watson→2010-preview notation and entity links. CI runs both commands. This is an inventory-table validator only; a green result is not source certification, a broader contract-lint result, or a Lean/review gate.

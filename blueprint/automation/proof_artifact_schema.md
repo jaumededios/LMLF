@@ -15,9 +15,12 @@ derivative conclusions, continuation or exceptional-value arguments, normal
 forms, stability theorems, and results not directly recoverable from the locked
 source or pinned Mathlib.
 
-Routine reuse wrappers may record `proof_status: not_required` in their theorem
-card and work packet with an explicit reason.  In that case there is no empty
-proof artifact.  An artifact that exists must contain an argument.
+Transparent non-novel wrappers around specifically bound pinned-library facts
+may record card `proof_status: not_required` and packet
+`natural_language_proof_review.applicability: not_applicable` with an explicit
+reason.  The external envelope repeats that applicability and records
+`gate_state: not_required`.  In that case there is no empty proof artifact.  An
+artifact that exists must contain an argument.
 
 ## 1. Artifact graph and storage boundary
 
@@ -107,6 +110,7 @@ target_bindings:
     proof_section: target-qc-001-t01
     theorem_class: generic_quantitative
     coverage_class: reusable_infrastructure
+    novelty_class: novel
 
 source_bindings:
   occurrences: []
@@ -120,6 +124,11 @@ dependency_bindings:
     - work_item_id: QB-001
       declaration: QuantitativeAnalysis.ErrorOn
       accepted_commit: REPLACE_WITH_FULL_SHA
+
+classification_schema_binding:
+  path: review/classifications-v2.json
+  schema_version: lmlf-classification-v2
+  sha256: REPLACE_WITH_SHA256
 
 structural_circularity_review:
   applicability: required    # required | not_applicable
@@ -149,6 +158,7 @@ At `frozen` state the artifact requires:
   explicitly empty for infrastructure;
 - exact resolved Mathlib revision;
 - every accepted project dependency with declaration and accepted commit;
+- the frozen v2 classification-schema path, version, and digest;
 - structural-circularity applicability, an exact reason when inapplicable, and
   required controlled perspectives when applicable;
 - `supersedes`, either null for revision one or the exact prior artifact ID; and
@@ -422,7 +432,9 @@ name its external authority; it never becomes evidence itself. Proof approval
 does not authorize more declarations than the frozen target list.
 
 `lean_ready` is a composite external authorization.  It additionally requires a
-frozen packet, theorem-card review, required natural-language-proof review,
+frozen packet, theorem-card review, a passing required natural-language-proof
+review or an externally mirrored `not_required` state for a frozen
+`not_applicable` reason,
 dependency availability, and a passing structural-circularity gate when
 applicable (or externally recorded `not_required` with a frozen reason).  It
 also requires the packet's perspective and distinct-ID quorums and no

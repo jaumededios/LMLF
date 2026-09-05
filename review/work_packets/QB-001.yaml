@@ -1,16 +1,17 @@
-schema_version: 3
+schema_version: 4
 
 # This packet intentionally does not contain its own path, commit, or digest.
 # An external review envelope binds those values after the packet is frozen.
 work_item_id: QB-001
 title: Bootstrap finite error predicates and five transport lemmas
+packet_revision: 2
 lifecycle_state: frozen
 specification_owner: jaumededios
 
 classification_schema:
-  path: review/classifications-v1.yaml
-  schema_version: lmlf-classification-v1
-  sha256: 7a4f322bb56dbb40d5d44a7eceb50b5a49ea6ae69f414b920341e3b12ea9d71e
+  path: review/classifications-v2.json
+  schema_version: lmlf-classification-v2
+  sha256: 698626606570827fcc8c78b69865d7cd4bc94de96bc6d5d45c23a5f6611aeeab
 packet_classification:
   theorem_class: foundational_calculus
   coverage_class: infrastructure
@@ -43,10 +44,10 @@ source:
 
 upstream_artifacts:
   theorem_cards:
-    - artifact_id: TC-QB-001-R4
+    - artifact_id: TC-QB-001-R5
       path_or_uri: blueprint/theorem_cards/QB-001.yaml
-      revision: 4
-      sha256: f470845b382e563ea23dbc850ab223cc5a11bc1504fe97cfb399eb9f457b6d46
+      revision: 5
+      sha256: de0ed8cae076e7dfe074b4eacc0e5a8875e245c1ddedf8230851bbfd920f0ce4
     - artifact_id: SIG-QB-001-R2
       path_or_uri: blueprint/theorem_cards/QB-001-signatures.md
       revision: 2
@@ -74,7 +75,7 @@ targets:
     relationship_to_source: >-
       Exact formalization of the reviewed internal definition; mathematically
       routine and non-novel, with no external source coverage.
-    theorem_card_id: TC-QB-001-R4
+    theorem_card_id: TC-QB-001-R5
     natural_language_proof_id: NLP-QB-001-R4
     exact_lean_signature: |
       def ErrorOn {X E : Type*} [NormedAddCommGroup E]
@@ -98,7 +99,7 @@ targets:
     relationship_to_source: >-
       Exact formalization of the reviewed internal definition; mathematically
       routine and non-novel, with no external source coverage.
-    theorem_card_id: TC-QB-001-R4
+    theorem_card_id: TC-QB-001-R5
     natural_language_proof_id: NLP-QB-001-R4
     exact_lean_signature: |
       def NormBoundOn {X E : Type*} [NormedAddCommGroup E]
@@ -122,7 +123,7 @@ targets:
     relationship_to_source: >-
       Exact formalization of the reviewed internal definition; mathematically
       routine and non-novel, with no external source coverage.
-    theorem_card_id: TC-QB-001-R4
+    theorem_card_id: TC-QB-001-R5
     natural_language_proof_id: NLP-QB-001-R4
     exact_lean_signature: |
       def HasErrorFamily {X E : Type*} [NormedAddCommGroup E]
@@ -148,7 +149,7 @@ targets:
     relationship_to_source: >-
       Exact formalization of the reviewed routine consequence of equality and
       norm_zero; no new mathematical claim.
-    theorem_card_id: TC-QB-001-R4
+    theorem_card_id: TC-QB-001-R5
     natural_language_proof_id: NLP-QB-001-R4
     exact_lean_signature: |
       theorem ErrorOn.exact {X E : Type*} [NormedAddCommGroup E]
@@ -172,7 +173,7 @@ targets:
     relationship_to_source: >-
       Exact formalization of the reviewed routine predicate restriction; no new
       mathematical claim.
-    theorem_card_id: TC-QB-001-R4
+    theorem_card_id: TC-QB-001-R5
     natural_language_proof_id: NLP-QB-001-R4
     exact_lean_signature: |
       theorem ErrorOn.restrict {X E : Type*} [NormedAddCommGroup E]
@@ -196,7 +197,7 @@ targets:
     relationship_to_source: >-
       Exact formalization of the reviewed routine transitivity of real
       inequalities; no new mathematical claim.
-    theorem_card_id: TC-QB-001-R4
+    theorem_card_id: TC-QB-001-R5
     natural_language_proof_id: NLP-QB-001-R4
     exact_lean_signature: |
       theorem ErrorOn.weaken {X E : Type*} [NormedAddCommGroup E]
@@ -220,7 +221,7 @@ targets:
     relationship_to_source: >-
       Exact formalization of the reviewed routine triangle-inequality
       composition; no new mathematical claim.
-    theorem_card_id: TC-QB-001-R4
+    theorem_card_id: TC-QB-001-R5
     natural_language_proof_id: NLP-QB-001-R4
     exact_lean_signature: |
       theorem ErrorOn.trans {X E : Type*} [NormedAddCommGroup E]
@@ -245,7 +246,7 @@ targets:
     relationship_to_source: >-
       Exact formalization of the reviewed routine precomposition transport; no
       new mathematical claim.
-    theorem_card_id: TC-QB-001-R4
+    theorem_card_id: TC-QB-001-R5
     natural_language_proof_id: NLP-QB-001-R4
     exact_lean_signature: |
       theorem ErrorOn.comp {X Y E : Type*} [NormedAddCommGroup E]
@@ -301,7 +302,7 @@ pre_lean_gate_requirements:
         agents: 2
         minimum_distinct_agent_models: 1
   natural_language_proof_review:
-    required: true
+    applicability: required
     inapplicable_reason: null
     minimum_distinct_reviewer_ids: 2
     allowed_reviewer_compositions:

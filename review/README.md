@@ -19,8 +19,9 @@ addressed evidence store.
   independent rubric review.
 - [`templates/disposition_ledger.yaml`](templates/disposition_ledger.yaml) tracks
   findings outside the candidate head.
-- [`classifications-v1.yaml`](classifications-v1.yaml) is the frozen, versioned
-  packet-level and target-level classification vocabulary.
+- [`classifications-v2.json`](classifications-v2.json) is the current frozen,
+  machine-readable packet-level and target-level classification vocabulary; it
+  supersedes but does not mutate `classifications-v1.yaml`.
 - [`rubrics/`](rubrics/) contains focused referee instructions. Apply one rubric
   at a time.
 
@@ -37,6 +38,8 @@ addressed evidence store.
 4. Set the envelope's `lean_ready` gate to `pass` only after its prerequisite
    pre-Lean gates, perspectives, and reviewer quorums pass. An inapplicable
    structural gate must be explicitly `not_required` with the packet reason.
+   The same representation applies to an inapplicable natural-language-proof
+   gate, including transparent non-novel pinned-library wrappers.
    `lean_ready` authorizes Lean work; it is not an implementation approval.
 5. Implement the packet on a focused branch. At a candidate head, add the full
    base/head SHAs and reproducible evidence to the external envelope.
@@ -73,9 +76,11 @@ authorization.  They describe frozen scope and intrinsic proof completeness.
 Only the externally stored envelope and bound verdicts establish gate state;
 repository review ledgers are historical and count as zero reviewers.
 
-Only the CSV inventory validator currently exists.  Validation of YAML/Markdown
-schemas, lifecycle transitions, external bindings, classification joins, and
-review quorums remains a manual process specified for a future contract linter.
+Only the CSV inventory validator currently exists as executable contract
+checking.  It consumes the v2 packet classification enums/examples and runs
+positive and negative suites in CI.  Validation of YAML/Markdown lifecycle,
+target-level card/packet joins, external bindings, and review quorums remains a
+manual process specified for a future contract linter.
 
 ## Manual isolation is limited
 

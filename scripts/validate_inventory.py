@@ -4,6 +4,7 @@
 from __future__ import annotations
 
 import csv
+import json
 import sys
 from copy import deepcopy
 from collections import defaultdict
@@ -13,6 +14,9 @@ from pathlib import Path
 SCHEMA_VERSION = "inventory-v1.0.0"
 ROOT = Path(__file__).resolve().parents[1]
 INVENTORY = ROOT / "blueprint" / "inventory"
+CLASSIFICATION_AUTHORITY = ROOT / "review" / "classifications-v2.json"
+CLASSIFICATION_SCHEMA_VERSION = "lmlf-classification-v2"
+REQUIRED_SOURCE_CARD_EXAMPLES = {"QL-001", "OLV-001", "SR-001"}
 
 
 HEADERS: dict[str, list[str]] = {
@@ -139,6 +143,16 @@ HEADERS: dict[str, list[str]] = {
         "identification_status",
         "notes",
     ],
+    "entity_evidence.csv": [
+        "schema_version",
+        "entity_evidence_id",
+        "entity_id",
+        "edition_id",
+        "source_snapshot_id",
+        "evidence_role",
+        "evidence_status",
+        "notes",
+    ],
     "cards.csv": [
         "schema_version",
         "card_id",
@@ -202,6 +216,7 @@ PRIMARY_KEYS: dict[str, tuple[str, ...]] = {
     "occurrences.csv": ("occurrence_id",),
     "notation.csv": ("notation_id",),
     "entities.csv": ("entity_id",),
+    "entity_evidence.csv": ("entity_evidence_id",),
     "cards.csv": ("card_id",),
     "manifests.csv": ("manifest_id",),
     "occurrence_notations.csv": ("occurrence_id", "notation_id"),
@@ -292,6 +307,14 @@ REQUIRED.update(
             "identity_status",
             "normalization_status",
             "identification_status",
+        ),
+        "entity_evidence.csv": REQUIRED["entity_evidence.csv"]
+        + (
+            "entity_id",
+            "edition_id",
+            "source_snapshot_id",
+            "evidence_role",
+            "evidence_status",
         ),
         "cards.csv": REQUIRED["cards.csv"]
         + (
@@ -467,20 +490,13 @@ ENUMS: dict[tuple[str, str], set[str]] = {
         "bridge_pending",
         "proved",
     },
-    ("cards.csv", "theorem_class"): {
-        "foundational_calculus",
-        "definition_identification",
-        "finite_remainder_bound",
-        "existence_uniqueness",
-        "qualitative_bridge",
+    ("entity_evidence.csv", "evidence_role"): {
+        "body_definition",
+        "body_naming",
+        "toc_lead",
+        "project_design",
     },
-    ("cards.csv", "coverage_class"): {
-        "infrastructure",
-        "entity_identification",
-        "exact_source_generic",
-        "named_source_application",
-        "audit_source_recovery",
-    },
+    ("entity_evidence.csv", "evidence_status"): {"provisional", "confirmed"},
     ("cards.csv", "registration_status"): {
         "planning_only",
         "execution_ready",
@@ -531,6 +547,95 @@ ENUMS: dict[tuple[str, str], set[str]] = {
 def add_error(errors: list[str], filename: str, line: int | None, message: str) -> None:
     location = filename if line is None else f"{filename}:{line}"
     errors.append(f"{location}: {message}")
+
+
+def load_classification_authority(
+    errors: list[str],
+) -> tuple[dict[tuple[str, str], set[str]], dict[str, dict[str, str]]]:
+    """Load packet enums and required examples from the single frozen authority."""
+
+    filename = str(CLASSIFICATION_AUTHORITY.relative_to(ROOT))
+    try:
+        with CLASSIFICATION_AUTHORITY.open("r", encoding="utf-8") as handle:
+            document = json.load(handle)
+    except (OSError, UnicodeError, json.JSONDecodeError) as exc:
+        add_error(errors, filename, None, f"cannot load classification authority: {exc}")
+        return {}, {}
+
+    if not isinstance(document, dict):
+        add_error(errors, filename, None, "classification authority must be a JSON object")
+        return {}, {}
+    if document.get("schema_version") != CLASSIFICATION_SCHEMA_VERSION:
+        add_error(
+            errors,
+            filename,
+            None,
+            f"schema_version must be {CLASSIFICATION_SCHEMA_VERSION!r}",
+        )
+    if document.get("record_kind") != "classification_vocabulary":
+        add_error(errors, filename, None, "record_kind must be 'classification_vocabulary'")
+    if document.get("status") != "frozen":
+        add_error(errors, filename, None, "classification authority must have status='frozen'")
+
+    allowed_by_level: dict[tuple[str, str], set[str]] = {}
+    for level in ("packet_level", "target_level"):
+        level_data = document.get(level)
+        if not isinstance(level_data, dict):
+            add_error(errors, filename, None, f"{level} must be an object")
+            continue
+        for axis in ("theorem_class", "coverage_class", "novelty_class"):
+            axis_data = level_data.get(axis)
+            values = axis_data.get("allowed") if isinstance(axis_data, dict) else None
+            if not isinstance(values, list) or not values:
+                add_error(errors, filename, None, f"{level}.{axis}.allowed must be a nonempty list")
+                continue
+            if not all(isinstance(value, str) and value for value in values):
+                add_error(
+                    errors,
+                    filename,
+                    None,
+                    f"{level}.{axis}.allowed must contain only nonempty strings",
+                )
+                continue
+            if len(values) != len(set(values)):
+                add_error(errors, filename, None, f"{level}.{axis}.allowed contains duplicates")
+            allowed_by_level[(level, axis)] = set(values)
+
+    examples: dict[str, dict[str, str]] = {}
+    raw_examples = document.get("required_packet_examples")
+    if not isinstance(raw_examples, list):
+        add_error(errors, filename, None, "required_packet_examples must be a list")
+        raw_examples = []
+    for index, example in enumerate(raw_examples):
+        label = f"required_packet_examples[{index}]"
+        if not isinstance(example, dict):
+            add_error(errors, filename, None, f"{label} must be an object")
+            continue
+        required_fields = ("id", "theorem_class", "coverage_class", "novelty_class")
+        if not all(isinstance(example.get(field), str) and example[field] for field in required_fields):
+            add_error(errors, filename, None, f"{label} must define nonempty {required_fields!r}")
+            continue
+        example_id = example["id"]
+        if example_id in examples:
+            add_error(errors, filename, None, f"duplicate required packet example id {example_id!r}")
+            continue
+        examples[example_id] = {field: example[field] for field in required_fields}
+        for axis in ("theorem_class", "coverage_class", "novelty_class"):
+            allowed = allowed_by_level.get(("packet_level", axis), set())
+            if example[axis] not in allowed:
+                add_error(
+                    errors,
+                    filename,
+                    None,
+                    f"{label}.{axis}={example[axis]!r} is not allowed on the packet {axis} axis",
+                )
+
+    card_enums = {
+        ("cards.csv", axis): allowed_by_level[("packet_level", axis)]
+        for axis in ("theorem_class", "coverage_class")
+        if ("packet_level", axis) in allowed_by_level
+    }
+    return card_enums, examples
 
 
 def read_tables(errors: list[str]) -> dict[str, list[dict[str, str]]]:
@@ -585,7 +690,12 @@ def line_of(row: dict[str, str]) -> int:
     return int(row["__line__"])
 
 
-def check_rows(tables: dict[str, list[dict[str, str]]], errors: list[str]) -> None:
+def check_rows(
+    tables: dict[str, list[dict[str, str]]],
+    errors: list[str],
+    classification_enums: dict[tuple[str, str], set[str]],
+) -> None:
+    active_enums = {**ENUMS, **classification_enums}
     for filename, rows in tables.items():
         for row in rows:
             line = line_of(row)
@@ -599,7 +709,7 @@ def check_rows(tables: dict[str, list[dict[str, str]]], errors: list[str]) -> No
             for field in REQUIRED[filename]:
                 if not row[field].strip():
                     add_error(errors, filename, line, f"required field {field!r} is blank")
-            for (enum_file, field), allowed in ENUMS.items():
+            for (enum_file, field), allowed in active_enums.items():
                 if enum_file == filename and row[field] not in allowed:
                     add_error(
                         errors,
@@ -649,6 +759,9 @@ def check_foreign_keys(
         ("occurrences.csv", "source_snapshot_id", snapshots),
         ("notation.csv", "source_snapshot_id", snapshots),
         ("notation.csv", "entity_id", entities),
+        ("entity_evidence.csv", "entity_id", entities),
+        ("entity_evidence.csv", "edition_id", editions),
+        ("entity_evidence.csv", "source_snapshot_id", snapshots),
         ("cards.csv", "manifest_id", manifests),
         ("occurrence_notations.csv", "occurrence_id", occurrences),
         ("occurrence_notations.csv", "notation_id", notations),
@@ -713,11 +826,57 @@ def parse_page_pair(
         )
 
 
+def editions_are_fully_equivalent(
+    left: str,
+    right: str,
+    relations: list[dict[str, str]],
+) -> bool:
+    if left == right:
+        return True
+    for relation in relations:
+        endpoints = {relation["from_edition_id"], relation["to_edition_id"]}
+        if endpoints != {left, right}:
+            continue
+        if (
+            relation["content_equivalence_status"] == "matched"
+            and relation["page_locator_equivalence_status"] == "matched"
+            and relation["join_semantics"] == "equivalent"
+        ):
+            return True
+    return False
+
+
+def source_provenance_is_compatible(
+    left_snapshot_id: str,
+    right_snapshot_id: str,
+    snapshots: dict[str, dict[str, str]],
+    relations: list[dict[str, str]],
+) -> bool:
+    """Permit same-edition evidence or a fully reconciled equivalent-edition join."""
+
+    left = snapshots.get(left_snapshot_id)
+    right = snapshots.get(right_snapshot_id)
+    if not left or not right:
+        return False
+    if left_snapshot_id == right_snapshot_id or left["edition_id"] == right["edition_id"]:
+        return True
+    return (
+        left["edition_reconciliation_status"] == "matched"
+        and right["edition_reconciliation_status"] == "matched"
+        and editions_are_fully_equivalent(
+            left["edition_id"],
+            right["edition_id"],
+            relations,
+        )
+    )
+
+
 def check_semantics(
     tables: dict[str, list[dict[str, str]]], errors: list[str]
 ) -> None:
     editions = index_by(tables, "editions.csv", "edition_id")
     snapshots = index_by(tables, "source_snapshots.csv", "source_snapshot_id")
+    edition_relations = tables["edition_relations.csv"]
 
     for row in tables["edition_relations.csv"]:
         if row["from_edition_id"] == row["to_edition_id"]:
@@ -756,6 +915,27 @@ def check_semantics(
                 "source_snapshots.csv",
                 line_of(row),
                 "unresolved digest must not carry an algorithm or value",
+            )
+
+    for row in tables["entity_evidence.csv"]:
+        snapshot = snapshots.get(row["source_snapshot_id"])
+        if snapshot and row["edition_id"] != snapshot["edition_id"]:
+            add_error(
+                errors,
+                "entity_evidence.csv",
+                line_of(row),
+                "entity evidence edition_id must equal its source snapshot edition_id",
+            )
+        if (
+            row["evidence_status"] == "confirmed"
+            and snapshot
+            and snapshot["edition_reconciliation_status"] != "matched"
+        ):
+            add_error(
+                errors,
+                "entity_evidence.csv",
+                line_of(row),
+                "confirmed entity evidence requires a snapshot reconciled to its edition",
             )
 
     for row in tables["page_audits.csv"]:
@@ -914,6 +1094,54 @@ def check_semantics(
             )
 
     occurrences = index_by(tables, "occurrences.csv", "occurrence_id")
+    notations = index_by(tables, "notation.csv", "notation_id")
+    for link in tables["occurrence_notations.csv"]:
+        if link["link_status"] != "confirmed":
+            continue
+        occurrence = occurrences.get(link["occurrence_id"])
+        notation = notations.get(link["notation_id"])
+        if occurrence and notation and not source_provenance_is_compatible(
+            occurrence["source_snapshot_id"],
+            notation["source_snapshot_id"],
+            snapshots,
+            edition_relations,
+        ):
+            add_error(
+                errors,
+                "occurrence_notations.csv",
+                line_of(link),
+                "confirmed occurrence-notation association crosses source provenance "
+                "without a fully matched equivalent-edition relation",
+            )
+
+    evidence_by_entity: defaultdict[str, list[dict[str, str]]] = defaultdict(list)
+    for evidence in tables["entity_evidence.csv"]:
+        evidence_by_entity[evidence["entity_id"]].append(evidence)
+    for link in tables["occurrence_entities.csv"]:
+        if link["link_status"] != "confirmed":
+            continue
+        occurrence = occurrences.get(link["occurrence_id"])
+        compatible_evidence = False
+        if occurrence:
+            compatible_evidence = any(
+                evidence["evidence_status"] == "confirmed"
+                and source_provenance_is_compatible(
+                    occurrence["source_snapshot_id"],
+                    evidence["source_snapshot_id"],
+                    snapshots,
+                    edition_relations,
+                )
+                for evidence in evidence_by_entity[link["entity_id"]]
+            )
+        if occurrence and not compatible_evidence:
+            add_error(
+                errors,
+                "occurrence_entities.csv",
+                line_of(link),
+                "confirmed occurrence-entity association has no confirmed entity evidence "
+                "with matching provenance or a fully matched equivalent-edition relation",
+            )
+
     links_by_entity: defaultdict[str, list[dict[str, str]]] = defaultdict(list)
     for link in tables["occurrence_entities.csv"]:
         links_by_entity[link["entity_id"]].append(link)
@@ -1091,20 +1319,64 @@ def check_manifest_totals(
     return result
 
 
+def check_classification_examples(
+    tables: dict[str, list[dict[str, str]]],
+    examples: dict[str, dict[str, str]],
+    errors: list[str],
+) -> None:
+    """Bind source-card registry axes to the authority's required positive examples."""
+
+    filename = str(CLASSIFICATION_AUTHORITY.relative_to(ROOT))
+    cards = index_by(tables, "cards.csv", "card_id")
+    for card_id in sorted(REQUIRED_SOURCE_CARD_EXAMPLES):
+        example = examples.get(card_id)
+        if not example:
+            add_error(
+                errors,
+                filename,
+                None,
+                f"missing required packet example {card_id!r}",
+            )
+            continue
+        card = cards.get(card_id)
+        if not card:
+            add_error(
+                errors,
+                "cards.csv",
+                None,
+                f"missing registry row for required classification example {card_id!r}",
+            )
+            continue
+        for axis in ("theorem_class", "coverage_class"):
+            if card[axis] != example[axis]:
+                add_error(
+                    errors,
+                    "cards.csv",
+                    line_of(card),
+                    f"{card_id} {axis}={card[axis]!r} does not match the frozen "
+                    f"classification example {example[axis]!r}",
+                )
+
+
 def validate_tables(
-    tables: dict[str, list[dict[str, str]]]
+    tables: dict[str, list[dict[str, str]]],
+    classification_enums: dict[tuple[str, str], set[str]],
+    classification_examples: dict[str, dict[str, str]],
 ) -> tuple[list[str], dict[str, int]]:
     errors: list[str] = []
-    check_rows(tables, errors)
+    check_rows(tables, errors, classification_enums)
     check_foreign_keys(tables, errors)
     check_semantics(tables, errors)
+    check_classification_examples(tables, classification_examples, errors)
     totals = check_manifest_totals(tables, errors)
     return errors, totals
 
 
 def run_negative_invariant_tests(
-    tables: dict[str, list[dict[str, str]]]
-) -> list[str]:
+    tables: dict[str, list[dict[str, str]]],
+    classification_enums: dict[tuple[str, str], set[str]],
+    classification_examples: dict[str, dict[str, str]],
+) -> tuple[list[str], int]:
     """Prove that high-risk provenance mutations are rejected in copied data."""
 
     def mutate_edition_mismatch(copy: dict[str, list[dict[str, str]]]) -> None:
@@ -1140,6 +1412,36 @@ def run_negative_invariant_tests(
         )
         row["declared_source_occurrence_total"] = "2"
 
+    def mutate_watson_preview_notation(
+        copy: dict[str, list[dict[str, str]]]
+    ) -> None:
+        copy["occurrence_notations.csv"].append(
+            {
+                "schema_version": SCHEMA_VERSION,
+                "occurrence_id": "OLV97-C03-WATSON",
+                "notation_id": "OLV10P-N0001",
+                "notation_role": "used_notation",
+                "link_status": "confirmed",
+                "notes": "Intentional invalid cross-edition negative fixture.",
+                "__line__": "999",
+            }
+        )
+
+    def mutate_watson_preview_entity(
+        copy: dict[str, list[dict[str, str]]]
+    ) -> None:
+        copy["occurrence_entities.csv"].append(
+            {
+                "schema_version": SCHEMA_VERSION,
+                "occurrence_id": "OLV97-C03-WATSON",
+                "entity_id": "gamma",
+                "entity_role": "uses",
+                "link_status": "confirmed",
+                "notes": "Intentional invalid cross-edition negative fixture.",
+                "__line__": "999",
+            }
+        )
+
     cases = [
         (
             "edition/snapshot mismatch",
@@ -1166,18 +1468,32 @@ def run_negative_invariant_tests(
             mutate_manifest_total,
             "declares 2 source occurrences but associations count 1",
         ),
+        (
+            "Watson linked to 2010-preview notation",
+            mutate_watson_preview_notation,
+            "confirmed occurrence-notation association crosses source provenance",
+        ),
+        (
+            "Watson linked to 2010-preview entity",
+            mutate_watson_preview_entity,
+            "confirmed occurrence-entity association has no confirmed entity evidence",
+        ),
     ]
 
     failures: list[str] = []
     for name, mutate, expected in cases:
         copied = deepcopy(tables)
         mutate(copied)
-        errors, _ = validate_tables(copied)
+        errors, _ = validate_tables(
+            copied,
+            classification_enums,
+            classification_examples,
+        )
         if not any(expected in error for error in errors):
             failures.append(
                 f"negative test {name!r} did not produce expected diagnostic {expected!r}"
             )
-    return failures
+    return failures, len(cases)
 
 
 def main() -> int:
@@ -1187,8 +1503,15 @@ def main() -> int:
         return 2
 
     read_errors: list[str] = []
+    classification_enums, classification_examples = load_classification_authority(
+        read_errors
+    )
     tables = read_tables(read_errors)
-    validation_errors, totals = validate_tables(tables)
+    validation_errors, totals = validate_tables(
+        tables,
+        classification_enums,
+        classification_examples,
+    )
     errors = read_errors + validation_errors
 
     if errors:
@@ -1198,7 +1521,11 @@ def main() -> int:
         return 1
 
     if "--negative-tests" in arguments:
-        negative_failures = run_negative_invariant_tests(tables)
+        negative_failures, negative_count = run_negative_invariant_tests(
+            tables,
+            classification_enums,
+            classification_examples,
+        )
         if negative_failures:
             print(
                 f"negative invariant testing failed with {len(negative_failures)} error(s):",
@@ -1207,7 +1534,10 @@ def main() -> int:
             for failure in negative_failures:
                 print(f"- {failure}", file=sys.stderr)
             return 1
-        print("negative invariant tests passed: 5 intentionally invalid copied fixtures rejected")
+        print(
+            f"negative invariant tests passed: {negative_count} intentionally invalid "
+            "copied fixtures rejected"
+        )
 
     association_rows = sum(
         len(tables[name])
@@ -1226,7 +1556,10 @@ def main() -> int:
         f"{len(tables['occurrences.csv'])} occurrences, "
         f"{len(tables['notation.csv'])} notations, "
         f"{len(tables['entities.csv'])} entities, "
-        f"{association_rows} associations; manifest totals [{manifest_summary}]"
+        f"{len(tables['entity_evidence.csv'])} entity evidence rows, "
+        f"{association_rows} occurrence associations; "
+        "classification examples [OLV-001, QL-001, SR-001]; "
+        f"manifest totals [{manifest_summary}]"
     )
     return 0
 
