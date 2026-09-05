@@ -1,0 +1,162 @@
+schema_version: 2
+id: OLV-001
+title: Quantitative source recovery of Olver 1997 Theorem 3.1
+owner: jaumededios
+artifact_revision: 1
+baseline_spec_commit: pending_external_record_after_commit
+
+theorem_class: finite_remainder_bound
+coverage_class: exact_source_generic
+novelty_class: strengthened_conclusion
+specification_status: draft
+proof_status: complete
+review_status: not_started
+implementation_status: not_started
+prototype_status: absent
+coverage_status: transcribed
+manifest_membership_status: planning_only
+status_as_of: post_source_acquisition_draft
+status_authority: external_review_envelope_only
+
+classification_schema:
+  path: review/classifications-v2.json
+  schema_version: lmlf-classification-v2
+  artifact_revision: 2
+  sha256: 8c9f8dbb5ab351771a433a9901fe176a66ec214092c5d5880b3ec57c9a5b23e9
+
+manifest: OLV-MVP-1
+source_snapshot:
+  id: SRC-OLV-1997-USER-PDF-20260905
+  sha256: 08e1844d29a5ad21f89b9b600249ce18ac1665a5845be2d4e4219a3ededdc909
+  repository_contains_source_bytes: false
+source_occurrences:
+  - OLV97-C03-WATSON
+source_transcription:
+  path: blueprint/source_transcriptions/OLV97-C03-WATSON.md
+  sha256: 7613657ede11fff0494303026a8310934722c9fd27613c4f8848755a18d90020
+  status: transcribed_unreconciled
+source_entities:
+  - watson_amplitude
+  - watson_coefficients
+  - watson_exponent_parameters
+  - watson_laplace_variables
+  - watson_remainders
+  - gamma
+source_notation:
+  - OLV97-N-WAT-Q
+  - OLV97-N-WAT-A
+  - OLV97-N-WAT-LAMMU
+  - OLV97-N-WAT-XT
+  - OLV97-N-WAT-PHI
+  - OLV97-N-WAT-GAMMA
+coverage_claim: pending independent collation review and later proof reconciliation
+
+scope:
+  summary: >-
+    From exactly the collated hypotheses of Olver 1997 Theorem 3.1, derive for
+    every fixed truncation order an explicit local-Gamma plus exponential-tail
+    finite bound with visible witnesses. A later SR-001 audit theorem recovers
+    the printed qualitative expansion.
+  candidate_module: LMLF.Olver1997.Chapter3.Watson
+  exact_signatures_artifact: pending after source and integral-semantics review
+  candidate_public_targets:
+    - target_id: OLV-001-T01
+      declaration: LMLF.Olver1997.Chapter3.watson_finite
+  included:
+    - exact exponent and zero-based order convention from Theorem 3.1
+    - existential local and tail witnesses derived from source hypotheses
+    - finite quantitative remainder inequality
+    - proof route to the printed qualitative expansion
+  excluded:
+    - section 9.1 global-majorant bounds
+    - best-supremum formulas for sigma_n
+    - named-function applications
+    - uniformity in order or external parameters
+    - Lean implementation before external authorization
+
+source_contract:
+  location: Chapter 3 section 3.2, Theorem 3.1, printed pages 71-72
+  amplitude_expansion: >-
+    q(t) has coefficients a_s at powers (s+lambda-mu)/mu as t tends to zero
+    from the positive side, in Olver's fixed-order asymptotic-expansion sense.
+  parameter_domain: lambda > 0 and mu > 0
+  convergence: >-
+    The improper Laplace integral over the full positive range converges for
+    all sufficiently large positive x.
+  source_conclusion: >-
+    The Laplace integral has coefficients Gamma((s+lambda)/mu)*a_s at powers
+    x^(-(s+lambda)/mu) as x tends to positive infinity.
+  source_regularities: >-
+    Subject to convergence, finitely many discontinuities and infinities are
+    permitted, including at zero; exact Lean semantics remain under review.
+
+quantitative_contract:
+  beta_n: (n + lambda) / mu
+  witnesses: k_n > 0, K_n >= 0, real X_n, L_n >= 0
+  domain: x > max X_n 0
+  bound: >-
+    norm(integral - sum_{s<n} a_s*Gamma(beta_s)*x^(-beta_s)) <=
+    K_n*Gamma(beta_n)*x^(-beta_n) + L_n*exp(-(x-X_n)*k_n)
+  order_convention: n retained terms indexed 0 through n-1; empty at n=0
+  branch_convention: positive-real powers only
+  derivative_convention: not_applicable
+  exceptional_values: no Gamma poles because beta_s > 0
+
+open_design_choices:
+  scalar_codomain:
+    status: unresolved
+    source_question: whether q and a_s are real, complex, or either
+  improper_integral:
+    status: unresolved
+    source_question: precise treatment of conditional convergence and interior infinities
+  packet_split:
+    status: proposed
+    proposal: >-
+      Keep the proof-derived local-tail theorem in OLV-001 and formalize the
+      stronger section 9.1 global-majorant formula in a later direct-source card.
+
+natural_language_proof:
+  artifact: blueprint/proofs/OLV-001.md
+  artifact_revision: 1
+  artifact_state: draft
+  proof_status: complete
+
+target_classifications:
+  - target_id: OLV-001-T01
+    theorem_class: generic_quantitative
+    coverage_class: direct_source_target
+    novelty_class: strengthened_conclusion
+
+dependencies:
+  accepted_lmlf_packets:
+    - QB-001
+    - DEF-001
+  draft_lmlf_packets:
+    - QL-001
+  source_dependencies:
+    - OLV97-C03-WATSON
+  explicitly_not_a_dependency:
+    - OLV97-C03-WATSON-BOUNDS
+
+review_questions:
+  path: review/questions/OLV97-C03-WATSON.md
+  status: awaiting_external_answers
+
+pre_lean_requirements:
+  source_collation_reviewers: 2
+  theorem_card_reviewers: 2
+  natural_language_proof_reviewers: 2
+  structural_circularity_review: required
+  lean_ready_authority: external_review_envelope_only
+
+blocking_conditions:
+  - source transcription and page audit are not independently reviewed
+  - open design choices are unresolved
+  - QL-001 is not frozen or accepted
+  - exact Lean signatures have not been compiled
+  - required external review quorum does not exist
+
+implementation:
+  implementation_status: not_started
+  declarations_present: false
+  authorization: absent

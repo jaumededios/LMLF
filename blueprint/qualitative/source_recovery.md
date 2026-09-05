@@ -262,11 +262,12 @@ and card receive ordinary source and mathematical review.
 
 An edition is a bibliographic target; a snapshot is the exact object inspected.
 The 2010 CRC preview has its own `olver_crc_2010_preview` edition row as well as
-its own snapshot row. It is not assigned to `olver_1997b`. The pending 1997 copy
-is a distinct locked-edition snapshot placeholder, not evidence of inspection.
+its own snapshot row. It is not assigned to `olver_1997b`. The reserved 1997
+placeholder remains immutable and is not evidence of inspection. The acquired
+private 1997 PDF therefore has a distinct concrete snapshot row and digest.
 The preview can generate preview-specific leads and provisional transcriptions,
-but only an inspected, reproducibly identified copy assigned to the locked
-edition can close a 1997 occurrence.
+but only that inspected, reproducibly identified locked-edition snapshot plus
+independent page/transcription review can close a 1997 occurrence.
 
 For each recovery packet, retain:
 

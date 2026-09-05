@@ -27,7 +27,7 @@ As of this specification:
 | `BOOTSTRAP-0` | exactly `QB-001` and `DEF-001` | closed and `execution_ready`; zero source occurrences |
 | `QB-001` | eight signatures only | card revision 7, proof revision 6, and signature revision 2 are frozen; proof complete, external review not started, no Lean authorization |
 | `DEF-001` | four Gamma reuse wrappers | card revision 4 frozen; proof not required, external review not started, implementation not started, prototype absent in the exact specification snapshot |
-| `OLV-MVP-1` | one selected Watson occurrence | open and `planning_only`; occurrence selected but the locked text is not yet collated |
+| `OLV-MVP-1` | one selected Watson occurrence | open and `planning_only`; exact 1997 snapshot acquired, first mathematical transcription and QL/OLV proof drafts present, independent review pending |
 | Olver theorem coverage | none | no quantitative Olver theorem or qualitative source recovery is currently claimed |
 
 The exact bootstrap specifications are the
@@ -182,7 +182,7 @@ linked document.
 |---|---|---|
 | Bootstrap | `QB-001`, `DEF-001` | the only current closed, fully specified manifest members |
 | Demonstrator candidates | `QA-002`, `DEF-002`, `QC-001`, `QL-001`, `EX-001`, `EX-002` | `DEMO-0` planning; only IDs with complete cards may move to a revised closed manifest |
-| Watson source pilot | `QL-001`, `OLV-001`, `SR-001` | registered as planning rows; no complete cards or source transcription yet |
+| Watson source pilot | `QL-001`, `OLV-001`, `SR-001` | QL-001 and OLV-001 have draft cards and complete first proof drafts; source transcription is unreviewed and SR-001 is not yet carded |
 | Domain/branch support | `QC-DOM`, `CB-PRINCIPAL`, `CB-GENERIC`, `QC-REAL`, `QC-LOGCOORD` | provisional in [complex domains](methods/complex_domains_branches.md) |
 | Derivative transport | `QC-CAUCHY`, `QC-RADIUS`, `EX-001`, `QC-NEG-DERIV`, `QC-JET`, `QC-MIXED`, `QC-GAUGE` | provisional except manifest candidate `EX-001`; M3 uses only the bounded initial slice |
 | Laplace | `QL-001`--`QL-003`, `EX-002`, `OLV-001`, `SR-001` | only the minimal source-selected slice is on the Watson path |
@@ -205,10 +205,10 @@ named function and discharge all generic hypotheses.
 
 ## Work that may proceed in parallel
 
-- Direct Watson collation, a narrow pinned-Mathlib reuse audit, and drafting the
-  generic finite Laplace proof may proceed together.  `OLV-001` cannot freeze
-  until the collation fixes its exact statement, and only the required QL
-  subset enters the source critical path.
+- Independent Watson collation review, the pinned-Mathlib reuse audit, and
+  review of the draft generic finite Laplace proof may proceed together.
+  `OLV-001` cannot freeze until source and integral-semantics findings are
+  resolved, and only the required QL subset enters the source critical path.
 - M3 complex derivative transport can proceed beside M4 and M5.  It must not be
   inserted into Watson's prerequisites.
 - Gamma specification review can proceed independently.  Implementation may
@@ -226,13 +226,16 @@ named function and discharge all generic hypotheses.
 
 ## Unresolved source and research gates
 
-The immediate source blocker is not Lean: the exact 1997 Watson proposition is
-untranscribed.  The occurrence still lacks the inspected snapshot identity,
-printed label and complete proposition, notation/entity resolution, and an
-independent collation review.  The current occurrence-card association also
-uses `exact_source_target`, matching the card's `exact_source_generic` coverage
-class; the inventory validator now rejects a named/source-recovery role
-mismatch.  This metadata agreement does not resolve the missing transcription.
+The unavailable-source blocker is closed: the exact 1997 PDF snapshot is
+hash-bound outside version control, printed pp. 71-72 map to PDF pp. 84-85,
+and a copyright-safe mathematical transcription plus notation/entity records
+exist.  The occurrence remains `transcribed_unreconciled`, because its page
+audit, scalar interpretation, conditional-improper-integral semantics, and
+transcription have not received independent approval.  Draft QL-001 and
+OLV-001 cards and complete first proof dossiers expose those questions; neither
+is frozen or Lean-authorized.  The occurrence-card association uses
+`exact_source_target`, matching the card's `exact_source_generic` coverage
+class, but structural metadata agreement is not source certification.
 
 The future Airy/Bessel planning names also need a non-mathematical registry
 reconciliation before any card is created: the demonstrator/transition plans
@@ -241,14 +244,15 @@ split that work into `DEF-AIR-*` and `DEF-BES-*`.  These are alternative queue
 names, not accepted dependencies or duplicate cards.  One finite canonical ID
 set must be chosen when the first exact signatures are frozen.
 
-Across the wider programme, the locked 1997 body scan is incomplete.  Many
-family leads come only from a later publisher preview's contents pages.  Exact
+Across the wider programme, the full locked 1997 snapshot is now available but
+its mathematical body audit is overwhelmingly incomplete.  Many existing
+family leads still come only from a later publisher preview's contents pages.  Exact
 member lists, normalizations, branch cuts, parameter order, derivative
 variables, exceptional values, and edition differences therefore remain open.
 The authoritative research queue starts with:
 
-- `RQ-SRC-001`: exact locked Watson collation;
-- `RQ-WAT-001`: the finite theorem justified by precisely those hypotheses;
+- `RQ-SRC-001`: independent approval of the exact locked Watson collation;
+- `RQ-WAT-001`: review and freezing of the finite theorem justified by precisely those hypotheses;
 - `RQ-QUAL-001`: the exact eventual-domain and scale bridge;
 - `RQ-INT-001` and `RQ-CAUCHY-001`: explicit tails and derivative radii;
 - `RQ-AIRY-001`, `RQ-BESSEL-001`, and `RQ-PARAM-001`: noncircular

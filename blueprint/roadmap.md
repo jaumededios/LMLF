@@ -240,9 +240,10 @@ M5 formalizes exactly one locked source occurrence:
 > pp. 71-72, whose location is independently corroborated by
 > [DLMF 2.3(ii)](https://dlmf.nist.gov/2.3.ii).
 
-M0 must transcribe its exact hypotheses, notation, conclusion, and surrounding
-normalization from the locked copy; DLMF is a cross-reference, not a substitute
-for that collation.  M5 then delivers:
+The first M0 collation now records the exact hypotheses, notation, conclusion,
+and surrounding asymptotic convention from a hash-bound 1997 snapshot; DLMF
+remains a cross-reference, not a substitute.  That transcription is still
+independently unreviewed.  After review and reconciliation, M5 delivers:
 
 - a generic conditional finite Laplace-remainder identity and explicit bound;
 - an `exact_source_generic` quantitative theorem matching the collated generic

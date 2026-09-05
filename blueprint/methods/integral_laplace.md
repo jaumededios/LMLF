@@ -296,12 +296,14 @@ permanent anti-laundering regression.
 
 ## 6. OLV-001 and SR-001 — Watson without scope creep
 
-`OLV97-C03-WATSON` is still unresolved in the source inventory.  No formula in
-this methods blueprint is represented as Olver's exact printed theorem.  Before
-either card is specified, direct collation against the locked 1997 copy must
-record the printed label, full mathematical transcription, quantifier order,
-endpoint convention, exponent lattice, coefficient normalization, conclusion,
-notation/entity associations, copy identifier, and transcription hash.
+`OLV97-C03-WATSON` now has a direct first collation against a hash-bound 1997
+snapshot, including the printed label, mathematical transcription, quantifier
+and exponent ledger, endpoint notes, provisional notation/entity associations,
+copy identifier, and transcription hash.  It remains
+`transcribed_unreconciled` until independent source review resolves the scalar
+codomain and conditional-improper-integral convention.  Draft QL-001 and
+OLV-001 cards and proof dossiers implement the planning split below; they are
+not frozen specifications.
 
 The card split is fixed:
 

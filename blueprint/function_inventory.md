@@ -23,6 +23,8 @@ An edition is bibliographic; a source snapshot is the exact physical or digital 
 
 `SRC-OLV-1997-COLLATION-PENDING` is a reserved placeholder for the locked copy required by the source manifest. It is not evidence that a copy has been acquired or inspected. Its locked-edition identity, `locked_copy_placeholder` kind, `pending` availability, absent digest/access metadata, unresolved digest/edition/page states, and `unknown` rights state are immutable schema invariants. Acquisition must create a new concrete snapshot ID and row, with a digest when legally and technically available, followed by occurrence reassignment or an explicit reconciliation record; the reserved row must never be promoted in place.
 
+`SRC-OLV-1997-USER-PDF-20260905` is the resulting concrete private snapshot. Its title, copyright page, corrected-reprint preface, contents, and Watson-related printed/PDF page map have been inspected, and its exact bytes are bound by ordinary SHA-256. The book bytes, OCR, and rendered pages remain outside version control. The Watson page audits are intentionally `partial`: a distinct source reviewer has not yet verified them, so the occurrence remains `transcribed_unreconciled` and all notation/entity associations remain provisional.
+
 Locators always use printed chapter, section, equation, example, exercise, or page labels. PDF page coordinates belong in `page_audits.csv`, never in the printed-page fields unless a page map has been verified.
 
 ## Meaning of “all named functions”
@@ -178,7 +180,7 @@ Goodwin–Staton, incomplete beta, Faddeeva, generalized exponential integrals, 
 9. Associate occurrences with cards and manifests. Manifest selection freezes scope, not truth or proof progress.
 10. Reverse-audit theorem cards and public APIs for unlinked names, then reconcile totals and index-only exclusions.
 
-For `OLV97-C03-WATSON`, the locked locator from the source manifest is recorded, but its printed theorem label, mathematical transcription, hash, notations, entities, and edition reconciliation remain unresolved. Its three planned theorem-card relationships and its membership in `OLV-MVP-1` are nevertheless explicit.
+For `OLV97-C03-WATSON`, the concrete locked snapshot, printed Theorem 3.1 label, mathematical transcription and hash, page map, and provisional notation/entity records now exist. Independent review, scalar-codomain interpretation, improper-integral semantics, and confirmed associations remain unresolved. Draft QL-001 and OLV-001 cards/proofs exist without frozen signatures or authorization. The related `OLV97-C03-WATSON-BOUNDS` row separately records section 9.1-9.2's stronger global-majorant formulas and is not selected into the one-occurrence MVP manifest.
 
 ## Completion gates
 

@@ -164,21 +164,28 @@ this manifest.
 |---|---|---|---|
 | OLV97-C03-WATSON | Chapter 3, pp. 71-72, Watson's lemma | exact_source_generic | [DLMF §2.3(ii)](https://dlmf.nist.gov/2.3.ii) cites these pages |
 
-Before execution readiness, direct collation must add the exact printed label,
-mathematical transcription, copy identifier, and transcription hash.  Every
-bound variable, endpoint, exponent, and coefficient sequence must resolve in
-the notation and source-entity inventories.
+Direct first collation has added the exact printed label, mathematical
+transcription, hash-bound private copy identifier, page map, and provisional
+notation/source-entity records.  Before execution readiness, a distinct
+reviewer must verify the page audit and transcription, resolve the scalar and
+improper-integral conventions, and promote every required link from
+provisional to confirmed.
 
-Planned cards are finite but not yet specified:
+The first two cards now exist as non-frozen drafts; SR-001 remains uncarded:
 
 | Card | Packet theorem class | Packet coverage class | Obligation |
 |---|---|---|---|
-| QL-001 | finite_remainder_bound | infrastructure | reusable finite Laplace identity and bound |
-| OLV-001 | finite_remainder_bound | exact_source_generic | match the collated Watson hypotheses and prove the explicit quantitative strengthening |
+| QL-001 | finite_remainder_bound | infrastructure | draft supplied-constant local-tail theorem and finite Gamma-moment decomposition |
+| OLV-001 | finite_remainder_bound | exact_source_generic | draft derivation of visible witnesses and a finite bound from the collated Watson hypotheses |
 | SR-001 | qualitative_bridge | audit_source_recovery | recover the exact printed qualitative conclusion in `Audit/SourceRecovery` |
 
 Watson earns occurrence coverage only when OLV-001 and SR-001 are proved and
 reconciled.  It requires no named-function application.
+
+The separately inventoried `OLV97-C03-WATSON-BOUNDS` occurrence records
+section 9.1-9.2, printed pp. 89-90.  It is not selected into this one-occurrence
+manifest.  Its global exponential majorant is a stronger hypothesis and must
+not be laundered into the Theorem 3.1 recovery path.
 
 Its critical path has two parallel predecessors:
 

@@ -1,4 +1,4 @@
 "schema_version","occurrence_id","card_id","card_role","link_status","notes"
 "inventory-v1.0.0","OLV97-C03-WATSON","QL-001","generic_dependency","confirmed","Required by the locked OLV-MVP-1 occurrence selection; manifest scope remains open and this does not advance theorem workflow."
 "inventory-v1.0.0","OLV97-C03-WATSON","OLV-001","exact_source_target","confirmed","Required exact-source generic target; card lifecycle is maintained outside occurrence resolution."
-"inventory-v1.0.0","OLV97-C03-WATSON","SR-001","source_recovery","confirmed","Required source-recovery card; exact source transcription remains pending."
+"inventory-v1.0.0","OLV97-C03-WATSON","SR-001","source_recovery","confirmed","Required source-recovery card; first source transcription exists but independent reconciliation and the SR-001 card remain pending."

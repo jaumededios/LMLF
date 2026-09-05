@@ -60,11 +60,11 @@ Only a manifest may turn a research dependency into release-critical work.
 
 | ID | Priority | Initial state | Question | Likely track |
 |---|---|---|---|---|
-| RQ-SRC-001 | critical_path | question | What is the exact locked-edition Watson proposition and local convention set? | source recovery |
-| RQ-WAT-001 | critical_path | question | Which explicit finite Watson theorem follows from precisely those hypotheses? | integral methods |
+| RQ-SRC-001 | critical_path | candidate_answer | What is the exact locked-edition Watson proposition and local convention set? | source recovery |
+| RQ-WAT-001 | critical_path | candidate_answer | Which explicit finite Watson theorem follows from precisely those hypotheses? | integral methods |
 | RQ-QUAL-001 | critical_path | scoped | What bridge proves the exact printed qualitative relation from the finite theorem? | qualitative recovery |
 | RQ-SCALE-001 | near_term | question | What minimal project representation of asymptotic scales supports source recovery without entering the finite core? | audit architecture |
-| RQ-INT-001 | near_term | question | How should local amplitude control and the nonlocal Laplace tail be combined with useful explicit constants? | integral methods |
+| RQ-INT-001 | near_term | candidate_answer | How should local amplitude control and the nonlocal Laplace tail be combined with useful explicit constants? | integral methods |
 | RQ-CAUCHY-001 | near_term | scoped | Which radius-selection theorems preserve useful derivative constants across moving domains? | complex derivatives |
 | RQ-AIRY-001 | near_term | question | What shared construction gives identified Ai/Bi while remaining independent of turning-point estimates? | definitions/ODE |
 | RQ-BESSEL-001 | near_term | question | How should Bessel kernels, branches, and exceptional orders be constructed and identified uniformly? | definitions/continuation |
@@ -94,10 +94,11 @@ or a Mathlib declaration with a similar name does not move an item to
 conventions, endpoint assumptions, parameter quantifiers, and qualitative
 conclusion of Watson's lemma on printed pp. 71–72 of the locked 1997 reprint?
 
-**Why it is open.** The present locator is corroborated by DLMF, while the exact
-1997 snapshot, mathematical transcription, notation records, and reconciliation
-remain pending. A later preview cannot silently answer an edition-specific
-question.
+**Why it remains open.** A hash-bound 1997 snapshot, page map, mathematical
+transcription, and provisional notation/entity records now exist. Independent
+collation review and reconciliation remain pending, especially for the scalar
+codomain and conditional-improper-integral convention. A later preview cannot
+silently answer either question.
 
 **Closing evidence.** An inspected snapshot record, printed-page map,
 copyright-safe mathematical transcription with digest, notation/entity links,
@@ -105,6 +106,10 @@ and independent collation review.
 
 **Guardrail.** DLMF's modern formulation or a theorem remembered as “Watson's
 lemma” cannot be substituted for the occurrence selected by `OLV-MVP-1`.
+
+**Candidate answer.** See
+[`OLV97-C03-WATSON.md`](../source_transcriptions/OLV97-C03-WATSON.md) and the
+[independent review questions](../../review/questions/OLV97-C03-WATSON.md).
 
 ### RQ-WAT-001 — explicit finite Watson theorem
 
@@ -129,6 +134,13 @@ order-zero statement means.
 
 The proof must identify an exact source-matching theorem and separately label
 any theorem using stronger hypotheses.
+
+**Candidate answer.** The draft
+[`OLV-001` proof](../proofs/OLV-001.md) derives a local-Gamma plus
+exponential-tail inequality from precisely the source proof, through the draft
+[`QL-001` finite theorem](../proofs/QL-001.md).  The global-majorant formulas
+on printed pp. 89-90 are transcribed separately and are not assumed in this
+route.
 
 **Guardrail.** A global remainder theorem assumed as a hypothesis is not a
 solution when the source only supplies local data. An explicit coefficient

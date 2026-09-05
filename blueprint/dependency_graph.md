@@ -92,8 +92,8 @@ global axiom may bypass a missing edge.
 |---|---|---|---|
 | `QB-001` | `BOOTSTRAP-0` | frozen eight-signature specification is complete; candidate-owned review summaries are not externally bound, so authoritative review and `lean_ready` remain pending and implementation is unauthorized | bind the exact successor specification externally, obtain protocol-valid reviews, then authorize only if that external gate passes |
 | `DEF-001` | `BOOTSTRAP-0` | frozen four-declaration specification; implementation is `not_started`, and no prototype is present in the exact specification snapshot | bind and review the exact specification; treat any earlier local compile as unbound historical feasibility evidence, not candidate implementation |
-| `QL-001` | `OLV-MVP-1` planning | registered planning row, no complete card | select a bounded target subset after/alongside Watson collation, then write proof/card |
-| `OLV-001` | `OLV-MVP-1` planning | occurrence selected but untranscribed | locked collation, exact-source card, full proof, two independent reviews |
+| `QL-001` | `OLV-MVP-1` planning | draft card and complete first proof draft; exact signature absent | resolve scalar/improper-integral choices, review, then freeze |
+| `OLV-001` | `OLV-MVP-1` planning | locked occurrence transcribed but independently unreconciled; draft card/proof present | source review, accepted QL-001, exact signatures, proof/card quorum |
 | `SR-001` | `OLV-MVP-1` planning | no card or proof | accepted `OLV-001`, eventual-domain/scale/notation bridge, audit-only implementation |
 
 `DEMO-0` is not closed.  Its candidate names express intent only.
@@ -104,7 +104,7 @@ approve `DEF-001` or release `QB-001`.
 
 ```mermaid
 flowchart LR
-  LOCK["Edition lock: complete"] --> COL["OLV97-C03-WATSON direct 1997 collation: blocked"]
+  LOCK["Edition lock and exact PDF snapshot: complete"] --> COL["OLV97-C03-WATSON first collation: review pending"]
   QB["QB-001 finite core: frozen; external gate pending"] --> QL["Minimal QL-001 Laplace slice: planning"]
   COL --> QL
   QL --> NEED{"Does the selected proof need generalized Gamma moments?"}
@@ -115,13 +115,14 @@ flowchart LR
   SR --> MVP["OLV-MVP-1: one reconciled occurrence"]
 ```
 
-The first blocker is the inspected, independently collated 1997 Watson text:
-printed label and proposition, binder/order convention, endpoint and
-integrability hypotheses, scale/conclusion, notation/entity links, snapshot
-identity, and transcription digest.  The occurrence-card join now uses
-`exact_source_target`, and the inventory validator requires that role for an
-`exact_source_generic` card; this structural consistency does not substitute
-for collation.
+The source snapshot, printed label, proposition, order convention, relevant
+page map, notation/entity draft links, and transcription digest now exist.  The
+first blocker is independent approval of that collation and resolution of its
+two semantic ambiguities: scalar codomain and conditionally convergent
+improper integrals with possible interior singularities.  The occurrence-card
+join uses `exact_source_target`, and the inventory validator requires that role
+for an `exact_source_generic` card; this structural consistency does not
+substitute for review.
 
 Explicitly absent from this graph: Airy, Cauchy derivative transport,
 oscillatory/contour methods, Euler--Maclaurin, ODE residual/stability,
@@ -349,7 +350,7 @@ creating proofs, reviews, status transitions, or source coverage.
 
 | May proceed together | Required join before downstream work |
 |---|---|
-| Watson collation; bounded QL paper proof; DEF implementation review | exact OLV card waits for collation; DEF joins only if Gamma is consumed |
+| independent Watson collation review; bounded QL proof review; later DEF maintenance | exact OLV card waits for reviewed collation and accepted QL; DEF joins only where Gamma identification is consumed |
 | M3 derivative demonstrator; M4/M5 source path | no join; M3 is explicitly off-path |
 | OI, CT, elementary SUM, and CF early roots | join only for a named application that uses several methods |
 | ODE residual algebra, path-system representation audit, and named-family body audits | comparison application waits for both accepted method and identification nodes |
@@ -364,8 +365,8 @@ expands a closed manifest or delays an unrelated accepted path.
 The [research queue](qualitative/open_research_questions.md) is the authoritative
 discussion layer.  The highest-impact unresolved edges are:
 
-1. `RQ-SRC-001`, `RQ-WAT-001`, `RQ-QUAL-001`: exact Watson text, finite theorem,
-   and source recovery.
+1. `RQ-SRC-001`, `RQ-WAT-001`, `RQ-QUAL-001`: review the collated Watson text,
+   freeze the finite theorem, and complete source recovery.
 2. `RQ-INT-001`: local amplitude data versus explicit nonlocal tail control.
 3. `RQ-CAUCHY-001`: useful constrained radii on moving domains.
 4. `RQ-AIRY-001`, `RQ-BESSEL-001`, `RQ-PARAM-001`: noncircular constructions,

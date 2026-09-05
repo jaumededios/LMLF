@@ -1,0 +1,146 @@
+schema_version: 2
+id: QL-001
+title: Finite local-tail bound for Laplace remainders
+owner: jaumededios
+artifact_revision: 1
+baseline_spec_commit: pending_external_record_after_commit
+
+theorem_class: finite_remainder_bound
+coverage_class: infrastructure
+novelty_class: novel
+specification_status: draft
+proof_status: complete
+review_status: not_started
+implementation_status: not_started
+prototype_status: absent
+coverage_status: not_applicable
+manifest_membership_status: planning_only
+status_as_of: post_source_acquisition_draft
+status_authority: external_review_envelope_only
+
+classification_schema:
+  path: review/classifications-v2.json
+  schema_version: lmlf-classification-v2
+  artifact_revision: 2
+  sha256: 8c9f8dbb5ab351771a433a9901fe176a66ec214092c5d5880b3ec57c9a5b23e9
+
+manifest: OLV-MVP-1
+source_occurrences:
+  - OLV97-C03-WATSON
+source_entities:
+  - watson_amplitude
+  - watson_coefficients
+  - watson_exponent_parameters
+  - watson_laplace_variables
+  - watson_remainders
+  - gamma
+source_notation:
+  - OLV97-N-WAT-Q
+  - OLV97-N-WAT-A
+  - OLV97-N-WAT-LAMMU
+  - OLV97-N-WAT-XT
+  - OLV97-N-WAT-PHI
+  - OLV97-N-WAT-GAMMA
+coverage_claim: none; this is reusable infrastructure
+
+scope:
+  summary: >-
+    Prove a finite local-plus-tail estimate for a Laplace remainder with supplied
+    local and bounded-primitive constants, then combine it with finitely many
+    Gamma moments to obtain a finite Watson remainder bound.
+  candidate_module: LMLF.Integral.Watson
+  exact_signatures_artifact: pending after integral-semantics review
+  candidate_public_targets:
+    - target_id: QL-001-T01
+      declaration: LMLF.Integral.improperLaplace_localTail_bound
+    - target_id: QL-001-T02
+      declaration: LMLF.Integral.watsonFiniteRemainder_bound
+  included:
+    - conditional upper-tail convergence from a bounded baseline primitive
+    - local power-law Gamma majorant
+    - finite model-moment decomposition
+    - n = 0 behavior
+  excluded:
+    - derivation of local or tail constants from a named function
+    - infinite-series integration
+    - source-coverage or qualitative asymptotic declarations
+    - section 9 best-exponent suprema
+    - numerical automation
+
+mathematical_contract:
+  local_bound: >-
+    norm (phi t) <= K * t^(beta-1) on 0 < t <= k, with beta > 0,
+    k > 0, and K >= 0.
+  tail_bound: >-
+    The baseline primitive F(t)=integral_k^t exp(-X v) phi(v) dv has norm at
+    most L for t >= k, with L >= 0.
+  target_domain: x > max X 0
+  conclusion: >-
+    The norm of the full remainder integral is at most
+    K*Gamma(beta)*x^(-beta) + L*exp(-(x-X)*k).
+  order_convention: n retained terms indexed 0 through n-1; empty at n=0
+  branch_convention: positive-real rpow only
+  derivative_convention: not_applicable
+  exceptional_values: x=X and x<=0 excluded; beta<=0 excluded
+
+open_design_choices:
+  scalar_codomain:
+    status: unresolved
+    candidates:
+      - real only
+      - complex only with a real corollary
+      - complete normed real vector space
+  improper_integral:
+    status: unresolved
+    requirement: >-
+      Must model conditional convergence as a limit of finite interval
+      integrals and must not rely on totalized nonintegrable Bochner integrals.
+  interior_singularities:
+    status: unresolved
+    requirement: >-
+      The first API should be minimal while still supporting the exact
+      source-facing specialization.
+
+natural_language_proof:
+  artifact: blueprint/proofs/QL-001.md
+  artifact_revision: 1
+  artifact_state: draft
+  proof_status: complete
+
+target_classifications:
+  - target_id: QL-001-T01
+    theorem_class: generic_quantitative
+    coverage_class: reusable_infrastructure
+    novelty_class: novel
+  - target_id: QL-001-T02
+    theorem_class: generic_quantitative
+    coverage_class: source_prerequisite
+    novelty_class: novel
+
+dependencies:
+  mathlib_revision: 0df444a360eaa60ab8c11dca51a86af692955474
+  accepted_lmlf_packets:
+    - QB-001
+    - DEF-001
+  pinned_candidates:
+    - integral_rpow_mul_exp_neg_mul_Ioi
+    - Complex.integral_cpow_mul_exp_neg_mul_Ioi
+    - Real.isLittleO_exp_neg_mul_rpow_atTop
+    - MeasureTheory.intervalIntegral_tendsto_integral_Ioi
+    - MeasureTheory.integral_Ioi_mul_deriv_eq_deriv_mul
+
+pre_lean_requirements:
+  theorem_card_reviewers: 2
+  natural_language_proof_reviewers: 2
+  structural_circularity_review: required
+  lean_ready_authority: external_review_envelope_only
+
+blocking_conditions:
+  - open design choices are unresolved
+  - exact Lean signatures have not been compiled
+  - no independent proof or theorem-card reviews exist
+
+implementation:
+  implementation_status: not_started
+  declarations_present: false
+  authorization: absent

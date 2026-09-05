@@ -100,9 +100,11 @@ Exit evidence includes:
 **Purpose:** exercise the complete quantitative-to-qualitative path on one
 generic source theorem.
 
-`OLV-MVP-1` is planned around `OLV97-C03-WATSON`. It becomes releasable only
-after direct 1997 collation and completion of the finite Laplace infrastructure,
-the exact-source quantitative theorem, and the audit-only qualitative bridge.
+`OLV-MVP-1` is planned around `OLV97-C03-WATSON`. A direct first 1997
+collation now exists, but it is independently unreviewed. The manifest becomes
+releasable only after source reconciliation and completion of the finite
+Laplace infrastructure, the exact-source quantitative theorem, and the
+audit-only qualitative bridge.
 Its release bundle must support this complete navigation path:
 
 ```text

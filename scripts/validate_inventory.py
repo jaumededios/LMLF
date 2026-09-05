@@ -1933,6 +1933,8 @@ def run_negative_invariant_tests(
             for row in copy["occurrences.csv"]
             if row["occurrence_id"] == "OLV97-C03-WATSON"
         )
+        occurrence["source_snapshot_id"] = RESERVED_PENDING_SNAPSHOT_ID
+        occurrence["evidence_type"] = "dlmf_locator"
         occurrence["resolution_status"] = "resolved"
         occurrence["transcription_status"] = "verified"
         occurrence["transcription_hash_algorithm"] = "sha256"
@@ -2237,6 +2239,8 @@ def run_negative_invariant_tests(
         for card in copy["cards.csv"]:
             if card["manifest_id"] == "OLV-MVP-1":
                 card["registration_status"] = "execution_ready"
+                card["artifact_status"] = "planned"
+                card["target_path"] = ""
         if add_noncovering_audit:
             copy["page_audits.csv"].append(
                 {

@@ -371,7 +371,7 @@ Every portfolio must pass the repository-wide definition gates in [`README.md`](
 
 ## Cross-portfolio explicit unknowns
 
-- The locked 1997 snapshot is still unavailable in the canonical source-snapshot ledger.
+- A locked 1997 snapshot is now available in the canonical source-snapshot ledger, but none of these family portfolios has a complete independently reviewed body audit from it.
 - No page range in these portfolios has a complete, independently reviewed locked-edition audit.
 - Most leads are contents-only; family membership and member counts are unknown.
 - Except for the recorded Bernoulli and hypergeometric substrates, pin-specific reuse searches are incomplete.

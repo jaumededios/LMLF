@@ -8,12 +8,16 @@ specifications, and release gates.
 
 ## Current status
 
-The repository contains a candidate implementation of the externally authorized BOOTSTRAP-0
-packets QB-001 and DEF-001. The candidate exposes foundational finite-error predicates and transport
-lemmas and transparent wrappers around Mathlib's Gamma function. It is awaiting implementation
-review and release; these declarations must not yet be described as accepted or released. The
-source ledgers are initial audit seeds, not a complete source inventory, and the project claims no
-quantitative Olver theorem or source coverage yet.
+The reviewed BOOTSTRAP-0 implementation at commit
+`515b742f7ad5472c17cfdf0fda7cbc83c5585da1` exposes foundational finite-error predicates and
+transport lemmas and transparent wrappers around Mathlib's Gamma function. Its external evidence
+records the exact accepted candidate; later planning commits do not alter those Lean declarations.
+
+The exact 1997 Olver PDF is now available as a private, hash-bound source snapshot outside version
+control. Theorem 3.1 on Watson's lemma has a first mathematical transcription, draft QL-001 and
+OLV-001 cards, and complete first natural-language proof dossiers. Those drafts remain independently
+unreviewed and authorize no Lean work. The source ledgers are still far from a complete book
+inventory, and the project claims no quantitative Olver theorem or source coverage yet.
 
 Planning and review artifacts are kept explicit:
 
@@ -21,6 +25,8 @@ Planning and review artifacts are kept explicit:
 - [Source manifest and inventory policy](blueprint/source_manifest.md)
 - [Function inventory protocol](blueprint/function_inventory.md)
 - [Manual review package](review/README.md)
+- [Watson source transcription](blueprint/source_transcriptions/OLV97-C03-WATSON.md)
+- [Questions for independent Watson review](review/questions/OLV97-C03-WATSON.md)
 
 ## Library layout
 
