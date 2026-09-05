@@ -1,0 +1,179 @@
+schema_version: 2
+id: OLV-002
+title: Olver global-majorant bound for the Watson remainder
+owner: jaumededios
+artifact_revision: 1
+baseline_spec_commit: pending_external_record_after_commit
+
+theorem_class: finite_remainder_bound
+coverage_class: exact_source_generic
+novelty_class: generalized
+specification_status: draft
+proof_status: complete
+review_status: not_started
+implementation_status: not_started
+prototype_status: absent
+coverage_status: transcribed
+manifest_membership_status: planning_only
+status_as_of: unreviewed_first_draft
+status_authority: external_review_envelope_only
+
+classification_schema:
+  path: review/classifications-v2.json
+  schema_version: lmlf-classification-v2
+  artifact_revision: 2
+  sha256: 8c9f8dbb5ab351771a433a9901fe176a66ec214092c5d5880b3ec57c9a5b23e9
+
+manifest: not_selected
+source_snapshot:
+  id: SRC-OLV-1997-USER-PDF-20260905
+  sha256: 08e1844d29a5ad21f89b9b600249ce18ac1665a5845be2d4e4219a3ededdc909
+  repository_contains_source_bytes: false
+source_occurrences:
+  - OLV97-C03-WATSON-BOUNDS
+source_transcription:
+  path: blueprint/source_transcriptions/OLV97-C03-WATSON-BOUNDS.md
+  sha256: 1559d995171789f9d51bc823fec64863ae8fa848bac489ad9f015785cc1b38f5
+  status: transcribed_unreconciled
+source_entities:
+  - watson_amplitude
+  - watson_coefficients
+  - watson_exponent_parameters
+  - watson_laplace_variables
+  - watson_remainders
+  - gamma
+source_notation:
+  - OLV97-N-WAT-Q
+  - OLV97-N-WAT-A
+  - OLV97-N-WAT-LAMMU
+  - OLV97-N-WAT-XT
+  - OLV97-N-WAT-PHI
+  - OLV97-N-WAT-GAMMA
+coverage_claim: >-
+  Planning claim only for the direct implication from Olver (1997) equation
+  (9.01) to equation (9.02); independent source reconciliation is pending.
+
+scope:
+  summary: >-
+    From a supplied global exponential-power majorant for one fixed Watson
+    remainder, derive the one-term Gamma bound at every
+    x > max(sigma, 0).
+  candidate_module: pending; no Lean module or signature is authorized
+  exact_signatures_artifact: pending after scalar and integral-semantics review
+  candidate_public_targets:
+    - target_id: OLV-002-T01
+      declaration: pending planning name
+  included:
+    - the supplied-majorant implication (9.01) to (9.02)
+    - the exact strict domain x > max(sigma, 0)
+    - the zero-coefficient and order-zero cases
+    - a provisional complex-norm generalization with exact real recovery
+  excluded:
+    - construction or optimization of an admissible exponent
+    - relaxed multiplicative majorants
+    - sign-dependent refinements
+    - derivation of the global majorant from Theorem 3.1
+    - Lean declarations, signatures, prototypes, or implementation
+
+source_contract:
+  location: >-
+    Chapter 3 section 9.1, printed page 89, PDF page 102, equations
+    (9.01)-(9.02)
+  fixed_order: n is a fixed natural truncation order
+  beta_n: (n + lambda) / mu
+  parameter_domain: lambda > 0 and mu > 0
+  remainder: >-
+    phi_n is the remainder defined in equation (3.04); the implication itself
+    consumes only its supplied global majorant.
+  supplied_majorant: >-
+    norm(phi_n(t)) <= norm(a_n) * t^(beta_n-1) * exp(sigma_n*t)
+    for every t > 0.
+  source_domain: x > max(sigma_n, 0)
+  source_conclusion: >-
+    norm(integral over t>0 of exp(-x*t)*phi_n(t)) <=
+    Gamma(beta_n)*norm(a_n)/(x-sigma_n)^beta_n.
+
+mathematical_contract:
+  scalar_codomain: >-
+    Drafted uniformly for real or complex scalars; the real instance is the
+    conservative source reading and the complex instance is explicitly a
+    project generalization.
+  measurability: >-
+    phi_n has a strongly measurable representative on the positive reals;
+    this makes explicit the integration regularity implicit in the source
+    context.
+  integral_semantics: >-
+    Lebesgue/Bochner integral on the positive half-line after absolute
+    integrability is established by domination.
+  branch_convention: all powers have positive real base
+  derivative_convention: not_applicable
+  exceptional_values: >-
+    beta_n is positive; x-sigma_n is positive; a_n=0 is permitted without any
+    division or logarithm.
+  constant_loss: none; the displayed Gamma majorant is retained exactly
+
+open_design_choices:
+  scalar_packaging:
+    status: unresolved
+    current_draft: >-
+      Use one norm-valued argument valid for both real and complex scalars,
+      classifying the complex case as a generalization.
+    freeze_options:
+      - one real direct-source target followed later by a complex corollary
+      - one scalar-polymorphic target whose real specialization is the source result
+    classification_effect: >-
+      The current generalized classification matches the scalar-polymorphic
+      draft; a real-only frozen target would require novelty reclassification.
+
+natural_language_proof:
+  artifact: blueprint/proofs/OLV-002.md
+  artifact_revision: 1
+  artifact_state: draft
+  proof_status: complete
+
+target_classifications:
+  - target_id: OLV-002-T01
+    theorem_class: generic_quantitative
+    coverage_class: direct_source_target
+    novelty_class: generalized
+    relationship: >-
+      The real specialization reproduces (9.01) to (9.02); allowing a complex
+      remainder and coefficient changes absolute value to norm and is the only
+      mathematical generalization claimed.
+
+dependencies:
+  mathlib_revision: 0df444a360eaa60ab8c11dca51a86af692955474
+  accepted_lmlf_packets: []
+  pinned_candidates:
+    - Real.integral_rpow_mul_exp_neg_mul_Ioi
+  draft_lmlf_packets: []
+  source_dependencies:
+    - OLV97-C03-WATSON-BOUNDS
+  explicitly_not_dependencies:
+    - OLV-001
+    - QL-001
+
+structural_circularity_review:
+  applicability: not_applicable
+  inapplicable_reason: >-
+    The target makes no construction or downstream identification and follows
+    by direct domination by a supplied integrable kernel.
+
+pre_lean_requirements:
+  source_collation_reviewers: 2
+  theorem_card_reviewers: 2
+  natural_language_proof_reviewers: 2
+  structural_circularity_review: not_applicable
+  lean_ready_authority: external_review_envelope_only
+
+blocking_conditions:
+  - the source transcription and exact page reading are independently unreviewed
+  - the real-versus-complex target packaging is unresolved
+  - exact integral semantics are unresolved
+  - no exact signature artifact exists
+  - no external theorem-card or natural-language-proof reviews exist
+
+implementation:
+  implementation_status: not_started
+  declarations_present: false
+  authorization: absent

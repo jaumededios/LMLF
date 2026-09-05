@@ -33,7 +33,7 @@ source_occurrences:
   - OLV97-C03-WATSON
 source_transcription:
   path: blueprint/source_transcriptions/OLV97-C03-WATSON.md
-  sha256: 8e84ea1c0efe62be77a4bf5d23b7383d5062046e1d8cfd3d6d57b33e6add618f
+  sha256: 77f05a8800cdb794917d8e98565cd7ba4ba3d1d933e11eb767b09276adb0d2d8
   status: transcribed_unreconciled
 source_entities:
   - watson_amplitude
@@ -92,11 +92,11 @@ source_contract:
 
 quantitative_contract:
   beta_n: (n + lambda) / mu
-  witnesses: k_n > 0, K_n >= 0, real X_n, L_n >= 0
-  domain: x > max X_n 0
+  witnesses: one common X > 0; for each n, k_n > 0, K_n >= 0, L_n >= 0
+  domain: x > X
   bound: >-
     norm(integral - sum_{s<n} a_s*Gamma(beta_s)*x^(-beta_s)) <=
-    K_n*Gamma(beta_n)*x^(-beta_n) + L_n*exp(-(x-X_n)*k_n)
+    K_n*Gamma(beta_n)*x^(-beta_n) + L_n*exp(-(x-X)*k_n)
   order_convention: n retained terms indexed 0 through n-1; empty at n=0
   branch_convention: positive-real powers only
   derivative_convention: not_applicable

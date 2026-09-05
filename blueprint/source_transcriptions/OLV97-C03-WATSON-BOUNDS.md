@@ -83,7 +83,7 @@ with candidate least exponent
  \right\rvert. \tag{9.05}
 \]
 
-One alternate choice uses
+When \(a_n\ne0\), one alternate choice uses
 
 \[
  M_n=\sup_{t>0}\left\lvert
@@ -91,7 +91,10 @@ One alternate choice uses
  \right\rvert,
 \]
 
-when this supremum is finite, giving \(\widehat\sigma_n=0\).
+when this supremum is finite. Taking \(M=M_n\) then makes
+\(\widehat\sigma_n=0\) an admissible supplied exponent. This does not assert
+that zero is the least exponent computed by the supremum in (9.05), which may
+be negative.
 
 ## Classification notes
 

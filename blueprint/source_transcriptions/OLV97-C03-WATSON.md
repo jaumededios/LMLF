@@ -53,8 +53,8 @@ For each \(n\in\mathbb N\), define
    a_s t^{(s+\lambda-\mu)/\mu}. \tag{3.04}
 \]
 
-The empty sum is zero when \(n=0\). Olver's asymptotic-expansion convention,
-together with the next coefficient in the full expansion, gives
+The empty sum is zero when \(n=0\). Olver's remainder convention in Chapter 1,
+section 7, equations (7.01)-(7.02), gives directly
 
 \[
  \phi_n(t)=O(t^{\beta_n-1})\qquad(t\to0^+).
@@ -67,8 +67,9 @@ Equivalently, for each fixed \(n\), there are positive \(k_n,K_n\) such that
  \qquad(0<t\le k_n).
 \]
 
-Termwise evaluation of the finite model moments gives the exact remainder
-identity
+Termwise evaluation of the finite model moments gives, for sufficiently large
+positive \(x\) (or whenever all displayed improper integrals converge), the
+exact remainder identity
 
 \[
  \int_0^\infty e^{-xt}q(t)\,dt
@@ -90,7 +91,7 @@ The local interval satisfies
  < K_n\Gamma(\beta_n)x^{-\beta_n}. \tag{3.06}
 \]
 
-Choose one real \(X\) for which
+Choose one positive value \(X\) of the source parameter \(x\) for which
 \(\int_0^\infty e^{-Xt}\phi_n(t)\,dt\) converges, and put
 
 \[
@@ -104,7 +105,7 @@ Let
  L_n:=\sup_{t\ge k_n}\lvert\Phi_n(t)\rvert.
 \]
 
-For \(x>X\), integration by parts gives
+For \(x>X>0\), integration by parts gives
 
 \[
  \int_{k_n}^{\infty}e^{-xt}\phi_n(t)\,dt
@@ -146,8 +147,10 @@ For fixed \(n,\lambda,\mu,k_n,K_n,X,L_n\), the exponential term is
   \(\lambda/\mu-1>-1\).
 - \(x\) is the positive large parameter; \(q\), \(a_s\), \(\lambda\), and
   \(\mu\) are fixed as \(x\to+\infty\).
-- The integral is an improper Riemann integral in the book's convention. The
-  theorem does not assume absolute convergence.
+- The source uses an improper integral and does not assume absolute
+  convergence. The exact Riemann/partition/principal-value semantics at a
+  permitted interior infinity are not fixed by these pages and remain an
+  interpretation question.
 - The theorem does not state uniformity in \(n\), \(\lambda\), \(\mu\), or any
   auxiliary parameter.
 

@@ -38,11 +38,13 @@ improper Laplace integral exists and
  \le K\Gamma(\beta)x^{-\beta}+Le^{-(x-X)k}.
 \]
 
-Olver's qualitative hypotheses produce the constants existentially for each
-fixed truncation order. Named-function applications will instead supply
-effective constants. The source allows improper convergence and does not
-clearly require absolute convergence, so replacing its integral by Mathlib's
-totalized whole-ray Bochner integral would strengthen or distort the theorem.
+Olver's eventual-convergence hypothesis supplies one positive baseline
+parameter (X), common to all truncation orders; the local and primitive-bound
+constants (k_n,K_n,L_n) are then existential and order-dependent.
+Named-function applications will instead supply effective constants. The
+source allows improper convergence and does not clearly require absolute
+convergence, so replacing its integral by Mathlib's totalized whole-ray
+Bochner integral would strengthen or distort the theorem.
 
 ## Decisions requested
 
