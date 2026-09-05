@@ -946,6 +946,16 @@ def page_audit_covers_printed_range(
     return audit_start <= start and end <= audit_end
 
 
+def card_has_ready_canonical_artifact(card: dict[str, str]) -> bool:
+    expected_path = f"blueprint/theorem_cards/{card['card_id']}.yaml"
+    return bool(
+        card["registration_status"] in {"execution_ready", "active", "complete"}
+        and card["artifact_status"] == "file_present"
+        and card["target_path"] == expected_path
+        and (ROOT / expected_path).is_file()
+    )
+
+
 def occurrence_is_source_ready(
     occurrence: dict[str, str] | None,
     snapshots: dict[str, dict[str, str]],
@@ -1584,6 +1594,11 @@ def check_semantics(
     cards_by_manifest: defaultdict[str, list[dict[str, str]]] = defaultdict(list)
     for card in tables["cards.csv"]:
         cards_by_manifest[card["manifest_id"]].append(card)
+    card_links_by_occurrence: defaultdict[str, list[dict[str, str]]] = defaultdict(
+        list
+    )
+    for link in tables["occurrence_cards.csv"]:
+        card_links_by_occurrence[link["occurrence_id"]].append(link)
     for row in tables["manifests.csv"]:
         scope_closed = row["scope_closed"] == "true"
         if row["manifest_status"] == "execution_ready" and not scope_closed:
@@ -1618,7 +1633,23 @@ def check_semantics(
                 line_of(row),
                 "source manifest must state whether occurrence selection is locked",
             )
-        if scope_closed or row["manifest_status"] in ready_states:
+        closed_or_ready = scope_closed or row["manifest_status"] in ready_states
+        source_bearing = source_total > 0 or bool(
+            manifest_occurrence_links[row["manifest_id"]]
+        )
+        if (
+            closed_or_ready
+            and source_bearing
+            and row["occurrence_selection_locked"] != "true"
+        ):
+            add_error(
+                errors,
+                "manifests.csv",
+                line_of(row),
+                "closed or ready source-bearing manifest requires "
+                "occurrence_selection_locked=true",
+            )
+        if closed_or_ready:
             if not cards_by_manifest[row["manifest_id"]]:
                 add_error(
                     errors,
@@ -1649,6 +1680,57 @@ def check_semantics(
                         line_of(row),
                         f"closed or ready manifest {row['manifest_id']!r} depends on "
                         f"unresolved or unverified occurrence {link['occurrence_id']!r}",
+                    )
+                local_confirmed_links: list[
+                    tuple[dict[str, str], dict[str, str]]
+                ] = []
+                for card_link in card_links_by_occurrence[link["occurrence_id"]]:
+                    card = cards.get(card_link["card_id"])
+                    if (
+                        card_link["link_status"] == "confirmed"
+                        and card
+                        and card["manifest_id"] == row["manifest_id"]
+                    ):
+                        local_confirmed_links.append((card_link, card))
+                has_exact_or_named = any(
+                    card_has_ready_canonical_artifact(card)
+                    and (
+                        (
+                            card_link["card_role"] == "exact_source_target"
+                            and card["coverage_class"] == "exact_source_generic"
+                        )
+                        or (
+                            card_link["card_role"] == "named_application"
+                            and card["coverage_class"] == "named_source_application"
+                        )
+                    )
+                    for card_link, card in local_confirmed_links
+                )
+                if not has_exact_or_named:
+                    add_error(
+                        errors,
+                        "occurrence_manifests.csv",
+                        line_of(link),
+                        f"closed or ready source coverage occurrence "
+                        f"{link['occurrence_id']!r} requires a confirmed exact-source or "
+                        "named-application association to a ready file-present canonical "
+                        f"card in the same manifest {row['manifest_id']!r}",
+                    )
+                has_source_recovery = any(
+                    card_link["card_role"] == "source_recovery"
+                    and card["coverage_class"] == "audit_source_recovery"
+                    and card_has_ready_canonical_artifact(card)
+                    for card_link, card in local_confirmed_links
+                )
+                if not has_source_recovery:
+                    add_error(
+                        errors,
+                        "occurrence_manifests.csv",
+                        line_of(link),
+                        f"closed or ready source coverage occurrence "
+                        f"{link['occurrence_id']!r} requires a confirmed source-recovery "
+                        "association to a ready file-present canonical card in the same "
+                        f"manifest {row['manifest_id']!r}",
                     )
 
     for row in tables["occurrence_manifests.csv"]:
@@ -2187,6 +2269,56 @@ def run_negative_invariant_tests(
     ) -> None:
         mutate_composed_fake_ready_source(copy, add_noncovering_audit=True)
 
+    def mutate_ready_source_manifest_unlocked(
+        copy: dict[str, list[dict[str, str]]]
+    ) -> None:
+        mutate_ready_olv_manifest(copy)
+        manifest = next(
+            row
+            for row in copy["manifests.csv"]
+            if row["manifest_id"] == "OLV-MVP-1"
+        )
+        manifest["occurrence_selection_locked"] = "false"
+
+    def mutate_bootstrap_cross_manifest_source_role_laundering(
+        copy: dict[str, list[dict[str, str]]]
+    ) -> None:
+        mutate_composed_fake_ready_source(copy, add_noncovering_audit=True)
+        audit = next(
+            row
+            for row in copy["page_audits.csv"]
+            if row["page_audit_id"] == "PA-OLV97-FAKE-NONCOVERING"
+        )
+        audit["snapshot_page_end"] = "72"
+        audit["printed_page_end"] = "72"
+        olv_manifest = next(
+            row
+            for row in copy["manifests.csv"]
+            if row["manifest_id"] == "OLV-MVP-1"
+        )
+        olv_manifest["scope_closed"] = "false"
+        olv_manifest["manifest_status"] = "planning_only"
+        for card in copy["cards.csv"]:
+            if card["manifest_id"] == "OLV-MVP-1":
+                card["registration_status"] = "planning_only"
+        bootstrap = next(
+            row
+            for row in copy["manifests.csv"]
+            if row["manifest_id"] == "BOOTSTRAP-0"
+        )
+        bootstrap["occurrence_selection_locked"] = "false"
+        bootstrap["declared_source_occurrence_total"] = "1"
+        copy["occurrence_manifests.csv"].append(
+            {
+                "schema_version": SCHEMA_VERSION,
+                "occurrence_id": "OLV97-C03-WATSON",
+                "manifest_id": "BOOTSTRAP-0",
+                "coverage_role": "source_coverage",
+                "notes": "Cross-manifest role-laundering negative fixture.",
+                "__line__": "996",
+            }
+        )
+
     cases = [
         (
             "edition/snapshot mismatch",
@@ -2350,6 +2482,24 @@ def run_negative_invariant_tests(
                 "'file_present' at its canonical card path",
                 "closed or ready manifest member 'SR-001' requires a file-present "
                 "canonical card artifact",
+            ),
+        ),
+        (
+            "ready source-bearing manifest with unlocked occurrence selection",
+            mutate_ready_source_manifest_unlocked,
+            "closed or ready source-bearing manifest requires "
+            "occurrence_selection_locked=true",
+        ),
+        (
+            "source-ready occurrence launders roles across manifests",
+            mutate_bootstrap_cross_manifest_source_role_laundering,
+            (
+                "closed or ready source-bearing manifest requires "
+                "occurrence_selection_locked=true",
+                "requires a confirmed exact-source or named-application association to a "
+                "ready file-present canonical card in the same manifest 'BOOTSTRAP-0'",
+                "requires a confirmed source-recovery association to a ready file-present "
+                "canonical card in the same manifest 'BOOTSTRAP-0'",
             ),
         ),
     ]

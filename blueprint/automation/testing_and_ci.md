@@ -104,6 +104,10 @@ Run the source-card validators against explicit manifest IDs:
   canonical artifact;
 - reject any `execution_ready`, `active`, or `complete` card registration whose
   artifact remains planned or absent;
+- require every closed or ready source-bearing manifest to lock its occurrence
+  selection and, for each source-coverage occurrence, bind confirmed
+  exact-source-or-named and source-recovery roles to ready canonical cards in
+  that same manifest; cross-manifest role links do not count;
 - compare declared and actual distinct occurrence/card totals;
 - reject generic/named/source-recovery role mismatches;
 - derive all three card-registry classification axes and every required registry
