@@ -24,6 +24,7 @@ dd805ce4c2a10f9b0b4dcacc1c4fbe213f225ffbbc13b2545689d8cf2459b3d2  ./contract-gua
 55ddd5213244946644fa5e14ba9e171c04f75903a29a83670cc72c4e96f8198a  ./imp-core-20795a2-contract-guard-checkpoint.md
 f42684d18300625756afbba705469ef2d636bb68d8723c0bd197f8f4a8633ed0  ./imp-core-a528680-abel-regressions-checkpoint.md
 4852ace739c8dea0e2176004e6679b4c3aa968bd8143ed76794f099b87a11a63  ./imp-core-b8d2f73-acceptance-matrix.md
+7ca0faec39ded02e621b0db2dd697c97e0dec7a030641e213a474958a98ea040  ./imp-core-b8d2f73-main-integration-checkpoint.md
 bb95d0f333d29660b3bc99e76b326ed846e7531589e047d81010116e0bf70a83  ./imp-core-b8d2f73-private-name-probe.lean
 6b3aa43462802151d3bc88c4f0fdf515b0459eab110511a1ec8304cb62bfeaad  ./imp-core-b8d2f73-public-api-probe.lean
 973cddb6759846fa1b1a3fade42e07a30e97333995bf3ef4a7cb6e877c2ac864  ./imp-core-b99b3c0-endpoint-regressions-checkpoint.md
