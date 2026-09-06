@@ -2,7 +2,7 @@ schema_version: 2
 id: OLV-001
 title: Quantitative source recovery of Olver 1997 Theorem 3.1
 owner: jaumededios
-artifact_revision: 2
+artifact_revision: 3
 baseline_spec_commit: pending_external_record_after_commit
 
 theorem_class: finite_remainder_bound
@@ -15,14 +15,14 @@ implementation_status: not_started
 prototype_status: absent
 coverage_status: transcribed
 manifest_membership_status: planning_only
-status_as_of: advisory_feedback_integrated_draft
+status_as_of: imp_r5_ql_r3_relational_consumer_route_integrated_pending_fresh_review
 status_authority: external_review_envelope_only
 
 classification_schema:
-  path: review/classifications-v2.json
-  schema_version: lmlf-classification-v2
-  artifact_revision: 2
-  sha256: 8c9f8dbb5ab351771a433a9901fe176a66ec214092c5d5880b3ec57c9a5b23e9
+  path: review/classifications-v3.json
+  schema_version: lmlf-classification-v3
+  artifact_revision: 3
+  sha256: 975e08b89d609cbdd15ff3f8d24f40a42bb17ea0f4c37bb26d9cf53fb8dc4b5e
 
 manifest: OLV-MVP-1
 source_snapshot:
@@ -55,23 +55,28 @@ scope:
   summary: >-
     From exactly the collated hypotheses of Olver 1997 Theorem 3.1, derive for
     every fixed truncation order an explicit local-Gamma plus exponential-tail
-    finite bound with visible witnesses. A later SR-001 audit theorem recovers
-    the printed qualitative expansion.
+    finite bound with visible witnesses and an explicit related
+    ordinary-improper value. A later SR-001 audit theorem uses uniqueness to
+    put every fixed-order estimate on one Laplace function and recovers the
+    printed qualitative expansion.
   candidate_module: LMLF.Olver1997.Chapter3.Watson
-  exact_signatures_artifact: pending after source and integral-semantics review
+  exact_signatures_artifact: absent pending IMP-001 revision 5 and QL-001 revision 3 acceptance plus fresh OLV-001 revision 3 review
   candidate_public_targets:
     - target_id: OLV-001-T01
       declaration: LMLF.Olver1997.Chapter3.watson_finite
   included:
     - exact exponent and zero-based order convention from Theorem 3.1
     - existential local and tail witnesses derived from source hypotheses
+    - explicit relational Laplace values, never totalized conditional set integrals
+    - public IMP T07 model construction, T03 subtraction, T04 splitting, and T08 primitive extraction
     - finite quantitative remainder inequality
-    - proof route to the printed qualitative expansion
+    - one-function choice and uniqueness route to the printed qualitative expansion
   excluded:
     - section 9.1 global-majorant bounds
     - best-supremum formulas for sigma_n
     - named-function applications
     - uniformity in order or external parameters
+    - source-adapter access to private sorted-break or finite-piece Abel helpers
     - Lean implementation before external authorization
 
 source_contract:
@@ -83,7 +88,9 @@ source_contract:
   parameter_domain: lambda > 0 and mu > 0
   convergence: >-
     The improper Laplace integral over the full positive range converges for
-    all sufficiently large positive x.
+    all sufficiently large positive x. On the Lean-facing side this is an
+    existence statement for a value related by the canonical
+    HasImproperIntegralAtTopExcept predicate, not a totalized set integral.
   source_conclusion: >-
     The Laplace integral has coefficients Gamma((s+lambda)/mu)*a_s at powers
     x^(-(s+lambda)/mu) as x tends to positive infinity.
@@ -92,30 +99,57 @@ source_contract:
     is split with independent one-sided convergence at every endpoint; no
     principal-value cancellation is part of this theorem. Proper compact
     integrals are available away from the exceptional set and are transported
-    to Mathlib's Bochner intervalIntegral in the Lean-facing adapter.
+    to Mathlib's Bochner intervalIntegral in the Lean-facing adapter. That
+    Riemann-to-Bochner agreement remains a separate formal source obligation;
+    revision 3 makes no new source claim or fresh source-reconciliation claim.
+    Before encoding baseline convergence by T01, the adapter uses the fixed
+    n=0 expansion q(t)=O(t^(beta_0-1)), beta_0>0, and proper Riemann
+    regularity on compact [epsilon,k] pieces. A countable exhaustion supplies
+    AE strong measurability under volume restricted to (0,k], and domination
+    proves the honest local Bochner integrability at zero that T01 requires.
+    Pointwise StronglyMeasurable is not claimed because null-set modifications
+    are immaterial. This source conversion remains an explicit formal
+    obligation, occurs before the later arbitrary n, and does not make the
+    common baseline X order-dependent.
 
 quantitative_contract:
   beta_n: (n + lambda) / mu
   witnesses: one common X > 0; for each n, k_n > 0, K_n > 0, L_n >= 0
   domain: x > X
+  related_value_quantifiers: >-
+    Choose X before n. After the order-dependent k_n, K_n, and L_n, every
+    x > X has an explicit Q related to the weighted amplitude. Uniqueness
+    identifies these values across all n.
   bound: >-
-    norm(integral - sum_{s<n} a_s*Gamma(beta_s)*x^(-beta_s)) <=
-    K_n*Gamma(beta_n)*x^(-beta_n) + L_n*exp(-(x-X)*k_n)
+    For every x > X there exists Q related to the weighted amplitude by the
+    canonical finite-exceptional ordinary-improper relation, and
+    norm(Q - sum_{s<n} a_s*Gamma(beta_s)*x^(-beta_s)) <=
+    K_n*Gamma(beta_n)*x^(-beta_n) + L_n*exp(-(x-X)*k_n).
   order_convention: n retained terms indexed 0 through n-1; empty at n=0
   branch_convention: positive-real powers only
   derivative_convention: not_applicable
   exceptional_values: no Gamma poles because beta_s > 0
+  qualitative_value_choice: >-
+    A future qualitative bridge chooses Q at each x > X from the n=0
+    existence result, extends the resulting function by zero outside that
+    domain, and uses uniqueness to transport every fixed-order bound. This
+    logical choice computes neither the Laplace value nor any bound constant.
   scalar_boundary: >-
     The source-facing target is complex-valued with real parameter x and
     positive-real powers; a real-valued theorem is a specialization.
   primitive_boundary: >-
-    For each n, the source adapter constructs a continuous normalized baseline
-    primitive through the finite exceptional set, with its genuine integral
-    increment law on regular pieces and a global norm bound.
+    For each n, the source adapter first constructs the baseline remainder
+    relation through public finite linearity and splitting. Public IMP T08 then
+    supplies a continuous normalized primitive with its genuine regular-piece
+    increment law and the same finite limit. The source adapter derives a
+    global norm bound from that limit and compact-prefix continuity; the bound
+    is not a T08 field.
   local_regularity: >-
-    After k_n is placed below the finite exceptional set, the source's proper
-    regularity on compact regular intervals supplies the measurability needed
-    for the local dominated-integrability argument.
+    After k_n is placed below the finite exceptional set, proper Riemann
+    regularity on every [epsilon,k_n] and countable exhaustion supply
+    AEStronglyMeasurable phi_n with respect to volume restricted to (0,k_n].
+    This measure-relative fact, not pointwise StronglyMeasurable, is the
+    measurability input to the local dominated-integrability argument.
 
 open_design_choices:
   scalar_codomain:
@@ -138,7 +172,7 @@ open_design_choices:
 
 natural_language_proof:
   artifact: blueprint/proofs/OLV-001.md
-  artifact_revision: 2
+  artifact_revision: 3
   artifact_state: draft
   proof_status: complete
 
@@ -151,6 +185,7 @@ target_classifications:
 dependencies:
   accepted_lmlf_packets: []
   draft_lmlf_packets:
+    - IMP-001
     - QL-001
   source_dependencies:
     - OLV97-C03-WATSON
@@ -171,9 +206,35 @@ pre_lean_requirements:
 blocking_conditions:
   - source transcription and page audit are not independently reviewed
   - provisional semantic and scalar selections lack independent approval
-  - QL-001 is not frozen or accepted
-  - exact Lean signatures have not been compiled
-  - required external review quorum does not exist
+  - IMP-001 revision 5 and its T01--T08 public architecture are concurrent unregistered drafts awaiting fresh review
+  - QL-001 revision 3 is a concurrent unregistered draft awaiting fresh review
+  - fresh exact Lean signatures are intentionally absent pending acceptance of IMP-001 revision 5 and QL-001 revision 3
+  - this revision-3 proof and theorem-card architecture lack two fresh independent approvals and the required structural-circularity review
+
+consumer_regressions:
+  - >-
+    Choose one baseline X > 0 and one canonical T01 value before n. For each
+    s<n, separately prove IntegrableOn for the Gamma model, identify its exact
+    set-integral value, and use public IMP T07 on the literal arbitrary S.
+  - >-
+    Use generalized public IMP T03 for the finite model subtraction, prove the
+    local AEStronglyMeasurable fact under restricted volume and the resulting
+    IntervalIntegrable proposition at zero, use public IMP T04 to move to k_n,
+    and use public IMP T08 forward to extract the primitive and its finite
+    limit. No pointwise StronglyMeasurable strengthening, private sorted
+    representation, or finite-piece Abel lemma may appear.
+  - >-
+    Derive L_n from eventual boundedness plus boundedness on a compact prefix;
+    reject any signature in which L_n is a field or conclusion hidden in T08.
+  - >-
+    Revision-3 QL T02 must return an explicit Q, the canonical ordinary-
+    improper relation for Q, and the finite remainder bound. A totalized
+    conditional Bochner set integral is not an acceptable substitute.
+  - >-
+    The future qualitative bridge chooses values for x>X from the n=0
+    existence result, extends the function arbitrarily by zero outside that
+    domain, and uses public IMP T02 uniqueness to transfer every n-bound to
+    that one function.
 
 implementation:
   implementation_status: not_started

@@ -77,11 +77,11 @@ uniformity or derivative conclusion, a new continuation or exceptional-value
 argument, a new normal form or stability theorem, or any result not directly
 recoverable from the locked source or pinned mathlib.
 
-Before Lean work begins on new mathematics, the packet must contain a complete
-natural-language proof: quantified statement, dependencies, exact identities,
-all analytic side conditions, every constant loss, edge cases, and an
-adversarial test.  At least two reviewers independently assess it before seeing
-each other's reports:
+Before exact Lean signature design or Lean work begins on new mathematics, the
+packet must contain a complete natural-language proof: quantified statement,
+dependencies, exact identities, all analytic side conditions, every constant
+loss, edge cases, and an adversarial test. At least two reviewers independently
+assess the proof and architecture before seeing each other's reports:
 
 - a source/semantics reviewer checks occurrence fidelity, notation,
   normalization, branches, exceptional values, and quantifiers;
@@ -91,8 +91,10 @@ each other's reports:
 Construction, continuation, identification through existence/uniqueness,
 nontrivial source recovery, turning-point, zero, connection, and theorem-sized
 hypothesis packets also require a separately represented
-`structural_circularity_review`.  A thin packet may mark it not applicable only
-with a concrete frozen reason.  A substantive edit
+`structural_circularity_review`. Only after these reviews may exact Lean
+signatures be designed; signatures and theorem cards then receive independent
+review before an external `lean_ready` gate. A thin packet may mark structural
+review not applicable only with a concrete frozen reason. A substantive edit
 to the statement or proof invalidates affected approvals.  No `sorry` skeleton,
 axiom, or structure field asserting the desired theorem is a substitute for
 this gate.
@@ -105,10 +107,11 @@ definition identification, finite remainder bound, or qualitative bridge.
 identification, an `exact_source_generic` theorem, a named source application,
 or audit-only source recovery.
 
-The frozen machine authority for both packet-level and target-level values is
-artifact revision 2 of
-[`lmlf-classification-v2`](../review/classifications-v2.json).  It supersedes
-immutable v1; coverage roles never appear on the theorem-shape axis.  Its
+The current machine authority for both packet-level and target-level values is
+artifact revision 3 of
+[`lmlf-classification-v3`](../review/classifications-v3.json). It supersedes
+without mutating immutable v2; historical frozen artifacts retain their
+recorded authority, and coverage roles never appear on the theorem-shape axis. Its
 machine-readable `registry_binding` determines which examples require card
 registry rows and which are merely illustrative.
 
@@ -231,7 +234,9 @@ Deliver:
 
 - a small relational ordinary-improper layer whose regular finite pieces are
   Mathlib Bochner `intervalIntegral`s with explicit integrability evidence;
-- a finite-piece Abel/Fubini identity for a continuous primitive certificate;
+- a public representation-independent Abel composition theorem for a
+  continuous primitive certificate, proved with a private finite-piece
+  Abel/Fubini engine;
 - a generic local/tail Laplace remainder identity and bound, with the real
   Gamma moment reused directly from pinned Mathlib;
 - a divergent factorial example proving valid finite bounds without implying
@@ -250,10 +255,13 @@ M5 formalizes exactly one locked source occurrence:
 > pp. 71-72, whose location is independently corroborated by
 > [DLMF 2.3(ii)](https://dlmf.nist.gov/2.3.ii).
 
-The first M0 collation now records the exact hypotheses, notation, conclusion,
-and surrounding asymptotic convention from a hash-bound 1997 snapshot; DLMF
-remains a cross-reference, not a substitute.  That transcription is still
-independently unreviewed.  After review and reconciliation, M5 delivers:
+The first M0 collation records the exact hypotheses, notation, conclusion,
+and surrounding asymptotic convention from a previously inspected, hash-bound
+1997 snapshot; DLMF remains a cross-reference, not a substitute. The uploaded
+PDF is absent from the restarted environment, so new source-image review needs
+reattachment or recovery, although source-independent IMP/QL work can proceed.
+The surviving transcription is still independently unreviewed. After review
+and reconciliation, M5 delivers:
 
 - a generic conditional finite Laplace-remainder identity and explicit bound;
 - an `exact_source_generic` quantitative theorem matching the collated generic
@@ -276,7 +284,21 @@ pinned Real Gamma moment -----------------------> QL-001
 ```
 
 QB-001 and DEF-001 are optional packaging/audit joins, not mathematical
-dependencies of the revision-2 Watson route.
+dependencies of the revision-3 Watson route.
+
+The current concurrent author drafts are IMP-001 revision 5 with eight public
+targets, QL-001 revision 3, and OLV-001 revision 3. The IMP split is
+T01/T05/T08/T02/T03/T04 in `Basic`, T07 in `Bochner`, and T06 in `Abel`.
+T01 keeps independent endpoint semantics; T08 is the existential normalized
+continuous-primitive equivalence; T07 is the arbitrary-exception absolute
+Bochner bridge; T03 maps `E -> H`; and T06 keeps the finite-piece engine
+private. QL consumes T06, T07, and local splitting T04. OLV consumes
+T07/T03/T04/T08 to obtain the baseline primitive, derives its own flat bound
+`L`, and only then invokes QL. Eight targets are justified by this consumer
+completion, not by a hard schema cap. The old R3 signature artifact is
+superseded evidence; recent R4 report bytes are absent, and conversation-only
+approval is not quorum. No current R5/R3 review, exact signature, registry,
+manifest, or Lean authorization exists.
 
 Airy, Cauchy derivative transport, residual algebra, ODE stability, and
 comparison systems are parallel work and are explicitly not prerequisites.

@@ -19,11 +19,13 @@ addressed evidence store.
   independent rubric review.
 - [`templates/disposition_ledger.yaml`](templates/disposition_ledger.yaml) tracks
   findings outside the candidate head.
-- [`classifications-v2.json`](classifications-v2.json), artifact revision 2, is
+- [`classifications-v3.json`](classifications-v3.json), artifact revision 3, is
   the current frozen, machine-readable packet-level and target-level
-  classification vocabulary; it supersedes but does not mutate
-  `classifications-v1.yaml`.  Its `registry_binding` field distinguishes
-  required registry rows from illustrative expressibility examples.
+  classification vocabulary. It supersedes but does not mutate
+  `classifications-v2.json`; historical specifications remain bound to the
+  immutable authority under which they were frozen. Its `registry_binding`
+  field distinguishes required registry rows from illustrative expressibility
+  examples.
 - [`rubrics/`](rubrics/) contains focused referee instructions. Apply one rubric
   at a time.
 
@@ -79,7 +81,7 @@ Only the externally stored envelope and bound verdicts establish gate state;
 repository review ledgers are historical and count as zero reviewers.
 
 Only the CSV inventory validator currently exists as executable contract
-checking.  It consumes the v2 packet classification enums and derives required
+checking. It consumes the v3 packet classification enums and derives required
 registry examples from `registry_binding`; illustrative examples do not create
 registry obligations.  CI runs its positive and negative suites.  Validation
 of YAML/Markdown lifecycle,

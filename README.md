@@ -13,9 +13,18 @@ The reviewed BOOTSTRAP-0 implementation at commit
 transport lemmas and transparent wrappers around Mathlib's Gamma function. Its external evidence
 records the exact accepted candidate; later planning commits do not alter those Lean declarations.
 
-The exact 1997 Olver PDF is now available as a private, hash-bound source snapshot outside version
-control. Theorem 3.1 on Watson's lemma has a mathematical transcription, revision-2 QL-001 and
-OLV-001 draft cards, and complete revision-2 natural-language proof dossiers. Bounded Airy,
+The exact 1997 Olver PDF was previously inspected and hash-bound outside version control, and its
+mathematical transcriptions survive. The original uploaded bytes are not present in this restarted
+environment; any new source-image audit requires reattachment or recovery. This does not block the
+source-independent IMP/QL work. Theorem 3.1 on Watson's lemma has a mathematical transcription. The current planning
+chain is the concurrent IMP-001 revision-5 eight-target author draft plus QL-001 and OLV-001
+revision-3 cards and complete natural-language proof dossiers. Their exact signatures, independent
+reviews, registry/manifest authorization, and Lean implementations do not yet exist. The old
+IMP revision-3 signature artifact is superseded evidence; recent R4 report bytes are absent, and a
+conversation-reported approval is not current quorum. The eight-target IMP surface preserves
+independent endpoint semantics and exposes only the primitive-equivalence, arbitrary-exception
+Bochner, continuous-linear-map, local-splitting, and Abel bridges needed to close the QL/OLV
+consumer route; its finite-piece Abel engine remains private. Bounded Airy,
 Euler--Maclaurin/Bernoulli, and Bessel source transcriptions are also present, together with
 unregistered Bernoulli identification drafts. Two independent source referees approved the exact
 revision-2 Bessel transcriptions, and all 119 proposed Bessel occurrences are now integrated
@@ -23,6 +32,14 @@ one-for-one into the normalized inventory. Those rows remain `transcribed_unreco
 notation or entity association, theorem card, manifest membership, coverage credit, reconciliation,
 or Lean work is authorized. The source ledgers are still far from a complete book inventory, and the
 project claims no quantitative Olver theorem or source coverage yet.
+
+Current planning classifications use version 3, which records the classical QL-001 mathematics as
+`non_novel`; frozen version-2 artifacts remain unchanged, and this metadata correction grants no
+review or implementation approval.
+
+Historical review reports are preserved at the private repository's
+[`review-evidence` commit `5c8ec1b`](https://github.com/jaumededios/LMLF/commit/5c8ec1b301f656df35ffa8850e002639807995cd).
+Those records bind only their own recorded commits and do not determine the status of later drafts.
 
 Planning and review artifacts are kept explicit:
 

@@ -4,6 +4,7 @@
 from __future__ import annotations
 
 import csv
+import hashlib
 import json
 import sys
 from copy import deepcopy
@@ -14,8 +15,14 @@ from pathlib import Path
 SCHEMA_VERSION = "inventory-v1.0.0"
 ROOT = Path(__file__).resolve().parents[1]
 INVENTORY = ROOT / "blueprint" / "inventory"
-CLASSIFICATION_AUTHORITY = ROOT / "review" / "classifications-v2.json"
-CLASSIFICATION_SCHEMA_VERSION = "lmlf-classification-v2"
+CLASSIFICATION_AUTHORITY = ROOT / "review" / "classifications-v3.json"
+CLASSIFICATION_SCHEMA_VERSION = "lmlf-classification-v3"
+CLASSIFICATION_ARTIFACT_REVISION = 3
+CLASSIFICATION_PREDECESSOR = ROOT / "review" / "classifications-v2.json"
+CLASSIFICATION_PREDECESSOR_SCHEMA_VERSION = "lmlf-classification-v2"
+CLASSIFICATION_PREDECESSOR_SHA256 = (
+    "8c9f8dbb5ab351771a433a9901fe176a66ec214092c5d5880b3ec57c9a5b23e9"
+)
 DIRECT_SOURCE_EVIDENCE_TYPES = {"direct_formula", "direct_prose"}
 RESERVED_PENDING_SNAPSHOT_ID = "SRC-OLV-1997-COLLATION-PENDING"
 RESERVED_PENDING_SNAPSHOT_FIELDS = {
@@ -591,10 +598,59 @@ def load_classification_authority(
             None,
             f"schema_version must be {CLASSIFICATION_SCHEMA_VERSION!r}",
         )
+    if document.get("artifact_revision") != CLASSIFICATION_ARTIFACT_REVISION:
+        add_error(
+            errors,
+            filename,
+            None,
+            f"artifact_revision must be {CLASSIFICATION_ARTIFACT_REVISION}",
+        )
     if document.get("record_kind") != "classification_vocabulary":
         add_error(errors, filename, None, "record_kind must be 'classification_vocabulary'")
     if document.get("status") != "frozen":
         add_error(errors, filename, None, "classification authority must have status='frozen'")
+
+    supersedes = document.get("supersedes")
+    expected_predecessor_path = str(CLASSIFICATION_PREDECESSOR.relative_to(ROOT))
+    if not isinstance(supersedes, dict):
+        add_error(errors, filename, None, "supersedes must be an object")
+    else:
+        if supersedes.get("path") != expected_predecessor_path:
+            add_error(
+                errors,
+                filename,
+                None,
+                f"supersedes.path must be {expected_predecessor_path!r}",
+            )
+        if supersedes.get("schema_version") != CLASSIFICATION_PREDECESSOR_SCHEMA_VERSION:
+            add_error(
+                errors,
+                filename,
+                None,
+                "supersedes.schema_version must be "
+                f"{CLASSIFICATION_PREDECESSOR_SCHEMA_VERSION!r}",
+            )
+        if supersedes.get("sha256") != CLASSIFICATION_PREDECESSOR_SHA256:
+            add_error(
+                errors,
+                filename,
+                None,
+                "supersedes.sha256 must match the frozen classification predecessor digest",
+            )
+        if not isinstance(supersedes.get("reason"), str) or not supersedes["reason"].strip():
+            add_error(errors, filename, None, "supersedes.reason must be a nonempty string")
+    try:
+        predecessor_digest = hashlib.sha256(CLASSIFICATION_PREDECESSOR.read_bytes()).hexdigest()
+    except OSError as exc:
+        add_error(errors, filename, None, f"cannot read classification predecessor: {exc}")
+    else:
+        if predecessor_digest != CLASSIFICATION_PREDECESSOR_SHA256:
+            add_error(
+                errors,
+                filename,
+                None,
+                "frozen classification predecessor digest does not match its recorded value",
+            )
 
     allowed_by_level: dict[tuple[str, str], set[str]] = {}
     for level in ("packet_level", "target_level"):
@@ -1989,11 +2045,11 @@ def run_negative_invariant_tests(
             if card["manifest_id"] == "OLV-MVP-1":
                 card["registration_status"] = "execution_ready"
 
-    def mutate_ql_novelty(copy: dict[str, list[dict[str, str]]]) -> None:
+    def mutate_ql_to_old_novelty(copy: dict[str, list[dict[str, str]]]) -> None:
         card = next(
             row for row in copy["cards.csv"] if row["card_id"] == "QL-001"
         )
-        card["novelty_class"] = "non_novel"
+        card["novelty_class"] = "novel"
 
     def mutate_distinct_ready_same_edition_snapshots(
         copy: dict[str, list[dict[str, str]]]
@@ -2411,9 +2467,9 @@ def run_negative_invariant_tests(
             ),
         ),
         (
-            "registry novelty differs from required classification example",
-            mutate_ql_novelty,
-            "QL-001 novelty_class='non_novel' does not match the frozen classification example 'novel'",
+            "registry retains superseded QL novelty under current authority",
+            mutate_ql_to_old_novelty,
+            "QL-001 novelty_class='novel' does not match the frozen classification example 'non_novel'",
         ),
         (
             "distinct ready snapshots of the same edition are not equivalent",

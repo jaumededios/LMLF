@@ -16,10 +16,10 @@ specification_binding:
       revision: REPLACE_WITH_IMMUTABLE_REVISION
       sha256: REPLACE_WITH_SHA256
   classification_schema:
-    path: review/classifications-v2.json
-    schema_version: lmlf-classification-v2
-    artifact_revision: REPLACE_WITH_IMMUTABLE_REVISION
-    sha256: REPLACE_WITH_SHA256
+    path: review/classifications-v3.json
+    schema_version: lmlf-classification-v3
+    artifact_revision: 3
+    sha256: 975e08b89d609cbdd15ff3f8d24f40a42bb17ea0f4c37bb26d9cf53fb8dc4b5e
 
 toolchain_binding:
   lean_toolchain: REPLACE_WITH_EXACT_TOOLCHAIN

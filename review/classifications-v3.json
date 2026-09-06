@@ -1,0 +1,165 @@
+{
+  "schema_version": "lmlf-classification-v3",
+  "record_kind": "classification_vocabulary",
+  "artifact_revision": 3,
+  "status": "frozen",
+  "normative_owner": "jaumededios",
+  "supersedes": {
+    "path": "review/classifications-v2.json",
+    "schema_version": "lmlf-classification-v2",
+    "sha256": "8c9f8dbb5ab351771a433a9901fe176a66ec214092c5d5880b3ec57c9a5b23e9",
+    "reason": "Version 2 classified QL-001 as novel. Version 3 records the disposition that QL-001 and both of its classical local-tail and finite Gamma-decomposition targets claim no novel mathematics; interface work does not create a mathematical novelty claim. All controlled vocabularies and orthogonal classification axes are unchanged, and the frozen version 2 predecessor remains immutable."
+  },
+  "purpose": "Versioned controlled values for packet summaries and declaration-level target classifications. The three axes are independent and no value grants source coverage, review approval, or implementation authorization.",
+  "packet_level": {
+    "theorem_class": {
+      "meaning": "Mathematical shape of the packet.",
+      "allowed": [
+        "foundational_calculus",
+        "definition_identification",
+        "exact_identity",
+        "finite_remainder_bound",
+        "existence_uniqueness",
+        "qualitative_support",
+        "qualitative_bridge",
+        "audit_regression",
+        "mixed"
+      ],
+      "value_semantics": {
+        "exact_identity": "A packet whose principal public results are exact identities and which does not also package a quantitatively distinct bound.",
+        "qualitative_support": "A packet of non-asymptotic regularity, branch, or supporting propositions not chiefly defining an entity or giving a finite remainder bound.",
+        "audit_regression": "A downstream packet of exact audit and regression declarations; it earns no source credit without a separate coverage role.",
+        "mixed": "A packet with principal targets from more than one packet theorem shape, such as an exact identity and a finite remainder bound."
+      }
+    },
+    "coverage_class": {
+      "meaning": "Role of the packet in source and infrastructure coverage.",
+      "allowed": [
+        "infrastructure",
+        "entity_identification",
+        "exact_source_generic",
+        "named_source_application",
+        "audit_source_recovery",
+        "mixed"
+      ]
+    },
+    "novelty_class": {
+      "meaning": "Relationship of the packet's mathematics to bound sources and accepted dependencies.",
+      "allowed": [
+        "non_novel",
+        "source_equivalent",
+        "equivalent_reformulation",
+        "generalized",
+        "strengthened_conclusion",
+        "stronger_hypotheses",
+        "novel",
+        "mixed"
+      ]
+    }
+  },
+  "target_level": {
+    "theorem_class": {
+      "allowed": [
+        "definition",
+        "identification",
+        "exact_identity",
+        "existence_uniqueness",
+        "qualitative_support",
+        "generic_quantitative",
+        "named_quantitative",
+        "audit_regression"
+      ]
+    },
+    "coverage_class": {
+      "allowed": [
+        "direct_source_target",
+        "named_source_target",
+        "source_prerequisite",
+        "reusable_infrastructure",
+        "audit_only"
+      ]
+    },
+    "novelty_class": {
+      "allowed": [
+        "non_novel",
+        "source_equivalent",
+        "equivalent_reformulation",
+        "generalized",
+        "strengthened_conclusion",
+        "stronger_hypotheses",
+        "novel"
+      ]
+    }
+  },
+  "registry_binding": {
+    "allowed": [
+      "required",
+      "illustrative"
+    ],
+    "semantics": {
+      "required": "A card-registry row with this ID is required and its packet-level classes must match this example exactly.",
+      "illustrative": "The row demonstrates a representable combination but does not require a card-registry entry."
+    }
+  },
+  "required_packet_examples": [
+    {
+      "id": "QB-001",
+      "registry_binding": "required",
+      "theorem_class": "foundational_calculus",
+      "coverage_class": "infrastructure",
+      "novelty_class": "non_novel"
+    },
+    {
+      "id": "DEF-001",
+      "registry_binding": "required",
+      "theorem_class": "definition_identification",
+      "coverage_class": "entity_identification",
+      "novelty_class": "non_novel"
+    },
+    {
+      "id": "QL-001",
+      "registry_binding": "required",
+      "theorem_class": "finite_remainder_bound",
+      "coverage_class": "infrastructure",
+      "novelty_class": "non_novel"
+    },
+    {
+      "id": "OLV-001",
+      "registry_binding": "required",
+      "theorem_class": "finite_remainder_bound",
+      "coverage_class": "exact_source_generic",
+      "novelty_class": "strengthened_conclusion"
+    },
+    {
+      "id": "SR-001",
+      "registry_binding": "required",
+      "theorem_class": "qualitative_bridge",
+      "coverage_class": "audit_source_recovery",
+      "novelty_class": "source_equivalent"
+    },
+    {
+      "id": "NAMED-EXAMPLE",
+      "registry_binding": "illustrative",
+      "theorem_class": "finite_remainder_bound",
+      "coverage_class": "named_source_application",
+      "novelty_class": "source_equivalent"
+    }
+  ],
+  "semantics": {
+    "non_novel": "A definition, routine consequence, or direct wrapper for which the packet claims no genuinely new mathematical content.",
+    "source_equivalent": "Mathematically equivalent to a specifically bound external source target or pinned-library statement; never a synonym for agreement with an internal proof dossier.",
+    "equivalent_reformulation": "A specifically bound external or pinned-library statement rewritten into a reviewed equivalent form whose translation is explained.",
+    "exact_source_generic": "A packet coverage role for a theorem matching a collated source occurrence while remaining generic in functions or parameters; not a theorem shape and not a named-function application.",
+    "named_source_application": "A packet coverage role requiring an identified named object and discharge of every generic hypothesis, reachability, and majorant-nonnegativity obligation.",
+    "audit_source_recovery": "A packet coverage role confined to downstream Audit/SourceRecovery bridges that recover a collated qualitative source statement."
+  },
+  "validation_rules": [
+    "Packet-level and target-level values must be taken from their own tables.",
+    "Every card and work packet newly frozen or revised under the current authority records this exact schema version and digest; immutable historical artifacts retain the classification authority to which they were frozen.",
+    "Every packet target has all three classifications and relationship prose.",
+    "Every required_packet_examples row has registry_binding required or illustrative; required rows must exist in the card registry with exactly matching packet-level classes, while illustrative rows test vocabulary expressibility without requiring a registry entry.",
+    "An internal proof artifact alone can never justify source_equivalent.",
+    "A packet summary may use mixed only when its targets use more than one value.",
+    "Classifications do not imply reviewer pass, lean_ready, coverage, or release."
+  ]
+}

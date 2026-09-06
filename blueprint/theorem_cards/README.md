@@ -11,9 +11,10 @@ review evidence.
 
 ## Three classifications, two levels
 
-The current versioned vocabulary is artifact revision 2 of
-[`review/classifications-v2.json`](../../review/classifications-v2.json), which
-supersedes the immutable v1 file.  It
+The current versioned vocabulary is artifact revision 3 of
+[`review/classifications-v3.json`](../../review/classifications-v3.json), which
+supersedes without mutating immutable v2. Historical frozen artifacts retain
+their recorded authority; the IMP R5 and QL/OLV R3 drafts bind v3. It
 separates packet-level summary values from declaration-level target values.
 Every card has three independent axes:
 
@@ -68,6 +69,10 @@ counts as zero reviewers.  Separately stored external records later authorized
 and accepted the exact BOOTSTRAP-0 implementation at commit
 `515b742f7ad5472c17cfdf0fda7cbc83c5585da1`; manifest readiness alone did not
 authorize that implementation.
+Historical reports are preserved at private
+[`review-evidence` commit `5c8ec1b`](https://github.com/jaumededios/LMLF/commit/5c8ec1b301f656df35ffa8850e002639807995cd),
+but each record binds only its recorded commit and is not mutable status
+authority.
 `prototype_status` records code that exists outside the authorized lifecycle;
 it never advances `implementation_status` or `review_status` by itself.
 
@@ -99,8 +104,10 @@ reachability, majorant nonnegativity, or identification as not applicable.
 
 ## Review and authorization
 
-Genuinely new mathematics needs a complete natural-language proof and two
-independent external approvals before an envelope may set `lean_ready: pass`.
+Genuinely new mathematics needs a complete natural-language proof and multiple
+independent proof/architecture approvals before exact Lean signature design.
+The resulting signatures and theorem card then receive their own independent
+reviews before an envelope may set `lean_ready: pass`.
 Packets involving construction, continuation, identification through
 existence/uniqueness, nontrivial source recovery, or theorem-sized hypothesis
 structures require the separately represented `structural_circularity_review`.
@@ -136,10 +143,13 @@ reviews bind and accept commit
 
 `IMP-001.yaml`, `OLV-002.yaml`, `DEF-BERN-001.yaml`, and
 `DEF-BERN-002.yaml` are planning artifacts, not registry entries or manifest
-members. IMP-001 revision 3 has six prospective integration targets; two
-fresh-context referees approved its exact natural-language proof bytes, so
-[its exact-signature proposal](IMP-001-signatures.md) may proceed to independent
-API review, but neither theorem-card approval nor Lean authorization follows.
+members. IMP-001 revision 5 has eight prospective integration targets justified
+by the QL/OLV consumer chain rather than a schema limit. The immutable
+[revision-3 exact-signature proposal](IMP-001-signatures.md) and its historical
+reviews are superseded, changes-requested evidence; they are not R5 input.
+No R5 proof/card/signature review or authorization exists. QL-001 and OLV-001
+revision 3 are registered planning drafts with complete author proofs, likewise
+without current review quorum, exact signatures, or Lean authorization.
 OLV-002 revision 2 has a complete draft proof.
 DEF-BERN-001 revision 1 and DEF-BERN-002 revision 1 are declaration-free and
 have complete draft identification proofs, respectively covering the

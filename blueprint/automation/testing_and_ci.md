@@ -111,7 +111,9 @@ Run the source-card validators against explicit manifest IDs:
 - compare declared and actual distinct occurrence/card totals;
 - reject generic/named/source-recovery role mismatches;
 - derive all three card-registry classification axes and every required registry
-  example from `review/classifications-v2.json`; and
+  example from the current authority, `review/classifications-v3.json`, while
+  preserving the exact immutable version 2 digest for historical specifications
+  that were frozen against that predecessor; and
 - require exact-source reconciliation only for the closed manifest under test;
   and
 - emit unresolved inventory debt without turning it into coverage.

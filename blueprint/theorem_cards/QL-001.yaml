@@ -2,12 +2,12 @@ schema_version: 2
 id: QL-001
 title: Finite local-tail bound for Laplace remainders
 owner: jaumededios
-artifact_revision: 2
+artifact_revision: 3
 baseline_spec_commit: pending_external_record_after_commit
 
 theorem_class: finite_remainder_bound
 coverage_class: infrastructure
-novelty_class: novel
+novelty_class: non_novel
 specification_status: draft
 proof_status: complete
 review_status: not_started
@@ -15,14 +15,14 @@ implementation_status: not_started
 prototype_status: absent
 coverage_status: not_applicable
 manifest_membership_status: planning_only
-status_as_of: advisory_feedback_integrated_draft
+status_as_of: imp_r5_consumer_architecture_integrated_pending_fresh_review
 status_authority: external_review_envelope_only
 
 classification_schema:
-  path: review/classifications-v2.json
-  schema_version: lmlf-classification-v2
-  artifact_revision: 2
-  sha256: 8c9f8dbb5ab351771a433a9901fe176a66ec214092c5d5880b3ec57c9a5b23e9
+  path: review/classifications-v3.json
+  schema_version: lmlf-classification-v3
+  artifact_revision: 3
+  sha256: 975e08b89d609cbdd15ff3f8d24f40a42bb17ea0f4c37bb26d9cf53fb8dc4b5e
 
 manifest: OLV-MVP-1
 source_occurrences:
@@ -48,9 +48,10 @@ scope:
     Prove a finite local-plus-tail estimate over a complete normed real vector
     space from supplied local constants and a finite-exceptional continuous
     primitive, then specialize to complex scalars and combine with finitely
-    many Gamma moments to obtain a finite Watson remainder bound.
+    many absolutely integrable Gamma moments to obtain a finite Watson
+    remainder bound stated entirely through explicit ordinary-improper values.
   candidate_module: LMLF.Integral.Watson
-  exact_signatures_artifact: pending after integral-semantics review
+  exact_signatures_artifact: absent-deferred-until-fresh-r3-proof-and-architecture-approvals
   candidate_public_targets:
     - target_id: QL-001-T01
       declaration: LMLF.Integral.improperLaplace_localTail_bound
@@ -59,9 +60,11 @@ scope:
   included:
     - conditional upper-tail convergence from a bounded baseline primitive
     - finite interior exceptional set with independent one-sided limits
-    - a local-Bochner adapter that does not claim conditionally singular coverage
+    - honest Bochner integrability of the local interval at zero
+    - an absolute-Bochner-to-ordinary-improper adapter for the Gamma model terms
     - local power-law Gamma majorant
     - finite model-moment decomposition
+    - explicit relational values rather than totalized conditional set integrals
     - n = 0 behavior
   excluded:
     - derivation of local or tail constants from a named function
@@ -72,9 +75,14 @@ scope:
 
 mathematical_contract:
   local_regularity: >-
-    phi is strongly measurable on (0,k], or arrives through an equivalent
-    proper-Riemann adapter on every compact [epsilon,k] away from zero. The
-    pointwise power bound alone is not treated as an integrability theorem.
+    Generic QL takes phi AEStronglyMeasurable for volume restricted to (0,k]
+    as a direct premise. For the complex-valued, hence finite-dimensional,
+    Olver source adapter, a proper-Riemann hypothesis on every compact
+    [epsilon,k] away from zero supplies exactly this a.e. premise by a
+    countable exhaustion; no such implication is asserted for arbitrary
+    Banach-valued Riemann integrability. Pointwise StronglyMeasurable/Borel
+    regularity may fail after null-set modifications, and the pointwise power
+    bound alone is not treated as an integrability theorem.
   local_bound: >-
     norm (phi t) <= K * t^(beta-1) on 0 < t <= k, with beta > 0,
     k > 0, and K >= 0.
@@ -86,16 +94,22 @@ mathematical_contract:
     Ordinary improper convergence is split at S, with independent one-sided
     endpoint limits and no principal-value cancellation. Every regular
     truncated piece uses Mathlib's Bochner intervalIntegral with explicit
-    IntervalIntegrable evidence; the source adapter proves agreement with
-    Olver's proper Riemann pieces. The target returns existence and the bound.
+    IntervalIntegrable evidence; the complex finite-dimensional source adapter
+    proves agreement with Olver's proper Riemann pieces. T01 returns existence of an explicit related
+    value and its bound. T02 returns an explicit value Q for the weighted
+    amplitude, a relation witnessing that value, and the finite remainder
+    bound. Displayed full-ray integrals are only shorthand for such related
+    values and never denote a totalized conditional set integral.
   scalar_boundary: >-
     T01 is generic over a complete normed real vector space. T02 is complex
     scalar; a real specialization is a corollary. Powers and Gamma factors are
     positive-real objects.
   target_domain: x > max X 0
   conclusion: >-
-    The norm of the full remainder integral is at most
-    K*Gamma(beta)*x^(-beta) + L*exp(-(x-X)*k).
+    T01 produces a value I related to the full weighted remainder and proves
+    norm I <= K*Gamma(beta)*x^(-beta) + L*exp(-(x-X)*k). T02 produces a value Q
+    related to the full weighted amplitude and proves that the norm of Q minus
+    the finite Gamma model is bounded by the corresponding T01 expression.
   order_convention: n retained terms indexed 0 through n-1; empty at n=0
   branch_convention: positive-real rpow only
   derivative_convention: not_applicable
@@ -106,28 +120,55 @@ open_design_choices:
     status: provisionally_selected_pending_review
     selection: generic complete normed real vector space for T01; complex T02; real corollary
   improper_integral:
-    status: provisionally_selected_pending_review
+    status: provisionally_selected_pending_imp_r5_and_ql_r3_review
     selection: >-
       Relational ordinary-improper values built from Mathlib intervalIntegral
       on regular truncated pieces and independent one-sided limits at a finite
-      exceptional set, plus a whole-set-integral bridge under separately
-      proved absolute integrability.
+      exceptional set. Public IMP T07 bridges a separately proved
+      absolute-Bochner IntegrableOn hypothesis to the relation at its exact
+      set-integral value; it is not a conditional-integral equivalence.
   interior_singularities:
-    status: provisionally_selected_pending_review
+    status: provisionally_selected_pending_imp_r5_and_ql_r3_review
     selection: >-
       A continuous normalized baseline primitive with regular-piece increment
       law; principal value is excluded and reserved for a later adapter.
   classification_novelty:
-    status: unresolved_versioned_schema_question
-    requirement: >-
-      Frozen classifications-v2 requires QL-001 as a novel example, while the
-      mathematics is classical and the Banach/interface packaging is a
-      generalization. Resolve only through a future schema version; do not
-      mutate v2 in place.
+    status: selected_non_novel_pending_classifications_v3_review
+    selection: >-
+      QL-001 and both targets are non_novel: the local-tail estimate and finite
+      Gamma decomposition are classical mathematics, and the project interface
+      work creates no novelty claim. The version-3 successor records this
+      disposition while preserving the version-2 bytes.
+
+imp_r5_public_dependencies:
+  - target_id: IMP-001-T01
+    declaration: LMLF.Integral.HasImproperIntegralAtTopExcept
+    role: explicit finite-exception ordinary-improper relation
+  - target_id: IMP-001-T02
+    declaration: LMLF.Integral.HasImproperIntegralAtTopExcept.unique
+    role: uniqueness of every explicit related value
+  - target_id: IMP-001-T03
+    declaration: LMLF.Integral.HasImproperIntegralAtTopExcept.finset_clm
+    role: generalized finite continuous-real-linear combination and literal finite union
+  - target_id: IMP-001-T04
+    declaration: LMLF.Integral.HasImproperIntegralAtTopExcept.split_regular
+    role: prepend the honestly integrable local interval from zero to k
+  - target_id: IMP-001-T05
+    declaration: LMLF.Integral.IsFiniteExceptionalPrimitive
+    role: normalized continuous baseline primitive certificate
+  - target_id: IMP-001-T06
+    declaration: LMLF.Integral.IsFiniteExceptionalPrimitive.hasImproperIntegralAtTopExcept_exp_smul
+    role: arbitrary-S exponential composition at the exact tail value
+  - target_id: IMP-001-T07
+    declaration: LMLF.Integral.HasImproperIntegralAtTopExcept.of_integrableOn_Ioi
+    role: absolutely integrable Gamma model to exact improper value
+  - target_id: IMP-001-T08
+    declaration: LMLF.Integral.hasImproperIntegralAtTopExcept_iff_exists_primitive
+    role: source adapter extraction of a primitive tending to its baseline value
 
 natural_language_proof:
   artifact: blueprint/proofs/QL-001.md
-  artifact_revision: 2
+  artifact_revision: 3
   artifact_state: draft
   proof_status: complete
 
@@ -135,11 +176,11 @@ target_classifications:
   - target_id: QL-001-T01
     theorem_class: generic_quantitative
     coverage_class: reusable_infrastructure
-    novelty_class: novel
+    novelty_class: non_novel
   - target_id: QL-001-T02
     theorem_class: generic_quantitative
     coverage_class: source_prerequisite
-    novelty_class: novel
+    novelty_class: non_novel
 
 dependencies:
   mathlib_revision: 0df444a360eaa60ab8c11dca51a86af692955474
@@ -148,6 +189,12 @@ dependencies:
     - IMP-001
   pinned_candidates:
     - Real.integral_rpow_mul_exp_neg_mul_Ioi
+    - integrableOn_rpow_mul_exp_neg_mul_rpow
+    - MeasureTheory.norm_integral_le_of_norm_le
+    - Real.integrableOn_exp_mul_Ioi
+    - Real.integral_exp_mul_Ioi
+    - Complex.ofRealCLM
+    - ContinuousLinearMap.mul
     - isLittleO_exp_neg_mul_rpow_atTop
     - MeasureTheory.intervalIntegral_tendsto_integral_Ioi
   explicitly_not_dependencies:
@@ -157,15 +204,42 @@ dependencies:
 pre_lean_requirements:
   theorem_card_reviewers: 2
   natural_language_proof_reviewers: 2
+  reviewer_independence: fresh_independent_sol_reviews_required
   structural_circularity_review: required
   lean_ready_authority: external_review_envelope_only
 
 blocking_conditions:
-  - IMP-001 has an unregistered revision-3 draft card and complete revised author proof awaiting two fresh approvals before exact-signature design; it has no registry row or authorization
+  - IMP-001 revision 5 and its T01--T08 public architecture are concurrent unregistered drafts awaiting fresh proof and architecture review
   - provisional semantic and scalar selections lack independent approval
-  - classification novelty needs a versioned-schema decision
-  - exact Lean signatures have not been compiled
+  - the classifications-v3 binding and non_novel disposition await independent review and claim no schema approval
+  - this revision-3 proof and architecture lack two fresh independent Sol approvals before exact Lean signature design
+  - exact Lean signatures are intentionally absent pending those reviews
   - no independent proof or theorem-card reviews exist
+
+consumer_regressions:
+  - >-
+    A source-shaped end-to-end regression begins with a baseline-X relation
+    for weighted q and the raw finite Gamma model functions, not with a
+    primitive assumed. It proves each baseline model IntegrableOn, applies T07
+    and generalized T03 to obtain the baseline remainder relation, uses local
+    integrability and T04 to move the start to k, applies T08 to obtain a
+    normalized continuous primitive tending to the tail value, and derives a
+    finite global bound L from convergence plus continuity before invoking QL.
+  - >-
+    An end-to-end T01 regression derives local IntervalIntegrable evidence at
+    zero, derives weighted-primitive IntegrableOn and boundary vanishing from
+    h=x-X>0 and the flat primitive bound, invokes public IMP T06 for arbitrary
+    finite S, and invokes public IMP T04 to prepend [0,k].
+  - >-
+    An end-to-end T02 regression separately proves absolute integrability of
+    every Gamma model by the pinned power-exponential theorem, invokes public
+    IMP T07 to obtain its exact improper value, and invokes generalized public
+    IMP T03 with the T01 remainder relation to construct Q. It may use public
+    IMP T02 uniqueness to identify any other supplied value, and it neither
+    unfolds T01 nor treats a totalized set integral as conditional convergence.
+  - >-
+    The n=0 regression has no model witnesses or coefficient access and reduces
+    T02 to the T01 remainder relation for q.
 
 implementation:
   implementation_status: not_started

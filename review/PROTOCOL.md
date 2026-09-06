@@ -80,10 +80,16 @@ An in-repository review summary is historical, non-quorum context.
 
 ## Orthogonal target classifications
 
-The frozen controlled vocabulary is artifact revision 2 of
-[`classifications-v2.json`](classifications-v2.json), which supersedes the
-immutable v1 artifact.  It separates packet-level
-summaries from declaration-level target values.  Every target in `targets` has
+The current frozen controlled vocabulary is artifact revision 3 of
+[`classifications-v3.json`](classifications-v3.json), which supersedes the
+immutable v2 artifact without changing the allowed vocabulary or the separation
+of classification axes. Version 3 changes only the required `QL-001` novelty
+example from `novel` to `non_novel`: its local-tail estimate and finite Gamma
+decomposition are classical mathematics, and interface work does not create a
+mathematical novelty claim. Historical specifications frozen under version 2
+remain bound to the exact immutable version 2 bytes and digest; a new or revised
+specification uses the current version 3 authority. The authority separates
+packet-level summaries from declaration-level target values. Every target in `targets` has
 three independent classifications:
 
 - `theorem_class`: `definition`, `identification`, `exact_identity`,
@@ -113,7 +119,7 @@ identity and finite bound.  `coverage_class` is a role such as
 `named_source_application`, or `audit_source_recovery`.  A source role may
 never occupy the theorem-shape axis.
 
-Each v2 example carries a machine-readable `registry_binding`.  `required`
+Each current-authority example carries a machine-readable `registry_binding`. `required`
 means that the card registry must contain the ID with exactly those packet
 classes; `illustrative` tests that a combination is representable without
 requiring a registry row.  Validators derive that distinction from the JSON

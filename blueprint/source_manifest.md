@@ -20,6 +20,12 @@ identifies would be self-referential.
 No page, equation, or exercise locator is accepted until checked against this
 printing.  DLMF links corroborate, but do not replace, direct collation.
 
+The exact private PDF was previously inspected and hash-bound, but its original
+uploaded bytes are absent from the restarted environment. Existing
+transcriptions and historical collation metadata survive; new source-image
+audits require reattachment or recovery. Source-independent IMP/QL drafting is
+not blocked by that runtime absence.
+
 ## Manifest state
 
 Manifest scope and packet progress are different facts.
@@ -42,13 +48,18 @@ Card review and implementation fields are temporal, nonauthoritative summaries.
 Only an external review envelope bound to the specification commit, packet,
 artifacts, and their digests can establish gate pass or Lean authorization.
 Repository review ledgers are historical context and count as zero reviewers.
+The private
+[`review-evidence` commit `5c8ec1b`](https://github.com/jaumededios/LMLF/commit/5c8ec1b301f656df35ffa8850e002639807995cd)
+preserves historical records; an approval binds only its recorded commit and
+does not establish current status for later bytes.
 
 ## Classification fields
 
-Every card records theorem, coverage, and novelty axes under frozen artifact
-revision 2 of the
-[`lmlf-classification-v2`](../review/classifications-v2.json) vocabulary, which
-supersedes rather than mutates frozen v1.  That
+Every newly revised card records theorem, coverage, and novelty axes under
+artifact revision 3 of the
+[`lmlf-classification-v3`](../review/classifications-v3.json) vocabulary, which
+supersedes rather than mutates frozen v2. Historical frozen cards retain their
+recorded authority. The current vocabulary
 schema distinguishes packet summaries from exact declaration-level target
 values and marks registry examples `required` or `illustrative` in a
 machine-readable field.  In particular, a routine target uses `non_novel`; it
@@ -65,10 +76,10 @@ Watson's lemma is `exact_source_generic`: it is a source theorem quantified over
 generic amplitudes and parameters, not an application to a named special
 function.
 
-The v2 registry currently requires `QL-001` to use `novel`, although the
-bounded-primitive argument is classical.  This is a recorded classification
-mismatch, not permission to edit frozen v2.  Any correction must be a versioned
-v3 schema migration with registry reconciliation.
+The v3 registry corrects `QL-001` to `non_novel`, matching its classical
+bounded-primitive mathematics. Frozen v2 remains byte-for-byte historical; the
+versioned correction itself supplies no mathematical approval, review quorum,
+or implementation authorization.
 
 ## Closed-manifest rule
 
@@ -175,7 +186,7 @@ transcription, hash-bound private copy identifier, page map, and provisional
 notation/source-entity records.  Before execution readiness, a distinct
 reviewer must verify the page audit, transcription, and proposed semantic
 reading, then promote every required link from provisional to confirmed.  The
-revision-2 proposal is source-facing over complex scalars with a real
+revision-3 proposal is source-facing over complex scalars with a real
 corollary.  It reads ordinary source convergence as independent one-sided
 convergence at a finite exceptional set and uses a continuous normalized
 primitive with a regular-piece increment law.  Lean-facing regular pieces use
@@ -189,21 +200,27 @@ SR-001 remains uncarded:
 
 | Card | Packet theorem class | Packet coverage class | Obligation |
 |---|---|---|---|
-| QL-001 | finite_remainder_bound | infrastructure | draft supplied-constant local-tail theorem and finite Gamma-moment decomposition |
-| OLV-001 | finite_remainder_bound | exact_source_generic | draft derivation of visible witnesses and a finite bound from the collated Watson hypotheses |
+| QL-001 | finite_remainder_bound | infrastructure | revision-3 draft supplied-constant local-tail theorem and finite Gamma-moment decomposition |
+| OLV-001 | finite_remainder_bound | exact_source_generic | revision-3 draft derivation of visible witnesses and a finite bound from the collated Watson hypotheses |
 | SR-001 | qualitative_bridge | audit_source_recovery | recover the exact printed qualitative conclusion in `Audit/SourceRecovery` |
 
-`IMP-001` is an unregistered revision-3 draft for the small ordinary-
-improper relation, finite-exceptional primitive layer, and finite-piece
-Abel/Fubini identity upstream of QL-001.
-Its six prospective targets have a complete revised author proof.  Two
-exact-commit review rounds exposed endpoint-continuity and component-bookkeeping
-gaps; revision 3 integrates both repairs and awaits two fresh proof approvals
-before exact-signature design.  Its name and boundary also await
-registry reconciliation and authorization before Lean; it is not a manifest
-member merely because a draft file exists.
-The OLV-001 draft chooses one common baseline `X > 0` before `n`, while its
-`k_n`, `K_n`, and `L_n` witnesses may depend on `n`.
+`IMP-001` is an unregistered revision-5 author draft upstream of QL-001. Its
+eight prospective public targets are justified by consumer completion rather
+than a hard schema cap: T01 keeps independent endpoint semantics; T08 equates
+it with existence of a normalized continuous primitive tending to the same
+value; T07 is the arbitrary-exception absolute Bochner bridge; T03 maps
+`E -> H`; and T06 exposes Abel composition while its finite-piece engine stays
+private. `Basic` owns T01/T05/T08/T02/T03/T04, `Bochner` T07, and `Abel` T06.
+The historical revision-3 signature artifact is untouched and superseded.
+Recent R4 report bytes are absent after restart, and conversation-reported
+approval supplies no current quorum. No R5 or QL/OLV R3 review, signature,
+registry, manifest, or Lean authorization exists; a draft file is not a
+manifest member.
+QL-001 uses T06 for the bounded-primitive tail, T07 for the absolutely
+integrable model terms, and T04 to prepend the local interval. OLV-001 chooses
+one common baseline `X > 0` before `n`, uses T07/T03/T04/T08 to obtain the
+baseline remainder primitive, derives its flat bound `L_n`, and only then calls
+QL-001; `k_n`, `K_n`, and `L_n` may depend on `n`.
 
 Watson earns occurrence coverage only when OLV-001 and SR-001 are proved and
 reconciled.  It requires no named-function application.
@@ -240,7 +257,7 @@ pinned Real Gamma moment -----------------------> QL-001
 ```
 
 QB-001 and DEF-001 may later join for optional error-predicate packaging or a
-project-level Gamma audit wrapper.  The revision-2 QL/OLV proofs do not consume
+project-level Gamma audit wrapper.  The revision-3 QL/OLV proofs do not consume
 them, so neither is a critical dependency.
 
 Airy, Cauchy transport, coefficient residual automation, ODE stability, and

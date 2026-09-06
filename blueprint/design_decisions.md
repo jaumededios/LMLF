@@ -160,7 +160,7 @@ entity, notation, and occurrence IDs remain reserved for source reconciliation.
 
 The edition/occurrence collation and the selected finite integral/Laplace
 infrastructure are independent, parallel predecessors of the source adapter.
-For the revision-2 Watson programme the mathematical path is
+For the revision-3 Watson programme the mathematical path is
 `IMP-001 -> QL-001 -> OLV-001 -> SR-001`; the real Gamma-moment identity is a
 direct pinned-Mathlib reuse inside QL-001.  The accepted QB-001 and DEF-001
 bootstrap declarations are optional packaging and audit joins, not Watson
@@ -169,13 +169,14 @@ ODE/comparison systems are parallel tracks, not blockers.
 
 ## DD-018 — Classification and review authority are versioned
 
-Artifact revision 2 of `review/classifications-v2.json` separately controls packet-level and
-declaration-level theorem, coverage, and novelty values.  Every frozen card and
-packet carries exact target classifications.  `non_novel` is canonical for
+Current artifact revision 3 of `review/classifications-v3.json` separately controls packet-level and
+declaration-level theorem, coverage, and novelty values. Every newly frozen card
+and packet carries exact target classifications. Historical frozen artifacts
+retain their recorded v2 authority. `non_novel` is canonical for
 routine internal definitions and consequences; `source_equivalent` requires a
 bound external source target or pinned-library statement.
 
-Version 2 supersedes the immutable v1 file.  Its machine-readable
+Version 3 supersedes without mutating the immutable v2 file. Its machine-readable
 `registry_binding` distinguishes required registry examples from illustrative
 ones.  Packet theorem classes are mathematical shapes such as
 `exact_identity`, `finite_remainder_bound`, `qualitative_support`,
@@ -184,8 +185,48 @@ principal targets span more than one shape.
 packet coverage classes carry roles such as `exact_source_generic`,
 `named_source_application`, and `audit_source_recovery`.
 
+Version 3 corrects QL-001 and its two classical targets from `novel` to
+`non_novel`. That versioned disposition is classification metadata only; it
+does not approve the R3 card/proof, signatures, or implementation.
+
 Passing review, `lean_ready`, and authorization exist only in an external
 envelope that binds the frozen specification commit and artifact digests.
 Candidate-owned ledgers are historical and count as zero reviewers.  Only the
 CSV inventory validator is implemented today; broader schema/lifecycle and
 review-contract validation remains manual/planned.
+
+## DD-019 — Consumer-complete finite-exception integration surface
+
+The primary architecture decision for the next unregistered `IMP-001` draft is
+an eight-target public surface justified by completion of the `QL-001` and
+`OLV-001` consumer chain, not by a hard packet-size or classification-schema
+cap. `Basic` owns T01/T05/T08/T02/T03/T04, `Bochner` owns T07, and `Abel` owns
+T06. T01 retains independent one-sided endpoint semantics because that is the
+collated ordinary source meaning and forbids principal-value cancellation. T08 exposes the
+public equivalence between T01 and existence of a normalized continuous
+finite-exceptional primitive tending to the same value; T07 bridges absolute
+Bochner integrability to T01 for an arbitrary finite exceptional set. Together
+those two bridges let the source adapter, Gamma models, and bounded-primitive
+tail use one relation without totalizing conditional integrals.
+
+T08 owns all endpoint stitching and the equivalence between component limits
+and a convergent normalized primitive. T06 owns only a private finite-piece
+Bochner-Fubini identity; it constructs the transformed primitive `G` and invokes
+the reverse direction of T08, rather than duplicating sorted endpoint recursion.
+No consumer needs the finite-piece representation as public API. The flat
+primitive norm bound remains visible data owned by `QL-001`
+and derived by `OLV-001`; it is not laundered into a T08 structure field. T03
+uses continuous real-linear maps `E ->L[R] H`, rather than endomorphisms only,
+because the model-subtraction consumer genuinely changes codomain.
+
+QL-001's local premise is `AEStronglyMeasurable` for
+`volume.restrict (Ioc 0 k)`, paired with the local norm majorant. Requiring a
+globally Borel representative would unnecessarily exclude proper-Riemann source
+data after null modifications; the restricted almost-everywhere premise is the
+Bochner condition actually consumed by the local estimate.
+
+Rejected alternatives are preserving an arbitrary historical six-target count,
+exposing sorted recursion or anchor machinery as public API, and replacing the
+source ordinary-improper relation with a totalized whole-set Bochner integral.
+This is a primary-agent architectural decision embodied in draft artifacts. It
+is not mathematical review, code review, gate evidence, or Lean authorization.
