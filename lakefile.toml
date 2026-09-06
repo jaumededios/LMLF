@@ -34,4 +34,5 @@ globs = [
   "LMLFTest.Integral.Improper.IMP001PublicUse",
   "LMLFTest.Integral.Improper.IMP001Regressions",
   "LMLFTest.Integral.Improper.IMP001EndpointAE",
+  "LMLFTest.Integral.Improper.IMP001GammaEndpoint",
 ]
