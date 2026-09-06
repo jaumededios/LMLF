@@ -1,19 +1,32 @@
 # Bessel and cylinder-function family programme
 
 **Status:** planning only; no provisional ID below is registered or authorized  
-**Current source evidence:** contents-only leads for `J`, `I`, later cylinder families, and Chapter 12 comparison auxiliaries  
+**Current source evidence:** locked-body first collations for Chapter 2 `J`/`I`
+and Chapter 12 real comparison auxiliaries, plus contents-only leads for later
+cylinder families; all remain unreconciled
 **Mathlib position at the pin:** no named classical Bessel `J`, `Y`, `I`, `K`, or Hankel object was found; regularized hypergeometric series are a candidate shared substrate
 
 ## Family boundary and source honesty
 
 This wave plans first- and second-kind Bessel functions, modified Bessel functions, Hankel functions, any source-confirmed “cylinder function” aliases or bases, and the exact model properties later required for simple-pole comparison systems. It does not automatically include every modern Bessel relative. Spherical functions, Kelvin functions, Nicholson combinations, Anger/Weber functions, Struve functions, and arbitrary cylinder-function linear combinations enter only if a locked-edition body occurrence or a separately labelled project need confirms them. Nicholson/Anger/Struve leads are tracked in [`remaining_families.md`](remaining_families.md).
 
-The present evidence is discovery-level:
+The present evidence now has two distinct levels:
 
-- `OLV10P-O0013` and `bessel_j_candidate` are based on the Chapter 2 §9 contents heading only.
-- `OLV10P-O0014` and `bessel_i_candidate` are based on the Chapter 2 §10 contents heading only.
+- [`OLV97-C02-BESSEL-JI.md`](../source_transcriptions/OLV97-C02-BESSEL-JI.md)
+  is a hash-bound first mathematical collation of Chapter 2 sections 9--10.
+  It records the `J`/`I` series, ODEs, branches, contours, recurrences, and
+  separately labelled exercises. Revision 2 integrates the first independent
+  review's semantic and atomic-occurrence repairs and awaits fresh rereview.
+- [`OLV97-C12-BESSEL-REAL-AUX.md`](../source_transcriptions/OLV97-C12-BESSEL-REAL-AUX.md)
+  is a hash-bound first collation of Chapter 12 section 1.  It records the real
+  comparison bases, Wronskians, zeros, and auxiliary root/weight/modulus/phase
+  system. Revision 2 likewise integrates the requested source-governance
+  repairs and awaits fresh rereview.
+- `OLV10P-O0013`, `OLV10P-O0014`, `bessel_j_candidate`, and
+  `bessel_i_candidate` remain preview-derived discovery records until the new
+  locked-body transcriptions are normalized into atomic inventory rows.
 - `OLV10P-O0018` is a Chapter 7 contents lead to Bessel, Hankel, modified Bessel, “other cylinder,” confluent hypergeometric, Whittaker, and Struve material. Its member split is unresolved.
-- `OLV10P-O0022` is a Chapter 12 contents lead to Bessel/modified-Bessel simple-pole models and auxiliaries. No comparison basis or auxiliary notation is resolved.
+- `OLV10P-O0022` is a Chapter 12 contents lead to Bessel/modified-Bessel simple-pole models and auxiliaries. The locked-body first collation now records a candidate comparison basis and auxiliary notation, but neither is reconciled or confirmed.
 
 No current Bessel entity is confirmed from a locked mathematical-body occurrence. DLMF formulas below are convention candidates and adversarial checks, not statements that Olver uses exactly those normalizations.
 
@@ -219,9 +232,13 @@ After collation enumerates the objects, define each modulus, phase, or envelope 
 
 ## Explicit unknowns and blockers
 
-- No locked 1997 Bessel-family body occurrence has been registered, transcribed, or reconciled.
+- Two locked 1997 Bessel-family body ranges have first mathematical
+  transcriptions. No atomic occurrence from them has yet been registered or
+  reconciled, and no Bessel entity is confirmed.
 - The Chapter 7 member split and the meaning of “other cylinder functions” are unknown.
-- The Chapter 12 comparison basis, Wronskian convention, and auxiliary symbols are unknown.
+- The Chapter 12 first collation records a comparison basis, Wronskian
+  convention, and auxiliary symbols, but their atomic inventory split and
+  normalization remain unreviewed and unresolved.
 - Modern DLMF formulas have not been checked against the locked source's exact scale, branch, and argument order.
 - The regularized $0F1$ substrate is feasible but no named Bessel construction has been compiled or reviewed.
 - Mathlib support for parameter analyticity of the regularized kernel has not been established; this may be the critical blocker for exceptional-order continuation.

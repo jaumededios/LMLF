@@ -222,6 +222,15 @@ theorem card; Bernoulli has an unregistered revision-1 planning card/proof but
 no inventory occurrence-card association. A draft file is neither registration
 nor coverage.
 
+Two additional locked-body revision-2 collations cover Chapter 2 `J`/`I` and
+Chapter 12 real Bessel/comparison auxiliaries. Their first source-review round
+found the displayed mathematics accurate and requested branch/path, phase,
+cross-reference, atomic-occurrence, and current-status repairs; those changes
+are integrated, with fresh independent rereview pending. The files remain
+unregistered `transcribed_unreconciled` artifacts with no normalized occurrence
+rows, confirmed entities, card, manifest membership, coverage, or implementation
+authorization.
+
 Its mathematical critical path is:
 
 ```text

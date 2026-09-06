@@ -1,7 +1,7 @@
 # OLV97-C02-BESSEL-JI - planning mathematical transcription
 
-**Status:** planning-only first collation; transcribed-unreconciled;
-independent review pending
+**Status:** planning-only revision 2; Referee A changes integrated;
+transcribed-unreconciled; fresh independent review pending
 **Edition:** F. W. J. Olver, *Asymptotics and Special Functions*, corrected
 A K Peters reprint, 1997, ISBN 1-56881-069-5
 **Source snapshot:** SRC-OLV-1997-USER-PDF-20260905
@@ -253,6 +253,12 @@ Exercise 9.3 gives the half-integral targets
 \end{aligned}
 \]
 
+The square root in these formulas and the half-integral \(J\)-values inherit
+the principal branch selected in section 9.3, or a branch obtained from it by
+the continuation rule (9.10). The exercise does not restate a cut, boundary
+value, or maximal admissible \(z\)-domain. Those details remain unresolved
+source semantics and must be fixed before this target is formalized.
+
 Exercise 9.4 asks, for nonnegative integral \(s\), to prove
 
 \[
@@ -267,6 +273,11 @@ and
  \{z^{-\nu}J_\nu(z)\}=(-1)^s z^{-\nu-s}J_{\nu+s}(z).
 \]
 
+Here \(z^\nu\), \(z^{-\nu}\), and all Bessel factors inherit one coherent
+principal-or-continued branch from section 9.3. The inspected exercise does
+not specify the cut, whether cut boundaries are admitted, or the precise
+punctured domain on which repeated differentiation is intended.
+
 Exercise 9.5 asks for Poisson's integral
 
 \[
@@ -277,6 +288,10 @@ Exercise 9.5 asks for Poisson's integral
 \]
 
 and for a direct verification that this integral satisfies (9.11).
+The prefactor \((z/2)^\nu\) and \(J_\nu(z)\) again inherit the branch convention
+of section 9.3. Although the \(\theta\)-integral is over a real interval, the
+exercise does not separately state an admissible complex \(z\)-domain or its
+boundary convention.
 
 Exercise 9.6 asks for the bounds
 
@@ -295,6 +310,9 @@ and, at integral order,
 
 The first inequality is printed in a real-\(\nu\) range; it should not be read
 as an ordering hypothesis on complex \(\nu\).
+The general-order Bessel value in this bound is understood on the same
+principal or continuously selected branch as in section 9.3. The exercise
+does not state whether the estimate is intended on a cut boundary.
 
 Exercise 9.7 asks, for \(\operatorname{Re}\nu>-1\), to show
 
@@ -312,6 +330,15 @@ and then, using the source's Fresnel notation from section 4.2, to deduce
  S(z)=\sum_{s=0}^{\infty}
  J_{2s+3/2}\!\left(\frac{\pi z^2}{2}\right).
 \]
+
+For this exercise the source prints \(\int_0^z\) but does not specify a path,
+a homotopy class, or an admissible complex domain. Because \(J_\nu(t)\) is
+generally branch-dependent and the endpoint \(t=0\) is exceptional in the
+general-order definition, this transcription does not invent a straight-line
+path or claim path independence. The integrand, its half-integral descendants,
+and the Fresnel identities are recorded as inheriting a coherent principal or
+continued branch from section 9.3; the path, endpoint semantics, cut behavior,
+and exact domain remain open source-reconciliation questions.
 
 Exercise 9.8 assumes \(a>0\), \(b>0\), \(\nu+1/2>0\), initially with
 \(b<a\), and asks for
@@ -509,6 +536,10 @@ the \(J/I\) exposition.
 13. Exercise 10.6 is the first locked-page occurrence in this bounded scan of
     the Kelvin names. Whether each sign/order variant is a separate canonical
     entity requires the project-wide identity audit.
+14. Exercises 9.3-9.7 inherit the principal or coherently continued branch
+    convention of section 9.3, but do not restate their full admissible
+    domains. In particular, Exercise 9.7 leaves the complex path from \(0\) to
+    \(z\) unresolved; no path or path-independence assertion is supplied here.
 
 ## Scope boundary
 
@@ -518,30 +549,89 @@ here. Fig. 9.1 is not reproduced. Section 11, beginning on printed p. 61, is
 outside scope. No formula from Chapter 7, DLMF, or memory has been used to fill
 an omitted definition or continuation theorem.
 
-## Inventory integration proposal
+## Atomic occurrence-planning queue
 
 This section is planning metadata only. It proposes no CSV edit, confirmed
-association, theorem-card registration, or manifest membership.
+association, theorem-card registration, or manifest membership. The
+transcription file is a shared artifact, not one canonical occurrence. Every
+row below is a distinct provisional occurrence with scalar kind, target, role,
+and evidence fields. All rows inherit edition `olver_1997b`, snapshot
+`SRC-OLV-1997-USER-PDF-20260905`, queue class `seed`, resolution
+`transcribed_unreconciled`, reconciliation `unresolved`, and novelty class
+`source_recovery`. IDs are provisional until inventory review.
 
-### Occurrence proposal
+### Numbered formulas and properties
 
-| Field | Proposed value |
-| --- | --- |
-| occurrence_id | OLV97-C02-BESSEL-JI |
-| edition_id | olver_1997b |
-| source_snapshot_id | SRC-OLV-1997-USER-PDF-20260905 |
-| queue_class | seed |
-| chapter, section | 2, 9.1-10.1 plus Exercises 9.1-9.8 and 10.1-10.6 |
-| printed pages | 55-61 |
-| locator | Ch. 2 sections 9-10, eqs. (9.01)-(9.16), (10.01)-(10.05), and printed exercises in range |
-| printed label | The Bessel Function \(J_\nu(z)\); The Modified Bessel Function \(I_\nu(z)\) |
-| source kind | body_definition with separately marked exercise targets |
-| target class | source_definition |
-| novelty class | source_recovery |
-| evidence | direct_formula |
-| resolution | transcribed_unreconciled |
-| transcription status | mathematical_transcription |
-| reconciliation | unresolved; independent page, formula, branch, and entity review required |
+| Provisional occurrence ID | Printed item | Source kind | Target class | Context role | Evidence |
+| --- | --- | --- | --- | --- | --- |
+| `OLV97-C02-BES-J-F0901` | (9.01) | body_definition | source_definition | integer-order \(J_n\) integral | direct_formula |
+| `OLV97-C02-BES-J-F0902` | (9.02) | displayed_formula | source_formula | integer-order exponential integral | direct_formula |
+| `OLV97-C02-BES-J-F0903` | (9.03) | displayed_formula | source_formula | integer-order contour integral | direct_formula |
+| `OLV97-C02-BES-J-F0904` | (9.04) | displayed_formula | source_formula | nonnegative-integer Maclaurin series | direct_formula |
+| `OLV97-C02-BES-J-F0905` | (9.05) | displayed_formula | source_formula | integer negative-order connection | direct_formula |
+| `OLV97-C02-BES-J-F0906` | (9.06) | displayed_formula | source_formula | Laurent generating function | direct_formula |
+| `OLV97-C02-BES-J-F0907` | (9.07) | displayed_formula | source_formula | differential identity | direct_formula |
+| `OLV97-C02-BES-J-F0908` | (9.08) | displayed_formula | source_formula | integer-order Bessel equation | direct_formula |
+| `OLV97-C02-BES-J-F0909` | (9.09) | body_definition | source_definition | general-order \(J_\nu\) series | direct_formula |
+| `OLV97-C02-BES-J-F0910` | (9.10) | displayed_formula | source_formula | branch-continuation rule | direct_formula |
+| `OLV97-C02-BES-J-F0911` | (9.11) | displayed_formula | source_formula | general-order Bessel equation | direct_formula |
+| `OLV97-C02-BES-J-F0912` | (9.12) | displayed_formula | source_formula | Hankel-loop Schlaefli integral | direct_formula |
+| `OLV97-C02-BES-J-F0913` | (9.13) | displayed_formula | source_formula | \(\tau\)-contour Schlaefli integral | direct_formula |
+| `OLV97-C02-BES-J-F0914` | (9.14) | displayed_formula | source_formula | order recurrence | direct_formula |
+| `OLV97-C02-BES-J-F0915` | (9.15) | displayed_formula | source_formula | derivative recurrence | direct_formula |
+| `OLV97-C02-BES-J-F0916` | (9.16) | displayed_formula | source_formula | solved order/derivative recurrences | direct_formula |
+| `OLV97-C02-BES-I-F1001` | (10.01) | body_definition | source_definition | general-order \(I_\nu\) series | direct_formula |
+| `OLV97-C02-BES-I-F1002` | (10.02) | displayed_formula | source_formula | \(I/J\) rotation and continuation | direct_formula |
+| `OLV97-C02-BES-I-F1003` | (10.03) | displayed_formula | source_formula | modified Bessel equation | direct_formula |
+| `OLV97-C02-BES-I-F1004` | (10.04) | displayed_formula | source_formula | modified order/derivative recurrences | direct_formula |
+| `OLV97-C02-BES-I-F1005` | (10.05) | displayed_formula | source_formula | solved modified recurrences | direct_formula |
+| `OLV97-C02-BES-J-PROP-INT-ENTIRE` | prose after (9.01) | source_property | qualitative_support | integer-order entireness in \(z\) | direct_prose |
+| `OLV97-C02-BES-J-PROP-CONTOUR-DEFORM` | prose after (9.03) | source_property | qualitative_support | contour-deformation invariance | direct_prose |
+| `OLV97-C02-BES-J-PROP-MAC-DERIV` | unnumbered formulas before (9.04) | displayed_formula | source_formula | derivatives at the origin | direct_formula |
+| `OLV97-C02-BES-J-PROP-GENFUN-CONV` | prose after (9.06) | source_property | qualitative_support | Laurent-series convergence | direct_prose |
+| `OLV97-C02-BES-J-PROP-NORM-LOCAL` | prose after (9.09) | source_property | qualitative_support | locally uniform normalized-series convergence | direct_prose |
+| `OLV97-C02-BES-J-PROP-NORM-ENTIRE` | prose after (9.09) | source_property | qualitative_support | normalized-kernel entireness | direct_prose |
+| `OLV97-C02-BES-J-PROP-ORDER-ENTIRE` | prose after (9.09) | source_property | qualitative_support | entire order dependence for \(z\neq0\) | direct_prose |
+| `OLV97-C02-BES-J-PROP-Z-MULTI` | prose after (9.09) | source_property | qualitative_support | general-order multivaluedness in \(z\) | direct_prose |
+| `OLV97-C02-BES-J-PROP-SCHLAEFLI-DOM` | prose after (9.13) | source_property | qualitative_support | analytic-continuation phase domain | direct_prose |
+| `OLV97-C02-BES-J-PROP-REC-CONT` | prose after (9.15) | source_property | qualitative_support | removal of the phase restriction from (9.14) | direct_prose |
+| `OLV97-C02-BES-J-PROP-J0-DERIV` | unnumbered formula after (9.16) | displayed_formula | source_formula | \(J_0'=-J_1\) specialization | direct_formula |
+| `OLV97-C02-BES-I-PROP-Z-MULTI` | prose after (10.01) | source_property | qualitative_support | general-order multivaluedness in \(z\) | direct_prose |
+
+### Exercises
+
+| Provisional occurrence ID | Printed item | Source kind | Target class | Context role | Evidence |
+| --- | --- | --- | --- | --- | --- |
+| `OLV97-C02-BES-J-EX0901` | Exercise 9.1 | exercise | exercise_target | generating-function specializations | direct_formula |
+| `OLV97-C02-BES-J-EX0902` | Exercise 9.2 | exercise | exercise_target | Neumann addition and square sum | direct_formula |
+| `OLV97-C02-BES-J-EX0903` | Exercise 9.3 | exercise | exercise_target | half-integral formulas with inherited branch | direct_formula |
+| `OLV97-C02-BES-J-EX0904` | Exercise 9.4 | exercise | exercise_target | iterated derivative identities with inherited branch | direct_formula |
+| `OLV97-C02-BES-J-EX0905` | Exercise 9.5 | exercise | exercise_target | Poisson integral with inherited branch | direct_formula |
+| `OLV97-C02-BES-J-EX0906` | Exercise 9.6 | exercise | exercise_target | complex-argument bounds | direct_formula |
+| `OLV97-C02-BES-J-EX0907` | Exercise 9.7 | exercise | exercise_target | unresolved-path integral and Fresnel sums | direct_formula |
+| `OLV97-C02-BES-J-EX0908` | Exercise 9.8 | exercise | exercise_target | Laplace-Bessel integral | direct_formula |
+| `OLV97-C02-BES-I-EX1001` | Exercise 10.1 | exercise | exercise_target | integer-order real integral | direct_formula |
+| `OLV97-C02-BES-I-EX1002` | Exercise 10.2 | exercise | exercise_target | principal-branch phase ranges | direct_formula |
+| `OLV97-C02-BES-I-EX1003` | Exercise 10.3 | exercise | exercise_target | modified generating function | direct_formula |
+| `OLV97-C02-BES-I-EX1004` | Exercise 10.4 | exercise | exercise_target | Airy transformation and connection formulas | direct_formula |
+| `OLV97-C02-BES-I-EX1005` | Exercise 10.5 | exercise | exercise_target | \(I/J\) series transforms | direct_formula |
+| `OLV97-C02-BES-I-EX1006` | Exercise 10.6 | exercise | exercise_target | Kelvin definitions and fourth-order equation | direct_formula |
+
+### Figure, footnotes, and substantive cross-references
+
+| Provisional occurrence ID | Printed item | Source kind | Target class | Context role | Evidence |
+| --- | --- | --- | --- | --- | --- |
+| `OLV97-C02-BES-J-FIG0901` | Fig. 9.1 | figure | source_auxiliary_geometry | omitted \(\tau\)-contour figure | direct_figure |
+| `OLV97-C02-BES-J-FN0901` | footnote under section 9.3 | footnote | qualitative_support | failure of (9.01) at general order | direct_prose |
+| `OLV97-C02-BES-I-FN1001` | footnote after (10.02) | footnote | qualitative_support | unequal principal cuts for \(I_\nu(z)\) and \(J_\nu(iz)\) | direct_prose |
+| `OLV97-C02-BES-I-XREF-EX1002` | Exercise 10.2 pointer in the (10.02) footnote | cross_reference | source_reference | principal-cut comparison | direct_prose |
+| `OLV97-C02-BES-J-XREF-T11` | Theorem 1.1 reference after (9.01) | cross_reference | source_reference | entireness proof provenance | direct_prose |
+| `OLV97-C02-BES-J-XREF-GAMMA` | equation (1.12) reference around (9.12) | cross_reference | source_reference | reciprocal-Gamma loop provenance | direct_prose |
+| `OLV97-C02-BES-J-XREF-CH7E719` | equation (7.19) comparison after (9.12) | cross_reference | source_reference | earlier Schlaefli comparison | direct_prose |
+| `OLV97-C02-BES-J-XREF-T81` | Theorem 8.1 reference before (9.12) | cross_reference | source_reference | sum-integral interchange provenance | direct_prose |
+| `OLV97-C02-BES-J-XREF-FRESNEL` | section 4.2 reference in Exercise 9.7 | cross_reference | source_reference | Fresnel normalization dependency | direct_prose |
+| `OLV97-C02-BES-I-XREF-AIRY` | equation (8.05) reference in Exercise 10.4 | cross_reference | source_reference | Airy-equation dependency | direct_prose |
+| `OLV97-C02-BES-I-XREF-CH7` | Chapter 7 pointer after (10.05) | cross_reference | source_reference | later cylinder-family development | direct_prose |
 
 ### Provisional entity split
 

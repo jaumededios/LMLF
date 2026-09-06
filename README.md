@@ -15,11 +15,13 @@ records the exact accepted candidate; later planning commits do not alter those 
 
 The exact 1997 Olver PDF is now available as a private, hash-bound source snapshot outside version
 control. Theorem 3.1 on Watson's lemma has a mathematical transcription, revision-2 QL-001 and
-OLV-001 draft cards, and complete revision-2 natural-language proof dossiers. Bounded Airy and
-Euler--Maclaurin/Bernoulli source transcriptions are also present, together with an unregistered
-Bernoulli identification draft. These planning artifacts remain unreconciled and authorize no new
-Lean work. The source ledgers are still far from a complete book inventory, and the project claims
-no quantitative Olver theorem or source coverage yet.
+OLV-001 draft cards, and complete revision-2 natural-language proof dossiers. Bounded Airy,
+Euler--Maclaurin/Bernoulli, and Bessel source transcriptions are also present, together with
+unregistered Bernoulli identification drafts. The Bessel files are revision-2 collations with the
+first review round's changes integrated and fresh independent rereview pending; unlike the earlier
+parallel collations, they do not yet have normalized inventory rows. These planning artifacts remain
+unreconciled and authorize no new Lean work. The source ledgers are still far from a complete book
+inventory, and the project claims no quantitative Olver theorem or source coverage yet.
 
 Planning and review artifacts are kept explicit:
 

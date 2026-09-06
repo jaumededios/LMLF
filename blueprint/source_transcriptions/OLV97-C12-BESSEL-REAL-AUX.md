@@ -1,7 +1,7 @@
 # OLV97-C12-BESSEL-REAL-AUX - planning mathematical transcription
 
-**Status:** planning-only first collation; transcribed-unreconciled;
-independent review pending
+**Status:** planning-only revision 2; Referee A changes integrated;
+transcribed-unreconciled; fresh independent review pending
 **Edition:** F. W. J. Olver, *Asymptotics and Special Functions*, corrected
 A K Peters reprint, 1997, ISBN 1-56881-069-5
 **Source snapshot:** SRC-OLV-1997-USER-PDF-20260905
@@ -336,8 +336,20 @@ As \(x\to+\infty\),
  \theta_\nu(x)=x-\frac12\nu\pi-\frac14\pi+O(x^{-1}). \tag{1.24}
 \]
 
-To fix the additive multiple of \(2\pi\) in the last phase formula, the
-source uses continuity in \(\nu\) and the half-order identities
+Before fixing the additive multiple in (1.24), the source obtains the
+intermediate phase relation
+
+\[
+ \theta_\nu(x)
+ =x-\frac12\nu\pi-\frac14\pi+2m\pi+O(x^{-1}),
+ \qquad m\in\mathbb Z.
+\]
+
+An attached footnote points to Chapter 1, Exercise 5.4 for comparison; this is
+a source cross-reference, not an additional result proved here.
+
+Continuity of \(\theta_\nu(x)\) in \(\nu\) makes this integer \(m\)
+independent of \(\nu\). The source then uses the half-order identities
 
 \[
  J_{1/2}(x)=2^{1/2}(\pi x)^{-1/2}\sin x,
@@ -353,9 +365,14 @@ They give
  \theta_{1/2}(x)=x-\frac\pi2
 \]
 
-on the \(x\geq X_{1/2}\) branch used in the large-\(x\) argument. The source
-then supplies a short numerical table of \(X_\nu\); that table is deliberately
-not reproduced here.
+on the \(x\geq X_{1/2}\) branch used in the large-\(x\) argument. This forces
+\(m=0\) and yields the phase in (1.24).
+
+The source then supplies a short numerical table of \(X_\nu\); that table is
+deliberately not reproduced here. A footnote attached to the table reports
+that \(X_\nu\) is increasing in \(\nu\) and cites a theorem of Watson
+(1944, section 15.6) that includes this result. This is a source report and
+cross-reference, not a proof on the inspected pages.
 
 ## Exercise 1.1: target, not a source assertion
 
@@ -366,9 +383,11 @@ Exercise 1.1 asks the reader to show, as \(\nu\) becomes large,
  =\nu-c\left(\frac\nu2\right)^{1/3}+O(\nu^{-1/3}),
 \]
 
-where \(c=-0.36605\ldots\) refers back to the exact Airy root selected in
-Chapter 11, section 2.2. The decimal is not the definition of \(c\). This
-large-order formula is an exercise target and is not proved in section 1.
+where \(c=-0.36605\ldots\) is described on this page only as the constant
+defined in Chapter 11, section 2.2. The decimal is not an exact definition,
+and the exact identity of \(c\) remains pending separate cross-source
+reconciliation. This large-order formula is an exercise target and is not
+proved in section 1.
 
 ## Convention, normalization, and open-question log
 
@@ -411,43 +430,108 @@ large-order formula is an exercise target and is not proved in section 1.
 11. The \(O\)-terms in (1.09), (1.14), (1.24), and Exercise 1.1 are
     qualitative source statements with the displayed fixed/bounded-parameter
     qualifiers. This transcription supplies no missing explicit constants.
-12. Exercise 1.1 is not an assertion of section 1, and its \(c\) must be
-    reconciled to the exact Chapter 11 Airy switch-root entity rather than to
-    the printed decimal alone.
+12. Exercise 1.1 is not an assertion of section 1. On the inspected page its
+    \(c\) is only a decimal-qualified cross-reference to a constant defined in
+    Chapter 11, section 2.2; the exact entity link remains pending separate
+    collation and reconciliation.
+13. The table footnote's monotonicity statement for \(X_\nu\) is a source
+    report with a Watson cross-reference, not a theorem proved in section 1.
 
 ## Scope boundary
 
 The numerical \(X_\nu\) table on printed p. 438 is omitted under the
-copyright-safe documentation policy; only the exact half-order normalization
-used in the phase argument is retained. Section 2, its formal-series title,
-and every formula beginning with section 2.1 are outside this transcription.
-No Chapter 7 or DLMF formula has been imported to complete a gap in the four
-inspected pages.
+copyright-safe documentation policy; the exact half-order normalization and a
+fresh paraphrase of its substantive monotonicity/citation footnote are
+retained. Section 2, its formal-series title, and every formula beginning with
+section 2.1 are outside this transcription. No Chapter 7 or DLMF formula has
+been imported to complete a gap in the four inspected pages.
 
-## Inventory integration proposal
+## Atomic occurrence-planning queue
 
 This section is planning metadata only. It proposes no CSV edit, confirmed
-association, theorem-card registration, or manifest membership.
+association, theorem-card registration, or manifest membership. The
+transcription file is a shared artifact, not one canonical occurrence. Every
+row below is a distinct provisional occurrence with scalar kind, target, role,
+and evidence fields. All rows inherit edition `olver_1997b`, snapshot
+`SRC-OLV-1997-USER-PDF-20260905`, queue class `cross_cutting`, resolution
+`transcribed_unreconciled`, reconciliation `unresolved`, and novelty class
+`source_recovery`. IDs are provisional until inventory review.
 
-### Occurrence proposal
+### Numbered formulas
 
-| Field | Proposed value |
-| --- | --- |
-| occurrence_id | OLV97-C12-BESSEL-REAL-AUX |
-| edition_id | olver_1997b |
-| source_snapshot_id | SRC-OLV-1997-USER-PDF-20260905 |
-| queue_class | cross_cutting |
-| chapter, section | 12, 1.1-1.3 and Exercise 1.1 |
-| printed pages | 435-438 |
-| locator | Ch. 12 section 1, eqs. (1.01)-(1.24), through Exercise 1.1 and before section 2.1 |
-| printed label | Bessel Functions and Modified Bessel Functions of Real Order and Argument |
-| source kind | body_definition/property collection with separately marked exercise target |
-| target class | source_definition and qualitative support |
-| novelty class | source_recovery |
-| evidence | direct_formula and direct_prose |
-| resolution | transcribed_unreconciled |
-| transcription status | mathematical_transcription |
-| reconciliation | unresolved; independent page, formula, normalization, zero-index, and auxiliary review required |
+| Provisional occurrence ID | Printed item | Source kind | Target class | Context role | Evidence |
+| --- | --- | --- | --- | --- | --- |
+| `OLV97-C12-BES-F0101` | (1.01) | displayed_formula | source_formula | \(I_\nu\) small-\(x\) behavior | direct_formula |
+| `OLV97-C12-BES-F0102` | (1.02) | displayed_formula | source_formula | \(K_\nu\) small-\(x\) behavior | direct_formula |
+| `OLV97-C12-BES-F0103` | (1.03) | displayed_formula | source_formula | \(I/K\) large-\(x\) behavior | direct_formula |
+| `OLV97-C12-BES-F0104` | (1.04) | displayed_formula | source_formula | ordered \(K/I\) Wronskian | direct_formula |
+| `OLV97-C12-BES-F0105` | (1.05) | displayed_formula | source_formula | modified recurrence package | direct_formula |
+| `OLV97-C12-BES-F0106` | (1.06) | displayed_formula | source_formula | modified negative-order connections | direct_formula |
+| `OLV97-C12-BES-F0107` | (1.07) | displayed_formula | source_formula | \(J_\nu\) small-\(x\) behavior | direct_formula |
+| `OLV97-C12-BES-F0108` | (1.08) | displayed_formula | source_formula | \(Y_\nu\) small-\(x\) behavior | direct_formula |
+| `OLV97-C12-BES-F0109` | (1.09) | displayed_formula | source_formula | \(J/Y\) large-\(x\) behavior | direct_formula |
+| `OLV97-C12-BES-F0110` | (1.10) | displayed_formula | source_formula | ordered \(J/Y\) Wronskian | direct_formula |
+| `OLV97-C12-BES-F0111` | (1.11) | displayed_formula | source_formula | unmodified recurrence package | direct_formula |
+| `OLV97-C12-BES-F0112` | (1.12) | displayed_formula | source_formula | unmodified negative-order connections | direct_formula |
+| `OLV97-C12-BES-F0113` | (1.13) | displayed_formula | source_formula | positive-zero interlacing | direct_formula |
+| `OLV97-C12-BES-F0114` | (1.14) | displayed_formula | source_formula | fixed-order zero asymptotics | direct_formula |
+| `OLV97-C12-BES-F0115` | (1.15) | displayed_formula | source_formula | location of \(X_\nu\) | direct_formula |
+| `OLV97-C12-BES-F0116` | (1.16) | body_definition | source_definition | weight \(E_\nu\) | direct_formula |
+| `OLV97-C12-BES-F0117` | (1.17) | body_definition | source_definition | modulus/phase representation | direct_formula |
+| `OLV97-C12-BES-F0118` | (1.18) | displayed_formula | source_formula | inner-region modulus/phase | direct_formula |
+| `OLV97-C12-BES-F0119` | (1.19) | displayed_formula | source_formula | outer-region modulus/phase | direct_formula |
+| `OLV97-C12-BES-F0120` | (1.20) | displayed_formula | source_formula | phase derivative | direct_formula |
+| `OLV97-C12-BES-F0121` | (1.21) | displayed_formula | source_formula | phase values at indexed zeros | direct_formula |
+| `OLV97-C12-BES-F0122` | (1.22) | displayed_formula | source_formula | weight behavior at \(0^+\) | direct_formula |
+| `OLV97-C12-BES-F0123` | (1.23) | displayed_formula | source_formula | modulus behavior at \(0^+\) | direct_formula |
+| `OLV97-C12-BES-F0124` | (1.24) | displayed_formula | source_formula | modulus/phase behavior at infinity | direct_formula |
+
+### Unnumbered properties and phase normalization
+
+| Provisional occurrence ID | Printed item | Source kind | Target class | Context role | Evidence |
+| --- | --- | --- | --- | --- | --- |
+| `OLV97-C12-BES-PROP-DOMAIN` | opening domain convention | source_property | qualitative_support | \(\nu\geq0,\ x>0\) through section 7 | direct_prose |
+| `OLV97-C12-BES-PROP-IK-CONT` | section 1.1 opening prose | source_property | qualitative_support | continuity of \(I/K\) in order and argument | direct_prose |
+| `OLV97-C12-BES-PROP-IK-POS` | section 1.1 opening prose | source_property | qualitative_support | positivity of \(I/K\) | direct_prose |
+| `OLV97-C12-BES-PROP-IK-XMON` | section 1.1 opening prose | source_property | qualitative_support | spatial monotonicity of \(I/K\) | direct_prose |
+| `OLV97-C12-BES-PROP-IK-NU-MON` | section 1.1 opening prose | source_property | qualitative_support | order monotonicity of \(I/K\) | direct_prose |
+| `OLV97-C12-BES-PROP-IK-UNIF` | prose after (1.03) | source_property | qualitative_support | bounded-order uniformity at infinity | direct_prose |
+| `OLV97-C12-BES-NOT-L` | notation before (1.05) | notation_definition | source_notation | order-rescaled \(\mathscr L_\nu\) family | direct_formula |
+| `OLV97-C12-BES-PROP-IK-NEG-EXT` | prose after (1.06) | source_property | qualitative_support | negative-order extension of (1.03)-(1.05) | direct_prose |
+| `OLV97-C12-BES-PROP-IK-NEG-EXC` | prose after (1.06) | source_property | qualitative_support | positive-integer exception for replaced (1.01) | direct_prose |
+| `OLV97-C12-BES-PROP-JY-CONT` | section 1.2 opening prose | source_property | qualitative_support | \(J/Y\) continuity | direct_prose |
+| `OLV97-C12-BES-PROP-JY-UNIF` | prose after (1.09) | source_property | qualitative_support | bounded-order uniformity at infinity | direct_prose |
+| `OLV97-C12-BES-NOT-C` | notation before (1.11) | notation_definition | source_notation | generic \(\mathscr C_\nu\) family | direct_formula |
+| `OLV97-C12-BES-PROP-JY-NEG-EXT` | prose after (1.12) | source_property | qualitative_support | negative-order extension of (1.09)-(1.11) | direct_prose |
+| `OLV97-C12-BES-PROP-JY-NEG-EXC` | prose after (1.12) | source_property | qualitative_support | positive-integer exception for replaced (1.07) | direct_prose |
+| `OLV97-C12-BES-NOT-ZEROS` | notation before (1.13) | notation_definition | source_notation | indexed positive \(J/Y\) zeros | direct_prose |
+| `OLV97-C12-BES-DEF-X` | unnumbered equation before (1.15) | body_definition | source_definition | smallest positive root \(X_\nu\) | direct_formula |
+| `OLV97-C12-BES-PROP-X-CONT` | prose after (1.15) | source_property | qualitative_support | continuity of \(X_\nu\) in \(\nu\) | direct_prose |
+| `OLV97-C12-BES-E-DERIV` | unnumbered derivative after (1.16) | displayed_formula | source_formula | derivative of \(E_\nu^2\) | direct_formula |
+| `OLV97-C12-BES-PROP-E-CONT-X` | prose after the unnumbered derivative | source_property | qualitative_support | spatial continuity of \(E_\nu\) | direct_prose |
+| `OLV97-C12-BES-PROP-E-POS` | prose after the unnumbered derivative | source_property | qualitative_support | positivity of \(E_\nu\) | direct_prose |
+| `OLV97-C12-BES-PROP-E-XMON` | prose after the unnumbered derivative | source_property | qualitative_support | spatial nonincrease of \(E_\nu\) | direct_prose |
+| `OLV97-C12-BES-PROP-E-CONT-NU` | prose after the unnumbered derivative | source_property | qualitative_support | order continuity of \(E_\nu\) | direct_prose |
+| `OLV97-C12-BES-PROP-THETA-CONT` | prose after (1.19) | source_property | qualitative_support | continuous inverse-tangent branch for \(\theta_\nu\) | direct_prose |
+| `OLV97-C12-BES-PROP-THETA-MON` | prose after (1.20) | source_property | qualitative_support | monotonicity of \(\theta_\nu\) | direct_prose |
+| `OLV97-C12-BES-PHASE-M` | unnumbered phase on p. 438 | displayed_formula | source_formula | integer phase ambiguity \(m\) | direct_formula |
+| `OLV97-C12-BES-PROP-M-INDEP` | prose after the unnumbered phase | source_property | qualitative_support | independence of \(m\) from \(\nu\) | direct_prose |
+| `OLV97-C12-BES-HALF-JY` | unnumbered half-order \(J/Y\) formulas | normalization_check | source_formula | order-\(1/2\) function values | direct_formula |
+| `OLV97-C12-BES-HALF-XTHETA` | unnumbered \(X/\theta\) formulas | normalization_check | source_formula | order-\(1/2\) phase normalization forcing \(m=0\) | direct_formula |
+
+### Exercise, omitted table, footnote, and substantive cross-references
+
+| Provisional occurrence ID | Printed item | Source kind | Target class | Context role | Evidence |
+| --- | --- | --- | --- | --- | --- |
+| `OLV97-C12-BES-EX0101` | Exercise 1.1 | exercise | exercise_target | large-order behavior of \(X_\nu\) | direct_formula |
+| `OLV97-C12-BES-TABLE-X` | numerical table on p. 438 | table | source_table_metadata | omitted sampled values of \(X_\nu\) | direct_table |
+| `OLV97-C12-BES-FN-X-MON` | table footnote on p. 438 | footnote | source_report | reported monotonicity of \(X_\nu\) | direct_prose |
+| `OLV97-C12-BES-FN-PHASE` | footnote on the integer phase ambiguity | footnote | source_reference | comparison with Chapter 1, Exercise 5.4 | direct_prose |
+| `OLV97-C12-BES-XREF-CH2` | opening Chapter 2 provenance | cross_reference | source_reference | provenance of collected Bessel definitions | direct_prose |
+| `OLV97-C12-BES-XREF-CH7` | opening Chapter 7 provenance | cross_reference | source_reference | provenance of collected Bessel properties | direct_prose |
+| `OLV97-C12-BES-XREF-CH7S7` | Chapter 7, section 7 after (1.15) | cross_reference | source_reference | continuity method for \(X_\nu\) | direct_prose |
+| `OLV97-C12-BES-XREF-CH11S22` | Chapter 11, section 2.2 in Exercise 1.1 | cross_reference | source_reference | unresolved exact identity of \(c\) | direct_prose |
+| `OLV97-C12-BES-XREF-WATSON` | Watson (1944, section 15.6) in table footnote | cross_reference | source_reference | theorem reported to include \(X_\nu\) monotonicity | direct_prose |
 
 ### Provisional entity split
 

@@ -28,7 +28,7 @@ As of this specification:
 | `QB-001` | eight signatures only | immutable card revision 7/proof revision 6/signature revision 2 retain their pre-authorization self-status; external review accepted the exact implementation at commit `515b742f7ad5472c17cfdf0fda7cbc83c5585da1` |
 | `DEF-001` | four Gamma reuse wrappers | immutable card revision 4 retains its specification-snapshot self-status; external review accepted the exact implementation at commit `515b742f7ad5472c17cfdf0fda7cbc83c5585da1` |
 | `OLV-MVP-1` | one selected Watson occurrence | open and `planning_only`; exact 1997 snapshot acquired, revision-2 QL/OLV cards and complete draft proofs present, independent review pending |
-| Parallel source collations | Chapter 2 `Ai`, Chapter 11 real Airy/auxiliaries, and Chapter 8 Euler--Maclaurin/Bernoulli | hash-bound mathematical transcriptions and provisional inventory rows present; Bernoulli has an unregistered draft identification card/proof, while Airy remains uncarded; no independent reconciliation, manifest membership, or coverage |
+| Parallel source collations | Chapter 2 `Ai` and `J`/`I`; Chapter 11 real Airy/auxiliaries; Chapter 12 real Bessel auxiliaries; Chapter 8 Euler--Maclaurin/Bernoulli | hash-bound mathematical transcriptions are present; Airy and Bernoulli have provisional inventory rows, while the two Bessel revision-2 collations have integrated the first review round and await fresh rereview before atomic inventory integration; Bernoulli has unregistered identification drafts; no independent reconciliation, manifest membership, or coverage |
 | Olver theorem coverage | none | no quantitative Olver theorem or qualitative source recovery is currently claimed |
 
 The exact bootstrap specifications are the
