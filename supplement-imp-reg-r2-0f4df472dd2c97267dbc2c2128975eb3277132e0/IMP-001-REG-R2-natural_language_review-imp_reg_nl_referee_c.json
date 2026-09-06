@@ -1,0 +1,83 @@
+{
+  "schema_version": 1,
+  "record_kind": "supplemental_regression_natural_language_verdict",
+  "storage_requirement": "external_to_candidate_head",
+  "template_state": "filled",
+  "supplement_id": "IMP-001-REG-R2",
+  "parent_work_item_id": "IMP-001",
+  "review_identity": {
+    "pending_envelope_ref": "pending-envelope.yaml#sha256=701b26b3ce0daa1c67183fd38c72f610190a4016966be1894e1eaf1face41f00",
+    "core_specification_commit": "3a1b16cae6d186a20530de3b883c1bb871ee76f6",
+    "core_work_packet_path": "review/work_packets/IMP-001.yaml",
+    "core_work_packet_sha256": "e0f16a660417d967312df0f7cc7ce12ea1243226801b409475548566d594796b",
+    "core_theorem_card_sha256": "d81f8970bcba3bf1a489f8cb4fea8b303a3e3bf6d1ad3ade37b42f3094b528c4",
+    "core_natural_language_proof_sha256": "941ca0f2a7e402e9dd3636d7c93744290b3f5b52b8705484c18630c6fe173548",
+    "core_signature_sha256": "0e220214233fec5f2f95608789b139900e7dfddef8a6b824b8d54bce37e74f2d",
+    "classification_schema_sha256": "975e08b89d609cbdd15ff3f8d24f40a42bb17ea0f4c37bb26d9cf53fb8dc4b5e",
+    "core_lean_ready_envelope_sha256": "3e4ca4b00adf36fc6b85315f74dcc4349abcd17eb6ebaf7282c374a0499a56f5",
+    "companion_specification_commit": "0f4df472dd2c97267dbc2c2128975eb3277132e0",
+    "companion_path": "blueprint/proofs/IMP-001-REG-R2.md",
+    "companion_artifact_id": "NLP-IMP-001-REG-R2",
+    "companion_revision": 2,
+    "companion_sha256": "316fc09bf3f35a5649f951ea0964ed1330e540d028a48c4706312d37c87ae7e9",
+    "predecessor_artifact_sha256": "c10dcbc498d80b98f24473a367546963c0b9d6713d99e73e21fd834ff8eedd4c",
+    "predecessor_disposition_sha256": "a51a631bfa3a50e5a509eaa69d87f7c3d2394a11b7c9ac41f1ac26a3941be53d",
+    "predecessor_role": "administrative_lineage_only",
+    "lean_toolchain": "leanprover/lean4:v4.33.1",
+    "mathlib_revision": "0df444a360eaa60ab8c11dca51a86af692955474",
+    "rubric": "mathematical_correctness",
+    "review_perspective": "analytic_regression_proof_correctness",
+    "review_scope": "regression_natural_language_only",
+    "counts_toward_core_prelean_quorum": false,
+    "inherits_predecessor_review_credit": false
+  },
+  "reviewer": {
+    "id": "/root/imp_reg_nl_referee_c",
+    "kind": "agent",
+    "model": "gpt-5.6-sol",
+    "runtime": "Codex desktop multi-agent runtime",
+    "isolation_strength": "manual_attestation",
+    "isolation_method": "Fresh delegated agent context; independently created detached Git worktree /tmp/imp-reg-r2-referee-c.Fj1r8q at exact commit 0f4df472dd2c97267dbc2c2128975eb3277132e0; candidate and pinned dependency sources treated read-only; review conclusions independently rederived.",
+    "independent_of_proposer": true,
+    "read_only_candidate": true,
+    "peer_or_predecessor_reports_read": false
+  },
+  "verdict": "approve",
+  "summary": "Approve the exact NLP-IMP-001-REG-R2 companion for the bounded supplemental analytic-regression review. Independent rederivation confirmed the definitions, signs, endpoint conventions, separate one-sided limits, Dirichlet Cauchy bounds, harmonic lower bound and non-L1 conclusions, cutoff correction, primitive constructions, Abel counterexamples, clipped-ramp evaluation, Gamma endpoint example, and full finite a.e. invariance. Source inspection at the pinned Mathlib revision confirmed every named dependency and, in particular, the exact local-image ContinuousOn premise and oriented Jacobian behavior of intervalIntegral.integral_comp_mul_deriv'. The companion introduces no public target binding or changed public premise. This verdict supplies no core-gate credit and no formalization authorization without root adjudication.",
+  "evidence": {
+    "commands_rerun": [
+      "sha256sum pending-envelope.yaml REVIEW-INSTRUCTIONS.md supplemental-schema.md referee-c.template.json",
+      "git worktree add --detach /tmp/imp-reg-r2-referee-c.Fj1r8q 0f4df472dd2c97267dbc2c2128975eb3277132e0",
+      "git rev-parse HEAD && git status --short --branch",
+      "sha256sum blueprint/proofs/IMP-001-REG-R2.md review/work_packets/IMP-001.yaml blueprint/theorem_cards/IMP-001.yaml blueprint/proofs/IMP-001-R7.md blueprint/theorem_cards/IMP-001-signatures-R6.md review/classifications-v3.json lake-manifest.json",
+      "sha256sum spec-3a1b16cae6d186a20530de3b883c1bb871ee76f6/IMP-001-review-envelope-lean-ready.yaml spec-3a1b16cae6d186a20530de3b883c1bb871ee76f6/IMP-001-prelean-adjudication.md",
+      "nl -ba blueprint/proofs/IMP-001-REG-R2.md | sed -n '1,1357p' (executed in three exhaustive chunks)",
+      "sed and rg source inspection over the exact bound core artifacts and pinned Mathlib declaration files",
+      "git -C /workspace/Documents/Codex/2026-09-05/yo/.lake/packages/mathlib rev-parse HEAD",
+      "cat lean-toolchain and inspect the mathlib revision in lake-manifest.json"
+    ],
+    "files_and_declarations_inspected": [
+      "pending-envelope.yaml; REVIEW-INSTRUCTIONS.md; supplemental-schema.md; referee-c.template.json",
+      "blueprint/proofs/IMP-001-REG-R2.md (all 1357 lines)",
+      "review/work_packets/IMP-001.yaml; blueprint/theorem_cards/IMP-001.yaml; blueprint/proofs/IMP-001-R7.md; blueprint/theorem_cards/IMP-001-signatures-R6.md; review/classifications-v3.json; lean-toolchain; lake-manifest.json",
+      "external immutable core lean-ready envelope and IMP-001 pre-Lean adjudication at their exact pending-envelope paths",
+      "intervalIntegral.integral_mul_deriv_eq_deriv_mul_of_hasDerivAt; intervalIntegral.integral_comp_mul_deriv'; intervalIntegral.integral_eq_sub_of_hasDerivAt_of_le",
+      "Real.hasDerivAt_sin; Real.hasDerivAt_cos; Real.hasDerivAt_exp; Real.hasDerivAt_log; exp_neg_integrableOn_Ioi",
+      "Real.GammaIntegral_convergent; Real.Gamma_eq_integral; Real.Gamma_pos_of_pos",
+      "intervalIntegrable_congr_ae; intervalIntegral.integral_congr_ae; integrableOn_congr_fun_ae; setIntegral_congr_ae; Set.Finite.measure_zero; intervalIntegral.integral_undef",
+      "MeasureTheory.setIntegral_pos_iff_support_of_nonneg_ae; Real.tendsto_log_nhdsGT_zero; Real.tendsto_exp_atBot",
+      "Real.strictMonoOn_sin; Real.sin_pi_div_six; Real.sin_pi_sub; Real.sin_add_nat_mul_pi",
+      "supporting pinned translation/integrability sources used to confirm the open-ray translation step: MeasureTheory.integral_add_right_eq_self (to_additive source of integral_mul_right_eq_self) and MeasurePreserving.integrableOn_comp_preimage"
+    ],
+    "pinned_dependency_source_inspected": true,
+    "limitations": [
+      "Isolation is a manual attestation on a shared host filesystem, not a technically enforced sandbox.",
+      "No Lean proof or elaboration attempt was made for the new regression mathematics, as required; validation was independent mathematics plus read-only pinned-source inspection.",
+      "No current production IMP code or tests, uncommitted candidate files, peer report, predecessor/R1 report or verdict, QL/OLV implementation, source-coverage implementation, or numerical implementation was inspected.",
+      "No CI, candidate edit, commit, push, or subagent was used."
+    ]
+  },
+  "findings": [],
+  "authorization_effect": "none_without_root_adjudication",
+  "issued_at_utc": "2026-09-06T16:59:46Z"
+}

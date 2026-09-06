@@ -1,0 +1,140 @@
+schema_version: 1
+record_kind: supplemental_regression_natural_language_review_envelope
+storage_requirement: external_to_candidate_head
+supplement_id: IMP-001-REG-R2
+parent_work_item_id: IMP-001
+lifecycle_state: passing_successor
+
+pending_envelope_ref:
+  path: pending-envelope.yaml
+  sha256: 701b26b3ce0daa1c67183fd38c72f610190a4016966be1894e1eaf1face41f00
+
+core_binding:
+  specification_commit: 3a1b16cae6d186a20530de3b883c1bb871ee76f6
+  work_packet:
+    path: review/work_packets/IMP-001.yaml
+    revision: 1
+    sha256: e0f16a660417d967312df0f7cc7ce12ea1243226801b409475548566d594796b
+  theorem_card:
+    path: blueprint/theorem_cards/IMP-001.yaml
+    artifact_id: TC-IMP-001-R7
+    revision: 7
+    sha256: d81f8970bcba3bf1a489f8cb4fea8b303a3e3bf6d1ad3ade37b42f3094b528c4
+  core_natural_language_proof:
+    path: blueprint/proofs/IMP-001-R7.md
+    artifact_id: NLP-IMP-001-R7
+    revision: 7
+    sha256: 941ca0f2a7e402e9dd3636d7c93744290b3f5b52b8705484c18630c6fe173548
+  signature_artifact:
+    path: blueprint/theorem_cards/IMP-001-signatures-R6.md
+    artifact_id: SIG-IMP-001-R6-P2
+    revision: 2
+    sha256: 0e220214233fec5f2f95608789b139900e7dfddef8a6b824b8d54bce37e74f2d
+  classification_schema:
+    path: review/classifications-v3.json
+    schema_version: lmlf-classification-v3
+    artifact_revision: 3
+    sha256: 975e08b89d609cbdd15ff3f8d24f40a42bb17ea0f4c37bb26d9cf53fb8dc4b5e
+  toolchain:
+    lean_toolchain: leanprover/lean4:v4.33.1
+    mathlib_revision: 0df444a360eaa60ab8c11dca51a86af692955474
+    lake_manifest_sha256: 4bd9b595f84163f69bdb0ffc9b1a876b5df71d65bdd53122415610d083d43404
+  core_prelean_authority:
+    lean_ready_envelope:
+      path: spec-3a1b16cae6d186a20530de3b883c1bb871ee76f6/IMP-001-review-envelope-lean-ready.yaml
+      sha256: 3e4ca4b00adf36fc6b85315f74dcc4349abcd17eb6ebaf7282c374a0499a56f5
+    adjudication:
+      path: spec-3a1b16cae6d186a20530de3b883c1bb871ee76f6/IMP-001-prelean-adjudication.md
+      sha256: ee625aeea238a1e6c87c7d715372860c23a109d9852588e3f5847aef96017be3
+    authority_changed: false
+
+companion_binding:
+  specification_commit: 0f4df472dd2c97267dbc2c2128975eb3277132e0
+  path: blueprint/proofs/IMP-001-REG-R2.md
+  artifact_id: NLP-IMP-001-REG-R2
+  revision: 2
+  sha256: 316fc09bf3f35a5649f951ea0964ed1330e540d028a48c4706312d37c87ae7e9
+  artifact_role: analytic_regression_companion
+  target_bindings: []
+  public_target_changes: false
+  public_premise_changes: false
+
+supplemental_review_gate:
+  gate: supplemental_regression_natural_language_review
+  gate_state: pass
+  minimum_distinct_reviewer_ids: 2
+  distinct_reviewer_ids:
+    - /root/imp_reg_nl_referee_c
+    - /root/imp_reg_nl_referee_d
+  selected_reviewer_composition:
+    humans: 0
+    agents: 2
+    minimum_distinct_agent_models: 1
+  historical_reviews_count_toward_quorum: false
+  core_prelean_reviewers_count_toward_quorum: false
+  predecessor_reviewers_count_toward_quorum: false
+  proposer_or_adjudicator_counts_toward_quorum: false
+  isolation_strength: manual_attestation
+  verdict_refs:
+    - path: IMP-001-REG-R2-natural_language_review-imp_reg_nl_referee_c.json
+      sha256: 48a36b67d7acfbd6f6ccbbccb490779c250149afd9b1d195605d834b3726d42e
+    - path: IMP-001-REG-R2-natural_language_review-imp_reg_nl_referee_d.json
+      sha256: eac147c1fe49bfd8751b310df60502b28baf0036856049b5858b2f665de9b7b7
+  report_refs:
+    - path: imp_reg_nl_referee_c.md
+      sha256: 852b9f408946b7b53d5f7793e67d7872f6fb32f31f20869a13f161211a8b0439
+    - path: imp_reg_nl_referee_d.md
+      sha256: e0fcf6d82f483ced496a7fc5a2070bbecd3048845a391e643450fa6a35ea38b6
+
+authorization_scope:
+  formalization_authorized: true
+  authorized_nonpublic_regressions:
+    - regression_id: IMP-R04
+      scope: analytic_regression
+    - regression_id: IMP-R05
+      scope: analytic_regression
+    - regression_id: IMP-R06
+      scope: analytic_regression
+    - regression_id: IMP-R11
+      scope: analytic_regression
+    - regression_id: IMP-R12
+      scope: analytic_endpoint_law_only
+    - regression_id: IMP-R13
+      scope: nondifferentiable_interval_indicator_only
+    - regression_id: IMP-R22
+      scope: analytic_regression
+    - regression_id: IMP-R24
+      scope: analytic_regression
+  no_new_scope_for_regressions:
+    - IMP-R07
+  public_target_bindings: []
+  production_implementation_acceptance: false
+  implementation_review_complete: false
+  merge_authorized: false
+  core_prelean_gate_reopened: false
+  core_lean_ready_changed: false
+  source_coverage_claimed: false
+  numerical_scope_claimed: false
+  ql_or_olv_scope_claimed: false
+
+root_adjudication:
+  gate_state: pass
+  formalization_authorized: true
+  decided_by: /root
+  decision_ref:
+    path: root-adjudication-r2.md
+    sha256: b1b77b956d19ea8c0f741d2d7111f98b8c31e38d27b89d01cb811a3e1dbafb17
+  findings: []
+
+candidate_implementation_binding:
+  base_sha: null
+  head_sha: null
+  proposer_evidence_ref: null
+
+implementation_reviews:
+  gate_state: pending
+  distinct_reviewer_ids: []
+  verdict_refs: []
+
+merge_gate_state: pending
+merge_decision_ref: null

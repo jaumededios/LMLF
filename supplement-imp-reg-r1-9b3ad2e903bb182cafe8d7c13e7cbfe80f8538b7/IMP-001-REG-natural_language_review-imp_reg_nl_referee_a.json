@@ -1,0 +1,97 @@
+{
+  "schema_version": 1,
+  "record_kind": "supplemental_regression_natural_language_verdict",
+  "storage_requirement": "external_to_candidate_head",
+  "template_state": "filled",
+  "supplement_id": "IMP-001-REG-R1",
+  "parent_work_item_id": "IMP-001",
+  "review_identity": {
+    "pending_envelope_ref": "pending-envelope.yaml#sha256=fd13506194ddc37dbf8b5c5fe8e8f0380ac58981c030370b3c7909ceb53e0ba1",
+    "core_specification_commit": "3a1b16cae6d186a20530de3b883c1bb871ee76f6",
+    "core_work_packet_path": "review/work_packets/IMP-001.yaml",
+    "core_work_packet_sha256": "e0f16a660417d967312df0f7cc7ce12ea1243226801b409475548566d594796b",
+    "core_theorem_card_sha256": "d81f8970bcba3bf1a489f8cb4fea8b303a3e3bf6d1ad3ade37b42f3094b528c4",
+    "core_natural_language_proof_sha256": "941ca0f2a7e402e9dd3636d7c93744290b3f5b52b8705484c18630c6fe173548",
+    "core_signature_sha256": "0e220214233fec5f2f95608789b139900e7dfddef8a6b824b8d54bce37e74f2d",
+    "classification_schema_sha256": "975e08b89d609cbdd15ff3f8d24f40a42bb17ea0f4c37bb26d9cf53fb8dc4b5e",
+    "core_lean_ready_envelope_sha256": "3e4ca4b00adf36fc6b85315f74dcc4349abcd17eb6ebaf7282c374a0499a56f5",
+    "companion_specification_commit": "9b3ad2e903bb182cafe8d7c13e7cbfe80f8538b7",
+    "companion_path": "blueprint/proofs/IMP-001-REG.md",
+    "companion_artifact_id": "NLP-IMP-001-REG-R1",
+    "companion_revision": 1,
+    "companion_sha256": "c10dcbc498d80b98f24473a367546963c0b9d6713d99e73e21fd834ff8eedd4c",
+    "lean_toolchain": "leanprover/lean4:v4.33.1",
+    "mathlib_revision": "0df444a360eaa60ab8c11dca51a86af692955474",
+    "rubric": "mathematical_correctness",
+    "review_perspective": "analytic_regression_proof_correctness",
+    "review_scope": "regression_natural_language_only",
+    "counts_toward_core_prelean_quorum": false
+  },
+  "reviewer": {
+    "id": "/root/imp_reg_nl_referee_a",
+    "kind": "agent",
+    "model": "gpt-5.6-sol",
+    "runtime": "Codex desktop sub-agent",
+    "isolation_strength": "manual_attestation",
+    "isolation_method": "Fresh delegated reviewer context; independently created /tmp/imp-reg-ref-a.WK3BnC/yo with mktemp -d and git worktree add --detach at the exact companion commit; candidate treated read-only.",
+    "independent_of_proposer": true,
+    "read_only_candidate": true,
+    "peer_reports_read": false
+  },
+  "verdict": "request_changes",
+  "summary": "The complete analytic regression mathematics is correct and reaches the stated nonpublic content, with no public-target, source, numerical, or production-implementation claim. One fixable P2 dependency defect remains: REG-M02 cites the global-continuity substitution theorem, but the supplied hypotheses establish only image-local continuity for functions that are singular at zero or discontinuous at c. A corrected exact API binding is required before approval.",
+  "evidence": {
+    "commands_rerun": [
+      "sha256sum pending-envelope.yaml",
+      "tmpbase=$(mktemp -d /tmp/imp-reg-ref-a.XXXXXX); git -C /workspace/Documents/Codex/2026-09-05/yo worktree add --detach $tmpbase/yo 9b3ad2e903bb182cafe8d7c13e7cbfe80f8538b7",
+      "git -C /tmp/imp-reg-ref-a.WK3BnC/yo rev-parse HEAD",
+      "git -C /tmp/imp-reg-ref-a.WK3BnC/yo status --short --branch",
+      "sha256sum blueprint/proofs/IMP-001-REG.md review/work_packets/IMP-001.yaml blueprint/theorem_cards/IMP-001.yaml blueprint/proofs/IMP-001-R7.md blueprint/theorem_cards/IMP-001-signatures-R6.md review/classifications-v3.json lake-manifest.json",
+      "sha256sum /workspace/Documents/Codex/2026-09-05/LMLF-review-evidence/spec-3a1b16cae6d186a20530de3b883c1bb871ee76f6/IMP-001-review-envelope-lean-ready.yaml /workspace/Documents/Codex/2026-09-05/LMLF-review-evidence/spec-3a1b16cae6d186a20530de3b883c1bb871ee76f6/IMP-001-prelean-adjudication.md",
+      "sed -n in exhaustive contiguous ranges over the 1260-line companion and relevant bound core contracts",
+      "rg -n and sed -n over the pinned Mathlib defining sources for REG-M01 through REG-M13"
+    ],
+    "files_and_declarations_inspected": [
+      "pending-envelope.yaml",
+      "REVIEW-INSTRUCTIONS.md",
+      "supplemental-schema.md",
+      "referee-a.template.json",
+      "blueprint/proofs/IMP-001-REG.md (all 1260 lines)",
+      "review/work_packets/IMP-001.yaml (bound scope and IMP-R04/R05/R06/R07/R11/R12/R13/R22/R24 rows)",
+      "blueprint/theorem_cards/IMP-001.yaml (bound public contracts, target count, and exclusions)",
+      "blueprint/proofs/IMP-001-R7.md (T01, T05, T06, T07, T08 semantics consumed by the companion)",
+      "blueprint/theorem_cards/IMP-001-signatures-R6.md (exact T01/T05 bodies and T06/T07/T08 signatures)",
+      "review/classifications-v3.json",
+      "/workspace/Documents/Codex/2026-09-05/LMLF-review-evidence/spec-3a1b16cae6d186a20530de3b883c1bb871ee76f6/IMP-001-review-envelope-lean-ready.yaml",
+      "/workspace/Documents/Codex/2026-09-05/LMLF-review-evidence/spec-3a1b16cae6d186a20530de3b883c1bb871ee76f6/IMP-001-prelean-adjudication.md",
+      "intervalIntegral.integral_mul_deriv_eq_deriv_mul_of_hasDerivAt",
+      "intervalIntegral.integral_comp_mul_deriv and intervalIntegral.integral_comp_mul_deriv'",
+      "intervalIntegral.integral_eq_sub_of_hasDerivAt_of_le",
+      "Real.hasDerivAt_sin, Real.hasDerivAt_cos, Real.hasDerivAt_exp, Real.hasDerivAt_log",
+      "exp_neg_integrableOn_Ioi",
+      "Real.GammaIntegral_convergent, Real.Gamma_eq_integral, Real.Gamma_pos_of_pos",
+      "intervalIntegrable_congr_ae, intervalIntegral.integral_congr_ae, integrableOn_congr_fun_ae, MeasureTheory.setIntegral_congr_ae",
+      "Set.Finite.measure_zero, intervalIntegral.integral_undef, MeasureTheory.setIntegral_pos_iff_support_of_nonneg_ae",
+      "Real.tendsto_log_nhdsGT_zero, Real.tendsto_exp_atBot, Real.strictMonoOn_sin, Real.sin_pi_div_six, Real.sin_pi_sub, Real.sin_add_nat_mul_pi"
+    ],
+    "pinned_dependency_source_inspected": true,
+    "limitations": [
+      "Isolation was manually attested, not enforced by a technical sandbox.",
+      "No Lean proof attempt or compilation of new analytic mathematics was performed; the authorized check was natural-language rederivation plus read-only pinned API source inspection.",
+      "Current production IMP code and tests, uncommitted candidate files, QL/OLV/source/numerical implementations, and peer or historical referee reports were excluded and not inspected.",
+      "The verdict JSON template has no field for a narrative-report digest, so no extra schema field was invented."
+    ]
+  },
+  "findings": [
+    {
+      "id": "A-REG-M02-001",
+      "priority": "P2",
+      "location": "blueprint/proofs/IMP-001-REG.md:336 and blueprint/proofs/IMP-001-REG.md:546",
+      "evidence": "At the pinned Mathlib revision, intervalIntegral.integral_comp_mul_deriv requires Continuous g globally. The companion proves only continuity on the finite image interval, and the reciprocal transformed expression is singular at zero while q_c is discontinuous at c. The same source provides intervalIntegral.integral_comp_mul_deriv' with the needed ContinuousOn hypothesis on the image.",
+      "impact": "The analytic substitution identities are correct, but the exact declared dependency cannot be applied from the side conditions recorded in the frozen companion, violating the required usable-type check.",
+      "required_fix": "In a frozen successor, bind a local-continuity substitution theorem such as intervalIntegral.integral_comp_mul_deriv' and spell out its image-continuity and derivative conditions for translation and reciprocal substitution, or explicitly construct suitable globally continuous extensions before retaining the non-prime theorem."
+    }
+  ],
+  "authorization_effect": "none_without_root_adjudication",
+  "issued_at_utc": "2026-09-06T16:40:17Z"
+}

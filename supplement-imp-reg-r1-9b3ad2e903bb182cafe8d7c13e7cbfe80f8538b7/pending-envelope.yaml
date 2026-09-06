@@ -1,0 +1,130 @@
+schema_version: 1
+record_kind: supplemental_regression_natural_language_review_envelope
+storage_requirement: external_to_candidate_head
+supplement_id: IMP-001-REG-R1
+parent_work_item_id: IMP-001
+lifecycle_state: pending_review
+
+extension_purpose: >-
+  The core schema-3 review envelope and schema-4 verdict do not distinguish a
+  later regression-only natural-language companion from a replacement of the
+  core pre-Lean proof gate. This dedicated external schema-1 record implements
+  the frozen packet's expressly authorized later-regression clause without
+  reopening, replacing, or inheriting credit from the core gates.
+
+core_binding:
+  specification_commit: 3a1b16cae6d186a20530de3b883c1bb871ee76f6
+  work_packet:
+    path: review/work_packets/IMP-001.yaml
+    revision: 1
+    sha256: e0f16a660417d967312df0f7cc7ce12ea1243226801b409475548566d594796b
+  theorem_card:
+    path: blueprint/theorem_cards/IMP-001.yaml
+    artifact_id: TC-IMP-001-R7
+    revision: 7
+    sha256: d81f8970bcba3bf1a489f8cb4fea8b303a3e3bf6d1ad3ade37b42f3094b528c4
+  core_natural_language_proof:
+    path: blueprint/proofs/IMP-001-R7.md
+    artifact_id: NLP-IMP-001-R7
+    revision: 7
+    sha256: 941ca0f2a7e402e9dd3636d7c93744290b3f5b52b8705484c18630c6fe173548
+  signature_artifact:
+    path: blueprint/theorem_cards/IMP-001-signatures-R6.md
+    artifact_id: SIG-IMP-001-R6-P2
+    revision: 2
+    sha256: 0e220214233fec5f2f95608789b139900e7dfddef8a6b824b8d54bce37e74f2d
+  classification_schema:
+    path: review/classifications-v3.json
+    schema_version: lmlf-classification-v3
+    artifact_revision: 3
+    sha256: 975e08b89d609cbdd15ff3f8d24f40a42bb17ea0f4c37bb26d9cf53fb8dc4b5e
+  toolchain:
+    lean_toolchain: leanprover/lean4:v4.33.1
+    mathlib_revision: 0df444a360eaa60ab8c11dca51a86af692955474
+    lake_manifest_sha256: 4bd9b595f84163f69bdb0ffc9b1a876b5df71d65bdd53122415610d083d43404
+  core_prelean_authority:
+    lean_ready_envelope:
+      path: spec-3a1b16cae6d186a20530de3b883c1bb871ee76f6/IMP-001-review-envelope-lean-ready.yaml
+      sha256: 3e4ca4b00adf36fc6b85315f74dcc4349abcd17eb6ebaf7282c374a0499a56f5
+    adjudication:
+      path: spec-3a1b16cae6d186a20530de3b883c1bb871ee76f6/IMP-001-prelean-adjudication.md
+      sha256: ee625aeea238a1e6c87c7d715372860c23a109d9852588e3f5847aef96017be3
+
+companion_binding:
+  specification_commit: 9b3ad2e903bb182cafe8d7c13e7cbfe80f8538b7
+  path: blueprint/proofs/IMP-001-REG.md
+  artifact_id: NLP-IMP-001-REG-R1
+  revision: 1
+  sha256: c10dcbc498d80b98f24473a367546963c0b9d6713d99e73e21fd834ff8eedd4c
+  artifact_role: analytic_regression_companion
+  target_bindings: []
+  public_target_changes: false
+  public_premise_changes: false
+
+review_scope:
+  kind: regression_natural_language_only
+  regression_bindings:
+    - regression_id: IMP-R04
+      authorization_scope: analytic_regression
+    - regression_id: IMP-R05
+      authorization_scope: analytic_regression
+    - regression_id: IMP-R06
+      authorization_scope: analytic_regression
+    - regression_id: IMP-R07
+      authorization_scope: projection_already_covered_by_core
+      new_lean_authorization_claim: false
+    - regression_id: IMP-R11
+      authorization_scope: analytic_regression
+    - regression_id: IMP-R12
+      authorization_scope: endpoint_law_analytic_part_only
+    - regression_id: IMP-R13
+      authorization_scope: nondifferentiable_example_analytic_part_only
+    - regression_id: IMP-R22
+      authorization_scope: analytic_regression
+    - regression_id: IMP-R24
+      authorization_scope: analytic_regression
+  public_target_bindings: []
+  production_lean_input_included: false
+  production_implementation_reviewed: false
+  core_prelean_gate_reopened: false
+  core_lean_ready_changed: false
+  source_coverage_claimed: false
+  numerical_scope_claimed: false
+
+review_requirements:
+  gate: supplemental_regression_natural_language_review
+  minimum_distinct_reviewer_ids: 2
+  historical_reviews_count_toward_quorum: false
+  core_prelean_reviewers_count_toward_quorum: false
+  proposer_or_adjudicator_counts_toward_quorum: false
+  peer_context_permitted: false
+  allocated_reviewer_ids:
+    - /root/imp_reg_nl_referee_a
+    - /root/imp_reg_nl_referee_b
+  allowed_reviewer_composition:
+    humans: 0
+    agents: 2
+    minimum_distinct_agent_models: 1
+  required_isolation_strength: manual_attestation
+  gate_state: pending
+  distinct_reviewer_ids: []
+  verdict_refs: []
+
+authorization_state:
+  root_adjudication: pending
+  decided_by: null
+  formalization_authorized: false
+  core_prelean_authority_unchanged: true
+  passing_successor_ref: null
+
+closed_world:
+  allowed_review_inputs:
+    - exact core-binding artifacts listed above
+    - exact companion artifact listed above
+    - this external pending envelope and REVIEW-INSTRUCTIONS.md
+    - pinned Mathlib sources needed to check cited declarations
+  excluded_review_inputs:
+    - current production IMP code or tests
+    - peer or historical referee reports and verdicts
+    - uncommitted working-tree files
+    - QL, OLV, source-coverage, and numerical implementations
