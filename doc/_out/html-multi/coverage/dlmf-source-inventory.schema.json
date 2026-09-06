@@ -1,0 +1,357 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://jaume.dedios.cat/LMLF/coverage/dlmf-source-inventory.schema.json",
+  "title": "LMLF DLMF structural source inventory",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "$schema",
+    "schema_version",
+    "artifact_kind",
+    "generated_at",
+    "source",
+    "scope",
+    "summary",
+    "sections",
+    "items"
+  ],
+  "properties": {
+    "$schema": {"const": "dlmf-source-inventory.schema.json"},
+    "schema_version": {"const": 2},
+    "artifact_kind": {"const": "dlmf_structural_source_inventory"},
+    "generated_at": {"type": "string", "format": "date-time"},
+    "source": {"$ref": "#/$defs/source"},
+    "scope": {"$ref": "#/$defs/scope"},
+    "summary": {"$ref": "#/$defs/summary"},
+    "sections": {
+      "type": "array",
+      "minItems": 243,
+      "maxItems": 243,
+      "items": {"$ref": "#/$defs/section"}
+    },
+    "items": {
+      "type": "array",
+      "minItems": 4792,
+      "maxItems": 4792,
+      "items": {"$ref": "#/$defs/item"}
+    }
+  },
+  "$defs": {
+    "sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "sourceKind": {
+      "enum": [
+        "numbered_formula",
+        "prose_block",
+        "unnumbered_display_formula",
+        "table_row",
+        "figure_caption",
+        "annotation_note",
+        "proof_sketch",
+        "editorial_change_note"
+      ]
+    },
+    "countMap": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "integer",
+        "minimum": 0
+      }
+    },
+    "source": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "name",
+        "base_url",
+        "version",
+        "release_date",
+        "chapters",
+        "chapter_index_sha256"
+      ],
+      "properties": {
+        "name": {"const": "NIST Digital Library of Mathematical Functions"},
+        "base_url": {"const": "https://dlmf.nist.gov"},
+        "version": {"const": "1.2.7"},
+        "release_date": {"const": "2026-06-15"},
+        "chapters": {
+          "const": [4, 5, 6, 7, 8, 9, 10]
+        },
+        "chapter_index_sha256": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["4", "5", "6", "7", "8", "9", "10"],
+          "properties": {
+            "4": {"$ref": "#/$defs/sha256"},
+            "5": {"$ref": "#/$defs/sha256"},
+            "6": {"$ref": "#/$defs/sha256"},
+            "7": {"$ref": "#/$defs/sha256"},
+            "8": {"$ref": "#/$defs/sha256"},
+            "9": {"$ref": "#/$defs/sha256"},
+            "10": {"$ref": "#/$defs/sha256"}
+          }
+        }
+      }
+    },
+    "scope": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "description",
+        "included_kinds",
+        "body_policy",
+        "excluded_structural_metadata"
+      ],
+      "properties": {
+        "description": {"type": "string", "minLength": 1},
+        "included_kinds": {
+          "type": "array",
+          "minItems": 8,
+          "maxItems": 8,
+          "uniqueItems": true,
+          "items": {"$ref": "#/$defs/sourceKind"}
+        },
+        "body_policy": {"type": "string", "minLength": 1},
+        "excluded_structural_metadata": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {"type": "string", "minLength": 1}
+        }
+      }
+    },
+    "summary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "sections",
+        "items",
+        "by_kind",
+        "formula_components",
+        "review_state",
+        "lean_statement_status",
+        "lean_proof_status",
+        "quantitative_analogue_status",
+        "quantitative_statement_status",
+        "quantitative_proof_status"
+      ],
+      "properties": {
+        "sections": {"const": 243},
+        "items": {"const": 4792},
+        "by_kind": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "numbered_formula",
+            "prose_block",
+            "unnumbered_display_formula",
+            "table_row",
+            "figure_caption",
+            "annotation_note",
+            "proof_sketch",
+            "editorial_change_note"
+          ],
+          "properties": {
+            "numbered_formula": {"const": 2108},
+            "prose_block": {"const": 1575},
+            "unnumbered_display_formula": {"const": 3},
+            "table_row": {"const": 221},
+            "figure_caption": {"const": 161},
+            "annotation_note": {"const": 395},
+            "proof_sketch": {"const": 109},
+            "editorial_change_note": {"const": 220}
+          }
+        },
+        "formula_components": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["formula_tex_parts", "formula_constraints"],
+          "properties": {
+            "formula_tex_parts": {"const": 2447},
+            "formula_constraints": {"const": 697}
+          }
+        },
+        "review_state": {"$ref": "#/$defs/countMap"},
+        "lean_statement_status": {"$ref": "#/$defs/countMap"},
+        "lean_proof_status": {"$ref": "#/$defs/countMap"},
+        "quantitative_analogue_status": {"$ref": "#/$defs/countMap"},
+        "quantitative_statement_status": {"$ref": "#/$defs/countMap"},
+        "quantitative_proof_status": {"$ref": "#/$defs/countMap"}
+      }
+    },
+    "section": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "chapter", "title", "source_url", "page_sha256", "item_counts"],
+      "properties": {
+        "id": {"type": "string", "pattern": "^(?:[4-9]|10)\\.\\d+$"},
+        "chapter": {"type": "integer", "minimum": 4, "maximum": 10},
+        "title": {"type": "string"},
+        "source_url": {"type": "string", "format": "uri"},
+        "page_sha256": {"$ref": "#/$defs/sha256"},
+        "item_counts": {"$ref": "#/$defs/countMap"}
+      }
+    },
+    "location": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "chapter",
+        "section",
+        "context_id",
+        "dom_id",
+        "source_url",
+        "document_order"
+      ],
+      "properties": {
+        "chapter": {"type": "integer", "minimum": 4, "maximum": 10},
+        "section": {"type": "string", "pattern": "^(?:[4-9]|10)\\.\\d+$"},
+        "context_id": {"type": ["string", "null"]},
+        "dom_id": {"type": "string", "minLength": 1},
+        "source_url": {"type": "string", "format": "uri"},
+        "document_order": {"type": "integer", "minimum": 1}
+      }
+    },
+    "texPart": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "source_url"],
+      "properties": {
+        "id": {"type": "string", "pattern": "^(?:[4-9]|10)\\.\\d+\\.E[^/]+$"},
+        "source_url": {"type": "string", "format": "uri"}
+      }
+    },
+    "formulaComponents": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["display_number", "tex_parts", "constraint_count"],
+      "properties": {
+        "display_number": {"type": "string", "pattern": "^(?:[4-9]|10)\\.\\d+\\.\\d+(?:_\\d+)?$"},
+        "tex_parts": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {"$ref": "#/$defs/texPart"}
+        },
+        "constraint_count": {"type": "integer", "minimum": 0}
+      }
+    },
+    "review": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["state"],
+      "properties": {
+        "state": {
+          "enum": ["unreviewed", "reviewed_no_claim", "claims_identified", "mixed"]
+        }
+      }
+    },
+    "leanStatus": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "statement_status",
+        "proof_status",
+        "coverage_relation",
+        "declarations",
+        "evidence_source"
+      ],
+      "properties": {
+        "statement_status": {"enum": ["unknown", "reviewed_absent", "checked"]},
+        "proof_status": {"enum": ["unknown", "not_applicable", "missing", "proved"]},
+        "coverage_relation": {
+          "enum": [
+            "unknown",
+            "exact",
+            "equivalent",
+            "specialization",
+            "consequence",
+            "generalization",
+            "partial"
+          ]
+        },
+        "declarations": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {"type": "string", "minLength": 1}
+        },
+        "evidence_source": {"type": ["string", "null"]}
+      }
+    },
+    "quantitativeStatus": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "analogue_status",
+        "statement_status",
+        "proof_status",
+        "declarations",
+        "evidence_source"
+      ],
+      "properties": {
+        "analogue_status": {
+          "enum": ["unknown", "not_applicable", "source_already_quantitative", "candidate", "present"]
+        },
+        "statement_status": {"enum": ["unknown", "reviewed_absent", "checked"]},
+        "proof_status": {"enum": ["unknown", "not_applicable", "missing", "proved"]},
+        "declarations": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {"type": "string", "minLength": 1}
+        },
+        "evidence_source": {"type": ["string", "null"]}
+      }
+    },
+    "item": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "kind",
+        "location",
+        "source_sha256",
+        "owner_source_id",
+        "annotation_label",
+        "formula_components",
+        "review",
+        "lean",
+        "quantitative"
+      ],
+      "properties": {
+        "id": {"type": "string", "pattern": "^dlmf:(?:[4-9]|10)\\.\\d+[.#@].+$"},
+        "kind": {"$ref": "#/$defs/sourceKind"},
+        "location": {"$ref": "#/$defs/location"},
+        "source_sha256": {"$ref": "#/$defs/sha256"},
+        "owner_source_id": {"type": ["string", "null"]},
+        "annotation_label": {"type": ["string", "null"]},
+        "formula_components": {
+          "oneOf": [
+            {"type": "null"},
+            {"$ref": "#/$defs/formulaComponents"}
+          ]
+        },
+        "review": {"$ref": "#/$defs/review"},
+        "lean": {"$ref": "#/$defs/leanStatus"},
+        "quantitative": {"$ref": "#/$defs/quantitativeStatus"}
+      },
+      "allOf": [
+        {
+          "if": {"properties": {"kind": {"const": "numbered_formula"}}},
+          "then": {"properties": {"formula_components": {"$ref": "#/$defs/formulaComponents"}}},
+          "else": {"properties": {"formula_components": {"type": "null"}}}
+        },
+        {
+          "if": {
+            "properties": {
+              "kind": {
+                "enum": ["annotation_note", "proof_sketch", "editorial_change_note"]
+              }
+            }
+          },
+          "then": {"properties": {"annotation_label": {"type": "string", "minLength": 1}}},
+          "else": {"properties": {"annotation_label": {"type": "null"}}}
+        }
+      ]
+    }
+  }
+}

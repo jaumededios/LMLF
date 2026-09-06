@@ -2,7 +2,18 @@
  {"title": "Sections or chapters of the manual",
   "description": null,
   "contents":
-  {"chapter-9":
+  {"coverage":
+   [{"id": "coverage",
+     "data":
+     {"title": "Coverage",
+      "shortTitle": null,
+      "sectionNum": null,
+      "searchPriority": 50,
+      "context":
+      [{"title": "LMLF · DLMF with Lean", "shortTitle": "LMLF", "number": null},
+       {"title": "Coverage", "shortTitle": null, "number": null}]},
+     "address": "/Coverage/"}],
+   "chapter-9":
    [{"id": "chapter-9",
      "data":
      {"title": "Airy and Related Functions",
@@ -10,9 +21,7 @@
       "sectionNum": "9.",
       "searchPriority": 50,
       "context":
-      [{"title": "LMLF · Mathematical Functions with Lean",
-        "shortTitle": "LMLF",
-        "number": null},
+      [{"title": "LMLF · DLMF with Lean", "shortTitle": "LMLF", "number": null},
        {"title": "Airy and Related Functions",
         "shortTitle": null,
         "number": "9"}]},
@@ -25,9 +34,7 @@
       "sectionNum": "8.",
       "searchPriority": 50,
       "context":
-      [{"title": "LMLF · Mathematical Functions with Lean",
-        "shortTitle": "LMLF",
-        "number": null},
+      [{"title": "LMLF · DLMF with Lean", "shortTitle": "LMLF", "number": null},
        {"title": "Incomplete Gamma and Related Functions",
         "shortTitle": null,
         "number": "8"}]},
@@ -40,9 +47,7 @@
       "sectionNum": "7.",
       "searchPriority": 50,
       "context":
-      [{"title": "LMLF · Mathematical Functions with Lean",
-        "shortTitle": "LMLF",
-        "number": null},
+      [{"title": "LMLF · DLMF with Lean", "shortTitle": "LMLF", "number": null},
        {"title": "Error Functions, Dawson's and Fresnel Integrals",
         "shortTitle": null,
         "number": "7"}]},
@@ -55,9 +60,7 @@
       "sectionNum": "6.",
       "searchPriority": 50,
       "context":
-      [{"title": "LMLF · Mathematical Functions with Lean",
-        "shortTitle": "LMLF",
-        "number": null},
+      [{"title": "LMLF · DLMF with Lean", "shortTitle": "LMLF", "number": null},
        {"title": "Exponential, Logarithmic, Sine, and Cosine Integrals",
         "shortTitle": null,
         "number": "6"}]},
@@ -71,9 +74,7 @@
       "sectionNum": "5.",
       "searchPriority": 50,
       "context":
-      [{"title": "LMLF · Mathematical Functions with Lean",
-        "shortTitle": "LMLF",
-        "number": null},
+      [{"title": "LMLF · DLMF with Lean", "shortTitle": "LMLF", "number": null},
        {"title": "Gamma Function", "shortTitle": null, "number": "5"}]},
      "address": "/Gamma-Function/"}],
    "chapter-4":
@@ -84,41 +85,33 @@
       "sectionNum": "4.",
       "searchPriority": 50,
       "context":
-      [{"title": "LMLF · Mathematical Functions with Lean",
-        "shortTitle": "LMLF",
-        "number": null},
+      [{"title": "LMLF · DLMF with Lean", "shortTitle": "LMLF", "number": null},
        {"title": "Elementary Functions", "shortTitle": null, "number": "4"}]},
      "address": "/Elementary-Functions/"}],
    "chapter-3":
    [{"id": "chapter-3",
      "data":
-     {"title": "Improper integrals, series, and source recovery",
+     {"title": "Improper integrals",
       "shortTitle": null,
       "sectionNum": "3.",
       "searchPriority": 50,
       "context":
-      [{"title": "LMLF · Mathematical Functions with Lean",
-        "shortTitle": "LMLF",
-        "number": null},
-       {"title": "Improper integrals, series, and source recovery",
-        "shortTitle": null,
-        "number": "3"}]},
-     "address": "/Improper-integrals___-series___-and-source-recovery/"}],
+      [{"title": "LMLF · DLMF with Lean", "shortTitle": "LMLF", "number": null},
+       {"title": "Improper integrals", "shortTitle": null, "number": "3"}]},
+     "address": "/Improper-integrals/"}],
    "chapter-2":
    [{"id": "chapter-2",
      "data":
-     {"title": "Finite families of approximants",
+     {"title": "Approximants and series",
       "shortTitle": null,
       "sectionNum": "2.",
       "searchPriority": 50,
       "context":
-      [{"title": "LMLF · Mathematical Functions with Lean",
-        "shortTitle": "LMLF",
-        "number": null},
-       {"title": "Finite families of approximants",
+      [{"title": "LMLF · DLMF with Lean", "shortTitle": "LMLF", "number": null},
+       {"title": "Approximants and series",
         "shortTitle": null,
         "number": "2"}]},
-     "address": "/Finite-families-of-approximants/"}],
+     "address": "/Approximants-and-series/"}],
    "chapter-10":
    [{"id": "chapter-10",
      "data":
@@ -127,594 +120,1020 @@
       "sectionNum": "10.",
       "searchPriority": 50,
       "context":
-      [{"title": "LMLF · Mathematical Functions with Lean",
-        "shortTitle": "LMLF",
-        "number": null},
+      [{"title": "LMLF · DLMF with Lean", "shortTitle": "LMLF", "number": null},
        {"title": "Bessel Functions", "shortTitle": null, "number": "10"}]},
      "address": "/Bessel-Functions/"}],
    "chapter-1":
    [{"id": "chapter-1",
      "data":
-     {"title": "Finite error calculus",
+     {"title": "Finite error bounds",
       "shortTitle": null,
       "sectionNum": "1.",
       "searchPriority": 50,
       "context":
-      [{"title": "LMLF · Mathematical Functions with Lean",
-        "shortTitle": "LMLF",
-        "number": null},
-       {"title": "Finite error calculus", "shortTitle": null, "number": "1"}]},
-     "address": "/Finite-error-calculus/"}],
-   "LMLF-___-Mathematical-Functions-with-Lean--Incomplete-Gamma-and-Related-Functions--Chapter-contents--Related-functions":
+      [{"title": "LMLF · DLMF with Lean", "shortTitle": "LMLF", "number": null},
+       {"title": "Finite error bounds", "shortTitle": null, "number": "1"}]},
+     "address": "/Finite-error-bounds/"}],
+   "LMLF-___-DLMF-with-Lean--Incomplete-Gamma-and-Related-Functions--Chapter-contents--Related-functions":
    [{"id":
-     "LMLF-___-Mathematical-Functions-with-Lean--Incomplete-Gamma-and-Related-Functions--Chapter-contents--Related-functions",
+     "LMLF-___-DLMF-with-Lean--Incomplete-Gamma-and-Related-Functions--Chapter-contents--Related-functions",
      "data":
      {"title": "Related functions",
       "shortTitle": null,
-      "sectionNum": "8.1.2.",
+      "sectionNum": null,
       "searchPriority": 50,
       "context":
-      [{"title": "LMLF · Mathematical Functions with Lean",
-        "shortTitle": "LMLF",
-        "number": null},
+      [{"title": "LMLF · DLMF with Lean", "shortTitle": "LMLF", "number": null},
        {"title": "Incomplete Gamma and Related Functions",
         "shortTitle": null,
         "number": "8"},
-       {"title": "Chapter contents", "shortTitle": null, "number": "1"},
-       {"title": "Related functions", "shortTitle": null, "number": "2"}]},
+       {"title": "Chapter contents", "shortTitle": null, "number": null},
+       {"title": "Related functions", "shortTitle": null, "number": null}]},
      "address": "/Incomplete-Gamma-and-Related-Functions/Chapter-contents/"}],
-   "LMLF-___-Mathematical-Functions-with-Lean--Incomplete-Gamma-and-Related-Functions--Chapter-contents--Incomplete-Gamma-functions":
+   "LMLF-___-DLMF-with-Lean--Incomplete-Gamma-and-Related-Functions--Chapter-contents--Incomplete-Gamma-functions":
    [{"id":
-     "LMLF-___-Mathematical-Functions-with-Lean--Incomplete-Gamma-and-Related-Functions--Chapter-contents--Incomplete-Gamma-functions",
+     "LMLF-___-DLMF-with-Lean--Incomplete-Gamma-and-Related-Functions--Chapter-contents--Incomplete-Gamma-functions",
      "data":
      {"title": "Incomplete Gamma functions",
       "shortTitle": null,
-      "sectionNum": "8.1.1.",
+      "sectionNum": null,
       "searchPriority": 50,
       "context":
-      [{"title": "LMLF · Mathematical Functions with Lean",
-        "shortTitle": "LMLF",
-        "number": null},
+      [{"title": "LMLF · DLMF with Lean", "shortTitle": "LMLF", "number": null},
        {"title": "Incomplete Gamma and Related Functions",
         "shortTitle": null,
         "number": "8"},
-       {"title": "Chapter contents", "shortTitle": null, "number": "1"},
+       {"title": "Chapter contents", "shortTitle": null, "number": null},
        {"title": "Incomplete Gamma functions",
         "shortTitle": null,
-        "number": "1"}]},
+        "number": null}]},
      "address": "/Incomplete-Gamma-and-Related-Functions/Chapter-contents/"}],
-   "LMLF-___-Mathematical-Functions-with-Lean--Incomplete-Gamma-and-Related-Functions--Chapter-contents--Applications-and-computation":
+   "LMLF-___-DLMF-with-Lean--Incomplete-Gamma-and-Related-Functions--Chapter-contents--Applications-and-computation":
    [{"id":
-     "LMLF-___-Mathematical-Functions-with-Lean--Incomplete-Gamma-and-Related-Functions--Chapter-contents--Applications-and-computation",
+     "LMLF-___-DLMF-with-Lean--Incomplete-Gamma-and-Related-Functions--Chapter-contents--Applications-and-computation",
      "data":
      {"title": "Applications and computation",
       "shortTitle": null,
-      "sectionNum": "8.1.3.",
+      "sectionNum": null,
       "searchPriority": 50,
       "context":
-      [{"title": "LMLF · Mathematical Functions with Lean",
-        "shortTitle": "LMLF",
-        "number": null},
+      [{"title": "LMLF · DLMF with Lean", "shortTitle": "LMLF", "number": null},
        {"title": "Incomplete Gamma and Related Functions",
         "shortTitle": null,
         "number": "8"},
-       {"title": "Chapter contents", "shortTitle": null, "number": "1"},
+       {"title": "Chapter contents", "shortTitle": null, "number": null},
        {"title": "Applications and computation",
         "shortTitle": null,
-        "number": "3"}]},
+        "number": null}]},
      "address": "/Incomplete-Gamma-and-Related-Functions/Chapter-contents/"}],
-   "LMLF-___-Mathematical-Functions-with-Lean--Incomplete-Gamma-and-Related-Functions--Chapter-contents":
+   "LMLF-___-DLMF-with-Lean--Incomplete-Gamma-and-Related-Functions--Chapter-contents":
    [{"id":
-     "LMLF-___-Mathematical-Functions-with-Lean--Incomplete-Gamma-and-Related-Functions--Chapter-contents",
+     "LMLF-___-DLMF-with-Lean--Incomplete-Gamma-and-Related-Functions--Chapter-contents",
      "data":
      {"title": "Chapter contents",
       "shortTitle": null,
-      "sectionNum": "8.1.",
+      "sectionNum": null,
       "searchPriority": 50,
       "context":
-      [{"title": "LMLF · Mathematical Functions with Lean",
-        "shortTitle": "LMLF",
-        "number": null},
+      [{"title": "LMLF · DLMF with Lean", "shortTitle": "LMLF", "number": null},
        {"title": "Incomplete Gamma and Related Functions",
         "shortTitle": null,
         "number": "8"},
-       {"title": "Chapter contents", "shortTitle": null, "number": "1"}]},
+       {"title": "Chapter contents", "shortTitle": null, "number": null}]},
      "address": "/Incomplete-Gamma-and-Related-Functions/Chapter-contents/"}],
-   "LMLF-___-Mathematical-Functions-with-Lean--Gamma-Function--Chapter-contents--Notation-and-properties":
+   "LMLF-___-DLMF-with-Lean--Improper-integrals--3___5-Abel-reweighting":
    [{"id":
-     "LMLF-___-Mathematical-Functions-with-Lean--Gamma-Function--Chapter-contents--Notation-and-properties",
+     "LMLF-___-DLMF-with-Lean--Improper-integrals--3___5-Abel-reweighting",
+     "data":
+     {"title": "3.5 Abel reweighting",
+      "shortTitle": null,
+      "sectionNum": null,
+      "searchPriority": 50,
+      "context":
+      [{"title": "LMLF · DLMF with Lean", "shortTitle": "LMLF", "number": null},
+       {"title": "Improper integrals", "shortTitle": null, "number": "3"},
+       {"title": "3.5 Abel reweighting", "shortTitle": null, "number": null}]},
+     "address": "/Improper-integrals/3___5-Abel-reweighting/"}],
+   "LMLF-___-DLMF-with-Lean--Improper-integrals--3___4-Absolutely-integrable-functions":
+   [{"id":
+     "LMLF-___-DLMF-with-Lean--Improper-integrals--3___4-Absolutely-integrable-functions",
+     "data":
+     {"title": "3.4 Absolutely integrable functions",
+      "shortTitle": null,
+      "sectionNum": null,
+      "searchPriority": 50,
+      "context":
+      [{"title": "LMLF · DLMF with Lean", "shortTitle": "LMLF", "number": null},
+       {"title": "Improper integrals", "shortTitle": null, "number": "3"},
+       {"title": "3.4 Absolutely integrable functions",
+        "shortTitle": null,
+        "number": null}]},
+     "address": "/Improper-integrals/3___4-Absolutely-integrable-functions/"}],
+   "LMLF-___-DLMF-with-Lean--Improper-integrals--3___3-Algebra-and-a-change-of-starting-point":
+   [{"id":
+     "LMLF-___-DLMF-with-Lean--Improper-integrals--3___3-Algebra-and-a-change-of-starting-point",
+     "data":
+     {"title": "3.3 Algebra and a change of starting point",
+      "shortTitle": null,
+      "sectionNum": null,
+      "searchPriority": 50,
+      "context":
+      [{"title": "LMLF · DLMF with Lean", "shortTitle": "LMLF", "number": null},
+       {"title": "Improper integrals", "shortTitle": null, "number": "3"},
+       {"title": "3.3 Algebra and a change of starting point",
+        "shortTitle": null,
+        "number": null}]},
+     "address":
+     "/Improper-integrals/3___3-Algebra-and-a-change-of-starting-point/"}],
+   "LMLF-___-DLMF-with-Lean--Improper-integrals--3___2-Continuous-primitives-across-the-exceptional-set":
+   [{"id":
+     "LMLF-___-DLMF-with-Lean--Improper-integrals--3___2-Continuous-primitives-across-the-exceptional-set",
+     "data":
+     {"title": "3.2 Continuous primitives across the exceptional set",
+      "shortTitle": null,
+      "sectionNum": null,
+      "searchPriority": 50,
+      "context":
+      [{"title": "LMLF · DLMF with Lean", "shortTitle": "LMLF", "number": null},
+       {"title": "Improper integrals", "shortTitle": null, "number": "3"},
+       {"title": "3.2 Continuous primitives across the exceptional set",
+        "shortTitle": null,
+        "number": null}]},
+     "address":
+     "/Improper-integrals/3___2-Continuous-primitives-across-the-exceptional-set/"}],
+   "LMLF-___-DLMF-with-Lean--Improper-integrals--3___1-Improper-integrals-with-finitely-many-exceptional-points":
+   [{"id":
+     "LMLF-___-DLMF-with-Lean--Improper-integrals--3___1-Improper-integrals-with-finitely-many-exceptional-points",
+     "data":
+     {"title": "3.1 Improper integrals with finitely many exceptional points",
+      "shortTitle": null,
+      "sectionNum": null,
+      "searchPriority": 50,
+      "context":
+      [{"title": "LMLF · DLMF with Lean", "shortTitle": "LMLF", "number": null},
+       {"title": "Improper integrals", "shortTitle": null, "number": "3"},
+       {"title": "3.1 Improper integrals with finitely many exceptional points",
+        "shortTitle": null,
+        "number": null}]},
+     "address":
+     "/Improper-integrals/3___1-Improper-integrals-with-finitely-many-exceptional-points/"}],
+   "LMLF-___-DLMF-with-Lean--Gamma-Function--___5___2-Definitions--___5___2_LPAR_i_RPAR_-Gamma-and-Psi-Functions":
+   [{"id":
+     "LMLF-___-DLMF-with-Lean--Gamma-Function--___5___2-Definitions--___5___2_LPAR_i_RPAR_-Gamma-and-Psi-Functions",
+     "data":
+     {"title": "§5.2(i) Gamma and Psi Functions",
+      "shortTitle": null,
+      "sectionNum": null,
+      "searchPriority": 50,
+      "context":
+      [{"title": "LMLF · DLMF with Lean", "shortTitle": "LMLF", "number": null},
+       {"title": "Gamma Function", "shortTitle": null, "number": "5"},
+       {"title": "§5.2 Definitions", "shortTitle": null, "number": null},
+       {"title": "§5.2(i) Gamma and Psi Functions",
+        "shortTitle": null,
+        "number": null}]},
+     "address": "/Gamma-Function/___5___2-Definitions/"}],
+   "LMLF-___-DLMF-with-Lean--Gamma-Function--___5___2-Definitions":
+   [{"id": "LMLF-___-DLMF-with-Lean--Gamma-Function--___5___2-Definitions",
+     "data":
+     {"title": "§5.2 Definitions",
+      "shortTitle": null,
+      "sectionNum": null,
+      "searchPriority": 50,
+      "context":
+      [{"title": "LMLF · DLMF with Lean", "shortTitle": "LMLF", "number": null},
+       {"title": "Gamma Function", "shortTitle": null, "number": "5"},
+       {"title": "§5.2 Definitions", "shortTitle": null, "number": null}]},
+     "address": "/Gamma-Function/___5___2-Definitions/"}],
+   "LMLF-___-DLMF-with-Lean--Gamma-Function--___5___11-Asymptotic-Expansions--___5___11_LPAR_i_RPAR_-Poincar___-Type-Expansions":
+   [{"id":
+     "LMLF-___-DLMF-with-Lean--Gamma-Function--___5___11-Asymptotic-Expansions--___5___11_LPAR_i_RPAR_-Poincar___-Type-Expansions",
+     "data":
+     {"title": "§5.11(i) Poincaré-Type Expansions",
+      "shortTitle": null,
+      "sectionNum": null,
+      "searchPriority": 50,
+      "context":
+      [{"title": "LMLF · DLMF with Lean", "shortTitle": "LMLF", "number": null},
+       {"title": "Gamma Function", "shortTitle": null, "number": "5"},
+       {"title": "§5.11 Asymptotic Expansions",
+        "shortTitle": null,
+        "number": null},
+       {"title": "§5.11(i) Poincaré-Type Expansions",
+        "shortTitle": null,
+        "number": null}]},
+     "address": "/Gamma-Function/___5___11-Asymptotic-Expansions/"}],
+   "LMLF-___-DLMF-with-Lean--Gamma-Function--___5___11-Asymptotic-Expansions":
+   [{"id":
+     "LMLF-___-DLMF-with-Lean--Gamma-Function--___5___11-Asymptotic-Expansions",
+     "data":
+     {"title": "§5.11 Asymptotic Expansions",
+      "shortTitle": null,
+      "sectionNum": null,
+      "searchPriority": 50,
+      "context":
+      [{"title": "LMLF · DLMF with Lean", "shortTitle": "LMLF", "number": null},
+       {"title": "Gamma Function", "shortTitle": null, "number": "5"},
+       {"title": "§5.11 Asymptotic Expansions",
+        "shortTitle": null,
+        "number": null}]},
+     "address": "/Gamma-Function/___5___11-Asymptotic-Expansions/"}],
+   "LMLF-___-DLMF-with-Lean--Gamma-Function--Chapter-contents--Notation-and-properties":
+   [{"id":
+     "LMLF-___-DLMF-with-Lean--Gamma-Function--Chapter-contents--Notation-and-properties",
      "data":
      {"title": "Notation and properties",
       "shortTitle": null,
-      "sectionNum": "5.3.1.",
+      "sectionNum": null,
       "searchPriority": 50,
       "context":
-      [{"title": "LMLF · Mathematical Functions with Lean",
-        "shortTitle": "LMLF",
-        "number": null},
+      [{"title": "LMLF · DLMF with Lean", "shortTitle": "LMLF", "number": null},
        {"title": "Gamma Function", "shortTitle": null, "number": "5"},
-       {"title": "Chapter contents", "shortTitle": null, "number": "3"},
+       {"title": "Chapter contents", "shortTitle": null, "number": null},
        {"title": "Notation and properties",
         "shortTitle": null,
-        "number": "1"}]},
+        "number": null}]},
      "address": "/Gamma-Function/Chapter-contents/"}],
-   "LMLF-___-Mathematical-Functions-with-Lean--Gamma-Function--Chapter-contents--Applications-and-computation":
+   "LMLF-___-DLMF-with-Lean--Gamma-Function--Chapter-contents--Applications-and-computation":
    [{"id":
-     "LMLF-___-Mathematical-Functions-with-Lean--Gamma-Function--Chapter-contents--Applications-and-computation",
+     "LMLF-___-DLMF-with-Lean--Gamma-Function--Chapter-contents--Applications-and-computation",
      "data":
      {"title": "Applications and computation",
       "shortTitle": null,
-      "sectionNum": "5.3.2.",
+      "sectionNum": null,
       "searchPriority": 50,
       "context":
-      [{"title": "LMLF · Mathematical Functions with Lean",
-        "shortTitle": "LMLF",
-        "number": null},
+      [{"title": "LMLF · DLMF with Lean", "shortTitle": "LMLF", "number": null},
        {"title": "Gamma Function", "shortTitle": null, "number": "5"},
-       {"title": "Chapter contents", "shortTitle": null, "number": "3"},
+       {"title": "Chapter contents", "shortTitle": null, "number": null},
        {"title": "Applications and computation",
         "shortTitle": null,
-        "number": "2"}]},
+        "number": null}]},
      "address": "/Gamma-Function/Chapter-contents/"}],
-   "LMLF-___-Mathematical-Functions-with-Lean--Gamma-Function--Chapter-contents":
-   [{"id":
-     "LMLF-___-Mathematical-Functions-with-Lean--Gamma-Function--Chapter-contents",
+   "LMLF-___-DLMF-with-Lean--Gamma-Function--Chapter-contents":
+   [{"id": "LMLF-___-DLMF-with-Lean--Gamma-Function--Chapter-contents",
      "data":
      {"title": "Chapter contents",
       "shortTitle": null,
-      "sectionNum": "5.3.",
+      "sectionNum": null,
       "searchPriority": 50,
       "context":
-      [{"title": "LMLF · Mathematical Functions with Lean",
-        "shortTitle": "LMLF",
-        "number": null},
+      [{"title": "LMLF · DLMF with Lean", "shortTitle": "LMLF", "number": null},
        {"title": "Gamma Function", "shortTitle": null, "number": "5"},
-       {"title": "Chapter contents", "shortTitle": null, "number": "3"}]},
+       {"title": "Chapter contents", "shortTitle": null, "number": null}]},
      "address": "/Gamma-Function/Chapter-contents/"}],
-   "LMLF-___-Mathematical-Functions-with-Lean--Gamma-Function--5___2-Definitions-and-conventions":
+   "LMLF-___-DLMF-with-Lean--Finite-error-bounds--1___2-Elementary-rules":
    [{"id":
-     "LMLF-___-Mathematical-Functions-with-Lean--Gamma-Function--5___2-Definitions-and-conventions",
+     "LMLF-___-DLMF-with-Lean--Finite-error-bounds--1___2-Elementary-rules",
      "data":
-     {"title": "5.2 Definitions and conventions",
+     {"title": "1.2 Elementary rules",
       "shortTitle": null,
-      "sectionNum": "5.2.",
+      "sectionNum": null,
       "searchPriority": 50,
       "context":
-      [{"title": "LMLF · Mathematical Functions with Lean",
-        "shortTitle": "LMLF",
-        "number": null},
-       {"title": "Gamma Function", "shortTitle": null, "number": "5"},
-       {"title": "5.2 Definitions and conventions",
-        "shortTitle": null,
-        "number": "2"}]},
-     "address": "/Gamma-Function/5___2-Definitions-and-conventions/"}],
-   "LMLF-___-Mathematical-Functions-with-Lean--Gamma-Function--5___2-Definitions-and-5___9-Integral-representations":
+      [{"title": "LMLF · DLMF with Lean", "shortTitle": "LMLF", "number": null},
+       {"title": "Finite error bounds", "shortTitle": null, "number": "1"},
+       {"title": "1.2 Elementary rules", "shortTitle": null, "number": null}]},
+     "address": "/Finite-error-bounds/1___2-Elementary-rules/"}],
+   "LMLF-___-DLMF-with-Lean--Finite-error-bounds--1___1-Pointwise-bounds":
    [{"id":
-     "LMLF-___-Mathematical-Functions-with-Lean--Gamma-Function--5___2-Definitions-and-5___9-Integral-representations",
+     "LMLF-___-DLMF-with-Lean--Finite-error-bounds--1___1-Pointwise-bounds",
      "data":
-     {"title": "5.2 Definitions and 5.9 Integral representations",
+     {"title": "1.1 Pointwise bounds",
       "shortTitle": null,
-      "sectionNum": "5.1.",
+      "sectionNum": null,
       "searchPriority": 50,
       "context":
-      [{"title": "LMLF · Mathematical Functions with Lean",
-        "shortTitle": "LMLF",
-        "number": null},
-       {"title": "Gamma Function", "shortTitle": null, "number": "5"},
-       {"title": "5.2 Definitions and 5.9 Integral representations",
-        "shortTitle": null,
-        "number": "1"}]},
-     "address":
-     "/Gamma-Function/5___2-Definitions-and-5___9-Integral-representations/"}],
-   "LMLF-___-Mathematical-Functions-with-Lean--Exponential___-Logarithmic___-Sine___-and-Cosine-Integrals--Chapter-contents--Notation-and-properties":
+      [{"title": "LMLF · DLMF with Lean", "shortTitle": "LMLF", "number": null},
+       {"title": "Finite error bounds", "shortTitle": null, "number": "1"},
+       {"title": "1.1 Pointwise bounds", "shortTitle": null, "number": null}]},
+     "address": "/Finite-error-bounds/1___1-Pointwise-bounds/"}],
+   "LMLF-___-DLMF-with-Lean--Exponential___-Logarithmic___-Sine___-and-Cosine-Integrals--Chapter-contents--Notation-and-properties":
    [{"id":
-     "LMLF-___-Mathematical-Functions-with-Lean--Exponential___-Logarithmic___-Sine___-and-Cosine-Integrals--Chapter-contents--Notation-and-properties",
+     "LMLF-___-DLMF-with-Lean--Exponential___-Logarithmic___-Sine___-and-Cosine-Integrals--Chapter-contents--Notation-and-properties",
      "data":
      {"title": "Notation and properties",
       "shortTitle": null,
-      "sectionNum": "6.1.1.",
+      "sectionNum": null,
       "searchPriority": 50,
       "context":
-      [{"title": "LMLF · Mathematical Functions with Lean",
-        "shortTitle": "LMLF",
-        "number": null},
+      [{"title": "LMLF · DLMF with Lean", "shortTitle": "LMLF", "number": null},
        {"title": "Exponential, Logarithmic, Sine, and Cosine Integrals",
         "shortTitle": null,
         "number": "6"},
-       {"title": "Chapter contents", "shortTitle": null, "number": "1"},
+       {"title": "Chapter contents", "shortTitle": null, "number": null},
        {"title": "Notation and properties",
         "shortTitle": null,
-        "number": "1"}]},
+        "number": null}]},
      "address":
      "/Exponential___-Logarithmic___-Sine___-and-Cosine-Integrals/Chapter-contents/"}],
-   "LMLF-___-Mathematical-Functions-with-Lean--Exponential___-Logarithmic___-Sine___-and-Cosine-Integrals--Chapter-contents--Applications-and-computation":
+   "LMLF-___-DLMF-with-Lean--Exponential___-Logarithmic___-Sine___-and-Cosine-Integrals--Chapter-contents--Applications-and-computation":
    [{"id":
-     "LMLF-___-Mathematical-Functions-with-Lean--Exponential___-Logarithmic___-Sine___-and-Cosine-Integrals--Chapter-contents--Applications-and-computation",
+     "LMLF-___-DLMF-with-Lean--Exponential___-Logarithmic___-Sine___-and-Cosine-Integrals--Chapter-contents--Applications-and-computation",
      "data":
      {"title": "Applications and computation",
       "shortTitle": null,
-      "sectionNum": "6.1.2.",
+      "sectionNum": null,
       "searchPriority": 50,
       "context":
-      [{"title": "LMLF · Mathematical Functions with Lean",
-        "shortTitle": "LMLF",
-        "number": null},
+      [{"title": "LMLF · DLMF with Lean", "shortTitle": "LMLF", "number": null},
        {"title": "Exponential, Logarithmic, Sine, and Cosine Integrals",
         "shortTitle": null,
         "number": "6"},
-       {"title": "Chapter contents", "shortTitle": null, "number": "1"},
+       {"title": "Chapter contents", "shortTitle": null, "number": null},
        {"title": "Applications and computation",
         "shortTitle": null,
-        "number": "2"}]},
+        "number": null}]},
      "address":
      "/Exponential___-Logarithmic___-Sine___-and-Cosine-Integrals/Chapter-contents/"}],
-   "LMLF-___-Mathematical-Functions-with-Lean--Exponential___-Logarithmic___-Sine___-and-Cosine-Integrals--Chapter-contents":
+   "LMLF-___-DLMF-with-Lean--Exponential___-Logarithmic___-Sine___-and-Cosine-Integrals--Chapter-contents":
    [{"id":
-     "LMLF-___-Mathematical-Functions-with-Lean--Exponential___-Logarithmic___-Sine___-and-Cosine-Integrals--Chapter-contents",
+     "LMLF-___-DLMF-with-Lean--Exponential___-Logarithmic___-Sine___-and-Cosine-Integrals--Chapter-contents",
      "data":
      {"title": "Chapter contents",
       "shortTitle": null,
-      "sectionNum": "6.1.",
+      "sectionNum": null,
       "searchPriority": 50,
       "context":
-      [{"title": "LMLF · Mathematical Functions with Lean",
-        "shortTitle": "LMLF",
-        "number": null},
+      [{"title": "LMLF · DLMF with Lean", "shortTitle": "LMLF", "number": null},
        {"title": "Exponential, Logarithmic, Sine, and Cosine Integrals",
         "shortTitle": null,
         "number": "6"},
-       {"title": "Chapter contents", "shortTitle": null, "number": "1"}]},
+       {"title": "Chapter contents", "shortTitle": null, "number": null}]},
      "address":
      "/Exponential___-Logarithmic___-Sine___-and-Cosine-Integrals/Chapter-contents/"}],
-   "LMLF-___-Mathematical-Functions-with-Lean--Error-Functions___-Dawson___s-and-Fresnel-Integrals--Chapter-contents--Notation-and-properties":
+   "LMLF-___-DLMF-with-Lean--Error-Functions___-Dawson___s-and-Fresnel-Integrals--Chapter-contents--Notation-and-properties":
    [{"id":
-     "LMLF-___-Mathematical-Functions-with-Lean--Error-Functions___-Dawson___s-and-Fresnel-Integrals--Chapter-contents--Notation-and-properties",
+     "LMLF-___-DLMF-with-Lean--Error-Functions___-Dawson___s-and-Fresnel-Integrals--Chapter-contents--Notation-and-properties",
      "data":
      {"title": "Notation and properties",
       "shortTitle": null,
-      "sectionNum": "7.1.1.",
+      "sectionNum": null,
       "searchPriority": 50,
       "context":
-      [{"title": "LMLF · Mathematical Functions with Lean",
-        "shortTitle": "LMLF",
-        "number": null},
+      [{"title": "LMLF · DLMF with Lean", "shortTitle": "LMLF", "number": null},
        {"title": "Error Functions, Dawson's and Fresnel Integrals",
         "shortTitle": null,
         "number": "7"},
-       {"title": "Chapter contents", "shortTitle": null, "number": "1"},
+       {"title": "Chapter contents", "shortTitle": null, "number": null},
        {"title": "Notation and properties",
         "shortTitle": null,
-        "number": "1"}]},
+        "number": null}]},
      "address":
      "/Error-Functions___-Dawson___s-and-Fresnel-Integrals/Chapter-contents/"}],
-   "LMLF-___-Mathematical-Functions-with-Lean--Error-Functions___-Dawson___s-and-Fresnel-Integrals--Chapter-contents--Applications-and-computation":
+   "LMLF-___-DLMF-with-Lean--Error-Functions___-Dawson___s-and-Fresnel-Integrals--Chapter-contents--Applications-and-computation":
    [{"id":
-     "LMLF-___-Mathematical-Functions-with-Lean--Error-Functions___-Dawson___s-and-Fresnel-Integrals--Chapter-contents--Applications-and-computation",
+     "LMLF-___-DLMF-with-Lean--Error-Functions___-Dawson___s-and-Fresnel-Integrals--Chapter-contents--Applications-and-computation",
      "data":
      {"title": "Applications and computation",
       "shortTitle": null,
-      "sectionNum": "7.1.2.",
+      "sectionNum": null,
       "searchPriority": 50,
       "context":
-      [{"title": "LMLF · Mathematical Functions with Lean",
-        "shortTitle": "LMLF",
-        "number": null},
+      [{"title": "LMLF · DLMF with Lean", "shortTitle": "LMLF", "number": null},
        {"title": "Error Functions, Dawson's and Fresnel Integrals",
         "shortTitle": null,
         "number": "7"},
-       {"title": "Chapter contents", "shortTitle": null, "number": "1"},
+       {"title": "Chapter contents", "shortTitle": null, "number": null},
        {"title": "Applications and computation",
         "shortTitle": null,
-        "number": "2"}]},
+        "number": null}]},
      "address":
      "/Error-Functions___-Dawson___s-and-Fresnel-Integrals/Chapter-contents/"}],
-   "LMLF-___-Mathematical-Functions-with-Lean--Error-Functions___-Dawson___s-and-Fresnel-Integrals--Chapter-contents":
+   "LMLF-___-DLMF-with-Lean--Error-Functions___-Dawson___s-and-Fresnel-Integrals--Chapter-contents":
    [{"id":
-     "LMLF-___-Mathematical-Functions-with-Lean--Error-Functions___-Dawson___s-and-Fresnel-Integrals--Chapter-contents",
+     "LMLF-___-DLMF-with-Lean--Error-Functions___-Dawson___s-and-Fresnel-Integrals--Chapter-contents",
      "data":
      {"title": "Chapter contents",
       "shortTitle": null,
-      "sectionNum": "7.1.",
+      "sectionNum": null,
       "searchPriority": 50,
       "context":
-      [{"title": "LMLF · Mathematical Functions with Lean",
-        "shortTitle": "LMLF",
-        "number": null},
+      [{"title": "LMLF · DLMF with Lean", "shortTitle": "LMLF", "number": null},
        {"title": "Error Functions, Dawson's and Fresnel Integrals",
         "shortTitle": null,
         "number": "7"},
-       {"title": "Chapter contents", "shortTitle": null, "number": "1"}]},
+       {"title": "Chapter contents", "shortTitle": null, "number": null}]},
      "address":
      "/Error-Functions___-Dawson___s-and-Fresnel-Integrals/Chapter-contents/"}],
-   "LMLF-___-Mathematical-Functions-with-Lean--Elementary-Functions--Chapter-contents--Trigonometric-functions":
+   "LMLF-___-DLMF-with-Lean--Elementary-Functions--Chapter-contents--Trigonometric-functions":
    [{"id":
-     "LMLF-___-Mathematical-Functions-with-Lean--Elementary-Functions--Chapter-contents--Trigonometric-functions",
+     "LMLF-___-DLMF-with-Lean--Elementary-Functions--Chapter-contents--Trigonometric-functions",
      "data":
      {"title": "Trigonometric functions",
       "shortTitle": null,
-      "sectionNum": "4.1.3.",
+      "sectionNum": null,
       "searchPriority": 50,
       "context":
-      [{"title": "LMLF · Mathematical Functions with Lean",
-        "shortTitle": "LMLF",
-        "number": null},
+      [{"title": "LMLF · DLMF with Lean", "shortTitle": "LMLF", "number": null},
        {"title": "Elementary Functions", "shortTitle": null, "number": "4"},
-       {"title": "Chapter contents", "shortTitle": null, "number": "1"},
+       {"title": "Chapter contents", "shortTitle": null, "number": null},
        {"title": "Trigonometric functions",
         "shortTitle": null,
-        "number": "3"}]},
+        "number": null}]},
      "address": "/Elementary-Functions/Chapter-contents/"}],
-   "LMLF-___-Mathematical-Functions-with-Lean--Elementary-Functions--Chapter-contents--Notation":
+   "LMLF-___-DLMF-with-Lean--Elementary-Functions--Chapter-contents--Notation":
    [{"id":
-     "LMLF-___-Mathematical-Functions-with-Lean--Elementary-Functions--Chapter-contents--Notation",
+     "LMLF-___-DLMF-with-Lean--Elementary-Functions--Chapter-contents--Notation",
      "data":
      {"title": "Notation",
       "shortTitle": null,
-      "sectionNum": "4.1.1.",
+      "sectionNum": null,
       "searchPriority": 50,
       "context":
-      [{"title": "LMLF · Mathematical Functions with Lean",
-        "shortTitle": "LMLF",
-        "number": null},
+      [{"title": "LMLF · DLMF with Lean", "shortTitle": "LMLF", "number": null},
        {"title": "Elementary Functions", "shortTitle": null, "number": "4"},
-       {"title": "Chapter contents", "shortTitle": null, "number": "1"},
-       {"title": "Notation", "shortTitle": null, "number": "1"}]},
+       {"title": "Chapter contents", "shortTitle": null, "number": null},
+       {"title": "Notation", "shortTitle": null, "number": null}]},
      "address": "/Elementary-Functions/Chapter-contents/"}],
-   "LMLF-___-Mathematical-Functions-with-Lean--Elementary-Functions--Chapter-contents--Logarithm___-exponential___-and-powers":
+   "LMLF-___-DLMF-with-Lean--Elementary-Functions--Chapter-contents--Logarithm___-exponential___-and-powers":
    [{"id":
-     "LMLF-___-Mathematical-Functions-with-Lean--Elementary-Functions--Chapter-contents--Logarithm___-exponential___-and-powers",
+     "LMLF-___-DLMF-with-Lean--Elementary-Functions--Chapter-contents--Logarithm___-exponential___-and-powers",
      "data":
      {"title": "Logarithm, exponential, and powers",
       "shortTitle": null,
-      "sectionNum": "4.1.2.",
+      "sectionNum": null,
       "searchPriority": 50,
       "context":
-      [{"title": "LMLF · Mathematical Functions with Lean",
-        "shortTitle": "LMLF",
-        "number": null},
+      [{"title": "LMLF · DLMF with Lean", "shortTitle": "LMLF", "number": null},
        {"title": "Elementary Functions", "shortTitle": null, "number": "4"},
-       {"title": "Chapter contents", "shortTitle": null, "number": "1"},
+       {"title": "Chapter contents", "shortTitle": null, "number": null},
        {"title": "Logarithm, exponential, and powers",
         "shortTitle": null,
-        "number": "2"}]},
+        "number": null}]},
      "address": "/Elementary-Functions/Chapter-contents/"}],
-   "LMLF-___-Mathematical-Functions-with-Lean--Elementary-Functions--Chapter-contents--Hyperbolic-functions":
+   "LMLF-___-DLMF-with-Lean--Elementary-Functions--Chapter-contents--Hyperbolic-functions":
    [{"id":
-     "LMLF-___-Mathematical-Functions-with-Lean--Elementary-Functions--Chapter-contents--Hyperbolic-functions",
+     "LMLF-___-DLMF-with-Lean--Elementary-Functions--Chapter-contents--Hyperbolic-functions",
      "data":
      {"title": "Hyperbolic functions",
       "shortTitle": null,
-      "sectionNum": "4.1.4.",
+      "sectionNum": null,
       "searchPriority": 50,
       "context":
-      [{"title": "LMLF · Mathematical Functions with Lean",
-        "shortTitle": "LMLF",
-        "number": null},
+      [{"title": "LMLF · DLMF with Lean", "shortTitle": "LMLF", "number": null},
        {"title": "Elementary Functions", "shortTitle": null, "number": "4"},
-       {"title": "Chapter contents", "shortTitle": null, "number": "1"},
-       {"title": "Hyperbolic functions", "shortTitle": null, "number": "4"}]},
+       {"title": "Chapter contents", "shortTitle": null, "number": null},
+       {"title": "Hyperbolic functions", "shortTitle": null, "number": null}]},
      "address": "/Elementary-Functions/Chapter-contents/"}],
-   "LMLF-___-Mathematical-Functions-with-Lean--Elementary-Functions--Chapter-contents--Applications-and-computation":
+   "LMLF-___-DLMF-with-Lean--Elementary-Functions--Chapter-contents--Applications-and-computation":
    [{"id":
-     "LMLF-___-Mathematical-Functions-with-Lean--Elementary-Functions--Chapter-contents--Applications-and-computation",
+     "LMLF-___-DLMF-with-Lean--Elementary-Functions--Chapter-contents--Applications-and-computation",
      "data":
      {"title": "Applications and computation",
       "shortTitle": null,
-      "sectionNum": "4.1.5.",
+      "sectionNum": null,
       "searchPriority": 50,
       "context":
-      [{"title": "LMLF · Mathematical Functions with Lean",
-        "shortTitle": "LMLF",
-        "number": null},
+      [{"title": "LMLF · DLMF with Lean", "shortTitle": "LMLF", "number": null},
        {"title": "Elementary Functions", "shortTitle": null, "number": "4"},
-       {"title": "Chapter contents", "shortTitle": null, "number": "1"},
+       {"title": "Chapter contents", "shortTitle": null, "number": null},
        {"title": "Applications and computation",
         "shortTitle": null,
-        "number": "5"}]},
+        "number": null}]},
      "address": "/Elementary-Functions/Chapter-contents/"}],
-   "LMLF-___-Mathematical-Functions-with-Lean--Elementary-Functions--Chapter-contents":
-   [{"id":
-     "LMLF-___-Mathematical-Functions-with-Lean--Elementary-Functions--Chapter-contents",
+   "LMLF-___-DLMF-with-Lean--Elementary-Functions--Chapter-contents":
+   [{"id": "LMLF-___-DLMF-with-Lean--Elementary-Functions--Chapter-contents",
      "data":
      {"title": "Chapter contents",
       "shortTitle": null,
-      "sectionNum": "4.1.",
+      "sectionNum": null,
       "searchPriority": 50,
       "context":
-      [{"title": "LMLF · Mathematical Functions with Lean",
-        "shortTitle": "LMLF",
-        "number": null},
+      [{"title": "LMLF · DLMF with Lean", "shortTitle": "LMLF", "number": null},
        {"title": "Elementary Functions", "shortTitle": null, "number": "4"},
-       {"title": "Chapter contents", "shortTitle": null, "number": "1"}]},
+       {"title": "Chapter contents", "shortTitle": null, "number": null}]},
      "address": "/Elementary-Functions/Chapter-contents/"}],
-   "LMLF-___-Mathematical-Functions-with-Lean--Bessel-Functions--Chapter-contents--Spherical-Bessel-functions":
+   "LMLF-___-DLMF-with-Lean--Bessel-Functions--Chapter-contents--Spherical-Bessel-functions":
    [{"id":
-     "LMLF-___-Mathematical-Functions-with-Lean--Bessel-Functions--Chapter-contents--Spherical-Bessel-functions",
+     "LMLF-___-DLMF-with-Lean--Bessel-Functions--Chapter-contents--Spherical-Bessel-functions",
      "data":
      {"title": "Spherical Bessel functions",
       "shortTitle": null,
-      "sectionNum": "10.1.3.",
+      "sectionNum": null,
       "searchPriority": 50,
       "context":
-      [{"title": "LMLF · Mathematical Functions with Lean",
-        "shortTitle": "LMLF",
-        "number": null},
+      [{"title": "LMLF · DLMF with Lean", "shortTitle": "LMLF", "number": null},
        {"title": "Bessel Functions", "shortTitle": null, "number": "10"},
-       {"title": "Chapter contents", "shortTitle": null, "number": "1"},
+       {"title": "Chapter contents", "shortTitle": null, "number": null},
        {"title": "Spherical Bessel functions",
         "shortTitle": null,
-        "number": "3"}]},
+        "number": null}]},
      "address": "/Bessel-Functions/Chapter-contents/"}],
-   "LMLF-___-Mathematical-Functions-with-Lean--Bessel-Functions--Chapter-contents--Modified-Bessel-functions":
+   "LMLF-___-DLMF-with-Lean--Bessel-Functions--Chapter-contents--Modified-Bessel-functions":
    [{"id":
-     "LMLF-___-Mathematical-Functions-with-Lean--Bessel-Functions--Chapter-contents--Modified-Bessel-functions",
+     "LMLF-___-DLMF-with-Lean--Bessel-Functions--Chapter-contents--Modified-Bessel-functions",
      "data":
      {"title": "Modified Bessel functions",
       "shortTitle": null,
-      "sectionNum": "10.1.2.",
+      "sectionNum": null,
       "searchPriority": 50,
       "context":
-      [{"title": "LMLF · Mathematical Functions with Lean",
-        "shortTitle": "LMLF",
-        "number": null},
+      [{"title": "LMLF · DLMF with Lean", "shortTitle": "LMLF", "number": null},
        {"title": "Bessel Functions", "shortTitle": null, "number": "10"},
-       {"title": "Chapter contents", "shortTitle": null, "number": "1"},
+       {"title": "Chapter contents", "shortTitle": null, "number": null},
        {"title": "Modified Bessel functions",
         "shortTitle": null,
-        "number": "2"}]},
+        "number": null}]},
      "address": "/Bessel-Functions/Chapter-contents/"}],
-   "LMLF-___-Mathematical-Functions-with-Lean--Bessel-Functions--Chapter-contents--Kelvin-functions":
+   "LMLF-___-DLMF-with-Lean--Bessel-Functions--Chapter-contents--Kelvin-functions":
    [{"id":
-     "LMLF-___-Mathematical-Functions-with-Lean--Bessel-Functions--Chapter-contents--Kelvin-functions",
+     "LMLF-___-DLMF-with-Lean--Bessel-Functions--Chapter-contents--Kelvin-functions",
      "data":
      {"title": "Kelvin functions",
       "shortTitle": null,
-      "sectionNum": "10.1.4.",
+      "sectionNum": null,
       "searchPriority": 50,
       "context":
-      [{"title": "LMLF · Mathematical Functions with Lean",
-        "shortTitle": "LMLF",
-        "number": null},
+      [{"title": "LMLF · DLMF with Lean", "shortTitle": "LMLF", "number": null},
        {"title": "Bessel Functions", "shortTitle": null, "number": "10"},
-       {"title": "Chapter contents", "shortTitle": null, "number": "1"},
-       {"title": "Kelvin functions", "shortTitle": null, "number": "4"}]},
+       {"title": "Chapter contents", "shortTitle": null, "number": null},
+       {"title": "Kelvin functions", "shortTitle": null, "number": null}]},
      "address": "/Bessel-Functions/Chapter-contents/"}],
-   "LMLF-___-Mathematical-Functions-with-Lean--Bessel-Functions--Chapter-contents--Bessel-and-Hankel-functions":
+   "LMLF-___-DLMF-with-Lean--Bessel-Functions--Chapter-contents--Bessel-and-Hankel-functions":
    [{"id":
-     "LMLF-___-Mathematical-Functions-with-Lean--Bessel-Functions--Chapter-contents--Bessel-and-Hankel-functions",
+     "LMLF-___-DLMF-with-Lean--Bessel-Functions--Chapter-contents--Bessel-and-Hankel-functions",
      "data":
      {"title": "Bessel and Hankel functions",
       "shortTitle": null,
-      "sectionNum": "10.1.1.",
+      "sectionNum": null,
       "searchPriority": 50,
       "context":
-      [{"title": "LMLF · Mathematical Functions with Lean",
-        "shortTitle": "LMLF",
-        "number": null},
+      [{"title": "LMLF · DLMF with Lean", "shortTitle": "LMLF", "number": null},
        {"title": "Bessel Functions", "shortTitle": null, "number": "10"},
-       {"title": "Chapter contents", "shortTitle": null, "number": "1"},
+       {"title": "Chapter contents", "shortTitle": null, "number": null},
        {"title": "Bessel and Hankel functions",
         "shortTitle": null,
-        "number": "1"}]},
+        "number": null}]},
      "address": "/Bessel-Functions/Chapter-contents/"}],
-   "LMLF-___-Mathematical-Functions-with-Lean--Bessel-Functions--Chapter-contents--Applications-and-computation":
+   "LMLF-___-DLMF-with-Lean--Bessel-Functions--Chapter-contents--Applications-and-computation":
    [{"id":
-     "LMLF-___-Mathematical-Functions-with-Lean--Bessel-Functions--Chapter-contents--Applications-and-computation",
+     "LMLF-___-DLMF-with-Lean--Bessel-Functions--Chapter-contents--Applications-and-computation",
      "data":
      {"title": "Applications and computation",
       "shortTitle": null,
-      "sectionNum": "10.1.5.",
+      "sectionNum": null,
       "searchPriority": 50,
       "context":
-      [{"title": "LMLF · Mathematical Functions with Lean",
-        "shortTitle": "LMLF",
-        "number": null},
+      [{"title": "LMLF · DLMF with Lean", "shortTitle": "LMLF", "number": null},
        {"title": "Bessel Functions", "shortTitle": null, "number": "10"},
-       {"title": "Chapter contents", "shortTitle": null, "number": "1"},
+       {"title": "Chapter contents", "shortTitle": null, "number": null},
        {"title": "Applications and computation",
         "shortTitle": null,
-        "number": "5"}]},
+        "number": null}]},
      "address": "/Bessel-Functions/Chapter-contents/"}],
-   "LMLF-___-Mathematical-Functions-with-Lean--Bessel-Functions--Chapter-contents":
-   [{"id":
-     "LMLF-___-Mathematical-Functions-with-Lean--Bessel-Functions--Chapter-contents",
+   "LMLF-___-DLMF-with-Lean--Bessel-Functions--Chapter-contents":
+   [{"id": "LMLF-___-DLMF-with-Lean--Bessel-Functions--Chapter-contents",
      "data":
      {"title": "Chapter contents",
       "shortTitle": null,
-      "sectionNum": "10.1.",
+      "sectionNum": null,
       "searchPriority": 50,
       "context":
-      [{"title": "LMLF · Mathematical Functions with Lean",
-        "shortTitle": "LMLF",
-        "number": null},
+      [{"title": "LMLF · DLMF with Lean", "shortTitle": "LMLF", "number": null},
        {"title": "Bessel Functions", "shortTitle": null, "number": "10"},
-       {"title": "Chapter contents", "shortTitle": null, "number": "1"}]},
+       {"title": "Chapter contents", "shortTitle": null, "number": null}]},
      "address": "/Bessel-Functions/Chapter-contents/"}],
-   "LMLF-___-Mathematical-Functions-with-Lean--Airy-and-Related-Functions--Chapter-contents--Related-functions":
+   "LMLF-___-DLMF-with-Lean--Approximants-and-series--2___2-Poincar___-expansions":
    [{"id":
-     "LMLF-___-Mathematical-Functions-with-Lean--Airy-and-Related-Functions--Chapter-contents--Related-functions",
+     "LMLF-___-DLMF-with-Lean--Approximants-and-series--2___2-Poincar___-expansions",
+     "data":
+     {"title": "2.2 Poincaré expansions",
+      "shortTitle": null,
+      "sectionNum": null,
+      "searchPriority": 50,
+      "context":
+      [{"title": "LMLF · DLMF with Lean", "shortTitle": "LMLF", "number": null},
+       {"title": "Approximants and series", "shortTitle": null, "number": "2"},
+       {"title": "2.2 Poincaré expansions",
+        "shortTitle": null,
+        "number": null}]},
+     "address": "/Approximants-and-series/2___2-Poincar___-expansions/"}],
+   "LMLF-___-DLMF-with-Lean--Approximants-and-series--2___1-Families-of-approximants":
+   [{"id":
+     "LMLF-___-DLMF-with-Lean--Approximants-and-series--2___1-Families-of-approximants",
+     "data":
+     {"title": "2.1 Families of approximants",
+      "shortTitle": null,
+      "sectionNum": null,
+      "searchPriority": 50,
+      "context":
+      [{"title": "LMLF · DLMF with Lean", "shortTitle": "LMLF", "number": null},
+       {"title": "Approximants and series", "shortTitle": null, "number": "2"},
+       {"title": "2.1 Families of approximants",
+        "shortTitle": null,
+        "number": null}]},
+     "address": "/Approximants-and-series/2___1-Families-of-approximants/"}],
+   "LMLF-___-DLMF-with-Lean--Airy-and-Related-Functions--Chapter-contents--Related-functions":
+   [{"id":
+     "LMLF-___-DLMF-with-Lean--Airy-and-Related-Functions--Chapter-contents--Related-functions",
      "data":
      {"title": "Related functions",
       "shortTitle": null,
-      "sectionNum": "9.1.2.",
+      "sectionNum": null,
       "searchPriority": 50,
       "context":
-      [{"title": "LMLF · Mathematical Functions with Lean",
-        "shortTitle": "LMLF",
-        "number": null},
+      [{"title": "LMLF · DLMF with Lean", "shortTitle": "LMLF", "number": null},
        {"title": "Airy and Related Functions",
         "shortTitle": null,
         "number": "9"},
-       {"title": "Chapter contents", "shortTitle": null, "number": "1"},
-       {"title": "Related functions", "shortTitle": null, "number": "2"}]},
+       {"title": "Chapter contents", "shortTitle": null, "number": null},
+       {"title": "Related functions", "shortTitle": null, "number": null}]},
      "address": "/Airy-and-Related-Functions/Chapter-contents/"}],
-   "LMLF-___-Mathematical-Functions-with-Lean--Airy-and-Related-Functions--Chapter-contents--Applications-and-computation":
+   "LMLF-___-DLMF-with-Lean--Airy-and-Related-Functions--Chapter-contents--Applications-and-computation":
    [{"id":
-     "LMLF-___-Mathematical-Functions-with-Lean--Airy-and-Related-Functions--Chapter-contents--Applications-and-computation",
+     "LMLF-___-DLMF-with-Lean--Airy-and-Related-Functions--Chapter-contents--Applications-and-computation",
      "data":
      {"title": "Applications and computation",
       "shortTitle": null,
-      "sectionNum": "9.1.3.",
+      "sectionNum": null,
       "searchPriority": 50,
       "context":
-      [{"title": "LMLF · Mathematical Functions with Lean",
-        "shortTitle": "LMLF",
-        "number": null},
+      [{"title": "LMLF · DLMF with Lean", "shortTitle": "LMLF", "number": null},
        {"title": "Airy and Related Functions",
         "shortTitle": null,
         "number": "9"},
-       {"title": "Chapter contents", "shortTitle": null, "number": "1"},
+       {"title": "Chapter contents", "shortTitle": null, "number": null},
        {"title": "Applications and computation",
         "shortTitle": null,
-        "number": "3"}]},
+        "number": null}]},
      "address": "/Airy-and-Related-Functions/Chapter-contents/"}],
-   "LMLF-___-Mathematical-Functions-with-Lean--Airy-and-Related-Functions--Chapter-contents--Airy-functions":
+   "LMLF-___-DLMF-with-Lean--Airy-and-Related-Functions--Chapter-contents--Airy-functions":
    [{"id":
-     "LMLF-___-Mathematical-Functions-with-Lean--Airy-and-Related-Functions--Chapter-contents--Airy-functions",
+     "LMLF-___-DLMF-with-Lean--Airy-and-Related-Functions--Chapter-contents--Airy-functions",
      "data":
      {"title": "Airy functions",
       "shortTitle": null,
-      "sectionNum": "9.1.1.",
+      "sectionNum": null,
       "searchPriority": 50,
       "context":
-      [{"title": "LMLF · Mathematical Functions with Lean",
-        "shortTitle": "LMLF",
-        "number": null},
+      [{"title": "LMLF · DLMF with Lean", "shortTitle": "LMLF", "number": null},
        {"title": "Airy and Related Functions",
         "shortTitle": null,
         "number": "9"},
-       {"title": "Chapter contents", "shortTitle": null, "number": "1"},
-       {"title": "Airy functions", "shortTitle": null, "number": "1"}]},
+       {"title": "Chapter contents", "shortTitle": null, "number": null},
+       {"title": "Airy functions", "shortTitle": null, "number": null}]},
      "address": "/Airy-and-Related-Functions/Chapter-contents/"}],
-   "LMLF-___-Mathematical-Functions-with-Lean--Airy-and-Related-Functions--Chapter-contents":
+   "LMLF-___-DLMF-with-Lean--Airy-and-Related-Functions--Chapter-contents":
    [{"id":
-     "LMLF-___-Mathematical-Functions-with-Lean--Airy-and-Related-Functions--Chapter-contents",
+     "LMLF-___-DLMF-with-Lean--Airy-and-Related-Functions--Chapter-contents",
      "data":
      {"title": "Chapter contents",
       "shortTitle": null,
-      "sectionNum": "9.1.",
+      "sectionNum": null,
       "searchPriority": 50,
       "context":
-      [{"title": "LMLF · Mathematical Functions with Lean",
-        "shortTitle": "LMLF",
-        "number": null},
+      [{"title": "LMLF · DLMF with Lean", "shortTitle": "LMLF", "number": null},
        {"title": "Airy and Related Functions",
         "shortTitle": null,
         "number": "9"},
-       {"title": "Chapter contents", "shortTitle": null, "number": "1"}]},
+       {"title": "Chapter contents", "shortTitle": null, "number": null}]},
      "address": "/Airy-and-Related-Functions/Chapter-contents/"}],
-   "LMLF-___-Mathematical-Functions-with-Lean":
-   [{"id": "LMLF-___-Mathematical-Functions-with-Lean",
+   "LMLF-___-DLMF-with-Lean":
+   [{"id": "LMLF-___-DLMF-with-Lean",
      "data":
-     {"title": "LMLF · Mathematical Functions with Lean",
+     {"title": "LMLF · DLMF with Lean",
       "shortTitle": "LMLF",
       "sectionNum": "",
       "searchPriority": 50,
       "context":
-      [{"title": "LMLF · Mathematical Functions with Lean",
+      [{"title": "LMLF · DLMF with Lean",
         "shortTitle": "LMLF",
         "number": null}]},
      "address": "/"}]}},
+ "Verso.Genre.Manual.example":
+ {"title": "Verso.Genre.Manual.example",
+  "description": null,
+  "contents":
+  {"QuantitativeAnalysis.seriesPartialSum":
+   [{"id": "QuantitativeAnalysis___seriesPartialSum",
+     "data":
+     {"/Approximants-and-series/2___2-Poincar___-expansions/#QuantitativeAnalysis___seriesPartialSum":
+      {"display": "seriesPartialSum",
+       "context":
+       ["LMLF · DLMF with Lean",
+        "Approximants and series",
+        "2.2 Poincaré expansions"]}},
+     "address": "/Approximants-and-series/2___2-Poincar___-expansions/"}],
+   "QuantitativeAnalysis.NormBoundOn":
+   [{"id": "QuantitativeAnalysis___NormBoundOn",
+     "data":
+     {"/Finite-error-bounds/1___1-Pointwise-bounds/#QuantitativeAnalysis___NormBoundOn":
+      {"display": "NormBoundOn",
+       "context":
+       ["LMLF · DLMF with Lean",
+        "Finite error bounds",
+        "1.1 Pointwise bounds"]}},
+     "address": "/Finite-error-bounds/1___1-Pointwise-bounds/"}],
+   "QuantitativeAnalysis.IsAsymptoticScale":
+   [{"id": "QuantitativeAnalysis___IsAsymptoticScale",
+     "data":
+     {"/Approximants-and-series/2___2-Poincar___-expansions/#QuantitativeAnalysis___IsAsymptoticScale":
+      {"display": "IsAsymptoticScale",
+       "context":
+       ["LMLF · DLMF with Lean",
+        "Approximants and series",
+        "2.2 Poincaré expansions"]}},
+     "address": "/Approximants-and-series/2___2-Poincar___-expansions/"}],
+   "QuantitativeAnalysis.HasPoincareExpansion.remainder_isLittleO":
+   [{"id": "QuantitativeAnalysis___HasPoincareExpansion___remainder_isLittleO",
+     "data":
+     {"/Approximants-and-series/2___2-Poincar___-expansions/#QuantitativeAnalysis___HasPoincareExpansion___remainder_isLittleO":
+      {"display": "remainder_isLittleO",
+       "context":
+       ["LMLF · DLMF with Lean",
+        "Approximants and series",
+        "2.2 Poincaré expansions"]}},
+     "address": "/Approximants-and-series/2___2-Poincar___-expansions/"}],
+   "QuantitativeAnalysis.HasPoincareExpansion.isAsymptoticScale":
+   [{"id": "QuantitativeAnalysis___HasPoincareExpansion___isAsymptoticScale",
+     "data":
+     {"/Approximants-and-series/2___2-Poincar___-expansions/#QuantitativeAnalysis___HasPoincareExpansion___isAsymptoticScale":
+      {"display": "isAsymptoticScale",
+       "context":
+       ["LMLF · DLMF with Lean",
+        "Approximants and series",
+        "2.2 Poincaré expansions"]}},
+     "address": "/Approximants-and-series/2___2-Poincar___-expansions/"}],
+   "QuantitativeAnalysis.HasPoincareExpansion":
+   [{"id": "QuantitativeAnalysis___HasPoincareExpansion",
+     "data":
+     {"/Approximants-and-series/2___2-Poincar___-expansions/#QuantitativeAnalysis___HasPoincareExpansion":
+      {"display": "HasPoincareExpansion",
+       "context":
+       ["LMLF · DLMF with Lean",
+        "Approximants and series",
+        "2.2 Poincaré expansions"]}},
+     "address": "/Approximants-and-series/2___2-Poincar___-expansions/"}],
+   "QuantitativeAnalysis.HasExpansionError":
+   [{"id": "QuantitativeAnalysis___HasExpansionError",
+     "data":
+     {"/Approximants-and-series/2___2-Poincar___-expansions/#QuantitativeAnalysis___HasExpansionError":
+      {"display": "HasExpansionError",
+       "context":
+       ["LMLF · DLMF with Lean",
+        "Approximants and series",
+        "2.2 Poincaré expansions"]}},
+     "address": "/Approximants-and-series/2___2-Poincar___-expansions/"}],
+   "QuantitativeAnalysis.HasErrorFamily":
+   [{"id": "QuantitativeAnalysis___HasErrorFamily",
+     "data":
+     {"/Approximants-and-series/2___1-Families-of-approximants/#QuantitativeAnalysis___HasErrorFamily":
+      {"display": "HasErrorFamily",
+       "context":
+       ["LMLF · DLMF with Lean",
+        "Approximants and series",
+        "2.1 Families of approximants"]}},
+     "address": "/Approximants-and-series/2___1-Families-of-approximants/"}],
+   "QuantitativeAnalysis.ErrorOn.weaken":
+   [{"id": "QuantitativeAnalysis___ErrorOn___weaken",
+     "data":
+     {"/Finite-error-bounds/1___2-Elementary-rules/#QuantitativeAnalysis___ErrorOn___weaken":
+      {"display": "weaken",
+       "context":
+       ["LMLF · DLMF with Lean",
+        "Finite error bounds",
+        "1.2 Elementary rules"]}},
+     "address": "/Finite-error-bounds/1___2-Elementary-rules/"}],
+   "QuantitativeAnalysis.ErrorOn.trans":
+   [{"id": "QuantitativeAnalysis___ErrorOn___trans",
+     "data":
+     {"/Finite-error-bounds/1___2-Elementary-rules/#QuantitativeAnalysis___ErrorOn___trans":
+      {"display": "trans",
+       "context":
+       ["LMLF · DLMF with Lean",
+        "Finite error bounds",
+        "1.2 Elementary rules"]}},
+     "address": "/Finite-error-bounds/1___2-Elementary-rules/"}],
+   "QuantitativeAnalysis.ErrorOn.restrict":
+   [{"id": "QuantitativeAnalysis___ErrorOn___restrict",
+     "data":
+     {"/Finite-error-bounds/1___2-Elementary-rules/#QuantitativeAnalysis___ErrorOn___restrict":
+      {"display": "restrict",
+       "context":
+       ["LMLF · DLMF with Lean",
+        "Finite error bounds",
+        "1.2 Elementary rules"]}},
+     "address": "/Finite-error-bounds/1___2-Elementary-rules/"}],
+   "QuantitativeAnalysis.ErrorOn.exact":
+   [{"id": "QuantitativeAnalysis___ErrorOn___exact",
+     "data":
+     {"/Finite-error-bounds/1___2-Elementary-rules/#QuantitativeAnalysis___ErrorOn___exact":
+      {"display": "exact",
+       "context":
+       ["LMLF · DLMF with Lean",
+        "Finite error bounds",
+        "1.2 Elementary rules"]}},
+     "address": "/Finite-error-bounds/1___2-Elementary-rules/"}],
+   "QuantitativeAnalysis.ErrorOn.comp":
+   [{"id": "QuantitativeAnalysis___ErrorOn___comp",
+     "data":
+     {"/Finite-error-bounds/1___2-Elementary-rules/#QuantitativeAnalysis___ErrorOn___comp":
+      {"display": "comp",
+       "context":
+       ["LMLF · DLMF with Lean",
+        "Finite error bounds",
+        "1.2 Elementary rules"]}},
+     "address": "/Finite-error-bounds/1___2-Elementary-rules/"}],
+   "QuantitativeAnalysis.ErrorOn":
+   [{"id": "QuantitativeAnalysis___ErrorOn",
+     "data":
+     {"/Finite-error-bounds/1___1-Pointwise-bounds/#QuantitativeAnalysis___ErrorOn":
+      {"display": "ErrorOn",
+       "context":
+       ["LMLF · DLMF with Lean",
+        "Finite error bounds",
+        "1.1 Pointwise bounds"]}},
+     "address": "/Finite-error-bounds/1___1-Pointwise-bounds/"}],
+   "LMLF.Integral.hasImproperIntegralAtTopExcept_iff_exists_primitive":
+   [{"id":
+     "LMLF___Integral___hasImproperIntegralAtTopExcept_iff_exists_primitive",
+     "data":
+     {"/Improper-integrals/3___2-Continuous-primitives-across-the-exceptional-set/#LMLF___Integral___hasImproperIntegralAtTopExcept_iff_exists_primitive":
+      {"display": "hasImproperIntegralAtTopExcept_iff_exists_primitive",
+       "context":
+       ["LMLF · DLMF with Lean",
+        "Improper integrals",
+        "3.2 Continuous primitives across the exceptional set"]}},
+     "address":
+     "/Improper-integrals/3___2-Continuous-primitives-across-the-exceptional-set/"}],
+   "LMLF.Integral.IsFiniteExceptionalPrimitive.hasImproperIntegralAtTopExcept_exp_smul":
+   [{"id":
+     "LMLF___Integral___IsFiniteExceptionalPrimitive___hasImproperIntegralAtTopExcept_exp_smul",
+     "data":
+     {"/Improper-integrals/3___5-Abel-reweighting/#LMLF___Integral___IsFiniteExceptionalPrimitive___hasImproperIntegralAtTopExcept_exp_smul":
+      {"display":
+       "IsFiniteExceptionalPrimitive.hasImproperIntegralAtTopExcept_exp_smul",
+       "context":
+       ["LMLF · DLMF with Lean",
+        "Improper integrals",
+        "3.5 Abel reweighting"]}},
+     "address": "/Improper-integrals/3___5-Abel-reweighting/"}],
+   "LMLF.Integral.IsFiniteExceptionalPrimitive":
+   [{"id": "LMLF___Integral___IsFiniteExceptionalPrimitive",
+     "data":
+     {"/Improper-integrals/3___2-Continuous-primitives-across-the-exceptional-set/#LMLF___Integral___IsFiniteExceptionalPrimitive":
+      {"display": "IsFiniteExceptionalPrimitive",
+       "context":
+       ["LMLF · DLMF with Lean",
+        "Improper integrals",
+        "3.2 Continuous primitives across the exceptional set"]}},
+     "address":
+     "/Improper-integrals/3___2-Continuous-primitives-across-the-exceptional-set/"}],
+   "LMLF.Integral.HasImproperIntegralTailFromBreaks":
+   [{"id": "LMLF___Integral___HasImproperIntegralTailFromBreaks",
+     "data":
+     {"/Improper-integrals/3___1-Improper-integrals-with-finitely-many-exceptional-points/#LMLF___Integral___HasImproperIntegralTailFromBreaks":
+      {"display": "HasImproperIntegralTailFromBreaks",
+       "context":
+       ["LMLF · DLMF with Lean",
+        "Improper integrals",
+        "3.1 Improper integrals with finitely many exceptional points"]}},
+     "address":
+     "/Improper-integrals/3___1-Improper-integrals-with-finitely-many-exceptional-points/"}],
+   "LMLF.Integral.HasImproperIntegralAtTopExcept.unique":
+   [{"id": "LMLF___Integral___HasImproperIntegralAtTopExcept___unique",
+     "data":
+     {"/Improper-integrals/3___1-Improper-integrals-with-finitely-many-exceptional-points/#LMLF___Integral___HasImproperIntegralAtTopExcept___unique":
+      {"display": "HasImproperIntegralAtTopExcept.unique",
+       "context":
+       ["LMLF · DLMF with Lean",
+        "Improper integrals",
+        "3.1 Improper integrals with finitely many exceptional points"]}},
+     "address":
+     "/Improper-integrals/3___1-Improper-integrals-with-finitely-many-exceptional-points/"}],
+   "LMLF.Integral.HasImproperIntegralAtTopExcept.split_regular":
+   [{"id": "LMLF___Integral___HasImproperIntegralAtTopExcept___split_regular",
+     "data":
+     {"/Improper-integrals/3___3-Algebra-and-a-change-of-starting-point/#LMLF___Integral___HasImproperIntegralAtTopExcept___split_regular":
+      {"display": "HasImproperIntegralAtTopExcept.split_regular",
+       "context":
+       ["LMLF · DLMF with Lean",
+        "Improper integrals",
+        "3.3 Algebra and a change of starting point"]}},
+     "address":
+     "/Improper-integrals/3___3-Algebra-and-a-change-of-starting-point/"}],
+   "LMLF.Integral.HasImproperIntegralAtTopExcept.of_integrableOn_Ioi":
+   [{"id":
+     "LMLF___Integral___HasImproperIntegralAtTopExcept___of_integrableOn_Ioi",
+     "data":
+     {"/Improper-integrals/3___4-Absolutely-integrable-functions/#LMLF___Integral___HasImproperIntegralAtTopExcept___of_integrableOn_Ioi":
+      {"display": "HasImproperIntegralAtTopExcept.of_integrableOn_Ioi",
+       "context":
+       ["LMLF · DLMF with Lean",
+        "Improper integrals",
+        "3.4 Absolutely integrable functions"]}},
+     "address": "/Improper-integrals/3___4-Absolutely-integrable-functions/"}],
+   "LMLF.Integral.HasImproperIntegralAtTopExcept.finset_clm":
+   [{"id": "LMLF___Integral___HasImproperIntegralAtTopExcept___finset_clm",
+     "data":
+     {"/Improper-integrals/3___3-Algebra-and-a-change-of-starting-point/#LMLF___Integral___HasImproperIntegralAtTopExcept___finset_clm":
+      {"display": "HasImproperIntegralAtTopExcept.finset_clm",
+       "context":
+       ["LMLF · DLMF with Lean",
+        "Improper integrals",
+        "3.3 Algebra and a change of starting point"]}},
+     "address":
+     "/Improper-integrals/3___3-Algebra-and-a-change-of-starting-point/"}],
+   "LMLF.Integral.HasImproperIntegralAtTopExcept":
+   [{"id": "LMLF___Integral___HasImproperIntegralAtTopExcept",
+     "data":
+     {"/Improper-integrals/3___1-Improper-integrals-with-finitely-many-exceptional-points/#LMLF___Integral___HasImproperIntegralAtTopExcept":
+      {"display": "HasImproperIntegralAtTopExcept",
+       "context":
+       ["LMLF · DLMF with Lean",
+        "Improper integrals",
+        "3.1 Improper integrals with finitely many exceptional points"]}},
+     "address":
+     "/Improper-integrals/3___1-Improper-integrals-with-finitely-many-exceptional-points/"}],
+   "LMLF.Integral.HasImproperIntegralAtTopBreaks":
+   [{"id": "LMLF___Integral___HasImproperIntegralAtTopBreaks",
+     "data":
+     {"/Improper-integrals/3___1-Improper-integrals-with-finitely-many-exceptional-points/#LMLF___Integral___HasImproperIntegralAtTopBreaks":
+      {"display": "HasImproperIntegralAtTopBreaks",
+       "context":
+       ["LMLF · DLMF with Lean",
+        "Improper integrals",
+        "3.1 Improper integrals with finitely many exceptional points"]}},
+     "address":
+     "/Improper-integrals/3___1-Improper-integrals-with-finitely-many-exceptional-points/"}],
+   "LMLF.Definitions.gamma_eulerIntegrable":
+   [{"id": "LMLF___Definitions___gamma_eulerIntegrable",
+     "data":
+     {"/Gamma-Function/___5___2-Definitions/#LMLF___Definitions___gamma_eulerIntegrable":
+      {"display": "gamma_eulerIntegrable",
+       "context":
+       ["LMLF · DLMF with Lean",
+        "Gamma Function",
+        "§5.2 Definitions",
+        "§5.2(i) Gamma and Psi Functions"]}},
+     "address": "/Gamma-Function/___5___2-Definitions/"}],
+   "LMLF.Definitions.gamma_eq_eulerIntegral":
+   [{"id": "LMLF___Definitions___gamma_eq_eulerIntegral",
+     "data":
+     {"/Gamma-Function/___5___2-Definitions/#LMLF___Definitions___gamma_eq_eulerIntegral":
+      {"display": "gamma_eq_eulerIntegral",
+       "context":
+       ["LMLF · DLMF with Lean",
+        "Gamma Function",
+        "§5.2 Definitions",
+        "§5.2(i) Gamma and Psi Functions"]}},
+     "address": "/Gamma-Function/___5___2-Definitions/"}],
+   "LMLF.Blueprint.Gamma.stirlingLog_remainder_bounds":
+   [{"id": "LMLF___Blueprint___Gamma___stirlingLog_remainder_bounds",
+     "data":
+     {"/Gamma-Function/___5___11-Asymptotic-Expansions/#LMLF___Blueprint___Gamma___stirlingLog_remainder_bounds":
+      {"display": "stirlingLog_remainder_bounds",
+       "context":
+       ["LMLF · DLMF with Lean",
+        "Gamma Function",
+        "§5.11 Asymptotic Expansions",
+        "§5.11(i) Poincaré-Type Expansions"]}},
+     "address": "/Gamma-Function/___5___11-Asymptotic-Expansions/"}],
+   "LMLF.Blueprint.Gamma.stirlingLog_hasPoincareExpansion":
+   [{"id": "LMLF___Blueprint___Gamma___stirlingLog_hasPoincareExpansion",
+     "data":
+     {"/Gamma-Function/___5___11-Asymptotic-Expansions/#LMLF___Blueprint___Gamma___stirlingLog_hasPoincareExpansion":
+      {"display": "stirlingLog_hasPoincareExpansion",
+       "context":
+       ["LMLF · DLMF with Lean",
+        "Gamma Function",
+        "§5.11 Asymptotic Expansions",
+        "§5.11(i) Poincaré-Type Expansions"]}},
+     "address": "/Gamma-Function/___5___11-Asymptotic-Expansions/"}],
+   "LMLF.Blueprint.Gamma.stirlingLogTerm":
+   [{"id": "LMLF___Blueprint___Gamma___stirlingLogTerm",
+     "data":
+     {"/Gamma-Function/___5___11-Asymptotic-Expansions/#LMLF___Blueprint___Gamma___stirlingLogTerm":
+      {"display": "stirlingLogTerm",
+       "context":
+       ["LMLF · DLMF with Lean",
+        "Gamma Function",
+        "§5.11 Asymptotic Expansions",
+        "§5.11(i) Poincaré-Type Expansions"]}},
+     "address": "/Gamma-Function/___5___11-Asymptotic-Expansions/"}],
+   "LMLF.Blueprint.Gamma.stirlingLogMain":
+   [{"id": "LMLF___Blueprint___Gamma___stirlingLogMain",
+     "data":
+     {"/Gamma-Function/___5___11-Asymptotic-Expansions/#LMLF___Blueprint___Gamma___stirlingLogMain":
+      {"display": "stirlingLogMain",
+       "context":
+       ["LMLF · DLMF with Lean",
+        "Gamma Function",
+        "§5.11 Asymptotic Expansions",
+        "§5.11(i) Poincaré-Type Expansions"]}},
+     "address": "/Gamma-Function/___5___11-Asymptotic-Expansions/"}],
+   "LMLF.Blueprint.Gamma.stirlingLogApprox":
+   [{"id": "LMLF___Blueprint___Gamma___stirlingLogApprox",
+     "data":
+     {"/Gamma-Function/___5___11-Asymptotic-Expansions/#LMLF___Blueprint___Gamma___stirlingLogApprox":
+      {"display": "stirlingLogApprox",
+       "context":
+       ["LMLF · DLMF with Lean",
+        "Gamma Function",
+        "§5.11 Asymptotic Expansions",
+        "§5.11(i) Poincaré-Type Expansions"]}},
+     "address": "/Gamma-Function/___5___11-Asymptotic-Expansions/"}]}},
  "Verso.Genre.Manual.doc.tech":
  {"title": "Terminology",
   "description": "Definitions of technical terms",

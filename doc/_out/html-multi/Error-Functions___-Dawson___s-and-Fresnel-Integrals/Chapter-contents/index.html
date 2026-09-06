@@ -58,135 +58,129 @@
     <link rel="stylesheet" href="-verso-data/katex/katex.css">
     <style>
 :root {
-  --lmlf-ink: #152c2a;
-  --lmlf-muted: #5f6d68;
-  --lmlf-green: #1f5a50;
-  --lmlf-green-soft: #e7f0ec;
-  --lmlf-gold: #a2772d;
-  --lmlf-paper: #fbfaf6;
-  --lmlf-rule: #d5d8cf;
+  --verso-text-font-family: Georgia, "Times New Roman", serif;
+  --verso-content-max-width: 64rem;
+  --lmlf-ink: #111;
+  --lmlf-muted: #555;
+  --lmlf-link: #0645ad;
+  --lmlf-heading: #d3dce6;
+  --lmlf-heading-dark: #bcc4cc;
+  --lmlf-rule: #a4abb2;
+  --lmlf-lean: #f4f8fc;
+  --lmlf-lean-rule: #9bb7d3;
 }
 
 body {
-  background: var(--lmlf-paper);
-  color: var(--lmlf-ink);
-}
-
-main { max-width: 78rem; }
-h1, h2, h3, h4 { color: var(--lmlf-ink); letter-spacing: -0.018em; }
-a { color: var(--lmlf-green); }
-
-.lmlf-chapter-status {
-  border-top: 4px solid var(--lmlf-green);
-  border-bottom: 1px solid var(--lmlf-rule);
-  margin: 1.4rem 0 2rem;
-  padding: 1rem 0 1.1rem;
-}
-
-.lmlf-chapter-status__eyebrow {
-  color: var(--lmlf-gold);
-  font-family: var(--verso-structure-font-family);
-  font-size: .76rem;
-  font-weight: 750;
-  letter-spacing: .12em;
-  text-transform: uppercase;
-}
-
-.lmlf-chapter-status__body > :first-child { margin-top: .45rem; }
-.lmlf-chapter-status__footer {
-  align-items: center;
-  display: flex;
-  flex-wrap: wrap;
-  gap: .75rem;
-  justify-content: space-between;
-  margin-top: .8rem;
-}
-
-.lmlf-status {
-  background: var(--lmlf-green-soft);
-  border: 1px solid #aac1b8;
-  border-radius: 999px;
-  color: var(--lmlf-green);
-  display: inline-block;
-  font-family: var(--verso-structure-font-family);
-  font-size: .72rem;
-  font-weight: 700;
-  letter-spacing: .055em;
-  padding: .18rem .62rem;
-  text-transform: uppercase;
-}
-
-.lmlf-result {
   background: #fff;
-  border: 1px solid var(--lmlf-rule);
-  border-left: 4px solid var(--lmlf-green);
-  border-radius: .25rem;
-  box-shadow: 0 5px 18px rgba(21, 44, 42, .055);
-  margin: 1.35rem 0;
-  overflow: hidden;
+  color: var(--lmlf-ink);
+  font-family: Georgia, "Times New Roman", serif;
 }
 
-.lmlf-result__header {
-  align-items: center;
-  background: linear-gradient(90deg, #f2f7f4, #fff);
-  border-bottom: 1px solid var(--lmlf-rule);
-  display: flex;
-  gap: 1rem;
-  justify-content: space-between;
-  padding: .8rem 1rem;
+main { max-width: 74rem; }
+
+h1, h2, h3, h4,
+.lmlf-source-link,
+.lmlf-dlmf-entry__source,
+.lmlf-lean > summary {
+  font-family: Arial, Helvetica, sans-serif;
 }
 
-.lmlf-result__title {
-  font-family: var(--verso-structure-font-family);
-  font-size: 1.02rem;
-  font-weight: 760;
+h2 {
+  background: var(--lmlf-heading-dark);
+  border-top: .28rem double var(--lmlf-rule);
+  color: #111;
+  padding: .38rem .55rem;
 }
 
-.lmlf-result__body { padding: .2rem 1rem .8rem; }
-.lmlf-result__body h3 { font-size: .94rem; margin-top: 1rem; }
+h3 {
+  background: var(--lmlf-heading);
+  color: #111;
+  padding: .28rem .48rem;
+}
+
+h4 { color: #222; }
+a { color: var(--lmlf-link); }
+
+.lmlf-source-link {
+  border-bottom: 1px solid #c8cdd2;
+  margin: .3rem 0 1.35rem;
+  padding: 0 0 .6rem;
+}
+
+.lmlf-source-link a { font-weight: 700; }
+
+.lmlf-dlmf-entry {
+  border-bottom: 1px solid #c8cdd2;
+  border-top: 1px solid #c8cdd2;
+  margin: 1.2rem 0 1.7rem;
+  padding: .75rem 0 .95rem;
+}
+
+.lmlf-dlmf-entry__body {
+  display: grid;
+  gap: .15rem;
+}
+
+.lmlf-dlmf-entry__source {
+  font-size: .86rem;
+  font-weight: 700;
+  margin-bottom: .65rem;
+}
+
+.lmlf-dlmf-entry__body > :first-child { margin-top: 0; }
 
 .lmlf-lean {
-  background: #f6f7f5;
-  border: 1px solid var(--lmlf-rule);
-  border-radius: .25rem;
-  margin: .9rem 0 .2rem;
+  background: var(--lmlf-lean);
+  border: 1px solid var(--lmlf-lean-rule);
+  margin: .85rem 0 .15rem;
 }
 
 .lmlf-lean > summary {
-  color: var(--lmlf-green);
+  color: #174f80;
   cursor: pointer;
-  font-family: var(--verso-structure-font-family);
-  font-size: .82rem;
-  font-weight: 750;
-  padding: .65rem .8rem;
+  font-size: .86rem;
+  font-weight: 700;
+  padding: .55rem .7rem;
 }
 
-.lmlf-lean[open] > summary { border-bottom: 1px solid var(--lmlf-rule); }
-.lmlf-lean__body { padding: .25rem .8rem .7rem; }
-.lmlf-lean__hint {
-  color: var(--lmlf-muted);
-  font-family: var(--verso-structure-font-family);
-  font-size: .76rem;
-  margin: .45rem 0 .1rem;
-}
+.lmlf-lean[open] > summary { border-bottom: 1px solid var(--lmlf-lean-rule); }
+.lmlf-lean__body { padding: .2rem .7rem .65rem; }
 
 .lmlf-section-list > ul {
-  columns: 2 22rem;
-  column-gap: 2rem;
   list-style: none;
+  margin-left: 0;
   padding-left: 0;
 }
 
 .lmlf-section-list li {
-  break-inside: avoid;
-  border-bottom: 1px dotted var(--lmlf-rule);
-  padding: .28rem 0;
+  border-bottom: 1px dotted #b7bcc1;
+  padding: .24rem .15rem;
 }
 
-@media (max-width: 720px) {
-  .lmlf-result__header { align-items: flex-start; flex-direction: column; }
-  .lmlf-section-list > ul { columns: 1; }
+.lmlf-section-list li::before {
+  color: #5f6770;
+  content: "\203A";
+  display: inline-block;
+  margin-right: .48rem;
 }
+
+.lmlf-coverage {
+  border-collapse: collapse;
+  font-family: Arial, Helvetica, sans-serif;
+  margin: 1rem 0 1.4rem;
+  width: 100%;
+}
+
+.lmlf-coverage th,
+.lmlf-coverage td {
+  border-bottom: 1px solid #c8cdd2;
+  padding: .42rem .55rem;
+  text-align: right;
+}
+
+.lmlf-coverage th:first-child,
+.lmlf-coverage td:first-child { text-align: left; }
+.lmlf-coverage thead { background: var(--lmlf-heading); }
 </style><style>
 
 .hl.lean {
@@ -867,7 +861,7 @@ Some CSS frameworks customize details/summary in ways not compatible with Verso'
 }
 
 </style><script>
-      
+
 window.onload = async () => {
 
     // Don't show hovers inside of closed tactic states
@@ -1121,15 +1115,15 @@ window.onload = async () => {
             <div class="split-toc book">
               <div class="title">
                 <label for="--verso-manual-toc-----bookRoot" class="toggle-split-toc"><input type="checkbox" class="toggle-split-toc" id="--verso-manual-toc-----bookRoot"></label><span class="">Table of Contents</span></div>
-              <table><tr class="numbered"><td class="num">1.</td><td><a href="Finite-error-calculus/#chapter-1">Finite error calculus</a></td></tr><tr class="numbered"><td class="num">2.</td><td><a href="Finite-families-of-approximants/#chapter-2">Finite families of approximants</a></td></tr><tr class="numbered"><td class="num">3.</td><td><a href="Improper-integrals___-series___-and-source-recovery/#chapter-3">Improper integrals, series, and source recovery</a></td></tr><tr class="numbered"><td class="num">4.</td><td><a href="Elementary-Functions/#chapter-4">Elementary Functions</a></td></tr><tr class="numbered"><td class="num">5.</td><td><a href="Gamma-Function/#chapter-5">Gamma Function</a></td></tr><tr class="numbered"><td class="num">6.</td><td><a href="Exponential___-Logarithmic___-Sine___-and-Cosine-Integrals/#chapter-6">Exponential, Logarithmic, Sine, and Cosine Integrals</a></td></tr><tr class="current numbered"><td class="num">7.</td><td><a href="Error-Functions___-Dawson___s-and-Fresnel-Integrals/#chapter-7">Error Functions, Dawson's and Fresnel Integrals</a></td></tr><tr class="numbered"><td class="num">8.</td><td><a href="Incomplete-Gamma-and-Related-Functions/#chapter-8">Incomplete Gamma and Related Functions</a></td></tr><tr class="numbered"><td class="num">9.</td><td><a href="Airy-and-Related-Functions/#chapter-9">Airy and Related Functions</a></td></tr><tr class="numbered"><td class="num">10.</td><td><a href="Bessel-Functions/#chapter-10">Bessel Functions</a></td></tr></table></div>
+              <table><tr class="unnumbered"><td class="num"><td><a href="Coverage/#coverage">Coverage</a></td></tr><tr class="numbered"><td class="num">1.</td><td><a href="Finite-error-bounds/#chapter-1">Finite error bounds</a></td></tr><tr class="numbered"><td class="num">2.</td><td><a href="Approximants-and-series/#chapter-2">Approximants and series</a></td></tr><tr class="numbered"><td class="num">3.</td><td><a href="Improper-integrals/#chapter-3">Improper integrals</a></td></tr><tr class="numbered"><td class="num">4.</td><td><a href="Elementary-Functions/#chapter-4">Elementary Functions</a></td></tr><tr class="numbered"><td class="num">5.</td><td><a href="Gamma-Function/#chapter-5">Gamma Function</a></td></tr><tr class="numbered"><td class="num">6.</td><td><a href="Exponential___-Logarithmic___-Sine___-and-Cosine-Integrals/#chapter-6">Exponential, Logarithmic, Sine, and Cosine Integrals</a></td></tr><tr class="current numbered"><td class="num">7.</td><td><a href="Error-Functions___-Dawson___s-and-Fresnel-Integrals/#chapter-7">Error Functions, Dawson's and Fresnel Integrals</a></td></tr><tr class="numbered"><td class="num">8.</td><td><a href="Incomplete-Gamma-and-Related-Functions/#chapter-8">Incomplete Gamma and Related Functions</a></td></tr><tr class="numbered"><td class="num">9.</td><td><a href="Airy-and-Related-Functions/#chapter-9">Airy and Related Functions</a></td></tr><tr class="numbered"><td class="num">10.</td><td><a href="Bessel-Functions/#chapter-10">Bessel Functions</a></td></tr></table></div>
             <div class="split-toc">
               <div class="title">
                 <label for="--verso-manual-toc-chapter-7" class="toggle-split-toc"><input type="checkbox" class="toggle-split-toc" id="--verso-manual-toc-chapter-7" checked="checked"></label><span class="number">7.</span> <span class=""><a href="Error-Functions___-Dawson___s-and-Fresnel-Integrals/#chapter-7">Error Functions, Dawson's and Fresnel Integrals</a></span></div>
-              <table><tr class="current numbered"><td class="num">7.1.</td><td><a href="Error-Functions___-Dawson___s-and-Fresnel-Integrals/Chapter-contents/#LMLF-___-Mathematical-Functions-with-Lean--Error-Functions___-Dawson___s-and-Fresnel-Integrals--Chapter-contents">Chapter contents</a></td></tr></table></div>
+              <table><tr class="current unnumbered"><td class="num"><td><a href="Error-Functions___-Dawson___s-and-Fresnel-Integrals/Chapter-contents/#LMLF-___-DLMF-with-Lean--Error-Functions___-Dawson___s-and-Fresnel-Integrals--Chapter-contents">Chapter contents</a></td></tr></table></div>
             <div class="split-toc">
               <div class="title">
-                <label for="--verso-manual-toc-LMLF-___-Mathematical-Functions-with-Lean--Error-Functions___-Dawson___s-and-Fresnel-Integrals--Chapter-contents" class="toggle-split-toc"><input type="checkbox" class="toggle-split-toc" id="--verso-manual-toc-LMLF-___-Mathematical-Functions-with-Lean--Error-Functions___-Dawson___s-and-Fresnel-Integrals--Chapter-contents" checked="checked"></label><span class="number">7.1.</span> <span class="current"><a href="Error-Functions___-Dawson___s-and-Fresnel-Integrals/Chapter-contents/#LMLF-___-Mathematical-Functions-with-Lean--Error-Functions___-Dawson___s-and-Fresnel-Integrals--Chapter-contents">Chapter contents</a></span></div>
-              <table><tr class="numbered"><td class="num">7.1.1.</td><td><a href="Error-Functions___-Dawson___s-and-Fresnel-Integrals/Chapter-contents/#LMLF-___-Mathematical-Functions-with-Lean--Error-Functions___-Dawson___s-and-Fresnel-Integrals--Chapter-contents--Notation-and-properties">Notation and properties</a></td></tr><tr class="numbered"><td class="num">7.1.2.</td><td><a href="Error-Functions___-Dawson___s-and-Fresnel-Integrals/Chapter-contents/#LMLF-___-Mathematical-Functions-with-Lean--Error-Functions___-Dawson___s-and-Fresnel-Integrals--Chapter-contents--Applications-and-computation">Applications and computation</a></td></tr></table></div>
+                <label for="--verso-manual-toc-LMLF-___-DLMF-with-Lean--Error-Functions___-Dawson___s-and-Fresnel-Integrals--Chapter-contents" class="toggle-split-toc"><input type="checkbox" class="toggle-split-toc" id="--verso-manual-toc-LMLF-___-DLMF-with-Lean--Error-Functions___-Dawson___s-and-Fresnel-Integrals--Chapter-contents" checked="checked"></label><span class="unnumbered"></span><span class="current"><a href="Error-Functions___-Dawson___s-and-Fresnel-Integrals/Chapter-contents/#LMLF-___-DLMF-with-Lean--Error-Functions___-Dawson___s-and-Fresnel-Integrals--Chapter-contents">Chapter contents</a></span></div>
+              <table><tr class="unnumbered"><td class="num"><td><a href="Error-Functions___-Dawson___s-and-Fresnel-Integrals/Chapter-contents/#LMLF-___-DLMF-with-Lean--Error-Functions___-Dawson___s-and-Fresnel-Integrals--Chapter-contents--Notation-and-properties">Notation and properties</a></td></tr><tr class="unnumbered"><td class="num"><td><a href="Error-Functions___-Dawson___s-and-Fresnel-Integrals/Chapter-contents/#LMLF-___-DLMF-with-Lean--Error-Functions___-Dawson___s-and-Fresnel-Integrals--Chapter-contents--Applications-and-computation">Applications and computation</a></td></tr></table></div>
             </div>
           </div>
         <div class="last"></div>
@@ -1140,10 +1134,10 @@ window.onload = async () => {
             <a class="local-button active" href="Error-Functions___-Dawson___s-and-Fresnel-Integrals/#chapter-7" rel="prev" title="7. Error Functions, Dawson's and Fresnel Integrals"><span class="arrow">←</span><span class="where">7. Error Functions, Dawson's and Fresnel Integrals</span></a><a class="local-button active" href="Incomplete-Gamma-and-Related-Functions/#chapter-8" rel="next" title="8. Incomplete Gamma and Related Functions"><span class="where">8. Incomplete Gamma and Related Functions</span><span class="arrow">→</span></a></nav>
           <section>
             <h1>
-              7.1. Chapter contents<span class="permalink-widget inline"><a href="find/?domain=Verso.Genre.Manual.section&amp;name=LMLF-___-Mathematical-Functions-with-Lean--Error-Functions___-Dawson___s-and-Fresnel-Integrals--Chapter-contents" title="Permalink">🔗</a></span></h1>
+              Chapter contents<span class="permalink-widget inline"><a href="find/?domain=Verso.Genre.Manual.section&amp;name=LMLF-___-DLMF-with-Lean--Error-Functions___-Dawson___s-and-Fresnel-Integrals--Chapter-contents" title="Permalink">🔗</a></span></h1>
             <section>
-              <h2 id="LMLF-___-Mathematical-Functions-with-Lean--Error-Functions___-Dawson___s-and-Fresnel-Integrals--Chapter-contents--Notation-and-properties">
-                7.1.1. Notation and properties<span class="permalink-widget inline"><a href="find/?domain=Verso.Genre.Manual.section&amp;name=LMLF-___-Mathematical-Functions-with-Lean--Error-Functions___-Dawson___s-and-Fresnel-Integrals--Chapter-contents--Notation-and-properties" title="Permalink">🔗</a></span></h2>
+              <h2 id="LMLF-___-DLMF-with-Lean--Error-Functions___-Dawson___s-and-Fresnel-Integrals--Chapter-contents--Notation-and-properties">
+                Notation and properties<span class="permalink-widget inline"><a href="find/?domain=Verso.Genre.Manual.section&amp;name=LMLF-___-DLMF-with-Lean--Error-Functions___-Dawson___s-and-Fresnel-Integrals--Chapter-contents--Notation-and-properties" title="Permalink">🔗</a></span></h2>
               <nav class="lmlf-section-list">
                 <ul>
                   <li>
@@ -1226,8 +1220,8 @@ window.onload = async () => {
                 </nav>
               </section>
             <section>
-              <h2 id="LMLF-___-Mathematical-Functions-with-Lean--Error-Functions___-Dawson___s-and-Fresnel-Integrals--Chapter-contents--Applications-and-computation">
-                7.1.2. Applications and computation<span class="permalink-widget inline"><a href="find/?domain=Verso.Genre.Manual.section&amp;name=LMLF-___-Mathematical-Functions-with-Lean--Error-Functions___-Dawson___s-and-Fresnel-Integrals--Chapter-contents--Applications-and-computation" title="Permalink">🔗</a></span></h2>
+              <h2 id="LMLF-___-DLMF-with-Lean--Error-Functions___-Dawson___s-and-Fresnel-Integrals--Chapter-contents--Applications-and-computation">
+                Applications and computation<span class="permalink-widget inline"><a href="find/?domain=Verso.Genre.Manual.section&amp;name=LMLF-___-DLMF-with-Lean--Error-Functions___-Dawson___s-and-Fresnel-Integrals--Chapter-contents--Applications-and-computation" title="Permalink">🔗</a></span></h2>
               <nav class="lmlf-section-list">
                 <ul>
                   <li>
@@ -1264,4 +1258,3 @@ window.onload = async () => {
         </main></div>
     </body>
   </html>
-

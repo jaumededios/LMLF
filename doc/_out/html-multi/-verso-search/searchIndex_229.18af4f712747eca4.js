@@ -1,0 +1,1 @@
+window.docContents[229].resolve({"/Approximants-and-series/#chapter-2":{"contents":"These are LMLF's small interfaces around Mathlib's finite sums, filters, and little-o relation.\n\n\n\n\n\n","context":"LMLF · DLMF with Lean","header":"2. Approximants and series","id":"/Approximants-and-series/#chapter-2"}});

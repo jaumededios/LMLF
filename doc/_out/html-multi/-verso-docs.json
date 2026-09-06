@@ -1,98 +1,200 @@
-{"9":
- "<code>Real : Type</code><span class=\"sep\"></span><code class=\"docstring\">The type `ℝ` of real numbers constructed as equivalence classes of Cauchy sequences of rational\nnumbers. </code>",
- "8": "<code>X → ℝ</code>",
- "7": "<code>X → E</code>",
- "6":
+{"99": "<code class=\"docstring\">The Bochner integral </code>",
+ "98":
+ "<code>MeasureTheory.IntegrableOn.{u_1, u_3} {α : Type u_1} {ε : Type u_3} {mα : MeasurableSpace α} [TopologicalSpace ε]\n  [ContinuousENorm ε] (f : α → ε) (s : Set α) (μ : Measure α := by volume_tac) : Prop</code><span class=\"sep\"></span><code class=\"docstring\">A function is `IntegrableOn` a set `s` if it is almost everywhere strongly measurable on `s`\nand if the integral of its pointwise norm over `s` is less than infinity. </code>",
+ "97": "<code>IntegrableOn f (Ioi k) volume</code>",
+ "96":
+ "<code>LMLF.Integral.HasImproperIntegralAtTopExcept.of_integrableOn_Ioi.{u_1} {E : Type u_1} [NormedAddCommGroup E]\n  [NormedSpace ℝ E] [CompleteSpace E] (f : ℝ → E) (k : ℝ) (S : Finset ℝ) (hS : ∀ c ∈ S, k &lt; c)\n  (hf : IntegrableOn f (Ioi k) volume) : HasImproperIntegralAtTopExcept f k S (∫ (t : ℝ) in Ioi k, f t)</code><span class=\"sep\"></span><code class=\"docstring\">IMP-001-T07. </code>",
+ "95": "<code>IntervalIntegrable f volume a k</code>",
+ "94": "<code>∀ c ∈ S, k &lt; c</code>",
+ "93": "<code>a ≤ k</code>",
+ "92":
+ "<code>LMLF.Integral.HasImproperIntegralAtTopExcept.split_regular.{u_1} {E : Type u_1} [NormedAddCommGroup E] [NormedSpace ℝ E]\n  [CompleteSpace E] (f : ℝ → E) {a k : ℝ} (S : Finset ℝ) (I : E) (hak : a ≤ k) (hS : ∀ c ∈ S, k &lt; c)\n  (hf : IntervalIntegrable f volume a k) :\n  HasImproperIntegralAtTopExcept f a S ((∫ (t : ℝ) in a..k, f t) + I) ↔ HasImproperIntegralAtTopExcept f k S I</code><span class=\"sep\"></span><code class=\"docstring\">IMP-001-T04. </code>",
+ "91":
+ "<code>Finset.biUnion.{u_1, u_2} {α : Type u_1} {β : Type u_2} [DecidableEq β] (s : Finset α) (t : α → Finset β) : Finset β</code><span class=\"sep\"></span><code class=\"docstring\">`Finset.biUnion s t` is the union of `t a` over `a ∈ s`.\n\n(This was formerly `bind` due to the monad structure on types with `DecidableEq`.) </code>",
+ "90": "<code>A</code>",
+ "9": "<code>X → E</code>",
+ "89":
+ "<code>∀ i ∈ s, HasImproperIntegralAtTopExcept (f i) k (S i) (I i)</code>",
+ "88": "<code>A → E →L[ℝ] H</code>",
+ "87": "<code>A → E</code>",
+ "86": "<code>A → Finset ℝ</code>",
+ "85": "<code>A → ℝ → E</code>",
+ "84": "<code>Finset A</code>",
+ "83":
+ "<code>LMLF.Integral.HasImproperIntegralAtTopExcept.finset_clm.{u_1, u_2, u_3} {E : Type u_1} [NormedAddCommGroup E]\n  [NormedSpace ℝ E] {H : Type u_2} [NormedAddCommGroup H] [NormedSpace ℝ H] [CompleteSpace E] [CompleteSpace H]\n  {A : Type u_3} (s : Finset A) (f : A → ℝ → E) (S : A → Finset ℝ) (I : A → E) (T : A → E →L[ℝ] H) {k : ℝ}\n  (h : ∀ i ∈ s, HasImproperIntegralAtTopExcept (f i) k (S i) (I i)) :\n  HasImproperIntegralAtTopExcept (fun t =&gt; ∑ i ∈ s, (T i) (f i t)) k (s.biUnion S) (∑ i ∈ s, (T i) (I i))</code><span class=\"sep\"></span><code class=\"docstring\">IMP-001-T03. </code>",
+ "82":
+ "<code>LMLF.Integral.hasImproperIntegralAtTopExcept_iff_exists_primitive.{u_1} {E : Type u_1} [NormedAddCommGroup E]\n  [NormedSpace ℝ E] [CompleteSpace E] {f : ℝ → E} {k : ℝ} {S : Finset ℝ} {I : E} :\n  HasImproperIntegralAtTopExcept f k S I ↔ ∃ F, IsFiniteExceptionalPrimitive f k S F ∧ Tendsto F atTop (nhds I)</code><span class=\"sep\"></span><code class=\"docstring\">IMP-001-T08. </code>",
+ "81":
+ "<code>Set.Icc.{u_1} {α : Type u_1} [Preorder α] (a b : α) : Set α</code><span class=\"sep\"></span><code class=\"docstring\">`Icc a b` is the left-closed right-closed interval $[a, b]$. </code>",
+ "80":
+ "<code>Disjoint.{u_1} {α : Type u_1} [PartialOrder α] [OrderBot α] (a b : α) : Prop</code><span class=\"sep\"></span><code class=\"docstring\">Two elements of a lattice are disjoint if their inf is the bottom element.\n  (This generalizes disjoint sets, viewed as members of the subset lattice.)\n\nNote that we define this without reference to `⊓`, as this allows us to talk about orders where\nthe infimum is not unique, or where implementing `Inf` would require additional `Decidable`\narguments. </code>",
+ "8":
  "<code>Set.{u} (α : Type u) : Type u</code><span class=\"sep\"></span><code class=\"docstring\">A set is a collection of elements of some type `α`.\n\nAlthough `Set` is defined as `α → Prop`, this is an implementation detail which should not be\nrelied on. Instead, `Set.ofPred` (also written `{x | p x}`) and membership of a set (`∈`) should be\nused to convert between sets and predicates.\n</code>",
- "59": "<code>ℕ</code>",
- "58":
- "<code>LMLF.Definitions.gamma_neg_nat_eq_zero (n : ℕ) : Complex.Gamma (-↑n) = 0</code><span class=\"sep\"></span><code class=\"docstring\">Mathlib totalizes Gamma to zero at its poles at the nonpositive integers. </code>",
- "57":
- "<code>Real.Gamma (s : ℝ) : ℝ</code><span class=\"sep\"></span><code class=\"docstring\">The `Γ` function (of a real variable `s`). </code>",
- "56":
- "<code>LMLF.Definitions.gamma_ofReal (s : ℝ) : Complex.Gamma ↑s = ↑(Real.Gamma s)</code><span class=\"sep\"></span><code class=\"docstring\">Mathlib's complex and real Gamma functions agree on every real input. </code>",
- "55":
- "<code>MeasureTheory.integral.{u_6, u_7} {α : Type u_6} {G : Type u_7} [NormedAddCommGroup G] [NormedSpace ℝ G]\n  {x✝ : MeasurableSpace α} (μ : MeasureTheory.Measure α) (f : α → G) : G</code><span class=\"sep\"></span><code class=\"docstring\">The Bochner integral </code>",
- "54":
- "<code>Eq.{u_1} {α : Sort u_1} : α → α → Prop</code><span class=\"sep\"></span><code class=\"docstring\">The equality relation. It has one introduction rule, `Eq.refl`.\nWe use `a = b` as notation for `Eq a b`.\nA fundamental property of equality is that it is an equivalence relation.\n```\nvariable (α : Type) (a b c d : α)\nvariable (hab : a = b) (hcb : c = b) (hcd : c = d)\n\nexample : a = d :=\n  Eq.trans (Eq.trans hab (Eq.symm hcb)) hcd\n```\nEquality is much more than an equivalence relation, however. It has the important property that every assertion\nrespects the equivalence, in the sense that we can substitute equal expressions without changing the truth value.\nThat is, given `h1 : a = b` and `h2 : p a`, we can construct a proof for `p b` using substitution: `Eq.subst h1 h2`.\nExample:\n```\nexample (α : Type) (a b : α) (p : α → Prop)\n        (h1 : a = b) (h2 : p a) : p b :=\n  Eq.subst h1 h2\n\nexample (α : Type) (a b : α) (p : α → Prop)\n    (h1 : a = b) (h2 : p a) : p b :=\n  h1 ▸ h2\n```\nThe triangle in the second presentation is a macro built on top of `Eq.subst` and `Eq.symm`, and you can enter it by typing `\\t`.\nFor more information: [Equality](https://lean-lang.org/theorem_proving_in_lean4/quantifiers_and_equality.html#equality)\n\n\nConventions for notations in identifiers:\n\n * The recommended spelling of `=` in identifiers is `eq`.</code>",
- "53":
- "<code>Complex.Gamma (s : ℂ) : ℂ</code><span class=\"sep\"></span><code class=\"docstring\">The `Γ` function (of a complex variable `s`). </code>",
- "52":
- "<code>LMLF.Definitions.gamma_eq_eulerIntegral {s : ℂ} (hs : 0 &lt; s.re) :\n  Complex.Gamma s = ∫ (t : ℝ) in Set.Ioi 0, ↑(Real.exp (-t)) * ↑t ^ (s - 1)</code><span class=\"sep\"></span><code class=\"docstring\">On the half-plane `0 &lt; re s`, Mathlib's complex Gamma function is Euler's integral. </code>",
- "51":
- "<code>MeasureTheory.MeasureSpace.volume.{u_6} {α : Type u_6} [self : MeasureTheory.MeasureSpace α] : MeasureTheory.Measure α</code><span class=\"sep\"></span><code class=\"docstring\">`volume` is the canonical measure on `α`. </code>",
- "50":
+ "79":
+ "<code>Set.Ici.{u_1} {α : Type u_1} [Preorder α] (b : α) : Set α</code><span class=\"sep\"></span><code class=\"docstring\">`Ici a` is the left-closed right-infinite interval $[a, ∞)$. </code>",
+ "78":
+ "<code>ContinuousOn.{u_1, u_2} {X : Type u_1} {Y : Type u_2} [TopologicalSpace X] [TopologicalSpace Y] (f : X → Y)\n  (s : Set X) : Prop</code><span class=\"sep\"></span><code class=\"docstring\">A function between topological spaces is continuous on a subset `s`\nwhen it's continuous at every point of `s` within `s`. </code>",
+ "77":
+ "<code>LMLF.Integral.IsFiniteExceptionalPrimitive.{u_1} {E : Type u_1} [NormedAddCommGroup E] [NormedSpace ℝ E]\n  [CompleteSpace E] (g : ℝ → E) (k : ℝ) (S : Finset ℝ) (F : ℝ → E) : Prop</code><span class=\"sep\"></span><code class=\"docstring\">IMP-001-T05. </code>",
+ "76": "<code>HasImproperIntegralAtTopExcept f k S J</code>",
+ "75": "<code>HasImproperIntegralAtTopExcept f k S I</code>",
+ "74":
+ "<code>LMLF.Integral.HasImproperIntegralAtTopExcept.unique.{u_1} {E : Type u_1} [NormedAddCommGroup E] [NormedSpace ℝ E]\n  [CompleteSpace E] {f : ℝ → E} {k : ℝ} {S : Finset ℝ} {I J : E} (hI : HasImproperIntegralAtTopExcept f k S I)\n  (hJ : HasImproperIntegralAtTopExcept f k S J) : I = J</code><span class=\"sep\"></span><code class=\"docstring\">IMP-001-T02. </code>",
+ "73":
+ "<code>Finset.sort.{u_1} {α : Type u_1} (s : Finset α) (r : α → α → Prop := by exact fun a b =&gt; a ≤ b) [DecidableRel r]\n  [IsTrans α r] [Std.Antisymm r] [Std.Total r] : List α</code><span class=\"sep\"></span><code class=\"docstring\">`sort s` constructs a sorted list from the unordered set `s`.\n(Uses merge sort algorithm.) </code>",
+ "72":
+ "<code>Finset.{u_4} (α : Type u_4) : Type u_4</code><span class=\"sep\"></span><code class=\"docstring\">`Finset α` is the type of finite sets of elements of `α`. It is implemented\nas a multiset (a list up to permutation) which has no duplicate elements. </code>",
+ "71": "<code>Finset ℝ</code>",
+ "70":
+ "<code>LMLF.Integral.HasImproperIntegralAtTopExcept.{u_1} {E : Type u_1} [NormedAddCommGroup E] [NormedSpace ℝ E]\n  [CompleteSpace E] (f : ℝ → E) (k : ℝ) (S : Finset ℝ) (I : E) : Prop</code><span class=\"sep\"></span><code class=\"docstring\">IMP-001-T01. </code>",
+ "7": "<code>Set X</code>",
+ "69":
+ "<code>LMLF.Integral.HasImproperIntegralAtTopBreaks.{u_1} {E : Type u_1} [NormedAddCommGroup E] [NormedSpace ℝ E]\n  [CompleteSpace E] (f : ℝ → E) (k : ℝ) : List ℝ → E → Prop</code><span class=\"sep\"></span><code class=\"docstring\">An improper integral from `k` to `+∞`, split at every point of a sorted list of exceptional\npoints. Every one-sided contribution must converge separately.\n</code>",
+ "68":
+ "<code>Set.Iio.{u_1} {α : Type u_1} [Preorder α] (b : α) : Set α</code><span class=\"sep\"></span><code class=\"docstring\">`Iio b` is the left-infinite right-open interval $(-∞, b)$. </code>",
+ "67": "<code>List ℝ</code>",
+ "66":
+ "<code>Filter.atTop.{u_3} {α : Type u_3} [Preorder α] : Filter α</code><span class=\"sep\"></span><code class=\"docstring\">`atTop` is the filter representing the limit `→ ∞` on an ordered set.\nIt is generated by the collection of up-sets `{b | a ≤ b}`.\n(The preorder need not have a top element for this to be well defined,\nand indeed is trivial when a top element `x` exists, i.e., it coincides with `pure x`.) </code>",
+ "65":
+ "<code>nhds.{u_3} {X : Type u_3} [TopologicalSpace X] (x : X) : Filter X</code><span class=\"sep\"></span><code class=\"docstring\">A set is called a neighborhood of `x` if it contains an open set around `x`. The set of all\nneighborhoods of `x` forms a filter, the neighborhood filter at `x`, is here defined as the\ninfimum over the principal filters of all open sets containing `x`. </code>",
+ "64":
  "<code>Set.Ioi.{u_1} {α : Type u_1} [Preorder α] (b : α) : Set α</code><span class=\"sep\"></span><code class=\"docstring\">`Ioi a` is the left-open right-infinite interval $(a, ∞)$. </code>",
- "5": "<code>Set X</code>",
- "49":
- "<code>HSub.hSub.{u, v, w} {α : Type u} {β : Type v} {γ : outParam (Type w)} [self : HSub α β γ] : α → β → γ</code><span class=\"sep\"></span><code class=\"docstring\">`a - b` computes the difference of `a` and `b`.\nThe meaning of this notation is type-dependent.\n* For natural numbers, this operator saturates at 0: `a - b = 0` when `a ≤ b`. \n\nConventions for notations in identifiers:\n\n * The recommended spelling of `-` in identifiers is `sub` (when used as a binary operator).</code>",
- "48":
- "<code>HPow.hPow.{u, v, w} {α : Type u} {β : Type v} {γ : outParam (Type w)} [self : HPow α β γ] : α → β → γ</code><span class=\"sep\"></span><code class=\"docstring\">`a ^ b` computes `a` to the power of `b`.\nThe meaning of this notation is type-dependent. \n\nConventions for notations in identifiers:\n\n * The recommended spelling of `^` in identifiers is `pow`.</code>",
- "47":
- "<code>HMul.hMul.{u, v, w} {α : Type u} {β : Type v} {γ : outParam (Type w)} [self : HMul α β γ] : α → β → γ</code><span class=\"sep\"></span><code class=\"docstring\">`a * b` computes the product of `a` and `b`.\nThe meaning of this notation is type-dependent. \n\nConventions for notations in identifiers:\n\n * The recommended spelling of `*` in identifiers is `mul`.</code>",
- "46":
- "<code>Neg.neg.{u} {α : Type u} [self : Neg α] : α → α</code><span class=\"sep\"></span><code class=\"docstring\">`-a` computes the negative or opposite of `a`.\nThe meaning of this notation is type-dependent. \n\nConventions for notations in identifiers:\n\n * The recommended spelling of `-` in identifiers is `neg` (when used as a unary operator).</code>",
- "45":
- "<code>Real.exp (x : ℝ) : ℝ</code><span class=\"sep\"></span><code class=\"docstring\">The real exponential function, defined as the real part of the complex exponential </code>",
- "44": "<code>ℝ</code>",
- "43":
- "<code>MeasureTheory.IntegrableOn.{u_1, u_3} {α : Type u_1} {ε : Type u_3} {mα : MeasurableSpace α} [TopologicalSpace ε]\n  [ContinuousENorm ε] (f : α → ε) (s : Set α) (μ : MeasureTheory.Measure α := by volume_tac) : Prop</code><span class=\"sep\"></span><code class=\"docstring\">A function is `IntegrableOn` a set `s` if it is almost everywhere strongly measurable on `s`\nand if the integral of its pointwise norm over `s` is less than infinity. </code>",
- "42":
- "<code>Complex.re (self : ℂ) : ℝ</code><span class=\"sep\"></span><code class=\"docstring\">The real part of a complex number. </code>",
- "41":
- "<code>LT.lt.{u} {α : Type u} [self : LT α] : α → α → Prop</code><span class=\"sep\"></span><code class=\"docstring\">The less-than relation: `x &lt; y` \n\nConventions for notations in identifiers:\n\n * The recommended spelling of `&lt;` in identifiers is `lt`.</code>",
- "40": "<code>0 &lt; s.re</code>",
- "4":
+ "63":
+ "<code>nhdsWithin.{u_1} {X : Type u_1} [TopologicalSpace X] (x : X) (s : Set X) : Filter X</code><span class=\"sep\"></span><code class=\"docstring\">The \"neighborhood within\" filter. Elements of `𝓝[s] x` are sets containing the\nintersection of `s` and a neighborhood of `x`. </code>",
+ "62":
+ "<code class=\"docstring\">The interval integral `∫ x in a..b, f x` is defined\nas `∫ x in Ioc a b, f x - ∫ x in Ioc b a, f x`. If `a ≤ b`, then it equals\n`∫ x in Ioc a b, f x`, otherwise it equals `-∫ x in Ioc b a, f x`. </code>",
+ "61":
+ "<code>Filter.Tendsto.{u_1, u_2} {α : Type u_1} {β : Type u_2} (f : α → β) (l₁ : Filter α) (l₂ : Filter β) : Prop</code><span class=\"sep\"></span><code class=\"docstring\">`Filter.Tendsto` is the generic \"limit of a function\" predicate.\n`Tendsto f l₁ l₂` asserts that for every `l₂` neighborhood `a`,\nthe `f`-preimage of `a` is an `l₁` neighborhood. </code>",
+ "60":
+ "<code>MeasureTheory.MeasureSpace.volume.{u_6} {α : Type u_6} [self : MeasureSpace α] : Measure α</code><span class=\"sep\"></span><code class=\"docstring\">`volume` is the canonical measure on `α`. </code>",
+ "6":
+ "<code>QuantitativeAnalysis.ErrorOn.{u_1, u_2} {X : Type u_1} {E : Type u_2} [NormedAddCommGroup E] (D : Set X) (f a : X → E)\n  (b : X → ℝ) : Prop</code><span class=\"sep\"></span><code class=\"docstring\">`ErrorOn D f a b` means that `a` approximates `f` with pointwise error at most `b` on `D`. </code>",
+ "59":
+ "<code>IntervalIntegrable.{u_3} {ε : Type u_3} [TopologicalSpace ε] [ENormedAddMonoid ε] (f : ℝ → ε) (μ : Measure ℝ)\n  (a b : ℝ) : Prop</code><span class=\"sep\"></span><code class=\"docstring\">A function `f` is called *interval integrable* with respect to a measure `μ` on an unordered\ninterval `a..b` if it is integrable on both intervals `(a, b]` and `(b, a]`. One of these\nintervals is always empty, so this property is equivalent to `f` being integrable on\n`(min a b, max a b]`. </code>",
+ "58": "<code>E</code>",
+ "57":
+ "<code>List.{u} (α : Type u) : Type u</code><span class=\"sep\"></span><code class=\"docstring\">Linked lists: ordered lists, in which each element has a reference to the next element.\n\nMost operations on linked lists take time proportional to the length of the list, because each\nelement must be traversed to find the next element.\n\n`List α` is isomorphic to `Array α`, but they are useful for different things:\n* `List α` is easier for reasoning, and `Array α` is modeled as a wrapper around `List α`.\n* `List α` works well as a persistent data structure, when many copies of the tail are shared. When\n  the value is not shared, `Array α` will have better performance because it can do destructive\n  updates.\n</code>",
+ "56": "<code>ℝ → E</code>",
+ "55":
+ "<code>CompleteSpace.{u} (α : Type u) [UniformSpace α] : Prop</code><span class=\"sep\"></span><code class=\"docstring\">A complete space is defined here using uniformities. A uniform space\nis complete if every Cauchy filter converges. </code>",
+ "54":
+ "<code>LMLF.Integral.HasImproperIntegralTailFromBreaks.{u_1} {E : Type u_1} [NormedAddCommGroup E] [NormedSpace ℝ E]\n  [CompleteSpace E] (f : ℝ → E) (c : ℝ) : List ℝ → E → Prop</code><span class=\"sep\"></span><code class=\"docstring\">Independent one-sided improper integrals on the intervals determined by a sorted list of remaining\nexceptional points, beginning immediately to the right of `c`.\n</code>",
+ "53":
+ "<code>NormedSpace.{u_6, u_7} (𝕜 : Type u_6) (E : Type u_7) [NormedField 𝕜] [SeminormedAddCommGroup E] : Type (max u_6 u_7)</code><span class=\"sep\"></span><code class=\"docstring\">A normed space over a normed field is a vector space endowed with a norm which satisfies the\nequality `‖c • x‖ = ‖c‖ ‖x‖`. We require only `‖c • x‖ ≤ ‖c‖ ‖x‖` in the definition, then prove\n`‖c • x‖ = ‖c‖ ‖x‖` in `norm_smul`.\n\nNote that since this requires `SeminormedAddCommGroup` and not `NormedAddCommGroup`, this\ntypeclass can be used for \"seminormed spaces\" too, just as `Module` can be used for\n\"semimodules\". </code>",
+ "52":
+ "<code>QuantitativeAnalysis.ErrorOn.{u_1, u_3} {X : Type u_1} {E : Type u_3} [NormedAddCommGroup E] (D : Set X) (f a : X → E)\n  (b : X → ℝ) : Prop</code><span class=\"sep\"></span><code class=\"docstring\">`ErrorOn D f a b` means that `a` approximates `f` with pointwise error at most `b` on `D`. </code>",
+ "51":
+ "<code>QuantitativeAnalysis.HasExpansionError.{u_1, u_2} {X : Type u_1} {E : Type u_2} [NormedAddCommGroup E] (f : X → E)\n  (term : ℕ → X → E) (D : ℕ → Set X) (bound : ℕ → X → ℝ) : Prop</code><span class=\"sep\"></span><code class=\"docstring\">Every finite truncation of `term` approximates `f` with the displayed pointwise bound. </code>",
+ "50":
+ "<code>QuantitativeAnalysis.HasPoincareExpansion.isAsymptoticScale.{u_1, u_2} {X : Type u_1} {E : Type u_2}\n  [NormedAddCommGroup E] {l : Filter X} {f : X → E} {term : ℕ → X → E} (h : HasPoincareExpansion l f term) :\n  IsAsymptoticScale l term</code><span class=\"sep\"></span><code class=\"docstring\">The terms of every Poincaré expansion form an asymptotic scale. </code>",
+ "5":
  "<code>NormedAddCommGroup.{u_8} (E : Type u_8) : Type u_8</code><span class=\"sep\"></span><code class=\"docstring\">A normed group is an additive group endowed with a norm for which `dist x y = ‖-x + y‖` defines\na metric space structure. </code>",
+ "49": "<code>HasPoincareExpansion l f term</code>",
+ "48":
+ "<code>QuantitativeAnalysis.HasPoincareExpansion.remainder_isLittleO.{u_1, u_2} {X : Type u_1} {E : Type u_2}\n  [NormedAddCommGroup E] {l : Filter X} {f : X → E} {term : ℕ → X → E} (h : HasPoincareExpansion l f term) (n : ℕ) :\n  (fun x =&gt; f x - seriesPartialSum term (n + 1) x) =o[l] term n</code><span class=\"sep\"></span><code class=\"docstring\">The remainder after retaining terms `0` through `n` is little-o of term `n`. </code>",
+ "47": "<code><span class=\"literal string\">\"] \"</span> : String</code>",
+ "46": "<code><span class=\"literal string\">\" ∼ₚ[\"</span> : String</code>",
+ "45": "<code>Lean.TSyntax `term</code>",
+ "44":
+ "<code>QuantitativeAnalysis.HasPoincareExpansion.{u_1, u_2} {X : Type u_1} {E : Type u_2} [NormedAddCommGroup E] (l : Filter X)\n  (f : X → E) (term : ℕ → X → E) : Prop</code><span class=\"sep\"></span><code class=\"docstring\">`f` has the Poincaré expansion `term` along `l` when every finite-truncation remainder is\nlittle-o of its last retained term. This relation does not assert convergence of an infinite sum.\n</code>",
+ "43":
+ "<code>Filter.{u_1} (α : Type u_1) : Type u_1</code><span class=\"sep\"></span><code class=\"docstring\">A filter `F` on a type `α` is a collection of sets of `α` which contains the whole `α`,\nis upwards-closed, and is stable under intersection. We do not forbid this collection to be\nall sets of `α`. </code>",
+ "42": "<code>Filter X</code>",
+ "41":
+ "<code>QuantitativeAnalysis.IsAsymptoticScale.{u_1, u_2} {X : Type u_1} {E : Type u_2} [NormedAddCommGroup E] (l : Filter X)\n  (term : ℕ → X → E) : Prop</code><span class=\"sep\"></span><code class=\"docstring\">Each successive term is asymptotically smaller in norm than its predecessor along `l`. </code>",
+ "40":
+ "<code>Finset.range (n : ℕ) : Finset ℕ</code><span class=\"sep\"></span><code class=\"docstring\">`range n` is the set of natural numbers less than `n`. </code>",
+ "4":
+ "<code class=\"docstring\">The syntax `variable (X Y ... Z : Type*)` creates a new distinct implicit universe variable\n`&gt; 0` for each variable in the sequence. </code>",
  "39":
- "<code>Complex : Type</code><span class=\"sep\"></span><code class=\"docstring\">Complex numbers consist of two `Real`s: a real part `re` and an imaginary part `im`. </code>",
- "38": "<code>ℂ</code>",
- "37":
- "<code>LMLF.Definitions.gamma_eulerIntegrable {s : ℂ} (hs : 0 &lt; s.re) :\n  MeasureTheory.IntegrableOn (fun t =&gt; ↑(Real.exp (-t)) * ↑t ^ (s - 1)) (Set.Ioi 0) MeasureTheory.volume</code><span class=\"sep\"></span><code class=\"docstring\">Euler's integrand for `s` is integrable on the positive real axis when `0 &lt; re s`. </code>",
+ "<code>QuantitativeAnalysis.seriesPartialSum.{u_1, u_2} {X : Type u_1} {E : Type u_2} [NormedAddCommGroup E] (term : ℕ → X → E)\n  (n : ℕ) (x : X) : E</code><span class=\"sep\"></span><code class=\"docstring\">The sum of the first `n` terms of a function-valued series. </code>",
+ "38":
+ "<code class=\"docstring\">Makes names from other namespaces visible without writing the namespace prefix.\n\nNames that are made available with `open` are visible within the current `section` or `namespace`\nblock. This makes referring to (type) definitions and theorems easier, but note that it can also\nmake [scoped instances], notations, and attributes from a different namespace available.\n\nThe `open` command can be used in a few different ways:\n\n* `open Some.Namespace.Path1 Some.Namespace.Path2` makes all non-protected names in\n  `Some.Namespace.Path1` and `Some.Namespace.Path2` available without the prefix, so that\n  `Some.Namespace.Path1.x` and `Some.Namespace.Path2.y` can be referred to by writing only `x` and\n  `y`.\n\n* `open Some.Namespace.Path hiding def1 def2` opens all non-protected names in `Some.Namespace.Path`\n  except `def1` and `def2`.\n\n* `open Some.Namespace.Path (def1 def2)` only makes `Some.Namespace.Path.def1` and\n  `Some.Namespace.Path.def2` available without the full prefix, so `Some.Namespace.Path.def3` would\n  be unaffected.\n\n  This works even if `def1` and `def2` are `protected`.\n\n* `open Some.Namespace.Path renaming def1 → def1', def2 → def2'` same as `open Some.Namespace.Path\n  (def1 def2)` but `def1`/`def2`'s names are changed to `def1'`/`def2'`.\n\n  This works even if `def1` and `def2` are `protected`.\n\n* `open scoped Some.Namespace.Path1 Some.Namespace.Path2` **only** opens [scoped instances],\n  notations, and attributes from `Namespace1` and `Namespace2`; it does **not** make any other name\n  available.\n\n* `open &lt;any of the open shapes above&gt; in` makes the names `open`-ed visible only in the next\n  command or expression.\n\n[scoped instance]: https://lean-lang.org/theorem_proving_in_lean4/type_classes.html#scoped-instances\n(Scoped instances in Theorem Proving in Lean)\n\n\n## Examples\n\n```lean\n/-- SKI combinators https://en.wikipedia.org/wiki/SKI_combinator_calculus -/\nnamespace Combinator.Calculus\n  def I (a : α) : α := a\n  def K (a : α) : β → α := fun _ =&gt; a\n  def S (x : α → β → γ) (y : α → β) (z : α) : γ := x z (y z)\nend Combinator.Calculus\n\nsection\n  -- open everything under `Combinator.Calculus`, *i.e.* `I`, `K` and `S`,\n  -- until the section ends\n  open Combinator.Calculus\n\n  theorem SKx_eq_K : S K x = I := rfl\nend\n\n-- open everything under `Combinator.Calculus` only for the next command (the next `theorem`, here)\nopen Combinator.Calculus in\ntheorem SKx_eq_K' : S K x = I := rfl\n\nsection\n  -- open only `S` and `K` under `Combinator.Calculus`\n  open Combinator.Calculus (S K)\n\n  theorem SKxy_eq_y : S K x y = y := rfl\n\n  -- `I` is not in scope, we have to use its full path\n  theorem SKxy_eq_Iy : S K x y = Combinator.Calculus.I y := rfl\nend\n\nsection\n  open Combinator.Calculus\n    renaming\n      I → identity,\n      K → konstant\n\n  #check identity\n  #check konstant\nend\n\nsection\n  open Combinator.Calculus\n    hiding S\n\n  #check I\n  #check K\nend\n\nsection\n  namespace Demo\n    inductive MyType\n    | val\n\n    namespace N1\n      scoped infix:68 \" ≋ \" =&gt; BEq.beq\n\n      scoped instance : BEq MyType where\n        beq _ _ := true\n\n      def Alias := MyType\n    end N1\n  end Demo\n\n  -- bring `≋` and the instance in scope, but not `Alias`\n  open scoped Demo.N1\n\n  #check Demo.MyType.val == Demo.MyType.val\n  #check Demo.MyType.val ≋ Demo.MyType.val\n  -- #check Alias -- unknown identifier 'Alias'\nend\n```\n</code>",
+ "37": "<code>ℕ</code>",
  "36": "<code>ℕ → X → ℝ</code>",
- "35": "<code>ℕ → Set a</code>",
+ "35": "<code>ℕ → Set X</code>",
  "34":
  "<code>Nat : Type</code><span class=\"sep\"></span><code class=\"docstring\">The natural numbers, starting at zero.\n\nThis type is special-cased by both the kernel and the compiler, and overridden with an efficient\nimplementation. Both use a fast arbitrary-precision arithmetic library (usually\n[GMP](https://gmplib.org/)); at runtime, `Nat` values that are sufficiently small are unboxed.\n</code>",
- "33": "<code>ℕ → X → a</code>",
+ "33": "<code>ℕ → X → E</code>",
  "32":
- "<code>QuantitativeAnalysis.HasErrorFamily.{u_1, u_3} {X : Type u_1} {E : Type u_3} [NormedAddCommGroup E] (f : X → E)\n  (a : ℕ → X → E) (D : ℕ → Set X) (b : ℕ → X → ℝ) : Prop</code><span class=\"sep\"></span><code class=\"docstring\">A family of finite pointwise error estimates for one fixed target function. </code>",
+ "<code>QuantitativeAnalysis.HasErrorFamily.{u_1, u_2} {X : Type u_1} {E : Type u_2} [NormedAddCommGroup E] (f : X → E)\n  (a : ℕ → X → E) (D : ℕ → Set X) (b : ℕ → X → ℝ) : Prop</code><span class=\"sep\"></span><code class=\"docstring\">A family of finite pointwise error estimates for one fixed target function. </code>",
  "31":
- "<code>Function.comp.{u, v, w} {α : Sort u} {β : Sort v} {δ : Sort w} (f : β → δ) (g : α → β) : α → δ</code><span class=\"sep\"></span><code class=\"docstring\">Function composition, usually written with the infix operator `∘`. A new function is created from\ntwo existing functions, where one function's output is used as input to the other.\n\nExamples:\n * `Function.comp List.reverse (List.drop 2) [3, 2, 4, 1] = [1, 4]`\n * `(List.reverse ∘ List.drop 2) [3, 2, 4, 1] = [1, 4]`\n\n\nConventions for notations in identifiers:\n\n * The recommended spelling of `∘` in identifiers is `comp`.</code>",
- "30":
  "<code>Set.MapsTo.{u, v} {α : Type u} {β : Type v} (f : α → β) (s : Set α) (t : Set β) : Prop</code><span class=\"sep\"></span><code class=\"docstring\">`MapsTo f s t` means that the image of `s` is contained in `t`. </code>",
- "3": "<code>Type u_3</code>",
- "29": "<code>Set.MapsTo ψ S D</code>",
- "28": "<code>Y → a</code>",
- "27": "<code>Set Y</code>",
- "26": "<code>Type u_2</code>",
+ "30": "<code>Set.MapsTo ψ S D</code>",
+ "3": "<code>Type u_2</code>",
+ "29": "<code>Y → X</code>",
+ "28": "<code>Set Y</code>",
+ "27":
+ "<code>QuantitativeAnalysis.ErrorOn.comp.{u_1, u_2, u_3} {X : Type u_1} {E : Type u_2} [NormedAddCommGroup E] {Y : Type u_3}\n  {D : Set X} {f a : X → E} {b : X → ℝ} (h : ErrorOn D f a b) {S : Set Y} (ψ : Y → X) (hψ : Set.MapsTo ψ S D) :\n  ErrorOn S (f ∘ ψ) (a ∘ ψ) (b ∘ ψ)</code><span class=\"sep\"></span><code class=\"docstring\">An error bound pulls back along a map into its original domain. </code>",
+ "26": "<code>ErrorOn D a c d</code>",
  "25":
- "<code>QuantitativeAnalysis.ErrorOn.comp.{u_1, u_2, u_3} {X : Type u_1} {Y : Type u_2} {E : Type u_3} [NormedAddCommGroup E]\n  {D : Set X} {f a : X → E} {b : X → ℝ} (h : QuantitativeAnalysis.ErrorOn D f a b) {S : Set Y} (ψ : Y → X)\n  (hψ : Set.MapsTo ψ S D) : QuantitativeAnalysis.ErrorOn S (f ∘ ψ) (a ∘ ψ) (b ∘ ψ)</code><span class=\"sep\"></span><code class=\"docstring\">An error bound pulls back along a map into its original domain. </code>",
- "24":
- "<code>HAdd.hAdd.{u, v, w} {α : Type u} {β : Type v} {γ : outParam (Type w)} [self : HAdd α β γ] : α → β → γ</code><span class=\"sep\"></span><code class=\"docstring\">`a + b` computes the sum of `a` and `b`.\nThe meaning of this notation is type-dependent. \n\nConventions for notations in identifiers:\n\n * The recommended spelling of `+` in identifiers is `add`.</code>",
- "23": "<code>QuantitativeAnalysis.ErrorOn D a c d</code>",
- "22":
- "<code>QuantitativeAnalysis.ErrorOn.trans.{u_1, u_3} {X : Type u_1} {E : Type u_3} [NormedAddCommGroup E] {D : Set X}\n  {f a c : X → E} {b d : X → ℝ} (hfa : QuantitativeAnalysis.ErrorOn D f a b)\n  (hac : QuantitativeAnalysis.ErrorOn D a c d) : QuantitativeAnalysis.ErrorOn D f c fun x =&gt; b x + d x</code><span class=\"sep\"></span><code class=\"docstring\">Successive error bounds compose with the sum of their majorants. </code>",
- "21":
- "<code>LE.le.{u} {α : Type u} [self : LE α] : α → α → Prop</code><span class=\"sep\"></span><code class=\"docstring\">The less-equal relation: `x ≤ y` \n\nConventions for notations in identifiers:\n\n * The recommended spelling of `≤` in identifiers is `le`.</code>",
- "20": "<code>∀ x ∈ D, b x ≤ d x</code>",
- "2":
- "<code class=\"docstring\">A type universe. `Type ≡ Type 0`, `Type u ≡ Sort (u + 1)`. </code>",
- "19":
- "<code>QuantitativeAnalysis.ErrorOn.weaken.{u_1, u_3} {X : Type u_1} {E : Type u_3} [NormedAddCommGroup E] {D : Set X}\n  {f a : X → E} {b d : X → ℝ} (h : QuantitativeAnalysis.ErrorOn D f a b) (hbd : ∀ x ∈ D, b x ≤ d x) :\n  QuantitativeAnalysis.ErrorOn D f a d</code><span class=\"sep\"></span><code class=\"docstring\">An error bound remains valid after pointwise enlargement of its majorant. </code>",
- "18": "<code>D' ⊆ D</code>",
- "17": "<code>QuantitativeAnalysis.ErrorOn D f a b</code>",
- "16":
- "<code>QuantitativeAnalysis.ErrorOn.restrict.{u_1, u_3} {X : Type u_1} {E : Type u_3} [NormedAddCommGroup E] {D D' : Set X}\n  {f a : X → E} {b : X → ℝ} (h : QuantitativeAnalysis.ErrorOn D f a b) (hD : D' ⊆ D) :\n  QuantitativeAnalysis.ErrorOn D' f a b</code><span class=\"sep\"></span><code class=\"docstring\">An error bound restricts to a smaller domain. </code>",
- "15": "<code>X</code>",
- "14":
+ "<code>QuantitativeAnalysis.ErrorOn.trans.{u_1, u_2} {X : Type u_1} {E : Type u_2} [NormedAddCommGroup E] {D : Set X}\n  {f a c : X → E} {b d : X → ℝ} (hfa : ErrorOn D f a b) (hac : ErrorOn D a c d) : ErrorOn D f c fun x =&gt; b x + d x</code><span class=\"sep\"></span><code class=\"docstring\">Successive error bounds compose with the sum of their majorants. </code>",
+ "24": "<code>∀ x ∈ D, b x ≤ d x</code>",
+ "23":
+ "<code>QuantitativeAnalysis.ErrorOn.weaken.{u_1, u_2} {X : Type u_1} {E : Type u_2} [NormedAddCommGroup E] {D : Set X}\n  {f a : X → E} {b d : X → ℝ} (h : ErrorOn D f a b) (hbd : ∀ x ∈ D, b x ≤ d x) : ErrorOn D f a d</code><span class=\"sep\"></span><code class=\"docstring\">An error bound remains valid after pointwise enlargement of its majorant. </code>",
+ "22": "<code>D' ⊆ D</code>",
+ "21": "<code>ErrorOn D f a b</code>",
+ "20":
+ "<code>QuantitativeAnalysis.ErrorOn.restrict.{u_1, u_2} {X : Type u_1} {E : Type u_2} [NormedAddCommGroup E] {D D' : Set X}\n  {f a : X → E} {b : X → ℝ} (h : ErrorOn D f a b) (hD : D' ⊆ D) : ErrorOn D' f a b</code><span class=\"sep\"></span><code class=\"docstring\">An error bound restricts to a smaller domain. </code>",
+ "2": "<code>Type u_1</code>",
+ "19": "<code>ℝ</code>",
+ "18":
  "<code>Set.EqOn.{u, v} {α : Type u} {β : Type v} (f₁ f₂ : α → β) (s : Set α) : Prop</code><span class=\"sep\"></span><code class=\"docstring\">Two functions `f₁ f₂ : α → β` are equal on `s` if `f₁ x = f₂ x` for all `x ∈ s`. </code>",
- "13": "<code>Set.EqOn f a D</code>",
+ "17": "<code>Set.EqOn f a D</code>",
+ "16":
+ "<code>QuantitativeAnalysis.ErrorOn.exact.{u_1, u_2} {X : Type u_1} {E : Type u_2} [NormedAddCommGroup E] {D : Set X}\n  {f a : X → E} (h : Set.EqOn f a D) : ErrorOn D f a fun x =&gt; 0</code><span class=\"sep\"></span><code class=\"docstring\">Functions equal on a domain have zero error there. </code>",
+ "15": "<code>Type u_3</code>",
+ "14":
+ "<code>QuantitativeAnalysis.NormBoundOn.{u_1, u_2} {X : Type u_1} {E : Type u_2} [NormedAddCommGroup E] (D : Set X) (f : X → E)\n  (b : X → ℝ) : Prop</code><span class=\"sep\"></span><code class=\"docstring\">`NormBoundOn D f b` means that the norm of `f` is pointwise at most `b` on `D`. </code>",
+ "13": "<code>X</code>",
+ "122": "<code>0 &lt; x</code>",
+ "121":
+ "<code>LMLF.Blueprint.Gamma.stirlingLog_remainder_bounds (n : ℕ) {x : ℝ} (hx : 0 &lt; x) :\n  0 ≤ (Real.log (Real.Gamma x) - stirlingLogApprox n x) * stirlingLogTerm n x ∧\n    |Real.log (Real.Gamma x) - stirlingLogApprox n x| ≤ |stirlingLogTerm n x|</code><span class=\"sep\"></span><code class=\"docstring\">On the positive real axis, the remainder has the sign of and is bounded by the next term. </code>",
+ "120":
+ "<code>LMLF.Blueprint.Gamma.stirlingLogApprox (n : ℕ) (x : ℝ) : ℝ</code><span class=\"sep\"></span><code class=\"docstring\">Stirling's approximation after `n` Bernoulli terms. </code>",
  "12":
- "<code>QuantitativeAnalysis.ErrorOn.exact.{u_1, u_3} {X : Type u_1} {E : Type u_3} [NormedAddCommGroup E] {D : Set X}\n  {f a : X → E} (h : Set.EqOn f a D) : QuantitativeAnalysis.ErrorOn D f a fun x =&gt; 0</code><span class=\"sep\"></span><code class=\"docstring\">Functions equal on a domain have zero error there. </code>",
- "11":
- "<code>QuantitativeAnalysis.NormBoundOn.{u_1, u_3} {X : Type u_1} {E : Type u_3} [NormedAddCommGroup E] (D : Set X) (f : X → E)\n  (b : X → ℝ) : Prop</code><span class=\"sep\"></span><code class=\"docstring\">`NormBoundOn D f b` means that the norm of `f` is pointwise at most `b` on `D`. </code>",
- "10":
  "<code class=\"docstring\">The universe of propositions. `Prop ≡ Sort 0`.\n\nEvery proposition is propositionally equal to either `True` or `False`. </code>",
- "1": "<code>Type u_1</code>",
+ "119":
+ "<code>Real.Gamma (s : ℝ) : ℝ</code><span class=\"sep\"></span><code class=\"docstring\">The `Γ` function (of a real variable `s`). </code>",
+ "118":
+ "<code>LMLF.Blueprint.Gamma.stirlingLog_hasPoincareExpansion :\n  (fun x =&gt; Real.log (Real.Gamma x) - stirlingLogMain x) ∼ₚ[atTop] stirlingLogTerm</code><span class=\"sep\"></span><code class=\"docstring\">The real-positive specialization of the Poincaré expansion in DLMF 5.11.1. </code>",
+ "117":
+ "<code>bernoulli (n : ℕ) : ℚ</code><span class=\"sep\"></span><code class=\"docstring\">The Bernoulli numbers are defined to be `bernoulli'` with a parity sign. </code>",
+ "116":
+ "<code>LMLF.Blueprint.Gamma.stirlingLogTerm (k : ℕ) (x : ℝ) : ℝ</code><span class=\"sep\"></span><code class=\"docstring\">Term `k` is the term numbered `k + 1` in DLMF 5.11.1. </code>",
+ "115":
+ "<code>Real.pi : ℝ</code><span class=\"sep\"></span><code class=\"docstring\">The number π = 3.14159265... Defined here using choice as twice a zero of cos in [1,2],\nfrom which one can derive all its properties. For explicit bounds on π,\nsee `Mathlib/Analysis/Real/Pi/Bounds.lean`.\n\nDenoted `π`, once the `Real` namespace is opened. </code>",
+ "114":
+ "<code>Real.log (x : ℝ) : ℝ</code><span class=\"sep\"></span><code class=\"docstring\">The real logarithm function, equal to the inverse of the exponential for `x &gt; 0`,\nto `log |x|` for `x &lt; 0`, and to `0` for `0`. We use this unconventional extension to\n`(-∞, 0]` as it gives the formula `log (x * y) = log x + log y` for all nonzero `x` and `y`, and\nthe derivative of `log` is `1/x` away from `0`. </code>",
+ "113":
+ "<code>LMLF.Blueprint.Gamma.stirlingLogMain (x : ℝ) : ℝ</code><span class=\"sep\"></span><code class=\"docstring\">The elementary part of Stirling's expansion for `log (Gamma x)`. </code>",
+ "112":
+ "<code>Complex.Gamma (s : ℂ) : ℂ</code><span class=\"sep\"></span><code class=\"docstring\">The `Γ` function (of a complex variable `s`). </code>",
+ "111":
+ "<code>LMLF.Definitions.gamma_eq_eulerIntegral {s : ℂ} (hs : 0 &lt; s.re) :\n  Complex.Gamma s = ∫ (t : ℝ) in Set.Ioi 0, ↑(Real.exp (-t)) * ↑t ^ (s - 1)</code><span class=\"sep\"></span><code class=\"docstring\">On the half-plane `0 &lt; re s`, Mathlib's complex Gamma function is Euler's integral. </code>",
+ "110":
+ "<code>MeasureTheory.IntegrableOn.{u_1, u_3} {α : Type u_1} {ε : Type u_3} {mα : MeasurableSpace α} [TopologicalSpace ε]\n  [ContinuousENorm ε] (f : α → ε) (s : Set α) (μ : MeasureTheory.Measure α := by volume_tac) : Prop</code><span class=\"sep\"></span><code class=\"docstring\">A function is `IntegrableOn` a set `s` if it is almost everywhere strongly measurable on `s`\nand if the integral of its pointwise norm over `s` is less than infinity. </code>",
+ "11":
+ "<code>Real : Type</code><span class=\"sep\"></span><code class=\"docstring\">The type `ℝ` of real numbers constructed as equivalence classes of Cauchy sequences of rational\nnumbers. </code>",
+ "109":
+ "<code>Complex.re (self : ℂ) : ℝ</code><span class=\"sep\"></span><code class=\"docstring\">The real part of a complex number. </code>",
+ "108": "<code>0 &lt; s.re</code>",
+ "107":
+ "<code>Complex : Type</code><span class=\"sep\"></span><code class=\"docstring\">Complex numbers consist of two `Real`s: a real part `re` and an imaginary part `im`. </code>",
+ "106": "<code>ℂ</code>",
+ "105":
+ "<code>LMLF.Definitions.gamma_eulerIntegrable {s : ℂ} (hs : 0 &lt; s.re) :\n  MeasureTheory.IntegrableOn (fun t =&gt; ↑(Real.exp (-t)) * ↑t ^ (s - 1)) (Set.Ioi 0) MeasureTheory.volume</code><span class=\"sep\"></span><code class=\"docstring\">Euler's integrand for `s` is integrable on the positive real axis when `0 &lt; re s`. </code>",
+ "104":
+ "<code>Tendsto (fun R =&gt; Real.exp (-h * R) • F R) atTop (nhds 0)</code>",
+ "103":
+ "<code>Real.exp (x : ℝ) : ℝ</code><span class=\"sep\"></span><code class=\"docstring\">The real exponential function, defined as the real part of the complex exponential </code>",
+ "102":
+ "<code>IntegrableOn (fun t =&gt; Real.exp (-h * t) • F t) (Ioi k) volume</code>",
+ "101": "<code>IsFiniteExceptionalPrimitive g k S F</code>",
+ "100":
+ "<code>LMLF.Integral.IsFiniteExceptionalPrimitive.hasImproperIntegralAtTopExcept_exp_smul.{u_1} {E : Type u_1}\n  [NormedAddCommGroup E] [NormedSpace ℝ E] [CompleteSpace E] {g F : ℝ → E} {k : ℝ} {S : Finset ℝ}\n  (hF : IsFiniteExceptionalPrimitive g k S F) (h : ℝ)\n  (hInt : IntegrableOn (fun t =&gt; Real.exp (-h * t) • F t) (Ioi k) volume)\n  (hLim : Tendsto (fun R =&gt; Real.exp (-h * R) • F R) atTop (nhds 0)) :\n  HasImproperIntegralAtTopExcept (fun t =&gt; Real.exp (-h * t) • g t) k S\n    (h • ∫ (t : ℝ) in Ioi k, Real.exp (-h * t) • F t)</code><span class=\"sep\"></span><code class=\"docstring\">IMP-001-T06. </code>",
+ "10": "<code>X → ℝ</code>",
+ "1":
+ "<code class=\"docstring\">Declares one or more typed variables, or modifies whether already-declared variables are\n  implicit.\n\nIntroduces variables that can be used in definitions within the same `namespace` or `section` block.\nWhen a definition mentions a variable, Lean will add it as an argument of the definition. This is\nuseful in particular when writing many definitions that have parameters in common (see below for an\nexample).\n\nVariable declarations have the same flexibility as regular function parameters. In particular they\ncan be [explicit, implicit][binder docs], or [instance implicit][tpil classes] (in which case they\ncan be anonymous). This can be changed, for instance one can turn explicit variable `x` into an\nimplicit one with `variable {x}`. Note that currently, you should avoid changing how variables are\nbound and declare new variables at the same time; see [issue 2789] for more on this topic.\n\nIn *theorem bodies* (i.e. proofs), variables are not included based on usage in order to ensure that\nchanges to the proof cannot change the statement of the overall theorem. Instead, variables are only\navailable to the proof if they have been mentioned in the theorem header or in an `include` command\nor are instance implicit and depend only on such variables.\n\nSee [*Variables and Sections* from Theorem Proving in Lean][tpil vars] for a more detailed\ndiscussion.\n\n[tpil vars]:\nhttps://lean-lang.org/theorem_proving_in_lean4/dependent_type_theory.html#variables-and-sections\n(Variables and Sections on Theorem Proving in Lean) [tpil classes]:\nhttps://lean-lang.org/theorem_proving_in_lean4/type_classes.html (Type classes on Theorem Proving in\nLean) [binder docs]:\nhttps://leanprover-community.github.io/mathlib4_docs/Lean/Expr.html#Lean.BinderInfo (Documentation\nfor the BinderInfo type) [issue 2789]: https://github.com/leanprover/lean4/issues/2789 (Issue 2789\non github)\n\n## Examples\n\n```lean\nsection\n  variable\n    {α : Type u}      -- implicit\n    (a : α)           -- explicit\n    [instBEq : BEq α] -- instance implicit, named\n    [Hashable α]      -- instance implicit, anonymous\n\n  def isEqual (b : α) : Bool :=\n    a == b\n\n  #check isEqual\n  -- isEqual.{u} {α : Type u} (a : α) [instBEq : BEq α] (b : α) : Bool\n\n  variable\n    {a} -- `a` is implicit now\n\n  def eqComm {b : α} := a == b ↔ b == a\n\n  #check eqComm\n  -- eqComm.{u} {α : Type u} {a : α} [instBEq : BEq α] {b : α} : Prop\nend\n```\n\nThe following shows a typical use of `variable` to factor out definition arguments:\n\n```lean\nvariable (Src : Type)\n\nstructure Logger where\n  trace : List (Src × String)\n#check Logger\n-- Logger (Src : Type) : Type\n\nnamespace Logger\n  -- switch `Src : Type` to be implicit until the `end Logger`\n  variable {Src}\n\n  def empty : Logger Src where\n    trace := []\n  #check empty\n  -- Logger.empty {Src : Type} : Logger Src\n\n  variable (log : Logger Src)\n\n  def len :=\n    log.trace.length\n  #check len\n  -- Logger.len {Src : Type} (log : Logger Src) : Nat\n\n  variable (src : Src) [BEq Src]\n\n  -- at this point all of `log`, `src`, `Src` and the `BEq` instance can all become arguments\n\n  def filterSrc :=\n    log.trace.filterMap\n      fun (src', str') =&gt; if src' == src then some str' else none\n  #check filterSrc\n  -- Logger.filterSrc {Src : Type} (log : Logger Src) (src : Src) [inst✝ : BEq Src] : List String\n\n  def lenSrc :=\n    log.filterSrc src |&gt;.length\n  #check lenSrc\n  -- Logger.lenSrc {Src : Type} (log : Logger Src) (src : Src) [inst✝ : BEq Src] : Nat\nend Logger\n```\n\nThe following example demonstrates availability of variables in proofs:\n```lean\nvariable\n  {α : Type}    -- available in the proof as indirectly mentioned through `a`\n  [ToString α]  -- available in the proof as `α` is included\n  (a : α)       -- available in the proof as mentioned in the header\n  {β : Type}    -- not available in the proof\n  [ToString β]  -- not available in the proof\n\ntheorem ex : a = a := rfl\n```\nAfter elaboration of the proof, the following warning will be generated to highlight the unused\nhypothesis:\n```\nincluded section variable '[ToString α]' is not used in 'ex', consider excluding it\n```\nIn such cases, the offending variable declaration should be moved down or into a section so that\nonly theorems that do depend on it follow it until the end of the section.\n</code>",
  "0":
- "<code>QuantitativeAnalysis.ErrorOn.{u_1, u_3} {X : Type u_1} {E : Type u_3} [NormedAddCommGroup E] (D : Set X) (f a : X → E)\n  (b : X → ℝ) : Prop</code><span class=\"sep\"></span><code class=\"docstring\">`ErrorOn D f a b` means that `a` approximates `f` with pointwise error at most `b` on `D`. </code>"}
+ "<code class=\"docstring\">`namespace &lt;id&gt;` opens a section with label `&lt;id&gt;` that influences naming and name resolution inside\nthe section:\n* Declarations names are prefixed: `def seventeen : ℕ := 17` inside a namespace `Nat` is given the\n  full name `Nat.seventeen`.\n* Names introduced by `export` declarations are also prefixed by the identifier.\n* All names starting with `&lt;id&gt;.` become available in the namespace without the prefix. These names\n  are preferred over names introduced by outer namespaces or `open`.\n* Within a namespace, declarations can be `protected`, which excludes them from the effects of\n  opening the namespace.\n\nAs with `section`, namespaces can be nested and the scope of a namespace is terminated by a\ncorresponding `end &lt;id&gt;` or the end of the file.\n\n`namespace` also acts like `section` in delimiting the scope of `variable`, `open`, and other scoped commands.\n</code>"}
