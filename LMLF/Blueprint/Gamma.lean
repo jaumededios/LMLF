@@ -9,9 +9,11 @@ This module contains typechecked statement design, isolated from the proved `LML
 Declarations move out of `LMLF.Blueprint` only when proofs are supplied.
 -/
 
+-- ANCHOR: stirlingContext
 namespace LMLF.Blueprint.Gamma
 
 open Filter
+-- ANCHOR_END: stirlingContext
 /-- The elementary part of Stirling's expansion for `log (Gamma x)`. -/
 -- ANCHOR: stirlingLogMain
 noncomputable def stirlingLogMain (x : ℝ) : ℝ :=
@@ -40,10 +42,12 @@ theorem stirlingLogTerm_apply (k : ℕ) (x : ℝ) :
 
 /-- The real-positive specialization of the Poincaré expansion in DLMF 5.11.1. -/
 -- ANCHOR: stirlingLog_hasPoincareExpansion
-axiom stirlingLog_hasPoincareExpansion :
-    (fun x : ℝ ↦ Real.log (Real.Gamma x) - stirlingLogMain x) ∼[atTop]
+theorem stirlingLog_hasPoincareExpansion :
+    (fun x : ℝ ↦ Real.log (Real.Gamma x) - stirlingLogMain x) ∼ₚ[atTop]
       stirlingLogTerm
 -- ANCHOR_END: stirlingLog_hasPoincareExpansion
+:= by
+  sorry
 
 /-- Stirling's approximation after `n` Bernoulli terms. -/
 -- ANCHOR: stirlingLogApprox
@@ -59,12 +63,14 @@ theorem stirlingLogApprox_apply (n : ℕ) (x : ℝ) :
 
 /-- On the positive real axis, the remainder has the sign of and is bounded by the next term. -/
 -- ANCHOR: stirlingLog_remainder_bounds
-axiom stirlingLog_remainder_bounds (n : ℕ) {x : ℝ} (hx : 0 < x) :
+theorem stirlingLog_remainder_bounds (n : ℕ) {x : ℝ} (hx : 0 < x) :
     0 ≤
         (Real.log (Real.Gamma x) - stirlingLogApprox n x) *
           stirlingLogTerm n x ∧
       |Real.log (Real.Gamma x) - stirlingLogApprox n x| ≤
         |stirlingLogTerm n x|
 -- ANCHOR_END: stirlingLog_remainder_bounds
+:= by
+  sorry
 
 end LMLF.Blueprint.Gamma

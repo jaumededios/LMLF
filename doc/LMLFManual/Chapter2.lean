@@ -24,7 +24,13 @@ number := false
 `HasErrorFamily f a D b` gives each finite order its own approximant `a n`, validity domain `D n`,
 and explicit error bound `b n`.
 
-:::leanStatement "Quantitative Lean definition"
+:::leanStatement "Quantitative Lean · QuantitativeAnalysis"
+```anchor quantitativeBasicContext (module := LMLF.Quantitative.Basic) -showProofStates
+namespace QuantitativeAnalysis
+
+variable {X E : Type*} [NormedAddCommGroup E]
+```
+
 ```anchor HasErrorFamily (module := LMLF.Quantitative.Basic) -showProofStates
 def HasErrorFamily
     (f : X → E) (a : ℕ → X → E)
@@ -38,10 +44,23 @@ def HasErrorFamily
 number := false
 %%%
 
-`seriesPartialSum term n` is the sum of the first `n` terms. The terms form an asymptotic scale when
-each successive term is little-o of its predecessor along the chosen filter.
+Let `X` be the space of arguments and `E` a normed additive commutative group. The function
+`term n : X → E` is the term of index `n`; `seriesPartialSum term n` retains the terms with indices
+`0` through `n - 1`. The filter `l` specifies how the argument approaches the asymptotic regime.
 
-:::leanStatement "Lean definitions"
+The family `term` is an asymptotic scale along `l` when every next term is little-o of its
+predecessor.
+$$`t_{n+1}=o_l(t_n).`
+
+:::leanStatement "Lean · QuantitativeAnalysis"
+```anchor quantitativeSeriesContext (module := LMLF.Quantitative.Series) -showProofStates
+namespace QuantitativeAnalysis
+
+open Asymptotics Filter
+
+variable {X E : Type*} [NormedAddCommGroup E]
+```
+
 ```anchor seriesPartialSum (module := LMLF.Quantitative.Series) -showProofStates
 def seriesPartialSum (term : ℕ → X → E) (n : ℕ) (x : X) : E :=
   ∑ k ∈ Finset.range n, term k x
@@ -55,8 +74,13 @@ def IsAsymptoticScale (l : Filter X) (term : ℕ → X → E) : Prop :=
 
 The notation
 $$`f\sim_{\mathrm P,l}\sum_{k\ge0}t_k`
-is written `f ∼[l] term` in Lean. It means that after terms `0` through `n` are retained, the
-remainder is little-o of term `n` along `l`.
+is written `f ∼ₚ[l] term` in Lean. For every `n`, the remainder after retaining terms `0` through
+`n` is little-o of `term n` along `l`:
+$$`f-\sum_{k=0}^{n}t_k=o_l(t_n).`
+
+These all-orders remainder estimates imply that `term` is an asymptotic scale. The displayed series
+is formal: this relation does not assert that an infinite sum converges. The subscript `ₚ`
+distinguishes this relation from Mathlib's asymptotic equivalence between two functions.
 
 :::leanStatement "Lean definition and notation"
 ```anchor HasPoincareExpansion (module := LMLF.Quantitative.Series) -showProofStates
@@ -66,8 +90,22 @@ def HasPoincareExpansion (l : Filter X) (f : X → E) (term : ℕ → X → E) :
 
 ```anchor poincareNotation (module := LMLF.Quantitative.Series) -showProofStates
 notation:50
-  f:50 " ∼[" l:50 "] " term:50 =>
+  f:50 " ∼ₚ[" l:50 "] " term:50 =>
     QuantitativeAnalysis.HasPoincareExpansion l f term
+```
+
+```anchor hasPoincareExpansionNamespace (module := LMLF.Quantitative.Series) -showProofStates
+namespace HasPoincareExpansion
+```
+
+```anchor HasPoincareExpansion.remainder_isLittleO (module := LMLF.Quantitative.Series) -showProofStates
+theorem remainder_isLittleO (h : HasPoincareExpansion l f term) (n : ℕ) :
+    (fun x ↦ f x - seriesPartialSum term (n + 1) x) =o[l] term n
+```
+
+```anchor HasPoincareExpansion.isAsymptoticScale (module := LMLF.Quantitative.Series) -showProofStates
+theorem isAsymptoticScale (h : HasPoincareExpansion l f term) :
+    IsAsymptoticScale l term
 ```
 :::
 

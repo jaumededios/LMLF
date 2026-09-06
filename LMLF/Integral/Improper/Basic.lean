@@ -6,11 +6,18 @@ open scoped Interval
 
 noncomputable section
 
+-- ANCHOR: improperBasicContext
 namespace LMLF.Integral
 
 variable {E : Type*} [NormedAddCommGroup E] [NormedSpace ℝ E]
+-- ANCHOR_END: improperBasicContext
 
-private def HasImproperIntegralTailFromBreaks
+/--
+Independent one-sided improper integrals on the intervals determined by a sorted list of remaining
+exceptional points, beginning immediately to the right of `c`.
+-/
+-- ANCHOR: HasImproperIntegralTailFromBreaks
+def HasImproperIntegralTailFromBreaks
     [CompleteSpace E] (f : ℝ → E) (c : ℝ) : List ℝ → E → Prop
   | [], I =>
       ∃ d : ℝ, ∃ L R : E, c < d ∧
@@ -30,8 +37,14 @@ private def HasImproperIntegralTailFromBreaks
           (nhdsWithin d (Iio d)) (nhds R) ∧
         HasImproperIntegralTailFromBreaks f d ds J ∧
         I = L + R + J
+-- ANCHOR_END: HasImproperIntegralTailFromBreaks
 
-private def HasImproperIntegralAtTopBreaks
+/--
+An improper integral from `k` to `+∞`, split at every point of a sorted list of exceptional
+points. Every one-sided contribution must converge separately.
+-/
+-- ANCHOR: HasImproperIntegralAtTopBreaks
+def HasImproperIntegralAtTopBreaks
     [CompleteSpace E] (f : ℝ → E) (k : ℝ) : List ℝ → E → Prop
   | [], I =>
       (∀ {b : ℝ}, k ≤ b → IntervalIntegrable f volume k b) ∧
@@ -44,14 +57,18 @@ private def HasImproperIntegralAtTopBreaks
           (nhdsWithin c (Iio c)) (nhds L) ∧
         HasImproperIntegralTailFromBreaks f c cs J ∧
         I = L + J
+-- ANCHOR_END: HasImproperIntegralAtTopBreaks
 
 /-- IMP-001-T01. -/
+-- ANCHOR: HasImproperIntegralAtTopExcept
 def HasImproperIntegralAtTopExcept
     [CompleteSpace E] (f : ℝ → E) (k : ℝ) (S : Finset ℝ) (I : E) : Prop :=
   (∀ c ∈ S, k < c) ∧
     HasImproperIntegralAtTopBreaks f k (S.sort (· ≤ ·)) I
+-- ANCHOR_END: HasImproperIntegralAtTopExcept
 
 /-- IMP-001-T05. -/
+-- ANCHOR: IsFiniteExceptionalPrimitive
 def IsFiniteExceptionalPrimitive
     [CompleteSpace E] (g : ℝ → E) (k : ℝ) (S : Finset ℝ) (F : ℝ → E) : Prop :=
   (∀ c ∈ S, k < c) ∧
@@ -61,6 +78,7 @@ def IsFiniteExceptionalPrimitive
       Disjoint (Icc a b) (↑S : Set ℝ) →
       IntervalIntegrable g volume a b ∧
         F b - F a = ∫ t in a..b, g t
+-- ANCHOR_END: IsFiniteExceptionalPrimitive
 
 private def IsTailPrimitiveFromBreaks
     [CompleteSpace E] (f : ℝ → E) (c : ℝ) (cs : List ℝ) (F : ℝ → E) : Prop :=
@@ -740,12 +758,15 @@ private theorem reverseInitialPrimitive
       simp
 
 /-- IMP-001-T08. -/
+-- ANCHOR: hasImproperIntegralAtTopExcept_iff_exists_primitive
 theorem hasImproperIntegralAtTopExcept_iff_exists_primitive
     [CompleteSpace E] {f : ℝ → E} {k : ℝ} {S : Finset ℝ} {I : E} :
     HasImproperIntegralAtTopExcept f k S I ↔
       ∃ F : ℝ → E,
         IsFiniteExceptionalPrimitive f k S F ∧
-          Tendsto F atTop (nhds I) := by
+          Tendsto F atTop (nhds I)
+-- ANCHOR_END: hasImproperIntegralAtTopExcept_iff_exists_primitive
+:= by
   constructor
   · intro himp
     have hsort : (S.sort (· ≤ ·)).SortedLT := S.sortedLT_sort
@@ -911,10 +932,13 @@ private theorem HasImproperIntegralAtTopBreaks.unique
       rw [hleft, htail]
 
 /-- IMP-001-T02. -/
+-- ANCHOR: HasImproperIntegralAtTopExcept.unique
 theorem HasImproperIntegralAtTopExcept.unique
     [CompleteSpace E] {f : ℝ → E} {k : ℝ} {S : Finset ℝ} {I J : E}
     (hI : HasImproperIntegralAtTopExcept f k S I)
-    (hJ : HasImproperIntegralAtTopExcept f k S J) : I = J :=
+    (hJ : HasImproperIntegralAtTopExcept f k S J) : I = J
+-- ANCHOR_END: HasImproperIntegralAtTopExcept.unique
+:=
   HasImproperIntegralAtTopBreaks.unique hI.2 hJ.2
 
 private theorem IsFiniteExceptionalPrimitive.weaken
@@ -930,6 +954,7 @@ private theorem IsFiniteExceptionalPrimitive.weaken
     exact hSU (by simpa using hc))
 
 /-- IMP-001-T03. -/
+-- ANCHOR: HasImproperIntegralAtTopExcept.finset_clm
 theorem HasImproperIntegralAtTopExcept.finset_clm
     {H : Type*} [NormedAddCommGroup H] [NormedSpace ℝ H]
     [CompleteSpace E] [CompleteSpace H]
@@ -938,7 +963,9 @@ theorem HasImproperIntegralAtTopExcept.finset_clm
     (h : ∀ i ∈ s, HasImproperIntegralAtTopExcept (f i) k (S i) (I i)) :
     HasImproperIntegralAtTopExcept
       (fun t => ∑ i ∈ s, T i (f i t)) k
-      (s.biUnion S) (∑ i ∈ s, T i (I i)) := by
+      (s.biUnion S) (∑ i ∈ s, T i (I i))
+-- ANCHOR_END: HasImproperIntegralAtTopExcept.finset_clm
+:= by
   classical
   let F : A → ℝ → E := fun i =>
     if hi : i ∈ s then
@@ -1003,12 +1030,15 @@ theorem HasImproperIntegralAtTopExcept.finset_clm
     exact (T i).continuous.continuousAt.tendsto.comp (hFlim i hi)
 
 /-- IMP-001-T04. -/
+-- ANCHOR: HasImproperIntegralAtTopExcept.split_regular
 theorem HasImproperIntegralAtTopExcept.split_regular
     [CompleteSpace E] (f : ℝ → E) {a k : ℝ} (S : Finset ℝ) (I : E)
     (hak : a ≤ k) (hS : ∀ c ∈ S, k < c)
     (hf : IntervalIntegrable f volume a k) :
     HasImproperIntegralAtTopExcept f a S ((∫ t in a..k, f t) + I) ↔
-      HasImproperIntegralAtTopExcept f k S I := by
+      HasImproperIntegralAtTopExcept f k S I
+-- ANCHOR_END: HasImproperIntegralAtTopExcept.split_regular
+:= by
   constructor
   · intro himp
     rcases hasImproperIntegralAtTopExcept_iff_exists_primitive.mp himp with

@@ -25,7 +25,13 @@ number := false
 `ErrorOn D f a b` says that `a x` approximates `f x` throughout `D`, with the explicit pointwise
 error `b x`. `NormBoundOn D f b` is the same language for a bound on `f` itself.
 
-:::leanStatement "Lean definitions"
+:::leanStatement "Lean · QuantitativeAnalysis"
+```anchor quantitativeBasicContext (module := LMLF.Quantitative.Basic) -showProofStates
+namespace QuantitativeAnalysis
+
+variable {X E : Type*} [NormedAddCommGroup E]
+```
+
 ```anchor ErrorOn (module := LMLF.Quantitative.Basic) -showProofStates
 def ErrorOn (D : Set X) (f a : X → E) (b : X → ℝ) : Prop :=
   ∀ x ∈ D, ‖f x - a x‖ ≤ b x
@@ -45,47 +51,48 @@ number := false
 Exact equality gives zero error. A bound can be restricted to a smaller domain, enlarged, composed
 with another approximation by the triangle inequality, or pulled back along a change of variables.
 
-:::leanStatement "Lean theorems"
+:::leanStatement "Lean · QuantitativeAnalysis.ErrorOn"
+```anchor quantitativeBasicContext (module := LMLF.Quantitative.Basic) -showProofStates
+namespace QuantitativeAnalysis
+
+variable {X E : Type*} [NormedAddCommGroup E]
+```
+
+```anchor quantitativeMapContext (module := LMLF.Quantitative.Basic) -showProofStates
+variable {Y : Type*}
+```
+
+```anchor errorOnNamespace (module := LMLF.Quantitative.Basic) -showProofStates
+namespace ErrorOn
+```
+
 ```anchor ErrorOn.exact (module := LMLF.Quantitative.Basic) -showProofStates
 theorem exact {D : Set X} {f a : X → E} (h : Set.EqOn f a D) :
-    ErrorOn D f a (fun _ ↦ 0) := by
-  intro x hx
-  simpa only [h hx, sub_self, norm_zero] using (le_refl (0 : ℝ))
+    ErrorOn D f a (fun _ ↦ 0)
 ```
 
 ```anchor ErrorOn.restrict (module := LMLF.Quantitative.Basic) -showProofStates
 theorem restrict {D D' : Set X} {f a : X → E} {b : X → ℝ}
     (h : ErrorOn D f a b) (hD : D' ⊆ D) :
-    ErrorOn D' f a b := by
-  intro x hx
-  exact h x (hD hx)
+    ErrorOn D' f a b
 ```
 
 ```anchor ErrorOn.weaken (module := LMLF.Quantitative.Basic) -showProofStates
 theorem weaken {D : Set X} {f a : X → E} {b d : X → ℝ}
     (h : ErrorOn D f a b) (hbd : ∀ x ∈ D, b x ≤ d x) :
-    ErrorOn D f a d := by
-  intro x hx
-  exact (h x hx).trans (hbd x hx)
+    ErrorOn D f a d
 ```
 
 ```anchor ErrorOn.trans (module := LMLF.Quantitative.Basic) -showProofStates
 theorem trans {D : Set X} {f a c : X → E} {b d : X → ℝ}
     (hfa : ErrorOn D f a b) (hac : ErrorOn D a c d) :
-    ErrorOn D f c (fun x ↦ b x + d x) := by
-  intro x hx
-  calc
-    ‖f x - c x‖ = ‖(f x - a x) + (a x - c x)‖ := by rw [sub_add_sub_cancel]
-    _ ≤ ‖f x - a x‖ + ‖a x - c x‖ := norm_add_le _ _
-    _ ≤ b x + d x := add_le_add (hfa x hx) (hac x hx)
+    ErrorOn D f c (fun x ↦ b x + d x)
 ```
 
 ```anchor ErrorOn.comp (module := LMLF.Quantitative.Basic) -showProofStates
 theorem comp {D : Set X} {f a : X → E} {b : X → ℝ}
     (h : ErrorOn D f a b) {S : Set Y} (ψ : Y → X)
     (hψ : Set.MapsTo ψ S D) :
-    ErrorOn S (f ∘ ψ) (a ∘ ψ) (b ∘ ψ) := by
-  intro y hy
-  exact h (ψ y) (hψ hy)
+    ErrorOn S (f ∘ ψ) (a ∘ ψ) (b ∘ ψ)
 ```
 :::

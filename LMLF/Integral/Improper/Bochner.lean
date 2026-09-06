@@ -6,9 +6,11 @@ open scoped Interval
 
 noncomputable section
 
+-- ANCHOR: improperBochnerContext
 namespace LMLF.Integral
 
 variable {E : Type*} [NormedAddCommGroup E] [NormedSpace ℝ E]
+-- ANCHOR_END: improperBochnerContext
 
 private theorem canonicalPrimitivePackage
     [CompleteSpace E] (f : ℝ → E) (k : ℝ) (S : Finset ℝ)
@@ -42,10 +44,13 @@ private theorem canonicalPrimitivePackage
   exact MeasureTheory.intervalIntegral_tendsto_integral_Ioi k hf tendsto_id
 
 /-- IMP-001-T07. -/
+-- ANCHOR: HasImproperIntegralAtTopExcept.of_integrableOn_Ioi
 theorem HasImproperIntegralAtTopExcept.of_integrableOn_Ioi
     [CompleteSpace E] (f : ℝ → E) (k : ℝ) (S : Finset ℝ)
     (hS : ∀ c ∈ S, k < c) (hf : IntegrableOn f (Ioi k)) :
-    HasImproperIntegralAtTopExcept f k S (∫ t in Ioi k, f t) := by
+    HasImproperIntegralAtTopExcept f k S (∫ t in Ioi k, f t)
+-- ANCHOR_END: HasImproperIntegralAtTopExcept.of_integrableOn_Ioi
+:= by
   apply hasImproperIntegralAtTopExcept_iff_exists_primitive.mpr
   exact ⟨fun t => ∫ x in k..t, f x, canonicalPrimitivePackage f k S hS hf⟩
 

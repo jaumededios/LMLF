@@ -621,21 +621,8 @@ axiom IsFiniteExceptionalPrimitive.hasImproperIntegralAtTopExcept_exp_smul
 
 end LMLF.Integral
 ```
-### Complete `Check.lean`
-
-```lean
-import LMLF.Integral.Improper.Abel
-import LMLF.Integral.Improper.Bochner
-
-#check LMLF.Integral.HasImproperIntegralAtTopExcept
-#check LMLF.Integral.HasImproperIntegralAtTopExcept.unique
-#check LMLF.Integral.HasImproperIntegralAtTopExcept.finset_clm
-#check LMLF.Integral.HasImproperIntegralAtTopExcept.split_regular
-#check LMLF.Integral.IsFiniteExceptionalPrimitive
-#check LMLF.Integral.IsFiniteExceptionalPrimitive.hasImproperIntegralAtTopExcept_exp_smul
-#check LMLF.Integral.HasImproperIntegralAtTopExcept.of_integrableOn_Ioi
-#check LMLF.Integral.hasImproperIntegralAtTopExcept_iff_exists_primitive
-```
+The public signatures above were checked together by the recorded disposable harness. The redundant
+name-only `#check` listing has been omitted; the complete declarations are the useful review surface.
 
 ### Complete `Regressions.lean`
 

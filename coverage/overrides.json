@@ -20,6 +20,6 @@
     "quantitative_declarations": [
       "LMLF.Blueprint.Gamma.stirlingLog_remainder_bounds"
     ],
-    "notes": "Real-positive specialization. The quantitative bound is the first-neglected-term result from DLMF §5.11(ii); both declarations are proof-pending."
+    "notes": "Real-positive specialization. The quantitative bound is the first-neglected-term result from DLMF §5.11(ii); both theorem declarations are proof-pending."
   }
 }

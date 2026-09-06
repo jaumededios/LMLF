@@ -11,24 +11,28 @@ This is an identification with the Euler integral only when `0 < s.re`.  It does
 the integral defines Gamma outside that half-plane.
 -/
 
+-- ANCHOR: gammaContext
 namespace LMLF.Definitions
+-- ANCHOR_END: gammaContext
 
 /-- Euler's integrand for `s` is integrable on the positive real axis when `0 < re s`. -/
 -- ANCHOR: gamma_eulerIntegrable
 theorem gamma_eulerIntegrable {s : ℂ} (hs : 0 < s.re) :
     MeasureTheory.IntegrableOn
       (fun t : ℝ ↦ (Real.exp (-t) : ℂ) * (t : ℂ) ^ (s - 1))
-      (Set.Ioi 0) := by
-  exact Complex.GammaIntegral_convergent hs
+      (Set.Ioi 0)
 -- ANCHOR_END: gamma_eulerIntegrable
+:= by
+  exact Complex.GammaIntegral_convergent hs
 
 /-- On the half-plane `0 < re s`, Mathlib's complex Gamma function is Euler's integral. -/
 -- ANCHOR: gamma_eq_eulerIntegral
 theorem gamma_eq_eulerIntegral {s : ℂ} (hs : 0 < s.re) :
     Complex.Gamma s =
-      ∫ t in Set.Ioi (0 : ℝ), (Real.exp (-t) : ℂ) * (t : ℂ) ^ (s - 1) := by
-  simpa only [Complex.GammaIntegral] using Complex.Gamma_eq_integral hs
+      ∫ t in Set.Ioi (0 : ℝ), (Real.exp (-t) : ℂ) * (t : ℂ) ^ (s - 1)
 -- ANCHOR_END: gamma_eq_eulerIntegral
+:= by
+  simpa only [Complex.GammaIntegral] using Complex.Gamma_eq_integral hs
 
 /-- Mathlib's complex and real Gamma functions agree on every real input. -/
 theorem gamma_ofReal (s : ℝ) :

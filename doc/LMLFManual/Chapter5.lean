@@ -81,20 +81,22 @@ $$`\Gamma(z)=\int_0^\infty e^{-t}t^{z-1}\,dt,\qquad \Re z>0.`
 For a complex number with positive real part, the Gamma function is Euler's integral on the positive
 real axis. The first declaration verifies convergence of that integral; the second states its value.
 
-:::leanStatement "Lean theorem"
+:::leanStatement "Lean · LMLF.Definitions"
+```anchor gammaContext (module := LMLF.Definitions.Gamma) -showProofStates
+namespace LMLF.Definitions
+```
+
 ```anchor gamma_eulerIntegrable (module := LMLF.Definitions.Gamma) -showProofStates
 theorem gamma_eulerIntegrable {s : ℂ} (hs : 0 < s.re) :
     MeasureTheory.IntegrableOn
       (fun t : ℝ ↦ (Real.exp (-t) : ℂ) * (t : ℂ) ^ (s - 1))
-      (Set.Ioi 0) := by
-  exact Complex.GammaIntegral_convergent hs
+      (Set.Ioi 0)
 ```
 
 ```anchor gamma_eq_eulerIntegral (module := LMLF.Definitions.Gamma) -showProofStates
 theorem gamma_eq_eulerIntegral {s : ℂ} (hs : 0 < s.re) :
     Complex.Gamma s =
-      ∫ t in Set.Ioi (0 : ℝ), (Real.exp (-t) : ℂ) * (t : ℂ) ^ (s - 1) := by
-  simpa only [Complex.GammaIntegral] using Complex.Gamma_eq_integral hs
+      ∫ t in Set.Ioi (0 : ℝ), (Real.exp (-t) : ℂ) * (t : ℂ) ^ (s - 1)
 ```
 :::
 ::::
@@ -118,7 +120,13 @@ $$`\operatorname{Ln}\Gamma(z)\sim
 For positive real `x`, the Lean specialization uses the same Bernoulli terms. After any finite
 truncation, the remaining error is little-o of the last retained term as `x` tends to infinity.
 
-:::leanStatement "Lean statement · real-positive leading term"
+:::leanStatement "Lean · LMLF.Blueprint.Gamma · real-positive specialization"
+```anchor stirlingContext (module := LMLF.Blueprint.Gamma) -showProofStates
+namespace LMLF.Blueprint.Gamma
+
+open Filter
+```
+
 ```anchor stirlingLogMain (module := LMLF.Blueprint.Gamma) -showProofStates
 noncomputable def stirlingLogMain (x : ℝ) : ℝ :=
   (x - 1 / 2) * Real.log x - x + Real.log (2 * Real.pi) / 2
@@ -131,8 +139,8 @@ noncomputable def stirlingLogTerm (k : ℕ) (x : ℝ) : ℝ :=
 ```
 
 ```anchor stirlingLog_hasPoincareExpansion (module := LMLF.Blueprint.Gamma) -showProofStates
-axiom stirlingLog_hasPoincareExpansion :
-    (fun x : ℝ ↦ Real.log (Real.Gamma x) - stirlingLogMain x) ∼[atTop]
+theorem stirlingLog_hasPoincareExpansion :
+    (fun x : ℝ ↦ Real.log (Real.Gamma x) - stirlingLogMain x) ∼ₚ[atTop]
       stirlingLogTerm
 ```
 :::
@@ -140,14 +148,14 @@ axiom stirlingLog_hasPoincareExpansion :
 The distinct finite theorem says that the remainder has the sign of the first omitted term and no
 greater magnitude.
 
-:::leanStatement "Quantitative Lean statement · first-neglected-term bound"
+:::leanStatement "Quantitative Lean · LMLF.Blueprint.Gamma · first-neglected-term bound"
 ```anchor stirlingLogApprox (module := LMLF.Blueprint.Gamma) -showProofStates
 noncomputable def stirlingLogApprox (n : ℕ) (x : ℝ) : ℝ :=
   stirlingLogMain x + QuantitativeAnalysis.seriesPartialSum stirlingLogTerm n x
 ```
 
 ```anchor stirlingLog_remainder_bounds (module := LMLF.Blueprint.Gamma) -showProofStates
-axiom stirlingLog_remainder_bounds (n : ℕ) {x : ℝ} (hx : 0 < x) :
+theorem stirlingLog_remainder_bounds (n : ℕ) {x : ℝ} (hx : 0 < x) :
     0 ≤
         (Real.log (Real.Gamma x) - stirlingLogApprox n x) *
           stirlingLogTerm n x ∧

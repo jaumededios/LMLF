@@ -9,9 +9,11 @@ open scoped Interval
 
 noncomputable section
 
+-- ANCHOR: improperAbelContext
 namespace LMLF.Integral
 
 variable {E : Type*} [NormedAddCommGroup E] [NormedSpace ℝ E]
+-- ANCHOR_END: improperAbelContext
 
 private theorem intervalIntegral_weighted_primitive_fubini
     [CompleteSpace E] {g : ℝ → E} {w : ℝ → ℝ} {a b : ℝ}
@@ -256,6 +258,7 @@ private theorem transformedPrimitivePackage
   exact ⟨hGprim, hGLim⟩
 
 /-- IMP-001-T06. -/
+-- ANCHOR: IsFiniteExceptionalPrimitive.hasImproperIntegralAtTopExcept_exp_smul
 theorem IsFiniteExceptionalPrimitive.hasImproperIntegralAtTopExcept_exp_smul
     [CompleteSpace E] {g F : ℝ → E} {k : ℝ} {S : Finset ℝ}
     (hF : IsFiniteExceptionalPrimitive g k S F) (h : ℝ)
@@ -264,7 +267,9 @@ theorem IsFiniteExceptionalPrimitive.hasImproperIntegralAtTopExcept_exp_smul
       atTop (nhds 0)) :
     HasImproperIntegralAtTopExcept
       (fun t => Real.exp (-h * t) • g t) k S
-      (h • ∫ t in Ioi k, Real.exp (-h * t) • F t) := by
+      (h • ∫ t in Ioi k, Real.exp (-h * t) • F t)
+-- ANCHOR_END: IsFiniteExceptionalPrimitive.hasImproperIntegralAtTopExcept_exp_smul
+:= by
   apply hasImproperIntegralAtTopExcept_iff_exists_primitive.mpr
   exact ⟨_, transformedPrimitivePackage hF h hInt hLim⟩
 

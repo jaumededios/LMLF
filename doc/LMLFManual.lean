@@ -25,8 +25,9 @@ shortTitle := "LMLF"
 %%%
 
 The NIST Digital Library of Mathematical Functions remains the source document. LMLF follows its
-chapter and equation numbering and adds an expandable Lean statement where a precise match exists.
-A second Lean panel appears only for a distinct finite estimate.
+chapter and equation numbering and adds an expandable Lean counterpart wherever one has been
+written. Any specialization or consequence is stated in the surrounding prose. A second Lean panel
+appears only for a genuinely distinct finite estimate.
 
 Chapters 1–3 contain only LMLF's additional interfaces for approximants, finite error bounds, series,
 and improper integrals. Chapters 4–10 link every section back to the current DLMF source.
