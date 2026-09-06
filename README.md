@@ -2,14 +2,15 @@
 
 > **Proposed successor-authority notice (pending).** The user-authorized broad
 > DLMF-through-Chapter-10 boundary is specified by proposed
-> [`blueprint/stage_1_dlmf-R6.md`](blueprint/stage_1_dlmf-R6.md), DD-021
-> revision 5. Its exact seven-file successor, enumerated there by repo-relative
+> [`blueprint/stage_1_dlmf-R7.md`](blueprint/stage_1_dlmf-R7.md), DD-021
+> revision 6. Its exact seven-file successor, enumerated there by repo-relative
 > path, takes effect only after two fresh independent blueprint approvals and a
 > root external adjudication bind the exact successor commit and digests. Until
 > then, the predecessor control plane remains operative. Once effective,
 > DD-021 changes only the bounded DLMF programme scope/nomenclature/priority,
-> semantic-versus-source-recovery placement, and the repeated-IMP lifecycle and
-> dependent-next-step correction in `blueprint/dependency_graph.md`. Legacy
+> semantic-versus-source-recovery placement, the separately named diagnostic
+> source-audit-with-documented-issues contract, and the repeated-IMP lifecycle
+> and dependent-next-step correction in `blueprint/dependency_graph.md`. Legacy
 > release stages are Olver-track-local; frozen source mathematics, IDs, proof
 > gates, evidence, and coverage semantics remain unchanged, and `OLV-MVP-1`
 > remains a parallel Olver-track packet, not a DLMF prerequisite or target.
