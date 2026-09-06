@@ -94,7 +94,8 @@ global axiom may bypass a missing edge.
 |---|---|---|---|
 | `QB-001` | `BOOTSTRAP-0` | frozen eight-signature specification retains its pre-authorization self-status; external evidence authorized and accepted the exact implementation at `515b742f7ad5472c17cfdf0fda7cbc83c5585da1` | reuse the public finite core where justified; any larger API requires a new card |
 | `DEF-001` | `BOOTSTRAP-0` | frozen four-declaration specification retains its snapshot self-status; external evidence authorized and accepted the exact implementation at `515b742f7ad5472c17cfdf0fda7cbc83c5585da1` | reuse the transparent Gamma wrappers only when a consumer benefits; do not make Watson depend on them gratuitously |
-| `QL-001` | `OLV-MVP-1` planning | revision-4 draft card and complete draft proof; exact API namespace correction only; no current review quorum or exact signature | review IMP R6 and QL R4 architecture/proof after new exact-commit checks, then design and review signatures |
+| `IMP-001` | `IMPROPER-0` | frozen registered revision-7 eight-target specification and complete proof; one-card manifest is `scope_closed: true` and `manifest_status: execution_ready`; this is baseline candidate self-status, not current external lifecycle authority | verify the exact external IMP acceptance is applicable to the selected dependency head before downstream use; no old signature review is independently final-packet credit |
+| `QL-001` | `OLV-MVP-1` planning | revision-4 draft card and complete draft proof; exact API namespace correction only; no current review quorum or exact signature | verify applicable exact external IMP acceptance, then review QL R4 architecture/proof after new exact-commit checks and design/review QL signatures |
 | `OLV-001` | `OLV-MVP-1` planning | locked occurrence transcribed but independently unreconciled; revision-4 complex-source card/proof present, dependency rebinding only | source review, accepted QL-001, then signature/card review and external gate |
 | `SR-001` | `OLV-MVP-1` planning | no card or proof | accepted `OLV-001`, eventual-domain/scale/notation bridge, audit-only implementation |
 
@@ -104,27 +105,35 @@ manifest readiness alone did not authorize Lean.  The later external records
 did authorize and accept the exact `515b742...` implementation.  This does not
 claim an Olver occurrence or a tagged release.
 
-`IMP-001` is a deliberately unregistered revision-6 eight-target author draft
+`IMP-001` is the frozen registered revision-7 eight-target specification
 upstream of QL-001. `Basic` owns T01/T05/T08/T02/T03/T04, `Bochner` owns the
 arbitrary-`S` absolute bridge T07, and `Abel` owns T06 with a private
 finite-piece engine. T01 retains independent endpoint limits, T08 gives the
 existential convergent-primitive equivalence, and T03 generalizes to `E -> H`
 continuous linear maps. The target count closes the QL/OLV consumer chain; it
-is not a hard schema cap. R6/R4 correct only three root Mathlib namespace
-references and rebind OLV to the revised IMP/QL drafts; the mathematics,
+is not a hard schema cap. The frozen R7 packet is a metadata-only successor to
+the R6 proof/signature design and `IMPROPER-0` is a closed, execution-ready
+specification manifest; neither candidate-owned state by itself authorizes
+implementation. The underlying
+IMP R6 and QL R4 artifacts correct only three root Mathlib namespace references
+and rebind OLV to the revised IMP/QL artifacts; the mathematics,
 architecture, QL a.e. local premise, finite-dimensional source adapter, eight
-targets, and three modules are unchanged. New exact-commit checks are pending
-and imply no approval or `lean_ready` status. Historical R3 signatures remain untouched superseded
-evidence. Recent R4 report bytes are missing, and conversation approval is not
-current quorum. No R6/R4 proof/architecture review, exact signature or card
-review, registry/manifest authorization, or Lean authorization exists.
+targets, and three modules are unchanged. Historical R3 and R6 signature
+reviews remain untouched prerequisite evidence but are not independently final
+R7 credit. Effective lifecycle and downstream dependency acceptance are
+reconstructed from the canonical inventories joined with applicable exact-bound
+external evidence; they are never
+inferred by hardcoding historical candidate-owned `review_status` or
+`implementation_status` fields. This bounded correction records the canonical
+baseline at `3a1b16cae6d186a20530de3b883c1bb871ee76f6` and claims no implementation,
+code presence at this documentation head, source coverage, or transferred pass.
 
 ## Watson MVP: only source critical path
 
 ```mermaid
 flowchart LR
   LOCK["Edition lock + previously inspected/hash-bound PDF; current upload absent"] --> COL["OLV97-C03-WATSON first collation survives: review pending"]
-  PIN["Pinned integration and limit facts"] --> IMP["IMP-001 ordinary-improper layer: unregistered"]
+  PIN["Pinned integration and limit facts"] --> IMP["IMP-001 frozen registered R7 specification; IMPROPER-0"]
   IMP --> QL["QL-001 R4 local-tail kernel: planning"]
   MOM["Pinned Real Gamma moment"] --> QL
   COL --> OLV["OLV-001 R4 exact_source_generic"]
@@ -205,8 +214,11 @@ separate section 9.1--9.2 occurrence -> OLV-002
 QL-003 optional exponential-growth adapter; EX-002 independent regression
 ```
 
-`IMP-001` has an unregistered revision-6 eight-target card/proof draft awaiting
-fresh proof and architecture review before any exact-signature design. It
+`IMP-001` has a frozen registered revision-7 eight-target card and complete
+proof. Its baseline candidate self-status does not decide later external gates.
+Before a selected QL dependency relies on it, verify that exact-bound external
+IMP acceptance is applicable to that dependency head. Earlier exact-signature
+reviews remain prerequisite history, not independently final R7 credit. It
 separates relational ordinary-improper semantics, the finite-exceptional
 primitive certificate/equivalence, the arbitrary-`S` absolute Bochner bridge,
 and public Abel composition from the QL estimate; the finite-piece engine is
@@ -391,7 +403,7 @@ creating proofs, reviews, status transitions, or source coverage.
 
 | May proceed together | Required join before downstream work |
 |---|---|
-| independent Watson collation review; IMP-001 R6 design/proof; revision-4 QL/OLV review; later QB/DEF maintenance | exact OLV card waits for reviewed collation and accepted IMP/QL layers; QB/DEF join only for optional packaging or audit wrappers |
+| independent Watson collation review; exact IMP external-acceptance applicability check; revision-4 QL/OLV review; later QB/DEF maintenance | exact OLV card waits for reviewed collation and accepted IMP/QL layers; QB/DEF join only for optional packaging or audit wrappers |
 | M3 derivative demonstrator; M4/M5 source path | no join; M3 is explicitly off-path |
 | OI, CT, elementary SUM, and CF early roots | join only for a named application that uses several methods |
 | ODE residual algebra, path-system representation audit, and named-family body audits | comparison application waits for both accepted method and identification nodes |
@@ -409,10 +421,10 @@ discussion layer.  The highest-impact unresolved edges are:
 1. `RQ-SRC-001`, `RQ-WAT-001`, `RQ-QUAL-001`: review the collated Watson text,
    its complex/ordinary-improper interpretation and common-`X` quantifier order, freeze
    the finite theorem, and complete source recovery.
-2. `RQ-INT-001`: independently review the unregistered IMP-001 R6
-   proof/architecture, then design and review exact signatures for the
-   ordinary-improper relation/primitive equivalence, arbitrary-`S` Bochner
-   bridge, and public Abel composition; keep finite-piece machinery private.
+2. `RQ-INT-001`: verify that exact external IMP-001 acceptance is applicable to
+   the selected dependency head, then perform the still-required QL reviews;
+   prior IMP signature reviews remain prerequisites rather than independently
+   final credit. Keep finite-piece machinery private.
 3. `RQ-CAUCHY-001`: useful constrained radii on moving domains.
 4. `RQ-AIRY-001`, `RQ-BESSEL-001`, `RQ-PARAM-001`: noncircular constructions,
    exceptional parameters, and joint regularity.
