@@ -241,3 +241,35 @@ modules, mathematical proofs, dependency direction, QL restricted-volume
 unchanged. New exact-commit checks are pending; this correction creates no
 approval, exact signature, implementation authorization, or `lean_ready`
 claim.
+
+**Status clarification (2026-09-06; superseding status prose only).** The
+opening description of IMP-001 as the "next unregistered" draft records the
+revision-6 design input and is no longer the current registration status.
+IMP-001 is the sole member of the new closed, source-free `IMPROPER-0`
+manifest. Its `execution_ready` registration records only that the final
+eight-target specification scope is bounded and frozen for external review.
+Final review, an external `lean_ready` gate, implementation authorization,
+implementation, and source coverage remain absent. This status clarification
+does not alter DD-019's mathematical decisions, public surface, dependency
+direction, or revision-6 input history.
+
+## DD-020 — Preserve verified numerical consumption as downstream work
+
+**Status (2026-09-06):** candidate decision frozen for external review; no
+approval or gate pass is recorded here.
+
+DD-003, DD-010, and DD-012 remain unchanged. The semantic library preserves
+finite explicit quantities together with their exact domains and hypotheses,
+proves exact identities before passing to estimates, and keeps every passage
+to norms and every constant or domain loss visible and tracked. These
+properties are intended to support later independently verified numerical
+consumers without adding a numerical layer to the present package.
+
+This intent creates no current numerical implementation or new numerical
+interface, and it does not require every semantic definition to be computable.
+Classical or noncomputable analysis remains acceptable when the resulting
+objects are publicly characterized and choice does not hide a target theorem
+or estimate. Numerical algorithms, interval certificates, floating-point and
+tolerance policies, quadrature, and solvers remain separate downstream work,
+requiring their own bounded scope, interfaces, and review before they can
+consume these semantic results.

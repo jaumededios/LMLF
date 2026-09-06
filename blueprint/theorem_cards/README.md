@@ -14,7 +14,9 @@ review evidence.
 The current versioned vocabulary is artifact revision 3 of
 [`review/classifications-v3.json`](../../review/classifications-v3.json), which
 supersedes without mutating immutable v2. Historical frozen artifacts retain
-their recorded authority; the IMP R6 and QL/OLV R4 drafts bind v3. It
+their recorded authority; IMP card R7 binds metadata-only proof successor R7
+and the accepted R6 signature proposal revision 2, while canonical proof R6 is
+preserved and the QL/OLV R4 drafts bind v3. It
 separates packet-level summary values from declaration-level target values.
 Every card has three independent axes:
 
@@ -139,36 +141,38 @@ implementation or prototype; its later external envelope and implementation
 reviews bind and accept commit
 `515b742f7ad5472c17cfdf0fda7cbc83c5585da1` without rewriting the frozen card.
 
-## Unregistered planning cards
+## IMPROPER-0 and unregistered planning cards
 
-`IMP-001.yaml`, `OLV-002.yaml`, `DEF-BERN-001.yaml`, and
-`DEF-BERN-002.yaml` are planning artifacts, not registry entries or manifest
-members. IMP-001 revision 6 has eight prospective integration targets justified
-by the QL/OLV consumer chain rather than a schema limit. The immutable
-[revision-3 exact-signature proposal](IMP-001-signatures.md) and its historical
-reviews are superseded, changes-requested evidence; they are not R6 input.
-Two independent fresh-context Sol reports D and E approved the exact IMP R6,
-QL R4, and OLV R4 card/proof inputs at candidate commit
-`50dcded3b36e33632cf1e9734cac34c10a890d8a` solely to clear bounded
-exact-signature design. The reports and administrative clearance are preserved
-at private
-[`review-evidence` commit `0d6813a`](https://github.com/jaumededios/LMLF/commit/0d6813aba75cff17d983cb77ae39d1466361aeaf),
-with a later
-[attribution-only clarification `b4e6fc6`](https://github.com/jaumededios/LMLF/commit/b4e6fc6).
-The new eight-signature, three-module
-[IMP R6 exact-signature proposal](IMP-001-signatures-R6.md) is an author
-candidate awaiting its own independent exact-byte review; temporary axiomatic
-theorem stubs are confined to a disposable specification harness and are not
-production Lean. QL-001 and OLV-001 revision 4 remain registered planning
-drafts. Final theorem-card/work-packet approval, final quorum, `lean_ready`,
-registry/manifest authorization, and Lean implementation remain absent; this
-input-stage review neither renews PDF fidelity nor establishes source coverage.
-These revisions correct exactly three pinned root namespaces and rebind OLV's
-draft dependencies; mathematical targets/proofs/architecture, the QL a.e.
-local premise, the finite-dimensional source adapter, eight targets, and three
-IMP modules are unchanged. Exact-commit checks passed for the reviewed
-`50dcded3` inputs, but no approval of the candidate signature bytes or
-`lean_ready` claim follows.
+`IMP-001.yaml` is frozen at card revision 7 as the sole member of the closed,
+source-free `IMPROPER-0` manifest. Its
+[`review/work_packets/IMP-001.yaml`](../../review/work_packets/IMP-001.yaml)
+work packet is revision 1 and binds the new metadata-only proof successor
+[`NLP-IMP-001-R7`](../proofs/IMP-001-R7.md) plus the accepted
+eight-signature, three-module
+[IMP R6 proposal revision 2](IMP-001-signatures-R6.md), SHA-256
+`0e220214233fec5f2f95608789b139900e7dfddef8a6b824b8d54bce37e74f2d`.
+The R7 successor preserves the R6 mathematical proof and equations while
+changing only lifecycle/binding/status metadata. Canonical
+[`IMP-001.md` R6](../proofs/IMP-001.md) remains byte-for-byte historical
+mathematical input and the dependency recorded by QL/OLV R4; it does not become
+frozen or inherit approvals.
+Fresh exact-byte referees C and D approved only those proposal bytes at
+`9e6e038871ac66f80534626d3deade0b27af6752`, and the root negative-guard
+finding was resolved only for that snapshot. Their reports and disposition are
+archived at private
+[`review-evidence` commit `d0d4fb4`](https://github.com/jaumededios/LMLF/commit/d0d4fb4895733b5de8396794e81cbe1a19657bdb).
+This is prerequisite-stage evidence, not final-packet quorum.
+`execution_ready` means specification readiness only: fresh final pre-Lean
+reviews and an external envelope remain pending, with no `lean_ready`,
+implementation authorization, or source-coverage claim. The
+compiled-unreviewed prototype contains temporary axiomatic theorem stubs only,
+not production Lean.
+
+The immutable [revision-3 exact-signature proposal](IMP-001-signatures.md) and
+its historical reviews remain superseded, changes-requested evidence; they are
+not R7 input. QL-001 and OLV-001 revision 4 remain registered planning drafts.
+`OLV-002.yaml`, `DEF-BERN-001.yaml`, and `DEF-BERN-002.yaml` are
+unregistered planning artifacts, not manifest members.
 OLV-002 revision 2 has a complete draft proof.
 DEF-BERN-001 revision 1 and DEF-BERN-002 revision 1 are declaration-free and
 have complete draft identification proofs, respectively covering the

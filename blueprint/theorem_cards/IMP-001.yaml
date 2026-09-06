@@ -2,25 +2,32 @@ schema_version: 2
 id: IMP-001
 title: Finite-exceptional ordinary-improper integration and Abel composition
 owner: jaumededios
-artifact_revision: 6
+artifact_revision: 7
 baseline_spec_commit: pending_external_record_after_commit
 
 theorem_class: mixed
 coverage_class: infrastructure
 novelty_class: non_novel
-specification_status: draft
+specification_status: frozen
 proof_status: complete
 review_status: not_started
 implementation_status: not_started
-prototype_status: absent
+prototype_status: compiled_unreviewed
 coverage_status: not_applicable
-manifest_membership_status: planning_only
-status_as_of: complete_r6_api_namespace_correction_pending_fresh_exact_commit_checks_and_review
+manifest_membership_status: execution_ready
+status_as_of: frozen_r7_specification_snapshot_pending_external_final_review_and_lean_ready
 status_authority: >-
-  Completeness is an author claim about the bound natural-language argument.
-  Review pass and implementation authorization can be established only by an
-  external review envelope bound to a frozen specification commit and exact
-  artifact digests. This draft claims neither.
+  Freezing and execution_ready describe only bounded specification scope.
+  Review pass, lean_ready, implementation authorization, and implementation
+  acceptance can be established only by an external review envelope bound to
+  a frozen specification commit and exact artifact digests. This card claims
+  none of those external states.
+prototype_status_note: >-
+  compiled_unreviewed is the card vocabulary for disposable code outside the
+  authorized production lifecycle and for absence of final R7 packet review.
+  It does not deny the prerequisite independent review of the exact signature
+  proposal that occurred before this final specification; those historical
+  reports still count zero toward the R7 final quorum.
 
 classification_schema:
   path: review/classifications-v3.json
@@ -28,11 +35,11 @@ classification_schema:
   artifact_revision: 3
   sha256: 975e08b89d609cbdd15ff3f8d24f40a42bb17ea0f4c37bb26d9cf53fb8dc4b5e
 
-manifest: null
+manifest: IMPROPER-0
 source_occurrences: []
 source_entities: []
 source_notation: []
-coverage_claim: none; this packet is source-independent reusable infrastructure
+coverage_claim: none; IMPROPER-0 has exactly this one card and zero source occurrences
 
 scope:
   summary: >-
@@ -46,55 +53,58 @@ scope:
     representation-independent exponential composition theorem. Its private
     proof uses the finite-piece Abel identity derived by Bochner Fubini without
     differentiating the primitive.
-  candidate_modules:
+  modules:
     - module: LMLF.Integral.Improper.Basic
-      prospective_targets: IMP-001-T01, IMP-001-T02, IMP-001-T03, IMP-001-T04, IMP-001-T05, IMP-001-T08
+      targets: IMP-001-T01, IMP-001-T05, IMP-001-T08, IMP-001-T02, IMP-001-T03, IMP-001-T04
+      imports:
+        - Mathlib.Data.Finset.Sort
+        - Mathlib.MeasureTheory.Integral.DominatedConvergence
     - module: LMLF.Integral.Improper.Bochner
-      prospective_targets: IMP-001-T07
+      targets: IMP-001-T07
+      imports:
+        - LMLF.Integral.Improper.Basic
+        - Mathlib.MeasureTheory.Integral.IntegralEqImproper
     - module: LMLF.Integral.Improper.Abel
-      prospective_targets: IMP-001-T06
-  prospective_module_dependencies:
-    - module: LMLF.Integral.Improper.Basic
-      imports: finite order, intervalIntegral basics, primitive continuity, topology of finite sums and Hausdorff limits
-    - module: LMLF.Integral.Improper.Bochner
-      imports: LMLF.Integral.Improper.Basic and Mathlib.MeasureTheory.Integral.IntegralEqImproper
-    - module: LMLF.Integral.Improper.Abel
-      imports: LMLF.Integral.Improper.Basic plus finite Fubini/product integration, interval FTC, real exponential derivative, and IntegralEqImproper
-  module_split_status: prospective_only
-  candidate_namespace: LMLF.Integral
-  exact_signatures_artifact: absent-deferred-until-fresh-r6-proof-and-structural-approvals
-  signature_design_timing: >-
-    Exact Lean signatures and binder order may be designed only after two
-    independent fresh reviewers approve the complete revision-6 proof and its
-    public-API/dependency architecture, including the QL/OLV consumer route.
-    The revision-3 signature artifact is immutable historical design evidence
-    and is not an R6 signature input.
-  signature_authorization: absent
-  candidate_public_targets:
+      targets: IMP-001-T06
+      imports:
+        - LMLF.Integral.Improper.Basic
+        - Mathlib.Analysis.SpecialFunctions.ExpDeriv
+        - Mathlib.MeasureTheory.Integral.IntervalIntegral.FundThmCalculus
+        - Mathlib.MeasureTheory.Integral.Prod
+        - Mathlib.MeasureTheory.Integral.IntegralEqImproper
+  module_split_status: frozen_for_external_review
+  namespace: LMLF.Integral
+  exact_signatures_artifact:
+    path: blueprint/theorem_cards/IMP-001-signatures-R6.md
+    semantic_revision: R6
+    proposal_revision: 2
+    sha256: 0e220214233fec5f2f95608789b139900e7dfddef8a6b824b8d54bce37e74f2d
+    status: immutable_snapshot_bound_by_this_card_for_external_review
+  public_targets:
     - target_id: IMP-001-T01
       declaration: LMLF.Integral.HasImproperIntegralAtTopExcept
-      signature_status: prospective_only
+      signature_status: frozen_exact
     - target_id: IMP-001-T02
       declaration: LMLF.Integral.HasImproperIntegralAtTopExcept.unique
-      signature_status: prospective_only
+      signature_status: frozen_exact
     - target_id: IMP-001-T03
       declaration: LMLF.Integral.HasImproperIntegralAtTopExcept.finset_clm
-      signature_status: prospective_only
+      signature_status: frozen_exact
     - target_id: IMP-001-T04
       declaration: LMLF.Integral.HasImproperIntegralAtTopExcept.split_regular
-      signature_status: prospective_only
+      signature_status: frozen_exact
     - target_id: IMP-001-T05
       declaration: LMLF.Integral.IsFiniteExceptionalPrimitive
-      signature_status: prospective_only
+      signature_status: frozen_exact
     - target_id: IMP-001-T06
       declaration: LMLF.Integral.IsFiniteExceptionalPrimitive.hasImproperIntegralAtTopExcept_exp_smul
-      signature_status: prospective_only
+      signature_status: frozen_exact
     - target_id: IMP-001-T07
       declaration: LMLF.Integral.HasImproperIntegralAtTopExcept.of_integrableOn_Ioi
-      signature_status: prospective_only
+      signature_status: frozen_exact
     - target_id: IMP-001-T08
       declaration: LMLF.Integral.hasImproperIntegralAtTopExcept_iff_exists_primitive
-      signature_status: prospective_only
+      signature_status: frozen_exact
   public_target_count: 8
   target_minimality: >-
     T01 and T05 are the two semantic predicates, and T08 is their public
@@ -131,7 +141,124 @@ scope:
     - a converse from the improper relation to absolute Bochner integrability
     - a norm bound bundled into the primitive equivalence
     - a public sorted-list representation, recursive constructor/eliminator, or implementation-specific anchor API
-    - exact Lean binder order or imports frozen as an implementation contract
+    - any public declaration, helper, constructor, or theorem beyond the exact eight frozen targets
+    - any production import beyond the exact per-module surfaces above without a new reviewed card
+    - numerical evaluators, interval certificates, floating-point tolerances, quadrature, or solvers
+
+exact_public_signatures:
+  - target_id: IMP-001-T01
+    exact_lean_signature: |
+      def LMLF.Integral.HasImproperIntegralAtTopExcept
+          {E : Type*} [NormedAddCommGroup E] [NormedSpace ℝ E]
+          [CompleteSpace E] (f : ℝ → E) (k : ℝ) (S : Finset ℝ)
+          (I : E) : Prop
+  - target_id: IMP-001-T02
+    exact_lean_signature: |
+      theorem LMLF.Integral.HasImproperIntegralAtTopExcept.unique
+          {E : Type*} [NormedAddCommGroup E] [NormedSpace ℝ E]
+          [CompleteSpace E] {f : ℝ → E} {k : ℝ} {S : Finset ℝ}
+          {I J : E}
+          (hI : LMLF.Integral.HasImproperIntegralAtTopExcept f k S I)
+          (hJ : LMLF.Integral.HasImproperIntegralAtTopExcept f k S J) :
+          I = J
+  - target_id: IMP-001-T03
+    exact_lean_signature: |
+      theorem LMLF.Integral.HasImproperIntegralAtTopExcept.finset_clm
+          {E : Type*} [NormedAddCommGroup E] [NormedSpace ℝ E]
+          {H : Type*} [NormedAddCommGroup H] [NormedSpace ℝ H]
+          [CompleteSpace E] [CompleteSpace H]
+          {A : Type*} (s : Finset A) (f : A → ℝ → E)
+          (S : A → Finset ℝ) (I : A → E) (T : A → E →L[ℝ] H)
+          {k : ℝ}
+          (h : ∀ i ∈ s,
+            LMLF.Integral.HasImproperIntegralAtTopExcept
+              (f i) k (S i) (I i)) :
+          LMLF.Integral.HasImproperIntegralAtTopExcept
+            (fun t => ∑ i ∈ s, T i (f i t)) k
+            (s.biUnion S) (∑ i ∈ s, T i (I i))
+  - target_id: IMP-001-T04
+    exact_lean_signature: |
+      theorem LMLF.Integral.HasImproperIntegralAtTopExcept.split_regular
+          {E : Type*} [NormedAddCommGroup E] [NormedSpace ℝ E]
+          [CompleteSpace E] (f : ℝ → E) {a k : ℝ} (S : Finset ℝ)
+          (I : E) (hak : a ≤ k) (hS : ∀ c ∈ S, k < c)
+          (hf : IntervalIntegrable f MeasureTheory.volume a k) :
+          LMLF.Integral.HasImproperIntegralAtTopExcept
+              f a S ((∫ t in a..k, f t) + I) ↔
+            LMLF.Integral.HasImproperIntegralAtTopExcept f k S I
+  - target_id: IMP-001-T05
+    exact_lean_signature: |
+      def LMLF.Integral.IsFiniteExceptionalPrimitive
+          {E : Type*} [NormedAddCommGroup E] [NormedSpace ℝ E]
+          [CompleteSpace E] (g : ℝ → E) (k : ℝ) (S : Finset ℝ)
+          (F : ℝ → E) : Prop
+  - target_id: IMP-001-T06
+    exact_lean_signature: |
+      theorem LMLF.Integral.IsFiniteExceptionalPrimitive.hasImproperIntegralAtTopExcept_exp_smul
+          {E : Type*} [NormedAddCommGroup E] [NormedSpace ℝ E]
+          [CompleteSpace E] {g F : ℝ → E} {k : ℝ} {S : Finset ℝ}
+          (hF : LMLF.Integral.IsFiniteExceptionalPrimitive g k S F)
+          (h : ℝ)
+          (hInt : MeasureTheory.IntegrableOn
+            (fun t => Real.exp (-h * t) • F t) (Set.Ioi k))
+          (hLim : Filter.Tendsto
+            (fun R => Real.exp (-h * R) • F R)
+            Filter.atTop (nhds 0)) :
+          LMLF.Integral.HasImproperIntegralAtTopExcept
+            (fun t => Real.exp (-h * t) • g t) k S
+            (h • ∫ t in Set.Ioi k, Real.exp (-h * t) • F t)
+  - target_id: IMP-001-T07
+    exact_lean_signature: |
+      theorem LMLF.Integral.HasImproperIntegralAtTopExcept.of_integrableOn_Ioi
+          {E : Type*} [NormedAddCommGroup E] [NormedSpace ℝ E]
+          [CompleteSpace E] (f : ℝ → E) (k : ℝ) (S : Finset ℝ)
+          (hS : ∀ c ∈ S, k < c)
+          (hf : MeasureTheory.IntegrableOn f (Set.Ioi k)) :
+          LMLF.Integral.HasImproperIntegralAtTopExcept
+            f k S (∫ t in Set.Ioi k, f t)
+  - target_id: IMP-001-T08
+    exact_lean_signature: |
+      theorem LMLF.Integral.hasImproperIntegralAtTopExcept_iff_exists_primitive
+          {E : Type*} [NormedAddCommGroup E] [NormedSpace ℝ E]
+          [CompleteSpace E] {f : ℝ → E} {k : ℝ} {S : Finset ℝ}
+          {I : E} :
+          LMLF.Integral.HasImproperIntegralAtTopExcept f k S I ↔
+            ∃ F : ℝ → E,
+              LMLF.Integral.IsFiniteExceptionalPrimitive f k S F ∧
+                Filter.Tendsto F Filter.atTop (nhds I)
+
+definition_semantics_binding:
+  authority: >-
+    The exact immutable signature proposal at SHA-256
+    0e220214233fec5f2f95608789b139900e7dfddef8a6b824b8d54bce37e74f2d.
+  basic_harness_sha256: 9a88b646c652126230941c3bc5a033b47a6e514a25a5a37df43439d6a3745c8c
+  required_encoding: >-
+    Production T01 and T05 must implement the exact public definition bodies
+    and the canonical sorted-component representation in the proposal's
+    authoritative complete Basic.lean block. Any semantically different
+    representation requires a new card and final pre-Lean review.
+  private_helpers:
+    - LMLF.Integral.HasImproperIntegralTailFromBreaks
+    - LMLF.Integral.HasImproperIntegralAtTopBreaks
+  private_helper_status: >-
+    Both helpers remain private implementation details. They are not public
+    declarations, packet targets, consumer dependencies, or an expansion of
+    the eight-target surface.
+  target_count_accounting: exactly two public definitions and six public theorems
+  excluded_ninth_target: >-
+    The finite-piece Abel/Fubini identity is private proof infrastructure and
+    is not a public declaration or ninth target.
+
+public_consumer_boundary:
+  meaning: >-
+    A public-IMP-only consumer may import the public IMP modules and separately
+    declared pinned Mathlib support. It may not import or name private IMP
+    helpers, downstream LMLF QL/OLV/source modules, or another private LMLF
+    implementation module.
+  direct_mathlib_support_is_permitted: true
+  production_import_noninflation: >-
+    Direct Mathlib facts used only by a consumer must not be added to a
+    production IMP module merely to make those facts transitively available.
 
 packet_local_concepts:
   items:
@@ -165,7 +292,8 @@ mathematical_contract:
     The mathematical semantics is independent of the auxiliary interior
     anchor used to split an open component. The proof dossier uses the midpoint
     of a bounded component and c+1 for the final unbounded component only to
-    display a deterministic witness. Exact Lean encoding is deferred.
+    display a deterministic witness. The exact private sorted-component Lean
+    encoding is now bound by definition_semantics_binding and remains private.
   endpoint_convention: >-
     k is regular and is not in S. Values of f at isolated exceptional points
     are irrelevant to the finite interval integrals, but behavior approaching
@@ -182,8 +310,10 @@ mathematical_contract:
     HasImproperIntegralAtTopExcept f k S I holds if and only if there exists
     F with IsFiniteExceptionalPrimitive f k S F and Tendsto F atTop (nhds I).
     The existential is essential: the theorem does not claim an equivalence
-    for an arbitrary preselected F. It contains no norm bound, fixes F only on
-    [k,infinity), and permits arbitrary values below k.
+    for an arbitrary preselected F. Its signature contains no quantitative
+    norm bound or bounding constant, fixes F only on [k,infinity), and permits
+    arbitrary values below k. Existential boundedness is derived separately
+    from continuity and the finite atTop limit.
   bochner_bridge_contract: >-
     If f is IntegrableOn (Ioi k) and every c in the arbitrary finite S lies
     above k, then f has the finite-exceptional improper value equal to its
@@ -292,25 +422,39 @@ hypothesis_laundering_check: >-
   all regular-piece integrability, every one-sided endpoint limit, continuity,
   normalization, and increment law. They contain no boundedness constant,
   target Laplace value, convergence at a new weight, Gamma moment, Watson
-  remainder, or source conclusion. T08 bundles no norm bound. T06 takes weighted-primitive integrability
+  remainder, or source conclusion. T08 bundles no quantitative norm bound or
+  bounding constant; existential boundedness is a separate consequence of
+  continuity and the finite limit. T06 takes weighted-primitive integrability
   and boundary vanishing as separate propositions rather than fields of T05;
   QL derives both from its separately supplied positive weight and flat bound.
   The private finite-piece Fubini proof derives AEStronglyMeasurable only under
   its exact restricted product measure and adds no global StronglyMeasurable
   hypothesis.
 choice_laundering_check: >-
-  Sorting a finite set is canonical. Interior anchors are deterministic in the
-  displayed semantics and are proved immaterial. The exceptional set in T03 is
+  Sorting a finite set is canonical. The natural-language presentation uses
+  deterministic midpoint and c+1 anchors, while the bound private Lean
+  encoding existentially quantifies interior anchors. The proved
+  anchor-independence identity establishes their equivalent public semantics;
+  no anchor is exposed or selected by the API. The exceptional set in T03 is
   the explicit finite union of the supplied S_i, not a selected enlargement.
   Component and total values are unique. F is explicit input in T05/T06; T08
   asserts ordinary mathematical existence but defines neither a selected
   primitive nor an improper-integral value function by Classical.choose.
 
 natural_language_proof:
-  artifact: blueprint/proofs/IMP-001.md
-  artifact_revision: 6
-  artifact_state: draft
+  artifact: blueprint/proofs/IMP-001-R7.md
+  artifact_id: NLP-IMP-001-R7
+  artifact_revision: 7
+  sha256: 941ca0f2a7e402e9dd3636d7c93744290b3f5b52b8705484c18630c6fe173548
+  artifact_state: frozen
   proof_status: complete
+  binding_role: frozen_metadata_normalized_successor
+  mathematical_content_predecessor:
+    artifact: blueprint/proofs/IMP-001.md
+    artifact_id: NLP-IMP-001-R6
+    artifact_revision: 6
+    sha256: 88f60d501c4261cba37b5d1f320406c258bde785ed3912720b3be897d6424f0e
+    preservation: exact_mathematical_body_and_regression_obligations
   normative_sections:
     - target-imp-001-t01
     - target-imp-001-t05
@@ -320,6 +464,27 @@ natural_language_proof:
     - target-imp-001-t04
     - target-imp-001-t07
     - target-imp-001-t06
+  full_context_sections:
+    - exact target map and classifications
+    - source and named-object reconciliation
+    - standing assumptions and quantifier ledger
+    - precise relational semantics and anchor independence
+    - pinned dependency ledger
+    - analytic side-condition ledger
+    - exact identity and loss ledger
+    - boundary and adversarial cases
+    - hypothesis- and choice-laundering audit
+    - regression obligations IMP-R01 through IMP-R25
+    - exact QL/OLV consumer map
+    - trust, imports, and exclusions
+    - reconstruction of each target
+  binding_addendum: >-
+    NLP-IMP-001-R7 is a metadata-only frozen successor whose exact mathematical
+    content comes from the unchanged R6 snapshot. It normalizes the card and
+    signature bindings without rewriting the canonical R6 file used by the
+    historical QL/OLV drafts. Fresh theorem-card, natural-language-proof, and
+    structural referees must judge the successor and its exact provenance;
+    no historical approval is inherited.
 
 dependencies:
   lean_toolchain: leanprover/lean4:v4.33.1
@@ -327,7 +492,7 @@ dependencies:
   lake_manifest_sha256: 4bd9b595f84163f69bdb0ffc9b1a876b5df71d65bdd53122415610d083d43404
   accepted_lmlf_packets: []
   draft_lmlf_packets: []
-  pin_status: r6_root_namespace_correction_source_confirmed_new_exact_commit_checks_pending
+  pin_status: frozen_exact_r7_dependency_binding_pending_external_review
   pinned_declarations:
     - declaration: intervalIntegral.integral_add_adjacent_intervals
       import: Mathlib.MeasureTheory.Integral.IntervalIntegral.Basic
@@ -398,6 +563,18 @@ pre_lean_requirements:
   registry_reconciliation: required-before-implementation
   lean_ready_authority: external_review_envelope_only
 
+reviews:
+  review_status: not_started
+  authoritative_record: external_review_envelope_only
+  current_external_verdict_refs: []
+  prior_exact_commit_reports:
+    role: prerequisite_context_for_signature_design_only
+    counts_toward_r7_final_quorum: false
+    note: >-
+      Prior reports cleared the R6 proof/architecture only far enough to design
+      signatures. They do not approve this final R7 card, the frozen packet,
+      lean_ready, implementation, or implementation acceptance.
+
 edge_tests:
   - empty exceptional set reduces to an ordinary right-endpoint limit
   - T08 is checked for empty and multiple-point exceptional sets with all independent endpoints and the exact telescope
@@ -425,20 +602,53 @@ edge_tests:
     h>0 plus a separate flat bound, and constructs the target finite-exception
     relation through public T05 and T06
   - T07 accepts every finite marking set above k and cannot be invoked without IntegrableOn on Ioi k
-  - T08 is existential in F, preserves independent endpoints, gives no norm bound, and is tested in both directions
+  - T08 is existential in F, preserves independent endpoints, includes no quantitative norm bound or bounding constant, and is tested in both directions; existential boundedness is derived separately from continuity and the finite limit
   - values of f at k and S and values of a T08 witness F below k do not change any conclusion
   - T04 preserves the exact interval-integral sign and value order
 
+regression_acceptance:
+  required_ids: IMP-R01-through-IMP-R25
+  current_status: mandatory_not_yet_fully_implemented
+  signature_harness_scope: >-
+    The immutable proposal verifies exact signatures and selected public-use
+    reachability only. It does not implement all analytic, adversarial, or
+    concrete-example obligations and must not be cited as if it did.
+  target_implementation_phase: >-
+    External final pre-Lean pass authorizes proof work only for the eight
+    public targets and their private implementation support.
+  later_regression_proof_phase: >-
+    Before formalizing new analytic counterexample or example mathematics not
+    already derived in the bound target proof, bind a complete companion
+    natural-language proof provisionally labeled NLP-IMP-001-REG and obtain at
+    least two fresh independent reviews. No path, digest, authorization, or
+    current dependency is asserted for that planned artifact.
+  material_change_rule: >-
+    If a regression proof reveals a required change to a target type,
+    definition semantics, or mathematical contract, issue a new final
+    specification revision and repeat the applicable pre-Lean review.
+
 blocking_conditions:
-  - revision 6 corrects only the exact pinned Mathlib namespace ledger; the revision-5 mathematical targets, proofs, and eight-target three-module architecture are unchanged
-  - new exact-commit checks for revision 6 are pending; no approval or lean_ready claim follows from the source confirmation
-  - the complete R6 proof and architecture lack the required fresh independent proof and structural approvals before signature design
-  - the R6 exact Lean signature artifact is intentionally absent and must be designed only after those approvals
-  - the revision-3 exact-signature artifact and approvals are immutable historical evidence and count zero toward R6
-  - no external envelope authorizes implementation
-  - IMP-001 is not registered or admitted to an execution manifest
+  - fresh final review must accept this exact R7 card, frozen NLP-IMP-001-R7 with its unchanged R6 mathematical provenance, and the immutable R6-revision-2 signature proposal
+  - the default pre-Lean quorum is three distinct reviewer IDs overall, including at least two card reviews, at least two natural-language-proof reviews, and structural coverage of all three required perspectives
+  - prior proof, architecture, or signature-design reports are prerequisite historical context only and count zero toward the final R7 quorum
+  - no external envelope currently records lean_ready or authorizes proof implementation
+  - every IMP-R01 through IMP-R25 and every edge-test obligation remains required before implementation acceptance; the signature harness supplies only partial evidence
+  - the planned NLP-IMP-001-REG companion and its fresh review are required before formalizing the identified new analytic example or counterexample mathematics
 
 implementation:
   implementation_status: not_started
   declarations_present: false
-  authorization: absent
+  authorization: absent_pending_external_lean_ready
+  package_integration: >-
+    After external authorization, add imports of the Abel and Bochner modules
+    to LMLF/Results.lean so the maintained public root and default lake build
+    include all three IMP modules. This introduces no extra declaration and
+    no reverse import from IMP into an umbrella or downstream module.
+  production_axiom_policy: >-
+    All eight public declarations require an axiom audit. Production permits
+    no undeclared axiom, sorry, or admit; the six disposable signature-harness
+    theorem axioms are elaboration stubs only and are not implementation.
+  numerical_motivation: >-
+    Future verified numerical consumption is design motivation only. It adds
+    no evaluator, certificate, interface, or constructivity requirement to
+    this packet, and exact identities remain separate from later estimates.

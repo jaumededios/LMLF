@@ -1,0 +1,990 @@
+schema_version: 4
+
+# This packet intentionally does not contain its own path, commit, or digest.
+# An external review envelope binds those values after the packet is frozen.
+work_item_id: IMP-001
+title: Finite-exceptional ordinary-improper integration and Abel composition
+packet_revision: 1
+lifecycle_state: frozen
+specification_owner: jaumededios
+
+classification_schema:
+  path: review/classifications-v3.json
+  schema_version: lmlf-classification-v3
+  artifact_revision: 3
+  sha256: 975e08b89d609cbdd15ff3f8d24f40a42bb17ea0f4c37bb26d9cf53fb8dc4b5e
+packet_classification:
+  theorem_class: mixed
+  coverage_class: infrastructure
+  novelty_class: non_novel
+
+prototype:
+  status: compiled_unreviewed
+  implementation_status: not_started
+  review_status: not_started
+  module_file: null
+  note: >-
+    The immutable signature proposal contains a disposable compiled harness.
+    T01 and T05 are definitions there; the six theorem targets are temporary
+    axioms used only for elaboration and consumer-shape checks. No production
+    IMP module, target proof, implementation authorization, or kernel proof of
+    a mocked theorem follows from that evidence. compiled_unreviewed is the
+    final-card vocabulary for code outside the authorized production lifecycle
+    and for the still-pending R7 packet review; it does not deny the completed
+    prerequisite exact-signature reviews, which count zero toward the final
+    R7 quorum.
+
+manifest_binding:
+  manifest_id: IMPROPER-0
+  scope_closed: true
+  manifest_status: execution_ready
+  member_count: 1
+  exact_members:
+    - IMP-001
+  source_occurrence_count: 0
+  meaning: >-
+    execution_ready means the one-card specification scope is closed. It does
+    not mean lean_ready, reviewed, implemented, accepted, or source-covered.
+
+source:
+  kind: original
+  citation: LMLF internal natural-language proof NLP-IMP-001-R7
+  edition_or_version: frozen revision 7, metadata-only successor to revision 6
+  isbn_doi_or_stable_id: NLP-IMP-001-R7
+  location: >-
+    The eight target anchors target-imp-001-t01, target-imp-001-t05,
+    target-imp-001-t08, target-imp-001-t02, target-imp-001-t03,
+    target-imp-001-t04, target-imp-001-t07, and target-imp-001-t06, read under
+    the full proof-context binding below
+  snapshot:
+    uri_or_archive_ref: blueprint/proofs/IMP-001-R7.md
+    accessed_utc: 2026-09-06
+    sha256: 941ca0f2a7e402e9dd3636d7c93744290b3f5b52b8705484c18630c6fe173548
+    source_occurrences: []
+  original_statement_or_formula: |
+    Define an ordinary right-ray improper-integral relation with a finite set
+    of independent exceptional endpoints and honest regular-piece Bochner
+    integrability. Define its normalized continuous finite-exceptional
+    primitive semantics. Prove their existential equivalence, uniqueness,
+    heterogeneous finite CLM combination on the literal union, exact regular
+    prepending, an arbitrary-marking bridge from IntegrableOn on Ioi, and the
+    same-exception-set exponential Abel composition at its exact weighted
+    primitive integral. The finite-piece Abel identity remains private.
+
+upstream_artifacts:
+  theorem_cards:
+    - artifact_id: TC-IMP-001-R7
+      path_or_uri: blueprint/theorem_cards/IMP-001.yaml
+      revision: 7
+      sha256: d81f8970bcba3bf1a489f8cb4fea8b303a3e3bf6d1ad3ade37b42f3094b528c4
+    - artifact_id: SIG-IMP-001-R6-P2
+      path_or_uri: blueprint/theorem_cards/IMP-001-signatures-R6.md
+      revision: 2
+      semantic_revision: R6
+      sha256: 0e220214233fec5f2f95608789b139900e7dfddef8a6b824b8d54bce37e74f2d
+  natural_language_proofs:
+    - artifact_id: NLP-IMP-001-R7
+      path_or_uri: blueprint/proofs/IMP-001-R7.md
+      revision: 7
+      artifact_state: frozen
+      proof_status: complete
+      sha256: 941ca0f2a7e402e9dd3636d7c93744290b3f5b52b8705484c18630c6fe173548
+  historical_provenance:
+    - artifact_id: NLP-IMP-001-R6
+      path_or_uri: blueprint/proofs/IMP-001.md
+      revision: 6
+      sha256: 88f60d501c4261cba37b5d1f320406c258bde785ed3912720b3be897d6424f0e
+      role: exact_mathematical_content_predecessor
+      counts_toward_final_quorum: false
+    - artifact_id: WATSON-R6-REFEREE-D
+      path_or_uri: >-
+        external review-evidence snapshot for design input commit
+        50dcded3b36e33632cf1e9734cac34c10a890d8a
+      sha256: 5d6b35c5c7c8b592044c2c8e934a9736494c63fcfff57e45049279d34ce4f505
+      role: prerequisite_proof_architecture_clearance_for_signature_design_only
+      counts_toward_final_quorum: false
+    - artifact_id: WATSON-R6-REFEREE-E
+      path_or_uri: >-
+        external review-evidence snapshot for design input commit
+        50dcded3b36e33632cf1e9734cac34c10a890d8a
+      sha256: ba29a71da49f14a7196fea7547b87b27ced7de832e8469928f3ef74132aaa39c
+      role: prerequisite_proof_architecture_clearance_for_signature_design_only
+      counts_toward_final_quorum: false
+
+proof_context_binding:
+  context_id: IMP-001-R7-FULL-CONTEXT
+  artifact_id: NLP-IMP-001-R7
+  normative_target_anchors:
+    - target-imp-001-t01
+    - target-imp-001-t05
+    - target-imp-001-t08
+    - target-imp-001-t02
+    - target-imp-001-t03
+    - target-imp-001-t04
+    - target-imp-001-t07
+    - target-imp-001-t06
+  standing_context:
+    - exact target map and classifications
+    - source and named-object reconciliation
+    - standing assumptions and quantifier ledger IMP-D01 through IMP-D15
+    - precise relational semantics and anchor independence IMP-I01
+    - pinned dependency ledger IMP-M01 through IMP-M14
+    - analytic side-condition ledger IMP-A01 through IMP-A16
+    - exact identities IMP-I03 through IMP-I07 and loss ledger IMP-L01 through IMP-L10
+    - boundary and adversarial cases
+    - hypothesis- and choice-laundering audit
+    - regression obligations IMP-R01 through IMP-R25
+    - exact QL/OLV consumer map
+    - trust, imports, and exclusions
+    - reconstruction of each target
+  interpretation: >-
+    No target anchor is reviewed in isolation from these definitions,
+    dependencies, side conditions, exact identities, adversarial cases, and
+    exclusions. The R7 successor changes no mathematical content from the
+    exact R6 predecessor; fresh reviewers judge this binding without inheriting
+    any historical approval.
+
+definition_semantics_binding:
+  signature_artifact_id: SIG-IMP-001-R6-P2
+  authoritative_basic_harness_sha256: 9a88b646c652126230941c3bc5a033b47a6e514a25a5a37df43439d6a3745c8c
+  production_requirement: >-
+    T01 and T05 use the exact public definition bodies and canonical private
+    sorted-component encoding in the signature proposal's authoritative
+    complete Basic.lean block. Any semantic replacement requires a new card,
+    packet binding, and final pre-Lean review.
+  anchor_semantics: >-
+    The proof presents deterministic midpoint and c+1 anchors. The exact
+    private encoding existentially quantifies interior anchors. Proved
+    anchor-independence makes these presentations equivalent at the public
+    relation; no public constructor, selected anchor, chosen primitive, or
+    selected improper value is introduced.
+  private_helpers:
+    - declaration: LMLF.Integral.HasImproperIntegralTailFromBreaks
+      visibility: private
+    - declaration: LMLF.Integral.HasImproperIntegralAtTopBreaks
+      visibility: private
+  public_status: >-
+    The helper declarations are never public targets, constructors,
+    eliminators, or consumer dependencies. The public count remains exactly
+    two definitions plus six theorems.
+  finite_piece_abel_identity: private_non_target
+
+targets:
+  - target_id: IMP-001-T01
+    module: LMLF.Integral.Improper.Basic
+    declaration: LMLF.Integral.HasImproperIntegralAtTopExcept
+    theorem_class: definition
+    coverage_class: reusable_infrastructure
+    novelty_class: non_novel
+    relationship_to_source: >-
+      Source-independent classical ordinary-improper semantics with explicit
+      finite-breakpoint bookkeeping; earns no source coverage.
+    theorem_card_id: TC-IMP-001-R7
+    natural_language_proof_id: NLP-IMP-001-R7
+    proof_section: target-imp-001-t01
+    proof_context_id: IMP-001-R7-FULL-CONTEXT
+    exact_lean_signature: |
+      def LMLF.Integral.HasImproperIntegralAtTopExcept
+          {E : Type*} [NormedAddCommGroup E] [NormedSpace ℝ E]
+          [CompleteSpace E] (f : ℝ → E) (k : ℝ) (S : Finset ℝ)
+          (I : E) : Prop
+    mathematical_statement: >-
+      S lies strictly above k; f is IntervalIntegrable on every compact
+      regular truncation; all finite exceptional endpoints have independent
+      one-sided limits; the final component has an atTop limit; and the exact
+      finite component sum equals I.
+    order_convention: S is canonically sorted increasingly only in private representation.
+    domain: "Complete normed real E; f : Real -> E; k : Real; finite S subset Ioi k."
+    nonempty_witness: S may be empty; the zero integrand relates to value zero.
+    bound: not_applicable; no inequality or norm bound is part of T01.
+    derivative_convention: not_applicable
+    branch_convention: not_applicable
+    exceptional_values: Values at k and isolated points of S are null-set irrelevant; approach from each side is not.
+    normalization: Proposed value I is explicit; no choice-selected value function exists.
+  - target_id: IMP-001-T02
+    module: LMLF.Integral.Improper.Basic
+    declaration: LMLF.Integral.HasImproperIntegralAtTopExcept.unique
+    theorem_class: existence_uniqueness
+    coverage_class: reusable_infrastructure
+    novelty_class: non_novel
+    relationship_to_source: Routine uniqueness of the component limits and their finite sum.
+    theorem_card_id: TC-IMP-001-R7
+    natural_language_proof_id: NLP-IMP-001-R7
+    proof_section: target-imp-001-t02
+    proof_context_id: IMP-001-R7-FULL-CONTEXT
+    exact_lean_signature: |
+      theorem LMLF.Integral.HasImproperIntegralAtTopExcept.unique
+          {E : Type*} [NormedAddCommGroup E] [NormedSpace ℝ E]
+          [CompleteSpace E] {f : ℝ → E} {k : ℝ} {S : Finset ℝ}
+          {I J : E}
+          (hI : LMLF.Integral.HasImproperIntegralAtTopExcept f k S I)
+          (hJ : LMLF.Integral.HasImproperIntegralAtTopExcept f k S J) :
+          I = J
+    mathematical_statement: Two relation witnesses for the same f, k, and S have equal explicit values.
+    order_convention: Uses the same canonical increasing order of S in both witnesses.
+    domain: The exact T01 domain for both hypotheses.
+    nonempty_witness: The zero integrand at value zero supplies a consistent instance.
+    bound: not_applicable
+    derivative_convention: not_applicable
+    branch_convention: not_applicable
+    exceptional_values: No principal-value cancellation is introduced.
+    normalization: No selected partial integral is defined.
+  - target_id: IMP-001-T03
+    module: LMLF.Integral.Improper.Basic
+    declaration: LMLF.Integral.HasImproperIntegralAtTopExcept.finset_clm
+    theorem_class: exact_identity
+    coverage_class: reusable_infrastructure
+    novelty_class: non_novel
+    relationship_to_source: >-
+      Classical finite linearity and continuous-linear transport from common
+      input/value space E to an independently complete output space H.
+    theorem_card_id: TC-IMP-001-R7
+    natural_language_proof_id: NLP-IMP-001-R7
+    proof_section: target-imp-001-t03
+    proof_context_id: IMP-001-R7-FULL-CONTEXT
+    exact_lean_signature: |
+      theorem LMLF.Integral.HasImproperIntegralAtTopExcept.finset_clm
+          {E : Type*} [NormedAddCommGroup E] [NormedSpace ℝ E]
+          {H : Type*} [NormedAddCommGroup H] [NormedSpace ℝ H]
+          [CompleteSpace E] [CompleteSpace H]
+          {A : Type*} (s : Finset A) (f : A → ℝ → E)
+          (S : A → Finset ℝ) (I : A → E) (T : A → E →L[ℝ] H)
+          {k : ℝ}
+          (h : ∀ i ∈ s,
+            LMLF.Integral.HasImproperIntegralAtTopExcept
+              (f i) k (S i) (I i)) :
+          LMLF.Integral.HasImproperIntegralAtTopExcept
+            (fun t => ∑ i ∈ s, T i (f i t)) k
+            (s.biUnion S) (∑ i ∈ s, T i (I i))
+    mathematical_statement: >-
+      A finite family of relations at the same k combines under maps E ->L[R]
+      H on exactly the literal finite union s.biUnion S and exact mapped sum.
+    order_convention: Finite index set s; no infinite sum or order limit.
+    domain: Complete normed real E and H; arbitrary finite s and family data.
+    nonempty_witness: The empty finite family gives the zero relation.
+    bound: not_applicable; exact finite identity only.
+    derivative_convention: not_applicable
+    branch_convention: not_applicable
+    exceptional_values: Each supplied S i is retained through the literal union.
+    normalization: Output value is exactly the finite mapped sum.
+  - target_id: IMP-001-T04
+    module: LMLF.Integral.Improper.Basic
+    declaration: LMLF.Integral.HasImproperIntegralAtTopExcept.split_regular
+    theorem_class: exact_identity
+    coverage_class: reusable_infrastructure
+    novelty_class: non_novel
+    relationship_to_source: Exact regular-prefix additivity and endpoint-limit transport.
+    theorem_card_id: TC-IMP-001-R7
+    natural_language_proof_id: NLP-IMP-001-R7
+    proof_section: target-imp-001-t04
+    proof_context_id: IMP-001-R7-FULL-CONTEXT
+    exact_lean_signature: |
+      theorem LMLF.Integral.HasImproperIntegralAtTopExcept.split_regular
+          {E : Type*} [NormedAddCommGroup E] [NormedSpace ℝ E]
+          [CompleteSpace E] (f : ℝ → E) {a k : ℝ} (S : Finset ℝ)
+          (I : E) (hak : a ≤ k) (hS : ∀ c ∈ S, k < c)
+          (hf : IntervalIntegrable f MeasureTheory.volume a k) :
+          LMLF.Integral.HasImproperIntegralAtTopExcept
+              f a S ((∫ t in a..k, f t) + I) ↔
+            LMLF.Integral.HasImproperIntegralAtTopExcept f k S I
+    mathematical_statement: >-
+      For a <= k and an honest regular prefix, the relation from a at the exact
+      value integral_a^k f + I is equivalent to the relation from k at I.
+    order_convention: Oriented interval a to k with explicit a <= k.
+    domain: Same finite S above k and IntervalIntegrable f volume a k.
+    nonempty_witness: a = k is the degenerate prefix case.
+    bound: not_applicable
+    derivative_convention: not_applicable
+    branch_convention: not_applicable
+    exceptional_values: No point of S lies in the prepended interval.
+    normalization: Exact value orientation is J + I, never I + J by silent rewriting.
+  - target_id: IMP-001-T05
+    module: LMLF.Integral.Improper.Basic
+    declaration: LMLF.Integral.IsFiniteExceptionalPrimitive
+    theorem_class: definition
+    coverage_class: reusable_infrastructure
+    novelty_class: non_novel
+    relationship_to_source: Source-independent normalized primitive certificate used by later consumers.
+    theorem_card_id: TC-IMP-001-R7
+    natural_language_proof_id: NLP-IMP-001-R7
+    proof_section: target-imp-001-t05
+    proof_context_id: IMP-001-R7-FULL-CONTEXT
+    exact_lean_signature: |
+      def LMLF.Integral.IsFiniteExceptionalPrimitive
+          {E : Type*} [NormedAddCommGroup E] [NormedSpace ℝ E]
+          [CompleteSpace E] (g : ℝ → E) (k : ℝ) (S : Finset ℝ)
+          (F : ℝ → E) : Prop
+    mathematical_statement: >-
+      S lies above k; F is continuous on Ici k; F k = 0; and every k <= a <= b
+      whose Icc avoids S has honest g interval integrability and exact increment
+      F b - F a = integral_a^b g.
+    order_convention: Every oriented regular interval satisfies k <= a <= b.
+    domain: Complete normed real E with explicit g, k, finite S, and F.
+    nonempty_witness: g = 0 and F = 0 satisfy the predicate for every S above k.
+    bound: not_applicable; no norm bound or atTop limit is a T05 field.
+    derivative_convention: No derivative or absolute-continuity field is assumed.
+    branch_convention: not_applicable
+    exceptional_values: Continuity of F glues the independent endpoint values.
+    normalization: F k = 0; values below k are unconstrained.
+  - target_id: IMP-001-T06
+    module: LMLF.Integral.Improper.Abel
+    declaration: LMLF.Integral.IsFiniteExceptionalPrimitive.hasImproperIntegralAtTopExcept_exp_smul
+    theorem_class: exact_identity
+    coverage_class: reusable_infrastructure
+    novelty_class: non_novel
+    relationship_to_source: >-
+      Classical representation-independent finite-exception Abel composition,
+      proved through a private finite-piece Fubini identity.
+    theorem_card_id: TC-IMP-001-R7
+    natural_language_proof_id: NLP-IMP-001-R7
+    proof_section: target-imp-001-t06
+    proof_context_id: IMP-001-R7-FULL-CONTEXT
+    exact_lean_signature: |
+      theorem LMLF.Integral.IsFiniteExceptionalPrimitive.hasImproperIntegralAtTopExcept_exp_smul
+          {E : Type*} [NormedAddCommGroup E] [NormedSpace ℝ E]
+          [CompleteSpace E] {g F : ℝ → E} {k : ℝ} {S : Finset ℝ}
+          (hF : LMLF.Integral.IsFiniteExceptionalPrimitive g k S F)
+          (h : ℝ)
+          (hInt : MeasureTheory.IntegrableOn
+            (fun t => Real.exp (-h * t) • F t) (Set.Ioi k))
+          (hLim : Filter.Tendsto
+            (fun R => Real.exp (-h * R) • F R)
+            Filter.atTop (nhds 0)) :
+          LMLF.Integral.HasImproperIntegralAtTopExcept
+            (fun t => Real.exp (-h * t) • g t) k S
+            (h • ∫ t in Set.Ioi k, Real.exp (-h * t) • F t)
+    mathematical_statement: >-
+      From T05 and the two explicit weighted-tail hypotheses, for arbitrary
+      real h conclude the weighted-g relation on the same literal S at exactly
+      h scalar-multiplied by the Ioi integral of the weighted primitive.
+    order_convention: Right ray from k; h is arbitrary and no division by h occurs.
+    domain: Complete normed real E; explicit T05 witness and weighted tail premises.
+    nonempty_witness: h = 0 is included whenever both explicit tail premises hold.
+    bound: not_applicable; no L, positivity, or estimate is present.
+    derivative_convention: The private proof differentiates only the scalar exponential, never F.
+    branch_convention: not_applicable
+    exceptional_values: The exceptional set is exactly the input S; no regular-point enlargement.
+    normalization: Exact value h • integral over Ioi k; T05 supplies F k = 0.
+  - target_id: IMP-001-T07
+    module: LMLF.Integral.Improper.Bochner
+    declaration: LMLF.Integral.HasImproperIntegralAtTopExcept.of_integrableOn_Ioi
+    theorem_class: qualitative_support
+    coverage_class: reusable_infrastructure
+    novelty_class: non_novel
+    relationship_to_source: Routine bridge from honest absolute Bochner integrability.
+    theorem_card_id: TC-IMP-001-R7
+    natural_language_proof_id: NLP-IMP-001-R7
+    proof_section: target-imp-001-t07
+    proof_context_id: IMP-001-R7-FULL-CONTEXT
+    exact_lean_signature: |
+      theorem LMLF.Integral.HasImproperIntegralAtTopExcept.of_integrableOn_Ioi
+          {E : Type*} [NormedAddCommGroup E] [NormedSpace ℝ E]
+          [CompleteSpace E] (f : ℝ → E) (k : ℝ) (S : Finset ℝ)
+          (hS : ∀ c ∈ S, k < c)
+          (hf : MeasureTheory.IntegrableOn f (Set.Ioi k)) :
+          LMLF.Integral.HasImproperIntegralAtTopExcept
+            f k S (∫ t in Set.Ioi k, f t)
+    mathematical_statement: >-
+      IntegrableOn f (Ioi k), together with every c in arbitrary finite S
+      lying above k, gives the relation at the honest Bochner set integral.
+    order_convention: Arbitrary finite marking set S; no canonical enlargement is selected.
+    domain: Complete normed real E and explicit IntegrableOn f (Ioi k).
+    nonempty_witness: The zero integrand works for every finite S above k.
+    bound: not_applicable
+    derivative_convention: not_applicable
+    branch_convention: not_applicable
+    exceptional_values: The value at the single point k is null-set irrelevant.
+    normalization: The conclusion value is exactly the Ioi set integral.
+  - target_id: IMP-001-T08
+    module: LMLF.Integral.Improper.Basic
+    declaration: LMLF.Integral.hasImproperIntegralAtTopExcept_iff_exists_primitive
+    theorem_class: exact_identity
+    coverage_class: reusable_infrastructure
+    novelty_class: non_novel
+    relationship_to_source: >-
+      Exact equivalence between independent endpoint-component semantics and
+      existence of a convergent normalized primitive.
+    theorem_card_id: TC-IMP-001-R7
+    natural_language_proof_id: NLP-IMP-001-R7
+    proof_section: target-imp-001-t08
+    proof_context_id: IMP-001-R7-FULL-CONTEXT
+    exact_lean_signature: |
+      theorem LMLF.Integral.hasImproperIntegralAtTopExcept_iff_exists_primitive
+          {E : Type*} [NormedAddCommGroup E] [NormedSpace ℝ E]
+          [CompleteSpace E] {f : ℝ → E} {k : ℝ} {S : Finset ℝ}
+          {I : E} :
+          LMLF.Integral.HasImproperIntegralAtTopExcept f k S I ↔
+            ∃ F : ℝ → E,
+              LMLF.Integral.IsFiniteExceptionalPrimitive f k S F ∧
+                Filter.Tendsto F Filter.atTop (nhds I)
+    mathematical_statement: >-
+      T01 at I holds if and only if there exists F satisfying exactly T05 and
+      tending to I atTop.
+    order_convention: Canonical component stitching is owned only by T08.
+    domain: Exact T01 and T05 domains for the same f, k, S, and I.
+    nonempty_witness: The zero relation has the zero primitive witness.
+    bound: >-
+      No quantitative norm bound or bounding constant is included in the
+      signature; existential boundedness is derived separately from continuity
+      and the finite atTop limit.
+    derivative_convention: not_applicable
+    branch_convention: not_applicable
+    exceptional_values: Witness values below k are unconstrained and conclusion-invariant.
+    normalization: The right side is existential in F, never fixed at an arbitrary supplied F.
+
+named_objects: []
+
+dependencies:
+  mathlib:
+    lean_toolchain: leanprover/lean4:v4.33.1
+    requested_revision: v4.33.1
+    resolved_revision: 0df444a360eaa60ab8c11dca51a86af692955474
+    lake_manifest_sha256: 4bd9b595f84163f69bdb0ffc9b1a876b5df71d65bdd53122415610d083d43404
+    declarations:
+      - intervalIntegral.integral_add_adjacent_intervals
+      - ContinuousLinearMap.intervalIntegral_comp_comm
+      - MeasureTheory.intervalIntegral_integral_swap
+      - ContinuousOn.intervalIntegrable_of_Icc
+      - tendsto_nhds_unique
+      - tendsto_finsetSum
+      - intervalIntegral.integral_eq_sub_of_hasDerivAt_of_le
+      - intervalIntegral.integral_undef
+      - intervalIntegral.continuousOn_primitive_interval'
+      - MeasureTheory.intervalIntegral_tendsto_integral_Ioi
+      - MeasureTheory.IntegrableOn.continuousOn_Ici_primitive_Ioi
+      - intervalIntegral.integral_Ioi_sub_Ioi
+      - intervalIntegrable_iff_integrableOn_Ioc_of_le
+      - Real.hasDerivAt_exp
+  accepted_work_items: []
+  draft_work_items: []
+  explicitly_not_dependencies:
+    - QB-001
+    - DEF-001
+    - QL-001
+    - OLV-001
+    - OLV-002
+  production_modules:
+    - module: LMLF.Integral.Improper.Basic
+      permitted_imports:
+        - Mathlib.Data.Finset.Sort
+        - Mathlib.MeasureTheory.Integral.DominatedConvergence
+    - module: LMLF.Integral.Improper.Bochner
+      permitted_imports:
+        - LMLF.Integral.Improper.Basic
+        - Mathlib.MeasureTheory.Integral.IntegralEqImproper
+    - module: LMLF.Integral.Improper.Abel
+      permitted_imports:
+        - LMLF.Integral.Improper.Basic
+        - Mathlib.Analysis.SpecialFunctions.ExpDeriv
+        - Mathlib.MeasureTheory.Integral.IntervalIntegral.FundThmCalculus
+        - Mathlib.MeasureTheory.Integral.Prod
+        - Mathlib.MeasureTheory.Integral.IntegralEqImproper
+  dependency_direction: Mathlib -> Basic -> {Bochner, Abel}; Bochner and Abel are independent siblings.
+  endpoint_stitching_owner: T08 alone
+  public_consumer_boundary:
+    excludes:
+      - private IMP helpers
+      - downstream LMLF QL, OLV, Watson, source, audit, QB, or DEF modules
+    permits_separately:
+      - direct pinned Mathlib support imports used by the consumer
+    noninflation_rule: >-
+      Consumer-only Mathlib support must not be added to production IMP imports
+      merely to make it transitively available.
+
+assumptions:
+  - name: complete_normed_real_spaces
+    exact_content: >-
+      E, and H for T03, have NormedAddCommGroup, NormedSpace Real, and
+      CompleteSpace instances.
+    provenance: explicit typeclass inputs
+    why_not_hidden_goal: These are the natural Bochner integration and Hausdorff-limit structures.
+  - name: finite_exceptions_above_start
+    exact_content: Every c in each explicit finite exceptional set satisfies k < c.
+    provenance: T01/T05 body or explicit theorem premise
+    why_not_hidden_goal: This is domain bookkeeping and contains no convergence conclusion.
+  - name: regular_piece_integrability
+    exact_content: Every compact interval avoiding S has explicit IntervalIntegrable evidence.
+    provenance: T01/T05 semantics and T04 explicit hf
+    why_not_hidden_goal: It prevents Mathlib totalization from standing in for convergence.
+  - name: independent_endpoint_limits
+    exact_content: Each side of every c in S and the final atTop endpoint converges separately.
+    provenance: Exact T01 definition semantics
+    why_not_hidden_goal: This defines ordinary improper convergence and forbids principal-value cancellation.
+  - name: normalized_continuous_increment_primitive
+    exact_content: F is continuous on Ici k, F k = 0, and has the exact increment law on every S-regular interval.
+    provenance: Exact T05 definition semantics
+    why_not_hidden_goal: It contains no atTop convergence, bound, derivative, weighted value, or target relation.
+  - name: weighted_tail_integrability
+    exact_content: IntegrableOn (fun t => exp (-h*t) • F t) (Ioi k).
+    provenance: Explicit T06 premise
+    why_not_hidden_goal: It makes the totalized set integral in T06 honest; no flat bound is bundled.
+  - name: weighted_boundary_vanishing
+    exact_content: Tendsto (fun R => exp (-h*R) • F R) atTop (nhds 0).
+    provenance: Explicit T06 premise
+    why_not_hidden_goal: It removes only the terminal Abel boundary term.
+  - name: whole_ray_absolute_integrability
+    exact_content: IntegrableOn f (Ioi k).
+    provenance: Explicit T07 premise
+    why_not_hidden_goal: It makes T07's Bochner integral honest and is not inferred from T01.
+  - name: existential_primitive
+    exact_content: T08 quantifies exists F with T05 and Tendsto F atTop (nhds I).
+    provenance: Exact T08 result type
+    why_not_hidden_goal: It defines no selected primitive and includes no norm bound.
+
+pre_lean_gate_requirements:
+  overall_minimum_distinct_reviewer_ids: 3
+  historical_reviews_count_toward_quorum: false
+  theorem_card_review:
+    required: true
+    minimum_distinct_reviewer_ids: 2
+    allowed_reviewer_compositions:
+      - humans: 2
+        agents: 0
+        minimum_distinct_agent_models: 0
+      - humans: 1
+        agents: 1
+        minimum_distinct_agent_models: 1
+      - humans: 0
+        agents: 2
+        minimum_distinct_agent_models: 1
+  natural_language_proof_review:
+    applicability: required
+    inapplicable_reason: null
+    minimum_distinct_reviewer_ids: 2
+    allowed_reviewer_compositions:
+      - humans: 2
+        agents: 0
+        minimum_distinct_agent_models: 0
+      - humans: 1
+        agents: 1
+        minimum_distinct_agent_models: 1
+      - humans: 0
+        agents: 2
+        minimum_distinct_agent_models: 1
+  structural_circularity_review:
+    applicability: required
+    inapplicable_reason: null
+    minimum_distinct_reviewer_ids: 1
+    allowed_reviewer_compositions:
+      - humans: 1
+        agents: 0
+        minimum_distinct_agent_models: 0
+      - humans: 0
+        agents: 1
+        minimum_distinct_agent_models: 1
+    required_perspectives:
+      - dependency_direction
+      - source_to_target_reachability
+      - hypothesis_and_choice_laundering
+  lean_ready:
+    required: true
+    current_candidate_owned_state: pending
+    authoritative_state_source: external_review_envelope_only
+    requires_gate_states:
+      theorem_card_review: pass
+      natural_language_proof_review: pass
+      structural_circularity_review: pass
+
+implementation_review_requirements:
+  status: pending
+  overall_minimum_distinct_reviewer_ids: 3
+  rubrics:
+    - rubric: source_fidelity
+      applicability: not_applicable
+      inapplicable_reason: >-
+        Source-independent original reusable infrastructure with no source
+        occurrence, named source object, transcription, or coverage claim.
+      minimum_distinct_reviewer_ids: 0
+      allowed_reviewer_compositions: []
+    - rubric: quantitative_correctness
+      applicability: required
+      inapplicable_reason: null
+      minimum_distinct_reviewer_ids: 1
+      allowed_reviewer_compositions:
+        - humans: 1
+          agents: 0
+          minimum_distinct_agent_models: 0
+        - humans: 0
+          agents: 1
+          minimum_distinct_agent_models: 1
+    - rubric: mathlib_reuse
+      applicability: required
+      inapplicable_reason: null
+      minimum_distinct_reviewer_ids: 1
+      allowed_reviewer_compositions:
+        - humans: 1
+          agents: 0
+          minimum_distinct_agent_models: 0
+        - humans: 0
+          agents: 1
+          minimum_distinct_agent_models: 1
+    - rubric: api_dependency
+      applicability: required
+      inapplicable_reason: null
+      minimum_distinct_reviewer_ids: 1
+      allowed_reviewer_compositions:
+        - humans: 1
+          agents: 0
+          minimum_distinct_agent_models: 0
+        - humans: 0
+          agents: 1
+          minimum_distinct_agent_models: 1
+    - rubric: proof_quality
+      applicability: required
+      inapplicable_reason: null
+      minimum_distinct_reviewer_ids: 1
+      allowed_reviewer_compositions:
+        - humans: 1
+          agents: 0
+          minimum_distinct_agent_models: 0
+        - humans: 0
+          agents: 1
+          minimum_distinct_agent_models: 1
+
+regression_policy:
+  acceptance_requirement: >-
+    Every IMP-R01 through IMP-R25 and every theorem-card edge obligation is
+    mandatory before implementation acceptance. Partial signature-harness
+    evidence never converts an obligation to complete.
+  target_proof_authorization: >-
+    A passing external final pre-Lean gate authorizes implementation only of
+    the exact eight targets and their private proof support.
+  later_mathematical_regression_authorization: >-
+    Before formalizing new analytic examples or counterexamples beyond the
+    reviewed target derivations, bind a complete companion natural-language
+    proof provisionally labeled NLP-IMP-001-REG and obtain at least two fresh
+    independent reviews. This label is a plan, not a current path, digest,
+    dependency, or authorization.
+  change_control: >-
+    A regression discovery requiring a changed target type, definition
+    semantics, or mathematical premise returns the packet to a new frozen
+    specification and fresh applicable pre-Lean review.
+
+regressions:
+  - regression_id: IMP-R01
+    protects: T01 binder order E, f, k, S, I and visible S subset Ioi k semantics
+    expected_statement: The production declaration exactly matches frozen T01 and its bound definition body.
+    stage: target_implementation_acceptance
+    current_evidence: Signature and definition bytes are compiled in SIG-IMP-001-R6-P2; production is absent.
+    status: required_pending
+  - regression_id: IMP-R02
+    protects: empty exceptional-set base semantics
+    expected_statement: Empty S reduces to honest regular truncations and the direct right-endpoint atTop limit.
+    stage: target_implementation_acceptance
+    current_evidence: Definition design contains the empty-list clause; no production regression exists.
+    status: required_pending
+  - regression_id: IMP-R03
+    protects: T08 complete component semantics
+    expected_statement: T08 works in both directions for empty and multiple-point S with every independent endpoint and the exact telescope.
+    stage: target_implementation_acceptance
+    current_evidence: T08's existential type and simple forward extraction compile; the multipoint telescope has a natural-language proof but no Lean proof yet.
+    status: required_pending
+  - regression_id: IMP-R04
+    protects: rejection of principal-value-only cancellation
+    expected_statement: A cutoff one-over-distance singularity with symmetric PV fails the two independent one-sided limits.
+    stage: later_reviewed_mathematical_regression_then_acceptance
+    current_evidence: Natural-language adversarial argument only; no Lean theorem exists.
+    authorization_precondition: reviewed NLP-IMP-001-REG companion
+    status: required_pending
+  - regression_id: IMP-R05
+    protects: acceptance of genuinely conditional finite singularities
+    expected_statement: A cutoff sin(1/(t-c))/(t-c) has both independent improper sides but is not absolutely locally Bochner integrable across c.
+    stage: later_reviewed_mathematical_regression_then_acceptance
+    current_evidence: Natural-language adversarial argument only; no Lean theorem exists.
+    authorization_precondition: reviewed NLP-IMP-001-REG companion
+    status: required_pending
+  - regression_id: IMP-R06
+    protects: conditional convergence at infinity without absolute strengthening
+    expected_statement: A tail such as sin(t)/t satisfies T01 for empty S without yielding IntegrableOn on the whole ray.
+    stage: later_reviewed_mathematical_regression_then_acceptance
+    current_evidence: Natural-language adversarial argument only; no Lean theorem exists.
+    authorization_precondition: reviewed NLP-IMP-001-REG companion
+    status: required_pending
+  - regression_id: IMP-R07
+    protects: honest regular-piece integrability and resistance to totalization
+    expected_statement: Missing IntervalIntegrable evidence cannot construct T01 even when a totalized intervalIntegral expression has a value.
+    stage: target_implementation_acceptance
+    current_evidence: No exact production regression exists.
+    authorization_precondition: >-
+      An abstract projection/type-shape test follows the reviewed target. Any
+      chosen concrete nonintegrable example first requires the reviewed
+      NLP-IMP-001-REG companion.
+    status: required_pending
+  - regression_id: IMP-R08
+    protects: T03 literal union, exact finite linearity, and heterogeneous codomain
+    expected_statement: >-
+      Test empty and two-term families, negation, complex multiplication,
+      Real-to-Complex, Complex-to-Real, and the amplitude-on-S plus smooth-on-empty case.
+    stage: target_implementation_acceptance
+    current_evidence: >-
+      Partial only: generic cross-codomain/literal-union shape and selected
+      subtraction/recombination consumers compile against temporary axioms;
+      the enumerated named CLM instances are not all present.
+    status: required_pending
+  - regression_id: IMP-R09
+    protects: T04 orientation and degenerate prefix
+    expected_statement: Test a = k and a nonzero constant prepended segment with exact J + I orientation.
+    stage: target_implementation_acceptance
+    current_evidence: "Partial only: a generic split/extraction consumer compiles; a=k and constant-prefix cases are missing."
+    status: required_pending
+  - regression_id: IMP-R10
+    protects: T05 field boundary and absence of a hidden flat bound
+    expected_statement: T05 exposes only above-k, continuity, normalization, regular integrability, and increments; no L or atTop limit.
+    stage: target_implementation_acceptance
+    current_evidence: Exact definition body is compiled in the signature proposal; production audit is pending.
+    status: required_pending
+  - regression_id: IMP-R11
+    protects: continuity across exceptional points
+    expected_statement: A discontinuous componentwise primitive cannot telescope across an exceptional point.
+    stage: later_reviewed_mathematical_regression_then_acceptance
+    current_evidence: Natural-language counterexample only.
+    authorization_precondition: reviewed NLP-IMP-001-REG companion
+    status: required_pending
+  - regression_id: IMP-R12
+    protects: all-intermediate-point increment law
+    expected_statement: Endpoint equality alone for g=0 and F(t)=t(1-t) does not prove the private Abel identity or populate T05 for T06.
+    stage: later_reviewed_mathematical_regression_then_acceptance
+    current_evidence: Natural-language counterexample only.
+    authorization_precondition: reviewed NLP-IMP-001-REG companion
+    status: required_pending
+  - regression_id: IMP-R13
+    protects: degenerate Abel algebra, h=0, and lack of a derivative premise on F
+    expected_statement: >-
+      The private identity handles a=b and h=0; public T06 handles h=0 under
+      its exact two tail premises and a bounded eventually constant
+      nondifferentiable indicator primitive for h>0.
+    stage: target_and_later_reviewed_mathematical_regression_then_acceptance
+    current_evidence: Signature admits arbitrary h, but neither the algebraic cases nor indicator example is implemented.
+    authorization_precondition: >-
+      The a=b and h=0 algebra belong to the reviewed target proof. The
+      nondifferentiable indicator example requires the reviewed
+      NLP-IMP-001-REG companion.
+    status: required_pending
+  - regression_id: IMP-R14
+    protects: split-improper exceptional prefix semantics
+    expected_statement: Exceptional finite prefixes are sums of component values and are never collapsed to one intervalIntegral across a singularity.
+    stage: target_implementation_acceptance
+    current_evidence: T06 signature shape does not establish this private production proof property.
+    status: required_pending
+  - regression_id: IMP-R15
+    protects: downward-only production import and axiom architecture
+    expected_statement: No IMP module imports QL, OLV, Watson, source, Gamma, QB, or DEF; all eight public axiom reports satisfy the allowlist.
+    stage: target_implementation_acceptance
+    current_evidence: Proposal import surfaces pass only in the disposable harness; production is absent.
+    status: required_pending
+  - regression_id: IMP-R16
+    protects: proof-before-Lean gate
+    expected_statement: No production target proof begins before an external envelope records final lean_ready pass.
+    stage: pre_implementation_gate_and_acceptance_audit
+    current_evidence: Production is absent and no authorization is claimed.
+    status: required_pending
+  - regression_id: IMP-R17
+    protects: T03 proof route without representation dependence
+    expected_statement: T03 weakens each T05 witness to literal s.biUnion S, constructs the mapped finite-sum primitive, and invokes T08 reverse.
+    stage: target_implementation_acceptance
+    current_evidence: The signature consumer does not prove this production theorem route.
+    status: required_pending
+  - regression_id: IMP-R18
+    protects: exact restricted-product Bochner Fubini premise and local measurability
+    expected_statement: >-
+      The private kernel proves Integrable (uncurry K) under exactly the product
+      of the two volume.restrict (uIoc a b) measures and proves
+      AEStronglyMeasurable only under that measure, with no global premise.
+    stage: target_implementation_acceptance
+    current_evidence: No production proof body exists; signatures do not discharge the Fubini premise.
+    status: required_pending
+  - regression_id: IMP-R19
+    protects: exact exponential derivative dependency and no division by h
+    expected_statement: Derive (exp(-h*t))'=-h*exp(-h*t) from Real.hasDerivAt_exp and prove the FTC identity also at h=0.
+    stage: target_implementation_acceptance
+    current_evidence: No production proof body exists; the pinned import/name was only checked during design.
+    status: required_pending
+  - regression_id: IMP-R20
+    protects: arbitrary-S public QL-shaped reachability
+    expected_statement: >-
+      From public T05, h>0, L>=0, and the separate flat bound on Ici k, derive
+      weighted IntegrableOn and boundary vanishing, then invoke only public T06
+      on the same S without unfolding T01 or naming private helpers.
+    stage: target_implementation_acceptance
+    current_evidence: A complete consumer compiles against temporary target axioms; it must be rerun unchanged against actual target proofs.
+    status: required_pending
+  - regression_id: IMP-R21
+    protects: honest arbitrary-S Bochner bridge
+    expected_statement: T07 works for every finite S above k and its typed negative guard rejects omission of IntegrableOn.
+    stage: target_implementation_acceptance
+    current_evidence: Positive signature use and isolated negative-guard sensitivity are compiled; the actual T07 proof and final rerun are pending.
+    status: required_pending
+  - regression_id: IMP-R22
+    protects: initial-endpoint semantics
+    expected_statement: >-
+      An exponentially cut off square-root singularity at k is accepted, while
+      a conditionally improper non-L1 singularity at k is rejected.
+    stage: later_reviewed_mathematical_regression_then_acceptance
+    current_evidence: Natural-language examples only; no Lean theorem exists.
+    authorization_precondition: reviewed NLP-IMP-001-REG companion
+    status: required_pending
+  - regression_id: IMP-R23
+    protects: T08 existential quantifier, two directions, no quantitative bound in the signature, and below-k irrelevance
+    expected_statement: >-
+      T08 rejects a fixed arbitrary F, works in both directions, exposes no
+      norm bound, and is invariant under changing witness values below k.
+    stage: target_implementation_acceptance
+    current_evidence: >-
+      Partial only: the fixed-F guard is sensitivity-tested and forward
+      extraction/no-bound are consumer-visible; full below-k invariance is not proved.
+    status: required_pending
+  - regression_id: IMP-R24
+    protects: null-set endpoint values
+    expected_statement: Changing f at k and at every c in S preserves T01, T07, and T08.
+    stage: later_reviewed_mathematical_regression_then_acceptance
+    current_evidence: "Partial only: the harness checks initial-point update for the T07 bridge, not full T01/T08 or every c in S."
+    authorization_precondition: reviewed NLP-IMP-001-REG companion for the full invariance theorem
+    status: required_pending
+  - regression_id: IMP-R25
+    protects: absence of a bound in T08 and exact downstream route
+    expected_statement: >-
+      A public source-shaped consumer takes an explicit baseline T01 witness,
+      uses T08 forward, and derives a norm bound separately from continuity
+      plus the finite atTop limit. It compiles without QL/OLV imports and
+      exercises the route intended for their later implementations; actual
+      QL/OLV implementation is not an IMP acceptance prerequisite.
+    stage: target_implementation_acceptance
+    current_evidence: "Partial only: a conditional one-model public-interface chain compiles; no OLV code or accepted downstream proof exists."
+    status: required_pending
+
+card_edge_obligations:
+  mapping_in_card_order:
+    - edge: empty exceptional set reduces to an ordinary right-endpoint limit
+      regression_ids: [IMP-R02]
+    - edge: T08 empty and multiple-point exact telescope
+      regression_ids: [IMP-R03]
+    - edge: amplitude on S plus smooth model terms on empty concludes on S
+      regression_ids: [IMP-R08, IMP-R17]
+    - edge: T03 cross-codomain scalar transports
+      regression_ids: [IMP-R08]
+    - edge: principal-value-only one-over-distance singularity is rejected
+      regression_ids: [IMP-R04]
+    - edge: conditionally convergent one-sided finite singularity is accepted
+      regression_ids: [IMP-R05]
+    - edge: sin(t)/t tail is not strengthened to absolute integrability
+      regression_ids: [IMP-R06]
+    - edge: nonintegrable truncation cannot pass through totalization
+      regression_ids: [IMP-R07]
+    - edge: square-root versus conditionally improper non-L1 initial singularities
+      regression_ids: [IMP-R22]
+    - edge: discontinuous componentwise primitive cannot telescope
+      regression_ids: [IMP-R11]
+    - edge: endpoint equality cannot replace every-point increments
+      regression_ids: [IMP-R12]
+    - edge: exceptional prefix is not one intervalIntegral
+      regression_ids: [IMP-R14]
+    - edge: exact restricted-product Integrable kernel
+      regression_ids: [IMP-R18]
+    - edge: measure-local AEStronglyMeasurable without global StronglyMeasurable
+      regression_ids: [IMP-R18]
+    - edge: Real.hasDerivAt_exp and no division by h
+      regression_ids: [IMP-R19]
+    - edge: private a=b and h=0 plus public h=0 and nondifferentiable primitive
+      regression_ids: [IMP-R13]
+    - edge: arbitrary-S QL-shaped public-only consumer
+      regression_ids: [IMP-R20]
+    - edge: arbitrary-S T07 and missing-IntegrableOn rejection
+      regression_ids: [IMP-R21]
+    - edge: existential T08 in both directions with no quantitative bound or bounding constant in the signature
+      regression_ids: [IMP-R23]
+    - edge: endpoint values and below-k witness values are irrelevant
+      regression_ids: [IMP-R24, IMP-R23]
+    - edge: T04 exact sign and value order
+      regression_ids: [IMP-R09]
+  status: all_required_before_implementation_acceptance
+
+scope:
+  included:
+    - exactly eight public declarations in exactly the three frozen modules
+    - T01 and T05 as the two exact bound definitions
+    - T02, T03, T04, T06, T07, and T08 as the six theorem proofs
+    - the exact canonical private sorted-component representation for T01
+    - private proof support required for the eight targets, including the finite-piece Abel/Fubini identity
+    - imports of the Abel and Bochner modules in the maintained LMLF/Results.lean umbrella, with no extra declarations or reverse imports
+    - nonpublic regression files discharging IMP-R01 through IMP-R25 and every card edge obligation under the staged proof policy
+    - local builds, import audits, public declaration axiom audits, and exact public-use regressions
+  excluded:
+    - every ninth public declaration, public private-helper wrapper, constructor, eliminator, anchor API, or improper-integral value function
+    - the private finite-piece Abel identity as a public theorem target
+    - QB, DEF, QL, OLV, Watson, Gamma, source, or audit imports in production IMP modules
+    - any bound field or bounding constant in T05 or T08
+    - bounded-primitive estimates, Gamma moments, Watson remainders, or source recovery
+    - principal-value, whole-line, two-sided-infinity, contour, or oscillatory APIs
+    - numerical evaluators, floating-point or interval certificates, tolerance policies, quadrature, optimizers, and solvers
+    - any new constructivity requirement motivated only by possible future verified numerical consumers
+  exact_identity_estimate_separation: >-
+    All public values, hypotheses, and finite identities remain explicit. T01,
+    T03, T04, T06, and T08 state exact relations or equivalences; no estimate
+    or constant loss is hidden in them. Later estimates must be separate
+    declarations under separate bounded specifications.
+
+verification:
+  status: future_acceptance_commands_not_current_implementation_evidence
+  local_only: true
+  github_ci_calls_permitted: false
+  commands:
+    - lake build
+    - lake env lean LMLF/Integral/Improper/Basic.lean
+    - lake env lean LMLF/Integral/Improper/Bochner.lean
+    - lake env lean LMLF/Integral/Improper/Abel.lean
+    - lake env lean LMLFTest/Integral/Improper/IMP001PublicUse.lean
+    - lake env lean LMLFTest/Integral/Improper/IMP001Regressions.lean
+    - python3 scripts/validate_inventory.py
+    - python3 scripts/validate_inventory.py --negative-tests
+  command_note: >-
+    The production and LMLFTest files do not yet exist. These are required
+    local acceptance commands after authorized implementation and staged
+    regression proof work; listing them is not a claim that they currently run.
+    The initial lake build reaches all three IMP modules through the two
+    permitted Results imports and produces their oleans before direct Lean
+    checks of importing modules and the nonpublic test files.
+  public_declarations_requiring_axiom_report:
+    - LMLF.Integral.HasImproperIntegralAtTopExcept
+    - LMLF.Integral.HasImproperIntegralAtTopExcept.unique
+    - LMLF.Integral.HasImproperIntegralAtTopExcept.finset_clm
+    - LMLF.Integral.HasImproperIntegralAtTopExcept.split_regular
+    - LMLF.Integral.IsFiniteExceptionalPrimitive
+    - LMLF.Integral.IsFiniteExceptionalPrimitive.hasImproperIntegralAtTopExcept_exp_smul
+    - LMLF.Integral.HasImproperIntegralAtTopExcept.of_integrableOn_Ioi
+    - LMLF.Integral.hasImproperIntegralAtTopExcept_iff_exists_primitive
+  allowed_axioms:
+    - propext
+    - Classical.choice
+    - Quot.sound
+  forbidden_production_declarations:
+    - axiom
+    - sorry
+    - admit
+  disposable_harness_disclosure: >-
+    The signature proposal's six theorem axioms are excluded from production
+    and cannot satisfy any target axiom audit or implementation review.
+
+acceptance_notes: |
+  This packet freezes a closed, source-free, one-card infrastructure scope. It
+  binds TC-IMP-001-R7, frozen NLP-IMP-001-R7, its exact R6 mathematical-content
+  provenance, and SIG-IMP-001-R6-P2. The prior reports are prerequisite
+  historical context only and count zero toward the fresh final quorum.
+
+  Card and packet freezing do not establish theorem-card review, proof review,
+  structural review, lean_ready, implementation authorization, or acceptance.
+  The final pre-Lean quorum requires three distinct reviewer IDs overall, two
+  card reviewers, two natural-language-proof reviewers, and all three required
+  structural perspectives. Authority lives only in an external envelope bound
+  after the specification commit exists.
+
+  Every IMP-R01 through IMP-R25 and every card edge obligation remains required
+  before implementation acceptance. The signature harness provides only the
+  partial evidence stated per row. A later hash-bound NLP-IMP-001-REG companion
+  with at least two fresh independent reviews is required before formalizing
+  the identified new analytic example/counterexample mathematics; the planned
+  label is not a present dependency or authorization.
+
+  Future verified numerical consumption is design motivation only. This packet
+  creates no evaluator, certificate, numerical interface, or constructivity
+  demand. Exact values and hypotheses remain explicit, and exact identities
+  remain separate from any later estimate.

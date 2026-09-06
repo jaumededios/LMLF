@@ -169,6 +169,39 @@ reason, mirrored externally as `not_required`.  The immutable card fields still
 record the earlier specification-snapshot state by design and are not rewritten
 with later external verdicts.
 
+## IMPROPER-0 — source-free improper-integration specification
+
+- `owner`: `jaumededios`
+- `scope_closed`: `true`
+- `occurrence_selection_locked`: `not_applicable`
+- `manifest_status`: `execution_ready`
+- `member_count`: 1
+- `public_target_count`: 8
+- `Olver coverage`: none
+- `work_packets`: `review/work_packets/IMP-001.yaml`
+
+The sole member is frozen `IMP-001` card revision 7. Work-packet revision 1
+binds the new metadata-only proof successor
+[`NLP-IMP-001-R7`](proofs/IMP-001-R7.md) and the accepted
+[exact-signature proposal revision 2](theorem_cards/IMP-001-signatures-R6.md),
+SHA-256 `0e220214233fec5f2f95608789b139900e7dfddef8a6b824b8d54bce37e74f2d`.
+The R7 successor preserves the R6 mathematical proof and equations while
+changing only lifecycle/binding/status metadata. Canonical
+[`IMP-001.md` R6](proofs/IMP-001.md) remains byte-for-byte historical
+mathematical input and the dependency recorded by QL/OLV R4; it does not become
+frozen or inherit approvals.
+Fresh exact-byte referees C and D approved only that proposal at
+`9e6e038871ac66f80534626d3deade0b27af6752`; the root negative-guard finding
+was resolved only for those bytes. The reports and disposition are archived at
+private
+[`review-evidence` commit `d0d4fb4`](https://github.com/jaumededios/LMLF/commit/d0d4fb4895733b5de8396794e81cbe1a19657bdb).
+This evidence satisfies a prerequisite stage, not final-packet quorum.
+`execution_ready` means only that this source-free specification is closed
+and bounded. Fresh final pre-Lean reviews and an external envelope remain
+pending; there is no `lean_ready`, implementation authorization, production
+Lean, source occurrence, or source-coverage claim. The compiled-unreviewed
+prototype uses temporary axiomatic theorem stubs only.
+
 ## OLV-MVP-1 — first source theorem planning manifest
 
 - `owner`: `jaumededios`
@@ -204,8 +237,8 @@ SR-001 remains uncarded:
 | OLV-001 | finite_remainder_bound | exact_source_generic | revision-4 draft derivation of visible witnesses and a finite bound from the collated Watson hypotheses; dependency rebinding only |
 | SR-001 | qualitative_bridge | audit_source_recovery | recover the exact printed qualitative conclusion in `Audit/SourceRecovery` |
 
-`IMP-001` is an unregistered revision-6 author draft upstream of QL-001. Its
-eight prospective public targets are justified by consumer completion rather
+`IMP-001` is now frozen separately in source-free `IMPROPER-0`, upstream of
+QL-001. Its eight public targets are justified by consumer completion rather
 than a hard schema cap: T01 keeps independent endpoint semantics; T08 equates
 it with existence of a normalized continuous primitive tending to the same
 value; T07 is the arbitrary-exception absolute Bochner bridge; T03 maps
@@ -214,13 +247,12 @@ private. `Basic` owns T01/T05/T08/T02/T03/T04, `Bochner` T07, and `Abel` T06.
 IMP R6 and QL R4 correct only three root namespace entries in the pinned API
 ledger, while OLV R4 only rebinds those draft dependencies. The mathematical
 targets, proofs, architecture, QL a.e. local premise, finite-dimensional source
-adapter, target count, and module split are unchanged; new exact-commit checks
-remain pending and imply no approval or `lean_ready` status.
+adapter, target count, and module split are unchanged.
 The historical revision-3 signature artifact is untouched and superseded.
-Recent R4 report bytes are absent after restart, and conversation-reported
-approval supplies no current quorum. No R6 or QL/OLV R4 review, signature,
-registry, manifest, or Lean authorization exists; a draft file is not a
-manifest member.
+The frozen IMP card/work packet still awaits fresh final pre-Lean reviews and
+an external envelope, while QL/OLV R4 remain planning drafts; no `lean_ready`,
+implementation authorization, or source coverage follows from
+`IMPROPER-0`.
 QL-001 uses T06 for the bounded-primitive tail, T07 for the absolutely
 integrable model terms, and T04 to prepend the local interval. OLV-001 chooses
 one common baseline `X > 0` before `n`, uses T07/T03/T04/T08 to obtain the

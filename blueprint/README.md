@@ -25,9 +25,10 @@ As of this specification:
 |---|---|---|
 | `DEMO-0` | candidate M0--M4 work | open and `planning_only`; not execution-ready |
 | `BOOTSTRAP-0` | exactly `QB-001` and `DEF-001` | closed with zero source occurrences; externally authorized and implemented; no tagged release is claimed here |
+| `IMPROPER-0` | exactly `IMP-001`: eight public targets, zero source occurrences | closed and `execution_ready` as a specification only; frozen card R7, metadata-only proof successor R7, and work packet R1 await fresh final pre-Lean review and an external envelope; no `lean_ready` or implementation authorization |
 | `QB-001` | eight signatures only | immutable card revision 7/proof revision 6/signature revision 2 retain their pre-authorization self-status; external review accepted the exact implementation at commit `515b742f7ad5472c17cfdf0fda7cbc83c5585da1` |
 | `DEF-001` | four Gamma reuse wrappers | immutable card revision 4 retains its specification-snapshot self-status; external review accepted the exact implementation at commit `515b742f7ad5472c17cfdf0fda7cbc83c5585da1` |
-| `OLV-MVP-1` | one selected Watson occurrence | open and `planning_only`; exact 1997 snapshot was previously inspected/hash-bound but its uploaded bytes are absent after restart; two external fresh-context Sol reports approve the exact IMP R6 plus QL/OLV R4 natural-language/architecture inputs at `50dcded3` only to begin signature design; the candidate signature bytes and all final gates remain unreviewed, with no `lean_ready`, Lean authorization, PDF-fidelity renewal, or coverage claim |
+| `OLV-MVP-1` | one selected Watson occurrence | open and `planning_only`; QL-001 and OLV-001 remain revision-4 planning drafts; the separate upstream IMP specification has no `lean_ready`, implementation authorization, PDF-fidelity renewal, or coverage claim |
 | Parallel source collations | Chapter 2 `Ai` and `J`/`I`; Chapter 11 real Airy/auxiliaries; Chapter 12 real Bessel auxiliaries; Chapter 8 Euler--Maclaurin/Bernoulli | hash-bound mathematical transcriptions are present; two independent source referees approved the exact Bessel revision-2 files and all 119 Bessel occurrence rows are integrated provisionally; Airy, Bernoulli, and Bessel remain unreconciled, Bernoulli has unregistered identification drafts, and no Bessel notation/entity link, card, manifest membership, coverage, or Lean authorization exists |
 | Olver theorem coverage | none | no quantitative Olver theorem or qualitative source recovery is currently claimed |
 
@@ -160,10 +161,17 @@ pinned integration/limit facts -> IMP-001 -> QL-001 ------/
 pinned Real Gamma moment -----------------------> QL-001
 ```
 
-`IMP-001` is a provisional, unregistered handle for the ordinary-improper
-relation and finite-exceptional continuous-primitive layer. Its revision-6
-author draft has eight prospective targets selected by consumer completion,
-not by a hard schema cap. `Basic` owns T01/T05/T08/T02/T03/T04, `Bochner` owns
+`IMP-001` is the sole member of the separate, source-free `IMPROPER-0`
+milestone. Frozen card revision 7 and work-packet revision 1 bind the new
+metadata-only proof successor `NLP-IMP-001-R7` and the accepted exact-signature
+proposal revision 2,
+SHA-256 `0e220214233fec5f2f95608789b139900e7dfddef8a6b824b8d54bce37e74f2d`.
+The R7 proof successor preserves the R6 mathematics and equations while
+updating only lifecycle/binding/status metadata; canonical
+`proofs/IMP-001.md` R6 remains unchanged historical mathematical input and
+the dependency recorded by QL/OLV R4.
+Its eight targets were selected by consumer completion, not by a hard schema
+cap. `Basic` owns T01/T05/T08/T02/T03/T04, `Bochner` owns
 the arbitrary-exception absolute bridge T07, and `Abel` owns T06 while keeping
 the finite-piece engine private. T01 retains independent endpoint semantics;
 T08 is the public equivalence with existence of a normalized continuous
@@ -172,23 +180,20 @@ primitive tending to the same value; and T03 permits continuous linear maps
 declaration; QL revision 4 corrects two more root namespaces, and OLV revision
 4 only rebinds those revised dependencies. The mathematical targets, proofs,
 architecture, a.e. local premise, finite-dimensional source adapter, eight
-public targets, and three IMP modules are unchanged; new exact-commit checks
-were completed for the reviewed inputs. Two independent fresh-context Sol
-reports D and E approved those exact six card/proof artifacts at commit
-`50dcded3b36e33632cf1e9734cac34c10a890d8a` solely as prerequisites for
-bounded exact-signature design. Their reports and the administrative clearance
-are preserved at private
-[`review-evidence` commit `0d6813a`](https://github.com/jaumededios/LMLF/commit/0d6813aba75cff17d983cb77ae39d1466361aeaf),
-with a later
-[attribution-only clarification `b4e6fc6`](https://github.com/jaumededios/LMLF/commit/b4e6fc6).
-The new eight-signature, three-module
-[IMP R6 exact-signature proposal](theorem_cards/IMP-001-signatures-R6.md)
-is an author candidate awaiting its own independent exact-byte review; its
-temporary axiomatic theorem stubs are confined to a disposable specification
-harness and are not production Lean. Final theorem-card/work-packet approval,
-final quorum, `lean_ready`, registry/manifest authorization, and implementation
-authorization remain absent, and no PDF-fidelity or source-coverage claim
-follows. The historical
+public targets, and three IMP modules are unchanged. Fresh exact-byte referees C
+and D approved the
+[revision-2 proposal](theorem_cards/IMP-001-signatures-R6.md) at commit
+`9e6e038871ac66f80534626d3deade0b27af6752`; the root negative-guard finding
+was resolved only for those exact proposal bytes. The reports and disposition
+are archived at private
+[`review-evidence` commit `d0d4fb4`](https://github.com/jaumededios/LMLF/commit/d0d4fb4895733b5de8396794e81cbe1a19657bdb).
+Those approvals are prerequisite-stage input to card/work-packet freezing, not
+final-packet quorum. The closed manifest's `execution_ready` status means
+specification readiness only. Its compiled-unreviewed prototype uses temporary
+axiomatic theorem stubs only and is not production Lean. Fresh final pre-Lean
+reviews and an external
+envelope remain pending; no `lean_ready`, production implementation,
+PDF-fidelity, or source-coverage claim follows. The historical
 revision-3 exact-signature artifact is untouched,
 superseded changes-requested evidence and is not an R6 signature input.
 QL-001 uses T06 for its tail, T07 for model terms, and T04 for the local/tail
@@ -240,12 +245,13 @@ linked document.
 
 | Queue | Planning IDs | Registration/status boundary |
 |---|---|---|
-| Bootstrap | `QB-001`, `DEF-001` | the only current closed, fully specified manifest members |
+| Bootstrap | `QB-001`, `DEF-001` | closed, externally accepted, and implemented at the exact `515b742...` candidate |
+| Improper integration infrastructure | `IMP-001` | sole member of separate closed `IMPROPER-0`; frozen card R7, metadata-only proof successor R7, work packet R1, and eight signatures are `execution_ready` as a specification only, pending fresh final pre-Lean review and external envelope |
 | Demonstrator candidates | `QA-002`, `DEF-002`, `QC-001`, `QL-001`, `EX-001`, `EX-002` | `DEMO-0` planning; only IDs with complete cards may move to a revised closed manifest |
-| Watson source pilot | provisional `IMP-001`; registered `QL-001`, `OLV-001`, `SR-001` | IMP-001 revision 6 has eight draft targets; QL-001 and OLV-001 revision 4 are the concurrent consumer drafts; two external reports approve the exact `50dcded3` natural-language/architecture inputs only for signature design; the linked R6 signature proposal awaits independent exact-byte review, and final card/packet/quorum, `lean_ready`, Lean authorization, and SR-001 carding remain absent |
+| Watson source pilot | registered `QL-001`, `OLV-001`, `SR-001`; upstream `IMP-001` lives in `IMPROPER-0` | QL-001 and OLV-001 remain revision-4 planning drafts; final acceptance of the upstream IMP packet, `lean_ready`, implementation authorization, and SR-001 carding remain absent |
 | Domain/branch support | `QC-DOM`, `CB-PRINCIPAL`, `CB-GENERIC`, `QC-REAL`, `QC-LOGCOORD` | provisional in [complex domains](methods/complex_domains_branches.md) |
 | Derivative transport | `QC-CAUCHY`, `QC-RADIUS`, `EX-001`, `QC-NEG-DERIV`, `QC-JET`, `QC-MIXED`, `QC-GAUGE` | provisional except manifest candidate `EX-001`; M3 uses only the bounded initial slice |
-| Laplace | provisional `IMP-001`; `QL-001`--`QL-003`, `EX-002`, `OLV-001`, `OLV-002`, `SR-001` | IMP-001 -> QL-001 -> OLV-001 -> SR-001 is the MVP route; OLV-002 is a separate unselected section 9 bound |
+| Laplace | `IMP-001`; `QL-001`--`QL-003`, `EX-002`, `OLV-001`, `OLV-002`, `SR-001` | IMP-001 in separate `IMPROPER-0` -> QL-001 -> OLV-001 -> SR-001 is the MVP route; OLV-002 is a separate unselected section 9 bound |
 | Oscillatory/contour | `OI-001`--`OI-003`, `CT-001`--`CT-002`, `SP-001`--`SP-002`, `SD-001`, `COAL-001` | provisional and off the Watson path |
 | Summation/transfer | `SUM-001`, `BER-001`, `EM-001`--`EM-002`, `CF-001`--`CF-002`, `DAR-001`, `ILT-001` | provisional; `ILT-001` waits for a direct source selection |
 | ODE/stability | `ODE-001`--`ODE-011` | separate bounded planning packets; named variants escalate to the three-review gate |
@@ -268,8 +274,10 @@ named function and discharge all generic hypotheses.
 - Independent Watson collation review remains pending. Two external
   fresh-context Sol reports approved the exact IMP-001 R6, QL-001 R4, and
   OLV-001 R4 natural-language proof/architecture bytes at `50dcded3` solely
-  to begin bounded signature design. The resulting signature proposal requires
-  its own independent exact-byte review.
+  to begin bounded signature design. Fresh referees C and D then approved the
+  exact signature-proposal revision 2 bytes at `9e6e038`; frozen IMP card R7,
+  metadata-only proof successor R7, and work packet R1 now await fresh final
+  pre-Lean review and an external envelope.
   `OLV-001` cannot freeze until the source
   and integral-semantics choices are independently approved and IMP-001 and
   QL-001 are accepted.
@@ -308,11 +316,11 @@ primitive.  No separate proper-Riemann implementation is planned.  It chooses
 one common baseline `X > 0` before `n`; the whole-set Bochner route is only an
 absolute-integrability adapter. QL-001 and OLV-001 revision-4 cards and
 complete draft proof dossiers expose those choices; neither is frozen or
-Lean-authorized. The unregistered IMP-001 revision-6 author draft exposes the
-eight-target architecture above. External reports D and E approve the exact
-`50dcded3` natural-language/architecture inputs only for signature design;
-the candidate signature bytes exist but their independent exact-byte review
-remains pending. Final theorem-card/work-packet approval, final quorum,
+Lean-authorized. The separate `IMPROPER-0` milestone now freezes upstream
+IMP-001 card R7, metadata-only proof successor R7, and work packet R1 around
+the unchanged R6 mathematics and accepted signature-proposal revision 2.
+Canonical proof R6 remains the unchanged historical input used by QL/OLV, not
+a newly frozen artifact. The final pre-Lean reviews, external envelope,
 `lean_ready`, and implementation authorization remain absent. This
 review stage does not renew PDF fidelity or establish source coverage. The
 occurrence-card association uses

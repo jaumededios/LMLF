@@ -16,25 +16,28 @@ records the exact accepted candidate; later planning commits do not alter those 
 The exact 1997 Olver PDF was previously inspected and hash-bound outside version control, and its
 mathematical transcriptions survive. The original uploaded bytes are not present in this restarted
 environment; any new source-image audit requires reattachment or recovery. This does not block the
-source-independent IMP/QL work. Theorem 3.1 on Watson's lemma has a mathematical transcription. The current planning
-chain is the concurrent IMP-001 revision-6 eight-target author draft plus QL-001 and OLV-001
-revision-4 cards and complete natural-language proof dossiers. These revisions correct only three
-exact pinned Mathlib namespace references and rebind the OLV dependencies; the eight public
-targets, three candidate IMP modules, mathematical proofs, architecture, QL a.e. local premise,
-and finite-dimensional source adapter are unchanged. Two independent fresh-context Sol reports D
-and E approved the exact six R6/R4 card/proof inputs at commit
-`50dcded3b36e33632cf1e9734cac34c10a890d8a` for bounded signature design only.
-The reports and administrative clearance are preserved at private
-[`review-evidence` commit `0d6813a`](https://github.com/jaumededios/LMLF/commit/0d6813aba75cff17d983cb77ae39d1466361aeaf),
-with a later
-[attribution-only clarification `b4e6fc6`](https://github.com/jaumededios/LMLF/commit/b4e6fc6).
-The new eight-signature, three-module
-[IMP R6 exact-signature proposal](blueprint/theorem_cards/IMP-001-signatures-R6.md)
-is an author candidate awaiting independent exact-byte review; any temporary axiomatic theorem
-stubs belong only to a disposable specification harness, not production Lean. Final card and work
-packet approval, final quorum, `lean_ready`, registry/manifest authorization, and Lean
-implementation remain absent. The reviews make no PDF-fidelity or source-coverage claim. The old
-IMP revision-3 signature artifact remains superseded evidence. The eight-target IMP surface preserves
+source-independent IMP/QL work. Theorem 3.1 on Watson's lemma has a mathematical transcription.
+The source-free IMP layer is now bounded by frozen card revision 7, the new
+metadata-only proof successor `NLP-IMP-001-R7`, and work-packet revision 1 in
+the separate closed `IMPROPER-0` manifest. The successor preserves the R6
+mathematical proof and equations while updating only lifecycle/binding/status
+metadata; canonical `blueprint/proofs/IMP-001.md` R6 remains unchanged
+historical mathematical input and the dependency recorded by the QL/OLV
+drafts. The frozen specification also binds the accepted eight-signature, three-module
+[IMP R6 signature proposal revision 2](blueprint/theorem_cards/IMP-001-signatures-R6.md),
+SHA-256 `0e220214233fec5f2f95608789b139900e7dfddef8a6b824b8d54bce37e74f2d`.
+Fresh exact-byte referees C and D approved only that signature proposal at
+`9e6e038871ac66f80534626d3deade0b27af6752`; the root negative-guard finding
+was resolved only for those bytes. The records are archived at private
+[`review-evidence` commit `d0d4fb4`](https://github.com/jaumededios/LMLF/commit/d0d4fb4895733b5de8396794e81cbe1a19657bdb).
+This is prerequisite-stage evidence, not final-packet quorum. `execution_ready`
+means only that the source-free specification is closed and fully bounded.
+The compiled-unreviewed prototype uses temporary axiomatic theorem stubs only;
+it is not production Lean.
+Fresh final pre-Lean reviews and an external envelope are still pending; no
+`lean_ready`, implementation, PDF-fidelity, or source-coverage claim follows.
+QL-001 and OLV-001 remain unchanged revision-4 planning drafts. The old IMP
+revision-3 signature artifact remains superseded evidence. The eight-target IMP surface preserves
 independent endpoint semantics and exposes only the primitive-equivalence, arbitrary-exception
 Bochner, continuous-linear-map, local-splitting, and Abel bridges needed to close the QL/OLV
 consumer route; its finite-piece Abel engine remains private. Bounded Airy,

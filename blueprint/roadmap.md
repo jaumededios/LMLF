@@ -45,6 +45,11 @@ DEF-001 cards.  Manifest readiness did not itself authorize Lean; both members
 subsequently passed their externally recorded gates and their exact
 implementation was accepted at commit
 `515b742f7ad5472c17cfdf0fda7cbc83c5585da1`.
+The separate source-free `IMPROPER-0` manifest is also closed and
+`execution_ready`, with one frozen IMP-001 specification, eight public
+targets, and zero source occurrences. Here readiness is specification-only:
+fresh final pre-Lean reviews and an external envelope remain pending, and no
+`lean_ready` or implementation authorization follows.
 
 Three inventories support every closed manifest:
 
@@ -286,8 +291,14 @@ pinned Real Gamma moment -----------------------> QL-001
 QB-001 and DEF-001 are optional packaging/audit joins, not mathematical
 dependencies of the revision-4 Watson route.
 
-The current concurrent author drafts are IMP-001 revision 6 with eight public
-targets, QL-001 revision 4, and OLV-001 revision 4. The IMP split is
+The upstream IMP layer is now a separate source-free milestone: `IMPROPER-0`
+contains frozen card revision 7, metadata-only proof successor
+`NLP-IMP-001-R7`, and work-packet revision 1 for eight public targets and zero
+source occurrences. The successor preserves the R6 mathematical proof and
+equations while updating only lifecycle/binding/status metadata; canonical
+`blueprint/proofs/IMP-001.md` R6 remains unchanged historical mathematical
+input and the dependency recorded by the unchanged QL-001 and OLV-001
+revision-4 planning drafts. The IMP split is
 T01/T05/T08/T02/T03/T04 in `Basic`, T07 in `Bochner`, and T06 in `Abel`.
 T01 keeps independent endpoint semantics; T08 is the existential normalized
 continuous-primitive equivalence; T07 is the arbitrary-exception absolute
@@ -295,17 +306,27 @@ Bochner bridge; T03 maps `E -> H`; and T06 keeps the finite-piece engine
 private. QL consumes T06, T07, and local splitting T04. OLV consumes
 T07/T03/T04/T08 to obtain the baseline primitive, derives its own flat bound
 `L`, and only then invokes QL. Eight targets are justified by this consumer
-completion, not by a hard schema cap. The old R3 signature artifact is
-superseded evidence; recent R4 report bytes are absent, and conversation-only
-approval is not quorum. No current R6/R4 review, exact signature, registry,
-manifest, or Lean authorization exists.
+completion, not by a hard schema cap. The frozen card binds accepted
+exact-signature proposal revision 2, SHA-256
+`0e220214233fec5f2f95608789b139900e7dfddef8a6b824b8d54bce37e74f2d`.
+Fresh exact-byte referees C and D approved only that proposal at
+`9e6e038871ac66f80534626d3deade0b27af6752`; the root negative-guard finding
+was resolved only for those bytes. The reports and disposition are archived at
+private
+[`review-evidence` commit `d0d4fb4`](https://github.com/jaumededios/LMLF/commit/d0d4fb4895733b5de8396794e81cbe1a19657bdb).
+This is prerequisite-stage evidence, not final-packet quorum. Fresh final
+pre-Lean reviews and an external envelope remain pending; `execution_ready`
+means only specification readiness, with no `lean_ready`, implementation
+authorization, or source-coverage claim. The compiled-unreviewed prototype uses
+temporary axiomatic theorem stubs only and is not production Lean. The old R3 signature
+artifact remains superseded evidence.
 
 R6/R4 are clerical exact-API revisions: IMP and QL correct three pinned root
 namespace references, and OLV only rebinds those dependencies. The mathematical
 targets, proofs, architecture, restricted-volume a.e. local premise,
 finite-dimensional source adapter, eight targets, and three IMP modules are
-unchanged. New exact-commit checks remain pending; no approval or `lean_ready`
-claim follows.
+unchanged. No approval transfers from the preserved R6 draft to the new frozen
+R7 successor.
 
 Airy, Cauchy derivative transport, residual algebra, ODE stability, and
 comparison systems are parallel work and are explicitly not prerequisites.
