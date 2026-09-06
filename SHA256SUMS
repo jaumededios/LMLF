@@ -232,3 +232,12 @@ f902ca42c9bd9b2fc72602b13ab3a089835f1c36340edaf8f86971ce8f74a8db  ./e0-contract-
 71a29abbcd1f124057b81e31b3545d615b522b26681c1221959af5dd4e94a67a  ./e0-contract-referee-e.md
 998a8bcbce8e2745fc60e7fa4c2ea36a37dc2db6a5f49f716f51b31d24a4c7b9  ./e0-contract-referee-f.md
 cf8ada65adcce2f14ad0805e042b98f3ae3de00d40b6057dd096d385badab91b  ./root-e0-contract-draft04-adjudication.md
+95d955565ca7d2f6d0212b8a9a5a17f666b5c8af9250c6c471ceddc46b5efe66  ./e0-implementation-proposer-01.md
+f357bdb2cf51e4e12f7aafe88325e05b6be29d43eea3abdf03fc536cd8a388f0  ./e0-implementation-proposer-01-addendum-01.md
+dc4c591060d2ce131b37f452d054be0e80351d79c51f2fd7d8ebb6b439caa383  ./e0-validator-adversarial-review-a.md
+8e462bb463a2c3da90f629baf59cba76906685c7c58f9a208f96795243463935  ./e0-validator-semantics-review-b.md
+48e2d6915ab6fdb0a47c6a941df622795eea791cdb8cd06f12a935ec5421068f  ./e0-validator-adversarial-review-a-candidate-01.md
+ed9fb79e6117fcec751e5828651c2c6881241ab97c412e8f6fee1ce70b8a1e2b  ./e0-validator-adversarial-review-a-candidate-01-addendum-01.md
+a499a197b1d5f3040c87d8c285090cfdbf3ccff72b25450606538730d7d86920  ./e0-validator-semantics-review-b-candidate-01.md
+588884cd9fd407e6a0682d430e4c395784463e7cc02266d52f755fb29f131537  ./e0-binding-repair-design-01.md
+c50fa7d136dfb63b3af4fc2deca84929028879c24b282b7b54c9daa8d30e93b7  ./e0-binding-repair-design-02.md
