@@ -917,4 +917,221 @@ theorem HasImproperIntegralAtTopExcept.unique
     (hJ : HasImproperIntegralAtTopExcept f k S J) : I = J :=
   HasImproperIntegralAtTopBreaks.unique hI.2 hJ.2
 
+private theorem IsFiniteExceptionalPrimitive.weaken
+    [CompleteSpace E] {f : ℝ → E} {k : ℝ} {S U : Finset ℝ} {F : ℝ → E}
+    (hF : IsFiniteExceptionalPrimitive f k S F)
+    (hSU : S ⊆ U) (hU : ∀ c ∈ U, k < c) :
+    IsFiniteExceptionalPrimitive f k U F := by
+  refine ⟨hU, hF.2.1, hF.2.2.1, ?_⟩
+  intro a b hka hab hdis
+  apply hF.2.2.2 hka hab
+  exact hdis.mono_right (by
+    intro c hc
+    exact hSU (by simpa using hc))
+
+/-- IMP-001-T03. -/
+theorem HasImproperIntegralAtTopExcept.finset_clm
+    {H : Type*} [NormedAddCommGroup H] [NormedSpace ℝ H]
+    [CompleteSpace E] [CompleteSpace H]
+    {A : Type*} (s : Finset A) (f : A → ℝ → E)
+    (S : A → Finset ℝ) (I : A → E) (T : A → E →L[ℝ] H) {k : ℝ}
+    (h : ∀ i ∈ s, HasImproperIntegralAtTopExcept (f i) k (S i) (I i)) :
+    HasImproperIntegralAtTopExcept
+      (fun t => ∑ i ∈ s, T i (f i t)) k
+      (s.biUnion S) (∑ i ∈ s, T i (I i)) := by
+  classical
+  let F : A → ℝ → E := fun i =>
+    if hi : i ∈ s then
+      Classical.choose
+        (hasImproperIntegralAtTopExcept_iff_exists_primitive.mp (h i hi))
+    else 0
+  have hF : ∀ i ∈ s, IsFiniteExceptionalPrimitive (f i) k (S i) (F i) := by
+    intro i hi
+    simpa [F, hi] using
+      (Classical.choose_spec
+        (hasImproperIntegralAtTopExcept_iff_exists_primitive.mp (h i hi))).1
+  have hFlim : ∀ i ∈ s, Tendsto (F i) atTop (nhds (I i)) := by
+    intro i hi
+    simpa [F, hi] using
+      (Classical.choose_spec
+        (hasImproperIntegralAtTopExcept_iff_exists_primitive.mp (h i hi))).2
+  have hU : ∀ c ∈ s.biUnion S, k < c := by
+    intro c hc
+    simp only [Finset.mem_biUnion] at hc
+    rcases hc with ⟨i, hi, hc⟩
+    exact (hF i hi).1 c hc
+  have hFU : ∀ i ∈ s,
+      IsFiniteExceptionalPrimitive (f i) k (s.biUnion S) (F i) := by
+    intro i hi
+    apply IsFiniteExceptionalPrimitive.weaken (hF i hi) _ hU
+    intro c hc
+    simp only [Finset.mem_biUnion]
+    exact ⟨i, hi, hc⟩
+  apply hasImproperIntegralAtTopExcept_iff_exists_primitive.mpr
+  refine ⟨fun t => ∑ i ∈ s, T i (F i t), ?_, ?_⟩
+  · refine ⟨hU, ?_, ?_, ?_⟩
+    · apply continuousOn_finsetSum
+      intro i hi
+      exact (T i).continuous.comp_continuousOn (hFU i hi).2.1
+    · apply Finset.sum_eq_zero
+      intro i hi
+      rw [(hFU i hi).2.2.1, map_zero]
+    · intro a b hka hab hdis
+      have hpiece : ∀ i ∈ s,
+          IntervalIntegrable (fun t => T i (f i t)) volume a b ∧
+            T i (F i b) - T i (F i a) =
+              ∫ t in a..b, T i (f i t) := by
+        intro i hi
+        rcases (hFU i hi).2.2.2 hka hab hdis with ⟨hint, hinc⟩
+        have hmap : IntervalIntegrable (fun t => T i (f i t)) volume a b :=
+          ⟨(T i).integrable_comp hint.1, (T i).integrable_comp hint.2⟩
+        refine ⟨hmap, ?_⟩
+        rw [← (T i).map_sub, hinc, (T i).intervalIntegral_comp_comm hint]
+      have hsumInt := IntervalIntegrable.sum s (fun i hi => (hpiece i hi).1)
+      have hsumInt' : IntervalIntegrable
+          (fun t => ∑ i ∈ s, T i (f i t)) volume a b := by
+        exact hsumInt.congr (fun t _ => by simp)
+      refine ⟨hsumInt', ?_⟩
+      change (∑ i ∈ s, T i (F i b)) - (∑ i ∈ s, T i (F i a)) =
+        ∫ t in a..b, ∑ i ∈ s, T i (f i t)
+      rw [intervalIntegral.integral_finsetSum
+        (fun i hi => (hpiece i hi).1)]
+      rw [← Finset.sum_sub_distrib]
+      exact Finset.sum_congr rfl fun i hi => (hpiece i hi).2
+  · apply tendsto_finsetSum s
+    intro i hi
+    exact (T i).continuous.continuousAt.tendsto.comp (hFlim i hi)
+
+/-- IMP-001-T04. -/
+theorem HasImproperIntegralAtTopExcept.split_regular
+    [CompleteSpace E] (f : ℝ → E) {a k : ℝ} (S : Finset ℝ) (I : E)
+    (hak : a ≤ k) (hS : ∀ c ∈ S, k < c)
+    (hf : IntervalIntegrable f volume a k) :
+    HasImproperIntegralAtTopExcept f a S ((∫ t in a..k, f t) + I) ↔
+      HasImproperIntegralAtTopExcept f k S I := by
+  constructor
+  · intro himp
+    rcases hasImproperIntegralAtTopExcept_iff_exists_primitive.mp himp with
+      ⟨G, hG, hGlim⟩
+    have hdisPrefix : Disjoint (Icc a k) (↑S : Set ℝ) := by
+      rw [Set.disjoint_left]
+      intro x hx hxS
+      exact (not_lt_of_ge hx.2) (hS x hxS)
+    have hGk : G k = ∫ t in a..k, f t := by
+      have hinc := (hG.2.2.2 le_rfl hak hdisPrefix).2
+      simpa [hG.2.2.1] using hinc
+    let F := normalizedTail G k
+    have hF : IsFiniteExceptionalPrimitive f k S F := by
+      refine ⟨hS, ?_, ?_, ?_⟩
+      · exact (hG.2.1.mono (Ici_subset_Ici.2 hak)).sub continuousOn_const
+      · simp [F, normalizedTail]
+      · intro u v hku huv hdis
+        rcases hG.2.2.2 (hak.trans hku) huv hdis with ⟨hint, hinc⟩
+        refine ⟨hint, ?_⟩
+        simpa [F, normalizedTail, sub_sub_sub_cancel_right] using hinc
+    have hFlim : Tendsto F atTop (nhds I) := by
+      have ht := hGlim.sub_const (G k)
+      change Tendsto (fun x => G x - G k) atTop (nhds I)
+      simpa [hGk] using ht
+    exact hasImproperIntegralAtTopExcept_iff_exists_primitive.mpr ⟨F, hF, hFlim⟩
+  · intro himp
+    rcases hasImproperIntegralAtTopExcept_iff_exists_primitive.mp himp with
+      ⟨F, hF, hFlim⟩
+    let P := fun x => ∫ t in a..x, f t
+    let J := ∫ t in a..k, f t
+    let G := glueComponentPrimitives k P F J
+    have hPcont : ContinuousOn P (Icc a k) := by
+      simpa [P, uIcc_of_le hak] using
+        (intervalIntegral.continuousOn_primitive_interval' hf left_mem_uIcc)
+    have hGleft : ∀ x ∈ Icc a k, G x = P x := by
+      intro x hx
+      simp [G, glueComponentPrimitives, hx.2]
+    have hGright : ∀ x ∈ Ici k, G x = J + F x := by
+      intro x hx
+      change k ≤ x at hx
+      rcases eq_or_lt_of_le hx with rfl | hkx
+      · simp [G, glueComponentPrimitives, P, J, hF.2.2.1]
+      · simp [G, glueComponentPrimitives, not_le_of_gt hkx]
+    have hGcontLeft : ContinuousOn G (Icc a k) := hPcont.congr hGleft
+    have hGcontRight : ContinuousOn G (Ici k) :=
+      (hF.2.1.const_add J).congr hGright
+    have hunion : Icc a k ∪ Ici k = Ici a := by
+      ext x
+      simp only [mem_union, mem_Icc, mem_Ici]
+      constructor
+      · rintro (⟨hax, _⟩ | hkx)
+        · exact hax
+        · exact hak.trans hkx
+      · intro hax
+        rcases le_total x k with hxk | hkx
+        · exact Or.inl ⟨hax, hxk⟩
+        · exact Or.inr hkx
+    have hGcont : ContinuousOn G (Ici a) := by
+      rw [← hunion]
+      exact hGcontLeft.union_of_isClosed hGcontRight isClosed_Icc isClosed_Ici
+    have hGa : G a = 0 := by
+      rw [hGleft a ⟨le_rfl, hak⟩]
+      simp [P]
+    have hGinc : ∀ {u v : ℝ}, a ≤ u → u ≤ v →
+        Disjoint (Icc u v) (↑S : Set ℝ) →
+        IntervalIntegrable f volume u v ∧ G v - G u = ∫ t in u..v, f t := by
+      intro u v hau huv hdis
+      by_cases hvk : v ≤ k
+      · have hAu : IntervalIntegrable f volume a u :=
+          hf.mono_set (by
+            rw [uIcc_of_le hau, uIcc_of_le hak]
+            exact Icc_subset_Icc le_rfl (huv.trans hvk))
+        have hAv : IntervalIntegrable f volume a v :=
+          hf.mono_set (by
+            rw [uIcc_of_le (hau.trans huv), uIcc_of_le hak]
+            exact Icc_subset_Icc le_rfl hvk)
+        have huvInt : IntervalIntegrable f volume u v :=
+          hf.mono_set (by
+            rw [uIcc_of_le huv, uIcc_of_le hak]
+            exact Icc_subset_Icc hau hvk)
+        refine ⟨huvInt, ?_⟩
+        rw [hGleft v ⟨hau.trans huv, hvk⟩,
+          hGleft u ⟨hau, huv.trans hvk⟩]
+        change (∫ t in a..v, f t) - ∫ t in a..u, f t = _
+        exact intervalIntegral.integral_interval_sub_left hAv hAu
+      · by_cases hku : k ≤ u
+        · rcases hF.2.2.2 hku huv hdis with ⟨hint, hinc⟩
+          refine ⟨hint, ?_⟩
+          rw [hGright v (hku.trans huv), hGright u hku]
+          simpa [add_sub_add_left_eq_sub] using hinc
+        · have huk : u ≤ k := le_of_not_ge hku
+          have hkv : k ≤ v := (lt_of_not_ge hvk).le
+          have hAu : IntervalIntegrable f volume a u :=
+            hf.mono_set (by
+              rw [uIcc_of_le hau, uIcc_of_le hak]
+              exact Icc_subset_Icc le_rfl huk)
+          have hukInt : IntervalIntegrable f volume u k :=
+            hf.mono_set (by
+              rw [uIcc_of_le huk, uIcc_of_le hak]
+              exact Icc_subset_Icc hau le_rfl)
+          have hdisRight : Disjoint (Icc k v) (↑S : Set ℝ) :=
+            hdis.mono_left (Icc_subset_Icc huk le_rfl)
+          rcases hF.2.2.2 le_rfl hkv hdisRight with ⟨hkvInt, hright⟩
+          have hleft : P k - P u = ∫ t in u..k, f t := by
+            change (∫ t in a..k, f t) - ∫ t in a..u, f t = _
+            exact intervalIntegral.integral_interval_sub_left hf hAu
+          refine ⟨hukInt.trans hkvInt, ?_⟩
+          rw [hGright v hkv, hGleft u ⟨hau, huk⟩]
+          calc
+            J + F v - P u = (P k - P u) + (F v - F k) := by
+              rw [hF.2.2.1]
+              rw [show J = P k by rfl]
+              abel
+            _ = (∫ t in u..k, f t) + ∫ t in k..v, f t := by
+              rw [hleft, hright]
+            _ = ∫ t in u..v, f t :=
+              intervalIntegral.integral_add_adjacent_intervals hukInt hkvInt
+    have hGlim : Tendsto G atTop (nhds (J + I)) :=
+      (hFlim.const_add J).congr' (by
+        filter_upwards [eventually_ge_atTop k] with x hkx
+        exact (hGright x hkx).symm)
+    apply hasImproperIntegralAtTopExcept_iff_exists_primitive.mpr
+    exact ⟨G, ⟨fun c hc => hak.trans_lt (hS c hc), hGcont, hGa, hGinc⟩,
+      by simpa [J] using hGlim⟩
+
 end LMLF.Integral
