@@ -1,8 +1,20 @@
 # LMLF
 
+> **Proposed successor-authority notice (pending).** The user-authorized broad
+> DLMF-through-Chapter-10 boundary is specified by proposed
+> [`blueprint/stage_1_dlmf-R4.md`](blueprint/stage_1_dlmf-R4.md), DD-021
+> revision 3. Its exact six-file successor, enumerated there by repo-relative
+> path, takes effect only after two fresh independent blueprint approvals and a
+> root external adjudication bind the exact successor commit and digests. Until
+> then, the predecessor control plane remains operative. Once effective,
+> DD-021 changes only the enumerated programme-priority/scheduling clauses;
+> frozen Olver evidence and semantics remain unchanged, and `OLV-MVP-1`
+> remains an eligible parallel Olver-track packet, not a DLMF prerequisite or
+> target.
+
 LMLF is a Lean 4 and [mathlib](https://github.com/leanprover-community/mathlib4) library for exact
-special-function definitions, finite approximants, and explicit error bounds. Its first
-source-coverage programme is the corrected 1997 reprint of F. W. J. Olver's *Asymptotics and
+special-function definitions, finite approximants, and explicit error bounds. Its locked Olver
+source-coverage track uses the corrected 1997 reprint of F. W. J. Olver's *Asymptotics and
 Special Functions*. The [project blueprint](blueprint/README.md) records the detailed scope,
 specifications, and release gates.
 

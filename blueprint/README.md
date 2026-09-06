@@ -2,13 +2,14 @@
 
 > **Proposed successor-authority notice (pending).** The user-authorized broad
 > DLMF-through-Chapter-10 boundary is specified by proposed
-> [DD-021 revision 2](stage_1_dlmf-R3.md). Its operative five-file plan takes
+> [`blueprint/stage_1_dlmf-R4.md`](stage_1_dlmf-R4.md), DD-021 revision 3.
+> Its exact six-file successor, enumerated there by repo-relative path, takes
 > effect only after two fresh independent blueprint approvals and a root
 > external adjudication bind the exact successor commit and digests. Until then,
-> the frozen text below remains operative. Once effective, DD-021 supersedes
-> only the Olver-first programme-priority/scheduling clauses it enumerates;
-> frozen Olver evidence and semantics remain unchanged, and `OLV-MVP-1` remains
-> an eligible parallel Olver-track packet, not a DLMF prerequisite or target.
+> the frozen text below remains operative. Once effective, DD-021 changes only
+> the enumerated programme-priority/scheduling clauses; frozen Olver evidence
+> and semantics remain unchanged, and `OLV-MVP-1` remains an eligible parallel
+> Olver-track packet, not a DLMF prerequisite or target.
 
 **Normative owner:** `jaumededios`  
 **Blueprint state:** bounded specification plus planning queues  
