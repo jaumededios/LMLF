@@ -193,13 +193,15 @@ SR-001 remains uncarded:
 | OLV-001 | finite_remainder_bound | exact_source_generic | draft derivation of visible witnesses and a finite bound from the collated Watson hypotheses |
 | SR-001 | qualitative_bridge | audit_source_recovery | recover the exact printed qualitative conclusion in `Audit/SourceRecovery` |
 
-`IMP-001` is an unregistered revision-1 draft for the small ordinary-
+`IMP-001` is an unregistered revision-2 draft for the small ordinary-
 improper relation, finite-exceptional primitive layer, and finite-piece
 Abel/Fubini identity upstream of QL-001.
-Its six prospective targets have a complete author proof, while its name and
-boundary await registry reconciliation, exact signatures, independent reviews,
-and authorization before Lean; it is not a manifest member merely because a
-draft file exists.
+Its six prospective targets have a complete revised author proof.  The first
+exact-commit review round requested a more explicit regular-point insertion
+argument; revision 2 integrates that repair and awaits two fresh proof
+approvals before exact-signature design.  Its name and boundary also await
+registry reconciliation and authorization before Lean; it is not a manifest
+member merely because a draft file exists.
 The OLV-001 draft chooses one common baseline `X > 0` before `n`, while its
 `k_n`, `K_n`, and `L_n` witnesses may depend on `n`.
 

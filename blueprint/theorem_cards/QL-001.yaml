@@ -161,7 +161,7 @@ pre_lean_requirements:
   lean_ready_authority: external_review_envelope_only
 
 blocking_conditions:
-  - IMP-001 has an unregistered revision-1 draft card and complete author proof, but no exact signatures, independent reviews, registry row, or authorization
+  - IMP-001 has an unregistered revision-2 draft card and complete revised author proof awaiting two fresh approvals before exact-signature design; it has no registry row or authorization
   - provisional semantic and scalar selections lack independent approval
   - classification novelty needs a versioned-schema decision
   - exact Lean signatures have not been compiled

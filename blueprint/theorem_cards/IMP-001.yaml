@@ -2,7 +2,7 @@ schema_version: 2
 id: IMP-001
 title: Finite-exceptional ordinary-improper integration and the finite Abel identity
 owner: jaumededios
-artifact_revision: 1
+artifact_revision: 2
 baseline_spec_commit: pending_external_record_after_commit
 
 theorem_class: mixed
@@ -10,12 +10,12 @@ coverage_class: infrastructure
 novelty_class: non_novel
 specification_status: draft
 proof_status: complete
-review_status: not_started
+review_status: changes_requested
 implementation_status: not_started
 prototype_status: absent
 coverage_status: not_applicable
 manifest_membership_status: planning_only
-status_as_of: author_complete_unreviewed_draft
+status_as_of: referee_changes_integrated_pending_rereview
 status_authority: >-
   Completeness is an author claim about the bound natural-language argument.
   Review pass and implementation authorization can be established only by an
@@ -50,7 +50,10 @@ scope:
       prospective_targets: IMP-001-T06
   module_split_status: prospective_only
   candidate_namespace: LMLF.Integral
-  exact_signatures_artifact: pending after independent semantic and proof review
+  exact_signatures_artifact: not_created-design_only_after-two-proof-approvals
+  signature_design_timing: >-
+    Exact Lean signatures and binder order may be designed only after two
+    independent reviewers approve the complete revision-2 proof.
   signature_authorization: absent
   candidate_public_targets:
     - target_id: IMP-001-T01
@@ -226,7 +229,7 @@ choice_laundering_check: >-
 
 natural_language_proof:
   artifact: blueprint/proofs/IMP-001.md
-  artifact_revision: 1
+  artifact_revision: 2
   artifact_state: draft
   proof_status: complete
   normative_sections:
@@ -243,15 +246,36 @@ dependencies:
   lake_manifest_sha256: 4bd9b595f84163f69bdb0ffc9b1a876b5df71d65bdd53122415610d083d43404
   accepted_lmlf_packets: []
   draft_lmlf_packets: []
-  pinned_candidates:
-    - intervalIntegral.integral_add_adjacent_intervals
-    - ContinuousLinearMap.intervalIntegral_comp_comm
-    - MeasureTheory.intervalIntegral_integral_swap
-    - ContinuousOn.intervalIntegrable_of_Icc
-    - tendsto_nhds_unique
-    - tendsto_finsetSum
-    - intervalIntegral.integral_eq_sub_of_hasDerivAt_of_le
-    - intervalIntegral.integral_undef
+  pin_status: exact_names_and_defining_imports_audited_for_revision_2
+  pinned_declarations:
+    - declaration: intervalIntegral.integral_add_adjacent_intervals
+      import: Mathlib.MeasureTheory.Integral.IntervalIntegral.Basic
+    - declaration: ContinuousLinearMap.intervalIntegral_comp_comm
+      import: Mathlib.MeasureTheory.Integral.IntervalIntegral.Basic
+    - declaration: MeasureTheory.intervalIntegral_integral_swap
+      import: Mathlib.MeasureTheory.Integral.Prod
+    - declaration: ContinuousOn.intervalIntegrable_of_Icc
+      import: Mathlib.MeasureTheory.Integral.IntervalIntegral.Basic
+    - declaration: tendsto_nhds_unique
+      import: Mathlib.Topology.Separation.Hausdorff
+    - declaration: tendsto_finsetSum
+      import: Mathlib.Topology.Algebra.Monoid
+    - declaration: intervalIntegral.integral_eq_sub_of_hasDerivAt_of_le
+      import: Mathlib.MeasureTheory.Integral.IntervalIntegral.FundThmCalculus
+    - declaration: intervalIntegral.integral_undef
+      import: Mathlib.MeasureTheory.Integral.IntervalIntegral.Basic
+    - declaration: intervalIntegral.continuousOn_primitive_interval'
+      import: Mathlib.MeasureTheory.Integral.DominatedConvergence
+    - declaration: Real.hasDerivAt_exp
+      import: Mathlib.Analysis.SpecialFunctions.ExpDeriv
+  planned_mathlib_imports:
+    - Mathlib.MeasureTheory.Integral.IntervalIntegral.Basic
+    - Mathlib.MeasureTheory.Integral.DominatedConvergence
+    - Mathlib.MeasureTheory.Integral.Prod
+    - Mathlib.MeasureTheory.Integral.IntervalIntegral.FundThmCalculus
+    - Mathlib.Analysis.SpecialFunctions.ExpDeriv
+    - Mathlib.Topology.Algebra.Monoid
+    - Mathlib.Topology.Separation.Hausdorff
   explicitly_not_dependencies:
     - QL-001
     - OLV-001
@@ -283,7 +307,8 @@ pre_lean_requirements:
 
 edge_tests:
   - empty exceptional set reduces to an ordinary right-endpoint limit
-  - adding a genuinely regular marked point does not change the value
+  - adding a genuinely regular marked point preserves both individual endpoint limits and the total value
+  - regular-point insertion is checked in the empty, first, bounded-interior, and final-unbounded component positions
   - combining an amplitude exceptional on S with smooth model terms exceptional on the empty set concludes on S
   - a one-over-distance singularity with symmetric principal value is rejected
   - a conditionally convergent one-sided singularity is accepted when both sides converge independently
@@ -292,14 +317,16 @@ edge_tests:
   - discontinuous componentwise primitives cannot telescope across an exceptional point
   - endpoint equality alone cannot replace the all-intermediate-point increment law
   - an exceptional finite prefix is a sum of split-improper component values, never one intervalIntegral
+  - the Abel Fubini step proves Integrable uncurry H under the exact restricted product measure required by intervalIntegral_integral_swap
+  - the scalar exponential identity derives its derivative from Real.hasDerivAt_exp and never divides by h
   - T06 handles h=0, a=b, and a continuous nondifferentiable primitive
   - T04 preserves the exact interval-integral sign and value order
 
 blocking_conditions:
-  - exact Lean representations and binder order are intentionally not frozen
-  - the theorem card and complete proof draft have no independent reviews
-  - the required semantics and structural-circularity reviews have not started
-  - no signature artifact or external review envelope exists
+  - revision 2 has integrated requested changes and awaits exact-commit rereview
+  - the complete proof lacks the two approvals required before signature design
+  - the exact Lean signature artifact is intentionally absent and must be designed only after those two proof approvals
+  - no external envelope authorizes implementation
   - IMP-001 is not registered or admitted to an execution manifest
 
 implementation:
