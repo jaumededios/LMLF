@@ -1,5 +1,15 @@
 # Source manifests and inventories
 
+> **Proposed successor-authority notice (pending).** The user-authorized broad
+> DLMF-through-Chapter-10 boundary is specified by proposed
+> [DD-021 revision 1](stage_1_dlmf-R2.md). Its operative five-file plan takes
+> effect only after two fresh independent blueprint approvals and a root
+> external adjudication bind the exact successor commit and digests. Until then,
+> the frozen text below remains operative. Once effective, DD-021 supersedes
+> only the Olver-first programme-priority/scheduling clauses it enumerates;
+> frozen Olver evidence and semantics remain unchanged, and `OLV-MVP-1` remains
+> an eligible parallel Olver-track packet, not a DLMF prerequisite or target.
+
 **Normative owner:** `jaumededios`  
 **Document specification status:** `frozen`  
 **Baseline specification commit:** `pending_external_record_after_commit`
