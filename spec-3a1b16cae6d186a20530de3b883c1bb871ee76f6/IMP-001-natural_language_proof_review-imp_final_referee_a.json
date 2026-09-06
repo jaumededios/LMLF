@@ -1,0 +1,102 @@
+{
+  "schema_version": 4,
+  "record_kind": "rubric_verdict",
+  "storage_requirement": "external_to_candidate_head",
+  "work_item_id": "IMP-001",
+  "review_stage": "pre_lean",
+  "gate": "natural_language_proof_review",
+  "review_identity": {
+    "review_envelope_ref": "/workspace/Documents/Codex/2026-09-05/LMLF-review-evidence/spec-3a1b16cae6d186a20530de3b883c1bb871ee76f6/IMP-001-review-envelope-pending.yaml; sha256=62d1d8e1530b02f63dedda505c925291d7453c16faf65d81919799a69f243b52",
+    "spec_commit": "3a1b16cae6d186a20530de3b883c1bb871ee76f6",
+    "work_packet_path": "review/work_packets/IMP-001.yaml",
+    "work_packet_sha256": "e0f16a660417d967312df0f7cc7ce12ea1243226801b409475548566d594796b",
+    "theorem_card_bindings": [
+      {
+        "artifact_id": "TC-IMP-001-R7",
+        "revision": 7,
+        "sha256": "d81f8970bcba3bf1a489f8cb4fea8b303a3e3bf6d1ad3ade37b42f3094b528c4"
+      },
+      {
+        "artifact_id": "SIG-IMP-001-R6-P2",
+        "revision": 2,
+        "sha256": "0e220214233fec5f2f95608789b139900e7dfddef8a6b824b8d54bce37e74f2d"
+      }
+    ],
+    "natural_language_proof_bindings": [
+      {
+        "artifact_id": "NLP-IMP-001-R7",
+        "revision": 7,
+        "sha256": "941ca0f2a7e402e9dd3636d7c93744290b3f5b52b8705484c18630c6fe173548"
+      }
+    ],
+    "classification_schema_binding": {
+      "path": "review/classifications-v3.json",
+      "schema_version": "lmlf-classification-v3",
+      "artifact_revision": 3,
+      "sha256": "975e08b89d609cbdd15ff3f8d24f40a42bb17ea0f4c37bb26d9cf53fb8dc4b5e"
+    },
+    "base_sha": null,
+    "head_sha": null,
+    "lean_toolchain": "leanprover/lean4:v4.33.1",
+    "mathlib_revision": "0df444a360eaa60ab8c11dca51a86af692955474",
+    "rubric": "quantitative_correctness",
+    "review_perspective": "proof_correctness",
+    "rubric_revision": "1f77ffb3ac536c58875719ebae6cf9bbbcfd4fd027bd491867e0545660745062"
+  },
+  "reviewer": {
+    "id": "/root/imp_final_referee_a",
+    "kind": "agent",
+    "model": "gpt-5.6-sol",
+    "runtime": "Codex desktop fresh-context session",
+    "isolation_strength": "manual_attestation",
+    "isolation_method": "Fresh independent context and reviewer-created disposable detached worktree /tmp/imp-final-ref-a.0nYyMBoi at exact spec commit; no peer or predecessor reports read; tracked candidate bytes not edited; temporary check files and oleans removed; only the three requested verdict/report artifacts written externally; shared filesystem and dependency checkout were available; no network or GitHub CI used.",
+    "independent_of_proposer": true,
+    "read_only_candidate": true
+  },
+  "verdict": "approve",
+  "summary": "The frozen R7 proof completely reaches all eight exact targets. T08 constructively stitches the independent endpoint components and reverses by an exact finite telescope; T03 weakens witnesses to the literal union and handles E-to-H CLMs; T04 preserves the prefix sign; T07 constructs the canonical primitive from honest Ioi integrability for arbitrary S; and T06 proves the exact Abel value from a restricted-product Bochner Fubini identity without differentiating F or dividing by h. T08 is proved directly before downstream laws, so there is no dependence on QL/OLV and no circularity. All controlling integrability and boundary premises are explicit, no bound or selected object is hidden, and the staged 25-regression obligations remain intact.",
+  "evidence": {
+    "proposer_bundle_ref": "/workspace/Documents/Codex/2026-09-05/LMLF-review-evidence/spec-3a1b16cae6d186a20530de3b883c1bb871ee76f6/proposer-evidence.md sha256=3af2776b4b161461f7e9b72701a0b99ecccce9c4a03b730fbc0b8fb932eb0ec7; /workspace/Documents/Codex/2026-09-05/LMLF-review-evidence/spec-3a1b16cae6d186a20530de3b883c1bb871ee76f6/proposer-evidence-command-erratum.md sha256=2a404f162911de09c272044c3dd752907b57235d62aa995277e0771ed2a38622",
+    "source_snapshot_verified": true,
+    "pinned_dependency_source_inspected": true,
+    "commands_rerun": [
+      "git status --short --branch; git worktree list --porcelain; git rev-parse HEAD (clean detached review snapshot at 3a1b16cae6d186a20530de3b883c1bb871ee76f6)",
+      "sha256sum on envelope, proposer evidence and erratum, packet, card, signature, R7 proof, R6 proof, classification schema, protocol, verdict template, both rubrics, lean-toolchain, and lake-manifest.json (all matched bound values)",
+      "diff -u blueprint/proofs/IMP-001.md blueprint/proofs/IMP-001-R7.md plus independent section hashing (five metadata/status-only hunks; target proof core, analytic/regression material, and reconstruction sections byte-identical)",
+      "/home/codex/.codex/skills/referee-lean-library/scripts/library_inventory.sh /tmp/imp-final-ref-a.0nYyMBoi (7 Lean files, 210 lines, 3 defs, 18 theorems, no trust/resource markers)",
+      "byte diff of all eight exact signature blocks in packet versus card (identical; count 8 each) and proof-anchor/target-ID counts (8 each)",
+      "byte diff of authoritative complete Basic/Bochner/Abel/Check/Regressions blocks against disclosed harness files and sha256sum (all exact)",
+      "pinned raw Lean 4.33.1 compilation of exact Basic, Bochner, Abel signature harnesses plus Check.lean, PacketTypes.lean, and Regressions.lean using reviewer-local oleans (all exit 0; style warnings only; six theorem axioms treated only as type evidence)",
+      "git -C pinned-mathlib rev-parse HEAD and status plus source inspection and #check of IMP-M01 through IMP-M14 (clean exact 0df444a360eaa60ab8c11dca51a86af692955474)",
+      "python3 scripts/validate_inventory.py and python3 scripts/validate_inventory.py --negative-tests (positive validation passed; all 25 invalid fixtures rejected)",
+      "packet audit: 25 distinct IMP-R01 through IMP-R25 IDs, 21 edge-obligation rows, absent production IMP/test files, and exact future acceptance command list",
+      "git diff --check (exit 0)",
+      "lake build at exact main HEAD (Build completed successfully, 2748 jobs; current-tree evidence only because production IMP files are absent)"
+    ],
+    "files_and_declarations_inspected": [
+      "review/PROTOCOL.md",
+      "review/templates/verdict.json",
+      "review/rubrics/source_fidelity.md",
+      "review/rubrics/quantitative_correctness.md",
+      "review/classifications-v3.json",
+      "review/work_packets/IMP-001.yaml",
+      "blueprint/theorem_cards/IMP-001.yaml",
+      "blueprint/theorem_cards/IMP-001-signatures-R6.md",
+      "blueprint/proofs/IMP-001-R7.md in full, including IMP-D01-D15, IMP-I01/I03-I07, IMP-M01-M14, IMP-A01-A16, IMP-L01-L10, all target sections, adversarial cases, IMP-R01-R25, consumer map, exclusions, and reconstruction",
+      "blueprint/proofs/IMP-001.md and its complete diff against R7",
+      "lean-toolchain",
+      "lake-manifest.json",
+      "LMLF.lean and every current LMLF/*.lean root/import module",
+      "exact T01 private sorted-component definitions HasImproperIntegralAtTopBreaks and HasImproperIntegralTailFromBreaks",
+      "exact T05 definition IsFiniteExceptionalPrimitive",
+      "exact signatures and complete natural-language proofs of T02, T03, T04, T06, T07, and T08",
+      "pinned Mathlib sources and exact declarations IMP-M01 through IMP-M14",
+      "external IMP-001-review-envelope-pending.yaml",
+      "external proposer-evidence.md",
+      "external proposer-evidence-command-erratum.md"
+    ]
+  },
+  "findings": [],
+  "prior_finding_dispositions_checked": [],
+  "issued_at_utc": "2026-09-06T13:31:53Z"
+}

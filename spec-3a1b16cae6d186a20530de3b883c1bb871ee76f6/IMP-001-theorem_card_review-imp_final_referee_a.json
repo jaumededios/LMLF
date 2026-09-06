@@ -1,0 +1,106 @@
+{
+  "schema_version": 4,
+  "record_kind": "rubric_verdict",
+  "storage_requirement": "external_to_candidate_head",
+  "work_item_id": "IMP-001",
+  "review_stage": "pre_lean",
+  "gate": "theorem_card_review",
+  "review_identity": {
+    "review_envelope_ref": "/workspace/Documents/Codex/2026-09-05/LMLF-review-evidence/spec-3a1b16cae6d186a20530de3b883c1bb871ee76f6/IMP-001-review-envelope-pending.yaml; sha256=62d1d8e1530b02f63dedda505c925291d7453c16faf65d81919799a69f243b52",
+    "spec_commit": "3a1b16cae6d186a20530de3b883c1bb871ee76f6",
+    "work_packet_path": "review/work_packets/IMP-001.yaml",
+    "work_packet_sha256": "e0f16a660417d967312df0f7cc7ce12ea1243226801b409475548566d594796b",
+    "theorem_card_bindings": [
+      {
+        "artifact_id": "TC-IMP-001-R7",
+        "revision": 7,
+        "sha256": "d81f8970bcba3bf1a489f8cb4fea8b303a3e3bf6d1ad3ade37b42f3094b528c4"
+      },
+      {
+        "artifact_id": "SIG-IMP-001-R6-P2",
+        "revision": 2,
+        "sha256": "0e220214233fec5f2f95608789b139900e7dfddef8a6b824b8d54bce37e74f2d"
+      }
+    ],
+    "natural_language_proof_bindings": [
+      {
+        "artifact_id": "NLP-IMP-001-R7",
+        "revision": 7,
+        "sha256": "941ca0f2a7e402e9dd3636d7c93744290b3f5b52b8705484c18630c6fe173548"
+      }
+    ],
+    "classification_schema_binding": {
+      "path": "review/classifications-v3.json",
+      "schema_version": "lmlf-classification-v3",
+      "artifact_revision": 3,
+      "sha256": "975e08b89d609cbdd15ff3f8d24f40a42bb17ea0f4c37bb26d9cf53fb8dc4b5e"
+    },
+    "base_sha": null,
+    "head_sha": null,
+    "lean_toolchain": "leanprover/lean4:v4.33.1",
+    "mathlib_revision": "0df444a360eaa60ab8c11dca51a86af692955474",
+    "rubric": "source_fidelity",
+    "review_perspective": "source_semantics",
+    "rubric_revision": "6873853ce125346feef082d0e31d28808387ec0fa5fb0887ce0d300eba02c9a2"
+  },
+  "reviewer": {
+    "id": "/root/imp_final_referee_a",
+    "kind": "agent",
+    "model": "gpt-5.6-sol",
+    "runtime": "Codex desktop fresh-context session",
+    "isolation_strength": "manual_attestation",
+    "isolation_method": "Fresh independent context and reviewer-created disposable detached worktree /tmp/imp-final-ref-a.0nYyMBoi at exact spec commit; no peer or predecessor reports read; tracked candidate bytes not edited; temporary check files and oleans removed; only the three requested verdict/report artifacts written externally; shared filesystem and dependency checkout were available; no network or GitHub CI used.",
+    "independent_of_proposer": true,
+    "read_only_candidate": true
+  },
+  "verdict": "approve",
+  "summary": "The source-independent R7 theorem card, revision-2 exact-signature artifact, and frozen packet agree on all eight target identities, quantifiers, definition semantics, exact conclusions, orientations, classifications, module ownership, and exclusions. T01 enforces independent endpoint limits and honest local integrability; T03 preserves E-to-H transport and the literal union; T04 has the exact prefix orientation; T05/T08 contain no hidden bound or selection; T06/T07 retain their explicit integrability premises and exact same-S conclusions. No named-source coverage is claimed, and the six harness axioms are disclosed as type evidence only.",
+  "evidence": {
+    "proposer_bundle_ref": "/workspace/Documents/Codex/2026-09-05/LMLF-review-evidence/spec-3a1b16cae6d186a20530de3b883c1bb871ee76f6/proposer-evidence.md sha256=3af2776b4b161461f7e9b72701a0b99ecccce9c4a03b730fbc0b8fb932eb0ec7; /workspace/Documents/Codex/2026-09-05/LMLF-review-evidence/spec-3a1b16cae6d186a20530de3b883c1bb871ee76f6/proposer-evidence-command-erratum.md sha256=2a404f162911de09c272044c3dd752907b57235d62aa995277e0771ed2a38622",
+    "source_snapshot_verified": true,
+    "pinned_dependency_source_inspected": true,
+    "commands_rerun": [
+      "git status --short --branch; git worktree list --porcelain; git rev-parse HEAD (clean detached review snapshot at 3a1b16cae6d186a20530de3b883c1bb871ee76f6)",
+      "sha256sum on envelope, proposer evidence and erratum, packet, card, signature, R7 proof, R6 proof, classification schema, protocol, verdict template, both rubrics, lean-toolchain, and lake-manifest.json (all matched bound values)",
+      "diff -u blueprint/proofs/IMP-001.md blueprint/proofs/IMP-001-R7.md plus independent section hashing (five metadata/status-only hunks; target proof core, analytic/regression material, and reconstruction sections byte-identical)",
+      "/home/codex/.codex/skills/referee-lean-library/scripts/library_inventory.sh /tmp/imp-final-ref-a.0nYyMBoi (7 Lean files, 210 lines, 3 defs, 18 theorems, no trust/resource markers)",
+      "byte diff of all eight exact signature blocks in packet versus card (identical; count 8 each) and proof-anchor/target-ID counts (8 each)",
+      "byte diff of authoritative complete Basic/Bochner/Abel/Check/Regressions blocks against disclosed harness files and sha256sum (all exact)",
+      "pinned raw Lean 4.33.1 compilation of exact Basic, Bochner, Abel signature harnesses plus Check.lean, PacketTypes.lean, and Regressions.lean using reviewer-local oleans (all exit 0; style warnings only)",
+      "git -C pinned-mathlib rev-parse HEAD and status plus source inspection and #check of IMP-M01 through IMP-M14 (clean exact 0df444a360eaa60ab8c11dca51a86af692955474)",
+      "python3 scripts/validate_inventory.py and python3 scripts/validate_inventory.py --negative-tests (positive validation passed; all 25 invalid fixtures rejected)",
+      "git diff --check (exit 0)",
+      "lake build at exact main HEAD (Build completed successfully, 2748 jobs; current-tree evidence only because production IMP files are absent)"
+    ],
+    "files_and_declarations_inspected": [
+      "review/PROTOCOL.md",
+      "review/templates/verdict.json",
+      "review/rubrics/source_fidelity.md",
+      "review/rubrics/quantitative_correctness.md",
+      "review/classifications-v3.json",
+      "review/work_packets/IMP-001.yaml",
+      "blueprint/theorem_cards/IMP-001.yaml",
+      "blueprint/theorem_cards/IMP-001-signatures-R6.md",
+      "blueprint/proofs/IMP-001-R7.md",
+      "blueprint/proofs/IMP-001.md",
+      "lean-toolchain",
+      "lake-manifest.json",
+      "LMLF.lean and every current LMLF/*.lean root/import module",
+      "LMLF.Integral.HasImproperIntegralAtTopExcept",
+      "LMLF.Integral.HasImproperIntegralAtTopExcept.unique",
+      "LMLF.Integral.HasImproperIntegralAtTopExcept.finset_clm",
+      "LMLF.Integral.HasImproperIntegralAtTopExcept.split_regular",
+      "LMLF.Integral.IsFiniteExceptionalPrimitive",
+      "LMLF.Integral.IsFiniteExceptionalPrimitive.hasImproperIntegralAtTopExcept_exp_smul",
+      "LMLF.Integral.HasImproperIntegralAtTopExcept.of_integrableOn_Ioi",
+      "LMLF.Integral.hasImproperIntegralAtTopExcept_iff_exists_primitive",
+      "pinned Mathlib sources and exact declarations IMP-M01 through IMP-M14",
+      "external IMP-001-review-envelope-pending.yaml",
+      "external proposer-evidence.md",
+      "external proposer-evidence-command-erratum.md"
+    ]
+  },
+  "findings": [],
+  "prior_finding_dispositions_checked": [],
+  "issued_at_utc": "2026-09-06T13:31:53Z"
+}

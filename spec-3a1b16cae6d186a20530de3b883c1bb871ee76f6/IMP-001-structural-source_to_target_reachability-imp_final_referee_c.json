@@ -1,0 +1,88 @@
+{
+  "schema_version": 4,
+  "record_kind": "rubric_verdict",
+  "storage_requirement": "external_to_candidate_head",
+  "work_item_id": "IMP-001",
+  "review_stage": "pre_lean",
+  "gate": "structural_circularity_review",
+  "review_identity": {
+    "review_envelope_ref": "/workspace/Documents/Codex/2026-09-05/LMLF-review-evidence/spec-3a1b16cae6d186a20530de3b883c1bb871ee76f6/IMP-001-review-envelope-pending.yaml#sha256=62d1d8e1530b02f63dedda505c925291d7453c16faf65d81919799a69f243b52",
+    "spec_commit": "3a1b16cae6d186a20530de3b883c1bb871ee76f6",
+    "work_packet_path": "review/work_packets/IMP-001.yaml",
+    "work_packet_sha256": "e0f16a660417d967312df0f7cc7ce12ea1243226801b409475548566d594796b",
+    "theorem_card_bindings": [
+      {
+        "artifact_id": "TC-IMP-001-R7",
+        "revision": "7",
+        "sha256": "d81f8970bcba3bf1a489f8cb4fea8b303a3e3bf6d1ad3ade37b42f3094b528c4"
+      },
+      {
+        "artifact_id": "SIG-IMP-001-R6-P2",
+        "revision": "2",
+        "sha256": "0e220214233fec5f2f95608789b139900e7dfddef8a6b824b8d54bce37e74f2d"
+      }
+    ],
+    "natural_language_proof_bindings": [
+      {
+        "artifact_id": "NLP-IMP-001-R7",
+        "revision": "7",
+        "sha256": "941ca0f2a7e402e9dd3636d7c93744290b3f5b52b8705484c18630c6fe173548"
+      }
+    ],
+    "classification_schema_binding": {
+      "path": "review/classifications-v3.json",
+      "schema_version": "lmlf-classification-v3",
+      "artifact_revision": 3,
+      "sha256": "975e08b89d609cbdd15ff3f8d24f40a42bb17ea0f4c37bb26d9cf53fb8dc4b5e"
+    },
+    "base_sha": null,
+    "head_sha": null,
+    "lean_toolchain": "leanprover/lean4:v4.33.1",
+    "mathlib_revision": "0df444a360eaa60ab8c11dca51a86af692955474",
+    "rubric": "api_dependency",
+    "review_perspective": "source_to_target_reachability",
+    "rubric_revision": "sha256:4e5f947ed15f0101c46fe9bb0a12a013d66c7de3c7ed2c35fda817de8d92eb41"
+  },
+  "reviewer": {
+    "id": "/root/imp_final_referee_c",
+    "kind": "agent",
+    "model": "gpt-5.6-sol",
+    "runtime": "Codex desktop multi-agent runtime",
+    "isolation_strength": "manual_attestation",
+    "isolation_method": "Fresh independent agent session; detached worktree /tmp/imp-final-ref-c.tthMwP8K at the exact specification commit and made read-only; no peer or predecessor referee reports read; no subagents, candidate edits, commits, pushes, GitHub CI, or network review calls; local pinned checks and fresh disposable olean output only. Shared filesystem, tools, credentials, and repository history were not technically excluded.",
+    "independent_of_proposer": true,
+    "read_only_candidate": true
+  },
+  "verdict": "approve",
+  "summary": "IMPROPER-0 is truthfully source-free (one card, eight targets, zero occurrences), and the eight-target API reaches the real QL/OLV plans without private helpers or downstream imports. QL derives T06 side conditions and model integrability; OLV derives the baseline remainder relation, local split, primitive, finite limit, and then its flat bound. The harness proves type/API reachability only and is not treated as proof evidence.",
+  "evidence": {
+    "proposer_bundle_ref": "/workspace/Documents/Codex/2026-09-05/LMLF-review-evidence/spec-3a1b16cae6d186a20530de3b883c1bb871ee76f6/proposer-evidence.md#sha256=3af2776b4b161461f7e9b72701a0b99ecccce9c4a03b730fbc0b8fb932eb0ec7; /workspace/Documents/Codex/2026-09-05/LMLF-review-evidence/spec-3a1b16cae6d186a20530de3b883c1bb871ee76f6/proposer-evidence-command-erratum.md#sha256=2a404f162911de09c272044c3dd752907b57235d62aa995277e0771ed2a38622",
+    "source_snapshot_verified": false,
+    "pinned_dependency_source_inspected": true,
+    "commands_rerun": [
+      "git rev-parse/status/worktree/show checks at 3a1b16cae6d186a20530de3b883c1bb871ee76f6",
+      "sha256sum over the packet, card, R7 proof, R6 proof, signature, classification, Lake manifest, pending envelope, proposer evidence, and erratum",
+      "diff -u blueprint/proofs/IMP-001.md blueprint/proofs/IMP-001-R7.md",
+      "/home/codex/.codex/skills/referee-lean-library/scripts/library_inventory.sh /tmp/imp-final-ref-c.tthMwP8K",
+      "lake build",
+      "python3 scripts/validate_inventory.py",
+      "python3 scripts/validate_inventory.py --negative-tests",
+      "exact packet/card eight-signature and proof-anchor join check",
+      "raw pinned Lean compilation of the exact-hash Basic/Bochner/Abel harness into /tmp/imp-final-ref-c-harness.yDxBfOel, followed by Check.lean and Regressions.lean",
+      "corrected raw pinned Lean/LEAN_PATH run of exact-hash PacketTypes.lean against the fresh harness"
+    ],
+    "files_and_declarations_inspected": [
+      "review/PROTOCOL.md; review/templates/verdict.json; review/rubrics/api_dependency.md",
+      "review/work_packets/IMP-001.yaml; blueprint/theorem_cards/IMP-001.yaml; blueprint/proofs/IMP-001-R7.md; blueprint/proofs/IMP-001.md; blueprint/theorem_cards/IMP-001-signatures-R6.md",
+      "blueprint/proofs/QL-001.md; blueprint/theorem_cards/QL-001.yaml; blueprint/proofs/OLV-001.md; blueprint/theorem_cards/OLV-001.yaml; blueprint/proofs/OLV-002.md; blueprint/theorem_cards/OLV-002.yaml",
+      "blueprint/inventory/cards.csv; blueprint/inventory/manifests.csv; blueprint/source_manifest.md; blueprint/roadmap.md; blueprint/design_decisions.md",
+      "T01 LMLF.Integral.HasImproperIntegralAtTopExcept; T02 .unique; T03 .finset_clm; T04 .split_regular; T05 LMLF.Integral.IsFiniteExceptionalPrimitive; T06 .hasImproperIntegralAtTopExcept_exp_smul; T07 .of_integrableOn_Ioi; T08 LMLF.Integral.hasImproperIntegralAtTopExcept_iff_exists_primitive",
+      "R20 arbitrary-S bounded-primitive consumer; R25 generic source-shaped public consumer; QL-001-T01/T02 and OLV-001-T01 proof routes",
+      "external IMP-001-review-envelope-pending.yaml; proposer-evidence.md; proposer-evidence-command-erratum.md"
+    ]
+  },
+  "findings": [],
+  "prior_finding_dispositions_checked": [],
+  "issued_at_utc": "2026-09-06T13:34:19Z"
+}
+
