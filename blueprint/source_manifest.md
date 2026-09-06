@@ -2,7 +2,7 @@
 
 > **Proposed successor-authority notice (pending).** The user-authorized broad
 > DLMF-through-Chapter-10 boundary is specified by proposed
-> [DD-021 revision 1](stage_1_dlmf-R2.md). Its operative five-file plan takes
+> [DD-021 revision 2](stage_1_dlmf-R3.md). Its operative five-file plan takes
 > effect only after two fresh independent blueprint approvals and a root
 > external adjudication bind the exact successor commit and digests. Until then,
 > the frozen text below remains operative. Once effective, DD-021 supersedes
