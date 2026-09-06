@@ -1,0 +1,77 @@
+{
+  "schema_version": 4,
+  "record_kind": "rubric_verdict",
+  "storage_requirement": "external_to_candidate_head",
+  "work_item_id": "QB-001",
+  "review_stage": "pre_lean",
+  "gate": "natural_language_proof_review",
+  "review_identity": {
+    "review_envelope_ref": "/home/codex/Documents/Codex/2026-09-05/LMLF-review-evidence/spec-1a7a1864e3f7c343b8c6f90511689d7a7b1a88d9/QB-001-review-envelope.yaml#sha256=4a5f71f71e1afcfa3c5f466d5a79310579d8ed0128463855167ecaf269ed950e",
+    "spec_commit": "1a7a1864e3f7c343b8c6f90511689d7a7b1a88d9",
+    "work_packet_path": "review/work_packets/QB-001.yaml",
+    "work_packet_sha256": "7a56a1695d15ea2cedd525ee4270d20830e1706827bb592dfde293bcd7d54c39",
+    "theorem_card_bindings": [
+      {
+        "artifact_id": "TC-QB-001-R7",
+        "revision": 7,
+        "sha256": "827522349afc7374a8bec60b3d281c192a44189f8e8c08c24e453bf75e215667"
+      },
+      {
+        "artifact_id": "SIG-QB-001-R2",
+        "revision": 2,
+        "sha256": "93e4e30a93087de95342abdb1e986676924cd93512e771737d0d3f3ed7973b39"
+      }
+    ],
+    "natural_language_proof_bindings": [
+      {
+        "artifact_id": "NLP-QB-001-R6",
+        "revision": 6,
+        "sha256": "42b027310a56ff70f4c56471de527aa9b6a3ac88810ad3ba17029953514c1589"
+      }
+    ],
+    "classification_schema_binding": {
+      "path": "review/classifications-v2.json",
+      "schema_version": "lmlf-classification-v2",
+      "artifact_revision": 2,
+      "sha256": "8c9f8dbb5ab351771a433a9901fe176a66ec214092c5d5880b3ec57c9a5b23e9"
+    },
+    "base_sha": null,
+    "head_sha": null,
+    "lean_toolchain": "leanprover/lean4:v4.33.1",
+    "mathlib_revision": "0df444a360eaa60ab8c11dca51a86af692955474",
+    "rubric": "quantitative_correctness",
+    "review_perspective": "proof_correctness",
+    "rubric_revision": "1f77ffb3ac536c58875719ebae6cf9bbbcfd4fd027bd491867e0545660745062"
+  },
+  "reviewer": {
+    "id": "prelean_green_l",
+    "kind": "agent",
+    "model": "gpt-5.6-sol",
+    "runtime": "Codex desktop, externally spawned task /root/prelean_green_l",
+    "isolation_strength": "manual_attestation",
+    "isolation_method": "Fresh-context review of a disposable git archive at /tmp/olver-prelean-green-l.PGneE5 created from the exact spec commit; no .git metadata; dirty worktree, untracked prototypes, historical review content, and other reviewer output excluded. The runtime still had broader filesystem and network access, so isolation was not technically enforced.",
+    "independent_of_proposer": true,
+    "read_only_candidate": true
+  },
+  "verdict": "approve",
+  "summary": "Approve QB-001 natural-language proof revision 6: all eight targets are independently derivable with the stated domains, majorant directions, fixed-target family semantics, edge cases, and exact frozen signatures.",
+  "evidence": {
+    "proposer_bundle_ref": "/home/codex/Documents/Codex/2026-09-05/LMLF-review-evidence/spec-1a7a1864e3f7c343b8c6f90511689d7a7b1a88d9/prelean_green_l.md#sha256=7a616cb60f7e20dc398e60f206ab1db8ad56e7bb26e26b7271ae36191b9da1f0",
+    "source_snapshot_verified": false,
+    "pinned_dependency_source_inspected": false,
+    "commands_rerun": [
+      "lake env lean --version",
+      "check_lean_file.sh QB001Independent.lean",
+      "#print axioms for all eight independently reconstructed QB declarations"
+    ],
+    "files_and_declarations_inspected": [
+      "blueprint/proofs/QB-001.md revision 6",
+      "blueprint/theorem_cards/QB-001-signatures.md revision 2",
+      "review/work_packets/QB-001.yaml revision 4",
+      "QB-001-T01 through QB-001-T08"
+    ]
+  },
+  "findings": [],
+  "prior_finding_dispositions_checked": [],
+  "issued_at_utc": "2026-09-05T18:57:19Z"
+}

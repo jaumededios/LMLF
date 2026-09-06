@@ -1,0 +1,95 @@
+{
+  "schema_version": 4,
+  "record_kind": "rubric_verdict",
+  "storage_requirement": "external_to_candidate_head",
+  "work_item_id": "QB-001",
+  "review_stage": "pre_lean",
+  "gate": "theorem_card_review",
+  "review_identity": {
+    "review_envelope_ref": "/home/codex/Documents/Codex/2026-09-05/LMLF-review-evidence/spec-1a7a1864e3f7c343b8c6f90511689d7a7b1a88d9/QB-001-review-envelope.yaml",
+    "review_envelope_sha256": "4a5f71f71e1afcfa3c5f466d5a79310579d8ed0128463855167ecaf269ed950e",
+    "spec_commit": "1a7a1864e3f7c343b8c6f90511689d7a7b1a88d9",
+    "work_packet_path": "review/work_packets/QB-001.yaml",
+    "work_packet_sha256": "7a56a1695d15ea2cedd525ee4270d20830e1706827bb592dfde293bcd7d54c39",
+    "theorem_card_bindings": [
+      {
+        "artifact_id": "TC-QB-001-R7",
+        "revision": 7,
+        "sha256": "827522349afc7374a8bec60b3d281c192a44189f8e8c08c24e453bf75e215667"
+      },
+      {
+        "artifact_id": "SIG-QB-001-R2",
+        "revision": 2,
+        "sha256": "93e4e30a93087de95342abdb1e986676924cd93512e771737d0d3f3ed7973b39"
+      }
+    ],
+    "natural_language_proof_bindings": [
+      {
+        "artifact_id": "NLP-QB-001-R6",
+        "revision": 6,
+        "sha256": "42b027310a56ff70f4c56471de527aa9b6a3ac88810ad3ba17029953514c1589"
+      }
+    ],
+    "classification_schema_binding": {
+      "path": "review/classifications-v2.json",
+      "schema_version": "lmlf-classification-v2",
+      "artifact_revision": 2,
+      "sha256": "8c9f8dbb5ab351771a433a9901fe176a66ec214092c5d5880b3ec57c9a5b23e9"
+    },
+    "base_sha": null,
+    "head_sha": null,
+    "lean_toolchain": "leanprover/lean4:v4.33.1",
+    "lean_toolchain_sha256": "3aac669c7a910ec2389f4e4f921b605adf6ebf2d1e0c9b9cd0be4d33f3f5db71",
+    "mathlib_revision": "0df444a360eaa60ab8c11dca51a86af692955474",
+    "mathlib_manifest_sha256": "4bd9b595f84163f69bdb0ffc9b1a876b5df71d65bdd53122415610d083d43404",
+    "rubric": "source_fidelity",
+    "review_perspective": "source_semantics",
+    "rubric_revision": "6873853ce125346feef082d0e31d28808387ec0fa5fb0887ce0d300eba02c9a2"
+  },
+  "reviewer": {
+    "id": "/root/prelean_green_k",
+    "kind": "agent",
+    "model": "gpt-5.6-sol",
+    "runtime": "manual",
+    "isolation_strength": "manual_attestation",
+    "isolation_method": "Fresh-context manual review of a disposable tree produced by git archive at the exact spec commit; the candidate repository was treated read-only, prior review reports and dirty untracked paths were excluded, and temporary compilation and adversarial-test files existed only under /tmp/prelean-green-k.ApChrc.",
+    "independent_of_proposer": true,
+    "read_only_candidate": true
+  },
+  "verdict": "approve",
+  "summary": "Approve QB-001 theorem card R7 and signature artifact R2 at the bound specification: the eight exact targets, classifications, dependencies, prospectivity boundary, and proposed signatures are coherent and complete.",
+  "evidence": {
+    "proposer_bundle_ref": null,
+    "narrative_report_ref": {
+      "path": "/home/codex/Documents/Codex/2026-09-05/LMLF-review-evidence/spec-1a7a1864e3f7c343b8c6f90511689d7a7b1a88d9/prelean_green_k.md",
+      "sha256": "a537ee0cf5f04ccacb475877c1e2443c9f2e3cded91ada44bd07ced4aa411fa4"
+    },
+    "source_snapshot_verified": true,
+    "pinned_dependency_source_inspected": false,
+    "commands_rerun": [
+      "git archive 1a7a1864e3f7c343b8c6f90511689d7a7b1a88d9 into disposable /tmp/prelean-green-k.ApChrc",
+      "python3 scripts/validate_inventory.py",
+      "python3 scripts/validate_inventory.py --negative-tests",
+      "lake build",
+      "lake env lean QB001Compile.lean"
+    ],
+    "files_and_declarations_inspected": [
+      "review/work_packets/QB-001.yaml",
+      "blueprint/theorem_cards/QB-001.yaml",
+      "blueprint/theorem_cards/QB-001-signatures.md",
+      "blueprint/proofs/QB-001.md",
+      "review/classifications-v2.json",
+      "ErrorOn",
+      "NormBoundOn",
+      "HasErrorFamily",
+      "ErrorOn.exact",
+      "ErrorOn.restrict",
+      "ErrorOn.weaken",
+      "ErrorOn.trans",
+      "ErrorOn.comp"
+    ]
+  },
+  "findings": [],
+  "prior_finding_dispositions_checked": [],
+  "issued_at_utc": "2026-09-05T18:57:44Z"
+}

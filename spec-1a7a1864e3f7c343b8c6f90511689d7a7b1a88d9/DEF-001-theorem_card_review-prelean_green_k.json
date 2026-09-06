@@ -1,0 +1,77 @@
+{
+  "schema_version": 4,
+  "record_kind": "rubric_verdict",
+  "storage_requirement": "external_to_candidate_head",
+  "work_item_id": "DEF-001",
+  "review_stage": "pre_lean",
+  "gate": "theorem_card_review",
+  "review_identity": {
+    "review_envelope_ref": "/home/codex/Documents/Codex/2026-09-05/LMLF-review-evidence/spec-1a7a1864e3f7c343b8c6f90511689d7a7b1a88d9/DEF-001-review-envelope.yaml",
+    "review_envelope_sha256": "e8b173170146865c6bb356ff94ebfe937643c6058fef9d85c4bf62f2767bd08c",
+    "spec_commit": "1a7a1864e3f7c343b8c6f90511689d7a7b1a88d9",
+    "work_packet_path": "review/work_packets/DEF-001.yaml",
+    "work_packet_sha256": "6dbda13f4f27dd4c0492c00ecc0a2d184f00fe85fa7096802cf93e9fdecf11e8",
+    "theorem_card_bindings": [
+      {
+        "artifact_id": "TC-DEF-001-R4",
+        "revision": 4,
+        "sha256": "eff82b06afaa61b67d13c3a399494525ed452e42c203a390ba40e56b93ec9daa"
+      }
+    ],
+    "natural_language_proof_bindings": [],
+    "classification_schema_binding": {
+      "path": "review/classifications-v2.json",
+      "schema_version": "lmlf-classification-v2",
+      "artifact_revision": 2,
+      "sha256": "8c9f8dbb5ab351771a433a9901fe176a66ec214092c5d5880b3ec57c9a5b23e9"
+    },
+    "base_sha": null,
+    "head_sha": null,
+    "lean_toolchain": "leanprover/lean4:v4.33.1",
+    "lean_toolchain_sha256": "3aac669c7a910ec2389f4e4f921b605adf6ebf2d1e0c9b9cd0be4d33f3f5db71",
+    "mathlib_revision": "0df444a360eaa60ab8c11dca51a86af692955474",
+    "mathlib_manifest_sha256": "4bd9b595f84163f69bdb0ffc9b1a876b5df71d65bdd53122415610d083d43404",
+    "pinned_mathlib_source_sha256": "720a9a72d742fbe1c9a89601dc3a00d82c0261c7368c98cccb58307dbffe3bbf",
+    "rubric": "source_fidelity",
+    "review_perspective": "source_semantics",
+    "rubric_revision": "6873853ce125346feef082d0e31d28808387ec0fa5fb0887ce0d300eba02c9a2"
+  },
+  "reviewer": {
+    "id": "/root/prelean_green_k",
+    "kind": "agent",
+    "model": "gpt-5.6-sol",
+    "runtime": "manual",
+    "isolation_strength": "manual_attestation",
+    "isolation_method": "Fresh-context manual review of a disposable tree produced by git archive at the exact spec commit; the candidate repository was treated read-only, prior review reports and dirty untracked paths were excluded, and temporary compilation and adversarial-test files existed only under /tmp/prelean-green-k.ApChrc.",
+    "independent_of_proposer": true,
+    "read_only_candidate": true
+  },
+  "verdict": "approve",
+  "summary": "Approve DEF-001 theorem card R4: its four exact Gamma wrappers match the named declarations in the pinned Mathlib source, use the intended narrow import, and are correctly classified as transparent non-novel reuse.",
+  "evidence": {
+    "proposer_bundle_ref": null,
+    "narrative_report_ref": {
+      "path": "/home/codex/Documents/Codex/2026-09-05/LMLF-review-evidence/spec-1a7a1864e3f7c343b8c6f90511689d7a7b1a88d9/prelean_green_k.md",
+      "sha256": "a537ee0cf5f04ccacb475877c1e2443c9f2e3cded91ada44bd07ced4aa411fa4"
+    },
+    "source_snapshot_verified": true,
+    "pinned_dependency_source_inspected": true,
+    "commands_rerun": [
+      "git archive 1a7a1864e3f7c343b8c6f90511689d7a7b1a88d9 into disposable /tmp/prelean-green-k.ApChrc",
+      "lake env lean DEF001Compile.lean",
+      "#print axioms for all four DEF-001 declarations"
+    ],
+    "files_and_declarations_inspected": [
+      "review/work_packets/DEF-001.yaml",
+      "blueprint/theorem_cards/DEF-001.yaml",
+      "Mathlib/Analysis/SpecialFunctions/Gamma/Basic.lean at 0df444a360eaa60ab8c11dca51a86af692955474",
+      "gamma_eulerIntegrable",
+      "gamma_eq_eulerIntegral",
+      "gamma_ofReal",
+      "gamma_neg_nat_eq_zero"
+    ]
+  },
+  "findings": [],
+  "prior_finding_dispositions_checked": [],
+  "issued_at_utc": "2026-09-05T18:57:44Z"
+}

@@ -1,0 +1,108 @@
+schema_version: 3
+record_kind: review_envelope
+storage_requirement: external_to_candidate_head
+work_item_id: DEF-001
+
+specification_binding:
+  spec_commit: 1a7a1864e3f7c343b8c6f90511689d7a7b1a88d9
+  work_packet_path: review/work_packets/DEF-001.yaml
+  work_packet_sha256: 6dbda13f4f27dd4c0492c00ecc0a2d184f00fe85fa7096802cf93e9fdecf11e8
+  theorem_cards:
+    - artifact_id: TC-DEF-001-R4
+      revision: 4
+      sha256: eff82b06afaa61b67d13c3a399494525ed452e42c203a390ba40e56b93ec9daa
+  natural_language_proofs: []
+  classification_schema:
+    path: review/classifications-v2.json
+    schema_version: lmlf-classification-v2
+    artifact_revision: 2
+    sha256: 8c9f8dbb5ab351771a433a9901fe176a66ec214092c5d5880b3ec57c9a5b23e9
+
+toolchain_binding:
+  lean_toolchain: leanprover/lean4:v4.33.1
+  mathlib_revision: 0df444a360eaa60ab8c11dca51a86af692955474
+
+candidate_binding:
+  base_sha: null
+  head_sha: null
+  proposer_evidence_ref: null
+
+pre_lean_gates:
+  overall_distinct_reviewer_ids:
+    - /root/prelean_green_k
+    - prelean_green_l
+  theorem_card_review:
+    gate_state: pass
+    distinct_reviewer_ids:
+      - /root/prelean_green_k
+      - prelean_green_l
+    selected_reviewer_composition:
+      humans: 0
+      agents: 2
+      minimum_distinct_agent_models: 1
+    verdict_refs:
+      - path: /home/codex/Documents/Codex/2026-09-05/LMLF-review-evidence/spec-1a7a1864e3f7c343b8c6f90511689d7a7b1a88d9/DEF-001-theorem_card_review-prelean_green_k.json
+        sha256: 92aa3ccf4e84adf7804422ffd7727bf4a97ea6e925cc40aec9875aca9f19af2b
+      - path: /home/codex/Documents/Codex/2026-09-05/LMLF-review-evidence/spec-1a7a1864e3f7c343b8c6f90511689d7a7b1a88d9/prelean_green_l.DEF-001.theorem_card_review.json
+        sha256: 2468ea1f76f34e830be2469c5bd229290623f2f628a9dbadb5505ad05a6d3310
+  natural_language_proof_review:
+    applicability: not_applicable
+    inapplicable_reason: >-
+      Non-novel wrappers around the four explicitly named pinned mathlib facts;
+      no new mathematical argument is proposed.
+    gate_state: not_required
+    distinct_reviewer_ids: []
+    selected_reviewer_composition: null
+    verdict_refs:
+      - path: /home/codex/Documents/Codex/2026-09-05/LMLF-review-evidence/spec-1a7a1864e3f7c343b8c6f90511689d7a7b1a88d9/DEF-001-natural_language_proof_review-prelean_green_k.json
+        sha256: 6a89baa5e39b0aebbdb4f3175b026e921e8d0813ed7ddbf4d4050bb41511d36a
+      - path: /home/codex/Documents/Codex/2026-09-05/LMLF-review-evidence/spec-1a7a1864e3f7c343b8c6f90511689d7a7b1a88d9/prelean_green_l.DEF-001.natural_language_proof_review.json
+        sha256: 4a4c320f451e016e9e6bf067df566d5cff171bfe27c8192da95ec0ffbd7d2f0c
+  structural_circularity_review:
+    applicability: not_applicable
+    inapplicable_reason: >-
+      This bounded packet proposes transparent wrappers around four named pinned
+      Mathlib declarations.  It introduces no new construction, continuation,
+      existence/uniqueness route, or theorem-sized hypothesis object.
+    gate_state: not_required
+    distinct_reviewer_ids: []
+    selected_reviewer_composition: null
+    represented_perspectives: []
+    verdict_refs:
+      - path: /home/codex/Documents/Codex/2026-09-05/LMLF-review-evidence/spec-1a7a1864e3f7c343b8c6f90511689d7a7b1a88d9/DEF-001-structural_circularity_review-prelean_green_k.json
+        sha256: 4e4503bcb4797d5fb7de177ecb5c9488f4eff68b6ef747d34817b068096fe9b2
+      - path: /home/codex/Documents/Codex/2026-09-05/LMLF-review-evidence/spec-1a7a1864e3f7c343b8c6f90511689d7a7b1a88d9/prelean_green_l.DEF-001.structural_circularity_review.json
+        sha256: 4512b826d3132a8c00eabb011d308952de89acd786a493b60195efa9e95b74b0
+  lean_ready:
+    gate_state: pass
+    decided_by: /root/prelean_envelope
+    evidence_refs:
+      - path: /home/codex/Documents/Codex/2026-09-05/LMLF-review-evidence/spec-1a7a1864e3f7c343b8c6f90511689d7a7b1a88d9/DEF-001-theorem_card_review-prelean_green_k.json
+        sha256: 92aa3ccf4e84adf7804422ffd7727bf4a97ea6e925cc40aec9875aca9f19af2b
+      - path: /home/codex/Documents/Codex/2026-09-05/LMLF-review-evidence/spec-1a7a1864e3f7c343b8c6f90511689d7a7b1a88d9/prelean_green_l.DEF-001.theorem_card_review.json
+        sha256: 2468ea1f76f34e830be2469c5bd229290623f2f628a9dbadb5505ad05a6d3310
+      - path: /home/codex/Documents/Codex/2026-09-05/LMLF-review-evidence/spec-1a7a1864e3f7c343b8c6f90511689d7a7b1a88d9/DEF-001-natural_language_proof_review-prelean_green_k.json
+        sha256: 6a89baa5e39b0aebbdb4f3175b026e921e8d0813ed7ddbf4d4050bb41511d36a
+      - path: /home/codex/Documents/Codex/2026-09-05/LMLF-review-evidence/spec-1a7a1864e3f7c343b8c6f90511689d7a7b1a88d9/prelean_green_l.DEF-001.natural_language_proof_review.json
+        sha256: 4a4c320f451e016e9e6bf067df566d5cff171bfe27c8192da95ec0ffbd7d2f0c
+      - path: /home/codex/Documents/Codex/2026-09-05/LMLF-review-evidence/spec-1a7a1864e3f7c343b8c6f90511689d7a7b1a88d9/DEF-001-structural_circularity_review-prelean_green_k.json
+        sha256: 4e4503bcb4797d5fb7de177ecb5c9488f4eff68b6ef747d34817b068096fe9b2
+      - path: /home/codex/Documents/Codex/2026-09-05/LMLF-review-evidence/spec-1a7a1864e3f7c343b8c6f90511689d7a7b1a88d9/prelean_green_l.DEF-001.structural_circularity_review.json
+        sha256: 4512b826d3132a8c00eabb011d308952de89acd786a493b60195efa9e95b74b0
+      - path: /home/codex/Documents/Codex/2026-09-05/LMLF-review-evidence/spec-1a7a1864e3f7c343b8c6f90511689d7a7b1a88d9/prelean_green_k.md
+        sha256: a537ee0cf5f04ccacb475877c1e2443c9f2e3cded91ada44bd07ced4aa411fa4
+      - path: /home/codex/Documents/Codex/2026-09-05/LMLF-review-evidence/spec-1a7a1864e3f7c343b8c6f90511689d7a7b1a88d9/prelean_green_l.md
+        sha256: 7a616cb60f7e20dc398e60f206ab1db8ad56e7bb26e26b7271ae36191b9da1f0
+    requires_gate_states:
+      theorem_card_review: pass
+      natural_language_proof_review: not_required
+      structural_circularity_review: not_required
+
+implementation_reviews:
+  gate_state: pending
+  overall_distinct_reviewer_ids: []
+  rubric_verdict_refs: []
+
+disposition_ledger_ref: /home/codex/Documents/Codex/2026-09-05/LMLF-review-evidence/spec-1a7a1864e3f7c343b8c6f90511689d7a7b1a88d9/prelean_authorization.md#def-001
+merge_gate_state: pending
+merge_decision_ref: null

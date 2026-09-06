@@ -1,0 +1,40 @@
+{
+  "schema_version": 4,
+  "record_kind": "rubric_verdict",
+  "storage_requirement": "external_to_candidate_head",
+  "work_item_id": "QB-001",
+  "review_stage": "implementation",
+  "gate": "implementation_review",
+  "review_identity": {
+    "review_envelope_ref": "/home/codex/Documents/Codex/2026-09-05/LMLF-review-evidence/candidate-515b742f7ad5472c17cfdf0fda7cbc83c5585da1/QB-001-review-envelope.yaml",
+    "review_envelope_sha256": "a04999c678029a8125a919893b202c6555ac04517e2511c5dd3695d587f9ca8d",
+    "spec_commit": "1a7a1864e3f7c343b8c6f90511689d7a7b1a88d9",
+    "work_packet_path": "review/work_packets/QB-001.yaml",
+    "work_packet_sha256": "7a56a1695d15ea2cedd525ee4270d20830e1706827bb592dfde293bcd7d54c39",
+    "theorem_card_bindings": [{"artifact_id": "TC-QB-001-R7", "revision": 7, "sha256": "827522349afc7374a8bec60b3d281c192a44189f8e8c08c24e453bf75e215667"}, {"artifact_id": "SIG-QB-001-R2", "revision": 2, "sha256": "93e4e30a93087de95342abdb1e986676924cd93512e771737d0d3f3ed7973b39"}],
+    "natural_language_proof_bindings": [{"artifact_id": "NLP-QB-001-R6", "revision": 6, "sha256": "42b027310a56ff70f4c56471de527aa9b6a3ac88810ad3ba17029953514c1589"}],
+    "classification_schema_binding": {"path": "review/classifications-v2.json", "schema_version": "lmlf-classification-v2", "artifact_revision": 2, "sha256": "8c9f8dbb5ab351771a433a9901fe176a66ec214092c5d5880b3ec57c9a5b23e9"},
+    "base_sha": "1a7a1864e3f7c343b8c6f90511689d7a7b1a88d9",
+    "head_sha": "515b742f7ad5472c17cfdf0fda7cbc83c5585da1",
+    "lean_toolchain": "leanprover/lean4:v4.33.1",
+    "mathlib_revision": "0df444a360eaa60ab8c11dca51a86af692955474",
+    "rubric": "api_dependency",
+    "review_perspective": "dependency_direction",
+    "rubric_revision": "4e5f947ed15f0101c46fe9bb0a12a013d66c7de3c7ed2c35fda817de8d92eb41"
+  },
+  "reviewer": {"id": "/root/impl_final_p", "kind": "agent", "model": "gpt-5.6-sol", "runtime": "OpenAI Codex desktop", "isolation_strength": "manual_attestation", "isolation_method": "Fresh disposable git-archive extractions of exact base/head/predecessor under /tmp; no live worktree or predecessor referee output inspected; candidate source left unchanged; generated check files and .lake confined to disposable archive.", "independent_of_proposer": true, "read_only_candidate": true},
+  "verdict": "approve",
+  "summary": "The exact 8-declaration surface, names, signatures, classifications, and neutral family semantics are preserved; imports flow from LMLF.Basic to the quantitative module and onward to maintained consumers without cycles or special-function dependencies.",
+  "evidence": {
+    "proposer_bundle_ref": "/home/codex/Documents/Codex/2026-09-05/LMLF-review-evidence/candidate-515b742f7ad5472c17cfdf0fda7cbc83c5585da1/bootstrap_implementer.md",
+    "proposer_bundle_sha256": "2fe11b62dca1a5994df3d3847097401a1dd9591651d4a5a54996643c95717aef",
+    "narrative_ref": {"path": "/home/codex/Documents/Codex/2026-09-05/LMLF-review-evidence/implementation-515b742f7ad5472c17cfdf0fda7cbc83c5585da1/impl_final_p.md", "sha256": "7a151cb388222bbcb7fd7af4f87c134f79a066bd70207194e968c888320e588e"},
+    "source_snapshot_verified": true,
+    "pinned_dependency_source_inspected": true,
+    "commands_rerun": ["referee library_inventory.sh", "compiled #check for all eight declarations", "source declaration-form enumeration", "consumer and import rg", "lake build"],
+    "files_and_declarations_inspected": ["review/work_packets/QB-001.yaml", "blueprint/theorem_cards/QB-001.yaml", "blueprint/theorem_cards/QB-001-signatures.md", "LMLF/Quantitative/Basic.lean", "LMLF/Audit/Definitions.lean", "LMLF/Results.lean", "LMLF.lean", "lakefile.toml", "README.md"]
+  },
+  "findings": [],
+  "prior_finding_dispositions_checked": [],
+  "issued_at_utc": "2026-09-05T20:22:40Z"
+}

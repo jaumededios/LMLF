@@ -1,0 +1,90 @@
+{
+  "schema_version": 4,
+  "record_kind": "rubric_verdict",
+  "storage_requirement": "external_to_candidate_head",
+  "work_item_id": "DEF-001",
+  "review_stage": "implementation",
+  "gate": "implementation_review",
+  "review_identity": {
+    "review_envelope_ref": "/home/codex/Documents/Codex/2026-09-05/LMLF-review-evidence/candidate-3dbfcc8ef8a2b2c9b721bbf8570493a112b413f6/DEF-001-review-envelope.yaml#sha256=630415868f05c15c201a8540e776af99a4893db56611179ae102cbcc5c89d5ca",
+    "spec_commit": "1a7a1864e3f7c343b8c6f90511689d7a7b1a88d9",
+    "work_packet_path": "review/work_packets/DEF-001.yaml",
+    "work_packet_sha256": "6dbda13f4f27dd4c0492c00ecc0a2d184f00fe85fa7096802cf93e9fdecf11e8",
+    "theorem_card_bindings": [
+      {
+        "artifact_id": "TC-DEF-001-R4",
+        "revision": 4,
+        "sha256": "eff82b06afaa61b67d13c3a399494525ed452e42c203a390ba40e56b93ec9daa"
+      }
+    ],
+    "natural_language_proof_bindings": [],
+    "classification_schema_binding": {
+      "path": "review/classifications-v2.json",
+      "schema_version": "lmlf-classification-v2",
+      "artifact_revision": 2,
+      "sha256": "8c9f8dbb5ab351771a433a9901fe176a66ec214092c5d5880b3ec57c9a5b23e9"
+    },
+    "base_sha": "1a7a1864e3f7c343b8c6f90511689d7a7b1a88d9",
+    "head_sha": "3dbfcc8ef8a2b2c9b721bbf8570493a112b413f6",
+    "lean_toolchain": "leanprover/lean4:v4.33.1",
+    "mathlib_revision": "0df444a360eaa60ab8c11dca51a86af692955474",
+    "rubric": "source_fidelity",
+    "review_perspective": "source_semantics",
+    "rubric_revision": "6873853ce125346feef082d0e31d28808387ec0fa5fb0887ce0d300eba02c9a2"
+  },
+  "reviewer": {
+    "id": "/root/impl_review_m",
+    "kind": "agent",
+    "model": "gpt-5.6-sol",
+    "runtime": "Codex desktop",
+    "isolation_strength": "manual_attestation",
+    "isolation_method": "Manual archive isolation: exact base and head were extracted with git archive into separate disposable directories under /tmp/impl-review-m.iQ1T84; only the archived head was built and inspected; the dirty/live worktree, historical review reports, and other implementation-referee output were not inspected; only external narrative/verdict files were written.",
+    "independent_of_proposer": true,
+    "read_only_candidate": true
+  },
+  "verdict": "request_changes",
+  "summary": "P2: the required Euler-at-one audit proves Mathlib's special value directly and does not derive it through the candidate's public Euler-integral wrapper. This exact-head review round is stopped and the head must be superseded before fresh review.",
+  "evidence": {
+    "proposer_bundle_ref": "/home/codex/Documents/Codex/2026-09-05/LMLF-review-evidence/candidate-3dbfcc8ef8a2b2c9b721bbf8570493a112b413f6/bootstrap_implementer.md#sha256=6a8b940d31b5cd5363cbfcd2b8311745eb97904b0ec58cd684a64ab580e6d2ed",
+    "narrative_ref": {
+      "path": "/home/codex/Documents/Codex/2026-09-05/LMLF-review-evidence/implementation-3dbfcc8ef8a2b2c9b721bbf8570493a112b413f6/impl_review_m.md",
+      "sha256": "5fb14c7d231e42b4c7bc0e88e524d60ac4f59b8a0b91eda095b368c44ee39faf"
+    },
+    "source_snapshot_verified": true,
+    "pinned_dependency_source_inspected": true,
+    "commands_rerun": [
+      "git archive --format=tar 3dbfcc8ef8a2b2c9b721bbf8570493a112b413f6",
+      "sha256sum .lake/packages/mathlib/Mathlib/Analysis/SpecialFunctions/Gamma/Basic.lean",
+      "lake build",
+      "lake env lean LMLF/Definitions/Gamma.lean",
+      "lake env lean LMLF/Audit/Definitions.lean",
+      "lake env lean /tmp/impl-review-m.iQ1T84/checks/ReviewChecks.lean",
+      "python3 scripts/validate_inventory.py",
+      "python3 scripts/validate_inventory.py --negative-tests"
+    ],
+    "files_and_declarations_inspected": [
+      "review/work_packets/DEF-001.yaml",
+      "blueprint/theorem_cards/DEF-001.yaml",
+      "review/PROTOCOL.md",
+      "review/classifications-v2.json",
+      "review/rubrics/source_fidelity.md",
+      "LMLF/Definitions/Gamma.lean: LMLF.Definitions.gamma_eulerIntegrable, gamma_eq_eulerIntegral, gamma_ofReal, gamma_neg_nat_eq_zero",
+      "LMLF/Audit/Definitions.lean: LMLFTest.Definitions.Gamma.eulerIntegrable, eulerFormula, eulerAtOne, realAgreement, conjugation, poleTotalization",
+      "Mathlib/Analysis/SpecialFunctions/Gamma/Basic.lean at 0df444a360eaa60ab8c11dca51a86af692955474"
+    ]
+  },
+  "findings": [
+    {
+      "id": "M1",
+      "priority": "P2",
+      "file": "LMLF/Audit/Definitions.lean",
+      "line": 55,
+      "declaration": "LMLFTest.Definitions.Gamma.eulerAtOne",
+      "issue": "The frozen regression is supposed to establish that the public Euler-integral identity specializes to Complex.Gamma 1 = 1, but the candidate proof is only exact Complex.Gamma_one and never uses LMLF.Definitions.gamma_eq_eulerIntegral. It therefore does not audit the public formula's normalization connection.",
+      "evidence": "The candidate source at lines 55-56 contains `theorem eulerAtOne : Complex.Gamma 1 = 1 := by exact Complex.Gamma_one`. The frozen DEF-001 packet's eulerAtOne regression explicitly says the public integral identity must specialize to this value. A proof that rewrites with the public wrapper, changes the resulting expression to Complex.GammaIntegral 1, and evaluates it through pinned Mathlib compiled successfully in the disposable archive.",
+      "required_fix": "Make eulerAtOne materially derive the special value through LMLF.Definitions.gamma_eq_eulerIntegral at s = 1 and evaluate the resulting Euler integral; rerun the direct audit compile and full build; then obtain fresh verdicts bound to the superseding head."
+    }
+  ],
+  "prior_finding_dispositions_checked": [],
+  "issued_at_utc": "2026-09-05T19:54:14Z"
+}

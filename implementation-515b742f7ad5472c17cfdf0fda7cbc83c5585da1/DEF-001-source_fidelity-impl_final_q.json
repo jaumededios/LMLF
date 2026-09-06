@@ -1,0 +1,88 @@
+{
+  "schema_version": 4,
+  "record_kind": "rubric_verdict",
+  "storage_requirement": "external_to_candidate_head",
+  "work_item_id": "DEF-001",
+  "review_stage": "implementation",
+  "gate": "implementation_review",
+  "review_identity": {
+    "review_envelope_ref": "/home/codex/Documents/Codex/2026-09-05/LMLF-review-evidence/candidate-515b742f7ad5472c17cfdf0fda7cbc83c5585da1/DEF-001-review-envelope.yaml",
+    "review_envelope_sha256": "d482eb4e15125ce815bca407d0cabca3b52368695913fd3672a8889ba232ceb9",
+    "spec_commit": "1a7a1864e3f7c343b8c6f90511689d7a7b1a88d9",
+    "work_packet_path": "review/work_packets/DEF-001.yaml",
+    "work_packet_sha256": "6dbda13f4f27dd4c0492c00ecc0a2d184f00fe85fa7096802cf93e9fdecf11e8",
+    "theorem_card_bindings": [
+      {
+        "artifact_id": "TC-DEF-001-R4",
+        "revision": 4,
+        "sha256": "eff82b06afaa61b67d13c3a399494525ed452e42c203a390ba40e56b93ec9daa"
+      }
+    ],
+    "natural_language_proof_bindings": [],
+    "classification_schema_binding": {
+      "path": "review/classifications-v2.json",
+      "schema_version": "lmlf-classification-v2",
+      "artifact_revision": 2,
+      "sha256": "8c9f8dbb5ab351771a433a9901fe176a66ec214092c5d5880b3ec57c9a5b23e9"
+    },
+    "base_sha": "1a7a1864e3f7c343b8c6f90511689d7a7b1a88d9",
+    "head_sha": "515b742f7ad5472c17cfdf0fda7cbc83c5585da1",
+    "lean_toolchain": "leanprover/lean4:v4.33.1",
+    "mathlib_revision": "0df444a360eaa60ab8c11dca51a86af692955474",
+    "rubric": "source_fidelity",
+    "review_perspective": "source_semantics",
+    "rubric_path": "review/rubrics/source_fidelity.md",
+    "rubric_revision": "sha256:6873853ce125346feef082d0e31d28808387ec0fa5fb0887ce0d300eba02c9a2"
+  },
+  "reviewer": {
+    "id": "/root/impl_final_q",
+    "kind": "agent",
+    "model": "gpt-5.6-sol",
+    "runtime": "Codex Desktop agent runtime on Linux x86_64",
+    "isolation_strength": "manual_attestation",
+    "isolation_method": "Fresh session; exact base/head Git archives in /tmp/impl-final-q-YhyqVP; candidate source treated read-only, with generated .lake state and a temporary checker confined to the disposable archive; pinned Mathlib Gamma source archived and read at the bound revision; general filesystem/network access was not technically blocked.",
+    "independent_of_proposer": true,
+    "read_only_candidate": true
+  },
+  "verdict": "approve",
+  "summary": "All four DEF wrappers faithfully reproduce the pinned Mathlib Gamma declarations: the exact Euler integrand and positive-real-part domain, normalization, whole-real-line agreement, and zero totalization at classical nonpositive-integer poles. M1 is repaired by a public-wrapper-dependent normalization regression.",
+  "evidence": {
+    "proposer_bundle_ref": "/home/codex/Documents/Codex/2026-09-05/LMLF-review-evidence/candidate-515b742f7ad5472c17cfdf0fda7cbc83c5585da1/bootstrap_implementer.md",
+    "proposer_bundle_sha256": "2fe11b62dca1a5994df3d3847097401a1dd9591651d4a5a54996643c95717aef",
+    "narrative_ref": {
+      "path": "/home/codex/Documents/Codex/2026-09-05/LMLF-review-evidence/implementation-515b742f7ad5472c17cfdf0fda7cbc83c5585da1/impl_final_q.md",
+      "sha256": "f0e3980e32d1bbdefda9b27b5595bc159f5a9a8e202c2627f4c72303ad74f0d6"
+    },
+    "source_snapshot_verified": true,
+    "pinned_dependency_source_inspected": true,
+    "commands_rerun": [
+      "git archive pinned Mathlib Gamma Basic source",
+      "sha256sum pinned Mathlib Gamma Basic source",
+      "lake env lean temporary #check/#print eulerAtOne checker",
+      "check_lean_file.sh LMLF/Definitions/Gamma.lean",
+      "check_lean_file.sh LMLF/Audit/Definitions.lean",
+      "git diff predecessor head -- LMLF/Audit/Definitions.lean"
+    ],
+    "files_and_declarations_inspected": [
+      "review/work_packets/DEF-001.yaml",
+      "blueprint/theorem_cards/DEF-001.yaml",
+      "Mathlib/Analysis/SpecialFunctions/Gamma/Basic.lean at 0df444a360eaa60ab8c11dca51a86af692955474",
+      "LMLF/Definitions/Gamma.lean: all four DEF targets",
+      "LMLF/Audit/Definitions.lean: Gamma regression consumers",
+      "LMLFTest.Definitions.Gamma.eulerAtOne elaborated proof term"
+    ]
+  },
+  "findings": [],
+  "prior_finding_dispositions_checked": [
+    {
+      "finding_id": "M1",
+      "predecessor_head_sha": "3dbfcc8ef8a2b2c9b721bbf8570493a112b413f6",
+      "predecessor_disposition_ref": "/home/codex/Documents/Codex/2026-09-05/LMLF-review-evidence/candidate-515b742f7ad5472c17cfdf0fda7cbc83c5585da1/predecessor_disposition.md",
+      "predecessor_disposition_sha256": "0d8689d1e8034d741591c2e980733805ce8294e58ff624bf57e1fde0275ad5f2",
+      "prior_resolution_state": "fixed_pending_rereview",
+      "current_resolution_state": "resolved_by_fresh_approval",
+      "evidence": "/home/codex/Documents/Codex/2026-09-05/LMLF-review-evidence/implementation-515b742f7ad5472c17cfdf0fda7cbc83c5585da1/impl_final_q.md#m1-verification-and-disposition"
+    }
+  ],
+  "issued_at_utc": "2026-09-05T20:18:25Z"
+}

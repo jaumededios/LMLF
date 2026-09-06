@@ -1,0 +1,70 @@
+{
+  "schema_version": 4,
+  "record_kind": "rubric_verdict",
+  "storage_requirement": "external_to_candidate_head",
+  "work_item_id": "DEF-001",
+  "review_stage": "pre_lean",
+  "gate": "theorem_card_review",
+  "review_identity": {
+    "review_envelope_ref": "/home/codex/Documents/Codex/2026-09-05/LMLF-review-evidence/spec-1a7a1864e3f7c343b8c6f90511689d7a7b1a88d9/DEF-001-review-envelope.yaml#sha256=e8b173170146865c6bb356ff94ebfe937643c6058fef9d85c4bf62f2767bd08c",
+    "spec_commit": "1a7a1864e3f7c343b8c6f90511689d7a7b1a88d9",
+    "work_packet_path": "review/work_packets/DEF-001.yaml",
+    "work_packet_sha256": "6dbda13f4f27dd4c0492c00ecc0a2d184f00fe85fa7096802cf93e9fdecf11e8",
+    "theorem_card_bindings": [
+      {
+        "artifact_id": "TC-DEF-001-R4",
+        "revision": 4,
+        "sha256": "eff82b06afaa61b67d13c3a399494525ed452e42c203a390ba40e56b93ec9daa"
+      }
+    ],
+    "natural_language_proof_bindings": [],
+    "classification_schema_binding": {
+      "path": "review/classifications-v2.json",
+      "schema_version": "lmlf-classification-v2",
+      "artifact_revision": 2,
+      "sha256": "8c9f8dbb5ab351771a433a9901fe176a66ec214092c5d5880b3ec57c9a5b23e9"
+    },
+    "base_sha": null,
+    "head_sha": null,
+    "lean_toolchain": "leanprover/lean4:v4.33.1",
+    "mathlib_revision": "0df444a360eaa60ab8c11dca51a86af692955474",
+    "rubric": "mathlib_reuse",
+    "review_perspective": "source_semantics",
+    "rubric_revision": "dee214f219ccb03db63194208487f6cb69777b5bc780b608b6e717b729ee901a"
+  },
+  "reviewer": {
+    "id": "prelean_green_l",
+    "kind": "agent",
+    "model": "gpt-5.6-sol",
+    "runtime": "Codex desktop, externally spawned task /root/prelean_green_l",
+    "isolation_strength": "manual_attestation",
+    "isolation_method": "Fresh-context review of a disposable git archive at /tmp/olver-prelean-green-l.PGneE5 created from the exact spec commit; no .git metadata; dirty worktree, untracked prototypes, historical review content, and other reviewer output excluded. The runtime still had broader filesystem and network access, so isolation was not technically enforced.",
+    "independent_of_proposer": true,
+    "read_only_candidate": true
+  },
+  "verdict": "approve",
+  "summary": "Approve DEF-001 theorem card revision 4: the exact four-wrapper scope reuses the pinned Complex.Gamma object and facts, preserves the Euler domain, real agreement, and pole-totalization semantics, and claims no Olver occurrence.",
+  "evidence": {
+    "proposer_bundle_ref": "/home/codex/Documents/Codex/2026-09-05/LMLF-review-evidence/spec-1a7a1864e3f7c343b8c6f90511689d7a7b1a88d9/prelean_green_l.md#sha256=7a616cb60f7e20dc398e60f206ab1db8ad56e7bb26e26b7271ae36191b9da1f0",
+    "source_snapshot_verified": false,
+    "pinned_dependency_source_inspected": true,
+    "commands_rerun": [
+      "git -C .lake/packages/mathlib rev-parse HEAD",
+      "sha256sum .lake/packages/mathlib/Mathlib/Analysis/SpecialFunctions/Gamma/Basic.lean",
+      "check_lean_file.sh DEF001Independent.lean"
+    ],
+    "files_and_declarations_inspected": [
+      "blueprint/theorem_cards/DEF-001.yaml",
+      "review/work_packets/DEF-001.yaml",
+      "review/classifications-v2.json",
+      "Mathlib/Analysis/SpecialFunctions/Gamma/Basic.lean at SHA-256 720a9a72d742fbe1c9a89601dc3a00d82c0261c7368c98cccb58307dbffe3bbf",
+      "Complex.GammaIntegral_convergent",
+      "Complex.Gamma_eq_integral",
+      "Complex.Gamma_ofReal",
+      "Complex.Gamma_neg_nat_eq_zero"
+    ]
+  },
+  "findings": [],
+  "prior_finding_dispositions_checked": [],
+  "issued_at_utc": "2026-09-05T18:57:19Z"
+}

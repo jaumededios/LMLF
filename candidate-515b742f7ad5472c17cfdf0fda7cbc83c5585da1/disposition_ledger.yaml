@@ -1,0 +1,50 @@
+schema_version: 1
+record_kind: disposition_ledger
+storage_requirement: external_to_candidate_head
+work_item_id: DEF-001
+review_envelope_ref: /home/codex/Documents/Codex/2026-09-05/LMLF-review-evidence/candidate-515b742f7ad5472c17cfdf0fda7cbc83c5585da1/DEF-001-review-envelope.yaml#sha256=d482eb4e15125ce815bca407d0cabca3b52368695913fd3672a8889ba232ceb9
+spec_commit: 1a7a1864e3f7c343b8c6f90511689d7a7b1a88d9
+work_packet_sha256: 6dbda13f4f27dd4c0492c00ecc0a2d184f00fe85fa7096802cf93e9fdecf11e8
+reviewed_head_sha: 515b742f7ad5472c17cfdf0fda7cbc83c5585da1
+
+predecessor_disposition_ref:
+  path: /home/codex/Documents/Codex/2026-09-05/LMLF-review-evidence/candidate-515b742f7ad5472c17cfdf0fda7cbc83c5585da1/predecessor_disposition.md
+  sha256: 0d8689d1e8034d741591c2e980733805ce8294e58ff624bf57e1fde0275ad5f2
+
+findings:
+  - finding_id: M1
+    originating_verdict_ref:
+      path: /home/codex/Documents/Codex/2026-09-05/LMLF-review-evidence/implementation-3dbfcc8ef8a2b2c9b721bbf8570493a112b413f6/DEF-001-source_fidelity-impl_review_m.json
+      sha256: 782ad40feae664c72e5d4d01fbed2ec7a67e9c9262de51aa8eed73776d1e673c
+    related_originating_verdict_refs:
+      - path: /home/codex/Documents/Codex/2026-09-05/LMLF-review-evidence/implementation-3dbfcc8ef8a2b2c9b721bbf8570493a112b413f6/DEF-001-proof_quality-impl_review_m.json
+        sha256: 0dd92988e32127c6d2a2d0c4b9914179958461a9f98cf0bb3882d02034f82e0f
+    resolution_state: resolved_by_fresh_approval
+    proposer_response: >-
+      Candidate 515b742f7ad5472c17cfdf0fda7cbc83c5585da1 changes only
+      LMLF/Audit/Definitions.lean from the rejected predecessor and rewrites
+      eulerAtOne to exercise LMLF.Definitions.gamma_eq_eulerIntegral before
+      applying the canonical Complex.GammaIntegral_one normalization result.
+    proposed_fix_head_sha: 515b742f7ad5472c17cfdf0fda7cbc83c5585da1
+    confirming_verdict_ref:
+      path: /home/codex/Documents/Codex/2026-09-05/LMLF-review-evidence/implementation-515b742f7ad5472c17cfdf0fda7cbc83c5585da1/DEF-001-source_fidelity-impl_final_p.json
+      sha256: e171267377733b6f6d8b6151a4cd8a071dd1481185b568d2a78d5b8ee692a985
+    additional_confirming_verdict_refs:
+      - path: /home/codex/Documents/Codex/2026-09-05/LMLF-review-evidence/implementation-515b742f7ad5472c17cfdf0fda7cbc83c5585da1/DEF-001-source_fidelity-impl_final_q.json
+        sha256: 4b4ca5b0305a16faf5fb95d2f5dddc0f2c561e03b588cf514f85340ae0731b43
+      - path: /home/codex/Documents/Codex/2026-09-05/LMLF-review-evidence/implementation-515b742f7ad5472c17cfdf0fda7cbc83c5585da1/DEF-001-source_fidelity-impl_final_r.json
+        sha256: f6562286553c45c9108b3eba1d59cff7dbdf88979a24c46f5653731511b6d560
+      - path: /home/codex/Documents/Codex/2026-09-05/LMLF-review-evidence/implementation-515b742f7ad5472c17cfdf0fda7cbc83c5585da1/DEF-001-proof_quality-impl_final_p.json
+        sha256: d52a0ef6889d45b078c53b3b35ddb2576371b8377dba9b1231b74434f76c21bc
+      - path: /home/codex/Documents/Codex/2026-09-05/LMLF-review-evidence/implementation-515b742f7ad5472c17cfdf0fda7cbc83c5585da1/DEF-001-proof_quality-impl_final_q.json
+        sha256: b96bda0c9f5ce07b5aafece3556ff5c1138753117fe556afb7713658016c631a
+      - path: /home/codex/Documents/Codex/2026-09-05/LMLF-review-evidence/implementation-515b742f7ad5472c17cfdf0fda7cbc83c5585da1/DEF-001-proof_quality-impl_final_r.json
+        sha256: 96381daf9b23864054913b3c5f0759c5f17beff9e3379bcec370dad463eb686d
+    confirmation_narrative_refs:
+      - path: /home/codex/Documents/Codex/2026-09-05/LMLF-review-evidence/implementation-515b742f7ad5472c17cfdf0fda7cbc83c5585da1/impl_final_p.md
+        sha256: 7a151cb388222bbcb7fd7af4f87c134f79a066bd70207194e968c888320e588e
+      - path: /home/codex/Documents/Codex/2026-09-05/LMLF-review-evidence/implementation-515b742f7ad5472c17cfdf0fda7cbc83c5585da1/impl_final_q.md
+        sha256: f0e3980e32d1bbdefda9b27b5595bc159f5a9a8e202c2627f4c72303ad74f0d6
+      - path: /home/codex/Documents/Codex/2026-09-05/LMLF-review-evidence/implementation-515b742f7ad5472c17cfdf0fda7cbc83c5585da1/impl_final_r.md
+        sha256: 8a249ffd749b00830f3db8874a2831cfe29cf9a75766b6834790c954def9126c
+    specification_supersession_ref: null
