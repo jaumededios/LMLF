@@ -36,4 +36,5 @@ globs = [
   "LMLFTest.Integral.Improper.IMP001EndpointAE",
   "LMLFTest.Integral.Improper.IMP001GammaEndpoint",
   "LMLFTest.Integral.Improper.IMP001AbelExamples",
+  "LMLFTest.Integral.Improper.IMP001Oscillatory",
 ]
