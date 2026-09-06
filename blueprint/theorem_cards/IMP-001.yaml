@@ -1,8 +1,8 @@
 schema_version: 2
 id: IMP-001
-title: Finite-exceptional ordinary-improper integration and the finite Abel identity
+title: Finite-exceptional ordinary-improper integration and Abel composition
 owner: jaumededios
-artifact_revision: 3
+artifact_revision: 4
 baseline_spec_commit: pending_external_record_after_commit
 
 theorem_class: mixed
@@ -15,7 +15,7 @@ implementation_status: not_started
 prototype_status: absent
 coverage_status: not_applicable
 manifest_membership_status: planning_only
-status_as_of: referee_c_changes_integrated_pending_fresh_rereview
+status_as_of: signature_referee_b_change_integrated_pending_fresh_r4_review
 status_authority: >-
   Completeness is an author claim about the bound natural-language argument.
   Review pass and implementation authorization can be established only by an
@@ -39,10 +39,13 @@ scope:
     Specify a relation for an ordinary improper integral on a right ray with a
     finite exceptional set, using independent one-sided limits of Mathlib
     Bochner intervalIntegral values; provide only the uniqueness, finite-union
-    refinement/continuous-linear-combination, and regular-splitting laws required by the
-    Watson route; specify a normalized continuous finite-exceptional primitive
-    predicate; and prove the finite-piece exponential Abel identity by Bochner
-    Fubini without assuming a derivative of the primitive.
+    refinement/continuous-linear-combination, and regular-splitting laws required
+    by the Watson route; specify a normalized continuous finite-exceptional
+    primitive predicate; and provide a representation-independent exponential
+    composition theorem that constructs the target improper relation from that
+    predicate and explicit weighted-tail hypotheses. Its private proof uses the
+    finite-piece Abel identity derived by Bochner Fubini without differentiating
+    the primitive.
   candidate_modules:
     - module: LMLF.Integral.Improper.Basic
       prospective_targets: IMP-001-T01 through IMP-001-T05
@@ -50,10 +53,13 @@ scope:
       prospective_targets: IMP-001-T06
   module_split_status: prospective_only
   candidate_namespace: LMLF.Integral
-  exact_signatures_artifact: not_created-design_only_after-two-proof-approvals
+  exact_signatures_artifact: absent-deferred-until-two-fresh-r4-proof-and-architecture-approvals
   signature_design_timing: >-
     Exact Lean signatures and binder order may be designed only after two
-    independent reviewers approve the complete revision-3 proof.
+    independent fresh reviewers approve the complete revision-4 proof and its
+    public-API/dependency architecture, including the QL-shaped acceptance
+    regression. The revision-3 signature artifact is superseded design evidence
+    and is not an R4 signature input.
   signature_authorization: absent
   candidate_public_targets:
     - target_id: IMP-001-T01
@@ -72,7 +78,7 @@ scope:
       declaration: LMLF.Integral.IsFiniteExceptionalPrimitive
       signature_status: prospective_only
     - target_id: IMP-001-T06
-      declaration: LMLF.Integral.intervalIntegral_exp_smul_eq_of_integral_eq_sub
+      declaration: LMLF.Integral.IsFiniteExceptionalPrimitive.hasImproperIntegralAtTopExcept_exp_smul
       signature_status: prospective_only
   public_target_count: 6
   target_minimality: >-
@@ -83,7 +89,14 @@ scope:
     multiplication, and regular-point insertion without separate public
     targets. T04 is the
     one regular-piece concatenation/splitting law needed to join a proper local
-    piece to a conditionally improper tail. T06 is the only analytic identity.
+    piece to a conditionally improper tail. Revision 4 replaces, rather than
+    supplements, the revision-3 public finite-piece Abel target with T06, the
+    finite-exception composition theorem that the first consumer actually
+    needs. The finite-piece identity remains a private proof lemma in Abel.
+    Exposing both would create a seventh public target with no second consumer;
+    exposing sorted-recursion constructors would instead freeze a private
+    representation. Six targets are therefore the minimal public surface that
+    preserves the existing relation algebra and closes the QL construction gap.
   included:
     - a right-ray relation with a finite set of exceptional points strictly above the initial point
     - independent left and right limits at every finite exceptional point
@@ -92,7 +105,8 @@ scope:
     - uniqueness, finite-set refinement, and finite functorial linearity under continuous real-linear maps
     - splitting or prepending one compact regular interval
     - a continuous normalized primitive predicate with regular-piece increment law
-    - the finite-piece exponential Abel identity for every real exponential parameter
+    - a public finite-exception exponential composition theorem for every real exponential parameter when its explicit weighted-tail hypotheses hold
+    - a private finite-piece exponential Abel/Fubini identity used to prove that composition theorem
     - empty exceptional set and degenerate finite interval behavior
   excluded:
     - a project-local proper Riemann integral
@@ -101,8 +115,9 @@ scope:
     - a partial-value or choice-selected improper-integral function
     - a bundled quantitative certificate containing k, K, X, or L
     - bounded-primitive tail estimates, Gamma moments, and Watson remainders
-    - a bridge to Mathlib set integrals under absolute integrability
-    - exact Lean binder order, representation of sorted exceptional points, or imports frozen as an implementation contract
+    - a general T01-to-Mathlib whole-set bridge beyond the explicit weighted-primitive value used by T06
+    - a public sorted-list representation, recursive constructor/eliminator, or implementation-specific anchor API
+    - exact Lean binder order or imports frozen as an implementation contract
 
 packet_local_concepts:
   items:
@@ -145,26 +160,38 @@ mathematical_contract:
     on [k,infinity), F(k)=0, and for every k <= a <= b whose closed interval
     avoids S, g is IntervalIntegrable on [a,b] and
     F(b)-F(a)=intervalIntegral g a b.
-  abel_contract: >-
+  finite_piece_abel_lemma: >-
     For a <= b, IntervalIntegrable g on [a,b], ContinuousOn F [a,b], and
     F(t)-F(a)=intervalIntegral g a t for every t in [a,b], every h : Real
     satisfies integral_a^b exp(-h*t) scalar-mul g(t) dt =
     exp(-h*b) scalar-mul F(b) - exp(-h*a) scalar-mul F(a) +
-    h scalar-mul integral_a^b exp(-h*t) scalar-mul F(t) dt.
+    h scalar-mul integral_a^b exp(-h*t) scalar-mul F(t) dt. This identity is
+    an internal lemma, not a seventh public target.
+  finite_exception_composition_contract: >-
+    If IsFiniteExceptionalPrimitive g k S F holds, the weighted primitive
+    t |-> exp(-h*t) scalar-mul F(t) is integrable on (k,infinity), and its
+    boundary value tends to zero at positive infinity, then the target
+    integrand t |-> exp(-h*t) scalar-mul g(t) has the ordinary-improper value
+    h scalar-mul integral over (k,infinity) of the weighted primitive, with the
+    same arbitrary finite exceptional set S. The theorem is valid for every
+    real h for which those two explicit tail hypotheses hold.
   derivative_convention: >-
     No derivative, almost-everywhere derivative, or absolute-continuity field
-    for F is assumed. T06 is proved from the increment law by finite Bochner
-    Fubini.
+    for F is assumed. The private finite-piece lemma and public T06 composition
+    theorem are proved from the increment law by finite Bochner Fubini and
+    separate endpoint limits.
   orientation_convention: >-
-    T01 is a right-ray relation. T04 assumes a <= k. T06 assumes a <= b;
-    reversed-orientation wrappers are deferred.
+    T01 and T06 concern a right ray. T04 assumes a <= k. The private
+    finite-piece Abel lemma assumes a <= b; reversed-orientation wrappers are
+    deferred.
   totalization_warning: >-
     Convergence is never inferred from the value of a totalized nonintegrable
     Bochner integral. IntervalIntegrable evidence is part of every regular
     truncation, and the relation explicitly asserts every endpoint limit.
   exceptional_values: >-
-    S empty is allowed. S containing a point at or below k is rejected. The
-    finite Abel identity includes h=0 and a=b. Principal-value-only singularities
+    S empty is allowed. S containing a point at or below k is rejected. T06
+    includes h=0 whenever its explicit weighted-tail hypotheses hold, and its
+    private finite-piece lemma includes a=b. Principal-value-only singularities
     are rejected.
 
 target_classifications:
@@ -206,21 +233,26 @@ target_classifications:
     novelty_class: non_novel
     relationship: source-independent primitive certificate used by QL-001
   - target_id: IMP-001-T06
-    declaration: LMLF.Integral.intervalIntegral_exp_smul_eq_of_integral_eq_sub
+    declaration: LMLF.Integral.IsFiniteExceptionalPrimitive.hasImproperIntegralAtTopExcept_exp_smul
     proof_anchor: target-imp-001-t06
     theorem_class: exact_identity
     coverage_class: reusable_infrastructure
     novelty_class: non_novel
-    relationship: classical finite Abel identity proved without differentiating F
+    relationship: >-
+      classical finite-exception Abel composition, proved from a private
+      finite-piece Fubini identity without differentiating F
 
 hypothesis_laundering_check: >-
   The predicates expose every summand's exceptional set, their finite union,
-  all regular-piece integrability,
-  every one-sided endpoint limit, continuity, normalization, and increment
-  law. They contain no boundedness constant, target Laplace value, convergence
-  at a new weight, Gamma moment, Watson remainder, or source conclusion.
-  The T06 Fubini proof derives AEStronglyMeasurable only under its exact
-  restricted product measure and adds no global StronglyMeasurable hypothesis.
+  all regular-piece integrability, every one-sided endpoint limit, continuity,
+  normalization, and increment law. They contain no boundedness constant,
+  target Laplace value, convergence at a new weight, Gamma moment, Watson
+  remainder, or source conclusion. T06 takes weighted-primitive integrability
+  and boundary vanishing as separate propositions rather than fields of T05;
+  QL derives both from its separately supplied positive weight and flat bound.
+  The private finite-piece Fubini proof derives AEStronglyMeasurable only under
+  its exact restricted product measure and adds no global StronglyMeasurable
+  hypothesis.
 choice_laundering_check: >-
   Sorting a finite set is canonical. Interior anchors are deterministic in the
   displayed semantics and are proved immaterial. The exceptional set in T03 is
@@ -231,7 +263,7 @@ choice_laundering_check: >-
 
 natural_language_proof:
   artifact: blueprint/proofs/IMP-001.md
-  artifact_revision: 3
+  artifact_revision: 4
   artifact_state: draft
   proof_status: complete
   normative_sections:
@@ -248,7 +280,7 @@ dependencies:
   lake_manifest_sha256: 4bd9b595f84163f69bdb0ffc9b1a876b5df71d65bdd53122415610d083d43404
   accepted_lmlf_packets: []
   draft_lmlf_packets: []
-  pin_status: exact_names_and_defining_imports_audited_for_revision_3
+  pin_status: revision_3_names_reused_and_new_r4_tail_passage_dependency_located_pending_exact_signature_review
   pinned_declarations:
     - declaration: intervalIntegral.integral_add_adjacent_intervals
       import: Mathlib.MeasureTheory.Integral.IntervalIntegral.Basic
@@ -268,6 +300,8 @@ dependencies:
       import: Mathlib.MeasureTheory.Integral.IntervalIntegral.Basic
     - declaration: intervalIntegral.continuousOn_primitive_interval'
       import: Mathlib.MeasureTheory.Integral.DominatedConvergence
+    - declaration: MeasureTheory.intervalIntegral_tendsto_integral_Ioi
+      import: Mathlib.MeasureTheory.Integral.IntegralEqImproper
     - declaration: Real.hasDerivAt_exp
       import: Mathlib.Analysis.SpecialFunctions.ExpDeriv
   planned_mathlib_imports:
@@ -275,6 +309,7 @@ dependencies:
     - Mathlib.MeasureTheory.Integral.DominatedConvergence
     - Mathlib.MeasureTheory.Integral.Prod
     - Mathlib.MeasureTheory.Integral.IntervalIntegral.FundThmCalculus
+    - Mathlib.MeasureTheory.Integral.IntegralEqImproper
     - Mathlib.Analysis.SpecialFunctions.ExpDeriv
     - Mathlib.Topology.Algebra.Monoid
     - Mathlib.Topology.Separation.Hausdorff
@@ -323,13 +358,23 @@ edge_tests:
   - the Abel Fubini step proves Integrable uncurry H under the exact restricted product measure required by intervalIntegral_integral_swap
   - the Abel kernel is AEStronglyMeasurable under that restricted product measure without a global StronglyMeasurable hypothesis
   - the scalar exponential identity derives its derivative from Real.hasDerivAt_exp and never divides by h
-  - T06 handles h=0, a=b, and a continuous nondifferentiable primitive
+  - >-
+    the private finite-piece lemma handles a=b and h=0; public T06 handles
+    h=0 under its explicit weighted-integrability and boundary-vanishing
+    hypotheses and handles a continuous nondifferentiable primitive
+  - >-
+    a QL-shaped consumer with arbitrary finite S imports only public IMP
+    modules, never unfolds HasImproperIntegralAtTopExcept or copies private
+    recursion, derives weighted integrability and boundary vanishing from
+    h>0 plus a separate flat bound, and constructs the target finite-exception
+    relation through public T05 and T06
   - T04 preserves the exact interval-integral sign and value order
 
 blocking_conditions:
-  - revision 3 has integrated referee-C requested changes and awaits fresh exact-commit rereview
-  - the complete proof lacks the two approvals required before signature design
-  - the exact Lean signature artifact is intentionally absent and must be designed only after those two proof approvals
+  - revision 4 changes the public architecture in response to exact-signature referee B and has no fresh approval
+  - the complete R4 proof and architecture lack the two fresh independent approvals required before signature design
+  - the R4 exact Lean signature artifact is intentionally absent and must be designed only after those two approvals
+  - the revision-3 exact-signature approvals bind superseded bytes and count zero toward R4
   - no external envelope authorizes implementation
   - IMP-001 is not registered or admitted to an execution manifest
 
