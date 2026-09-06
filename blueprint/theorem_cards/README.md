@@ -134,12 +134,20 @@ reviews bind and accept commit
 
 ## Unregistered planning cards
 
-`IMP-001.yaml`, `OLV-002.yaml`, and `DEF-BERN-001.yaml` are planning artifacts,
-not registry entries or manifest members.  IMP-001 revision 3 has six
-prospective integration targets and a complete revised author proof awaiting
-two fresh approvals before exact-signature design; OLV-002 revision 2
-has a complete draft proof; DEF-BERN-001 revision 1 is declaration-free and has
-a complete draft identification proof.  None has exact implementation
+`IMP-001.yaml`, `OLV-002.yaml`, `DEF-BERN-001.yaml`, and
+`DEF-BERN-002.yaml` are planning artifacts, not registry entries or manifest
+members. IMP-001 revision 3 has six prospective integration targets; two
+fresh-context referees approved its exact natural-language proof bytes, so
+[its exact-signature proposal](IMP-001-signatures.md) may proceed to independent
+API review, but neither theorem-card approval nor Lean authorization follows.
+OLV-002 revision 2 has a complete draft proof.
+DEF-BERN-001 revision 1 and DEF-BERN-002 revision 1 are declaration-free and
+have complete draft identification proofs, respectively covering the
+number/polynomial normalization and the existing periodized object. Two
+independent fresh-context reviews approve the exact DEF-BERN-002 mathematical,
+source, and reuse content at commit `67600aaae94708006f1160e53f7d7ffc63d416d2`;
+the upstream DEF-BERN-001 acceptance, frozen packet, external envelope, and
+registry/status work remain outstanding. None has exact implementation
 authorization merely because its file exists.
 
 Only the CSV inventory validator currently exists.  It consumes v2 packet

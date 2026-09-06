@@ -59,7 +59,7 @@ manifest entry, source claim, or implementation authorization.
 
 | Order | Provisional card | Packet theorem / coverage / novelty class | Depends on | Status |
 |---:|---|---|---|---|
-| 1 | IMP-001 | `mixed` / `infrastructure` / `non_novel` | pinned integration and limit facts | unregistered revision-3 draft card and complete revised author proof; two review repairs integrated, two fresh proof approvals required before exact signatures |
+| 1 | IMP-001 | `mixed` / `infrastructure` / `non_novel` | pinned integration and limit facts | unregistered revision-3 card/proof; two fresh exact-proof approvals; six-declaration signature proposal frozen for API review |
 | 2 | QL-001 | `finite_remainder_bound` / `infrastructure` / v2 registry value `novel` | accepted IMP-001 and the direct pinned real Gamma moment | revision-2 draft card and complete draft proof; exact signatures and reviews pending |
 | 3 | OLV-001 | `finite_remainder_bound` / `exact_source_generic` / `strengthened_conclusion` | locked occurrence and accepted QL-001 | revision-2 complex source-facing draft with real corollary; exact signatures and reviews pending |
 | 4 | SR-001 | `qualitative_bridge` / `audit_source_recovery` / intended `source_equivalent` | accepted OLV-001 | planning only; audit module only |
@@ -128,9 +128,10 @@ continuous primitive certificate, uniqueness/splitting/finite-linearity laws,
 and bridges from ordinary locally Bochner-integrable data.  Its name and exact
 boundary remain provisional until registry reconciliation.  Its six
 prospective targets have a complete revised author proof whose two review
-repairs are integrated.  It still needs two fresh proof approvals before exact
-signature design, plus registry reconciliation and external authorization before any Lean
-implementation.  QL-001 is the first
+repairs are integrated and whose exact bytes have two fresh approvals. Its
+six-declaration exact-signature proposal is frozen for independent API review;
+registry reconciliation and external authorization remain mandatory before any
+Lean implementation. QL-001 is the first
 planned consumer and must not hide this layer inside an application-specific
 structure.
 
