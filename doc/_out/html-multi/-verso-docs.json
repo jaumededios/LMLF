@@ -1,0 +1,98 @@
+{"9":
+ "<code>Real : Type</code><span class=\"sep\"></span><code class=\"docstring\">The type `ℝ` of real numbers constructed as equivalence classes of Cauchy sequences of rational\nnumbers. </code>",
+ "8": "<code>X → ℝ</code>",
+ "7": "<code>X → E</code>",
+ "6":
+ "<code>Set.{u} (α : Type u) : Type u</code><span class=\"sep\"></span><code class=\"docstring\">A set is a collection of elements of some type `α`.\n\nAlthough `Set` is defined as `α → Prop`, this is an implementation detail which should not be\nrelied on. Instead, `Set.ofPred` (also written `{x | p x}`) and membership of a set (`∈`) should be\nused to convert between sets and predicates.\n</code>",
+ "59": "<code>ℕ</code>",
+ "58":
+ "<code>LMLF.Definitions.gamma_neg_nat_eq_zero (n : ℕ) : Complex.Gamma (-↑n) = 0</code><span class=\"sep\"></span><code class=\"docstring\">Mathlib totalizes Gamma to zero at its poles at the nonpositive integers. </code>",
+ "57":
+ "<code>Real.Gamma (s : ℝ) : ℝ</code><span class=\"sep\"></span><code class=\"docstring\">The `Γ` function (of a real variable `s`). </code>",
+ "56":
+ "<code>LMLF.Definitions.gamma_ofReal (s : ℝ) : Complex.Gamma ↑s = ↑(Real.Gamma s)</code><span class=\"sep\"></span><code class=\"docstring\">Mathlib's complex and real Gamma functions agree on every real input. </code>",
+ "55":
+ "<code>MeasureTheory.integral.{u_6, u_7} {α : Type u_6} {G : Type u_7} [NormedAddCommGroup G] [NormedSpace ℝ G]\n  {x✝ : MeasurableSpace α} (μ : MeasureTheory.Measure α) (f : α → G) : G</code><span class=\"sep\"></span><code class=\"docstring\">The Bochner integral </code>",
+ "54":
+ "<code>Eq.{u_1} {α : Sort u_1} : α → α → Prop</code><span class=\"sep\"></span><code class=\"docstring\">The equality relation. It has one introduction rule, `Eq.refl`.\nWe use `a = b` as notation for `Eq a b`.\nA fundamental property of equality is that it is an equivalence relation.\n```\nvariable (α : Type) (a b c d : α)\nvariable (hab : a = b) (hcb : c = b) (hcd : c = d)\n\nexample : a = d :=\n  Eq.trans (Eq.trans hab (Eq.symm hcb)) hcd\n```\nEquality is much more than an equivalence relation, however. It has the important property that every assertion\nrespects the equivalence, in the sense that we can substitute equal expressions without changing the truth value.\nThat is, given `h1 : a = b` and `h2 : p a`, we can construct a proof for `p b` using substitution: `Eq.subst h1 h2`.\nExample:\n```\nexample (α : Type) (a b : α) (p : α → Prop)\n        (h1 : a = b) (h2 : p a) : p b :=\n  Eq.subst h1 h2\n\nexample (α : Type) (a b : α) (p : α → Prop)\n    (h1 : a = b) (h2 : p a) : p b :=\n  h1 ▸ h2\n```\nThe triangle in the second presentation is a macro built on top of `Eq.subst` and `Eq.symm`, and you can enter it by typing `\\t`.\nFor more information: [Equality](https://lean-lang.org/theorem_proving_in_lean4/quantifiers_and_equality.html#equality)\n\n\nConventions for notations in identifiers:\n\n * The recommended spelling of `=` in identifiers is `eq`.</code>",
+ "53":
+ "<code>Complex.Gamma (s : ℂ) : ℂ</code><span class=\"sep\"></span><code class=\"docstring\">The `Γ` function (of a complex variable `s`). </code>",
+ "52":
+ "<code>LMLF.Definitions.gamma_eq_eulerIntegral {s : ℂ} (hs : 0 &lt; s.re) :\n  Complex.Gamma s = ∫ (t : ℝ) in Set.Ioi 0, ↑(Real.exp (-t)) * ↑t ^ (s - 1)</code><span class=\"sep\"></span><code class=\"docstring\">On the half-plane `0 &lt; re s`, Mathlib's complex Gamma function is Euler's integral. </code>",
+ "51":
+ "<code>MeasureTheory.MeasureSpace.volume.{u_6} {α : Type u_6} [self : MeasureTheory.MeasureSpace α] : MeasureTheory.Measure α</code><span class=\"sep\"></span><code class=\"docstring\">`volume` is the canonical measure on `α`. </code>",
+ "50":
+ "<code>Set.Ioi.{u_1} {α : Type u_1} [Preorder α] (b : α) : Set α</code><span class=\"sep\"></span><code class=\"docstring\">`Ioi a` is the left-open right-infinite interval $(a, ∞)$. </code>",
+ "5": "<code>Set X</code>",
+ "49":
+ "<code>HSub.hSub.{u, v, w} {α : Type u} {β : Type v} {γ : outParam (Type w)} [self : HSub α β γ] : α → β → γ</code><span class=\"sep\"></span><code class=\"docstring\">`a - b` computes the difference of `a` and `b`.\nThe meaning of this notation is type-dependent.\n* For natural numbers, this operator saturates at 0: `a - b = 0` when `a ≤ b`. \n\nConventions for notations in identifiers:\n\n * The recommended spelling of `-` in identifiers is `sub` (when used as a binary operator).</code>",
+ "48":
+ "<code>HPow.hPow.{u, v, w} {α : Type u} {β : Type v} {γ : outParam (Type w)} [self : HPow α β γ] : α → β → γ</code><span class=\"sep\"></span><code class=\"docstring\">`a ^ b` computes `a` to the power of `b`.\nThe meaning of this notation is type-dependent. \n\nConventions for notations in identifiers:\n\n * The recommended spelling of `^` in identifiers is `pow`.</code>",
+ "47":
+ "<code>HMul.hMul.{u, v, w} {α : Type u} {β : Type v} {γ : outParam (Type w)} [self : HMul α β γ] : α → β → γ</code><span class=\"sep\"></span><code class=\"docstring\">`a * b` computes the product of `a` and `b`.\nThe meaning of this notation is type-dependent. \n\nConventions for notations in identifiers:\n\n * The recommended spelling of `*` in identifiers is `mul`.</code>",
+ "46":
+ "<code>Neg.neg.{u} {α : Type u} [self : Neg α] : α → α</code><span class=\"sep\"></span><code class=\"docstring\">`-a` computes the negative or opposite of `a`.\nThe meaning of this notation is type-dependent. \n\nConventions for notations in identifiers:\n\n * The recommended spelling of `-` in identifiers is `neg` (when used as a unary operator).</code>",
+ "45":
+ "<code>Real.exp (x : ℝ) : ℝ</code><span class=\"sep\"></span><code class=\"docstring\">The real exponential function, defined as the real part of the complex exponential </code>",
+ "44": "<code>ℝ</code>",
+ "43":
+ "<code>MeasureTheory.IntegrableOn.{u_1, u_3} {α : Type u_1} {ε : Type u_3} {mα : MeasurableSpace α} [TopologicalSpace ε]\n  [ContinuousENorm ε] (f : α → ε) (s : Set α) (μ : MeasureTheory.Measure α := by volume_tac) : Prop</code><span class=\"sep\"></span><code class=\"docstring\">A function is `IntegrableOn` a set `s` if it is almost everywhere strongly measurable on `s`\nand if the integral of its pointwise norm over `s` is less than infinity. </code>",
+ "42":
+ "<code>Complex.re (self : ℂ) : ℝ</code><span class=\"sep\"></span><code class=\"docstring\">The real part of a complex number. </code>",
+ "41":
+ "<code>LT.lt.{u} {α : Type u} [self : LT α] : α → α → Prop</code><span class=\"sep\"></span><code class=\"docstring\">The less-than relation: `x &lt; y` \n\nConventions for notations in identifiers:\n\n * The recommended spelling of `&lt;` in identifiers is `lt`.</code>",
+ "40": "<code>0 &lt; s.re</code>",
+ "4":
+ "<code>NormedAddCommGroup.{u_8} (E : Type u_8) : Type u_8</code><span class=\"sep\"></span><code class=\"docstring\">A normed group is an additive group endowed with a norm for which `dist x y = ‖-x + y‖` defines\na metric space structure. </code>",
+ "39":
+ "<code>Complex : Type</code><span class=\"sep\"></span><code class=\"docstring\">Complex numbers consist of two `Real`s: a real part `re` and an imaginary part `im`. </code>",
+ "38": "<code>ℂ</code>",
+ "37":
+ "<code>LMLF.Definitions.gamma_eulerIntegrable {s : ℂ} (hs : 0 &lt; s.re) :\n  MeasureTheory.IntegrableOn (fun t =&gt; ↑(Real.exp (-t)) * ↑t ^ (s - 1)) (Set.Ioi 0) MeasureTheory.volume</code><span class=\"sep\"></span><code class=\"docstring\">Euler's integrand for `s` is integrable on the positive real axis when `0 &lt; re s`. </code>",
+ "36": "<code>ℕ → X → ℝ</code>",
+ "35": "<code>ℕ → Set a</code>",
+ "34":
+ "<code>Nat : Type</code><span class=\"sep\"></span><code class=\"docstring\">The natural numbers, starting at zero.\n\nThis type is special-cased by both the kernel and the compiler, and overridden with an efficient\nimplementation. Both use a fast arbitrary-precision arithmetic library (usually\n[GMP](https://gmplib.org/)); at runtime, `Nat` values that are sufficiently small are unboxed.\n</code>",
+ "33": "<code>ℕ → X → a</code>",
+ "32":
+ "<code>QuantitativeAnalysis.HasErrorFamily.{u_1, u_3} {X : Type u_1} {E : Type u_3} [NormedAddCommGroup E] (f : X → E)\n  (a : ℕ → X → E) (D : ℕ → Set X) (b : ℕ → X → ℝ) : Prop</code><span class=\"sep\"></span><code class=\"docstring\">A family of finite pointwise error estimates for one fixed target function. </code>",
+ "31":
+ "<code>Function.comp.{u, v, w} {α : Sort u} {β : Sort v} {δ : Sort w} (f : β → δ) (g : α → β) : α → δ</code><span class=\"sep\"></span><code class=\"docstring\">Function composition, usually written with the infix operator `∘`. A new function is created from\ntwo existing functions, where one function's output is used as input to the other.\n\nExamples:\n * `Function.comp List.reverse (List.drop 2) [3, 2, 4, 1] = [1, 4]`\n * `(List.reverse ∘ List.drop 2) [3, 2, 4, 1] = [1, 4]`\n\n\nConventions for notations in identifiers:\n\n * The recommended spelling of `∘` in identifiers is `comp`.</code>",
+ "30":
+ "<code>Set.MapsTo.{u, v} {α : Type u} {β : Type v} (f : α → β) (s : Set α) (t : Set β) : Prop</code><span class=\"sep\"></span><code class=\"docstring\">`MapsTo f s t` means that the image of `s` is contained in `t`. </code>",
+ "3": "<code>Type u_3</code>",
+ "29": "<code>Set.MapsTo ψ S D</code>",
+ "28": "<code>Y → a</code>",
+ "27": "<code>Set Y</code>",
+ "26": "<code>Type u_2</code>",
+ "25":
+ "<code>QuantitativeAnalysis.ErrorOn.comp.{u_1, u_2, u_3} {X : Type u_1} {Y : Type u_2} {E : Type u_3} [NormedAddCommGroup E]\n  {D : Set X} {f a : X → E} {b : X → ℝ} (h : QuantitativeAnalysis.ErrorOn D f a b) {S : Set Y} (ψ : Y → X)\n  (hψ : Set.MapsTo ψ S D) : QuantitativeAnalysis.ErrorOn S (f ∘ ψ) (a ∘ ψ) (b ∘ ψ)</code><span class=\"sep\"></span><code class=\"docstring\">An error bound pulls back along a map into its original domain. </code>",
+ "24":
+ "<code>HAdd.hAdd.{u, v, w} {α : Type u} {β : Type v} {γ : outParam (Type w)} [self : HAdd α β γ] : α → β → γ</code><span class=\"sep\"></span><code class=\"docstring\">`a + b` computes the sum of `a` and `b`.\nThe meaning of this notation is type-dependent. \n\nConventions for notations in identifiers:\n\n * The recommended spelling of `+` in identifiers is `add`.</code>",
+ "23": "<code>QuantitativeAnalysis.ErrorOn D a c d</code>",
+ "22":
+ "<code>QuantitativeAnalysis.ErrorOn.trans.{u_1, u_3} {X : Type u_1} {E : Type u_3} [NormedAddCommGroup E] {D : Set X}\n  {f a c : X → E} {b d : X → ℝ} (hfa : QuantitativeAnalysis.ErrorOn D f a b)\n  (hac : QuantitativeAnalysis.ErrorOn D a c d) : QuantitativeAnalysis.ErrorOn D f c fun x =&gt; b x + d x</code><span class=\"sep\"></span><code class=\"docstring\">Successive error bounds compose with the sum of their majorants. </code>",
+ "21":
+ "<code>LE.le.{u} {α : Type u} [self : LE α] : α → α → Prop</code><span class=\"sep\"></span><code class=\"docstring\">The less-equal relation: `x ≤ y` \n\nConventions for notations in identifiers:\n\n * The recommended spelling of `≤` in identifiers is `le`.</code>",
+ "20": "<code>∀ x ∈ D, b x ≤ d x</code>",
+ "2":
+ "<code class=\"docstring\">A type universe. `Type ≡ Type 0`, `Type u ≡ Sort (u + 1)`. </code>",
+ "19":
+ "<code>QuantitativeAnalysis.ErrorOn.weaken.{u_1, u_3} {X : Type u_1} {E : Type u_3} [NormedAddCommGroup E] {D : Set X}\n  {f a : X → E} {b d : X → ℝ} (h : QuantitativeAnalysis.ErrorOn D f a b) (hbd : ∀ x ∈ D, b x ≤ d x) :\n  QuantitativeAnalysis.ErrorOn D f a d</code><span class=\"sep\"></span><code class=\"docstring\">An error bound remains valid after pointwise enlargement of its majorant. </code>",
+ "18": "<code>D' ⊆ D</code>",
+ "17": "<code>QuantitativeAnalysis.ErrorOn D f a b</code>",
+ "16":
+ "<code>QuantitativeAnalysis.ErrorOn.restrict.{u_1, u_3} {X : Type u_1} {E : Type u_3} [NormedAddCommGroup E] {D D' : Set X}\n  {f a : X → E} {b : X → ℝ} (h : QuantitativeAnalysis.ErrorOn D f a b) (hD : D' ⊆ D) :\n  QuantitativeAnalysis.ErrorOn D' f a b</code><span class=\"sep\"></span><code class=\"docstring\">An error bound restricts to a smaller domain. </code>",
+ "15": "<code>X</code>",
+ "14":
+ "<code>Set.EqOn.{u, v} {α : Type u} {β : Type v} (f₁ f₂ : α → β) (s : Set α) : Prop</code><span class=\"sep\"></span><code class=\"docstring\">Two functions `f₁ f₂ : α → β` are equal on `s` if `f₁ x = f₂ x` for all `x ∈ s`. </code>",
+ "13": "<code>Set.EqOn f a D</code>",
+ "12":
+ "<code>QuantitativeAnalysis.ErrorOn.exact.{u_1, u_3} {X : Type u_1} {E : Type u_3} [NormedAddCommGroup E] {D : Set X}\n  {f a : X → E} (h : Set.EqOn f a D) : QuantitativeAnalysis.ErrorOn D f a fun x =&gt; 0</code><span class=\"sep\"></span><code class=\"docstring\">Functions equal on a domain have zero error there. </code>",
+ "11":
+ "<code>QuantitativeAnalysis.NormBoundOn.{u_1, u_3} {X : Type u_1} {E : Type u_3} [NormedAddCommGroup E] (D : Set X) (f : X → E)\n  (b : X → ℝ) : Prop</code><span class=\"sep\"></span><code class=\"docstring\">`NormBoundOn D f b` means that the norm of `f` is pointwise at most `b` on `D`. </code>",
+ "10":
+ "<code class=\"docstring\">The universe of propositions. `Prop ≡ Sort 0`.\n\nEvery proposition is propositionally equal to either `True` or `False`. </code>",
+ "1": "<code>Type u_1</code>",
+ "0":
+ "<code>QuantitativeAnalysis.ErrorOn.{u_1, u_3} {X : Type u_1} {E : Type u_3} [NormedAddCommGroup E] (D : Set X) (f a : X → E)\n  (b : X → ℝ) : Prop</code><span class=\"sep\"></span><code class=\"docstring\">`ErrorOn D f a b` means that `a` approximates `f` with pointwise error at most `b` on `D`. </code>"}

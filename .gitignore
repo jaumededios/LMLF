@@ -1,7 +1,9 @@
 /.lake/
 /.lean/
 /doc/.lake/
-/doc/_out/
+/doc/_out/*
+!/doc/_out/html-multi/
+!/doc/_out/html-multi/**
 
 # Python caches
 __pycache__/

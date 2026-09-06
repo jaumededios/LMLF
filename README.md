@@ -95,7 +95,7 @@ The `lean-toolchain` file selects the supported Lean release. The mathlib revisi
 
 ## Documentation overlay
 
-The Verso-native [LMLF overlay](https://jaumededios.github.io/LMLF/) follows DLMF Chapters 1–10,
+The Verso-native [LMLF overlay](https://jaume.dedios.cat/LMLF/) follows DLMF Chapters 1–10,
 distinguishes accepted Lean declarations from blueprint and source-preparation states, and keeps
 checked Lean statements in expandable result cards. Its [source and local build instructions](doc/README.md)
 live in the independent `doc` project:
@@ -107,6 +107,10 @@ lake build
 lake exe lmlf-site
 python3 -m http.server 8000 -d _out/html-multi
 ```
+
+The generated `doc/_out/html-multi` tree is committed so the Pages deployment stays fast and does
+not rebuild Lean's dependency graph on a cold runner. Regenerate it with `lake exe lmlf-site` after
+changing the manual.
 
 ## Development workflow
 
