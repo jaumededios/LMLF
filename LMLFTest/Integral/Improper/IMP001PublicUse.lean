@@ -83,7 +83,8 @@ theorem flat_bound_of_continuousOn_Ici_of_tendsto
       (hcont.mono fun _ ht => ht.1)
   rcases isBounded_iff_forall_norm_le.mp hcomp.isBounded with ⟨C, hC⟩
   refine ⟨max C (‖I‖ + 1), ?_, ?_⟩
-  · exact le_trans (norm_nonneg I) (le_trans (le_add_of_nonneg_right zero_le_one) (le_max_right _ _))
+  · exact le_trans (norm_nonneg I)
+      (le_trans (le_add_of_nonneg_right zero_le_one) (le_max_right _ _))
   · intro t hkt
     by_cases htr : t ≤ r
     · exact (hC (F t) ⟨t, ⟨hkt, htr⟩, rfl⟩).trans (le_max_left _ _)
