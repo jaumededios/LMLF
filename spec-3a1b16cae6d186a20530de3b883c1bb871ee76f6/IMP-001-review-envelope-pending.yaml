@@ -1,0 +1,74 @@
+schema_version: 3
+record_kind: review_envelope
+storage_requirement: external_to_candidate_head
+work_item_id: IMP-001
+
+specification_binding:
+  spec_commit: 3a1b16cae6d186a20530de3b883c1bb871ee76f6
+  work_packet_path: review/work_packets/IMP-001.yaml
+  work_packet_sha256: e0f16a660417d967312df0f7cc7ce12ea1243226801b409475548566d594796b
+  theorem_cards:
+    - artifact_id: TC-IMP-001-R7
+      revision: 7
+      sha256: d81f8970bcba3bf1a489f8cb4fea8b303a3e3bf6d1ad3ade37b42f3094b528c4
+    - artifact_id: SIG-IMP-001-R6-P2
+      revision: 2
+      sha256: 0e220214233fec5f2f95608789b139900e7dfddef8a6b824b8d54bce37e74f2d
+  natural_language_proofs:
+    - artifact_id: NLP-IMP-001-R7
+      revision: 7
+      sha256: 941ca0f2a7e402e9dd3636d7c93744290b3f5b52b8705484c18630c6fe173548
+  classification_schema:
+    path: review/classifications-v3.json
+    schema_version: lmlf-classification-v3
+    artifact_revision: 3
+    sha256: 975e08b89d609cbdd15ff3f8d24f40a42bb17ea0f4c37bb26d9cf53fb8dc4b5e
+
+toolchain_binding:
+  lean_toolchain: leanprover/lean4:v4.33.1
+  mathlib_revision: 0df444a360eaa60ab8c11dca51a86af692955474
+
+candidate_binding:
+  base_sha: null
+  head_sha: null
+  proposer_evidence_ref: null
+
+pre_lean_gates:
+  overall_distinct_reviewer_ids: []
+  theorem_card_review:
+    gate_state: pending
+    distinct_reviewer_ids: []
+    selected_reviewer_composition: null
+    verdict_refs: []
+  natural_language_proof_review:
+    applicability: required
+    inapplicable_reason: null
+    gate_state: pending
+    distinct_reviewer_ids: []
+    selected_reviewer_composition: null
+    verdict_refs: []
+  structural_circularity_review:
+    applicability: required
+    inapplicable_reason: null
+    gate_state: pending
+    distinct_reviewer_ids: []
+    selected_reviewer_composition: null
+    represented_perspectives: []
+    verdict_refs: []
+  lean_ready:
+    gate_state: pending
+    decided_by: null
+    evidence_refs: []
+    requires_gate_states:
+      theorem_card_review: pass
+      natural_language_proof_review: pass
+      structural_circularity_review: pass
+
+implementation_reviews:
+  gate_state: pending
+  overall_distinct_reviewer_ids: []
+  rubric_verdict_refs: []
+
+disposition_ledger_ref: null
+merge_gate_state: pending
+merge_decision_ref: null
