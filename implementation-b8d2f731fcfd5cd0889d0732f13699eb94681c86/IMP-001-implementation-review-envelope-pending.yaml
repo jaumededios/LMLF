@@ -1,0 +1,154 @@
+schema_version: 3
+record_kind: review_envelope
+storage_requirement: external_to_candidate_head
+work_item_id: IMP-001
+lifecycle_state: immutable_pending_implementation_review
+
+specification_binding:
+  spec_commit: 3a1b16cae6d186a20530de3b883c1bb871ee76f6
+  work_packet_path: review/work_packets/IMP-001.yaml
+  work_packet_sha256: e0f16a660417d967312df0f7cc7ce12ea1243226801b409475548566d594796b
+  theorem_cards:
+    - artifact_id: TC-IMP-001-R7
+      revision: 7
+      sha256: d81f8970bcba3bf1a489f8cb4fea8b303a3e3bf6d1ad3ade37b42f3094b528c4
+    - artifact_id: SIG-IMP-001-R6-P2
+      revision: 2
+      sha256: 0e220214233fec5f2f95608789b139900e7dfddef8a6b824b8d54bce37e74f2d
+  natural_language_proofs:
+    - artifact_id: NLP-IMP-001-R7
+      revision: 7
+      sha256: 941ca0f2a7e402e9dd3636d7c93744290b3f5b52b8705484c18630c6fe173548
+  classification_schema:
+    path: review/classifications-v3.json
+    schema_version: lmlf-classification-v3
+    artifact_revision: 3
+    sha256: 975e08b89d609cbdd15ff3f8d24f40a42bb17ea0f4c37bb26d9cf53fb8dc4b5e
+
+supplemental_regression_binding:
+  specification_commit: 0f4df472dd2c97267dbc2c2128975eb3277132e0
+  artifact_id: NLP-IMP-001-REG-R2
+  revision: 2
+  path: blueprint/proofs/IMP-001-REG-R2.md
+  sha256: 316fc09bf3f35a5649f951ea0964ed1330e540d028a48c4706312d37c87ae7e9
+  authorization_scope: reviewed_nonpublic_analytic_regressions_only
+  public_target_or_premise_changes: false
+  passing_envelope:
+    path: /workspace/Documents/Codex/2026-09-05/LMLF-review-evidence/supplement-imp-reg-r2-0f4df472dd2c97267dbc2c2128975eb3277132e0/lean-ready-envelope-r2.yaml
+    sha256: ee3fb545a1772eae460cfaa39ecf45b1d7d4c075461f2424577ee273dce25d9c
+  root_adjudication:
+    path: /workspace/Documents/Codex/2026-09-05/LMLF-review-evidence/supplement-imp-reg-r2-0f4df472dd2c97267dbc2c2128975eb3277132e0/root-adjudication-r2.md
+    sha256: b1b77b956d19ea8c0f741d2d7111f98b8c31e38d27b89d01cb811a3e1dbafb17
+
+toolchain_binding:
+  lean_toolchain: leanprover/lean4:v4.33.1
+  mathlib_revision: 0df444a360eaa60ab8c11dca51a86af692955474
+  lake_manifest_sha256: 4bd9b595f84163f69bdb0ffc9b1a876b5df71d65bdd53122415610d083d43404
+
+candidate_binding:
+  base_sha: 3a1b16cae6d186a20530de3b883c1bb871ee76f6
+  head_sha: b8d2f731fcfd5cd0889d0732f13699eb94681c86
+  proposer_evidence_ref: null
+  proposer_evidence_status: pending_external_finalization
+  note: >-
+    The independent acceptance matrix is not yet final or hash-bound. This
+    immutable pending envelope will not be edited to add it; a later external
+    successor may bind the completed proposer bundle and actual verdicts.
+
+pre_lean_authority:
+  passing_envelope:
+    path: /workspace/Documents/Codex/2026-09-05/LMLF-review-evidence/spec-3a1b16cae6d186a20530de3b883c1bb871ee76f6/IMP-001-review-envelope-lean-ready.yaml
+    sha256: 3e4ca4b00adf36fc6b85315f74dcc4349abcd17eb6ebaf7282c374a0499a56f5
+  authority_changed: false
+
+pre_lean_gates:
+  overall_distinct_reviewer_ids:
+    - /root/imp_final_referee_a
+    - /root/imp_final_referee_b
+    - /root/imp_final_referee_c
+  theorem_card_review:
+    gate_state: pass
+    distinct_reviewer_ids:
+      - /root/imp_final_referee_a
+      - /root/imp_final_referee_b
+    selected_reviewer_composition: {humans: 0, agents: 2, minimum_distinct_agent_models: 1}
+    verdict_refs:
+      - path: /workspace/Documents/Codex/2026-09-05/LMLF-review-evidence/spec-3a1b16cae6d186a20530de3b883c1bb871ee76f6/IMP-001-theorem_card_review-imp_final_referee_a.json
+        sha256: aa892f84d567df30bb4750da382881fd14cae12f904f4eb5a3a0d28dda9dae32
+      - path: /workspace/Documents/Codex/2026-09-05/LMLF-review-evidence/spec-3a1b16cae6d186a20530de3b883c1bb871ee76f6/IMP-001-theorem_card_review-imp_final_referee_b.json
+        sha256: bef190f91d3d90188e0c049145a26b8a3104e2c49129e8af85385e4d7e0ffc87
+  natural_language_proof_review:
+    applicability: required
+    inapplicable_reason: null
+    gate_state: pass
+    distinct_reviewer_ids:
+      - /root/imp_final_referee_a
+      - /root/imp_final_referee_b
+    selected_reviewer_composition: {humans: 0, agents: 2, minimum_distinct_agent_models: 1}
+    verdict_refs:
+      - path: /workspace/Documents/Codex/2026-09-05/LMLF-review-evidence/spec-3a1b16cae6d186a20530de3b883c1bb871ee76f6/IMP-001-natural_language_proof_review-imp_final_referee_a.json
+        sha256: 7931dae4a4df7eda90c7c445733373ec76851967252e94f72038634980bfd838
+      - path: /workspace/Documents/Codex/2026-09-05/LMLF-review-evidence/spec-3a1b16cae6d186a20530de3b883c1bb871ee76f6/IMP-001-natural_language_proof_review-imp_final_referee_b.json
+        sha256: 2d1c4b077ec71e09284d7a8cc4d23cedb9dc302132fd0b90e9dbfe782a3d9498
+  structural_circularity_review:
+    applicability: required
+    inapplicable_reason: null
+    gate_state: pass
+    distinct_reviewer_ids:
+      - /root/imp_final_referee_c
+    selected_reviewer_composition: {humans: 0, agents: 1, minimum_distinct_agent_models: 1}
+    represented_perspectives:
+      - dependency_direction
+      - source_to_target_reachability
+      - hypothesis_and_choice_laundering
+    verdict_refs:
+      - path: /workspace/Documents/Codex/2026-09-05/LMLF-review-evidence/spec-3a1b16cae6d186a20530de3b883c1bb871ee76f6/IMP-001-structural-dependency_direction-imp_final_referee_c.json
+        sha256: 4465ae9563ddfe212457163708124e97cf59e24bd18c10e2c0dd1065af74ba00
+      - path: /workspace/Documents/Codex/2026-09-05/LMLF-review-evidence/spec-3a1b16cae6d186a20530de3b883c1bb871ee76f6/IMP-001-structural-source_to_target_reachability-imp_final_referee_c.json
+        sha256: b46b8ca8fbf308627c58da7875d5f31914af0dd2f1c4798570d88fd66dc66feb
+      - path: /workspace/Documents/Codex/2026-09-05/LMLF-review-evidence/spec-3a1b16cae6d186a20530de3b883c1bb871ee76f6/IMP-001-structural-hypothesis_and_choice_laundering-imp_final_referee_c.json
+        sha256: d9ec7dfc4f8b419fed8e6e1f62d2f4077f4d3c13bb4d87f7827bb9c03db47642
+  lean_ready:
+    gate_state: pass
+    decided_by: /root
+    evidence_refs:
+      - path: /workspace/Documents/Codex/2026-09-05/LMLF-review-evidence/spec-3a1b16cae6d186a20530de3b883c1bb871ee76f6/IMP-001-prelean-adjudication.md
+        sha256: ee625aeea238a1e6c87c7d715372860c23a109d9852588e3f5847aef96017be3
+      - path: /workspace/Documents/Codex/2026-09-05/LMLF-review-evidence/spec-3a1b16cae6d186a20530de3b883c1bb871ee76f6/IMP-001-review-envelope-pending.yaml
+        sha256: 62d1d8e1530b02f63dedda505c925291d7453c16faf65d81919799a69f243b52
+    requires_gate_states:
+      theorem_card_review: pass
+      natural_language_proof_review: pass
+      structural_circularity_review: pass
+
+implementation_review_requirements:
+  overall_minimum_distinct_reviewer_ids: 3
+  source_fidelity:
+    applicability: not_applicable
+    inapplicable_reason: >-
+      Source-independent original reusable infrastructure with no source
+      occurrence, named source object, transcription, or coverage claim.
+    minimum_distinct_reviewer_ids: 0
+  quantitative_correctness: {applicability: required, minimum_distinct_reviewer_ids: 1}
+  mathlib_reuse: {applicability: required, minimum_distinct_reviewer_ids: 1}
+  api_dependency: {applicability: required, minimum_distinct_reviewer_ids: 1}
+  proof_quality: {applicability: required, minimum_distinct_reviewer_ids: 1}
+
+planned_review_assignments:
+  status: allocation_only_templates_count_zero_until_final_verdicts
+  assignments:
+    - reviewer_id: /root/imp_impl_referee_a
+      rubrics: [quantitative_correctness, proof_quality]
+    - reviewer_id: /root/imp_impl_referee_b
+      rubrics: [mathlib_reuse, api_dependency]
+    - reviewer_id: /root/imp_impl_referee_c
+      rubrics: [proof_quality, api_dependency]
+
+implementation_reviews:
+  gate_state: pending
+  overall_distinct_reviewer_ids: []
+  rubric_verdict_refs: []
+
+disposition_ledger_ref: null
+merge_gate_state: pending
+merge_decision_ref: null
