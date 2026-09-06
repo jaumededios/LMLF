@@ -147,14 +147,28 @@ members. IMP-001 revision 6 has eight prospective integration targets justified
 by the QL/OLV consumer chain rather than a schema limit. The immutable
 [revision-3 exact-signature proposal](IMP-001-signatures.md) and its historical
 reviews are superseded, changes-requested evidence; they are not R6 input.
-No R6 proof/card/signature review or authorization exists. QL-001 and OLV-001
-revision 4 are registered planning drafts with complete author proofs, likewise
-without current review quorum, exact signatures, or Lean authorization.
+Two independent fresh-context Sol reports D and E approved the exact IMP R6,
+QL R4, and OLV R4 card/proof inputs at candidate commit
+`50dcded3b36e33632cf1e9734cac34c10a890d8a` solely to clear bounded
+exact-signature design. The reports and administrative clearance are preserved
+at private
+[`review-evidence` commit `0d6813a`](https://github.com/jaumededios/LMLF/commit/0d6813aba75cff17d983cb77ae39d1466361aeaf),
+with a later
+[attribution-only clarification `b4e6fc6`](https://github.com/jaumededios/LMLF/commit/b4e6fc6).
+The new eight-signature, three-module
+[IMP R6 exact-signature proposal](IMP-001-signatures-R6.md) is an author
+candidate awaiting its own independent exact-byte review; temporary axiomatic
+theorem stubs are confined to a disposable specification harness and are not
+production Lean. QL-001 and OLV-001 revision 4 remain registered planning
+drafts. Final theorem-card/work-packet approval, final quorum, `lean_ready`,
+registry/manifest authorization, and Lean implementation remain absent; this
+input-stage review neither renews PDF fidelity nor establishes source coverage.
 These revisions correct exactly three pinned root namespaces and rebind OLV's
 draft dependencies; mathematical targets/proofs/architecture, the QL a.e.
 local premise, the finite-dimensional source adapter, eight targets, and three
-IMP modules are unchanged. New exact-commit checks remain pending, so no
-approval or `lean_ready` claim follows.
+IMP modules are unchanged. Exact-commit checks passed for the reviewed
+`50dcded3` inputs, but no approval of the candidate signature bytes or
+`lean_ready` claim follows.
 OLV-002 revision 2 has a complete draft proof.
 DEF-BERN-001 revision 1 and DEF-BERN-002 revision 1 are declaration-free and
 have complete draft identification proofs, respectively covering the

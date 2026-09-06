@@ -21,10 +21,20 @@ chain is the concurrent IMP-001 revision-6 eight-target author draft plus QL-001
 revision-4 cards and complete natural-language proof dossiers. These revisions correct only three
 exact pinned Mathlib namespace references and rebind the OLV dependencies; the eight public
 targets, three candidate IMP modules, mathematical proofs, architecture, QL a.e. local premise,
-and finite-dimensional source adapter are unchanged. New exact-commit checks are pending. Their exact signatures, independent
-reviews, registry/manifest authorization, and Lean implementations do not yet exist. The old
-IMP revision-3 signature artifact is superseded evidence; recent R4 report bytes are absent, and a
-conversation-reported approval is not current quorum. The eight-target IMP surface preserves
+and finite-dimensional source adapter are unchanged. Two independent fresh-context Sol reports D
+and E approved the exact six R6/R4 card/proof inputs at commit
+`50dcded3b36e33632cf1e9734cac34c10a890d8a` for bounded signature design only.
+The reports and administrative clearance are preserved at private
+[`review-evidence` commit `0d6813a`](https://github.com/jaumededios/LMLF/commit/0d6813aba75cff17d983cb77ae39d1466361aeaf),
+with a later
+[attribution-only clarification `b4e6fc6`](https://github.com/jaumededios/LMLF/commit/b4e6fc6).
+The new eight-signature, three-module
+[IMP R6 exact-signature proposal](blueprint/theorem_cards/IMP-001-signatures-R6.md)
+is an author candidate awaiting independent exact-byte review; any temporary axiomatic theorem
+stubs belong only to a disposable specification harness, not production Lean. Final card and work
+packet approval, final quorum, `lean_ready`, registry/manifest authorization, and Lean
+implementation remain absent. The reviews make no PDF-fidelity or source-coverage claim. The old
+IMP revision-3 signature artifact remains superseded evidence. The eight-target IMP surface preserves
 independent endpoint semantics and exposes only the primitive-equivalence, arbitrary-exception
 Bochner, continuous-linear-map, local-splitting, and Abel bridges needed to close the QL/OLV
 consumer route; its finite-piece Abel engine remains private. Bounded Airy,

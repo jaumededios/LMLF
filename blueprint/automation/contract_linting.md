@@ -11,9 +11,13 @@ cannot approve mathematics, source fidelity, or review independence
 **Current implementation boundary:** the CSV inventory validator is the only
 executable contract checker.  It loads all three packet-classification enums and
 derives required registry rows from the `registry_binding` values in
-`review/classifications-v2.json`; illustrative examples impose no registry
-row.  CI runs its positive and negative suites.  YAML/Markdown lifecycle
-checks, target-level card/packet joins, digest bindings, structural-circularity requirements, and
+`review/classifications-v3.json`; illustrative examples impose no registry
+row. Routine checks run locally with `lake build`,
+`python3 scripts/validate_inventory.py`, and
+`python3 scripts/validate_inventory.py --negative-tests`. The existing GitHub
+Actions workflow is manual-dispatch-only via `workflow_dispatch` and is not
+required for routine work. YAML/Markdown lifecycle checks, target-level
+card/packet joins, digest bindings, structural-circularity requirements, and
 external review quorums described below remain manual/planned; this document
 must not be cited as evidence that they ran.
 

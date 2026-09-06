@@ -83,8 +83,11 @@ repository review ledgers are historical and count as zero reviewers.
 Only the CSV inventory validator currently exists as executable contract
 checking. It consumes the v3 packet classification enums and derives required
 registry examples from `registry_binding`; illustrative examples do not create
-registry obligations.  CI runs its positive and negative suites.  Validation
-of YAML/Markdown lifecycle,
+registry obligations. Routine checks run locally with `lake build`,
+`python3 scripts/validate_inventory.py`, and
+`python3 scripts/validate_inventory.py --negative-tests`. The existing GitHub
+Actions workflow is manual-dispatch-only via `workflow_dispatch` and is not
+required for routine work. Validation of YAML/Markdown lifecycle,
 target-level card/packet joins, external bindings, and review quorums remains a
 manual process specified for a future contract linter.
 

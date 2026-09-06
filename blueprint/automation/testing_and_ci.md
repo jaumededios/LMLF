@@ -1,7 +1,10 @@
 # Testing and continuous-integration blueprint
 
-**Status:** target design; current CI runs the baseline Lean build plus positive
-inventory validation and the validator's negative mutation suite
+**Status:** target design; routine checks run locally with `lake build`,
+`python3 scripts/validate_inventory.py`, and
+`python3 scripts/validate_inventory.py --negative-tests`; the existing GitHub
+Actions workflow is manual-dispatch-only via `workflow_dispatch` and is not
+required for routine work
 
 **Applies to:** specification artifacts, semantic Lean modules, audit consumers,
 future proof-producing tactics, and external review evidence
