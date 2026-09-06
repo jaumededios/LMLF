@@ -103,9 +103,9 @@ The linter validates:
 9. no unknown field at frozen levels unless the schema explicitly permits an
    extension namespace.
 
-The current versioned vocabulary is artifact revision 2 of
-`review/classifications-v2.json`, which
-supersedes without mutating frozen v1.  It deliberately
+The current versioned vocabulary is artifact revision 3 of
+`review/classifications-v3.json`, which supersedes without mutating immutable
+v2.  It deliberately
 has separate packet-level and target-level tables: values such as packet
 `infrastructure` and target `reusable_infrastructure` are not raw-string
 equivalents.  A future validator checks each field against its proper table and

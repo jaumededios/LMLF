@@ -6,6 +6,7 @@
 |---|---|
 | Work item | `IMP-001` |
 | Artifact role | candidate exact-signature design after the revision-6 natural-language-proof and architecture quorum |
+| Proposal revision | revision 2; supersedes only the negative-regression evidence in revision 1 at repository commit `8af103fee3b2000033fc1e8c684645e529aaa841`, artifact SHA-256 `4b2b6f73a8a92c6b48e88e6ca7b3c1d252ed877f4df33257306c10cbab679ab0` |
 | Design input | exact repository head `50dcded3b36e33632cf1e9734cac34c10a890d8a` |
 | Registry status | unregistered |
 | Manifest status | planning only |
@@ -22,9 +23,10 @@ work item, admit it to a manifest, or satisfy `lean_ready`. Any accepted packet
 must later bind the exact digest of this artifact externally, in accordance
 with `review/PROTOCOL.md`.
 
-The theorem targets are represented by temporary `axiom` declarations only in
-the disposable compilation harness described below. Those axioms establish
-elaboration and consumer type reachability only. They are not proposed
+Six theorem targets are represented by temporary `axiom` declarations only in
+the disposable compilation harness described below; T01 and T05 are actual
+definitions. The axioms establish elaboration and consumer type reachability
+only. They are not proposed
 production code, are not kernel proofs of any target, and must be replaced by
 reviewed theorem bodies after a separate implementation authorization. No
 `sorry`-filled pseudo-implementation was created.
@@ -316,8 +318,8 @@ and any Gamma, Watson, or source declaration.
 
 ## Disposable compilation evidence
 
-All prototype work was confined to the new directory
-`/workspace/Documents/Codex/imp-r6-signatures.dgUi1H`, outside the candidate
+All revision-2 prototype work was confined to the new directory
+`/workspace/Documents/Codex/imp-r6-negative-fix.XT854T`, outside the candidate
 repository. The harness files and exact final hashes are:
 
 | Harness file | SHA-256 | Lines | Result |
@@ -326,7 +328,7 @@ repository. The harness files and exact final hashes are:
 | `LMLF/Integral/Improper/Bochner.lean` | `33fd45c29a3ea0ec32638c01f7d098a633280c54f34d5b4843721e42020e4cd3` | 20 | compiled, exit 0 |
 | `LMLF/Integral/Improper/Abel.lean` | `c96c1f97e0e123fea038dc3748b0164a6f911e8af863d9cde49c278b9457ab53` | 28 | compiled, exit 0 |
 | `Check.lean` | `b1aa6e50c08a33509a9e60fa9d2ce583fbb4a88126428cd7dc56c214929b1e5d` | 11 | imported Bochner and Abel; resolved and printed all eight exact names, exit 0 |
-| `Regressions.lean` | `b016c4b894597605029a99350ca41d33f3e692c1c38782622848c08ce2d53dc4` | 304 | all positive and negative public-use regressions elaborated, exit 0 with style-only linter warnings |
+| `Regressions.lean` | `93dff3d5c34874efad1894160a8beb7980b7431b2a473822051c19e38ba43f17` | 307 | all unchanged positive consumers and both corrected negative guards elaborated, exit 0 with style-only linter warnings |
 
 The modules were compiled in dependency order with the Lean executable from
 the pinned toolchain and a `LEAN_PATH` consisting of the disposable harness
@@ -357,6 +359,15 @@ The final `#check` output confirmed:
 The public consumer file contains no occurrence of either private recursive
 definition, `S.sort`, a Watson/QL/OLV name, or a downstream LMLF import.
 
+Revision 1's two negative checks were vacuous: each ran `exact` on a relation
+or equivalence while the outer goal was `True`, so the inner tactic failed from
+the unrelated goal mismatch even under the prohibited signature shape. That
+evidence is superseded. Revision 2 gives the inner `have` its intended bad
+type, checks that each guard succeeds against the valid API, and checks an
+isolated prohibited mutant. Under each mutant the typed `have` succeeds, so
+`fail_if_success` itself emits the specifically asserted diagnostic. No public
+signature, import, definition, axiom, or positive consumer proof changed.
+
 ## Public-use regression results
 
 | Regression | Verified compile-time result | Scope limit |
@@ -367,8 +378,8 @@ definition, `S.sort`, a Watson/QL/OLV name, or a downstream LMLF import.
 | T04 then T08 extraction | Starting from the exact `J + I` left relation and honest local `IntervalIntegrable`, the consumer uses T04 to obtain the tail and T08 forward to obtain `∃ F`. | No unfolding of T01 or private recursion occurs. |
 | Flat bound derived separately | A proved local consumer lemma derives `∃ L ≥ 0, ∀ t ≥ k, ‖F t‖ ≤ L` from `ContinuousOn F (Ici k)` and `Tendsto F atTop (nhds I)`, using eventual boundedness and compact-prefix boundedness. | The bound is absent from T08 and T05, as required. |
 | Complete source-shaped chain | A compiled one-model finite instance starts from a baseline source relation and raw model `IntegrableOn`; uses T07/T03 subtraction; performs an honest T04 split; extracts T05 plus a finite limit through T08; derives `L`; applies the arbitrary-`S` R20/T06 route; prepends with T04; and applies target T07/T03 recombination. | This is an API reachability chain, not QL or OLV implementation. Arbitrary finite-family shape is checked separately by the generic T03 regression. |
-| Negative: missing `IntegrableOn` | `fail_if_success` confirms that T07 cannot produce its relation after only `f`, `k`, `S`, and the above-`k` proof are supplied. | Type-shape rejection only; no nonintegrable counterexample is claimed. |
-| Negative: fixed `F` versus existential T08 | `fail_if_success` confirms that T08 cannot inhabit an equivalence whose right side is T05 and convergence for an arbitrary preselected `F`. | Type-shape rejection only; it does not prove a mathematical nonexistence result. |
+| Negative: missing `IntegrableOn` | A typed `have hbad : HasImproperIntegralAtTopExcept f k S (∫ t in Ioi k, f t)` inside `fail_if_success` is rejected by the valid T07 signature. The guard-only valid control exits 0; an isolated T07 mutant without `IntegrableOn` compiles, then the same guard exits exactly 1 with the asserted `fail_if_success`-succeeded diagnostic. | Type-shape rejection only; no nonintegrable counterexample is claimed. |
+| Negative: fixed `F` versus existential T08 | A typed `have hbad` for the fixed-`F` equivalence inside `fail_if_success` is rejected by the valid existential T08 signature. The guard-only valid control exits 0; an isolated fixed-`F` mutant compiles, then the same guard exits exactly 1 with the asserted diagnostic. | Type-shape rejection only; it does not prove a mathematical nonexistence result. |
 
 No concrete principal-value, conditional-singularity, or nonintegrable
 counterexample theorem was proved in this signature harness. Those remain
@@ -924,20 +935,197 @@ section NegativeTypeShapeChecks
 example (f : ℝ → E) (k : ℝ) (S : Finset ℝ)
     (hS : ∀ c ∈ S, k < c) : True := by
   fail_if_success
-    exact HasImproperIntegralAtTopExcept.of_integrableOn_Ioi f k S hS
+    have hbad : HasImproperIntegralAtTopExcept
+        f k S (∫ t in Ioi k, f t) :=
+      HasImproperIntegralAtTopExcept.of_integrableOn_Ioi f k S hS
   trivial
 
 example (f F : ℝ → E) (k : ℝ) (S : Finset ℝ) (I : E) : True := by
   fail_if_success
-    exact (hasImproperIntegralAtTopExcept_iff_exists_primitive :
+    have hbad :
       HasImproperIntegralAtTopExcept f k S I ↔
-        IsFiniteExceptionalPrimitive f k S F ∧ Tendsto F atTop (nhds I))
+        IsFiniteExceptionalPrimitive f k S F ∧ Tendsto F atTop (nhds I) :=
+      hasImproperIntegralAtTopExcept_iff_exists_primitive
   trivial
 
 end NegativeTypeShapeChecks
 
 end LMLF.IMP001R6SignatureRegression
 ```
+
+### Negative-guard sensitivity evidence
+
+The complete valid `Regressions.lean` above contains the corrected guards.
+For sensitivity only, two separate disposable mutant roots were made from the
+authoritative valid sources. Each mutant changes one prohibited type shape;
+neither is a candidate declaration, proof, or production file. No positive
+consumer was compiled against either mutant.
+
+For T07, the mutant is obtained by applying exactly this patch to the complete
+valid `LMLF/Integral/Improper/Bochner.lean` block above:
+
+```diff
+ axiom HasImproperIntegralAtTopExcept.of_integrableOn_Ioi
+     [CompleteSpace E] (f : ℝ → E) (k : ℝ) (S : Finset ℝ)
+-    (hS : ∀ c ∈ S, k < c) (hf : IntegrableOn f (Ioi k)) :
++    (hS : ∀ c ∈ S, k < c) :
+     HasImproperIntegralAtTopExcept f k S (∫ t in Ioi k, f t)
+```
+
+The complete T07 guard-only source is:
+
+```lean
+import LMLF.Integral.Improper.Bochner
+
+open Filter MeasureTheory Set
+
+noncomputable section
+
+open LMLF.Integral
+
+variable {E : Type*} [NormedAddCommGroup E] [NormedSpace ℝ E] [CompleteSpace E]
+
+example (f : ℝ → E) (k : ℝ) (S : Finset ℝ)
+    (hS : ∀ c ∈ S, k < c) : True := by
+  fail_if_success
+    have hbad : HasImproperIntegralAtTopExcept
+        f k S (∫ t in Ioi k, f t) :=
+      HasImproperIntegralAtTopExcept.of_integrableOn_Ioi f k S hS
+  trivial
+```
+
+The T07 mutant uses the unchanged valid `Basic.lean` hash
+`9a88b646c652126230941c3bc5a033b47a6e514a25a5a37df43439d6a3745c8c`,
+the patched `Bochner.lean` hash
+`1dffc49ac37aa44a95847ff39fde9b4adf48071a505c67d2d238d4a75b643903`,
+and guard hash
+`55421431513e1ba1f0e71a1ae5822eb77b5c6e8d82d9e640d3df100f6adbc758`.
+The exact strengthened run was:
+
+```bash
+set -e
+MUTANT_ROOT=/workspace/Documents/Codex/imp-r6-negative-fix.XT854T/mutants/t07
+TOOL_LEAN=/home/codex/.elan/toolchains/leanprover--lean4---v4.33.1/bin/lean
+PIN_LEAN_PATH="$MUTANT_ROOT:$(lake env printenv LEAN_PATH)"
+env LEAN_PATH="$PIN_LEAN_PATH" "$TOOL_LEAN" -R "$MUTANT_ROOT" \
+  -o "$MUTANT_ROOT/LMLF/Integral/Improper/Basic.olean" \
+  "$MUTANT_ROOT/LMLF/Integral/Improper/Basic.lean"
+env LEAN_PATH="$PIN_LEAN_PATH" "$TOOL_LEAN" -R "$MUTANT_ROOT" \
+  -o "$MUTANT_ROOT/LMLF/Integral/Improper/Bochner.olean" \
+  "$MUTANT_ROOT/LMLF/Integral/Improper/Bochner.lean"
+set +e
+MUTANT_OUTPUT="$(env LEAN_PATH="$PIN_LEAN_PATH" "$TOOL_LEAN" \
+  -R "$MUTANT_ROOT" "$MUTANT_ROOT/Guard.lean" 2>&1)"
+GUARD_STATUS=$?
+set -e
+printf '%s\n' "$MUTANT_OUTPUT"
+printf 'T07 mutant guard exit: %s\n' "$GUARD_STATUS"
+test "$GUARD_STATUS" -eq 1
+printf '%s\n' "$MUTANT_OUTPUT" |
+  rg -F 'succeeded but was expected to fail:'
+```
+
+Both mutant signature modules returned exit 0. The guard returned exactly 1,
+and the fixed-string assertion matched this diagnostic:
+
+```text
+/workspace/Documents/Codex/imp-r6-negative-fix.XT854T/mutants/t07/Guard.lean:13:2: error: The tactic provided to `fail_if_success` succeeded but was expected to fail:
+  have hbad : HasImproperIntegralAtTopExcept f k S (∫ t in Ioi k, f t) :=
+      HasImproperIntegralAtTopExcept.of_integrableOn_Ioi f k S hS
+```
+
+For T08, the mutant is obtained by applying exactly this patch to the complete
+valid `LMLF/Integral/Improper/Basic.lean` block above:
+
+```diff
+ axiom hasImproperIntegralAtTopExcept_iff_exists_primitive
+-    [CompleteSpace E] {f : ℝ → E} {k : ℝ} {S : Finset ℝ} {I : E} :
++    [CompleteSpace E] {f F : ℝ → E} {k : ℝ} {S : Finset ℝ} {I : E} :
+     HasImproperIntegralAtTopExcept f k S I ↔
+-      ∃ F : ℝ → E,
+-        IsFiniteExceptionalPrimitive f k S F ∧
+-          Tendsto F atTop (nhds I)
++      IsFiniteExceptionalPrimitive f k S F ∧
++        Tendsto F atTop (nhds I)
+```
+
+The complete T08 guard-only source is:
+
+```lean
+import LMLF.Integral.Improper.Basic
+
+open Filter MeasureTheory Set
+
+noncomputable section
+
+open LMLF.Integral
+
+variable {E : Type*} [NormedAddCommGroup E] [NormedSpace ℝ E] [CompleteSpace E]
+
+example (f F : ℝ → E) (k : ℝ) (S : Finset ℝ) (I : E) : True := by
+  fail_if_success
+    have hbad :
+      HasImproperIntegralAtTopExcept f k S I ↔
+        IsFiniteExceptionalPrimitive f k S F ∧ Tendsto F atTop (nhds I) :=
+      hasImproperIntegralAtTopExcept_iff_exists_primitive
+  trivial
+```
+
+The patched T08 `Basic.lean` hash is
+`2d12d556ee52c0a5924b409b60a2b794f1ca46fee19e4b26b1cdc4b85cf1b5fa`,
+and the guard hash is
+`24187270c6cb444de8387d6de50b2c7ba0bbcc474ef04ae4a67a2e5fab021983`.
+The exact strengthened run was:
+
+```bash
+set -e
+MUTANT_ROOT=/workspace/Documents/Codex/imp-r6-negative-fix.XT854T/mutants/t08
+TOOL_LEAN=/home/codex/.elan/toolchains/leanprover--lean4---v4.33.1/bin/lean
+PIN_LEAN_PATH="$MUTANT_ROOT:$(lake env printenv LEAN_PATH)"
+env LEAN_PATH="$PIN_LEAN_PATH" "$TOOL_LEAN" -R "$MUTANT_ROOT" \
+  -o "$MUTANT_ROOT/LMLF/Integral/Improper/Basic.olean" \
+  "$MUTANT_ROOT/LMLF/Integral/Improper/Basic.lean"
+set +e
+MUTANT_OUTPUT="$(env LEAN_PATH="$PIN_LEAN_PATH" "$TOOL_LEAN" \
+  -R "$MUTANT_ROOT" "$MUTANT_ROOT/Guard.lean" 2>&1)"
+GUARD_STATUS=$?
+set -e
+printf '%s\n' "$MUTANT_OUTPUT"
+printf 'T08 mutant guard exit: %s\n' "$GUARD_STATUS"
+test "$GUARD_STATUS" -eq 1
+printf '%s\n' "$MUTANT_OUTPUT" |
+  rg -F 'succeeded but was expected to fail:'
+```
+
+The mutant signature module returned exit 0. The guard returned exactly 1,
+and the fixed-string assertion matched this diagnostic:
+
+```text
+/workspace/Documents/Codex/imp-r6-negative-fix.XT854T/mutants/t08/Guard.lean:12:2: error: The tactic provided to `fail_if_success` succeeded but was expected to fail:
+  have hbad :
+      HasImproperIntegralAtTopExcept f k S I ↔ IsFiniteExceptionalPrimitive f k S F ∧ Tendsto F atTop (nhds I) :=
+      hasImproperIntegralAtTopExcept_iff_exists_primitive
+```
+
+Finally, the same two complete guard sources were compiled with the valid
+harness root first in `LEAN_PATH`; both returned exit 0 (with unused-binder
+style warnings only):
+
+```bash
+set -e
+VALID_ROOT=/workspace/Documents/Codex/imp-r6-negative-fix.XT854T
+TOOL_LEAN=/home/codex/.elan/toolchains/leanprover--lean4---v4.33.1/bin/lean
+PIN_LEAN_PATH="$VALID_ROOT:$(lake env printenv LEAN_PATH)"
+env LEAN_PATH="$PIN_LEAN_PATH" "$TOOL_LEAN" -R "$VALID_ROOT/mutants/t07" \
+  "$VALID_ROOT/mutants/t07/Guard.lean"
+env LEAN_PATH="$PIN_LEAN_PATH" "$TOOL_LEAN" -R "$VALID_ROOT/mutants/t08" \
+  "$VALID_ROOT/mutants/t08/Guard.lean"
+```
+
+Thus each corrected guard passes against the valid signature and fails against
+only its isolated prohibited type-shape mutant because the intended typed
+`have` becomes elaborable. This is sensitivity evidence, not a mathematical
+counterexample proof.
 
 ### Exact local compile commands
 
@@ -946,7 +1134,7 @@ five files under the stated disposable root, the final successful run was:
 
 ```bash
 set -e
-HARNESS_ROOT=/workspace/Documents/Codex/imp-r6-signatures.dgUi1H
+HARNESS_ROOT=/workspace/Documents/Codex/imp-r6-negative-fix.XT854T
 TOOL_LEAN=/home/codex/.elan/toolchains/leanprover--lean4---v4.33.1/bin/lean
 PIN_LEAN_PATH="$HARNESS_ROOT:$(lake env printenv LEAN_PATH)"
 

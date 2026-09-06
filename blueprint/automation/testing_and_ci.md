@@ -140,6 +140,13 @@ The probe is generated outside the candidate tree or in an ignored temporary
 directory.  It does not become source.  A broad umbrella import passing while a
 promised narrow import fails is a failure.
 
+Negative signature and type regressions must elaborate against the intended
+relation or equivalence type, not an unrelated enclosing goal. Their sensitivity
+must also be demonstrated independently with a deliberately accepted or
+weakened signature, or with a controlled positive case, isolated from unrelated
+consumers. A `fail_if_success` check without that independent sensitivity
+evidence is insufficient.
+
 ### 3.4 `lean-semantic`
 
 Build the maintained semantic library root and every declared public umbrella.
