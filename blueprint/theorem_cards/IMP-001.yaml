@@ -2,7 +2,7 @@ schema_version: 2
 id: IMP-001
 title: Finite-exceptional ordinary-improper integration and Abel composition
 owner: jaumededios
-artifact_revision: 5
+artifact_revision: 6
 baseline_spec_commit: pending_external_record_after_commit
 
 theorem_class: mixed
@@ -15,7 +15,7 @@ implementation_status: not_started
 prototype_status: absent
 coverage_status: not_applicable
 manifest_membership_status: planning_only
-status_as_of: complete_r5_author_draft_pending_fresh_proof_and_structural_review
+status_as_of: complete_r6_api_namespace_correction_pending_fresh_exact_commit_checks_and_review
 status_authority: >-
   Completeness is an author claim about the bound natural-language argument.
   Review pass and implementation authorization can be established only by an
@@ -62,13 +62,13 @@ scope:
       imports: LMLF.Integral.Improper.Basic plus finite Fubini/product integration, interval FTC, real exponential derivative, and IntegralEqImproper
   module_split_status: prospective_only
   candidate_namespace: LMLF.Integral
-  exact_signatures_artifact: absent-deferred-until-fresh-r5-proof-and-structural-approvals
+  exact_signatures_artifact: absent-deferred-until-fresh-r6-proof-and-structural-approvals
   signature_design_timing: >-
     Exact Lean signatures and binder order may be designed only after two
-    independent fresh reviewers approve the complete revision-5 proof and its
+    independent fresh reviewers approve the complete revision-6 proof and its
     public-API/dependency architecture, including the QL/OLV consumer route.
     The revision-3 signature artifact is immutable historical design evidence
-    and is not an R5 signature input.
+    and is not an R6 signature input.
   signature_authorization: absent
   candidate_public_targets:
     - target_id: IMP-001-T01
@@ -308,7 +308,7 @@ choice_laundering_check: >-
 
 natural_language_proof:
   artifact: blueprint/proofs/IMP-001.md
-  artifact_revision: 5
+  artifact_revision: 6
   artifact_state: draft
   proof_status: complete
   normative_sections:
@@ -327,7 +327,7 @@ dependencies:
   lake_manifest_sha256: 4bd9b595f84163f69bdb0ffc9b1a876b5df71d65bdd53122415610d083d43404
   accepted_lmlf_packets: []
   draft_lmlf_packets: []
-  pin_status: r5_natural_language_dependencies_located_pending_fresh_review_and_exact_signature_design
+  pin_status: r6_root_namespace_correction_source_confirmed_new_exact_commit_checks_pending
   pinned_declarations:
     - declaration: intervalIntegral.integral_add_adjacent_intervals
       import: Mathlib.MeasureTheory.Integral.IntervalIntegral.Basic
@@ -353,7 +353,7 @@ dependencies:
       import: Mathlib.MeasureTheory.Integral.DominatedConvergence
     - declaration: intervalIntegral.integral_Ioi_sub_Ioi
       import: Mathlib.MeasureTheory.Integral.IntervalIntegral.Basic
-    - declaration: intervalIntegral.intervalIntegrable_iff_integrableOn_Ioc_of_le
+    - declaration: intervalIntegrable_iff_integrableOn_Ioc_of_le
       import: Mathlib.MeasureTheory.Integral.IntervalIntegral.Basic
     - declaration: Real.hasDerivAt_exp
       import: Mathlib.Analysis.SpecialFunctions.ExpDeriv
@@ -430,10 +430,11 @@ edge_tests:
   - T04 preserves the exact interval-integral sign and value order
 
 blocking_conditions:
-  - revision 5 changes the public architecture to close the full QL/OLV consumer route and has no fresh approval
-  - the complete R5 proof and architecture lack the required fresh independent proof and structural approvals before signature design
-  - the R5 exact Lean signature artifact is intentionally absent and must be designed only after those approvals
-  - the revision-3 exact-signature artifact and approvals are immutable historical evidence and count zero toward R5
+  - revision 6 corrects only the exact pinned Mathlib namespace ledger; the revision-5 mathematical targets, proofs, and eight-target three-module architecture are unchanged
+  - new exact-commit checks for revision 6 are pending; no approval or lean_ready claim follows from the source confirmation
+  - the complete R6 proof and architecture lack the required fresh independent proof and structural approvals before signature design
+  - the R6 exact Lean signature artifact is intentionally absent and must be designed only after those approvals
+  - the revision-3 exact-signature artifact and approvals are immutable historical evidence and count zero toward R6
   - no external envelope authorizes implementation
   - IMP-001 is not registered or admitted to an execution manifest
 

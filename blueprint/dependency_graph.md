@@ -94,8 +94,8 @@ global axiom may bypass a missing edge.
 |---|---|---|---|
 | `QB-001` | `BOOTSTRAP-0` | frozen eight-signature specification retains its pre-authorization self-status; external evidence authorized and accepted the exact implementation at `515b742f7ad5472c17cfdf0fda7cbc83c5585da1` | reuse the public finite core where justified; any larger API requires a new card |
 | `DEF-001` | `BOOTSTRAP-0` | frozen four-declaration specification retains its snapshot self-status; external evidence authorized and accepted the exact implementation at `515b742f7ad5472c17cfdf0fda7cbc83c5585da1` | reuse the transparent Gamma wrappers only when a consumer benefits; do not make Watson depend on them gratuitously |
-| `QL-001` | `OLV-MVP-1` planning | revision-3 draft card and complete draft proof; no current review quorum or exact signature | review IMP R5 and QL R3 architecture/proof, then design and review signatures |
-| `OLV-001` | `OLV-MVP-1` planning | locked occurrence transcribed but independently unreconciled; revision-3 complex-source card/proof present | source review, accepted QL-001, then signature/card review and external gate |
+| `QL-001` | `OLV-MVP-1` planning | revision-4 draft card and complete draft proof; exact API namespace correction only; no current review quorum or exact signature | review IMP R6 and QL R4 architecture/proof after new exact-commit checks, then design and review signatures |
+| `OLV-001` | `OLV-MVP-1` planning | locked occurrence transcribed but independently unreconciled; revision-4 complex-source card/proof present, dependency rebinding only | source review, accepted QL-001, then signature/card review and external gate |
 | `SR-001` | `OLV-MVP-1` planning | no card or proof | accepted `OLV-001`, eventual-domain/scale/notation bridge, audit-only implementation |
 
 `DEMO-0` is not closed.  Its candidate names express intent only.
@@ -104,15 +104,19 @@ manifest readiness alone did not authorize Lean.  The later external records
 did authorize and accept the exact `515b742...` implementation.  This does not
 claim an Olver occurrence or a tagged release.
 
-`IMP-001` is a deliberately unregistered revision-5 eight-target author draft
+`IMP-001` is a deliberately unregistered revision-6 eight-target author draft
 upstream of QL-001. `Basic` owns T01/T05/T08/T02/T03/T04, `Bochner` owns the
 arbitrary-`S` absolute bridge T07, and `Abel` owns T06 with a private
 finite-piece engine. T01 retains independent endpoint limits, T08 gives the
 existential convergent-primitive equivalence, and T03 generalizes to `E -> H`
 continuous linear maps. The target count closes the QL/OLV consumer chain; it
-is not a hard schema cap. Historical R3 signatures remain untouched superseded
+is not a hard schema cap. R6/R4 correct only three root Mathlib namespace
+references and rebind OLV to the revised IMP/QL drafts; the mathematics,
+architecture, QL a.e. local premise, finite-dimensional source adapter, eight
+targets, and three modules are unchanged. New exact-commit checks are pending
+and imply no approval or `lean_ready` status. Historical R3 signatures remain untouched superseded
 evidence. Recent R4 report bytes are missing, and conversation approval is not
-current quorum. No R5/R3 proof/architecture review, exact signature or card
+current quorum. No R6/R4 proof/architecture review, exact signature or card
 review, registry/manifest authorization, or Lean authorization exists.
 
 ## Watson MVP: only source critical path
@@ -121,9 +125,9 @@ review, registry/manifest authorization, or Lean authorization exists.
 flowchart LR
   LOCK["Edition lock + previously inspected/hash-bound PDF; current upload absent"] --> COL["OLV97-C03-WATSON first collation survives: review pending"]
   PIN["Pinned integration and limit facts"] --> IMP["IMP-001 ordinary-improper layer: unregistered"]
-  IMP --> QL["QL-001 R3 local-tail kernel: planning"]
+  IMP --> QL["QL-001 R4 local-tail kernel: planning"]
   MOM["Pinned Real Gamma moment"] --> QL
-  COL --> OLV["OLV-001 R3 exact_source_generic"]
+  COL --> OLV["OLV-001 R4 exact_source_generic"]
   QL --> OLV
   OLV --> SR["SR-001 Audit/SourceRecovery"]
   SR --> MVP["OLV-MVP-1: one reconciled occurrence"]
@@ -132,7 +136,7 @@ flowchart LR
 
 The source snapshot, printed label, proposition, order convention, relevant
 page map, notation/entity draft links, and transcription digest now exist. The
-revision-3 design uses the source-supported complex codomain, with a real
+revision-4 design uses the source-supported complex codomain, with a real
 corollary, and reads the book's ordinary convergence as independent one-sided
 convergence at a finite exceptional set.  Mathlib's Bochner `intervalIntegral`
 represents every regular finite piece, with explicit `IntervalIntegrable`
@@ -201,17 +205,17 @@ separate section 9.1--9.2 occurrence -> OLV-002
 QL-003 optional exponential-growth adapter; EX-002 independent regression
 ```
 
-`IMP-001` has an unregistered revision-5 eight-target card/proof draft awaiting
+`IMP-001` has an unregistered revision-6 eight-target card/proof draft awaiting
 fresh proof and architecture review before any exact-signature design. It
 separates relational ordinary-improper semantics, the finite-exceptional
 primitive certificate/equivalence, the arbitrary-`S` absolute Bochner bridge,
 and public Abel composition from the QL estimate; the finite-piece engine is
-private. Its regular pieces use Mathlib `intervalIntegral`. QL-001 revision 3
+private. Its regular pieces use Mathlib `intervalIntegral`. QL-001 revision 4
 is a complete-normed-real-vector-space local-tail kernel using T06, T07, and
 local splitting T04;
 OLV-001 specializes it to the source-supported complex scalar theorem and then
 provides a real corollary.  QB-001 and DEF-001 are optional future packaging or
-audit joins, not dependencies of these revision-3 proofs.  OLV-002 remains
+audit joins, not dependencies of these revision-4 proofs.  OLV-002 remains
 outside the MVP path.  `EX-002` permanently demonstrates that valid finite
 bounds for every order do not imply convergence in order.
 
@@ -387,7 +391,7 @@ creating proofs, reviews, status transitions, or source coverage.
 
 | May proceed together | Required join before downstream work |
 |---|---|
-| independent Watson collation review; IMP-001 R5 design/proof; revision-3 QL/OLV review; later QB/DEF maintenance | exact OLV card waits for reviewed collation and accepted IMP/QL layers; QB/DEF join only for optional packaging or audit wrappers |
+| independent Watson collation review; IMP-001 R6 design/proof; revision-4 QL/OLV review; later QB/DEF maintenance | exact OLV card waits for reviewed collation and accepted IMP/QL layers; QB/DEF join only for optional packaging or audit wrappers |
 | M3 derivative demonstrator; M4/M5 source path | no join; M3 is explicitly off-path |
 | OI, CT, elementary SUM, and CF early roots | join only for a named application that uses several methods |
 | ODE residual algebra, path-system representation audit, and named-family body audits | comparison application waits for both accepted method and identification nodes |
@@ -405,7 +409,7 @@ discussion layer.  The highest-impact unresolved edges are:
 1. `RQ-SRC-001`, `RQ-WAT-001`, `RQ-QUAL-001`: review the collated Watson text,
    its complex/ordinary-improper interpretation and common-`X` quantifier order, freeze
    the finite theorem, and complete source recovery.
-2. `RQ-INT-001`: independently review the unregistered IMP-001 R5
+2. `RQ-INT-001`: independently review the unregistered IMP-001 R6
    proof/architecture, then design and review exact signatures for the
    ordinary-improper relation/primitive equivalence, arbitrary-`S` Bochner
    bridge, and public Abel composition; keep finite-piece machinery private.

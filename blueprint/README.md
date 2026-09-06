@@ -27,7 +27,7 @@ As of this specification:
 | `BOOTSTRAP-0` | exactly `QB-001` and `DEF-001` | closed with zero source occurrences; externally authorized and implemented; no tagged release is claimed here |
 | `QB-001` | eight signatures only | immutable card revision 7/proof revision 6/signature revision 2 retain their pre-authorization self-status; external review accepted the exact implementation at commit `515b742f7ad5472c17cfdf0fda7cbc83c5585da1` |
 | `DEF-001` | four Gamma reuse wrappers | immutable card revision 4 retains its specification-snapshot self-status; external review accepted the exact implementation at commit `515b742f7ad5472c17cfdf0fda7cbc83c5585da1` |
-| `OLV-MVP-1` | one selected Watson occurrence | open and `planning_only`; exact 1997 snapshot was previously inspected/hash-bound but its uploaded bytes are absent after restart; surviving transcriptions and IMP R5 plus QL/OLV R3 drafts have no current review quorum or Lean authorization |
+| `OLV-MVP-1` | one selected Watson occurrence | open and `planning_only`; exact 1997 snapshot was previously inspected/hash-bound but its uploaded bytes are absent after restart; surviving transcriptions and IMP R6 plus QL/OLV R4 drafts have no current review quorum or Lean authorization |
 | Parallel source collations | Chapter 2 `Ai` and `J`/`I`; Chapter 11 real Airy/auxiliaries; Chapter 12 real Bessel auxiliaries; Chapter 8 Euler--Maclaurin/Bernoulli | hash-bound mathematical transcriptions are present; two independent source referees approved the exact Bessel revision-2 files and all 119 Bessel occurrence rows are integrated provisionally; Airy, Bernoulli, and Bessel remain unreconciled, Bernoulli has unregistered identification drafts, and no Bessel notation/entity link, card, manifest membership, coverage, or Lean authorization exists |
 | Olver theorem coverage | none | no quantitative Olver theorem or qualitative source recovery is currently claimed |
 
@@ -126,7 +126,7 @@ source coverage roles, and marks registry examples as required or illustrative
 in machine-readable form. Its SHA-256 is
 `975e08b89d609cbdd15ff3f8d24f40a42bb17ea0f4c37bb26d9cf53fb8dc4b5e`.
 Immutable historical cards and packets retain the
-authority to which they were frozen; the IMP R5 and QL/OLV R3 drafts bind v3.
+authority to which they were frozen; the IMP R6 and QL/OLV R4 drafts bind v3.
 
 The canonical normalized tables live in [`inventory/`](inventory/).  Closed
 release manifests have finite card and occurrence membership, exact totals,
@@ -146,7 +146,7 @@ M0--M4 are a bounded infrastructure demonstrator, not Olver coverage:
 |---|---|---|
 | M0 | edition/pin lock, inventories, cards, review protocol | governance foundation |
 | M1 | `QB-001` finite-error predicates and five transport lemmas | minimal quantitative foundation |
-| M2 | `DEF-001` Gamma reuse/audit pilot | parallel audit wrapper; not consumed by the revision-3 Watson proof |
+| M2 | `DEF-001` Gamma reuse/audit pilot | parallel audit wrapper; not consumed by the revision-4 Watson proof |
 | M3 | explicit complex-domain and Cauchy derivative transport demonstrator | parallel, off Watson path |
 | M4 | finite integral/Laplace identities and bounds | direct Watson prerequisite |
 | M5 | one exact-source quantitative Watson theorem plus audit recovery | first true quantitative-Olver MVP |
@@ -161,22 +161,28 @@ pinned Real Gamma moment -----------------------> QL-001
 ```
 
 `IMP-001` is a provisional, unregistered handle for the ordinary-improper
-relation and finite-exceptional continuous-primitive layer. Its revision-5
+relation and finite-exceptional continuous-primitive layer. Its revision-6
 author draft has eight prospective targets selected by consumer completion,
 not by a hard schema cap. `Basic` owns T01/T05/T08/T02/T03/T04, `Bochner` owns
 the arbitrary-exception absolute bridge T07, and `Abel` owns T06 while keeping
 the finite-piece engine private. T01 retains independent endpoint semantics;
 T08 is the public equivalence with existence of a normalized continuous
 primitive tending to the same value; and T03 permits continuous linear maps
-`E -> H`. The historical revision-3 exact-signature artifact is untouched,
-superseded changes-requested evidence and is not an R5 signature input. No R5
+`E -> H`. Revision 6 corrects only the root namespace of one pinned Mathlib
+declaration; QL revision 4 corrects two more root namespaces, and OLV revision
+4 only rebinds those revised dependencies. The mathematical targets, proofs,
+architecture, a.e. local premise, finite-dimensional source adapter, eight
+public targets, and three IMP modules are unchanged; new exact-commit checks
+remain pending and no approval or `lean_ready` claim is made. The historical
+revision-3 exact-signature artifact is untouched,
+superseded changes-requested evidence and is not an R6 signature input. No R6
 proof/card/signature review, registry reconciliation, or Lean authorization
 exists.
 QL-001 uses T06 for its tail, T07 for model terms, and T04 for the local/tail
 join. OLV-001 uses T07/T03/T04/T08 to obtain the baseline primitive, derives
 the flat bound `L` itself, and then invokes QL-001.
 QB-001 and DEF-001 may later support optional error-predicate packaging or a
-Gamma audit wrapper, but the revision-3 QL/OLV proofs consume neither.
+Gamma audit wrapper, but the revision-4 QL/OLV proofs consume neither.
 
 Watson is generic in an amplitude and parameters.  `OLV-001` is therefore
 `exact_source_generic`, not `named_source_application`.  It is source-facing
@@ -223,7 +229,7 @@ linked document.
 |---|---|---|
 | Bootstrap | `QB-001`, `DEF-001` | the only current closed, fully specified manifest members |
 | Demonstrator candidates | `QA-002`, `DEF-002`, `QC-001`, `QL-001`, `EX-001`, `EX-002` | `DEMO-0` planning; only IDs with complete cards may move to a revised closed manifest |
-| Watson source pilot | provisional `IMP-001`; registered `QL-001`, `OLV-001`, `SR-001` | IMP-001 revision 5 has eight draft targets; QL-001 and OLV-001 revision 3 are the concurrent consumer drafts; none has current proof/card/signature quorum or Lean authorization, and SR-001 is not yet carded |
+| Watson source pilot | provisional `IMP-001`; registered `QL-001`, `OLV-001`, `SR-001` | IMP-001 revision 6 has eight draft targets; QL-001 and OLV-001 revision 4 are the concurrent consumer drafts; these revisions are exact API namespace/dependency-binding corrections only, with new exact-commit checks pending; none has current proof/card/signature quorum or Lean authorization, and SR-001 is not yet carded |
 | Domain/branch support | `QC-DOM`, `CB-PRINCIPAL`, `CB-GENERIC`, `QC-REAL`, `QC-LOGCOORD` | provisional in [complex domains](methods/complex_domains_branches.md) |
 | Derivative transport | `QC-CAUCHY`, `QC-RADIUS`, `EX-001`, `QC-NEG-DERIV`, `QC-JET`, `QC-MIXED`, `QC-GAUGE` | provisional except manifest candidate `EX-001`; M3 uses only the bounded initial slice |
 | Laplace | provisional `IMP-001`; `QL-001`--`QL-003`, `EX-002`, `OLV-001`, `OLV-002`, `SR-001` | IMP-001 -> QL-001 -> OLV-001 -> SR-001 is the MVP route; OLV-002 is a separate unselected section 9 bound |
@@ -246,8 +252,8 @@ named function and discharge all generic hypotheses.
 
 ## Work that may proceed in parallel
 
-- Independent Watson collation review and fresh review of the IMP-001 R5,
-  QL-001 R3, and OLV-001 R3 natural-language proof/architecture bytes may
+- Independent Watson collation review and fresh review of the IMP-001 R6,
+  QL-001 R4, and OLV-001 R4 natural-language proof/architecture bytes may
   proceed together; exact Lean signature design follows those reviews.
   `OLV-001` cannot freeze until the source
   and integral-semantics choices are independently approved and IMP-001 and
@@ -257,7 +263,7 @@ named function and discharge all generic hypotheses.
 - Future Gamma or finite-error extensions may proceed independently, but each
   new card still needs an external `lean_ready` envelope before implementation.
   The accepted QB-001 and DEF-001 bootstrap declarations are optional
-  packaging/audit joins rather than dependencies of the revision-3 Watson proof.
+  packaging/audit joins rather than dependencies of the revision-4 Watson proof.
 - Within Track B, elementary summation, circle-coefficient, finite oscillatory,
   and finite contour infrastructure have deliberately separate roots.
 - ODE residual algebra, finite-IVP support, path systems, and representation
@@ -280,17 +286,17 @@ is unaffected. The occurrence remains `transcribed_unreconciled`, because its pa
 audit, scalar interpretation, conditional-improper-integral semantics, and
 transcription have not received independent approval.  Same-edition source
 evidence now supports a complex source-facing statement with a real corollary,
-and the revision-3 architecture represents the ordinary source meaning by
+and the revision-4 architecture represents the ordinary source meaning by
 one-sided limits at a finite exceptional set, using Mathlib
 `intervalIntegral` on regular finite pieces and a continuous normalized
 primitive.  No separate proper-Riemann implementation is planned.  It chooses
 one common baseline `X > 0` before `n`; the whole-set Bochner route is only an
-absolute-integrability adapter. QL-001 and OLV-001 revision-3 cards and
+absolute-integrability adapter. QL-001 and OLV-001 revision-4 cards and
 complete draft proof dossiers expose those choices; neither is frozen or
-Lean-authorized. The unregistered IMP-001 revision-5 author draft exposes the
+Lean-authorized. The unregistered IMP-001 revision-6 author draft exposes the
 eight-target architecture above. Recent R4 report bytes are absent after the
 restart, and a conversation-reported approval does not establish current
-quorum. No R5/R3 proof, signature, theorem-card, Lean, registry, or manifest
+quorum. No R6/R4 proof, signature, theorem-card, Lean, registry, or manifest
 authorization exists. The occurrence-card association uses
 `exact_source_target`, matching the card's `exact_source_generic` coverage
 class, but structural metadata agreement is not source certification.
@@ -337,9 +343,12 @@ bundle.  The [contract linter](automation/contract_linting.md) may reject an
 incomplete or inconsistent artifact, but it cannot decide truth, source
 fidelity, proof correctness, or reviewer independence.
 
-Only the CSV inventory validator is implemented today; it consumes v2 packet
+Only the CSV inventory validator is implemented today; it consumes v3 packet
 classification enums and derives required registry rows from machine-readable
-`registry_binding` values.  CI runs its positive and negative suites.
+`registry_binding` values; v2 is only the frozen predecessor. Routine checks
+run locally with `lake build` and
+`python3 scripts/validate_inventory.py --negative-tests`. GitHub Actions is
+explicit manual-only via `workflow_dispatch`, not push/PR automation.
 YAML/Markdown lifecycle, target-level card/packet classification, digest, and
 external-review validation remains manual/planned; the contract-linter rules
 describe future behavior, not a gate that has already run.

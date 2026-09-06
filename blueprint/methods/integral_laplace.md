@@ -14,7 +14,7 @@ improper relation.  Those are different interfaces: Mathlib's totalized value
 for a nonintegrable Bochner-integral expression is never used as evidence of
 convergence, and principal value is never inferred from ordinary convergence.
 
-## 1. Track conventions and revision-3 planning choices
+## 1. Track conventions and revision-4 planning choices
 
 - The scalar parameter in a real Laplace kernel is `x : ℝ` with `0 < x`.
   The integration variable is `t : ℝ`, and the half-line is `Set.Ioi 0`.
@@ -23,7 +23,7 @@ convergence, and principal value is never inferred from ordinary convergence.
 - A finite polynomial model has exactly `N` terms,
   \(P_N(t)=\sum_{j=0}^{N-1}c_jt^j\).  Thus `N = 0` means the empty sum and
   remainder equal to the full amplitude.
-- The revision-3 generic local-tail kernel uses a complete normed real vector
+- The revision-4 generic local-tail kernel uses a complete normed real vector
   space `E`.  Its source-facing Watson specialization uses `E = ℂ`; the real
   theorem is a corollary, not the source boundary.  Scalar multiplication is
   explicit when the real kernel multiplies an `E`-valued value.
@@ -64,12 +64,12 @@ manifest entry, source claim, or implementation authorization.
 
 | Order | Provisional card | Packet theorem / coverage / novelty class | Depends on | Status |
 |---:|---|---|---|---|
-| 1 | IMP-001 | `mixed` / `infrastructure` / `non_novel` | pinned integration and limit facts | concurrent unregistered revision-5 card/proof with eight prospective targets; fresh proof/API review required before exact signatures; historical R3 signature proposal superseded |
-| 2 | QL-001 | `finite_remainder_bound` / `infrastructure` / v3 successor value `non_novel` | accepted IMP-001, pinned Gamma-model integrability, and the direct pinned real Gamma moment | revision-3 draft card and complete draft proof; classification binding and mathematical proof require fresh review before exact signatures |
-| 3 | OLV-001 | `finite_remainder_bound` / `exact_source_generic` / `strengthened_conclusion` | locked occurrence and accepted QL-001 | concurrent revision-3 source-adapter update against IMP R5 and QL R3; exact signatures and reviews pending |
+| 1 | IMP-001 | `mixed` / `infrastructure` / `non_novel` | pinned integration and limit facts | concurrent unregistered revision-6 card/proof with eight prospective targets; R6 corrects one pinned root namespace only; fresh exact-commit checks and proof/API review required before exact signatures; historical R3 signature proposal superseded |
+| 2 | QL-001 | `finite_remainder_bound` / `infrastructure` / v3 successor value `non_novel` | accepted IMP-001, pinned Gamma-model integrability, and the direct pinned real Gamma moment | revision-4 draft card and complete draft proof; R4 corrects two pinned root namespaces only; exact-commit checks, classification binding, and mathematical proof review remain pending before exact signatures |
+| 3 | OLV-001 | `finite_remainder_bound` / `exact_source_generic` / `strengthened_conclusion` | locked occurrence and accepted QL-001 | concurrent revision-4 dependency rebinding against IMP R6 and QL R4; mathematical target/proof/source adapter unchanged; exact signatures and reviews pending |
 | 4 | SR-001 | `qualitative_bridge` / `audit_source_recovery` / intended `source_equivalent` | accepted OLV-001 | planning only; audit module only |
 | off path | OLV-002 | `finite_remainder_bound` / `exact_source_generic` / `source_equivalent` | separate section 9.1--9.2 occurrence and pinned Gamma moment | revision-2 planning card/proof; not registered or selected by OLV-MVP-1 |
-| optional | QL-002, QL-003 | additional moment and exponential-envelope infrastructure | accepted QL-001 only where genuinely reused | provisional; neither is needed by the revision-3 Watson proof |
+| optional | QL-002, QL-003 | additional moment and exponential-envelope infrastructure | accepted QL-001 only where genuinely reused | provisional; neither is needed by the revision-4 Watson proof |
 | regression | EX-002 | `finite_remainder_bound` / `infrastructure` / `equivalent_reformulation` of the finite geometric identity | finite integration facts | provisional; not registered and no card exists |
 
 The version-3 classification successor records `QL-001` and both targets as
@@ -77,7 +77,7 @@ The version-3 classification successor records `QL-001` and both targets as
 arguments.  It preserves the frozen v2 bytes and awaits independent review;
 this planning document claims no schema approval.  The QL-002/QL-003 planning
 labels remain available only for additional reusable adapters and must not be
-used to restate the revision-3 core.
+used to restate the revision-4 core.
 
 The Watson critical path is intentionally no larger than
 
@@ -85,18 +85,18 @@ The Watson critical path is intentionally no larger than
 pinned integration and limit facts -> IMP-001 ordinary-improper layer
                                                   |
                                                   v
-pinned model integrability and Real Gamma moment -> QL-001 R3 local-tail kernel
+pinned model integrability and Real Gamma moment -> QL-001 R4 local-tail kernel
                                                   |
 locked 1997 occurrence and reviewed transcription |
                          +------------------------+
                          v
-              OLV-001 R3 exact_source_generic -> SR-001 in Audit/SourceRecovery
+              OLV-001 R4 exact_source_generic -> SR-001 in Audit/SourceRecovery
 
 separate section 9.1--9.2 occurrence -> OLV-002 supplied-global-majorant bound
 ```
 
 QB-001 and DEF-001 may later join for optional error-predicate packaging or a
-project-level Gamma audit wrapper.  Neither is consumed by the revision-3
+project-level Gamma audit wrapper.  Neither is consumed by the revision-4
 QL/OLV proofs or lies on their mathematical critical path.
 
 In particular, Watson does **not** depend on Airy, a named-function catalogue
@@ -113,7 +113,7 @@ an editorial change to existing frozen bytes.
 
 New-mathematics dossiers use the schema in
 `blueprint/automation/proof_artifact_schema.md`.  The active Watson drafts are
-`NLP-QL-001-R3` and the concurrent `NLP-OLV-001-R3`; the separate global-majorant draft is
+`NLP-QL-001-R4` and the concurrent `NLP-OLV-001-R4`; the separate global-majorant draft is
 `NLP-OLV-002-R2`.  QL-002, QL-003, EX-002, and SR-001 reserve no proof revision
 until an artifact is actually created.  Each artifact binds
 exact target IDs, card/signature revisions, the resolved Mathlib commit,
@@ -122,13 +122,13 @@ the quantifier ledger, dependency ledger, numbered exact identities, analytic
 side-condition ledger, constant-loss ledger, target proofs,
 hypothesis/choice-laundering audit, regressions, trust/import boundary, and
 exclusions.  These IDs reserve no file and confer no status; a dossier exists
-only when its complete artifact is created and frozen.  The QL/OLV revision-3
+only when its complete artifact is created and frozen.  The QL/OLV revision-4
 Watson artifacts and OLV-002 revision 2 are drafts, not frozen evidence or
 Lean authorization.
 
-## 3. IMP-001 revision 5 and QL-001 revision 3 — ordinary-improper local-tail kernel
+## 3. IMP-001 revision 6 and QL-001 revision 4 — ordinary-improper local-tail kernel
 
-`IMP-001` is a concurrent unregistered revision-5 draft.  Its prospective
+`IMP-001` is a concurrent unregistered revision-6 draft.  Its prospective
 public surface retains the finite-exceptional value relation, normalized
 continuous primitive certificate, uniqueness, generalized finite CLM
 linearity, regular splitting, and arbitrary-exception Abel composition.  It
@@ -139,7 +139,7 @@ is provisional pending fresh natural-language and architecture review.  The
 historical revision-3 six-declaration signature proposal is superseded design
 evidence and supplies neither approval nor an implementation contract.
 
-QL-001 revision 3 is the first full public-API consumer.  It must not hide IMP
+QL-001 revision 4 is the first full public-API consumer.  It must not hide IMP
 inside an application-specific structure, unfold IMP's endpoint
 representation, or begin with model improper witnesses already assumed.
 
@@ -279,14 +279,14 @@ and has a separate real corollary.
 
 ### QL-001 proof dossier and gate
 
-[`NLP-QL-001-R3`](../proofs/QL-001.md) is a complete draft proof, not a frozen
+[`NLP-QL-001-R4`](../proofs/QL-001.md) is a complete draft proof, not a frozen
 specification.  Review must independently check the relational improper
 integral, honest local interval integrability, the derived T06 hypotheses,
 T04 prepending, separate model integrability, T07 value construction,
 generalized T03 finite union, T02 uniqueness, real-scalar Banach generality,
 complex specialization, constants, powers, and the `n = 0` case.  An
 end-to-end regression must begin with the Gamma model functions rather than
-assume their relation witnesses.  IMP R5 and QL R3 both require fresh review;
+assume their relation witnesses.  IMP R6 and QL R4 both require fresh review;
 exact QL signatures are deliberately deferred.  The v3 successor binding and
 its `non_novel` disposition await independent review, claim no schema
 approval, and leave the frozen v2 bytes unchanged.
@@ -334,11 +334,11 @@ transcription and semantic interpretation.  Same-edition evidence supports a
 complex finite-dimensional amplitude and the bookwide Riemann convention; ordinary convergence is
 provisionally read as independent one-sided convergence at the finite
 exceptional set, with principal value reserved for a separate extension.
-Revision-3 QL-001 and the concurrent OLV-001 revision-3 adaptation implement
-that planning choice against IMP R5, but are not frozen specifications or
+Revision-4 QL-001 and the concurrent OLV-001 revision-4 adaptation implement
+that planning choice against IMP R6, but are not frozen specifications or
 review verdicts.
 
-The revision-3 planning split is:
+The revision-4 planning split is:
 
 - `OLV-001` is `exact_source_generic`, never a named-function application.  It
   instantiates QL-001 for a complex amplitude and exposes one common baseline
@@ -352,7 +352,7 @@ The revision-3 planning split is:
   qualitative statement from OLV-001.  It is not imported by the semantic
   public root.
 
-[`NLP-OLV-001-R3`](../proofs/OLV-001.md) contains the source-hypothesis
+[`NLP-OLV-001-R4`](../proofs/OLV-001.md) contains the source-hypothesis
 discharge ledger, exact finite remainder formula, local and tail estimates,
 common-`X` quantifier order, and the route to the printed conclusion.  Its
 pre-Lean gate
@@ -412,7 +412,7 @@ Reuse after exact signature checks:
   `Mathlib.Analysis.SpecialFunctions.Gaussian.GaussianIntegral`, specialized
   to `p = 1`, for model convergence, separately from
   `Real.integral_rpow_mul_exp_neg_mul_Ioi` for its positive-real value;
-- `Real.integrableOn_exp_mul_Ioi`, `Real.integral_exp_mul_Ioi`, and
+- root `integrableOn_exp_mul_Ioi`, root `integral_exp_mul_Ioi`, and
   `Real.tendsto_exp_neg_atTop_nhds_zero` for the T06 side conditions and tail
   bound;
 - `MeasureTheory.intervalIntegral_tendsto_integral_Ioi` underlies IMP T07's
@@ -424,7 +424,7 @@ Reuse after exact signature checks:
 No ready-made theorem was found in the pinned snapshot for the finite-
 exceptional ordinary-improper relation, its endpoint/primitive equivalence,
 the arbitrary-exception Abel composition, the vector-valued local-tail
-theorem, or the collated Watson theorem.  IMP R5 prospectively supplies those
+theorem, or the collated Watson theorem.  IMP R6 prospectively supplies those
 project interfaces and the absolute-Bochner adapter T07.  T07 is a
 sufficient constructor under norm integrability, not a replacement for the
 conditional source-facing relation.  A pre-Lean reuse search must be repeated

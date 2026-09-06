@@ -17,8 +17,11 @@ The exact 1997 Olver PDF was previously inspected and hash-bound outside version
 mathematical transcriptions survive. The original uploaded bytes are not present in this restarted
 environment; any new source-image audit requires reattachment or recovery. This does not block the
 source-independent IMP/QL work. Theorem 3.1 on Watson's lemma has a mathematical transcription. The current planning
-chain is the concurrent IMP-001 revision-5 eight-target author draft plus QL-001 and OLV-001
-revision-3 cards and complete natural-language proof dossiers. Their exact signatures, independent
+chain is the concurrent IMP-001 revision-6 eight-target author draft plus QL-001 and OLV-001
+revision-4 cards and complete natural-language proof dossiers. These revisions correct only three
+exact pinned Mathlib namespace references and rebind the OLV dependencies; the eight public
+targets, three candidate IMP modules, mathematical proofs, architecture, QL a.e. local premise,
+and finite-dimensional source adapter are unchanged. New exact-commit checks are pending. Their exact signatures, independent
 reviews, registry/manifest authorization, and Lean implementations do not yet exist. The old
 IMP revision-3 signature artifact is superseded evidence; recent R4 report bytes are absent, and a
 conversation-reported approval is not current quorum. The eight-target IMP surface preserves
@@ -82,11 +85,14 @@ The `lean-toolchain` file selects the supported Lean release. The mathlib revisi
 1. Start from a frozen, bounded work packet whose externally stored review envelope records `lean_ready: pass` under the [review workflow](review/README.md).
 2. Create a focused branch and add declarations in the narrowest suitable module.
 3. Import public semantic modules through the appropriate umbrella; keep audit modules separate.
-4. Run `lake build` locally before opening a pull request.
+4. Run `lake build` and
+   `python3 scripts/validate_inventory.py --negative-tests` locally before
+   opening a pull request.
 5. Keep commits small enough that definitions, statements, and proofs can be reviewed together.
 
-GitHub Actions validates the specification inventory and builds the public Lean package for pushes
-and pull requests.
+GitHub Actions is explicit manual-only via `workflow_dispatch`; it does not
+run on pushes or pull requests. Routine checks are the local `lake build` and
+`python3 scripts/validate_inventory.py --negative-tests` commands.
 
 ## License
 

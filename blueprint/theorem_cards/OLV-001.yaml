@@ -2,7 +2,7 @@ schema_version: 2
 id: OLV-001
 title: Quantitative source recovery of Olver 1997 Theorem 3.1
 owner: jaumededios
-artifact_revision: 3
+artifact_revision: 4
 baseline_spec_commit: pending_external_record_after_commit
 
 theorem_class: finite_remainder_bound
@@ -15,7 +15,7 @@ implementation_status: not_started
 prototype_status: absent
 coverage_status: transcribed
 manifest_membership_status: planning_only
-status_as_of: imp_r5_ql_r3_relational_consumer_route_integrated_pending_fresh_review
+status_as_of: r4_dependency_binding_only_to_imp_r6_ql_r4_pending_fresh_review
 status_authority: external_review_envelope_only
 
 classification_schema:
@@ -60,7 +60,7 @@ scope:
     put every fixed-order estimate on one Laplace function and recovers the
     printed qualitative expansion.
   candidate_module: LMLF.Olver1997.Chapter3.Watson
-  exact_signatures_artifact: absent pending IMP-001 revision 5 and QL-001 revision 3 acceptance plus fresh OLV-001 revision 3 review
+  exact_signatures_artifact: absent pending IMP-001 revision 6 and QL-001 revision 4 acceptance plus fresh OLV-001 revision 4 review
   candidate_public_targets:
     - target_id: OLV-001-T01
       declaration: LMLF.Olver1997.Chapter3.watson_finite
@@ -101,7 +101,7 @@ source_contract:
     integrals are available away from the exceptional set and are transported
     to Mathlib's Bochner intervalIntegral in the Lean-facing adapter. That
     Riemann-to-Bochner agreement remains a separate formal source obligation;
-    revision 3 makes no new source claim or fresh source-reconciliation claim.
+    Revision 4 makes no new source claim or fresh source-reconciliation claim.
     Before encoding baseline convergence by T01, the adapter uses the fixed
     n=0 expansion q(t)=O(t^(beta_0-1)), beta_0>0, and proper Riemann
     regularity on compact [epsilon,k] pieces. A countable exhaustion supplies
@@ -172,7 +172,7 @@ open_design_choices:
 
 natural_language_proof:
   artifact: blueprint/proofs/OLV-001.md
-  artifact_revision: 3
+  artifact_revision: 4
   artifact_state: draft
   proof_status: complete
 
@@ -206,10 +206,12 @@ pre_lean_requirements:
 blocking_conditions:
   - source transcription and page audit are not independently reviewed
   - provisional semantic and scalar selections lack independent approval
-  - IMP-001 revision 5 and its T01--T08 public architecture are concurrent unregistered drafts awaiting fresh review
-  - QL-001 revision 3 is a concurrent unregistered draft awaiting fresh review
-  - fresh exact Lean signatures are intentionally absent pending acceptance of IMP-001 revision 5 and QL-001 revision 3
-  - this revision-3 proof and theorem-card architecture lack two fresh independent approvals and the required structural-circularity review
+  - revision 4 changes only the dependency bindings to IMP-001 revision 6 and QL-001 revision 4; the revision-3 mathematical target, proof, source adapter, and architecture are unchanged
+  - new exact-commit checks for the revised dependency chain are pending; no approval or lean_ready claim follows
+  - IMP-001 revision 6 and its T01--T08 public architecture are concurrent unregistered drafts awaiting fresh review
+  - QL-001 revision 4 is a concurrent unregistered draft awaiting fresh review
+  - fresh exact Lean signatures are intentionally absent pending acceptance of IMP-001 revision 6 and QL-001 revision 4
+  - this revision-4 proof and theorem-card architecture lack two fresh independent approvals and the required structural-circularity review
 
 consumer_regressions:
   - >-
@@ -227,7 +229,7 @@ consumer_regressions:
     Derive L_n from eventual boundedness plus boundedness on a compact prefix;
     reject any signature in which L_n is a field or conclusion hidden in T08.
   - >-
-    Revision-3 QL T02 must return an explicit Q, the canonical ordinary-
+    Revision-4 QL T02 must return an explicit Q, the canonical ordinary-
     improper relation for Q, and the finite remainder bound. A totalized
     conditional Bochner set integral is not an acceptable substitute.
   - >-

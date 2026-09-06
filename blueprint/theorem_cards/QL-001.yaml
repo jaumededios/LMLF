@@ -2,7 +2,7 @@ schema_version: 2
 id: QL-001
 title: Finite local-tail bound for Laplace remainders
 owner: jaumededios
-artifact_revision: 3
+artifact_revision: 4
 baseline_spec_commit: pending_external_record_after_commit
 
 theorem_class: finite_remainder_bound
@@ -15,7 +15,7 @@ implementation_status: not_started
 prototype_status: absent
 coverage_status: not_applicable
 manifest_membership_status: planning_only
-status_as_of: imp_r5_consumer_architecture_integrated_pending_fresh_review
+status_as_of: r4_exact_api_namespace_correction_against_imp_r6_pending_fresh_exact_commit_checks_and_review
 status_authority: external_review_envelope_only
 
 classification_schema:
@@ -51,7 +51,7 @@ scope:
     many absolutely integrable Gamma moments to obtain a finite Watson
     remainder bound stated entirely through explicit ordinary-improper values.
   candidate_module: LMLF.Integral.Watson
-  exact_signatures_artifact: absent-deferred-until-fresh-r3-proof-and-architecture-approvals
+  exact_signatures_artifact: absent-deferred-until-fresh-r4-proof-and-architecture-approvals
   candidate_public_targets:
     - target_id: QL-001-T01
       declaration: LMLF.Integral.improperLaplace_localTail_bound
@@ -120,7 +120,7 @@ open_design_choices:
     status: provisionally_selected_pending_review
     selection: generic complete normed real vector space for T01; complex T02; real corollary
   improper_integral:
-    status: provisionally_selected_pending_imp_r5_and_ql_r3_review
+    status: provisionally_selected_pending_imp_r6_and_ql_r4_review
     selection: >-
       Relational ordinary-improper values built from Mathlib intervalIntegral
       on regular truncated pieces and independent one-sided limits at a finite
@@ -128,7 +128,7 @@ open_design_choices:
       absolute-Bochner IntegrableOn hypothesis to the relation at its exact
       set-integral value; it is not a conditional-integral equivalence.
   interior_singularities:
-    status: provisionally_selected_pending_imp_r5_and_ql_r3_review
+    status: provisionally_selected_pending_imp_r6_and_ql_r4_review
     selection: >-
       A continuous normalized baseline primitive with regular-piece increment
       law; principal value is excluded and reserved for a later adapter.
@@ -140,7 +140,7 @@ open_design_choices:
       work creates no novelty claim. The version-3 successor records this
       disposition while preserving the version-2 bytes.
 
-imp_r5_public_dependencies:
+imp_r6_public_dependencies:
   - target_id: IMP-001-T01
     declaration: LMLF.Integral.HasImproperIntegralAtTopExcept
     role: explicit finite-exception ordinary-improper relation
@@ -168,7 +168,7 @@ imp_r5_public_dependencies:
 
 natural_language_proof:
   artifact: blueprint/proofs/QL-001.md
-  artifact_revision: 3
+  artifact_revision: 4
   artifact_state: draft
   proof_status: complete
 
@@ -184,6 +184,7 @@ target_classifications:
 
 dependencies:
   mathlib_revision: 0df444a360eaa60ab8c11dca51a86af692955474
+  pin_status: r4_root_namespace_corrections_source_confirmed_new_exact_commit_checks_pending
   accepted_lmlf_packets: []
   draft_lmlf_packets:
     - IMP-001
@@ -191,8 +192,8 @@ dependencies:
     - Real.integral_rpow_mul_exp_neg_mul_Ioi
     - integrableOn_rpow_mul_exp_neg_mul_rpow
     - MeasureTheory.norm_integral_le_of_norm_le
-    - Real.integrableOn_exp_mul_Ioi
-    - Real.integral_exp_mul_Ioi
+    - integrableOn_exp_mul_Ioi
+    - integral_exp_mul_Ioi
     - Complex.ofRealCLM
     - ContinuousLinearMap.mul
     - isLittleO_exp_neg_mul_rpow_atTop
@@ -209,10 +210,12 @@ pre_lean_requirements:
   lean_ready_authority: external_review_envelope_only
 
 blocking_conditions:
-  - IMP-001 revision 5 and its T01--T08 public architecture are concurrent unregistered drafts awaiting fresh proof and architecture review
+  - revision 4 corrects only the exact pinned Mathlib namespace ledger; the revision-3 mathematical targets, proof, AE local premise, finite-dimensional source adapter, and architecture are unchanged
+  - new exact-commit checks for revision 4 are pending; no approval or lean_ready claim follows from the source confirmation
+  - IMP-001 revision 6 and its T01--T08 public architecture are concurrent unregistered drafts awaiting fresh proof and architecture review
   - provisional semantic and scalar selections lack independent approval
   - the classifications-v3 binding and non_novel disposition await independent review and claim no schema approval
-  - this revision-3 proof and architecture lack two fresh independent Sol approvals before exact Lean signature design
+  - this revision-4 proof and architecture lack two fresh independent Sol approvals before exact Lean signature design
   - exact Lean signatures are intentionally absent pending those reviews
   - no independent proof or theorem-card reviews exist
 

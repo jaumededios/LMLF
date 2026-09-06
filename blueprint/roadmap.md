@@ -284,10 +284,10 @@ pinned Real Gamma moment -----------------------> QL-001
 ```
 
 QB-001 and DEF-001 are optional packaging/audit joins, not mathematical
-dependencies of the revision-3 Watson route.
+dependencies of the revision-4 Watson route.
 
-The current concurrent author drafts are IMP-001 revision 5 with eight public
-targets, QL-001 revision 3, and OLV-001 revision 3. The IMP split is
+The current concurrent author drafts are IMP-001 revision 6 with eight public
+targets, QL-001 revision 4, and OLV-001 revision 4. The IMP split is
 T01/T05/T08/T02/T03/T04 in `Basic`, T07 in `Bochner`, and T06 in `Abel`.
 T01 keeps independent endpoint semantics; T08 is the existential normalized
 continuous-primitive equivalence; T07 is the arbitrary-exception absolute
@@ -297,8 +297,15 @@ T07/T03/T04/T08 to obtain the baseline primitive, derives its own flat bound
 `L`, and only then invokes QL. Eight targets are justified by this consumer
 completion, not by a hard schema cap. The old R3 signature artifact is
 superseded evidence; recent R4 report bytes are absent, and conversation-only
-approval is not quorum. No current R5/R3 review, exact signature, registry,
+approval is not quorum. No current R6/R4 review, exact signature, registry,
 manifest, or Lean authorization exists.
+
+R6/R4 are clerical exact-API revisions: IMP and QL correct three pinned root
+namespace references, and OLV only rebinds those dependencies. The mathematical
+targets, proofs, architecture, restricted-volume a.e. local premise,
+finite-dimensional source adapter, eight targets, and three IMP modules are
+unchanged. New exact-commit checks remain pending; no approval or `lean_ready`
+claim follows.
 
 Airy, Cauchy derivative transport, residual algebra, ODE stability, and
 comparison systems are parallel work and are explicitly not prerequisites.
@@ -371,9 +378,12 @@ manifests, and source-coverage claims backed only by generic conditional
 theorems.  Compile cost, import cost, readability, reuse, constant quality, and
 version robustness are tracked separately.
 
-Only the CSV inventory validator is implemented at present; it consumes v2
+Only the CSV inventory validator is implemented at present; it consumes v3
 packet classification enums and derives required registry rows from
-`registry_binding`; CI runs its positive and negative suites.  Broader
+`registry_binding`; v2 is only the frozen predecessor. Routine checks run
+locally with `lake build` and
+`python3 scripts/validate_inventory.py --negative-tests`. GitHub Actions is
+explicit manual-only via `workflow_dispatch`, not push/PR automation. Broader
 YAML/Markdown lifecycle, target-level classification, digest,
 and external-review contract checks remain manual/planned; passing inventory
 checks cannot establish any review or authorization gate.

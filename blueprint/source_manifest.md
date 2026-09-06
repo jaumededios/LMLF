@@ -186,7 +186,7 @@ transcription, hash-bound private copy identifier, page map, and provisional
 notation/source-entity records.  Before execution readiness, a distinct
 reviewer must verify the page audit, transcription, and proposed semantic
 reading, then promote every required link from provisional to confirmed.  The
-revision-3 proposal is source-facing over complex scalars with a real
+revision-4 proposal is source-facing over complex scalars with a real
 corollary.  It reads ordinary source convergence as independent one-sided
 convergence at a finite exceptional set and uses a continuous normalized
 primitive with a regular-piece increment law.  Lean-facing regular pieces use
@@ -200,20 +200,25 @@ SR-001 remains uncarded:
 
 | Card | Packet theorem class | Packet coverage class | Obligation |
 |---|---|---|---|
-| QL-001 | finite_remainder_bound | infrastructure | revision-3 draft supplied-constant local-tail theorem and finite Gamma-moment decomposition |
-| OLV-001 | finite_remainder_bound | exact_source_generic | revision-3 draft derivation of visible witnesses and a finite bound from the collated Watson hypotheses |
+| QL-001 | finite_remainder_bound | infrastructure | revision-4 draft supplied-constant local-tail theorem and finite Gamma-moment decomposition; exact API namespace correction only |
+| OLV-001 | finite_remainder_bound | exact_source_generic | revision-4 draft derivation of visible witnesses and a finite bound from the collated Watson hypotheses; dependency rebinding only |
 | SR-001 | qualitative_bridge | audit_source_recovery | recover the exact printed qualitative conclusion in `Audit/SourceRecovery` |
 
-`IMP-001` is an unregistered revision-5 author draft upstream of QL-001. Its
+`IMP-001` is an unregistered revision-6 author draft upstream of QL-001. Its
 eight prospective public targets are justified by consumer completion rather
 than a hard schema cap: T01 keeps independent endpoint semantics; T08 equates
 it with existence of a normalized continuous primitive tending to the same
 value; T07 is the arbitrary-exception absolute Bochner bridge; T03 maps
 `E -> H`; and T06 exposes Abel composition while its finite-piece engine stays
 private. `Basic` owns T01/T05/T08/T02/T03/T04, `Bochner` T07, and `Abel` T06.
+IMP R6 and QL R4 correct only three root namespace entries in the pinned API
+ledger, while OLV R4 only rebinds those draft dependencies. The mathematical
+targets, proofs, architecture, QL a.e. local premise, finite-dimensional source
+adapter, target count, and module split are unchanged; new exact-commit checks
+remain pending and imply no approval or `lean_ready` status.
 The historical revision-3 signature artifact is untouched and superseded.
 Recent R4 report bytes are absent after restart, and conversation-reported
-approval supplies no current quorum. No R5 or QL/OLV R3 review, signature,
+approval supplies no current quorum. No R6 or QL/OLV R4 review, signature,
 registry, manifest, or Lean authorization exists; a draft file is not a
 manifest member.
 QL-001 uses T06 for the bounded-primitive tail, T07 for the absolutely
@@ -257,15 +262,18 @@ pinned Real Gamma moment -----------------------> QL-001
 ```
 
 QB-001 and DEF-001 may later join for optional error-predicate packaging or a
-project-level Gamma audit wrapper.  The revision-3 QL/OLV proofs do not consume
+project-level Gamma audit wrapper.  The revision-4 QL/OLV proofs do not consume
 them, so neither is a critical dependency.
 
 Airy, Cauchy transport, coefficient residual automation, ODE stability, and
 comparison systems are explicitly off this path.
 
-Only the CSV inventory validator currently exists.  It consumes all three v2
+Only the CSV inventory validator currently exists.  It consumes all three v3
 packet-classification axes and derives required registry rows from
-`registry_binding`; CI runs positive and negative suites.
+`registry_binding`; v2 is only the frozen predecessor. Routine checks run
+locally with `lake build` and
+`python3 scripts/validate_inventory.py --negative-tests`. GitHub Actions is
+explicit manual-only via `workflow_dispatch`, not push/PR automation.
 YAML/Markdown lifecycle, target-level card/packet joins, digest, and external-
 review-envelope validation remains manual/planned.
 

@@ -160,7 +160,7 @@ entity, notation, and occurrence IDs remain reserved for source reconciliation.
 
 The edition/occurrence collation and the selected finite integral/Laplace
 infrastructure are independent, parallel predecessors of the source adapter.
-For the revision-3 Watson programme the mathematical path is
+For the revision-4 Watson programme the mathematical path is
 `IMP-001 -> QL-001 -> OLV-001 -> SR-001`; the real Gamma-moment identity is a
 direct pinned-Mathlib reuse inside QL-001.  The accepted QB-001 and DEF-001
 bootstrap declarations are optional packaging and audit joins, not Watson
@@ -187,7 +187,7 @@ packet coverage classes carry roles such as `exact_source_generic`,
 
 Version 3 corrects QL-001 and its two classical targets from `novel` to
 `non_novel`. That versioned disposition is classification metadata only; it
-does not approve the R3 card/proof, signatures, or implementation.
+does not approve the current R4 card/proof, signatures, or implementation.
 
 Passing review, `lean_ready`, and authorization exist only in an external
 envelope that binds the frozen specification commit and artifact digests.
@@ -230,3 +230,14 @@ exposing sorted recursion or anchor machinery as public API, and replacing the
 source ordinary-improper relation with a totalized whole-set Bochner integral.
 This is a primary-agent architectural decision embodied in draft artifacts. It
 is not mathematical review, code review, gate evidence, or Lean authorization.
+
+The current IMP revision 6 and QL revision 4 correct only the exact namespaces
+of three pinned Mathlib declarations: root
+`intervalIntegrable_iff_integrableOn_Ioc_of_le`, root
+`integrableOn_exp_mul_Ioi`, and root `integral_exp_mul_Ioi`. OLV revision 4
+only rebinds its IMP/QL dependencies. The eight public targets, three IMP
+modules, mathematical proofs, dependency direction, QL restricted-volume
+`AEStronglyMeasurable` premise, and finite-dimensional source adapter are
+unchanged. New exact-commit checks are pending; this correction creates no
+approval, exact signature, implementation authorization, or `lean_ready`
+claim.

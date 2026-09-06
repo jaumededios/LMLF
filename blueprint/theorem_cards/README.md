@@ -14,7 +14,7 @@ review evidence.
 The current versioned vocabulary is artifact revision 3 of
 [`review/classifications-v3.json`](../../review/classifications-v3.json), which
 supersedes without mutating immutable v2. Historical frozen artifacts retain
-their recorded authority; the IMP R5 and QL/OLV R3 drafts bind v3. It
+their recorded authority; the IMP R6 and QL/OLV R4 drafts bind v3. It
 separates packet-level summary values from declaration-level target values.
 Every card has three independent axes:
 
@@ -143,13 +143,18 @@ reviews bind and accept commit
 
 `IMP-001.yaml`, `OLV-002.yaml`, `DEF-BERN-001.yaml`, and
 `DEF-BERN-002.yaml` are planning artifacts, not registry entries or manifest
-members. IMP-001 revision 5 has eight prospective integration targets justified
+members. IMP-001 revision 6 has eight prospective integration targets justified
 by the QL/OLV consumer chain rather than a schema limit. The immutable
 [revision-3 exact-signature proposal](IMP-001-signatures.md) and its historical
-reviews are superseded, changes-requested evidence; they are not R5 input.
-No R5 proof/card/signature review or authorization exists. QL-001 and OLV-001
-revision 3 are registered planning drafts with complete author proofs, likewise
+reviews are superseded, changes-requested evidence; they are not R6 input.
+No R6 proof/card/signature review or authorization exists. QL-001 and OLV-001
+revision 4 are registered planning drafts with complete author proofs, likewise
 without current review quorum, exact signatures, or Lean authorization.
+These revisions correct exactly three pinned root namespaces and rebind OLV's
+draft dependencies; mathematical targets/proofs/architecture, the QL a.e.
+local premise, the finite-dimensional source adapter, eight targets, and three
+IMP modules are unchanged. New exact-commit checks remain pending, so no
+approval or `lean_ready` claim follows.
 OLV-002 revision 2 has a complete draft proof.
 DEF-BERN-001 revision 1 and DEF-BERN-002 revision 1 are declaration-free and
 have complete draft identification proofs, respectively covering the
@@ -160,8 +165,11 @@ the upstream DEF-BERN-001 acceptance, frozen packet, external envelope, and
 registry/status work remain outstanding. None has exact implementation
 authorization merely because its file exists.
 
-Only the CSV inventory validator currently exists.  It consumes v2 packet
+Only the CSV inventory validator currently exists.  It consumes v3 packet
 classification enums and derives required registry rows from each example's
-`registry_binding`; CI runs positive and negative suites.  The
+`registry_binding`; v2 is only the frozen predecessor. Routine checks run
+locally with `lake build` and
+`python3 scripts/validate_inventory.py --negative-tests`. GitHub Actions is
+explicit manual-only via `workflow_dispatch`, not push/PR automation. The
 YAML/Markdown lifecycle, target-level card/packet joins, digest, and review-
 quorum validation described by the blueprint remains manual/planned.
