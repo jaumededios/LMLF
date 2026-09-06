@@ -53,13 +53,13 @@ convergence, and principal value is never inferred from ordinary convergence.
 ## 2. Dependency order and packet queue
 
 `QL-001`, `OLV-001`, and `SR-001` have planning rows in the canonical card
-registry.  OLV-002 has draft planning artifacts but no registry row; IMP-001,
-QL-002, QL-003, and EX-002 are provisional handles.  Listing an ID is not a
+registry.  IMP-001 and OLV-002 have draft planning artifacts but no registry
+row; QL-002, QL-003, and EX-002 are provisional handles.  Listing an ID is not a
 manifest entry, source claim, or implementation authorization.
 
 | Order | Provisional card | Packet theorem / coverage / novelty class | Depends on | Status |
 |---:|---|---|---|---|
-| 1 | IMP-001 | provisional ordinary-improper relation and finite-exceptional primitive infrastructure | pinned integration and limit facts | unregistered planning handle; needs its own bounded card, complete proof, reviews, and registry reconciliation before Lean |
+| 1 | IMP-001 | `mixed` / `infrastructure` / `non_novel` | pinned integration and limit facts | unregistered revision-1 draft card and complete author proof; exact signatures, independent reviews, and registry reconciliation pending |
 | 2 | QL-001 | `finite_remainder_bound` / `infrastructure` / v2 registry value `novel` | accepted IMP-001 and the direct pinned real Gamma moment | revision-2 draft card and complete draft proof; exact signatures and reviews pending |
 | 3 | OLV-001 | `finite_remainder_bound` / `exact_source_generic` / `strengthened_conclusion` | locked occurrence and accepted QL-001 | revision-2 complex source-facing draft with real corollary; exact signatures and reviews pending |
 | 4 | SR-001 | `qualitative_bridge` / `audit_source_recovery` / intended `source_equivalent` | accepted OLV-001 | planning only; audit module only |
@@ -122,13 +122,14 @@ artifacts are drafts, not frozen evidence or Lean authorization.
 
 ## 3. IMP-001 and QL-001 revision 2 — ordinary-improper local-tail kernel
 
-`IMP-001` is a provisional, unregistered extraction handle for the smallest
+`IMP-001` is an unregistered revision-1 draft for the smallest
 ordinary-improper layer: the finite-exceptional value relation, normalized
 continuous primitive certificate, uniqueness/splitting/finite-linearity laws,
 and bridges from ordinary locally Bochner-integrable data.  Its name and exact
-boundary remain provisional until registry reconciliation.  It needs its own
-bounded theorem card, complete natural-language proof, independent reviews, and
-external authorization before any Lean implementation.  QL-001 is the first
+boundary remain provisional until registry reconciliation.  Its six
+prospective targets have a complete author proof but still need exact
+signatures, independent reviews, and external authorization before any Lean
+implementation.  QL-001 is the first
 planned consumer and must not hide this layer inside an application-specific
 structure.
 

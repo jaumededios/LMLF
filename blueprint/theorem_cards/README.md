@@ -132,6 +132,15 @@ implementation or prototype; its later external envelope and implementation
 reviews bind and accept commit
 `515b742f7ad5472c17cfdf0fda7cbc83c5585da1` without rewriting the frozen card.
 
+## Unregistered planning cards
+
+`IMP-001.yaml`, `OLV-002.yaml`, and `DEF-BERN-001.yaml` are planning artifacts,
+not registry entries or manifest members.  IMP-001 revision 1 has six
+prospective integration targets and a complete author proof; OLV-002 revision 2
+has a complete draft proof; DEF-BERN-001 revision 1 is declaration-free and has
+a complete draft identification proof.  None has exact implementation
+authorization merely because its file exists.
+
 Only the CSV inventory validator currently exists.  It consumes v2 packet
 classification enums and derives required registry rows from each example's
 `registry_binding`; CI runs positive and negative suites.  The

@@ -1,0 +1,308 @@
+schema_version: 2
+id: IMP-001
+title: Finite-exceptional ordinary-improper integration and the finite Abel identity
+owner: jaumededios
+artifact_revision: 1
+baseline_spec_commit: pending_external_record_after_commit
+
+theorem_class: mixed
+coverage_class: infrastructure
+novelty_class: non_novel
+specification_status: draft
+proof_status: complete
+review_status: not_started
+implementation_status: not_started
+prototype_status: absent
+coverage_status: not_applicable
+manifest_membership_status: planning_only
+status_as_of: author_complete_unreviewed_draft
+status_authority: >-
+  Completeness is an author claim about the bound natural-language argument.
+  Review pass and implementation authorization can be established only by an
+  external review envelope bound to a frozen specification commit and exact
+  artifact digests. This draft claims neither.
+
+classification_schema:
+  path: review/classifications-v2.json
+  schema_version: lmlf-classification-v2
+  artifact_revision: 2
+  sha256: 8c9f8dbb5ab351771a433a9901fe176a66ec214092c5d5880b3ec57c9a5b23e9
+
+manifest: null
+source_occurrences: []
+source_entities: []
+source_notation: []
+coverage_claim: none; this packet is source-independent reusable infrastructure
+
+scope:
+  summary: >-
+    Specify a relation for an ordinary improper integral on a right ray with a
+    finite exceptional set, using independent one-sided limits of Mathlib
+    Bochner intervalIntegral values; provide only the uniqueness, finite-union
+    refinement/continuous-linear-combination, and regular-splitting laws required by the
+    Watson route; specify a normalized continuous finite-exceptional primitive
+    predicate; and prove the finite-piece exponential Abel identity by Bochner
+    Fubini without assuming a derivative of the primitive.
+  candidate_modules:
+    - module: LMLF.Integral.Improper.Basic
+      prospective_targets: IMP-001-T01 through IMP-001-T05
+    - module: LMLF.Integral.Improper.Abel
+      prospective_targets: IMP-001-T06
+  module_split_status: prospective_only
+  candidate_namespace: LMLF.Integral
+  exact_signatures_artifact: pending after independent semantic and proof review
+  signature_authorization: absent
+  candidate_public_targets:
+    - target_id: IMP-001-T01
+      declaration: LMLF.Integral.HasImproperIntegralAtTopExcept
+      signature_status: prospective_only
+    - target_id: IMP-001-T02
+      declaration: LMLF.Integral.HasImproperIntegralAtTopExcept.unique
+      signature_status: prospective_only
+    - target_id: IMP-001-T03
+      declaration: LMLF.Integral.HasImproperIntegralAtTopExcept.finset_clm
+      signature_status: prospective_only
+    - target_id: IMP-001-T04
+      declaration: LMLF.Integral.HasImproperIntegralAtTopExcept.split_regular
+      signature_status: prospective_only
+    - target_id: IMP-001-T05
+      declaration: LMLF.Integral.IsFiniteExceptionalPrimitive
+      signature_status: prospective_only
+    - target_id: IMP-001-T06
+      declaration: LMLF.Integral.intervalIntegral_exp_smul_eq_of_integral_eq_sub
+      signature_status: prospective_only
+  public_target_count: 6
+  target_minimality: >-
+    T01 and T05 are the two semantic predicates. T02 prevents a relational
+    value from being ambiguous. T03 refines every summand's exceptional set to
+    their finite union and then applies one continuous-linear-map law; the
+    Watson consumer thereby obtains finite sums, addition, negation, scalar
+    multiplication, and regular-point insertion without separate public
+    targets. T04 is the
+    one regular-piece concatenation/splitting law needed to join a proper local
+    piece to a conditionally improper tail. T06 is the only analytic identity.
+  included:
+    - a right-ray relation with a finite set of exceptional points strictly above the initial point
+    - independent left and right limits at every finite exceptional point
+    - one-sided passage to positive infinity
+    - explicit IntervalIntegrable evidence for every compact regular truncation
+    - uniqueness, finite-set refinement, and finite functorial linearity under continuous real-linear maps
+    - splitting or prepending one compact regular interval
+    - a continuous normalized primitive predicate with regular-piece increment law
+    - the finite-piece exponential Abel identity for every real exponential parameter
+    - empty exceptional set and degenerate finite interval behavior
+  excluded:
+    - a project-local proper Riemann integral
+    - Cauchy principal value or any coupled left-right cutoff
+    - whole-line, two-sided-infinity, contour, or oscillatory-specific APIs
+    - a partial-value or choice-selected improper-integral function
+    - a bundled quantitative certificate containing k, K, X, or L
+    - bounded-primitive tail estimates, Gamma moments, and Watson remainders
+    - a bridge to Mathlib set integrals under absolute integrability
+    - exact Lean binder order, representation of sorted exceptional points, or imports frozen as an implementation contract
+
+packet_local_concepts:
+  items:
+    - id: IMP-RAY-REL
+      role: relational ordinary-improper value on a right ray with finite exceptional set
+    - id: IMP-PRIMITIVE
+      role: normalized continuous primitive on regular components
+  note: >-
+    These are project-local integration concepts and are not Olver source
+    entities. Their existence earns no source-occurrence coverage.
+
+mathematical_contract:
+  ambient_space: >-
+    E is a complete normed real vector space. All finite integrals are Bochner
+    intervalIntegrals with respect to real Lebesgue volume.
+  relation_inputs: >-
+    A function f : Real -> E, an initial point k : Real, a finite set S of
+    real exceptional points satisfying k < c for every c in S, and a proposed
+    value I : E.
+  relation_semantics: >-
+    Order S increasingly. Split [k,infinity) at those points. On each open
+    component require IntervalIntegrable f on every compact subinterval and
+    require the two endpoint contributions separately: from k to the first
+    exception, from the right of each exception and to the left of the next,
+    and from the right of the last exception to infinity. The sum of the
+    component values must be I. If S is empty, this is the one-sided limit of
+    intervalIntegral f k R as R tends to infinity. No limit may couple the two
+    sides of an exceptional point.
+  anchor_convention: >-
+    The mathematical semantics is independent of the auxiliary interior
+    anchor used to split an open component. The proof dossier uses the midpoint
+    of a bounded component and c+1 for the final unbounded component only to
+    display a deterministic witness. Exact Lean encoding is deferred.
+  endpoint_convention: >-
+    k is regular and is not in S. Values of f at isolated exceptional points
+    are irrelevant to the finite interval integrals, but behavior approaching
+    each side is not ignored.
+  primitive_contract: >-
+    IsFiniteExceptionalPrimitive g k S F means S is above k, F is continuous
+    on [k,infinity), F(k)=0, and for every k <= a <= b whose closed interval
+    avoids S, g is IntervalIntegrable on [a,b] and
+    F(b)-F(a)=intervalIntegral g a b.
+  abel_contract: >-
+    For a <= b, IntervalIntegrable g on [a,b], ContinuousOn F [a,b], and
+    F(t)-F(a)=intervalIntegral g a t for every t in [a,b], every h : Real
+    satisfies integral_a^b exp(-h*t) scalar-mul g(t) dt =
+    exp(-h*b) scalar-mul F(b) - exp(-h*a) scalar-mul F(a) +
+    h scalar-mul integral_a^b exp(-h*t) scalar-mul F(t) dt.
+  derivative_convention: >-
+    No derivative, almost-everywhere derivative, or absolute-continuity field
+    for F is assumed. T06 is proved from the increment law by finite Bochner
+    Fubini.
+  orientation_convention: >-
+    T01 is a right-ray relation. T04 assumes a <= k. T06 assumes a <= b;
+    reversed-orientation wrappers are deferred.
+  totalization_warning: >-
+    Convergence is never inferred from the value of a totalized nonintegrable
+    Bochner integral. IntervalIntegrable evidence is part of every regular
+    truncation, and the relation explicitly asserts every endpoint limit.
+  exceptional_values: >-
+    S empty is allowed. S containing a point at or below k is rejected. The
+    finite Abel identity includes h=0 and a=b. Principal-value-only singularities
+    are rejected.
+
+target_classifications:
+  - target_id: IMP-001-T01
+    declaration: LMLF.Integral.HasImproperIntegralAtTopExcept
+    proof_anchor: target-imp-001-t01
+    theorem_class: definition
+    coverage_class: reusable_infrastructure
+    novelty_class: non_novel
+    relationship: classical ordinary-improper semantics with explicit finite-breakpoint bookkeeping
+  - target_id: IMP-001-T02
+    declaration: LMLF.Integral.HasImproperIntegralAtTopExcept.unique
+    proof_anchor: target-imp-001-t02
+    theorem_class: existence_uniqueness
+    coverage_class: reusable_infrastructure
+    novelty_class: non_novel
+    relationship: uniqueness of limits in a Hausdorff Banach space
+  - target_id: IMP-001-T03
+    declaration: LMLF.Integral.HasImproperIntegralAtTopExcept.finset_clm
+    proof_anchor: target-imp-001-t03
+    theorem_class: exact_identity
+    coverage_class: reusable_infrastructure
+    novelty_class: non_novel
+    relationship: >-
+      refinement to the finite union of exceptional sets, finite linearity,
+      and commutation with continuous real-linear maps
+  - target_id: IMP-001-T04
+    declaration: LMLF.Integral.HasImproperIntegralAtTopExcept.split_regular
+    proof_anchor: target-imp-001-t04
+    theorem_class: exact_identity
+    coverage_class: reusable_infrastructure
+    novelty_class: non_novel
+    relationship: additivity of interval integrals and endpoint limits
+  - target_id: IMP-001-T05
+    declaration: LMLF.Integral.IsFiniteExceptionalPrimitive
+    proof_anchor: target-imp-001-t05
+    theorem_class: definition
+    coverage_class: reusable_infrastructure
+    novelty_class: non_novel
+    relationship: source-independent primitive certificate used by QL-001
+  - target_id: IMP-001-T06
+    declaration: LMLF.Integral.intervalIntegral_exp_smul_eq_of_integral_eq_sub
+    proof_anchor: target-imp-001-t06
+    theorem_class: exact_identity
+    coverage_class: reusable_infrastructure
+    novelty_class: non_novel
+    relationship: classical finite Abel identity proved without differentiating F
+
+hypothesis_laundering_check: >-
+  The predicates expose every summand's exceptional set, their finite union,
+  all regular-piece integrability,
+  every one-sided endpoint limit, continuity, normalization, and increment
+  law. They contain no boundedness constant, target Laplace value, convergence
+  at a new weight, Gamma moment, Watson remainder, or source conclusion.
+choice_laundering_check: >-
+  Sorting a finite set is canonical. Interior anchors are deterministic in the
+  displayed semantics and are proved immaterial. The exceptional set in T03 is
+  the explicit finite union of the supplied S_i, not a selected enlargement.
+  Component and total values
+  are unique. F is explicit input, not a choice-selected primitive. No
+  improper-integral value function is defined by Classical.choose.
+
+natural_language_proof:
+  artifact: blueprint/proofs/IMP-001.md
+  artifact_revision: 1
+  artifact_state: draft
+  proof_status: complete
+  normative_sections:
+    - target-imp-001-t01
+    - target-imp-001-t02
+    - target-imp-001-t03
+    - target-imp-001-t04
+    - target-imp-001-t05
+    - target-imp-001-t06
+
+dependencies:
+  lean_toolchain: leanprover/lean4:v4.33.1
+  mathlib_revision: 0df444a360eaa60ab8c11dca51a86af692955474
+  lake_manifest_sha256: 4bd9b595f84163f69bdb0ffc9b1a876b5df71d65bdd53122415610d083d43404
+  accepted_lmlf_packets: []
+  draft_lmlf_packets: []
+  pinned_candidates:
+    - intervalIntegral.integral_add_adjacent_intervals
+    - ContinuousLinearMap.intervalIntegral_comp_comm
+    - MeasureTheory.intervalIntegral_integral_swap
+    - ContinuousOn.intervalIntegrable_of_Icc
+    - tendsto_nhds_unique
+    - tendsto_finsetSum
+    - intervalIntegral.integral_eq_sub_of_hasDerivAt_of_le
+    - intervalIntegral.integral_undef
+  explicitly_not_dependencies:
+    - QL-001
+    - OLV-001
+    - OLV-002
+    - QB-001
+    - DEF-001
+
+downstream_consumers:
+  - QL-001
+
+structural_circularity_review:
+  applicability: required
+  inapplicable_reason: null
+  required_perspectives:
+    - dependency_direction
+    - source_to_target_reachability
+    - hypothesis_and_choice_laundering
+
+pre_lean_requirements:
+  source_collation_reviewers: 0
+  source_collation_review_applicability: not_applicable-source-independent
+  theorem_card_reviewers: 2
+  natural_language_proof_reviewers: 2
+  semantics_review: required
+  structural_circularity_review: required
+  exact_signature_artifact: required
+  registry_reconciliation: required-before-implementation
+  lean_ready_authority: external_review_envelope_only
+
+edge_tests:
+  - empty exceptional set reduces to an ordinary right-endpoint limit
+  - adding a genuinely regular marked point does not change the value
+  - combining an amplitude exceptional on S with smooth model terms exceptional on the empty set concludes on S
+  - a one-over-distance singularity with symmetric principal value is rejected
+  - a conditionally convergent one-sided singularity is accepted when both sides converge independently
+  - a conditionally convergent tail such as sin(t)/t is not strengthened to absolute integrability
+  - a nonintegrable truncation cannot pass through Mathlib integral totalization
+  - discontinuous componentwise primitives cannot telescope across an exceptional point
+  - endpoint equality alone cannot replace the all-intermediate-point increment law
+  - an exceptional finite prefix is a sum of split-improper component values, never one intervalIntegral
+  - T06 handles h=0, a=b, and a continuous nondifferentiable primitive
+  - T04 preserves the exact interval-integral sign and value order
+
+blocking_conditions:
+  - exact Lean representations and binder order are intentionally not frozen
+  - the theorem card and complete proof draft have no independent reviews
+  - the required semantics and structural-circularity reviews have not started
+  - no signature artifact or external review envelope exists
+  - IMP-001 is not registered or admitted to an execution manifest
+
+implementation:
+  implementation_status: not_started
+  declarations_present: false
+  authorization: absent
