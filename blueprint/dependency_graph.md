@@ -90,36 +90,52 @@ global axiom may bypass a missing edge.
 
 | Node | Manifest | Current gate | Next legitimate edge |
 |---|---|---|---|
-| `QB-001` | `BOOTSTRAP-0` | frozen eight-signature specification is complete; candidate-owned review summaries are not externally bound, so authoritative review and `lean_ready` remain pending and implementation is unauthorized | bind the exact successor specification externally, obtain protocol-valid reviews, then authorize only if that external gate passes |
-| `DEF-001` | `BOOTSTRAP-0` | frozen four-declaration specification; implementation is `not_started`, and no prototype is present in the exact specification snapshot | bind and review the exact specification; treat any earlier local compile as unbound historical feasibility evidence, not candidate implementation |
-| `QL-001` | `OLV-MVP-1` planning | draft card and complete first proof draft; exact signature absent | resolve scalar/improper-integral choices, review, then freeze |
-| `OLV-001` | `OLV-MVP-1` planning | locked occurrence transcribed but independently unreconciled; draft card/proof present | source review, accepted QL-001, exact signatures, proof/card quorum |
+| `QB-001` | `BOOTSTRAP-0` | frozen eight-signature specification retains its pre-authorization self-status; external evidence authorized and accepted the exact implementation at `515b742f7ad5472c17cfdf0fda7cbc83c5585da1` | reuse the public finite core where justified; any larger API requires a new card |
+| `DEF-001` | `BOOTSTRAP-0` | frozen four-declaration specification retains its snapshot self-status; external evidence authorized and accepted the exact implementation at `515b742f7ad5472c17cfdf0fda7cbc83c5585da1` | reuse the transparent Gamma wrappers only when a consumer benefits; do not make Watson depend on them gratuitously |
+| `QL-001` | `OLV-MVP-1` planning | revision-2 draft card and complete draft proof; exact signature absent | extract and accept IMP-001, review the generic kernel, then freeze |
+| `OLV-001` | `OLV-MVP-1` planning | locked occurrence transcribed but independently unreconciled; revision-2 complex-source card/proof present | source review, accepted QL-001, exact signatures, proof/card quorum |
 | `SR-001` | `OLV-MVP-1` planning | no card or proof | accepted `OLV-001`, eventual-domain/scale/notation bridge, audit-only implementation |
 
 `DEMO-0` is not closed.  Its candidate names express intent only.
-`BOOTSTRAP-0` is closed and execution-ready, but that manifest state does not
-approve `DEF-001` or release `QB-001`.
+`BOOTSTRAP-0` was closed and execution-ready before its separate external gate;
+manifest readiness alone did not authorize Lean.  The later external records
+did authorize and accept the exact `515b742...` implementation.  This does not
+claim an Olver occurrence or a tagged release.
+
+`IMP-001` is a deliberately unregistered planning handle for the small
+ordinary-improper/finite-exceptional primitive layer upstream of QL-001.  The
+name and boundary remain provisional until registry reconciliation.  It needs
+its own bounded card, complete natural-language proof, independent reviews, and
+external authorization before Lean; it must not be smuggled into QL-001 as an
+unreviewed implementation detail.
 
 ## Watson MVP: only source critical path
 
 ```mermaid
 flowchart LR
   LOCK["Edition lock and exact PDF snapshot: complete"] --> COL["OLV97-C03-WATSON first collation: review pending"]
-  QB["QB-001 finite core: frozen; external gate pending"] --> QL["Minimal QL-001 Laplace slice: planning"]
-  COL --> QL
-  QL --> NEED{"Does the selected proof need generalized Gamma moments?"}
-  NEED -- "no" --> OLV["OLV-001 exact_source_generic"]
-  NEED -- "yes" --> GAM["QL-002 and accepted DEF-001 Gamma facts"]
-  GAM --> OLV
+  PIN["Pinned integration and limit facts"] --> IMP["IMP-001 ordinary-improper layer: unregistered"]
+  IMP --> QL["QL-001 R2 local-tail kernel: planning"]
+  MOM["Pinned Real Gamma moment"] --> QL
+  COL --> OLV["OLV-001 R2 exact_source_generic"]
+  QL --> OLV
   OLV --> SR["SR-001 Audit/SourceRecovery"]
   SR --> MVP["OLV-MVP-1: one reconciled occurrence"]
+  BOUNDS["Separate section 9.1--9.2 occurrence"] --> OLV2["OLV-002: unregistered, unselected"]
 ```
 
 The source snapshot, printed label, proposition, order convention, relevant
 page map, notation/entity draft links, and transcription digest now exist.  The
-first blocker is independent approval of that collation and resolution of its
-two semantic ambiguities: scalar codomain and conditionally convergent
-improper integrals with possible interior singularities.  The occurrence-card
+revision-2 design uses the source-supported complex codomain, with a real
+corollary, and reads the book's ordinary convergence as independent one-sided
+convergence at a finite exceptional set.  Mathlib's Bochner `intervalIntegral`
+represents every regular finite piece, with explicit `IntervalIntegrable`
+evidence; only endpoint passages are improper, and no second proper-Riemann
+library is planned.  A continuous normalized primitive with a regular-piece
+increment law is the proposed generic bridge; the whole-set Bochner route is
+only an absolute-integrability adapter.  These choices and the collation
+still require independent approval.  OLV-001 chooses one common baseline
+`X > 0` before `n`, while `k_n`, `K_n`, and `L_n` may depend on `n`.  The occurrence-card
 join uses `exact_source_target`, and the inventory validator requires that role
 for an `exact_source_generic` card; this structural consistency does not
 substitute for review.
@@ -148,7 +164,7 @@ planning queues are:
 | Family | Queue roots and order | Downstream seams |
 |---|---|---|
 | [Gamma-related](families/gamma_related.md) | existing `DEF-001`; then `DEF-GAM-002`--`005`, `DEF-IGAM-001`--`003`, `AUD-GAM-001` | Laplace moments, Stirling, ratios, incomplete-Gamma applications |
-| [Airy and Scorer](families/airy_scorer.md) | `CON-AIR-001` -> `DEF-AIR-001`; then integral/rotation/Scorer cards, `CMP-AIR-*`, `AUD-AIR-001` | turning points, contours, inhomogeneous models, zeros, connections |
+| [Airy and Scorer](families/airy_scorer.md) | review the bounded locked transcriptions; `CON-AIR-001` -> `DEF-AIR-001`; then integral/rotation/Scorer cards, `CMP-AIR-*`, `AUD-AIR-001` | turning points, contours, inhomogeneous models, zeros, connections |
 | [Bessel/cylinder](families/bessel_cylinder.md) | shared `DEF-HG0F1-001` -> first-kind objects -> parameter continuation -> second-kind/Hankel; `CMP-BES-*`, `AUD-BES-001` | simple-pole comparison, saddle/large-order applications, zeros/connections |
 | [Hypergeometric/Legendre/Whittaker](families/hypergeometric_legendre.md) | local regularized substrate -> local series -> continuation -> Kummer/Legendre/Whittaker bridges -> audit | Airy/Bessel construction candidates, Barnes/Darboux, parabolic-cylinder functions |
 | [Remaining portfolios](families/remaining_families.md) | separate exponential-integral, error/Dawson/Fresnel, parabolic-cylinder, per-orthogonal-family, zeta/Bernoulli, Anger/Struve/Nicholson, and per-auxiliary queues | admitted only for explicitly collated consumers |
@@ -171,17 +187,23 @@ treated as four accepted constructions or as resolved dependency IDs.
 The [Laplace queue](methods/integral_laplace.md) is:
 
 ```text
-QB-001 -> QL-001
-QL-001 -> QL-002 (only if generalized powers are needed)
-QL-001/002 -> QL-003 explicit local envelope
-QL-001 -> EX-002 divergent-factorial regression
-collated Watson + selected QL slice -> OLV-001 -> SR-001
+pinned integration/limit facts -> IMP-001 -> QL-001
+pinned Real Gamma moment ---------------------> QL-001
+collated Watson + accepted QL-001 -> OLV-001 -> SR-001
+separate section 9.1--9.2 occurrence -> OLV-002
+QL-003 optional exponential-growth adapter; EX-002 independent regression
 ```
 
-`QL-001` separates half-line integral semantics, exact moments, the global
-finite remainder, local cutoff identity, and tail control.  A local Taylor
-bound does not control the nonlocal tail.  `EX-002` permanently demonstrates
-that valid finite bounds for every order do not imply convergence in order.
+`IMP-001` is provisional and unregistered.  It separates relational ordinary-
+improper semantics, the finite-exceptional primitive certificate, and the
+finite-piece Abel/Fubini identity from the QL estimate.  Its regular pieces use
+Mathlib `intervalIntegral`.  QL-001 is a complete-normed-real-vector-space
+local-tail kernel;
+OLV-001 specializes it to the source-supported complex scalar theorem and then
+provides a real corollary.  QB-001 and DEF-001 are optional future packaging or
+audit joins, not dependencies of these revision-2 proofs.  OLV-002 remains
+outside the MVP path.  `EX-002` permanently demonstrates that valid finite
+bounds for every order do not imply convergence in order.
 
 ### Oscillatory and contour branch
 
@@ -209,14 +231,19 @@ roots:
 
 ```text
 QB-001 + finite sums -> SUM-001
-pinned Bernoulli facts -> BER-001
+DEF-BERN-001 -> DEF-BERN-002 -> BER-001
+pinned Bernoulli facts ----------------> BER-001
 SUM-001 + BER-001 + integration by parts -> EM-001 -> EM-002
 pinned Cauchy coefficient facts -> CF-001 -> CF-002
 CF-002 + branch/contour support -> DAR-001
 collated Chapter 8 transform + selected integral/contour support -> ILT-001
 ```
 
-`BER-001` is infrastructure unless source identification is separately proved.
+The locked Chapter 8 §1 source identity and exact remainder are transcribed but
+unreviewed. `DEF-BERN-001` identifies the numbers/polynomials without project
+declarations; `DEF-BERN-002` separately identifies the source periodization;
+`BER-001` is only a real-line facade and calculus/envelope infrastructure after
+those source identifications are accepted.
 `ILT-001` remains unclassified until direct source selection.  Darboux and
 inverse-Laplace packets must construct the needed contour instead of placing
 the desired geometry and bound into an input structure.
@@ -350,7 +377,7 @@ creating proofs, reviews, status transitions, or source coverage.
 
 | May proceed together | Required join before downstream work |
 |---|---|
-| independent Watson collation review; bounded QL proof review; later DEF maintenance | exact OLV card waits for reviewed collation and accepted QL; DEF joins only where Gamma identification is consumed |
+| independent Watson collation review; IMP-001 design/proof; revision-2 QL/OLV review; later QB/DEF maintenance | exact OLV card waits for reviewed collation and accepted IMP/QL layers; QB/DEF join only for optional packaging or audit wrappers |
 | M3 derivative demonstrator; M4/M5 source path | no join; M3 is explicitly off-path |
 | OI, CT, elementary SUM, and CF early roots | join only for a named application that uses several methods |
 | ODE residual algebra, path-system representation audit, and named-family body audits | comparison application waits for both accepted method and identification nodes |
@@ -366,8 +393,11 @@ The [research queue](qualitative/open_research_questions.md) is the authoritativ
 discussion layer.  The highest-impact unresolved edges are:
 
 1. `RQ-SRC-001`, `RQ-WAT-001`, `RQ-QUAL-001`: review the collated Watson text,
-   freeze the finite theorem, and complete source recovery.
-2. `RQ-INT-001`: local amplitude data versus explicit nonlocal tail control.
+   its complex/ordinary-improper interpretation and common-`X` quantifier order, freeze
+   the finite theorem, and complete source recovery.
+2. `RQ-INT-001`: card and prove the provisional IMP-001 ordinary-improper
+   relation/primitive layer, Mathlib-interval-integral Abel/Fubini lemma, and
+   narrower whole-set Bochner adapter.
 3. `RQ-CAUCHY-001`: useful constrained radii on moving domains.
 4. `RQ-AIRY-001`, `RQ-BESSEL-001`, `RQ-PARAM-001`: noncircular constructions,
    exceptional parameters, and joint regularity.

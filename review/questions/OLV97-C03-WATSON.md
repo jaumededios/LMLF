@@ -2,20 +2,51 @@
 
 **Audience:** an external model used for high-leverage library-design decisions
 
-**Status:** decision request for draft theorem cards; no Lean authorization
+**Status:** advisory response received; provisional architecture recorded below;
+no Lean authorization
 
-**Repository snapshot:** commit `773ef08b0fd536813a0b14c5883bb9801d5198ec`
+**Repository snapshot originally sent for advice:** commit
+`773ef08b0fd536813a0b14c5883bb9801d5198ec`
 
 **Relevant drafts:** `blueprint/theorem_cards/QL-001.yaml`,
 `blueprint/theorem_cards/OLV-001.yaml`, `blueprint/proofs/QL-001.md`, and
-`blueprint/proofs/OLV-001.md`
+`blueprint/proofs/OLV-001.md`; the provisional disposition is incorporated in
+their successor revision-2 drafts and is not yet bound to a frozen commit
 
-## Purpose and boundary
+**Source availability:** the private source snapshot is available to the local
+project workflow at SHA-256
+`08e1844d29a5ad21f89b9b600249ce18ac1665a5845be2d4e4219a3ededdc909`.
+The copyrighted source bytes, OCR, and rendered pages are not stored in this
+repository.
 
-Please decide the public semantic and dependency architecture for the first
-Watson-lemma packet. We will handle transcription comparison, pinned-Mathlib
-search, routine edge cases, proof details, and Lean implementation locally.
-Do not spend review time checking equations line by line.
+**Advisory response:** a GPT-6 Pro response was received on 2026-09-06 at
+SHA-256
+`a35bb2262144f59aac20e72efbed46204e12375a2ad239d50397326e12895c63`.
+It was prepared against a different DjVu witness and an earlier repository
+commit, and it was not a fresh-context formal referee. It is design input only:
+it supplies no source attestation, review quorum, or implementation authority.
+Every source claim adopted below was checked independently against the exact
+private PDF.
+
+## Current action requested
+
+Please answer only the schema-level question in
+**One remaining structural question for a future model pass** below.  The D1--D5
+material is retained as an audit trail: it has already been answered
+provisionally, checked against the supplied PDF, and incorporated into the
+revision-2 Watson drafts.  Reopening those choices would require a concrete
+architectural objection, not routine proof or Lean-level preferences.
+
+We will handle transcription comparison, pinned-Mathlib search, routine edge
+cases, proof details, and Lean implementation locally.  The requested response
+should focus on the durable classification-schema boundary.
+
+## Historical purpose and boundary
+
+The original request was to decide the public semantic and dependency
+architecture for the first Watson-lemma packet.  The following sections record
+that request and the resulting disposition; they are context, not the current
+question.  Do not spend review time checking equations line by line.
 
 The mathematical core is the following. If a remainder `phi` obeys a local
 bound
@@ -46,7 +77,7 @@ source allows improper convergence and does not clearly require absolute
 convergence, so replacing its integral by Mathlib's totalized whole-ray
 Bochner integral would strengthen or distort the theorem.
 
-## Decisions requested
+## Previously requested decisions (provisionally resolved)
 
 ### D1. Canonical improper-integral semantics
 
@@ -86,7 +117,7 @@ theorems.
 - **C — real-first:** formalize only the real case until a concrete complex
   consumer appears.
 
-A exposes the genuinely vector-valued integration-by-parts argument without
+A exposes the genuinely vector-valued bounded-primitive argument without
 forcing Gamma-moment algebra into an over-general statement. B gives one
 scalar API but may couple generic infrastructure to complex coercions. C is
 smallest but likely creates later duplication.
@@ -176,18 +207,60 @@ in a general asymptotics bridge.
 - Natural-language proof review and source-fidelity review remain separate
   gates. This memo is only for architecture.
 
-## Requested response
+## Provisional disposition after the advisory response
 
-Return one decisive recommendation for each of D1-D5, with a brief reason and
-the principal rejected alternative. Then give:
+The response resolves D1--D5 provisionally, subject to fresh theorem-card,
+natural-language-proof, source-fidelity, and structural reviews against the
+eventual frozen commit.
 
-1. one coherent module/dependency diagram;
-2. pseudocode-level signatures for the canonical improper-integral relation,
-   generic local-tail theorem, and source-facing Watson theorem;
-3. a short list of decisions that must be frozen before Lean work, separated
-   from choices safe to defer.
+1. **D1/D4 — relational ordinary-improper semantics with a finite-exceptional
+   adapter.** The source adapter records a finite exceptional set and separate
+   one-sided Riemann limits at every exceptional endpoint. Every compact
+   regular piece is represented in Lean by Mathlib's Bochner
+   `intervalIntegral` with explicit integrability evidence; no second proper
+   Riemann integral library is planned. Its useful proof object is a continuous
+   normalized weighted primitive whose increment law holds on those pieces.
+   The generic local-tail proof consumes that object; it does not require
+   global Bochner local integrability. Cauchy principal value is a separate
+   later adapter, because printed Exercise 3.4 introduces it as an extension
+   rather than the default meaning of Theorem 3.1.
+2. **D2 — generic kernel, complex source theorem.** The finite-piece
+   Abel/Fubini kernel is intended for a complete normed real vector space. The Watson
+   moment layer and Olver-facing theorem use complex-valued amplitudes and
+   coefficients; a real specialization is a corollary. This matches the
+   book's explicit real-or-complex convention for its Laplace framework
+   without coupling the generic estimate to complex arithmetic.
+3. **D3 — flat witnesses first.** Keep `k`, `K`, `X`, `L`, the finite
+   exceptional set, and the primitive witness visible. A certificate structure
+   is deferred until at least two consumers establish stable fields.
+4. **D5 — five downward-only layers.** Use a small ordinary-improper relation,
+   finite-exceptional primitive layer, and finite-piece Abel/Fubini identity; a
+   generic local-tail estimate; a
+   scalar Watson/Gamma-moment layer; the `Olver1997` source adapter and later
+   qualitative audit consumer; and an independent section 9 global-majorant
+   packet. No source module may be imported by the reusable layers.
 
-Optimize for a durable LMLF-wide foundation, not merely the shortest Watson
-proof. If two decisions interact, resolve them together rather than returning
-an unranked menu. Do not set `lean_ready`; implementation authorization remains
-a separate review-envelope decision.
+One positive baseline `X` is chosen before the truncation order. The local and
+primitive constants remain order-dependent. This quantifier order is now part
+of the draft source-facing contract.
+
+## One remaining structural question for a future model pass
+
+The frozen `review/classifications-v2.json` makes `QL-001` its required example
+of packet-level novelty `novel`. The advisory response correctly observes that
+the underlying Abel/Dirichlet bounded-primitive estimate is classical, even if
+our exact explicit packaging is new project work.
+
+Should a future `classifications-v3.json` split **mathematical novelty** from
+**formalization/package novelty**, migrate `QL-001` accordingly, and leave v2
+immutable for already bound artifacts? Please answer only this schema-level
+question. Do not mutate v2, rewrite existing historical bindings, review proof
+details, or set `lean_ready`.
+
+## Local work that does not need another large-model decision
+
+The project team will independently settle exact Lean names, the representation
+of ordered exceptional points, finite-partition telescoping, bridge lemmas to
+Mathlib integrals under absolute integrability, routine edge tests, and the
+eventual exact signatures. All of these remain behind the proof-before-Lean
+review gates.

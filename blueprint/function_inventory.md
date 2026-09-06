@@ -23,7 +23,7 @@ An edition is bibliographic; a source snapshot is the exact physical or digital 
 
 `SRC-OLV-1997-COLLATION-PENDING` is a reserved placeholder for the locked copy required by the source manifest. It is not evidence that a copy has been acquired or inspected. Its locked-edition identity, `locked_copy_placeholder` kind, `pending` availability, absent digest/access metadata, unresolved digest/edition/page states, and `unknown` rights state are immutable schema invariants. Acquisition must create a new concrete snapshot ID and row, with a digest when legally and technically available, followed by occurrence reassignment or an explicit reconciliation record; the reserved row must never be promoted in place.
 
-`SRC-OLV-1997-USER-PDF-20260905` is the resulting concrete private snapshot. Its title, copyright page, corrected-reprint preface, contents, and Watson-related printed/PDF page map have been inspected, and its exact bytes are bound by ordinary SHA-256. The book bytes, OCR, and rendered pages remain outside version control. The Watson page audits are intentionally `partial`: a distinct source reviewer has not yet verified them, so the occurrence remains `transcribed_unreconciled` and all notation/entity associations remain provisional.
+`SRC-OLV-1997-USER-PDF-20260905` is the resulting concrete private snapshot. Its title, copyright page, corrected-reprint preface, contents, and selected Watson, Airy, and Chapter 8 printed/PDF page maps have been inspected, and its exact bytes are bound by ordinary SHA-256. The full book bytes, OCR, and rendered page images remain outside version control. Every mathematical page audit is intentionally `partial`: a distinct source reviewer has not yet verified it, so each new occurrence remains `transcribed_unreconciled` and every new notation/entity association remains provisional.
 
 Locators always use printed chapter, section, equation, example, exercise, or page labels. PDF page coordinates belong in `page_audits.csv`, never in the printed-page fields unless a page map has been verified.
 
@@ -119,6 +119,8 @@ Association link status is `provisional` or `confirmed`. A provisional associati
 
 Card theorem, coverage, and novelty classes are not duplicated in the inventory validator. Their executable allowed sets come directly from the frozen [`review/classifications-v2.json`](../review/classifications-v2.json) packet-level axes. The validator derives its registry set from each example's `registry_binding`: every `required` row (`QB-001`, `DEF-001`, `QL-001`, `OLV-001`, and `SR-001` currently) must exist in `cards.csv` with all three axes equal, while an `illustrative` row such as `NAMED-EXAMPLE` must not create a registry requirement. Registry status is `planning_only`, `execution_ready`, `active`, `complete`, or `superseded`; artifact status is `planned` or `file_present`.
 
+The v2-required `QL-001` novelty value is retained even though the bounded-primitive argument is classical. Correcting that mismatch requires an explicit versioned v3 schema and registry migration; this inventory must not mutate frozen v2. `IMP-001` is only a provisional planning handle for the ordinary-improper/finite-exceptional primitive layer and is intentionally absent from `cards.csv` until its name, boundary, card, and proof are reconciled.
+
 Manifest status is `planning_only`, `execution_ready`, `active`, `complete`, or `superseded`. `scope_closed` is an independent Boolean. `occurrence_selection_locked` is `true`, `false`, or `not_applicable`, because a zero-source bootstrap has no occurrence selection to lock. Every closed manifest and every manifest in a ready state (`execution_ready`, `active`, or `complete`) must have at least one registered member card, and every member card's registration status must equal the manifest status and have its canonical file-present card artifact. If such a manifest declares or links any source-coverage occurrence, its occurrence selection must be locked. Each source-coverage occurrence must have confirmed links to ready canonical cards in that same manifest for (i) an `exact_source_target`/`exact_source_generic` or `named_application`/`named_source_application` pair and (ii) a `source_recovery`/`audit_source_recovery` pair. A role link to a card in another manifest cannot satisfy closure. `generic_dependency` is not an additional coverage gate: in the normative Watson plan it is an implementation-DAG dependency, while the source manifest explicitly assigns occurrence coverage to the exact-source and source-recovery cards. A closed or ready manifest cannot contain an unresolved/unverified source occurrence. A source-dependent card cannot enter a ready registration state while any bound source occurrence is not source-ready.
 
 ## Audit queue
@@ -135,7 +137,7 @@ The queue is seeded only by direct publisher-preview pages, its contents, or cit
 | Error functions, Dawson's integral, Fresnel integrals | Chapter 2 §4 contents | variants, scalings, continuation |
 | Incomplete gamma functions | Chapter 2 §5 and Chapter 4 contents | upper/lower, normalized forms, parameter order |
 | Orthogonal/classical orthogonal polynomials | Chapter 2 §§6–7 contents | enumerate only body occurrences, not the DLMF family tree |
-| Airy integral/functions | Chapter 2 §8; Chapters 4 and 11 contents | integral versus `Ai`/`Bi`, rotations, derivatives |
+| Airy integral/functions | Direct locked-1997 Chapter 2 §§8.1–8.3 transcription plus later contents leads | independently review the real/contour `Ai` identification, normalization, rotations, and derivative meaning |
 | Bessel `J` and modified Bessel `I` | Chapter 2 §§9–10 contents only in the present seed | both remain `occurrence_unresolved`; inspect definitions and conventions |
 | Zeta function | Chapter 2 §11 contents | confirm Riemann zeta identity and notation |
 
@@ -146,7 +148,7 @@ Authoritative convention cross-checks include DLMF [Gamma](https://dlmf.nist.gov
 | Queue item | Evidence | Required audit |
 |---|---|---|
 | Elementary exponential comparison solutions | Chapter 10 contents | separate unnamed expressions from named project wrappers |
-| Airy functions, derivatives, modulus/phase, auxiliaries | Chapter 11 contents; [DLMF §9.8](https://dlmf.nist.gov/9.8) points to Olver's modulus/phase treatment | enumerate every printed auxiliary symbol |
+| Airy functions, derivatives, modulus/phase, auxiliaries | Direct locked-1997 Chapter 11 §§1.1–2.4 transcription; [DLMF §9.8](https://dlmf.nist.gov/9.8) cross-check | independently review the enumerated `Ai`, `Bi`, `E`, `M`, `theta`, `N`, `omega`, `c`, `lambda`, `mu_1`, and `mu_2` records |
 | Bessel/modified-Bessel simple-pole models | Chapter 12 contents; [DLMF §2.8](https://dlmf.nist.gov/2.8) identifies comparison cases | basis, normalization, phase shift, real/complex auxiliaries |
 | Inhomogeneous Airy/Scorer-type models | Chapters 10–11 contents; [DLMF §9.12](https://dlmf.nist.gov/9.12) supplies Olver page locators | direct source scan before confirming each Scorer notation |
 | Coalescing-saddle and endpoint models | Chapter 9 CFU/Bleistein sections; [DLMF §2.4](https://dlmf.nist.gov/2.4) gives modern taxonomy | verify which modern names occur in the edition |
@@ -159,7 +161,7 @@ Authoritative convention cross-checks include DLMF [Gamma](https://dlmf.nist.gov
 | Chapter 5 | hypergeometric, generalized hypergeometric, associated Legendre, Legendre, Ferrers | [DLMF §15.1](https://dlmf.nist.gov/15.1), [§14.1](https://dlmf.nist.gov/14.1) |
 | Chapter 6 | parabolic cylinder | [DLMF §12.1](https://dlmf.nist.gov/12.1) |
 | Chapter 7 | Hankel, Bessel `Y`, other cylinder, modified Bessel, confluent hypergeometric, Whittaker, Struve | [DLMF §10.4](https://dlmf.nist.gov/10.4), [§13.1](https://dlmf.nist.gov/13.1), [§13.2](https://dlmf.nist.gov/13.2), [§11.1](https://dlmf.nist.gov/11.1) |
-| Chapter 8 | Bernoulli polynomials and Barnes-integral hypergeometric notation | [DLMF §24.2](https://dlmf.nist.gov/24.2) |
+| Chapter 8 | Direct locked-1997 §1 transcription of periodic primitives, Bernoulli numbers/polynomials, finite Euler--Maclaurin, and positive-even zeta; later material remains discovery-only | [DLMF §24.2](https://dlmf.nist.gov/24.2) |
 | Chapter 9 | Nicholson Bessel combination and Anger functions | [DLMF §11.11](https://dlmf.nist.gov/11.11) |
 | Chapter 14 | exponential integral and confluent hypergeometric revisited | reconcile to earlier entities |
 
@@ -180,7 +182,16 @@ Goodwin–Staton, incomplete beta, Faddeeva, generalized exponential integrals, 
 9. Associate occurrences with cards and manifests. Manifest selection freezes scope, not truth or proof progress.
 10. Reverse-audit theorem cards and public APIs for unlinked names, then reconcile totals and index-only exclusions.
 
-For `OLV97-C03-WATSON`, the concrete locked snapshot, printed Theorem 3.1 label, mathematical transcription and hash, page map, and provisional notation/entity records now exist. Independent review, scalar-codomain interpretation, improper-integral semantics, and confirmed associations remain unresolved. Draft QL-001 and OLV-001 cards/proofs exist without frozen signatures or authorization. The related `OLV97-C03-WATSON-BOUNDS` row separately records section 9.1-9.2's stronger global-majorant formulas and is not selected into the one-occurrence MVP manifest.
+For `OLV97-C03-WATSON`, the concrete locked snapshot, printed Theorem 3.1 label, mathematical transcription and hash, page map, and provisional notation/entity records now exist. The revision-2 design is source-facing over complex scalars with a real corollary; it represents ordinary convergence by independent one-sided limits at a finite exceptional set and a continuous normalized primitive with regular-piece increments. Lean-facing regular pieces use Mathlib Bochner `intervalIntegral` with explicit integrability evidence, while only endpoint passages are improper; no second proper-Riemann library is planned. OLV-001 chooses one common baseline `X > 0` before `n`. Independent approval and confirmed associations remain unresolved. Draft QL-001 and OLV-001 revision-2 cards/proofs exist without frozen signatures or authorization, while their proposed IMP-001 infrastructure predecessor is unregistered and still needs its own card and natural-language proof before Lean. The related `OLV97-C03-WATSON-BOUNDS` row separately records section 9.1-9.2's stronger global-majorant formulas; its draft OLV-002 packet is unregistered and neither occurrence nor packet is selected into the one-occurrence MVP manifest.
+
+Four additional exact locked-edition occurrence rows bind the Chapter 2 `Ai`,
+Chapter 11 real Airy/basis, Chapter 11 real auxiliaries, and Chapter 8
+Euler--Maclaurin/Bernoulli transcriptions. Their hashes and partial page maps
+are recorded, but every source, normalization, entity, and association state
+remains unreconciled or provisional. Airy remains uncarded. The Bernoulli
+numbers/polynomials have an unregistered revision-1 planning card and proof;
+there is no `cards.csv` or occurrence-card association and no manifest selects
+any of these four occurrences.
 
 ## Completion gates
 

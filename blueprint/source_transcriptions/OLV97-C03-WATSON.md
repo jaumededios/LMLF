@@ -6,17 +6,18 @@ A K Peters reprint, 1997, ISBN 1-56881-069-5
 **Source snapshot:** `SRC-OLV-1997-USER-PDF-20260905`
 **Source location:** Chapter 3, section 3, Theorem 3.1, printed pp. 71-72;
 PDF pages 84-85
-**Supporting conventions:** Chapter 1 section 7, printed pp. 16-17; Chapter 3
-section 2.1, printed pp. 67-68
+**Supporting conventions:** Preface, printed p. xviii (PDF p. 13); Chapter 1
+section 7, printed pp. 16-17; Chapter 3 section 2.1, printed pp. 67-68;
+Chapter 4 sections 1.1 and 3.1, printed pp. 106 and 112 (PDF pp. 119 and 125)
 
 This file records mathematical content and source conventions in new prose. It
 does not reproduce the book's surrounding exposition or page images.
 
 ## Printed theorem, normalized transcription
 
-Fix positive real constants \(\lambda\) and \(\mu\). Let \(q(t)\) be a
-function of the positive real variable \(t\), with coefficients \(a_s\), such
-that
+Fix positive real constants \(\lambda\) and \(\mu\). Let \(q(t)\) be a real-
+or complex-valued function of the positive real variable \(t\), with
+coefficients \(a_s\) in the same scalar field, such that
 
 \[
  q(t) \sim \sum_{s=0}^{\infty}
@@ -37,6 +38,14 @@ Then
 
 provided the improper integral on the left converges over its full range for
 all sufficiently large \(x\).
+
+The theorem page does not repeat the codomain, but the book's surrounding
+Laplace theory explicitly says that \(q\) may be real or complex: Chapter 4
+section 1.1 calls its complex-parameter theory an extension of Chapter 3
+section 2 and says “again” that \(q\) is real or complex; Chapter 4 Theorem
+3.1* repeats the same codomain while referring its proof to Chapter 3 section
+3.2.  The source-facing formalization therefore uses complex scalars and
+obtains the real case by specialization.
 
 The source permits, subject to convergence, finitely many discontinuities and
 infinities in the integration range, including at \(t=0\). It states that the
@@ -91,8 +100,10 @@ The local interval satisfies
  < K_n\Gamma(\beta_n)x^{-\beta_n}. \tag{3.06}
 \]
 
-Choose one positive value \(X\) of the source parameter \(x\) for which
-\(\int_0^\infty e^{-Xt}\phi_n(t)\,dt\) converges, and put
+Choose one positive value \(X\) of the source parameter \(x\) for which the
+original integral of \(q\) converges. This choice is made before \(n\). For
+every \(n\), all finitely many model moments converge at this same \(X\), so
+the integral of \(\phi_n\) also converges there. Put
 
 \[
  \Phi_n(t):=\int_{k_n}^{t}e^{-Xv}\phi_n(v)\,dv.
@@ -147,27 +158,25 @@ For fixed \(n,\lambda,\mu,k_n,K_n,X,L_n\), the exponential term is
   \(\lambda/\mu-1>-1\).
 - \(x\) is the positive large parameter; \(q\), \(a_s\), \(\lambda\), and
   \(\mu\) are fixed as \(x\to+\infty\).
-- The source uses an improper integral and does not assume absolute
-  convergence. The exact Riemann/partition/principal-value semantics at a
-  permitted interior infinity are not fixed by these pages and remain an
-  interpretation question.
+- The preface says that every integral in the book is Riemannian. Ordinary
+  convergence in the presence of a finite interior infinity is therefore read
+  as separate one-sided improper convergence at that point. It is not a
+  Cauchy principal value: printed Exercise 3.4 explicitly introduces principal
+  value as a separate extension for a simple interior pole.
 - The theorem does not state uniformity in \(n\), \(\lambda\), \(\mu\), or any
   auxiliary parameter.
 
 ## Ambiguities deliberately left for review
 
-1. The statement names \(t\) as real but does not explicitly say whether
-   \(q(t)\) and \(a_s\) are real or complex. The proof works with absolute
-   values and appears compatible with complex values, but this should be
-   classified as interpretation or generalization, not silently assumed.
-2. A Lean statement matching conditional improper convergence needs a
+1. A Lean statement matching conditional improper convergence needs a
    limit-of-finite-interval-integrals interface. Mathlib's totalized Bochner
    integral is not by itself source-equivalent.
-3. Interior infinities require an explicit convention for subdivision and
-   convergence at every singular point. A first bounded packet may expose a
-   locally integrable formulation and record whether that is equivalent to or
-   stronger than the printed convention.
-4. Equation (W-local-tail) is extracted from the printed proof but is not
+2. Interior infinities require finite-breakpoint bookkeeping and separate
+   one-sided limits. Requiring `LocallyIntegrableOn` across the whole positive
+   ray would exclude conditionally convergent source cases and is not an
+   equivalent first interface. The current design candidate instead supplies
+   a continuous normalized primitive with an increment law on regular pieces.
+3. Equation (W-local-tail) is extracted from the printed proof but is not
    displayed as a single theorem in the source. It is a quantitative
    strengthening/repackaging, whereas equations (3.02)-(3.08) are direct source
    content.

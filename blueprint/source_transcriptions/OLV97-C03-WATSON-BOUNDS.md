@@ -7,6 +7,9 @@ A K Peters reprint, 1997, ISBN 1-56881-069-5
 **Source location:** Chapter 3, section 9.1-9.2, printed pp. 89-90; PDF pages
 102-103
 **Depends on:** Theorem 3.1 and its remainder \(\phi_n\), equation (3.04)
+**Supporting scalar convention:** Chapter 4 sections 1.1 and 3.1, printed
+pp. 106 and 112, explicitly permit real or complex amplitudes in the same
+Laplace framework
 
 This file records only the mathematical content needed to distinguish the
 source's global bounds from the local-tail proof of Theorem 3.1.
@@ -119,5 +122,6 @@ be negative.
    quotient.
 3. Preserve the strict domain \(x>\max(\sigma_n,0)\), which supplies both
    \(x>0\) and \(x-\sigma_n>0\).
-4. Record whether complex-valued \(q\) is an intended source interpretation or
-   a project generalization. The estimate itself naturally uses a norm.
+4. The exact-source check supports a complex target with a real
+   specialization. Independent source review is still required before this
+   packaging is frozen.

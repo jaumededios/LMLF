@@ -41,8 +41,10 @@ a manifest revision.
 `DEMO-0` is currently a planning queue, not closed or execution-ready, because
 most candidate packets do not yet have theorem cards.  The first execution-ready
 manifest is `BOOTSTRAP-0`, containing only the fully bounded, frozen QB-001 and
-DEF-001 cards.  Manifest readiness does not authorize Lean: each member still
-passes its externally recorded review gates.
+DEF-001 cards.  Manifest readiness did not itself authorize Lean; both members
+subsequently passed their externally recorded gates and their exact
+implementation was accepted at commit
+`515b742f7ad5472c17cfdf0fda7cbc83c5585da1`.
 
 Three inventories support every closed manifest:
 
@@ -63,12 +65,12 @@ specification, natural-language proof, review, implementation, coverage, and
 manifest membership.  The vocabulary is normative in
 [`theorem_cards/README.md`](theorem_cards/README.md).  Candidate-owned status
 fields are temporal and nonauthoritative.  QB-001 card revision 7 and proof
-revision 6 are
-currently `specification_status: frozen`, `proof_status: complete`,
+revision 6 record `specification_status: frozen`, `proof_status: complete`,
 `review_status: not_started`, and `implementation_status: not_started`.  Its
-revision-3 repository ledger is historical, non-quorum context.  Only an
-external envelope bound to the frozen commit and digests may establish review
-pass or Lean authorization.
+revision-3 repository ledger is historical, non-quorum context.  Those
+immutable self-fields describe the specification snapshot; external envelopes
+later established review pass and authorized the exact implementation accepted
+at `515b742f7ad5472c17cfdf0fda7cbc83c5585da1`.
 
 New mathematics includes a new explicit constant or threshold, stronger
 uniformity or derivative conclusion, a new continuation or exceptional-value
@@ -150,8 +152,9 @@ consumers, not semantic dependencies.
 
 M0-M4 test the architecture; they are not the first Olver result and must not
 expand into an indefinite foundations project.  `DEMO-0` remains planning-only
-until every chosen packet has a complete card; only `BOOTSTRAP-0` may currently
-be executed through review.
+until every chosen packet has a complete card. `BOOTSTRAP-0` served as the first
+bounded execution and its exact implementation is now accepted; later
+demonstrator work still requires its own closed cards and external gates.
 
 ### M0 — locked contracts and inventories
 
@@ -180,9 +183,10 @@ wrappers require later cards.
 `HasErrorFamily` replaces the misleading name `HasFiniteExpansion`: it asserts
 a family of finite error bounds and makes no convergence-in-order claim.
 
-Exit: the eight declarations pass their frozen review.  Empty-domain behavior is
-intentional because this is generic infrastructure; concrete source and named
-cards own reachability requirements.
+Exit: completed at `515b742f7ad5472c17cfdf0fda7cbc83c5585da1`; the eight
+declarations passed exact-candidate review.  Empty-domain behavior is intentional
+because this is generic infrastructure; concrete source and named cards own
+reachability requirements.
 
 ### M2 — auditable definitions pilot
 
@@ -193,7 +197,10 @@ naturals.  It creates no second Gamma object and claims no Olver occurrence.
 The exact specification snapshot contains no DEF-001 Lean implementation or
 prototype: `implementation_status` is `not_started`, `prototype_status` is
 `absent`, and review is `not_started`.  Bytes in another commit or dirty
-worktree have no standing until an external review envelope binds them.
+worktree have no standing until an external review envelope binds them.  That
+prospective condition was later met: the exact implementation at
+`515b742f7ad5472c17cfdf0fda7cbc83c5585da1` passed independent implementation
+review, while the frozen card retained its original self-status.
 
 Airy construction and broader definition sheets remain DEMO-0 planning items
 until independently carded.  Exit: DEF-001 passes reuse, semantic, and API
@@ -222,12 +229,15 @@ path.  It cannot delay the first source MVP.
 
 Deliver:
 
-- exact exponential moments and finite polynomial integration;
-- an explicit cutoff/tail identity with integrability hypotheses;
-- a generic finite Laplace remainder identity and bound;
+- a small relational ordinary-improper layer whose regular finite pieces are
+  Mathlib Bochner `intervalIntegral`s with explicit integrability evidence;
+- a finite-piece Abel/Fubini identity for a continuous primitive certificate;
+- a generic local/tail Laplace remainder identity and bound, with the real
+  Gamma moment reused directly from pinned Mathlib;
 - a divergent factorial example proving valid finite bounds without implying
   convergence in order;
-- Gamma facts from DEF-001 only if the selected moment proof actually uses them.
+- optional error-predicate or project-Gamma wrappers only if a later consumer
+  genuinely needs them.
 
 Exit: the finite integral packets have their own closed cards before execution.
 No Airy, Cauchy, ODE, comparison hierarchy, or custom tactic is a dependency.
@@ -255,16 +265,18 @@ independently unreviewed.  After review and reconciliation, M5 delivers:
 Watson is not a named-function application.  Only completion of this exact
 source-generic packet is the first quantitative-Olver MVP.
 
-The critical path is deliberately short, with collation and QB-001 proceeding
-as parallel predecessors:
+The critical path is deliberately short.  Source collation, the generic
+improper-integral layer, and the pinned-moment audit may proceed in parallel:
 
 ```text
-locked 1997 collation -----\
-                            +-> selected QL-001 -> OLV-001 -> SR-001
-QB-001 finite core --------/
-DEF-001 / Gamma facts - - -> QL-001 or OLV-001
-                           only if the collated formulation uses Gamma moments
+locked 1997 collation ------------------------------------\
+                                                           +-> OLV-001 -> SR-001
+pinned integration/limit facts -> IMP-001 -> QL-001 ------/
+pinned Real Gamma moment -----------------------> QL-001
 ```
+
+QB-001 and DEF-001 are optional packaging/audit joins, not mathematical
+dependencies of the revision-2 Watson route.
 
 Airy, Cauchy derivative transport, residual algebra, ODE stability, and
 comparison systems are parallel work and are explicitly not prerequisites.

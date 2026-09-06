@@ -2,7 +2,7 @@ schema_version: 2
 id: OLV-001
 title: Quantitative source recovery of Olver 1997 Theorem 3.1
 owner: jaumededios
-artifact_revision: 1
+artifact_revision: 2
 baseline_spec_commit: pending_external_record_after_commit
 
 theorem_class: finite_remainder_bound
@@ -15,7 +15,7 @@ implementation_status: not_started
 prototype_status: absent
 coverage_status: transcribed
 manifest_membership_status: planning_only
-status_as_of: post_source_acquisition_draft
+status_as_of: advisory_feedback_integrated_draft
 status_authority: external_review_envelope_only
 
 classification_schema:
@@ -33,7 +33,7 @@ source_occurrences:
   - OLV97-C03-WATSON
 source_transcription:
   path: blueprint/source_transcriptions/OLV97-C03-WATSON.md
-  sha256: 77f05a8800cdb794917d8e98565cd7ba4ba3d1d933e11eb767b09276adb0d2d8
+  sha256: 94ea9bf00b291e82a315522fee099d0889d60967f0de0b815f92a1e1ce8b5b6b
   status: transcribed_unreconciled
 source_entities:
   - watson_amplitude
@@ -77,8 +77,9 @@ scope:
 source_contract:
   location: Chapter 3 section 3.2, Theorem 3.1, printed pages 71-72
   amplitude_expansion: >-
-    q(t) has coefficients a_s at powers (s+lambda-mu)/mu as t tends to zero
-    from the positive side, in Olver's fixed-order asymptotic-expansion sense.
+    q(t) and a_s are complex-valued, with a real specialization, at powers
+    (s+lambda-mu)/mu as t tends to zero from the positive side, in Olver's
+    fixed-order asymptotic-expansion sense.
   parameter_domain: lambda > 0 and mu > 0
   convergence: >-
     The improper Laplace integral over the full positive range converges for
@@ -87,12 +88,15 @@ source_contract:
     The Laplace integral has coefficients Gamma((s+lambda)/mu)*a_s at powers
     x^(-(s+lambda)/mu) as x tends to positive infinity.
   source_regularities: >-
-    Subject to convergence, finitely many discontinuities and infinities are
-    permitted, including at zero; exact Lean semantics remain under review.
+    Integrals are ordinary Riemann improper integrals. A finite exceptional set
+    is split with independent one-sided convergence at every endpoint; no
+    principal-value cancellation is part of this theorem. Proper compact
+    integrals are available away from the exceptional set and are transported
+    to Mathlib's Bochner intervalIntegral in the Lean-facing adapter.
 
 quantitative_contract:
   beta_n: (n + lambda) / mu
-  witnesses: one common X > 0; for each n, k_n > 0, K_n >= 0, L_n >= 0
+  witnesses: one common X > 0; for each n, k_n > 0, K_n > 0, L_n >= 0
   domain: x > X
   bound: >-
     norm(integral - sum_{s<n} a_s*Gamma(beta_s)*x^(-beta_s)) <=
@@ -101,14 +105,31 @@ quantitative_contract:
   branch_convention: positive-real powers only
   derivative_convention: not_applicable
   exceptional_values: no Gamma poles because beta_s > 0
+  scalar_boundary: >-
+    The source-facing target is complex-valued with real parameter x and
+    positive-real powers; a real-valued theorem is a specialization.
+  primitive_boundary: >-
+    For each n, the source adapter constructs a continuous normalized baseline
+    primitive through the finite exceptional set, with its genuine integral
+    increment law on regular pieces and a global norm bound.
+  local_regularity: >-
+    After k_n is placed below the finite exceptional set, the source's proper
+    regularity on compact regular intervals supplies the measurability needed
+    for the local dominated-integrability argument.
 
 open_design_choices:
   scalar_codomain:
-    status: unresolved
-    source_question: whether q and a_s are real, complex, or either
+    status: provisionally_selected_pending_review
+    selection: complex source target with real corollary
   improper_integral:
-    status: unresolved
-    source_question: precise treatment of conditional convergence and interior infinities
+    status: provisionally_selected_pending_review
+    selection: >-
+      Relational ordinary-improper integral split at a finite exceptional set
+      with independent one-sided limits. Lean-facing regular finite pieces are
+      Mathlib Bochner intervalIntegral values with explicit IntervalIntegrable
+      evidence; only endpoint passages are improper. Principal value is reserved
+      for a later Exercise 3.4 adapter, and no second proper-Riemann library is
+      planned.
   packet_split:
     status: proposed
     proposal: >-
@@ -117,7 +138,7 @@ open_design_choices:
 
 natural_language_proof:
   artifact: blueprint/proofs/OLV-001.md
-  artifact_revision: 1
+  artifact_revision: 2
   artifact_state: draft
   proof_status: complete
 
@@ -128,9 +149,7 @@ target_classifications:
     novelty_class: strengthened_conclusion
 
 dependencies:
-  accepted_lmlf_packets:
-    - QB-001
-    - DEF-001
+  accepted_lmlf_packets: []
   draft_lmlf_packets:
     - QL-001
   source_dependencies:
@@ -140,7 +159,7 @@ dependencies:
 
 review_questions:
   path: review/questions/OLV97-C03-WATSON.md
-  status: awaiting_external_answers
+  status: advisory_response_received_pending_fresh_formal_review
 
 pre_lean_requirements:
   source_collation_reviewers: 2
@@ -151,7 +170,7 @@ pre_lean_requirements:
 
 blocking_conditions:
   - source transcription and page audit are not independently reviewed
-  - open design choices are unresolved
+  - provisional semantic and scalar selections lack independent approval
   - QL-001 is not frozen or accepted
   - exact Lean signatures have not been compiled
   - required external review quorum does not exist

@@ -172,10 +172,12 @@ complete and nonoverlapping.
 ### 3.2 Legacy artifacts
 
 Legacy-format proof artifacts such as QB-001 remain interpreted under their
-recorded format.  QB-001 revision 6 has no current external review binding;
-earlier candidate-owned summaries are non-quorum.  A future material successor
-uses this schema or the then-current reviewed version rather than silently
-inventing missing fields.
+recorded format.  QB-001 revision 6 itself contains no external review binding;
+earlier candidate-owned summaries are non-quorum.  Separate external records
+subsequently authorized and accepted the exact BOOTSTRAP-0 implementation at
+commit `515b742f7ad5472c17cfdf0fda7cbc83c5585da1` without rewriting that frozen
+artifact.  A future material successor uses this schema or the then-current
+reviewed version rather than silently inventing missing fields.
 The contract linter therefore supports explicit legacy versions; it does not
 quietly treat missing new fields as present.
 

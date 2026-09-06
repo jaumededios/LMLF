@@ -221,13 +221,13 @@ The entire member list and all source normalizations are unknown because `OLV10P
 
 - Confirm that the Chapter 2 zeta heading denotes Riemann zeta, and record argument type, initial Dirichlet-series domain, continuation, pole, and any functional-equation normalization.
 - Distinguish a completed/scaled zeta function if it appears; it is not an alias.
-- In Chapter 8, split Bernoulli numbers, Bernoulli polynomials, and periodic Bernoulli functions only when body occurrences confirm them.
-- Freeze the $B_1$ sign convention, polynomial argument, periodicization convention at integers, and derivative variable.
-- Determine exactly which Euler–Maclaurin coefficient and remainder formulas use these objects.
+- Independently review the locked Chapter 8 §1 split into Bernoulli numbers, Bernoulli polynomials, and periodic functions recorded by `OLV97-C08-EULER-MACLAURIN`.
+- Reconcile the transcribed $B_1=-1/2$ sign, polynomial argument, `[0,1)` periodic representative, integer point value, and derivative variable with the pinned declarations.
+- Freeze only the exact finite Euler–Maclaurin identity and integral remainder supplied by that occurrence; norm bounds are later project mathematics.
 
 ### Construction versus reuse and dependencies
 
-The pin already supplies `bernoulli`, `Polynomial.bernoulli`, its derivative and power-sum identity, plus `bernoulliFun` and regularity facts. These should be reused after exact normalization comparison. The current audit did not record a zeta availability decision, so search the pin before proposing any new object. A reused zeta still needs a readable Dirichlet-series/continuation identification and explicit pole/totalization policy.
+The pin supplies `bernoulli`, `Polynomial.bernoulli`, `bernoulliFun`, and `periodizedBernoulli`; the last uses the `[0,1)` representative and matches the transcribed integer value at $B_1$. `DEF-BERN-001` is therefore reuse-only and declaration-free. `BER-001` may add only a real-line facade plus the calculus/envelope facts required by Euler--Maclaurin, after exact source identification. The zeta decision remains separate: the new occurrence identifies only positive-even Dirichlet-series values, not analytic continuation or pole semantics.
 
 ```text
 locked zeta/Bernoulli body audit
@@ -245,7 +245,12 @@ pin reuse audit
 ### Proof dossiers and card queue
 
 - `NLP-ZETA-001`: pin reuse, Dirichlet-series convergence/equality, continuation domain, pole and totalized values, real agreement, and only the functional identities included in the bounded card.
-- `NLP-BERN-001`: exact match of numbers, polynomials, periodic function, $B_1$ convention, derivative identity, endpoint behavior, and source notation.
+- `NLP-BERN-001`: exact match of numbers and rational polynomials, their real
+  evaluation facade, the $B_1$ convention, derivative identity, coefficient
+  orientation, and source notation.
+- `NLP-BERN-002`: exact match of the source periodization with pinned
+  `periodizedBernoulli`, including the `[0,1)` representative and endpoint jump;
+  later `BER-001` owns only the real-line facade and calculus/envelope API.
 
 | Provisional ID | Bounded target | Packet theorem / coverage class | Prerequisites |
 |---|---|---|---|
@@ -256,7 +261,7 @@ pin reuse audit
 
 ### Acceptance gates, negative tests, unknowns, and consumers
 
-Acceptance requires source identity, exact pin declarations, series convergence domain, continuation/pole semantics, Bernoulli normalization, and independent low-index audits. Tests catch the two $B_1$ conventions, polynomial index/argument reversal, periodic endpoint mismatch, zeta's pole treated as a finite value, and a Dirichlet-series formula asserted outside its half-plane. The zeta identity and Bernoulli member split are unknown. Prospective consumers are finite Euler–Maclaurin, coefficient transfer, power sums, and source-confirmed zeta asymptotics; the generic summation method remains separate infrastructure.
+Acceptance requires source identity, exact pin declarations, series convergence domain, continuation/pole semantics, Bernoulli normalization, and independent low-index audits. Tests catch the two $B_1$ conventions, polynomial index/argument reversal, periodic endpoint mismatch, zeta's pole treated as a finite value, and a Dirichlet-series formula asserted outside its half-plane. The Bernoulli split, periodic representative, exact finite remainder, and positive-even zeta formula are transcribed but independently unreviewed; global zeta identity remains unresolved. Prospective consumers are finite Euler–Maclaurin, coefficient transfer, power sums, and source-confirmed zeta asymptotics; the generic summation method remains separate infrastructure.
 
 ## Portfolio F — Anger/Weber, Struve, and Nicholson-type objects
 
@@ -373,7 +378,7 @@ Every portfolio must pass the repository-wide definition gates in [`README.md`](
 
 - A locked 1997 snapshot is now available in the canonical source-snapshot ledger, but none of these family portfolios has a complete independently reviewed body audit from it.
 - No page range in these portfolios has a complete, independently reviewed locked-edition audit.
-- Most leads are contents-only; family membership and member counts are unknown.
+- Most leads are contents-only; the bounded Chapter 8 Bernoulli/zeta occurrence is a new exception, but family membership and member counts elsewhere remain unknown.
 - Except for the recorded Bernoulli and hypergeometric substrates, pin-specific reuse searches are incomplete.
 - Branch, contour, principal-value, parameter-regularity, and complex ODE infrastructure remains uncarded for many proposed constructions.
 - No source application, exact approximant, finite error bound, or occurrence reconciliation is specified here.

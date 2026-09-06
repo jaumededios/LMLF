@@ -140,12 +140,14 @@ Specification, proof, review, implementation, coverage, and manifest membership
 use separate controlled vocabularies from `theorem_cards/README.md`.
 Candidate-owned review and implementation fields are temporal descriptions,
 not gate evidence.  QB-001 card revision 7 and proof revision 6 are frozen and
-complete as applicable but have
-no current external review or implementation authorization.  Its revision-3
-repository review summary is historical and non-quorum.  DEF-001 revision 4 is
-frozen with `implementation_status: not_started` and `prototype_status: absent`
-for the exact specification snapshot.  Manifest execution readiness never
-implies Lean authorization.
+complete as applicable, while their self-fields retain the pre-authorization
+state.  Its revision-3 repository review summary is historical and non-quorum.
+DEF-001 revision 4 likewise remains frozen with
+`implementation_status: not_started` and `prototype_status: absent` for the
+exact specification snapshot.  Manifest execution readiness never implies Lean
+authorization; separate external records later authorized and accepted the
+exact BOOTSTRAP-0 implementation at
+`515b742f7ad5472c17cfdf0fda7cbc83c5585da1` without rewriting either card.
 
 ## DD-016 — Packet concepts are not source entities
 
@@ -156,12 +158,14 @@ entity, notation, and occurrence IDs remain reserved for source reconciliation.
 
 ## DD-017 — Watson has a narrow critical path
 
-The edition/occurrence collation and QB-001 finite calculus are independent,
-parallel predecessors of the selected finite integral/Laplace slice.  That
-slice leads to OLV-001 and then SR-001.  DEF-001 Gamma facts feed QL-001 or
-OLV-001 only if the collated formulation uses Gamma moments.  Airy, Cauchy
-derivative transport, exact ODE residuals, and ODE/comparison systems are
-parallel tracks, not blockers.
+The edition/occurrence collation and the selected finite integral/Laplace
+infrastructure are independent, parallel predecessors of the source adapter.
+For the revision-2 Watson programme the mathematical path is
+`IMP-001 -> QL-001 -> OLV-001 -> SR-001`; the real Gamma-moment identity is a
+direct pinned-Mathlib reuse inside QL-001.  The accepted QB-001 and DEF-001
+bootstrap declarations are optional packaging and audit joins, not Watson
+dependencies.  Airy, Cauchy derivative transport, exact ODE residuals, and
+ODE/comparison systems are parallel tracks, not blockers.
 
 ## DD-018 — Classification and review authority are versioned
 

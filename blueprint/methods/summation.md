@@ -17,11 +17,13 @@ into a certified upper bound by changing its name.
 - `N` terms means a sum over `Finset.range N`; for natural endpoints `m ≤ n`,
   the default interval is half-open, \(\sum_{k=m}^{n-1}\).  Inclusive sums are
   named explicitly.
-- Bernoulli numbers use Mathlib's convention, in particular
+- The locked Chapter 8 §1 transcription uses Mathlib's convention, in particular
   \(B_1=-\tfrac12\).  The real Bernoulli polynomial is
   \(B_r(x)\); the periodic function is separately defined by
   \(\widetilde B_r(x)=B_r(\{x\})\), with `0 ≤ {x} < 1`.
-  `bernoulliFun` itself is a polynomial, not the periodic function.
+  The pin already provides `periodizedBernoulli` on `UnitAddCircle` through the
+  `[0,1)` representative; a real-line wrapper must reuse it rather than invent
+  a second periodization. Source agreement remains independently unreviewed.
 - The baseline Euler--Maclaurin formula sums `[m,n)`.  This fixes the endpoint
   term as `(f(m) - f(n))/2`; changing to an inclusive or `(m,n]` convention
   requires a separately proved transport lemma.
@@ -43,7 +45,7 @@ and reviewed proof artifact exist.
 | Order | Card | Packet theorem / coverage / novelty class | Bounded content | Dependencies |
 |---:|---|---|---|---|
 | 1 | SUM-001 | `foundational_calculus` / `infrastructure` / `equivalent_reformulation` | finite summation-by-parts identities and Dirichlet bound | QB-001 and Mathlib finite sums |
-| 2 | BER-001 | `definition_identification` / `infrastructure` / `novel` project periodic wrapper | periodic Bernoulli definition, unit-interval calculus, and explicit finite envelope | pinned Bernoulli polynomials |
+| 2 | BER-001 | `definition_identification` / `infrastructure` / `equivalent_reformulation` | real-line facade for pinned `periodizedBernoulli`, unit-interval calculus, and explicit finite envelope | accepted DEF-BERN-001 number/polynomial identification, accepted DEF-BERN-002 periodization identification, and pinned Bernoulli objects |
 | 3 | EM-001 | `exact_identity` / `infrastructure` / `equivalent_reformulation` | half-open Euler--Maclaurin exact identity | SUM-001, BER-001, interval integration by parts |
 | 4 | EM-002 | `finite_remainder_bound` / `infrastructure` / `novel` explicit packaging | natural integral remainder bound and explicit constant corollaries | EM-001, QB-001 |
 | 5 | CF-001 | `mixed` / `infrastructure` / `equivalent_reformulation` | circle coefficient identity and Cauchy coefficient bound | pinned Cauchy integral infrastructure |
@@ -122,9 +124,11 @@ correctness and Mathlib/API reuse before Lean.
 
 ## 4. BER-001 — periodic Bernoulli support
 
-This packet must not redefine Mathlib's Bernoulli numbers or polynomials.  It
-adds only the periodic function needed by Euler--Maclaurin and proves its
-relationship to the reused polynomial.
+This packet must not redefine Mathlib's Bernoulli numbers, polynomials, or
+periodization. It adds only the real-line facade needed by Euler--Maclaurin and
+the calculus/envelope facts not already exported for pinned
+`periodizedBernoulli`. `DEF-BERN-001` is reuse-only and declaration-free;
+`DEF-BERN-002` separately owns the source-to-periodization identification.
 
 For `r : ℕ`, define
 
@@ -387,28 +391,31 @@ Reuse candidates verified in the current local audit are:
 - root `bernoulli`, `Polynomial.bernoulli`,
   `Polynomial.derivative_bernoulli`, and
   `Polynomial.sum_range_pow_eq_bernoulli_sub`;
-- root `bernoulliFun`, `hasDerivAt_bernoulliFun`,
-  `intervalIntegrable_bernoulliFun`, and its unit-interval integral facts;
+- root `bernoulliFun`, `periodizedBernoulli` on `UnitAddCircle`,
+  `hasDerivAt_bernoulliFun`, `intervalIntegrable_bernoulliFun`, and its
+  unit-interval integral facts;
 - interval integration by parts and the Bochner integral norm inequality;
 - `Complex.cauchyPowerSeries`, `cauchyPowerSeries_apply`,
   `DifferentiableOn.hasFPowerSeriesOnBall`, the Cauchy derivative integral, and
   `circleIntegral.norm_integral_le_of_norm_le_const`.
 
-The pinned searches found no Euler--Maclaurin theorem with a periodic-Bernoulli
-remainder and no ready finite Darboux/coefficient-transfer package in the
-required source-facing form.  `bernoulliFun` is nonperiodic and does not close
-that gap.  EM-001, EM-002, and DAR-001 are new project formalization work; a
-fresh exact-signature search is required before freezing each card.
+The pinned searches found no Euler--Maclaurin theorem with the exact
+periodic-Bernoulli remainder and no ready finite Darboux/coefficient-transfer
+package in the required source-facing form. Periodization itself is already
+present; the remaining gap is its real-line calculus facade and the exact
+finite identity. EM-001, EM-002, and DAR-001 remain project formalization work;
+a fresh exact-signature search is required before freezing each card.
 
 ## 12. Named Olver consumers
 
-The following are discovery-level consumers from Chapter 8 and the current
-inventory.  Each needs a locked body occurrence and exact transcription before
-its coverage and novelty classifications are frozen.
+The Chapter 8 §1 Bernoulli/Euler--Maclaurin row now has a locked body
+transcription; it remains independently unreconciled. Other consumers below
+are discovery-level and still need exact locked occurrences before their
+coverage and novelty classifications are frozen.
 
 | Provisional card | Named consumer | Expected dependency |
 |---|---|---|
-| DEF-BERNOULLI-001 | Bernoulli polynomials in Chapter 8 §1 | entity identification/convention audit, not by itself theorem coverage |
+| DEF-BERN-001 | Bernoulli polynomials in Chapter 8 §1 | entity identification/convention audit, not by itself theorem coverage |
 | APP-STIRLING-LOGGAMMA-001 | Stirling's series for `log Γ(z)`, Chapter 8 | EM-001/002 or the source's contour remainder, identified Gamma, and a fixed logarithm branch |
 | APP-BARNES-HYPERGEOMETRIC-001 | Barnes integral for the hypergeometric function, Chapter 8 | CT-001/002, residue/branch data, and identified ordinary versus regularized hypergeometric object |
 | APP-ENTIRE-EXPANSION-001 | asymptotic expansions of entire functions, Chapter 8 | CF-001 plus exact source growth hypotheses |

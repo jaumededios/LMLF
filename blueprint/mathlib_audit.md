@@ -216,11 +216,36 @@ Import `Mathlib.NumberTheory.BernoulliPolynomials` provides:
 - `Polynomial.sum_range_pow_eq_bernoulli_sub`
 
 Import `Mathlib.NumberTheory.ZetaValues` provides root `bernoulliFun`,
-`hasDerivAt_bernoulliFun`, and `intervalIntegrable_bernoulliFun`, together with Fourier-related facts.
+`hasDerivAt_bernoulliFun`, `intervalIntegrable_bernoulliFun`, and
+`periodizedBernoulli`, together with Fourier-related facts.  At the pinned
+revision,
 
-No Euler--Maclaurin theorem, periodic-Bernoulli remainder package, or directly reusable finite
-Euler--Maclaurin expansion was found in either searched snapshot. Such a method module is new formalization
-work, although the Bernoulli and integration primitives already exist.
+```lean
+def periodizedBernoulli (k : ℕ) : UnitAddCircle → ℝ :=
+  AddCircle.liftIco 1 0 (bernoulliFun k)
+```
+
+uses the representative in `[0,1)`.  Its pullback along `ℝ → UnitAddCircle`
+therefore agrees with `bernoulliFun k (Int.fract x)`, including the
+source-critical integer value `B₁(0) = -1/2`.  Mathlib exposes continuity of
+this circle function for `k ≠ 1`; the exclusion records the genuine jump in
+the first periodic Bernoulli function.  Useful supporting declarations include
+`bernoulli_one`, `Polynomial.bernoulli_def`,
+`Polynomial.bernoulli_eval_zero`, `Polynomial.derivative_bernoulli`,
+`bernoulliFun_eval_one`, `bernoulliFun_eq_integral`,
+`bernoulliFun_eval_half`, `Int.fract_intCast`, and
+`periodizedBernoulli.continuous`.
+
+Consequently the project must not define a second periodization.  A bounded
+Bernoulli identification packet can reuse Mathlib's numbers and polynomials
+without new semantic declarations.  The method layer needs only a real-line
+facade for `periodizedBernoulli`, the factorial conversion to Olver's
+`ω_s = B_s({x}) / s!`, and the missing cellwise calculus and envelope lemmas.
+
+No Euler--Maclaurin theorem or directly reusable finite periodic-Bernoulli
+remainder expansion was found in either searched snapshot. Such a method
+module is new formalization work, although the Bernoulli periodization and
+integration primitives already exist.
 
 ### ODEs, Gronwall estimates, and contraction mappings
 

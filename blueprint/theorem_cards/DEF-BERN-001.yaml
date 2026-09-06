@@ -1,0 +1,333 @@
+schema_version: 2
+id: DEF-BERN-001
+title: Identify Olver's Bernoulli numbers and polynomials with pinned Mathlib
+owner: jaumededios
+artifact_revision: 1
+baseline_spec_commit: pending_external_record_after_commit
+
+theorem_class: definition_identification
+coverage_class: entity_identification
+novelty_class: non_novel
+specification_status: draft
+proof_status: draft
+review_status: not_started
+implementation_status: not_started
+prototype_status: absent
+coverage_status: transcribed
+manifest_membership_status: planning_only
+status_as_of: referee_feedback_integrated_draft
+status_authority: >-
+  Review pass and implementation authorization can be established only by an
+  external review envelope bound to the frozen specification commit and exact
+  artifact digests. This draft claims neither.
+
+classification_schema:
+  path: review/classifications-v2.json
+  schema_version: lmlf-classification-v2
+  artifact_revision: 2
+  sha256: 8c9f8dbb5ab351771a433a9901fe176a66ec214092c5d5880b3ec57c9a5b23e9
+
+manifest: null
+source_snapshot:
+  id: SRC-OLV-1997-USER-PDF-20260905
+  digest_algorithm: sha256
+  sha256: 08e1844d29a5ad21f89b9b600249ce18ac1665a5845be2d4e4219a3ededdc909
+  repository_contains_source_bytes: false
+source_occurrences:
+  - OLV97-C08-EULER-MACLAURIN
+source_transcription:
+  path: blueprint/source_transcriptions/OLV97-C08-EULER-MACLAURIN.md
+  sha256: f0d1113204c984096f04af658037aed6ddb9012fbcca5fb6dfdfb84c4bdadb99
+  status: transcribed_unreconciled
+source_entities:
+  - bernoulli_numbers
+  - bernoulli_polynomials
+source_notation:
+  - OLV97-N-EM-BNUM
+  - OLV97-N-EM-BPOLY
+coverage_claim: >-
+  Planning-only identification of two source entities. It covers no Olver
+  theorem occurrence and remains pending independent source and normalization
+  review.
+
+pin_binding:
+  lean_toolchain: leanprover/lean4:v4.33.1
+  lean_toolchain_sha256: 3aac669c7a910ec2389f4e4f921b605adf6ebf2d1e0c9b9cd0be4d33f3f5db71
+  mathlib_tag: v4.33.1
+  mathlib_revision: 0df444a360eaa60ab8c11dca51a86af692955474
+  lake_manifest_sha256: 4bd9b595f84163f69bdb0ffc9b1a876b5df71d65bdd53122415610d083d43404
+  mathlib_audit:
+    path: blueprint/mathlib_audit.md
+    sha256: 6b0aab27aac6711894567048c3f232f6ab3345b5d0c79b5b3402e0ecad38378c
+  source_files:
+    - path: Mathlib/NumberTheory/Bernoulli.lean
+      sha256: 25e02401c1ccb47d6a7db4637cdaf15cf1d3d89539b8de0755887b3aa88376d1
+    - path: Mathlib/NumberTheory/BernoulliPolynomials.lean
+      sha256: 936ad39ef25a9dc336836d1f564e7a369cea0ea1978a8bbf0ed565c5cef335cf
+    - path: Mathlib/NumberTheory/ZetaValues.lean
+      sha256: 491a1fc741734e2eb5a79684542bc0b57bc6333e0dc7619c47fecbaa366d8b73
+
+scope:
+  summary: >-
+    Identify Olver's complex analytic coefficients with canonical casts of
+    root bernoulli, identify the canonical rational polynomial from (1.09)
+    with Polynomial.bernoulli, and then identify the real evaluation facade
+    bernoulliFun. Coefficient-wise complex polynomial base change is only an
+    algebraic corollary, not a source-scope claim. Use the printed rational
+    recurrence for the source-to-pin bridge; audit coefficient orientation,
+    B_0, B_1, zero evaluation, derivative/reflection conventions, and the
+    denominator-cleared formal generating functions. Add no declaration or
+    alias.
+  candidate_module: null
+  exact_signatures_artifact: not_applicable-no-project-declarations
+  project_public_declarations: []
+  reused_entities:
+    - source_entity: bernoulli_numbers
+      declaration: _root_.bernoulli
+      type_shape: "Nat -> Rat"
+      source_scalar_bridge: "Olver coefficient B_s^O = (bernoulli s : Complex)"
+    - source_entity: bernoulli_polynomials
+      declaration: Polynomial.bernoulli
+      type_shape: "Nat -> Polynomial Rat"
+      source_scalar_bridge: >-
+        Exact canonical rational polynomial from (1.09); coefficient-wise map
+        into Polynomial Complex is an algebraic corollary only.
+    - source_entity: bernoulli_polynomials
+      declaration: _root_.bernoulliFun
+      type_shape: "Nat -> Real -> Real"
+      role: real base-change and evaluation facade, not a separate source entity
+  included:
+    - coefficient orientation B_s(x) = sum_j choose(s,j) B_(s-j) x^j
+    - negative-B_1 convention and B_1(x) = x - 1/2
+    - B_s(0) = B_s over the rational polynomial and real facade
+    - derivative with respect to the polynomial or real argument
+    - reflection B_s(1-x) = (-1)^s B_s(x)
+    - formal denominator-cleared generating identities
+  excluded:
+    - any duplicate Bernoulli definition, wrapper, notation, or compatibility alias
+    - periodizedBernoulli, fractional-part periodization, and Olver's omega_s
+    - all periodic endpoint choices, assigned integer values, and jump analysis
+    - every Euler-Maclaurin identity, coefficient, remainder, and bound
+    - analytic convergence of the complex generating series on abs(z) < 2*pi
+    - midpoint identities, polynomial bounds, power sums, and zeta values
+
+mathematical_contract:
+  index_convention: s is a natural-number degree/index and precedes the argument.
+  coefficient_orientation: >-
+    The coefficient of x^j in B_s(x) is choose(s,j) * B_(s-j) for
+    0 <= j <= s, and is zero above degree s.
+  number_normalization: "B_0 = 1 and B_1 = -1/2."
+  source_to_pin_bridge: >-
+    Olver's printed recurrence (1.11), starting from B_0=1, keeps every source
+    coefficient in the canonical copy of Rat inside Complex and uniquely
+    determines it. Coefficient comparison in the pinned denominator-cleared
+    formal identity instantiated at A = Rat gives the same recurrence for root
+    bernoulli.
+  evaluation_at_zero: "Polynomial.bernoulli s evaluated at zero is root bernoulli s."
+  real_agreement: >-
+    bernoulliFun s x is Polynomial.bernoulli s after mapping rational
+    coefficients to real numbers and evaluating at x.
+  derivative_convention: >-
+    Differentiation is in x: the source states derivative(B_s) =
+    s * B_(s-1) for s >= 1. Mathlib's s = 0 case is a harmless zero-factor
+    algebraic extension and is not attributed to the source.
+  reflection_convention: "B_s(1-x) = (-1)^s * B_s(x)."
+  formal_number_generating_function: >-
+    The power series with coefficient B_s/s! satisfies
+    B(Z) * (exp(Z)-1) = Z.
+  formal_polynomial_generating_function: >-
+    The power series with coefficient B_s(x)/s! satisfies
+    B_x(Z) * (exp(Z)-1) = Z * exp(x*Z), represented in Mathlib by rescaling
+    the exponential power series.
+  formal_quotient_warning: >-
+    exp(Z)-1 has zero constant coefficient and is not inverted in the formal
+    power-series ring; the two cleared product identities are normative.
+  validity_domain: >-
+    All s in Nat; Polynomial.bernoulli has rational coefficients;
+    bernoulliFun evaluates its rational-coefficient base change on all real x.
+  branch_convention: not_applicable
+  exceptional_values: >-
+    There are no poles or branches. At s = 1 the nonperiodic polynomial has
+    B_1(0) = -1/2 and B_1(1) = 1/2; this is not a periodic endpoint policy.
+
+prospective_audit_targets:
+  - id: BER-M00
+    declaration: _root_.bernoulli_zero
+    expected_shape: "bernoulli 0 = 1"
+  - id: BER-M01
+    declaration: _root_.bernoulli
+    expected_role: reused rational Bernoulli number sequence
+  - id: BER-M02
+    declaration: _root_.bernoulli_one
+    expected_shape: "bernoulli 1 = -1 / 2"
+  - id: BER-M03
+    declaration: _root_.bernoulliPowerSeries
+    expected_role: coefficient sequence bernoulli n divided by n factorial
+  - id: BER-M04
+    declaration: _root_.bernoulliPowerSeries_mul_exp_sub_one
+    expected_shape: "bernoulliPowerSeries A * (exp A - 1) = X"
+  - id: BER-M05
+    declaration: Polynomial.bernoulli
+    expected_role: reused rational Bernoulli polynomial sequence
+  - id: BER-M06
+    declaration: Polynomial.bernoulli_def
+    expected_role: source-facing finite coefficient orientation
+  - id: BER-M07
+    declaration: Polynomial.coeff_bernoulli
+    expected_role: coefficient and out-of-range regression
+  - id: BER-M08
+    declaration: Polynomial.bernoulli_one
+    expected_shape: "Polynomial.bernoulli 1 = X - C (2 inverse)"
+  - id: BER-M09
+    declaration: Polynomial.bernoulli_eval_zero
+    expected_shape: "(Polynomial.bernoulli n).eval 0 = bernoulli n"
+  - id: BER-M10
+    declaration: Polynomial.derivative_bernoulli
+    expected_shape: "derivative (Polynomial.bernoulli k) = (k : Rat) * Polynomial.bernoulli (k-1)"
+  - id: BER-M11
+    declaration: Polynomial.bernoulli_comp_one_sub_X
+    expected_role: polynomial reflection
+  - id: BER-M12
+    declaration: Polynomial.bernoulli_eval_one_sub
+    expected_role: evaluated rational reflection
+  - id: BER-M13
+    declaration: Polynomial.bernoulli_generating_function
+    expected_role: denominator-cleared polynomial formal generating function
+  - id: BER-M14
+    declaration: _root_.bernoulliFun
+    expected_role: real map and evaluation facade
+  - id: BER-M15
+    declaration: _root_.bernoulliFun_one
+    expected_shape: "bernoulliFun 1 x = x - 1 / 2"
+  - id: BER-M16
+    declaration: _root_.bernoulliFun_eval_zero
+    expected_shape: "bernoulliFun k 0 = (bernoulli k : Real)"
+  - id: BER-M17
+    declaration: _root_.hasDerivAt_bernoulliFun
+    expected_role: derivative in the real argument
+  - id: BER-M18
+    declaration: _root_.bernoulliFun_eval_one_sub
+    expected_role: real reflection
+
+target_classifications:
+  - target_id: DEF-BERN-001-T01
+    declaration: _root_.bernoulli
+    proof_anchor: target-def-bern-001-t01
+    theorem_class: identification
+    coverage_class: source_prerequisite
+    novelty_class: source_equivalent
+  - target_id: DEF-BERN-001-T02
+    declaration: Polynomial.bernoulli
+    proof_anchor: target-def-bern-001-t02
+    theorem_class: identification
+    coverage_class: source_prerequisite
+    novelty_class: source_equivalent
+  - target_id: DEF-BERN-001-T03
+    declaration: _root_.bernoulliFun
+    proof_anchor: target-def-bern-001-t03
+    theorem_class: identification
+    coverage_class: source_prerequisite
+    novelty_class: equivalent_reformulation
+
+hypothesis_laundering_check: >-
+  No analytic convergence, periodicity, Euler-Maclaurin identity, or future
+  packet is assumed. The formal power-series facts are not represented as
+  proofs of convergence on the source's complex disk.
+choice_laundering_check: >-
+  No project-local choice occurs. The packet reuses three fixed pinned
+  declarations, with bernoulliFun definitionally derived from
+  Polynomial.bernoulli.
+
+novelty:
+  classification: non_novel
+  rationale: >-
+    Source-to-library normalization audit and reuse of already proved pinned
+    definitions and facts; no new semantic declaration or theorem is proposed.
+  natural_language_proof_review_applicability: required
+  natural_language_proof_review_reason: >-
+    The source identification requires nontrivial convention, coefficient-
+    orientation, and formal-generating-function reconciliation even though the
+    reused Mathlib results themselves are non-novel.
+
+natural_language_proof:
+  artifact: blueprint/proofs/DEF-BERN-001.md
+  artifact_id: NLP-BERN-001-R1
+  artifact_revision: 1
+  artifact_state: draft
+  proof_status: draft
+
+dependencies:
+  accepted_lmlf_packets: []
+  mathlib_imports:
+    - Mathlib.NumberTheory.BernoulliPolynomials
+    - Mathlib.NumberTheory.ZetaValues
+  later_consumers:
+    - DEF-BERN-002
+    - BER-001
+    - EM-001
+  forbidden_reverse_dependencies:
+    - DEF-BERN-002 must not be used to identify its Bernoulli-polynomial input
+    - BER-001 must not be used to identify its Bernoulli-polynomial input
+    - EM-001 must not be used to identify its Bernoulli coefficients
+
+domain_obligations:
+  nonempty_or_reachable: >-
+    Nat is inhabited and the rational and real polynomial evaluation domains
+    are total. This entity-identification packet claims no named estimate.
+majorant_obligations:
+  nonnegative: not_applicable
+
+edge_tests:
+  - B_0 and the zero-index derivative
+  - root B_1 = -1/2 and polynomial B_1(x) = x - 1/2
+  - B_2(x) = x^2 - x + 1/6 detects coefficient reversal
+  - evaluation at zero uses bernoulli rather than positive-B_1 bernoulli'
+  - reflection at s = 1
+  - formal generating functions remain denominator-cleared
+  - bernoulliFun 1 has unequal endpoint values and is not periodized
+
+reviews:
+  review_status: not_started
+  authoritative_record: external_review_envelope_only
+  current_external_verdict_refs: []
+  required_rubrics:
+    - source_fidelity
+    - mathlib_reuse
+    - api_dependency
+    - proof_quality
+
+pre_lean_requirements:
+  source_collation_reviewers: 2
+  theorem_card_reviewers: 2
+  natural_language_proof_reviewers: 2
+  structural_circularity_review: required
+  lean_ready_authority: external_review_envelope_only
+
+blocking_conditions:
+  - source transcription and normalization are not independently reviewed
+  - theorem card and proof dossier remain draft
+  - no external review envelope binds this revision and its digests
+  - no lean_ready authorization exists
+
+implementation:
+  implementation_status: not_started
+  authorization_source: external_review_envelope_only
+  authorization: absent
+  prototype_status: absent
+  file: null
+  declarations_present: false
+  project_public_declarations: []
+  note: >-
+    There is intentionally nothing to implement in the project for this
+    identification packet. A later authorized audit may check the existing
+    pinned declarations without adding wrappers or aliases.
+
+release_checks:
+  - source snapshot, transcription, audit, manifest, and Mathlib source digests match
+  - exact pin and narrow imports are preserved
+  - all BER-M00 through BER-M18 declaration shapes are checked
+  - coefficient orientation, B_1, zero evaluation, derivative, and reflection match Olver
+  - both formal generating identities are checked without formal division
+  - no duplicate Bernoulli definition, wrapper, notation, or alias is introduced
+  - DEF-BERN-002 periodic identification, BER-001 periodic infrastructure, and EM-001 Euler-Maclaurin work remain excluded
+  - external review and authorization remain separate from this card

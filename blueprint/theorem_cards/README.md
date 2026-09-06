@@ -62,10 +62,12 @@ Review and implementation fields in a candidate-owned card are temporal,
 nonauthoritative projections; only an externally stored envelope and bound
 verdicts can establish reviewer quorum, gate pass, or Lean authorization.
 QB-001 card revision 7 and proof revision 6 are `complete`/`frozen` as
-applicable, but externally unreviewed and
-unauthorized.  Its revision-3 repository ledger is historical context and
-counts as zero reviewers.  Manifest execution readiness never authorizes
-implementation.
+applicable, and their candidate-owned fields retain the pre-authorization
+self-status.  Their revision-3 repository ledger is historical context and
+counts as zero reviewers.  Separately stored external records later authorized
+and accepted the exact BOOTSTRAP-0 implementation at commit
+`515b742f7ad5472c17cfdf0fda7cbc83c5585da1`; manifest readiness alone did not
+authorize that implementation.
 `prototype_status` records code that exists outside the authorized lifecycle;
 it never advances `implementation_status` or `review_status` by itself.
 
@@ -124,9 +126,11 @@ The corresponding frozen, bounded execution specifications are
 `review/work_packets/QB-001.yaml` and `review/work_packets/DEF-001.yaml`.
 Neither packet self-certifies a passing gate.  QB-001 has a complete frozen
 proof, while DEF-001 has no natural-language-proof requirement.  Both are
-externally unreviewed and unauthorized.  The exact specification snapshot has
-no DEF-001 implementation or prototype; bytes in another commit or dirty
-worktree have no review status until an external envelope binds them.
+immutable specifications whose own fields record the earlier unreviewed and
+unauthorized state.  The exact specification snapshot has no DEF-001
+implementation or prototype; its later external envelope and implementation
+reviews bind and accept commit
+`515b742f7ad5472c17cfdf0fda7cbc83c5585da1` without rewriting the frozen card.
 
 Only the CSV inventory validator currently exists.  It consumes v2 packet
 classification enums and derives required registry rows from each example's

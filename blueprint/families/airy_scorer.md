@@ -1,7 +1,7 @@
 # Airy and Scorer family programme
 
 **Status:** planning only; no provisional ID below is registered or authorized  
-**Current source evidence:** contents-only leads `OLV10P-O0012` and `OLV10P-O0021`; no resolved Airy or Scorer entity row  
+**Current source evidence:** locked-1997 formula transcriptions `OLV97-C02-AIRY-AI`, `OLV97-C11-AIRY-REAL`, and `OLV97-C11-AIRY-AUX`; all independently unreviewed and provisional
 **Mathlib position at the pin:** no named `Ai` or `Bi` implementation found; regularized hypergeometric infrastructure is a promising construction substrate
 
 ## Family boundary and edition-scoped claim
@@ -10,24 +10,21 @@ This file plans the baseline Airy functions, their integral/rotation identificat
 
 The evidence currently justifies much less than that programme:
 
-- `OLV10P-O0012` records the contents headings “Airy Integral” in Chapter 2 §8 and a Chapter 4 Airy-integral heading. It is `occurrence_unresolved` and does not establish that the printed object is already `Ai`, `Bi`, a contour integral, or a particular normalization.
-- `OLV10P-O0021` records Chapter 11 Airy-function and auxiliary-function headings. It is also contents-only. No derivative, rotation, modulus, phase, or envelope symbol has been collated.
+- `OLV97-C02-AIRY-AI` transcribes Chapter 2 §§8.1–8.3: the real oscillatory `Ai` integral, entire contour continuation, initial values, Airy ODE, and exact rotation relation.
+- `OLV97-C11-AIRY-REAL` and `OLV97-C11-AIRY-AUX` transcribe Chapter 11 §§1.1–2.4: real `Ai`/`Bi`, derivatives, Wronskian, coefficient sequences, and the explicitly enumerated weight/modulus/phase auxiliaries.
+- The older 2010-preview contents rows remain discovery leads for uncollated nearby material; they are not transferred to the locked edition.
 - DLMF gives modern Airy conventions and points to Olver's modulus/phase and Scorer-related treatment. Those are convention warnings and locator aids, not evidence that a particular Scorer name or notation occurs in the locked edition.
 
-Accordingly, `Ai`, `Bi`, `Gi`, `Hi`, rotated Airy solutions, modulus, phase, and envelopes are planning concepts here. Source entities and named source applications are created only after a locked-edition body audit confirms them. A project-required inhomogeneous solution absent from the source is recorded as `project_extra` and excluded from source-completeness totals.
+Accordingly, `Ai`, `Bi`, the ordered real basis, and the bounded Chapter 11 auxiliary list now have provisional source entities and notation rows, not confirmed identities. `Gi`, `Hi`, and other Scorer-type names remain planning concepts only. A project-required inhomogeneous solution absent from the source is recorded as `project_extra` and excluded from source-completeness totals.
 
 ## Source and normalization questions
 
 ### Airy integral and homogeneous solutions
 
-1. What is the exact Chapter 2 “Airy integral”: contour, orientation, integrand, phase sign, prefactor, domain, and printed symbol?
-2. Does the text identify that integral with `Ai`, a rotated `Ai`, or another normalization? Do not infer the answer from the heading.
-3. Where are `Ai` and `Bi` first named in the mathematical body, and which argument convention and derivative notation are used?
-4. Is the differential equation printed as $y''=zy$, $y''-zy=0$, or after a rescaling/change of sign? Record the independent and dependent variables explicitly.
-5. Which normalization is primary: initial values at zero, real integral, contour behavior, recessiveness, a Wronskian, or a connection formula?
-6. Which powers of 3 occur in the initial values, and are they real positive powers before coercion? A complex-power interpretation would introduce an unintended branch.
-7. Which rotated solutions and cube-root conventions occur? Record the branch and exact direction of each rotation.
-8. Does a prime always mean differentiation in the Airy argument, or are scaled transition derivatives also given distinct notation?
+1. Independently verify the transcribed contour orientation, endpoint sectors, compact-uniform convergence regime, and equality with the real oscillatory `Ai` integral.
+2. Decide whether the project definition should use the entire IVP normalization, a fixed contour, or a reused substrate, while keeping the other source formulas as identification theorems.
+3. Prove that the Chapter 11 real `Ai` is the restriction of the Chapter 2 entire object and that primes are ordinary Airy-argument derivatives.
+4. Reconcile every Bessel/Hankel formula only after those source entities and branch conventions are separately resolved.
 
 ### Scorer and inhomogeneous Airy objects
 
@@ -60,7 +57,7 @@ The construction decision should compare two routes before a card is frozen:
 
 The preferred direction is to prototype the regularized-$0F1$ route first, as recommended by the pin audit, while keeping the generic Airy recurrence as the readable equation-level proof plan. The final family exposes exactly one `Ai` and one `Bi`. If both constructions are retained, one is private or secondary and a proved equality connects them.
 
-The conventional identification candidate is the entire Airy equation plus two exact initial values. DLMF's standard values are useful for convention checking, but the locked source must be collated before they are described as Olver's normalization. The powers of 3 are positive real powers coerced to the complex codomain. Existence and uniqueness must be proved below all turning-point estimates.
+The locked source now directly supplies the entire Airy equation and two exact initial values as a candidate identification, with positive real powers of 3 before coercion. Independent source review and a construction decision are still required. Existence and uniqueness must be proved below all turning-point estimates.
 
 Integral and contour formulas should be identification theorems for the already constructed functions unless a careful reuse review finds that one integral construction is substantially cleaner. A contour construction requires contour geometry, orientation, convergence, holomorphy, differentiation under the integral, the equation, and normalization. None can be imported from a later steepest-descent estimate.
 
@@ -69,7 +66,7 @@ Scorer-type functions form a later subwave. Reuse is unassessed. Their actual co
 ## Dependency graph
 
 ```text
-locked-edition Airy/auxiliary body audit
+reviewed locked-edition Airy/auxiliary transcription
           |                         |
           |                         +--> decide whether Scorer names are source entities
           v
@@ -191,15 +188,18 @@ No card in this queue covers a Chapter 11 turning-point occurrence. Such a card 
 
 ## Explicit unknowns and blockers
 
-- The locked 1997 copy has not been scanned for the Airy leads, and no exact printed page, formula, or notation has been resolved.
-- It is unknown whether the Chapter 2 Airy integral is itself a named Airy function and which normalization it has.
-- The complete Chapter 11 list of derivatives, rotations, moduli, phases, and auxiliaries is unknown.
+- Exact Chapter 2 and bounded Chapter 11 formulas and notation are transcribed but have no independent source or semantics approval; every inventory link remains provisional.
+- The construction choice, contour-independence interface, improper oscillatory-integral semantics, and Chapter 2/11 real-restriction agreement remain unresolved.
+- Chapter 11 material beyond the bounded §§1.1–2.4 collation, including later turning-point occurrences, is not inventoried by these rows.
 - No Scorer notation is confirmed as a source entity; DLMF locators alone do not promote one.
 - The pin audit has not compiled an Airy construction. It only established that regularized $0F1$ is a feasible entire-series substrate.
 - The choice between a direct recurrence construction and a $0F1$-based construction is not frozen.
 - Generic complex second-order IVP uniqueness infrastructure is a known major gap in the pinned Mathlib audit and may require a separate infrastructure packet.
 - Contour infrastructure, improper oscillatory integral semantics, and parameter-continuation requirements are not yet scoped into cards.
-- No envelope inequality, transition region, Wronskian normalization, or zero theorem has been collated from the source.
+- The Wronskian normalization and two first positive-axis `Ai`/`Ai'`
+  inequalities are collated. No transition region or zero theorem is collated,
+  and the later detailed error/envelope functions cited by the source remain
+  outside this bounded occurrence.
 - No provisional card has exact signatures, dossier approvals, implementation authorization, or manifest membership.
 
 ## Downstream asymptotic consumers

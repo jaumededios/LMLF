@@ -65,6 +65,11 @@ Watson's lemma is `exact_source_generic`: it is a source theorem quantified over
 generic amplitudes and parameters, not an application to a named special
 function.
 
+The v2 registry currently requires `QL-001` to use `novel`, although the
+bounded-primitive argument is classical.  This is a recorded classification
+mismatch, not permission to edit frozen v2.  Any correction must be a versioned
+v3 schema migration with registry reconciliation.
+
 ## Closed-manifest rule
 
 A manifest is closed only when every member has a card with exact boundaries,
@@ -120,8 +125,10 @@ not authorize review or Lean.
 | EX-001 | infrastructure | geometric constant regression |
 | EX-002 | infrastructure | divergent factorial finite-bound example |
 
-Only QB-001 and DEF-001 currently have full cards.  They are executed under the
-separate BOOTSTRAP-0 manifest; the remaining rows stay candidates.
+QB-001 and DEF-001 are the only frozen, externally accepted cards in this
+queue. QL-001 and OLV-001 have registered planning drafts; OLV-002 and
+DEF-BERN-001 have unregistered planning drafts; SR-001 remains planned. Only
+QB-001 and DEF-001 belong to the separate BOOTSTRAP-0 manifest.
 
 ## BOOTSTRAP-0 — initial execution-ready manifest
 
@@ -130,27 +137,26 @@ separate BOOTSTRAP-0 manifest; the remaining rows stay candidates.
 - `manifest_status`: `execution_ready`
 - `member_count`: 2
 - `Olver coverage`: none
-- `baseline_spec_commit`: `pending_external_record_after_commit`
+- `baseline_spec_commit`: `1a7a1864e3f7c343b8c6f90511689d7a7b1a88d9`
 - `work_packets`: `review/work_packets/QB-001.yaml`,
   `review/work_packets/DEF-001.yaml`
 
-| Card | Packet theorem class | Packet coverage class | Specification | Proof | Review | Implementation |
-|---|---|---|---|---|---|---|
-| QB-001 | foundational_calculus | infrastructure | frozen | complete | not_started | not_started |
-| DEF-001 | definition_identification | entity_identification | frozen | not_required | not_started | not_started |
+| Card | Packet theorem class | Packet coverage class | Frozen specification self-status | External gate | Accepted implementation |
+|---|---|---|---|---|---|
+| QB-001 | foundational_calculus | infrastructure | frozen; proof complete | pass | `515b742f7ad5472c17cfdf0fda7cbc83c5585da1` |
+| DEF-001 | definition_identification | entity_identification | frozen; proof not required | pass | `515b742f7ad5472c17cfdf0fda7cbc83c5585da1` |
 
 Scope is exactly the eight signatures in
 [`QB-001-signatures.md`](theorem_cards/QB-001-signatures.md) and the four Gamma
 wrappers in [`DEF-001.yaml`](theorem_cards/DEF-001.yaml).  Both specifications
-are frozen, but execution begins only after externally recorded mandated
-reviews.  QB-001's proof is complete; its in-repository revision-3 review ledger
-is historical and non-quorum.  DEF-001's transparent non-novel pinned-library
-wrappers use a frozen `not_applicable` proof-review reason; an external envelope
-must mirror that gate as `not_required`.
-Neither has external `lean_ready` authorization.  In the exact specification
-snapshot, both implementation states are `not_started`, and DEF-001's prototype
-status is `absent`; code in another commit or dirty worktree is not evidence for
-this manifest.
+were subsequently bound by external pre-Lean records, implemented, and accepted
+after independent implementation review at the exact commit shown above.
+QB-001's in-repository revision-3 review ledger remains historical and
+non-quorum; it is not the authority for that result.  DEF-001's transparent
+non-novel pinned-library wrappers used the frozen `not_applicable` proof-review
+reason, mirrored externally as `not_required`.  The immutable card fields still
+record the earlier specification-snapshot state by design and are not rewritten
+with later external verdicts.
 
 ## OLV-MVP-1 — first source theorem planning manifest
 
@@ -167,11 +173,19 @@ this manifest.
 Direct first collation has added the exact printed label, mathematical
 transcription, hash-bound private copy identifier, page map, and provisional
 notation/source-entity records.  Before execution readiness, a distinct
-reviewer must verify the page audit and transcription, resolve the scalar and
-improper-integral conventions, and promote every required link from
-provisional to confirmed.
+reviewer must verify the page audit, transcription, and proposed semantic
+reading, then promote every required link from provisional to confirmed.  The
+revision-2 proposal is source-facing over complex scalars with a real
+corollary.  It reads ordinary source convergence as independent one-sided
+convergence at a finite exceptional set and uses a continuous normalized
+primitive with a regular-piece increment law.  Lean-facing regular pieces use
+Mathlib's Bochner `intervalIntegral` with explicit integrability evidence; only
+endpoint passages are improper, and no second proper-Riemann implementation is
+planned.  Principal value is separate, and a whole-set Bochner integral is only
+a narrower absolute-integrability adapter.
 
-The first two cards now exist as non-frozen drafts; SR-001 remains uncarded:
+The two OLV-MVP implementation-path cards now exist as non-frozen drafts;
+SR-001 remains uncarded:
 
 | Card | Packet theorem class | Packet coverage class | Obligation |
 |---|---|---|---|
@@ -179,23 +193,44 @@ The first two cards now exist as non-frozen drafts; SR-001 remains uncarded:
 | OLV-001 | finite_remainder_bound | exact_source_generic | draft derivation of visible witnesses and a finite bound from the collated Watson hypotheses |
 | SR-001 | qualitative_bridge | audit_source_recovery | recover the exact printed qualitative conclusion in `Audit/SourceRecovery` |
 
+`IMP-001` is a provisional, unregistered handle for the small ordinary-
+improper relation, finite-exceptional primitive layer, and finite-piece
+Abel/Fubini identity upstream of QL-001.
+Its name and boundary await registry reconciliation.  It needs its own bounded
+card, complete natural-language proof, independent reviews, and authorization
+before Lean; it is not a manifest member merely because this plan names it.
+The OLV-001 draft chooses one common baseline `X > 0` before `n`, while its
+`k_n`, `K_n`, and `L_n` witnesses may depend on `n`.
+
 Watson earns occurrence coverage only when OLV-001 and SR-001 are proved and
 reconciled.  It requires no named-function application.
 
 The separately inventoried `OLV97-C03-WATSON-BOUNDS` occurrence records
 section 9.1-9.2, printed pp. 89-90.  It is not selected into this one-occurrence
 manifest.  Its global exponential majorant is a stronger hypothesis and must
-not be laundered into the Theorem 3.1 recovery path.
+not be laundered into the Theorem 3.1 recovery path.  The revision-2 OLV-002
+card/proof is an unregistered, unselected planning packet for that direct
+implication and remains separate from OLV-001.
 
-Its critical path has two parallel predecessors:
+The locked Chapter 2 `Ai`, Chapter 11 real Airy/basis and auxiliary, and
+Chapter 8 Euler--Maclaurin/Bernoulli transcriptions are likewise inventoried as
+`transcribed_unreconciled`. They remain outside every manifest. Airy has no
+theorem card; Bernoulli has an unregistered revision-1 planning card/proof but
+no inventory occurrence-card association. A draft file is neither registration
+nor coverage.
+
+Its mathematical critical path is:
 
 ```text
-locked 1997 collation -----\
-                            +-> selected QL-001 -> OLV-001 -> SR-001
-QB-001 finite core --------/
-DEF-001 / Gamma facts - - -> QL-001 or OLV-001
-                           only if the collated formulation uses Gamma moments
+locked 1997 collation ------------------------------------\
+                                                           +-> OLV-001 -> SR-001
+pinned integration/limit facts -> IMP-001 -> QL-001 ------/
+pinned Real Gamma moment -----------------------> QL-001
 ```
+
+QB-001 and DEF-001 may later join for optional error-predicate packaging or a
+project-level Gamma audit wrapper.  The revision-2 QL/OLV proofs do not consume
+them, so neither is a critical dependency.
 
 Airy, Cauchy transport, coefficient residual automation, ODE stability, and
 comparison systems are explicitly off this path.

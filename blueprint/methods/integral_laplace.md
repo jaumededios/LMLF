@@ -1,19 +1,20 @@
 # Integral and Laplace methods
 
 **Document status:** planning blueprint; no packet in this file is authorized for Lean  
-**Scope:** real half-line integrals, exact exponential moments, finite Laplace
-remainders, and the deliberately narrow Watson source path  
+**Scope:** real-half-line vector and complex integrals, exact exponential
+moments, finite Laplace remainders, and the deliberately narrow Watson source path
 **Out of scope here:** oscillatory and contour arguments (see
 `oscillatory_contour.md`), summation, ODE stability, named-function
 construction, numerical quadrature, and order selection algorithms
 
 This file turns the integral portion of Track B into bounded,
 dependency-ordered natural-language work.  A displayed integral denotes a
-classically valid Bochner or improper integral only under the hypotheses stated
-with it.  The fact that Lean assigns a value to a nonintegrable Bochner-integral
-expression is never used as a theorem of convergence.
+classically valid Bochner integral or a value of an explicitly stated ordinary-
+improper relation.  Those are different interfaces: Mathlib's totalized value
+for a nonintegrable Bochner-integral expression is never used as evidence of
+convergence, and principal value is never inferred from ordinary convergence.
 
-## 1. Frozen conventions
+## 1. Track conventions and revision-2 planning choices
 
 - The scalar parameter in a real Laplace kernel is `x : ℝ` with `0 < x`.
   The integration variable is `t : ℝ`, and the half-line is `Set.Ioi 0`.
@@ -22,10 +23,22 @@ expression is never used as a theorem of convergence.
 - A finite polynomial model has exactly `N` terms,
   \(P_N(t)=\sum_{j=0}^{N-1}c_jt^j\).  Thus `N = 0` means the empty sum and
   remainder equal to the full amplitude.
-- Vector-valued statements use a complete normed real vector space `E` and
-  Bochner integration.  Scalar complex corollaries may use `E = ℂ`.  Scalar
-  multiplication is written explicitly when a real kernel multiplies an
-  `E`-valued coefficient.
+- The revision-2 generic local-tail kernel uses a complete normed real vector
+  space `E`.  Its source-facing Watson specialization uses `E = ℂ`; the real
+  theorem is a corollary, not the source boundary.  Scalar multiplication is
+  explicit when the real kernel multiplies an `E`-valued value.
+- An ordinary improper integral with finite exceptional set `S` is a relation:
+  split at the ordered points of `S`, take independent one-sided limits at
+  every finite exceptional endpoint and at infinity, and forbid cancellation
+  across a singularity.  The Lean-facing relation uses Mathlib's Bochner
+  `intervalIntegral` on each compact regular piece, with explicit
+  `IntervalIntegrable` evidence; only the endpoint passages are improper.  No
+  second proper-Riemann integral implementation is planned.  A Cauchy principal
+  value is a separate later adapter.
+- The conditional tail interface is a continuous normalized primitive with an
+  integral-increment law on compact regular pieces.  A local-Bochner
+  construction may populate that certificate when absolute integrability is
+  available, but is not the general source semantics.
 - All public bounds are real and visibly nonnegative.  Parameters called
   \(M,C,T,x\) carry, respectively, `0 ≤ M`, `0 ≤ C`, `0 ≤ T`, and
   `0 < x` unless a stronger condition is displayed.
@@ -40,240 +53,202 @@ expression is never used as a theorem of convergence.
 ## 2. Dependency order and packet queue
 
 `QL-001`, `OLV-001`, and `SR-001` have planning rows in the canonical card
-registry. `EX-002` and every other additional ID in this file are provisional.
-Listing an ID is not a card, manifest entry, source claim, or implementation
-authorization.
+registry.  OLV-002 has draft planning artifacts but no registry row; IMP-001,
+QL-002, QL-003, and EX-002 are provisional handles.  Listing an ID is not a
+manifest entry, source claim, or implementation authorization.
 
 | Order | Provisional card | Packet theorem / coverage / novelty class | Depends on | Status |
 |---:|---|---|---|---|
-| 1 | QL-001 | `finite_remainder_bound` / `infrastructure` / provisionally `novel` | QB-001 | planning only; registered but not specified |
-| 2 | QL-002 | `finite_remainder_bound` / `infrastructure` / provisionally `generalized` | QL-001; DEF-001 only if the public proof is routed through Gamma | provisional |
-| 3 | QL-003 | `finite_remainder_bound` / `infrastructure` / provisionally `novel` | the smallest accepted slice of QL-001/QL-002 | provisional |
-| 4 | EX-002 | `finite_remainder_bound` / `infrastructure` / `equivalent_reformulation` of the finite geometric identity | QL-001 | provisional; not registered and no card exists |
-| 5 | OLV-001 | `finite_remainder_bound` / `exact_source_generic` / provisionally `strengthened_conclusion`, subject to collation | locked occurrence, QB-001, and only the selected Laplace targets | planning only; source transcription absent |
-| 6 | SR-001 | `qualitative_bridge` / `audit_source_recovery` / intended `source_equivalent`, subject to collation | OLV-001 | planning only; audit module only |
+| 1 | IMP-001 | provisional ordinary-improper relation and finite-exceptional primitive infrastructure | pinned integration and limit facts | unregistered planning handle; needs its own bounded card, complete proof, reviews, and registry reconciliation before Lean |
+| 2 | QL-001 | `finite_remainder_bound` / `infrastructure` / v2 registry value `novel` | accepted IMP-001 and the direct pinned real Gamma moment | revision-2 draft card and complete draft proof; exact signatures and reviews pending |
+| 3 | OLV-001 | `finite_remainder_bound` / `exact_source_generic` / `strengthened_conclusion` | locked occurrence and accepted QL-001 | revision-2 complex source-facing draft with real corollary; exact signatures and reviews pending |
+| 4 | SR-001 | `qualitative_bridge` / `audit_source_recovery` / intended `source_equivalent` | accepted OLV-001 | planning only; audit module only |
+| off path | OLV-002 | `finite_remainder_bound` / `exact_source_generic` / `source_equivalent` | separate section 9.1--9.2 occurrence and pinned Gamma moment | revision-2 planning card/proof; not registered or selected by OLV-MVP-1 |
+| optional | QL-002, QL-003 | additional moment and exponential-envelope infrastructure | accepted QL-001 only where genuinely reused | provisional; neither is needed by the revision-2 Watson proof |
+| regression | EX-002 | `finite_remainder_bound` / `infrastructure` / `equivalent_reformulation` of the finite geometric identity | finite integration facts | provisional; not registered and no card exists |
 
-`QL-002` and `QL-003` may be merged into a later revision of `QL-001` only if
-the resulting card remains bounded and its exact declarations are all needed by
-Watson.  Otherwise they remain parallel reusable infrastructure.
+The frozen v2 classification registry currently forces `QL-001` to carry
+`novel`, although the underlying bounded-primitive argument is classical.  That
+metadata mismatch is deferred to an explicit versioned v3 migration; v2 is not
+mutated in place.  The QL-002/QL-003 planning labels remain available only for
+additional reusable adapters and must not be used to restate the revision-2
+core.
 
 The Watson critical path is intentionally no larger than
 
 ```text
-locked 1997 occurrence and verified mathematical transcription --+
-                                                               +-> selected minimal QL-001 slice
-QB-001 finite core ---------------------------------------------+             |
-                                                                             v
-QL-002 / DEF-001 -- conditional, only if generalized Gamma moments are used -+
-                                                                             |
-                                                                             v
-                                                          OLV-001 exact_source_generic
-                                                                             |
-                                                                             v
-                                                          SR-001 in Audit/SourceRecovery
+pinned integration and limit facts -> IMP-001 ordinary-improper layer
+                                                  |
+                                                  v
+pinned Real Gamma moment -----------------> QL-001 R2 local-tail kernel
+                                                  |
+locked 1997 occurrence and reviewed transcription |
+                         +------------------------+
+                         v
+              OLV-001 R2 exact_source_generic -> SR-001 in Audit/SourceRecovery
+
+separate section 9.1--9.2 occurrence -> OLV-002 supplied-global-majorant bound
 ```
 
+QB-001 and DEF-001 may later join for optional error-predicate packaging or a
+project-level Gamma audit wrapper.  Neither is consumed by the revision-2
+QL/OLV proofs or lies on their mathematical critical path.
+
 In particular, Watson does **not** depend on Airy, a named-function catalogue
-wave beyond an actually used Gamma bridge, complex derivative transport,
+wave, a project Gamma wrapper, complex derivative transport,
 oscillatory integration by parts, contour deformation, Euler--Maclaurin, ODEs,
 or a custom tactic.
 
 The classification shorthand above is nonnormative.  A multi-target card
 classifies each declaration separately under the theorem-card and work-packet
-vocabularies; OLV-001 receives no novelty value until comparison with the
-verified transcription makes that value meaningful.
+vocabularies.  Any correction to the v2 registry is a new schema revision, not
+an editorial change to existing frozen bytes.
 
 ### Planned proof artifacts
 
 New-mathematics dossiers use the schema in
-`blueprint/automation/proof_artifact_schema.md`.  The first proposed revisions
-are `NLP-QL-001-R1`, `NLP-QL-002-R1`, `NLP-QL-003-R1`,
-`NLP-EX-002-R1`, `NLP-OLV-001-R1`, and `NLP-SR-001-R1`.  Each artifact binds
+`blueprint/automation/proof_artifact_schema.md`.  The active Watson drafts are
+`NLP-QL-001-R2` and `NLP-OLV-001-R2`; the separate global-majorant draft is
+`NLP-OLV-002-R2`.  QL-002, QL-003, EX-002, and SR-001 reserve no proof revision
+until an artifact is actually created.  Each artifact binds
 exact target IDs, card/signature revisions, the resolved Mathlib commit,
 accepted work-item commits, and source IDs where applicable.  Its body contains
 the quantifier ledger, dependency ledger, numbered exact identities, analytic
 side-condition ledger, constant-loss ledger, target proofs,
 hypothesis/choice-laundering audit, regressions, trust/import boundary, and
 exclusions.  These IDs reserve no file and confer no status; a dossier exists
-only when its complete artifact is created and frozen.
+only when its complete artifact is created and frozen.  The three revision-2
+artifacts are drafts, not frozen evidence or Lean authorization.
 
-## 3. QL-001 — finite half-line and polynomial Laplace core
+## 3. IMP-001 and QL-001 revision 2 — ordinary-improper local-tail kernel
 
-### QL-001.A — semantics and cutoff identity
+`IMP-001` is a provisional, unregistered extraction handle for the smallest
+ordinary-improper layer: the finite-exceptional value relation, normalized
+continuous primitive certificate, uniqueness/splitting/finite-linearity laws,
+and bridges from ordinary locally Bochner-integrable data.  Its name and exact
+boundary remain provisional until registry reconciliation.  It needs its own
+bounded theorem card, complete natural-language proof, independent reviews, and
+external authorization before any Lean implementation.  QL-001 is the first
+planned consumer and must not hide this layer inside an application-specific
+structure.
 
-For an integrable `E`-valued function \(f\) on \((0,\infty)\), and
-\(0\le T\), prove the exact decomposition
+### QL-001.A — standing data and ordinary-improper semantics
 
-\[
- \int_{(0,\infty)} f(t)\,dt
- =\int_{(0,T]} f(t)\,dt+\int_{(T,\infty)}f(t)\,dt.
-\]
+Let `E` be a complete normed real vector space and
+\(\phi:\mathbb R\to E\).  Supply \(\beta>0\), \(k>0\), \(K,L\ge0\), a
+baseline \(X\in\mathbb R\), and a finite exceptional set
+\(S\subset(k,\infty)\).  The target parameter satisfies
+\(x>\max(X,0)\).
 
-Supply variants expressed with the interval integral from `0` to `T`, and prove
-the endpoint conversions.  The target records `IntegrableOn f (Ioi 0)`; the
-summands inherit integrability by restriction.  A companion inequality is
+The tail is not encoded as an everywhere locally Bochner-integrable function.
+It is an ordinary-improper relation obtained by splitting at the ordered points
+of `S` and requiring independent one-sided limits.  There is no cross-point or
+principal-value cancellation.  Proper integrals are used only on compact
+regular pieces, and those are represented by Mathlib `intervalIntegral` rather
+than by a project-local Riemann integral.
 
-\[
- \left\|\int_{(T,\infty)} f(t)\,dt\right\|
- \le \int_{(T,\infty)}\|f(t)\|\,dt.
-\]
+### QL-001.B — continuous primitive certificate
 
-This small target prevents every later proof from silently mixing set,
-interval, and improper-limit conventions.
-
-### QL-001.B — natural exponential moments
-
-For every \(n\in\mathbb N\) and `0 < x`, prove integrability and
-
-\[
- \int_0^\infty e^{-xt}t^n\,dt=\frac{n!}{x^{n+1}}. \tag{IL.1}
-\]
-
-The no-Gamma proof route is induction on `n` using integration by parts, with
-the two boundary limits proved explicitly.  The alternative route specializes
-Mathlib's Gamma moment and `Real.Gamma_nat_eq_factorial`.  The theorem card must
-choose one route: the first keeps DEF-001 off the dependency path; the second
-must list the exact Gamma declarations and DEF-001 if it consumes project
-wrappers.
-
-For `0 ≤ T`, prove the exact polynomial-exponential tail
+The supplied certificate is a continuous \(F:[k,\infty)\to E\) such that
+\(F(k)=0\), \(\|F(t)\|\le L\), and, whenever
+\([a,b]\subset[k,\infty)\) avoids `S`,
 
 \[
- Q_n(x,T):=\int_T^\infty e^{-xt}t^n\,dt
- =e^{-xT}\sum_{j=0}^{n}
-   \frac{n!}{(n-j)!}\frac{T^{n-j}}{x^{j+1}}. \tag{IL.2}
+ F(b)-F(a)=\int_a^b e^{-Xv}\phi(v)\,dv. \tag{IL.1}
 \]
 
-Every summand on the right is nonnegative.  Required regressions are
-\(Q_0=e^{-xT}/x\),
-\(Q_1=e^{-xT}(T/x+1/x^2)\), and `T = 0`, which recovers (IL.1).
-
-### QL-001.C — exact global remainder and bound
-
-Let \(c_0,\ldots,c_{N-1}\in E\), define
+Continuity is the gluing datum for the independent endpoint limits.  On each
+regular component, the finite-piece Abel/Fubini lemma planned as `IMP-001`
+derives the weighted increment identity from the primitive law, without
+assuming a pointwise derivative of `F`.  Its boundary term is
+\(e^{-ht}F(t)\), where \(h=x-X>0\).  Summing a finite partition cancels the two
+copies at each exceptional point.  Letting the right endpoint tend to infinity
+then gives
 
 \[
- P_N(t)=\sum_{j<N}t^j c_j,\qquad r_N(t)=a(t)-P_N(t).
+ \left\|\int_k^\infty e^{-xt}\phi(t)\,dt\right\|
+ \le L e^{-(x-X)k}. \tag{IL.2}
 \]
 
-Assume `0 < x`, the amplitude is strongly measurable on `Ioi 0`, and
+The certificate does not contain the requested integral at `x`; it records a
+bounded primitive at the one baseline `X`.  A local-Bochner adapter may derive
+it from absolute integrability and an ordinary integral primitive, but that
+adapter is strictly narrower and must not claim the conditionally convergent
+interior-singularity cases accepted by the core.
+
+### QL-001.C — local Gamma majorant
+
+Assume that \(\phi\) is strongly measurable on \((0,k]\) and
 
 \[
- \|r_N(t)\|\le M t^N\quad(t>0),\qquad 0\le M. \tag{IL.3}
+ \|\phi(t)\|\le Kt^{\beta-1}\qquad(0<t\le k). \tag{IL.3}
 \]
 
-Dominated integrability is part of the proof, not an additional conclusion
-hidden in notation.  Prove the exact identity
+Strong measurability together with \(\beta>0\) and the displayed majorant
+supplies absolute integrability at zero.  Enlarging the positive scalar
+majorant to the whole ray and using
+`Real.integral_rpow_mul_exp_neg_mul_Ioi` yields
 
 \[
- \int_0^\infty e^{-xt}a(t)\,dt
- -\sum_{j<N}\frac{j!}{x^{j+1}}c_j
- =\int_0^\infty e^{-xt}r_N(t)\,dt, \tag{IL.4}
+ \left\|\int_0^k e^{-xt}\phi(t)\,dt\right\|
+ \le K\Gamma(\beta)x^{-\beta}. \tag{IL.4}
 \]
 
-and then
+Combining (IL.2) and (IL.4) proves existence of the split ordinary-improper
+Laplace integral and the generic bound
 
 \[
- \left\|\int_0^\infty e^{-xt}a(t)\,dt
- -\sum_{j<N}\frac{j!}{x^{j+1}}c_j\right\|
- \le \frac{M N!}{x^{N+1}}. \tag{IL.5}
+ \left\|\int_0^\infty e^{-xt}\phi(t)\,dt\right\|
+ \le K\Gamma(\beta)x^{-\beta}+Le^{-(x-X)k}. \tag{IL.5}
 \]
 
-The public theorem quantifies one fixed `a` before `N`; it is compatible with
-`HasErrorFamily` and asserts no convergence as `N → ∞`.  At `N = 0`, (IL.5)
-is the ordinary bound by `M/x` under \(\|a(t)\|\le M\).
+### QL-001.D — finite Watson decomposition
 
-### QL-001.D — local polynomial identity
-
-Assume (IL.3) only for `0 < t ≤ T`, and separately assume integrability of
-the amplitude tail.  With `Q_j` from (IL.2), prove
+For \(\lambda,\mu>0\), complex coefficients \(a_s\), and
+\(\beta_s=(s+\lambda)/\mu\), define
 
 \[
-\begin{aligned}
- &\int_0^\infty e^{-xt}a(t)\,dt
-   -\sum_{j<N}\frac{j!}{x^{j+1}}c_j\\
- &=\int_0^T e^{-xt}r_N(t)\,dt
-   +\int_T^\infty e^{-xt}a(t)\,dt
-   -\sum_{j<N}c_jQ_j(x,T).
-\end{aligned}\tag{IL.6}
+ p_n(t)=\sum_{s<n}a_st^{\beta_s-1},\qquad
+ \phi_n(t)=q(t)-p_n(t).
 \]
 
-If
+Finite linearity and the real Gamma moment give
 
 \[
- \left\|\int_T^\infty e^{-xt}a(t)\,dt\right\|\le E_a(x,T),
- \qquad 0\le E_a(x,T),
+ \int_0^\infty e^{-xt}q(t)\,dt
+ -\sum_{s<n}a_s\Gamma(\beta_s)x^{-\beta_s}
+ =\int_0^\infty e^{-xt}\phi_n(t)\,dt. \tag{IL.6}
 \]
 
-then the natural bound is
-
-\[
- M\int_0^T e^{-xt}t^N\,dt
- +E_a(x,T)+\sum_{j<N}\|c_j\|Q_j(x,T). \tag{IL.7}
-\]
-
-Export this formula before weakening the local moment to \(MN!/x^{N+1}\).
-The polynomial-tail term is essential: subtracting the full model moments while
-using only a local model creates exactly this contribution.
+Specializing (IL.5) to `E = ℂ` and \(\beta=\beta_n\) yields the finite
+Watson remainder bound, including `n = 0` with an empty sum.  The generic
+kernel remains vector-valued over real scalars; the source-facing theorem is
+complex and has a separate real corollary.
 
 ### QL-001 proof dossier and gate
 
-The planned artifact `blueprint/proofs/QL-001.md` must derive each equality
-before taking norms; prove strong measurability and integrability of every
-summand; state all endpoint-null-set conversions; show every finite sum/integral
-interchange; prove the boundary limits in (IL.2); and expand the cases `N = 0`,
-`N = 1`, and `T = 0`.  It must compare the induction and Gamma proof routes and
-freeze one dependency choice.
+[`NLP-QL-001-R2`](../proofs/QL-001.md) is a complete draft proof, not a frozen
+specification.  Review must independently check the relational improper
+integral, finite partition and one-sided limits, the regular-piece Abel/Fubini
+bridge, the local-Bochner adapter, the real-scalar Banach generality,
+the complex specialization, constants, powers, and the `n = 0` case.  Exact
+Lean representations and signatures remain open.  The frozen-v2 `novel`
+registry mismatch is recorded for a versioned v3 change and is not repaired by
+mutating v2.
 
-Before Lean, two independent reviewers inspect the same frozen card and dossier:
+## 4. Optional moment adapters beyond QL-001
 
-1. an integral-semantics/quantitative referee checks measurability,
-   integrability, endpoints, constants, powers, and majorant nonnegativity;
-2. a Mathlib/API referee checks the pinned declarations, binder order, finite
-   sum convention, import boundary, and whether QL-001 is still bounded.
+QL-001 already contains the positive-real power moment needed by Watson.  A
+future QL-002 may package other moment families only when at least two accepted
+consumers justify it.  Complex powers, complex parameters, and logarithm-branch
+choices are separate APIs and require their own source and branch review; they
+are not implicit generalizations of the real-exponent theorem.
 
-A substantive change to a formula, endpoint convention, ambient space, or
-Gamma dependency resets both approvals.  Implementation later receives the
-full quantitative-correctness, Mathlib-reuse, API/dependency, and proof-quality
-rubrics at the exact candidate head.
+## 5. QL-003 — optional exponential tail adapter
 
-## 4. QL-002 — generalized power moments
-
-This packet is optional on the Watson path until direct collation shows the
-printed exponent lattice.  For `α > -1` and `0 < x`, Mathlib already supports the
-real moment
-
-\[
- \int_0^\infty t^\alpha e^{-xt}\,dt
- =x^{-(\alpha+1)}\Gamma(\alpha+1). \tag{IL.8}
-\]
-
-The packet must freeze whether the theorem is real-valued, complex-valued with
-real exponent, or complex-power-valued.  These are not interchangeable APIs.
-For a positive spacing `μ` and offset `λ > 0`, the candidate model terms are
-
-\[
- t^{(j+\lambda)/\mu-1},\qquad
- \int_0^\infty e^{-xt}t^{(j+\lambda)/\mu-1}\,dt
- =\Gamma((j+\lambda)/\mu)x^{-(j+\lambda)/\mu}. \tag{IL.9}
-\]
-
-All powers use the positive-real convention.  The assumptions `0 < μ`,
-`0 < λ`, and `0 < x` make the endpoint and infinity integrability explicit.
-A remainder bounded by \(M t^{(N+\lambda)/\mu-1}\) then receives exactly the
-corresponding Gamma majorant.
-
-The dossier must prove the exponent inequalities at zero, the scaling
-substitution, branch agreement, positivity of the Gamma majorant, and the
-integer specialization back to QL-001.  Two independent pre-Lean reviews are
-mandatory.  If a complex parameter or branch is added, require a third
-source/branch-semantics reviewer.
-
-## 5. QL-003 — explicit local Watson envelope
-
-This packet combines QL-001.D or QL-002 with a reusable tail hypothesis that is
-strictly weaker than assuming the desired final estimate.  A first concrete
-tail lemma is:
+This provisional packet supplies an absolutely integrable exponential-growth
+tail adapter.  It is not used to represent Olver's conditionally convergent
+finite-exceptional source hypothesis.  A first concrete lemma is:
 
 \[
  \|a(t)\|\le C e^{\rho t}\quad(t\ge T),\quad C\ge0,
@@ -284,8 +259,7 @@ tail lemma is:
 \]
 
 Here `x - ρ > 0` is a theorem hypothesis, not rescued by totalized division.
-The local part uses the exact incomplete moment when available, and (IL.7)
-retains amplitude-tail and model-tail terms separately.  An application must
+An application must
 prove its own `C`, `ρ`, and `T`; QL-003 does not package them in a structure that
 asserts the target bound.
 
@@ -294,30 +268,38 @@ same local polynomial on `[0,T]` gives no uniform tail control: add an
 arbitrarily large nonnegative bump supported in `[T+1,T+2]`.  This is a
 permanent anti-laundering regression.
 
-## 6. OLV-001 and SR-001 — Watson without scope creep
+## 6. OLV-001, OLV-002, and SR-001 — Watson without scope creep
 
 `OLV97-C03-WATSON` now has a direct first collation against a hash-bound 1997
 snapshot, including the printed label, mathematical transcription, quantifier
 and exponent ledger, endpoint notes, provisional notation/entity associations,
 copy identifier, and transcription hash.  It remains
-`transcribed_unreconciled` until independent source review resolves the scalar
-codomain and conditional-improper-integral convention.  Draft QL-001 and
-OLV-001 cards and proof dossiers implement the planning split below; they are
-not frozen specifications.
+`transcribed_unreconciled` until independent source review approves the
+transcription and semantic interpretation.  Same-edition evidence supports a
+complex amplitude and the bookwide Riemann convention; ordinary convergence is
+provisionally read as independent one-sided convergence at the finite
+exceptional set, with principal value reserved for a separate extension.
+Revision-2 QL-001 and OLV-001 cards and proof dossiers implement that planning
+choice, but are not frozen specifications or review verdicts.
 
-The card split is fixed:
+The revision-2 planning split is:
 
 - `OLV-001` is `exact_source_generic`, never a named-function application.  It
-  instantiates only the generic Laplace targets required by the transcription
-  and may add an explicit finite strengthening.  Any stronger hypotheses are
-  reported as stronger hypotheses, not as a stronger theorem.
+  instantiates QL-001 for a complex amplitude and exposes one common baseline
+  \(X>0\) chosen before `n`; the witnesses \(k_n,K_n,L_n\) may depend on `n`.
+  Its real-valued statement is a corollary.  Any stronger hypotheses are
+  reported as stronger hypotheses, not laundered into Theorem 3.1.
+- `OLV-002` is a separate, unselected planning packet for the direct
+  section 9.1 global-majorant implication to the section 9.2 Gamma bound.  It
+  is not a dependency of OLV-001 and does not alter OLV-MVP-1 membership.
 - `SR-001` lives only under `Audit/SourceRecovery` and derives the exact printed
   qualitative statement from OLV-001.  It is not imported by the semantic
   public root.
 
-The OLV-001 proof dossier must contain a line-by-line source-hypothesis discharge
-ledger, the exact finite remainder formula, all local and tail estimates, and a
-proof that the finite result implies the printed conclusion.  Its pre-Lean gate
+[`NLP-OLV-001-R2`](../proofs/OLV-001.md) contains the source-hypothesis
+discharge ledger, exact finite remainder formula, local and tail estimates,
+common-`X` quantifier order, and the route to the printed conclusion.  Its
+pre-Lean gate
 requires at least two distinct independent reviewers: one source/semantics
 reviewer and one quantitative proof reviewer.  Because a source occurrence is
 at stake, source-fidelity requires two independent approvals in the later
@@ -364,23 +346,24 @@ Additional negative regressions:
 
 Reuse after exact signature checks:
 
-- `MeasureTheory.norm_integral_le_integral_norm`, set-integral restriction and
-  union lemmas, `intervalIntegral.integral_interval_add_Ioi`,
-  `intervalIntegral_tendsto_integral_Ioi`, and the endpoint-null-set lemmas;
-- `MeasureTheory.integral_Ioi_mul_deriv_eq_deriv_mul` and finite-interval
-  integration by parts for the induction proof;
-- `Complex.integral_cpow_mul_exp_neg_mul_Ioi`,
-  `Real.integral_rpow_mul_exp_neg_mul_Ioi`,
-  `integral_rpow_mul_exp_neg_mul_rpow`, and Gamma's natural-value facts where
-  their exact conventions fit;
+- `MeasureTheory.norm_integral_le_integral_norm`, set-integral restriction,
+  `MeasureTheory.intervalIntegral_tendsto_integral_Ioi`, and endpoint-null-set
+  lemmas for the absolute-integrability adapter and local estimate;
+- finite-interval Bochner integration and Fubini facts for the `IMP-001`
+  finite-piece Abel identity; no infinite-interval integration-by-parts theorem
+  is a dependency of the generic Banach-space interface;
+- `Real.integral_rpow_mul_exp_neg_mul_Ioi` for the positive-real model moment,
+  plus `isLittleO_exp_neg_mul_rpow_atTop` for qualitative recovery;
 - `Complex.Gamma` through DEF-001 only when a project-level identification is
   actually consumed.
 
-No ready-made theorem was found in the pinned snapshot for QL-001's vector-valued
-finite Laplace remainder, the exact polynomial-exponential tail (IL.2), the
-local split (IL.6)--(IL.7), or the collated Watson theorem.  These are project
-proofs, not renamed Mathlib declarations.  A pre-Lean reuse search must be
-repeated at the then-current pin and recorded in the card.
+No ready-made theorem was found in the pinned snapshot for the finite-
+exceptional ordinary-improper relation, its continuous normalized primitive
+certificate, the vector-valued local-tail theorem, or the collated Watson
+theorem.  These are project infrastructure and proofs, not renamed Mathlib
+declarations.  The local-Bochner bridge is an adapter to existing integration
+infrastructure, not a replacement for the source-facing relation.  A pre-Lean
+reuse search must be repeated at the then-current pin and recorded in the card.
 
 ## 9. Named Olver consumers after Watson
 

@@ -2,7 +2,7 @@ schema_version: 2
 id: QL-001
 title: Finite local-tail bound for Laplace remainders
 owner: jaumededios
-artifact_revision: 1
+artifact_revision: 2
 baseline_spec_commit: pending_external_record_after_commit
 
 theorem_class: finite_remainder_bound
@@ -15,7 +15,7 @@ implementation_status: not_started
 prototype_status: absent
 coverage_status: not_applicable
 manifest_membership_status: planning_only
-status_as_of: post_source_acquisition_draft
+status_as_of: advisory_feedback_integrated_draft
 status_authority: external_review_envelope_only
 
 classification_schema:
@@ -45,9 +45,10 @@ coverage_claim: none; this is reusable infrastructure
 
 scope:
   summary: >-
-    Prove a finite local-plus-tail estimate for a Laplace remainder with supplied
-    local and bounded-primitive constants, then combine it with finitely many
-    Gamma moments to obtain a finite Watson remainder bound.
+    Prove a finite local-plus-tail estimate over a complete normed real vector
+    space from supplied local constants and a finite-exceptional continuous
+    primitive, then specialize to complex scalars and combine with finitely
+    many Gamma moments to obtain a finite Watson remainder bound.
   candidate_module: LMLF.Integral.Watson
   exact_signatures_artifact: pending after integral-semantics review
   candidate_public_targets:
@@ -57,6 +58,8 @@ scope:
       declaration: LMLF.Integral.watsonFiniteRemainder_bound
   included:
     - conditional upper-tail convergence from a bounded baseline primitive
+    - finite interior exceptional set with independent one-sided limits
+    - a local-Bochner adapter that does not claim conditionally singular coverage
     - local power-law Gamma majorant
     - finite model-moment decomposition
     - n = 0 behavior
@@ -68,12 +71,27 @@ scope:
     - numerical automation
 
 mathematical_contract:
+  local_regularity: >-
+    phi is strongly measurable on (0,k], or arrives through an equivalent
+    proper-Riemann adapter on every compact [epsilon,k] away from zero. The
+    pointwise power bound alone is not treated as an integrability theorem.
   local_bound: >-
     norm (phi t) <= K * t^(beta-1) on 0 < t <= k, with beta > 0,
     k > 0, and K >= 0.
   tail_bound: >-
-    The baseline primitive F(t)=integral_k^t exp(-X v) phi(v) dv has norm at
-    most L for t >= k, with L >= 0.
+    For a finite S contained in (k,infinity), F is continuous on [k,infinity),
+    satisfies F(k)=0, has the baseline-integral increment law on every compact
+    regular piece avoiding S, and has norm at most L for t >= k, with L >= 0.
+  improper_semantics: >-
+    Ordinary improper convergence is split at S, with independent one-sided
+    endpoint limits and no principal-value cancellation. Every regular
+    truncated piece uses Mathlib's Bochner intervalIntegral with explicit
+    IntervalIntegrable evidence; the source adapter proves agreement with
+    Olver's proper Riemann pieces. The target returns existence and the bound.
+  scalar_boundary: >-
+    T01 is generic over a complete normed real vector space. T02 is complex
+    scalar; a real specialization is a corollary. Powers and Gamma factors are
+    positive-real objects.
   target_domain: x > max X 0
   conclusion: >-
     The norm of the full remainder integral is at most
@@ -85,25 +103,31 @@ mathematical_contract:
 
 open_design_choices:
   scalar_codomain:
-    status: unresolved
-    candidates:
-      - real only
-      - complex only with a real corollary
-      - complete normed real vector space
+    status: provisionally_selected_pending_review
+    selection: generic complete normed real vector space for T01; complex T02; real corollary
   improper_integral:
-    status: unresolved
-    requirement: >-
-      Must model conditional convergence as a limit of finite interval
-      integrals and must not rely on totalized nonintegrable Bochner integrals.
+    status: provisionally_selected_pending_review
+    selection: >-
+      Relational ordinary-improper values built from Mathlib intervalIntegral
+      on regular truncated pieces and independent one-sided limits at a finite
+      exceptional set, plus a whole-set-integral bridge under separately
+      proved absolute integrability.
   interior_singularities:
-    status: unresolved
+    status: provisionally_selected_pending_review
+    selection: >-
+      A continuous normalized baseline primitive with regular-piece increment
+      law; principal value is excluded and reserved for a later adapter.
+  classification_novelty:
+    status: unresolved_versioned_schema_question
     requirement: >-
-      The first API should be minimal while still supporting the exact
-      source-facing specialization.
+      Frozen classifications-v2 requires QL-001 as a novel example, while the
+      mathematics is classical and the Banach/interface packaging is a
+      generalization. Resolve only through a future schema version; do not
+      mutate v2 in place.
 
 natural_language_proof:
   artifact: blueprint/proofs/QL-001.md
-  artifact_revision: 1
+  artifact_revision: 2
   artifact_state: draft
   proof_status: complete
 
@@ -119,15 +143,16 @@ target_classifications:
 
 dependencies:
   mathlib_revision: 0df444a360eaa60ab8c11dca51a86af692955474
-  accepted_lmlf_packets:
-    - QB-001
-    - DEF-001
+  accepted_lmlf_packets: []
+  draft_lmlf_packets:
+    - IMP-001
   pinned_candidates:
-    - integral_rpow_mul_exp_neg_mul_Ioi
-    - Complex.integral_cpow_mul_exp_neg_mul_Ioi
-    - Real.isLittleO_exp_neg_mul_rpow_atTop
+    - Real.integral_rpow_mul_exp_neg_mul_Ioi
+    - isLittleO_exp_neg_mul_rpow_atTop
     - MeasureTheory.intervalIntegral_tendsto_integral_Ioi
-    - MeasureTheory.integral_Ioi_mul_deriv_eq_deriv_mul
+  explicitly_not_dependencies:
+    - QB-001; no ErrorOn packaging is used by the two proposed targets
+    - DEF-001; the real Gamma moment is reused directly from pinned Mathlib
 
 pre_lean_requirements:
   theorem_card_reviewers: 2
@@ -136,7 +161,9 @@ pre_lean_requirements:
   lean_ready_authority: external_review_envelope_only
 
 blocking_conditions:
-  - open design choices are unresolved
+  - IMP-001 is only a provisional unregistered handle and has no card or proof
+  - provisional semantic and scalar selections lack independent approval
+  - classification novelty needs a versioned-schema decision
   - exact Lean signatures have not been compiled
   - no independent proof or theorem-card reviews exist
 

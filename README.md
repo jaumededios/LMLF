@@ -14,10 +14,12 @@ transport lemmas and transparent wrappers around Mathlib's Gamma function. Its e
 records the exact accepted candidate; later planning commits do not alter those Lean declarations.
 
 The exact 1997 Olver PDF is now available as a private, hash-bound source snapshot outside version
-control. Theorem 3.1 on Watson's lemma has a first mathematical transcription, draft QL-001 and
-OLV-001 cards, and complete first natural-language proof dossiers. Those drafts remain independently
-unreviewed and authorize no Lean work. The source ledgers are still far from a complete book
-inventory, and the project claims no quantitative Olver theorem or source coverage yet.
+control. Theorem 3.1 on Watson's lemma has a mathematical transcription, revision-2 QL-001 and
+OLV-001 draft cards, and complete revision-2 natural-language proof dossiers. Bounded Airy and
+Euler--Maclaurin/Bernoulli source transcriptions are also present, together with an unregistered
+Bernoulli identification draft. These planning artifacts remain unreconciled and authorize no new
+Lean work. The source ledgers are still far from a complete book inventory, and the project claims
+no quantitative Olver theorem or source coverage yet.
 
 Planning and review artifacts are kept explicit:
 
