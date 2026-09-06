@@ -1,7 +1,7 @@
 name = "LMLF"
 version = "0.1.0"
 keywords = ["math"]
-defaultTargets = ["LMLF"]
+defaultTargets = ["LMLF", "LMLFTest"]
 
 [leanOptions]
 pp.unicode.fun = true # Pretty-print `fun a ↦ b`.
@@ -28,4 +28,15 @@ globs = [
   "LMLF.Quantitative.Series",
   "LMLF.Results",
   "LMLF.Audit.Definitions",
+]
+
+[[lean_lib]]
+name = "LMLFTest"
+globs = [
+  "LMLFTest.Integral.Improper.IMP001PublicUse",
+  "LMLFTest.Integral.Improper.IMP001Regressions",
+  "LMLFTest.Integral.Improper.IMP001EndpointAE",
+  "LMLFTest.Integral.Improper.IMP001GammaEndpoint",
+  "LMLFTest.Integral.Improper.IMP001AbelExamples",
+  "LMLFTest.Integral.Improper.IMP001Oscillatory",
 ]
