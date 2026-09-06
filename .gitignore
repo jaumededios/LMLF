@@ -1,5 +1,7 @@
 /.lake/
 /.lean/
+/doc/.lake/
+/doc/_out/
 
 # Python caches
 __pycache__/

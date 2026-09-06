@@ -93,6 +93,21 @@ lake build
 The `lean-toolchain` file selects the supported Lean release. The mathlib revision is pinned in
 `lakefile.toml`, while `lake-manifest.json` records the fully resolved dependency graph.
 
+## Documentation overlay
+
+The Verso-native [LMLF overlay](https://jaumededios.github.io/LMLF/) follows DLMF Chapters 1–10,
+distinguishes accepted Lean declarations from blueprint and source-preparation states, and keeps
+checked Lean statements in expandable result cards. Its [source and local build instructions](doc/README.md)
+live in the independent `doc` project:
+
+```sh
+cd doc
+lake update
+lake build
+lake exe lmlf-site
+python3 -m http.server 8000 -d _out/html-multi
+```
+
 ## Development workflow
 
 1. Start from a frozen, bounded work packet whose externally stored review envelope records `lean_ready: pass` under the [review workflow](review/README.md).

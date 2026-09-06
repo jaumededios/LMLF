@@ -1,0 +1,97 @@
+import VersoManual
+import LMLFManual.Components
+
+open Verso.Genre Manual
+open LMLFManual
+
+#doc (Manual) "Elementary Functions" =>
+%%%
+tag := "chapter-4"
+%%%
+
+:::chapterStatus "https://dlmf.nist.gov/4" "overlay scaffold · no accepted cards"
+Elementary functions are primarily supplied by Mathlib and are not duplicated here. LMLF will add
+only source-facing identifications, branch conventions, approximation theorems, and explicit bounds
+that are genuinely needed by Chapters 4–10.
+:::
+
+:::result "Current LMLF overlay" "planning only"
+There is no Chapter 4 theorem card on accepted `main`. Lambert `W`, explicit elementary-function
+approximations, and source-specific branch statements remain future bounded packets. Ordinary
+Mathlib facts are intentionally absent from this chapter.
+:::
+
+# Chapter contents
+
+## Notation
+
+:::sectionIndex
+* [4.1 Special Notation](https://dlmf.nist.gov/4.1)
+:::
+
+## Logarithm, exponential, and powers
+
+:::sectionIndex
+* [4.2 Definitions](https://dlmf.nist.gov/4.2)
+* [4.3 Graphics](https://dlmf.nist.gov/4.3)
+* [4.4 Special Values and Limits](https://dlmf.nist.gov/4.4)
+* [4.5 Inequalities](https://dlmf.nist.gov/4.5)
+* [4.6 Power Series](https://dlmf.nist.gov/4.6)
+* [4.7 Derivatives and Differential Equations](https://dlmf.nist.gov/4.7)
+* [4.8 Identities](https://dlmf.nist.gov/4.8)
+* [4.9 Continued Fractions](https://dlmf.nist.gov/4.9)
+* [4.10 Integrals](https://dlmf.nist.gov/4.10)
+* [4.11 Sums](https://dlmf.nist.gov/4.11)
+* [4.12 Generalized Logarithms and Exponentials](https://dlmf.nist.gov/4.12)
+* [4.13 Lambert W-Function](https://dlmf.nist.gov/4.13)
+:::
+
+## Trigonometric functions
+
+:::sectionIndex
+* [4.14 Definitions and Periodicity](https://dlmf.nist.gov/4.14)
+* [4.15 Graphics](https://dlmf.nist.gov/4.15)
+* [4.16 Elementary Properties](https://dlmf.nist.gov/4.16)
+* [4.17 Special Values and Limits](https://dlmf.nist.gov/4.17)
+* [4.18 Inequalities](https://dlmf.nist.gov/4.18)
+* [4.19 Maclaurin Series and Laurent Series](https://dlmf.nist.gov/4.19)
+* [4.20 Derivatives and Differential Equations](https://dlmf.nist.gov/4.20)
+* [4.21 Identities](https://dlmf.nist.gov/4.21)
+* [4.22 Infinite Products and Partial Fractions](https://dlmf.nist.gov/4.22)
+* [4.23 Inverse Trigonometric Functions](https://dlmf.nist.gov/4.23)
+* [4.24 Inverse Trigonometric Functions: Further Properties](https://dlmf.nist.gov/4.24)
+* [4.25 Continued Fractions](https://dlmf.nist.gov/4.25)
+* [4.26 Integrals](https://dlmf.nist.gov/4.26)
+* [4.27 Sums](https://dlmf.nist.gov/4.27)
+:::
+
+## Hyperbolic functions
+
+:::sectionIndex
+* [4.28 Definitions and Periodicity](https://dlmf.nist.gov/4.28)
+* [4.29 Graphics](https://dlmf.nist.gov/4.29)
+* [4.30 Elementary Properties](https://dlmf.nist.gov/4.30)
+* [4.31 Special Values and Limits](https://dlmf.nist.gov/4.31)
+* [4.32 Inequalities](https://dlmf.nist.gov/4.32)
+* [4.33 Maclaurin Series and Laurent Series](https://dlmf.nist.gov/4.33)
+* [4.34 Derivatives and Differential Equations](https://dlmf.nist.gov/4.34)
+* [4.35 Identities](https://dlmf.nist.gov/4.35)
+* [4.36 Infinite Products and Partial Fractions](https://dlmf.nist.gov/4.36)
+* [4.37 Inverse Hyperbolic Functions](https://dlmf.nist.gov/4.37)
+* [4.38 Inverse Hyperbolic Functions: Further Properties](https://dlmf.nist.gov/4.38)
+* [4.39 Continued Fractions](https://dlmf.nist.gov/4.39)
+* [4.40 Integrals](https://dlmf.nist.gov/4.40)
+* [4.41 Sums](https://dlmf.nist.gov/4.41)
+:::
+
+## Applications and computation
+
+:::sectionIndex
+* [4.42 Solution of Triangles](https://dlmf.nist.gov/4.42)
+* [4.43 Cubic Equations](https://dlmf.nist.gov/4.43)
+* [4.44 Other Applications](https://dlmf.nist.gov/4.44)
+* [4.45 Methods of Computation](https://dlmf.nist.gov/4.45)
+* [4.46 Tables](https://dlmf.nist.gov/4.46)
+* [4.47 Approximations](https://dlmf.nist.gov/4.47)
+* [4.48 Software](https://dlmf.nist.gov/4.48)
+:::

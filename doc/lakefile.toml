@@ -1,0 +1,20 @@
+name = "lmlf-manual"
+version = "0.1.0"
+defaultTargets = ["LMLFManual", "lmlf-site"]
+
+[[require]]
+name = "verso"
+git = "https://github.com/leanprover/verso"
+rev = "v4.33.0"
+
+[[require]]
+name = "LMLF"
+path = "../"
+
+[[lean_lib]]
+name = "LMLFManual"
+
+[[lean_exe]]
+name = "lmlf-site"
+root = "Main"
+supportInterpreter = true
