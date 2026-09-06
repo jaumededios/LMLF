@@ -1,0 +1,44 @@
+schema_version: 1
+record_kind: disposition_ledger
+storage_requirement: external_to_candidate_head
+work_item_id: IMP-001
+review_envelope_ref:
+  path: IMP-001-implementation-review-envelope-pending.yaml
+  sha256: 1c7874b190ada114c60853a880b2ec2a56bbaba3fed261ccf7ad57b30e012ab7
+spec_commit: 3a1b16cae6d186a20530de3b883c1bb871ee76f6
+work_packet_sha256: e0f16a660417d967312df0f7cc7ce12ea1243226801b409475548566d594796b
+candidate_base_sha: 3a1b16cae6d186a20530de3b883c1bb871ee76f6
+reviewed_head_sha: b8d2f731fcfd5cd0889d0732f13699eb94681c86
+
+final_verdict_refs:
+  - path: IMP-001-quantitative_correctness-imp_impl_referee_a.json
+    sha256: 182dcff935b82253a3b5d6ee3178da9f43a4097ae6bd9592f90cbb1defbe60f0
+  - path: IMP-001-proof_quality-imp_impl_referee_a.json
+    sha256: 1674552c5fac63cf88d101c766682806ab3211a95253f4b30c2e1f4fdf6ae3b4
+  - path: IMP-001-mathlib_reuse-imp_impl_referee_b.json
+    sha256: 1234a53e8626e79fc334604bc58c2dcf34062519c75e4e71454f1e72747a43df
+  - path: IMP-001-api_dependency-imp_impl_referee_b.json
+    sha256: d76babfb7d9bdb12f73dbc3c9297a25aca179b09c3d9a9120ca3f3b9bb4473ba
+  - path: IMP-001-proof_quality-imp_impl_referee_c.json
+    sha256: 1d38b4ef5a970e51bb350572137307d4b8c9c83ecfea1bccaf68e54db5092adc
+  - path: IMP-001-api_dependency-imp_impl_referee_c.json
+    sha256: ca375b304b0a025b6fdb047a335aaa84dd68180d737474aebc153acb26b1b33b
+
+report_refs:
+  - path: imp_impl_referee_a.md
+    sha256: 832b379546bf252507ee9a7b352c52dc63f676ae48abbfeb9ae03b0c847a2566
+  - path: imp_impl_referee_a-t02-correction-01.md
+    sha256: 30287d616bf7d6e76c72b91d97a74f2dab18b1ad0e8055fe75c6774f68c6a76c
+  - path: imp_impl_referee_b.md
+    sha256: 22cd053df8fa122cefe4b2684a13260abc4cc0ee1b6a1099cf26ffde2aff25c8
+  - path: imp_impl_referee_c.md
+    sha256: 0a11bc596fc76e7e8bbad8cbbc3b0797d65e7c9230e66a9f31bde1d9193e86d7
+
+findings: []
+finding_count: 0
+all_final_verdicts_approve: true
+note: >-
+  Referee A's signed correction supersedes one false dependency-route sentence
+  in A's report without changing candidate bytes, adding a finding, creating a
+  new verdict, or earning extra reviewer credit. There are no candidate
+  findings requiring a resolution entry.

@@ -1,0 +1,116 @@
+{
+  "schema_version": 4,
+  "record_kind": "rubric_verdict",
+  "storage_requirement": "external_to_candidate_head",
+  "work_item_id": "IMP-001",
+  "review_stage": "implementation",
+  "gate": "implementation_review",
+  "review_identity": {
+    "review_envelope_ref": "/workspace/Documents/Codex/2026-09-05/LMLF-review-evidence/implementation-b8d2f731fcfd5cd0889d0732f13699eb94681c86/IMP-001-implementation-review-envelope-pending.yaml",
+    "spec_commit": "3a1b16cae6d186a20530de3b883c1bb871ee76f6",
+    "work_packet_path": "review/work_packets/IMP-001.yaml",
+    "work_packet_sha256": "e0f16a660417d967312df0f7cc7ce12ea1243226801b409475548566d594796b",
+    "theorem_card_bindings": [
+      {
+        "artifact_id": "TC-IMP-001-R7",
+        "revision": 7,
+        "sha256": "d81f8970bcba3bf1a489f8cb4fea8b303a3e3bf6d1ad3ade37b42f3094b528c4"
+      },
+      {
+        "artifact_id": "SIG-IMP-001-R6-P2",
+        "revision": 2,
+        "sha256": "0e220214233fec5f2f95608789b139900e7dfddef8a6b824b8d54bce37e74f2d"
+      }
+    ],
+    "natural_language_proof_bindings": [
+      {
+        "artifact_id": "NLP-IMP-001-R7",
+        "revision": 7,
+        "sha256": "941ca0f2a7e402e9dd3636d7c93744290b3f5b52b8705484c18630c6fe173548"
+      },
+      {
+        "artifact_id": "NLP-IMP-001-REG-R2",
+        "revision": 2,
+        "sha256": "316fc09bf3f35a5649f951ea0964ed1330e540d028a48c4706312d37c87ae7e9"
+      }
+    ],
+    "supplemental_regression_authority": {
+      "specification_commit": "0f4df472dd2c97267dbc2c2128975eb3277132e0",
+      "passing_envelope_sha256": "ee3fb545a1772eae460cfaa39ecf45b1d7d4c075461f2424577ee273dce25d9c",
+      "root_adjudication_sha256": "b1b77b956d19ea8c0f741d2d7111f98b8c31e38d27b89d01cb811a3e1dbafb17",
+      "scope": "reviewed_nonpublic_analytic_regressions_only",
+      "public_target_or_premise_changes": false
+    },
+    "classification_schema_binding": {
+      "path": "review/classifications-v3.json",
+      "schema_version": "lmlf-classification-v3",
+      "artifact_revision": 3,
+      "sha256": "975e08b89d609cbdd15ff3f8d24f40a42bb17ea0f4c37bb26d9cf53fb8dc4b5e"
+    },
+    "base_sha": "3a1b16cae6d186a20530de3b883c1bb871ee76f6",
+    "head_sha": "b8d2f731fcfd5cd0889d0732f13699eb94681c86",
+    "lean_toolchain": "leanprover/lean4:v4.33.1",
+    "mathlib_revision": "0df444a360eaa60ab8c11dca51a86af692955474",
+    "rubric": "api_dependency",
+    "review_perspective": "dependency_direction",
+    "rubric_revision": "4e5f947ed15f0101c46fe9bb0a12a013d66c7de3c7ed2c35fda817de8d92eb41"
+  },
+  "reviewer": {
+    "id": "/root/imp_impl_referee_c",
+    "kind": "agent",
+    "model": "gpt-5.6-sol",
+    "runtime": "Codex desktop multi-agent subagent on Linux x86_64; fresh model-context fork; high reasoning effort",
+    "isolation_strength": "manual_attestation",
+    "isolation_method": "Fresh detached worktree /tmp/imp-impl-ref-c.hWDZJOAR/checkout at the exact head; candidate source read-only; reused only the pinned .lake/packages through a symlink; no downloads, pin changes, CI, peer implementation reports, Stage 1, Verso, or uncommitted work. Shared writable filesystem, package cache, and available network were not technically isolated; only the three authorized external review artifacts were written.",
+    "independent_of_proposer": true,
+    "read_only_candidate": true
+  },
+  "verdict": "approve",
+  "summary": "The candidate exposes exactly the eight frozen public declarations and keeps all 29 support declarations private. Imports are acyclic and downward (Mathlib to Basic, Basic to Abel/Bochner, siblings to Results), the maintained root and all six nonpublic tests are reachable, no downstream LMLF module enters production, and the pinned Mathlib interfaces were inspected. No API/dependency finding remains.",
+  "evidence": {
+    "review_envelope_sha256": "1c7874b190ada114c60853a880b2ec2a56bbaba3fed261ccf7ad57b30e012ab7",
+    "proposer_bundle_ref": "/workspace/Documents/Codex/2026-09-05/LMLF-review-evidence/imp-core-b8d2f73-acceptance-matrix.md",
+    "proposer_bundle_sha256": "4852ace739c8dea0e2176004e6679b4c3aa968bd8143ed76794f099b87a11a63",
+    "proposer_bundle_status": "bound_as_untrusted_proposer_evidence_independently_verified_no_review_credit",
+    "source_snapshot_verified": true,
+    "source_fidelity_applicability": "not_applicable_source_free_packet",
+    "pinned_dependency_source_inspected": true,
+    "commands_rerun": [
+      "lake build [exit 0; 2766 jobs; wall 14.641s]",
+      "lake env lean LMLF/Integral/Improper/Basic.lean [exit 0]",
+      "lake env lean LMLF/Integral/Improper/Bochner.lean [exit 0]",
+      "lake env lean LMLF/Integral/Improper/Abel.lean [exit 0]",
+      "lake env lean LMLFTest/Integral/Improper/IMP001Regressions.lean [exit 0]",
+      "lake env lean LMLFTest/Integral/Improper/IMP001PublicUse.lean [exit 0]",
+      "lake env lean LMLFTest/Integral/Improper/IMP001EndpointAE.lean [exit 0]",
+      "lake env lean LMLFTest/Integral/Improper/IMP001GammaEndpoint.lean [exit 0]",
+      "lake env lean LMLFTest/Integral/Improper/IMP001AbelExamples.lean [exit 0]",
+      "lake env lean LMLFTest/Integral/Improper/IMP001Oscillatory.lean [exit 0]",
+      "python3 scripts/validate_inventory.py [exit 0]",
+      "python3 scripts/validate_inventory.py --negative-tests [exit 0; 25 invalid fixtures rejected]",
+      "lake env lean imp-core-b8d2f73-public-api-probe.lean [exit 0]",
+      "lake env lean imp-core-b8d2f73-private-name-probe.lean [expected exit 1; exactly four unknownIdentifier errors]",
+      "lake env lean /tmp/imp-impl-ref-c.hWDZJOAR/AxiomAudit.lean [exit 0; eight declarations each exactly propext, Classical.choice, Quot.sound]",
+      "/home/codex/.codex/skills/referee-lean-library/scripts/library_inventory.sh /tmp/imp-impl-ref-c.hWDZJOAR/checkout [exit 0]",
+      "git diff --check 3a1b16cae6d186a20530de3b883c1bb871ee76f6..b8d2f731fcfd5cd0889d0732f13699eb94681c86 [exit 0]",
+      "git diff --exit-code base..head on frozen packet/card/signature/NLP [exit 0]",
+      "trust/resource/public-declaration/import scans with rg [exit 0; no forbidden marker; exactly eight public declarations]"
+    ],
+    "files_and_declarations_inspected": [
+      "LMLF/Integral/Improper/Basic.lean: full file; exact T01/T05 and public T08/T02/T03/T04 plus 23 private helpers",
+      "LMLF/Integral/Improper/Abel.lean: full file; public T06 plus four private helpers and five exact imports",
+      "LMLF/Integral/Improper/Bochner.lean: full file; public T07 plus one private helper and two exact imports",
+      "LMLF/Results.lean: maintained-root imports",
+      "lakefile.toml and lake-manifest.json: default target, six test globs, unchanged pin/resource settings",
+      "All six LMLFTest/Integral/Improper modules in full, including public-use and private-boundary probes/guards",
+      "review/PROTOCOL.md; review/work_packets/IMP-001.yaml; theorem card R7; signatures R6/P2; NLP R7; NLP REG-R2; proof artifact schema; both assigned rubrics",
+      "Pinned Mathlib Integral/Prod.lean, ExpDeriv.lean, IntegralEqImproper.lean, and Gamma/Basic.lean at revision 0df444a360eaa60ab8c11dca51a86af692955474",
+      "Public API probe SHA-256 6b3aa43462802151d3bc88c4f0fdf515b0459eab110511a1ec8304cb62bfeaad",
+      "Private-name probe SHA-256 bb95d0f333d29660b3bc99e76b326ed846e7531589e047d81010116e0bf70a83",
+      "All 25 IMP-R01 through IMP-R25 obligations and all 21 theorem-card edge obligations"
+    ]
+  },
+  "findings": [],
+  "prior_finding_dispositions_checked": [],
+  "issued_at_utc": "2026-09-06T18:30:00Z"
+}

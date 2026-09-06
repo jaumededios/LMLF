@@ -1,0 +1,120 @@
+{
+  "schema_version": 4,
+  "record_kind": "rubric_verdict",
+  "storage_requirement": "external_to_candidate_head",
+  "work_item_id": "IMP-001",
+  "review_stage": "implementation",
+  "gate": "implementation_review",
+  "review_identity": {
+    "review_envelope_ref": "/workspace/Documents/Codex/2026-09-05/LMLF-review-evidence/implementation-b8d2f731fcfd5cd0889d0732f13699eb94681c86/IMP-001-implementation-review-envelope-pending.yaml",
+    "spec_commit": "3a1b16cae6d186a20530de3b883c1bb871ee76f6",
+    "work_packet_path": "review/work_packets/IMP-001.yaml",
+    "work_packet_sha256": "e0f16a660417d967312df0f7cc7ce12ea1243226801b409475548566d594796b",
+    "theorem_card_bindings": [
+      {
+        "artifact_id": "TC-IMP-001-R7",
+        "revision": 7,
+        "sha256": "d81f8970bcba3bf1a489f8cb4fea8b303a3e3bf6d1ad3ade37b42f3094b528c4"
+      },
+      {
+        "artifact_id": "SIG-IMP-001-R6-P2",
+        "revision": 2,
+        "sha256": "0e220214233fec5f2f95608789b139900e7dfddef8a6b824b8d54bce37e74f2d"
+      }
+    ],
+    "natural_language_proof_bindings": [
+      {
+        "artifact_id": "NLP-IMP-001-R7",
+        "revision": 7,
+        "sha256": "941ca0f2a7e402e9dd3636d7c93744290b3f5b52b8705484c18630c6fe173548"
+      },
+      {
+        "artifact_id": "NLP-IMP-001-REG-R2",
+        "revision": 2,
+        "sha256": "316fc09bf3f35a5649f951ea0964ed1330e540d028a48c4706312d37c87ae7e9"
+      }
+    ],
+    "supplemental_regression_authority": {
+      "specification_commit": "0f4df472dd2c97267dbc2c2128975eb3277132e0",
+      "passing_envelope_sha256": "ee3fb545a1772eae460cfaa39ecf45b1d7d4c075461f2424577ee273dce25d9c",
+      "root_adjudication_sha256": "b1b77b956d19ea8c0f741d2d7111f98b8c31e38d27b89d01cb811a3e1dbafb17",
+      "scope": "reviewed_nonpublic_analytic_regressions_only",
+      "public_target_or_premise_changes": false
+    },
+    "classification_schema_binding": {
+      "path": "review/classifications-v3.json",
+      "schema_version": "lmlf-classification-v3",
+      "artifact_revision": 3,
+      "sha256": "975e08b89d609cbdd15ff3f8d24f40a42bb17ea0f4c37bb26d9cf53fb8dc4b5e"
+    },
+    "base_sha": "3a1b16cae6d186a20530de3b883c1bb871ee76f6",
+    "head_sha": "b8d2f731fcfd5cd0889d0732f13699eb94681c86",
+    "lean_toolchain": "leanprover/lean4:v4.33.1",
+    "mathlib_revision": "0df444a360eaa60ab8c11dca51a86af692955474",
+    "rubric": "mathlib_reuse",
+    "review_perspective": "dependency_direction",
+    "rubric_revision": "dee214f219ccb03db63194208487f6cb69777b5bc780b608b6e717b729ee901a"
+  },
+  "reviewer": {
+    "id": "/root/imp_impl_referee_b",
+    "kind": "agent",
+    "model": "gpt-5.6-sol",
+    "reasoning_effort": "high",
+    "runtime": "Codex desktop agent runtime; Linux 5.15.0-190-generic x86_64; Lean 4.33.1",
+    "isolation_strength": "manual_attestation",
+    "isolation_method": "Fresh detached worktree /tmp/imp-impl-ref-b.6zMdrSC6/checkout at the exact head; reused only the existing pinned .lake/packages via a disposable ignored symlink; temporary probes outside the checkout; no candidate edits, CI, delegation, peer/predecessor reports, Stage 1/Verso, or uncommitted candidate files.",
+    "independent_of_proposer": true,
+    "read_only_candidate": true
+  },
+  "verdict": "approve",
+  "summary": "Pinned-source and local-library search found no exact existing finite-exceptional relation or primitive abstraction. The implementation appropriately keeps those project concepts local and reuses the exact Mathlib interval-limit, primitive-continuity, interval-additivity, CLM, Fubini, FTC, exponential-derivative, rpow-substitution, and Gamma seams. No duplicate foundation, overlooked exact theorem, unjustified wrapper, or inflated production import remains.",
+  "evidence": {
+    "review_envelope_sha256": "1c7874b190ada114c60853a880b2ec2a56bbaba3fed261ccf7ad57b30e012ab7",
+    "proposer_bundle_ref": "/workspace/Documents/Codex/2026-09-05/LMLF-review-evidence/imp-core-b8d2f73-acceptance-matrix.md",
+    "proposer_bundle_sha256": "4852ace739c8dea0e2176004e6679b4c3aa968bd8143ed76794f099b87a11a63",
+    "proposer_bundle_status": "final_untrusted_proposer_evidence_independently_verified_no_review_credit",
+    "source_snapshot_verified": true,
+    "source_fidelity_applicability": "not_applicable_source_free_packet",
+    "pinned_dependency_source_inspected": true,
+    "commands_rerun": [
+      "git rev-parse HEAD (exit 0; b8d2f731fcfd5cd0889d0732f13699eb94681c86)",
+      "git -C .lake/packages/mathlib rev-parse HEAD (exit 0; 0df444a360eaa60ab8c11dca51a86af692955474)",
+      "bash /home/codex/.codex/skills/referee-lean-library/scripts/library_inventory.sh /tmp/imp-impl-ref-b.6zMdrSC6/checkout (exit 0)",
+      "rg local LMLF sources for improper/final-exception concepts before pinned Mathlib search (exit 0)",
+      "rg pinned Mathlib for improper-integral and named reuse seams (exit 0; no exact T01/T05/T08 substitute)",
+      "lake env lean /tmp/imp-impl-ref-b.6zMdrSC6/MathlibSeamProbe.lean (final corrected invocation exit 0)",
+      "lake build (exit 0; 2766 jobs)",
+      "lake env lean on the three production IMP modules and all six regression modules (nine invocations, each exit 0)",
+      "lake env lean LMLF/Results.lean (exit 0)",
+      "python3 scripts/validate_inventory.py (exit 0)",
+      "python3 scripts/validate_inventory.py --negative-tests (exit 0)",
+      "git diff --check 3a1b16cae6d186a20530de3b883c1bb871ee76f6..b8d2f731fcfd5cd0889d0732f13699eb94681c86 (exit 0)"
+    ],
+    "files_and_declarations_inspected": [
+      "LMLF/Integral/Improper/Basic.lean: complete file, all T01/T05/T08/T02/T03/T04 bodies and private component machinery",
+      "LMLF/Integral/Improper/Abel.lean: complete file, T06 and all private Fubini/FTC/transformed-primitive support",
+      "LMLF/Integral/Improper/Bochner.lean: complete file, T07 and private canonical primitive package",
+      "LMLF/Results.lean and lakefile.toml import/target changes",
+      "all six LMLFTest/Integral/Improper/IMP001*.lean modules, complete files",
+      "pinned Mathlib MeasureTheory/Integral/DominatedConvergence.lean",
+      "pinned Mathlib MeasureTheory/Integral/IntegralEqImproper.lean",
+      "pinned Mathlib MeasureTheory/Integral/IntervalIntegral/Basic.lean",
+      "pinned Mathlib MeasureTheory/Integral/Prod.lean",
+      "pinned Mathlib Analysis/SpecialFunctions/Gamma/Basic.lean",
+      "MeasureTheory.intervalIntegral_tendsto_integral_Ioi",
+      "MeasureTheory.IntegrableOn.continuousOn_Ici_primitive_Ioi",
+      "intervalIntegral.continuousOn_primitive_interval'",
+      "intervalIntegral.integral_Ioi_sub_Ioi",
+      "intervalIntegral.integral_add_adjacent_intervals",
+      "ContinuousLinearMap.intervalIntegral_comp_comm",
+      "IntervalIntegrable.sum and tendsto_finsetSum",
+      "MeasureTheory.intervalIntegral_integral_swap",
+      "Real.hasDerivAt_exp and intervalIntegral.integral_eq_sub_of_hasDerivAt_of_le",
+      "MeasureTheory.integrableOn_Ioi_comp_rpow_iff",
+      "Real.GammaIntegral_convergent, Real.Gamma_eq_integral, and Real.Gamma_pos_of_pos"
+    ]
+  },
+  "findings": [],
+  "prior_finding_dispositions_checked": [],
+  "issued_at_utc": "2026-09-06T18:28:25Z"
+}

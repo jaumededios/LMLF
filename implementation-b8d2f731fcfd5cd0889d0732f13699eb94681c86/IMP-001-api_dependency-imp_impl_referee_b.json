@@ -1,0 +1,129 @@
+{
+  "schema_version": 4,
+  "record_kind": "rubric_verdict",
+  "storage_requirement": "external_to_candidate_head",
+  "work_item_id": "IMP-001",
+  "review_stage": "implementation",
+  "gate": "implementation_review",
+  "review_identity": {
+    "review_envelope_ref": "/workspace/Documents/Codex/2026-09-05/LMLF-review-evidence/implementation-b8d2f731fcfd5cd0889d0732f13699eb94681c86/IMP-001-implementation-review-envelope-pending.yaml",
+    "spec_commit": "3a1b16cae6d186a20530de3b883c1bb871ee76f6",
+    "work_packet_path": "review/work_packets/IMP-001.yaml",
+    "work_packet_sha256": "e0f16a660417d967312df0f7cc7ce12ea1243226801b409475548566d594796b",
+    "theorem_card_bindings": [
+      {
+        "artifact_id": "TC-IMP-001-R7",
+        "revision": 7,
+        "sha256": "d81f8970bcba3bf1a489f8cb4fea8b303a3e3bf6d1ad3ade37b42f3094b528c4"
+      },
+      {
+        "artifact_id": "SIG-IMP-001-R6-P2",
+        "revision": 2,
+        "sha256": "0e220214233fec5f2f95608789b139900e7dfddef8a6b824b8d54bce37e74f2d"
+      }
+    ],
+    "natural_language_proof_bindings": [
+      {
+        "artifact_id": "NLP-IMP-001-R7",
+        "revision": 7,
+        "sha256": "941ca0f2a7e402e9dd3636d7c93744290b3f5b52b8705484c18630c6fe173548"
+      },
+      {
+        "artifact_id": "NLP-IMP-001-REG-R2",
+        "revision": 2,
+        "sha256": "316fc09bf3f35a5649f951ea0964ed1330e540d028a48c4706312d37c87ae7e9"
+      }
+    ],
+    "supplemental_regression_authority": {
+      "specification_commit": "0f4df472dd2c97267dbc2c2128975eb3277132e0",
+      "passing_envelope_sha256": "ee3fb545a1772eae460cfaa39ecf45b1d7d4c075461f2424577ee273dce25d9c",
+      "root_adjudication_sha256": "b1b77b956d19ea8c0f741d2d7111f98b8c31e38d27b89d01cb811a3e1dbafb17",
+      "scope": "reviewed_nonpublic_analytic_regressions_only",
+      "public_target_or_premise_changes": false
+    },
+    "classification_schema_binding": {
+      "path": "review/classifications-v3.json",
+      "schema_version": "lmlf-classification-v3",
+      "artifact_revision": 3,
+      "sha256": "975e08b89d609cbdd15ff3f8d24f40a42bb17ea0f4c37bb26d9cf53fb8dc4b5e"
+    },
+    "base_sha": "3a1b16cae6d186a20530de3b883c1bb871ee76f6",
+    "head_sha": "b8d2f731fcfd5cd0889d0732f13699eb94681c86",
+    "lean_toolchain": "leanprover/lean4:v4.33.1",
+    "mathlib_revision": "0df444a360eaa60ab8c11dca51a86af692955474",
+    "rubric": "api_dependency",
+    "review_perspective": "dependency_direction",
+    "rubric_revision": "4e5f947ed15f0101c46fe9bb0a12a013d66c7de3c7ed2c35fda817de8d92eb41"
+  },
+  "reviewer": {
+    "id": "/root/imp_impl_referee_b",
+    "kind": "agent",
+    "model": "gpt-5.6-sol",
+    "reasoning_effort": "high",
+    "runtime": "Codex desktop agent runtime; Linux 5.15.0-190-generic x86_64; Lean 4.33.1",
+    "isolation_strength": "manual_attestation",
+    "isolation_method": "Fresh detached worktree /tmp/imp-impl-ref-b.6zMdrSC6/checkout at the exact head; reused only the existing pinned .lake/packages via a disposable ignored symlink; temporary probes outside the checkout; no candidate edits, CI, delegation, peer/predecessor reports, Stage 1/Verso, or uncommitted candidate files.",
+    "independent_of_proposer": true,
+    "read_only_candidate": true
+  },
+  "verdict": "approve",
+  "summary": "The candidate exposes exactly the frozen two definitions and six theorems, with exact signatures and intended classifications/consumers. All representation, endpoint, constructor/eliminator, Fubini, and primitive-package plumbing remains private. Imports flow Mathlib to Basic to independent Abel/Bochner siblings and then to Results; no downstream/source/QL/OLV/Watson/Gamma dependency leaks into production. T02, T03, T06, T07, and T08 follow their required independent routes, and all 25 regressions plus 21 card edges compile or pass the specified structural/negative checks.",
+  "evidence": {
+    "review_envelope_sha256": "1c7874b190ada114c60853a880b2ec2a56bbaba3fed261ccf7ad57b30e012ab7",
+    "proposer_bundle_ref": "/workspace/Documents/Codex/2026-09-05/LMLF-review-evidence/imp-core-b8d2f73-acceptance-matrix.md",
+    "proposer_bundle_sha256": "4852ace739c8dea0e2176004e6679b4c3aa968bd8143ed76794f099b87a11a63",
+    "proposer_bundle_status": "final_untrusted_proposer_evidence_independently_verified_no_review_credit",
+    "source_snapshot_verified": true,
+    "source_fidelity_applicability": "not_applicable_source_free_packet",
+    "pinned_dependency_source_inspected": true,
+    "commands_rerun": [
+      "git rev-parse HEAD and detached-head check (exit 0; exact bound head; no branch)",
+      "source declaration inventory over Basic/Abel/Bochner (exit 0; exactly two public defs and six public theorems)",
+      "per-file production and test import inventory (exit 0)",
+      "forbidden production import scan (rg exit 1, expected no matches)",
+      "Basic-to-sibling and Abel/Bochner cross-import/reference scans (each rg exit 1, expected no matches)",
+      "lake build (exit 0; 2766 jobs)",
+      "lake env lean LMLF/Integral/Improper/Basic.lean (exit 0)",
+      "lake env lean LMLF/Integral/Improper/Abel.lean (exit 0)",
+      "lake env lean LMLF/Integral/Improper/Bochner.lean (exit 0)",
+      "lake env lean LMLF/Results.lean (exit 0)",
+      "lake env lean on IMP001PublicUse, IMP001Regressions, IMP001EndpointAE, IMP001GammaEndpoint, IMP001AbelExamples, and IMP001Oscillatory (six invocations, each exit 0)",
+      "lake env lean imp-core-b8d2f73-public-api-probe.lean (final post-build invocation exit 0)",
+      "lake env lean imp-core-b8d2f73-private-name-probe.lean (exit 1 as required; four unknown private identifiers)",
+      "lake env lean /tmp/imp-impl-ref-b.6zMdrSC6/AxiomProbe.lean (exit 0; all eight reports within the three-axiom allowlist)",
+      "lake env lean /tmp/imp-impl-ref-b.6zMdrSC6/PublicNamespaceInventory.lean (exit 0)",
+      "trust marker scan for sorry/admit/axiom/unsafe/resource overrides (zero matches)",
+      "python3 scripts/validate_inventory.py (exit 0)",
+      "python3 scripts/validate_inventory.py --negative-tests (exit 0; all 25 invalid fixtures rejected)",
+      "git diff --check 3a1b16cae6d186a20530de3b883c1bb871ee76f6..b8d2f731fcfd5cd0889d0732f13699eb94681c86 (exit 0)",
+      "git -C /tmp/lmlf-imp-core.aZgav6tR status --short (exit 0; empty)"
+    ],
+    "files_and_declarations_inspected": [
+      "review/work_packets/IMP-001.yaml: every T01-T08 target, classification, consumer, scope, 25 regressions, and 21 edge obligations",
+      "blueprint/theorem_cards/IMP-001.yaml revision 7 and blueprint/theorem_cards/IMP-001-signatures-R6.md",
+      "blueprint/proofs/IMP-001-R7.md and blueprint/proofs/IMP-001-REG-R2.md",
+      "LMLF/Integral/Improper/Basic.lean: all 1137 lines",
+      "LMLF/Integral/Improper/Abel.lean: all 271 lines",
+      "LMLF/Integral/Improper/Bochner.lean: all 52 lines",
+      "LMLF/Results.lean and lakefile.toml",
+      "LMLFTest/Integral/Improper/IMP001PublicUse.lean: all 308 lines",
+      "LMLFTest/Integral/Improper/IMP001Regressions.lean: all 406 lines",
+      "LMLFTest/Integral/Improper/IMP001EndpointAE.lean: all 141 lines",
+      "LMLFTest/Integral/Improper/IMP001GammaEndpoint.lean: all 96 lines",
+      "LMLFTest/Integral/Improper/IMP001AbelExamples.lean: all 591 lines",
+      "LMLFTest/Integral/Improper/IMP001Oscillatory.lean: all 1409 lines",
+      "T01/T05 exact definition bodies and private sorted component relations",
+      "T08 direct forward/reverse component route",
+      "T02 private componentwise uniqueness route without T08",
+      "T03 literal biUnion weakening, heterogeneous CLM sum, and T08 reverse route",
+      "T04 exact prefix-plus-tail orientation",
+      "T06 private restricted-product Fubini/transformed primitive route",
+      "T07 private canonical Bochner primitive route",
+      "all eight public declaration signatures and axiom reports",
+      "positive public and negative private-name probes"
+    ]
+  },
+  "findings": [],
+  "prior_finding_dispositions_checked": [],
+  "issued_at_utc": "2026-09-06T18:28:25Z"
+}

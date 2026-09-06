@@ -1,0 +1,201 @@
+schema_version: 3
+record_kind: review_envelope
+storage_requirement: external_to_candidate_head
+work_item_id: IMP-001
+lifecycle_state: passing_implementation_successor
+
+predecessor_pending_envelope:
+  path: IMP-001-implementation-review-envelope-pending.yaml
+  sha256: 1c7874b190ada114c60853a880b2ec2a56bbaba3fed261ccf7ad57b30e012ab7
+
+specification_binding:
+  spec_commit: 3a1b16cae6d186a20530de3b883c1bb871ee76f6
+  work_packet_path: review/work_packets/IMP-001.yaml
+  work_packet_sha256: e0f16a660417d967312df0f7cc7ce12ea1243226801b409475548566d594796b
+  theorem_cards:
+    - artifact_id: TC-IMP-001-R7
+      revision: 7
+      sha256: d81f8970bcba3bf1a489f8cb4fea8b303a3e3bf6d1ad3ade37b42f3094b528c4
+    - artifact_id: SIG-IMP-001-R6-P2
+      revision: 2
+      sha256: 0e220214233fec5f2f95608789b139900e7dfddef8a6b824b8d54bce37e74f2d
+  natural_language_proofs:
+    - artifact_id: NLP-IMP-001-R7
+      revision: 7
+      sha256: 941ca0f2a7e402e9dd3636d7c93744290b3f5b52b8705484c18630c6fe173548
+  classification_schema:
+    path: review/classifications-v3.json
+    schema_version: lmlf-classification-v3
+    artifact_revision: 3
+    sha256: 975e08b89d609cbdd15ff3f8d24f40a42bb17ea0f4c37bb26d9cf53fb8dc4b5e
+
+supplemental_regression_binding:
+  specification_commit: 0f4df472dd2c97267dbc2c2128975eb3277132e0
+  artifact_id: NLP-IMP-001-REG-R2
+  revision: 2
+  path: blueprint/proofs/IMP-001-REG-R2.md
+  sha256: 316fc09bf3f35a5649f951ea0964ed1330e540d028a48c4706312d37c87ae7e9
+  passing_envelope:
+    path: /workspace/Documents/Codex/2026-09-05/LMLF-review-evidence/supplement-imp-reg-r2-0f4df472dd2c97267dbc2c2128975eb3277132e0/lean-ready-envelope-r2.yaml
+    sha256: ee3fb545a1772eae460cfaa39ecf45b1d7d4c075461f2424577ee273dce25d9c
+  root_adjudication:
+    path: /workspace/Documents/Codex/2026-09-05/LMLF-review-evidence/supplement-imp-reg-r2-0f4df472dd2c97267dbc2c2128975eb3277132e0/root-adjudication-r2.md
+    sha256: b1b77b956d19ea8c0f741d2d7111f98b8c31e38d27b89d01cb811a3e1dbafb17
+  authorized_scope: reviewed_nonpublic_analytic_regressions_only
+  public_target_or_premise_changes: false
+
+toolchain_binding:
+  lean_toolchain: leanprover/lean4:v4.33.1
+  mathlib_revision: 0df444a360eaa60ab8c11dca51a86af692955474
+  lake_manifest_sha256: 4bd9b595f84163f69bdb0ffc9b1a876b5df71d65bdd53122415610d083d43404
+
+candidate_binding:
+  base_sha: 3a1b16cae6d186a20530de3b883c1bb871ee76f6
+  head_sha: b8d2f731fcfd5cd0889d0732f13699eb94681c86
+  proposer_evidence_ref:
+    path: /workspace/Documents/Codex/2026-09-05/LMLF-review-evidence/imp-core-b8d2f73-acceptance-matrix.md
+    sha256: 4852ace739c8dea0e2176004e6679b4c3aa968bd8143ed76794f099b87a11a63
+  public_api_probe:
+    path: /workspace/Documents/Codex/2026-09-05/LMLF-review-evidence/imp-core-b8d2f73-public-api-probe.lean
+    sha256: 6b3aa43462802151d3bc88c4f0fdf515b0459eab110511a1ec8304cb62bfeaad
+  private_name_probe:
+    path: /workspace/Documents/Codex/2026-09-05/LMLF-review-evidence/imp-core-b8d2f73-private-name-probe.lean
+    sha256: bb95d0f333d29660b3bc99e76b326ed846e7531589e047d81010116e0bf70a83
+
+pre_lean_authority:
+  passing_envelope:
+    path: /workspace/Documents/Codex/2026-09-05/LMLF-review-evidence/spec-3a1b16cae6d186a20530de3b883c1bb871ee76f6/IMP-001-review-envelope-lean-ready.yaml
+    sha256: 3e4ca4b00adf36fc6b85315f74dcc4349abcd17eb6ebaf7282c374a0499a56f5
+  authority_changed: false
+
+pre_lean_gates:
+  overall_distinct_reviewer_ids:
+    - /root/imp_final_referee_a
+    - /root/imp_final_referee_b
+    - /root/imp_final_referee_c
+  theorem_card_review:
+    gate_state: pass
+    distinct_reviewer_ids: [/root/imp_final_referee_a, /root/imp_final_referee_b]
+    selected_reviewer_composition: {humans: 0, agents: 2, minimum_distinct_agent_models: 1}
+    verdict_refs:
+      - path: /workspace/Documents/Codex/2026-09-05/LMLF-review-evidence/spec-3a1b16cae6d186a20530de3b883c1bb871ee76f6/IMP-001-theorem_card_review-imp_final_referee_a.json
+        sha256: aa892f84d567df30bb4750da382881fd14cae12f904f4eb5a3a0d28dda9dae32
+      - path: /workspace/Documents/Codex/2026-09-05/LMLF-review-evidence/spec-3a1b16cae6d186a20530de3b883c1bb871ee76f6/IMP-001-theorem_card_review-imp_final_referee_b.json
+        sha256: bef190f91d3d90188e0c049145a26b8a3104e2c49129e8af85385e4d7e0ffc87
+  natural_language_proof_review:
+    applicability: required
+    inapplicable_reason: null
+    gate_state: pass
+    distinct_reviewer_ids: [/root/imp_final_referee_a, /root/imp_final_referee_b]
+    selected_reviewer_composition: {humans: 0, agents: 2, minimum_distinct_agent_models: 1}
+    verdict_refs:
+      - path: /workspace/Documents/Codex/2026-09-05/LMLF-review-evidence/spec-3a1b16cae6d186a20530de3b883c1bb871ee76f6/IMP-001-natural_language_proof_review-imp_final_referee_a.json
+        sha256: 7931dae4a4df7eda90c7c445733373ec76851967252e94f72038634980bfd838
+      - path: /workspace/Documents/Codex/2026-09-05/LMLF-review-evidence/spec-3a1b16cae6d186a20530de3b883c1bb871ee76f6/IMP-001-natural_language_proof_review-imp_final_referee_b.json
+        sha256: 2d1c4b077ec71e09284d7a8cc4d23cedb9dc302132fd0b90e9dbfe782a3d9498
+  structural_circularity_review:
+    applicability: required
+    inapplicable_reason: null
+    gate_state: pass
+    distinct_reviewer_ids: [/root/imp_final_referee_c]
+    selected_reviewer_composition: {humans: 0, agents: 1, minimum_distinct_agent_models: 1}
+    represented_perspectives: [dependency_direction, source_to_target_reachability, hypothesis_and_choice_laundering]
+    verdict_refs:
+      - path: /workspace/Documents/Codex/2026-09-05/LMLF-review-evidence/spec-3a1b16cae6d186a20530de3b883c1bb871ee76f6/IMP-001-structural-dependency_direction-imp_final_referee_c.json
+        sha256: 4465ae9563ddfe212457163708124e97cf59e24bd18c10e2c0dd1065af74ba00
+      - path: /workspace/Documents/Codex/2026-09-05/LMLF-review-evidence/spec-3a1b16cae6d186a20530de3b883c1bb871ee76f6/IMP-001-structural-source_to_target_reachability-imp_final_referee_c.json
+        sha256: b46b8ca8fbf308627c58da7875d5f31914af0dd2f1c4798570d88fd66dc66feb
+      - path: /workspace/Documents/Codex/2026-09-05/LMLF-review-evidence/spec-3a1b16cae6d186a20530de3b883c1bb871ee76f6/IMP-001-structural-hypothesis_and_choice_laundering-imp_final_referee_c.json
+        sha256: d9ec7dfc4f8b419fed8e6e1f62d2f4077f4d3c13bb4d87f7827bb9c03db47642
+  lean_ready:
+    gate_state: pass
+    decided_by: /root
+    evidence_refs:
+      - path: /workspace/Documents/Codex/2026-09-05/LMLF-review-evidence/spec-3a1b16cae6d186a20530de3b883c1bb871ee76f6/IMP-001-prelean-adjudication.md
+        sha256: ee625aeea238a1e6c87c7d715372860c23a109d9852588e3f5847aef96017be3
+      - path: /workspace/Documents/Codex/2026-09-05/LMLF-review-evidence/spec-3a1b16cae6d186a20530de3b883c1bb871ee76f6/IMP-001-review-envelope-pending.yaml
+        sha256: 62d1d8e1530b02f63dedda505c925291d7453c16faf65d81919799a69f243b52
+    requires_gate_states: {theorem_card_review: pass, natural_language_proof_review: pass, structural_circularity_review: pass}
+
+implementation_reviews:
+  gate_state: pass
+  overall_distinct_reviewer_ids:
+    - /root/imp_impl_referee_a
+    - /root/imp_impl_referee_b
+    - /root/imp_impl_referee_c
+  selected_overall_reviewer_composition: {humans: 0, agents: 3, minimum_distinct_agent_models: 1}
+  rubric_states:
+    source_fidelity:
+      applicability: not_applicable
+      inapplicable_reason: >-
+        Source-independent original reusable infrastructure with no source
+        occurrence, named source object, transcription, or coverage claim.
+      gate_state: not_required
+      distinct_reviewer_ids: []
+      verdict_refs: []
+    quantitative_correctness:
+      applicability: required
+      gate_state: pass
+      distinct_reviewer_ids: [/root/imp_impl_referee_a]
+      selected_reviewer_composition: {humans: 0, agents: 1, minimum_distinct_agent_models: 1}
+      all_approving_reviewer_ids: [/root/imp_impl_referee_a]
+    mathlib_reuse:
+      applicability: required
+      gate_state: pass
+      distinct_reviewer_ids: [/root/imp_impl_referee_b]
+      selected_reviewer_composition: {humans: 0, agents: 1, minimum_distinct_agent_models: 1}
+      all_approving_reviewer_ids: [/root/imp_impl_referee_b]
+    api_dependency:
+      applicability: required
+      gate_state: pass
+      distinct_reviewer_ids: [/root/imp_impl_referee_b]
+      selected_reviewer_composition: {humans: 0, agents: 1, minimum_distinct_agent_models: 1}
+      all_approving_reviewer_ids: [/root/imp_impl_referee_b, /root/imp_impl_referee_c]
+    proof_quality:
+      applicability: required
+      gate_state: pass
+      distinct_reviewer_ids: [/root/imp_impl_referee_c]
+      selected_reviewer_composition: {humans: 0, agents: 1, minimum_distinct_agent_models: 1}
+      all_approving_reviewer_ids: [/root/imp_impl_referee_a, /root/imp_impl_referee_c]
+  rubric_verdict_refs:
+    - path: IMP-001-quantitative_correctness-imp_impl_referee_a.json
+      sha256: 182dcff935b82253a3b5d6ee3178da9f43a4097ae6bd9592f90cbb1defbe60f0
+    - path: IMP-001-proof_quality-imp_impl_referee_a.json
+      sha256: 1674552c5fac63cf88d101c766682806ab3211a95253f4b30c2e1f4fdf6ae3b4
+    - path: IMP-001-mathlib_reuse-imp_impl_referee_b.json
+      sha256: 1234a53e8626e79fc334604bc58c2dcf34062519c75e4e71454f1e72747a43df
+    - path: IMP-001-api_dependency-imp_impl_referee_b.json
+      sha256: d76babfb7d9bdb12f73dbc3c9297a25aca179b09c3d9a9120ca3f3b9bb4473ba
+    - path: IMP-001-proof_quality-imp_impl_referee_c.json
+      sha256: 1d38b4ef5a970e51bb350572137307d4b8c9c83ecfea1bccaf68e54db5092adc
+    - path: IMP-001-api_dependency-imp_impl_referee_c.json
+      sha256: ca375b304b0a025b6fdb047a335aaa84dd68180d737474aebc153acb26b1b33b
+  report_refs:
+    - path: imp_impl_referee_a.md
+      sha256: 832b379546bf252507ee9a7b352c52dc63f676ae48abbfeb9ae03b0c847a2566
+    - path: imp_impl_referee_a-t02-correction-01.md
+      sha256: 30287d616bf7d6e76c72b91d97a74f2dab18b1ad0e8055fe75c6774f68c6a76c
+    - path: imp_impl_referee_b.md
+      sha256: 22cd053df8fa122cefe4b2684a13260abc4cc0ee1b6a1099cf26ffde2aff25c8
+    - path: imp_impl_referee_c.md
+      sha256: 0a11bc596fc76e7e8bbad8cbbc3b0797d65e7c9230e66a9f31bde1d9193e86d7
+  findings: []
+
+disposition_ledger_ref:
+  path: IMP-001-implementation-disposition.yaml
+  sha256: da2779971d1f4482195d3305d1fc0a60a574133038a20a838f08ff1232aea197
+
+root_adjudication_ref:
+  path: root-adjudication.md
+  sha256: 996426b436f18ff6e28f5f78e678e1e0f31c35f28ceca11f2b43e0075d9c4223
+
+merge_gate_state: pass
+merge_decision_ref:
+  path: root-adjudication.md
+  sha256: 996426b436f18ff6e28f5f78e678e1e0f31c35f28ceca11f2b43e0075d9c4223
+execution_condition: >-
+  Execute only if main is clean at exact base
+  3a1b16cae6d186a20530de3b883c1bb871ee76f6 and candidate head, candidate
+  bytes, specification bindings, pre-Lean authorities, classification schema,
+  Lean toolchain, and Mathlib pin remain unchanged. No new head or source
+  amendment is authorized.
