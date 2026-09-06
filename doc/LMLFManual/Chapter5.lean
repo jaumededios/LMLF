@@ -1,67 +1,34 @@
 import VersoManual
+import Verso.Code.External
 import LMLF.Definitions.Gamma
+import LMLF.Blueprint.Gamma
 import LMLFManual.Components
 
 open Verso.Genre Manual
 open Verso.Genre.Manual.InlineLean
 open LMLFManual
+open Verso.Code.External
+
+set_option verso.exampleProject "."
 
 #doc (Manual) "Gamma Function" =>
 %%%
 tag := "chapter-5"
 %%%
 
-:::chapterStatus "https://dlmf.nist.gov/5" "partial · four accepted declarations"
-LMLF currently identifies the pinned Mathlib Gamma object on its Euler half-plane, records real
-agreement, and exposes Mathlib's totalization convention. It does not yet implement the chapter's
-series, asymptotic expansions, inequalities, polygamma, Barnes, or q-Gamma families.
+:::dlmfChapter "https://dlmf.nist.gov/5"
+Source: NIST Digital Library of Mathematical Functions, Chapter 5.
 :::
-
-# 5.2 Definitions and 5.9 Integral representations
-
-::::result "Euler integral identification" "implemented · DEF-001"
-*Qualitative view.*
-
-For complex `s` with positive real part, the selected Gamma function is Euler's integral on the
-positive real axis. The integrability assertion is separate from the value identity.
-
-*Quantitative view.*
-
-This is an exact identification, not an approximation; there is no error majorant to display.
-
-:::leanStatement "Expand the checked Lean declarations"
-```lean
-#check LMLF.Definitions.gamma_eulerIntegrable
-#check LMLF.Definitions.gamma_eq_eulerIntegral
-```
-:::
-::::
-
-# 5.2 Definitions and conventions
-
-::::result "Real agreement and pole totalization" "implemented · DEF-001"
-*Qualitative view.*
-
-The complex and real Mathlib Gamma functions agree on real inputs. At nonpositive integers, the
-totalized Lean function has value zero; this records an implementation convention at classical poles,
-not a finite classical Gamma value.
-
-*Quantitative view.*
-
-These are exact convention and identification theorems, so a quantitative remainder analogue is not
-applicable.
-
-:::leanStatement "Expand the checked Lean declarations"
-```lean
-#check LMLF.Definitions.gamma_ofReal
-#check LMLF.Definitions.gamma_neg_nat_eq_zero
-```
-:::
-::::
 
 # Chapter contents
+%%%
+number := false
+%%%
 
 ## Notation and properties
+%%%
+number := false
+%%%
 
 :::sectionIndex
 * [5.1 Special Notation](https://dlmf.nist.gov/5.1)
@@ -85,6 +52,9 @@ applicable.
 :::
 
 ## Applications and computation
+%%%
+number := false
+%%%
 
 :::sectionIndex
 * [5.19 Mathematical Applications](https://dlmf.nist.gov/5.19)
@@ -94,3 +64,95 @@ applicable.
 * [5.23 Approximations](https://dlmf.nist.gov/5.23)
 * [5.24 Software](https://dlmf.nist.gov/5.24)
 :::
+
+# §5.2 Definitions
+%%%
+number := false
+%%%
+
+## §5.2(i) Gamma and Psi Functions
+%%%
+number := false
+%%%
+
+::::dlmfEntry "5.2.1" "https://dlmf.nist.gov/5.2.E1"
+$$`\Gamma(z)=\int_0^\infty e^{-t}t^{z-1}\,dt,\qquad \Re z>0.`
+
+For a complex number with positive real part, the Gamma function is Euler's integral on the positive
+real axis. The first declaration verifies convergence of that integral; the second states its value.
+
+:::leanStatement "Lean theorem"
+```anchor gamma_eulerIntegrable (module := LMLF.Definitions.Gamma) -showProofStates
+theorem gamma_eulerIntegrable {s : ℂ} (hs : 0 < s.re) :
+    MeasureTheory.IntegrableOn
+      (fun t : ℝ ↦ (Real.exp (-t) : ℂ) * (t : ℂ) ^ (s - 1))
+      (Set.Ioi 0) := by
+  exact Complex.GammaIntegral_convergent hs
+```
+
+```anchor gamma_eq_eulerIntegral (module := LMLF.Definitions.Gamma) -showProofStates
+theorem gamma_eq_eulerIntegral {s : ℂ} (hs : 0 < s.re) :
+    Complex.Gamma s =
+      ∫ t in Set.Ioi (0 : ℝ), (Real.exp (-t) : ℂ) * (t : ℂ) ^ (s - 1) := by
+  simpa only [Complex.GammaIntegral] using Complex.Gamma_eq_integral hs
+```
+:::
+::::
+
+# §5.11 Asymptotic Expansions
+%%%
+number := false
+%%%
+
+## §5.11(i) Poincaré-Type Expansions
+%%%
+number := false
+%%%
+
+::::dlmfEntry "5.11.1" "https://dlmf.nist.gov/5.11.E1"
+As $`z\to\infty` in $`|\operatorname{ph}z|\le\pi-\delta`,
+$$`\operatorname{Ln}\Gamma(z)\sim
+\left(z-\frac12\right)\ln z-z+\frac12\ln(2\pi)
++\sum_{k=1}^{\infty}\frac{B_{2k}}{2k(2k-1)z^{2k-1}}.`
+
+For positive real `x`, the Lean specialization uses the same Bernoulli terms. After any finite
+truncation, the remaining error is little-o of the last retained term as `x` tends to infinity.
+
+:::leanStatement "Lean statement · real-positive leading term"
+```anchor stirlingLogMain (module := LMLF.Blueprint.Gamma) -showProofStates
+noncomputable def stirlingLogMain (x : ℝ) : ℝ :=
+  (x - 1 / 2) * Real.log x - x + Real.log (2 * Real.pi) / 2
+```
+
+```anchor stirlingLogTerm (module := LMLF.Blueprint.Gamma) -showProofStates
+noncomputable def stirlingLogTerm (k : ℕ) (x : ℝ) : ℝ :=
+  (bernoulli (2 * k + 2) : ℝ) /
+    ((2 * k + 2 : ℕ) * (2 * k + 1 : ℕ) * x ^ (2 * k + 1))
+```
+
+```anchor stirlingLog_hasPoincareExpansion (module := LMLF.Blueprint.Gamma) -showProofStates
+axiom stirlingLog_hasPoincareExpansion :
+    (fun x : ℝ ↦ Real.log (Real.Gamma x) - stirlingLogMain x) ∼[atTop]
+      stirlingLogTerm
+```
+:::
+
+The distinct finite theorem says that the remainder has the sign of the first omitted term and no
+greater magnitude.
+
+:::leanStatement "Quantitative Lean statement · first-neglected-term bound"
+```anchor stirlingLogApprox (module := LMLF.Blueprint.Gamma) -showProofStates
+noncomputable def stirlingLogApprox (n : ℕ) (x : ℝ) : ℝ :=
+  stirlingLogMain x + QuantitativeAnalysis.seriesPartialSum stirlingLogTerm n x
+```
+
+```anchor stirlingLog_remainder_bounds (module := LMLF.Blueprint.Gamma) -showProofStates
+axiom stirlingLog_remainder_bounds (n : ℕ) {x : ℝ} (hx : 0 < x) :
+    0 ≤
+        (Real.log (Real.Gamma x) - stirlingLogApprox n x) *
+          stirlingLogTerm n x ∧
+      |Real.log (Real.Gamma x) - stirlingLogApprox n x| ≤
+        |stirlingLogTerm n x|
+```
+:::
+::::

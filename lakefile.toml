@@ -23,7 +23,9 @@ globs = [
   "LMLF.Basic",
   "LMLF.Definitions",
   "LMLF.Definitions.Gamma",
+  "LMLF.Blueprint.Gamma",
   "LMLF.Quantitative.Basic",
+  "LMLF.Quantitative.Series",
   "LMLF.Results",
   "LMLF.Audit.Definitions",
 ]

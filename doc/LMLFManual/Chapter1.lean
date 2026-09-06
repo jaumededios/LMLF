@@ -1,62 +1,91 @@
 import VersoManual
+import Verso.Code.External
 import LMLF.Quantitative.Basic
 import LMLFManual.Components
 
 open Verso.Genre Manual
-open Verso.Genre.Manual.InlineLean
+open Verso.Code.External
 open LMLFManual
 
-#doc (Manual) "Finite error calculus" =>
+set_option verso.exampleProject "."
+
+#doc (Manual) "Finite error bounds" =>
 %%%
 tag := "chapter-1"
 %%%
 
-This chapter does not reproduce Mathlib's algebra, calculus, topology, measure theory, or numerical
-methods. It documents only LMLF's additional language for finite approximations and explicit error
-bounds.
+This chapter introduces only LMLF notation. General analysis already available in Mathlib is not
+repeated.
 
-:::chapterStatus "https://dlmf.nist.gov/1" "implemented · bootstrap"
-The first layer says exactly what it means for an approximant to have a pointwise error or norm bound
-on an ordinary set. Empty domains remain logically valid here; named applications must separately
-prove that their advertised domains are reachable.
-:::
+# 1.1 Pointwise bounds
+%%%
+number := false
+%%%
 
-::::result "Pointwise approximation on a domain" "implemented · QB-001"
-*Qualitative view.*
+`ErrorOn D f a b` says that `a x` approximates `f x` throughout `D`, with the explicit pointwise
+error `b x`. `NormBoundOn D f b` is the same language for a bound on `f` itself.
 
-Exact agreement on a domain is the zero-error case.
+:::leanStatement "Lean definitions"
+```anchor ErrorOn (module := LMLF.Quantitative.Basic) -showProofStates
+def ErrorOn (D : Set X) (f a : X → E) (b : X → ℝ) : Prop :=
+  ∀ x ∈ D, ‖f x - a x‖ ≤ b x
+```
 
-*Quantitative view.*
-
-`ErrorOn D f a b` records the explicit inequality `‖f x - a x‖ ≤ b x` for every `x ∈ D`.
-`NormBoundOn D f b` records `‖f x‖ ≤ b x` on the same kind of domain.
-
-:::leanStatement "Expand the checked Lean declarations"
-```lean
-#check QuantitativeAnalysis.ErrorOn
-#check QuantitativeAnalysis.NormBoundOn
-#check QuantitativeAnalysis.ErrorOn.exact
+```anchor NormBoundOn (module := LMLF.Quantitative.Basic) -showProofStates
+def NormBoundOn (D : Set X) (f : X → E) (b : X → ℝ) : Prop :=
+  ∀ x ∈ D, ‖f x‖ ≤ b x
 ```
 :::
-::::
 
-::::result "Transporting a finite error bound" "implemented · QB-001"
-*Qualitative view.*
+# 1.2 Elementary rules
+%%%
+number := false
+%%%
 
-The same approximation remains valid after restricting its domain, weakening its majorant, or
-reparameterizing the domain.
+Exact equality gives zero error. A bound can be restricted to a smaller domain, enlarged, composed
+with another approximation by the triangle inequality, or pulled back along a change of variables.
 
-*Quantitative view.*
+:::leanStatement "Lean theorems"
+```anchor ErrorOn.exact (module := LMLF.Quantitative.Basic) -showProofStates
+theorem exact {D : Set X} {f a : X → E} (h : Set.EqOn f a D) :
+    ErrorOn D f a (fun _ ↦ 0) := by
+  intro x hx
+  simpa only [h hx, sub_self, norm_zero] using (le_refl (0 : ℝ))
+```
 
-Error bounds compose by the triangle inequality: bounds `b` and `d` produce the visible bound
-`b + d`. No asymptotic notation or unnamed constant is introduced.
+```anchor ErrorOn.restrict (module := LMLF.Quantitative.Basic) -showProofStates
+theorem restrict {D D' : Set X} {f a : X → E} {b : X → ℝ}
+    (h : ErrorOn D f a b) (hD : D' ⊆ D) :
+    ErrorOn D' f a b := by
+  intro x hx
+  exact h x (hD hx)
+```
 
-:::leanStatement "Expand the checked Lean declarations"
-```lean
-#check QuantitativeAnalysis.ErrorOn.restrict
-#check QuantitativeAnalysis.ErrorOn.weaken
-#check QuantitativeAnalysis.ErrorOn.trans
-#check QuantitativeAnalysis.ErrorOn.comp
+```anchor ErrorOn.weaken (module := LMLF.Quantitative.Basic) -showProofStates
+theorem weaken {D : Set X} {f a : X → E} {b d : X → ℝ}
+    (h : ErrorOn D f a b) (hbd : ∀ x ∈ D, b x ≤ d x) :
+    ErrorOn D f a d := by
+  intro x hx
+  exact (h x hx).trans (hbd x hx)
+```
+
+```anchor ErrorOn.trans (module := LMLF.Quantitative.Basic) -showProofStates
+theorem trans {D : Set X} {f a c : X → E} {b d : X → ℝ}
+    (hfa : ErrorOn D f a b) (hac : ErrorOn D a c d) :
+    ErrorOn D f c (fun x ↦ b x + d x) := by
+  intro x hx
+  calc
+    ‖f x - c x‖ = ‖(f x - a x) + (a x - c x)‖ := by rw [sub_add_sub_cancel]
+    _ ≤ ‖f x - a x‖ + ‖a x - c x‖ := norm_add_le _ _
+    _ ≤ b x + d x := add_le_add (hfa x hx) (hac x hx)
+```
+
+```anchor ErrorOn.comp (module := LMLF.Quantitative.Basic) -showProofStates
+theorem comp {D : Set X} {f a : X → E} {b : X → ℝ}
+    (h : ErrorOn D f a b) {S : Set Y} (ψ : Y → X)
+    (hψ : Set.MapsTo ψ S D) :
+    ErrorOn S (f ∘ ψ) (a ∘ ψ) (b ∘ ψ) := by
+  intro y hy
+  exact h (ψ y) (hψ hy)
 ```
 :::
-::::

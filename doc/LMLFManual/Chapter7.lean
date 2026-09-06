@@ -9,20 +9,19 @@ open LMLFManual
 tag := "chapter-7"
 %%%
 
-:::chapterStatus "https://dlmf.nist.gov/7" "overlay scaffold · no accepted cards"
-The chapter shell reserves the source-facing navigation. LMLF currently has no accepted definition,
-qualitative bridge, or quantitative theorem for these named functions.
-:::
-
-:::result "Current LMLF overlay" "planning only"
-The planned family wave separates object identification from later series, integral, asymptotic, zero,
-and inverse-function results. Scale conventions for Fresnel and Voigt variants must be fixed before
-shared infrastructure is presented as a named theorem.
+:::dlmfChapter "https://dlmf.nist.gov/7"
+Source: NIST Digital Library of Mathematical Functions, Chapter 7.
 :::
 
 # Chapter contents
+%%%
+number := false
+%%%
 
 ## Notation and properties
+%%%
+number := false
+%%%
 
 :::sectionIndex
 * [7.1 Special Notation](https://dlmf.nist.gov/7.1)
@@ -47,6 +46,9 @@ shared infrastructure is presented as a named theorem.
 :::
 
 ## Applications and computation
+%%%
+number := false
+%%%
 
 :::sectionIndex
 * [7.20 Mathematical Applications](https://dlmf.nist.gov/7.20)

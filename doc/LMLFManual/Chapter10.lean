@@ -9,28 +9,19 @@ open LMLFManual
 tag := "chapter-10"
 %%%
 
-:::chapterStatus "https://dlmf.nist.gov/10" "119 source occurrences · no accepted cards"
-Two independently checked Olver transcriptions contribute 58 Chapter 2 `J`/`I` occurrences and 61
-Chapter 12 real comparison-basis and auxiliary occurrences to LMLF's source inventory. They remain
-unreconciled and are not DLMF Chapter 10 coverage.
-:::
-
-:::result "Bessel source material" "transcribed · unreconciled"
-*Qualitative view.*
-
-The source inventory records formulas and uses concerning first-kind and modified first-kind Bessel
-functions, together with real comparison bases and auxiliaries. It does not yet establish canonical
-LMLF objects, branches, exceptional orders, or normalizations.
-
-*Quantitative view.*
-
-Large-argument, large-order, uniform, zero, and connection results remain future packets. No Lean
-statement is displayed until an identified Bessel object and bounded theorem card are accepted.
+:::dlmfChapter "https://dlmf.nist.gov/10"
+Source: NIST Digital Library of Mathematical Functions, Chapter 10.
 :::
 
 # Chapter contents
+%%%
+number := false
+%%%
 
 ## Bessel and Hankel functions
+%%%
+number := false
+%%%
 
 :::sectionIndex
 * [10.1 Special Notation](https://dlmf.nist.gov/10.1)
@@ -60,6 +51,9 @@ statement is displayed until an identified Bessel object and bounded theorem car
 :::
 
 ## Modified Bessel functions
+%%%
+number := false
+%%%
 
 :::sectionIndex
 * [10.25 Definitions](https://dlmf.nist.gov/10.25)
@@ -87,6 +81,9 @@ statement is displayed until an identified Bessel object and bounded theorem car
 :::
 
 ## Spherical Bessel functions
+%%%
+number := false
+%%%
 
 :::sectionIndex
 * [10.47 Definitions and Basic Properties](https://dlmf.nist.gov/10.47)
@@ -106,6 +103,9 @@ statement is displayed until an identified Bessel object and bounded theorem car
 :::
 
 ## Kelvin functions
+%%%
+number := false
+%%%
 
 :::sectionIndex
 * [10.61 Definitions and Basic Properties](https://dlmf.nist.gov/10.61)
@@ -122,6 +122,9 @@ statement is displayed until an identified Bessel object and bounded theorem car
 :::
 
 ## Applications and computation
+%%%
+number := false
+%%%
 
 :::sectionIndex
 * [10.72 Mathematical Applications](https://dlmf.nist.gov/10.72)

@@ -10,155 +10,130 @@ namespace LMLFManual
 
 private def lmlfCss : String := r#"
 :root {
-  --lmlf-ink: #152c2a;
-  --lmlf-muted: #5f6d68;
-  --lmlf-green: #1f5a50;
-  --lmlf-green-soft: #e7f0ec;
-  --lmlf-gold: #a2772d;
-  --lmlf-paper: #fbfaf6;
-  --lmlf-rule: #d5d8cf;
+  --verso-text-font-family: Georgia, "Times New Roman", serif;
+  --verso-content-max-width: 64rem;
+  --lmlf-ink: #111;
+  --lmlf-muted: #555;
+  --lmlf-link: #0645ad;
+  --lmlf-heading: #d3dce6;
+  --lmlf-heading-dark: #bcc4cc;
+  --lmlf-rule: #a4abb2;
+  --lmlf-lean: #f4f8fc;
+  --lmlf-lean-rule: #9bb7d3;
 }
 
 body {
-  background: var(--lmlf-paper);
-  color: var(--lmlf-ink);
-}
-
-main { max-width: 78rem; }
-h1, h2, h3, h4 { color: var(--lmlf-ink); letter-spacing: -0.018em; }
-a { color: var(--lmlf-green); }
-
-.lmlf-chapter-status {
-  border-top: 4px solid var(--lmlf-green);
-  border-bottom: 1px solid var(--lmlf-rule);
-  margin: 1.4rem 0 2rem;
-  padding: 1rem 0 1.1rem;
-}
-
-.lmlf-chapter-status__eyebrow {
-  color: var(--lmlf-gold);
-  font-family: var(--verso-structure-font-family);
-  font-size: .76rem;
-  font-weight: 750;
-  letter-spacing: .12em;
-  text-transform: uppercase;
-}
-
-.lmlf-chapter-status__body > :first-child { margin-top: .45rem; }
-.lmlf-chapter-status__footer {
-  align-items: center;
-  display: flex;
-  flex-wrap: wrap;
-  gap: .75rem;
-  justify-content: space-between;
-  margin-top: .8rem;
-}
-
-.lmlf-status {
-  background: var(--lmlf-green-soft);
-  border: 1px solid #aac1b8;
-  border-radius: 999px;
-  color: var(--lmlf-green);
-  display: inline-block;
-  font-family: var(--verso-structure-font-family);
-  font-size: .72rem;
-  font-weight: 700;
-  letter-spacing: .055em;
-  padding: .18rem .62rem;
-  text-transform: uppercase;
-}
-
-.lmlf-result {
   background: #fff;
-  border: 1px solid var(--lmlf-rule);
-  border-left: 4px solid var(--lmlf-green);
-  border-radius: .25rem;
-  box-shadow: 0 5px 18px rgba(21, 44, 42, .055);
-  margin: 1.35rem 0;
-  overflow: hidden;
+  color: var(--lmlf-ink);
+  font-family: Georgia, "Times New Roman", serif;
 }
 
-.lmlf-result__header {
-  align-items: center;
-  background: linear-gradient(90deg, #f2f7f4, #fff);
-  border-bottom: 1px solid var(--lmlf-rule);
-  display: flex;
-  gap: 1rem;
-  justify-content: space-between;
-  padding: .8rem 1rem;
+main { max-width: 74rem; }
+
+h1, h2, h3, h4,
+.lmlf-source-link,
+.lmlf-dlmf-entry__source,
+.lmlf-lean > summary {
+  font-family: Arial, Helvetica, sans-serif;
 }
 
-.lmlf-result__title {
-  font-family: var(--verso-structure-font-family);
-  font-size: 1.02rem;
-  font-weight: 760;
+h2 {
+  background: var(--lmlf-heading-dark);
+  border-top: .28rem double var(--lmlf-rule);
+  color: #111;
+  padding: .38rem .55rem;
 }
 
-.lmlf-result__body { padding: .2rem 1rem .8rem; }
-.lmlf-result__body h3 { font-size: .94rem; margin-top: 1rem; }
+h3 {
+  background: var(--lmlf-heading);
+  color: #111;
+  padding: .28rem .48rem;
+}
+
+h4 { color: #222; }
+a { color: var(--lmlf-link); }
+
+.lmlf-source-link {
+  border-bottom: 1px solid #c8cdd2;
+  margin: .3rem 0 1.35rem;
+  padding: 0 0 .6rem;
+}
+
+.lmlf-source-link a { font-weight: 700; }
+
+.lmlf-dlmf-entry {
+  border-bottom: 1px solid #c8cdd2;
+  border-top: 1px solid #c8cdd2;
+  margin: 1.2rem 0 1.7rem;
+  padding: .75rem 0 .95rem;
+}
+
+.lmlf-dlmf-entry__body {
+  display: grid;
+  gap: .15rem;
+}
+
+.lmlf-dlmf-entry__source {
+  font-size: .86rem;
+  font-weight: 700;
+  margin-bottom: .65rem;
+}
+
+.lmlf-dlmf-entry__body > :first-child { margin-top: 0; }
 
 .lmlf-lean {
-  background: #f6f7f5;
-  border: 1px solid var(--lmlf-rule);
-  border-radius: .25rem;
-  margin: .9rem 0 .2rem;
+  background: var(--lmlf-lean);
+  border: 1px solid var(--lmlf-lean-rule);
+  margin: .85rem 0 .15rem;
 }
 
 .lmlf-lean > summary {
-  color: var(--lmlf-green);
+  color: #174f80;
   cursor: pointer;
-  font-family: var(--verso-structure-font-family);
-  font-size: .82rem;
-  font-weight: 750;
-  padding: .65rem .8rem;
+  font-size: .86rem;
+  font-weight: 700;
+  padding: .55rem .7rem;
 }
 
-.lmlf-lean[open] > summary { border-bottom: 1px solid var(--lmlf-rule); }
-.lmlf-lean__body { padding: .25rem .8rem .7rem; }
-.lmlf-lean__hint {
-  color: var(--lmlf-muted);
-  font-family: var(--verso-structure-font-family);
-  font-size: .76rem;
-  margin: .45rem 0 .1rem;
-}
+.lmlf-lean[open] > summary { border-bottom: 1px solid var(--lmlf-lean-rule); }
+.lmlf-lean__body { padding: .2rem .7rem .65rem; }
 
 .lmlf-section-list > ul {
-  columns: 2 22rem;
-  column-gap: 2rem;
   list-style: none;
+  margin-left: 0;
   padding-left: 0;
 }
 
 .lmlf-section-list li {
-  break-inside: avoid;
-  border-bottom: 1px dotted var(--lmlf-rule);
-  padding: .28rem 0;
+  border-bottom: 1px dotted #b7bcc1;
+  padding: .24rem .15rem;
 }
 
-@media (max-width: 720px) {
-  .lmlf-result__header { align-items: flex-start; flex-direction: column; }
-  .lmlf-section-list > ul { columns: 1; }
+.lmlf-section-list li::before {
+  color: #5f6770;
+  content: "\203A";
+  display: inline-block;
+  margin-right: .48rem;
 }
+
+.lmlf-coverage {
+  border-collapse: collapse;
+  font-family: Arial, Helvetica, sans-serif;
+  margin: 1rem 0 1.4rem;
+  width: 100%;
+}
+
+.lmlf-coverage th,
+.lmlf-coverage td {
+  border-bottom: 1px solid #c8cdd2;
+  padding: .42rem .55rem;
+  text-align: right;
+}
+
+.lmlf-coverage th:first-child,
+.lmlf-coverage td:first-child { text-align: left; }
+.lmlf-coverage thead { background: var(--lmlf-heading); }
 "#
-
-block_extension ResultCard (title : String) (status : String) where
-  data := .arr #[.str title, .str status]
-  traverse _ _ _ := pure none
-  toTeX := none
-  toHtml := some fun _ goB _id data contents => open Verso.Output.Html in do
-    let .arr #[.str title, .str status] := data
-      | reportError s!"Invalid result-card data: {data.compress}"
-        return .empty
-    pure {{
-      <article class="lmlf-result">
-        <header class="lmlf-result__header">
-          <span class="lmlf-result__title">{{title}}</span>
-          <span class="lmlf-status">{{status}}</span>
-        </header>
-        <div class="lmlf-result__body">{{← contents.mapM goB}}</div>
-      </article>
-    }}
-  extraCss := [lmlfCss]
 
 block_extension LeanDisclosure (label : String) where
   data := .str label
@@ -169,33 +144,43 @@ block_extension LeanDisclosure (label : String) where
       | reportError s!"Invalid Lean-disclosure data: {data.compress}"
         return .empty
     pure {{
-      <details class="lmlf-lean">
+      <details class="lmlf-lean" open>
         <summary>{{label}}</summary>
-        <div class="lmlf-lean__body">
-          <p class="lmlf-lean__hint">"Hover or focus a checked name to see its full elaborated type."</p>
-          {{← contents.mapM goB}}
-        </div>
+        <div class="lmlf-lean__body">{{← contents.mapM goB}}</div>
       </details>
     }}
   extraCss := [lmlfCss]
 
-block_extension ChapterStatus (sourceUrl : String) (status : String) where
-  data := .arr #[.str sourceUrl, .str status]
+block_extension DLMFEntry (number : String) (sourceUrl : String) where
+  data := .arr #[.str number, .str sourceUrl]
   traverse _ _ _ := pure none
   toTeX := none
   toHtml := some fun _ goB _id data contents => open Verso.Output.Html in do
-    let .arr #[.str sourceUrl, .str status] := data
-      | reportError s!"Invalid chapter-status data: {data.compress}"
+    let .arr #[.str number, .str sourceUrl] := data
+      | reportError s!"Invalid DLMF-entry data: {data.compress}"
+        return .empty
+    let label := s!"DLMF {number} ↗"
+    pure {{
+      <article class="lmlf-dlmf-entry">
+        <div class="lmlf-dlmf-entry__source"><a href={{sourceUrl}}>{{label}}</a></div>
+        <div class="lmlf-dlmf-entry__body">{{← contents.mapM goB}}</div>
+      </article>
+    }}
+  extraCss := [lmlfCss]
+
+block_extension DLMFChapter (sourceUrl : String) where
+  data := .str sourceUrl
+  traverse _ _ _ := pure none
+  toTeX := none
+  toHtml := some fun _ goB _id data contents => open Verso.Output.Html in do
+    let .str sourceUrl := data
+      | reportError s!"Invalid DLMF-chapter data: {data.compress}"
         return .empty
     pure {{
-      <section class="lmlf-chapter-status">
-        <div class="lmlf-chapter-status__eyebrow">"LMLF overlay · DLMF 1.2.7"</div>
-        <div class="lmlf-chapter-status__body">{{← contents.mapM goB}}</div>
-        <div class="lmlf-chapter-status__footer">
-          <span class="lmlf-status">{{status}}</span>
-          <a href={{sourceUrl}}>"Open the source chapter ↗"</a>
-        </div>
-      </section>
+      <div class="lmlf-source-link">
+        {{← contents.mapM goB}}
+        <a href={{sourceUrl}}>"Open this chapter in the DLMF ↗"</a>
+      </div>
     }}
   extraCss := [lmlfCss]
 
@@ -204,6 +189,30 @@ block_extension SectionIndex where
   toTeX := none
   toHtml := some fun _ goB _id _ contents => open Verso.Output.Html in do
     pure {{<nav class="lmlf-section-list">{{← contents.mapM goB}}</nav>}}
+  extraCss := [lmlfCss]
+
+block_extension CoverageSummary where
+  traverse _ _ _ := pure none
+  toTeX := none
+  toHtml := some fun _ _ _id _ _ => open Verso.Output.Html in do
+    pure {{
+      <table class="lmlf-coverage">
+        <thead><tr>
+          <th>"Chapter"</th><th>"DLMF formulas"</th><th>"Lean statements"</th>
+          <th>"Proved"</th><th>"Quantitative"</th>
+        </tr></thead>
+        <tbody>
+          <tr><td>"4"</td><td>"531"</td><td>"0"</td><td>"0"</td><td>"0"</td></tr>
+          <tr><td>"5"</td><td>"169"</td><td>"2"</td><td>"1"</td><td>"1"</td></tr>
+          <tr><td>"6"</td><td>"100"</td><td>"0"</td><td>"0"</td><td>"0"</td></tr>
+          <tr><td>"7"</td><td>"139"</td><td>"0"</td><td>"0"</td><td>"0"</td></tr>
+          <tr><td>"8"</td><td>"241"</td><td>"0"</td><td>"0"</td><td>"0"</td></tr>
+          <tr><td>"9"</td><td>"230"</td><td>"0"</td><td>"0"</td><td>"0"</td></tr>
+          <tr><td>"10"</td><td>"698"</td><td>"0"</td><td>"0"</td><td>"0"</td></tr>
+          <tr><th>"Total"</th><th>"2,108"</th><th>"2"</th><th>"1"</th><th>"1"</th></tr>
+        </tbody>
+      </table>
+    }}
   extraCss := [lmlfCss]
 
 structure TwoStrings where
@@ -220,26 +229,33 @@ instance : FromArgs OneString DocElabM where
   fromArgs := OneString.mk <$> .positional `value .strLit
 
 @[directive]
-def result : DirectiveExpanderOf TwoStrings
-  | { first, second }, contents => do
-    ``(Block.other (ResultCard $(quote first.getString) $(quote second.getString))
-      #[$(← contents.mapM elabBlock),*])
-
-@[directive]
 def leanStatement : DirectiveExpanderOf OneString
   | { value }, contents => do
     ``(Block.other (LeanDisclosure $(quote value.getString))
       #[$(← contents.mapM elabBlock),*])
 
 @[directive]
-def chapterStatus : DirectiveExpanderOf TwoStrings
+def dlmfEntry : DirectiveExpanderOf TwoStrings
   | { first, second }, contents => do
-    ``(Block.other (ChapterStatus $(quote first.getString) $(quote second.getString))
+    ``(Block.other (DLMFEntry $(quote first.getString) $(quote second.getString))
+      #[$(← contents.mapM elabBlock),*])
+
+@[directive]
+def dlmfChapter : DirectiveExpanderOf OneString
+  | { value }, contents => do
+    ``(Block.other (DLMFChapter $(quote value.getString))
       #[$(← contents.mapM elabBlock),*])
 
 @[directive]
 def sectionIndex : DirectiveExpanderOf Unit
   | (), contents => do
     ``(Block.other SectionIndex #[$(← contents.mapM elabBlock),*])
+
+@[directive]
+def coverageSummary : DirectiveExpanderOf Unit
+  | (), contents => do
+    if !contents.isEmpty then
+      throwError "The coverageSummary directive takes no content"
+    ``(Block.other CoverageSummary #[])
 
 end LMLFManual

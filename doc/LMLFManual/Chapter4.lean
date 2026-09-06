@@ -9,27 +9,28 @@ open LMLFManual
 tag := "chapter-4"
 %%%
 
-:::chapterStatus "https://dlmf.nist.gov/4" "overlay scaffold · no accepted cards"
-Elementary functions are primarily supplied by Mathlib and are not duplicated here. LMLF will add
-only source-facing identifications, branch conventions, approximation theorems, and explicit bounds
-that are genuinely needed by Chapters 4–10.
-:::
-
-:::result "Current LMLF overlay" "planning only"
-There is no Chapter 4 theorem card on accepted `main`. Lambert `W`, explicit elementary-function
-approximations, and source-specific branch statements remain future bounded packets. Ordinary
-Mathlib facts are intentionally absent from this chapter.
+:::dlmfChapter "https://dlmf.nist.gov/4"
+Source: NIST Digital Library of Mathematical Functions, Chapter 4.
 :::
 
 # Chapter contents
+%%%
+number := false
+%%%
 
 ## Notation
+%%%
+number := false
+%%%
 
 :::sectionIndex
 * [4.1 Special Notation](https://dlmf.nist.gov/4.1)
 :::
 
 ## Logarithm, exponential, and powers
+%%%
+number := false
+%%%
 
 :::sectionIndex
 * [4.2 Definitions](https://dlmf.nist.gov/4.2)
@@ -47,6 +48,9 @@ Mathlib facts are intentionally absent from this chapter.
 :::
 
 ## Trigonometric functions
+%%%
+number := false
+%%%
 
 :::sectionIndex
 * [4.14 Definitions and Periodicity](https://dlmf.nist.gov/4.14)
@@ -66,6 +70,9 @@ Mathlib facts are intentionally absent from this chapter.
 :::
 
 ## Hyperbolic functions
+%%%
+number := false
+%%%
 
 :::sectionIndex
 * [4.28 Definitions and Periodicity](https://dlmf.nist.gov/4.28)
@@ -85,6 +92,9 @@ Mathlib facts are intentionally absent from this chapter.
 :::
 
 ## Applications and computation
+%%%
+number := false
+%%%
 
 :::sectionIndex
 * [4.42 Solution of Triangles](https://dlmf.nist.gov/4.42)

@@ -9,20 +9,19 @@ open LMLFManual
 tag := "chapter-8"
 %%%
 
-:::chapterStatus "https://dlmf.nist.gov/8" "overlay scaffold · no accepted cards"
-LMLF's accepted complete-Gamma wrapper is a dependency candidate, not Chapter 8 coverage. Lower,
-upper, normalized, incomplete-beta, and generalized integral objects remain unidentified.
-:::
-
-:::result "Current LMLF overlay" "planning only"
-The chapter requires separate base-domain integrals, continuation and exceptional-parameter policies,
-normalization bridges, and then paired asymptotic and explicit-remainder results. None is accepted on
-`main` yet.
+:::dlmfChapter "https://dlmf.nist.gov/8"
+Source: NIST Digital Library of Mathematical Functions, Chapter 8.
 :::
 
 # Chapter contents
+%%%
+number := false
+%%%
 
 ## Incomplete Gamma functions
+%%%
+number := false
+%%%
 
 :::sectionIndex
 * [8.1 Special Notation](https://dlmf.nist.gov/8.1)
@@ -44,6 +43,9 @@ normalization bridges, and then paired asymptotic and explicit-remainder results
 :::
 
 ## Related functions
+%%%
+number := false
+%%%
 
 :::sectionIndex
 * [8.17 Incomplete Beta Functions](https://dlmf.nist.gov/8.17)
@@ -54,6 +56,9 @@ normalization bridges, and then paired asymptotic and explicit-remainder results
 :::
 
 ## Applications and computation
+%%%
+number := false
+%%%
 
 :::sectionIndex
 * [8.22 Mathematical Applications](https://dlmf.nist.gov/8.22)

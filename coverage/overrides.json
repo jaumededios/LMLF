@@ -1,0 +1,25 @@
+{
+  "5.2.E1": {
+    "match": "exact",
+    "lean_statement": true,
+    "lean_proof": true,
+    "lean_declarations": [
+      "LMLF.Definitions.gamma_eulerIntegrable",
+      "LMLF.Definitions.gamma_eq_eulerIntegral"
+    ],
+    "notes": "The integrability and value identity are separate proved declarations."
+  },
+  "5.11.E1": {
+    "match": "consequence",
+    "lean_statement": true,
+    "lean_declarations": [
+      "LMLF.Blueprint.Gamma.stirlingLog_hasPoincareExpansion"
+    ],
+    "quantitative_analogue": true,
+    "quantitative_statement": true,
+    "quantitative_declarations": [
+      "LMLF.Blueprint.Gamma.stirlingLog_remainder_bounds"
+    ],
+    "notes": "Real-positive specialization. The quantitative bound is the first-neglected-term result from DLMF §5.11(ii); both declarations are proof-pending."
+  }
+}

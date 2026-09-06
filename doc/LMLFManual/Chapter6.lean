@@ -9,20 +9,19 @@ open LMLFManual
 tag := "chapter-6"
 %%%
 
-:::chapterStatus "https://dlmf.nist.gov/6" "overlay scaffold · no accepted cards"
-The chapter shell is present for stable navigation. LMLF does not yet expose identified exponential,
-logarithmic, sine, cosine, or hyperbolic integral objects.
-:::
-
-:::result "Current LMLF overlay" "planning only"
-Definition identification, branch conventions, power series, integral representations, asymptotic
-expansions with explicit remainders, and zero results remain future packets. No Mathlib declaration is
-re-exported merely to fill the page.
+:::dlmfChapter "https://dlmf.nist.gov/6"
+Source: NIST Digital Library of Mathematical Functions, Chapter 6.
 :::
 
 # Chapter contents
+%%%
+number := false
+%%%
 
 ## Notation and properties
+%%%
+number := false
+%%%
 
 :::sectionIndex
 * [6.1 Special Notation](https://dlmf.nist.gov/6.1)
@@ -43,6 +42,9 @@ re-exported merely to fill the page.
 :::
 
 ## Applications and computation
+%%%
+number := false
+%%%
 
 :::sectionIndex
 * [6.16 Mathematical Applications](https://dlmf.nist.gov/6.16)

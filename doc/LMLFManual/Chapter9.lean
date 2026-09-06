@@ -9,27 +9,19 @@ open LMLFManual
 tag := "chapter-9"
 %%%
 
-:::chapterStatus "https://dlmf.nist.gov/9" "source preparation · no accepted cards"
-LMLF has bounded Olver transcriptions for an Airy integral and for real Airy basis and auxiliary
-material. They remain unreconciled and do not identify an accepted `Ai`, `Bi`, or Scorer object.
-:::
-
-:::result "Airy source material" "transcribed · unreconciled"
-*Qualitative view.*
-
-The source records support future statements about Airy normalization, real basis functions, and
-auxiliaries, but no statement is currently claimed as a proved LMLF theorem.
-
-*Quantitative view.*
-
-Finite asymptotic expansions, explicit error envelopes, turning-point estimates, derivatives, and
-zero bounds remain future cards. No Lean disclosure is shown because the family has no accepted
-declaration.
+:::dlmfChapter "https://dlmf.nist.gov/9"
+Source: NIST Digital Library of Mathematical Functions, Chapter 9.
 :::
 
 # Chapter contents
+%%%
+number := false
+%%%
 
 ## Airy functions
+%%%
+number := false
+%%%
 
 :::sectionIndex
 * [9.1 Special Notation](https://dlmf.nist.gov/9.1)
@@ -46,6 +38,9 @@ declaration.
 :::
 
 ## Related functions
+%%%
+number := false
+%%%
 
 :::sectionIndex
 * [9.12 Scorer Functions](https://dlmf.nist.gov/9.12)
@@ -54,6 +49,9 @@ declaration.
 :::
 
 ## Applications and computation
+%%%
+number := false
+%%%
 
 :::sectionIndex
 * [9.15 Mathematical Applications](https://dlmf.nist.gov/9.15)
