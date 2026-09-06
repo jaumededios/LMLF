@@ -1,0 +1,344 @@
+schema_version: 2
+id: DEF-BERN-002
+title: Identify Olver's periodic Bernoulli polynomial with pinned Mathlib
+owner: jaumededios
+artifact_revision: 1
+baseline_spec_commit: pending_external_record_after_commit
+
+theorem_class: definition_identification
+coverage_class: entity_identification
+novelty_class: non_novel
+specification_status: draft
+proof_status: complete
+review_status: not_started
+implementation_status: not_started
+prototype_status: absent
+coverage_status: transcribed
+manifest_membership_status: planning_only
+status_as_of: unregistered_author_complete_draft
+status_authority: >-
+  Completeness is only the author's claim about the bound natural-language
+  derivation. Review pass and implementation authorization can be established
+  only by an external review envelope bound to a frozen specification commit
+  and exact artifact digests. This unregistered draft claims neither.
+
+classification_schema:
+  path: review/classifications-v2.json
+  schema_version: lmlf-classification-v2
+  artifact_revision: 2
+  sha256: 8c9f8dbb5ab351771a433a9901fe176a66ec214092c5d5880b3ec57c9a5b23e9
+
+manifest: null
+source_snapshot:
+  id: SRC-OLV-1997-USER-PDF-20260905
+  digest_algorithm: sha256
+  sha256: 08e1844d29a5ad21f89b9b600249ce18ac1665a5845be2d4e4219a3ededdc909
+  repository_contains_source_bytes: false
+source_occurrences:
+  - OLV97-C08-EULER-MACLAURIN
+source_transcription:
+  path: blueprint/source_transcriptions/OLV97-C08-EULER-MACLAURIN.md
+  sha256: f0d1113204c984096f04af658037aed6ddb9012fbcca5fb6dfdfb84c4bdadb99
+  status: transcribed_unreconciled
+source_entities:
+  - periodic_bernoulli_functions
+source_notation:
+  - OLV97-N-EM-OMEGA
+coverage_claim: >-
+  Planning-only identification of the periodic Bernoulli entity. It covers no
+  Olver theorem occurrence and remains pending independent source,
+  normalization, and dependency review.
+
+pin_binding:
+  lean_toolchain: leanprover/lean4:v4.33.1
+  lean_toolchain_sha256: 3aac669c7a910ec2389f4e4f921b605adf6ebf2d1e0c9b9cd0be4d33f3f5db71
+  mathlib_tag: v4.33.1
+  mathlib_revision: 0df444a360eaa60ab8c11dca51a86af692955474
+  lake_manifest_sha256: 4bd9b595f84163f69bdb0ffc9b1a876b5df71d65bdd53122415610d083d43404
+  mathlib_audit:
+    path: blueprint/mathlib_audit.md
+    sha256: 6b0aab27aac6711894567048c3f232f6ab3345b5d0c79b5b3402e0ecad38378c
+  source_files:
+    - path: Mathlib/NumberTheory/Bernoulli.lean
+      sha256: 25e02401c1ccb47d6a7db4637cdaf15cf1d3d89539b8de0755887b3aa88376d1
+    - path: Mathlib/NumberTheory/BernoulliPolynomials.lean
+      sha256: 936ad39ef25a9dc336836d1f564e7a369cea0ea1978a8bbf0ed565c5cef335cf
+    - path: Mathlib/NumberTheory/ZetaValues.lean
+      sha256: 491a1fc741734e2eb5a79684542bc0b57bc6333e0dc7619c47fecbaa366d8b73
+    - path: Mathlib/Topology/Instances/AddCircle/Defs.lean
+      sha256: 7de9890e577f8c3bd6ba6b30975a3f8e13f0bc5819086d68ab8856f6fd83575e
+    - path: Mathlib/Topology/Instances/AddCircle/Real.lean
+      sha256: 7fec0ee52acda634f28458e2aadda46873aa4b00e0d7b8b447fb1d7680a62b5f
+    - path: Mathlib/Algebra/Order/Floor/Ring.lean
+      sha256: d46979d7e9a446825f04b9b8ee080d303812c01083406ed9e76a296454a5387f
+
+scope:
+  summary: >-
+    Identify Olver's unscaled periodic function x |-> B_s({x}) = s! *
+    omega_s(x) with the pullback x |-> periodizedBernoulli s
+    (x : UnitAddCircle). Reuse the pinned circle-valued definition exactly,
+    prove the half-open [0,1) representative and the B_1 integer point value
+    in the dossier, and add no LMLF declaration, alias, notation, wrapper, or
+    real-line facade.
+  candidate_module: null
+  exact_signatures_artifact: not_applicable-no-project-declarations
+  project_public_declarations: []
+  reused_entities:
+    - source_entity: periodic_bernoulli_functions
+      source_expression: "x |-> B_s({x}) = s! * omega_s(x)"
+      declaration: _root_.periodizedBernoulli
+      type_shape: "Nat -> UnitAddCircle -> Real"
+      source_to_pin_bridge: >-
+        For every s : Nat and x : Real, periodizedBernoulli s
+        (x : UnitAddCircle) = bernoulliFun s (Int.fract x).
+  target_minimality: >-
+    The only source-identification target is the existing circle-valued
+    periodizedBernoulli declaration. The real pullback equality, endpoint
+    checks, and continuity split are identification evidence and prospective
+    regressions, not proposed public targets. BER-001 owns any later real-line
+    wrapper and calculus or envelope theorems.
+  included:
+    - the unscaled periodic function B_s({x}) and its exact relation s! * omega_s(x)
+    - the representative Int.fract x in the half-open interval [0,1)
+    - agreement with bernoulliFun s on [0,1)
+    - the assigned value B_1(0) = -1/2 at every integer
+    - the B_1 right-value/left-limit jump and the continuity split at s = 1
+    - all natural indices s, including s = 0, 1, and 2 regressions
+  excluded:
+    - every new project declaration, wrapper, alias, or notation
+    - a new real-line facade for periodizedBernoulli
+    - derivative, primitive, integral, mean-zero, periodicity, and envelope APIs
+    - construction of omega_s by recursive primitives
+    - every Euler-Maclaurin identity, coefficient, endpoint conversion, remainder, and bound
+    - Fourier expansions, zeta values, midpoint identities, power sums, and numerical evaluation
+
+mathematical_contract:
+  index_convention: s is a natural-number degree/index and precedes every argument.
+  source_scaling: >-
+    The identified Mathlib object is Olver's unscaled B_s({x}), not omega_s
+    itself. Equation (1.07) gives omega_s(x) = B_s({x}) / s!.
+  circle_contract: >-
+    UnitAddCircle is Real modulo integer multiples of 1. The source real
+    periodic function is represented without loss by a function on this
+    quotient, and its pullback is evaluated at (x : UnitAddCircle).
+  representative_contract: >-
+    AddCircle.liftIco 1 0 selects the unique representative in Ico 0 1.
+    AddCircle.coe_equivIco_mk_apply reduces that representative to
+    Int.fract x, which satisfies 0 <= Int.fract x < 1.
+  endpoint_contract: >-
+    The right-hand representative 0 is selected at every integer. Therefore
+    periodizedBernoulli 1 (k : UnitAddCircle) = bernoulliFun 1 0 = -1/2,
+    while the left limit through representatives y -> 1 is +1/2.
+  continuity_contract: >-
+    periodizedBernoulli s is continuous on UnitAddCircle for s != 1. The
+    excluded index is genuine: periodizedBernoulli 1 is discontinuous at the
+    circle class of every integer because its left pullback limit is +1/2
+    while its value and right pullback limit are -1/2.
+  validity_domain: >-
+    All s in Nat and all x in Real for the pullback; equivalently all points
+    of UnitAddCircle for the reused declaration.
+  derivative_convention: >-
+    No global derivative theorem is claimed. In particular, the first
+    periodized Bernoulli function must not be differentiated through its jump.
+  branch_convention: not_applicable
+  exceptional_values: >-
+    There are no poles or branches. The only exceptional regularity index is
+    s = 1; its assigned integer value is part of the source normalization.
+
+prospective_audit_targets:
+  - id: PBER-M00
+    declaration: _root_.periodizedBernoulli
+    import: Mathlib.NumberTheory.ZetaValues
+    expected_shape: "Nat -> UnitAddCircle -> Real"
+  - id: PBER-M01
+    declaration: _root_.bernoulliFun
+    import: Mathlib.NumberTheory.ZetaValues
+    expected_role: real evaluation of the accepted Bernoulli polynomial
+  - id: PBER-M02
+    declaration: AddCircle.liftIco
+    import: Mathlib.Topology.Instances.AddCircle.Defs
+    expected_role: half-open representative lift used by the pinned definition
+  - id: PBER-M03
+    declaration: AddCircle.liftIco_zero_coe_apply
+    import: Mathlib.Topology.Instances.AddCircle.Defs
+    expected_shape: "x in Ico 0 p -> liftIco p 0 f (x : AddCircle p) = f x"
+  - id: PBER-M04
+    declaration: AddCircle.coe_equivIco_mk_apply
+    import: Mathlib.Topology.Instances.AddCircle.Defs
+    expected_role: representative of a quotient point via Int.fract
+  - id: PBER-M05
+    declaration: Int.fract_nonneg
+    import: Mathlib.Algebra.Order.Floor.Ring
+    expected_shape: "0 <= Int.fract x"
+  - id: PBER-M06
+    declaration: Int.fract_lt_one
+    import: Mathlib.Algebra.Order.Floor.Ring
+    expected_shape: "Int.fract x < 1"
+  - id: PBER-M07
+    declaration: Int.fract_intCast
+    import: Mathlib.Algebra.Order.Floor.Ring
+    expected_shape: "Int.fract (k : Real) = 0"
+  - id: PBER-M08
+    declaration: _root_.bernoulliFun_one
+    import: Mathlib.NumberTheory.ZetaValues
+    expected_shape: "bernoulliFun 1 x = x - 1 / 2"
+  - id: PBER-M09
+    declaration: _root_.bernoulliFun_eval_zero
+    import: Mathlib.NumberTheory.ZetaValues
+    expected_shape: "bernoulliFun s 0 = (bernoulli s : Real)"
+  - id: PBER-M10
+    declaration: _root_.bernoulli_one
+    import: Mathlib.NumberTheory.Bernoulli
+    expected_shape: "bernoulli 1 = -1 / 2"
+  - id: PBER-M11
+    declaration: _root_.bernoulliFun_endpoints_eq_of_ne_one
+    import: Mathlib.NumberTheory.ZetaValues
+    expected_shape: "s != 1 -> bernoulliFun s 1 = bernoulliFun s 0"
+  - id: PBER-M12
+    declaration: _root_.periodizedBernoulli.continuous
+    import: Mathlib.NumberTheory.ZetaValues
+    expected_shape: "s != 1 -> Continuous (periodizedBernoulli s)"
+  - id: PBER-M13
+    declaration: _root_.bernoulliFun_zero
+    import: Mathlib.NumberTheory.ZetaValues
+    expected_shape: "bernoulliFun 0 x = 1"
+  - id: PBER-M14
+    declaration: _root_.bernoulliFun_two
+    import: Mathlib.NumberTheory.ZetaValues
+    expected_shape: "bernoulliFun 2 x = x^2 - x + 1/6"
+  - id: PBER-M15
+    declaration: AddCircle.continuous_mk'
+    import: Mathlib.Topology.Instances.AddCircle.Defs
+    expected_role: continuity of the quotient map used by the discontinuity regression
+
+target_classifications:
+  - target_id: DEF-BERN-002-T01
+    declaration: _root_.periodizedBernoulli
+    proof_anchor: target-def-bern-002-t01
+    theorem_class: identification
+    coverage_class: source_prerequisite
+    novelty_class: source_equivalent
+    relationship: >-
+      Direct identification of Olver's source function B_s({x}) = s! *
+      omega_s(x) with the pullback of the existing pinned circle-valued object.
+
+hypothesis_laundering_check: >-
+  No periodicity, continuity, derivative, primitive, integral, mean-zero,
+  envelope, or Euler-Maclaurin theorem is assumed as an identification
+  hypothesis. The equality is obtained only from the accepted polynomial
+  normalization and the pinned half-open lift definition.
+choice_laundering_check: >-
+  No project-local choice occurs. AddCircle.equivIco canonically selects the
+  [0,1) representative and the pin fixes its endpoint policy before s and x.
+
+novelty:
+  classification: non_novel
+  rationale: >-
+    Source-to-library normalization audit and direct reuse of an already
+    defined pinned Mathlib object; no new semantic declaration or theorem is
+    proposed.
+  natural_language_proof_review_applicability: required
+  natural_language_proof_review_reason: >-
+    Although reuse is direct, source identification requires a nontrivial
+    reconciliation of the real fractional-part formula with a circle-valued
+    half-open lift, the factorial scaling of omega_s, and the convention-
+    sensitive B_1 value and jump.
+
+natural_language_proof:
+  artifact: blueprint/proofs/DEF-BERN-002.md
+  artifact_id: NLP-BERN-002-R1
+  artifact_revision: 1
+  artifact_state: draft
+  proof_status: complete
+  normative_sections:
+    - target-def-bern-002-t01
+
+dependencies:
+  lean_toolchain: leanprover/lean4:v4.33.1
+  mathlib_revision: 0df444a360eaa60ab8c11dca51a86af692955474
+  lake_manifest_sha256: 4bd9b595f84163f69bdb0ffc9b1a876b5df71d65bdd53122415610d083d43404
+  accepted_lmlf_packets: []
+  draft_lmlf_packets:
+    - work_item_id: DEF-BERN-001
+      card_revision: 1
+      card_sha256: 344078c22e3525fe6dcd1c11c83962d52bad496a62c48bdce3e6fb47b53b507b
+      proof_artifact_id: NLP-BERN-001-R1
+      proof_sha256: 91acc0f38731738eaec1317ef50af9831f89a674d9512bb16bcafc6d454eef3d
+      role: >-
+        Planning prerequisite identifying Polynomial.bernoulli and bernoulliFun;
+        it must be accepted before this card can freeze or authorize anything.
+  pin_status: exact_names_defining_imports_and_source_files_audited_for_revision_1
+  mathlib_imports:
+    - Mathlib.NumberTheory.ZetaValues
+  later_consumers:
+    - BER-001
+  forbidden_reverse_dependencies:
+    - BER-001 must not be used to identify periodizedBernoulli
+    - EM-001 must not be used to identify its periodic Bernoulli input
+    - Fourier or zeta-value theorems must not be used as the normalization definition
+
+domain_obligations:
+  nonempty_or_reachable: >-
+    UnitAddCircle is inhabited and every circle point has a unique [0,1)
+    representative. Every real x reaches a circle point through the quotient
+    map. This entity-identification packet claims no named estimate.
+majorant_obligations:
+  nonnegative: not_applicable
+
+edge_tests:
+  - s = 0 gives the constant periodized function 1
+  - s = 1 at every integer is -1/2, not +1/2 or 0
+  - the left limit at an integer for s = 1 is +1/2 while the value and right limit are -1/2
+  - s = 2 has matching endpoint values and a continuous circle function
+  - negative real inputs use the usual Int.fract value in [0,1), not truncation toward zero
+  - replacing liftIco by liftIoc changes the assigned B_1 endpoint and must fail
+  - forgetting the factorial identifies omega_s rather than B_s({x}) and must fail for s >= 2
+  - asserting continuity for all s must fail at s = 1
+
+reviews:
+  review_status: not_started
+  authoritative_record: external_review_envelope_only
+  current_external_verdict_refs: []
+  required_rubrics:
+    - source_fidelity
+    - mathlib_reuse
+    - api_dependency
+    - proof_quality
+
+pre_lean_requirements:
+  source_collation_reviewers: 2
+  theorem_card_reviewers: 2
+  natural_language_proof_reviewers: 2
+  structural_circularity_review: required
+  lean_ready_authority: external_review_envelope_only
+
+blocking_conditions:
+  - DEF-BERN-001 is a draft planning prerequisite and is not accepted
+  - source transcription and periodic normalization are not independently reviewed
+  - theorem card and proof dossier remain draft artifacts
+  - no external review envelope binds this revision and its digests
+  - no lean_ready authorization exists
+
+implementation:
+  implementation_status: not_started
+  authorization_source: external_review_envelope_only
+  authorization: absent
+  prototype_status: absent
+  file: null
+  declarations_present: false
+  project_public_declarations: []
+  note: >-
+    There is intentionally nothing to implement in the project for this
+    source-identification packet. A later authorized audit may inspect the
+    existing pinned declarations without adding wrappers or aliases. BER-001,
+    if separately reviewed and authorized, owns any real-line facade.
+
+release_checks:
+  - source snapshot, transcription, audit, manifest, and Mathlib source digests match
+  - exact pin and narrow ZetaValues import are preserved
+  - all PBER-M00 through PBER-M15 declaration names and shapes are checked
+  - the [0,1) representative and equality with bernoulliFun s (Int.fract x) are checked
+  - the identified object is B_s({x}) = s! * omega_s(x), not omega_s without scaling
+  - the B_1 integer value, unequal one-sided limits, and continuity exclusion are checked
+  - no project definition, wrapper, notation, alias, Euler-Maclaurin result, or BER-001 theorem is introduced
+  - external review and authorization remain separate from this card
