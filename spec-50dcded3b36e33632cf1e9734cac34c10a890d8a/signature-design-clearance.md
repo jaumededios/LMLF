@@ -1,8 +1,8 @@
 # Administrative signature-design clearance
 
-This is an administrative disposition by the specification owner. It is not an
-additional review, verdict, quorum member, final theorem-card gate, or
-`lean_ready` authorization.
+This is an administrative disposition by the primary Codex agent acting under
+the user's delegated project authority. It is not an additional review,
+verdict, quorum member, final theorem-card gate, or `lean_ready` authorization.
 
 The following exact artifacts at candidate commit
 `50dcded3b36e33632cf1e9734cac34c10a890d8a` were the R6/R4 review inputs:
@@ -19,8 +19,9 @@ The following exact artifacts at candidate commit
 
 `watson_r6_referee_d.md` and `watson_r6_referee_e.md` record fresh
 natural-language-proof and structural approvals for those exact bindings. The
-specification owner therefore considers the prerequisites met for bounded
-exact-signature design and a disposable specification prototype only.
+primary agent, acting under that delegated authority, therefore considers the
+prerequisites met for bounded exact-signature design and a disposable
+specification prototype only.
 
 The earlier f5 finding F1 concerning three exact Mathlib root namespaces and
 finding G1 concerning a stale version-2 documentation sentence were corrected
@@ -29,8 +30,8 @@ their own recorded bytes.
 
 No final theorem card, exact-signature artifact, frozen work packet, external
 `lean_ready`, production Lean implementation, or source-fidelity gate is
-created or passed by this note. The specification owner assigned
-`imp_r6_signature_author` only to create the new
+created or passed by this note. Acting under the user's delegated project
+authority, the primary agent assigned `imp_r6_signature_author` only to create the new
 `blueprint/theorem_cards/IMP-001-signatures-R6.md` artifact and use a disposable
 temporary signature harness after reading the completed reports. Any resulting
 artifact and revised card/packet require their own exact bindings and final-spec
