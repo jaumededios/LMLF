@@ -1,0 +1,116 @@
+{
+  "schema_version": 4,
+  "record_kind": "rubric_verdict",
+  "storage_requirement": "external_to_candidate_head",
+  "work_item_id": "IMP-001",
+  "review_stage": "pre_lean",
+  "gate": "theorem_card_review",
+  "review_identity": {
+    "review_envelope_ref": "/workspace/Documents/Codex/2026-09-05/LMLF-review-evidence/spec-3a1b16cae6d186a20530de3b883c1bb871ee76f6/IMP-001-review-envelope-pending.yaml#sha256=62d1d8e1530b02f63dedda505c925291d7453c16faf65d81919799a69f243b52",
+    "spec_commit": "3a1b16cae6d186a20530de3b883c1bb871ee76f6",
+    "work_packet_path": "review/work_packets/IMP-001.yaml",
+    "work_packet_sha256": "e0f16a660417d967312df0f7cc7ce12ea1243226801b409475548566d594796b",
+    "theorem_card_bindings": [
+      {
+        "artifact_id": "TC-IMP-001-R7",
+        "revision": 7,
+        "sha256": "d81f8970bcba3bf1a489f8cb4fea8b303a3e3bf6d1ad3ade37b42f3094b528c4"
+      },
+      {
+        "artifact_id": "SIG-IMP-001-R6-P2",
+        "revision": 2,
+        "sha256": "0e220214233fec5f2f95608789b139900e7dfddef8a6b824b8d54bce37e74f2d"
+      }
+    ],
+    "natural_language_proof_bindings": [
+      {
+        "artifact_id": "NLP-IMP-001-R7",
+        "revision": 7,
+        "sha256": "941ca0f2a7e402e9dd3636d7c93744290b3f5b52b8705484c18630c6fe173548"
+      }
+    ],
+    "classification_schema_binding": {
+      "path": "review/classifications-v3.json",
+      "schema_version": "lmlf-classification-v3",
+      "artifact_revision": 3,
+      "sha256": "975e08b89d609cbdd15ff3f8d24f40a42bb17ea0f4c37bb26d9cf53fb8dc4b5e"
+    },
+    "base_sha": null,
+    "head_sha": null,
+    "lean_toolchain": "leanprover/lean4:v4.33.1",
+    "mathlib_revision": "0df444a360eaa60ab8c11dca51a86af692955474",
+    "rubric": "source_fidelity",
+    "review_perspective": "source_semantics",
+    "rubric_revision": "6873853ce125346feef082d0e31d28808387ec0fa5fb0887ce0d300eba02c9a2"
+  },
+  "reviewer": {
+    "id": "/root/imp_final_referee_b",
+    "kind": "agent",
+    "model": "gpt-5.6-sol",
+    "runtime": "Codex desktop agent runtime with local Lean 4.33.1 shell checks",
+    "isolation_strength": "manual_attestation",
+    "isolation_method": "Fresh independent agent session in detached disposable worktree /tmp/imp-final-ref-b.5LxpEBA7 at the exact spec commit; tracked candidate read-only; no sibling/prior referee reports, subagents, candidate edits, commits, pushes, or GitHub CI; filesystem/network/context exclusion was not technically enforced; pinned dependencies were materialized in the disposable worktree for local checks.",
+    "independent_of_proposer": true,
+    "read_only_candidate": true
+  },
+  "verdict": "approve",
+  "summary": "The frozen source-independent theorem card unambiguously binds exactly eight public targets and their exact definition/signature semantics. Quantifiers, domains, endpoint conventions, classifications, module ownership, dependency direction, lifecycle state, type-only harness boundary, and staged regression authorization are faithful and noncircular; no material source-semantics issue remains.",
+  "evidence": {
+    "proposer_bundle_ref": "/workspace/Documents/Codex/2026-09-05/LMLF-review-evidence/spec-3a1b16cae6d186a20530de3b883c1bb871ee76f6/proposer-evidence.md#sha256=3af2776b4b161461f7e9b72701a0b99ecccce9c4a03b730fbc0b8fb932eb0ec7; corrected by proposer-evidence-command-erratum.md#sha256=2a404f162911de09c272044c3dd752907b57235d62aa995277e0771ed2a38622",
+    "source_snapshot_verified": true,
+    "pinned_dependency_source_inspected": true,
+    "commands_rerun": [
+      "git status --short --branch; git worktree list --porcelain; git rev-parse HEAD; git show --stat --name-status HEAD",
+      "bash /home/codex/.codex/skills/referee-lean-library/scripts/library_inventory.sh /tmp/imp-final-ref-b.5LxpEBA7",
+      "sha256sum on packet, card, R7 proof, R6 proof, signature artifact, classification schema, protocol, verdict template, rubrics, envelope, proposer evidence, erratum, lean-toolchain, and lake-manifest.json",
+      "git diff --no-index --unified=0 -- blueprint/proofs/IMP-001.md blueprint/proofs/IMP-001-R7.md plus independent section extraction and sha256sum",
+      "Python standard-library cross-artifact comparison of all eight target signatures, declarations, classifications, and proof anchors",
+      "rg/sed source inspection and lake env lean /dev/stdin #check of all fourteen pinned Mathlib declarations",
+      "stream extraction, sha256sum, line counts, and pinned Lean elaboration of the five authoritative signature-harness blocks",
+      "raw pinned Lean reconstruction of the proposer PacketTypes source with corrected LEAN_PATH construction",
+      "python3 scripts/validate_inventory.py; python3 scripts/validate_inventory.py --negative-tests",
+      "git diff --check HEAD^ HEAD; lake build"
+    ],
+    "files_and_declarations_inspected": [
+      "review/PROTOCOL.md",
+      "review/templates/verdict.json",
+      "review/rubrics/source_fidelity.md",
+      "review/rubrics/quantitative_correctness.md",
+      "review/classifications-v3.json",
+      "review/work_packets/IMP-001.yaml",
+      "blueprint/theorem_cards/IMP-001.yaml",
+      "blueprint/proofs/IMP-001-R7.md",
+      "blueprint/proofs/IMP-001.md",
+      "blueprint/theorem_cards/IMP-001-signatures-R6.md",
+      "blueprint/inventory/cards.csv",
+      "blueprint/inventory/manifests.csv",
+      "lean-toolchain",
+      "lake-manifest.json",
+      "LMLF.Integral.HasImproperIntegralAtTopExcept",
+      "LMLF.Integral.HasImproperIntegralAtTopExcept.unique",
+      "LMLF.Integral.HasImproperIntegralAtTopExcept.finset_clm",
+      "LMLF.Integral.HasImproperIntegralAtTopExcept.split_regular",
+      "LMLF.Integral.IsFiniteExceptionalPrimitive",
+      "LMLF.Integral.IsFiniteExceptionalPrimitive.hasImproperIntegralAtTopExcept_exp_smul",
+      "LMLF.Integral.HasImproperIntegralAtTopExcept.of_integrableOn_Ioi",
+      "LMLF.Integral.hasImproperIntegralAtTopExcept_iff_exists_primitive",
+      "intervalIntegral.integral_add_adjacent_intervals",
+      "ContinuousLinearMap.intervalIntegral_comp_comm",
+      "MeasureTheory.intervalIntegral_integral_swap",
+      "ContinuousOn.intervalIntegrable_of_Icc",
+      "tendsto_nhds_unique",
+      "tendsto_finsetSum",
+      "intervalIntegral.integral_eq_sub_of_hasDerivAt_of_le",
+      "intervalIntegral.integral_undef",
+      "intervalIntegral.continuousOn_primitive_interval'",
+      "MeasureTheory.intervalIntegral_tendsto_integral_Ioi",
+      "MeasureTheory.IntegrableOn.continuousOn_Ici_primitive_Ioi",
+      "intervalIntegral.integral_Ioi_sub_Ioi",
+      "intervalIntegrable_iff_integrableOn_Ioc_of_le",
+      "Real.hasDerivAt_exp"
+    ]
+  },
+  "findings": [],
+  "prior_finding_dispositions_checked": [],
+  "issued_at_utc": "2026-09-06T13:44:18Z"
+}
