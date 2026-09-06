@@ -215,6 +215,28 @@ block_extension CoverageSummary where
     }}
   extraCss := [lmlfCss]
 
+block_extension SourceInventorySummary where
+  traverse _ _ _ := pure none
+  toTeX := none
+  toHtml := some fun _ _ _id _ _ => open Verso.Output.Html in do
+    pure {{
+      <table class="lmlf-coverage">
+        <thead><tr><th>"Source-item kind"</th><th>"Candidates"</th></tr></thead>
+        <tbody>
+          <tr><td>"Numbered formulas"</td><td>"2,108"</td></tr>
+          <tr><td>"Main-flow prose blocks"</td><td>"1,575"</td></tr>
+          <tr><td>"Unnumbered display formulas"</td><td>"3"</td></tr>
+          <tr><td>"Table rows"</td><td>"221"</td></tr>
+          <tr><td>"Figure captions"</td><td>"161"</td></tr>
+          <tr><td>"Annotation notes"</td><td>"395"</td></tr>
+          <tr><td>"Proof sketches"</td><td>"109"</td></tr>
+          <tr><td>"Editorial change notes"</td><td>"220"</td></tr>
+          <tr><th>"Total structural candidates"</th><th>"4,792"</th></tr>
+        </tbody>
+      </table>
+    }}
+  extraCss := [lmlfCss]
+
 structure TwoStrings where
   first : StrLit
   second : StrLit
@@ -257,5 +279,12 @@ def coverageSummary : DirectiveExpanderOf Unit
     if !contents.isEmpty then
       throwError "The coverageSummary directive takes no content"
     ``(Block.other CoverageSummary #[])
+
+@[directive]
+def sourceInventorySummary : DirectiveExpanderOf Unit
+  | (), contents => do
+    if !contents.isEmpty then
+      throwError "The sourceInventorySummary directive takes no content"
+    ``(Block.other SourceInventorySummary #[])
 
 end LMLFManual

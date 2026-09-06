@@ -3,6 +3,12 @@
 [`dlmf-4-10.json`](dlmf-4-10.json) is the machine-readable coverage ledger. Schema version 1 has one
 row for every **numbered formula** in DLMF Chapters 4–10. It does not copy formula bodies.
 
+[`dlmf-4-10-source-inventory.json`](dlmf-4-10-source-inventory.json) is the schema-version-2
+structural inventory. It indexes 4,792 formula, prose, table-row, caption, and substantive-annotation
+candidates by stable location and content hash. It deliberately labels every source item
+`unreviewed`: structural detection is not a claim that every paragraph is theorem-shaped. Its
+contract is [`dlmf-source-inventory.schema.json`](dlmf-source-inventory.schema.json).
+
 The boolean fields are deliberately independent:
 
 - `lean_statement`: LMLF has a checked Lean declaration matching the formula exactly or as described
@@ -20,6 +26,7 @@ Regenerate the ledger from the current DLMF section pages with:
 
 ```sh
 python3 scripts/update_dlmf_coverage.py
+python3 scripts/update_dlmf_source_inventory.py
 ```
 
 Update `overrides.json` whenever a statement or proof lands. The generator rejects inconsistent

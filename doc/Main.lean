@@ -9,8 +9,6 @@ def config : RenderConfig where
   emitHtmlSingle := .no
   emitHtmlMulti := .immediately
   htmlDepth := 2
-  extraFilesHtml := [
-    ("../coverage/dlmf-4-10.json", "coverage/dlmf-4-10.json")
-  ]
+  extraFilesHtml := [("../coverage", "coverage")]
 
 def main := manualMain (%doc LMLFManual) (config := config)
