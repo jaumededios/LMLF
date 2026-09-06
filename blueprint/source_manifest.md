@@ -223,13 +223,12 @@ no inventory occurrence-card association. A draft file is neither registration
 nor coverage.
 
 Two additional locked-body revision-2 collations cover Chapter 2 `J`/`I` and
-Chapter 12 real Bessel/comparison auxiliaries. Their first source-review round
-found the displayed mathematics accurate and requested branch/path, phase,
-cross-reference, atomic-occurrence, and current-status repairs; those changes
-are integrated, with fresh independent rereview pending. The files remain
-unregistered `transcribed_unreconciled` artifacts with no normalized occurrence
-rows, confirmed entities, card, manifest membership, coverage, or implementation
-authorization.
+Chapter 12 real Bessel/comparison auxiliaries. Two independent source referees
+approved the exact revision-2 files, and all 119 proposed occurrences (58 plus
+61) are integrated one-for-one into the normalized inventory. Every row remains
+`transcribed_unreconciled` and `unresolved`. The integration creates no notation
+or entity link, theorem card, occurrence-card link, manifest membership,
+coverage credit, reconciliation, or implementation authorization.
 
 Its mathematical critical path is:
 

@@ -1,9 +1,12 @@
 # Bessel and cylinder-function family programme
 
-**Status:** planning only; no provisional ID below is registered or authorized  
-**Current source evidence:** locked-body first collations for Chapter 2 `J`/`I`
-and Chapter 12 real comparison auxiliaries, plus contents-only leads for later
-cylinder families; all remain unreconciled
+**Status:** planning only; 119 provisional source occurrences are inventoried,
+but no proposed theorem card below is registered or authorized
+
+**Current source evidence:** independently approved, hash-bound collations for
+Chapter 2 `J`/`I` and Chapter 12 real comparison auxiliaries, plus contents-only
+leads for later cylinder families; all notation/entity reconciliation remains open
+
 **Mathlib position at the pin:** no named classical Bessel `J`, `Y`, `I`, `K`, or Hankel object was found; regularized hypergeometric series are a candidate shared substrate
 
 ## Family boundary and source honesty
@@ -15,16 +18,16 @@ The present evidence now has two distinct levels:
 - [`OLV97-C02-BESSEL-JI.md`](../source_transcriptions/OLV97-C02-BESSEL-JI.md)
   is a hash-bound first mathematical collation of Chapter 2 sections 9--10.
   It records the `J`/`I` series, ODEs, branches, contours, recurrences, and
-  separately labelled exercises. Revision 2 integrates the first independent
-  review's semantic and atomic-occurrence repairs and awaits fresh rereview.
+  separately labelled exercises. Two independent source referees approved the
+  exact revision-2 bytes; its 58 atomic rows are now integrated provisionally.
 - [`OLV97-C12-BESSEL-REAL-AUX.md`](../source_transcriptions/OLV97-C12-BESSEL-REAL-AUX.md)
   is a hash-bound first collation of Chapter 12 section 1.  It records the real
   comparison bases, Wronskians, zeros, and auxiliary root/weight/modulus/phase
-  system. Revision 2 likewise integrates the requested source-governance
-  repairs and awaits fresh rereview.
+  system. Two independent source referees approved the exact revision-2 bytes;
+  its 61 atomic rows are now integrated provisionally.
 - `OLV10P-O0013`, `OLV10P-O0014`, `bessel_j_candidate`, and
-  `bessel_i_candidate` remain preview-derived discovery records until the new
-  locked-body transcriptions are normalized into atomic inventory rows.
+  `bessel_i_candidate` remain preview-derived discovery records. The new
+  locked-body rows do not reconcile or transfer those comparison-edition leads.
 - `OLV10P-O0018` is a Chapter 7 contents lead to Bessel, Hankel, modified Bessel, “other cylinder,” confluent hypergeometric, Whittaker, and Struve material. Its member split is unresolved.
 - `OLV10P-O0022` is a Chapter 12 contents lead to Bessel/modified-Bessel simple-pole models and auxiliaries. The locked-body first collation now records a candidate comparison basis and auxiliary notation, but neither is reconciled or confirmed.
 
@@ -232,13 +235,13 @@ After collation enumerates the objects, define each modulus, phase, or envelope 
 
 ## Explicit unknowns and blockers
 
-- Two locked 1997 Bessel-family body ranges have first mathematical
-  transcriptions. No atomic occurrence from them has yet been registered or
-  reconciled, and no Bessel entity is confirmed.
+- Two locked 1997 Bessel-family body ranges have independently approved
+  mathematical transcriptions and 119 atomic inventory rows. Every row remains
+  `transcribed_unreconciled`, and no Bessel notation or entity is confirmed.
 - The Chapter 7 member split and the meaning of “other cylinder functions” are unknown.
 - The Chapter 12 first collation records a comparison basis, Wronskian
-  convention, and auxiliary symbols, but their atomic inventory split and
-  normalization remain unreviewed and unresolved.
+  convention, and auxiliary symbols; its atomic occurrence split is reviewed
+  and integrated, while normalization and entity identity remain unresolved.
 - Modern DLMF formulas have not been checked against the locked source's exact scale, branch, and argument order.
 - The regularized $0F1$ substrate is feasible but no named Bessel construction has been compiled or reviewed.
 - Mathlib support for parameter analyticity of the regularized kernel has not been established; this may be the critical blocker for exceptional-order continuation.

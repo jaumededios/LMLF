@@ -23,7 +23,7 @@ An edition is bibliographic; a source snapshot is the exact physical or digital 
 
 `SRC-OLV-1997-COLLATION-PENDING` is a reserved placeholder for the locked copy required by the source manifest. It is not evidence that a copy has been acquired or inspected. Its locked-edition identity, `locked_copy_placeholder` kind, `pending` availability, absent digest/access metadata, unresolved digest/edition/page states, and `unknown` rights state are immutable schema invariants. Acquisition must create a new concrete snapshot ID and row, with a digest when legally and technically available, followed by occurrence reassignment or an explicit reconciliation record; the reserved row must never be promoted in place.
 
-`SRC-OLV-1997-USER-PDF-20260905` is the resulting concrete private snapshot. Its title, copyright page, corrected-reprint preface, contents, and selected Watson, Airy, and Chapter 8 printed/PDF page maps have been inspected, and its exact bytes are bound by ordinary SHA-256. The full book bytes, OCR, and rendered page images remain outside version control. Every mathematical page audit is intentionally `partial`: a distinct source reviewer has not yet verified it, so each new occurrence remains `transcribed_unreconciled` and every new notation/entity association remains provisional.
+`SRC-OLV-1997-USER-PDF-20260905` is the resulting concrete private snapshot. Its title, copyright page, corrected-reprint preface, contents, and selected Watson, Airy, Chapter 8, and Bessel printed/PDF page maps have been inspected, and its exact bytes are bound by ordinary SHA-256. The full book bytes, OCR, and rendered page images remain outside version control. Most mathematical page audits remain `partial`; the Chapter 2 Bessel pages 55--61 and Chapter 12 Bessel pages 435--438 now have complete, independently reviewed bounded audits. Complete page review does not by itself reconcile notation or entities, so the 119 Bessel occurrences remain `transcribed_unreconciled`, with no Bessel notation or entity association added.
 
 Locators always use printed chapter, section, equation, example, exercise, or page labels. PDF page coordinates belong in `page_audits.csv`, never in the printed-page fields unless a page map has been verified.
 
@@ -113,6 +113,44 @@ Occurrence `resolution_status`:
 
 Transcription status is independently one of `not_started`, `locator_only`, `summary_only`, `mathematical_transcription`, or `verified`. A `verified` transcription uses `sha256`, exactly 64 lowercase hexadecimal digits, a collator, and a date. Reconciliation status is `unresolved`, `matched`, `mismatch`, or `not_applicable`.
 
+### Bessel revision-2 queue normalization
+
+The two approved Bessel transcription queues use richer planning labels than
+`inventory-v1.0.0`. Their 119 rows are normalized without changing this schema:
+
+| Planning source kind / target / evidence | Inventory-v1 source kind | Inventory-v1 target | Inventory-v1 evidence | Transcription state |
+|---|---|---|---|---|
+| `body_definition` / `source_definition` / `direct_formula` | `body_definition` | `source_definition` | `direct_formula` | `verified` |
+| `displayed_formula` / `source_formula` / `direct_formula` | `displayed_formula` | `source_formula` | `direct_formula` | `verified` |
+| `source_property` / `qualitative_support` / `direct_prose` | `body_use` | `source_formula` | `direct_prose` | `verified` |
+| `exercise` / `exercise_target` / `direct_formula` | `exercise` | `source_exercise` | `direct_formula` | `verified` |
+| `notation_definition` / `source_notation` / direct evidence | `body_definition` | `source_definition` | the original `direct_formula` or `direct_prose` | `verified` |
+| `normalization_check` / `source_formula` / `direct_formula` | `displayed_formula` | `source_formula` | `direct_formula` | `verified` |
+| `cross_reference` / `source_reference` / `direct_prose` | `cross_reference` | `inventory_lead` | `direct_prose` | `verified` |
+| `footnote` / `qualitative_support` or `source_report` / `direct_prose` | `body_use` | `source_formula` | `direct_prose` | `verified` |
+| `footnote` / `source_reference` / `direct_prose` | `cross_reference` | `inventory_lead` | `direct_prose` | `verified` |
+| `table` / `source_table_metadata` / `direct_table` | `table` | `source_table` | `direct_prose` | `summary_only`; numerical contents omitted |
+| `figure` / `source_auxiliary_geometry` / `direct_figure` | `cross_reference` | `inventory_lead` | `direct_prose` | `summary_only`; geometry omitted |
+
+The identifier mapping is the identity function: for every one of the 58 IDs
+in the exact Chapter 2 queue and every one of the 61 IDs in the exact Chapter
+12 queue, `inventory_occurrence_id(proposed_id) = proposed_id`. There are no
+renames, merges, splits, collisions, or deferred rows; `occurrences.csv` is the
+authoritative complete list. The Chapter 2 rows bind transcription SHA-256
+`f157c9fc8688da02a680661c185a8a5458a24ba5b6dd77641190a4393d6e5439`,
+and the Chapter 12 rows bind
+`13d223d6e088582f2eb9c4fbc282cb4d1a8acf29abd32d6f28e26918d42acc5b`.
+Both were approved at commit
+`4147deda85688ac5e6e7dc0868a45c0f60dc7036` by external reports
+`bessel_source_r2_referee_c.md` (SHA-256
+`0910abe97f77c8291b3d6651d3a35bd136fdc654a43bff12d45c86df072e8e06`)
+and `bessel_source_r2_referee_d.md` (SHA-256
+`46f90b5ecffd8f5851d24153bf56818c0ed2e47904b4283da8a41fea823c807f`).
+Every inserted row keeps `resolution_status=transcribed_unreconciled`,
+`reconciliation_status=unresolved`, and `novelty_class=source_recovery`.
+No notation/entity association, theorem card, occurrence-card link, manifest
+membership, coverage claim, or Lean authorization follows from this mapping.
+
 Notation resolution is `normalization_unresolved` or `resolved`. Entity identity is `provisional`, `confirmed`, or `excluded`; entity normalization is `unresolved`, `resolved`, or `not_applicable`. `confirmed` requires a confirmed association to a resolved, reconciled occurrence in a locked-target edition. A direct body hit in a comparison-only preview is still only `provisional` for this programme. Implementation identification is `not_assessed`, `reuse_candidate`, `construction_planned`, `bridge_pending`, or `proved`.
 
 Association link status is `provisional` or `confirmed`. A provisional association is useful planning data, not a resolved semantic claim.
@@ -138,7 +176,7 @@ The queue is seeded only by direct publisher-preview pages, its contents, or cit
 | Incomplete gamma functions | Chapter 2 §5 and Chapter 4 contents | upper/lower, normalized forms, parameter order |
 | Orthogonal/classical orthogonal polynomials | Chapter 2 §§6–7 contents | enumerate only body occurrences, not the DLMF family tree |
 | Airy integral/functions | Direct locked-1997 Chapter 2 §§8.1–8.3 transcription plus later contents leads | independently review the real/contour `Ai` identification, normalization, rotations, and derivative meaning |
-| Bessel `J` and modified Bessel `I` | Chapter 2 §§9–10 contents only in the present seed | both remain `occurrence_unresolved`; inspect definitions and conventions |
+| Bessel `J` and modified Bessel `I` | Independently approved locked-1997 Chapter 2 §§9–10 transcription with 58 atomic occurrence rows | reconcile notation, entities, branches, origin regimes, and exercise-domain/path semantics; rows remain `transcribed_unreconciled` |
 | Zeta function | Chapter 2 §11 contents | confirm Riemann zeta identity and notation |
 
 Authoritative convention cross-checks include DLMF [Gamma](https://dlmf.nist.gov/5.2), [exponential integrals](https://dlmf.nist.gov/6.2), [error/Fresnel](https://dlmf.nist.gov/7.2), [incomplete gamma](https://dlmf.nist.gov/8.2), [Airy](https://dlmf.nist.gov/9.2), [Bessel](https://dlmf.nist.gov/10.2), [modified Bessel](https://dlmf.nist.gov/10.25), [orthogonal polynomials](https://dlmf.nist.gov/18.1), and [zeta](https://dlmf.nist.gov/25.2).
@@ -149,7 +187,7 @@ Authoritative convention cross-checks include DLMF [Gamma](https://dlmf.nist.gov
 |---|---|---|
 | Elementary exponential comparison solutions | Chapter 10 contents | separate unnamed expressions from named project wrappers |
 | Airy functions, derivatives, modulus/phase, auxiliaries | Direct locked-1997 Chapter 11 §§1.1–2.4 transcription; [DLMF §9.8](https://dlmf.nist.gov/9.8) cross-check | independently review the enumerated `Ai`, `Bi`, `E`, `M`, `theta`, `N`, `omega`, `c`, `lambda`, `mu_1`, and `mu_2` records |
-| Bessel/modified-Bessel simple-pole models | Chapter 12 contents; [DLMF §2.8](https://dlmf.nist.gov/2.8) identifies comparison cases | basis, normalization, phase shift, real/complex auxiliaries |
+| Bessel/modified-Bessel simple-pole models | Independently approved locked-1997 Chapter 12 §1 transcription with 61 atomic occurrence rows; [DLMF §2.8](https://dlmf.nist.gov/2.8) is only a convention cross-check | reconcile basis identity, normalization, phase construction, exceptional orders, and real/complex auxiliary bridges |
 | Inhomogeneous Airy/Scorer-type models | Chapters 10–11 contents; [DLMF §9.12](https://dlmf.nist.gov/9.12) supplies Olver page locators | direct source scan before confirming each Scorer notation |
 | Coalescing-saddle and endpoint models | Chapter 9 CFU/Bleistein sections; [DLMF §2.4](https://dlmf.nist.gov/2.4) gives modern taxonomy | verify which modern names occur in the edition |
 | Envelope/control objects | Chapters 11–12 auxiliary headings and project design | separate source entities from `project_extra` |
@@ -196,6 +234,13 @@ but its formal packet, upstream acceptance, registry, and source-status gates
 remain open. Accordingly,
 there is no `cards.csv` or occurrence-card association and no manifest selects
 any of these four occurrences.
+
+The two independently approved Bessel revision-2 transcriptions contribute a
+further 119 atomic occurrence rows: 58 for Chapter 2 `J`/`I` and 61 for Chapter
+12 real comparison bases and auxiliaries. They are hash-bound and source-
+verified, but remain `transcribed_unreconciled` with unresolved reconciliation.
+No notation, entity, card, occurrence-card, or manifest association was added,
+and the rows provide neither source coverage nor Lean authorization.
 
 ## Completion gates
 

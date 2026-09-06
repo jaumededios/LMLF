@@ -17,11 +17,12 @@ The exact 1997 Olver PDF is now available as a private, hash-bound source snapsh
 control. Theorem 3.1 on Watson's lemma has a mathematical transcription, revision-2 QL-001 and
 OLV-001 draft cards, and complete revision-2 natural-language proof dossiers. Bounded Airy,
 Euler--Maclaurin/Bernoulli, and Bessel source transcriptions are also present, together with
-unregistered Bernoulli identification drafts. The Bessel files are revision-2 collations with the
-first review round's changes integrated and fresh independent rereview pending; unlike the earlier
-parallel collations, they do not yet have normalized inventory rows. These planning artifacts remain
-unreconciled and authorize no new Lean work. The source ledgers are still far from a complete book
-inventory, and the project claims no quantitative Olver theorem or source coverage yet.
+unregistered Bernoulli identification drafts. Two independent source referees approved the exact
+revision-2 Bessel transcriptions, and all 119 proposed Bessel occurrences are now integrated
+one-for-one into the normalized inventory. Those rows remain `transcribed_unreconciled`: no Bessel
+notation or entity association, theorem card, manifest membership, coverage credit, reconciliation,
+or Lean work is authorized. The source ledgers are still far from a complete book inventory, and the
+project claims no quantitative Olver theorem or source coverage yet.
 
 Planning and review artifacts are kept explicit:
 
