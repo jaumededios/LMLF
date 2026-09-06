@@ -102,10 +102,10 @@ manifest readiness alone did not authorize Lean.  The later external records
 did authorize and accept the exact `515b742...` implementation.  This does not
 claim an Olver occurrence or a tagged release.
 
-`IMP-001` is a deliberately unregistered revision-2 draft for the small
+`IMP-001` is a deliberately unregistered revision-3 draft for the small
 ordinary-improper/finite-exceptional primitive layer upstream of QL-001.  Its
-six prospective targets have a complete revised author proof.  Its first
-exact-commit review changes are integrated, but two fresh proof approvals must
+six prospective targets have a complete revised author proof.  Its two
+exact-commit review repairs are integrated, but two fresh proof approvals must
 precede exact-signature design.  The name and boundary remain provisional until
 registry reconciliation, and external authorization remains required before Lean;
 it must not be smuggled into QL-001 as an unreviewed implementation detail.
@@ -195,7 +195,7 @@ separate section 9.1--9.2 occurrence -> OLV-002
 QL-003 optional exponential-growth adapter; EX-002 independent regression
 ```
 
-`IMP-001` has an unregistered revision-2 card/proof draft.  It separates relational ordinary-
+`IMP-001` has an unregistered revision-3 card/proof draft.  It separates relational ordinary-
 improper semantics, the finite-exceptional primitive certificate, and the
 finite-piece Abel/Fubini identity from the QL estimate.  Its regular pieces use
 Mathlib `intervalIntegral`.  QL-001 is a complete-normed-real-vector-space
@@ -397,7 +397,7 @@ discussion layer.  The highest-impact unresolved edges are:
    its complex/ordinary-improper interpretation and common-`X` quantifier order, freeze
    the finite theorem, and complete source recovery.
 2. `RQ-INT-001`: independently rereview, sign, and reconcile the unregistered
-   IMP-001 revision-2 ordinary-improper relation/primitive layer and
+   IMP-001 revision-3 ordinary-improper relation/primitive layer and
    Mathlib-interval-integral Abel/Fubini lemma; scope any narrower whole-set
    Bochner adapter separately.
 3. `RQ-CAUCHY-001`: useful constrained radii on moving domains.

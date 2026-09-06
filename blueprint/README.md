@@ -151,10 +151,10 @@ pinned Real Gamma moment -----------------------> QL-001
 ```
 
 `IMP-001` is a provisional, unregistered handle for the ordinary-improper
-relation and finite-exceptional continuous-primitive layer.  Its revision-1
-draft card and complete author proof bind six prospective targets, but its name
-and boundary still require registry reconciliation, exact signatures,
-independent reviews, and authorization before Lean.
+relation and finite-exceptional continuous-primitive layer.  Its revision-3
+draft card and complete revised author proof bind six prospective targets.  Two
+fresh proof approvals must precede exact-signature design; its name and boundary
+also require registry reconciliation and authorization before Lean.
 QB-001 and DEF-001 may later support optional error-predicate packaging or a
 Gamma audit wrapper, but the revision-2 QL/OLV proofs consume neither.
 
@@ -203,7 +203,7 @@ linked document.
 |---|---|---|
 | Bootstrap | `QB-001`, `DEF-001` | the only current closed, fully specified manifest members |
 | Demonstrator candidates | `QA-002`, `DEF-002`, `QC-001`, `QL-001`, `EX-001`, `EX-002` | `DEMO-0` planning; only IDs with complete cards may move to a revised closed manifest |
-| Watson source pilot | provisional `IMP-001`; registered `QL-001`, `OLV-001`, `SR-001` | IMP-001 has an unregistered revision-2 draft card/complete revised author proof awaiting fresh rereview; QL-001 and OLV-001 have revision-2 draft cards and complete draft proofs; none is Lean-authorized, and SR-001 is not yet carded |
+| Watson source pilot | provisional `IMP-001`; registered `QL-001`, `OLV-001`, `SR-001` | IMP-001 has an unregistered revision-3 draft card/complete revised author proof awaiting fresh rereview; QL-001 and OLV-001 have revision-2 draft cards and complete draft proofs; none is Lean-authorized, and SR-001 is not yet carded |
 | Domain/branch support | `QC-DOM`, `CB-PRINCIPAL`, `CB-GENERIC`, `QC-REAL`, `QC-LOGCOORD` | provisional in [complex domains](methods/complex_domains_branches.md) |
 | Derivative transport | `QC-CAUCHY`, `QC-RADIUS`, `EX-001`, `QC-NEG-DERIV`, `QC-JET`, `QC-MIXED`, `QC-GAUGE` | provisional except manifest candidate `EX-001`; M3 uses only the bounded initial slice |
 | Laplace | provisional `IMP-001`; `QL-001`--`QL-003`, `EX-002`, `OLV-001`, `OLV-002`, `SR-001` | IMP-001 -> QL-001 -> OLV-001 -> SR-001 is the MVP route; OLV-002 is a separate unselected section 9 bound |
@@ -227,7 +227,7 @@ named function and discharge all generic hypotheses.
 ## Work that may proceed in parallel
 
 - Independent Watson collation review, the pinned-Mathlib reuse audit,
-  IMP-001 revision-2 proof rereview, and review of the revision-2 generic finite
+  IMP-001 revision-3 proof rereview, and review of the revision-2 generic finite
   Laplace proof may proceed together.  `OLV-001` cannot freeze until the source
   and integral-semantics choices are independently approved and IMP-001 and
   QL-001 are accepted.
@@ -263,7 +263,7 @@ primitive.  No separate proper-Riemann implementation is planned.  It chooses
 one common baseline `X > 0` before `n`; the whole-set Bochner route is only an
 absolute-integrability adapter.  QL-001 and OLV-001 revision-2 cards and complete draft proof
 dossiers expose those choices; neither is frozen or Lean-authorized.  The
-unregistered IMP-001 revision-2 draft must receive two fresh proof approvals
+unregistered IMP-001 revision-3 draft must receive two fresh proof approvals
 before exact-signature design, then registry reconciliation and authorization
 before Lean.  The occurrence-card association uses
 `exact_source_target`, matching the card's `exact_source_generic` coverage

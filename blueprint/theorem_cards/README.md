@@ -135,7 +135,7 @@ reviews bind and accept commit
 ## Unregistered planning cards
 
 `IMP-001.yaml`, `OLV-002.yaml`, and `DEF-BERN-001.yaml` are planning artifacts,
-not registry entries or manifest members.  IMP-001 revision 2 has six
+not registry entries or manifest members.  IMP-001 revision 3 has six
 prospective integration targets and a complete revised author proof awaiting
 two fresh approvals before exact-signature design; OLV-002 revision 2
 has a complete draft proof; DEF-BERN-001 revision 1 is declaration-free and has

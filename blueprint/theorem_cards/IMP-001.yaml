@@ -2,7 +2,7 @@ schema_version: 2
 id: IMP-001
 title: Finite-exceptional ordinary-improper integration and the finite Abel identity
 owner: jaumededios
-artifact_revision: 2
+artifact_revision: 3
 baseline_spec_commit: pending_external_record_after_commit
 
 theorem_class: mixed
@@ -15,7 +15,7 @@ implementation_status: not_started
 prototype_status: absent
 coverage_status: not_applicable
 manifest_membership_status: planning_only
-status_as_of: referee_changes_integrated_pending_rereview
+status_as_of: referee_c_changes_integrated_pending_fresh_rereview
 status_authority: >-
   Completeness is an author claim about the bound natural-language argument.
   Review pass and implementation authorization can be established only by an
@@ -53,7 +53,7 @@ scope:
   exact_signatures_artifact: not_created-design_only_after-two-proof-approvals
   signature_design_timing: >-
     Exact Lean signatures and binder order may be designed only after two
-    independent reviewers approve the complete revision-2 proof.
+    independent reviewers approve the complete revision-3 proof.
   signature_authorization: absent
   candidate_public_targets:
     - target_id: IMP-001-T01
@@ -219,6 +219,8 @@ hypothesis_laundering_check: >-
   every one-sided endpoint limit, continuity, normalization, and increment
   law. They contain no boundedness constant, target Laplace value, convergence
   at a new weight, Gamma moment, Watson remainder, or source conclusion.
+  The T06 Fubini proof derives AEStronglyMeasurable only under its exact
+  restricted product measure and adds no global StronglyMeasurable hypothesis.
 choice_laundering_check: >-
   Sorting a finite set is canonical. Interior anchors are deterministic in the
   displayed semantics and are proved immaterial. The exceptional set in T03 is
@@ -229,7 +231,7 @@ choice_laundering_check: >-
 
 natural_language_proof:
   artifact: blueprint/proofs/IMP-001.md
-  artifact_revision: 2
+  artifact_revision: 3
   artifact_state: draft
   proof_status: complete
   normative_sections:
@@ -246,7 +248,7 @@ dependencies:
   lake_manifest_sha256: 4bd9b595f84163f69bdb0ffc9b1a876b5df71d65bdd53122415610d083d43404
   accepted_lmlf_packets: []
   draft_lmlf_packets: []
-  pin_status: exact_names_and_defining_imports_audited_for_revision_2
+  pin_status: exact_names_and_defining_imports_audited_for_revision_3
   pinned_declarations:
     - declaration: intervalIntegral.integral_add_adjacent_intervals
       import: Mathlib.MeasureTheory.Integral.IntervalIntegral.Basic
@@ -309,6 +311,7 @@ edge_tests:
   - empty exceptional set reduces to an ordinary right-endpoint limit
   - adding a genuinely regular marked point preserves both individual endpoint limits and the total value
   - regular-point insertion is checked in the empty, first, bounded-interior, and final-unbounded component positions
+  - first-component insertion uses an interior anchor v and verifies the two new component values sum with the new first contribution to the old value B
   - combining an amplitude exceptional on S with smooth model terms exceptional on the empty set concludes on S
   - a one-over-distance singularity with symmetric principal value is rejected
   - a conditionally convergent one-sided singularity is accepted when both sides converge independently
@@ -318,12 +321,13 @@ edge_tests:
   - endpoint equality alone cannot replace the all-intermediate-point increment law
   - an exceptional finite prefix is a sum of split-improper component values, never one intervalIntegral
   - the Abel Fubini step proves Integrable uncurry H under the exact restricted product measure required by intervalIntegral_integral_swap
+  - the Abel kernel is AEStronglyMeasurable under that restricted product measure without a global StronglyMeasurable hypothesis
   - the scalar exponential identity derives its derivative from Real.hasDerivAt_exp and never divides by h
   - T06 handles h=0, a=b, and a continuous nondifferentiable primitive
   - T04 preserves the exact interval-integral sign and value order
 
 blocking_conditions:
-  - revision 2 has integrated requested changes and awaits exact-commit rereview
+  - revision 3 has integrated referee-C requested changes and awaits fresh exact-commit rereview
   - the complete proof lacks the two approvals required before signature design
   - the exact Lean signature artifact is intentionally absent and must be designed only after those two proof approvals
   - no external envelope authorizes implementation
