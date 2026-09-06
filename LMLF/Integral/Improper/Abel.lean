@@ -184,4 +184,88 @@ private theorem intervalIntegral_exp_smul_primitive
   dsimp [w]
   module
 
+private theorem transformedPrimitivePackage
+    [CompleteSpace E] {g F : ℝ → E} {k : ℝ} {S : Finset ℝ}
+    (hF : IsFiniteExceptionalPrimitive g k S F) (h : ℝ)
+    (hInt : IntegrableOn (fun t => Real.exp (-h * t) • F t) (Ioi k))
+    (hLim : Tendsto (fun R => Real.exp (-h * R) • F R)
+      atTop (nhds 0)) :
+    let G := fun t =>
+      Real.exp (-h * t) • F t +
+        h • ∫ u in k..t, Real.exp (-h * u) • F u
+    IsFiniteExceptionalPrimitive
+        (fun t => Real.exp (-h * t) • g t) k S G ∧
+      Tendsto G atTop
+        (nhds (h • ∫ u in Ioi k, Real.exp (-h * u) • F u)) := by
+  dsimp only
+  let w : ℝ → ℝ := fun t => Real.exp (-h * t)
+  let q : ℝ → E := fun t => w t • F t
+  let Q : ℝ → E := fun t => ∫ u in k..t, q u
+  let G : ℝ → E := fun t => q t + h • Q t
+  have hwcont : Continuous w :=
+    Real.continuous_exp.comp (continuous_const.mul continuous_id)
+  have hqcont : ContinuousOn q (Ici k) :=
+    hwcont.continuousOn.smul hF.2.1
+  have hQcont : ContinuousOn Q (Ici k) := by
+    have htail := hInt.continuousOn_Ici_primitive_Ioi
+    exact (continuousOn_const.sub htail).congr fun t ht =>
+      (intervalIntegral.integral_Ioi_sub_Ioi hInt ht).symm
+  have hGcont : ContinuousOn G (Ici k) :=
+    hqcont.add (hQcont.const_smul h)
+  have hGzero : G k = 0 := by
+    simp [G, Q, q, w, hF.2.2.1]
+  have hGprim : IsFiniteExceptionalPrimitive
+      (fun t => Real.exp (-h * t) • g t) k S G := by
+    refine ⟨hF.1, hGcont, hGzero, ?_⟩
+    intro a b hka hab hdisj
+    rcases hF.2.2.2 hka hab hdisj with ⟨hgInt, hFab⟩
+    have hFcont : ContinuousOn F (Icc a b) :=
+      hF.2.1.mono (fun t ht => hka.trans ht.1)
+    have hinc : ∀ t ∈ Icc a b, F t - F a = ∫ v in a..t, g v := by
+      intro t ht
+      have hsub : Icc a t ⊆ Icc a b := Icc_subset_Icc_right ht.2
+      have hdisj' : Disjoint (Icc a t) (↑S : Set ℝ) :=
+        hdisj.mono hsub Subset.rfl
+      exact (hF.2.2.2 hka ht.1 hdisj').2
+    have hAbel :=
+      intervalIntegral_exp_smul_primitive hab hgInt hFcont hinc h
+    have hweightedInt : IntervalIntegrable
+        (fun t => Real.exp (-h * t) • g t) volume a b :=
+      hgInt.continuousOn_smul hwcont.continuousOn
+    have hkaOn : IntegrableOn q (Ioc k a) := by
+      exact hInt.mono_set (fun x hx => hx.1)
+    have habOn : IntegrableOn q (Ioc a b) := by
+      exact hInt.mono_set (fun x hx => lt_of_le_of_lt hka hx.1)
+    have hkaInt : IntervalIntegrable q volume k a :=
+      (intervalIntegrable_iff_integrableOn_Ioc_of_le hka).2 hkaOn
+    have habInt : IntervalIntegrable q volume a b :=
+      (intervalIntegrable_iff_integrableOn_Ioc_of_le hab).2 habOn
+    have hadd :=
+      intervalIntegral.integral_add_adjacent_intervals hkaInt habInt
+    refine ⟨hweightedInt, ?_⟩
+    change (q b + h • Q b) - (q a + h • Q a) = _
+    dsimp [Q]
+    rw [← hadd]
+    dsimp [q, w]
+    rw [hAbel]
+    module
+  have hQLim : Tendsto Q atTop (nhds (∫ u in Ioi k, q u)) :=
+    MeasureTheory.intervalIntegral_tendsto_integral_Ioi k hInt tendsto_id
+  have hGLim : Tendsto G atTop (nhds (h • ∫ u in Ioi k, q u)) := by
+    simpa only [G, q, w, zero_add] using hLim.add (hQLim.const_smul h)
+  exact ⟨hGprim, hGLim⟩
+
+/-- IMP-001-T06. -/
+theorem IsFiniteExceptionalPrimitive.hasImproperIntegralAtTopExcept_exp_smul
+    [CompleteSpace E] {g F : ℝ → E} {k : ℝ} {S : Finset ℝ}
+    (hF : IsFiniteExceptionalPrimitive g k S F) (h : ℝ)
+    (hInt : IntegrableOn (fun t => Real.exp (-h * t) • F t) (Ioi k))
+    (hLim : Tendsto (fun R => Real.exp (-h * R) • F R)
+      atTop (nhds 0)) :
+    HasImproperIntegralAtTopExcept
+      (fun t => Real.exp (-h * t) • g t) k S
+      (h • ∫ t in Ioi k, Real.exp (-h * t) • F t) := by
+  apply hasImproperIntegralAtTopExcept_iff_exists_primitive.mpr
+  exact ⟨_, transformedPrimitivePackage hF h hInt hLim⟩
+
 end LMLF.Integral
