@@ -14,16 +14,19 @@ the [Chapter 5 checklist](blueprint/olver/chapter05.md), and the approved
 [Wronskian/Abel natural-language blueprint](blueprint/olver/chapter05-wronskians.md).
 The first accepted Lean slice checks exactly `C05-01-08`–`C05-01-11`: the
 Wronskian derivative, Abel identity, zero/nowhere-zero alternative, and
-constant-Wronskian corollary. Chapter 5 therefore stands at `4/108 = 3.70%`
-of the disclosed claim-component inventory, `0/13` whole numbered theorems,
-and `0/44` exercises. The full fundamental-pair equivalence in Theorem 1.2
-remains pending.
+constant-Wronskian corollary. The accepted Theorem 1.1 slice now also checks
+`C05-01-02` and `C05-01-03`: global `C²` existence, uniqueness for arbitrary
+initial value and derivative, and infinitely many solutions. Chapter 5 therefore
+stands at `6/108 = 5.56%` of the disclosed claim-component inventory, `1/13 = 7.69%`
+whole numbered theorems, and `0/44` exercises.
 
-The next implementation target is Olver Theorem 1.1. Its
-[approved global-IVP blueprint](blueprint/olver/chapter05-global-ivp.md) proves the real and complex
-phase, `C²`, uniqueness, and infinitude forms; Lean work is in progress in
-`LMLF/ODE/LinearSecondOrder.lean`, so `C05-01-02` and `C05-01-03` remain pending and the current
-coverage counts do not change.
+The [accepted global-IVP blueprint](blueprint/olver/chapter05-global-ivp.md) records the proof and
+its correspondence with the six public real/complex phase, `C²`, uniqueness, and infinitude
+declarations in [`LMLF/ODE/LinearSecondOrder.lean`](LMLF/ODE/LinearSecondOrder.lean), together with
+the two Wronskian-reuse consumers in
+[`LMLFTest/ODE/LinearSecondOrder.lean`](LMLFTest/ODE/LinearSecondOrder.lean). The next target is the
+full fundamental-pair equivalence in Theorem 1.2; its natural-language proof packet is under two
+fresh reviews and remains pending.
 
 Both bounded A/B candidates were mathematically correct and built
 successfully. The Sol candidate was selected because it had cleaner public
@@ -37,7 +40,7 @@ Functions* has been restored, identified, and retained privately outside the
 repository. Public files contain only source citations and original
 mathematical exposition, not book scans, OCR, or page renderings.
 
-At the current baseline commit `b8d2f731fcfd5cd0889d0732f13699eb94681c86`,
+At the historical pre-Chapter-5 baseline commit `b8d2f731fcfd5cd0889d0732f13699eb94681c86`,
 the accepted Lean library already contains the improper-integral core and its
 regression consumers, together with the foundational finite-error predicates,
 transport lemmas, and transparent Mathlib Gamma wrappers. These are real Lean
@@ -69,6 +72,10 @@ Planning and review artifacts are kept explicit:
   Wronskian and Abel API for complex- and real-valued solutions.
 - [`LMLFTest/ODE/Wronskian.lean`](LMLFTest/ODE/Wronskian.lean) provides the nonpublic
   hypergeometric and associated-Legendre equation consumers.
+- [`LMLF/ODE/LinearSecondOrder.lean`](LMLF/ODE/LinearSecondOrder.lean) provides the accepted global
+  real and complex linear-IVP API in phase and source forms, plus infinitude.
+- [`LMLFTest/ODE/LinearSecondOrder.lean`](LMLFTest/ODE/LinearSecondOrder.lean) provides its nonpublic
+  real and complex Wronskian-reuse consumers.
 - `LMLF/Definitions.lean` and `LMLF/Results.lean` are the public semantic umbrellas.
 - `LMLF/Audit/Definitions.lean` is a separately built regression consumer and is not imported by
   `LMLF.lean`.

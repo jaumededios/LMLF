@@ -1,7 +1,8 @@
 # Chapter 5: global linear initial-value theorem
 
-**Status:** Two fresh natural-language reviews approved this proof; Lean implementation is in
-progress in `LMLF/ODE/LinearSecondOrder.lean`. This page creates no new checked coverage.
+**Status:** Accepted. Two fresh natural-language reviews approved this proof, and a fresh
+independent code review accepted the Lean implementation without findings. The implementation and
+its local verification check `C05-01-02`, `C05-01-03`, and the whole of Theorem 1.1.
 
 ## Source and review record
 
@@ -21,15 +22,49 @@ reviews approved that exact packet without mathematical changes:
 - review B, SHA-256
   `c71a46ccbe1deade8ab956067e0c2c9ae05b24922a1f8500e38d2afa4af7c16b`.
 
+The fresh independent Lean code review accepted the implementation without findings; its report
+has SHA-256
+`dee4f39774a6d60436ea0f2917ef2e39abe7361df809cfd654e436c5531b32b3`.
+The frozen accepted implementation artifacts have these SHA-256 digests:
+
+- `LMLF/ODE/LinearSecondOrder.lean`:
+  `ff845560c0122975065c4f75a6e4895574a065091cd38f033f9ae48154356aba`;
+- `LMLFTest/ODE/LinearSecondOrder.lean`:
+  `e429829f0c0aeb3d42413b27e9e7076f1794b61d4227145ad6234bd6638f723a`;
+- `LMLF/Results.lean`:
+  `8c67c5df1460bb434af72a2c8dd5c0c1b2a43786593a45aa4e706838c4e3f8d4`;
+- `lakefile.toml`:
+  `7e7bccdb025e3c19eb6a2a5a6dee011981df4d8f5baa71ebb00ac2666de384e3`.
+
+Local acceptance independently passed the full `lake build` (2,776 jobs), repository inventory
+validation and all 25 negative fixtures, clean full-file diagnostics, and the standard-axiom
+checks for all six public declarations and both consumers.
+
 The source theorem concerns a homogeneous second-order equation on a finite or infinite open real
 interval. It says that continuous coefficients give infinitely many twice continuously
 differentiable solutions, and that arbitrary prescribed values of the solution and its first
 derivative at any point determine one solution uniquely.
 
 In the [Chapter 5 checklist](chapter05.md), this theorem is represented by
-`C05-01-02` and `C05-01-03`. Both rows remain pending until the Lean implementation and its local
-checks are accepted. The already checked Wronskian rows remain `C05-01-08`--`C05-01-11`; this page
-does not claim the full fundamental-pair equivalence in Theorem 1.2.
+`C05-01-02` and `C05-01-03`. Both rows and the whole numbered theorem are checked. The previously
+checked Wronskian rows remain `C05-01-08`--`C05-01-11`; this page does not claim the full
+fundamental-pair equivalence in Theorem 1.2.
+
+## Source-to-Lean correspondence
+
+The accepted public API exposes both source-shaped and reusable phase-shaped forms over the two
+concrete scalar fields:
+
+- complex phase IVP: [`exists_unique_complexLinearIVP`](../../LMLF/ODE/LinearSecondOrder.lean#L761);
+- real phase IVP: [`exists_unique_realLinearIVP`](../../LMLF/ODE/LinearSecondOrder.lean#L778);
+- complex source-form `C²` IVP: [`exists_unique_complexSecondOrderLinear`](../../LMLF/ODE/LinearSecondOrder.lean#L829);
+- real source-form `C²` IVP: [`exists_unique_realSecondOrderLinear`](../../LMLF/ODE/LinearSecondOrder.lean#L847);
+- infinitely many complex `C²` solutions: [`infinite_complexSecondOrderLinearSolutions`](../../LMLF/ODE/LinearSecondOrder.lean#L890);
+- infinitely many real `C²` solutions: [`infinite_realSecondOrderLinearSolutions`](../../LMLF/ODE/LinearSecondOrder.lean#L900).
+
+The required cross-module reuse is checked by
+[`complexCanonicalLinearIVP_wronskian_ne_zero`](../../LMLFTest/ODE/LinearSecondOrder.lean#L16) and
+[`realCanonicalLinearIVP_wronskian_ne_zero`](../../LMLFTest/ODE/LinearSecondOrder.lean#L38).
 
 ## Statement in phase form
 
@@ -449,9 +484,8 @@ For every `x∈I`, the zero-equivalence theorem says
 \]
 
 Equation (27) makes the right side false, so `W(x)≠0` throughout `I`. The real IVP theorem and
-`realWronskian_eq_zero_iff` give the identical real-valued consumer. The implementation test lives
-in `LMLFTest/ODE/LinearSecondOrder.lean` and must call those existing declarations rather than
-reprove Abel's identity.
+`realWronskian_eq_zero_iff` give the identical real-valued consumer. The accepted implementation
+tests call those existing declarations rather than reprove Abel's identity.
 
 This consumer checks real and complex phase conventions and genuine reuse across the two public
 ODE modules. It is not itself new source coverage, and it proves only the canonical pair's
@@ -460,9 +494,8 @@ nonvanishing Wronskian, not the full three-way equivalence of Theorem 1.2.
 ## Coverage boundary
 
 - Natural-language mathematics completed here: `C05-01-02` and `C05-01-03`.
-- Checked Lean coverage added by this page: none.
-- Current Chapter 5 checked claim-component count: `4/108 = 3.70%`.
-- Current whole-numbered-theorem count: `0/13`.
-- The counts change only after the complete real source theorem, the corresponding reusable phase
-  results, local verification, and the required consumers are accepted.
-- Theorem 1.2 remains pending.
+- Checked Lean coverage: `C05-01-02`, `C05-01-03`, and the whole of `T05-1.1`.
+- Current Chapter 5 checked claim-component count: `6/108 = 5.56%`.
+- Current whole-numbered-theorem count: `1/13 = 7.69%`.
+- Current exercise count: `0/44 = 0%`.
+- Theorem 1.2 remains pending and receives no coverage credit here.

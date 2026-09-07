@@ -23,6 +23,7 @@ globs = [
   "LMLF.Basic",
   "LMLF.Definitions",
   "LMLF.Definitions.Gamma",
+  "LMLF.ODE.LinearSecondOrder",
   "LMLF.ODE.Wronskian",
   "LMLF.Quantitative.Basic",
   "LMLF.Results",
@@ -32,6 +33,7 @@ globs = [
 [[lean_lib]]
 name = "LMLFTest"
 globs = [
+  "LMLFTest.ODE.LinearSecondOrder",
   "LMLFTest.ODE.Wronskian",
   "LMLFTest.Integral.Improper.IMP001PublicUse",
   "LMLFTest.Integral.Improper.IMP001Regressions",
