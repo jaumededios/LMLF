@@ -1,4 +1,5 @@
 import LMLF.Definitions.Gamma
+import LMLF.Definitions.Hypergeometric
 
 /-!
 # LMLF.Definitions

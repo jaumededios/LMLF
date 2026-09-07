@@ -1,7 +1,5 @@
 import Mathlib.Analysis.Calculus.MeanValue
-import Mathlib.Analysis.SpecialFunctions.ExpDeriv
-import Mathlib.MeasureTheory.Integral.IntervalIntegral.FundThmCalculus
-import Mathlib.Topology.Order.IntermediateValue
+import LMLF.ODE.LinearFirstOrder
 
 /-!
 # Wronskians for second-order ordinary differential equations
@@ -23,16 +21,6 @@ def wronskian {X R : Type*} [Mul R] [Sub R]
 /-- Compatibility name for the Wronskian of two real-valued phase pairs. -/
 abbrev realWronskian (y₁ v₁ y₂ v₂ : ℝ → ℝ) (x : ℝ) : ℝ :=
   wronskian y₁ v₁ y₂ v₂ x
-
-private theorem integral_hasDerivAt_of_continuousOn
-    {E : Type*} [NormedAddCommGroup E] [NormedSpace ℝ E] [CompleteSpace E]
-    {I : Set ℝ} (hI : IsOpen I) (hIc : IsPreconnected I)
-    {f : ℝ → E} (hf : ContinuousOn f I) {x₀ x : ℝ} (hx₀ : x₀ ∈ I) (hx : x ∈ I) :
-    HasDerivAt (fun u ↦ ∫ t in x₀..u, f t) (f x) x := by
-  apply intervalIntegral.integral_hasDerivAt_right
-  · exact (hf.mono (hIc.ordConnected.uIcc_subset hx₀ hx)).intervalIntegrable
-  · exact hf.stronglyMeasurableAtFilter hI x hx
-  · exact hf.continuousAt (hI.mem_nhds hx)
 
 /-- A1: the Wronskian of two complex phase-pair solutions satisfies `W' = -f W`. -/
 theorem hasDerivAt_wronskian {I : Set ℝ} {f g y₁ v₁ y₂ v₂ : ℝ → ℂ} {x : ℝ}
@@ -56,32 +44,8 @@ theorem wronskian_eq_mul_cexp_integral {I : Set ℝ} {f g y₁ v₁ y₂ v₂ : 
     {x₀ x : ℝ} (hx₀ : x₀ ∈ I) (hx : x ∈ I) :
     wronskian y₁ v₁ y₂ v₂ x = wronskian y₁ v₁ y₂ v₂ x₀ *
       Complex.exp (-∫ t in x₀..x, f t) := by
-  let A : ℝ → ℂ := fun u ↦ ∫ t in x₀..u, f t
-  let E : ℝ → ℂ := fun u ↦ Complex.exp (A u) * wronskian y₁ v₁ y₂ v₂ u
-  have hE : ∀ z ∈ I, HasDerivAt E 0 z := by
-    intro z hz
-    have hA : HasDerivAt A (f z) z :=
-      integral_hasDerivAt_of_continuousOn hI hIc hf hx₀ hz
-    have hW := hasDerivAt_wronskian hz hy₁ hv₁ hy₂ hv₂
-    have h := hA.cexp.mul hW
-    exact h.congr_deriv (by ring)
-  have hconst : E x = E x₀ :=
-    hI.is_const_of_deriv_eq_zero hIc
-      (fun z hz ↦ (hE z hz).differentiableAt.differentiableWithinAt)
-      (fun z hz ↦ (hE z hz).deriv) hx hx₀
-  have hproduct : Complex.exp (A x) * wronskian y₁ v₁ y₂ v₂ x =
-      wronskian y₁ v₁ y₂ v₂ x₀ := by
-    simpa [E, A] using hconst
-  calc
-    wronskian y₁ v₁ y₂ v₂ x =
-        (Complex.exp (A x))⁻¹ *
-          (Complex.exp (A x) * wronskian y₁ v₁ y₂ v₂ x) := by
-            simp [Complex.exp_ne_zero]
-    _ = (Complex.exp (A x))⁻¹ * wronskian y₁ v₁ y₂ v₂ x₀ := by rw [hproduct]
-    _ = wronskian y₁ v₁ y₂ v₂ x₀ * Complex.exp (-A x) := by
-      rw [Complex.exp_neg]
-      ac_rfl
-    _ = wronskian y₁ v₁ y₂ v₂ x₀ * Complex.exp (-∫ t in x₀..x, f t) := by rfl
+  exact eqOn_const_mul_cexp_neg_integral_of_hasDerivAt hI hIc hf
+    (fun z hz ↦ hasDerivAt_wronskian hz hy₁ hv₁ hy₂ hv₂) hx₀ hx
 
 /-- A3, pointwise form: a complex Wronskian vanishes at one point iff it vanishes at another. -/
 theorem wronskian_eq_zero_iff {I : Set ℝ} {f g y₁ v₁ y₂ v₂ : ℝ → ℂ}
@@ -172,31 +136,8 @@ theorem realWronskian_eq_mul_exp_integral {I : Set ℝ} {f g y₁ v₁ y₂ v₂
     {x₀ x : ℝ} (hx₀ : x₀ ∈ I) (hx : x ∈ I) :
     realWronskian y₁ v₁ y₂ v₂ x = realWronskian y₁ v₁ y₂ v₂ x₀ *
       Real.exp (-∫ t in x₀..x, f t) := by
-  let A : ℝ → ℝ := fun u ↦ ∫ t in x₀..u, f t
-  let E : ℝ → ℝ := fun u ↦ Real.exp (A u) * realWronskian y₁ v₁ y₂ v₂ u
-  have hE : ∀ z ∈ I, HasDerivAt E 0 z := by
-    intro z hz
-    have hA : HasDerivAt A (f z) z :=
-      integral_hasDerivAt_of_continuousOn hI hIc hf hx₀ hz
-    have hW := hasDerivAt_realWronskian hz hy₁ hv₁ hy₂ hv₂
-    have h := hA.exp.mul hW
-    exact h.congr_deriv (by ring)
-  have hconst : E x = E x₀ :=
-    hI.is_const_of_deriv_eq_zero hIc
-      (fun z hz ↦ (hE z hz).differentiableAt.differentiableWithinAt)
-      (fun z hz ↦ (hE z hz).deriv) hx hx₀
-  have hproduct : Real.exp (A x) * realWronskian y₁ v₁ y₂ v₂ x =
-      realWronskian y₁ v₁ y₂ v₂ x₀ := by
-    simpa [E, A] using hconst
-  calc
-    realWronskian y₁ v₁ y₂ v₂ x =
-        (Real.exp (A x))⁻¹ * (Real.exp (A x) * realWronskian y₁ v₁ y₂ v₂ x) := by
-          simp [Real.exp_ne_zero]
-    _ = (Real.exp (A x))⁻¹ * realWronskian y₁ v₁ y₂ v₂ x₀ := by rw [hproduct]
-    _ = realWronskian y₁ v₁ y₂ v₂ x₀ * Real.exp (-A x) := by
-      rw [Real.exp_neg]
-      ac_rfl
-    _ = realWronskian y₁ v₁ y₂ v₂ x₀ * Real.exp (-∫ t in x₀..x, f t) := by rfl
+  exact eqOn_const_mul_exp_neg_integral_of_hasDerivAt hI hIc hf
+    (fun z hz ↦ hasDerivAt_realWronskian hz hy₁ hv₁ hy₂ hv₂) hx₀ hx
 
 /-- Real A3, pointwise form. -/
 theorem realWronskian_eq_zero_iff {I : Set ℝ} {f g y₁ v₁ y₂ v₂ : ℝ → ℝ}

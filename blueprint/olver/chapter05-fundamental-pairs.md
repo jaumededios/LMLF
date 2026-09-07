@@ -43,7 +43,7 @@ digests:
 - [`lakefile.toml`](../../lakefile.toml):
   `376de15f948f2d94ae064cc6ec5fa0d057a597067d1b69f1708c272046008c73`.
 
-The accepted parent modules are `LMLF/ODE/LinearSecondOrder.lean` at
+The accepted parent modules at this slice's review snapshot were `LMLF/ODE/LinearSecondOrder.lean` at
 `ff845560c0122975065c4f75a6e4895574a065091cd38f033f9ae48154356aba` and
 `LMLF/ODE/Wronskian.lean` at
 `091295aafbab1741be0dc4f27cadf14ee24d59f23d4e6811d653edaf11a43e9d`. Root acceptance passed the
@@ -56,7 +56,7 @@ The source components are:
 | Checklist component | Mathematical content | Accepted public target |
 |---|---|---|
 | `C05-01-04` | Fundamental-pair spanning and the normalized IVP pair | [`SpansSecondOrderLinearSolutionsOn`](../../LMLF/ODE/FundamentalPair.lean#L22); [`exists_complexCanonicalFundamentalPair`](../../LMLF/ODE/FundamentalPair.lean#L535); [`exists_realCanonicalFundamentalPair`](../../LMLF/ODE/FundamentalPair.lean#L576) |
-| `C05-01-05` | Wronskian definition | existing [`wronskian`](../../LMLF/ODE/Wronskian.lean#L19); existing [`realWronskian`](../../LMLF/ODE/Wronskian.lean#L24) |
+| `C05-01-05` | Wronskian definition | existing [`wronskian`](../../LMLF/ODE/Wronskian.lean#L17); existing [`realWronskian`](../../LMLF/ODE/Wronskian.lean#L22) |
 | `C05-01-06` | Interval-relative scalar linear independence | [`linearIndependent_restrict_pair_iff`](../../LMLF/ODE/FundamentalPair.lean#L31) |
 | `C05-01-07` | Full three-way equivalence | [`complexFundamentalPair_iff`](../../LMLF/ODE/FundamentalPair.lean#L353); [`realFundamentalPair_iff`](../../LMLF/ODE/FundamentalPair.lean#L373); [`complexSecondOrderFundamentalPair_iff`](../../LMLF/ODE/FundamentalPair.lean#L485); [`realSecondOrderFundamentalPair_iff`](../../LMLF/ODE/FundamentalPair.lean#L510) |
 
@@ -433,9 +433,10 @@ Wronskian, or duplicate Abel proof.
 Natural-language and checked Lean scope completed here is `C05-01-04`--`C05-01-07`, including all
 of Theorem 1.2:
 
-- claim components: `10/108 = 9.26%`;
+- claim components: `12/108 = 11.11%`;
 - whole numbered theorems: `2/13 = 15.38%`;
 - exercises: `0/44 = 0%`.
 
-The next target is the still-pending `C05-01-01`; its
-[approved natural-language blueprint](chapter05-first-order.md) receives no Lean coverage credit.
+The later [first-order](chapter05-first-order.md) and
+[local Gauss-series](chapter05-hypergeometric-series.md) slices are now independently accepted;
+their two additional claim-component credits do not belong to this historical Theorem 1.2 slice.

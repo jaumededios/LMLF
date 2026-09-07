@@ -23,6 +23,8 @@ globs = [
   "LMLF.Basic",
   "LMLF.Definitions",
   "LMLF.Definitions.Gamma",
+  "LMLF.Definitions.Hypergeometric",
+  "LMLF.ODE.LinearFirstOrder",
   "LMLF.ODE.LinearSecondOrder",
   "LMLF.ODE.FundamentalPair",
   "LMLF.ODE.Wronskian",
@@ -34,6 +36,8 @@ globs = [
 [[lean_lib]]
 name = "LMLFTest"
 globs = [
+  "LMLFTest.Definitions.Hypergeometric",
+  "LMLFTest.ODE.LinearFirstOrder",
   "LMLFTest.ODE.LinearSecondOrder",
   "LMLFTest.ODE.FundamentalPair",
   "LMLFTest.ODE.Wronskian",

@@ -13,6 +13,14 @@ consumers have passed acceptance. Root independently completed the full
 project build (2,768 jobs, exit 0), all 25 negative tests plus inventory
 validation, and standard-axiom-only checks for the public core and consumers.
 
+That is the historical acceptance record for the original Wronskian slice. A later accepted
+first-order integration preserved every public Wronskian signature, kept A1 and A4 direct, and
+changed only imports, removal of the duplicated private FTC helper, and the two A2 proof bodies.
+Those A2 formulas now consume the accepted first-order classification API. The current 209-line
+core has SHA-256 `5b7c5bd5a28f282f65cad32bcb13fc4acb7bc92f7f26c007c7032d3e7e4f380e`;
+the first-order code-referee report has SHA-256
+`47347470b9229e3ab47c33bf2a608399e3deb79145442886cacf04897506c449`.
+
 Source: Frank W. J. Olver, *Asymptotics and Special Functions*, corrected
 A K Peters reprint (1997) of the 1974 edition, Chapter 5, “Differential
 Equations with Regular Singularities; Hypergeometric and Legendre Functions.”
@@ -27,10 +35,10 @@ here. This chapter text is an original proof exposition.
 
 | Checklist component | Result in this blueprint | Lean status |
 |---|---|---|
-| `C05-01-08` | A1, Wronskian derivative | checked: [complex](../../LMLF/ODE/Wronskian.lean#L38), [real](../../LMLF/ODE/Wronskian.lean#L154) |
-| `C05-01-09` | A2, Abel basepoint formula | checked: [complex](../../LMLF/ODE/Wronskian.lean#L50), [real](../../LMLF/ODE/Wronskian.lean#L166) |
-| `C05-01-10` | A3, zero/nowhere-zero alternative | checked: [complex](../../LMLF/ODE/Wronskian.lean#L100), [real](../../LMLF/ODE/Wronskian.lean#L215) |
-| `C05-01-11` | A4, constant Wronskian when `f=0` | checked: [complex](../../LMLF/ODE/Wronskian.lean#L139), [real](../../LMLF/ODE/Wronskian.lean#L254) |
+| `C05-01-08` | A1, Wronskian derivative | checked: [complex](../../LMLF/ODE/Wronskian.lean#L26), [real](../../LMLF/ODE/Wronskian.lean#L118) |
+| `C05-01-09` | A2, Abel basepoint formula | checked: [complex](../../LMLF/ODE/Wronskian.lean#L38), [real](../../LMLF/ODE/Wronskian.lean#L130) |
+| `C05-01-10` | A3, zero/nowhere-zero alternative | checked: [complex](../../LMLF/ODE/Wronskian.lean#L64), [real](../../LMLF/ODE/Wronskian.lean#L156) |
+| `C05-01-11` | A4, constant Wronskian when `f=0` | checked: [complex](../../LMLF/ODE/Wronskian.lean#L103), [real](../../LMLF/ODE/Wronskian.lean#L195) |
 
 These are four claim components, not the whole of Theorem 1.2. In particular,
 this slice does not prove the initial-value theorem or the full equivalence
@@ -414,10 +422,16 @@ evidence. Hashes are SHA-256 values.
 | Independent addendum referee B report | `415f077d69aa2b08092808f58db73e7e4983be60791b5a93838d69c68ca1e5e9` |
 | A/B comparison report | `4a1e5a094b1f4a2a63d97b4e7f07a2f23a390c13d86f33eaf24728b3e4cdf716` |
 | Final integration-delta referee report | `83d1a686c55bf5d6370a04ae4439d2d36900e533e1f47936b0cb0698572ef11f` |
-| Accepted core Lean file | `091295aafbab1741be0dc4f27cadf14ee24d59f23d4e6811d653edaf11a43e9d` |
+| Originally accepted core Lean file | `091295aafbab1741be0dc4f27cadf14ee24d59f23d4e6811d653edaf11a43e9d` |
 | Accepted equation-consumer Lean file | `e989775024b550f136ae38484cd277aa178c5f679001b132faa5baee78713646` |
+| Current core after accepted first-order reuse migration | `5b7c5bd5a28f282f65cad32bcb13fc4acb7bc92f7f26c007c7032d3e7e4f380e` |
+| First-order reuse code-referee report | `47347470b9229e3ab47c33bf2a608399e3deb79145442886cacf04897506c449` |
 
 Both addendum referees approved the complex core, the fully quantified real
 corollaries, and both consumers without further mathematical amendment. The
 accepted implementation realizes exactly those four source components; it
 does not change the coverage boundary stated above.
+
+The original evidence hashes above remain the historical acceptance record. The later link and
+reuse updates on this page are not presented as a fresh independent review of the revised public
+bytes.

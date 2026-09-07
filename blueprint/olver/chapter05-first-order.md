@@ -2,9 +2,8 @@
 
 ## Status and source
 
-**Lean status: pending.** This document records the reviewed natural-language
-mathematics and proposed public API. It is not an implementation and does not
-change Chapter 5 coverage by itself.
+**Status: accepted.** The reviewed natural-language mathematics and Lean implementation close
+exactly `C05-01-01`. This is not a whole-numbered-theorem credit.
 
 Source: Frank W. J. Olver, *Asymptotics and Special Functions*, corrected
 A K Peters reprint (1997) of the 1974 edition, Chapter 5, printed p. 139
@@ -18,6 +17,24 @@ homogeneous scalar equation has the exponential-of-an-integral general
 solution. This is not a new whole numbered theorem. The explicit basepoint
 form, complex-valued real-time extension, API design, and Wronskian reuse add
 no further source credit.
+
+The accepted implementation artifacts have these SHA-256 digests:
+
+- [`LMLF/ODE/LinearFirstOrder.lean`](../../LMLF/ODE/LinearFirstOrder.lean), 123 lines:
+  `e182fb2b208144d8e71e1589637524e37792f98f077bbe3645eefb16062d6718`;
+- [`LMLFTest/ODE/LinearFirstOrder.lean`](../../LMLFTest/ODE/LinearFirstOrder.lean), 129 lines:
+  `9fd8f13d594da5c44644cfbe36b41b1217071f5bdaf58c0ca15dc0647bfaaf12`;
+- the migrated [`LMLF/ODE/Wronskian.lean`](../../LMLF/ODE/Wronskian.lean), 209 lines:
+  `5b7c5bd5a28f282f65cad32bcb13fc4acb7bc92f7f26c007c7032d3e7e4f380e`;
+- [`LMLF/Results.lean`](../../LMLF/Results.lean):
+  `e4b274c94e41c062f9ac8d54810c8d332dbe1a4cc9fadb1469395858df6c9676`.
+
+The fresh independent code-referee report has SHA-256
+`47347470b9229e3ab47c33bf2a608399e3deb79145442886cacf04897506c449` and accepted the exact four
+declarations, tests, and narrow Wronskian reuse without a finding. Root acceptance passed the full
+2,780-job build, inventory and all 25 negative fixtures, clean diagnostics for the three affected
+source files, and standard-axiom checks for 20 selected public declarations across the new and
+dependent ODE modules.
 
 The printed formula has the negative sign appropriate to
 
@@ -211,12 +228,18 @@ Derivative-zero constancy gives `E(x)=E(x₀)` throughout `I`; hence
 complex real-time solutions are classified by `c=w(x₀)`. This makes no claim
 about complex-time analytic ODEs. ∎
 
-## Reviewed public API
+## Accepted public API
 
-The proposed source-free module is `LMLF/ODE/LinearFirstOrder.lean`, in
-namespace `LMLF.ODE`. Its public surface is the following four reviewed
+The source-free module is [`LMLF/ODE/LinearFirstOrder.lean`](../../LMLF/ODE/LinearFirstOrder.lean),
+in namespace `LMLF.ODE`. Its public surface is the following four reviewed
 contracts: a solution witness and an `EqOn` classification theorem for each
 of `ℝ` and `ℂ`.
+
+The declarations are anchored at
+[`hasDerivAt_const_mul_exp_neg_integral`](../../LMLF/ODE/LinearFirstOrder.lean#L31),
+[`eqOn_const_mul_exp_neg_integral_of_hasDerivAt`](../../LMLF/ODE/LinearFirstOrder.lean#L45),
+[`hasDerivAt_const_mul_cexp_neg_integral`](../../LMLF/ODE/LinearFirstOrder.lean#L78), and
+[`eqOn_const_mul_cexp_neg_integral_of_hasDerivAt`](../../LMLF/ODE/LinearFirstOrder.lean#L92).
 
 ```lean
 theorem hasDerivAt_const_mul_exp_neg_integral
@@ -254,7 +277,7 @@ theorem eqOn_const_mul_cexp_neg_integral_of_hasDerivAt
       (fun x ↦ w x₀ * Complex.exp (-∫ t in x₀..x, a t)) I
 ```
 
-The compact-segment FTC helper should remain private. No generic
+The compact-segment FTC helper remains private. No generic
 Banach-algebra wrapper, packed solution structure, or broader ODE theory is
 part of this slice. A later equivalence wrapper is unnecessary unless actual
 call sites justify it.
@@ -271,12 +294,11 @@ multiplication and real/complex exponential rules,
 nonvanishing and negation identities. No matching public scalar
 classification theorem was found in the pinned project or Mathlib sources.
 
-## Narrow Wronskian extraction opportunity
+## Accepted Wronskian reuse
 
-After this module is implemented and accepted, the existing Abel formulas in
-`LMLF/ODE/Wronskian.lean` can become direct consumers. All current public
-Wronskian theorem names, binders, hypotheses, and conclusions must remain
-frozen.
+The existing Abel formulas in [`LMLF/ODE/Wronskian.lean`](../../LMLF/ODE/Wronskian.lean) are now
+direct consumers. All public Wronskian theorem names, binders, hypotheses, and conclusions remain
+unchanged.
 
 For the complex formula, `hasDerivAt_wronskian` already proves pointwise
 
@@ -300,8 +322,8 @@ only `ContinuousOn f I`, never continuity of `g`.
 The real proof is identical: `hasDerivAt_realWronskian` supplies
 `W_{\mathbb R}'=-fW_{\mathbb R}`, and the real `EqOn` theorem yields the
 existing `realWronskian_eq_mul_exp_integral` conclusion without changing any
-assumption or sign. The private compact-segment FTC helper in `Wronskian.lean`
-may be removed only after both A2 bodies have migrated successfully.
+assumption or sign. The duplicated private compact-segment FTC helper was removed after both A2
+bodies migrated successfully.
 
 A1 remains the direct determinant differentiation theorem. Complex and real
 A4 must also remain direct derivative-zero constancy proofs: routing A4
@@ -311,8 +333,7 @@ theorems and equation-specific consumers continue through the frozen A2
 signatures and require no mathematical change. Arbitrary first-order
 solutions must not be realized artificially as Wronskians.
 
-No Wronskian implementation or refactor is permitted until the concurrent
-Theorem 1.2 work has been published. Future numerical use is only a design
+No other Wronskian proof body or signature changed. Future numerical use is only a design
 consideration; this blueprint proposes no algorithm or stability result.
 
 ## Review provenance
@@ -326,3 +347,16 @@ identified in the review record by SHA-256 prefixes `4e623896…` and
 `dec4f381…`. The adaptation preserves the accepted four-statement
 mathematics, API contracts, attribution, source caveats, and dependency
 boundary while omitting packet-internal audit detail.
+
+That public pre-implementation blueprint had SHA-256
+`faf62b999c73bdfd9535e209d3c42a4c04ec0e1b77816bcc53673b2a9e9820ab`. The publication edits above
+record later accepted Lean evidence; they do not claim that the revised public bytes were the bytes
+read by the natural-language referees.
+
+## Coverage boundary
+
+- This slice adds exactly `C05-01-01`; §1 now has all `11/11` claim components checked.
+- The two §1 exercises remain unproved.
+- Current Chapter 5 claim-component coverage is `12/108 = 11.11%` after the separately accepted
+  local Gauss-series slice.
+- Whole numbered theorems remain `2/13 = 15.38%`; exercises remain `0/44 = 0%`.

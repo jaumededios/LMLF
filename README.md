@@ -13,7 +13,9 @@ starting with Chapter 5. See the [current direction](blueprint/current_direction
 the [Chapter 5 checklist](blueprint/olver/chapter05.md), the approved
 [Wronskian/Abel blueprint](blueprint/olver/chapter05-wronskians.md), and the accepted
 [global-IVP](blueprint/olver/chapter05-global-ivp.md) and
-[fundamental-pair](blueprint/olver/chapter05-fundamental-pairs.md) blueprints.
+[fundamental-pair](blueprint/olver/chapter05-fundamental-pairs.md) blueprints, the accepted
+[first-order blueprint](blueprint/olver/chapter05-first-order.md), and the accepted
+[local Gauss-series blueprint](blueprint/olver/chapter05-hypergeometric-series.md).
 The first accepted Lean slice checks exactly `C05-01-08`–`C05-01-11`: the
 Wronskian derivative, Abel identity, zero/nowhere-zero alternative, and
 constant-Wronskian corollary. The accepted Theorem 1.1 slice now also checks
@@ -21,8 +23,11 @@ constant-Wronskian corollary. The accepted Theorem 1.1 slice now also checks
 initial value and derivative, and infinitely many solutions. The accepted Theorem 1.2 slice checks
 `C05-01-04`--`C05-01-07`: interval-relative spanning and linear independence, the existing
 Wronskian definition, the full three-way equivalence, explicit Cramer representations, and the
-normalized canonical pair. Chapter 5 therefore stands at `10/108 = 9.26%` of the disclosed
-claim-component inventory, `2/13 = 15.38%` whole numbered theorems, and `0/44` exercises.
+normalized canonical pair. The accepted first-order slice completes `C05-01-01`, and the accepted
+local Gauss-series slice completes `C05-09-01`. Chapter 5 therefore stands at
+`12/108 = 11.11%` of the disclosed claim-component inventory, `2/13 = 15.38%` whole numbered
+theorems, and `0/44` exercises. All eleven claim components in §1 are now checked; its two
+exercises remain unproved.
 
 The [accepted global-IVP blueprint](blueprint/olver/chapter05-global-ivp.md) records the proof and
 its correspondence with the six public real/complex phase, `C²`, uniqueness, and infinitude
@@ -36,9 +41,19 @@ and its verification evidence. The implementation and focused consumers are in
 [`LMLF/ODE/FundamentalPair.lean`](LMLF/ODE/FundamentalPair.lean) and
 [`LMLFTest/ODE/FundamentalPair.lean`](LMLFTest/ODE/FundamentalPair.lean).
 
-The next target is `C05-01-01`, the first-order homogeneous scalar equation. Its
-[approved natural-language blueprint](blueprint/olver/chapter05-first-order.md) is ready, but its
-Lean implementation remains pending and earns no coverage credit yet.
+The accepted first-order implementation and tests are in
+[`LMLF/ODE/LinearFirstOrder.lean`](LMLF/ODE/LinearFirstOrder.lean) and
+[`LMLFTest/ODE/LinearFirstOrder.lean`](LMLFTest/ODE/LinearFirstOrder.lean). The accepted Abel
+formulas now consume the first-order classification API directly without changing their public
+statements.
+
+The accepted local-series implementation and tests are in
+[`LMLF/Definitions/Hypergeometric.lean`](LMLF/Definitions/Hypergeometric.lean) and
+[`LMLFTest/Definitions/Hypergeometric.lean`](LMLFTest/Definitions/Hypergeometric.lean).
+`C05-09-02` remains pending/partial: the regularized definition, coefficients, convergence, and
+origin value are present, but the all-parameter hypergeometric ODE is not. A separate private ODE
+proof packet has passed two independent mathematical reviews; its Lean implementation remains
+pending and earns no coverage credit.
 
 Both bounded A/B candidates were mathematically correct and built
 successfully. The Sol candidate was selected because it had cleaner public
@@ -79,7 +94,15 @@ Planning and review artifacts are kept explicit:
 
 - `LMLF/Basic.lean` provides narrow shared imports for foundational quantitative algebra.
 - `LMLF/Definitions/Gamma.lean` provides the four candidate wrappers around `Complex.Gamma`.
+- [`LMLF/Definitions/Hypergeometric.lean`](LMLF/Definitions/Hypergeometric.lean) provides the
+  accepted ordinary and regularized local Gauss-series API on the open unit disk.
+- [`LMLFTest/Definitions/Hypergeometric.lean`](LMLFTest/Definitions/Hypergeometric.lean) provides
+  its nonpublic coefficient, convergence, exceptional-parameter, and analyticity consumers.
 - `LMLF/Quantitative/Basic.lean` provides the eight candidate finite-error declarations.
+- [`LMLF/ODE/LinearFirstOrder.lean`](LMLF/ODE/LinearFirstOrder.lean) provides the accepted real and
+  complex exponential-of-an-integral solution and classification API.
+- [`LMLFTest/ODE/LinearFirstOrder.lean`](LMLFTest/ODE/LinearFirstOrder.lean) provides its nonpublic
+  multiplier, orientation, unbounded-interval, and `EqOn` consumers.
 - [`LMLF/ODE/Wronskian.lean`](LMLF/ODE/Wronskian.lean) provides the accepted real-variable
   Wronskian and Abel API for complex- and real-valued solutions.
 - [`LMLFTest/ODE/Wronskian.lean`](LMLFTest/ODE/Wronskian.lean) provides the nonpublic
