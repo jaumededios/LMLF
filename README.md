@@ -20,7 +20,8 @@ the [Chapter 5 checklist](blueprint/olver/chapter05.md), the approved
 accepted [exceptional-shift blueprint](blueprint/olver/chapter05-hypergeometric-exceptional-shift.md)
 and the accepted [local](blueprint/olver/chapter05-holomorphic-local-ivp.md) and
 [global](blueprint/olver/chapter05-holomorphic-global-ivp.md) holomorphic-IVP blueprints, and the
-accepted [principal Gauss blueprint](blueprint/olver/chapter05-hypergeometric-principal.md).
+accepted [principal Gauss blueprint](blueprint/olver/chapter05-hypergeometric-principal.md) and
+[principal-specialization blueprint](blueprint/olver/chapter05-hypergeometric-specializations.md).
 The first accepted Lean slice checks exactly `C05-01-08`–`C05-01-11`: the
 Wronskian derivative, Abel identity, zero/nowhere-zero alternative, and
 constant-Wronskian corollary. The accepted Theorem 1.1 slice now also checks
@@ -31,7 +32,8 @@ Wronskian definition, the full three-way equivalence, explicit Cramer representa
 normalized canonical pair. The accepted first-order slice completes `C05-01-01`, and the accepted
 local Gauss-series, ODE, and exceptional-shift slices complete `C05-09-01`--`C05-09-03`. The
 accepted holomorphic-IVP development completes `C05-03-01`, `C05-03-02`, and all of `T05-3.1`.
-Chapter 5 therefore stands at `16/108 = 14.81%` of the disclosed claim-component inventory,
+The accepted principal-specialization slice completes `C05-09-06`.
+Chapter 5 therefore stands at `17/108 = 15.74%` of the disclosed claim-component inventory,
 `3/13 = 23.08%` whole numbered theorems, and `0/44` exercises. All eleven claim components in §1
 are now checked; its two
 exercises remain unproved.
@@ -92,14 +94,18 @@ focused consumers are in
 It also proves the two principal exceptional-shift forms and both all-ambient early-termination
 zero theorems. This is partial progress on `C05-09-04`, whose row remains pending: continuation
 across interior points of the chosen cut, classification at `1` and infinity, and the qualified
-nonprincipal singularity statement at `0` remain unproved. The metrics therefore stay
-`16/108 = 14.81%`, `3/13 = 23.08%`, and `0/44`.
+nonprincipal singularity statement at `0` remain unproved.
 
-The next source task is `C05-09-06`: Olver's exact printed p. 160, §9.3 specialization
-`F(a,1;1;z) = (1-z)^(-a)`, including the `a = 1` geometric-series case. Its natural-language
-proof is currently being prepared and is not yet Lean-approved. A general `b = c` theorem is not
-required by the book statement, and no general parameter-infrastructure side project is part of
-this checkpoint.
+The accepted principal-specialization leaf proves `F(a,1;1;z)=(1-z)^(-a)` on the principal cut
+plane for every complex `a`, proves the regularized identity through the public Gamma quotient at
+`c=1`, and exposes the reciprocal specialization and its convergent geometric series on `‖z‖<1`.
+The implementation and focused consumers are in
+[`LMLF/Results/HypergeometricPrincipalSpecializations.lean`](LMLF/Results/HypergeometricPrincipalSpecializations.lean)
+and
+[`LMLFTest/Results/HypergeometricPrincipalSpecializations.lean`](LMLFTest/Results/HypergeometricPrincipalSpecializations.lean).
+This completes exactly `C05-09-06`; the general `b=c` identity is deferred, while `C05-09-04`,
+`C05-09-07`, and `C05-09-08` remain pending. The metrics are now `17/108 = 15.74%`,
+`3/13 = 23.08%`, and `0/44`.
 
 Both bounded A/B candidates were mathematically correct and built
 successfully. The Sol candidate was selected because it had cleaner public
@@ -162,6 +168,11 @@ Planning and review artifacts are kept explicit:
   [`LMLFTest/Results/HypergeometricPrincipal.lean`](LMLFTest/Results/HypergeometricPrincipal.lean)
   provide the accepted principal exceptional shifts, global early-termination consequences, and
   their focused consumers.
+- [`LMLF/Results/HypergeometricPrincipalSpecializations.lean`](LMLF/Results/HypergeometricPrincipalSpecializations.lean)
+  and
+  [`LMLFTest/Results/HypergeometricPrincipalSpecializations.lean`](LMLFTest/Results/HypergeometricPrincipalSpecializations.lean)
+  provide the accepted principal `F(a,1;1;z)` and geometric specializations and their focused
+  consumers, without depending on the exceptional-parameter results leaf.
 - `LMLF/Quantitative/Basic.lean` provides the eight candidate finite-error declarations.
 - [`LMLF/ODE/LinearFirstOrder.lean`](LMLF/ODE/LinearFirstOrder.lean) provides the accepted real and
   complex exponential-of-an-integral solution and classification API.

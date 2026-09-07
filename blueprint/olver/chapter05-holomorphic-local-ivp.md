@@ -443,8 +443,9 @@ the full arbitrary-universe, arbitrary-basepoint, whole-ball contract. The named
 specializes to the zero coefficient and uses the public uniqueness clause to identify the returned
 solution with the constant function.
 
-Current Chapter 5 coverage is **16/108 = 14.81% claim components, 3/13 = 23.08% whole numbered
-theorems, and 0/44 = 0% exercises**. The completed global and scalar development checks exactly
+At the historical principal-Gauss checkpoint `18531f4`, Chapter 5 coverage was **16/108 = 14.81%
+claim components, 3/13 = 23.08% whole numbered theorems, and 0/44 = 0% exercises**; see the
+[Chapter 5 checklist](chapter05.md) for current totals. The completed global and scalar development checks exactly
 `C05-03-01`, `C05-03-02`, and all of `T05-3.1`; the disk lemma is an independently useful public
 analytic seam but earns no additional source credit.
 

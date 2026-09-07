@@ -357,5 +357,6 @@ read by the natural-language referees.
 
 - This slice adds exactly `C05-01-01`; §1 now has all `11/11` claim components checked.
 - The two §1 exercises remain unproved.
-- Current Chapter 5 claim-component coverage is `16/108 = 14.81%`.
-- Whole numbered theorems are now `3/13 = 23.08%`; exercises remain `0/44 = 0%`.
+- At the historical principal-Gauss checkpoint `18531f4`, Chapter 5 coverage was
+  `16/108 = 14.81%` claim components, `3/13 = 23.08%` whole numbered theorems, and
+  `0/44 = 0%` exercises. See the [Chapter 5 checklist](chapter05.md) for current totals.

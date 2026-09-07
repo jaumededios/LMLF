@@ -61,10 +61,9 @@ The accepted scope is deliberately local.
   ODE API to check `C05-09-03`; that additional credit does not belong to this historical slice.
 
 This historical slice itself added exactly one claim component; the separately accepted ODE slice
-and exceptional-shift slice add two more. Current Chapter 5 coverage is
-`16/108 = 14.81%` claim components,
-`3/13 = 23.08%` whole numbered theorems, and
-`0/44 = 0%` exercises.
+and exceptional-shift slice add two more. At the historical principal-Gauss checkpoint `18531f4`,
+Chapter 5 coverage was `16/108 = 14.81%` claim components, `3/13 = 23.08%` whole numbered
+theorems, and `0/44 = 0%` exercises. See the [Chapter 5 checklist](chapter05.md) for current totals.
 
 ## Local objects and totalization discipline
 

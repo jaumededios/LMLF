@@ -495,9 +495,9 @@ nonvanishing Wronskian, not the full three-way equivalence of Theorem 1.2.
 
 - Natural-language mathematics completed here: `C05-01-02` and `C05-01-03`.
 - Checked Lean coverage: `C05-01-02`, `C05-01-03`, and the whole of `T05-1.1`.
-- Current Chapter 5 checked claim-component count: `16/108 = 14.81%`.
-- Current whole-numbered-theorem count: `3/13 = 23.08%`.
-- Current exercise count: `0/44 = 0%`.
+- At the historical principal-Gauss checkpoint `18531f4`, Chapter 5 coverage was
+  `16/108 = 14.81%` claim components, `3/13 = 23.08%` whole numbered theorems, and
+  `0/44 = 0%` exercises. See the [Chapter 5 checklist](chapter05.md) for current totals.
 - Theorem 1.2 is now independently accepted and documented in the
   [fundamental-pair blueprint](chapter05-fundamental-pairs.md); none of its additional credit is
   claimed by this historical Theorem 1.1 slice.

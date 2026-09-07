@@ -543,8 +543,9 @@ plane, or about continuation of a named Gauss function.
 | downstream reuse only | normalized regularized Gauss equation on a punctured subdomain of the unit disk | [`regularizedGauss_reuses_holomorphicSecondOrderLinearIVP`](../../LMLFTest/ODE/HolomorphicSecondOrder.lean#L30) |
 
 The accepted source-to-natural-language-to-Lean chain checks exactly `C05-03-01`, `C05-03-02`,
-and all of `T05-3.1`. Current Chapter 5 coverage is **16/108 = 14.81% claim components, 3/13 =
-23.08% whole numbered theorems, and 0/44 = 0% exercises**. The 108-component denominator retains
+and all of `T05-3.1`. At the historical principal-Gauss checkpoint `18531f4`, Chapter 5 coverage
+was **16/108 = 14.81% claim components, 3/13 = 23.08% whole numbered theorems, and 0/44 = 0%
+exercises**; see the [Chapter 5 checklist](chapter05.md) for current totals. The 108-component denominator retains
 the disclosed editorial bundling rule; this development does not alter any denominator.
 
 The development does not prove the complex-domain fundamental-pair/Wronskian extension

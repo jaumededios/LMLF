@@ -433,9 +433,9 @@ Wronskian, or duplicate Abel proof.
 Natural-language and checked Lean scope completed here is `C05-01-04`--`C05-01-07`, including all
 of Theorem 1.2:
 
-- claim components: `16/108 = 14.81%`;
-- whole numbered theorems: `3/13 = 23.08%`;
-- exercises: `0/44 = 0%`.
+- at the historical principal-Gauss checkpoint `18531f4`, claim components were
+  `16/108 = 14.81%`, whole numbered theorems were `3/13 = 23.08%`, and exercises were
+  `0/44 = 0%`. See the [Chapter 5 checklist](chapter05.md) for current totals.
 
 The later [first-order](chapter05-first-order.md),
 [local Gauss-series](chapter05-hypergeometric-series.md),

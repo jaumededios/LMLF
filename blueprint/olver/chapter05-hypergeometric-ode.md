@@ -304,9 +304,10 @@ theorems. Those axiom checks reported only `propext`, `Classical.choice`, and `Q
 referee independently passed a 2,803-job affected build and clean local checks. All recorded tests
 were local; no CI was run.
 
-This slice adds exactly `C05-09-02`. Current Chapter 5 coverage is
-`16/108 = 14.81%` claim components, `3/13 = 23.08%` whole numbered theorems, and
-`0/44 = 0%` exercises. No §8 component, numbered theorem, or exercise receives credit from this
+This slice adds exactly `C05-09-02`. At the historical principal-Gauss checkpoint `18531f4`,
+Chapter 5 coverage was `16/108 = 14.81%` claim components, `3/13 = 23.08%` whole numbered
+theorems, and `0/44 = 0%` exercises; see the [Chapter 5 checklist](chapter05.md) for current totals.
+No §8 component, numbered theorem, or exercise receives credit from this
 slice. It supplies no analytic continuation, cut-plane or boundary values, parameter analyticity,
 transformation formulas, or numerics. The later accepted
 [exceptional-shift slice](chapter05-hypergeometric-exceptional-shift.md) checks `C05-09-03`; that

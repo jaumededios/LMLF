@@ -37,6 +37,7 @@ globs = [
   "LMLF.Results",
   "LMLF.Results.Hypergeometric",
   "LMLF.Results.HypergeometricPrincipal",
+  "LMLF.Results.HypergeometricPrincipalSpecializations",
   "LMLF.Audit.Definitions",
 ]
 
@@ -55,6 +56,7 @@ globs = [
   "LMLFTest.ODE.Wronskian",
   "LMLFTest.Results.Hypergeometric",
   "LMLFTest.Results.HypergeometricPrincipal",
+  "LMLFTest.Results.HypergeometricPrincipalSpecializations",
   "LMLFTest.Integral.Improper.IMP001PublicUse",
   "LMLFTest.Integral.Improper.IMP001Regressions",
   "LMLFTest.Integral.Improper.IMP001EndpointAE",

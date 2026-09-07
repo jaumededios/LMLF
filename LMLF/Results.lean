@@ -11,6 +11,7 @@ import LMLF.ODE.Wronskian
 import LMLF.Quantitative.Basic
 import LMLF.Results.Hypergeometric
 import LMLF.Results.HypergeometricPrincipal
+import LMLF.Results.HypergeometricPrincipalSpecializations
 
 /-!
 # LMLF.Results

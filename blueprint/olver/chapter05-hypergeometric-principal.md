@@ -64,11 +64,10 @@ there is no proposed general `z=1` value theorem: that point is outside the prin
 belongs to a later checkpoint. The ambient fallback below merely leaves that checkpoint possible.
 The single terminating compatibility check at `z=1` earns no `C05-09-08` credit.
 
-The current published Chapter 5 coverage therefore remains
-`16/108 = 14.81%` claim components,
-`3/13 = 23.08%` whole numbered theorems, and
-`0/44 = 0%` exercises. This accepted partial milestone does not change any coverage count or
-complete source row `C05-09-04`.
+At the historical principal-Gauss checkpoint `18531f4`, Chapter 5 coverage was
+`16/108 = 14.81%` claim components, `3/13 = 23.08%` whole numbered theorems, and
+`0/44 = 0%` exercises. This accepted partial milestone did not change any coverage count or
+complete source row `C05-09-04`. See the [Chapter 5 checklist](chapter05.md) for current totals.
 
 ## 1. The principal domain and its three-chart cover
 
