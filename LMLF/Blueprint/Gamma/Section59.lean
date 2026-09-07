@@ -1,4 +1,5 @@
 import LMLF.Definitions.Gamma
+import LMLF.Integral.Curve
 import Mathlib.Analysis.SpecialFunctions.Gamma.Digamma
 import Mathlib.MeasureTheory.Integral.IntervalIntegral.Basic
 import Mathlib.NumberTheory.LSeries.RiemannZeta
@@ -24,24 +25,6 @@ noncomputable def complexSegmentIntegral (f : ℂ → ℂ) (a b : ℂ) : ℂ :=
   (b - a) * ∫ u in (0 : ℝ)..1, f (a + (u : ℂ) * (b - a))
 -- ANCHOR_END: complexSegmentIntegral
 
-/-- DLMF 5.9.2. A finite Hankel contour with explicit continuous branch arguments:
-the lower bank uses `-π`, the circle runs through `-π ≤ θ ≤ π`, and the upper bank uses `+π`. -/
--- ANCHOR: hankelTruncation
-noncomputable def hankelTruncation (z : ℂ) (R ε : ℝ) : ℂ :=
-  ∫ r in R..ε,
-      Complex.exp ((r : ℂ) * Complex.exp (-(Real.pi : ℂ) * Complex.I)) *
-        Complex.exp (-z * ((Real.log r : ℂ) - (Real.pi : ℂ) * Complex.I)) *
-        Complex.exp (-(Real.pi : ℂ) * Complex.I) +
-    ∫ θ in (-Real.pi)..Real.pi,
-      Complex.exp ((ε : ℂ) * Complex.exp ((θ : ℂ) * Complex.I)) *
-        Complex.exp (-z * ((Real.log ε : ℂ) + (θ : ℂ) * Complex.I)) *
-        ((ε : ℂ) * Complex.I * Complex.exp ((θ : ℂ) * Complex.I)) +
-    ∫ r in ε..R,
-      Complex.exp ((r : ℂ) * Complex.exp ((Real.pi : ℂ) * Complex.I)) *
-        Complex.exp (-z * ((Real.log r : ℂ) + (Real.pi : ℂ) * Complex.I)) *
-      Complex.exp ((Real.pi : ℂ) * Complex.I)
--- ANCHOR_END: hankelTruncation
-
 /-- DLMF 5.9.1. Generalized Euler integral, including absolute convergence. -/
 -- ANCHOR: dlmf_5_9_1
 theorem dlmf_5_9_1 {z ν : ℂ} {μ : ℝ} (hμ : 0 < μ) (hν : 0 < ν.re) (hz : 0 < z.re) :
@@ -54,15 +37,14 @@ theorem dlmf_5_9_1 {z ν : ℂ} {μ : ℝ} (hμ : 0 < μ) (hν : 0 < ν.re) (hz 
 -- ANCHOR_END: dlmf_5_9_1
 := by sorry
 
-/-- DLMF 5.9.2. Hankel's loop integral, with both limiting processes explicit. -/
+/-- DLMF 5.9.2. Hankel's loop integral. The logarithm is lifted
+continuously along the contour, so `t⁻ᶻ` has the intended two bank values. -/
 -- ANCHOR: dlmf_5_9_2
 theorem dlmf_5_9_2 (z : ℂ) :
-    ∃ outer : ℝ → ℂ,
-      (∀ ε > 0,
-        Tendsto (fun R : ℝ ↦ hankelTruncation z R ε)
-          atTop (nhds (outer ε))) ∧
-      Tendsto outer (nhdsWithin 0 (Ioi 0))
-        (nhds (2 * Real.pi * Complex.I / Complex.Gamma z))
+    LMLF.Integral.HasHankelRepresentation
+      (fun t logt => Complex.exp t * Complex.exp (-z * logt))
+      (1 / (2 * Real.pi * Complex.I))
+      (1 / Complex.Gamma z)
 -- ANCHOR_END: dlmf_5_9_2
 := by sorry
 

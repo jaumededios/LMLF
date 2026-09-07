@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-09-07T01:37:56+00:00",
+  "generated_at": "2026-09-07T03:58:14+00:00",
   "source": {
     "name": "NIST Digital Library of Mathematical Functions",
     "base_url": "https://dlmf.nist.gov",
@@ -32,7 +32,7 @@
     "5": {
       "formulas": 169,
       "lean_statements": 160,
-      "lean_proofs": 1,
+      "lean_proofs": 2,
       "quantitative_statements": 3,
       "quantitative_proofs": 0
     },
@@ -11108,8 +11108,8 @@
       "lean_statement": true,
       "lean_proof": true,
       "lean_declarations": [
-        "LMLF.Definitions.gamma_eq_eulerIntegral",
-        "LMLF.Definitions.gamma_eulerIntegrable"
+        "LMLF.Definitions.gamma_eulerIntegrable",
+        "LMLF.Definitions.gamma_eq_eulerIntegral"
       ],
       "quantitative_analogue": false,
       "quantitative_statement": false,
@@ -12292,13 +12292,27 @@
       "lean_statement": true,
       "lean_proof": false,
       "lean_declarations": [
+        "LMLF.Integral.C1Contour",
+        "LMLF.Integral.C1Contour.integral",
+        "LMLF.Integral.LogLiftedC1Contour",
+        "LMLF.Integral.LogLiftedC1Contour.integral",
+        "LMLF.Integral.HankelRadii",
+        "LMLF.Integral.hankelLowerBank_spec",
+        "LMLF.Integral.hankelInnerCircle_spec",
+        "LMLF.Integral.hankelUpperBank_spec",
+        "LMLF.Integral.HankelContour",
+        "LMLF.Integral.hankelContour",
+        "LMLF.Integral.HankelContour.integral",
+        "LMLF.Integral.HankelContour.Integrable",
+        "LMLF.Integral.HasHankelIntegral",
+        "LMLF.Integral.HasHankelRepresentation",
         "LMLF.Blueprint.Gamma.Section59.dlmf_5_9_2"
       ],
       "quantitative_analogue": false,
       "quantitative_statement": false,
       "quantitative_proof": false,
       "quantitative_declarations": [],
-      "notes": "Branch-aware finite Hankel contour: lower and upper banks use continuous arguments -π and +π."
+      "notes": "The reusable API specifies the lower bank, counterclockwise inner circle, upper bank, their ±π logarithm lifts, and admissible radii. HasHankelIntegral requires integrability on every finite three-piece contour and records the outer-radius limit followed by the inner-radius limit; HasHankelRepresentation preserves the source normalization 1/Γ(z) = (1/(2πi)) integral."
     },
     {
       "dlmf_id": "5.9.E2_5",
@@ -12748,18 +12762,24 @@
       "lean_statement": true,
       "lean_proof": false,
       "lean_declarations": [
-        "LMLF.Blueprint.Gamma.Section510.continuedFractionTail",
-        "LMLF.Blueprint.Gamma.Section510.continuedFractionConvergent",
-        "LMLF.Blueprint.Gamma.Section510.exists_gammaContinuedFractionCoeff",
+        "LMLF.continuedFraction",
+        "LMLF.continuedFractionConvergent",
+        "LMLF.CFCoefficients",
+        "LMLF.cfracCoeff",
+        "LMLF.formalContinuedFraction_cfracCoeff",
+        "LMLF.cfracCoeff_unique",
+        "LMLF.Blueprint.Gamma.Section510.logGammaStirlingSeries",
         "LMLF.Blueprint.Gamma.Section510.gammaContinuedFractionCoeff",
-        "LMLF.Blueprint.Gamma.Section510.gammaContinuedFractionCoeff_spec",
+        "LMLF.Blueprint.Gamma.Section510.gammaContinuedFractionCoeff_regular",
+        "LMLF.Blueprint.Gamma.Section510.gammaContinuedFraction_reconstructs_stirling",
+        "LMLF.Blueprint.Gamma.Section510.gammaContinuedFractionCoeff_unique",
         "LMLF.Blueprint.Gamma.Section510.dlmf_5_10_1"
       ],
       "quantitative_analogue": false,
       "quantitative_statement": false,
       "quantitative_proof": false,
       "quantitative_declarations": [],
-      "notes": "Positive-real specialization of the source condition Re z > 0; finite convergents make the continued fraction's limit explicit. A proof-pending existential supplies the full coefficient sequence and its convergence; the reader-facing sequence is its Classical.choose."
+      "notes": "Positive-real specialization of the source condition Re z > 0. The reusable evaluator has an optional tail offset. A canonical executable map extracts a zero-terminated numerator stream from the odd Stirling germ; reconstruction and uniqueness are stated separately from analytic convergence."
     },
     {
       "dlmf_id": "5.10.E2",
@@ -12770,18 +12790,22 @@
       "source_url": "https://dlmf.nist.gov/5.10.E2",
       "match": "exact",
       "lean_statement": true,
-      "lean_proof": false,
+      "lean_proof": true,
       "lean_declarations": [
-        "LMLF.Blueprint.Gamma.Section510.exists_gammaContinuedFractionCoeff",
+        "LMLF.ZeroTerminated",
+        "LMLF.CFCoefficients",
+        "LMLF.cfracCoeff",
+        "LMLF.cfracCoeff_congr_prefix",
+        "LMLF.Blueprint.Gamma.Section510.logGammaStirlingSeries",
         "LMLF.Blueprint.Gamma.Section510.gammaContinuedFractionCoeff",
-        "LMLF.Blueprint.Gamma.Section510.gammaContinuedFractionCoeff_spec",
+        "LMLF.Blueprint.Gamma.Section510.gammaContinuedFractionCoeff_algorithm",
         "LMLF.Blueprint.Gamma.Section510.dlmf_5_10_2"
       ],
       "quantitative_analogue": false,
       "quantitative_statement": false,
       "quantitative_proof": false,
       "quantitative_declarations": [],
-      "notes": "The seven displayed coefficients are kept as one grouped source record; later coefficients are present in the existential full sequence because §5.10 refers to external tables for them."
+      "notes": "The seven displayed coefficients are one grouped source record and are proved by native evaluation of the Bernoulli-series extraction algorithm. The finite-prefix theorem shows how every later requested coefficient is computable."
     },
     {
       "dlmf_id": "5.11.E1",

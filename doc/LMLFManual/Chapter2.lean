@@ -1,5 +1,6 @@
 import VersoManual
 import Verso.Code.External
+import LMLF.Definitions.ContinuedFraction
 import LMLF.Quantitative.Series
 import LMLFManual.Components
 
@@ -120,3 +121,131 @@ def HasExpansionError
   ∀ n, ErrorOn (D n) f (seriesPartialSum term (n + 1)) (bound n)
 ```
 :::
+
+# 2.3 Normalized continued fractions
+%%%
+number := false
+%%%
+
+A continued fraction has two different lives in LMLF. Its finite convergents
+are ordinary values, used in analytic convergence theorems. Its coefficient
+extraction is instead performed on a formal asymptotic germ, where every
+requested coefficient can be computed from a finite prefix.
+
+The evaluator starts at coefficient zero. The optional `offset` selects a tail;
+readers do not have to supply it in the usual case. Its `n`th convergent uses
+numerators `offset` through `offset + n`.
+
+:::leanStatement "Lean · finite continued fractions"
+```anchor continuedFraction (module := LMLF.Definitions.ContinuedFraction) -showProofStates
+def continuedFraction {K : Type*} [DivisionRing K]
+    (denominator numerator : ℕ → K) (depth : ℕ) (offset : ℕ := 0) : K :=
+  continuedFractionFrom denominator numerator offset depth
+```
+
+```anchor continuedFractionConvergent (module := LMLF.Definitions.ContinuedFraction) -showProofStates
+def continuedFractionConvergent {K : Type*} [DivisionRing K]
+    (denominator numerator : ℕ → K) (n : ℕ) (offset : ℕ := 0) : K :=
+  continuedFraction denominator numerator (n + 1) (offset := offset)
+```
+:::
+
+Normalized coefficients form a subtype. Its invariant says exactly that a
+zero numerator terminates the fraction: all later numerators are also zero.
+This convention matters because coefficients after the first zero cannot be
+recovered from the value of a continued fraction.
+
+:::leanStatement "Lean · normalized coefficient streams"
+```anchor ZeroTerminated (module := LMLF.Definitions.ContinuedFraction) -showProofStates
+def ZeroTerminated {K : Type} [Zero K] (a : ℕ → K) : Prop :=
+  ∀ k, a k = 0 → ∀ j, k ≤ j → a j = 0
+```
+
+```anchor CFCoefficients (module := LMLF.Definitions.ContinuedFraction) -showProofStates
+abbrev CFCoefficients (K : Type := ℚ) [Zero K] :=
+  {a : ℕ → K // ZeroTerminated a}
+```
+:::
+
+The extraction itself repeatedly takes the normalized reciprocal of the
+current residual series. Its constant coefficient is the next numerator, and
+the remaining coefficients form the next residual. All operations below are
+finite rational arithmetic. If a nonzero residual has zero constant term, the
+algorithm returns the terminating zero stream; the reconstruction and
+uniqueness theorems deliberately exclude exactly that case through
+`CFracRegular`.
+
+:::leanStatement "Lean · executable triangular extraction"
+```anchor normalizedReciprocalCoeff (module := LMLF.Definitions.ContinuedFraction) -showProofStates
+def normalizedReciprocalCoeff (s : OddAsymptoticSeries) : ℕ → ℚ
+  | 0 => 1
+  | n + 1 =>
+      if s 0 = 0 then 0
+      else
+        -(∑ i ∈ Finset.range (n + 1),
+            s (i + 1) * normalizedReciprocalCoeff s (n - i)) / s 0
+termination_by n => n
+decreasing_by omega
+```
+
+```anchor cfracStep (module := LMLF.Definitions.ContinuedFraction) -showProofStates
+def cfracStep (s : OddAsymptoticSeries) : OddAsymptoticSeries :=
+  fun n => normalizedReciprocalCoeff s (n + 1)
+```
+
+```anchor cfracRemainder (module := LMLF.Definitions.ContinuedFraction) -showProofStates
+def cfracRemainder (s : OddAsymptoticSeries) : ℕ → OddAsymptoticSeries
+  | 0 => s
+  | k + 1 => cfracStep (cfracRemainder s k)
+```
+
+```anchor cfracCoeffValue (module := LMLF.Definitions.ContinuedFraction) -showProofStates
+def cfracCoeffValue (s : OddAsymptoticSeries) (k : ℕ) : ℚ :=
+  if ∃ j ≤ k, cfracCoeffRaw s j = 0 then 0 else cfracCoeffRaw s k
+```
+:::
+
+For an odd germ
+$$`z^{-1}(s_0+s_1z^{-2}+s_2z^{-4}+\cdots),`
+`cfracCoeff s` is the canonical normalized coefficient stream. The algorithm
+is triangular and executable over the rationals. Under the regularity
+condition shown below, its continued fraction reconstructs the germ, and it is
+the only normalized coefficient stream that does so.
+
+:::leanStatement "Lean · extraction, reconstruction, and uniqueness"
+```anchor CFracRegular (module := LMLF.Definitions.ContinuedFraction) -showProofStates
+def CFracRegular (s : OddAsymptoticSeries) : Prop :=
+  ∀ k, cfracCoeffRaw s k = 0 → cfracRemainder s k = 0
+```
+
+```anchor cfracCoeff (module := LMLF.Definitions.ContinuedFraction) -showProofStates
+def cfracCoeff (s : OddAsymptoticSeries) : CFCoefficients :=
+  ⟨cfracCoeffValue s, cfracCoeffValue_zeroTerminated s⟩
+```
+
+```anchor formalContinuedFraction_cfracCoeff (module := LMLF.Definitions.ContinuedFraction) -showProofStates
+theorem formalContinuedFraction_cfracCoeff
+    (s : OddAsymptoticSeries) (hs : CFracRegular s) :
+    formalContinuedFraction (cfracCoeff s) = PowerSeries.mk s
+```
+
+```anchor cfracCoeff_unique (module := LMLF.Definitions.ContinuedFraction) -showProofStates
+theorem cfracCoeff_unique
+    (s : OddAsymptoticSeries) (a : CFCoefficients)
+    (hs : CFracRegular s)
+    (h : formalContinuedFraction a = PowerSeries.mk s) :
+    a = cfracCoeff s
+```
+
+```anchor cfracCoeff_congr_prefix (module := LMLF.Definitions.ContinuedFraction) -showProofStates
+theorem cfracCoeff_congr_prefix
+    (s t : OddAsymptoticSeries) (k : ℕ)
+    (h : ∀ n ≤ k, s n = t n) :
+    cfracCoeff s k = cfracCoeff t k
+```
+:::
+
+This is not a claim that every holomorphic function has a unique continued
+fraction. The canonical map applies to the normalized formal germ used by the
+special-function theorem; analytic equality with the function is a separate
+convergence statement.

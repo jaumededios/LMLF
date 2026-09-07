@@ -59,7 +59,17 @@
   "numbered_formula_ids_omitted": [],
   "extra_statement_ids": [
     "complexSegmentIntegral",
-    "hankelTruncation",
+    "C1Contour",
+    "LogLiftedC1Contour",
+    "HankelRadii",
+    "hankelLowerBank_spec",
+    "hankelInnerCircle_spec",
+    "hankelUpperBank_spec",
+    "HankelContour",
+    "hankelContour",
+    "HankelContour.integral",
+    "HasHankelIntegral",
+    "HasHankelRepresentation",
     "temmePhase",
     "verticalLineIntegral",
     "scaledGamma"
@@ -78,12 +88,26 @@
     {
       "source_id": "5.9.E2",
       "names": [
+        "LMLF.Integral.C1Contour",
+        "LMLF.Integral.C1Contour.integral",
+        "LMLF.Integral.LogLiftedC1Contour",
+        "LMLF.Integral.LogLiftedC1Contour.integral",
+        "LMLF.Integral.HankelRadii",
+        "LMLF.Integral.hankelLowerBank_spec",
+        "LMLF.Integral.hankelInnerCircle_spec",
+        "LMLF.Integral.hankelUpperBank_spec",
+        "LMLF.Integral.HankelContour",
+        "LMLF.Integral.hankelContour",
+        "LMLF.Integral.HankelContour.integral",
+        "LMLF.Integral.HankelContour.Integrable",
+        "LMLF.Integral.HasHankelIntegral",
+        "LMLF.Integral.HasHankelRepresentation",
         "LMLF.Blueprint.Gamma.Section59.dlmf_5_9_2"
       ],
       "relation": "exact",
       "proof_status": "missing",
       "quantitative_analogue": "not_applicable",
-      "notes": "Branch-aware finite Hankel contour: lower and upper banks use continuous arguments -π and +π."
+      "notes": "The reusable API specifies the lower bank, counterclockwise inner circle, upper bank, their ±π logarithm lifts, and admissible radii. HasHankelIntegral requires integrability on every finite three-piece contour and records the outer-radius limit followed by the inner-radius limit; HasHankelRepresentation preserves the source normalization 1/Γ(z) = (1/(2πi)) integral."
     },
     {
       "source_id": "5.9.E2_5",
@@ -317,7 +341,7 @@
     }
   ],
   "shared_vocabulary_requests": [
-    "Consolidate straight-segment, finite Hankel-contour, and vertical-line integration vocabulary if another section needs the same constructions.",
+    "Consolidate straight-segment and vertical-line integration vocabulary with the reusable contour interface.",
     "Consolidate the scaled Gamma normalization with §5.11 when that section receives a complex-variable treatment."
   ],
   "known_gaps": [

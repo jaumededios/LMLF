@@ -45,33 +45,86 @@ theorem dlmf_5_9_1 {z ν : ℂ} {μ : ℝ} (hμ : 0 < μ) (hν : 0 < ν.re) (hz 
 ::::dlmfEntry "5.9.2" "https://dlmf.nist.gov/5.9.E2"
 $$`\frac{1}{\Gamma\left(z\right)}=\frac{1}{2\pi i}\int_{-\infty}^{(0+)}e^{t}t^{-z }\,\mathrm{d}t,`
 
-The Lean statement makes Hankel convergence explicit: first the finite loop grows to infinity at fixed inner radius, then that radius tends to zero. `hankelTruncation` fixes the orientation and carries the continuous branch argument explicitly: the lower bank uses `-π`, the circle uses `θ ∈ [-π,π]`, and the upper bank uses `+π`.
+The contour starts at $`-\infty` below the negative real axis, circles the
+origin counterclockwise, and returns to $`-\infty` above the cut. Along it,
+$`t^{-z}` means $`\exp(-z\operatorname{Log}_\gamma t)`, where
+$`\operatorname{Log}_\gamma` is the continuously selected logarithm carried
+by the contour.
 
-:::leanStatement "Lean statement"
-```anchor hankelTruncation (module := LMLF.Blueprint.Gamma.Section59) -showProofStates
-noncomputable def hankelTruncation (z : ℂ) (R ε : ℝ) : ℂ :=
-  ∫ r in R..ε,
-      Complex.exp ((r : ℂ) * Complex.exp (-(Real.pi : ℂ) * Complex.I)) *
-        Complex.exp (-z * ((Real.log r : ℂ) - (Real.pi : ℂ) * Complex.I)) *
-        Complex.exp (-(Real.pi : ℂ) * Complex.I) +
-    ∫ θ in (-Real.pi)..Real.pi,
-      Complex.exp ((ε : ℂ) * Complex.exp ((θ : ℂ) * Complex.I)) *
-        Complex.exp (-z * ((Real.log ε : ℂ) + (θ : ℂ) * Complex.I)) *
-        ((ε : ℂ) * Complex.I * Complex.exp ((θ : ℂ) * Complex.I)) +
-    ∫ r in ε..R,
-      Complex.exp ((r : ℂ) * Complex.exp ((Real.pi : ℂ) * Complex.I)) *
-        Complex.exp (-z * ((Real.log r : ℂ) + (Real.pi : ℂ) * Complex.I)) *
-      Complex.exp ((Real.pi : ℂ) * Complex.I)
+The reusable §3.6 contour interface makes those choices formal. Its finite
+contour has admissible radii $`0<\varepsilon<R`, three separately C¹ pieces,
+and an explicit lift on each piece. The first disclosure records the actual
+lower bank, counterclockwise circle, and upper bank formulas. The second
+records finite integrability and the ordered limits $`R\to\infty` followed by
+$`\varepsilon\to0^+`.
+
+:::leanStatement "Lean · the finite Hankel contour"
+```anchor hankelLowerBank_spec (module := LMLF.Integral.Curve) -showProofStates
+theorem hankelLowerBank_spec (ρ : HankelRadii) :
+    (∀ u, (hankelLowerBank ρ).point u =
+      -((ρ.outer + u * (ρ.inner - ρ.outer) : ℝ) : ℂ)) ∧
+    (∀ u, (hankelLowerBank ρ).tangent u =
+      ((ρ.outer - ρ.inner : ℝ) : ℂ)) ∧
+    (∀ u, (hankelLowerBank ρ).logLift u =
+      Real.log (ρ.outer + u * (ρ.inner - ρ.outer)) - Real.pi * Complex.I)
 ```
 
+```anchor hankelInnerCircle_spec (module := LMLF.Integral.Curve) -showProofStates
+theorem hankelInnerCircle_spec (ρ : HankelRadii) :
+    (∀ u, (hankelInnerCircle ρ).point u =
+      (ρ.inner : ℂ) *
+        Complex.exp (((-Real.pi + 2 * Real.pi * u : ℝ) : ℂ) * Complex.I)) ∧
+    (∀ u, (hankelInnerCircle ρ).tangent u =
+      (ρ.inner : ℂ) *
+        Complex.exp (((-Real.pi + 2 * Real.pi * u : ℝ) : ℂ) * Complex.I) *
+        ((2 * Real.pi : ℝ) : ℂ) * Complex.I) ∧
+    (∀ u, (hankelInnerCircle ρ).logLift u =
+      Real.log ρ.inner +
+        ((-Real.pi + 2 * Real.pi * u : ℝ) : ℂ) * Complex.I)
+```
+
+```anchor hankelUpperBank_spec (module := LMLF.Integral.Curve) -showProofStates
+theorem hankelUpperBank_spec (ρ : HankelRadii) :
+    (∀ u, (hankelUpperBank ρ).point u =
+      -((ρ.inner + u * (ρ.outer - ρ.inner) : ℝ) : ℂ)) ∧
+    (∀ u, (hankelUpperBank ρ).tangent u =
+      -((ρ.outer - ρ.inner : ℝ) : ℂ)) ∧
+    (∀ u, (hankelUpperBank ρ).logLift u =
+      Real.log (ρ.inner + u * (ρ.outer - ρ.inner)) + Real.pi * Complex.I)
+```
+
+```anchor HankelContour.integral (module := LMLF.Integral.Curve) -showProofStates
+def HankelContour.integral (γ : HankelContour) (f : ℂ → ℂ → ℂ) : ℂ :=
+  γ.lowerBank.integral f + γ.innerCircle.integral f + γ.upperBank.integral f
+```
+:::
+
+:::leanStatement "Lean · Hankel convergence"
+```anchor HasHankelIntegral (module := LMLF.Integral.Curve) -showProofStates
+def HasHankelIntegral (f : ℂ → ℂ → ℂ) (value : ℂ) : Prop :=
+  (∀ ε : PositiveRadius, ∀ R : OuterRadius ε,
+      (hankelContour (HankelRadii.of ε R)).Integrable f) ∧
+    ∃ outerLimit : PositiveRadius → ℂ,
+      (∀ ε : PositiveRadius,
+        Tendsto
+          (fun R : OuterRadius ε =>
+            (hankelContour (HankelRadii.of ε R)).integral f)
+          atTop (nhds (outerLimit ε))) ∧
+      Tendsto outerLimit positiveRadiusAtZero (nhds value)
+```
+:::
+
+The Gamma declaration now has the same normalization as the printed formula:
+the integral exists and multiplying it by $`1/(2\pi i)` gives
+$`1/\Gamma(z)`.
+
+:::leanStatement "Lean · DLMF 5.9.2"
 ```anchor dlmf_5_9_2 (module := LMLF.Blueprint.Gamma.Section59) -showProofStates
 theorem dlmf_5_9_2 (z : ℂ) :
-    ∃ outer : ℝ → ℂ,
-      (∀ ε > 0,
-        Tendsto (fun R : ℝ ↦ hankelTruncation z R ε)
-          atTop (nhds (outer ε))) ∧
-      Tendsto outer (nhdsWithin 0 (Ioi 0))
-        (nhds (2 * Real.pi * Complex.I / Complex.Gamma z))
+    LMLF.Integral.HasHankelRepresentation
+      (fun t logt => Complex.exp t * Complex.exp (-z * logt))
+      (1 / (2 * Real.pi * Complex.I))
+      (1 / Complex.Gamma z)
 ```
 :::
 ::::

@@ -2,7 +2,7 @@
   "$schema": "dlmf-source-inventory.schema.json",
   "schema_version": 2,
   "artifact_kind": "dlmf_structural_source_inventory",
-  "generated_at": "2026-09-07T01:38:22+00:00",
+  "generated_at": "2026-09-07T03:58:40+00:00",
   "source": {
     "name": "NIST Digital Library of Mathematical Functions",
     "base_url": "https://dlmf.nist.gov",
@@ -78,8 +78,8 @@
       "unknown": 4493
     },
     "lean_proof_status": {
-      "missing": 298,
-      "proved": 1,
+      "missing": 297,
+      "proved": 2,
       "unknown": 4493
     },
     "quantitative_analogue_status": {
@@ -41712,8 +41712,8 @@
         "proof_status": "proved",
         "coverage_relation": "exact",
         "declarations": [
-          "LMLF.Definitions.gamma_eq_eulerIntegral",
-          "LMLF.Definitions.gamma_eulerIntegrable"
+          "LMLF.Definitions.gamma_eulerIntegrable",
+          "LMLF.Definitions.gamma_eq_eulerIntegral"
         ],
         "evidence_source": "coverage/overrides.json"
       },
@@ -47184,6 +47184,20 @@
         "proof_status": "missing",
         "coverage_relation": "exact",
         "declarations": [
+          "LMLF.Integral.C1Contour",
+          "LMLF.Integral.C1Contour.integral",
+          "LMLF.Integral.LogLiftedC1Contour",
+          "LMLF.Integral.LogLiftedC1Contour.integral",
+          "LMLF.Integral.HankelRadii",
+          "LMLF.Integral.hankelLowerBank_spec",
+          "LMLF.Integral.hankelInnerCircle_spec",
+          "LMLF.Integral.hankelUpperBank_spec",
+          "LMLF.Integral.HankelContour",
+          "LMLF.Integral.hankelContour",
+          "LMLF.Integral.HankelContour.integral",
+          "LMLF.Integral.HankelContour.Integrable",
+          "LMLF.Integral.HasHankelIntegral",
+          "LMLF.Integral.HasHankelRepresentation",
           "LMLF.Blueprint.Gamma.Section59.dlmf_5_9_2"
         ],
         "evidence_source": "coverage/overrides.json"
@@ -49032,11 +49046,17 @@
         "proof_status": "missing",
         "coverage_relation": "specialization",
         "declarations": [
-          "LMLF.Blueprint.Gamma.Section510.continuedFractionTail",
-          "LMLF.Blueprint.Gamma.Section510.continuedFractionConvergent",
-          "LMLF.Blueprint.Gamma.Section510.exists_gammaContinuedFractionCoeff",
+          "LMLF.continuedFraction",
+          "LMLF.continuedFractionConvergent",
+          "LMLF.CFCoefficients",
+          "LMLF.cfracCoeff",
+          "LMLF.formalContinuedFraction_cfracCoeff",
+          "LMLF.cfracCoeff_unique",
+          "LMLF.Blueprint.Gamma.Section510.logGammaStirlingSeries",
           "LMLF.Blueprint.Gamma.Section510.gammaContinuedFractionCoeff",
-          "LMLF.Blueprint.Gamma.Section510.gammaContinuedFractionCoeff_spec",
+          "LMLF.Blueprint.Gamma.Section510.gammaContinuedFractionCoeff_regular",
+          "LMLF.Blueprint.Gamma.Section510.gammaContinuedFraction_reconstructs_stirling",
+          "LMLF.Blueprint.Gamma.Section510.gammaContinuedFractionCoeff_unique",
           "LMLF.Blueprint.Gamma.Section510.dlmf_5_10_1"
         ],
         "evidence_source": "coverage/overrides.json"
@@ -49135,12 +49155,16 @@
       },
       "lean": {
         "statement_status": "checked",
-        "proof_status": "missing",
+        "proof_status": "proved",
         "coverage_relation": "exact",
         "declarations": [
-          "LMLF.Blueprint.Gamma.Section510.exists_gammaContinuedFractionCoeff",
+          "LMLF.ZeroTerminated",
+          "LMLF.CFCoefficients",
+          "LMLF.cfracCoeff",
+          "LMLF.cfracCoeff_congr_prefix",
+          "LMLF.Blueprint.Gamma.Section510.logGammaStirlingSeries",
           "LMLF.Blueprint.Gamma.Section510.gammaContinuedFractionCoeff",
-          "LMLF.Blueprint.Gamma.Section510.gammaContinuedFractionCoeff_spec",
+          "LMLF.Blueprint.Gamma.Section510.gammaContinuedFractionCoeff_algorithm",
           "LMLF.Blueprint.Gamma.Section510.dlmf_5_10_2"
         ],
         "evidence_source": "coverage/overrides.json"

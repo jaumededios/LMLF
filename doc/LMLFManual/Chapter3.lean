@@ -3,6 +3,7 @@ import Verso.Code.External
 import LMLF.Integral.Improper.Basic
 import LMLF.Integral.Improper.Bochner
 import LMLF.Integral.Improper.Abel
+import LMLF.Integral.Curve
 import LMLFManual.Components
 
 open Verso.Genre Manual
@@ -242,5 +243,171 @@ theorem IsFiniteExceptionalPrimitive.hasImproperIntegralAtTopExcept_exp_smul
     HasImproperIntegralAtTopExcept
       (fun t => Real.exp (-h * t) • g t) k S
       (h • ∫ t in Ioi k, Real.exp (-h * t) • F t)
+```
+:::
+
+# 3.6 Complex contour integrals
+%%%
+number := false
+%%%
+
+A `C1Contour` is a continuously differentiable map $`\gamma:[0,1]\to\mathbb C`
+with named endpoints and a continuous tangent $`\gamma'`. Storing the tangent
+and its within-interval derivative law avoids using a totalized derivative at
+the endpoints. Its integral is the familiar parameterized integral
+$$`\int_\gamma f(z)\,\mathrm dz
+  =\int_0^1 f(\gamma(t))\gamma'(t)\,\mathrm dt.`
+
+:::leanStatement "Lean · C¹ contours and dγ"
+```anchor C1Contour (module := LMLF.Integral.Curve) -showProofStates
+structure C1Contour where
+  point : ℝ → ℂ
+  tangent : ℝ → ℂ
+  start : ℂ
+  finish : ℂ
+  point_zero : point 0 = start
+  point_one : point 1 = finish
+  hasDeriv : ∀ t ∈ Icc (0 : ℝ) 1,
+    HasDerivWithinAt point (tangent t) (Icc 0 1) t
+  tangent_continuous : ContinuousOn tangent (Icc 0 1)
+```
+
+```anchor C1Contour.integral (module := LMLF.Integral.Curve) -showProofStates
+def C1Contour.integral (γ : C1Contour) (f : ℂ → ℂ) : ℂ :=
+  ∫ t in (0 : ℝ)..1, f (γ t) * γ.tangent t
+```
+
+```anchor C1Contour.Integrable (module := LMLF.Integral.Curve) -showProofStates
+def C1Contour.Integrable (γ : C1Contour) (f : ℂ → ℂ) : Prop :=
+  IntervalIntegrable (fun t => f (γ t) * γ.tangent t) volume 0 1
+```
+:::
+
+Expressions such as $`z^s` or $`\log z` need more data when the contour winds
+around zero. A `LogLiftedC1Contour` carries a continuous
+choice of logarithm along the path. Its integral may depend on both the point
+$`\gamma(t)` and the selected lift $`\operatorname{Log}_\gamma(t)`.
+
+:::leanStatement "Lean · branch-aware contours"
+```anchor LogLiftedC1Contour (module := LMLF.Integral.Curve) -showProofStates
+structure LogLiftedC1Contour extends C1Contour where
+  logLift : ℝ → ℂ
+  logLift_continuous : ContinuousOn logLift (Icc 0 1)
+  exp_logLift : ∀ t ∈ Icc (0 : ℝ) 1, Complex.exp (logLift t) = point t
+```
+
+```anchor LogLiftedC1Contour.integral (module := LMLF.Integral.Curve) -showProofStates
+def LogLiftedC1Contour.integral
+    (γ : LogLiftedC1Contour) (f : ℂ → ℂ → ℂ) : ℂ :=
+  ∫ t in (0 : ℝ)..1,
+    f (γ.point t) (γ.logLift t) * γ.tangent t
+```
+
+```anchor LogLiftedC1Contour.Integrable (module := LMLF.Integral.Curve) -showProofStates
+def LogLiftedC1Contour.Integrable
+    (γ : LogLiftedC1Contour) (f : ℂ → ℂ → ℂ) : Prop :=
+  IntervalIntegrable
+    (fun t => f (γ.point t) (γ.logLift t) * γ.tangent t) volume 0 1
+```
+:::
+
+The standard finite Hankel contour has radii $`0<\varepsilon<R` and three C¹
+pieces. For $`0\le u\le1`, write
+$$`r_-(u)=R+u(\varepsilon-R),\qquad
+  \theta(u)=-\pi+2\pi u,\qquad
+  r_+(u)=\varepsilon+u(R-\varepsilon).`
+The lower bank uses $`\gamma_-(u)=-r_-(u)` and
+$`\operatorname{Log}_{\gamma_-}=\log r_-(u)-\pi i`; the inner circle uses
+$`\gamma_0(u)=\varepsilon e^{i\theta(u)}` and
+$`\operatorname{Log}_{\gamma_0}=\log\varepsilon+i\theta(u)`; the upper bank
+uses $`\gamma_+(u)=-r_+(u)` and
+$`\operatorname{Log}_{\gamma_+}=\log r_+(u)+\pi i`. Thus the circle is
+counterclockwise and the two bank values of the logarithm are fixed in the
+data.
+
+:::leanStatement "Lean · explicit Hankel geometry"
+```anchor HankelRadii (module := LMLF.Integral.Curve) -showProofStates
+structure HankelRadii where
+  inner : ℝ
+  outer : ℝ
+  inner_pos : 0 < inner
+  inner_lt_outer : inner < outer
+```
+
+```anchor hankelLowerBank_spec (module := LMLF.Integral.Curve) -showProofStates
+theorem hankelLowerBank_spec (ρ : HankelRadii) :
+    (∀ u, (hankelLowerBank ρ).point u =
+      -((ρ.outer + u * (ρ.inner - ρ.outer) : ℝ) : ℂ)) ∧
+    (∀ u, (hankelLowerBank ρ).tangent u =
+      ((ρ.outer - ρ.inner : ℝ) : ℂ)) ∧
+    (∀ u, (hankelLowerBank ρ).logLift u =
+      Real.log (ρ.outer + u * (ρ.inner - ρ.outer)) - Real.pi * Complex.I)
+```
+
+```anchor hankelInnerCircle_spec (module := LMLF.Integral.Curve) -showProofStates
+theorem hankelInnerCircle_spec (ρ : HankelRadii) :
+    (∀ u, (hankelInnerCircle ρ).point u =
+      (ρ.inner : ℂ) *
+        Complex.exp (((-Real.pi + 2 * Real.pi * u : ℝ) : ℂ) * Complex.I)) ∧
+    (∀ u, (hankelInnerCircle ρ).tangent u =
+      (ρ.inner : ℂ) *
+        Complex.exp (((-Real.pi + 2 * Real.pi * u : ℝ) : ℂ) * Complex.I) *
+        ((2 * Real.pi : ℝ) : ℂ) * Complex.I) ∧
+    (∀ u, (hankelInnerCircle ρ).logLift u =
+      Real.log ρ.inner +
+        ((-Real.pi + 2 * Real.pi * u : ℝ) : ℂ) * Complex.I)
+```
+
+```anchor hankelUpperBank_spec (module := LMLF.Integral.Curve) -showProofStates
+theorem hankelUpperBank_spec (ρ : HankelRadii) :
+    (∀ u, (hankelUpperBank ρ).point u =
+      -((ρ.inner + u * (ρ.outer - ρ.inner) : ℝ) : ℂ)) ∧
+    (∀ u, (hankelUpperBank ρ).tangent u =
+      -((ρ.outer - ρ.inner : ℝ) : ℂ)) ∧
+    (∀ u, (hankelUpperBank ρ).logLift u =
+      Real.log (ρ.inner + u * (ρ.outer - ρ.inner)) + Real.pi * Complex.I)
+```
+
+```anchor HankelContour (module := LMLF.Integral.Curve) -showProofStates
+structure HankelContour where
+  lowerBank : LogLiftedC1Contour
+  innerCircle : LogLiftedC1Contour
+  upperBank : LogLiftedC1Contour
+  lower_join : lowerBank.finish = innerCircle.start
+  upper_join : innerCircle.finish = upperBank.start
+  closed : lowerBank.start = upperBank.finish
+  lower_log_join : lowerBank.logLift 1 = innerCircle.logLift 0
+  upper_log_join : innerCircle.logLift 1 = upperBank.logLift 0
+```
+
+```anchor HankelContour.integral (module := LMLF.Integral.Curve) -showProofStates
+def HankelContour.integral (γ : HankelContour) (f : ℂ → ℂ → ℂ) : ℂ :=
+  γ.lowerBank.integral f + γ.innerCircle.integral f + γ.upperBank.integral f
+```
+:::
+
+The improper integral has two stages. Every admissible finite contour must be
+integrable. At fixed positive inner radius its outer radius tends to infinity;
+only then does the inner radius tend to zero. The radius subtypes ensure that
+no invalid finite contour enters either limit.
+
+:::leanStatement "Lean · Hankel convergence"
+```anchor HasHankelIntegral (module := LMLF.Integral.Curve) -showProofStates
+def HasHankelIntegral (f : ℂ → ℂ → ℂ) (value : ℂ) : Prop :=
+  (∀ ε : PositiveRadius, ∀ R : OuterRadius ε,
+      (hankelContour (HankelRadii.of ε R)).Integrable f) ∧
+    ∃ outerLimit : PositiveRadius → ℂ,
+      (∀ ε : PositiveRadius,
+        Tendsto
+          (fun R : OuterRadius ε =>
+            (hankelContour (HankelRadii.of ε R)).integral f)
+          atTop (nhds (outerLimit ε))) ∧
+      Tendsto outerLimit positiveRadiusAtZero (nhds value)
+```
+
+```anchor HasHankelRepresentation (module := LMLF.Integral.Curve) -showProofStates
+def HasHankelRepresentation
+    (f : ℂ → ℂ → ℂ) (normalization value : ℂ) : Prop :=
+  ∃ integral, HasHankelIntegral f integral ∧ value = normalization * integral
 ```
 :::

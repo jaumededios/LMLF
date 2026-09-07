@@ -595,6 +595,21 @@
         "number": "8"},
        {"title": "Chapter contents", "shortTitle": null, "number": null}]},
      "address": "/Incomplete-Gamma-and-Related-Functions/Chapter-contents/"}],
+   "LMLF-___-DLMF-with-Lean--Improper-integrals--3___6-Complex-contour-integrals":
+   [{"id":
+     "LMLF-___-DLMF-with-Lean--Improper-integrals--3___6-Complex-contour-integrals",
+     "data":
+     {"title": "3.6 Complex contour integrals",
+      "shortTitle": null,
+      "sectionNum": null,
+      "searchPriority": 50,
+      "context":
+      [{"title": "LMLF · DLMF with Lean", "shortTitle": "LMLF", "number": null},
+       {"title": "Improper integrals", "shortTitle": null, "number": "3"},
+       {"title": "3.6 Complex contour integrals",
+        "shortTitle": null,
+        "number": null}]},
+     "address": "/Improper-integrals/3___6-Complex-contour-integrals/"}],
    "LMLF-___-DLMF-with-Lean--Improper-integrals--3___5-Abel-reweighting":
    [{"id":
      "LMLF-___-DLMF-with-Lean--Improper-integrals--3___5-Abel-reweighting",
@@ -2016,6 +2031,22 @@
        {"title": "Bessel Functions", "shortTitle": null, "number": "10"},
        {"title": "Chapter contents", "shortTitle": null, "number": null}]},
      "address": "/Bessel-Functions/Chapter-contents/"}],
+   "LMLF-___-DLMF-with-Lean--Approximants-and-series--2___3-Normalized-continued-fractions":
+   [{"id":
+     "LMLF-___-DLMF-with-Lean--Approximants-and-series--2___3-Normalized-continued-fractions",
+     "data":
+     {"title": "2.3 Normalized continued fractions",
+      "shortTitle": null,
+      "sectionNum": null,
+      "searchPriority": 50,
+      "context":
+      [{"title": "LMLF · DLMF with Lean", "shortTitle": "LMLF", "number": null},
+       {"title": "Approximants and series", "shortTitle": null, "number": "2"},
+       {"title": "2.3 Normalized continued fractions",
+        "shortTitle": null,
+        "number": null}]},
+     "address":
+     "/Approximants-and-series/2___3-Normalized-continued-fractions/"}],
    "LMLF-___-DLMF-with-Lean--Approximants-and-series--2___2-Poincar___-expansions":
    [{"id":
      "LMLF-___-DLMF-with-Lean--Approximants-and-series--2___2-Poincar___-expansions",
@@ -2267,6 +2298,348 @@
         "Finite error bounds",
         "1.1 Pointwise bounds"]}},
      "address": "/Finite-error-bounds/1___1-Pointwise-bounds/"}],
+   "MeasureTheory.IntegrableOn":
+   [{"id": "MeasureTheory___IntegrableOn",
+     "data":
+     {"/Gamma-Function/___5___9-Integral-Representations/#MeasureTheory___IntegrableOn":
+      {"display": "IntegrableOn",
+       "context":
+       ["LMLF · DLMF with Lean",
+        "Gamma Function",
+        "§5.9 Integral Representations",
+        "§5.9(i) Gamma Function"]}},
+     "address": "/Gamma-Function/___5___9-Integral-Representations/"}],
+   "LMLF.normalizedReciprocalCoeff":
+   [{"id": "LMLF___normalizedReciprocalCoeff-next",
+     "data":
+     {"/Gamma-Function/___5___10-Continued-Fractions/#LMLF___normalizedReciprocalCoeff-next":
+      {"display": "normalizedReciprocalCoeff",
+       "context":
+       ["LMLF · DLMF with Lean",
+        "Gamma Function",
+        "§5.10 Continued Fractions"]},
+      "/Approximants-and-series/2___3-Normalized-continued-fractions/#LMLF___normalizedReciprocalCoeff":
+      {"display": "normalizedReciprocalCoeff",
+       "context":
+       ["LMLF · DLMF with Lean",
+        "Approximants and series",
+        "2.3 Normalized continued fractions"]}},
+     "address": "/Gamma-Function/___5___10-Continued-Fractions/"},
+    {"id": "LMLF___normalizedReciprocalCoeff",
+     "data":
+     {"/Gamma-Function/___5___10-Continued-Fractions/#LMLF___normalizedReciprocalCoeff-next":
+      {"display": "normalizedReciprocalCoeff",
+       "context":
+       ["LMLF · DLMF with Lean",
+        "Gamma Function",
+        "§5.10 Continued Fractions"]},
+      "/Approximants-and-series/2___3-Normalized-continued-fractions/#LMLF___normalizedReciprocalCoeff":
+      {"display": "normalizedReciprocalCoeff",
+       "context":
+       ["LMLF · DLMF with Lean",
+        "Approximants and series",
+        "2.3 Normalized continued fractions"]}},
+     "address":
+     "/Approximants-and-series/2___3-Normalized-continued-fractions/"}],
+   "LMLF.formalContinuedFraction_cfracCoeff":
+   [{"id": "LMLF___formalContinuedFraction_cfracCoeff-next",
+     "data":
+     {"/Gamma-Function/___5___10-Continued-Fractions/#LMLF___formalContinuedFraction_cfracCoeff-next":
+      {"display": "formalContinuedFraction_cfracCoeff",
+       "context":
+       ["LMLF · DLMF with Lean",
+        "Gamma Function",
+        "§5.10 Continued Fractions"]},
+      "/Approximants-and-series/2___3-Normalized-continued-fractions/#LMLF___formalContinuedFraction_cfracCoeff":
+      {"display": "formalContinuedFraction_cfracCoeff",
+       "context":
+       ["LMLF · DLMF with Lean",
+        "Approximants and series",
+        "2.3 Normalized continued fractions"]}},
+     "address": "/Gamma-Function/___5___10-Continued-Fractions/"},
+    {"id": "LMLF___formalContinuedFraction_cfracCoeff",
+     "data":
+     {"/Gamma-Function/___5___10-Continued-Fractions/#LMLF___formalContinuedFraction_cfracCoeff-next":
+      {"display": "formalContinuedFraction_cfracCoeff",
+       "context":
+       ["LMLF · DLMF with Lean",
+        "Gamma Function",
+        "§5.10 Continued Fractions"]},
+      "/Approximants-and-series/2___3-Normalized-continued-fractions/#LMLF___formalContinuedFraction_cfracCoeff":
+      {"display": "formalContinuedFraction_cfracCoeff",
+       "context":
+       ["LMLF · DLMF with Lean",
+        "Approximants and series",
+        "2.3 Normalized continued fractions"]}},
+     "address":
+     "/Approximants-and-series/2___3-Normalized-continued-fractions/"}],
+   "LMLF.continuedFractionConvergent":
+   [{"id": "LMLF___continuedFractionConvergent",
+     "data":
+     {"/Gamma-Function/___5___10-Continued-Fractions/#LMLF___continuedFractionConvergent-next":
+      {"display": "continuedFractionConvergent",
+       "context":
+       ["LMLF · DLMF with Lean",
+        "Gamma Function",
+        "§5.10 Continued Fractions"]},
+      "/Approximants-and-series/2___3-Normalized-continued-fractions/#LMLF___continuedFractionConvergent":
+      {"display": "continuedFractionConvergent",
+       "context":
+       ["LMLF · DLMF with Lean",
+        "Approximants and series",
+        "2.3 Normalized continued fractions"]}},
+     "address":
+     "/Approximants-and-series/2___3-Normalized-continued-fractions/"},
+    {"id": "LMLF___continuedFractionConvergent-next",
+     "data":
+     {"/Gamma-Function/___5___10-Continued-Fractions/#LMLF___continuedFractionConvergent-next":
+      {"display": "continuedFractionConvergent",
+       "context":
+       ["LMLF · DLMF with Lean",
+        "Gamma Function",
+        "§5.10 Continued Fractions"]},
+      "/Approximants-and-series/2___3-Normalized-continued-fractions/#LMLF___continuedFractionConvergent":
+      {"display": "continuedFractionConvergent",
+       "context":
+       ["LMLF · DLMF with Lean",
+        "Approximants and series",
+        "2.3 Normalized continued fractions"]}},
+     "address": "/Gamma-Function/___5___10-Continued-Fractions/"}],
+   "LMLF.continuedFraction":
+   [{"id": "LMLF___continuedFraction-next",
+     "data":
+     {"/Gamma-Function/___5___10-Continued-Fractions/#LMLF___continuedFraction-next":
+      {"display": "continuedFraction",
+       "context":
+       ["LMLF · DLMF with Lean",
+        "Gamma Function",
+        "§5.10 Continued Fractions"]},
+      "/Approximants-and-series/2___3-Normalized-continued-fractions/#LMLF___continuedFraction":
+      {"display": "continuedFraction",
+       "context":
+       ["LMLF · DLMF with Lean",
+        "Approximants and series",
+        "2.3 Normalized continued fractions"]}},
+     "address": "/Gamma-Function/___5___10-Continued-Fractions/"},
+    {"id": "LMLF___continuedFraction",
+     "data":
+     {"/Gamma-Function/___5___10-Continued-Fractions/#LMLF___continuedFraction-next":
+      {"display": "continuedFraction",
+       "context":
+       ["LMLF · DLMF with Lean",
+        "Gamma Function",
+        "§5.10 Continued Fractions"]},
+      "/Approximants-and-series/2___3-Normalized-continued-fractions/#LMLF___continuedFraction":
+      {"display": "continuedFraction",
+       "context":
+       ["LMLF · DLMF with Lean",
+        "Approximants and series",
+        "2.3 Normalized continued fractions"]}},
+     "address":
+     "/Approximants-and-series/2___3-Normalized-continued-fractions/"}],
+   "LMLF.cfracStep":
+   [{"id": "LMLF___cfracStep",
+     "data":
+     {"/Approximants-and-series/2___3-Normalized-continued-fractions/#LMLF___cfracStep":
+      {"display": "cfracStep",
+       "context":
+       ["LMLF · DLMF with Lean",
+        "Approximants and series",
+        "2.3 Normalized continued fractions"]}},
+     "address":
+     "/Approximants-and-series/2___3-Normalized-continued-fractions/"}],
+   "LMLF.cfracRemainder":
+   [{"id": "LMLF___cfracRemainder",
+     "data":
+     {"/Gamma-Function/___5___10-Continued-Fractions/#LMLF___cfracRemainder-next":
+      {"display": "cfracRemainder",
+       "context":
+       ["LMLF · DLMF with Lean",
+        "Gamma Function",
+        "§5.10 Continued Fractions"]},
+      "/Approximants-and-series/2___3-Normalized-continued-fractions/#LMLF___cfracRemainder":
+      {"display": "cfracRemainder",
+       "context":
+       ["LMLF · DLMF with Lean",
+        "Approximants and series",
+        "2.3 Normalized continued fractions"]}},
+     "address":
+     "/Approximants-and-series/2___3-Normalized-continued-fractions/"},
+    {"id": "LMLF___cfracRemainder-next",
+     "data":
+     {"/Gamma-Function/___5___10-Continued-Fractions/#LMLF___cfracRemainder-next":
+      {"display": "cfracRemainder",
+       "context":
+       ["LMLF · DLMF with Lean",
+        "Gamma Function",
+        "§5.10 Continued Fractions"]},
+      "/Approximants-and-series/2___3-Normalized-continued-fractions/#LMLF___cfracRemainder":
+      {"display": "cfracRemainder",
+       "context":
+       ["LMLF · DLMF with Lean",
+        "Approximants and series",
+        "2.3 Normalized continued fractions"]}},
+     "address": "/Gamma-Function/___5___10-Continued-Fractions/"}],
+   "LMLF.cfracCoeff_unique":
+   [{"id": "LMLF___cfracCoeff_unique",
+     "data":
+     {"/Gamma-Function/___5___10-Continued-Fractions/#LMLF___cfracCoeff_unique-next":
+      {"display": "cfracCoeff_unique",
+       "context":
+       ["LMLF · DLMF with Lean",
+        "Gamma Function",
+        "§5.10 Continued Fractions"]},
+      "/Approximants-and-series/2___3-Normalized-continued-fractions/#LMLF___cfracCoeff_unique":
+      {"display": "cfracCoeff_unique",
+       "context":
+       ["LMLF · DLMF with Lean",
+        "Approximants and series",
+        "2.3 Normalized continued fractions"]}},
+     "address":
+     "/Approximants-and-series/2___3-Normalized-continued-fractions/"},
+    {"id": "LMLF___cfracCoeff_unique-next",
+     "data":
+     {"/Gamma-Function/___5___10-Continued-Fractions/#LMLF___cfracCoeff_unique-next":
+      {"display": "cfracCoeff_unique",
+       "context":
+       ["LMLF · DLMF with Lean",
+        "Gamma Function",
+        "§5.10 Continued Fractions"]},
+      "/Approximants-and-series/2___3-Normalized-continued-fractions/#LMLF___cfracCoeff_unique":
+      {"display": "cfracCoeff_unique",
+       "context":
+       ["LMLF · DLMF with Lean",
+        "Approximants and series",
+        "2.3 Normalized continued fractions"]}},
+     "address": "/Gamma-Function/___5___10-Continued-Fractions/"}],
+   "LMLF.cfracCoeff_congr_prefix":
+   [{"id": "LMLF___cfracCoeff_congr_prefix",
+     "data":
+     {"/Gamma-Function/___5___10-Continued-Fractions/#LMLF___cfracCoeff_congr_prefix-next":
+      {"display": "cfracCoeff_congr_prefix",
+       "context":
+       ["LMLF · DLMF with Lean",
+        "Gamma Function",
+        "§5.10 Continued Fractions"]},
+      "/Approximants-and-series/2___3-Normalized-continued-fractions/#LMLF___cfracCoeff_congr_prefix":
+      {"display": "cfracCoeff_congr_prefix",
+       "context":
+       ["LMLF · DLMF with Lean",
+        "Approximants and series",
+        "2.3 Normalized continued fractions"]}},
+     "address":
+     "/Approximants-and-series/2___3-Normalized-continued-fractions/"},
+    {"id": "LMLF___cfracCoeff_congr_prefix-next",
+     "data":
+     {"/Gamma-Function/___5___10-Continued-Fractions/#LMLF___cfracCoeff_congr_prefix-next":
+      {"display": "cfracCoeff_congr_prefix",
+       "context":
+       ["LMLF · DLMF with Lean",
+        "Gamma Function",
+        "§5.10 Continued Fractions"]},
+      "/Approximants-and-series/2___3-Normalized-continued-fractions/#LMLF___cfracCoeff_congr_prefix":
+      {"display": "cfracCoeff_congr_prefix",
+       "context":
+       ["LMLF · DLMF with Lean",
+        "Approximants and series",
+        "2.3 Normalized continued fractions"]}},
+     "address": "/Gamma-Function/___5___10-Continued-Fractions/"}],
+   "LMLF.cfracCoeffValue":
+   [{"id": "LMLF___cfracCoeffValue-next",
+     "data":
+     {"/Gamma-Function/___5___10-Continued-Fractions/#LMLF___cfracCoeffValue-next":
+      {"display": "cfracCoeffValue",
+       "context":
+       ["LMLF · DLMF with Lean",
+        "Gamma Function",
+        "§5.10 Continued Fractions"]},
+      "/Approximants-and-series/2___3-Normalized-continued-fractions/#LMLF___cfracCoeffValue":
+      {"display": "cfracCoeffValue",
+       "context":
+       ["LMLF · DLMF with Lean",
+        "Approximants and series",
+        "2.3 Normalized continued fractions"]}},
+     "address": "/Gamma-Function/___5___10-Continued-Fractions/"},
+    {"id": "LMLF___cfracCoeffValue",
+     "data":
+     {"/Gamma-Function/___5___10-Continued-Fractions/#LMLF___cfracCoeffValue-next":
+      {"display": "cfracCoeffValue",
+       "context":
+       ["LMLF · DLMF with Lean",
+        "Gamma Function",
+        "§5.10 Continued Fractions"]},
+      "/Approximants-and-series/2___3-Normalized-continued-fractions/#LMLF___cfracCoeffValue":
+      {"display": "cfracCoeffValue",
+       "context":
+       ["LMLF · DLMF with Lean",
+        "Approximants and series",
+        "2.3 Normalized continued fractions"]}},
+     "address":
+     "/Approximants-and-series/2___3-Normalized-continued-fractions/"}],
+   "LMLF.cfracCoeff":
+   [{"id": "LMLF___cfracCoeff",
+     "data":
+     {"/Gamma-Function/___5___10-Continued-Fractions/#LMLF___cfracCoeff-next":
+      {"display": "cfracCoeff",
+       "context":
+       ["LMLF · DLMF with Lean",
+        "Gamma Function",
+        "§5.10 Continued Fractions"]},
+      "/Approximants-and-series/2___3-Normalized-continued-fractions/#LMLF___cfracCoeff":
+      {"display": "cfracCoeff",
+       "context":
+       ["LMLF · DLMF with Lean",
+        "Approximants and series",
+        "2.3 Normalized continued fractions"]}},
+     "address":
+     "/Approximants-and-series/2___3-Normalized-continued-fractions/"},
+    {"id": "LMLF___cfracCoeff-next",
+     "data":
+     {"/Gamma-Function/___5___10-Continued-Fractions/#LMLF___cfracCoeff-next":
+      {"display": "cfracCoeff",
+       "context":
+       ["LMLF · DLMF with Lean",
+        "Gamma Function",
+        "§5.10 Continued Fractions"]},
+      "/Approximants-and-series/2___3-Normalized-continued-fractions/#LMLF___cfracCoeff":
+      {"display": "cfracCoeff",
+       "context":
+       ["LMLF · DLMF with Lean",
+        "Approximants and series",
+        "2.3 Normalized continued fractions"]}},
+     "address": "/Gamma-Function/___5___10-Continued-Fractions/"}],
+   "LMLF.ZeroTerminated":
+   [{"id": "LMLF___ZeroTerminated-next",
+     "data":
+     {"/Gamma-Function/___5___10-Continued-Fractions/#LMLF___ZeroTerminated-next":
+      {"display": "ZeroTerminated",
+       "context":
+       ["LMLF · DLMF with Lean",
+        "Gamma Function",
+        "§5.10 Continued Fractions"]},
+      "/Approximants-and-series/2___3-Normalized-continued-fractions/#LMLF___ZeroTerminated":
+      {"display": "ZeroTerminated",
+       "context":
+       ["LMLF · DLMF with Lean",
+        "Approximants and series",
+        "2.3 Normalized continued fractions"]}},
+     "address": "/Gamma-Function/___5___10-Continued-Fractions/"},
+    {"id": "LMLF___ZeroTerminated",
+     "data":
+     {"/Gamma-Function/___5___10-Continued-Fractions/#LMLF___ZeroTerminated-next":
+      {"display": "ZeroTerminated",
+       "context":
+       ["LMLF · DLMF with Lean",
+        "Gamma Function",
+        "§5.10 Continued Fractions"]},
+      "/Approximants-and-series/2___3-Normalized-continued-fractions/#LMLF___ZeroTerminated":
+      {"display": "ZeroTerminated",
+       "context":
+       ["LMLF · DLMF with Lean",
+        "Approximants and series",
+        "2.3 Normalized continued fractions"]}},
+     "address":
+     "/Approximants-and-series/2___3-Normalized-continued-fractions/"}],
    "LMLF.Integral.hasImproperIntegralAtTopExcept_iff_exists_primitive":
    [{"id":
      "LMLF___Integral___hasImproperIntegralAtTopExcept_iff_exists_primitive",
@@ -2279,6 +2652,165 @@
         "3.2 Continuous primitives across the exceptional set"]}},
      "address":
      "/Improper-integrals/3___2-Continuous-primitives-across-the-exceptional-set/"}],
+   "LMLF.Integral.hankelUpperBank_spec":
+   [{"id": "LMLF___Integral___hankelUpperBank_spec",
+     "data":
+     {"/Improper-integrals/3___6-Complex-contour-integrals/#LMLF___Integral___hankelUpperBank_spec":
+      {"display": "hankelUpperBank_spec",
+       "context":
+       ["LMLF · DLMF with Lean",
+        "Improper integrals",
+        "3.6 Complex contour integrals"]},
+      "/Gamma-Function/___5___9-Integral-Representations/#LMLF___Integral___hankelUpperBank_spec-next":
+      {"display": "hankelUpperBank_spec",
+       "context":
+       ["LMLF · DLMF with Lean",
+        "Gamma Function",
+        "§5.9 Integral Representations",
+        "§5.9(i) Gamma Function"]}},
+     "address": "/Improper-integrals/3___6-Complex-contour-integrals/"},
+    {"id": "LMLF___Integral___hankelUpperBank_spec-next",
+     "data":
+     {"/Improper-integrals/3___6-Complex-contour-integrals/#LMLF___Integral___hankelUpperBank_spec":
+      {"display": "hankelUpperBank_spec",
+       "context":
+       ["LMLF · DLMF with Lean",
+        "Improper integrals",
+        "3.6 Complex contour integrals"]},
+      "/Gamma-Function/___5___9-Integral-Representations/#LMLF___Integral___hankelUpperBank_spec-next":
+      {"display": "hankelUpperBank_spec",
+       "context":
+       ["LMLF · DLMF with Lean",
+        "Gamma Function",
+        "§5.9 Integral Representations",
+        "§5.9(i) Gamma Function"]}},
+     "address": "/Gamma-Function/___5___9-Integral-Representations/"}],
+   "LMLF.Integral.hankelLowerBank_spec":
+   [{"id": "LMLF___Integral___hankelLowerBank_spec",
+     "data":
+     {"/Improper-integrals/3___6-Complex-contour-integrals/#LMLF___Integral___hankelLowerBank_spec":
+      {"display": "hankelLowerBank_spec",
+       "context":
+       ["LMLF · DLMF with Lean",
+        "Improper integrals",
+        "3.6 Complex contour integrals"]},
+      "/Gamma-Function/___5___9-Integral-Representations/#LMLF___Integral___hankelLowerBank_spec-next":
+      {"display": "hankelLowerBank_spec",
+       "context":
+       ["LMLF · DLMF with Lean",
+        "Gamma Function",
+        "§5.9 Integral Representations",
+        "§5.9(i) Gamma Function"]}},
+     "address": "/Improper-integrals/3___6-Complex-contour-integrals/"},
+    {"id": "LMLF___Integral___hankelLowerBank_spec-next",
+     "data":
+     {"/Improper-integrals/3___6-Complex-contour-integrals/#LMLF___Integral___hankelLowerBank_spec":
+      {"display": "hankelLowerBank_spec",
+       "context":
+       ["LMLF · DLMF with Lean",
+        "Improper integrals",
+        "3.6 Complex contour integrals"]},
+      "/Gamma-Function/___5___9-Integral-Representations/#LMLF___Integral___hankelLowerBank_spec-next":
+      {"display": "hankelLowerBank_spec",
+       "context":
+       ["LMLF · DLMF with Lean",
+        "Gamma Function",
+        "§5.9 Integral Representations",
+        "§5.9(i) Gamma Function"]}},
+     "address": "/Gamma-Function/___5___9-Integral-Representations/"}],
+   "LMLF.Integral.hankelInnerCircle_spec":
+   [{"id": "LMLF___Integral___hankelInnerCircle_spec-next",
+     "data":
+     {"/Improper-integrals/3___6-Complex-contour-integrals/#LMLF___Integral___hankelInnerCircle_spec":
+      {"display": "hankelInnerCircle_spec",
+       "context":
+       ["LMLF · DLMF with Lean",
+        "Improper integrals",
+        "3.6 Complex contour integrals"]},
+      "/Gamma-Function/___5___9-Integral-Representations/#LMLF___Integral___hankelInnerCircle_spec-next":
+      {"display": "hankelInnerCircle_spec",
+       "context":
+       ["LMLF · DLMF with Lean",
+        "Gamma Function",
+        "§5.9 Integral Representations",
+        "§5.9(i) Gamma Function"]}},
+     "address": "/Gamma-Function/___5___9-Integral-Representations/"},
+    {"id": "LMLF___Integral___hankelInnerCircle_spec",
+     "data":
+     {"/Improper-integrals/3___6-Complex-contour-integrals/#LMLF___Integral___hankelInnerCircle_spec":
+      {"display": "hankelInnerCircle_spec",
+       "context":
+       ["LMLF · DLMF with Lean",
+        "Improper integrals",
+        "3.6 Complex contour integrals"]},
+      "/Gamma-Function/___5___9-Integral-Representations/#LMLF___Integral___hankelInnerCircle_spec-next":
+      {"display": "hankelInnerCircle_spec",
+       "context":
+       ["LMLF · DLMF with Lean",
+        "Gamma Function",
+        "§5.9 Integral Representations",
+        "§5.9(i) Gamma Function"]}},
+     "address": "/Improper-integrals/3___6-Complex-contour-integrals/"}],
+   "LMLF.Integral.LogLiftedC1Contour.logLift_continuous":
+   [{"id": "LMLF___Integral___LogLiftedC1Contour___logLift_continuous",
+     "data":
+     {"/Improper-integrals/3___6-Complex-contour-integrals/#LMLF___Integral___LogLiftedC1Contour___logLift_continuous":
+      {"display": "logLift_continuous",
+       "context":
+       ["LMLF · DLMF with Lean",
+        "Improper integrals",
+        "3.6 Complex contour integrals"]}},
+     "address": "/Improper-integrals/3___6-Complex-contour-integrals/"}],
+   "LMLF.Integral.LogLiftedC1Contour.logLift":
+   [{"id": "LMLF___Integral___LogLiftedC1Contour___logLift",
+     "data":
+     {"/Improper-integrals/3___6-Complex-contour-integrals/#LMLF___Integral___LogLiftedC1Contour___logLift":
+      {"display": "logLift",
+       "context":
+       ["LMLF · DLMF with Lean",
+        "Improper integrals",
+        "3.6 Complex contour integrals"]}},
+     "address": "/Improper-integrals/3___6-Complex-contour-integrals/"}],
+   "LMLF.Integral.LogLiftedC1Contour.integral":
+   [{"id": "LMLF___Integral___LogLiftedC1Contour___integral",
+     "data":
+     {"/Improper-integrals/3___6-Complex-contour-integrals/#LMLF___Integral___LogLiftedC1Contour___integral":
+      {"display": "LogLiftedC1Contour.integral",
+       "context":
+       ["LMLF · DLMF with Lean",
+        "Improper integrals",
+        "3.6 Complex contour integrals"]}},
+     "address": "/Improper-integrals/3___6-Complex-contour-integrals/"}],
+   "LMLF.Integral.LogLiftedC1Contour.exp_logLift":
+   [{"id": "LMLF___Integral___LogLiftedC1Contour___exp_logLift",
+     "data":
+     {"/Improper-integrals/3___6-Complex-contour-integrals/#LMLF___Integral___LogLiftedC1Contour___exp_logLift":
+      {"display": "exp_logLift",
+       "context":
+       ["LMLF · DLMF with Lean",
+        "Improper integrals",
+        "3.6 Complex contour integrals"]}},
+     "address": "/Improper-integrals/3___6-Complex-contour-integrals/"}],
+   "LMLF.Integral.LogLiftedC1Contour.Integrable":
+   [{"id": "LMLF___Integral___LogLiftedC1Contour___Integrable",
+     "data":
+     {"/Improper-integrals/3___6-Complex-contour-integrals/#LMLF___Integral___LogLiftedC1Contour___Integrable":
+      {"display": "LogLiftedC1Contour.Integrable",
+       "context":
+       ["LMLF · DLMF with Lean",
+        "Improper integrals",
+        "3.6 Complex contour integrals"]}},
+     "address": "/Improper-integrals/3___6-Complex-contour-integrals/"}],
+   "LMLF.Integral.LogLiftedC1Contour":
+   [{"id": "LMLF___Integral___LogLiftedC1Contour",
+     "data":
+     {"/Improper-integrals/3___6-Complex-contour-integrals/#LMLF___Integral___LogLiftedC1Contour":
+      {"display": "LogLiftedC1Contour",
+       "context":
+       ["LMLF · DLMF with Lean",
+        "Improper integrals",
+        "3.6 Complex contour integrals"]}},
+     "address": "/Improper-integrals/3___6-Complex-contour-integrals/"}],
    "LMLF.Integral.IsFiniteExceptionalPrimitive.hasImproperIntegralAtTopExcept_exp_smul":
    [{"id":
      "LMLF___Integral___IsFiniteExceptionalPrimitive___hasImproperIntegralAtTopExcept_exp_smul",
@@ -2379,6 +2911,332 @@
         "3.1 Improper integrals with finitely many exceptional points"]}},
      "address":
      "/Improper-integrals/3___1-Improper-integrals-with-finitely-many-exceptional-points/"}],
+   "LMLF.Integral.HasHankelRepresentation":
+   [{"id": "LMLF___Integral___HasHankelRepresentation",
+     "data":
+     {"/Improper-integrals/3___6-Complex-contour-integrals/#LMLF___Integral___HasHankelRepresentation":
+      {"display": "HasHankelRepresentation",
+       "context":
+       ["LMLF · DLMF with Lean",
+        "Improper integrals",
+        "3.6 Complex contour integrals"]}},
+     "address": "/Improper-integrals/3___6-Complex-contour-integrals/"}],
+   "LMLF.Integral.HasHankelIntegral":
+   [{"id": "LMLF___Integral___HasHankelIntegral-next",
+     "data":
+     {"/Improper-integrals/3___6-Complex-contour-integrals/#LMLF___Integral___HasHankelIntegral":
+      {"display": "HasHankelIntegral",
+       "context":
+       ["LMLF · DLMF with Lean",
+        "Improper integrals",
+        "3.6 Complex contour integrals"]},
+      "/Gamma-Function/___5___9-Integral-Representations/#LMLF___Integral___HasHankelIntegral-next":
+      {"display": "HasHankelIntegral",
+       "context":
+       ["LMLF · DLMF with Lean",
+        "Gamma Function",
+        "§5.9 Integral Representations",
+        "§5.9(i) Gamma Function"]}},
+     "address": "/Gamma-Function/___5___9-Integral-Representations/"},
+    {"id": "LMLF___Integral___HasHankelIntegral",
+     "data":
+     {"/Improper-integrals/3___6-Complex-contour-integrals/#LMLF___Integral___HasHankelIntegral":
+      {"display": "HasHankelIntegral",
+       "context":
+       ["LMLF · DLMF with Lean",
+        "Improper integrals",
+        "3.6 Complex contour integrals"]},
+      "/Gamma-Function/___5___9-Integral-Representations/#LMLF___Integral___HasHankelIntegral-next":
+      {"display": "HasHankelIntegral",
+       "context":
+       ["LMLF · DLMF with Lean",
+        "Gamma Function",
+        "§5.9 Integral Representations",
+        "§5.9(i) Gamma Function"]}},
+     "address": "/Improper-integrals/3___6-Complex-contour-integrals/"}],
+   "LMLF.Integral.HankelRadii.outer":
+   [{"id": "LMLF___Integral___HankelRadii___outer",
+     "data":
+     {"/Improper-integrals/3___6-Complex-contour-integrals/#LMLF___Integral___HankelRadii___outer":
+      {"display": "outer",
+       "context":
+       ["LMLF · DLMF with Lean",
+        "Improper integrals",
+        "3.6 Complex contour integrals"]}},
+     "address": "/Improper-integrals/3___6-Complex-contour-integrals/"}],
+   "LMLF.Integral.HankelRadii.inner_pos":
+   [{"id": "LMLF___Integral___HankelRadii___inner_pos",
+     "data":
+     {"/Improper-integrals/3___6-Complex-contour-integrals/#LMLF___Integral___HankelRadii___inner_pos":
+      {"display": "inner_pos",
+       "context":
+       ["LMLF · DLMF with Lean",
+        "Improper integrals",
+        "3.6 Complex contour integrals"]}},
+     "address": "/Improper-integrals/3___6-Complex-contour-integrals/"}],
+   "LMLF.Integral.HankelRadii.inner_lt_outer":
+   [{"id": "LMLF___Integral___HankelRadii___inner_lt_outer",
+     "data":
+     {"/Improper-integrals/3___6-Complex-contour-integrals/#LMLF___Integral___HankelRadii___inner_lt_outer":
+      {"display": "inner_lt_outer",
+       "context":
+       ["LMLF · DLMF with Lean",
+        "Improper integrals",
+        "3.6 Complex contour integrals"]}},
+     "address": "/Improper-integrals/3___6-Complex-contour-integrals/"}],
+   "LMLF.Integral.HankelRadii.inner":
+   [{"id": "LMLF___Integral___HankelRadii___inner",
+     "data":
+     {"/Improper-integrals/3___6-Complex-contour-integrals/#LMLF___Integral___HankelRadii___inner":
+      {"display": "inner",
+       "context":
+       ["LMLF · DLMF with Lean",
+        "Improper integrals",
+        "3.6 Complex contour integrals"]}},
+     "address": "/Improper-integrals/3___6-Complex-contour-integrals/"}],
+   "LMLF.Integral.HankelRadii":
+   [{"id": "LMLF___Integral___HankelRadii",
+     "data":
+     {"/Improper-integrals/3___6-Complex-contour-integrals/#LMLF___Integral___HankelRadii":
+      {"display": "HankelRadii",
+       "context":
+       ["LMLF · DLMF with Lean",
+        "Improper integrals",
+        "3.6 Complex contour integrals"]}},
+     "address": "/Improper-integrals/3___6-Complex-contour-integrals/"}],
+   "LMLF.Integral.HankelContour.upper_log_join":
+   [{"id": "LMLF___Integral___HankelContour___upper_log_join",
+     "data":
+     {"/Improper-integrals/3___6-Complex-contour-integrals/#LMLF___Integral___HankelContour___upper_log_join":
+      {"display": "upper_log_join",
+       "context":
+       ["LMLF · DLMF with Lean",
+        "Improper integrals",
+        "3.6 Complex contour integrals"]}},
+     "address": "/Improper-integrals/3___6-Complex-contour-integrals/"}],
+   "LMLF.Integral.HankelContour.upper_join":
+   [{"id": "LMLF___Integral___HankelContour___upper_join",
+     "data":
+     {"/Improper-integrals/3___6-Complex-contour-integrals/#LMLF___Integral___HankelContour___upper_join":
+      {"display": "upper_join",
+       "context":
+       ["LMLF · DLMF with Lean",
+        "Improper integrals",
+        "3.6 Complex contour integrals"]}},
+     "address": "/Improper-integrals/3___6-Complex-contour-integrals/"}],
+   "LMLF.Integral.HankelContour.upperBank":
+   [{"id": "LMLF___Integral___HankelContour___upperBank",
+     "data":
+     {"/Improper-integrals/3___6-Complex-contour-integrals/#LMLF___Integral___HankelContour___upperBank":
+      {"display": "upperBank",
+       "context":
+       ["LMLF · DLMF with Lean",
+        "Improper integrals",
+        "3.6 Complex contour integrals"]}},
+     "address": "/Improper-integrals/3___6-Complex-contour-integrals/"}],
+   "LMLF.Integral.HankelContour.lower_log_join":
+   [{"id": "LMLF___Integral___HankelContour___lower_log_join",
+     "data":
+     {"/Improper-integrals/3___6-Complex-contour-integrals/#LMLF___Integral___HankelContour___lower_log_join":
+      {"display": "lower_log_join",
+       "context":
+       ["LMLF · DLMF with Lean",
+        "Improper integrals",
+        "3.6 Complex contour integrals"]}},
+     "address": "/Improper-integrals/3___6-Complex-contour-integrals/"}],
+   "LMLF.Integral.HankelContour.lower_join":
+   [{"id": "LMLF___Integral___HankelContour___lower_join",
+     "data":
+     {"/Improper-integrals/3___6-Complex-contour-integrals/#LMLF___Integral___HankelContour___lower_join":
+      {"display": "lower_join",
+       "context":
+       ["LMLF · DLMF with Lean",
+        "Improper integrals",
+        "3.6 Complex contour integrals"]}},
+     "address": "/Improper-integrals/3___6-Complex-contour-integrals/"}],
+   "LMLF.Integral.HankelContour.lowerBank":
+   [{"id": "LMLF___Integral___HankelContour___lowerBank",
+     "data":
+     {"/Improper-integrals/3___6-Complex-contour-integrals/#LMLF___Integral___HankelContour___lowerBank":
+      {"display": "lowerBank",
+       "context":
+       ["LMLF · DLMF with Lean",
+        "Improper integrals",
+        "3.6 Complex contour integrals"]}},
+     "address": "/Improper-integrals/3___6-Complex-contour-integrals/"}],
+   "LMLF.Integral.HankelContour.integral":
+   [{"id": "LMLF___Integral___HankelContour___integral",
+     "data":
+     {"/Improper-integrals/3___6-Complex-contour-integrals/#LMLF___Integral___HankelContour___integral":
+      {"display": "HankelContour.integral",
+       "context":
+       ["LMLF · DLMF with Lean",
+        "Improper integrals",
+        "3.6 Complex contour integrals"]},
+      "/Gamma-Function/___5___9-Integral-Representations/#LMLF___Integral___HankelContour___integral-next":
+      {"display": "HankelContour.integral",
+       "context":
+       ["LMLF · DLMF with Lean",
+        "Gamma Function",
+        "§5.9 Integral Representations",
+        "§5.9(i) Gamma Function"]}},
+     "address": "/Improper-integrals/3___6-Complex-contour-integrals/"},
+    {"id": "LMLF___Integral___HankelContour___integral-next",
+     "data":
+     {"/Improper-integrals/3___6-Complex-contour-integrals/#LMLF___Integral___HankelContour___integral":
+      {"display": "HankelContour.integral",
+       "context":
+       ["LMLF · DLMF with Lean",
+        "Improper integrals",
+        "3.6 Complex contour integrals"]},
+      "/Gamma-Function/___5___9-Integral-Representations/#LMLF___Integral___HankelContour___integral-next":
+      {"display": "HankelContour.integral",
+       "context":
+       ["LMLF · DLMF with Lean",
+        "Gamma Function",
+        "§5.9 Integral Representations",
+        "§5.9(i) Gamma Function"]}},
+     "address": "/Gamma-Function/___5___9-Integral-Representations/"}],
+   "LMLF.Integral.HankelContour.innerCircle":
+   [{"id": "LMLF___Integral___HankelContour___innerCircle",
+     "data":
+     {"/Improper-integrals/3___6-Complex-contour-integrals/#LMLF___Integral___HankelContour___innerCircle":
+      {"display": "innerCircle",
+       "context":
+       ["LMLF · DLMF with Lean",
+        "Improper integrals",
+        "3.6 Complex contour integrals"]}},
+     "address": "/Improper-integrals/3___6-Complex-contour-integrals/"}],
+   "LMLF.Integral.HankelContour.closed":
+   [{"id": "LMLF___Integral___HankelContour___closed",
+     "data":
+     {"/Improper-integrals/3___6-Complex-contour-integrals/#LMLF___Integral___HankelContour___closed":
+      {"display": "closed",
+       "context":
+       ["LMLF · DLMF with Lean",
+        "Improper integrals",
+        "3.6 Complex contour integrals"]}},
+     "address": "/Improper-integrals/3___6-Complex-contour-integrals/"}],
+   "LMLF.Integral.HankelContour":
+   [{"id": "LMLF___Integral___HankelContour",
+     "data":
+     {"/Improper-integrals/3___6-Complex-contour-integrals/#LMLF___Integral___HankelContour":
+      {"display": "HankelContour",
+       "context":
+       ["LMLF · DLMF with Lean",
+        "Improper integrals",
+        "3.6 Complex contour integrals"]}},
+     "address": "/Improper-integrals/3___6-Complex-contour-integrals/"}],
+   "LMLF.Integral.C1Contour.tangent_continuous":
+   [{"id": "LMLF___Integral___C1Contour___tangent_continuous",
+     "data":
+     {"/Improper-integrals/3___6-Complex-contour-integrals/#LMLF___Integral___C1Contour___tangent_continuous":
+      {"display": "tangent_continuous",
+       "context":
+       ["LMLF · DLMF with Lean",
+        "Improper integrals",
+        "3.6 Complex contour integrals"]}},
+     "address": "/Improper-integrals/3___6-Complex-contour-integrals/"}],
+   "LMLF.Integral.C1Contour.tangent":
+   [{"id": "LMLF___Integral___C1Contour___tangent",
+     "data":
+     {"/Improper-integrals/3___6-Complex-contour-integrals/#LMLF___Integral___C1Contour___tangent":
+      {"display": "tangent",
+       "context":
+       ["LMLF · DLMF with Lean",
+        "Improper integrals",
+        "3.6 Complex contour integrals"]}},
+     "address": "/Improper-integrals/3___6-Complex-contour-integrals/"}],
+   "LMLF.Integral.C1Contour.start":
+   [{"id": "LMLF___Integral___C1Contour___start",
+     "data":
+     {"/Improper-integrals/3___6-Complex-contour-integrals/#LMLF___Integral___C1Contour___start":
+      {"display": "start",
+       "context":
+       ["LMLF · DLMF with Lean",
+        "Improper integrals",
+        "3.6 Complex contour integrals"]}},
+     "address": "/Improper-integrals/3___6-Complex-contour-integrals/"}],
+   "LMLF.Integral.C1Contour.point_zero":
+   [{"id": "LMLF___Integral___C1Contour___point_zero",
+     "data":
+     {"/Improper-integrals/3___6-Complex-contour-integrals/#LMLF___Integral___C1Contour___point_zero":
+      {"display": "point_zero",
+       "context":
+       ["LMLF · DLMF with Lean",
+        "Improper integrals",
+        "3.6 Complex contour integrals"]}},
+     "address": "/Improper-integrals/3___6-Complex-contour-integrals/"}],
+   "LMLF.Integral.C1Contour.point_one":
+   [{"id": "LMLF___Integral___C1Contour___point_one",
+     "data":
+     {"/Improper-integrals/3___6-Complex-contour-integrals/#LMLF___Integral___C1Contour___point_one":
+      {"display": "point_one",
+       "context":
+       ["LMLF · DLMF with Lean",
+        "Improper integrals",
+        "3.6 Complex contour integrals"]}},
+     "address": "/Improper-integrals/3___6-Complex-contour-integrals/"}],
+   "LMLF.Integral.C1Contour.point":
+   [{"id": "LMLF___Integral___C1Contour___point",
+     "data":
+     {"/Improper-integrals/3___6-Complex-contour-integrals/#LMLF___Integral___C1Contour___point":
+      {"display": "point",
+       "context":
+       ["LMLF · DLMF with Lean",
+        "Improper integrals",
+        "3.6 Complex contour integrals"]}},
+     "address": "/Improper-integrals/3___6-Complex-contour-integrals/"}],
+   "LMLF.Integral.C1Contour.integral":
+   [{"id": "LMLF___Integral___C1Contour___integral",
+     "data":
+     {"/Improper-integrals/3___6-Complex-contour-integrals/#LMLF___Integral___C1Contour___integral":
+      {"display": "C1Contour.integral",
+       "context":
+       ["LMLF · DLMF with Lean",
+        "Improper integrals",
+        "3.6 Complex contour integrals"]}},
+     "address": "/Improper-integrals/3___6-Complex-contour-integrals/"}],
+   "LMLF.Integral.C1Contour.hasDeriv":
+   [{"id": "LMLF___Integral___C1Contour___hasDeriv",
+     "data":
+     {"/Improper-integrals/3___6-Complex-contour-integrals/#LMLF___Integral___C1Contour___hasDeriv":
+      {"display": "hasDeriv",
+       "context":
+       ["LMLF · DLMF with Lean",
+        "Improper integrals",
+        "3.6 Complex contour integrals"]}},
+     "address": "/Improper-integrals/3___6-Complex-contour-integrals/"}],
+   "LMLF.Integral.C1Contour.finish":
+   [{"id": "LMLF___Integral___C1Contour___finish",
+     "data":
+     {"/Improper-integrals/3___6-Complex-contour-integrals/#LMLF___Integral___C1Contour___finish":
+      {"display": "finish",
+       "context":
+       ["LMLF · DLMF with Lean",
+        "Improper integrals",
+        "3.6 Complex contour integrals"]}},
+     "address": "/Improper-integrals/3___6-Complex-contour-integrals/"}],
+   "LMLF.Integral.C1Contour.Integrable":
+   [{"id": "LMLF___Integral___C1Contour___Integrable",
+     "data":
+     {"/Improper-integrals/3___6-Complex-contour-integrals/#LMLF___Integral___C1Contour___Integrable":
+      {"display": "C1Contour.Integrable",
+       "context":
+       ["LMLF · DLMF with Lean",
+        "Improper integrals",
+        "3.6 Complex contour integrals"]}},
+     "address": "/Improper-integrals/3___6-Complex-contour-integrals/"}],
+   "LMLF.Integral.C1Contour":
+   [{"id": "LMLF___Integral___C1Contour",
+     "data":
+     {"/Improper-integrals/3___6-Complex-contour-integrals/#LMLF___Integral___C1Contour":
+      {"display": "C1Contour",
+       "context":
+       ["LMLF · DLMF with Lean",
+        "Improper integrals",
+        "3.6 Complex contour integrals"]}},
+     "address": "/Improper-integrals/3___6-Complex-contour-integrals/"}],
    "LMLF.Definitions.gamma_eulerIntegrable":
    [{"id": "LMLF___Definitions___gamma_eulerIntegrable",
      "data":
@@ -2401,6 +3259,49 @@
         "§5.2 Definitions",
         "§5.2(i) Gamma and Psi Functions"]}},
      "address": "/Gamma-Function/___5___2-Definitions/"}],
+   "LMLF.CFracRegular":
+   [{"id": "LMLF___CFracRegular",
+     "data":
+     {"/Approximants-and-series/2___3-Normalized-continued-fractions/#LMLF___CFracRegular":
+      {"display": "CFracRegular",
+       "context":
+       ["LMLF · DLMF with Lean",
+        "Approximants and series",
+        "2.3 Normalized continued fractions"]}},
+     "address":
+     "/Approximants-and-series/2___3-Normalized-continued-fractions/"}],
+   "LMLF.CFCoefficients":
+   [{"id": "LMLF___CFCoefficients",
+     "data":
+     {"/Gamma-Function/___5___10-Continued-Fractions/#LMLF___CFCoefficients-next":
+      {"display": "CFCoefficients",
+       "context":
+       ["LMLF · DLMF with Lean",
+        "Gamma Function",
+        "§5.10 Continued Fractions"]},
+      "/Approximants-and-series/2___3-Normalized-continued-fractions/#LMLF___CFCoefficients":
+      {"display": "CFCoefficients",
+       "context":
+       ["LMLF · DLMF with Lean",
+        "Approximants and series",
+        "2.3 Normalized continued fractions"]}},
+     "address":
+     "/Approximants-and-series/2___3-Normalized-continued-fractions/"},
+    {"id": "LMLF___CFCoefficients-next",
+     "data":
+     {"/Gamma-Function/___5___10-Continued-Fractions/#LMLF___CFCoefficients-next":
+      {"display": "CFCoefficients",
+       "context":
+       ["LMLF · DLMF with Lean",
+        "Gamma Function",
+        "§5.10 Continued Fractions"]},
+      "/Approximants-and-series/2___3-Normalized-continued-fractions/#LMLF___CFCoefficients":
+      {"display": "CFCoefficients",
+       "context":
+       ["LMLF · DLMF with Lean",
+        "Approximants and series",
+        "2.3 Normalized continued fractions"]}},
+     "address": "/Gamma-Function/___5___10-Continued-Fractions/"}],
    "LMLF.Blueprint.Gamma.tendsto_harmonic_sub_log_eulerMascheroni":
    [{"id":
      "LMLF___Blueprint___Gamma___tendsto_harmonic_sub_log_eulerMascheroni",
@@ -3547,17 +4448,6 @@
      "data":
      {"/Gamma-Function/___5___9-Integral-Representations/#LMLF___Blueprint___Gamma___Section59___scaledGamma":
       {"display": "scaledGamma",
-       "context":
-       ["LMLF · DLMF with Lean",
-        "Gamma Function",
-        "§5.9 Integral Representations",
-        "§5.9(i) Gamma Function"]}},
-     "address": "/Gamma-Function/___5___9-Integral-Representations/"}],
-   "LMLF.Blueprint.Gamma.Section59.hankelTruncation":
-   [{"id": "LMLF___Blueprint___Gamma___Section59___hankelTruncation",
-     "data":
-     {"/Gamma-Function/___5___9-Integral-Representations/#LMLF___Blueprint___Gamma___Section59___hankelTruncation":
-      {"display": "hankelTruncation",
        "context":
        ["LMLF · DLMF with Lean",
         "Gamma Function",
@@ -5901,12 +6791,33 @@
         "§5.11 Asymptotic Expansions",
         "§5.11(iii) Ratios"]}},
      "address": "/Gamma-Function/___5___11-Asymptotic-Expansions/"}],
-   "LMLF.Blueprint.Gamma.Section510.gammaContinuedFractionCoeff_spec":
-   [{"id":
-     "LMLF___Blueprint___Gamma___Section510___gammaContinuedFractionCoeff_spec",
+   "LMLF.Blueprint.Gamma.Section510.logGammaStirlingSeries":
+   [{"id": "LMLF___Blueprint___Gamma___Section510___logGammaStirlingSeries",
      "data":
-     {"/Gamma-Function/___5___10-Continued-Fractions/#LMLF___Blueprint___Gamma___Section510___gammaContinuedFractionCoeff_spec":
-      {"display": "gammaContinuedFractionCoeff_spec",
+     {"/Gamma-Function/___5___10-Continued-Fractions/#LMLF___Blueprint___Gamma___Section510___logGammaStirlingSeries":
+      {"display": "logGammaStirlingSeries",
+       "context":
+       ["LMLF · DLMF with Lean",
+        "Gamma Function",
+        "§5.10 Continued Fractions"]}},
+     "address": "/Gamma-Function/___5___10-Continued-Fractions/"}],
+   "LMLF.Blueprint.Gamma.Section510.gammaContinuedFraction_reconstructs_stirling":
+   [{"id":
+     "LMLF___Blueprint___Gamma___Section510___gammaContinuedFraction_reconstructs_stirling",
+     "data":
+     {"/Gamma-Function/___5___10-Continued-Fractions/#LMLF___Blueprint___Gamma___Section510___gammaContinuedFraction_reconstructs_stirling":
+      {"display": "gammaContinuedFraction_reconstructs_stirling",
+       "context":
+       ["LMLF · DLMF with Lean",
+        "Gamma Function",
+        "§5.10 Continued Fractions"]}},
+     "address": "/Gamma-Function/___5___10-Continued-Fractions/"}],
+   "LMLF.Blueprint.Gamma.Section510.gammaContinuedFractionCoeff_unique":
+   [{"id":
+     "LMLF___Blueprint___Gamma___Section510___gammaContinuedFractionCoeff_unique",
+     "data":
+     {"/Gamma-Function/___5___10-Continued-Fractions/#LMLF___Blueprint___Gamma___Section510___gammaContinuedFractionCoeff_unique":
+      {"display": "gammaContinuedFractionCoeff_unique",
        "context":
        ["LMLF · DLMF with Lean",
         "Gamma Function",
@@ -5918,17 +6829,6 @@
      "data":
      {"/Gamma-Function/___5___10-Continued-Fractions/#LMLF___Blueprint___Gamma___Section510___gammaContinuedFractionCoeff":
       {"display": "gammaContinuedFractionCoeff",
-       "context":
-       ["LMLF · DLMF with Lean",
-        "Gamma Function",
-        "§5.10 Continued Fractions"]}},
-     "address": "/Gamma-Function/___5___10-Continued-Fractions/"}],
-   "LMLF.Blueprint.Gamma.Section510.exists_gammaContinuedFractionCoeff":
-   [{"id":
-     "LMLF___Blueprint___Gamma___Section510___exists_gammaContinuedFractionCoeff",
-     "data":
-     {"/Gamma-Function/___5___10-Continued-Fractions/#LMLF___Blueprint___Gamma___Section510___exists_gammaContinuedFractionCoeff":
-      {"display": "exists_gammaContinuedFractionCoeff",
        "context":
        ["LMLF · DLMF with Lean",
         "Gamma Function",
@@ -5949,27 +6849,6 @@
      "data":
      {"/Gamma-Function/___5___10-Continued-Fractions/#LMLF___Blueprint___Gamma___Section510___dlmf_5_10_1":
       {"display": "dlmf_5_10_1",
-       "context":
-       ["LMLF · DLMF with Lean",
-        "Gamma Function",
-        "§5.10 Continued Fractions"]}},
-     "address": "/Gamma-Function/___5___10-Continued-Fractions/"}],
-   "LMLF.Blueprint.Gamma.Section510.continuedFractionTail":
-   [{"id": "LMLF___Blueprint___Gamma___Section510___continuedFractionTail",
-     "data":
-     {"/Gamma-Function/___5___10-Continued-Fractions/#LMLF___Blueprint___Gamma___Section510___continuedFractionTail":
-      {"display": "continuedFractionTail",
-       "context":
-       ["LMLF · DLMF with Lean",
-        "Gamma Function",
-        "§5.10 Continued Fractions"]}},
-     "address": "/Gamma-Function/___5___10-Continued-Fractions/"}],
-   "LMLF.Blueprint.Gamma.Section510.continuedFractionConvergent":
-   [{"id":
-     "LMLF___Blueprint___Gamma___Section510___continuedFractionConvergent",
-     "data":
-     {"/Gamma-Function/___5___10-Continued-Fractions/#LMLF___Blueprint___Gamma___Section510___continuedFractionConvergent":
-      {"display": "continuedFractionConvergent",
        "context":
        ["LMLF · DLMF with Lean",
         "Gamma Function",

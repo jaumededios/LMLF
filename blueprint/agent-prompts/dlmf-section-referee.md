@@ -35,6 +35,16 @@ For every numbered DLMF formula in `SECTION_RANGE`, check:
     `node scripts/check_source_tex.mjs DOC_FILE`, and when integrated the generated
     site passes `node scripts/check_rendered_tex.mjs`.
 
+Apply the object-first test across the whole page, not only to examples already
+flagged by a human. A statement needs revision when a stable invariant is left
+as repeated plumbing, an existential witness is exposed where a canonical map
+should exist, a source-generated sequence has no finite-prefix/executable API,
+or a path/branch/remainder object is expanded into an unreadable proposition.
+Check that syntax, evaluation, convergence, and quantitative error control are
+separate declarations when they are mathematically separate. Check also that a
+new reusable interface is taught in Chapters 1–3, not merely used without
+explanation on a special-function page.
+
 Also sample non-formula statement candidates—prose assertions, tables, captions,
 and notes—and flag mathematically substantive claims missing from the authored
 page. Graphics should be treated as mathematical content when their captions or

@@ -226,30 +226,12 @@ def merge_overrides(old: dict[str, Any], reviewed: dict[str, dict[str, Any]]) ->
     chapter_ids = set(reviewed)
     merged: dict[str, Any] = {key: value for key, value in old.items() if key not in chapter_ids}
     for formula_id in sorted(reviewed):
-        current = dict(reviewed[formula_id])
-        previous = old.get(formula_id)
-        if isinstance(previous, dict):
-            # Preserve only stronger proof evidence while replacing stale Chapter 5 mappings.
-            # In particular, the old 5.2.E1 proved gamma_eq_eulerIntegral declaration survives;
-            # old unproved 5.11 names are intentionally not carried into the reviewed manifest.
-            if previous.get("lean_proof") is True:
-                current["lean_proof"] = True
-                current["lean_statement"] = True
-                old_names = previous.get("lean_declarations", [])
-                if isinstance(old_names, list):
-                    current["lean_declarations"] = sorted(
-                        set(current["lean_declarations"]) | {name for name in old_names if isinstance(name, str) and name}
-                    )
-            if previous.get("quantitative_proof") is True:
-                current["quantitative_proof"] = True
-                current["quantitative_statement"] = True
-                current["quantitative_analogue"] = True
-                old_names = previous.get("quantitative_declarations", [])
-                if isinstance(old_names, list):
-                    current["quantitative_declarations"] = sorted(
-                        set(current["quantitative_declarations"]) | {name for name in old_names if isinstance(name, str) and name}
-                    )
-        merged[formula_id] = current
+        # Reviewed section manifests are authoritative for Chapter 5. Unioning
+        # an older proved row's declaration names reintroduces declarations that
+        # have since been removed (as happened during the §5.10 API rewrite).
+        # Strong proof evidence must therefore live in the current manifest;
+        # §5.2.E1 already records its two proved Euler-integral declarations.
+        merged[formula_id] = dict(reviewed[formula_id])
     return dict(sorted(merged.items()))
 
 

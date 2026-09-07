@@ -12,7 +12,7 @@
   "omitted_ids": [],
   "summary": {
     "lean_statements": 2,
-    "lean_proofs": 0,
+    "lean_proofs": 1,
     "quantitative_analogues": 0,
     "quantitative_statements": 0,
     "quantitative_proofs": 0
@@ -25,42 +25,49 @@
       "lean_statement": true,
       "lean_proof": false,
       "lean_declarations": [
-        "LMLF.Blueprint.Gamma.Section510.continuedFractionTail",
-        "LMLF.Blueprint.Gamma.Section510.continuedFractionConvergent",
-        "LMLF.Blueprint.Gamma.Section510.exists_gammaContinuedFractionCoeff",
+        "LMLF.continuedFraction",
+        "LMLF.continuedFractionConvergent",
+        "LMLF.CFCoefficients",
+        "LMLF.cfracCoeff",
+        "LMLF.formalContinuedFraction_cfracCoeff",
+        "LMLF.cfracCoeff_unique",
+        "LMLF.Blueprint.Gamma.Section510.logGammaStirlingSeries",
         "LMLF.Blueprint.Gamma.Section510.gammaContinuedFractionCoeff",
-        "LMLF.Blueprint.Gamma.Section510.gammaContinuedFractionCoeff_spec",
+        "LMLF.Blueprint.Gamma.Section510.gammaContinuedFractionCoeff_regular",
+        "LMLF.Blueprint.Gamma.Section510.gammaContinuedFraction_reconstructs_stirling",
+        "LMLF.Blueprint.Gamma.Section510.gammaContinuedFractionCoeff_unique",
         "LMLF.Blueprint.Gamma.Section510.dlmf_5_10_1"
       ],
       "quantitative_analogue": false,
       "quantitative_statement": false,
       "quantitative_proof": false,
-      "notes": "Positive-real specialization of the source condition Re z > 0; finite convergents make the continued fraction's limit explicit. A proof-pending existential supplies the full coefficient sequence and its convergence; the reader-facing sequence is its Classical.choose."
+      "notes": "Positive-real specialization of the source condition Re z > 0. The reusable evaluator has an optional tail offset. A canonical executable map extracts a zero-terminated numerator stream from the odd Stirling germ; reconstruction and uniqueness are stated separately from analytic convergence."
     },
     {
       "id": "5.10.2",
       "source_url": "https://dlmf.nist.gov/5.10.E2",
       "match": "exact",
       "lean_statement": true,
-      "lean_proof": false,
+      "lean_proof": true,
       "lean_declarations": [
-        "LMLF.Blueprint.Gamma.Section510.exists_gammaContinuedFractionCoeff",
+        "LMLF.ZeroTerminated",
+        "LMLF.CFCoefficients",
+        "LMLF.cfracCoeff",
+        "LMLF.cfracCoeff_congr_prefix",
+        "LMLF.Blueprint.Gamma.Section510.logGammaStirlingSeries",
         "LMLF.Blueprint.Gamma.Section510.gammaContinuedFractionCoeff",
-        "LMLF.Blueprint.Gamma.Section510.gammaContinuedFractionCoeff_spec",
+        "LMLF.Blueprint.Gamma.Section510.gammaContinuedFractionCoeff_algorithm",
         "LMLF.Blueprint.Gamma.Section510.dlmf_5_10_2"
       ],
       "quantitative_analogue": false,
       "quantitative_statement": false,
       "quantitative_proof": false,
-      "notes": "The seven displayed coefficients are kept as one grouped source record; later coefficients are present in the existential full sequence because §5.10 refers to external tables for them."
+      "notes": "The seven displayed coefficients are one grouped source record and are proved by native evaluation of the Bernoulli-series extraction algorithm. The finite-prefix theorem shows how every later requested coefficient is computable."
     }
   ],
-  "shared_vocabulary_requests": [
-    "Consolidate continuedFractionTail and continuedFractionConvergent if another section needs continued-fraction limits."
-  ],
+  "shared_vocabulary_requests": [],
   "known_gaps": [
-    "Both statements are proof-pending (by sorry).",
-    "DLMF 5.10.1 is represented on the positive real axis rather than with the full complex general-logarithm branch convention.",
-    "DLMF 5.10.2 lists a₀ through a₆ and points to external tables for later coefficients. The existence assertion for a full sequence with those values and the E1 convergence/value remains proof-pending."
+    "The analytic convergence statement 5.10.1 is proof-pending (by sorry).",
+    "DLMF 5.10.1 is represented on the positive real axis rather than with the full complex general-logarithm branch convention."
   ]
 }
