@@ -1,0 +1,27 @@
+{
+  "author_contract": "blueprint/agent-prompts/dlmf-section-author.md",
+  "referee_contract": "blueprint/agent-prompts/dlmf-section-referee.md",
+  "pages": [
+    {"section":"6.1","slug":"61","lean_file":"LMLF/Blueprint/ExponentialIntegrals/Section61.lean","doc_file":"doc/LMLFManual/Chapter6/Section61.lean","manifest_file":"coverage/sections/chapter6-61.json","reviewers":1},
+    {"section":"6.2","slug":"62","lean_file":"LMLF/Blueprint/ExponentialIntegrals/Section62.lean","doc_file":"doc/LMLFManual/Chapter6/Section62.lean","manifest_file":"coverage/sections/chapter6-62.json","reviewers":2},
+    {"section":"6.3","slug":"63","lean_file":"LMLF/Blueprint/ExponentialIntegrals/Section63.lean","doc_file":"doc/LMLFManual/Chapter6/Section63.lean","manifest_file":"coverage/sections/chapter6-63.json","reviewers":1},
+    {"section":"6.4","slug":"64","lean_file":"LMLF/Blueprint/ExponentialIntegrals/Section64.lean","doc_file":"doc/LMLFManual/Chapter6/Section64.lean","manifest_file":"coverage/sections/chapter6-64.json","reviewers":1},
+    {"section":"6.5","slug":"65","lean_file":"LMLF/Blueprint/ExponentialIntegrals/Section65.lean","doc_file":"doc/LMLFManual/Chapter6/Section65.lean","manifest_file":"coverage/sections/chapter6-65.json","reviewers":1},
+    {"section":"6.6","slug":"66","lean_file":"LMLF/Blueprint/ExponentialIntegrals/Section66.lean","doc_file":"doc/LMLFManual/Chapter6/Section66.lean","manifest_file":"coverage/sections/chapter6-66.json","reviewers":1},
+    {"section":"6.7","slug":"67","lean_file":"LMLF/Blueprint/ExponentialIntegrals/Section67.lean","doc_file":"doc/LMLFManual/Chapter6/Section67.lean","manifest_file":"coverage/sections/chapter6-67.json","reviewers":2},
+    {"section":"6.8","slug":"68","lean_file":"LMLF/Blueprint/ExponentialIntegrals/Section68.lean","doc_file":"doc/LMLFManual/Chapter6/Section68.lean","manifest_file":"coverage/sections/chapter6-68.json","reviewers":1},
+    {"section":"6.9","slug":"69","lean_file":"LMLF/Blueprint/ExponentialIntegrals/Section69.lean","doc_file":"doc/LMLFManual/Chapter6/Section69.lean","manifest_file":"coverage/sections/chapter6-69.json","reviewers":1},
+    {"section":"6.10","slug":"610","lean_file":"LMLF/Blueprint/ExponentialIntegrals/Section610.lean","doc_file":"doc/LMLFManual/Chapter6/Section610.lean","manifest_file":"coverage/sections/chapter6-610.json","reviewers":1},
+    {"section":"6.11","slug":"611","lean_file":"LMLF/Blueprint/ExponentialIntegrals/Section611.lean","doc_file":"doc/LMLFManual/Chapter6/Section611.lean","manifest_file":"coverage/sections/chapter6-611.json","reviewers":1},
+    {"section":"6.12","slug":"612","lean_file":"LMLF/Blueprint/ExponentialIntegrals/Section612.lean","doc_file":"doc/LMLFManual/Chapter6/Section612.lean","manifest_file":"coverage/sections/chapter6-612.json","reviewers":2},
+    {"section":"6.13","slug":"613","lean_file":"LMLF/Blueprint/ExponentialIntegrals/Section613.lean","doc_file":"doc/LMLFManual/Chapter6/Section613.lean","manifest_file":"coverage/sections/chapter6-613.json","reviewers":1},
+    {"section":"6.14","slug":"614","lean_file":"LMLF/Blueprint/ExponentialIntegrals/Section614.lean","doc_file":"doc/LMLFManual/Chapter6/Section614.lean","manifest_file":"coverage/sections/chapter6-614.json","reviewers":1},
+    {"section":"6.15","slug":"615","lean_file":"LMLF/Blueprint/ExponentialIntegrals/Section615.lean","doc_file":"doc/LMLFManual/Chapter6/Section615.lean","manifest_file":"coverage/sections/chapter6-615.json","reviewers":1},
+    {"section":"6.16","slug":"616","lean_file":"LMLF/Blueprint/ExponentialIntegrals/Section616.lean","doc_file":"doc/LMLFManual/Chapter6/Section616.lean","manifest_file":"coverage/sections/chapter6-616.json","reviewers":1},
+    {"section":"6.17","slug":"617","lean_file":"LMLF/Blueprint/ExponentialIntegrals/Section617.lean","doc_file":"doc/LMLFManual/Chapter6/Section617.lean","manifest_file":"coverage/sections/chapter6-617.json","reviewers":1},
+    {"section":"6.18","slug":"618","lean_file":"LMLF/Blueprint/ExponentialIntegrals/Section618.lean","doc_file":"doc/LMLFManual/Chapter6/Section618.lean","manifest_file":"coverage/sections/chapter6-618.json","reviewers":1},
+    {"section":"6.19","slug":"619","lean_file":"LMLF/Blueprint/ExponentialIntegrals/Section619.lean","doc_file":"doc/LMLFManual/Chapter6/Section619.lean","manifest_file":"coverage/sections/chapter6-619.json","reviewers":1},
+    {"section":"6.20","slug":"620","lean_file":"LMLF/Blueprint/ExponentialIntegrals/Section620.lean","doc_file":"doc/LMLFManual/Chapter6/Section620.lean","manifest_file":"coverage/sections/chapter6-620.json","reviewers":1},
+    {"section":"6.21","slug":"621","lean_file":"LMLF/Blueprint/ExponentialIntegrals/Section621.lean","doc_file":"doc/LMLFManual/Chapter6/Section621.lean","manifest_file":"coverage/sections/chapter6-621.json","reviewers":1}
+  ]
+}

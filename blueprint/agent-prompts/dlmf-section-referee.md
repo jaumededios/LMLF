@@ -29,7 +29,10 @@ For every numbered DLMF formula in `SECTION_RANGE`, check:
 8. the manifest names the right declaration and status;
 9. the Lean module elaborates despite permitted `sorry`s;
 10. neither source file contains `#check`, filler status prose, or proof work that
-    displaced statement coverage.
+    displaced statement coverage;
+11. every Verso math block contains raw KaTeX input without redundant `\[...\]`
+    delimiters or unsupported commands; when integrated, the generated site passes
+    `node scripts/check_rendered_tex.mjs`.
 
 Also sample non-formula statement candidates—prose assertions, tables, captions,
 and notes—and flag mathematically substantive claims missing from the authored

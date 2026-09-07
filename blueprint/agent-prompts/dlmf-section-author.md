@@ -39,6 +39,10 @@ For every mathematical result, present this sequence:
 4. an open Lean disclosure containing the complete declaration copied through a
    Verso external-source anchor.
 
+In Verso display math, write raw TeX inside `$$\`...\``. Do not add `\[` and
+`\]`: Verso already selects display mode, and those redundant delimiters are
+invalid input to the site's KaTeX renderer. Use only KaTeX-supported commands.
+
 Do not write status prose such as “qualitative view”, “Lean analogue”, “proof
 pending”, “this theorem says”, or “there is no error majorant”. Do not use
 `#check`. Do not replace a declaration by its name. Do not expose opaque wrapper
@@ -110,7 +114,9 @@ Before finishing:
 2. build `LEAN_FILE` with the pinned project;
 3. build `DOC_FILE` if its standalone shape permits it;
 4. search both files for `#check` and reject any hit;
-5. report counts, build results, specialization decisions, vocabulary requests,
+5. when the page is integrated, run `node scripts/check_rendered_tex.mjs` and
+   reject any KaTeX parse failure;
+6. report counts, build results, specialization decisions, vocabulary requests,
    and every remaining gap.
 
 Do not claim the section is complete unless expected and stated ID sets are equal

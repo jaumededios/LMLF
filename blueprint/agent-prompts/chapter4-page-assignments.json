@@ -33,6 +33,22 @@
     {"section":"4.29","slug":"429","lean_file":"LMLF/Blueprint/Elementary/Section429.lean","doc_file":"doc/LMLFManual/Chapter4/Section429.lean","manifest_file":"coverage/sections/chapter4-429.json","reviewers":1},
     {"section":"4.30","slug":"430","lean_file":"LMLF/Blueprint/Elementary/Section430.lean","doc_file":"doc/LMLFManual/Chapter4/Section430.lean","manifest_file":"coverage/sections/chapter4-430.json","reviewers":1},
     {"section":"4.31","slug":"431","lean_file":"LMLF/Blueprint/Elementary/Section431.lean","doc_file":"doc/LMLFManual/Chapter4/Section431.lean","manifest_file":"coverage/sections/chapter4-431.json","reviewers":1},
-    {"section":"4.32","slug":"432","lean_file":"LMLF/Blueprint/Elementary/Section432.lean","doc_file":"doc/LMLFManual/Chapter4/Section432.lean","manifest_file":"coverage/sections/chapter4-432.json","reviewers":1}
+    {"section":"4.32","slug":"432","lean_file":"LMLF/Blueprint/Elementary/Section432.lean","doc_file":"doc/LMLFManual/Chapter4/Section432.lean","manifest_file":"coverage/sections/chapter4-432.json","reviewers":1},
+    {"section":"4.33","slug":"433","lean_file":"LMLF/Blueprint/Elementary/Section433.lean","doc_file":"doc/LMLFManual/Chapter4/Section433.lean","manifest_file":"coverage/sections/chapter4-433.json","reviewers":1},
+    {"section":"4.34","slug":"434","lean_file":"LMLF/Blueprint/Elementary/Section434.lean","doc_file":"doc/LMLFManual/Chapter4/Section434.lean","manifest_file":"coverage/sections/chapter4-434.json","reviewers":1},
+    {"section":"4.35","slug":"435","lean_file":"LMLF/Blueprint/Elementary/Section435.lean","doc_file":"doc/LMLFManual/Chapter4/Section435.lean","manifest_file":"coverage/sections/chapter4-435.json","reviewers":1},
+    {"section":"4.36","slug":"436","lean_file":"LMLF/Blueprint/Elementary/Section436.lean","doc_file":"doc/LMLFManual/Chapter4/Section436.lean","manifest_file":"coverage/sections/chapter4-436.json","reviewers":1},
+    {"section":"4.37","slug":"437","lean_file":"LMLF/Blueprint/Elementary/Section437.lean","doc_file":"doc/LMLFManual/Chapter4/Section437.lean","manifest_file":"coverage/sections/chapter4-437.json","reviewers":2},
+    {"section":"4.38","slug":"438","lean_file":"LMLF/Blueprint/Elementary/Section438.lean","doc_file":"doc/LMLFManual/Chapter4/Section438.lean","manifest_file":"coverage/sections/chapter4-438.json","reviewers":2},
+    {"section":"4.39","slug":"439","lean_file":"LMLF/Blueprint/Elementary/Section439.lean","doc_file":"doc/LMLFManual/Chapter4/Section439.lean","manifest_file":"coverage/sections/chapter4-439.json","reviewers":1},
+    {"section":"4.40","slug":"440","lean_file":"LMLF/Blueprint/Elementary/Section440.lean","doc_file":"doc/LMLFManual/Chapter4/Section440.lean","manifest_file":"coverage/sections/chapter4-440.json","reviewers":1},
+    {"section":"4.41","slug":"441","lean_file":"LMLF/Blueprint/Elementary/Section441.lean","doc_file":"doc/LMLFManual/Chapter4/Section441.lean","manifest_file":"coverage/sections/chapter4-441.json","reviewers":1},
+    {"section":"4.42","slug":"442","lean_file":"LMLF/Blueprint/Elementary/Section442.lean","doc_file":"doc/LMLFManual/Chapter4/Section442.lean","manifest_file":"coverage/sections/chapter4-442.json","reviewers":1},
+    {"section":"4.43","slug":"443","lean_file":"LMLF/Blueprint/Elementary/Section443.lean","doc_file":"doc/LMLFManual/Chapter4/Section443.lean","manifest_file":"coverage/sections/chapter4-443.json","reviewers":1},
+    {"section":"4.44","slug":"444","lean_file":"LMLF/Blueprint/Elementary/Section444.lean","doc_file":"doc/LMLFManual/Chapter4/Section444.lean","manifest_file":"coverage/sections/chapter4-444.json","reviewers":1},
+    {"section":"4.45","slug":"445","lean_file":"LMLF/Blueprint/Elementary/Section445.lean","doc_file":"doc/LMLFManual/Chapter4/Section445.lean","manifest_file":"coverage/sections/chapter4-445.json","reviewers":1},
+    {"section":"4.46","slug":"446","lean_file":"LMLF/Blueprint/Elementary/Section446.lean","doc_file":"doc/LMLFManual/Chapter4/Section446.lean","manifest_file":"coverage/sections/chapter4-446.json","reviewers":1},
+    {"section":"4.47","slug":"447","lean_file":"LMLF/Blueprint/Elementary/Section447.lean","doc_file":"doc/LMLFManual/Chapter4/Section447.lean","manifest_file":"coverage/sections/chapter4-447.json","reviewers":1},
+    {"section":"4.48","slug":"448","lean_file":"LMLF/Blueprint/Elementary/Section448.lean","doc_file":"doc/LMLFManual/Chapter4/Section448.lean","manifest_file":"coverage/sections/chapter4-448.json","reviewers":1}
   ]
 }
