@@ -1,6 +1,7 @@
 import LMLF.Basic
 import LMLF.Definitions
 import LMLF.Results
+import LMLF.Blueprint.Elementary
 import LMLF.Blueprint.Gamma.Section51
 import LMLF.Blueprint.Gamma.Section52
 import LMLF.Blueprint.Gamma.Section53

@@ -1,0 +1,32 @@
+{
+  "section_range": ["4.10"],
+  "numbered_formula_ids_expected": [
+    "4.10.E1", "4.10.E2", "4.10.E3", "4.10.E4", "4.10.E5", "4.10.E6",
+    "4.10.E7", "4.10.E8", "4.10.E9", "4.10.E10", "4.10.E11", "4.10.E12",
+    "4.10.E13"
+  ],
+  "numbered_formula_ids_stated": [
+    "4.10.E1", "4.10.E2", "4.10.E3", "4.10.E4", "4.10.E5", "4.10.E6",
+    "4.10.E7", "4.10.E8", "4.10.E9", "4.10.E10", "4.10.E11", "4.10.E12",
+    "4.10.E13"
+  ],
+  "numbered_formula_ids_omitted": [],
+  "extra_statement_ids": [],
+  "declarations": [
+    {"source_id":"4.10.E1","names":["LMLF.Blueprint.Elementary.Section410.dlmf_4_10_1"],"relation":"specialization","proof_status":"missing","quantitative_analogue":"not_applicable","notes":"Derivative form of the principal-logarithm antiderivative on an explicit branch domain."},
+    {"source_id":"4.10.E2","names":["LMLF.Blueprint.Elementary.Section410.dlmf_4_10_2"],"relation":"specialization","proof_status":"missing","quantitative_analogue":"not_applicable","notes":"Derivative form with the principal branch and nonzero argument."},
+    {"source_id":"4.10.E3","names":["LMLF.Blueprint.Elementary.Section410.dlmf_4_10_3"],"relation":"specialization","proof_status":"missing","quantitative_analogue":"not_applicable","notes":"Integer exponent and derivative formulation; n ≠ -1 is retained."},
+    {"source_id":"4.10.E4","names":["LMLF.Blueprint.Elementary.Section410.dlmf_4_10_4"],"relation":"specialization","proof_status":"missing","quantitative_analogue":"not_applicable","notes":"Derivative formulation on the principal branch where z and log z are nonzero."},
+    {"source_id":"4.10.E5","names":["LMLF.Blueprint.Elementary.Section410.dlmf_4_10_5"],"relation":"exact","proof_status":"missing","quantitative_analogue":"not_applicable","notes":"Improper integral over the positive interval (0,1)."},
+    {"source_id":"4.10.E6","names":["LMLF.Blueprint.Elementary.Section410.dlmf_4_10_6"],"relation":"exact","proof_status":"missing","quantitative_analogue":"not_applicable","notes":"Improper integral over the positive interval (0,1)."},
+    {"source_id":"4.10.E7","names":["LMLF.Blueprint.Elementary.Section410.dlmf_4_10_7","LMLF.Blueprint.Elementary.Section410.logarithmicIntegral"],"relation":"specialization","proof_status":"missing","quantitative_analogue":"not_applicable","notes":"For x > 1, the theorem states existence and value of the explicit symmetric-cutoff Cauchy-principal-value limit."},
+    {"source_id":"4.10.E8","names":["LMLF.Blueprint.Elementary.Section410.dlmf_4_10_8"],"relation":"specialization","proof_status":"missing","quantitative_analogue":"not_applicable","notes":"Derivative formulation of the complex antiderivative with a ≠ 0."},
+    {"source_id":"4.10.E9","names":["LMLF.Blueprint.Elementary.Section410.dlmf_4_10_9"],"relation":"specialization","proof_status":"missing","quantitative_analogue":"not_applicable","notes":"Derivative formulation with a,b ≠ 0 and the principal-log argument nonzero and off its nonpositive-real branch cut."},
+    {"source_id":"4.10.E10","names":["LMLF.Blueprint.Elementary.Section410.dlmf_4_10_10"],"relation":"specialization","proof_status":"missing","quantitative_analogue":"not_applicable","notes":"Derivative formulation with explicit nonzero and principal-log slit-domain hypotheses for the logarithm argument."},
+    {"source_id":"4.10.E11","names":["LMLF.Blueprint.Elementary.Section410.dlmf_4_10_11"],"relation":"exact","proof_status":"missing","quantitative_analogue":"not_applicable","notes":"Complex Gaussian integral with Re c > 0 and principal complex square root notation."},
+    {"source_id":"4.10.E12","names":["LMLF.Blueprint.Elementary.Section410.dlmf_4_10_12"],"relation":"exact","proof_status":"missing","quantitative_analogue":"not_applicable","notes":"Finite real integral with the stated logarithmic endpoint."},
+    {"source_id":"4.10.E13","names":["LMLF.Blueprint.Elementary.Section410.dlmf_4_10_13"],"relation":"exact","proof_status":"missing","quantitative_analogue":"not_applicable","notes":"Improper integral over (0,∞)."}
+  ],
+  "shared_vocabulary_requests": [],
+  "known_gaps": []
+}

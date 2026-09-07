@@ -1,0 +1,34 @@
+{
+  "section_range": ["4.6"],
+  "numbered_formula_ids_expected": [
+    "4.6.E1", "4.6.E2", "4.6.E3", "4.6.E4", "4.6.E5", "4.6.E6", "4.6.E7"
+  ],
+  "numbered_formula_ids_stated": [
+    "4.6.E1", "4.6.E2", "4.6.E3", "4.6.E4", "4.6.E5", "4.6.E6", "4.6.E7"
+  ],
+  "numbered_formula_ids_omitted": [],
+  "extra_statement_ids": [
+    "4.6.logOneAddTerm", "4.6.logRatioTerm", "4.6.logSubOneTerm",
+    "4.6.logSymmetricTerm", "4.6.logInverseOddTerm", "4.6.logShiftedTerm",
+    "4.6.generalizedBinomial", "4.6.E7.terminating"
+  ],
+  "declarations": [
+    {"source_id":"4.6.E1","names":["LMLF.Blueprint.Elementary.Section46.dlmf_4_6_1"],"relation":"exact","proof_status":"missing","quantitative_analogue":"not_applicable","notes":"Principal logarithm series on the closed unit disk excluding z = -1."},
+    {"source_id":"4.6.E2","names":["LMLF.Blueprint.Elementary.Section46.dlmf_4_6_2"],"relation":"exact","proof_status":"missing","quantitative_analogue":"not_applicable","notes":"Principal logarithm series under Re z >= 1/2."},
+    {"source_id":"4.6.E3","names":["LMLF.Blueprint.Elementary.Section46.dlmf_4_6_3"],"relation":"exact","proof_status":"missing","quantitative_analogue":"not_applicable","notes":"Principal logarithm series on |z - 1| <= 1 excluding z = 0."},
+    {"source_id":"4.6.E4","names":["LMLF.Blueprint.Elementary.Section46.dlmf_4_6_4"],"relation":"exact","proof_status":"missing","quantitative_analogue":"not_applicable","notes":"Symmetric odd-power series in the right half-plane, including the source factor 2."},
+    {"source_id":"4.6.E5","names":["LMLF.Blueprint.Elementary.Section46.dlmf_4_6_5"],"relation":"exact","proof_status":"missing","quantitative_analogue":"not_applicable","notes":"Inverse odd-power series on |z| >= 1 excluding z = +/-1, including the source factor 2."},
+    {"source_id":"4.6.E6","names":["LMLF.Blueprint.Elementary.Section46.dlmf_4_6_6"],"relation":"specialization","proof_status":"missing","quantitative_analogue":"not_applicable","notes":"Real a,z specialization of the source condition a > 0 and Re z >= -a."},
+    {"source_id":"4.6.E7","names":["LMLF.Blueprint.Elementary.Section46.dlmf_4_6_7","LMLF.Blueprint.Elementary.Section46.dlmf_4_6_7_terminating"],"relation":"exact","proof_status":"missing","quantitative_analogue":"not_applicable","notes":"Generalized binomial series on |z| < 1, together with the unrestricted terminating-polynomial case for nonnegative integral exponents."},
+    {"source_id":"4.6.logOneAddTerm","names":["LMLF.Blueprint.Elementary.Section46.logOneAddTerm"],"relation":"related","proof_status":"missing","quantitative_analogue":"not_applicable","notes":"Reusable series term for E1."},
+    {"source_id":"4.6.logRatioTerm","names":["LMLF.Blueprint.Elementary.Section46.logRatioTerm"],"relation":"related","proof_status":"missing","quantitative_analogue":"not_applicable","notes":"Reusable series term for E2."},
+    {"source_id":"4.6.logSubOneTerm","names":["LMLF.Blueprint.Elementary.Section46.logSubOneTerm"],"relation":"related","proof_status":"missing","quantitative_analogue":"not_applicable","notes":"Reusable series term for E3."},
+    {"source_id":"4.6.logSymmetricTerm","names":["LMLF.Blueprint.Elementary.Section46.logSymmetricTerm"],"relation":"related","proof_status":"missing","quantitative_analogue":"not_applicable","notes":"Reusable series term for E4."},
+    {"source_id":"4.6.logInverseOddTerm","names":["LMLF.Blueprint.Elementary.Section46.logInverseOddTerm"],"relation":"related","proof_status":"missing","quantitative_analogue":"not_applicable","notes":"Reusable series term for E5."},
+    {"source_id":"4.6.logShiftedTerm","names":["LMLF.Blueprint.Elementary.Section46.logShiftedTerm"],"relation":"related","proof_status":"missing","quantitative_analogue":"not_applicable","notes":"Reusable series term for E6."},
+    {"source_id":"4.6.generalizedBinomial","names":["LMLF.Blueprint.Elementary.Section46.generalizedBinomial"],"relation":"related","proof_status":"missing","quantitative_analogue":"not_applicable","notes":"Finite-product generalized binomial coefficient used by E7."}
+    ,{"source_id":"4.6.E7.terminating","names":["LMLF.Blueprint.Elementary.Section46.dlmf_4_6_7_terminating"],"relation":"consequence","proof_status":"missing","quantitative_analogue":"not_applicable","notes":"Unrestricted complex-z terminating-polynomial extension stated by the source after E7."}
+  ],
+  "shared_vocabulary_requests": [],
+  "known_gaps": []
+}

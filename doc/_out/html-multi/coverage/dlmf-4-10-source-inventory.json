@@ -2,7 +2,7 @@
   "$schema": "dlmf-source-inventory.schema.json",
   "schema_version": 2,
   "artifact_kind": "dlmf_structural_source_inventory",
-  "generated_at": "2026-09-07T00:08:38+00:00",
+  "generated_at": "2026-09-07T01:38:22+00:00",
   "source": {
     "name": "NIST Digital Library of Mathematical Functions",
     "base_url": "https://dlmf.nist.gov",
@@ -74,13 +74,13 @@
       "unreviewed": 4792
     },
     "lean_statement_status": {
-      "checked": 160,
-      "unknown": 4632
+      "checked": 299,
+      "unknown": 4493
     },
     "lean_proof_status": {
-      "missing": 159,
+      "missing": 298,
       "proved": 1,
-      "unknown": 4632
+      "unknown": 4493
     },
     "quantitative_analogue_status": {
       "present": 3,
@@ -3473,11 +3473,13 @@
         "state": "unreviewed"
       },
       "lean": {
-        "statement_status": "unknown",
-        "proof_status": "unknown",
-        "coverage_relation": "unknown",
-        "declarations": [],
-        "evidence_source": null
+        "statement_status": "checked",
+        "proof_status": "missing",
+        "coverage_relation": "specialization",
+        "declarations": [
+          "LMLF.Blueprint.Elementary.Section42.dlmf_4_2_1"
+        ],
+        "evidence_source": "coverage/overrides.json"
       },
       "quantitative": {
         "analogue_status": "unknown",
@@ -3548,11 +3550,13 @@
         "state": "unreviewed"
       },
       "lean": {
-        "statement_status": "unknown",
-        "proof_status": "unknown",
-        "coverage_relation": "unknown",
-        "declarations": [],
-        "evidence_source": null
+        "statement_status": "checked",
+        "proof_status": "missing",
+        "coverage_relation": "specialization",
+        "declarations": [
+          "LMLF.Blueprint.Elementary.Section42.dlmf_4_2_2"
+        ],
+        "evidence_source": "coverage/overrides.json"
       },
       "quantitative": {
         "analogue_status": "unknown",
@@ -3656,11 +3660,13 @@
         "state": "unreviewed"
       },
       "lean": {
-        "statement_status": "unknown",
-        "proof_status": "unknown",
-        "coverage_relation": "unknown",
-        "declarations": [],
-        "evidence_source": null
+        "statement_status": "checked",
+        "proof_status": "missing",
+        "coverage_relation": "specialization",
+        "declarations": [
+          "LMLF.Blueprint.Elementary.Section42.dlmf_4_2_3"
+        ],
+        "evidence_source": "coverage/overrides.json"
       },
       "quantitative": {
         "analogue_status": "unknown",
@@ -3764,11 +3770,13 @@
         "state": "unreviewed"
       },
       "lean": {
-        "statement_status": "unknown",
-        "proof_status": "unknown",
-        "coverage_relation": "unknown",
-        "declarations": [],
-        "evidence_source": null
+        "statement_status": "checked",
+        "proof_status": "missing",
+        "coverage_relation": "specialization",
+        "declarations": [
+          "LMLF.Blueprint.Elementary.Section42.dlmf_4_2_4"
+        ],
+        "evidence_source": "coverage/overrides.json"
       },
       "quantitative": {
         "analogue_status": "unknown",
@@ -3806,11 +3814,13 @@
         "state": "unreviewed"
       },
       "lean": {
-        "statement_status": "unknown",
-        "proof_status": "unknown",
-        "coverage_relation": "unknown",
-        "declarations": [],
-        "evidence_source": null
+        "statement_status": "checked",
+        "proof_status": "missing",
+        "coverage_relation": "exact",
+        "declarations": [
+          "LMLF.Blueprint.Elementary.Section42.dlmf_4_2_5"
+        ],
+        "evidence_source": "coverage/overrides.json"
       },
       "quantitative": {
         "analogue_status": "unknown",
@@ -3848,11 +3858,13 @@
         "state": "unreviewed"
       },
       "lean": {
-        "statement_status": "unknown",
-        "proof_status": "unknown",
-        "coverage_relation": "unknown",
-        "declarations": [],
-        "evidence_source": null
+        "statement_status": "checked",
+        "proof_status": "missing",
+        "coverage_relation": "exact",
+        "declarations": [
+          "LMLF.Blueprint.Elementary.Section42.dlmf_4_2_6"
+        ],
+        "evidence_source": "coverage/overrides.json"
       },
       "quantitative": {
         "analogue_status": "unknown",
@@ -3923,11 +3935,13 @@
         "state": "unreviewed"
       },
       "lean": {
-        "statement_status": "unknown",
-        "proof_status": "unknown",
-        "coverage_relation": "unknown",
-        "declarations": [],
-        "evidence_source": null
+        "statement_status": "checked",
+        "proof_status": "missing",
+        "coverage_relation": "specialization",
+        "declarations": [
+          "LMLF.Blueprint.Elementary.Section42.dlmf_4_2_7"
+        ],
+        "evidence_source": "coverage/overrides.json"
       },
       "quantitative": {
         "analogue_status": "unknown",
@@ -4097,11 +4111,13 @@
         "state": "unreviewed"
       },
       "lean": {
-        "statement_status": "unknown",
-        "proof_status": "unknown",
-        "coverage_relation": "unknown",
-        "declarations": [],
-        "evidence_source": null
+        "statement_status": "checked",
+        "proof_status": "missing",
+        "coverage_relation": "exact",
+        "declarations": [
+          "LMLF.Blueprint.Elementary.Section42.dlmf_4_2_8"
+        ],
+        "evidence_source": "coverage/overrides.json"
       },
       "quantitative": {
         "analogue_status": "unknown",
@@ -4139,11 +4155,13 @@
         "state": "unreviewed"
       },
       "lean": {
-        "statement_status": "unknown",
-        "proof_status": "unknown",
-        "coverage_relation": "unknown",
-        "declarations": [],
-        "evidence_source": null
+        "statement_status": "checked",
+        "proof_status": "missing",
+        "coverage_relation": "exact",
+        "declarations": [
+          "LMLF.Blueprint.Elementary.Section42.dlmf_4_2_9"
+        ],
+        "evidence_source": "coverage/overrides.json"
       },
       "quantitative": {
         "analogue_status": "unknown",
@@ -4181,11 +4199,13 @@
         "state": "unreviewed"
       },
       "lean": {
-        "statement_status": "unknown",
-        "proof_status": "unknown",
-        "coverage_relation": "unknown",
-        "declarations": [],
-        "evidence_source": null
+        "statement_status": "checked",
+        "proof_status": "missing",
+        "coverage_relation": "exact",
+        "declarations": [
+          "LMLF.Blueprint.Elementary.Section42.dlmf_4_2_10"
+        ],
+        "evidence_source": "coverage/overrides.json"
       },
       "quantitative": {
         "analogue_status": "unknown",
@@ -4256,11 +4276,13 @@
         "state": "unreviewed"
       },
       "lean": {
-        "statement_status": "unknown",
-        "proof_status": "unknown",
-        "coverage_relation": "unknown",
-        "declarations": [],
-        "evidence_source": null
+        "statement_status": "checked",
+        "proof_status": "missing",
+        "coverage_relation": "specialization",
+        "declarations": [
+          "LMLF.Blueprint.Elementary.Section42.dlmf_4_2_11"
+        ],
+        "evidence_source": "coverage/overrides.json"
       },
       "quantitative": {
         "analogue_status": "unknown",
@@ -4331,11 +4353,13 @@
         "state": "unreviewed"
       },
       "lean": {
-        "statement_status": "unknown",
-        "proof_status": "unknown",
-        "coverage_relation": "unknown",
-        "declarations": [],
-        "evidence_source": null
+        "statement_status": "checked",
+        "proof_status": "missing",
+        "coverage_relation": "exact",
+        "declarations": [
+          "LMLF.Blueprint.Elementary.Section42.dlmf_4_2_12"
+        ],
+        "evidence_source": "coverage/overrides.json"
       },
       "quantitative": {
         "analogue_status": "unknown",
@@ -4373,11 +4397,13 @@
         "state": "unreviewed"
       },
       "lean": {
-        "statement_status": "unknown",
-        "proof_status": "unknown",
-        "coverage_relation": "unknown",
-        "declarations": [],
-        "evidence_source": null
+        "statement_status": "checked",
+        "proof_status": "missing",
+        "coverage_relation": "exact",
+        "declarations": [
+          "LMLF.Blueprint.Elementary.Section42.dlmf_4_2_13"
+        ],
+        "evidence_source": "coverage/overrides.json"
       },
       "quantitative": {
         "analogue_status": "unknown",
@@ -4415,11 +4441,13 @@
         "state": "unreviewed"
       },
       "lean": {
-        "statement_status": "unknown",
-        "proof_status": "unknown",
-        "coverage_relation": "unknown",
-        "declarations": [],
-        "evidence_source": null
+        "statement_status": "checked",
+        "proof_status": "missing",
+        "coverage_relation": "exact",
+        "declarations": [
+          "LMLF.Blueprint.Elementary.Section42.dlmf_4_2_14"
+        ],
+        "evidence_source": "coverage/overrides.json"
       },
       "quantitative": {
         "analogue_status": "unknown",
@@ -4457,11 +4485,13 @@
         "state": "unreviewed"
       },
       "lean": {
-        "statement_status": "unknown",
-        "proof_status": "unknown",
-        "coverage_relation": "unknown",
-        "declarations": [],
-        "evidence_source": null
+        "statement_status": "checked",
+        "proof_status": "missing",
+        "coverage_relation": "exact",
+        "declarations": [
+          "LMLF.Blueprint.Elementary.Section42.dlmf_4_2_15"
+        ],
+        "evidence_source": "coverage/overrides.json"
       },
       "quantitative": {
         "analogue_status": "unknown",
@@ -4499,11 +4529,13 @@
         "state": "unreviewed"
       },
       "lean": {
-        "statement_status": "unknown",
-        "proof_status": "unknown",
-        "coverage_relation": "unknown",
-        "declarations": [],
-        "evidence_source": null
+        "statement_status": "checked",
+        "proof_status": "missing",
+        "coverage_relation": "exact",
+        "declarations": [
+          "LMLF.Blueprint.Elementary.Section42.dlmf_4_2_16"
+        ],
+        "evidence_source": "coverage/overrides.json"
       },
       "quantitative": {
         "analogue_status": "unknown",
@@ -4541,11 +4573,13 @@
         "state": "unreviewed"
       },
       "lean": {
-        "statement_status": "unknown",
-        "proof_status": "unknown",
-        "coverage_relation": "unknown",
-        "declarations": [],
-        "evidence_source": null
+        "statement_status": "checked",
+        "proof_status": "missing",
+        "coverage_relation": "specialization",
+        "declarations": [
+          "LMLF.Blueprint.Elementary.Section42.dlmf_4_2_17"
+        ],
+        "evidence_source": "coverage/overrides.json"
       },
       "quantitative": {
         "analogue_status": "unknown",
@@ -4616,11 +4650,13 @@
         "state": "unreviewed"
       },
       "lean": {
-        "statement_status": "unknown",
-        "proof_status": "unknown",
-        "coverage_relation": "unknown",
-        "declarations": [],
-        "evidence_source": null
+        "statement_status": "checked",
+        "proof_status": "missing",
+        "coverage_relation": "specialization",
+        "declarations": [
+          "LMLF.Blueprint.Elementary.Section42.dlmf_4_2_18"
+        ],
+        "evidence_source": "coverage/overrides.json"
       },
       "quantitative": {
         "analogue_status": "unknown",
@@ -4757,11 +4793,13 @@
         "state": "unreviewed"
       },
       "lean": {
-        "statement_status": "unknown",
-        "proof_status": "unknown",
-        "coverage_relation": "unknown",
-        "declarations": [],
-        "evidence_source": null
+        "statement_status": "checked",
+        "proof_status": "missing",
+        "coverage_relation": "exact",
+        "declarations": [
+          "LMLF.Blueprint.Elementary.Section42.dlmf_4_2_19"
+        ],
+        "evidence_source": "coverage/overrides.json"
       },
       "quantitative": {
         "analogue_status": "unknown",
@@ -4799,11 +4837,13 @@
         "state": "unreviewed"
       },
       "lean": {
-        "statement_status": "unknown",
-        "proof_status": "unknown",
-        "coverage_relation": "unknown",
-        "declarations": [],
-        "evidence_source": null
+        "statement_status": "checked",
+        "proof_status": "missing",
+        "coverage_relation": "exact",
+        "declarations": [
+          "LMLF.Blueprint.Elementary.Section42.dlmf_4_2_20"
+        ],
+        "evidence_source": "coverage/overrides.json"
       },
       "quantitative": {
         "analogue_status": "unknown",
@@ -4841,11 +4881,13 @@
         "state": "unreviewed"
       },
       "lean": {
-        "statement_status": "unknown",
-        "proof_status": "unknown",
-        "coverage_relation": "unknown",
-        "declarations": [],
-        "evidence_source": null
+        "statement_status": "checked",
+        "proof_status": "missing",
+        "coverage_relation": "exact",
+        "declarations": [
+          "LMLF.Blueprint.Elementary.Section42.dlmf_4_2_21"
+        ],
+        "evidence_source": "coverage/overrides.json"
       },
       "quantitative": {
         "analogue_status": "unknown",
@@ -4883,11 +4925,13 @@
         "state": "unreviewed"
       },
       "lean": {
-        "statement_status": "unknown",
-        "proof_status": "unknown",
-        "coverage_relation": "unknown",
-        "declarations": [],
-        "evidence_source": null
+        "statement_status": "checked",
+        "proof_status": "missing",
+        "coverage_relation": "exact",
+        "declarations": [
+          "LMLF.Blueprint.Elementary.Section42.dlmf_4_2_22"
+        ],
+        "evidence_source": "coverage/overrides.json"
       },
       "quantitative": {
         "analogue_status": "unknown",
@@ -4925,11 +4969,13 @@
         "state": "unreviewed"
       },
       "lean": {
-        "statement_status": "unknown",
-        "proof_status": "unknown",
-        "coverage_relation": "unknown",
-        "declarations": [],
-        "evidence_source": null
+        "statement_status": "checked",
+        "proof_status": "missing",
+        "coverage_relation": "exact",
+        "declarations": [
+          "LMLF.Blueprint.Elementary.Section42.dlmf_4_2_23"
+        ],
+        "evidence_source": "coverage/overrides.json"
       },
       "quantitative": {
         "analogue_status": "unknown",
@@ -5000,11 +5046,13 @@
         "state": "unreviewed"
       },
       "lean": {
-        "statement_status": "unknown",
-        "proof_status": "unknown",
-        "coverage_relation": "unknown",
-        "declarations": [],
-        "evidence_source": null
+        "statement_status": "checked",
+        "proof_status": "missing",
+        "coverage_relation": "specialization",
+        "declarations": [
+          "LMLF.Blueprint.Elementary.Section42.dlmf_4_2_24"
+        ],
+        "evidence_source": "coverage/overrides.json"
       },
       "quantitative": {
         "analogue_status": "unknown",
@@ -5075,11 +5123,13 @@
         "state": "unreviewed"
       },
       "lean": {
-        "statement_status": "unknown",
-        "proof_status": "unknown",
-        "coverage_relation": "unknown",
-        "declarations": [],
-        "evidence_source": null
+        "statement_status": "checked",
+        "proof_status": "missing",
+        "coverage_relation": "exact",
+        "declarations": [
+          "LMLF.Blueprint.Elementary.Section42.dlmf_4_2_25"
+        ],
+        "evidence_source": "coverage/overrides.json"
       },
       "quantitative": {
         "analogue_status": "unknown",
@@ -5183,11 +5233,13 @@
         "state": "unreviewed"
       },
       "lean": {
-        "statement_status": "unknown",
-        "proof_status": "unknown",
-        "coverage_relation": "unknown",
-        "declarations": [],
-        "evidence_source": null
+        "statement_status": "checked",
+        "proof_status": "missing",
+        "coverage_relation": "exact",
+        "declarations": [
+          "LMLF.Blueprint.Elementary.Section42.dlmf_4_2_26"
+        ],
+        "evidence_source": "coverage/overrides.json"
       },
       "quantitative": {
         "analogue_status": "unknown",
@@ -5225,11 +5277,13 @@
         "state": "unreviewed"
       },
       "lean": {
-        "statement_status": "unknown",
-        "proof_status": "unknown",
-        "coverage_relation": "unknown",
-        "declarations": [],
-        "evidence_source": null
+        "statement_status": "checked",
+        "proof_status": "missing",
+        "coverage_relation": "specialization",
+        "declarations": [
+          "LMLF.Blueprint.Elementary.Section42.dlmf_4_2_27"
+        ],
+        "evidence_source": "coverage/overrides.json"
       },
       "quantitative": {
         "analogue_status": "unknown",
@@ -5267,11 +5321,13 @@
         "state": "unreviewed"
       },
       "lean": {
-        "statement_status": "unknown",
-        "proof_status": "unknown",
-        "coverage_relation": "unknown",
-        "declarations": [],
-        "evidence_source": null
+        "statement_status": "checked",
+        "proof_status": "missing",
+        "coverage_relation": "specialization",
+        "declarations": [
+          "LMLF.Blueprint.Elementary.Section42.dlmf_4_2_28"
+        ],
+        "evidence_source": "coverage/overrides.json"
       },
       "quantitative": {
         "analogue_status": "unknown",
@@ -5309,11 +5365,13 @@
         "state": "unreviewed"
       },
       "lean": {
-        "statement_status": "unknown",
-        "proof_status": "unknown",
-        "coverage_relation": "unknown",
-        "declarations": [],
-        "evidence_source": null
+        "statement_status": "checked",
+        "proof_status": "missing",
+        "coverage_relation": "specialization",
+        "declarations": [
+          "LMLF.Blueprint.Elementary.Section42.dlmf_4_2_29"
+        ],
+        "evidence_source": "coverage/overrides.json"
       },
       "quantitative": {
         "analogue_status": "unknown",
@@ -5351,11 +5409,13 @@
         "state": "unreviewed"
       },
       "lean": {
-        "statement_status": "unknown",
-        "proof_status": "unknown",
-        "coverage_relation": "unknown",
-        "declarations": [],
-        "evidence_source": null
+        "statement_status": "checked",
+        "proof_status": "missing",
+        "coverage_relation": "specialization",
+        "declarations": [
+          "LMLF.Blueprint.Elementary.Section42.dlmf_4_2_30"
+        ],
+        "evidence_source": "coverage/overrides.json"
       },
       "quantitative": {
         "analogue_status": "unknown",
@@ -5397,11 +5457,14 @@
         "state": "unreviewed"
       },
       "lean": {
-        "statement_status": "unknown",
-        "proof_status": "unknown",
-        "coverage_relation": "unknown",
-        "declarations": [],
-        "evidence_source": null
+        "statement_status": "checked",
+        "proof_status": "missing",
+        "coverage_relation": "specialization",
+        "declarations": [
+          "LMLF.Blueprint.Elementary.Section42.dlmf_4_2_31a",
+          "LMLF.Blueprint.Elementary.Section42.dlmf_4_2_31b"
+        ],
+        "evidence_source": "coverage/overrides.json"
       },
       "quantitative": {
         "analogue_status": "unknown",
@@ -5472,11 +5535,13 @@
         "state": "unreviewed"
       },
       "lean": {
-        "statement_status": "unknown",
-        "proof_status": "unknown",
-        "coverage_relation": "unknown",
-        "declarations": [],
-        "evidence_source": null
+        "statement_status": "checked",
+        "proof_status": "missing",
+        "coverage_relation": "exact",
+        "declarations": [
+          "LMLF.Blueprint.Elementary.Section42.dlmf_4_2_32"
+        ],
+        "evidence_source": "coverage/overrides.json"
       },
       "quantitative": {
         "analogue_status": "unknown",
@@ -5514,11 +5579,13 @@
         "state": "unreviewed"
       },
       "lean": {
-        "statement_status": "unknown",
-        "proof_status": "unknown",
-        "coverage_relation": "unknown",
-        "declarations": [],
-        "evidence_source": null
+        "statement_status": "checked",
+        "proof_status": "missing",
+        "coverage_relation": "exact",
+        "declarations": [
+          "LMLF.Blueprint.Elementary.Section42.dlmf_4_2_33"
+        ],
+        "evidence_source": "coverage/overrides.json"
       },
       "quantitative": {
         "analogue_status": "unknown",
@@ -5589,11 +5656,13 @@
         "state": "unreviewed"
       },
       "lean": {
-        "statement_status": "unknown",
-        "proof_status": "unknown",
-        "coverage_relation": "unknown",
-        "declarations": [],
-        "evidence_source": null
+        "statement_status": "checked",
+        "proof_status": "missing",
+        "coverage_relation": "exact",
+        "declarations": [
+          "LMLF.Blueprint.Elementary.Section42.dlmf_4_2_34"
+        ],
+        "evidence_source": "coverage/overrides.json"
       },
       "quantitative": {
         "analogue_status": "unknown",
@@ -5664,11 +5733,13 @@
         "state": "unreviewed"
       },
       "lean": {
-        "statement_status": "unknown",
-        "proof_status": "unknown",
-        "coverage_relation": "unknown",
-        "declarations": [],
-        "evidence_source": null
+        "statement_status": "checked",
+        "proof_status": "missing",
+        "coverage_relation": "exact",
+        "declarations": [
+          "LMLF.Blueprint.Elementary.Section42.dlmf_4_2_35"
+        ],
+        "evidence_source": "coverage/overrides.json"
       },
       "quantitative": {
         "analogue_status": "unknown",
@@ -5706,11 +5777,13 @@
         "state": "unreviewed"
       },
       "lean": {
-        "statement_status": "unknown",
-        "proof_status": "unknown",
-        "coverage_relation": "unknown",
-        "declarations": [],
-        "evidence_source": null
+        "statement_status": "checked",
+        "proof_status": "missing",
+        "coverage_relation": "specialization",
+        "declarations": [
+          "LMLF.Blueprint.Elementary.Section42.dlmf_4_2_36"
+        ],
+        "evidence_source": "coverage/overrides.json"
       },
       "quantitative": {
         "analogue_status": "unknown",
@@ -5781,11 +5854,13 @@
         "state": "unreviewed"
       },
       "lean": {
-        "statement_status": "unknown",
-        "proof_status": "unknown",
-        "coverage_relation": "unknown",
-        "declarations": [],
-        "evidence_source": null
+        "statement_status": "checked",
+        "proof_status": "missing",
+        "coverage_relation": "specialization",
+        "declarations": [
+          "LMLF.Blueprint.Elementary.Section42.dlmf_4_2_37"
+        ],
+        "evidence_source": "coverage/overrides.json"
       },
       "quantitative": {
         "analogue_status": "unknown",
@@ -6351,11 +6426,13 @@
         "state": "unreviewed"
       },
       "lean": {
-        "statement_status": "unknown",
-        "proof_status": "unknown",
-        "coverage_relation": "unknown",
-        "declarations": [],
-        "evidence_source": null
+        "statement_status": "checked",
+        "proof_status": "missing",
+        "coverage_relation": "exact",
+        "declarations": [
+          "LMLF.Blueprint.Elementary.Section44.dlmf_4_4_1"
+        ],
+        "evidence_source": "coverage/overrides.json"
       },
       "quantitative": {
         "analogue_status": "unknown",
@@ -6393,11 +6470,13 @@
         "state": "unreviewed"
       },
       "lean": {
-        "statement_status": "unknown",
-        "proof_status": "unknown",
-        "coverage_relation": "unknown",
-        "declarations": [],
-        "evidence_source": null
+        "statement_status": "checked",
+        "proof_status": "missing",
+        "coverage_relation": "exact",
+        "declarations": [
+          "LMLF.Blueprint.Elementary.Section44.dlmf_4_4_2"
+        ],
+        "evidence_source": "coverage/overrides.json"
       },
       "quantitative": {
         "analogue_status": "unknown",
@@ -6435,11 +6514,13 @@
         "state": "unreviewed"
       },
       "lean": {
-        "statement_status": "unknown",
-        "proof_status": "unknown",
-        "coverage_relation": "unknown",
-        "declarations": [],
-        "evidence_source": null
+        "statement_status": "checked",
+        "proof_status": "missing",
+        "coverage_relation": "exact",
+        "declarations": [
+          "LMLF.Blueprint.Elementary.Section44.dlmf_4_4_3"
+        ],
+        "evidence_source": "coverage/overrides.json"
       },
       "quantitative": {
         "analogue_status": "unknown",
@@ -6543,11 +6624,13 @@
         "state": "unreviewed"
       },
       "lean": {
-        "statement_status": "unknown",
-        "proof_status": "unknown",
-        "coverage_relation": "unknown",
-        "declarations": [],
-        "evidence_source": null
+        "statement_status": "checked",
+        "proof_status": "missing",
+        "coverage_relation": "exact",
+        "declarations": [
+          "LMLF.Blueprint.Elementary.Section44.dlmf_4_4_4"
+        ],
+        "evidence_source": "coverage/overrides.json"
       },
       "quantitative": {
         "analogue_status": "unknown",
@@ -6585,11 +6668,13 @@
         "state": "unreviewed"
       },
       "lean": {
-        "statement_status": "unknown",
-        "proof_status": "unknown",
-        "coverage_relation": "unknown",
-        "declarations": [],
-        "evidence_source": null
+        "statement_status": "checked",
+        "proof_status": "missing",
+        "coverage_relation": "exact",
+        "declarations": [
+          "LMLF.Blueprint.Elementary.Section44.dlmf_4_4_5"
+        ],
+        "evidence_source": "coverage/overrides.json"
       },
       "quantitative": {
         "analogue_status": "unknown",
@@ -6627,11 +6712,13 @@
         "state": "unreviewed"
       },
       "lean": {
-        "statement_status": "unknown",
-        "proof_status": "unknown",
-        "coverage_relation": "unknown",
-        "declarations": [],
-        "evidence_source": null
+        "statement_status": "checked",
+        "proof_status": "missing",
+        "coverage_relation": "exact",
+        "declarations": [
+          "LMLF.Blueprint.Elementary.Section44.dlmf_4_4_6"
+        ],
+        "evidence_source": "coverage/overrides.json"
       },
       "quantitative": {
         "analogue_status": "unknown",
@@ -6669,11 +6756,13 @@
         "state": "unreviewed"
       },
       "lean": {
-        "statement_status": "unknown",
-        "proof_status": "unknown",
-        "coverage_relation": "unknown",
-        "declarations": [],
-        "evidence_source": null
+        "statement_status": "checked",
+        "proof_status": "missing",
+        "coverage_relation": "exact",
+        "declarations": [
+          "LMLF.Blueprint.Elementary.Section44.dlmf_4_4_7"
+        ],
+        "evidence_source": "coverage/overrides.json"
       },
       "quantitative": {
         "analogue_status": "unknown",
@@ -6711,11 +6800,13 @@
         "state": "unreviewed"
       },
       "lean": {
-        "statement_status": "unknown",
-        "proof_status": "unknown",
-        "coverage_relation": "unknown",
-        "declarations": [],
-        "evidence_source": null
+        "statement_status": "checked",
+        "proof_status": "missing",
+        "coverage_relation": "exact",
+        "declarations": [
+          "LMLF.Blueprint.Elementary.Section44.dlmf_4_4_8"
+        ],
+        "evidence_source": "coverage/overrides.json"
       },
       "quantitative": {
         "analogue_status": "unknown",
@@ -6753,11 +6844,13 @@
         "state": "unreviewed"
       },
       "lean": {
-        "statement_status": "unknown",
-        "proof_status": "unknown",
-        "coverage_relation": "unknown",
-        "declarations": [],
-        "evidence_source": null
+        "statement_status": "checked",
+        "proof_status": "missing",
+        "coverage_relation": "exact",
+        "declarations": [
+          "LMLF.Blueprint.Elementary.Section44.dlmf_4_4_9"
+        ],
+        "evidence_source": "coverage/overrides.json"
       },
       "quantitative": {
         "analogue_status": "unknown",
@@ -6795,11 +6888,13 @@
         "state": "unreviewed"
       },
       "lean": {
-        "statement_status": "unknown",
-        "proof_status": "unknown",
-        "coverage_relation": "unknown",
-        "declarations": [],
-        "evidence_source": null
+        "statement_status": "checked",
+        "proof_status": "missing",
+        "coverage_relation": "exact",
+        "declarations": [
+          "LMLF.Blueprint.Elementary.Section44.dlmf_4_4_10"
+        ],
+        "evidence_source": "coverage/overrides.json"
       },
       "quantitative": {
         "analogue_status": "unknown",
@@ -6837,11 +6932,13 @@
         "state": "unreviewed"
       },
       "lean": {
-        "statement_status": "unknown",
-        "proof_status": "unknown",
-        "coverage_relation": "unknown",
-        "declarations": [],
-        "evidence_source": null
+        "statement_status": "checked",
+        "proof_status": "missing",
+        "coverage_relation": "exact",
+        "declarations": [
+          "LMLF.Blueprint.Elementary.Section44.dlmf_4_4_11"
+        ],
+        "evidence_source": "coverage/overrides.json"
       },
       "quantitative": {
         "analogue_status": "unknown",
@@ -6879,11 +6976,13 @@
         "state": "unreviewed"
       },
       "lean": {
-        "statement_status": "unknown",
-        "proof_status": "unknown",
-        "coverage_relation": "unknown",
-        "declarations": [],
-        "evidence_source": null
+        "statement_status": "checked",
+        "proof_status": "missing",
+        "coverage_relation": "exact",
+        "declarations": [
+          "LMLF.Blueprint.Elementary.Section44.dlmf_4_4_12"
+        ],
+        "evidence_source": "coverage/overrides.json"
       },
       "quantitative": {
         "analogue_status": "unknown",
@@ -6987,11 +7086,13 @@
         "state": "unreviewed"
       },
       "lean": {
-        "statement_status": "unknown",
-        "proof_status": "unknown",
-        "coverage_relation": "unknown",
-        "declarations": [],
-        "evidence_source": null
+        "statement_status": "checked",
+        "proof_status": "missing",
+        "coverage_relation": "specialization",
+        "declarations": [
+          "LMLF.Blueprint.Elementary.Section44.dlmf_4_4_13"
+        ],
+        "evidence_source": "coverage/overrides.json"
       },
       "quantitative": {
         "analogue_status": "unknown",
@@ -7029,11 +7130,13 @@
         "state": "unreviewed"
       },
       "lean": {
-        "statement_status": "unknown",
-        "proof_status": "unknown",
-        "coverage_relation": "unknown",
-        "declarations": [],
-        "evidence_source": null
+        "statement_status": "checked",
+        "proof_status": "missing",
+        "coverage_relation": "specialization",
+        "declarations": [
+          "LMLF.Blueprint.Elementary.Section44.dlmf_4_4_14"
+        ],
+        "evidence_source": "coverage/overrides.json"
       },
       "quantitative": {
         "analogue_status": "unknown",
@@ -7071,11 +7174,13 @@
         "state": "unreviewed"
       },
       "lean": {
-        "statement_status": "unknown",
-        "proof_status": "unknown",
-        "coverage_relation": "unknown",
-        "declarations": [],
-        "evidence_source": null
+        "statement_status": "checked",
+        "proof_status": "missing",
+        "coverage_relation": "specialization",
+        "declarations": [
+          "LMLF.Blueprint.Elementary.Section44.dlmf_4_4_15"
+        ],
+        "evidence_source": "coverage/overrides.json"
       },
       "quantitative": {
         "analogue_status": "unknown",
@@ -7113,11 +7218,13 @@
         "state": "unreviewed"
       },
       "lean": {
-        "statement_status": "unknown",
-        "proof_status": "unknown",
-        "coverage_relation": "unknown",
-        "declarations": [],
-        "evidence_source": null
+        "statement_status": "checked",
+        "proof_status": "missing",
+        "coverage_relation": "specialization",
+        "declarations": [
+          "LMLF.Blueprint.Elementary.Section44.dlmf_4_4_16"
+        ],
+        "evidence_source": "coverage/overrides.json"
       },
       "quantitative": {
         "analogue_status": "unknown",
@@ -7155,11 +7262,13 @@
         "state": "unreviewed"
       },
       "lean": {
-        "statement_status": "unknown",
-        "proof_status": "unknown",
-        "coverage_relation": "unknown",
-        "declarations": [],
-        "evidence_source": null
+        "statement_status": "checked",
+        "proof_status": "missing",
+        "coverage_relation": "exact",
+        "declarations": [
+          "LMLF.Blueprint.Elementary.Section44.dlmf_4_4_17"
+        ],
+        "evidence_source": "coverage/overrides.json"
       },
       "quantitative": {
         "analogue_status": "unknown",
@@ -7197,11 +7306,13 @@
         "state": "unreviewed"
       },
       "lean": {
-        "statement_status": "unknown",
-        "proof_status": "unknown",
-        "coverage_relation": "unknown",
-        "declarations": [],
-        "evidence_source": null
+        "statement_status": "checked",
+        "proof_status": "missing",
+        "coverage_relation": "specialization",
+        "declarations": [
+          "LMLF.Blueprint.Elementary.Section44.dlmf_4_4_18"
+        ],
+        "evidence_source": "coverage/overrides.json"
       },
       "quantitative": {
         "analogue_status": "unknown",
@@ -7239,11 +7350,13 @@
         "state": "unreviewed"
       },
       "lean": {
-        "statement_status": "unknown",
-        "proof_status": "unknown",
-        "coverage_relation": "unknown",
-        "declarations": [],
-        "evidence_source": null
+        "statement_status": "checked",
+        "proof_status": "missing",
+        "coverage_relation": "exact",
+        "declarations": [
+          "LMLF.Blueprint.Elementary.Section44.dlmf_4_4_19"
+        ],
+        "evidence_source": "coverage/overrides.json"
       },
       "quantitative": {
         "analogue_status": "unknown",
@@ -7380,11 +7493,13 @@
         "state": "unreviewed"
       },
       "lean": {
-        "statement_status": "unknown",
-        "proof_status": "unknown",
-        "coverage_relation": "unknown",
-        "declarations": [],
-        "evidence_source": null
+        "statement_status": "checked",
+        "proof_status": "missing",
+        "coverage_relation": "exact",
+        "declarations": [
+          "LMLF.Blueprint.Elementary.Section45.dlmf_4_5_1"
+        ],
+        "evidence_source": "coverage/overrides.json"
       },
       "quantitative": {
         "analogue_status": "unknown",
@@ -7422,11 +7537,13 @@
         "state": "unreviewed"
       },
       "lean": {
-        "statement_status": "unknown",
-        "proof_status": "unknown",
-        "coverage_relation": "unknown",
-        "declarations": [],
-        "evidence_source": null
+        "statement_status": "checked",
+        "proof_status": "missing",
+        "coverage_relation": "exact",
+        "declarations": [
+          "LMLF.Blueprint.Elementary.Section45.dlmf_4_5_2"
+        ],
+        "evidence_source": "coverage/overrides.json"
       },
       "quantitative": {
         "analogue_status": "unknown",
@@ -7464,11 +7581,13 @@
         "state": "unreviewed"
       },
       "lean": {
-        "statement_status": "unknown",
-        "proof_status": "unknown",
-        "coverage_relation": "unknown",
-        "declarations": [],
-        "evidence_source": null
+        "statement_status": "checked",
+        "proof_status": "missing",
+        "coverage_relation": "specialization",
+        "declarations": [
+          "LMLF.Blueprint.Elementary.Section45.dlmf_4_5_3"
+        ],
+        "evidence_source": "coverage/overrides.json"
       },
       "quantitative": {
         "analogue_status": "unknown",
@@ -7506,11 +7625,13 @@
         "state": "unreviewed"
       },
       "lean": {
-        "statement_status": "unknown",
-        "proof_status": "unknown",
-        "coverage_relation": "unknown",
-        "declarations": [],
-        "evidence_source": null
+        "statement_status": "checked",
+        "proof_status": "missing",
+        "coverage_relation": "exact",
+        "declarations": [
+          "LMLF.Blueprint.Elementary.Section45.dlmf_4_5_4"
+        ],
+        "evidence_source": "coverage/overrides.json"
       },
       "quantitative": {
         "analogue_status": "unknown",
@@ -7548,11 +7669,13 @@
         "state": "unreviewed"
       },
       "lean": {
-        "statement_status": "unknown",
-        "proof_status": "unknown",
-        "coverage_relation": "unknown",
-        "declarations": [],
-        "evidence_source": null
+        "statement_status": "checked",
+        "proof_status": "missing",
+        "coverage_relation": "specialization",
+        "declarations": [
+          "LMLF.Blueprint.Elementary.Section45.dlmf_4_5_5"
+        ],
+        "evidence_source": "coverage/overrides.json"
       },
       "quantitative": {
         "analogue_status": "unknown",
@@ -7590,11 +7713,13 @@
         "state": "unreviewed"
       },
       "lean": {
-        "statement_status": "unknown",
-        "proof_status": "unknown",
-        "coverage_relation": "unknown",
-        "declarations": [],
-        "evidence_source": null
+        "statement_status": "checked",
+        "proof_status": "missing",
+        "coverage_relation": "exact",
+        "declarations": [
+          "LMLF.Blueprint.Elementary.Section45.dlmf_4_5_6"
+        ],
+        "evidence_source": "coverage/overrides.json"
       },
       "quantitative": {
         "analogue_status": "unknown",
@@ -7764,11 +7889,13 @@
         "state": "unreviewed"
       },
       "lean": {
-        "statement_status": "unknown",
-        "proof_status": "unknown",
-        "coverage_relation": "unknown",
-        "declarations": [],
-        "evidence_source": null
+        "statement_status": "checked",
+        "proof_status": "missing",
+        "coverage_relation": "exact",
+        "declarations": [
+          "LMLF.Blueprint.Elementary.Section45.dlmf_4_5_7"
+        ],
+        "evidence_source": "coverage/overrides.json"
       },
       "quantitative": {
         "analogue_status": "unknown",
@@ -7806,11 +7933,13 @@
         "state": "unreviewed"
       },
       "lean": {
-        "statement_status": "unknown",
-        "proof_status": "unknown",
-        "coverage_relation": "unknown",
-        "declarations": [],
-        "evidence_source": null
+        "statement_status": "checked",
+        "proof_status": "missing",
+        "coverage_relation": "exact",
+        "declarations": [
+          "LMLF.Blueprint.Elementary.Section45.dlmf_4_5_8"
+        ],
+        "evidence_source": "coverage/overrides.json"
       },
       "quantitative": {
         "analogue_status": "unknown",
@@ -7848,11 +7977,13 @@
         "state": "unreviewed"
       },
       "lean": {
-        "statement_status": "unknown",
-        "proof_status": "unknown",
-        "coverage_relation": "unknown",
-        "declarations": [],
-        "evidence_source": null
+        "statement_status": "checked",
+        "proof_status": "missing",
+        "coverage_relation": "exact",
+        "declarations": [
+          "LMLF.Blueprint.Elementary.Section45.dlmf_4_5_9"
+        ],
+        "evidence_source": "coverage/overrides.json"
       },
       "quantitative": {
         "analogue_status": "unknown",
@@ -7890,11 +8021,13 @@
         "state": "unreviewed"
       },
       "lean": {
-        "statement_status": "unknown",
-        "proof_status": "unknown",
-        "coverage_relation": "unknown",
-        "declarations": [],
-        "evidence_source": null
+        "statement_status": "checked",
+        "proof_status": "missing",
+        "coverage_relation": "exact",
+        "declarations": [
+          "LMLF.Blueprint.Elementary.Section45.dlmf_4_5_10"
+        ],
+        "evidence_source": "coverage/overrides.json"
       },
       "quantitative": {
         "analogue_status": "unknown",
@@ -7932,11 +8065,13 @@
         "state": "unreviewed"
       },
       "lean": {
-        "statement_status": "unknown",
-        "proof_status": "unknown",
-        "coverage_relation": "unknown",
-        "declarations": [],
-        "evidence_source": null
+        "statement_status": "checked",
+        "proof_status": "missing",
+        "coverage_relation": "exact",
+        "declarations": [
+          "LMLF.Blueprint.Elementary.Section45.dlmf_4_5_11"
+        ],
+        "evidence_source": "coverage/overrides.json"
       },
       "quantitative": {
         "analogue_status": "unknown",
@@ -7974,11 +8109,13 @@
         "state": "unreviewed"
       },
       "lean": {
-        "statement_status": "unknown",
-        "proof_status": "unknown",
-        "coverage_relation": "unknown",
-        "declarations": [],
-        "evidence_source": null
+        "statement_status": "checked",
+        "proof_status": "missing",
+        "coverage_relation": "exact",
+        "declarations": [
+          "LMLF.Blueprint.Elementary.Section45.dlmf_4_5_12"
+        ],
+        "evidence_source": "coverage/overrides.json"
       },
       "quantitative": {
         "analogue_status": "unknown",
@@ -8016,11 +8153,13 @@
         "state": "unreviewed"
       },
       "lean": {
-        "statement_status": "unknown",
-        "proof_status": "unknown",
-        "coverage_relation": "unknown",
-        "declarations": [],
-        "evidence_source": null
+        "statement_status": "checked",
+        "proof_status": "missing",
+        "coverage_relation": "specialization",
+        "declarations": [
+          "LMLF.Blueprint.Elementary.Section45.dlmf_4_5_13"
+        ],
+        "evidence_source": "coverage/overrides.json"
       },
       "quantitative": {
         "analogue_status": "unknown",
@@ -8058,11 +8197,13 @@
         "state": "unreviewed"
       },
       "lean": {
-        "statement_status": "unknown",
-        "proof_status": "unknown",
-        "coverage_relation": "unknown",
-        "declarations": [],
-        "evidence_source": null
+        "statement_status": "checked",
+        "proof_status": "missing",
+        "coverage_relation": "specialization",
+        "declarations": [
+          "LMLF.Blueprint.Elementary.Section45.dlmf_4_5_14"
+        ],
+        "evidence_source": "coverage/overrides.json"
       },
       "quantitative": {
         "analogue_status": "unknown",
@@ -8100,11 +8241,13 @@
         "state": "unreviewed"
       },
       "lean": {
-        "statement_status": "unknown",
-        "proof_status": "unknown",
-        "coverage_relation": "unknown",
-        "declarations": [],
-        "evidence_source": null
+        "statement_status": "checked",
+        "proof_status": "missing",
+        "coverage_relation": "exact",
+        "declarations": [
+          "LMLF.Blueprint.Elementary.Section45.dlmf_4_5_15"
+        ],
+        "evidence_source": "coverage/overrides.json"
       },
       "quantitative": {
         "analogue_status": "unknown",
@@ -8142,11 +8285,13 @@
         "state": "unreviewed"
       },
       "lean": {
-        "statement_status": "unknown",
-        "proof_status": "unknown",
-        "coverage_relation": "unknown",
-        "declarations": [],
-        "evidence_source": null
+        "statement_status": "checked",
+        "proof_status": "missing",
+        "coverage_relation": "exact",
+        "declarations": [
+          "LMLF.Blueprint.Elementary.Section45.dlmf_4_5_16"
+        ],
+        "evidence_source": "coverage/overrides.json"
       },
       "quantitative": {
         "analogue_status": "unknown",
@@ -8283,11 +8428,13 @@
         "state": "unreviewed"
       },
       "lean": {
-        "statement_status": "unknown",
-        "proof_status": "unknown",
-        "coverage_relation": "unknown",
-        "declarations": [],
-        "evidence_source": null
+        "statement_status": "checked",
+        "proof_status": "missing",
+        "coverage_relation": "exact",
+        "declarations": [
+          "LMLF.Blueprint.Elementary.Section46.dlmf_4_6_1"
+        ],
+        "evidence_source": "coverage/overrides.json"
       },
       "quantitative": {
         "analogue_status": "unknown",
@@ -8325,11 +8472,13 @@
         "state": "unreviewed"
       },
       "lean": {
-        "statement_status": "unknown",
-        "proof_status": "unknown",
-        "coverage_relation": "unknown",
-        "declarations": [],
-        "evidence_source": null
+        "statement_status": "checked",
+        "proof_status": "missing",
+        "coverage_relation": "exact",
+        "declarations": [
+          "LMLF.Blueprint.Elementary.Section46.dlmf_4_6_2"
+        ],
+        "evidence_source": "coverage/overrides.json"
       },
       "quantitative": {
         "analogue_status": "unknown",
@@ -8367,11 +8516,13 @@
         "state": "unreviewed"
       },
       "lean": {
-        "statement_status": "unknown",
-        "proof_status": "unknown",
-        "coverage_relation": "unknown",
-        "declarations": [],
-        "evidence_source": null
+        "statement_status": "checked",
+        "proof_status": "missing",
+        "coverage_relation": "exact",
+        "declarations": [
+          "LMLF.Blueprint.Elementary.Section46.dlmf_4_6_3"
+        ],
+        "evidence_source": "coverage/overrides.json"
       },
       "quantitative": {
         "analogue_status": "unknown",
@@ -8409,11 +8560,13 @@
         "state": "unreviewed"
       },
       "lean": {
-        "statement_status": "unknown",
-        "proof_status": "unknown",
-        "coverage_relation": "unknown",
-        "declarations": [],
-        "evidence_source": null
+        "statement_status": "checked",
+        "proof_status": "missing",
+        "coverage_relation": "exact",
+        "declarations": [
+          "LMLF.Blueprint.Elementary.Section46.dlmf_4_6_4"
+        ],
+        "evidence_source": "coverage/overrides.json"
       },
       "quantitative": {
         "analogue_status": "unknown",
@@ -8451,11 +8604,13 @@
         "state": "unreviewed"
       },
       "lean": {
-        "statement_status": "unknown",
-        "proof_status": "unknown",
-        "coverage_relation": "unknown",
-        "declarations": [],
-        "evidence_source": null
+        "statement_status": "checked",
+        "proof_status": "missing",
+        "coverage_relation": "exact",
+        "declarations": [
+          "LMLF.Blueprint.Elementary.Section46.dlmf_4_6_5"
+        ],
+        "evidence_source": "coverage/overrides.json"
       },
       "quantitative": {
         "analogue_status": "unknown",
@@ -8526,11 +8681,13 @@
         "state": "unreviewed"
       },
       "lean": {
-        "statement_status": "unknown",
-        "proof_status": "unknown",
-        "coverage_relation": "unknown",
-        "declarations": [],
-        "evidence_source": null
+        "statement_status": "checked",
+        "proof_status": "missing",
+        "coverage_relation": "specialization",
+        "declarations": [
+          "LMLF.Blueprint.Elementary.Section46.dlmf_4_6_6"
+        ],
+        "evidence_source": "coverage/overrides.json"
       },
       "quantitative": {
         "analogue_status": "unknown",
@@ -8667,11 +8824,14 @@
         "state": "unreviewed"
       },
       "lean": {
-        "statement_status": "unknown",
-        "proof_status": "unknown",
-        "coverage_relation": "unknown",
-        "declarations": [],
-        "evidence_source": null
+        "statement_status": "checked",
+        "proof_status": "missing",
+        "coverage_relation": "exact",
+        "declarations": [
+          "LMLF.Blueprint.Elementary.Section46.dlmf_4_6_7",
+          "LMLF.Blueprint.Elementary.Section46.dlmf_4_6_7_terminating"
+        ],
+        "evidence_source": "coverage/overrides.json"
       },
       "quantitative": {
         "analogue_status": "unknown",
@@ -8775,11 +8935,13 @@
         "state": "unreviewed"
       },
       "lean": {
-        "statement_status": "unknown",
-        "proof_status": "unknown",
-        "coverage_relation": "unknown",
-        "declarations": [],
-        "evidence_source": null
+        "statement_status": "checked",
+        "proof_status": "missing",
+        "coverage_relation": "exact",
+        "declarations": [
+          "LMLF.Blueprint.Elementary.Section47.principalLog_deriv"
+        ],
+        "evidence_source": "coverage/overrides.json"
       },
       "quantitative": {
         "analogue_status": "unknown",
@@ -8817,11 +8979,13 @@
         "state": "unreviewed"
       },
       "lean": {
-        "statement_status": "unknown",
-        "proof_status": "unknown",
-        "coverage_relation": "unknown",
-        "declarations": [],
-        "evidence_source": null
+        "statement_status": "checked",
+        "proof_status": "missing",
+        "coverage_relation": "specialization",
+        "declarations": [
+          "LMLF.Blueprint.Elementary.Section47.generalLog_deriv"
+        ],
+        "evidence_source": "coverage/overrides.json"
       },
       "quantitative": {
         "analogue_status": "unknown",
@@ -8859,11 +9023,13 @@
         "state": "unreviewed"
       },
       "lean": {
-        "statement_status": "unknown",
-        "proof_status": "unknown",
-        "coverage_relation": "unknown",
-        "declarations": [],
-        "evidence_source": null
+        "statement_status": "checked",
+        "proof_status": "missing",
+        "coverage_relation": "exact",
+        "declarations": [
+          "LMLF.Blueprint.Elementary.Section47.principalLog_iteratedDeriv"
+        ],
+        "evidence_source": "coverage/overrides.json"
       },
       "quantitative": {
         "analogue_status": "unknown",
@@ -8901,11 +9067,13 @@
         "state": "unreviewed"
       },
       "lean": {
-        "statement_status": "unknown",
-        "proof_status": "unknown",
-        "coverage_relation": "unknown",
-        "declarations": [],
-        "evidence_source": null
+        "statement_status": "checked",
+        "proof_status": "missing",
+        "coverage_relation": "specialization",
+        "declarations": [
+          "LMLF.Blueprint.Elementary.Section47.generalLog_iteratedDeriv"
+        ],
+        "evidence_source": "coverage/overrides.json"
       },
       "quantitative": {
         "analogue_status": "unknown",
@@ -8976,11 +9144,13 @@
         "state": "unreviewed"
       },
       "lean": {
-        "statement_status": "unknown",
-        "proof_status": "unknown",
-        "coverage_relation": "unknown",
-        "declarations": [],
-        "evidence_source": null
+        "statement_status": "checked",
+        "proof_status": "missing",
+        "coverage_relation": "exact",
+        "declarations": [
+          "LMLF.Blueprint.Elementary.Section47.logarithmicDifferentialEquation"
+        ],
+        "evidence_source": "coverage/overrides.json"
       },
       "quantitative": {
         "analogue_status": "unknown",
@@ -9018,11 +9188,13 @@
         "state": "unreviewed"
       },
       "lean": {
-        "statement_status": "unknown",
-        "proof_status": "unknown",
-        "coverage_relation": "unknown",
-        "declarations": [],
-        "evidence_source": null
+        "statement_status": "checked",
+        "proof_status": "missing",
+        "coverage_relation": "specialization",
+        "declarations": [
+          "LMLF.Blueprint.Elementary.Section47.logarithmicSolution"
+        ],
+        "evidence_source": "coverage/overrides.json"
       },
       "quantitative": {
         "analogue_status": "unknown",
@@ -9126,11 +9298,13 @@
         "state": "unreviewed"
       },
       "lean": {
-        "statement_status": "unknown",
-        "proof_status": "unknown",
-        "coverage_relation": "unknown",
-        "declarations": [],
-        "evidence_source": null
+        "statement_status": "checked",
+        "proof_status": "missing",
+        "coverage_relation": "exact",
+        "declarations": [
+          "LMLF.Blueprint.Elementary.Section47.exp_deriv"
+        ],
+        "evidence_source": "coverage/overrides.json"
       },
       "quantitative": {
         "analogue_status": "unknown",
@@ -9168,11 +9342,13 @@
         "state": "unreviewed"
       },
       "lean": {
-        "statement_status": "unknown",
-        "proof_status": "unknown",
-        "coverage_relation": "unknown",
-        "declarations": [],
-        "evidence_source": null
+        "statement_status": "checked",
+        "proof_status": "missing",
+        "coverage_relation": "exact",
+        "declarations": [
+          "LMLF.Blueprint.Elementary.Section47.exp_mul_deriv"
+        ],
+        "evidence_source": "coverage/overrides.json"
       },
       "quantitative": {
         "analogue_status": "unknown",
@@ -9210,11 +9386,13 @@
         "state": "unreviewed"
       },
       "lean": {
-        "statement_status": "unknown",
-        "proof_status": "unknown",
-        "coverage_relation": "unknown",
-        "declarations": [],
-        "evidence_source": null
+        "statement_status": "checked",
+        "proof_status": "missing",
+        "coverage_relation": "specialization",
+        "declarations": [
+          "LMLF.Blueprint.Elementary.Section47.cpow_deriv"
+        ],
+        "evidence_source": "coverage/overrides.json"
       },
       "quantitative": {
         "analogue_status": "unknown",
@@ -9252,11 +9430,13 @@
         "state": "unreviewed"
       },
       "lean": {
-        "statement_status": "unknown",
-        "proof_status": "unknown",
-        "coverage_relation": "unknown",
-        "declarations": [],
-        "evidence_source": null
+        "statement_status": "checked",
+        "proof_status": "missing",
+        "coverage_relation": "specialization",
+        "declarations": [
+          "LMLF.Blueprint.Elementary.Section47.z_cpow_deriv"
+        ],
+        "evidence_source": "coverage/overrides.json"
       },
       "quantitative": {
         "analogue_status": "unknown",
@@ -9294,11 +9474,13 @@
         "state": "unreviewed"
       },
       "lean": {
-        "statement_status": "unknown",
-        "proof_status": "unknown",
-        "coverage_relation": "unknown",
-        "declarations": [],
-        "evidence_source": null
+        "statement_status": "checked",
+        "proof_status": "missing",
+        "coverage_relation": "specialization",
+        "declarations": [
+          "LMLF.Blueprint.Elementary.Section47.z_cpow_iteratedDeriv"
+        ],
+        "evidence_source": "coverage/overrides.json"
       },
       "quantitative": {
         "analogue_status": "unknown",
@@ -9369,11 +9551,13 @@
         "state": "unreviewed"
       },
       "lean": {
-        "statement_status": "unknown",
-        "proof_status": "unknown",
-        "coverage_relation": "unknown",
-        "declarations": [],
-        "evidence_source": null
+        "statement_status": "checked",
+        "proof_status": "missing",
+        "coverage_relation": "exact",
+        "declarations": [
+          "LMLF.Blueprint.Elementary.Section47.linearDifferentialEquation"
+        ],
+        "evidence_source": "coverage/overrides.json"
       },
       "quantitative": {
         "analogue_status": "unknown",
@@ -9411,11 +9595,13 @@
         "state": "unreviewed"
       },
       "lean": {
-        "statement_status": "unknown",
-        "proof_status": "unknown",
-        "coverage_relation": "unknown",
-        "declarations": [],
-        "evidence_source": null
+        "statement_status": "checked",
+        "proof_status": "missing",
+        "coverage_relation": "specialization",
+        "declarations": [
+          "LMLF.Blueprint.Elementary.Section47.linearDifferentialSolution"
+        ],
+        "evidence_source": "coverage/overrides.json"
       },
       "quantitative": {
         "analogue_status": "unknown",
@@ -9486,11 +9672,13 @@
         "state": "unreviewed"
       },
       "lean": {
-        "statement_status": "unknown",
-        "proof_status": "unknown",
-        "coverage_relation": "unknown",
-        "declarations": [],
-        "evidence_source": null
+        "statement_status": "checked",
+        "proof_status": "missing",
+        "coverage_relation": "exact",
+        "declarations": [
+          "LMLF.Blueprint.Elementary.Section47.secondOrderExponentialEquation"
+        ],
+        "evidence_source": "coverage/overrides.json"
       },
       "quantitative": {
         "analogue_status": "unknown",
@@ -9528,11 +9716,13 @@
         "state": "unreviewed"
       },
       "lean": {
-        "statement_status": "unknown",
-        "proof_status": "unknown",
-        "coverage_relation": "unknown",
-        "declarations": [],
-        "evidence_source": null
+        "statement_status": "checked",
+        "proof_status": "missing",
+        "coverage_relation": "specialization",
+        "declarations": [
+          "LMLF.Blueprint.Elementary.Section47.secondOrderExponentialSolution"
+        ],
+        "evidence_source": "coverage/overrides.json"
       },
       "quantitative": {
         "analogue_status": "unknown",
@@ -9669,11 +9859,13 @@
         "state": "unreviewed"
       },
       "lean": {
-        "statement_status": "unknown",
-        "proof_status": "unknown",
-        "coverage_relation": "unknown",
-        "declarations": [],
-        "evidence_source": null
+        "statement_status": "checked",
+        "proof_status": "missing",
+        "coverage_relation": "specialization",
+        "declarations": [
+          "LMLF.Blueprint.Elementary.Section48.log_mul"
+        ],
+        "evidence_source": "coverage/overrides.json"
       },
       "quantitative": {
         "analogue_status": "unknown",
@@ -9711,11 +9903,13 @@
         "state": "unreviewed"
       },
       "lean": {
-        "statement_status": "unknown",
-        "proof_status": "unknown",
-        "coverage_relation": "unknown",
-        "declarations": [],
-        "evidence_source": null
+        "statement_status": "checked",
+        "proof_status": "missing",
+        "coverage_relation": "specialization",
+        "declarations": [
+          "LMLF.Blueprint.Elementary.Section48.principal_log_mul"
+        ],
+        "evidence_source": "coverage/overrides.json"
       },
       "quantitative": {
         "analogue_status": "unknown",
@@ -9753,11 +9947,13 @@
         "state": "unreviewed"
       },
       "lean": {
-        "statement_status": "unknown",
-        "proof_status": "unknown",
-        "coverage_relation": "unknown",
-        "declarations": [],
-        "evidence_source": null
+        "statement_status": "checked",
+        "proof_status": "missing",
+        "coverage_relation": "specialization",
+        "declarations": [
+          "LMLF.Blueprint.Elementary.Section48.log_div"
+        ],
+        "evidence_source": "coverage/overrides.json"
       },
       "quantitative": {
         "analogue_status": "unknown",
@@ -9795,11 +9991,13 @@
         "state": "unreviewed"
       },
       "lean": {
-        "statement_status": "unknown",
-        "proof_status": "unknown",
-        "coverage_relation": "unknown",
-        "declarations": [],
-        "evidence_source": null
+        "statement_status": "checked",
+        "proof_status": "missing",
+        "coverage_relation": "specialization",
+        "declarations": [
+          "LMLF.Blueprint.Elementary.Section48.principal_log_div"
+        ],
+        "evidence_source": "coverage/overrides.json"
       },
       "quantitative": {
         "analogue_status": "unknown",
@@ -9870,11 +10068,13 @@
         "state": "unreviewed"
       },
       "lean": {
-        "statement_status": "unknown",
-        "proof_status": "unknown",
-        "coverage_relation": "unknown",
-        "declarations": [],
-        "evidence_source": null
+        "statement_status": "checked",
+        "proof_status": "missing",
+        "coverage_relation": "specialization",
+        "declarations": [
+          "LMLF.Blueprint.Elementary.Section48.log_zpow"
+        ],
+        "evidence_source": "coverage/overrides.json"
       },
       "quantitative": {
         "analogue_status": "unknown",
@@ -9912,11 +10112,13 @@
         "state": "unreviewed"
       },
       "lean": {
-        "statement_status": "unknown",
-        "proof_status": "unknown",
-        "coverage_relation": "unknown",
-        "declarations": [],
-        "evidence_source": null
+        "statement_status": "checked",
+        "proof_status": "missing",
+        "coverage_relation": "specialization",
+        "declarations": [
+          "LMLF.Blueprint.Elementary.Section48.principal_log_zpow"
+        ],
+        "evidence_source": "coverage/overrides.json"
       },
       "quantitative": {
         "analogue_status": "unknown",
@@ -9954,11 +10156,13 @@
         "state": "unreviewed"
       },
       "lean": {
-        "statement_status": "unknown",
-        "proof_status": "unknown",
-        "coverage_relation": "unknown",
-        "declarations": [],
-        "evidence_source": null
+        "statement_status": "checked",
+        "proof_status": "missing",
+        "coverage_relation": "specialization",
+        "declarations": [
+          "LMLF.Blueprint.Elementary.Section48.log_inv"
+        ],
+        "evidence_source": "coverage/overrides.json"
       },
       "quantitative": {
         "analogue_status": "unknown",
@@ -9996,11 +10200,13 @@
         "state": "unreviewed"
       },
       "lean": {
-        "statement_status": "unknown",
-        "proof_status": "unknown",
-        "coverage_relation": "unknown",
-        "declarations": [],
-        "evidence_source": null
+        "statement_status": "checked",
+        "proof_status": "missing",
+        "coverage_relation": "exact",
+        "declarations": [
+          "LMLF.Blueprint.Elementary.Section48.log_exp_branch"
+        ],
+        "evidence_source": "coverage/overrides.json"
       },
       "quantitative": {
         "analogue_status": "unknown",
@@ -10038,11 +10244,13 @@
         "state": "unreviewed"
       },
       "lean": {
-        "statement_status": "unknown",
-        "proof_status": "unknown",
-        "coverage_relation": "unknown",
-        "declarations": [],
-        "evidence_source": null
+        "statement_status": "checked",
+        "proof_status": "missing",
+        "coverage_relation": "specialization",
+        "declarations": [
+          "LMLF.Blueprint.Elementary.Section48.principal_log_exp"
+        ],
+        "evidence_source": "coverage/overrides.json"
       },
       "quantitative": {
         "analogue_status": "unknown",
@@ -10080,11 +10288,13 @@
         "state": "unreviewed"
       },
       "lean": {
-        "statement_status": "unknown",
-        "proof_status": "unknown",
-        "coverage_relation": "unknown",
-        "declarations": [],
-        "evidence_source": null
+        "statement_status": "checked",
+        "proof_status": "missing",
+        "coverage_relation": "exact",
+        "declarations": [
+          "LMLF.Blueprint.Elementary.Section48.exp_log"
+        ],
+        "evidence_source": "coverage/overrides.json"
       },
       "quantitative": {
         "analogue_status": "unknown",
@@ -10155,11 +10365,13 @@
         "state": "unreviewed"
       },
       "lean": {
-        "statement_status": "unknown",
-        "proof_status": "unknown",
-        "coverage_relation": "unknown",
-        "declarations": [],
-        "evidence_source": null
+        "statement_status": "checked",
+        "proof_status": "missing",
+        "coverage_relation": "specialization",
+        "declarations": [
+          "LMLF.Blueprint.Elementary.Section48.log_rpow_general_branch"
+        ],
+        "evidence_source": "coverage/overrides.json"
       },
       "quantitative": {
         "analogue_status": "unknown",
@@ -10197,11 +10409,13 @@
         "state": "unreviewed"
       },
       "lean": {
-        "statement_status": "unknown",
-        "proof_status": "unknown",
-        "coverage_relation": "unknown",
-        "declarations": [],
-        "evidence_source": null
+        "statement_status": "checked",
+        "proof_status": "missing",
+        "coverage_relation": "specialization",
+        "declarations": [
+          "LMLF.Blueprint.Elementary.Section48.principal_log_rpow"
+        ],
+        "evidence_source": "coverage/overrides.json"
       },
       "quantitative": {
         "analogue_status": "unknown",
@@ -10239,11 +10453,13 @@
         "state": "unreviewed"
       },
       "lean": {
-        "statement_status": "unknown",
-        "proof_status": "unknown",
-        "coverage_relation": "unknown",
-        "declarations": [],
-        "evidence_source": null
+        "statement_status": "checked",
+        "proof_status": "missing",
+        "coverage_relation": "exact",
+        "declarations": [
+          "LMLF.Blueprint.Elementary.Section48.log_rpow"
+        ],
+        "evidence_source": "coverage/overrides.json"
       },
       "quantitative": {
         "analogue_status": "unknown",
@@ -10347,11 +10563,13 @@
         "state": "unreviewed"
       },
       "lean": {
-        "statement_status": "unknown",
-        "proof_status": "unknown",
-        "coverage_relation": "unknown",
-        "declarations": [],
-        "evidence_source": null
+        "statement_status": "checked",
+        "proof_status": "missing",
+        "coverage_relation": "specialization",
+        "declarations": [
+          "LMLF.Blueprint.Elementary.Section48.rpow_add"
+        ],
+        "evidence_source": "coverage/overrides.json"
       },
       "quantitative": {
         "analogue_status": "unknown",
@@ -10422,11 +10640,13 @@
         "state": "unreviewed"
       },
       "lean": {
-        "statement_status": "unknown",
-        "proof_status": "unknown",
-        "coverage_relation": "unknown",
-        "declarations": [],
-        "evidence_source": null
+        "statement_status": "checked",
+        "proof_status": "missing",
+        "coverage_relation": "specialization",
+        "declarations": [
+          "LMLF.Blueprint.Elementary.Section48.mul_rpow"
+        ],
+        "evidence_source": "coverage/overrides.json"
       },
       "quantitative": {
         "analogue_status": "unknown",
@@ -10464,11 +10684,13 @@
         "state": "unreviewed"
       },
       "lean": {
-        "statement_status": "unknown",
-        "proof_status": "unknown",
-        "coverage_relation": "unknown",
-        "declarations": [],
-        "evidence_source": null
+        "statement_status": "checked",
+        "proof_status": "missing",
+        "coverage_relation": "specialization",
+        "declarations": [
+          "LMLF.Blueprint.Elementary.Section48.exp_add"
+        ],
+        "evidence_source": "coverage/overrides.json"
       },
       "quantitative": {
         "analogue_status": "unknown",
@@ -10506,11 +10728,13 @@
         "state": "unreviewed"
       },
       "lean": {
-        "statement_status": "unknown",
-        "proof_status": "unknown",
-        "coverage_relation": "unknown",
-        "declarations": [],
-        "evidence_source": null
+        "statement_status": "checked",
+        "proof_status": "missing",
+        "coverage_relation": "specialization",
+        "declarations": [
+          "LMLF.Blueprint.Elementary.Section48.exp_rpow"
+        ],
+        "evidence_source": "coverage/overrides.json"
       },
       "quantitative": {
         "analogue_status": "unknown",
@@ -10614,11 +10838,15 @@
         "state": "unreviewed"
       },
       "lean": {
-        "statement_status": "unknown",
-        "proof_status": "unknown",
-        "coverage_relation": "unknown",
-        "declarations": [],
-        "evidence_source": null
+        "statement_status": "checked",
+        "proof_status": "missing",
+        "coverage_relation": "specialization",
+        "declarations": [
+          "LMLF.Blueprint.Elementary.Section49.logarithmFractionNumerator",
+          "LMLF.Blueprint.Elementary.Section49.logarithmFractionDenominator",
+          "LMLF.Blueprint.Elementary.Section49.dlmf_4_9_1"
+        ],
+        "evidence_source": "coverage/overrides.json"
       },
       "quantitative": {
         "analogue_status": "unknown",
@@ -10656,11 +10884,15 @@
         "state": "unreviewed"
       },
       "lean": {
-        "statement_status": "unknown",
-        "proof_status": "unknown",
-        "coverage_relation": "unknown",
-        "declarations": [],
-        "evidence_source": null
+        "statement_status": "checked",
+        "proof_status": "missing",
+        "coverage_relation": "exact",
+        "declarations": [
+          "LMLF.Blueprint.Elementary.Section49.symmetricLogFractionNumerator",
+          "LMLF.Blueprint.Elementary.Section49.symmetricLogFractionDenominator",
+          "LMLF.Blueprint.Elementary.Section49.dlmf_4_9_2"
+        ],
+        "evidence_source": "coverage/overrides.json"
       },
       "quantitative": {
         "analogue_status": "unknown",
@@ -10805,11 +11037,19 @@
         "state": "unreviewed"
       },
       "lean": {
-        "statement_status": "unknown",
-        "proof_status": "unknown",
-        "coverage_relation": "unknown",
-        "declarations": [],
-        "evidence_source": null
+        "statement_status": "checked",
+        "proof_status": "missing",
+        "coverage_relation": "exact",
+        "declarations": [
+          "LMLF.Blueprint.Elementary.Section49.exponentialFractionNumeratorOne",
+          "LMLF.Blueprint.Elementary.Section49.exponentialFractionDenominatorOne",
+          "LMLF.Blueprint.Elementary.Section49.exponentialFractionNumeratorTwo",
+          "LMLF.Blueprint.Elementary.Section49.exponentialFractionDenominatorTwo",
+          "LMLF.Blueprint.Elementary.Section49.exponentialFractionNumeratorThree",
+          "LMLF.Blueprint.Elementary.Section49.exponentialFractionDenominatorThree",
+          "LMLF.Blueprint.Elementary.Section49.dlmf_4_9_3"
+        ],
+        "evidence_source": "coverage/overrides.json"
       },
       "quantitative": {
         "analogue_status": "unknown",
@@ -10847,11 +11087,16 @@
         "state": "unreviewed"
       },
       "lean": {
-        "statement_status": "unknown",
-        "proof_status": "unknown",
-        "coverage_relation": "unknown",
-        "declarations": [],
-        "evidence_source": null
+        "statement_status": "checked",
+        "proof_status": "missing",
+        "coverage_relation": "specialization",
+        "declarations": [
+          "LMLF.Blueprint.Elementary.Section49.exponentialExpansion",
+          "LMLF.Blueprint.Elementary.Section49.exponentialRemainderNumerator",
+          "LMLF.Blueprint.Elementary.Section49.exponentialRemainderDenominator",
+          "LMLF.Blueprint.Elementary.Section49.dlmf_4_9_4"
+        ],
+        "evidence_source": "coverage/overrides.json"
       },
       "quantitative": {
         "analogue_status": "unknown",
@@ -10889,11 +11134,13 @@
         "state": "unreviewed"
       },
       "lean": {
-        "statement_status": "unknown",
-        "proof_status": "unknown",
-        "coverage_relation": "unknown",
-        "declarations": [],
-        "evidence_source": null
+        "statement_status": "checked",
+        "proof_status": "missing",
+        "coverage_relation": "exact",
+        "declarations": [
+          "LMLF.Blueprint.Elementary.Section49.dlmf_4_9_5"
+        ],
+        "evidence_source": "coverage/overrides.json"
       },
       "quantitative": {
         "analogue_status": "unknown",
@@ -11063,11 +11310,13 @@
         "state": "unreviewed"
       },
       "lean": {
-        "statement_status": "unknown",
-        "proof_status": "unknown",
-        "coverage_relation": "unknown",
-        "declarations": [],
-        "evidence_source": null
+        "statement_status": "checked",
+        "proof_status": "missing",
+        "coverage_relation": "specialization",
+        "declarations": [
+          "LMLF.Blueprint.Elementary.Section410.dlmf_4_10_1"
+        ],
+        "evidence_source": "coverage/overrides.json"
       },
       "quantitative": {
         "analogue_status": "unknown",
@@ -11105,11 +11354,13 @@
         "state": "unreviewed"
       },
       "lean": {
-        "statement_status": "unknown",
-        "proof_status": "unknown",
-        "coverage_relation": "unknown",
-        "declarations": [],
-        "evidence_source": null
+        "statement_status": "checked",
+        "proof_status": "missing",
+        "coverage_relation": "specialization",
+        "declarations": [
+          "LMLF.Blueprint.Elementary.Section410.dlmf_4_10_2"
+        ],
+        "evidence_source": "coverage/overrides.json"
       },
       "quantitative": {
         "analogue_status": "unknown",
@@ -11147,11 +11398,13 @@
         "state": "unreviewed"
       },
       "lean": {
-        "statement_status": "unknown",
-        "proof_status": "unknown",
-        "coverage_relation": "unknown",
-        "declarations": [],
-        "evidence_source": null
+        "statement_status": "checked",
+        "proof_status": "missing",
+        "coverage_relation": "specialization",
+        "declarations": [
+          "LMLF.Blueprint.Elementary.Section410.dlmf_4_10_3"
+        ],
+        "evidence_source": "coverage/overrides.json"
       },
       "quantitative": {
         "analogue_status": "unknown",
@@ -11189,11 +11442,13 @@
         "state": "unreviewed"
       },
       "lean": {
-        "statement_status": "unknown",
-        "proof_status": "unknown",
-        "coverage_relation": "unknown",
-        "declarations": [],
-        "evidence_source": null
+        "statement_status": "checked",
+        "proof_status": "missing",
+        "coverage_relation": "specialization",
+        "declarations": [
+          "LMLF.Blueprint.Elementary.Section410.dlmf_4_10_4"
+        ],
+        "evidence_source": "coverage/overrides.json"
       },
       "quantitative": {
         "analogue_status": "unknown",
@@ -11231,11 +11486,13 @@
         "state": "unreviewed"
       },
       "lean": {
-        "statement_status": "unknown",
-        "proof_status": "unknown",
-        "coverage_relation": "unknown",
-        "declarations": [],
-        "evidence_source": null
+        "statement_status": "checked",
+        "proof_status": "missing",
+        "coverage_relation": "exact",
+        "declarations": [
+          "LMLF.Blueprint.Elementary.Section410.dlmf_4_10_5"
+        ],
+        "evidence_source": "coverage/overrides.json"
       },
       "quantitative": {
         "analogue_status": "unknown",
@@ -11273,11 +11530,13 @@
         "state": "unreviewed"
       },
       "lean": {
-        "statement_status": "unknown",
-        "proof_status": "unknown",
-        "coverage_relation": "unknown",
-        "declarations": [],
-        "evidence_source": null
+        "statement_status": "checked",
+        "proof_status": "missing",
+        "coverage_relation": "exact",
+        "declarations": [
+          "LMLF.Blueprint.Elementary.Section410.dlmf_4_10_6"
+        ],
+        "evidence_source": "coverage/overrides.json"
       },
       "quantitative": {
         "analogue_status": "unknown",
@@ -11315,11 +11574,14 @@
         "state": "unreviewed"
       },
       "lean": {
-        "statement_status": "unknown",
-        "proof_status": "unknown",
-        "coverage_relation": "unknown",
-        "declarations": [],
-        "evidence_source": null
+        "statement_status": "checked",
+        "proof_status": "missing",
+        "coverage_relation": "specialization",
+        "declarations": [
+          "LMLF.Blueprint.Elementary.Section410.dlmf_4_10_7",
+          "LMLF.Blueprint.Elementary.Section410.logarithmicIntegral"
+        ],
+        "evidence_source": "coverage/overrides.json"
       },
       "quantitative": {
         "analogue_status": "unknown",
@@ -11423,11 +11685,13 @@
         "state": "unreviewed"
       },
       "lean": {
-        "statement_status": "unknown",
-        "proof_status": "unknown",
-        "coverage_relation": "unknown",
-        "declarations": [],
-        "evidence_source": null
+        "statement_status": "checked",
+        "proof_status": "missing",
+        "coverage_relation": "specialization",
+        "declarations": [
+          "LMLF.Blueprint.Elementary.Section410.dlmf_4_10_8"
+        ],
+        "evidence_source": "coverage/overrides.json"
       },
       "quantitative": {
         "analogue_status": "unknown",
@@ -11465,11 +11729,13 @@
         "state": "unreviewed"
       },
       "lean": {
-        "statement_status": "unknown",
-        "proof_status": "unknown",
-        "coverage_relation": "unknown",
-        "declarations": [],
-        "evidence_source": null
+        "statement_status": "checked",
+        "proof_status": "missing",
+        "coverage_relation": "specialization",
+        "declarations": [
+          "LMLF.Blueprint.Elementary.Section410.dlmf_4_10_9"
+        ],
+        "evidence_source": "coverage/overrides.json"
       },
       "quantitative": {
         "analogue_status": "unknown",
@@ -11507,11 +11773,13 @@
         "state": "unreviewed"
       },
       "lean": {
-        "statement_status": "unknown",
-        "proof_status": "unknown",
-        "coverage_relation": "unknown",
-        "declarations": [],
-        "evidence_source": null
+        "statement_status": "checked",
+        "proof_status": "missing",
+        "coverage_relation": "specialization",
+        "declarations": [
+          "LMLF.Blueprint.Elementary.Section410.dlmf_4_10_10"
+        ],
+        "evidence_source": "coverage/overrides.json"
       },
       "quantitative": {
         "analogue_status": "unknown",
@@ -11549,11 +11817,13 @@
         "state": "unreviewed"
       },
       "lean": {
-        "statement_status": "unknown",
-        "proof_status": "unknown",
-        "coverage_relation": "unknown",
-        "declarations": [],
-        "evidence_source": null
+        "statement_status": "checked",
+        "proof_status": "missing",
+        "coverage_relation": "exact",
+        "declarations": [
+          "LMLF.Blueprint.Elementary.Section410.dlmf_4_10_11"
+        ],
+        "evidence_source": "coverage/overrides.json"
       },
       "quantitative": {
         "analogue_status": "unknown",
@@ -11591,11 +11861,13 @@
         "state": "unreviewed"
       },
       "lean": {
-        "statement_status": "unknown",
-        "proof_status": "unknown",
-        "coverage_relation": "unknown",
-        "declarations": [],
-        "evidence_source": null
+        "statement_status": "checked",
+        "proof_status": "missing",
+        "coverage_relation": "exact",
+        "declarations": [
+          "LMLF.Blueprint.Elementary.Section410.dlmf_4_10_12"
+        ],
+        "evidence_source": "coverage/overrides.json"
       },
       "quantitative": {
         "analogue_status": "unknown",
@@ -11633,11 +11905,13 @@
         "state": "unreviewed"
       },
       "lean": {
-        "statement_status": "unknown",
-        "proof_status": "unknown",
-        "coverage_relation": "unknown",
-        "declarations": [],
-        "evidence_source": null
+        "statement_status": "checked",
+        "proof_status": "missing",
+        "coverage_relation": "exact",
+        "declarations": [
+          "LMLF.Blueprint.Elementary.Section410.dlmf_4_10_13"
+        ],
+        "evidence_source": "coverage/overrides.json"
       },
       "quantitative": {
         "analogue_status": "unknown",
@@ -11774,11 +12048,13 @@
         "state": "unreviewed"
       },
       "lean": {
-        "statement_status": "unknown",
-        "proof_status": "unknown",
-        "coverage_relation": "unknown",
-        "declarations": [],
-        "evidence_source": null
+        "statement_status": "checked",
+        "proof_status": "missing",
+        "coverage_relation": "exact",
+        "declarations": [
+          "LMLF.Blueprint.Elementary.Section412.dlmf_4_12_1"
+        ],
+        "evidence_source": "coverage/overrides.json"
       },
       "quantitative": {
         "analogue_status": "unknown",
@@ -11816,11 +12092,13 @@
         "state": "unreviewed"
       },
       "lean": {
-        "statement_status": "unknown",
-        "proof_status": "unknown",
-        "coverage_relation": "unknown",
-        "declarations": [],
-        "evidence_source": null
+        "statement_status": "checked",
+        "proof_status": "missing",
+        "coverage_relation": "exact",
+        "declarations": [
+          "LMLF.Blueprint.Elementary.Section412.dlmf_4_12_2"
+        ],
+        "evidence_source": "coverage/overrides.json"
       },
       "quantitative": {
         "analogue_status": "unknown",
@@ -11858,11 +12136,13 @@
         "state": "unreviewed"
       },
       "lean": {
-        "statement_status": "unknown",
-        "proof_status": "unknown",
-        "coverage_relation": "unknown",
-        "declarations": [],
-        "evidence_source": null
+        "statement_status": "checked",
+        "proof_status": "missing",
+        "coverage_relation": "exact",
+        "declarations": [
+          "LMLF.Blueprint.Elementary.Section412.dlmf_4_12_3"
+        ],
+        "evidence_source": "coverage/overrides.json"
       },
       "quantitative": {
         "analogue_status": "unknown",
@@ -11900,11 +12180,13 @@
         "state": "unreviewed"
       },
       "lean": {
-        "statement_status": "unknown",
-        "proof_status": "unknown",
-        "coverage_relation": "unknown",
-        "declarations": [],
-        "evidence_source": null
+        "statement_status": "checked",
+        "proof_status": "missing",
+        "coverage_relation": "exact",
+        "declarations": [
+          "LMLF.Blueprint.Elementary.Section412.dlmf_4_12_4"
+        ],
+        "evidence_source": "coverage/overrides.json"
       },
       "quantitative": {
         "analogue_status": "unknown",
@@ -11975,11 +12257,13 @@
         "state": "unreviewed"
       },
       "lean": {
-        "statement_status": "unknown",
-        "proof_status": "unknown",
-        "coverage_relation": "unknown",
-        "declarations": [],
-        "evidence_source": null
+        "statement_status": "checked",
+        "proof_status": "missing",
+        "coverage_relation": "exact",
+        "declarations": [
+          "LMLF.Blueprint.Elementary.Section412.dlmf_4_12_5"
+        ],
+        "evidence_source": "coverage/overrides.json"
       },
       "quantitative": {
         "analogue_status": "unknown",
@@ -12017,11 +12301,13 @@
         "state": "unreviewed"
       },
       "lean": {
-        "statement_status": "unknown",
-        "proof_status": "unknown",
-        "coverage_relation": "unknown",
-        "declarations": [],
-        "evidence_source": null
+        "statement_status": "checked",
+        "proof_status": "missing",
+        "coverage_relation": "exact",
+        "declarations": [
+          "LMLF.Blueprint.Elementary.Section412.dlmf_4_12_6"
+        ],
+        "evidence_source": "coverage/overrides.json"
       },
       "quantitative": {
         "analogue_status": "unknown",
@@ -12059,11 +12345,13 @@
         "state": "unreviewed"
       },
       "lean": {
-        "statement_status": "unknown",
-        "proof_status": "unknown",
-        "coverage_relation": "unknown",
-        "declarations": [],
-        "evidence_source": null
+        "statement_status": "checked",
+        "proof_status": "missing",
+        "coverage_relation": "exact",
+        "declarations": [
+          "LMLF.Blueprint.Elementary.Section412.dlmf_4_12_7"
+        ],
+        "evidence_source": "coverage/overrides.json"
       },
       "quantitative": {
         "analogue_status": "unknown",
@@ -12101,11 +12389,13 @@
         "state": "unreviewed"
       },
       "lean": {
-        "statement_status": "unknown",
-        "proof_status": "unknown",
-        "coverage_relation": "unknown",
-        "declarations": [],
-        "evidence_source": null
+        "statement_status": "checked",
+        "proof_status": "missing",
+        "coverage_relation": "exact",
+        "declarations": [
+          "LMLF.Blueprint.Elementary.Section412.dlmf_4_12_8"
+        ],
+        "evidence_source": "coverage/overrides.json"
       },
       "quantitative": {
         "analogue_status": "unknown",
@@ -12143,11 +12433,13 @@
         "state": "unreviewed"
       },
       "lean": {
-        "statement_status": "unknown",
-        "proof_status": "unknown",
-        "coverage_relation": "unknown",
-        "declarations": [],
-        "evidence_source": null
+        "statement_status": "checked",
+        "proof_status": "missing",
+        "coverage_relation": "exact",
+        "declarations": [
+          "LMLF.Blueprint.Elementary.Section412.dlmf_4_12_9"
+        ],
+        "evidence_source": "coverage/overrides.json"
       },
       "quantitative": {
         "analogue_status": "unknown",
@@ -12218,11 +12510,13 @@
         "state": "unreviewed"
       },
       "lean": {
-        "statement_status": "unknown",
-        "proof_status": "unknown",
-        "coverage_relation": "unknown",
-        "declarations": [],
-        "evidence_source": null
+        "statement_status": "checked",
+        "proof_status": "missing",
+        "coverage_relation": "exact",
+        "declarations": [
+          "LMLF.Blueprint.Elementary.Section412.dlmf_4_12_10"
+        ],
+        "evidence_source": "coverage/overrides.json"
       },
       "quantitative": {
         "analogue_status": "unknown",

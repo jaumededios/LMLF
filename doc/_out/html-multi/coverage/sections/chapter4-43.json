@@ -1,0 +1,70 @@
+{
+  "section_range": ["4.3"],
+  "numbered_formula_ids_expected": [],
+  "numbered_formula_ids_stated": [],
+  "numbered_formula_ids_omitted": [],
+  "extra_statement_ids": [
+    "real_log_exp_inverse",
+    "real_exp_log_inverse",
+    "complex_exp_principal_log_inverse",
+    "principal_log_exp_on_strip",
+    "conformal_map_boundary_values",
+    "conformalMapNinePointTable",
+    "conformal_map_nine_point_table_spec",
+    "principalLogSurfaceHeight",
+    "principalLogSurfaceDomain",
+    "principal_log_surface_height",
+    "complex_exp_surface_height"
+  ],
+  "declarations": [
+    {
+      "source_id": "4.3.F1",
+      "names": [
+        "LMLF.Blueprint.Elementary.Section43.real_log_exp_inverse",
+        "LMLF.Blueprint.Elementary.Section43.real_exp_log_inverse"
+      ],
+      "relation": "exact",
+      "proof_status": "missing",
+      "quantitative_analogue": "not_applicable",
+      "notes": "The figure's inverse relationship is stated on the natural real domains of log and exp."
+    },
+    {
+      "source_id": "4.3.F2",
+      "names": [
+        "LMLF.Blueprint.Elementary.Section43.complex_exp_principal_log_inverse",
+        "LMLF.Blueprint.Elementary.Section43.principal_log_exp_on_strip",
+        "LMLF.Blueprint.Elementary.Section43.conformal_map_boundary_values",
+        "LMLF.Blueprint.Elementary.Section43.conformalMapNinePointTable",
+        "LMLF.Blueprint.Elementary.Section43.conformal_map_nine_point_table_spec"
+      ],
+      "relation": "specialization",
+      "proof_status": "missing",
+      "quantitative_analogue": "not_applicable",
+      "notes": "The declarations formalize the principal-branch inverses and selected boundary values displayed in the conformal-map figure."
+    },
+    {
+      "source_id": "4.3.F3",
+      "names": [
+        "LMLF.Blueprint.Elementary.Section43.principalLogSurfaceHeight",
+        "LMLF.Blueprint.Elementary.Section43.principalLogSurfaceDomain",
+        "LMLF.Blueprint.Elementary.Section43.principal_log_surface_height"
+      ],
+      "relation": "specialization",
+      "proof_status": "missing",
+      "quantitative_analogue": "not_applicable",
+      "notes": "The named height is the plotted modulus on the explicitly stated slit-plane domain."
+    },
+    {
+      "source_id": "4.3.F4",
+      "names": [
+        "LMLF.Blueprint.Elementary.Section43.complex_exp_surface_height"
+      ],
+      "relation": "exact",
+      "proof_status": "missing",
+      "quantitative_analogue": "not_applicable",
+      "notes": "The modulus of exp(x + iy) is exp(x), matching the surface height."
+    }
+  ],
+  "shared_vocabulary_requests": [],
+  "known_gaps": []
+}

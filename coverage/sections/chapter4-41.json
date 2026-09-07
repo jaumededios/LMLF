@@ -1,0 +1,47 @@
+{
+  "section_range": ["4.1"],
+  "numbered_formula_ids_expected": [],
+  "numbered_formula_ids_stated": [],
+  "numbered_formula_ids_omitted": [],
+  "extra_statement_ids": ["4.1.variables", "4.1.functions", "4.1.naming"],
+  "declarations": [
+    {
+      "source_id": "4.1.variables",
+      "names": [
+        "LMLF.Blueprint.Elementary.Section41.IntegerVariable",
+        "LMLF.Blueprint.Elementary.Section41.RealOrComplexConstant",
+        "LMLF.Blueprint.Elementary.Section41.RealVariable",
+        "LMLF.Blueprint.Elementary.Section41.complexCoordinate",
+        "LMLF.Blueprint.Elementary.Section41.complexCoordinate_re",
+        "LMLF.Blueprint.Elementary.Section41.complexCoordinate_im",
+        "LMLF.Blueprint.Elementary.Section41.naturalLogBase",
+        "LMLF.Blueprint.Elementary.Section41.naturalLogBase_pos"
+      ],
+      "relation": "exact",
+      "proof_status": "missing",
+      "quantitative_analogue": "not_applicable",
+      "notes": "The notation table is represented with integer and real domains, a complex-valued representation for constants allowed to be real or complex, the coordinate convention z = x + i y, and e = exp 1."
+    },
+    {
+      "source_id": "4.1.functions",
+      "names": ["LMLF.Blueprint.Elementary.Section41.ComplexFunction"],
+      "relation": "related",
+      "proof_status": "not_applicable",
+      "quantitative_analogue": "not_applicable",
+      "notes": "The source enumerates the complex elementary-function families and their principal/general notation; the page records that vocabulary in prose and gives a shared complex-function domain without duplicating definitions introduced in §§4.2–4.37."
+    },
+    {
+      "source_id": "4.1.naming",
+      "names": [],
+      "relation": "related",
+      "proof_status": "not_applicable",
+      "quantitative_analogue": "not_applicable",
+      "notes": "The source records naming ambiguities between lowercase and uppercase branch notation and the alternative arc/index −1 spelling; the page preserves these conventions as prose."
+    }
+  ],
+  "shared_vocabulary_requests": [],
+  "known_gaps": [
+    "DLMF §4.1 has no numbered equations; coverage consists of the notation table and surrounding naming conventions.",
+    "The chapter's elementary-function definitions are introduced in later sections, so §4.1 records their names and shared complex domain without reimplementing them here."
+  ]
+}

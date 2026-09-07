@@ -1,0 +1,91 @@
+{
+  "section_range": ["4.9"],
+  "numbered_formula_ids_expected": ["4.9.E1", "4.9.E2", "4.9.E3", "4.9.E4", "4.9.E5"],
+  "numbered_formula_ids_stated": ["4.9.E1", "4.9.E2", "4.9.E3", "4.9.E4", "4.9.E5"],
+  "numbered_formula_ids_omitted": [],
+  "extra_statement_ids": [
+    "4.9.continuedFractionTail",
+    "4.9.continuedFractionConvergent",
+    "4.9.logarithmFractionNumerator",
+    "4.9.logarithmFractionDenominator",
+    "4.9.symmetricLogFractionNumerator",
+    "4.9.symmetricLogFractionDenominator",
+    "4.9.exponentialFractionNumeratorOne",
+    "4.9.exponentialFractionDenominatorOne",
+    "4.9.exponentialFractionNumeratorTwo",
+    "4.9.exponentialFractionDenominatorTwo",
+    "4.9.exponentialFractionNumeratorThree",
+    "4.9.exponentialFractionDenominatorThree",
+    "4.9.exponentialExpansion",
+    "4.9.exponentialRemainderNumerator",
+    "4.9.exponentialRemainderDenominator"
+  ],
+  "declarations": [
+    {
+      "source_id": "4.9.E1",
+      "names": [
+        "LMLF.Blueprint.Elementary.Section49.logarithmFractionNumerator",
+        "LMLF.Blueprint.Elementary.Section49.logarithmFractionDenominator",
+        "LMLF.Blueprint.Elementary.Section49.dlmf_4_9_1"
+      ],
+      "relation": "specialization",
+      "proof_status": "missing",
+      "quantitative_analogue": "not_applicable",
+      "notes": "The numerator and denominator streams reproduce the displayed coefficients. The formal convergence statement uses Complex.log, adds the natural nonzero condition for 1 + z, and states the source phase restriction with Complex.arg."
+    },
+    {
+      "source_id": "4.9.E2",
+      "names": [
+        "LMLF.Blueprint.Elementary.Section49.symmetricLogFractionNumerator",
+        "LMLF.Blueprint.Elementary.Section49.symmetricLogFractionDenominator",
+        "LMLF.Blueprint.Elementary.Section49.dlmf_4_9_2"
+      ],
+      "relation": "exact",
+      "proof_status": "missing",
+      "quantitative_analogue": "not_applicable",
+      "notes": "The condition excludes the real cuts (-∞, -1] and [1, ∞), and the negative square numerators and odd denominators follow the DLMF display."
+    },
+    {
+      "source_id": "4.9.E3",
+      "names": [
+        "LMLF.Blueprint.Elementary.Section49.exponentialFractionNumeratorOne",
+        "LMLF.Blueprint.Elementary.Section49.exponentialFractionDenominatorOne",
+        "LMLF.Blueprint.Elementary.Section49.exponentialFractionNumeratorTwo",
+        "LMLF.Blueprint.Elementary.Section49.exponentialFractionDenominatorTwo",
+        "LMLF.Blueprint.Elementary.Section49.exponentialFractionNumeratorThree",
+        "LMLF.Blueprint.Elementary.Section49.exponentialFractionDenominatorThree",
+        "LMLF.Blueprint.Elementary.Section49.dlmf_4_9_3"
+      ],
+      "relation": "exact",
+      "proof_status": "missing",
+      "quantitative_analogue": "not_applicable",
+      "notes": "All three DLMF continued fractions are stated together for complex z, including their distinct initial denominators and coefficient/sign patterns."
+    },
+    {
+      "source_id": "4.9.E4",
+      "names": [
+        "LMLF.Blueprint.Elementary.Section49.exponentialExpansion",
+        "LMLF.Blueprint.Elementary.Section49.exponentialRemainderNumerator",
+        "LMLF.Blueprint.Elementary.Section49.exponentialRemainderDenominator",
+        "LMLF.Blueprint.Elementary.Section49.dlmf_4_9_4"
+      ],
+      "relation": "specialization",
+      "proof_status": "missing",
+      "quantitative_analogue": "not_applicable",
+      "notes": "The source's positive integer n is represented by n : ℕ with 1 ≤ n; the finite depth limit is stated as Tendsto atTop and the alternating remainder coefficients are explicit."
+    },
+    {
+      "source_id": "4.9.E5",
+      "names": ["LMLF.Blueprint.Elementary.Section49.dlmf_4_9_5"],
+      "relation": "exact",
+      "proof_status": "missing",
+      "quantitative_analogue": "not_applicable",
+      "notes": "The finite sum uses Finset.range (n + 1), representing exactly the indices 0 through n in the source definition of e_n(z)."
+    }
+  ],
+  "shared_vocabulary_requests": [],
+  "known_gaps": [
+    "The generic continued-fraction tail is a local finite approximant definition; convergence is asserted directly in each numbered theorem rather than through a shared library of continued-fraction convergence results.",
+    "The mathematical proofs of the five DLMF results are not filled in during the statement-coverage phase."
+  ]
+}

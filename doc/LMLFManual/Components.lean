@@ -222,14 +222,14 @@ block_extension CoverageSummary where
           <th>"Proved"</th><th>"Quantitative"</th>
         </tr></thead>
         <tbody>
-          <tr><td>"4"</td><td>"531"</td><td>"0"</td><td>"0"</td><td>"0"</td></tr>
+          <tr><td>"4"</td><td>"531"</td><td>"139"</td><td>"0"</td><td>"0"</td></tr>
           <tr><td>"5"</td><td>"169"</td><td>"160"</td><td>"1"</td><td>"3"</td></tr>
           <tr><td>"6"</td><td>"100"</td><td>"0"</td><td>"0"</td><td>"0"</td></tr>
           <tr><td>"7"</td><td>"139"</td><td>"0"</td><td>"0"</td><td>"0"</td></tr>
           <tr><td>"8"</td><td>"241"</td><td>"0"</td><td>"0"</td><td>"0"</td></tr>
           <tr><td>"9"</td><td>"230"</td><td>"0"</td><td>"0"</td><td>"0"</td></tr>
           <tr><td>"10"</td><td>"698"</td><td>"0"</td><td>"0"</td><td>"0"</td></tr>
-          <tr><th>"Total"</th><th>"2,108"</th><th>"160"</th><th>"1"</th><th>"3"</th></tr>
+          <tr><th>"Total"</th><th>"2,108"</th><th>"299"</th><th>"1"</th><th>"3"</th></tr>
         </tbody>
       </table>
     }}

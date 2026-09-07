@@ -879,6 +879,242 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 </script>
     <script>
+
+window.onload = async () => {
+
+    // Don't show hovers inside of closed tactic states
+    function blockedByTactic(elem) {
+      let parent = elem.parentNode;
+      while (parent && "classList" in parent) {
+        if (parent.classList.contains("tactic")) {
+          const toggle = parent.querySelector(":scope > input.tactic-toggle");
+          if (toggle) {
+            return !toggle.checked;
+          }
+        }
+        parent = parent.parentNode;
+      }
+      return false;
+    }
+
+    // Track whether any tippy is visible (O(1) check instead of DOM scan)
+    let visibleTippyCount = 0;
+    function blockedByTippy(elem) {
+      return visibleTippyCount > 0;
+    }
+
+    // Binding highlights via event delegation with cached lookups
+    const bindingCache = new Map(); // context+binding -> [token elements]
+    let highlightedTokens = [];
+    function getBindingTokens(context, binding) {
+      const key = context + "\0" + binding;
+      let tokens = bindingCache.get(key);
+      if (!tokens) {
+        tokens = [];
+        for (const example of document.querySelectorAll(".hl.lean")) {
+          if (example.dataset.leanContext == context) {
+            for (const tok of example.querySelectorAll(".token[data-binding=\"" + CSS.escape(binding) + "\"]")) {
+              tokens.push(tok);
+            }
+          }
+        }
+        bindingCache.set(key, tokens);
+      }
+      return tokens;
+    }
+    for (const container of document.querySelectorAll(".hl.lean")) {
+      container.addEventListener("mouseover", (event) => {
+        const c = event.target.closest(".token");
+        if (!c || !c.dataset.binding || c.dataset.binding === "" || !container.contains(c)) return;
+        if (blockedByTactic(c)) return;
+        const tokens = getBindingTokens(container.dataset.leanContext, c.dataset.binding);
+        for (const tok of tokens) {
+          tok.classList.add("binding-hl");
+        }
+        highlightedTokens = tokens;
+      });
+      container.addEventListener("mouseout", (event) => {
+        const c = event.target.closest(".token");
+        if (!c || !container.contains(c)) return;
+        for (const tok of highlightedTokens) {
+          tok.classList.remove("binding-hl");
+        }
+        highlightedTokens = [];
+      });
+    }
+    /* Render docstrings */
+    if ('undefined' !== typeof marked) {
+        for (const d of document.querySelectorAll("code.docstring, pre.docstring")) {
+            const str = d.innerText;
+            const html = marked.parse(str);
+            const rendered = document.createElement("div");
+            rendered.classList.add("docstring");
+            rendered.innerHTML = html;
+            d.parentNode.replaceChild(rendered, d);
+        }
+    }
+    // Add hovers
+    const versoDocData = await (fetch("-verso-docs.json").then((resp) => resp.json()));
+
+    function hideParentTooltips(element) {
+      let parent = element.parentElement;
+      while (parent) {
+        const tippyInstance = parent._tippy;
+        if (tippyInstance) {
+          tippyInstance.hide();
+        }
+        parent = parent.parentElement;
+      }
+    }
+
+
+
+    const defaultTippyProps = {
+      /* DEBUG -- remove the space: * /
+      onHide(any) { return false; },
+      trigger: "click",
+      // */
+      /* theme: "lean", */
+      maxWidth: "none",
+      appendTo: () => document.body,
+      interactive: true,
+      delay: [100, null],
+      /* ignoreAttributes: true, */
+      followCursor: 'initial',
+      onShow(inst) {
+        if (inst.reference.className == 'tactic') {
+          const toggle = inst.reference.querySelector(":scope > input.tactic-toggle");
+          if (toggle && toggle.checked) {
+            return false;
+          }
+          hideParentTooltips(inst.reference);
+          if (blockedByTippy(inst.reference)) { return false; }
+
+        } else if (inst.reference.querySelector(".hover-info") || "versoHover" in inst.reference.dataset) {
+          if (blockedByTactic(inst.reference)) { return false };
+          if (blockedByTippy(inst.reference)) { return false; }
+        } else { // Nothing to show here!
+          return false;
+        }
+      },
+      onShown(inst) { visibleTippyCount++; },
+      onHidden(inst) { visibleTippyCount = Math.max(0, visibleTippyCount - 1); },
+      content (tgt) {
+        const content = document.createElement("span");
+        if (tgt.className == 'tactic') {
+          const state = tgt.querySelector(":scope > .tactic-state").cloneNode(true);
+          state.style.display = "block";
+          content.appendChild(state);
+          content.style.display = "block";
+          content.className = "hl lean popup";
+        } else {
+          content.className = "hl lean";
+          content.style.display = "block";
+          content.style.maxHeight = "300px";
+          content.style.overflowY = "auto";
+          content.style.overflowX = "hidden";
+          const hoverId = tgt.dataset.versoHover;
+          const hoverInfo = tgt.querySelector(".hover-info");
+          if (hoverId) { // Docstrings from the table
+            // TODO stop doing an implicit conversion from string to number here
+            let data = versoDocData[hoverId];
+            if (data) {
+              const info = document.createElement("span");
+              info.className = "hover-info";
+              info.style.display = "block";
+              info.innerHTML = data;
+              content.appendChild(info);
+              /* Render docstrings - TODO server-side */
+              if ('undefined' !== typeof marked) {
+                  for (const d of content.querySelectorAll("code.docstring, pre.docstring")) {
+                      const str = d.innerText;
+                      const html = marked.parse(str);
+                      const rendered = document.createElement("div");
+                      rendered.classList.add("docstring");
+                      rendered.innerHTML = html;
+                      d.parentNode.replaceChild(rendered, d);
+                  }
+              }
+            } else {
+              content.innerHTML = "Failed to load doc ID: " + hoverId;
+            }
+          } else if (hoverInfo) { // The inline info, still used for compiler messages
+            content.appendChild(hoverInfo.cloneNode(true));
+          }
+          const extraLinks = tgt.parentElement.dataset['versoLinks'];
+          if (extraLinks) {
+            try {
+              const extras = JSON.parse(extraLinks);
+              const links = document.createElement('ul');
+              links.className = 'extra-doc-links';
+              extras.forEach((l) => {
+                const li = document.createElement('li');
+                li.innerHTML = "<a href=\"" + l['href'] + "\" title=\"" + l.long + "\">" + l.short + "</a>";
+                links.appendChild(li);
+              });
+              content.appendChild(links);
+            } catch (error) {
+              console.error(error);
+            }
+          }
+        }
+        return content;
+      }
+    };
+
+
+    document.querySelectorAll('.hl.lean .const.token, .hl.lean .keyword.token, .hl.lean .literal.token, .hl.lean .option.token, .hl.lean .var.token, .hl.lean .typed.token, .hl.lean .level-var, .hl.lean .level-const, .hl.lean .level-op, .hl.lean .sort').forEach(element => {
+      element.setAttribute('data-tippy-theme', 'lean');
+    });
+    document.querySelectorAll('.hl.lean .has-info.warning').forEach(element => {
+      element.setAttribute('data-tippy-theme', 'warning message');
+    });
+    document.querySelectorAll('.hl.lean .has-info.information').forEach(element => {
+      element.setAttribute('data-tippy-theme', 'info message');
+    });
+    document.querySelectorAll('.hl.lean .has-info.error').forEach(element => {
+      element.setAttribute('data-tippy-theme', 'error message');
+    });
+    document.querySelectorAll('.hl.lean .tactic').forEach(element => {
+      element.setAttribute('data-tippy-theme', 'tactic');
+    });
+    // Skip tokens inside closed tactics — they interfere with tactic tippys
+    const closedTactics = new Set();
+    document.querySelectorAll('.hl.lean .tactic').forEach(tactic => {
+      const toggle = tactic.querySelector(':scope > input.tactic-toggle');
+      if (toggle && !toggle.checked) closedTactics.add(tactic);
+    });
+    function isInsideClosedTactic(el) {
+      const tactic = el.closest('.tactic');
+      return tactic && tactic !== el && closedTactics.has(tactic);
+    }
+
+    const tokenSelector = '.hl.lean .const.token, .hl.lean .keyword.token, .hl.lean .literal.token, .hl.lean .option.token, .hl.lean .var.token, .hl.lean .typed.token, .hl.lean .has-info, .hl.lean .tactic, .hl.lean .level-var, .hl.lean .level-const, .hl.lean .level-op, .hl.lean .sort';
+    tippy(Array.from(document.querySelectorAll(tokenSelector)).filter(el => !isInsideClosedTactic(el)), defaultTippyProps);
+
+    // Create/destroy token tippys when tactic checkbox toggles
+    const tacticTippySelector = '.const.token, .keyword.token, .literal.token, .option.token, .var.token, .typed.token, .has-info, .level-var, .level-const, .level-op, .sort';
+    document.querySelectorAll('.hl.lean .tactic').forEach(tactic => {
+      const toggle = tactic.querySelector(':scope > input.tactic-toggle');
+      if (toggle) toggle.addEventListener('change', () => {
+        if (toggle.checked) {
+          closedTactics.delete(tactic);
+          tactic.querySelectorAll('.token').forEach(tok => {
+            if (!tok._tippy && tok.matches(tacticTippySelector)) {
+              tippy(tok, defaultTippyProps);
+            }
+          });
+        } else {
+          closedTactics.add(tactic);
+          tactic.querySelectorAll('.token').forEach(tok => {
+            if (tok._tippy) tok._tippy.destroy();
+          });
+        }
+      });
+  });
+}
+</script>
+    <script>
       window.xref = {"Verso.Genre.Manual.section":
  {"title": "Sections or chapters of the manual",
   "description": null,
@@ -1198,6 +1434,160 @@ document.addEventListener("DOMContentLoaded", () => {
       [{"title": "LMLF · DLMF with Lean", "shortTitle": "LMLF", "number": null},
        {"title": "Gamma Function", "shortTitle": null, "number": "5"}]},
      "address": "/Gamma-Function/"}],
+   "chapter-4-section-9":
+   [{"id": "chapter-4-section-9",
+     "data":
+     {"title": "§4.9 Continued Fractions",
+      "shortTitle": null,
+      "sectionNum": "4.9.",
+      "searchPriority": 50,
+      "context":
+      [{"title": "LMLF · DLMF with Lean", "shortTitle": "LMLF", "number": null},
+       {"title": "Elementary Functions", "shortTitle": null, "number": "4"},
+       {"title": "§4.9 Continued Fractions",
+        "shortTitle": null,
+        "number": "9"}]},
+     "address": "/Elementary-Functions/___4___9-Continued-Fractions/"}],
+   "chapter-4-section-8":
+   [{"id": "chapter-4-section-8",
+     "data":
+     {"title": "§4.8 Identities",
+      "shortTitle": null,
+      "sectionNum": "4.8.",
+      "searchPriority": 50,
+      "context":
+      [{"title": "LMLF · DLMF with Lean", "shortTitle": "LMLF", "number": null},
+       {"title": "Elementary Functions", "shortTitle": null, "number": "4"},
+       {"title": "§4.8 Identities", "shortTitle": null, "number": "8"}]},
+     "address": "/Elementary-Functions/___4___8-Identities/"}],
+   "chapter-4-section-7":
+   [{"id": "chapter-4-section-7",
+     "data":
+     {"title": "§4.7 Derivatives and Differential Equations",
+      "shortTitle": null,
+      "sectionNum": "4.7.",
+      "searchPriority": 50,
+      "context":
+      [{"title": "LMLF · DLMF with Lean", "shortTitle": "LMLF", "number": null},
+       {"title": "Elementary Functions", "shortTitle": null, "number": "4"},
+       {"title": "§4.7 Derivatives and Differential Equations",
+        "shortTitle": null,
+        "number": "7"}]},
+     "address":
+     "/Elementary-Functions/___4___7-Derivatives-and-Differential-Equations/"}],
+   "chapter-4-section-6":
+   [{"id": "chapter-4-section-6",
+     "data":
+     {"title": "§4.6 Power Series",
+      "shortTitle": null,
+      "sectionNum": "4.6.",
+      "searchPriority": 50,
+      "context":
+      [{"title": "LMLF · DLMF with Lean", "shortTitle": "LMLF", "number": null},
+       {"title": "Elementary Functions", "shortTitle": null, "number": "4"},
+       {"title": "§4.6 Power Series", "shortTitle": null, "number": "6"}]},
+     "address": "/Elementary-Functions/___4___6-Power-Series/"}],
+   "chapter-4-section-5":
+   [{"id": "chapter-4-section-5",
+     "data":
+     {"title": "§4.5 Inequalities",
+      "shortTitle": null,
+      "sectionNum": "4.5.",
+      "searchPriority": 50,
+      "context":
+      [{"title": "LMLF · DLMF with Lean", "shortTitle": "LMLF", "number": null},
+       {"title": "Elementary Functions", "shortTitle": null, "number": "4"},
+       {"title": "§4.5 Inequalities", "shortTitle": null, "number": "5"}]},
+     "address": "/Elementary-Functions/___4___5-Inequalities/"}],
+   "chapter-4-section-4":
+   [{"id": "chapter-4-section-4",
+     "data":
+     {"title": "§4.4 Special Values and Limits",
+      "shortTitle": null,
+      "sectionNum": "4.4.",
+      "searchPriority": 50,
+      "context":
+      [{"title": "LMLF · DLMF with Lean", "shortTitle": "LMLF", "number": null},
+       {"title": "Elementary Functions", "shortTitle": null, "number": "4"},
+       {"title": "§4.4 Special Values and Limits",
+        "shortTitle": null,
+        "number": "4"}]},
+     "address": "/Elementary-Functions/___4___4-Special-Values-and-Limits/"}],
+   "chapter-4-section-3":
+   [{"id": "chapter-4-section-3",
+     "data":
+     {"title": "§4.3 Graphics",
+      "shortTitle": null,
+      "sectionNum": "4.3.",
+      "searchPriority": 50,
+      "context":
+      [{"title": "LMLF · DLMF with Lean", "shortTitle": "LMLF", "number": null},
+       {"title": "Elementary Functions", "shortTitle": null, "number": "4"},
+       {"title": "§4.3 Graphics", "shortTitle": null, "number": "3"}]},
+     "address": "/Elementary-Functions/___4___3-Graphics/"}],
+   "chapter-4-section-2":
+   [{"id": "chapter-4-section-2",
+     "data":
+     {"title": "§4.2 Definitions",
+      "shortTitle": null,
+      "sectionNum": "4.2.",
+      "searchPriority": 50,
+      "context":
+      [{"title": "LMLF · DLMF with Lean", "shortTitle": "LMLF", "number": null},
+       {"title": "Elementary Functions", "shortTitle": null, "number": "4"},
+       {"title": "§4.2 Definitions", "shortTitle": null, "number": "2"}]},
+     "address": "/Elementary-Functions/___4___2-Definitions/"}],
+   "chapter-4-section-12":
+   [{"id": "chapter-4-section-12",
+     "data":
+     {"title": "§4.12 Generalized Logarithms and Exponentials",
+      "shortTitle": null,
+      "sectionNum": "4.12.",
+      "searchPriority": 50,
+      "context":
+      [{"title": "LMLF · DLMF with Lean", "shortTitle": "LMLF", "number": null},
+       {"title": "Elementary Functions", "shortTitle": null, "number": "4"},
+       {"title": "§4.12 Generalized Logarithms and Exponentials",
+        "shortTitle": null,
+        "number": "12"}]},
+     "address":
+     "/Elementary-Functions/___4___12-Generalized-Logarithms-and-Exponentials/"}],
+   "chapter-4-section-11":
+   [{"id": "chapter-4-section-11",
+     "data":
+     {"title": "§4.11 Sums",
+      "shortTitle": null,
+      "sectionNum": "4.11.",
+      "searchPriority": 50,
+      "context":
+      [{"title": "LMLF · DLMF with Lean", "shortTitle": "LMLF", "number": null},
+       {"title": "Elementary Functions", "shortTitle": null, "number": "4"},
+       {"title": "§4.11 Sums", "shortTitle": null, "number": "11"}]},
+     "address": "/Elementary-Functions/___4___11-Sums/"}],
+   "chapter-4-section-10":
+   [{"id": "chapter-4-section-10",
+     "data":
+     {"title": "§4.10 Integrals",
+      "shortTitle": null,
+      "sectionNum": "4.10.",
+      "searchPriority": 50,
+      "context":
+      [{"title": "LMLF · DLMF with Lean", "shortTitle": "LMLF", "number": null},
+       {"title": "Elementary Functions", "shortTitle": null, "number": "4"},
+       {"title": "§4.10 Integrals", "shortTitle": null, "number": "10"}]},
+     "address": "/Elementary-Functions/___4___10-Integrals/"}],
+   "chapter-4-section-1":
+   [{"id": "chapter-4-section-1",
+     "data":
+     {"title": "§4.1 Special Notation",
+      "shortTitle": null,
+      "sectionNum": "4.1.",
+      "searchPriority": 50,
+      "context":
+      [{"title": "LMLF · DLMF with Lean", "shortTitle": "LMLF", "number": null},
+       {"title": "Elementary Functions", "shortTitle": null, "number": "4"},
+       {"title": "§4.1 Special Notation", "shortTitle": null, "number": "1"}]},
+     "address": "/Elementary-Functions/___4___1-Special-Notation/"}],
    "chapter-4":
    [{"id": "chapter-4",
      "data":
@@ -2239,6 +2629,332 @@ document.addEventListener("DOMContentLoaded", () => {
        {"title": "Chapter contents", "shortTitle": null, "number": null}]},
      "address":
      "/Error-Functions___-Dawson___s-and-Fresnel-Integrals/Chapter-contents/"}],
+   "LMLF-___-DLMF-with-Lean--Elementary-Functions--___4___9-Continued-Fractions--___4___9-Continued-Fractions":
+   [{"id":
+     "LMLF-___-DLMF-with-Lean--Elementary-Functions--___4___9-Continued-Fractions--___4___9-Continued-Fractions",
+     "data":
+     {"title": "§4.9 Continued Fractions",
+      "shortTitle": null,
+      "sectionNum": null,
+      "searchPriority": 50,
+      "context":
+      [{"title": "LMLF · DLMF with Lean", "shortTitle": "LMLF", "number": null},
+       {"title": "Elementary Functions", "shortTitle": null, "number": "4"},
+       {"title": "§4.9 Continued Fractions", "shortTitle": null, "number": "9"},
+       {"title": "§4.9 Continued Fractions",
+        "shortTitle": null,
+        "number": null}]},
+     "address": "/Elementary-Functions/___4___9-Continued-Fractions/"}],
+   "LMLF-___-DLMF-with-Lean--Elementary-Functions--___4___8-Identities--___4___8-Identities--___4___8_LPAR_ii_RPAR_-Powers":
+   [{"id":
+     "LMLF-___-DLMF-with-Lean--Elementary-Functions--___4___8-Identities--___4___8-Identities--___4___8_LPAR_ii_RPAR_-Powers",
+     "data":
+     {"title": "§4.8(ii) Powers",
+      "shortTitle": null,
+      "sectionNum": null,
+      "searchPriority": 50,
+      "context":
+      [{"title": "LMLF · DLMF with Lean", "shortTitle": "LMLF", "number": null},
+       {"title": "Elementary Functions", "shortTitle": null, "number": "4"},
+       {"title": "§4.8 Identities", "shortTitle": null, "number": "8"},
+       {"title": "§4.8 Identities", "shortTitle": null, "number": null},
+       {"title": "§4.8(ii) Powers", "shortTitle": null, "number": null}]},
+     "address": "/Elementary-Functions/___4___8-Identities/"}],
+   "LMLF-___-DLMF-with-Lean--Elementary-Functions--___4___8-Identities--___4___8-Identities--___4___8_LPAR_i_RPAR_-Logarithms":
+   [{"id":
+     "LMLF-___-DLMF-with-Lean--Elementary-Functions--___4___8-Identities--___4___8-Identities--___4___8_LPAR_i_RPAR_-Logarithms",
+     "data":
+     {"title": "§4.8(i) Logarithms",
+      "shortTitle": null,
+      "sectionNum": null,
+      "searchPriority": 50,
+      "context":
+      [{"title": "LMLF · DLMF with Lean", "shortTitle": "LMLF", "number": null},
+       {"title": "Elementary Functions", "shortTitle": null, "number": "4"},
+       {"title": "§4.8 Identities", "shortTitle": null, "number": "8"},
+       {"title": "§4.8 Identities", "shortTitle": null, "number": null},
+       {"title": "§4.8(i) Logarithms", "shortTitle": null, "number": null}]},
+     "address": "/Elementary-Functions/___4___8-Identities/"}],
+   "LMLF-___-DLMF-with-Lean--Elementary-Functions--___4___8-Identities--___4___8-Identities":
+   [{"id":
+     "LMLF-___-DLMF-with-Lean--Elementary-Functions--___4___8-Identities--___4___8-Identities",
+     "data":
+     {"title": "§4.8 Identities",
+      "shortTitle": null,
+      "sectionNum": null,
+      "searchPriority": 50,
+      "context":
+      [{"title": "LMLF · DLMF with Lean", "shortTitle": "LMLF", "number": null},
+       {"title": "Elementary Functions", "shortTitle": null, "number": "4"},
+       {"title": "§4.8 Identities", "shortTitle": null, "number": "8"},
+       {"title": "§4.8 Identities", "shortTitle": null, "number": null}]},
+     "address": "/Elementary-Functions/___4___8-Identities/"}],
+   "LMLF-___-DLMF-with-Lean--Elementary-Functions--___4___7-Derivatives-and-Differential-Equations--___4___7-Derivatives-and-Differential-Equations--___4___7_LPAR_ii_RPAR_-Exponentials-and-Powers":
+   [{"id":
+     "LMLF-___-DLMF-with-Lean--Elementary-Functions--___4___7-Derivatives-and-Differential-Equations--___4___7-Derivatives-and-Differential-Equations--___4___7_LPAR_ii_RPAR_-Exponentials-and-Powers",
+     "data":
+     {"title": "§4.7(ii) Exponentials and Powers",
+      "shortTitle": null,
+      "sectionNum": null,
+      "searchPriority": 50,
+      "context":
+      [{"title": "LMLF · DLMF with Lean", "shortTitle": "LMLF", "number": null},
+       {"title": "Elementary Functions", "shortTitle": null, "number": "4"},
+       {"title": "§4.7 Derivatives and Differential Equations",
+        "shortTitle": null,
+        "number": "7"},
+       {"title": "§4.7 Derivatives and Differential Equations",
+        "shortTitle": null,
+        "number": null},
+       {"title": "§4.7(ii) Exponentials and Powers",
+        "shortTitle": null,
+        "number": null}]},
+     "address":
+     "/Elementary-Functions/___4___7-Derivatives-and-Differential-Equations/"}],
+   "LMLF-___-DLMF-with-Lean--Elementary-Functions--___4___7-Derivatives-and-Differential-Equations--___4___7-Derivatives-and-Differential-Equations--___4___7_LPAR_i_RPAR_-Logarithms":
+   [{"id":
+     "LMLF-___-DLMF-with-Lean--Elementary-Functions--___4___7-Derivatives-and-Differential-Equations--___4___7-Derivatives-and-Differential-Equations--___4___7_LPAR_i_RPAR_-Logarithms",
+     "data":
+     {"title": "§4.7(i) Logarithms",
+      "shortTitle": null,
+      "sectionNum": null,
+      "searchPriority": 50,
+      "context":
+      [{"title": "LMLF · DLMF with Lean", "shortTitle": "LMLF", "number": null},
+       {"title": "Elementary Functions", "shortTitle": null, "number": "4"},
+       {"title": "§4.7 Derivatives and Differential Equations",
+        "shortTitle": null,
+        "number": "7"},
+       {"title": "§4.7 Derivatives and Differential Equations",
+        "shortTitle": null,
+        "number": null},
+       {"title": "§4.7(i) Logarithms", "shortTitle": null, "number": null}]},
+     "address":
+     "/Elementary-Functions/___4___7-Derivatives-and-Differential-Equations/"}],
+   "LMLF-___-DLMF-with-Lean--Elementary-Functions--___4___7-Derivatives-and-Differential-Equations--___4___7-Derivatives-and-Differential-Equations":
+   [{"id":
+     "LMLF-___-DLMF-with-Lean--Elementary-Functions--___4___7-Derivatives-and-Differential-Equations--___4___7-Derivatives-and-Differential-Equations",
+     "data":
+     {"title": "§4.7 Derivatives and Differential Equations",
+      "shortTitle": null,
+      "sectionNum": null,
+      "searchPriority": 50,
+      "context":
+      [{"title": "LMLF · DLMF with Lean", "shortTitle": "LMLF", "number": null},
+       {"title": "Elementary Functions", "shortTitle": null, "number": "4"},
+       {"title": "§4.7 Derivatives and Differential Equations",
+        "shortTitle": null,
+        "number": "7"},
+       {"title": "§4.7 Derivatives and Differential Equations",
+        "shortTitle": null,
+        "number": null}]},
+     "address":
+     "/Elementary-Functions/___4___7-Derivatives-and-Differential-Equations/"}],
+   "LMLF-___-DLMF-with-Lean--Elementary-Functions--___4___6-Power-Series--___4___6_LPAR_ii_RPAR_-Powers--Binomial-Expansion":
+   [{"id":
+     "LMLF-___-DLMF-with-Lean--Elementary-Functions--___4___6-Power-Series--___4___6_LPAR_ii_RPAR_-Powers--Binomial-Expansion",
+     "data":
+     {"title": "Binomial Expansion",
+      "shortTitle": null,
+      "sectionNum": null,
+      "searchPriority": 50,
+      "context":
+      [{"title": "LMLF · DLMF with Lean", "shortTitle": "LMLF", "number": null},
+       {"title": "Elementary Functions", "shortTitle": null, "number": "4"},
+       {"title": "§4.6 Power Series", "shortTitle": null, "number": "6"},
+       {"title": "§4.6(ii) Powers", "shortTitle": null, "number": null},
+       {"title": "Binomial Expansion", "shortTitle": null, "number": null}]},
+     "address": "/Elementary-Functions/___4___6-Power-Series/"}],
+   "LMLF-___-DLMF-with-Lean--Elementary-Functions--___4___6-Power-Series--___4___6_LPAR_ii_RPAR_-Powers":
+   [{"id":
+     "LMLF-___-DLMF-with-Lean--Elementary-Functions--___4___6-Power-Series--___4___6_LPAR_ii_RPAR_-Powers",
+     "data":
+     {"title": "§4.6(ii) Powers",
+      "shortTitle": null,
+      "sectionNum": null,
+      "searchPriority": 50,
+      "context":
+      [{"title": "LMLF · DLMF with Lean", "shortTitle": "LMLF", "number": null},
+       {"title": "Elementary Functions", "shortTitle": null, "number": "4"},
+       {"title": "§4.6 Power Series", "shortTitle": null, "number": "6"},
+       {"title": "§4.6(ii) Powers", "shortTitle": null, "number": null}]},
+     "address": "/Elementary-Functions/___4___6-Power-Series/"}],
+   "LMLF-___-DLMF-with-Lean--Elementary-Functions--___4___6-Power-Series--___4___6_LPAR_i_RPAR_-Logarithms":
+   [{"id":
+     "LMLF-___-DLMF-with-Lean--Elementary-Functions--___4___6-Power-Series--___4___6_LPAR_i_RPAR_-Logarithms",
+     "data":
+     {"title": "§4.6(i) Logarithms",
+      "shortTitle": null,
+      "sectionNum": null,
+      "searchPriority": 50,
+      "context":
+      [{"title": "LMLF · DLMF with Lean", "shortTitle": "LMLF", "number": null},
+       {"title": "Elementary Functions", "shortTitle": null, "number": "4"},
+       {"title": "§4.6 Power Series", "shortTitle": null, "number": "6"},
+       {"title": "§4.6(i) Logarithms", "shortTitle": null, "number": null}]},
+     "address": "/Elementary-Functions/___4___6-Power-Series/"}],
+   "LMLF-___-DLMF-with-Lean--Elementary-Functions--___4___4-Special-Values-and-Limits--___4___4_LPAR_iii_RPAR_-Limits":
+   [{"id":
+     "LMLF-___-DLMF-with-Lean--Elementary-Functions--___4___4-Special-Values-and-Limits--___4___4_LPAR_iii_RPAR_-Limits",
+     "data":
+     {"title": "§4.4(iii) Limits",
+      "shortTitle": null,
+      "sectionNum": null,
+      "searchPriority": 50,
+      "context":
+      [{"title": "LMLF · DLMF with Lean", "shortTitle": "LMLF", "number": null},
+       {"title": "Elementary Functions", "shortTitle": null, "number": "4"},
+       {"title": "§4.4 Special Values and Limits",
+        "shortTitle": null,
+        "number": "4"},
+       {"title": "§4.4(iii) Limits", "shortTitle": null, "number": null}]},
+     "address": "/Elementary-Functions/___4___4-Special-Values-and-Limits/"}],
+   "LMLF-___-DLMF-with-Lean--Elementary-Functions--___4___4-Special-Values-and-Limits--___4___4_LPAR_ii_RPAR_-Powers":
+   [{"id":
+     "LMLF-___-DLMF-with-Lean--Elementary-Functions--___4___4-Special-Values-and-Limits--___4___4_LPAR_ii_RPAR_-Powers",
+     "data":
+     {"title": "§4.4(ii) Powers",
+      "shortTitle": null,
+      "sectionNum": null,
+      "searchPriority": 50,
+      "context":
+      [{"title": "LMLF · DLMF with Lean", "shortTitle": "LMLF", "number": null},
+       {"title": "Elementary Functions", "shortTitle": null, "number": "4"},
+       {"title": "§4.4 Special Values and Limits",
+        "shortTitle": null,
+        "number": "4"},
+       {"title": "§4.4(ii) Powers", "shortTitle": null, "number": null}]},
+     "address": "/Elementary-Functions/___4___4-Special-Values-and-Limits/"}],
+   "LMLF-___-DLMF-with-Lean--Elementary-Functions--___4___4-Special-Values-and-Limits--___4___4_LPAR_i_RPAR_-Logarithms":
+   [{"id":
+     "LMLF-___-DLMF-with-Lean--Elementary-Functions--___4___4-Special-Values-and-Limits--___4___4_LPAR_i_RPAR_-Logarithms",
+     "data":
+     {"title": "§4.4(i) Logarithms",
+      "shortTitle": null,
+      "sectionNum": null,
+      "searchPriority": 50,
+      "context":
+      [{"title": "LMLF · DLMF with Lean", "shortTitle": "LMLF", "number": null},
+       {"title": "Elementary Functions", "shortTitle": null, "number": "4"},
+       {"title": "§4.4 Special Values and Limits",
+        "shortTitle": null,
+        "number": "4"},
+       {"title": "§4.4(i) Logarithms", "shortTitle": null, "number": null}]},
+     "address": "/Elementary-Functions/___4___4-Special-Values-and-Limits/"}],
+   "LMLF-___-DLMF-with-Lean--Elementary-Functions--___4___3-Graphics--___4___3-Graphics--___4___3_LPAR_iii_RPAR_-Complex-Arguments___-Surfaces":
+   [{"id":
+     "LMLF-___-DLMF-with-Lean--Elementary-Functions--___4___3-Graphics--___4___3-Graphics--___4___3_LPAR_iii_RPAR_-Complex-Arguments___-Surfaces",
+     "data":
+     {"title": "§4.3(iii) Complex Arguments: Surfaces",
+      "shortTitle": null,
+      "sectionNum": null,
+      "searchPriority": 50,
+      "context":
+      [{"title": "LMLF · DLMF with Lean", "shortTitle": "LMLF", "number": null},
+       {"title": "Elementary Functions", "shortTitle": null, "number": "4"},
+       {"title": "§4.3 Graphics", "shortTitle": null, "number": "3"},
+       {"title": "§4.3 Graphics", "shortTitle": null, "number": null},
+       {"title": "§4.3(iii) Complex Arguments: Surfaces",
+        "shortTitle": null,
+        "number": null}]},
+     "address": "/Elementary-Functions/___4___3-Graphics/"}],
+   "LMLF-___-DLMF-with-Lean--Elementary-Functions--___4___3-Graphics--___4___3-Graphics--___4___3_LPAR_ii_RPAR_-Complex-Arguments___-Conformal-Maps":
+   [{"id":
+     "LMLF-___-DLMF-with-Lean--Elementary-Functions--___4___3-Graphics--___4___3-Graphics--___4___3_LPAR_ii_RPAR_-Complex-Arguments___-Conformal-Maps",
+     "data":
+     {"title": "§4.3(ii) Complex Arguments: Conformal Maps",
+      "shortTitle": null,
+      "sectionNum": null,
+      "searchPriority": 50,
+      "context":
+      [{"title": "LMLF · DLMF with Lean", "shortTitle": "LMLF", "number": null},
+       {"title": "Elementary Functions", "shortTitle": null, "number": "4"},
+       {"title": "§4.3 Graphics", "shortTitle": null, "number": "3"},
+       {"title": "§4.3 Graphics", "shortTitle": null, "number": null},
+       {"title": "§4.3(ii) Complex Arguments: Conformal Maps",
+        "shortTitle": null,
+        "number": null}]},
+     "address": "/Elementary-Functions/___4___3-Graphics/"}],
+   "LMLF-___-DLMF-with-Lean--Elementary-Functions--___4___3-Graphics--___4___3-Graphics--___4___3_LPAR_i_RPAR_-Real-Arguments":
+   [{"id":
+     "LMLF-___-DLMF-with-Lean--Elementary-Functions--___4___3-Graphics--___4___3-Graphics--___4___3_LPAR_i_RPAR_-Real-Arguments",
+     "data":
+     {"title": "§4.3(i) Real Arguments",
+      "shortTitle": null,
+      "sectionNum": null,
+      "searchPriority": 50,
+      "context":
+      [{"title": "LMLF · DLMF with Lean", "shortTitle": "LMLF", "number": null},
+       {"title": "Elementary Functions", "shortTitle": null, "number": "4"},
+       {"title": "§4.3 Graphics", "shortTitle": null, "number": "3"},
+       {"title": "§4.3 Graphics", "shortTitle": null, "number": null},
+       {"title": "§4.3(i) Real Arguments",
+        "shortTitle": null,
+        "number": null}]},
+     "address": "/Elementary-Functions/___4___3-Graphics/"}],
+   "LMLF-___-DLMF-with-Lean--Elementary-Functions--___4___3-Graphics--___4___3-Graphics":
+   [{"id":
+     "LMLF-___-DLMF-with-Lean--Elementary-Functions--___4___3-Graphics--___4___3-Graphics",
+     "data":
+     {"title": "§4.3 Graphics",
+      "shortTitle": null,
+      "sectionNum": null,
+      "searchPriority": 50,
+      "context":
+      [{"title": "LMLF · DLMF with Lean", "shortTitle": "LMLF", "number": null},
+       {"title": "Elementary Functions", "shortTitle": null, "number": "4"},
+       {"title": "§4.3 Graphics", "shortTitle": null, "number": "3"},
+       {"title": "§4.3 Graphics", "shortTitle": null, "number": null}]},
+     "address": "/Elementary-Functions/___4___3-Graphics/"}],
+   "LMLF-___-DLMF-with-Lean--Elementary-Functions--___4___12-Generalized-Logarithms-and-Exponentials--___4___12-Generalized-Logarithms-and-Exponentials":
+   [{"id":
+     "LMLF-___-DLMF-with-Lean--Elementary-Functions--___4___12-Generalized-Logarithms-and-Exponentials--___4___12-Generalized-Logarithms-and-Exponentials",
+     "data":
+     {"title": "§4.12 Generalized Logarithms and Exponentials",
+      "shortTitle": null,
+      "sectionNum": null,
+      "searchPriority": 50,
+      "context":
+      [{"title": "LMLF · DLMF with Lean", "shortTitle": "LMLF", "number": null},
+       {"title": "Elementary Functions", "shortTitle": null, "number": "4"},
+       {"title": "§4.12 Generalized Logarithms and Exponentials",
+        "shortTitle": null,
+        "number": "12"},
+       {"title": "§4.12 Generalized Logarithms and Exponentials",
+        "shortTitle": null,
+        "number": null}]},
+     "address":
+     "/Elementary-Functions/___4___12-Generalized-Logarithms-and-Exponentials/"}],
+   "LMLF-___-DLMF-with-Lean--Elementary-Functions--___4___10-Integrals--___4___10_LPAR_ii_RPAR_-Exponentials":
+   [{"id":
+     "LMLF-___-DLMF-with-Lean--Elementary-Functions--___4___10-Integrals--___4___10_LPAR_ii_RPAR_-Exponentials",
+     "data":
+     {"title": "§4.10(ii) Exponentials",
+      "shortTitle": null,
+      "sectionNum": null,
+      "searchPriority": 50,
+      "context":
+      [{"title": "LMLF · DLMF with Lean", "shortTitle": "LMLF", "number": null},
+       {"title": "Elementary Functions", "shortTitle": null, "number": "4"},
+       {"title": "§4.10 Integrals", "shortTitle": null, "number": "10"},
+       {"title": "§4.10(ii) Exponentials",
+        "shortTitle": null,
+        "number": null}]},
+     "address": "/Elementary-Functions/___4___10-Integrals/"}],
+   "LMLF-___-DLMF-with-Lean--Elementary-Functions--___4___10-Integrals--___4___10_LPAR_i_RPAR_-Logarithms":
+   [{"id":
+     "LMLF-___-DLMF-with-Lean--Elementary-Functions--___4___10-Integrals--___4___10_LPAR_i_RPAR_-Logarithms",
+     "data":
+     {"title": "§4.10(i) Logarithms",
+      "shortTitle": null,
+      "sectionNum": null,
+      "searchPriority": 50,
+      "context":
+      [{"title": "LMLF · DLMF with Lean", "shortTitle": "LMLF", "number": null},
+       {"title": "Elementary Functions", "shortTitle": null, "number": "4"},
+       {"title": "§4.10 Integrals", "shortTitle": null, "number": "10"},
+       {"title": "§4.10(i) Logarithms", "shortTitle": null, "number": null}]},
+     "address": "/Elementary-Functions/___4___10-Integrals/"}],
    "LMLF-___-DLMF-with-Lean--Elementary-Functions--Chapter-contents--Trigonometric-functions":
    [{"id":
      "LMLF-___-DLMF-with-Lean--Elementary-Functions--Chapter-contents--Trigonometric-functions",
@@ -6636,7 +7352,2321 @@ document.addEventListener("DOMContentLoaded", () => {
       {"display": "BalancedGammaParameters",
        "context":
        ["LMLF · DLMF with Lean", "Gamma Function", "§5.8 Infinite Products"]}},
-     "address": "/Gamma-Function/___5___8-Infinite-Products/"}]}},
+     "address": "/Gamma-Function/___5___8-Infinite-Products/"}],
+   "LMLF.Blueprint.Elementary.Section49.symmetricLogFractionNumerator":
+   [{"id":
+     "LMLF___Blueprint___Elementary___Section49___symmetricLogFractionNumerator",
+     "data":
+     {"/Elementary-Functions/___4___9-Continued-Fractions/#LMLF___Blueprint___Elementary___Section49___symmetricLogFractionNumerator":
+      {"display": "symmetricLogFractionNumerator",
+       "context":
+       ["LMLF · DLMF with Lean",
+        "Elementary Functions",
+        "§4.9 Continued Fractions",
+        "§4.9 Continued Fractions"]}},
+     "address": "/Elementary-Functions/___4___9-Continued-Fractions/"}],
+   "LMLF.Blueprint.Elementary.Section49.symmetricLogFractionDenominator":
+   [{"id":
+     "LMLF___Blueprint___Elementary___Section49___symmetricLogFractionDenominator",
+     "data":
+     {"/Elementary-Functions/___4___9-Continued-Fractions/#LMLF___Blueprint___Elementary___Section49___symmetricLogFractionDenominator":
+      {"display": "symmetricLogFractionDenominator",
+       "context":
+       ["LMLF · DLMF with Lean",
+        "Elementary Functions",
+        "§4.9 Continued Fractions",
+        "§4.9 Continued Fractions"]}},
+     "address": "/Elementary-Functions/___4___9-Continued-Fractions/"}],
+   "LMLF.Blueprint.Elementary.Section49.logarithmFractionNumerator":
+   [{"id":
+     "LMLF___Blueprint___Elementary___Section49___logarithmFractionNumerator",
+     "data":
+     {"/Elementary-Functions/___4___9-Continued-Fractions/#LMLF___Blueprint___Elementary___Section49___logarithmFractionNumerator":
+      {"display": "logarithmFractionNumerator",
+       "context":
+       ["LMLF · DLMF with Lean",
+        "Elementary Functions",
+        "§4.9 Continued Fractions",
+        "§4.9 Continued Fractions"]}},
+     "address": "/Elementary-Functions/___4___9-Continued-Fractions/"}],
+   "LMLF.Blueprint.Elementary.Section49.logarithmFractionDenominator":
+   [{"id":
+     "LMLF___Blueprint___Elementary___Section49___logarithmFractionDenominator",
+     "data":
+     {"/Elementary-Functions/___4___9-Continued-Fractions/#LMLF___Blueprint___Elementary___Section49___logarithmFractionDenominator":
+      {"display": "logarithmFractionDenominator",
+       "context":
+       ["LMLF · DLMF with Lean",
+        "Elementary Functions",
+        "§4.9 Continued Fractions",
+        "§4.9 Continued Fractions"]}},
+     "address": "/Elementary-Functions/___4___9-Continued-Fractions/"}],
+   "LMLF.Blueprint.Elementary.Section49.exponentialRemainderNumerator":
+   [{"id":
+     "LMLF___Blueprint___Elementary___Section49___exponentialRemainderNumerator",
+     "data":
+     {"/Elementary-Functions/___4___9-Continued-Fractions/#LMLF___Blueprint___Elementary___Section49___exponentialRemainderNumerator":
+      {"display": "exponentialRemainderNumerator",
+       "context":
+       ["LMLF · DLMF with Lean",
+        "Elementary Functions",
+        "§4.9 Continued Fractions",
+        "§4.9 Continued Fractions"]}},
+     "address": "/Elementary-Functions/___4___9-Continued-Fractions/"}],
+   "LMLF.Blueprint.Elementary.Section49.exponentialRemainderDenominator":
+   [{"id":
+     "LMLF___Blueprint___Elementary___Section49___exponentialRemainderDenominator",
+     "data":
+     {"/Elementary-Functions/___4___9-Continued-Fractions/#LMLF___Blueprint___Elementary___Section49___exponentialRemainderDenominator":
+      {"display": "exponentialRemainderDenominator",
+       "context":
+       ["LMLF · DLMF with Lean",
+        "Elementary Functions",
+        "§4.9 Continued Fractions",
+        "§4.9 Continued Fractions"]}},
+     "address": "/Elementary-Functions/___4___9-Continued-Fractions/"}],
+   "LMLF.Blueprint.Elementary.Section49.exponentialFractionNumeratorTwo":
+   [{"id":
+     "LMLF___Blueprint___Elementary___Section49___exponentialFractionNumeratorTwo",
+     "data":
+     {"/Elementary-Functions/___4___9-Continued-Fractions/#LMLF___Blueprint___Elementary___Section49___exponentialFractionNumeratorTwo":
+      {"display": "exponentialFractionNumeratorTwo",
+       "context":
+       ["LMLF · DLMF with Lean",
+        "Elementary Functions",
+        "§4.9 Continued Fractions",
+        "§4.9 Continued Fractions"]}},
+     "address": "/Elementary-Functions/___4___9-Continued-Fractions/"}],
+   "LMLF.Blueprint.Elementary.Section49.exponentialFractionNumeratorThree":
+   [{"id":
+     "LMLF___Blueprint___Elementary___Section49___exponentialFractionNumeratorThree",
+     "data":
+     {"/Elementary-Functions/___4___9-Continued-Fractions/#LMLF___Blueprint___Elementary___Section49___exponentialFractionNumeratorThree":
+      {"display": "exponentialFractionNumeratorThree",
+       "context":
+       ["LMLF · DLMF with Lean",
+        "Elementary Functions",
+        "§4.9 Continued Fractions",
+        "§4.9 Continued Fractions"]}},
+     "address": "/Elementary-Functions/___4___9-Continued-Fractions/"}],
+   "LMLF.Blueprint.Elementary.Section49.exponentialFractionNumeratorOne":
+   [{"id":
+     "LMLF___Blueprint___Elementary___Section49___exponentialFractionNumeratorOne",
+     "data":
+     {"/Elementary-Functions/___4___9-Continued-Fractions/#LMLF___Blueprint___Elementary___Section49___exponentialFractionNumeratorOne":
+      {"display": "exponentialFractionNumeratorOne",
+       "context":
+       ["LMLF · DLMF with Lean",
+        "Elementary Functions",
+        "§4.9 Continued Fractions",
+        "§4.9 Continued Fractions"]}},
+     "address": "/Elementary-Functions/___4___9-Continued-Fractions/"}],
+   "LMLF.Blueprint.Elementary.Section49.exponentialFractionDenominatorTwo":
+   [{"id":
+     "LMLF___Blueprint___Elementary___Section49___exponentialFractionDenominatorTwo",
+     "data":
+     {"/Elementary-Functions/___4___9-Continued-Fractions/#LMLF___Blueprint___Elementary___Section49___exponentialFractionDenominatorTwo":
+      {"display": "exponentialFractionDenominatorTwo",
+       "context":
+       ["LMLF · DLMF with Lean",
+        "Elementary Functions",
+        "§4.9 Continued Fractions",
+        "§4.9 Continued Fractions"]}},
+     "address": "/Elementary-Functions/___4___9-Continued-Fractions/"}],
+   "LMLF.Blueprint.Elementary.Section49.exponentialFractionDenominatorThree":
+   [{"id":
+     "LMLF___Blueprint___Elementary___Section49___exponentialFractionDenominatorThree",
+     "data":
+     {"/Elementary-Functions/___4___9-Continued-Fractions/#LMLF___Blueprint___Elementary___Section49___exponentialFractionDenominatorThree":
+      {"display": "exponentialFractionDenominatorThree",
+       "context":
+       ["LMLF · DLMF with Lean",
+        "Elementary Functions",
+        "§4.9 Continued Fractions",
+        "§4.9 Continued Fractions"]}},
+     "address": "/Elementary-Functions/___4___9-Continued-Fractions/"}],
+   "LMLF.Blueprint.Elementary.Section49.exponentialFractionDenominatorOne":
+   [{"id":
+     "LMLF___Blueprint___Elementary___Section49___exponentialFractionDenominatorOne",
+     "data":
+     {"/Elementary-Functions/___4___9-Continued-Fractions/#LMLF___Blueprint___Elementary___Section49___exponentialFractionDenominatorOne":
+      {"display": "exponentialFractionDenominatorOne",
+       "context":
+       ["LMLF · DLMF with Lean",
+        "Elementary Functions",
+        "§4.9 Continued Fractions",
+        "§4.9 Continued Fractions"]}},
+     "address": "/Elementary-Functions/___4___9-Continued-Fractions/"}],
+   "LMLF.Blueprint.Elementary.Section49.exponentialExpansion":
+   [{"id": "LMLF___Blueprint___Elementary___Section49___exponentialExpansion",
+     "data":
+     {"/Elementary-Functions/___4___9-Continued-Fractions/#LMLF___Blueprint___Elementary___Section49___exponentialExpansion":
+      {"display": "exponentialExpansion",
+       "context":
+       ["LMLF · DLMF with Lean",
+        "Elementary Functions",
+        "§4.9 Continued Fractions",
+        "§4.9 Continued Fractions"]}},
+     "address": "/Elementary-Functions/___4___9-Continued-Fractions/"}],
+   "LMLF.Blueprint.Elementary.Section49.dlmf_4_9_5":
+   [{"id": "LMLF___Blueprint___Elementary___Section49___dlmf_4_9_5",
+     "data":
+     {"/Elementary-Functions/___4___9-Continued-Fractions/#LMLF___Blueprint___Elementary___Section49___dlmf_4_9_5":
+      {"display": "dlmf_4_9_5",
+       "context":
+       ["LMLF · DLMF with Lean",
+        "Elementary Functions",
+        "§4.9 Continued Fractions",
+        "§4.9 Continued Fractions"]}},
+     "address": "/Elementary-Functions/___4___9-Continued-Fractions/"}],
+   "LMLF.Blueprint.Elementary.Section49.dlmf_4_9_4":
+   [{"id": "LMLF___Blueprint___Elementary___Section49___dlmf_4_9_4",
+     "data":
+     {"/Elementary-Functions/___4___9-Continued-Fractions/#LMLF___Blueprint___Elementary___Section49___dlmf_4_9_4":
+      {"display": "dlmf_4_9_4",
+       "context":
+       ["LMLF · DLMF with Lean",
+        "Elementary Functions",
+        "§4.9 Continued Fractions",
+        "§4.9 Continued Fractions"]}},
+     "address": "/Elementary-Functions/___4___9-Continued-Fractions/"}],
+   "LMLF.Blueprint.Elementary.Section49.dlmf_4_9_3":
+   [{"id": "LMLF___Blueprint___Elementary___Section49___dlmf_4_9_3",
+     "data":
+     {"/Elementary-Functions/___4___9-Continued-Fractions/#LMLF___Blueprint___Elementary___Section49___dlmf_4_9_3":
+      {"display": "dlmf_4_9_3",
+       "context":
+       ["LMLF · DLMF with Lean",
+        "Elementary Functions",
+        "§4.9 Continued Fractions",
+        "§4.9 Continued Fractions"]}},
+     "address": "/Elementary-Functions/___4___9-Continued-Fractions/"}],
+   "LMLF.Blueprint.Elementary.Section49.dlmf_4_9_2":
+   [{"id": "LMLF___Blueprint___Elementary___Section49___dlmf_4_9_2",
+     "data":
+     {"/Elementary-Functions/___4___9-Continued-Fractions/#LMLF___Blueprint___Elementary___Section49___dlmf_4_9_2":
+      {"display": "dlmf_4_9_2",
+       "context":
+       ["LMLF · DLMF with Lean",
+        "Elementary Functions",
+        "§4.9 Continued Fractions",
+        "§4.9 Continued Fractions"]}},
+     "address": "/Elementary-Functions/___4___9-Continued-Fractions/"}],
+   "LMLF.Blueprint.Elementary.Section49.dlmf_4_9_1":
+   [{"id": "LMLF___Blueprint___Elementary___Section49___dlmf_4_9_1",
+     "data":
+     {"/Elementary-Functions/___4___9-Continued-Fractions/#LMLF___Blueprint___Elementary___Section49___dlmf_4_9_1":
+      {"display": "dlmf_4_9_1",
+       "context":
+       ["LMLF · DLMF with Lean",
+        "Elementary Functions",
+        "§4.9 Continued Fractions",
+        "§4.9 Continued Fractions"]}},
+     "address": "/Elementary-Functions/___4___9-Continued-Fractions/"}],
+   "LMLF.Blueprint.Elementary.Section49.continuedFractionTail":
+   [{"id": "LMLF___Blueprint___Elementary___Section49___continuedFractionTail",
+     "data":
+     {"/Elementary-Functions/___4___9-Continued-Fractions/#LMLF___Blueprint___Elementary___Section49___continuedFractionTail":
+      {"display": "continuedFractionTail",
+       "context":
+       ["LMLF · DLMF with Lean",
+        "Elementary Functions",
+        "§4.9 Continued Fractions",
+        "§4.9 Continued Fractions"]}},
+     "address": "/Elementary-Functions/___4___9-Continued-Fractions/"}],
+   "LMLF.Blueprint.Elementary.Section49.continuedFractionConvergent":
+   [{"id":
+     "LMLF___Blueprint___Elementary___Section49___continuedFractionConvergent",
+     "data":
+     {"/Elementary-Functions/___4___9-Continued-Fractions/#LMLF___Blueprint___Elementary___Section49___continuedFractionConvergent":
+      {"display": "continuedFractionConvergent",
+       "context":
+       ["LMLF · DLMF with Lean",
+        "Elementary Functions",
+        "§4.9 Continued Fractions",
+        "§4.9 Continued Fractions"]}},
+     "address": "/Elementary-Functions/___4___9-Continued-Fractions/"}],
+   "LMLF.Blueprint.Elementary.Section48.rpow_add":
+   [{"id": "LMLF___Blueprint___Elementary___Section48___rpow_add",
+     "data":
+     {"/Elementary-Functions/___4___8-Identities/#LMLF___Blueprint___Elementary___Section48___rpow_add":
+      {"display": "rpow_add",
+       "context":
+       ["LMLF · DLMF with Lean",
+        "Elementary Functions",
+        "§4.8 Identities",
+        "§4.8 Identities",
+        "§4.8(ii) Powers"]}},
+     "address": "/Elementary-Functions/___4___8-Identities/"}],
+   "LMLF.Blueprint.Elementary.Section48.principal_log_zpow":
+   [{"id": "LMLF___Blueprint___Elementary___Section48___principal_log_zpow",
+     "data":
+     {"/Elementary-Functions/___4___8-Identities/#LMLF___Blueprint___Elementary___Section48___principal_log_zpow":
+      {"display": "principal_log_zpow",
+       "context":
+       ["LMLF · DLMF with Lean",
+        "Elementary Functions",
+        "§4.8 Identities",
+        "§4.8 Identities",
+        "§4.8(i) Logarithms"]}},
+     "address": "/Elementary-Functions/___4___8-Identities/"}],
+   "LMLF.Blueprint.Elementary.Section48.principal_log_rpow":
+   [{"id": "LMLF___Blueprint___Elementary___Section48___principal_log_rpow",
+     "data":
+     {"/Elementary-Functions/___4___8-Identities/#LMLF___Blueprint___Elementary___Section48___principal_log_rpow":
+      {"display": "principal_log_rpow",
+       "context":
+       ["LMLF · DLMF with Lean",
+        "Elementary Functions",
+        "§4.8 Identities",
+        "§4.8 Identities",
+        "§4.8(i) Logarithms"]}},
+     "address": "/Elementary-Functions/___4___8-Identities/"}],
+   "LMLF.Blueprint.Elementary.Section48.principal_log_mul":
+   [{"id": "LMLF___Blueprint___Elementary___Section48___principal_log_mul",
+     "data":
+     {"/Elementary-Functions/___4___8-Identities/#LMLF___Blueprint___Elementary___Section48___principal_log_mul":
+      {"display": "principal_log_mul",
+       "context":
+       ["LMLF · DLMF with Lean",
+        "Elementary Functions",
+        "§4.8 Identities",
+        "§4.8 Identities",
+        "§4.8(i) Logarithms"]}},
+     "address": "/Elementary-Functions/___4___8-Identities/"}],
+   "LMLF.Blueprint.Elementary.Section48.principal_log_exp":
+   [{"id": "LMLF___Blueprint___Elementary___Section48___principal_log_exp",
+     "data":
+     {"/Elementary-Functions/___4___8-Identities/#LMLF___Blueprint___Elementary___Section48___principal_log_exp":
+      {"display": "principal_log_exp",
+       "context":
+       ["LMLF · DLMF with Lean",
+        "Elementary Functions",
+        "§4.8 Identities",
+        "§4.8 Identities",
+        "§4.8(i) Logarithms"]}},
+     "address": "/Elementary-Functions/___4___8-Identities/"}],
+   "LMLF.Blueprint.Elementary.Section48.principal_log_div":
+   [{"id": "LMLF___Blueprint___Elementary___Section48___principal_log_div",
+     "data":
+     {"/Elementary-Functions/___4___8-Identities/#LMLF___Blueprint___Elementary___Section48___principal_log_div":
+      {"display": "principal_log_div",
+       "context":
+       ["LMLF · DLMF with Lean",
+        "Elementary Functions",
+        "§4.8 Identities",
+        "§4.8 Identities",
+        "§4.8(i) Logarithms"]}},
+     "address": "/Elementary-Functions/___4___8-Identities/"}],
+   "LMLF.Blueprint.Elementary.Section48.mul_rpow":
+   [{"id": "LMLF___Blueprint___Elementary___Section48___mul_rpow",
+     "data":
+     {"/Elementary-Functions/___4___8-Identities/#LMLF___Blueprint___Elementary___Section48___mul_rpow":
+      {"display": "mul_rpow",
+       "context":
+       ["LMLF · DLMF with Lean",
+        "Elementary Functions",
+        "§4.8 Identities",
+        "§4.8 Identities",
+        "§4.8(ii) Powers"]}},
+     "address": "/Elementary-Functions/___4___8-Identities/"}],
+   "LMLF.Blueprint.Elementary.Section48.log_zpow":
+   [{"id": "LMLF___Blueprint___Elementary___Section48___log_zpow",
+     "data":
+     {"/Elementary-Functions/___4___8-Identities/#LMLF___Blueprint___Elementary___Section48___log_zpow":
+      {"display": "log_zpow",
+       "context":
+       ["LMLF · DLMF with Lean",
+        "Elementary Functions",
+        "§4.8 Identities",
+        "§4.8 Identities",
+        "§4.8(i) Logarithms"]}},
+     "address": "/Elementary-Functions/___4___8-Identities/"}],
+   "LMLF.Blueprint.Elementary.Section48.log_rpow_general_branch":
+   [{"id":
+     "LMLF___Blueprint___Elementary___Section48___log_rpow_general_branch",
+     "data":
+     {"/Elementary-Functions/___4___8-Identities/#LMLF___Blueprint___Elementary___Section48___log_rpow_general_branch":
+      {"display": "log_rpow_general_branch",
+       "context":
+       ["LMLF · DLMF with Lean",
+        "Elementary Functions",
+        "§4.8 Identities",
+        "§4.8 Identities",
+        "§4.8(i) Logarithms"]}},
+     "address": "/Elementary-Functions/___4___8-Identities/"}],
+   "LMLF.Blueprint.Elementary.Section48.log_rpow":
+   [{"id": "LMLF___Blueprint___Elementary___Section48___log_rpow",
+     "data":
+     {"/Elementary-Functions/___4___8-Identities/#LMLF___Blueprint___Elementary___Section48___log_rpow":
+      {"display": "log_rpow",
+       "context":
+       ["LMLF · DLMF with Lean",
+        "Elementary Functions",
+        "§4.8 Identities",
+        "§4.8 Identities",
+        "§4.8(i) Logarithms"]}},
+     "address": "/Elementary-Functions/___4___8-Identities/"}],
+   "LMLF.Blueprint.Elementary.Section48.log_mul":
+   [{"id": "LMLF___Blueprint___Elementary___Section48___log_mul",
+     "data":
+     {"/Elementary-Functions/___4___8-Identities/#LMLF___Blueprint___Elementary___Section48___log_mul":
+      {"display": "log_mul",
+       "context":
+       ["LMLF · DLMF with Lean",
+        "Elementary Functions",
+        "§4.8 Identities",
+        "§4.8 Identities",
+        "§4.8(i) Logarithms"]}},
+     "address": "/Elementary-Functions/___4___8-Identities/"}],
+   "LMLF.Blueprint.Elementary.Section48.log_inv":
+   [{"id": "LMLF___Blueprint___Elementary___Section48___log_inv",
+     "data":
+     {"/Elementary-Functions/___4___8-Identities/#LMLF___Blueprint___Elementary___Section48___log_inv":
+      {"display": "log_inv",
+       "context":
+       ["LMLF · DLMF with Lean",
+        "Elementary Functions",
+        "§4.8 Identities",
+        "§4.8 Identities",
+        "§4.8(i) Logarithms"]}},
+     "address": "/Elementary-Functions/___4___8-Identities/"}],
+   "LMLF.Blueprint.Elementary.Section48.log_exp_branch":
+   [{"id": "LMLF___Blueprint___Elementary___Section48___log_exp_branch",
+     "data":
+     {"/Elementary-Functions/___4___8-Identities/#LMLF___Blueprint___Elementary___Section48___log_exp_branch":
+      {"display": "log_exp_branch",
+       "context":
+       ["LMLF · DLMF with Lean",
+        "Elementary Functions",
+        "§4.8 Identities",
+        "§4.8 Identities",
+        "§4.8(i) Logarithms"]}},
+     "address": "/Elementary-Functions/___4___8-Identities/"}],
+   "LMLF.Blueprint.Elementary.Section48.log_div":
+   [{"id": "LMLF___Blueprint___Elementary___Section48___log_div",
+     "data":
+     {"/Elementary-Functions/___4___8-Identities/#LMLF___Blueprint___Elementary___Section48___log_div":
+      {"display": "log_div",
+       "context":
+       ["LMLF · DLMF with Lean",
+        "Elementary Functions",
+        "§4.8 Identities",
+        "§4.8 Identities",
+        "§4.8(i) Logarithms"]}},
+     "address": "/Elementary-Functions/___4___8-Identities/"}],
+   "LMLF.Blueprint.Elementary.Section48.exp_rpow":
+   [{"id": "LMLF___Blueprint___Elementary___Section48___exp_rpow",
+     "data":
+     {"/Elementary-Functions/___4___8-Identities/#LMLF___Blueprint___Elementary___Section48___exp_rpow":
+      {"display": "exp_rpow",
+       "context":
+       ["LMLF · DLMF with Lean",
+        "Elementary Functions",
+        "§4.8 Identities",
+        "§4.8 Identities",
+        "§4.8(ii) Powers"]}},
+     "address": "/Elementary-Functions/___4___8-Identities/"}],
+   "LMLF.Blueprint.Elementary.Section48.exp_log":
+   [{"id": "LMLF___Blueprint___Elementary___Section48___exp_log",
+     "data":
+     {"/Elementary-Functions/___4___8-Identities/#LMLF___Blueprint___Elementary___Section48___exp_log":
+      {"display": "exp_log",
+       "context":
+       ["LMLF · DLMF with Lean",
+        "Elementary Functions",
+        "§4.8 Identities",
+        "§4.8 Identities",
+        "§4.8(i) Logarithms"]}},
+     "address": "/Elementary-Functions/___4___8-Identities/"}],
+   "LMLF.Blueprint.Elementary.Section48.exp_add":
+   [{"id": "LMLF___Blueprint___Elementary___Section48___exp_add",
+     "data":
+     {"/Elementary-Functions/___4___8-Identities/#LMLF___Blueprint___Elementary___Section48___exp_add":
+      {"display": "exp_add",
+       "context":
+       ["LMLF · DLMF with Lean",
+        "Elementary Functions",
+        "§4.8 Identities",
+        "§4.8 Identities",
+        "§4.8(ii) Powers"]}},
+     "address": "/Elementary-Functions/___4___8-Identities/"}],
+   "LMLF.Blueprint.Elementary.Section47.z_cpow_iteratedDeriv":
+   [{"id": "LMLF___Blueprint___Elementary___Section47___z_cpow_iteratedDeriv",
+     "data":
+     {"/Elementary-Functions/___4___7-Derivatives-and-Differential-Equations/#LMLF___Blueprint___Elementary___Section47___z_cpow_iteratedDeriv":
+      {"display": "z_cpow_iteratedDeriv",
+       "context":
+       ["LMLF · DLMF with Lean",
+        "Elementary Functions",
+        "§4.7 Derivatives and Differential Equations",
+        "§4.7 Derivatives and Differential Equations",
+        "§4.7(ii) Exponentials and Powers"]}},
+     "address":
+     "/Elementary-Functions/___4___7-Derivatives-and-Differential-Equations/"}],
+   "LMLF.Blueprint.Elementary.Section47.z_cpow_deriv":
+   [{"id": "LMLF___Blueprint___Elementary___Section47___z_cpow_deriv",
+     "data":
+     {"/Elementary-Functions/___4___7-Derivatives-and-Differential-Equations/#LMLF___Blueprint___Elementary___Section47___z_cpow_deriv":
+      {"display": "z_cpow_deriv",
+       "context":
+       ["LMLF · DLMF with Lean",
+        "Elementary Functions",
+        "§4.7 Derivatives and Differential Equations",
+        "§4.7 Derivatives and Differential Equations",
+        "§4.7(ii) Exponentials and Powers"]}},
+     "address":
+     "/Elementary-Functions/___4___7-Derivatives-and-Differential-Equations/"}],
+   "LMLF.Blueprint.Elementary.Section47.secondOrderExponentialSolution":
+   [{"id":
+     "LMLF___Blueprint___Elementary___Section47___secondOrderExponentialSolution",
+     "data":
+     {"/Elementary-Functions/___4___7-Derivatives-and-Differential-Equations/#LMLF___Blueprint___Elementary___Section47___secondOrderExponentialSolution":
+      {"display": "secondOrderExponentialSolution",
+       "context":
+       ["LMLF · DLMF with Lean",
+        "Elementary Functions",
+        "§4.7 Derivatives and Differential Equations",
+        "§4.7 Derivatives and Differential Equations",
+        "§4.7(ii) Exponentials and Powers"]}},
+     "address":
+     "/Elementary-Functions/___4___7-Derivatives-and-Differential-Equations/"}],
+   "LMLF.Blueprint.Elementary.Section47.secondOrderExponentialEquation":
+   [{"id":
+     "LMLF___Blueprint___Elementary___Section47___secondOrderExponentialEquation",
+     "data":
+     {"/Elementary-Functions/___4___7-Derivatives-and-Differential-Equations/#LMLF___Blueprint___Elementary___Section47___secondOrderExponentialEquation":
+      {"display": "secondOrderExponentialEquation",
+       "context":
+       ["LMLF · DLMF with Lean",
+        "Elementary Functions",
+        "§4.7 Derivatives and Differential Equations",
+        "§4.7 Derivatives and Differential Equations",
+        "§4.7(ii) Exponentials and Powers"]}},
+     "address":
+     "/Elementary-Functions/___4___7-Derivatives-and-Differential-Equations/"}],
+   "LMLF.Blueprint.Elementary.Section47.principalLog_iteratedDeriv":
+   [{"id":
+     "LMLF___Blueprint___Elementary___Section47___principalLog_iteratedDeriv",
+     "data":
+     {"/Elementary-Functions/___4___7-Derivatives-and-Differential-Equations/#LMLF___Blueprint___Elementary___Section47___principalLog_iteratedDeriv":
+      {"display": "principalLog_iteratedDeriv",
+       "context":
+       ["LMLF · DLMF with Lean",
+        "Elementary Functions",
+        "§4.7 Derivatives and Differential Equations",
+        "§4.7 Derivatives and Differential Equations",
+        "§4.7(i) Logarithms"]}},
+     "address":
+     "/Elementary-Functions/___4___7-Derivatives-and-Differential-Equations/"}],
+   "LMLF.Blueprint.Elementary.Section47.principalLog_deriv":
+   [{"id": "LMLF___Blueprint___Elementary___Section47___principalLog_deriv",
+     "data":
+     {"/Elementary-Functions/___4___7-Derivatives-and-Differential-Equations/#LMLF___Blueprint___Elementary___Section47___principalLog_deriv":
+      {"display": "principalLog_deriv",
+       "context":
+       ["LMLF · DLMF with Lean",
+        "Elementary Functions",
+        "§4.7 Derivatives and Differential Equations",
+        "§4.7 Derivatives and Differential Equations",
+        "§4.7(i) Logarithms"]}},
+     "address":
+     "/Elementary-Functions/___4___7-Derivatives-and-Differential-Equations/"}],
+   "LMLF.Blueprint.Elementary.Section47.logarithmicSolution":
+   [{"id": "LMLF___Blueprint___Elementary___Section47___logarithmicSolution",
+     "data":
+     {"/Elementary-Functions/___4___7-Derivatives-and-Differential-Equations/#LMLF___Blueprint___Elementary___Section47___logarithmicSolution":
+      {"display": "logarithmicSolution",
+       "context":
+       ["LMLF · DLMF with Lean",
+        "Elementary Functions",
+        "§4.7 Derivatives and Differential Equations",
+        "§4.7 Derivatives and Differential Equations",
+        "§4.7(i) Logarithms"]}},
+     "address":
+     "/Elementary-Functions/___4___7-Derivatives-and-Differential-Equations/"}],
+   "LMLF.Blueprint.Elementary.Section47.logarithmicDifferentialEquation":
+   [{"id":
+     "LMLF___Blueprint___Elementary___Section47___logarithmicDifferentialEquation",
+     "data":
+     {"/Elementary-Functions/___4___7-Derivatives-and-Differential-Equations/#LMLF___Blueprint___Elementary___Section47___logarithmicDifferentialEquation":
+      {"display": "logarithmicDifferentialEquation",
+       "context":
+       ["LMLF · DLMF with Lean",
+        "Elementary Functions",
+        "§4.7 Derivatives and Differential Equations",
+        "§4.7 Derivatives and Differential Equations",
+        "§4.7(i) Logarithms"]}},
+     "address":
+     "/Elementary-Functions/___4___7-Derivatives-and-Differential-Equations/"}],
+   "LMLF.Blueprint.Elementary.Section47.linearDifferentialSolution":
+   [{"id":
+     "LMLF___Blueprint___Elementary___Section47___linearDifferentialSolution",
+     "data":
+     {"/Elementary-Functions/___4___7-Derivatives-and-Differential-Equations/#LMLF___Blueprint___Elementary___Section47___linearDifferentialSolution":
+      {"display": "linearDifferentialSolution",
+       "context":
+       ["LMLF · DLMF with Lean",
+        "Elementary Functions",
+        "§4.7 Derivatives and Differential Equations",
+        "§4.7 Derivatives and Differential Equations",
+        "§4.7(ii) Exponentials and Powers"]}},
+     "address":
+     "/Elementary-Functions/___4___7-Derivatives-and-Differential-Equations/"}],
+   "LMLF.Blueprint.Elementary.Section47.linearDifferentialEquation":
+   [{"id":
+     "LMLF___Blueprint___Elementary___Section47___linearDifferentialEquation",
+     "data":
+     {"/Elementary-Functions/___4___7-Derivatives-and-Differential-Equations/#LMLF___Blueprint___Elementary___Section47___linearDifferentialEquation":
+      {"display": "linearDifferentialEquation",
+       "context":
+       ["LMLF · DLMF with Lean",
+        "Elementary Functions",
+        "§4.7 Derivatives and Differential Equations",
+        "§4.7 Derivatives and Differential Equations",
+        "§4.7(ii) Exponentials and Powers"]}},
+     "address":
+     "/Elementary-Functions/___4___7-Derivatives-and-Differential-Equations/"}],
+   "LMLF.Blueprint.Elementary.Section47.generalLog_iteratedDeriv":
+   [{"id":
+     "LMLF___Blueprint___Elementary___Section47___generalLog_iteratedDeriv",
+     "data":
+     {"/Elementary-Functions/___4___7-Derivatives-and-Differential-Equations/#LMLF___Blueprint___Elementary___Section47___generalLog_iteratedDeriv":
+      {"display": "generalLog_iteratedDeriv",
+       "context":
+       ["LMLF · DLMF with Lean",
+        "Elementary Functions",
+        "§4.7 Derivatives and Differential Equations",
+        "§4.7 Derivatives and Differential Equations",
+        "§4.7(i) Logarithms"]}},
+     "address":
+     "/Elementary-Functions/___4___7-Derivatives-and-Differential-Equations/"}],
+   "LMLF.Blueprint.Elementary.Section47.generalLog_deriv":
+   [{"id": "LMLF___Blueprint___Elementary___Section47___generalLog_deriv",
+     "data":
+     {"/Elementary-Functions/___4___7-Derivatives-and-Differential-Equations/#LMLF___Blueprint___Elementary___Section47___generalLog_deriv":
+      {"display": "generalLog_deriv",
+       "context":
+       ["LMLF · DLMF with Lean",
+        "Elementary Functions",
+        "§4.7 Derivatives and Differential Equations",
+        "§4.7 Derivatives and Differential Equations",
+        "§4.7(i) Logarithms"]}},
+     "address":
+     "/Elementary-Functions/___4___7-Derivatives-and-Differential-Equations/"}],
+   "LMLF.Blueprint.Elementary.Section47.exp_mul_deriv":
+   [{"id": "LMLF___Blueprint___Elementary___Section47___exp_mul_deriv",
+     "data":
+     {"/Elementary-Functions/___4___7-Derivatives-and-Differential-Equations/#LMLF___Blueprint___Elementary___Section47___exp_mul_deriv":
+      {"display": "exp_mul_deriv",
+       "context":
+       ["LMLF · DLMF with Lean",
+        "Elementary Functions",
+        "§4.7 Derivatives and Differential Equations",
+        "§4.7 Derivatives and Differential Equations",
+        "§4.7(ii) Exponentials and Powers"]}},
+     "address":
+     "/Elementary-Functions/___4___7-Derivatives-and-Differential-Equations/"}],
+   "LMLF.Blueprint.Elementary.Section47.exp_deriv":
+   [{"id": "LMLF___Blueprint___Elementary___Section47___exp_deriv",
+     "data":
+     {"/Elementary-Functions/___4___7-Derivatives-and-Differential-Equations/#LMLF___Blueprint___Elementary___Section47___exp_deriv":
+      {"display": "exp_deriv",
+       "context":
+       ["LMLF · DLMF with Lean",
+        "Elementary Functions",
+        "§4.7 Derivatives and Differential Equations",
+        "§4.7 Derivatives and Differential Equations",
+        "§4.7(ii) Exponentials and Powers"]}},
+     "address":
+     "/Elementary-Functions/___4___7-Derivatives-and-Differential-Equations/"}],
+   "LMLF.Blueprint.Elementary.Section47.cpow_deriv":
+   [{"id": "LMLF___Blueprint___Elementary___Section47___cpow_deriv",
+     "data":
+     {"/Elementary-Functions/___4___7-Derivatives-and-Differential-Equations/#LMLF___Blueprint___Elementary___Section47___cpow_deriv":
+      {"display": "cpow_deriv",
+       "context":
+       ["LMLF · DLMF with Lean",
+        "Elementary Functions",
+        "§4.7 Derivatives and Differential Equations",
+        "§4.7 Derivatives and Differential Equations",
+        "§4.7(ii) Exponentials and Powers"]}},
+     "address":
+     "/Elementary-Functions/___4___7-Derivatives-and-Differential-Equations/"}],
+   "LMLF.Blueprint.Elementary.Section46.logSymmetricTerm":
+   [{"id": "LMLF___Blueprint___Elementary___Section46___logSymmetricTerm",
+     "data":
+     {"/Elementary-Functions/___4___6-Power-Series/#LMLF___Blueprint___Elementary___Section46___logSymmetricTerm":
+      {"display": "logSymmetricTerm",
+       "context":
+       ["LMLF · DLMF with Lean", "Elementary Functions", "§4.6 Power Series"]}},
+     "address": "/Elementary-Functions/___4___6-Power-Series/"}],
+   "LMLF.Blueprint.Elementary.Section46.logSubOneTerm":
+   [{"id": "LMLF___Blueprint___Elementary___Section46___logSubOneTerm",
+     "data":
+     {"/Elementary-Functions/___4___6-Power-Series/#LMLF___Blueprint___Elementary___Section46___logSubOneTerm":
+      {"display": "logSubOneTerm",
+       "context":
+       ["LMLF · DLMF with Lean", "Elementary Functions", "§4.6 Power Series"]}},
+     "address": "/Elementary-Functions/___4___6-Power-Series/"}],
+   "LMLF.Blueprint.Elementary.Section46.logShiftedTerm":
+   [{"id": "LMLF___Blueprint___Elementary___Section46___logShiftedTerm",
+     "data":
+     {"/Elementary-Functions/___4___6-Power-Series/#LMLF___Blueprint___Elementary___Section46___logShiftedTerm":
+      {"display": "logShiftedTerm",
+       "context":
+       ["LMLF · DLMF with Lean", "Elementary Functions", "§4.6 Power Series"]}},
+     "address": "/Elementary-Functions/___4___6-Power-Series/"}],
+   "LMLF.Blueprint.Elementary.Section46.logRatioTerm":
+   [{"id": "LMLF___Blueprint___Elementary___Section46___logRatioTerm",
+     "data":
+     {"/Elementary-Functions/___4___6-Power-Series/#LMLF___Blueprint___Elementary___Section46___logRatioTerm":
+      {"display": "logRatioTerm",
+       "context":
+       ["LMLF · DLMF with Lean", "Elementary Functions", "§4.6 Power Series"]}},
+     "address": "/Elementary-Functions/___4___6-Power-Series/"}],
+   "LMLF.Blueprint.Elementary.Section46.logOneAddTerm":
+   [{"id": "LMLF___Blueprint___Elementary___Section46___logOneAddTerm",
+     "data":
+     {"/Elementary-Functions/___4___6-Power-Series/#LMLF___Blueprint___Elementary___Section46___logOneAddTerm":
+      {"display": "logOneAddTerm",
+       "context":
+       ["LMLF · DLMF with Lean", "Elementary Functions", "§4.6 Power Series"]}},
+     "address": "/Elementary-Functions/___4___6-Power-Series/"}],
+   "LMLF.Blueprint.Elementary.Section46.logInverseOddTerm":
+   [{"id": "LMLF___Blueprint___Elementary___Section46___logInverseOddTerm",
+     "data":
+     {"/Elementary-Functions/___4___6-Power-Series/#LMLF___Blueprint___Elementary___Section46___logInverseOddTerm":
+      {"display": "logInverseOddTerm",
+       "context":
+       ["LMLF · DLMF with Lean", "Elementary Functions", "§4.6 Power Series"]}},
+     "address": "/Elementary-Functions/___4___6-Power-Series/"}],
+   "LMLF.Blueprint.Elementary.Section46.generalizedBinomial":
+   [{"id": "LMLF___Blueprint___Elementary___Section46___generalizedBinomial",
+     "data":
+     {"/Elementary-Functions/___4___6-Power-Series/#LMLF___Blueprint___Elementary___Section46___generalizedBinomial":
+      {"display": "generalizedBinomial",
+       "context":
+       ["LMLF · DLMF with Lean", "Elementary Functions", "§4.6 Power Series"]}},
+     "address": "/Elementary-Functions/___4___6-Power-Series/"}],
+   "LMLF.Blueprint.Elementary.Section46.dlmf_4_6_7_terminating":
+   [{"id": "LMLF___Blueprint___Elementary___Section46___dlmf_4_6_7_terminating",
+     "data":
+     {"/Elementary-Functions/___4___6-Power-Series/#LMLF___Blueprint___Elementary___Section46___dlmf_4_6_7_terminating":
+      {"display": "dlmf_4_6_7_terminating",
+       "context":
+       ["LMLF · DLMF with Lean",
+        "Elementary Functions",
+        "§4.6 Power Series",
+        "§4.6(ii) Powers",
+        "Binomial Expansion"]}},
+     "address": "/Elementary-Functions/___4___6-Power-Series/"}],
+   "LMLF.Blueprint.Elementary.Section46.dlmf_4_6_7":
+   [{"id": "LMLF___Blueprint___Elementary___Section46___dlmf_4_6_7",
+     "data":
+     {"/Elementary-Functions/___4___6-Power-Series/#LMLF___Blueprint___Elementary___Section46___dlmf_4_6_7":
+      {"display": "dlmf_4_6_7",
+       "context":
+       ["LMLF · DLMF with Lean",
+        "Elementary Functions",
+        "§4.6 Power Series",
+        "§4.6(ii) Powers",
+        "Binomial Expansion"]}},
+     "address": "/Elementary-Functions/___4___6-Power-Series/"}],
+   "LMLF.Blueprint.Elementary.Section46.dlmf_4_6_6":
+   [{"id": "LMLF___Blueprint___Elementary___Section46___dlmf_4_6_6",
+     "data":
+     {"/Elementary-Functions/___4___6-Power-Series/#LMLF___Blueprint___Elementary___Section46___dlmf_4_6_6":
+      {"display": "dlmf_4_6_6",
+       "context":
+       ["LMLF · DLMF with Lean",
+        "Elementary Functions",
+        "§4.6 Power Series",
+        "§4.6(i) Logarithms"]}},
+     "address": "/Elementary-Functions/___4___6-Power-Series/"}],
+   "LMLF.Blueprint.Elementary.Section46.dlmf_4_6_5":
+   [{"id": "LMLF___Blueprint___Elementary___Section46___dlmf_4_6_5",
+     "data":
+     {"/Elementary-Functions/___4___6-Power-Series/#LMLF___Blueprint___Elementary___Section46___dlmf_4_6_5":
+      {"display": "dlmf_4_6_5",
+       "context":
+       ["LMLF · DLMF with Lean",
+        "Elementary Functions",
+        "§4.6 Power Series",
+        "§4.6(i) Logarithms"]}},
+     "address": "/Elementary-Functions/___4___6-Power-Series/"}],
+   "LMLF.Blueprint.Elementary.Section46.dlmf_4_6_4":
+   [{"id": "LMLF___Blueprint___Elementary___Section46___dlmf_4_6_4",
+     "data":
+     {"/Elementary-Functions/___4___6-Power-Series/#LMLF___Blueprint___Elementary___Section46___dlmf_4_6_4":
+      {"display": "dlmf_4_6_4",
+       "context":
+       ["LMLF · DLMF with Lean",
+        "Elementary Functions",
+        "§4.6 Power Series",
+        "§4.6(i) Logarithms"]}},
+     "address": "/Elementary-Functions/___4___6-Power-Series/"}],
+   "LMLF.Blueprint.Elementary.Section46.dlmf_4_6_3":
+   [{"id": "LMLF___Blueprint___Elementary___Section46___dlmf_4_6_3",
+     "data":
+     {"/Elementary-Functions/___4___6-Power-Series/#LMLF___Blueprint___Elementary___Section46___dlmf_4_6_3":
+      {"display": "dlmf_4_6_3",
+       "context":
+       ["LMLF · DLMF with Lean",
+        "Elementary Functions",
+        "§4.6 Power Series",
+        "§4.6(i) Logarithms"]}},
+     "address": "/Elementary-Functions/___4___6-Power-Series/"}],
+   "LMLF.Blueprint.Elementary.Section46.dlmf_4_6_2":
+   [{"id": "LMLF___Blueprint___Elementary___Section46___dlmf_4_6_2",
+     "data":
+     {"/Elementary-Functions/___4___6-Power-Series/#LMLF___Blueprint___Elementary___Section46___dlmf_4_6_2":
+      {"display": "dlmf_4_6_2",
+       "context":
+       ["LMLF · DLMF with Lean",
+        "Elementary Functions",
+        "§4.6 Power Series",
+        "§4.6(i) Logarithms"]}},
+     "address": "/Elementary-Functions/___4___6-Power-Series/"}],
+   "LMLF.Blueprint.Elementary.Section46.dlmf_4_6_1":
+   [{"id": "LMLF___Blueprint___Elementary___Section46___dlmf_4_6_1",
+     "data":
+     {"/Elementary-Functions/___4___6-Power-Series/#LMLF___Blueprint___Elementary___Section46___dlmf_4_6_1":
+      {"display": "dlmf_4_6_1",
+       "context":
+       ["LMLF · DLMF with Lean",
+        "Elementary Functions",
+        "§4.6 Power Series",
+        "§4.6(i) Logarithms"]}},
+     "address": "/Elementary-Functions/___4___6-Power-Series/"}],
+   "LMLF.Blueprint.Elementary.Section45.dlmf_4_5_9":
+   [{"id": "LMLF___Blueprint___Elementary___Section45___dlmf_4_5_9",
+     "data":
+     {"/Elementary-Functions/___4___5-Inequalities/#LMLF___Blueprint___Elementary___Section45___dlmf_4_5_9":
+      {"display": "dlmf_4_5_9",
+       "context":
+       ["LMLF · DLMF with Lean", "Elementary Functions", "§4.5 Inequalities"]}},
+     "address": "/Elementary-Functions/___4___5-Inequalities/"}],
+   "LMLF.Blueprint.Elementary.Section45.dlmf_4_5_8":
+   [{"id": "LMLF___Blueprint___Elementary___Section45___dlmf_4_5_8",
+     "data":
+     {"/Elementary-Functions/___4___5-Inequalities/#LMLF___Blueprint___Elementary___Section45___dlmf_4_5_8":
+      {"display": "dlmf_4_5_8",
+       "context":
+       ["LMLF · DLMF with Lean", "Elementary Functions", "§4.5 Inequalities"]}},
+     "address": "/Elementary-Functions/___4___5-Inequalities/"}],
+   "LMLF.Blueprint.Elementary.Section45.dlmf_4_5_7":
+   [{"id": "LMLF___Blueprint___Elementary___Section45___dlmf_4_5_7",
+     "data":
+     {"/Elementary-Functions/___4___5-Inequalities/#LMLF___Blueprint___Elementary___Section45___dlmf_4_5_7":
+      {"display": "dlmf_4_5_7",
+       "context":
+       ["LMLF · DLMF with Lean", "Elementary Functions", "§4.5 Inequalities"]}},
+     "address": "/Elementary-Functions/___4___5-Inequalities/"}],
+   "LMLF.Blueprint.Elementary.Section45.dlmf_4_5_6":
+   [{"id": "LMLF___Blueprint___Elementary___Section45___dlmf_4_5_6",
+     "data":
+     {"/Elementary-Functions/___4___5-Inequalities/#LMLF___Blueprint___Elementary___Section45___dlmf_4_5_6":
+      {"display": "dlmf_4_5_6",
+       "context":
+       ["LMLF · DLMF with Lean", "Elementary Functions", "§4.5 Inequalities"]}},
+     "address": "/Elementary-Functions/___4___5-Inequalities/"}],
+   "LMLF.Blueprint.Elementary.Section45.dlmf_4_5_5":
+   [{"id": "LMLF___Blueprint___Elementary___Section45___dlmf_4_5_5",
+     "data":
+     {"/Elementary-Functions/___4___5-Inequalities/#LMLF___Blueprint___Elementary___Section45___dlmf_4_5_5":
+      {"display": "dlmf_4_5_5",
+       "context":
+       ["LMLF · DLMF with Lean", "Elementary Functions", "§4.5 Inequalities"]}},
+     "address": "/Elementary-Functions/___4___5-Inequalities/"}],
+   "LMLF.Blueprint.Elementary.Section45.dlmf_4_5_4":
+   [{"id": "LMLF___Blueprint___Elementary___Section45___dlmf_4_5_4",
+     "data":
+     {"/Elementary-Functions/___4___5-Inequalities/#LMLF___Blueprint___Elementary___Section45___dlmf_4_5_4":
+      {"display": "dlmf_4_5_4",
+       "context":
+       ["LMLF · DLMF with Lean", "Elementary Functions", "§4.5 Inequalities"]}},
+     "address": "/Elementary-Functions/___4___5-Inequalities/"}],
+   "LMLF.Blueprint.Elementary.Section45.dlmf_4_5_3":
+   [{"id": "LMLF___Blueprint___Elementary___Section45___dlmf_4_5_3",
+     "data":
+     {"/Elementary-Functions/___4___5-Inequalities/#LMLF___Blueprint___Elementary___Section45___dlmf_4_5_3":
+      {"display": "dlmf_4_5_3",
+       "context":
+       ["LMLF · DLMF with Lean", "Elementary Functions", "§4.5 Inequalities"]}},
+     "address": "/Elementary-Functions/___4___5-Inequalities/"}],
+   "LMLF.Blueprint.Elementary.Section45.dlmf_4_5_2":
+   [{"id": "LMLF___Blueprint___Elementary___Section45___dlmf_4_5_2",
+     "data":
+     {"/Elementary-Functions/___4___5-Inequalities/#LMLF___Blueprint___Elementary___Section45___dlmf_4_5_2":
+      {"display": "dlmf_4_5_2",
+       "context":
+       ["LMLF · DLMF with Lean", "Elementary Functions", "§4.5 Inequalities"]}},
+     "address": "/Elementary-Functions/___4___5-Inequalities/"}],
+   "LMLF.Blueprint.Elementary.Section45.dlmf_4_5_16":
+   [{"id": "LMLF___Blueprint___Elementary___Section45___dlmf_4_5_16",
+     "data":
+     {"/Elementary-Functions/___4___5-Inequalities/#LMLF___Blueprint___Elementary___Section45___dlmf_4_5_16":
+      {"display": "dlmf_4_5_16",
+       "context":
+       ["LMLF · DLMF with Lean", "Elementary Functions", "§4.5 Inequalities"]}},
+     "address": "/Elementary-Functions/___4___5-Inequalities/"}],
+   "LMLF.Blueprint.Elementary.Section45.dlmf_4_5_15":
+   [{"id": "LMLF___Blueprint___Elementary___Section45___dlmf_4_5_15",
+     "data":
+     {"/Elementary-Functions/___4___5-Inequalities/#LMLF___Blueprint___Elementary___Section45___dlmf_4_5_15":
+      {"display": "dlmf_4_5_15",
+       "context":
+       ["LMLF · DLMF with Lean", "Elementary Functions", "§4.5 Inequalities"]}},
+     "address": "/Elementary-Functions/___4___5-Inequalities/"}],
+   "LMLF.Blueprint.Elementary.Section45.dlmf_4_5_14":
+   [{"id": "LMLF___Blueprint___Elementary___Section45___dlmf_4_5_14",
+     "data":
+     {"/Elementary-Functions/___4___5-Inequalities/#LMLF___Blueprint___Elementary___Section45___dlmf_4_5_14":
+      {"display": "dlmf_4_5_14",
+       "context":
+       ["LMLF · DLMF with Lean", "Elementary Functions", "§4.5 Inequalities"]}},
+     "address": "/Elementary-Functions/___4___5-Inequalities/"}],
+   "LMLF.Blueprint.Elementary.Section45.dlmf_4_5_13":
+   [{"id": "LMLF___Blueprint___Elementary___Section45___dlmf_4_5_13",
+     "data":
+     {"/Elementary-Functions/___4___5-Inequalities/#LMLF___Blueprint___Elementary___Section45___dlmf_4_5_13":
+      {"display": "dlmf_4_5_13",
+       "context":
+       ["LMLF · DLMF with Lean", "Elementary Functions", "§4.5 Inequalities"]}},
+     "address": "/Elementary-Functions/___4___5-Inequalities/"}],
+   "LMLF.Blueprint.Elementary.Section45.dlmf_4_5_12":
+   [{"id": "LMLF___Blueprint___Elementary___Section45___dlmf_4_5_12",
+     "data":
+     {"/Elementary-Functions/___4___5-Inequalities/#LMLF___Blueprint___Elementary___Section45___dlmf_4_5_12":
+      {"display": "dlmf_4_5_12",
+       "context":
+       ["LMLF · DLMF with Lean", "Elementary Functions", "§4.5 Inequalities"]}},
+     "address": "/Elementary-Functions/___4___5-Inequalities/"}],
+   "LMLF.Blueprint.Elementary.Section45.dlmf_4_5_11":
+   [{"id": "LMLF___Blueprint___Elementary___Section45___dlmf_4_5_11",
+     "data":
+     {"/Elementary-Functions/___4___5-Inequalities/#LMLF___Blueprint___Elementary___Section45___dlmf_4_5_11":
+      {"display": "dlmf_4_5_11",
+       "context":
+       ["LMLF · DLMF with Lean", "Elementary Functions", "§4.5 Inequalities"]}},
+     "address": "/Elementary-Functions/___4___5-Inequalities/"}],
+   "LMLF.Blueprint.Elementary.Section45.dlmf_4_5_10":
+   [{"id": "LMLF___Blueprint___Elementary___Section45___dlmf_4_5_10",
+     "data":
+     {"/Elementary-Functions/___4___5-Inequalities/#LMLF___Blueprint___Elementary___Section45___dlmf_4_5_10":
+      {"display": "dlmf_4_5_10",
+       "context":
+       ["LMLF · DLMF with Lean", "Elementary Functions", "§4.5 Inequalities"]}},
+     "address": "/Elementary-Functions/___4___5-Inequalities/"}],
+   "LMLF.Blueprint.Elementary.Section45.dlmf_4_5_1":
+   [{"id": "LMLF___Blueprint___Elementary___Section45___dlmf_4_5_1",
+     "data":
+     {"/Elementary-Functions/___4___5-Inequalities/#LMLF___Blueprint___Elementary___Section45___dlmf_4_5_1":
+      {"display": "dlmf_4_5_1",
+       "context":
+       ["LMLF · DLMF with Lean", "Elementary Functions", "§4.5 Inequalities"]}},
+     "address": "/Elementary-Functions/___4___5-Inequalities/"}],
+   "LMLF.Blueprint.Elementary.Section44.dlmf_4_4_9":
+   [{"id": "LMLF___Blueprint___Elementary___Section44___dlmf_4_4_9",
+     "data":
+     {"/Elementary-Functions/___4___4-Special-Values-and-Limits/#LMLF___Blueprint___Elementary___Section44___dlmf_4_4_9":
+      {"display": "dlmf_4_4_9",
+       "context":
+       ["LMLF · DLMF with Lean",
+        "Elementary Functions",
+        "§4.4 Special Values and Limits",
+        "§4.4(ii) Powers"]}},
+     "address": "/Elementary-Functions/___4___4-Special-Values-and-Limits/"}],
+   "LMLF.Blueprint.Elementary.Section44.dlmf_4_4_8":
+   [{"id": "LMLF___Blueprint___Elementary___Section44___dlmf_4_4_8",
+     "data":
+     {"/Elementary-Functions/___4___4-Special-Values-and-Limits/#LMLF___Blueprint___Elementary___Section44___dlmf_4_4_8":
+      {"display": "dlmf_4_4_8",
+       "context":
+       ["LMLF · DLMF with Lean",
+        "Elementary Functions",
+        "§4.4 Special Values and Limits",
+        "§4.4(ii) Powers"]}},
+     "address": "/Elementary-Functions/___4___4-Special-Values-and-Limits/"}],
+   "LMLF.Blueprint.Elementary.Section44.dlmf_4_4_7":
+   [{"id": "LMLF___Blueprint___Elementary___Section44___dlmf_4_4_7",
+     "data":
+     {"/Elementary-Functions/___4___4-Special-Values-and-Limits/#LMLF___Blueprint___Elementary___Section44___dlmf_4_4_7":
+      {"display": "dlmf_4_4_7",
+       "context":
+       ["LMLF · DLMF with Lean",
+        "Elementary Functions",
+        "§4.4 Special Values and Limits",
+        "§4.4(ii) Powers"]}},
+     "address": "/Elementary-Functions/___4___4-Special-Values-and-Limits/"}],
+   "LMLF.Blueprint.Elementary.Section44.dlmf_4_4_6":
+   [{"id": "LMLF___Blueprint___Elementary___Section44___dlmf_4_4_6",
+     "data":
+     {"/Elementary-Functions/___4___4-Special-Values-and-Limits/#LMLF___Blueprint___Elementary___Section44___dlmf_4_4_6":
+      {"display": "dlmf_4_4_6",
+       "context":
+       ["LMLF · DLMF with Lean",
+        "Elementary Functions",
+        "§4.4 Special Values and Limits",
+        "§4.4(ii) Powers"]}},
+     "address": "/Elementary-Functions/___4___4-Special-Values-and-Limits/"}],
+   "LMLF.Blueprint.Elementary.Section44.dlmf_4_4_5":
+   [{"id": "LMLF___Blueprint___Elementary___Section44___dlmf_4_4_5",
+     "data":
+     {"/Elementary-Functions/___4___4-Special-Values-and-Limits/#LMLF___Blueprint___Elementary___Section44___dlmf_4_4_5":
+      {"display": "dlmf_4_4_5",
+       "context":
+       ["LMLF · DLMF with Lean",
+        "Elementary Functions",
+        "§4.4 Special Values and Limits",
+        "§4.4(ii) Powers"]}},
+     "address": "/Elementary-Functions/___4___4-Special-Values-and-Limits/"}],
+   "LMLF.Blueprint.Elementary.Section44.dlmf_4_4_4":
+   [{"id": "LMLF___Blueprint___Elementary___Section44___dlmf_4_4_4",
+     "data":
+     {"/Elementary-Functions/___4___4-Special-Values-and-Limits/#LMLF___Blueprint___Elementary___Section44___dlmf_4_4_4":
+      {"display": "dlmf_4_4_4",
+       "context":
+       ["LMLF · DLMF with Lean",
+        "Elementary Functions",
+        "§4.4 Special Values and Limits",
+        "§4.4(ii) Powers"]}},
+     "address": "/Elementary-Functions/___4___4-Special-Values-and-Limits/"}],
+   "LMLF.Blueprint.Elementary.Section44.dlmf_4_4_3":
+   [{"id": "LMLF___Blueprint___Elementary___Section44___dlmf_4_4_3",
+     "data":
+     {"/Elementary-Functions/___4___4-Special-Values-and-Limits/#LMLF___Blueprint___Elementary___Section44___dlmf_4_4_3":
+      {"display": "dlmf_4_4_3",
+       "context":
+       ["LMLF · DLMF with Lean",
+        "Elementary Functions",
+        "§4.4 Special Values and Limits",
+        "§4.4(i) Logarithms"]}},
+     "address": "/Elementary-Functions/___4___4-Special-Values-and-Limits/"}],
+   "LMLF.Blueprint.Elementary.Section44.dlmf_4_4_2":
+   [{"id": "LMLF___Blueprint___Elementary___Section44___dlmf_4_4_2",
+     "data":
+     {"/Elementary-Functions/___4___4-Special-Values-and-Limits/#LMLF___Blueprint___Elementary___Section44___dlmf_4_4_2":
+      {"display": "dlmf_4_4_2",
+       "context":
+       ["LMLF · DLMF with Lean",
+        "Elementary Functions",
+        "§4.4 Special Values and Limits",
+        "§4.4(i) Logarithms"]}},
+     "address": "/Elementary-Functions/___4___4-Special-Values-and-Limits/"}],
+   "LMLF.Blueprint.Elementary.Section44.dlmf_4_4_19":
+   [{"id": "LMLF___Blueprint___Elementary___Section44___dlmf_4_4_19",
+     "data":
+     {"/Elementary-Functions/___4___4-Special-Values-and-Limits/#LMLF___Blueprint___Elementary___Section44___dlmf_4_4_19":
+      {"display": "dlmf_4_4_19",
+       "context":
+       ["LMLF · DLMF with Lean",
+        "Elementary Functions",
+        "§4.4 Special Values and Limits",
+        "§4.4(iii) Limits"]}},
+     "address": "/Elementary-Functions/___4___4-Special-Values-and-Limits/"}],
+   "LMLF.Blueprint.Elementary.Section44.dlmf_4_4_18":
+   [{"id": "LMLF___Blueprint___Elementary___Section44___dlmf_4_4_18",
+     "data":
+     {"/Elementary-Functions/___4___4-Special-Values-and-Limits/#LMLF___Blueprint___Elementary___Section44___dlmf_4_4_18":
+      {"display": "dlmf_4_4_18",
+       "context":
+       ["LMLF · DLMF with Lean",
+        "Elementary Functions",
+        "§4.4 Special Values and Limits",
+        "§4.4(iii) Limits"]}},
+     "address": "/Elementary-Functions/___4___4-Special-Values-and-Limits/"}],
+   "LMLF.Blueprint.Elementary.Section44.dlmf_4_4_17":
+   [{"id": "LMLF___Blueprint___Elementary___Section44___dlmf_4_4_17",
+     "data":
+     {"/Elementary-Functions/___4___4-Special-Values-and-Limits/#LMLF___Blueprint___Elementary___Section44___dlmf_4_4_17":
+      {"display": "dlmf_4_4_17",
+       "context":
+       ["LMLF · DLMF with Lean",
+        "Elementary Functions",
+        "§4.4 Special Values and Limits",
+        "§4.4(iii) Limits"]}},
+     "address": "/Elementary-Functions/___4___4-Special-Values-and-Limits/"}],
+   "LMLF.Blueprint.Elementary.Section44.dlmf_4_4_16":
+   [{"id": "LMLF___Blueprint___Elementary___Section44___dlmf_4_4_16",
+     "data":
+     {"/Elementary-Functions/___4___4-Special-Values-and-Limits/#LMLF___Blueprint___Elementary___Section44___dlmf_4_4_16":
+      {"display": "dlmf_4_4_16",
+       "context":
+       ["LMLF · DLMF with Lean",
+        "Elementary Functions",
+        "§4.4 Special Values and Limits",
+        "§4.4(iii) Limits"]}},
+     "address": "/Elementary-Functions/___4___4-Special-Values-and-Limits/"}],
+   "LMLF.Blueprint.Elementary.Section44.dlmf_4_4_15":
+   [{"id": "LMLF___Blueprint___Elementary___Section44___dlmf_4_4_15",
+     "data":
+     {"/Elementary-Functions/___4___4-Special-Values-and-Limits/#LMLF___Blueprint___Elementary___Section44___dlmf_4_4_15":
+      {"display": "dlmf_4_4_15",
+       "context":
+       ["LMLF · DLMF with Lean",
+        "Elementary Functions",
+        "§4.4 Special Values and Limits",
+        "§4.4(iii) Limits"]}},
+     "address": "/Elementary-Functions/___4___4-Special-Values-and-Limits/"}],
+   "LMLF.Blueprint.Elementary.Section44.dlmf_4_4_14":
+   [{"id": "LMLF___Blueprint___Elementary___Section44___dlmf_4_4_14",
+     "data":
+     {"/Elementary-Functions/___4___4-Special-Values-and-Limits/#LMLF___Blueprint___Elementary___Section44___dlmf_4_4_14":
+      {"display": "dlmf_4_4_14",
+       "context":
+       ["LMLF · DLMF with Lean",
+        "Elementary Functions",
+        "§4.4 Special Values and Limits",
+        "§4.4(iii) Limits"]}},
+     "address": "/Elementary-Functions/___4___4-Special-Values-and-Limits/"}],
+   "LMLF.Blueprint.Elementary.Section44.dlmf_4_4_13":
+   [{"id": "LMLF___Blueprint___Elementary___Section44___dlmf_4_4_13",
+     "data":
+     {"/Elementary-Functions/___4___4-Special-Values-and-Limits/#LMLF___Blueprint___Elementary___Section44___dlmf_4_4_13":
+      {"display": "dlmf_4_4_13",
+       "context":
+       ["LMLF · DLMF with Lean",
+        "Elementary Functions",
+        "§4.4 Special Values and Limits",
+        "§4.4(iii) Limits"]}},
+     "address": "/Elementary-Functions/___4___4-Special-Values-and-Limits/"}],
+   "LMLF.Blueprint.Elementary.Section44.dlmf_4_4_12":
+   [{"id": "LMLF___Blueprint___Elementary___Section44___dlmf_4_4_12",
+     "data":
+     {"/Elementary-Functions/___4___4-Special-Values-and-Limits/#LMLF___Blueprint___Elementary___Section44___dlmf_4_4_12":
+      {"display": "dlmf_4_4_12",
+       "context":
+       ["LMLF · DLMF with Lean",
+        "Elementary Functions",
+        "§4.4 Special Values and Limits",
+        "§4.4(ii) Powers"]}},
+     "address": "/Elementary-Functions/___4___4-Special-Values-and-Limits/"}],
+   "LMLF.Blueprint.Elementary.Section44.dlmf_4_4_11":
+   [{"id": "LMLF___Blueprint___Elementary___Section44___dlmf_4_4_11",
+     "data":
+     {"/Elementary-Functions/___4___4-Special-Values-and-Limits/#LMLF___Blueprint___Elementary___Section44___dlmf_4_4_11":
+      {"display": "dlmf_4_4_11",
+       "context":
+       ["LMLF · DLMF with Lean",
+        "Elementary Functions",
+        "§4.4 Special Values and Limits",
+        "§4.4(ii) Powers"]}},
+     "address": "/Elementary-Functions/___4___4-Special-Values-and-Limits/"}],
+   "LMLF.Blueprint.Elementary.Section44.dlmf_4_4_10":
+   [{"id": "LMLF___Blueprint___Elementary___Section44___dlmf_4_4_10",
+     "data":
+     {"/Elementary-Functions/___4___4-Special-Values-and-Limits/#LMLF___Blueprint___Elementary___Section44___dlmf_4_4_10":
+      {"display": "dlmf_4_4_10",
+       "context":
+       ["LMLF · DLMF with Lean",
+        "Elementary Functions",
+        "§4.4 Special Values and Limits",
+        "§4.4(ii) Powers"]}},
+     "address": "/Elementary-Functions/___4___4-Special-Values-and-Limits/"}],
+   "LMLF.Blueprint.Elementary.Section44.dlmf_4_4_1":
+   [{"id": "LMLF___Blueprint___Elementary___Section44___dlmf_4_4_1",
+     "data":
+     {"/Elementary-Functions/___4___4-Special-Values-and-Limits/#LMLF___Blueprint___Elementary___Section44___dlmf_4_4_1":
+      {"display": "dlmf_4_4_1",
+       "context":
+       ["LMLF · DLMF with Lean",
+        "Elementary Functions",
+        "§4.4 Special Values and Limits",
+        "§4.4(i) Logarithms"]}},
+     "address": "/Elementary-Functions/___4___4-Special-Values-and-Limits/"}],
+   "LMLF.Blueprint.Elementary.Section43.real_log_exp_inverse":
+   [{"id": "LMLF___Blueprint___Elementary___Section43___real_log_exp_inverse",
+     "data":
+     {"/Elementary-Functions/___4___3-Graphics/#LMLF___Blueprint___Elementary___Section43___real_log_exp_inverse":
+      {"display": "real_log_exp_inverse",
+       "context":
+       ["LMLF · DLMF with Lean",
+        "Elementary Functions",
+        "§4.3 Graphics",
+        "§4.3 Graphics",
+        "§4.3(i) Real Arguments"]}},
+     "address": "/Elementary-Functions/___4___3-Graphics/"}],
+   "LMLF.Blueprint.Elementary.Section43.real_exp_log_inverse":
+   [{"id": "LMLF___Blueprint___Elementary___Section43___real_exp_log_inverse",
+     "data":
+     {"/Elementary-Functions/___4___3-Graphics/#LMLF___Blueprint___Elementary___Section43___real_exp_log_inverse":
+      {"display": "real_exp_log_inverse",
+       "context":
+       ["LMLF · DLMF with Lean",
+        "Elementary Functions",
+        "§4.3 Graphics",
+        "§4.3 Graphics",
+        "§4.3(i) Real Arguments"]}},
+     "address": "/Elementary-Functions/___4___3-Graphics/"}],
+   "LMLF.Blueprint.Elementary.Section43.principal_log_surface_height":
+   [{"id":
+     "LMLF___Blueprint___Elementary___Section43___principal_log_surface_height",
+     "data":
+     {"/Elementary-Functions/___4___3-Graphics/#LMLF___Blueprint___Elementary___Section43___principal_log_surface_height":
+      {"display": "principal_log_surface_height",
+       "context":
+       ["LMLF · DLMF with Lean",
+        "Elementary Functions",
+        "§4.3 Graphics",
+        "§4.3 Graphics",
+        "§4.3(iii) Complex Arguments: Surfaces"]}},
+     "address": "/Elementary-Functions/___4___3-Graphics/"}],
+   "LMLF.Blueprint.Elementary.Section43.principal_log_exp_on_strip":
+   [{"id":
+     "LMLF___Blueprint___Elementary___Section43___principal_log_exp_on_strip",
+     "data":
+     {"/Elementary-Functions/___4___3-Graphics/#LMLF___Blueprint___Elementary___Section43___principal_log_exp_on_strip":
+      {"display": "principal_log_exp_on_strip",
+       "context":
+       ["LMLF · DLMF with Lean",
+        "Elementary Functions",
+        "§4.3 Graphics",
+        "§4.3 Graphics",
+        "§4.3(ii) Complex Arguments: Conformal Maps"]}},
+     "address": "/Elementary-Functions/___4___3-Graphics/"}],
+   "LMLF.Blueprint.Elementary.Section43.principalLogSurfaceHeight":
+   [{"id":
+     "LMLF___Blueprint___Elementary___Section43___principalLogSurfaceHeight",
+     "data":
+     {"/Elementary-Functions/___4___3-Graphics/#LMLF___Blueprint___Elementary___Section43___principalLogSurfaceHeight":
+      {"display": "principalLogSurfaceHeight",
+       "context":
+       ["LMLF · DLMF with Lean",
+        "Elementary Functions",
+        "§4.3 Graphics",
+        "§4.3 Graphics",
+        "§4.3(iii) Complex Arguments: Surfaces"]}},
+     "address": "/Elementary-Functions/___4___3-Graphics/"}],
+   "LMLF.Blueprint.Elementary.Section43.principalLogSurfaceDomain":
+   [{"id":
+     "LMLF___Blueprint___Elementary___Section43___principalLogSurfaceDomain",
+     "data":
+     {"/Elementary-Functions/___4___3-Graphics/#LMLF___Blueprint___Elementary___Section43___principalLogSurfaceDomain":
+      {"display": "principalLogSurfaceDomain",
+       "context":
+       ["LMLF · DLMF with Lean",
+        "Elementary Functions",
+        "§4.3 Graphics",
+        "§4.3 Graphics",
+        "§4.3(iii) Complex Arguments: Surfaces"]}},
+     "address": "/Elementary-Functions/___4___3-Graphics/"}],
+   "LMLF.Blueprint.Elementary.Section43.conformal_map_nine_point_table_spec":
+   [{"id":
+     "LMLF___Blueprint___Elementary___Section43___conformal_map_nine_point_table_spec",
+     "data":
+     {"/Elementary-Functions/___4___3-Graphics/#LMLF___Blueprint___Elementary___Section43___conformal_map_nine_point_table_spec":
+      {"display": "conformal_map_nine_point_table_spec",
+       "context":
+       ["LMLF · DLMF with Lean",
+        "Elementary Functions",
+        "§4.3 Graphics",
+        "§4.3 Graphics",
+        "§4.3(ii) Complex Arguments: Conformal Maps"]}},
+     "address": "/Elementary-Functions/___4___3-Graphics/"}],
+   "LMLF.Blueprint.Elementary.Section43.conformal_map_boundary_values":
+   [{"id":
+     "LMLF___Blueprint___Elementary___Section43___conformal_map_boundary_values",
+     "data":
+     {"/Elementary-Functions/___4___3-Graphics/#LMLF___Blueprint___Elementary___Section43___conformal_map_boundary_values":
+      {"display": "conformal_map_boundary_values",
+       "context":
+       ["LMLF · DLMF with Lean",
+        "Elementary Functions",
+        "§4.3 Graphics",
+        "§4.3 Graphics",
+        "§4.3(ii) Complex Arguments: Conformal Maps"]}},
+     "address": "/Elementary-Functions/___4___3-Graphics/"}],
+   "LMLF.Blueprint.Elementary.Section43.conformalMapNinePointTable":
+   [{"id":
+     "LMLF___Blueprint___Elementary___Section43___conformalMapNinePointTable",
+     "data":
+     {"/Elementary-Functions/___4___3-Graphics/#LMLF___Blueprint___Elementary___Section43___conformalMapNinePointTable":
+      {"display": "conformalMapNinePointTable",
+       "context":
+       ["LMLF · DLMF with Lean",
+        "Elementary Functions",
+        "§4.3 Graphics",
+        "§4.3 Graphics",
+        "§4.3(ii) Complex Arguments: Conformal Maps"]}},
+     "address": "/Elementary-Functions/___4___3-Graphics/"}],
+   "LMLF.Blueprint.Elementary.Section43.complex_exp_surface_height":
+   [{"id":
+     "LMLF___Blueprint___Elementary___Section43___complex_exp_surface_height",
+     "data":
+     {"/Elementary-Functions/___4___3-Graphics/#LMLF___Blueprint___Elementary___Section43___complex_exp_surface_height":
+      {"display": "complex_exp_surface_height",
+       "context":
+       ["LMLF · DLMF with Lean",
+        "Elementary Functions",
+        "§4.3 Graphics",
+        "§4.3 Graphics",
+        "§4.3(iii) Complex Arguments: Surfaces"]}},
+     "address": "/Elementary-Functions/___4___3-Graphics/"}],
+   "LMLF.Blueprint.Elementary.Section43.complex_exp_principal_log_inverse":
+   [{"id":
+     "LMLF___Blueprint___Elementary___Section43___complex_exp_principal_log_inverse",
+     "data":
+     {"/Elementary-Functions/___4___3-Graphics/#LMLF___Blueprint___Elementary___Section43___complex_exp_principal_log_inverse":
+      {"display": "complex_exp_principal_log_inverse",
+       "context":
+       ["LMLF · DLMF with Lean",
+        "Elementary Functions",
+        "§4.3 Graphics",
+        "§4.3 Graphics",
+        "§4.3(ii) Complex Arguments: Conformal Maps"]}},
+     "address": "/Elementary-Functions/___4___3-Graphics/"}],
+   "LMLF.Blueprint.Elementary.Section42.logBase":
+   [{"id": "LMLF___Blueprint___Elementary___Section42___logBase",
+     "data":
+     {"/Elementary-Functions/___4___2-Definitions/#LMLF___Blueprint___Elementary___Section42___logBase":
+      {"display": "logBase",
+       "context":
+       ["LMLF · DLMF with Lean", "Elementary Functions", "§4.2 Definitions"]}},
+     "address": "/Elementary-Functions/___4___2-Definitions/"}],
+   "LMLF.Blueprint.Elementary.Section42.dlmf_4_2_9":
+   [{"id": "LMLF___Blueprint___Elementary___Section42___dlmf_4_2_9",
+     "data":
+     {"/Elementary-Functions/___4___2-Definitions/#LMLF___Blueprint___Elementary___Section42___dlmf_4_2_9":
+      {"display": "dlmf_4_2_9",
+       "context":
+       ["LMLF · DLMF with Lean", "Elementary Functions", "§4.2 Definitions"]}},
+     "address": "/Elementary-Functions/___4___2-Definitions/"}],
+   "LMLF.Blueprint.Elementary.Section42.dlmf_4_2_8":
+   [{"id": "LMLF___Blueprint___Elementary___Section42___dlmf_4_2_8",
+     "data":
+     {"/Elementary-Functions/___4___2-Definitions/#LMLF___Blueprint___Elementary___Section42___dlmf_4_2_8":
+      {"display": "dlmf_4_2_8",
+       "context":
+       ["LMLF · DLMF with Lean", "Elementary Functions", "§4.2 Definitions"]}},
+     "address": "/Elementary-Functions/___4___2-Definitions/"}],
+   "LMLF.Blueprint.Elementary.Section42.dlmf_4_2_7":
+   [{"id": "LMLF___Blueprint___Elementary___Section42___dlmf_4_2_7",
+     "data":
+     {"/Elementary-Functions/___4___2-Definitions/#LMLF___Blueprint___Elementary___Section42___dlmf_4_2_7":
+      {"display": "dlmf_4_2_7",
+       "context":
+       ["LMLF · DLMF with Lean", "Elementary Functions", "§4.2 Definitions"]}},
+     "address": "/Elementary-Functions/___4___2-Definitions/"}],
+   "LMLF.Blueprint.Elementary.Section42.dlmf_4_2_6":
+   [{"id": "LMLF___Blueprint___Elementary___Section42___dlmf_4_2_6",
+     "data":
+     {"/Elementary-Functions/___4___2-Definitions/#LMLF___Blueprint___Elementary___Section42___dlmf_4_2_6":
+      {"display": "dlmf_4_2_6",
+       "context":
+       ["LMLF · DLMF with Lean", "Elementary Functions", "§4.2 Definitions"]}},
+     "address": "/Elementary-Functions/___4___2-Definitions/"}],
+   "LMLF.Blueprint.Elementary.Section42.dlmf_4_2_5":
+   [{"id": "LMLF___Blueprint___Elementary___Section42___dlmf_4_2_5",
+     "data":
+     {"/Elementary-Functions/___4___2-Definitions/#LMLF___Blueprint___Elementary___Section42___dlmf_4_2_5":
+      {"display": "dlmf_4_2_5",
+       "context":
+       ["LMLF · DLMF with Lean", "Elementary Functions", "§4.2 Definitions"]}},
+     "address": "/Elementary-Functions/___4___2-Definitions/"}],
+   "LMLF.Blueprint.Elementary.Section42.dlmf_4_2_4":
+   [{"id": "LMLF___Blueprint___Elementary___Section42___dlmf_4_2_4",
+     "data":
+     {"/Elementary-Functions/___4___2-Definitions/#LMLF___Blueprint___Elementary___Section42___dlmf_4_2_4":
+      {"display": "dlmf_4_2_4",
+       "context":
+       ["LMLF · DLMF with Lean", "Elementary Functions", "§4.2 Definitions"]}},
+     "address": "/Elementary-Functions/___4___2-Definitions/"}],
+   "LMLF.Blueprint.Elementary.Section42.dlmf_4_2_37":
+   [{"id": "LMLF___Blueprint___Elementary___Section42___dlmf_4_2_37",
+     "data":
+     {"/Elementary-Functions/___4___2-Definitions/#LMLF___Blueprint___Elementary___Section42___dlmf_4_2_37":
+      {"display": "dlmf_4_2_37",
+       "context":
+       ["LMLF · DLMF with Lean", "Elementary Functions", "§4.2 Definitions"]}},
+     "address": "/Elementary-Functions/___4___2-Definitions/"}],
+   "LMLF.Blueprint.Elementary.Section42.dlmf_4_2_36":
+   [{"id": "LMLF___Blueprint___Elementary___Section42___dlmf_4_2_36",
+     "data":
+     {"/Elementary-Functions/___4___2-Definitions/#LMLF___Blueprint___Elementary___Section42___dlmf_4_2_36":
+      {"display": "dlmf_4_2_36",
+       "context":
+       ["LMLF · DLMF with Lean", "Elementary Functions", "§4.2 Definitions"]}},
+     "address": "/Elementary-Functions/___4___2-Definitions/"}],
+   "LMLF.Blueprint.Elementary.Section42.dlmf_4_2_35":
+   [{"id": "LMLF___Blueprint___Elementary___Section42___dlmf_4_2_35",
+     "data":
+     {"/Elementary-Functions/___4___2-Definitions/#LMLF___Blueprint___Elementary___Section42___dlmf_4_2_35":
+      {"display": "dlmf_4_2_35",
+       "context":
+       ["LMLF · DLMF with Lean", "Elementary Functions", "§4.2 Definitions"]}},
+     "address": "/Elementary-Functions/___4___2-Definitions/"}],
+   "LMLF.Blueprint.Elementary.Section42.dlmf_4_2_34":
+   [{"id": "LMLF___Blueprint___Elementary___Section42___dlmf_4_2_34",
+     "data":
+     {"/Elementary-Functions/___4___2-Definitions/#LMLF___Blueprint___Elementary___Section42___dlmf_4_2_34":
+      {"display": "dlmf_4_2_34",
+       "context":
+       ["LMLF · DLMF with Lean", "Elementary Functions", "§4.2 Definitions"]}},
+     "address": "/Elementary-Functions/___4___2-Definitions/"}],
+   "LMLF.Blueprint.Elementary.Section42.dlmf_4_2_33":
+   [{"id": "LMLF___Blueprint___Elementary___Section42___dlmf_4_2_33",
+     "data":
+     {"/Elementary-Functions/___4___2-Definitions/#LMLF___Blueprint___Elementary___Section42___dlmf_4_2_33":
+      {"display": "dlmf_4_2_33",
+       "context":
+       ["LMLF · DLMF with Lean", "Elementary Functions", "§4.2 Definitions"]}},
+     "address": "/Elementary-Functions/___4___2-Definitions/"}],
+   "LMLF.Blueprint.Elementary.Section42.dlmf_4_2_32":
+   [{"id": "LMLF___Blueprint___Elementary___Section42___dlmf_4_2_32",
+     "data":
+     {"/Elementary-Functions/___4___2-Definitions/#LMLF___Blueprint___Elementary___Section42___dlmf_4_2_32":
+      {"display": "dlmf_4_2_32",
+       "context":
+       ["LMLF · DLMF with Lean", "Elementary Functions", "§4.2 Definitions"]}},
+     "address": "/Elementary-Functions/___4___2-Definitions/"}],
+   "LMLF.Blueprint.Elementary.Section42.dlmf_4_2_31b":
+   [{"id": "LMLF___Blueprint___Elementary___Section42___dlmf_4_2_31b",
+     "data":
+     {"/Elementary-Functions/___4___2-Definitions/#LMLF___Blueprint___Elementary___Section42___dlmf_4_2_31b":
+      {"display": "dlmf_4_2_31b",
+       "context":
+       ["LMLF · DLMF with Lean", "Elementary Functions", "§4.2 Definitions"]}},
+     "address": "/Elementary-Functions/___4___2-Definitions/"}],
+   "LMLF.Blueprint.Elementary.Section42.dlmf_4_2_31a":
+   [{"id": "LMLF___Blueprint___Elementary___Section42___dlmf_4_2_31a",
+     "data":
+     {"/Elementary-Functions/___4___2-Definitions/#LMLF___Blueprint___Elementary___Section42___dlmf_4_2_31a":
+      {"display": "dlmf_4_2_31a",
+       "context":
+       ["LMLF · DLMF with Lean", "Elementary Functions", "§4.2 Definitions"]}},
+     "address": "/Elementary-Functions/___4___2-Definitions/"}],
+   "LMLF.Blueprint.Elementary.Section42.dlmf_4_2_30":
+   [{"id": "LMLF___Blueprint___Elementary___Section42___dlmf_4_2_30",
+     "data":
+     {"/Elementary-Functions/___4___2-Definitions/#LMLF___Blueprint___Elementary___Section42___dlmf_4_2_30":
+      {"display": "dlmf_4_2_30",
+       "context":
+       ["LMLF · DLMF with Lean", "Elementary Functions", "§4.2 Definitions"]}},
+     "address": "/Elementary-Functions/___4___2-Definitions/"}],
+   "LMLF.Blueprint.Elementary.Section42.dlmf_4_2_3":
+   [{"id": "LMLF___Blueprint___Elementary___Section42___dlmf_4_2_3",
+     "data":
+     {"/Elementary-Functions/___4___2-Definitions/#LMLF___Blueprint___Elementary___Section42___dlmf_4_2_3":
+      {"display": "dlmf_4_2_3",
+       "context":
+       ["LMLF · DLMF with Lean", "Elementary Functions", "§4.2 Definitions"]}},
+     "address": "/Elementary-Functions/___4___2-Definitions/"}],
+   "LMLF.Blueprint.Elementary.Section42.dlmf_4_2_29":
+   [{"id": "LMLF___Blueprint___Elementary___Section42___dlmf_4_2_29",
+     "data":
+     {"/Elementary-Functions/___4___2-Definitions/#LMLF___Blueprint___Elementary___Section42___dlmf_4_2_29":
+      {"display": "dlmf_4_2_29",
+       "context":
+       ["LMLF · DLMF with Lean", "Elementary Functions", "§4.2 Definitions"]}},
+     "address": "/Elementary-Functions/___4___2-Definitions/"}],
+   "LMLF.Blueprint.Elementary.Section42.dlmf_4_2_28":
+   [{"id": "LMLF___Blueprint___Elementary___Section42___dlmf_4_2_28",
+     "data":
+     {"/Elementary-Functions/___4___2-Definitions/#LMLF___Blueprint___Elementary___Section42___dlmf_4_2_28":
+      {"display": "dlmf_4_2_28",
+       "context":
+       ["LMLF · DLMF with Lean", "Elementary Functions", "§4.2 Definitions"]}},
+     "address": "/Elementary-Functions/___4___2-Definitions/"}],
+   "LMLF.Blueprint.Elementary.Section42.dlmf_4_2_27":
+   [{"id": "LMLF___Blueprint___Elementary___Section42___dlmf_4_2_27",
+     "data":
+     {"/Elementary-Functions/___4___2-Definitions/#LMLF___Blueprint___Elementary___Section42___dlmf_4_2_27":
+      {"display": "dlmf_4_2_27",
+       "context":
+       ["LMLF · DLMF with Lean", "Elementary Functions", "§4.2 Definitions"]}},
+     "address": "/Elementary-Functions/___4___2-Definitions/"}],
+   "LMLF.Blueprint.Elementary.Section42.dlmf_4_2_26":
+   [{"id": "LMLF___Blueprint___Elementary___Section42___dlmf_4_2_26",
+     "data":
+     {"/Elementary-Functions/___4___2-Definitions/#LMLF___Blueprint___Elementary___Section42___dlmf_4_2_26":
+      {"display": "dlmf_4_2_26",
+       "context":
+       ["LMLF · DLMF with Lean", "Elementary Functions", "§4.2 Definitions"]}},
+     "address": "/Elementary-Functions/___4___2-Definitions/"}],
+   "LMLF.Blueprint.Elementary.Section42.dlmf_4_2_25":
+   [{"id": "LMLF___Blueprint___Elementary___Section42___dlmf_4_2_25",
+     "data":
+     {"/Elementary-Functions/___4___2-Definitions/#LMLF___Blueprint___Elementary___Section42___dlmf_4_2_25":
+      {"display": "dlmf_4_2_25",
+       "context":
+       ["LMLF · DLMF with Lean", "Elementary Functions", "§4.2 Definitions"]}},
+     "address": "/Elementary-Functions/___4___2-Definitions/"}],
+   "LMLF.Blueprint.Elementary.Section42.dlmf_4_2_24":
+   [{"id": "LMLF___Blueprint___Elementary___Section42___dlmf_4_2_24",
+     "data":
+     {"/Elementary-Functions/___4___2-Definitions/#LMLF___Blueprint___Elementary___Section42___dlmf_4_2_24":
+      {"display": "dlmf_4_2_24",
+       "context":
+       ["LMLF · DLMF with Lean", "Elementary Functions", "§4.2 Definitions"]}},
+     "address": "/Elementary-Functions/___4___2-Definitions/"}],
+   "LMLF.Blueprint.Elementary.Section42.dlmf_4_2_23":
+   [{"id": "LMLF___Blueprint___Elementary___Section42___dlmf_4_2_23",
+     "data":
+     {"/Elementary-Functions/___4___2-Definitions/#LMLF___Blueprint___Elementary___Section42___dlmf_4_2_23":
+      {"display": "dlmf_4_2_23",
+       "context":
+       ["LMLF · DLMF with Lean", "Elementary Functions", "§4.2 Definitions"]}},
+     "address": "/Elementary-Functions/___4___2-Definitions/"}],
+   "LMLF.Blueprint.Elementary.Section42.dlmf_4_2_22":
+   [{"id": "LMLF___Blueprint___Elementary___Section42___dlmf_4_2_22",
+     "data":
+     {"/Elementary-Functions/___4___2-Definitions/#LMLF___Blueprint___Elementary___Section42___dlmf_4_2_22":
+      {"display": "dlmf_4_2_22",
+       "context":
+       ["LMLF · DLMF with Lean", "Elementary Functions", "§4.2 Definitions"]}},
+     "address": "/Elementary-Functions/___4___2-Definitions/"}],
+   "LMLF.Blueprint.Elementary.Section42.dlmf_4_2_21":
+   [{"id": "LMLF___Blueprint___Elementary___Section42___dlmf_4_2_21",
+     "data":
+     {"/Elementary-Functions/___4___2-Definitions/#LMLF___Blueprint___Elementary___Section42___dlmf_4_2_21":
+      {"display": "dlmf_4_2_21",
+       "context":
+       ["LMLF · DLMF with Lean", "Elementary Functions", "§4.2 Definitions"]}},
+     "address": "/Elementary-Functions/___4___2-Definitions/"}],
+   "LMLF.Blueprint.Elementary.Section42.dlmf_4_2_20":
+   [{"id": "LMLF___Blueprint___Elementary___Section42___dlmf_4_2_20",
+     "data":
+     {"/Elementary-Functions/___4___2-Definitions/#LMLF___Blueprint___Elementary___Section42___dlmf_4_2_20":
+      {"display": "dlmf_4_2_20",
+       "context":
+       ["LMLF · DLMF with Lean", "Elementary Functions", "§4.2 Definitions"]}},
+     "address": "/Elementary-Functions/___4___2-Definitions/"}],
+   "LMLF.Blueprint.Elementary.Section42.dlmf_4_2_2":
+   [{"id": "LMLF___Blueprint___Elementary___Section42___dlmf_4_2_2",
+     "data":
+     {"/Elementary-Functions/___4___2-Definitions/#LMLF___Blueprint___Elementary___Section42___dlmf_4_2_2":
+      {"display": "dlmf_4_2_2",
+       "context":
+       ["LMLF · DLMF with Lean", "Elementary Functions", "§4.2 Definitions"]}},
+     "address": "/Elementary-Functions/___4___2-Definitions/"}],
+   "LMLF.Blueprint.Elementary.Section42.dlmf_4_2_19":
+   [{"id": "LMLF___Blueprint___Elementary___Section42___dlmf_4_2_19",
+     "data":
+     {"/Elementary-Functions/___4___2-Definitions/#LMLF___Blueprint___Elementary___Section42___dlmf_4_2_19":
+      {"display": "dlmf_4_2_19",
+       "context":
+       ["LMLF · DLMF with Lean", "Elementary Functions", "§4.2 Definitions"]}},
+     "address": "/Elementary-Functions/___4___2-Definitions/"}],
+   "LMLF.Blueprint.Elementary.Section42.dlmf_4_2_18":
+   [{"id": "LMLF___Blueprint___Elementary___Section42___dlmf_4_2_18",
+     "data":
+     {"/Elementary-Functions/___4___2-Definitions/#LMLF___Blueprint___Elementary___Section42___dlmf_4_2_18":
+      {"display": "dlmf_4_2_18",
+       "context":
+       ["LMLF · DLMF with Lean", "Elementary Functions", "§4.2 Definitions"]}},
+     "address": "/Elementary-Functions/___4___2-Definitions/"}],
+   "LMLF.Blueprint.Elementary.Section42.dlmf_4_2_17":
+   [{"id": "LMLF___Blueprint___Elementary___Section42___dlmf_4_2_17",
+     "data":
+     {"/Elementary-Functions/___4___2-Definitions/#LMLF___Blueprint___Elementary___Section42___dlmf_4_2_17":
+      {"display": "dlmf_4_2_17",
+       "context":
+       ["LMLF · DLMF with Lean", "Elementary Functions", "§4.2 Definitions"]}},
+     "address": "/Elementary-Functions/___4___2-Definitions/"}],
+   "LMLF.Blueprint.Elementary.Section42.dlmf_4_2_16":
+   [{"id": "LMLF___Blueprint___Elementary___Section42___dlmf_4_2_16",
+     "data":
+     {"/Elementary-Functions/___4___2-Definitions/#LMLF___Blueprint___Elementary___Section42___dlmf_4_2_16":
+      {"display": "dlmf_4_2_16",
+       "context":
+       ["LMLF · DLMF with Lean", "Elementary Functions", "§4.2 Definitions"]}},
+     "address": "/Elementary-Functions/___4___2-Definitions/"}],
+   "LMLF.Blueprint.Elementary.Section42.dlmf_4_2_15":
+   [{"id": "LMLF___Blueprint___Elementary___Section42___dlmf_4_2_15",
+     "data":
+     {"/Elementary-Functions/___4___2-Definitions/#LMLF___Blueprint___Elementary___Section42___dlmf_4_2_15":
+      {"display": "dlmf_4_2_15",
+       "context":
+       ["LMLF · DLMF with Lean", "Elementary Functions", "§4.2 Definitions"]}},
+     "address": "/Elementary-Functions/___4___2-Definitions/"}],
+   "LMLF.Blueprint.Elementary.Section42.dlmf_4_2_14":
+   [{"id": "LMLF___Blueprint___Elementary___Section42___dlmf_4_2_14",
+     "data":
+     {"/Elementary-Functions/___4___2-Definitions/#LMLF___Blueprint___Elementary___Section42___dlmf_4_2_14":
+      {"display": "dlmf_4_2_14",
+       "context":
+       ["LMLF · DLMF with Lean", "Elementary Functions", "§4.2 Definitions"]}},
+     "address": "/Elementary-Functions/___4___2-Definitions/"}],
+   "LMLF.Blueprint.Elementary.Section42.dlmf_4_2_13":
+   [{"id": "LMLF___Blueprint___Elementary___Section42___dlmf_4_2_13",
+     "data":
+     {"/Elementary-Functions/___4___2-Definitions/#LMLF___Blueprint___Elementary___Section42___dlmf_4_2_13":
+      {"display": "dlmf_4_2_13",
+       "context":
+       ["LMLF · DLMF with Lean", "Elementary Functions", "§4.2 Definitions"]}},
+     "address": "/Elementary-Functions/___4___2-Definitions/"}],
+   "LMLF.Blueprint.Elementary.Section42.dlmf_4_2_12":
+   [{"id": "LMLF___Blueprint___Elementary___Section42___dlmf_4_2_12",
+     "data":
+     {"/Elementary-Functions/___4___2-Definitions/#LMLF___Blueprint___Elementary___Section42___dlmf_4_2_12":
+      {"display": "dlmf_4_2_12",
+       "context":
+       ["LMLF · DLMF with Lean", "Elementary Functions", "§4.2 Definitions"]}},
+     "address": "/Elementary-Functions/___4___2-Definitions/"}],
+   "LMLF.Blueprint.Elementary.Section42.dlmf_4_2_11":
+   [{"id": "LMLF___Blueprint___Elementary___Section42___dlmf_4_2_11",
+     "data":
+     {"/Elementary-Functions/___4___2-Definitions/#LMLF___Blueprint___Elementary___Section42___dlmf_4_2_11":
+      {"display": "dlmf_4_2_11",
+       "context":
+       ["LMLF · DLMF with Lean", "Elementary Functions", "§4.2 Definitions"]}},
+     "address": "/Elementary-Functions/___4___2-Definitions/"}],
+   "LMLF.Blueprint.Elementary.Section42.dlmf_4_2_10":
+   [{"id": "LMLF___Blueprint___Elementary___Section42___dlmf_4_2_10",
+     "data":
+     {"/Elementary-Functions/___4___2-Definitions/#LMLF___Blueprint___Elementary___Section42___dlmf_4_2_10":
+      {"display": "dlmf_4_2_10",
+       "context":
+       ["LMLF · DLMF with Lean", "Elementary Functions", "§4.2 Definitions"]}},
+     "address": "/Elementary-Functions/___4___2-Definitions/"}],
+   "LMLF.Blueprint.Elementary.Section42.dlmf_4_2_1":
+   [{"id": "LMLF___Blueprint___Elementary___Section42___dlmf_4_2_1",
+     "data":
+     {"/Elementary-Functions/___4___2-Definitions/#LMLF___Blueprint___Elementary___Section42___dlmf_4_2_1":
+      {"display": "dlmf_4_2_1",
+       "context":
+       ["LMLF · DLMF with Lean", "Elementary Functions", "§4.2 Definitions"]}},
+     "address": "/Elementary-Functions/___4___2-Definitions/"}],
+   "LMLF.Blueprint.Elementary.Section412.iteratedLogDefined":
+   [{"id": "LMLF___Blueprint___Elementary___Section412___iteratedLogDefined",
+     "data":
+     {"/Elementary-Functions/___4___12-Generalized-Logarithms-and-Exponentials/#LMLF___Blueprint___Elementary___Section412___iteratedLogDefined":
+      {"display": "iteratedLogDefined",
+       "context":
+       ["LMLF · DLMF with Lean",
+        "Elementary Functions",
+        "§4.12 Generalized Logarithms and Exponentials",
+        "§4.12 Generalized Logarithms and Exponentials"]}},
+     "address":
+     "/Elementary-Functions/___4___12-Generalized-Logarithms-and-Exponentials/"}],
+   "LMLF.Blueprint.Elementary.Section412.iteratedLog":
+   [{"id": "LMLF___Blueprint___Elementary___Section412___iteratedLog",
+     "data":
+     {"/Elementary-Functions/___4___12-Generalized-Logarithms-and-Exponentials/#LMLF___Blueprint___Elementary___Section412___iteratedLog":
+      {"display": "iteratedLog",
+       "context":
+       ["LMLF · DLMF with Lean",
+        "Elementary Functions",
+        "§4.12 Generalized Logarithms and Exponentials",
+        "§4.12 Generalized Logarithms and Exponentials"]}},
+     "address":
+     "/Elementary-Functions/___4___12-Generalized-Logarithms-and-Exponentials/"}],
+   "LMLF.Blueprint.Elementary.Section412.iteratedExp":
+   [{"id": "LMLF___Blueprint___Elementary___Section412___iteratedExp",
+     "data":
+     {"/Elementary-Functions/___4___12-Generalized-Logarithms-and-Exponentials/#LMLF___Blueprint___Elementary___Section412___iteratedExp":
+      {"display": "iteratedExp",
+       "context":
+       ["LMLF · DLMF with Lean",
+        "Elementary Functions",
+        "§4.12 Generalized Logarithms and Exponentials",
+        "§4.12 Generalized Logarithms and Exponentials"]}},
+     "address":
+     "/Elementary-Functions/___4___12-Generalized-Logarithms-and-Exponentials/"}],
+   "LMLF.Blueprint.Elementary.Section412.iterateRealFunction":
+   [{"id": "LMLF___Blueprint___Elementary___Section412___iterateRealFunction",
+     "data":
+     {"/Elementary-Functions/___4___12-Generalized-Logarithms-and-Exponentials/#LMLF___Blueprint___Elementary___Section412___iterateRealFunction":
+      {"display": "iterateRealFunction",
+       "context":
+       ["LMLF · DLMF with Lean",
+        "Elementary Functions",
+        "§4.12 Generalized Logarithms and Exponentials",
+        "§4.12 Generalized Logarithms and Exponentials"]}},
+     "address":
+     "/Elementary-Functions/___4___12-Generalized-Logarithms-and-Exponentials/"}],
+   "LMLF.Blueprint.Elementary.Section412.generalized_functions_strictMono":
+   [{"id":
+     "LMLF___Blueprint___Elementary___Section412___generalized_functions_strictMono",
+     "data":
+     {"/Elementary-Functions/___4___12-Generalized-Logarithms-and-Exponentials/#LMLF___Blueprint___Elementary___Section412___generalized_functions_strictMono":
+      {"display": "generalized_functions_strictMono",
+       "context":
+       ["LMLF · DLMF with Lean",
+        "Elementary Functions",
+        "§4.12 Generalized Logarithms and Exponentials",
+        "§4.12 Generalized Logarithms and Exponentials"]}},
+     "address":
+     "/Elementary-Functions/___4___12-Generalized-Logarithms-and-Exponentials/"}],
+   "LMLF.Blueprint.Elementary.Section412.generalized_functions_inverse":
+   [{"id":
+     "LMLF___Blueprint___Elementary___Section412___generalized_functions_inverse",
+     "data":
+     {"/Elementary-Functions/___4___12-Generalized-Logarithms-and-Exponentials/#LMLF___Blueprint___Elementary___Section412___generalized_functions_inverse":
+      {"display": "generalized_functions_inverse",
+       "context":
+       ["LMLF · DLMF with Lean",
+        "Elementary Functions",
+        "§4.12 Generalized Logarithms and Exponentials",
+        "§4.12 Generalized Logarithms and Exponentials"]}},
+     "address":
+     "/Elementary-Functions/___4___12-Generalized-Logarithms-and-Exponentials/"}],
+   "LMLF.Blueprint.Elementary.Section412.generalized_functions_contDiff":
+   [{"id":
+     "LMLF___Blueprint___Elementary___Section412___generalized_functions_contDiff",
+     "data":
+     {"/Elementary-Functions/___4___12-Generalized-Logarithms-and-Exponentials/#LMLF___Blueprint___Elementary___Section412___generalized_functions_contDiff":
+      {"display": "generalized_functions_contDiff",
+       "context":
+       ["LMLF · DLMF with Lean",
+        "Elementary Functions",
+        "§4.12 Generalized Logarithms and Exponentials",
+        "§4.12 Generalized Logarithms and Exponentials"]}},
+     "address":
+     "/Elementary-Functions/___4___12-Generalized-Logarithms-and-Exponentials/"}],
+   "LMLF.Blueprint.Elementary.Section412.dlmf_4_12_9":
+   [{"id": "LMLF___Blueprint___Elementary___Section412___dlmf_4_12_9",
+     "data":
+     {"/Elementary-Functions/___4___12-Generalized-Logarithms-and-Exponentials/#LMLF___Blueprint___Elementary___Section412___dlmf_4_12_9":
+      {"display": "dlmf_4_12_9",
+       "context":
+       ["LMLF · DLMF with Lean",
+        "Elementary Functions",
+        "§4.12 Generalized Logarithms and Exponentials",
+        "§4.12 Generalized Logarithms and Exponentials"]}},
+     "address":
+     "/Elementary-Functions/___4___12-Generalized-Logarithms-and-Exponentials/"}],
+   "LMLF.Blueprint.Elementary.Section412.dlmf_4_12_8":
+   [{"id": "LMLF___Blueprint___Elementary___Section412___dlmf_4_12_8",
+     "data":
+     {"/Elementary-Functions/___4___12-Generalized-Logarithms-and-Exponentials/#LMLF___Blueprint___Elementary___Section412___dlmf_4_12_8":
+      {"display": "dlmf_4_12_8",
+       "context":
+       ["LMLF · DLMF with Lean",
+        "Elementary Functions",
+        "§4.12 Generalized Logarithms and Exponentials",
+        "§4.12 Generalized Logarithms and Exponentials"]}},
+     "address":
+     "/Elementary-Functions/___4___12-Generalized-Logarithms-and-Exponentials/"}],
+   "LMLF.Blueprint.Elementary.Section412.dlmf_4_12_7":
+   [{"id": "LMLF___Blueprint___Elementary___Section412___dlmf_4_12_7",
+     "data":
+     {"/Elementary-Functions/___4___12-Generalized-Logarithms-and-Exponentials/#LMLF___Blueprint___Elementary___Section412___dlmf_4_12_7":
+      {"display": "dlmf_4_12_7",
+       "context":
+       ["LMLF · DLMF with Lean",
+        "Elementary Functions",
+        "§4.12 Generalized Logarithms and Exponentials",
+        "§4.12 Generalized Logarithms and Exponentials"]}},
+     "address":
+     "/Elementary-Functions/___4___12-Generalized-Logarithms-and-Exponentials/"}],
+   "LMLF.Blueprint.Elementary.Section412.dlmf_4_12_6":
+   [{"id": "LMLF___Blueprint___Elementary___Section412___dlmf_4_12_6",
+     "data":
+     {"/Elementary-Functions/___4___12-Generalized-Logarithms-and-Exponentials/#LMLF___Blueprint___Elementary___Section412___dlmf_4_12_6":
+      {"display": "dlmf_4_12_6",
+       "context":
+       ["LMLF · DLMF with Lean",
+        "Elementary Functions",
+        "§4.12 Generalized Logarithms and Exponentials",
+        "§4.12 Generalized Logarithms and Exponentials"]}},
+     "address":
+     "/Elementary-Functions/___4___12-Generalized-Logarithms-and-Exponentials/"}],
+   "LMLF.Blueprint.Elementary.Section412.dlmf_4_12_5":
+   [{"id": "LMLF___Blueprint___Elementary___Section412___dlmf_4_12_5",
+     "data":
+     {"/Elementary-Functions/___4___12-Generalized-Logarithms-and-Exponentials/#LMLF___Blueprint___Elementary___Section412___dlmf_4_12_5":
+      {"display": "dlmf_4_12_5",
+       "context":
+       ["LMLF · DLMF with Lean",
+        "Elementary Functions",
+        "§4.12 Generalized Logarithms and Exponentials",
+        "§4.12 Generalized Logarithms and Exponentials"]}},
+     "address":
+     "/Elementary-Functions/___4___12-Generalized-Logarithms-and-Exponentials/"}],
+   "LMLF.Blueprint.Elementary.Section412.dlmf_4_12_4":
+   [{"id": "LMLF___Blueprint___Elementary___Section412___dlmf_4_12_4",
+     "data":
+     {"/Elementary-Functions/___4___12-Generalized-Logarithms-and-Exponentials/#LMLF___Blueprint___Elementary___Section412___dlmf_4_12_4":
+      {"display": "dlmf_4_12_4",
+       "context":
+       ["LMLF · DLMF with Lean",
+        "Elementary Functions",
+        "§4.12 Generalized Logarithms and Exponentials",
+        "§4.12 Generalized Logarithms and Exponentials"]}},
+     "address":
+     "/Elementary-Functions/___4___12-Generalized-Logarithms-and-Exponentials/"}],
+   "LMLF.Blueprint.Elementary.Section412.dlmf_4_12_3":
+   [{"id": "LMLF___Blueprint___Elementary___Section412___dlmf_4_12_3",
+     "data":
+     {"/Elementary-Functions/___4___12-Generalized-Logarithms-and-Exponentials/#LMLF___Blueprint___Elementary___Section412___dlmf_4_12_3":
+      {"display": "dlmf_4_12_3",
+       "context":
+       ["LMLF · DLMF with Lean",
+        "Elementary Functions",
+        "§4.12 Generalized Logarithms and Exponentials",
+        "§4.12 Generalized Logarithms and Exponentials"]}},
+     "address":
+     "/Elementary-Functions/___4___12-Generalized-Logarithms-and-Exponentials/"}],
+   "LMLF.Blueprint.Elementary.Section412.dlmf_4_12_2":
+   [{"id": "LMLF___Blueprint___Elementary___Section412___dlmf_4_12_2",
+     "data":
+     {"/Elementary-Functions/___4___12-Generalized-Logarithms-and-Exponentials/#LMLF___Blueprint___Elementary___Section412___dlmf_4_12_2":
+      {"display": "dlmf_4_12_2",
+       "context":
+       ["LMLF · DLMF with Lean",
+        "Elementary Functions",
+        "§4.12 Generalized Logarithms and Exponentials",
+        "§4.12 Generalized Logarithms and Exponentials"]}},
+     "address":
+     "/Elementary-Functions/___4___12-Generalized-Logarithms-and-Exponentials/"}],
+   "LMLF.Blueprint.Elementary.Section412.dlmf_4_12_10":
+   [{"id": "LMLF___Blueprint___Elementary___Section412___dlmf_4_12_10",
+     "data":
+     {"/Elementary-Functions/___4___12-Generalized-Logarithms-and-Exponentials/#LMLF___Blueprint___Elementary___Section412___dlmf_4_12_10":
+      {"display": "dlmf_4_12_10",
+       "context":
+       ["LMLF · DLMF with Lean",
+        "Elementary Functions",
+        "§4.12 Generalized Logarithms and Exponentials",
+        "§4.12 Generalized Logarithms and Exponentials"]}},
+     "address":
+     "/Elementary-Functions/___4___12-Generalized-Logarithms-and-Exponentials/"}],
+   "LMLF.Blueprint.Elementary.Section412.dlmf_4_12_1":
+   [{"id": "LMLF___Blueprint___Elementary___Section412___dlmf_4_12_1",
+     "data":
+     {"/Elementary-Functions/___4___12-Generalized-Logarithms-and-Exponentials/#LMLF___Blueprint___Elementary___Section412___dlmf_4_12_1":
+      {"display": "dlmf_4_12_1",
+       "context":
+       ["LMLF · DLMF with Lean",
+        "Elementary Functions",
+        "§4.12 Generalized Logarithms and Exponentials",
+        "§4.12 Generalized Logarithms and Exponentials"]}},
+     "address":
+     "/Elementary-Functions/___4___12-Generalized-Logarithms-and-Exponentials/"}],
+   "LMLF.Blueprint.Elementary.Section412.GeneralizedLogarithm.zero":
+   [{"id":
+     "LMLF___Blueprint___Elementary___Section412___GeneralizedLogarithm___zero",
+     "data":
+     {"/Elementary-Functions/___4___12-Generalized-Logarithms-and-Exponentials/#LMLF___Blueprint___Elementary___Section412___GeneralizedLogarithm___zero":
+      {"display": "zero",
+       "context":
+       ["LMLF · DLMF with Lean",
+        "Elementary Functions",
+        "§4.12 Generalized Logarithms and Exponentials",
+        "§4.12 Generalized Logarithms and Exponentials"]}},
+     "address":
+     "/Elementary-Functions/___4___12-Generalized-Logarithms-and-Exponentials/"}],
+   "LMLF.Blueprint.Elementary.Section412.GeneralizedLogarithm.toFun":
+   [{"id":
+     "LMLF___Blueprint___Elementary___Section412___GeneralizedLogarithm___toFun",
+     "data":
+     {"/Elementary-Functions/___4___12-Generalized-Logarithms-and-Exponentials/#LMLF___Blueprint___Elementary___Section412___GeneralizedLogarithm___toFun":
+      {"display": "toFun",
+       "context":
+       ["LMLF · DLMF with Lean",
+        "Elementary Functions",
+        "§4.12 Generalized Logarithms and Exponentials",
+        "§4.12 Generalized Logarithms and Exponentials"]}},
+     "address":
+     "/Elementary-Functions/___4___12-Generalized-Logarithms-and-Exponentials/"}],
+   "LMLF.Blueprint.Elementary.Section412.GeneralizedLogarithm.strictMono":
+   [{"id":
+     "LMLF___Blueprint___Elementary___Section412___GeneralizedLogarithm___strictMono",
+     "data":
+     {"/Elementary-Functions/___4___12-Generalized-Logarithms-and-Exponentials/#LMLF___Blueprint___Elementary___Section412___GeneralizedLogarithm___strictMono":
+      {"display": "strictMono",
+       "context":
+       ["LMLF · DLMF with Lean",
+        "Elementary Functions",
+        "§4.12 Generalized Logarithms and Exponentials",
+        "§4.12 Generalized Logarithms and Exponentials"]}},
+     "address":
+     "/Elementary-Functions/___4___12-Generalized-Logarithms-and-Exponentials/"}],
+   "LMLF.Blueprint.Elementary.Section412.GeneralizedLogarithm.shift":
+   [{"id":
+     "LMLF___Blueprint___Elementary___Section412___GeneralizedLogarithm___shift",
+     "data":
+     {"/Elementary-Functions/___4___12-Generalized-Logarithms-and-Exponentials/#LMLF___Blueprint___Elementary___Section412___GeneralizedLogarithm___shift":
+      {"display": "shift",
+       "context":
+       ["LMLF · DLMF with Lean",
+        "Elementary Functions",
+        "§4.12 Generalized Logarithms and Exponentials",
+        "§4.12 Generalized Logarithms and Exponentials"]}},
+     "address":
+     "/Elementary-Functions/___4___12-Generalized-Logarithms-and-Exponentials/"}],
+   "LMLF.Blueprint.Elementary.Section412.GeneralizedLogarithm.positiveBranch":
+   [{"id":
+     "LMLF___Blueprint___Elementary___Section412___GeneralizedLogarithm___positiveBranch",
+     "data":
+     {"/Elementary-Functions/___4___12-Generalized-Logarithms-and-Exponentials/#LMLF___Blueprint___Elementary___Section412___GeneralizedLogarithm___positiveBranch":
+      {"display": "positiveBranch",
+       "context":
+       ["LMLF · DLMF with Lean",
+        "Elementary Functions",
+        "§4.12 Generalized Logarithms and Exponentials",
+        "§4.12 Generalized Logarithms and Exponentials"]}},
+     "address":
+     "/Elementary-Functions/___4___12-Generalized-Logarithms-and-Exponentials/"}],
+   "LMLF.Blueprint.Elementary.Section412.GeneralizedLogarithm.negativeBranch":
+   [{"id":
+     "LMLF___Blueprint___Elementary___Section412___GeneralizedLogarithm___negativeBranch",
+     "data":
+     {"/Elementary-Functions/___4___12-Generalized-Logarithms-and-Exponentials/#LMLF___Blueprint___Elementary___Section412___GeneralizedLogarithm___negativeBranch":
+      {"display": "negativeBranch",
+       "context":
+       ["LMLF · DLMF with Lean",
+        "Elementary Functions",
+        "§4.12 Generalized Logarithms and Exponentials",
+        "§4.12 Generalized Logarithms and Exponentials"]}},
+     "address":
+     "/Elementary-Functions/___4___12-Generalized-Logarithms-and-Exponentials/"}],
+   "LMLF.Blueprint.Elementary.Section412.GeneralizedLogarithm.identityOnUnit":
+   [{"id":
+     "LMLF___Blueprint___Elementary___Section412___GeneralizedLogarithm___identityOnUnit",
+     "data":
+     {"/Elementary-Functions/___4___12-Generalized-Logarithms-and-Exponentials/#LMLF___Blueprint___Elementary___Section412___GeneralizedLogarithm___identityOnUnit":
+      {"display": "identityOnUnit",
+       "context":
+       ["LMLF · DLMF with Lean",
+        "Elementary Functions",
+        "§4.12 Generalized Logarithms and Exponentials",
+        "§4.12 Generalized Logarithms and Exponentials"]}},
+     "address":
+     "/Elementary-Functions/___4___12-Generalized-Logarithms-and-Exponentials/"}],
+   "LMLF.Blueprint.Elementary.Section412.GeneralizedLogarithm.contDiff":
+   [{"id":
+     "LMLF___Blueprint___Elementary___Section412___GeneralizedLogarithm___contDiff",
+     "data":
+     {"/Elementary-Functions/___4___12-Generalized-Logarithms-and-Exponentials/#LMLF___Blueprint___Elementary___Section412___GeneralizedLogarithm___contDiff":
+      {"display": "contDiff",
+       "context":
+       ["LMLF · DLMF with Lean",
+        "Elementary Functions",
+        "§4.12 Generalized Logarithms and Exponentials",
+        "§4.12 Generalized Logarithms and Exponentials"]}},
+     "address":
+     "/Elementary-Functions/___4___12-Generalized-Logarithms-and-Exponentials/"}],
+   "LMLF.Blueprint.Elementary.Section412.GeneralizedLogarithm":
+   [{"id": "LMLF___Blueprint___Elementary___Section412___GeneralizedLogarithm",
+     "data":
+     {"/Elementary-Functions/___4___12-Generalized-Logarithms-and-Exponentials/#LMLF___Blueprint___Elementary___Section412___GeneralizedLogarithm":
+      {"display": "GeneralizedLogarithm",
+       "context":
+       ["LMLF · DLMF with Lean",
+        "Elementary Functions",
+        "§4.12 Generalized Logarithms and Exponentials",
+        "§4.12 Generalized Logarithms and Exponentials"]}},
+     "address":
+     "/Elementary-Functions/___4___12-Generalized-Logarithms-and-Exponentials/"}],
+   "LMLF.Blueprint.Elementary.Section412.GeneralizedFunctionPair.rightInverse":
+   [{"id":
+     "LMLF___Blueprint___Elementary___Section412___GeneralizedFunctionPair___rightInverse",
+     "data":
+     {"/Elementary-Functions/___4___12-Generalized-Logarithms-and-Exponentials/#LMLF___Blueprint___Elementary___Section412___GeneralizedFunctionPair___rightInverse":
+      {"display": "rightInverse",
+       "context":
+       ["LMLF · DLMF with Lean",
+        "Elementary Functions",
+        "§4.12 Generalized Logarithms and Exponentials",
+        "§4.12 Generalized Logarithms and Exponentials"]}},
+     "address":
+     "/Elementary-Functions/___4___12-Generalized-Logarithms-and-Exponentials/"}],
+   "LMLF.Blueprint.Elementary.Section412.GeneralizedFunctionPair.logarithm":
+   [{"id":
+     "LMLF___Blueprint___Elementary___Section412___GeneralizedFunctionPair___logarithm",
+     "data":
+     {"/Elementary-Functions/___4___12-Generalized-Logarithms-and-Exponentials/#LMLF___Blueprint___Elementary___Section412___GeneralizedFunctionPair___logarithm":
+      {"display": "logarithm",
+       "context":
+       ["LMLF · DLMF with Lean",
+        "Elementary Functions",
+        "§4.12 Generalized Logarithms and Exponentials",
+        "§4.12 Generalized Logarithms and Exponentials"]}},
+     "address":
+     "/Elementary-Functions/___4___12-Generalized-Logarithms-and-Exponentials/"}],
+   "LMLF.Blueprint.Elementary.Section412.GeneralizedFunctionPair.leftInverse":
+   [{"id":
+     "LMLF___Blueprint___Elementary___Section412___GeneralizedFunctionPair___leftInverse",
+     "data":
+     {"/Elementary-Functions/___4___12-Generalized-Logarithms-and-Exponentials/#LMLF___Blueprint___Elementary___Section412___GeneralizedFunctionPair___leftInverse":
+      {"display": "leftInverse",
+       "context":
+       ["LMLF · DLMF with Lean",
+        "Elementary Functions",
+        "§4.12 Generalized Logarithms and Exponentials",
+        "§4.12 Generalized Logarithms and Exponentials"]}},
+     "address":
+     "/Elementary-Functions/___4___12-Generalized-Logarithms-and-Exponentials/"}],
+   "LMLF.Blueprint.Elementary.Section412.GeneralizedFunctionPair.exponential":
+   [{"id":
+     "LMLF___Blueprint___Elementary___Section412___GeneralizedFunctionPair___exponential",
+     "data":
+     {"/Elementary-Functions/___4___12-Generalized-Logarithms-and-Exponentials/#LMLF___Blueprint___Elementary___Section412___GeneralizedFunctionPair___exponential":
+      {"display": "exponential",
+       "context":
+       ["LMLF · DLMF with Lean",
+        "Elementary Functions",
+        "§4.12 Generalized Logarithms and Exponentials",
+        "§4.12 Generalized Logarithms and Exponentials"]}},
+     "address":
+     "/Elementary-Functions/___4___12-Generalized-Logarithms-and-Exponentials/"}],
+   "LMLF.Blueprint.Elementary.Section412.GeneralizedFunctionPair":
+   [{"id":
+     "LMLF___Blueprint___Elementary___Section412___GeneralizedFunctionPair",
+     "data":
+     {"/Elementary-Functions/___4___12-Generalized-Logarithms-and-Exponentials/#LMLF___Blueprint___Elementary___Section412___GeneralizedFunctionPair":
+      {"display": "GeneralizedFunctionPair",
+       "context":
+       ["LMLF · DLMF with Lean",
+        "Elementary Functions",
+        "§4.12 Generalized Logarithms and Exponentials",
+        "§4.12 Generalized Logarithms and Exponentials"]}},
+     "address":
+     "/Elementary-Functions/___4___12-Generalized-Logarithms-and-Exponentials/"}],
+   "LMLF.Blueprint.Elementary.Section412.GeneralizedExponential.zero":
+   [{"id":
+     "LMLF___Blueprint___Elementary___Section412___GeneralizedExponential___zero",
+     "data":
+     {"/Elementary-Functions/___4___12-Generalized-Logarithms-and-Exponentials/#LMLF___Blueprint___Elementary___Section412___GeneralizedExponential___zero":
+      {"display": "zero",
+       "context":
+       ["LMLF · DLMF with Lean",
+        "Elementary Functions",
+        "§4.12 Generalized Logarithms and Exponentials",
+        "§4.12 Generalized Logarithms and Exponentials"]}},
+     "address":
+     "/Elementary-Functions/___4___12-Generalized-Logarithms-and-Exponentials/"}],
+   "LMLF.Blueprint.Elementary.Section412.GeneralizedExponential.toFun":
+   [{"id":
+     "LMLF___Blueprint___Elementary___Section412___GeneralizedExponential___toFun",
+     "data":
+     {"/Elementary-Functions/___4___12-Generalized-Logarithms-and-Exponentials/#LMLF___Blueprint___Elementary___Section412___GeneralizedExponential___toFun":
+      {"display": "toFun",
+       "context":
+       ["LMLF · DLMF with Lean",
+        "Elementary Functions",
+        "§4.12 Generalized Logarithms and Exponentials",
+        "§4.12 Generalized Logarithms and Exponentials"]}},
+     "address":
+     "/Elementary-Functions/___4___12-Generalized-Logarithms-and-Exponentials/"}],
+   "LMLF.Blueprint.Elementary.Section412.GeneralizedExponential.strictMono":
+   [{"id":
+     "LMLF___Blueprint___Elementary___Section412___GeneralizedExponential___strictMono",
+     "data":
+     {"/Elementary-Functions/___4___12-Generalized-Logarithms-and-Exponentials/#LMLF___Blueprint___Elementary___Section412___GeneralizedExponential___strictMono":
+      {"display": "strictMono",
+       "context":
+       ["LMLF · DLMF with Lean",
+        "Elementary Functions",
+        "§4.12 Generalized Logarithms and Exponentials",
+        "§4.12 Generalized Logarithms and Exponentials"]}},
+     "address":
+     "/Elementary-Functions/___4___12-Generalized-Logarithms-and-Exponentials/"}],
+   "LMLF.Blueprint.Elementary.Section412.GeneralizedExponential.recurrence":
+   [{"id":
+     "LMLF___Blueprint___Elementary___Section412___GeneralizedExponential___recurrence",
+     "data":
+     {"/Elementary-Functions/___4___12-Generalized-Logarithms-and-Exponentials/#LMLF___Blueprint___Elementary___Section412___GeneralizedExponential___recurrence":
+      {"display": "recurrence",
+       "context":
+       ["LMLF · DLMF with Lean",
+        "Elementary Functions",
+        "§4.12 Generalized Logarithms and Exponentials",
+        "§4.12 Generalized Logarithms and Exponentials"]}},
+     "address":
+     "/Elementary-Functions/___4___12-Generalized-Logarithms-and-Exponentials/"}],
+   "LMLF.Blueprint.Elementary.Section412.GeneralizedExponential.positiveBranch":
+   [{"id":
+     "LMLF___Blueprint___Elementary___Section412___GeneralizedExponential___positiveBranch",
+     "data":
+     {"/Elementary-Functions/___4___12-Generalized-Logarithms-and-Exponentials/#LMLF___Blueprint___Elementary___Section412___GeneralizedExponential___positiveBranch":
+      {"display": "positiveBranch",
+       "context":
+       ["LMLF · DLMF with Lean",
+        "Elementary Functions",
+        "§4.12 Generalized Logarithms and Exponentials",
+        "§4.12 Generalized Logarithms and Exponentials"]}},
+     "address":
+     "/Elementary-Functions/___4___12-Generalized-Logarithms-and-Exponentials/"}],
+   "LMLF.Blueprint.Elementary.Section412.GeneralizedExponential.negativeBranch":
+   [{"id":
+     "LMLF___Blueprint___Elementary___Section412___GeneralizedExponential___negativeBranch",
+     "data":
+     {"/Elementary-Functions/___4___12-Generalized-Logarithms-and-Exponentials/#LMLF___Blueprint___Elementary___Section412___GeneralizedExponential___negativeBranch":
+      {"display": "negativeBranch",
+       "context":
+       ["LMLF · DLMF with Lean",
+        "Elementary Functions",
+        "§4.12 Generalized Logarithms and Exponentials",
+        "§4.12 Generalized Logarithms and Exponentials"]}},
+     "address":
+     "/Elementary-Functions/___4___12-Generalized-Logarithms-and-Exponentials/"}],
+   "LMLF.Blueprint.Elementary.Section412.GeneralizedExponential.identityOnUnit":
+   [{"id":
+     "LMLF___Blueprint___Elementary___Section412___GeneralizedExponential___identityOnUnit",
+     "data":
+     {"/Elementary-Functions/___4___12-Generalized-Logarithms-and-Exponentials/#LMLF___Blueprint___Elementary___Section412___GeneralizedExponential___identityOnUnit":
+      {"display": "identityOnUnit",
+       "context":
+       ["LMLF · DLMF with Lean",
+        "Elementary Functions",
+        "§4.12 Generalized Logarithms and Exponentials",
+        "§4.12 Generalized Logarithms and Exponentials"]}},
+     "address":
+     "/Elementary-Functions/___4___12-Generalized-Logarithms-and-Exponentials/"}],
+   "LMLF.Blueprint.Elementary.Section412.GeneralizedExponential.contDiff":
+   [{"id":
+     "LMLF___Blueprint___Elementary___Section412___GeneralizedExponential___contDiff",
+     "data":
+     {"/Elementary-Functions/___4___12-Generalized-Logarithms-and-Exponentials/#LMLF___Blueprint___Elementary___Section412___GeneralizedExponential___contDiff":
+      {"display": "contDiff",
+       "context":
+       ["LMLF · DLMF with Lean",
+        "Elementary Functions",
+        "§4.12 Generalized Logarithms and Exponentials",
+        "§4.12 Generalized Logarithms and Exponentials"]}},
+     "address":
+     "/Elementary-Functions/___4___12-Generalized-Logarithms-and-Exponentials/"}],
+   "LMLF.Blueprint.Elementary.Section412.GeneralizedExponential":
+   [{"id":
+     "LMLF___Blueprint___Elementary___Section412___GeneralizedExponential",
+     "data":
+     {"/Elementary-Functions/___4___12-Generalized-Logarithms-and-Exponentials/#LMLF___Blueprint___Elementary___Section412___GeneralizedExponential":
+      {"display": "GeneralizedExponential",
+       "context":
+       ["LMLF · DLMF with Lean",
+        "Elementary Functions",
+        "§4.12 Generalized Logarithms and Exponentials",
+        "§4.12 Generalized Logarithms and Exponentials"]}},
+     "address":
+     "/Elementary-Functions/___4___12-Generalized-Logarithms-and-Exponentials/"}],
+   "LMLF.Blueprint.Elementary.Section410.dlmf_4_10_9":
+   [{"id": "LMLF___Blueprint___Elementary___Section410___dlmf_4_10_9",
+     "data":
+     {"/Elementary-Functions/___4___10-Integrals/#LMLF___Blueprint___Elementary___Section410___dlmf_4_10_9":
+      {"display": "dlmf_4_10_9",
+       "context":
+       ["LMLF · DLMF with Lean",
+        "Elementary Functions",
+        "§4.10 Integrals",
+        "§4.10(ii) Exponentials"]}},
+     "address": "/Elementary-Functions/___4___10-Integrals/"}],
+   "LMLF.Blueprint.Elementary.Section410.dlmf_4_10_8":
+   [{"id": "LMLF___Blueprint___Elementary___Section410___dlmf_4_10_8",
+     "data":
+     {"/Elementary-Functions/___4___10-Integrals/#LMLF___Blueprint___Elementary___Section410___dlmf_4_10_8":
+      {"display": "dlmf_4_10_8",
+       "context":
+       ["LMLF · DLMF with Lean",
+        "Elementary Functions",
+        "§4.10 Integrals",
+        "§4.10(ii) Exponentials"]}},
+     "address": "/Elementary-Functions/___4___10-Integrals/"}],
+   "LMLF.Blueprint.Elementary.Section410.dlmf_4_10_7":
+   [{"id": "LMLF___Blueprint___Elementary___Section410___dlmf_4_10_7",
+     "data":
+     {"/Elementary-Functions/___4___10-Integrals/#LMLF___Blueprint___Elementary___Section410___dlmf_4_10_7":
+      {"display": "dlmf_4_10_7",
+       "context":
+       ["LMLF · DLMF with Lean",
+        "Elementary Functions",
+        "§4.10 Integrals",
+        "§4.10(i) Logarithms"]}},
+     "address": "/Elementary-Functions/___4___10-Integrals/"}],
+   "LMLF.Blueprint.Elementary.Section410.dlmf_4_10_6":
+   [{"id": "LMLF___Blueprint___Elementary___Section410___dlmf_4_10_6",
+     "data":
+     {"/Elementary-Functions/___4___10-Integrals/#LMLF___Blueprint___Elementary___Section410___dlmf_4_10_6":
+      {"display": "dlmf_4_10_6",
+       "context":
+       ["LMLF · DLMF with Lean",
+        "Elementary Functions",
+        "§4.10 Integrals",
+        "§4.10(i) Logarithms"]}},
+     "address": "/Elementary-Functions/___4___10-Integrals/"}],
+   "LMLF.Blueprint.Elementary.Section410.dlmf_4_10_5":
+   [{"id": "LMLF___Blueprint___Elementary___Section410___dlmf_4_10_5",
+     "data":
+     {"/Elementary-Functions/___4___10-Integrals/#LMLF___Blueprint___Elementary___Section410___dlmf_4_10_5":
+      {"display": "dlmf_4_10_5",
+       "context":
+       ["LMLF · DLMF with Lean",
+        "Elementary Functions",
+        "§4.10 Integrals",
+        "§4.10(i) Logarithms"]}},
+     "address": "/Elementary-Functions/___4___10-Integrals/"}],
+   "LMLF.Blueprint.Elementary.Section410.dlmf_4_10_4":
+   [{"id": "LMLF___Blueprint___Elementary___Section410___dlmf_4_10_4",
+     "data":
+     {"/Elementary-Functions/___4___10-Integrals/#LMLF___Blueprint___Elementary___Section410___dlmf_4_10_4":
+      {"display": "dlmf_4_10_4",
+       "context":
+       ["LMLF · DLMF with Lean",
+        "Elementary Functions",
+        "§4.10 Integrals",
+        "§4.10(i) Logarithms"]}},
+     "address": "/Elementary-Functions/___4___10-Integrals/"}],
+   "LMLF.Blueprint.Elementary.Section410.dlmf_4_10_3":
+   [{"id": "LMLF___Blueprint___Elementary___Section410___dlmf_4_10_3",
+     "data":
+     {"/Elementary-Functions/___4___10-Integrals/#LMLF___Blueprint___Elementary___Section410___dlmf_4_10_3":
+      {"display": "dlmf_4_10_3",
+       "context":
+       ["LMLF · DLMF with Lean",
+        "Elementary Functions",
+        "§4.10 Integrals",
+        "§4.10(i) Logarithms"]}},
+     "address": "/Elementary-Functions/___4___10-Integrals/"}],
+   "LMLF.Blueprint.Elementary.Section410.dlmf_4_10_2":
+   [{"id": "LMLF___Blueprint___Elementary___Section410___dlmf_4_10_2",
+     "data":
+     {"/Elementary-Functions/___4___10-Integrals/#LMLF___Blueprint___Elementary___Section410___dlmf_4_10_2":
+      {"display": "dlmf_4_10_2",
+       "context":
+       ["LMLF · DLMF with Lean",
+        "Elementary Functions",
+        "§4.10 Integrals",
+        "§4.10(i) Logarithms"]}},
+     "address": "/Elementary-Functions/___4___10-Integrals/"}],
+   "LMLF.Blueprint.Elementary.Section410.dlmf_4_10_13":
+   [{"id": "LMLF___Blueprint___Elementary___Section410___dlmf_4_10_13",
+     "data":
+     {"/Elementary-Functions/___4___10-Integrals/#LMLF___Blueprint___Elementary___Section410___dlmf_4_10_13":
+      {"display": "dlmf_4_10_13",
+       "context":
+       ["LMLF · DLMF with Lean",
+        "Elementary Functions",
+        "§4.10 Integrals",
+        "§4.10(ii) Exponentials"]}},
+     "address": "/Elementary-Functions/___4___10-Integrals/"}],
+   "LMLF.Blueprint.Elementary.Section410.dlmf_4_10_12":
+   [{"id": "LMLF___Blueprint___Elementary___Section410___dlmf_4_10_12",
+     "data":
+     {"/Elementary-Functions/___4___10-Integrals/#LMLF___Blueprint___Elementary___Section410___dlmf_4_10_12":
+      {"display": "dlmf_4_10_12",
+       "context":
+       ["LMLF · DLMF with Lean",
+        "Elementary Functions",
+        "§4.10 Integrals",
+        "§4.10(ii) Exponentials"]}},
+     "address": "/Elementary-Functions/___4___10-Integrals/"}],
+   "LMLF.Blueprint.Elementary.Section410.dlmf_4_10_11":
+   [{"id": "LMLF___Blueprint___Elementary___Section410___dlmf_4_10_11",
+     "data":
+     {"/Elementary-Functions/___4___10-Integrals/#LMLF___Blueprint___Elementary___Section410___dlmf_4_10_11":
+      {"display": "dlmf_4_10_11",
+       "context":
+       ["LMLF · DLMF with Lean",
+        "Elementary Functions",
+        "§4.10 Integrals",
+        "§4.10(ii) Exponentials"]}},
+     "address": "/Elementary-Functions/___4___10-Integrals/"}],
+   "LMLF.Blueprint.Elementary.Section410.dlmf_4_10_10":
+   [{"id": "LMLF___Blueprint___Elementary___Section410___dlmf_4_10_10",
+     "data":
+     {"/Elementary-Functions/___4___10-Integrals/#LMLF___Blueprint___Elementary___Section410___dlmf_4_10_10":
+      {"display": "dlmf_4_10_10",
+       "context":
+       ["LMLF · DLMF with Lean",
+        "Elementary Functions",
+        "§4.10 Integrals",
+        "§4.10(ii) Exponentials"]}},
+     "address": "/Elementary-Functions/___4___10-Integrals/"}],
+   "LMLF.Blueprint.Elementary.Section410.dlmf_4_10_1":
+   [{"id": "LMLF___Blueprint___Elementary___Section410___dlmf_4_10_1",
+     "data":
+     {"/Elementary-Functions/___4___10-Integrals/#LMLF___Blueprint___Elementary___Section410___dlmf_4_10_1":
+      {"display": "dlmf_4_10_1",
+       "context":
+       ["LMLF · DLMF with Lean",
+        "Elementary Functions",
+        "§4.10 Integrals",
+        "§4.10(i) Logarithms"]}},
+     "address": "/Elementary-Functions/___4___10-Integrals/"}],
+   "LMLF.Blueprint.Elementary.Section41.naturalLogBase_pos":
+   [{"id": "LMLF___Blueprint___Elementary___Section41___naturalLogBase_pos",
+     "data":
+     {"/Elementary-Functions/___4___1-Special-Notation/#LMLF___Blueprint___Elementary___Section41___naturalLogBase_pos":
+      {"display": "naturalLogBase_pos",
+       "context":
+       ["LMLF · DLMF with Lean",
+        "Elementary Functions",
+        "§4.1 Special Notation"]}},
+     "address": "/Elementary-Functions/___4___1-Special-Notation/"}],
+   "LMLF.Blueprint.Elementary.Section41.naturalLogBase":
+   [{"id": "LMLF___Blueprint___Elementary___Section41___naturalLogBase",
+     "data":
+     {"/Elementary-Functions/___4___1-Special-Notation/#LMLF___Blueprint___Elementary___Section41___naturalLogBase":
+      {"display": "naturalLogBase",
+       "context":
+       ["LMLF · DLMF with Lean",
+        "Elementary Functions",
+        "§4.1 Special Notation"]}},
+     "address": "/Elementary-Functions/___4___1-Special-Notation/"}],
+   "LMLF.Blueprint.Elementary.Section41.complexCoordinate_re":
+   [{"id": "LMLF___Blueprint___Elementary___Section41___complexCoordinate_re",
+     "data":
+     {"/Elementary-Functions/___4___1-Special-Notation/#LMLF___Blueprint___Elementary___Section41___complexCoordinate_re":
+      {"display": "complexCoordinate_re",
+       "context":
+       ["LMLF · DLMF with Lean",
+        "Elementary Functions",
+        "§4.1 Special Notation"]}},
+     "address": "/Elementary-Functions/___4___1-Special-Notation/"}],
+   "LMLF.Blueprint.Elementary.Section41.complexCoordinate_im":
+   [{"id": "LMLF___Blueprint___Elementary___Section41___complexCoordinate_im",
+     "data":
+     {"/Elementary-Functions/___4___1-Special-Notation/#LMLF___Blueprint___Elementary___Section41___complexCoordinate_im":
+      {"display": "complexCoordinate_im",
+       "context":
+       ["LMLF · DLMF with Lean",
+        "Elementary Functions",
+        "§4.1 Special Notation"]}},
+     "address": "/Elementary-Functions/___4___1-Special-Notation/"}],
+   "LMLF.Blueprint.Elementary.Section41.complexCoordinate":
+   [{"id": "LMLF___Blueprint___Elementary___Section41___complexCoordinate",
+     "data":
+     {"/Elementary-Functions/___4___1-Special-Notation/#LMLF___Blueprint___Elementary___Section41___complexCoordinate":
+      {"display": "complexCoordinate",
+       "context":
+       ["LMLF · DLMF with Lean",
+        "Elementary Functions",
+        "§4.1 Special Notation"]}},
+     "address": "/Elementary-Functions/___4___1-Special-Notation/"}],
+   "LMLF.Blueprint.Elementary.Section41.RealVariable":
+   [{"id": "LMLF___Blueprint___Elementary___Section41___RealVariable",
+     "data":
+     {"/Elementary-Functions/___4___1-Special-Notation/#LMLF___Blueprint___Elementary___Section41___RealVariable":
+      {"display": "RealVariable",
+       "context":
+       ["LMLF · DLMF with Lean",
+        "Elementary Functions",
+        "§4.1 Special Notation"]}},
+     "address": "/Elementary-Functions/___4___1-Special-Notation/"}],
+   "LMLF.Blueprint.Elementary.Section41.RealOrComplexConstant":
+   [{"id": "LMLF___Blueprint___Elementary___Section41___RealOrComplexConstant",
+     "data":
+     {"/Elementary-Functions/___4___1-Special-Notation/#LMLF___Blueprint___Elementary___Section41___RealOrComplexConstant":
+      {"display": "RealOrComplexConstant",
+       "context":
+       ["LMLF · DLMF with Lean",
+        "Elementary Functions",
+        "§4.1 Special Notation"]}},
+     "address": "/Elementary-Functions/___4___1-Special-Notation/"}],
+   "LMLF.Blueprint.Elementary.Section41.IntegerVariable":
+   [{"id": "LMLF___Blueprint___Elementary___Section41___IntegerVariable",
+     "data":
+     {"/Elementary-Functions/___4___1-Special-Notation/#LMLF___Blueprint___Elementary___Section41___IntegerVariable":
+      {"display": "IntegerVariable",
+       "context":
+       ["LMLF · DLMF with Lean",
+        "Elementary Functions",
+        "§4.1 Special Notation"]}},
+     "address": "/Elementary-Functions/___4___1-Special-Notation/"}],
+   "LMLF.Blueprint.Elementary.Section41.ComplexFunction":
+   [{"id": "LMLF___Blueprint___Elementary___Section41___ComplexFunction",
+     "data":
+     {"/Elementary-Functions/___4___1-Special-Notation/#LMLF___Blueprint___Elementary___Section41___ComplexFunction":
+      {"display": "ComplexFunction",
+       "context":
+       ["LMLF · DLMF with Lean",
+        "Elementary Functions",
+        "§4.1 Special Notation"]}},
+     "address": "/Elementary-Functions/___4___1-Special-Notation/"}]}},
  "Verso.Genre.Manual.doc.tech":
  {"title": "Terminology",
   "description": "Definitions of technical terms",
@@ -6793,242 +9823,6 @@ if (paramName) {
             `;
         }
     });
-}
-</script>
-    <script>
-
-window.onload = async () => {
-
-    // Don't show hovers inside of closed tactic states
-    function blockedByTactic(elem) {
-      let parent = elem.parentNode;
-      while (parent && "classList" in parent) {
-        if (parent.classList.contains("tactic")) {
-          const toggle = parent.querySelector(":scope > input.tactic-toggle");
-          if (toggle) {
-            return !toggle.checked;
-          }
-        }
-        parent = parent.parentNode;
-      }
-      return false;
-    }
-
-    // Track whether any tippy is visible (O(1) check instead of DOM scan)
-    let visibleTippyCount = 0;
-    function blockedByTippy(elem) {
-      return visibleTippyCount > 0;
-    }
-
-    // Binding highlights via event delegation with cached lookups
-    const bindingCache = new Map(); // context+binding -> [token elements]
-    let highlightedTokens = [];
-    function getBindingTokens(context, binding) {
-      const key = context + "\0" + binding;
-      let tokens = bindingCache.get(key);
-      if (!tokens) {
-        tokens = [];
-        for (const example of document.querySelectorAll(".hl.lean")) {
-          if (example.dataset.leanContext == context) {
-            for (const tok of example.querySelectorAll(".token[data-binding=\"" + CSS.escape(binding) + "\"]")) {
-              tokens.push(tok);
-            }
-          }
-        }
-        bindingCache.set(key, tokens);
-      }
-      return tokens;
-    }
-    for (const container of document.querySelectorAll(".hl.lean")) {
-      container.addEventListener("mouseover", (event) => {
-        const c = event.target.closest(".token");
-        if (!c || !c.dataset.binding || c.dataset.binding === "" || !container.contains(c)) return;
-        if (blockedByTactic(c)) return;
-        const tokens = getBindingTokens(container.dataset.leanContext, c.dataset.binding);
-        for (const tok of tokens) {
-          tok.classList.add("binding-hl");
-        }
-        highlightedTokens = tokens;
-      });
-      container.addEventListener("mouseout", (event) => {
-        const c = event.target.closest(".token");
-        if (!c || !container.contains(c)) return;
-        for (const tok of highlightedTokens) {
-          tok.classList.remove("binding-hl");
-        }
-        highlightedTokens = [];
-      });
-    }
-    /* Render docstrings */
-    if ('undefined' !== typeof marked) {
-        for (const d of document.querySelectorAll("code.docstring, pre.docstring")) {
-            const str = d.innerText;
-            const html = marked.parse(str);
-            const rendered = document.createElement("div");
-            rendered.classList.add("docstring");
-            rendered.innerHTML = html;
-            d.parentNode.replaceChild(rendered, d);
-        }
-    }
-    // Add hovers
-    const versoDocData = await (fetch("-verso-docs.json").then((resp) => resp.json()));
-
-    function hideParentTooltips(element) {
-      let parent = element.parentElement;
-      while (parent) {
-        const tippyInstance = parent._tippy;
-        if (tippyInstance) {
-          tippyInstance.hide();
-        }
-        parent = parent.parentElement;
-      }
-    }
-
-
-
-    const defaultTippyProps = {
-      /* DEBUG -- remove the space: * /
-      onHide(any) { return false; },
-      trigger: "click",
-      // */
-      /* theme: "lean", */
-      maxWidth: "none",
-      appendTo: () => document.body,
-      interactive: true,
-      delay: [100, null],
-      /* ignoreAttributes: true, */
-      followCursor: 'initial',
-      onShow(inst) {
-        if (inst.reference.className == 'tactic') {
-          const toggle = inst.reference.querySelector(":scope > input.tactic-toggle");
-          if (toggle && toggle.checked) {
-            return false;
-          }
-          hideParentTooltips(inst.reference);
-          if (blockedByTippy(inst.reference)) { return false; }
-
-        } else if (inst.reference.querySelector(".hover-info") || "versoHover" in inst.reference.dataset) {
-          if (blockedByTactic(inst.reference)) { return false };
-          if (blockedByTippy(inst.reference)) { return false; }
-        } else { // Nothing to show here!
-          return false;
-        }
-      },
-      onShown(inst) { visibleTippyCount++; },
-      onHidden(inst) { visibleTippyCount = Math.max(0, visibleTippyCount - 1); },
-      content (tgt) {
-        const content = document.createElement("span");
-        if (tgt.className == 'tactic') {
-          const state = tgt.querySelector(":scope > .tactic-state").cloneNode(true);
-          state.style.display = "block";
-          content.appendChild(state);
-          content.style.display = "block";
-          content.className = "hl lean popup";
-        } else {
-          content.className = "hl lean";
-          content.style.display = "block";
-          content.style.maxHeight = "300px";
-          content.style.overflowY = "auto";
-          content.style.overflowX = "hidden";
-          const hoverId = tgt.dataset.versoHover;
-          const hoverInfo = tgt.querySelector(".hover-info");
-          if (hoverId) { // Docstrings from the table
-            // TODO stop doing an implicit conversion from string to number here
-            let data = versoDocData[hoverId];
-            if (data) {
-              const info = document.createElement("span");
-              info.className = "hover-info";
-              info.style.display = "block";
-              info.innerHTML = data;
-              content.appendChild(info);
-              /* Render docstrings - TODO server-side */
-              if ('undefined' !== typeof marked) {
-                  for (const d of content.querySelectorAll("code.docstring, pre.docstring")) {
-                      const str = d.innerText;
-                      const html = marked.parse(str);
-                      const rendered = document.createElement("div");
-                      rendered.classList.add("docstring");
-                      rendered.innerHTML = html;
-                      d.parentNode.replaceChild(rendered, d);
-                  }
-              }
-            } else {
-              content.innerHTML = "Failed to load doc ID: " + hoverId;
-            }
-          } else if (hoverInfo) { // The inline info, still used for compiler messages
-            content.appendChild(hoverInfo.cloneNode(true));
-          }
-          const extraLinks = tgt.parentElement.dataset['versoLinks'];
-          if (extraLinks) {
-            try {
-              const extras = JSON.parse(extraLinks);
-              const links = document.createElement('ul');
-              links.className = 'extra-doc-links';
-              extras.forEach((l) => {
-                const li = document.createElement('li');
-                li.innerHTML = "<a href=\"" + l['href'] + "\" title=\"" + l.long + "\">" + l.short + "</a>";
-                links.appendChild(li);
-              });
-              content.appendChild(links);
-            } catch (error) {
-              console.error(error);
-            }
-          }
-        }
-        return content;
-      }
-    };
-
-
-    document.querySelectorAll('.hl.lean .const.token, .hl.lean .keyword.token, .hl.lean .literal.token, .hl.lean .option.token, .hl.lean .var.token, .hl.lean .typed.token, .hl.lean .level-var, .hl.lean .level-const, .hl.lean .level-op, .hl.lean .sort').forEach(element => {
-      element.setAttribute('data-tippy-theme', 'lean');
-    });
-    document.querySelectorAll('.hl.lean .has-info.warning').forEach(element => {
-      element.setAttribute('data-tippy-theme', 'warning message');
-    });
-    document.querySelectorAll('.hl.lean .has-info.information').forEach(element => {
-      element.setAttribute('data-tippy-theme', 'info message');
-    });
-    document.querySelectorAll('.hl.lean .has-info.error').forEach(element => {
-      element.setAttribute('data-tippy-theme', 'error message');
-    });
-    document.querySelectorAll('.hl.lean .tactic').forEach(element => {
-      element.setAttribute('data-tippy-theme', 'tactic');
-    });
-    // Skip tokens inside closed tactics — they interfere with tactic tippys
-    const closedTactics = new Set();
-    document.querySelectorAll('.hl.lean .tactic').forEach(tactic => {
-      const toggle = tactic.querySelector(':scope > input.tactic-toggle');
-      if (toggle && !toggle.checked) closedTactics.add(tactic);
-    });
-    function isInsideClosedTactic(el) {
-      const tactic = el.closest('.tactic');
-      return tactic && tactic !== el && closedTactics.has(tactic);
-    }
-
-    const tokenSelector = '.hl.lean .const.token, .hl.lean .keyword.token, .hl.lean .literal.token, .hl.lean .option.token, .hl.lean .var.token, .hl.lean .typed.token, .hl.lean .has-info, .hl.lean .tactic, .hl.lean .level-var, .hl.lean .level-const, .hl.lean .level-op, .hl.lean .sort';
-    tippy(Array.from(document.querySelectorAll(tokenSelector)).filter(el => !isInsideClosedTactic(el)), defaultTippyProps);
-
-    // Create/destroy token tippys when tactic checkbox toggles
-    const tacticTippySelector = '.const.token, .keyword.token, .literal.token, .option.token, .var.token, .typed.token, .has-info, .level-var, .level-const, .level-op, .sort';
-    document.querySelectorAll('.hl.lean .tactic').forEach(tactic => {
-      const toggle = tactic.querySelector(':scope > input.tactic-toggle');
-      if (toggle) toggle.addEventListener('change', () => {
-        if (toggle.checked) {
-          closedTactics.delete(tactic);
-          tactic.querySelectorAll('.token').forEach(tok => {
-            if (!tok._tippy && tok.matches(tacticTippySelector)) {
-              tippy(tok, defaultTippyProps);
-            }
-          });
-        } else {
-          closedTactics.add(tactic);
-          tactic.querySelectorAll('.token').forEach(tok => {
-            if (tok._tippy) tok._tippy.destroy();
-          });
-        }
-      });
-  });
 }
 </script>
     </head>

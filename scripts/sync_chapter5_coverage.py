@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Synchronize the reviewed Chapter 5 section manifests into coverage ledgers.
+"""Synchronize a reviewed consecutive section range into the coverage ledgers.
 
 The section authors used two manifest revisions.  This command accepts both, validates their
 numbered-formula coverage against the schema-v2 source inventory, writes the formula overrides,
@@ -61,7 +61,10 @@ def load_expected_inventory(path: pathlib.Path) -> dict[str, set[str]]:
             by_section[section].add(canonical_id(item_id.removeprefix("dlmf:")))
     actual = sum(len(ids) for ids in by_section.values())
     if actual != EXPECTED_FORMULAS:
-        raise ValueError(f"schema-v2 inventory has {actual} Chapter 5.1--5.18 formulas, expected {EXPECTED_FORMULAS}")
+        raise ValueError(
+            f"schema-v2 inventory has {actual} formulas in {SECTIONS[0]}--{SECTIONS[-1]}, "
+            f"expected {EXPECTED_FORMULAS}"
+        )
     return by_section
 
 
@@ -74,7 +77,7 @@ def section_id(manifest: dict[str, Any], path: pathlib.Path) -> str:
             raise ValueError(f"{path}: expected a one-section section_range")
         section = ranges[0]
     if section not in SECTIONS:
-        raise ValueError(f"{path}: section {section!r} is outside 5.1--5.18")
+        raise ValueError(f"{path}: section {section!r} is outside {SECTIONS[0]}--{SECTIONS[-1]}")
     return section
 
 
@@ -163,14 +166,14 @@ def parse_manifest(path: pathlib.Path, expected: dict[str, set[str]]) -> dict[st
         relation = raw.get("match", raw.get("relation"))
         if relation not in RELATIONS:
             raise ValueError(f"{path}: malformed declaration relation {relation!r} for {source_id}")
-        names_value = raw.get("lean_declarations", raw.get("names"))
-        names = list_strings(names_value, f"{path}:{source_id}.declarations")
         if formula_id not in expected_ids:
             # Section vocabulary/caption declarations are not numbered formulas, but a typo in a
             # display formula ID must not be silently reclassified as vocabulary.
             if re.fullmatch(r"\d+\.\d+\.(?:E)?\d+(?:_\d+)?", source_id):
                 raise ValueError(f"{path}: unknown formula declaration ID {source_id}")
             continue
+        names_value = raw.get("lean_declarations", raw.get("names"))
+        names = list_strings(names_value, f"{path}:{source_id}.declarations")
         if formula_id in result:
             raise ValueError(f"{path}: duplicate declaration for {formula_id}")
         if relation not in FORMULA_RELATIONS:
@@ -313,22 +316,26 @@ def regenerate(root: pathlib.Path, overrides_path: pathlib.Path) -> tuple[dict[s
     return formula_ledger, source_inventory
 
 
-def update_summary(path: pathlib.Path, ledger: dict[str, Any]) -> None:
+def update_summary(path: pathlib.Path, ledger: dict[str, Any], chapter_number: int) -> None:
     text = path.read_text(encoding="utf-8")
     summary = ledger["summary"]
     total = {
         key: sum(int(summary[str(chapter)][key]) for chapter in range(4, 11))
         for key in ("formulas", "lean_statements", "lean_proofs", "quantitative_statements")
     }
-    chapter = summary["5"]
-    row = re.compile(r'<tr><td>"5"</td><td>"[0-9,]+"</td><td>"[0-9,]+"</td><td>"[0-9,]+"</td><td>"[0-9,]+"</td></tr>')
+    chapter_key = str(chapter_number)
+    chapter = summary[chapter_key]
+    row = re.compile(
+        rf'<tr><td>"{chapter_key}"</td><td>"[0-9,]+"</td><td>"[0-9,]+"</td>'
+        r'<td>"[0-9,]+"</td><td>"[0-9,]+"</td></tr>'
+    )
     text, count = row.subn(
-        f'<tr><td>"5"</td><td>"{chapter["formulas"]:,}"</td><td>"{chapter["lean_statements"]:,}"</td><td>"{chapter["lean_proofs"]:,}"</td><td>"{chapter["quantitative_statements"]:,}"</td></tr>',
+        f'<tr><td>"{chapter_key}"</td><td>"{chapter["formulas"]:,}"</td><td>"{chapter["lean_statements"]:,}"</td><td>"{chapter["lean_proofs"]:,}"</td><td>"{chapter["quantitative_statements"]:,}"</td></tr>',
         text,
         count=1,
     )
     if count != 1:
-        raise RuntimeError(f"{path}: could not find Chapter 5 coverage row")
+        raise RuntimeError(f"{path}: could not find Chapter {chapter_key} coverage row")
     total_row = re.compile(r'<tr><th>"Total"</th><th>"[0-9,]+"</th><th>"[0-9,]+"</th><th>"[0-9,]+"</th><th>"[0-9,]+"</th></tr>')
     text, count = total_row.subn(
         f'<tr><th>"Total"</th><th>"{total["formulas"]:,}"</th><th>"{total["lean_statements"]:,}"</th><th>"{total["lean_proofs"]:,}"</th><th>"{total["quantitative_statements"]:,}"</th></tr>',
@@ -347,7 +354,10 @@ def verify(formula_ledger: dict[str, Any], source_inventory: dict[str, Any], ove
     q_statements = sum(item["quantitative_statement"] is True for item in formulas)
     q_proofs = sum(item["quantitative_proof"] is True for item in formulas)
     if len(formulas) != EXPECTED_FORMULAS or checked != EXPECTED_FORMULAS:
-        raise RuntimeError(f"Chapter 5 reviewed formula guard failed: formulas={len(formulas)}, checked={checked}")
+        raise RuntimeError(
+            f"reviewed formula guard failed for {SECTIONS[0]}--{SECTIONS[-1]}: "
+            f"formulas={len(formulas)}, checked={checked}"
+        )
     if source_inventory["summary"]["items"] != 4792 or source_inventory["summary"]["by_kind"]["numbered_formula"] != 2108:
         raise RuntimeError("structural inventory guard changed")
     inventory_formulas = [item for item in source_inventory["items"] if item["kind"] == "numbered_formula" and item["location"]["section"] in SECTIONS]
@@ -359,33 +369,65 @@ def verify(formula_ledger: dict[str, Any], source_inventory: dict[str, Any], ove
         raise RuntimeError("formula and structural-ledger status totals disagree")
     override_ids = {key for key in overrides if key in set(item["dlmf_id"] for item in formulas)}
     if len(override_ids) != EXPECTED_FORMULAS:
-        raise RuntimeError(f"override guard failed: {len(override_ids)} Chapter 5 overrides")
+        raise RuntimeError(
+            f"override guard failed: {len(override_ids)} overrides for {SECTIONS[0]}--{SECTIONS[-1]}"
+        )
     return {"formulas": len(formulas), "checked": checked, "proofs": proofs, "quantitative_statements": q_statements, "quantitative_proofs": q_proofs}
 
 
 def main() -> None:
+    global SECTIONS, EXPECTED_FORMULAS
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--root", type=pathlib.Path, default=pathlib.Path("."))
+    parser.add_argument("--chapter", type=int, default=5)
+    parser.add_argument("--first-section", type=int, default=1)
+    parser.add_argument("--last-section", type=int, default=18)
+    parser.add_argument("--expected-formulas", type=int, default=160)
     args = parser.parse_args()
+    if args.first_section < 1 or args.last_section < args.first_section:
+        parser.error("section range must be positive and nonempty")
+    SECTIONS = tuple(
+        f"{args.chapter}.{number}"
+        for number in range(args.first_section, args.last_section + 1)
+    )
+    EXPECTED_FORMULAS = args.expected_formulas
     root = args.root.resolve()
     expected = load_expected_inventory(root / "coverage/dlmf-4-10-source-inventory.json")
     manifests: dict[str, dict[str, Any]] = {}
-    for path in sorted((root / "coverage/sections").glob("chapter5-*.json")):
+    manifest_glob = f"chapter{args.chapter}-*.json"
+    for path in sorted((root / "coverage/sections").glob(manifest_glob)):
+        raw_manifest = load_json(path)
+        raw_section = raw_manifest.get("section")
+        if raw_section is None:
+            raw_range = raw_manifest.get("section_range")
+            raw_section = raw_range[0] if isinstance(raw_range, list) and len(raw_range) == 1 else None
+        if raw_section not in SECTIONS:
+            continue
         parsed = parse_manifest(path, expected)
-        section = section_id(load_json(path), path)
+        section = section_id(raw_manifest, path)
         if section in manifests:
             raise RuntimeError(f"duplicate manifest for {section}")
         manifests[section] = parsed
     if set(manifests) != set(SECTIONS):
-        raise RuntimeError(f"missing Chapter 5 manifests: {sorted(set(SECTIONS) - set(manifests))}")
+        raise RuntimeError(
+            f"missing manifests for {SECTIONS[0]}--{SECTIONS[-1]}: "
+            f"{sorted(set(SECTIONS) - set(manifests))}"
+        )
 
     # Re-read all manifests at the write boundary.  This catches a concurrent source-indexing
     # revision (notably section 5.15) instead of writing an override from stale in-memory data.
     expected = load_expected_inventory(root / "coverage/dlmf-4-10-source-inventory.json")
     manifests = {}
-    for path in sorted((root / "coverage/sections").glob("chapter5-*.json")):
+    for path in sorted((root / "coverage/sections").glob(manifest_glob)):
+        raw_manifest = load_json(path)
+        raw_section = raw_manifest.get("section")
+        if raw_section is None:
+            raw_range = raw_manifest.get("section_range")
+            raw_section = raw_range[0] if isinstance(raw_range, list) and len(raw_range) == 1 else None
+        if raw_section not in SECTIONS:
+            continue
         parsed = parse_manifest(path, expected)
-        section = section_id(load_json(path), path)
+        section = section_id(raw_manifest, path)
         if section in manifests:
             raise RuntimeError(f"duplicate manifest for {section}")
         manifests[section] = parsed
@@ -396,7 +438,7 @@ def main() -> None:
     merged = merge_overrides(old, reviewed)
     write_json(root / "coverage/overrides.json", merged)
     ledger, inventory = regenerate(root, root / "coverage/overrides.json")
-    update_summary(root / "doc/LMLFManual/Components.lean", ledger)
+    update_summary(root / "doc/LMLFManual/Components.lean", ledger, args.chapter)
     totals = verify(ledger, inventory, merged)
     print(json.dumps(totals, sort_keys=True))
 

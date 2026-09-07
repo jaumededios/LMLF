@@ -1,0 +1,134 @@
+{
+  "section_range": ["4.12"],
+  "numbered_formula_ids_expected": [
+    "4.12.E1", "4.12.E2", "4.12.E3", "4.12.E4", "4.12.E5",
+    "4.12.E6", "4.12.E7", "4.12.E8", "4.12.E9", "4.12.E10"
+  ],
+  "numbered_formula_ids_stated": [
+    "4.12.E1", "4.12.E2", "4.12.E3", "4.12.E4", "4.12.E5",
+    "4.12.E6", "4.12.E7", "4.12.E8", "4.12.E9", "4.12.E10"
+  ],
+  "numbered_formula_ids_omitted": [],
+  "extra_statement_ids": [
+    "iterateRealFunction", "iteratedExp", "iteratedLog", "iteratedLogDefined",
+    "GeneralizedExponential", "GeneralizedLogarithm",
+    "GeneralizedFunctionPair", "generalized_functions_strictMono",
+    "generalized_functions_contDiff", "generalized_functions_inverse"
+  ],
+  "declarations": [
+    {
+      "source_id": "4.12.E1",
+      "names": ["LMLF.Blueprint.Elementary.Section412.dlmf_4_12_1"],
+      "relation": "exact",
+      "proof_status": "missing",
+      "quantitative_analogue": "not_applicable",
+      "notes": "Recurrence is stated for every x with -1 < x."
+    },
+    {
+      "source_id": "4.12.E2",
+      "names": ["LMLF.Blueprint.Elementary.Section412.dlmf_4_12_2"],
+      "relation": "exact",
+      "proof_status": "missing",
+      "quantitative_analogue": "not_applicable",
+      "notes": "Origin normalization of the generalized exponential."
+    },
+    {
+      "source_id": "4.12.E3",
+      "names": ["LMLF.Blueprint.Elementary.Section412.dlmf_4_12_3"],
+      "relation": "exact",
+      "proof_status": "missing",
+      "quantitative_analogue": "not_applicable",
+      "notes": "Generalized-logarithm shift relation for all real x."
+    },
+    {
+      "source_id": "4.12.E4",
+      "names": ["LMLF.Blueprint.Elementary.Section412.dlmf_4_12_4"],
+      "relation": "exact",
+      "proof_status": "missing",
+      "quantitative_analogue": "not_applicable",
+      "notes": "Origin normalization of the generalized logarithm."
+    },
+    {
+      "source_id": "4.12.E5",
+      "names": ["LMLF.Blueprint.Elementary.Section412.dlmf_4_12_5"],
+      "relation": "exact",
+      "proof_status": "missing",
+      "quantitative_analogue": "not_applicable",
+      "notes": "Identity choice on the closed unit interval."
+    },
+    {
+      "source_id": "4.12.E6",
+      "names": ["LMLF.Blueprint.Elementary.Section412.dlmf_4_12_6"],
+      "relation": "exact",
+      "proof_status": "missing",
+      "quantitative_analogue": "not_applicable",
+      "notes": "Principal real logarithm branch on -1 < x < 0."
+    },
+    {
+      "source_id": "4.12.E7",
+      "names": ["LMLF.Blueprint.Elementary.Section412.dlmf_4_12_7"],
+      "relation": "exact",
+      "proof_status": "missing",
+      "quantitative_analogue": "not_applicable",
+      "notes": "Natural-number floor and explicit iterated ordinary exponential for x > 1."
+    },
+    {
+      "source_id": "4.12.E8",
+      "names": ["LMLF.Blueprint.Elementary.Section412.dlmf_4_12_8"],
+      "relation": "exact",
+      "proof_status": "missing",
+      "quantitative_analogue": "not_applicable",
+      "notes": "Negative-half-line exponential branch."
+    },
+    {
+      "source_id": "4.12.E9",
+      "names": ["LMLF.Blueprint.Elementary.Section412.dlmf_4_12_9"],
+      "relation": "exact",
+      "proof_status": "missing",
+      "quantitative_analogue": "not_applicable",
+      "notes": "Positive integer iteration count and explicit iterated principal logarithm."
+    },
+    {
+      "source_id": "4.12.E10",
+      "names": ["LMLF.Blueprint.Elementary.Section412.dlmf_4_12_10"],
+      "relation": "exact",
+      "proof_status": "missing",
+      "quantitative_analogue": "not_applicable",
+      "notes": "Half-open unit-interval condition selecting the unique positive iteration count, guarded by positivity of every intermediate logarithm input."
+    },
+    {
+      "source_id": "4.12.claim.monotonicity",
+      "names": ["LMLF.Blueprint.Elementary.Section412.generalized_functions_strictMono"],
+      "relation": "exact",
+      "proof_status": "missing",
+      "quantitative_analogue": "not_applicable",
+      "notes": "Strict increase of both generalized functions on the closed unit interval."
+    },
+    {
+      "source_id": "4.12.iteratedLogDefined",
+      "names": ["LMLF.Blueprint.Elementary.Section412.iteratedLogDefined"],
+      "relation": "exact",
+      "proof_status": "not_applicable",
+      "quantitative_analogue": "not_applicable",
+      "notes": "Domain predicate requiring every intermediate principal-logarithm input to be positive."
+    },
+    {
+      "source_id": "4.12.claim.continuous-differentiability",
+      "names": ["LMLF.Blueprint.Elementary.Section412.generalized_functions_contDiff"],
+      "relation": "exact",
+      "proof_status": "missing",
+      "quantitative_analogue": "not_applicable",
+      "notes": "Continuous differentiability of both generalized functions."
+    },
+    {
+      "source_id": "4.12.claim.inverse-relationship",
+      "names": ["LMLF.Blueprint.Elementary.Section412.GeneralizedFunctionPair", "LMLF.Blueprint.Elementary.Section412.generalized_functions_inverse"],
+      "relation": "exact",
+      "proof_status": "missing",
+      "quantitative_analogue": "not_applicable",
+      "notes": "Paired generalized exponential/logarithm interface with both inverse-composition identities."
+    }
+  ],
+  "shared_vocabulary_requests": [],
+  "known_gaps": []
+}

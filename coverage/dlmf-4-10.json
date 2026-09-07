@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-09-07T00:08:12+00:00",
+  "generated_at": "2026-09-07T01:37:56+00:00",
   "source": {
     "name": "NIST Digital Library of Mathematical Functions",
     "base_url": "https://dlmf.nist.gov",
@@ -24,7 +24,7 @@
   "summary": {
     "4": {
       "formulas": 531,
-      "lean_statements": 0,
+      "lean_statements": 139,
       "lean_proofs": 0,
       "quantitative_statements": 0,
       "quantitative_proofs": 0
@@ -1783,15 +1783,17 @@
       "section": "4.2",
       "section_title": "Definitions",
       "source_url": "https://dlmf.nist.gov/4.2.E1",
-      "match": "none",
-      "lean_statement": false,
+      "match": "specialization",
+      "lean_statement": true,
       "lean_proof": false,
-      "lean_declarations": [],
+      "lean_declarations": [
+        "LMLF.Blueprint.Elementary.Section42.dlmf_4_2_1"
+      ],
       "quantitative_analogue": false,
       "quantitative_statement": false,
       "quantitative_proof": false,
       "quantitative_declarations": [],
-      "notes": null
+      "notes": "Algebraic principal branch-value specialization; the DLMF path-integral continuation is documented in prose."
     },
     {
       "dlmf_id": "4.2.E2",
@@ -1800,15 +1802,17 @@
       "section": "4.2",
       "section_title": "Definitions",
       "source_url": "https://dlmf.nist.gov/4.2.E2",
-      "match": "none",
-      "lean_statement": false,
+      "match": "specialization",
+      "lean_statement": true,
       "lean_proof": false,
-      "lean_declarations": [],
+      "lean_declarations": [
+        "LMLF.Blueprint.Elementary.Section42.dlmf_4_2_2"
+      ],
       "quantitative_analogue": false,
       "quantitative_statement": false,
       "quantitative_proof": false,
       "quantitative_declarations": [],
-      "notes": null
+      "notes": "Principal inverse is stated on the open slit domain."
     },
     {
       "dlmf_id": "4.2.E3",
@@ -1817,15 +1821,17 @@
       "section": "4.2",
       "section_title": "Definitions",
       "source_url": "https://dlmf.nist.gov/4.2.E3",
-      "match": "none",
-      "lean_statement": false,
+      "match": "specialization",
+      "lean_statement": true,
       "lean_proof": false,
-      "lean_declarations": [],
+      "lean_declarations": [
+        "LMLF.Blueprint.Elementary.Section42.dlmf_4_2_3"
+      ],
       "quantitative_analogue": false,
       "quantitative_statement": false,
       "quantitative_proof": false,
       "quantitative_declarations": [],
-      "notes": null
+      "notes": "Complex principal-log expression."
     },
     {
       "dlmf_id": "4.2.E4",
@@ -1834,15 +1840,17 @@
       "section": "4.2",
       "section_title": "Definitions",
       "source_url": "https://dlmf.nist.gov/4.2.E4",
-      "match": "none",
-      "lean_statement": false,
+      "match": "specialization",
+      "lean_statement": true,
       "lean_proof": false,
-      "lean_declarations": [],
+      "lean_declarations": [
+        "LMLF.Blueprint.Elementary.Section42.dlmf_4_2_4"
+      ],
       "quantitative_analogue": false,
       "quantitative_statement": false,
       "quantitative_proof": false,
       "quantitative_declarations": [],
-      "notes": null
+      "notes": "Directly records the closed cut point x<0 together with the upper/lower jump."
     },
     {
       "dlmf_id": "4.2.E5",
@@ -1851,10 +1859,12 @@
       "section": "4.2",
       "section_title": "Definitions",
       "source_url": "https://dlmf.nist.gov/4.2.E5",
-      "match": "none",
-      "lean_statement": false,
+      "match": "exact",
+      "lean_statement": true,
       "lean_proof": false,
-      "lean_declarations": [],
+      "lean_declarations": [
+        "LMLF.Blueprint.Elementary.Section42.dlmf_4_2_5"
+      ],
       "quantitative_analogue": false,
       "quantitative_statement": false,
       "quantitative_proof": false,
@@ -1868,15 +1878,17 @@
       "section": "4.2",
       "section_title": "Definitions",
       "source_url": "https://dlmf.nist.gov/4.2.E6",
-      "match": "none",
-      "lean_statement": false,
+      "match": "exact",
+      "lean_statement": true,
       "lean_proof": false,
-      "lean_declarations": [],
+      "lean_declarations": [
+        "LMLF.Blueprint.Elementary.Section42.dlmf_4_2_6"
+      ],
       "quantitative_analogue": false,
       "quantitative_statement": false,
       "quantitative_proof": false,
       "quantitative_declarations": [],
-      "notes": null
+      "notes": "Integer branch value on the nonzero domain."
     },
     {
       "dlmf_id": "4.2.E7",
@@ -1885,10 +1897,12 @@
       "section": "4.2",
       "section_title": "Definitions",
       "source_url": "https://dlmf.nist.gov/4.2.E7",
-      "match": "none",
-      "lean_statement": false,
+      "match": "specialization",
+      "lean_statement": true,
       "lean_proof": false,
-      "lean_declarations": [],
+      "lean_declarations": [
+        "LMLF.Blueprint.Elementary.Section42.dlmf_4_2_7"
+      ],
       "quantitative_analogue": false,
       "quantitative_statement": false,
       "quantitative_proof": false,
@@ -1902,10 +1916,12 @@
       "section": "4.2",
       "section_title": "Definitions",
       "source_url": "https://dlmf.nist.gov/4.2.E8",
-      "match": "none",
-      "lean_statement": false,
+      "match": "exact",
+      "lean_statement": true,
       "lean_proof": false,
-      "lean_declarations": [],
+      "lean_declarations": [
+        "LMLF.Blueprint.Elementary.Section42.dlmf_4_2_8"
+      ],
       "quantitative_analogue": false,
       "quantitative_statement": false,
       "quantitative_proof": false,
@@ -1919,10 +1935,12 @@
       "section": "4.2",
       "section_title": "Definitions",
       "source_url": "https://dlmf.nist.gov/4.2.E9",
-      "match": "none",
-      "lean_statement": false,
+      "match": "exact",
+      "lean_statement": true,
       "lean_proof": false,
-      "lean_declarations": [],
+      "lean_declarations": [
+        "LMLF.Blueprint.Elementary.Section42.dlmf_4_2_9"
+      ],
       "quantitative_analogue": false,
       "quantitative_statement": false,
       "quantitative_proof": false,
@@ -1936,10 +1954,12 @@
       "section": "4.2",
       "section_title": "Definitions",
       "source_url": "https://dlmf.nist.gov/4.2.E10",
-      "match": "none",
-      "lean_statement": false,
+      "match": "exact",
+      "lean_statement": true,
       "lean_proof": false,
-      "lean_declarations": [],
+      "lean_declarations": [
+        "LMLF.Blueprint.Elementary.Section42.dlmf_4_2_10"
+      ],
       "quantitative_analogue": false,
       "quantitative_statement": false,
       "quantitative_proof": false,
@@ -1953,15 +1973,17 @@
       "section": "4.2",
       "section_title": "Definitions",
       "source_url": "https://dlmf.nist.gov/4.2.E11",
-      "match": "none",
-      "lean_statement": false,
+      "match": "specialization",
+      "lean_statement": true,
       "lean_proof": false,
-      "lean_declarations": [],
+      "lean_declarations": [
+        "LMLF.Blueprint.Elementary.Section42.dlmf_4_2_11"
+      ],
       "quantitative_analogue": false,
       "quantitative_statement": false,
       "quantitative_proof": false,
       "quantitative_declarations": [],
-      "notes": null
+      "notes": "Coarse enclosure retaining only the first displayed decimal prefix."
     },
     {
       "dlmf_id": "4.2.E12",
@@ -1970,10 +1992,12 @@
       "section": "4.2",
       "section_title": "Definitions",
       "source_url": "https://dlmf.nist.gov/4.2.E12",
-      "match": "none",
-      "lean_statement": false,
+      "match": "exact",
+      "lean_statement": true,
       "lean_proof": false,
-      "lean_declarations": [],
+      "lean_declarations": [
+        "LMLF.Blueprint.Elementary.Section42.dlmf_4_2_12"
+      ],
       "quantitative_analogue": false,
       "quantitative_statement": false,
       "quantitative_proof": false,
@@ -1987,10 +2011,12 @@
       "section": "4.2",
       "section_title": "Definitions",
       "source_url": "https://dlmf.nist.gov/4.2.E13",
-      "match": "none",
-      "lean_statement": false,
+      "match": "exact",
+      "lean_statement": true,
       "lean_proof": false,
-      "lean_declarations": [],
+      "lean_declarations": [
+        "LMLF.Blueprint.Elementary.Section42.dlmf_4_2_13"
+      ],
       "quantitative_analogue": false,
       "quantitative_statement": false,
       "quantitative_proof": false,
@@ -2004,10 +2030,12 @@
       "section": "4.2",
       "section_title": "Definitions",
       "source_url": "https://dlmf.nist.gov/4.2.E14",
-      "match": "none",
-      "lean_statement": false,
+      "match": "exact",
+      "lean_statement": true,
       "lean_proof": false,
-      "lean_declarations": [],
+      "lean_declarations": [
+        "LMLF.Blueprint.Elementary.Section42.dlmf_4_2_14"
+      ],
       "quantitative_analogue": false,
       "quantitative_statement": false,
       "quantitative_proof": false,
@@ -2021,15 +2049,17 @@
       "section": "4.2",
       "section_title": "Definitions",
       "source_url": "https://dlmf.nist.gov/4.2.E15",
-      "match": "none",
-      "lean_statement": false,
+      "match": "exact",
+      "lean_statement": true,
       "lean_proof": false,
-      "lean_declarations": [],
+      "lean_declarations": [
+        "LMLF.Blueprint.Elementary.Section42.dlmf_4_2_15"
+      ],
       "quantitative_analogue": false,
       "quantitative_statement": false,
       "quantitative_proof": false,
       "quantitative_declarations": [],
-      "notes": null
+      "notes": "Both quotient and (log₁₀ e)·ln z equalities are stated."
     },
     {
       "dlmf_id": "4.2.E16",
@@ -2038,10 +2068,12 @@
       "section": "4.2",
       "section_title": "Definitions",
       "source_url": "https://dlmf.nist.gov/4.2.E16",
-      "match": "none",
-      "lean_statement": false,
+      "match": "exact",
+      "lean_statement": true,
       "lean_proof": false,
-      "lean_declarations": [],
+      "lean_declarations": [
+        "LMLF.Blueprint.Elementary.Section42.dlmf_4_2_16"
+      ],
       "quantitative_analogue": false,
       "quantitative_statement": false,
       "quantitative_proof": false,
@@ -2055,15 +2087,17 @@
       "section": "4.2",
       "section_title": "Definitions",
       "source_url": "https://dlmf.nist.gov/4.2.E17",
-      "match": "none",
-      "lean_statement": false,
+      "match": "specialization",
+      "lean_statement": true,
       "lean_proof": false,
-      "lean_declarations": [],
+      "lean_declarations": [
+        "LMLF.Blueprint.Elementary.Section42.dlmf_4_2_17"
+      ],
       "quantitative_analogue": false,
       "quantitative_statement": false,
       "quantitative_proof": false,
       "quantitative_declarations": [],
-      "notes": null
+      "notes": "Coarse enclosure for 1 / ln 10."
     },
     {
       "dlmf_id": "4.2.E18",
@@ -2072,15 +2106,17 @@
       "section": "4.2",
       "section_title": "Definitions",
       "source_url": "https://dlmf.nist.gov/4.2.E18",
-      "match": "none",
-      "lean_statement": false,
+      "match": "specialization",
+      "lean_statement": true,
       "lean_proof": false,
-      "lean_declarations": [],
+      "lean_declarations": [
+        "LMLF.Blueprint.Elementary.Section42.dlmf_4_2_18"
+      ],
       "quantitative_analogue": false,
       "quantitative_statement": false,
       "quantitative_proof": false,
       "quantitative_declarations": [],
-      "notes": null
+      "notes": "Coarse enclosure for ln 10."
     },
     {
       "dlmf_id": "4.2.E19",
@@ -2089,15 +2125,17 @@
       "section": "4.2",
       "section_title": "Definitions",
       "source_url": "https://dlmf.nist.gov/4.2.E19",
-      "match": "none",
-      "lean_statement": false,
+      "match": "exact",
+      "lean_statement": true,
       "lean_proof": false,
-      "lean_declarations": [],
+      "lean_declarations": [
+        "LMLF.Blueprint.Elementary.Section42.dlmf_4_2_19"
+      ],
       "quantitative_analogue": false,
       "quantitative_statement": false,
       "quantitative_proof": false,
       "quantitative_declarations": [],
-      "notes": null
+      "notes": "Infinite factorial power series represented by HasSum."
     },
     {
       "dlmf_id": "4.2.E20",
@@ -2106,10 +2144,12 @@
       "section": "4.2",
       "section_title": "Definitions",
       "source_url": "https://dlmf.nist.gov/4.2.E20",
-      "match": "none",
-      "lean_statement": false,
+      "match": "exact",
+      "lean_statement": true,
       "lean_proof": false,
-      "lean_declarations": [],
+      "lean_declarations": [
+        "LMLF.Blueprint.Elementary.Section42.dlmf_4_2_20"
+      ],
       "quantitative_analogue": false,
       "quantitative_statement": false,
       "quantitative_proof": false,
@@ -2123,10 +2163,12 @@
       "section": "4.2",
       "section_title": "Definitions",
       "source_url": "https://dlmf.nist.gov/4.2.E21",
-      "match": "none",
-      "lean_statement": false,
+      "match": "exact",
+      "lean_statement": true,
       "lean_proof": false,
-      "lean_declarations": [],
+      "lean_declarations": [
+        "LMLF.Blueprint.Elementary.Section42.dlmf_4_2_21"
+      ],
       "quantitative_analogue": false,
       "quantitative_statement": false,
       "quantitative_proof": false,
@@ -2140,10 +2182,12 @@
       "section": "4.2",
       "section_title": "Definitions",
       "source_url": "https://dlmf.nist.gov/4.2.E22",
-      "match": "none",
-      "lean_statement": false,
+      "match": "exact",
+      "lean_statement": true,
       "lean_proof": false,
-      "lean_declarations": [],
+      "lean_declarations": [
+        "LMLF.Blueprint.Elementary.Section42.dlmf_4_2_22"
+      ],
       "quantitative_analogue": false,
       "quantitative_statement": false,
       "quantitative_proof": false,
@@ -2157,10 +2201,12 @@
       "section": "4.2",
       "section_title": "Definitions",
       "source_url": "https://dlmf.nist.gov/4.2.E23",
-      "match": "none",
-      "lean_statement": false,
+      "match": "exact",
+      "lean_statement": true,
       "lean_proof": false,
-      "lean_declarations": [],
+      "lean_declarations": [
+        "LMLF.Blueprint.Elementary.Section42.dlmf_4_2_23"
+      ],
       "quantitative_analogue": false,
       "quantitative_statement": false,
       "quantitative_proof": false,
@@ -2174,15 +2220,17 @@
       "section": "4.2",
       "section_title": "Definitions",
       "source_url": "https://dlmf.nist.gov/4.2.E24",
-      "match": "none",
-      "lean_statement": false,
+      "match": "specialization",
+      "lean_statement": true,
       "lean_proof": false,
-      "lean_declarations": [],
+      "lean_declarations": [
+        "LMLF.Blueprint.Elementary.Section42.dlmf_4_2_24"
+      ],
       "quantitative_analogue": false,
       "quantitative_statement": false,
       "quantitative_proof": false,
       "quantitative_declarations": [],
-      "notes": null
+      "notes": "Real x,y decomposition."
     },
     {
       "dlmf_id": "4.2.E25",
@@ -2191,10 +2239,12 @@
       "section": "4.2",
       "section_title": "Definitions",
       "source_url": "https://dlmf.nist.gov/4.2.E25",
-      "match": "none",
-      "lean_statement": false,
+      "match": "exact",
+      "lean_statement": true,
       "lean_proof": false,
-      "lean_declarations": [],
+      "lean_declarations": [
+        "LMLF.Blueprint.Elementary.Section42.dlmf_4_2_25"
+      ],
       "quantitative_analogue": false,
       "quantitative_statement": false,
       "quantitative_proof": false,
@@ -2208,15 +2258,17 @@
       "section": "4.2",
       "section_title": "Definitions",
       "source_url": "https://dlmf.nist.gov/4.2.E26",
-      "match": "none",
-      "lean_statement": false,
+      "match": "exact",
+      "lean_statement": true,
       "lean_proof": false,
-      "lean_declarations": [],
+      "lean_declarations": [
+        "LMLF.Blueprint.Elementary.Section42.dlmf_4_2_26"
+      ],
       "quantitative_analogue": false,
       "quantitative_statement": false,
       "quantitative_proof": false,
       "quantitative_declarations": [],
-      "notes": null
+      "notes": "General power is stated for every integer logarithm branch."
     },
     {
       "dlmf_id": "4.2.E27",
@@ -2225,15 +2277,17 @@
       "section": "4.2",
       "section_title": "Definitions",
       "source_url": "https://dlmf.nist.gov/4.2.E27",
-      "match": "none",
-      "lean_statement": false,
+      "match": "specialization",
+      "lean_statement": true,
       "lean_proof": false,
-      "lean_declarations": [],
+      "lean_declarations": [
+        "LMLF.Blueprint.Elementary.Section42.dlmf_4_2_27"
+      ],
       "quantitative_analogue": false,
       "quantitative_statement": false,
       "quantitative_proof": false,
       "quantitative_declarations": [],
-      "notes": null
+      "notes": "Integer exponent, k = 0, with both finite-power and reciprocal components."
     },
     {
       "dlmf_id": "4.2.E28",
@@ -2242,15 +2296,17 @@
       "section": "4.2",
       "section_title": "Definitions",
       "source_url": "https://dlmf.nist.gov/4.2.E28",
-      "match": "none",
-      "lean_statement": false,
+      "match": "specialization",
+      "lean_statement": true,
       "lean_proof": false,
-      "lean_declarations": [],
+      "lean_declarations": [
+        "LMLF.Blueprint.Elementary.Section42.dlmf_4_2_28"
+      ],
       "quantitative_analogue": false,
       "quantitative_statement": false,
       "quantitative_proof": false,
       "quantitative_declarations": [],
-      "notes": null
+      "notes": "Principal branch on the open slit domain."
     },
     {
       "dlmf_id": "4.2.E29",
@@ -2259,15 +2315,17 @@
       "section": "4.2",
       "section_title": "Definitions",
       "source_url": "https://dlmf.nist.gov/4.2.E29",
-      "match": "none",
-      "lean_statement": false,
+      "match": "specialization",
+      "lean_statement": true,
       "lean_proof": false,
-      "lean_declarations": [],
+      "lean_declarations": [
+        "LMLF.Blueprint.Elementary.Section42.dlmf_4_2_29"
+      ],
       "quantitative_analogue": false,
       "quantitative_statement": false,
       "quantitative_proof": false,
       "quantitative_declarations": [],
-      "notes": null
+      "notes": "Principal branch modulus off the cut."
     },
     {
       "dlmf_id": "4.2.E30",
@@ -2276,15 +2334,17 @@
       "section": "4.2",
       "section_title": "Definitions",
       "source_url": "https://dlmf.nist.gov/4.2.E30",
-      "match": "none",
-      "lean_statement": false,
+      "match": "specialization",
+      "lean_statement": true,
       "lean_proof": false,
-      "lean_declarations": [],
+      "lean_declarations": [
+        "LMLF.Blueprint.Elementary.Section42.dlmf_4_2_30"
+      ],
       "quantitative_analogue": false,
       "quantitative_statement": false,
       "quantitative_proof": false,
       "quantitative_declarations": [],
-      "notes": null
+      "notes": "Wrapped principal phase off the cut."
     },
     {
       "dlmf_id": "4.2.E31",
@@ -2293,15 +2353,18 @@
       "section": "4.2",
       "section_title": "Definitions",
       "source_url": "https://dlmf.nist.gov/4.2.E31",
-      "match": "none",
-      "lean_statement": false,
+      "match": "specialization",
+      "lean_statement": true,
       "lean_proof": false,
-      "lean_declarations": [],
+      "lean_declarations": [
+        "LMLF.Blueprint.Elementary.Section42.dlmf_4_2_31a",
+        "LMLF.Blueprint.Elementary.Section42.dlmf_4_2_31b"
+      ],
       "quantitative_analogue": false,
       "quantitative_statement": false,
       "quantitative_proof": false,
       "quantitative_declarations": [],
-      "notes": null
+      "notes": "Two displayed components on the principal domain."
     },
     {
       "dlmf_id": "4.2.E32",
@@ -2310,10 +2373,12 @@
       "section": "4.2",
       "section_title": "Definitions",
       "source_url": "https://dlmf.nist.gov/4.2.E32",
-      "match": "none",
-      "lean_statement": false,
+      "match": "exact",
+      "lean_statement": true,
       "lean_proof": false,
-      "lean_declarations": [],
+      "lean_declarations": [
+        "LMLF.Blueprint.Elementary.Section42.dlmf_4_2_32"
+      ],
       "quantitative_analogue": false,
       "quantitative_statement": false,
       "quantitative_proof": false,
@@ -2327,10 +2392,12 @@
       "section": "4.2",
       "section_title": "Definitions",
       "source_url": "https://dlmf.nist.gov/4.2.E33",
-      "match": "none",
-      "lean_statement": false,
+      "match": "exact",
+      "lean_statement": true,
       "lean_proof": false,
-      "lean_declarations": [],
+      "lean_declarations": [
+        "LMLF.Blueprint.Elementary.Section42.dlmf_4_2_33"
+      ],
       "quantitative_analogue": false,
       "quantitative_statement": false,
       "quantitative_proof": false,
@@ -2344,10 +2411,12 @@
       "section": "4.2",
       "section_title": "Definitions",
       "source_url": "https://dlmf.nist.gov/4.2.E34",
-      "match": "none",
-      "lean_statement": false,
+      "match": "exact",
+      "lean_statement": true,
       "lean_proof": false,
-      "lean_declarations": [],
+      "lean_declarations": [
+        "LMLF.Blueprint.Elementary.Section42.dlmf_4_2_34"
+      ],
       "quantitative_analogue": false,
       "quantitative_statement": false,
       "quantitative_proof": false,
@@ -2361,15 +2430,17 @@
       "section": "4.2",
       "section_title": "Definitions",
       "source_url": "https://dlmf.nist.gov/4.2.E35",
-      "match": "none",
-      "lean_statement": false,
+      "match": "exact",
+      "lean_statement": true,
       "lean_proof": false,
-      "lean_declarations": [],
+      "lean_declarations": [
+        "LMLF.Blueprint.Elementary.Section42.dlmf_4_2_35"
+      ],
       "quantitative_analogue": false,
       "quantitative_statement": false,
       "quantitative_proof": false,
       "quantitative_declarations": [],
-      "notes": null
+      "notes": "Nonzero hypotheses exclude totalized zero logarithms."
     },
     {
       "dlmf_id": "4.2.E36",
@@ -2378,15 +2449,17 @@
       "section": "4.2",
       "section_title": "Definitions",
       "source_url": "https://dlmf.nist.gov/4.2.E36",
-      "match": "none",
-      "lean_statement": false,
+      "match": "specialization",
+      "lean_statement": true,
       "lean_proof": false,
-      "lean_declarations": [],
+      "lean_declarations": [
+        "LMLF.Blueprint.Elementary.Section42.dlmf_4_2_36"
+      ],
       "quantitative_analogue": false,
       "quantitative_statement": false,
       "quantitative_proof": false,
       "quantitative_declarations": [],
-      "notes": null
+      "notes": "Assumed half-open principal-phase condition yields the principal-power inversion conclusion."
     },
     {
       "dlmf_id": "4.2.E37",
@@ -2395,15 +2468,17 @@
       "section": "4.2",
       "section_title": "Definitions",
       "source_url": "https://dlmf.nist.gov/4.2.E37",
-      "match": "none",
-      "lean_statement": false,
+      "match": "specialization",
+      "lean_statement": true,
       "lean_proof": false,
-      "lean_declarations": [],
+      "lean_declarations": [
+        "LMLF.Blueprint.Elementary.Section42.dlmf_4_2_37"
+      ],
       "quantitative_analogue": false,
       "quantitative_statement": false,
       "quantitative_proof": false,
       "quantitative_declarations": [],
-      "notes": null
+      "notes": "Closed-definition square-root branch."
     },
     {
       "dlmf_id": "4.4.E1",
@@ -2412,15 +2487,17 @@
       "section": "4.4",
       "section_title": "Special Values and Limits",
       "source_url": "https://dlmf.nist.gov/4.4.E1",
-      "match": "none",
-      "lean_statement": false,
+      "match": "exact",
+      "lean_statement": true,
       "lean_proof": false,
-      "lean_declarations": [],
+      "lean_declarations": [
+        "LMLF.Blueprint.Elementary.Section44.dlmf_4_4_1"
+      ],
       "quantitative_analogue": false,
       "quantitative_statement": false,
       "quantitative_proof": false,
       "quantitative_declarations": [],
-      "notes": null
+      "notes": "Principal complex logarithm at one."
     },
     {
       "dlmf_id": "4.4.E2",
@@ -2429,15 +2506,17 @@
       "section": "4.4",
       "section_title": "Special Values and Limits",
       "source_url": "https://dlmf.nist.gov/4.4.E2",
-      "match": "none",
-      "lean_statement": false,
+      "match": "exact",
+      "lean_statement": true,
       "lean_proof": false,
-      "lean_declarations": [],
+      "lean_declarations": [
+        "LMLF.Blueprint.Elementary.Section44.dlmf_4_4_2"
+      ],
       "quantitative_analogue": false,
       "quantitative_statement": false,
       "quantitative_proof": false,
       "quantitative_declarations": [],
-      "notes": null
+      "notes": "One-sided boundary limits from above and below the negative real axis."
     },
     {
       "dlmf_id": "4.4.E3",
@@ -2446,15 +2525,17 @@
       "section": "4.4",
       "section_title": "Special Values and Limits",
       "source_url": "https://dlmf.nist.gov/4.4.E3",
-      "match": "none",
-      "lean_statement": false,
+      "match": "exact",
+      "lean_statement": true,
       "lean_proof": false,
-      "lean_declarations": [],
+      "lean_declarations": [
+        "LMLF.Blueprint.Elementary.Section44.dlmf_4_4_3"
+      ],
       "quantitative_analogue": false,
       "quantitative_statement": false,
       "quantitative_proof": false,
       "quantitative_declarations": [],
-      "notes": null
+      "notes": "Principal logarithm values at ±i."
     },
     {
       "dlmf_id": "4.4.E4",
@@ -2463,15 +2544,17 @@
       "section": "4.4",
       "section_title": "Special Values and Limits",
       "source_url": "https://dlmf.nist.gov/4.4.E4",
-      "match": "none",
-      "lean_statement": false,
+      "match": "exact",
+      "lean_statement": true,
       "lean_proof": false,
-      "lean_declarations": [],
+      "lean_declarations": [
+        "LMLF.Blueprint.Elementary.Section44.dlmf_4_4_4"
+      ],
       "quantitative_analogue": false,
       "quantitative_statement": false,
       "quantitative_proof": false,
       "quantitative_declarations": [],
-      "notes": null
+      "notes": "Exponential at zero."
     },
     {
       "dlmf_id": "4.4.E5",
@@ -2480,15 +2563,17 @@
       "section": "4.4",
       "section_title": "Special Values and Limits",
       "source_url": "https://dlmf.nist.gov/4.4.E5",
-      "match": "none",
-      "lean_statement": false,
+      "match": "exact",
+      "lean_statement": true,
       "lean_proof": false,
-      "lean_declarations": [],
+      "lean_declarations": [
+        "LMLF.Blueprint.Elementary.Section44.dlmf_4_4_5"
+      ],
       "quantitative_analogue": false,
       "quantitative_statement": false,
       "quantitative_proof": false,
       "quantitative_declarations": [],
-      "notes": null
+      "notes": "Both half-turn signs are retained."
     },
     {
       "dlmf_id": "4.4.E6",
@@ -2497,15 +2582,17 @@
       "section": "4.4",
       "section_title": "Special Values and Limits",
       "source_url": "https://dlmf.nist.gov/4.4.E6",
-      "match": "none",
-      "lean_statement": false,
+      "match": "exact",
+      "lean_statement": true,
       "lean_proof": false,
-      "lean_declarations": [],
+      "lean_declarations": [
+        "LMLF.Blueprint.Elementary.Section44.dlmf_4_4_6"
+      ],
       "quantitative_analogue": false,
       "quantitative_statement": false,
       "quantitative_proof": false,
       "quantitative_declarations": [],
-      "notes": null
+      "notes": "Both quarter-turn signs are retained."
     },
     {
       "dlmf_id": "4.4.E7",
@@ -2514,15 +2601,17 @@
       "section": "4.4",
       "section_title": "Special Values and Limits",
       "source_url": "https://dlmf.nist.gov/4.4.E7",
-      "match": "none",
-      "lean_statement": false,
+      "match": "exact",
+      "lean_statement": true,
       "lean_proof": false,
-      "lean_declarations": [],
+      "lean_declarations": [
+        "LMLF.Blueprint.Elementary.Section44.dlmf_4_4_7"
+      ],
       "quantitative_analogue": false,
       "quantitative_statement": false,
       "quantitative_proof": false,
       "quantitative_declarations": [],
-      "notes": null
+      "notes": "Integer full-turn parameter."
     },
     {
       "dlmf_id": "4.4.E8",
@@ -2531,15 +2620,17 @@
       "section": "4.4",
       "section_title": "Special Values and Limits",
       "source_url": "https://dlmf.nist.gov/4.4.E8",
-      "match": "none",
-      "lean_statement": false,
+      "match": "exact",
+      "lean_statement": true,
       "lean_proof": false,
-      "lean_declarations": [],
+      "lean_declarations": [
+        "LMLF.Blueprint.Elementary.Section44.dlmf_4_4_8"
+      ],
       "quantitative_analogue": false,
       "quantitative_statement": false,
       "quantitative_proof": false,
       "quantitative_declarations": [],
-      "notes": null
+      "notes": "Both sixth-turn signs are retained."
     },
     {
       "dlmf_id": "4.4.E9",
@@ -2548,15 +2639,17 @@
       "section": "4.4",
       "section_title": "Special Values and Limits",
       "source_url": "https://dlmf.nist.gov/4.4.E9",
-      "match": "none",
-      "lean_statement": false,
+      "match": "exact",
+      "lean_statement": true,
       "lean_proof": false,
-      "lean_declarations": [],
+      "lean_declarations": [
+        "LMLF.Blueprint.Elementary.Section44.dlmf_4_4_9"
+      ],
       "quantitative_analogue": false,
       "quantitative_statement": false,
       "quantitative_proof": false,
       "quantitative_declarations": [],
-      "notes": null
+      "notes": "Both third-turn signs are retained."
     },
     {
       "dlmf_id": "4.4.E10",
@@ -2565,15 +2658,17 @@
       "section": "4.4",
       "section_title": "Special Values and Limits",
       "source_url": "https://dlmf.nist.gov/4.4.E10",
-      "match": "none",
-      "lean_statement": false,
+      "match": "exact",
+      "lean_statement": true,
       "lean_proof": false,
-      "lean_declarations": [],
+      "lean_declarations": [
+        "LMLF.Blueprint.Elementary.Section44.dlmf_4_4_10"
+      ],
       "quantitative_analogue": false,
       "quantitative_statement": false,
       "quantitative_proof": false,
       "quantitative_declarations": [],
-      "notes": null
+      "notes": "Both eighth-turn signs are retained."
     },
     {
       "dlmf_id": "4.4.E11",
@@ -2582,15 +2677,17 @@
       "section": "4.4",
       "section_title": "Special Values and Limits",
       "source_url": "https://dlmf.nist.gov/4.4.E11",
-      "match": "none",
-      "lean_statement": false,
+      "match": "exact",
+      "lean_statement": true,
       "lean_proof": false,
-      "lean_declarations": [],
+      "lean_declarations": [
+        "LMLF.Blueprint.Elementary.Section44.dlmf_4_4_11"
+      ],
       "quantitative_analogue": false,
       "quantitative_statement": false,
       "quantitative_proof": false,
       "quantitative_declarations": [],
-      "notes": null
+      "notes": "Both three-eighths-turn signs are retained."
     },
     {
       "dlmf_id": "4.4.E12",
@@ -2599,15 +2696,17 @@
       "section": "4.4",
       "section_title": "Special Values and Limits",
       "source_url": "https://dlmf.nist.gov/4.4.E12",
-      "match": "none",
-      "lean_statement": false,
+      "match": "exact",
+      "lean_statement": true,
       "lean_proof": false,
-      "lean_declarations": [],
+      "lean_declarations": [
+        "LMLF.Blueprint.Elementary.Section44.dlmf_4_4_12"
+      ],
       "quantitative_analogue": false,
       "quantitative_statement": false,
       "quantitative_proof": false,
       "quantitative_declarations": [],
-      "notes": null
+      "notes": "Principal complex powers at ±i."
     },
     {
       "dlmf_id": "4.4.E13",
@@ -2616,15 +2715,17 @@
       "section": "4.4",
       "section_title": "Special Values and Limits",
       "source_url": "https://dlmf.nist.gov/4.4.E13",
-      "match": "none",
-      "lean_statement": false,
+      "match": "specialization",
+      "lean_statement": true,
       "lean_proof": false,
-      "lean_declarations": [],
+      "lean_declarations": [
+        "LMLF.Blueprint.Elementary.Section44.dlmf_4_4_13"
+      ],
       "quantitative_analogue": false,
       "quantitative_statement": false,
       "quantitative_proof": false,
       "quantitative_declarations": [],
-      "notes": null
+      "notes": "Positive-real x path with complex a and Re a > 0."
     },
     {
       "dlmf_id": "4.4.E14",
@@ -2633,15 +2734,17 @@
       "section": "4.4",
       "section_title": "Special Values and Limits",
       "source_url": "https://dlmf.nist.gov/4.4.E14",
-      "match": "none",
-      "lean_statement": false,
+      "match": "specialization",
+      "lean_statement": true,
       "lean_proof": false,
-      "lean_declarations": [],
+      "lean_declarations": [
+        "LMLF.Blueprint.Elementary.Section44.dlmf_4_4_14"
+      ],
       "quantitative_analogue": false,
       "quantitative_statement": false,
       "quantitative_proof": false,
       "quantitative_declarations": [],
-      "notes": null
+      "notes": "Positive-real x approaching zero from the right."
     },
     {
       "dlmf_id": "4.4.E15",
@@ -2650,15 +2753,17 @@
       "section": "4.4",
       "section_title": "Special Values and Limits",
       "source_url": "https://dlmf.nist.gov/4.4.E15",
-      "match": "none",
-      "lean_statement": false,
+      "match": "specialization",
+      "lean_statement": true,
       "lean_proof": false,
-      "lean_declarations": [],
+      "lean_declarations": [
+        "LMLF.Blueprint.Elementary.Section44.dlmf_4_4_15"
+      ],
       "quantitative_analogue": false,
       "quantitative_statement": false,
       "quantitative_proof": false,
       "quantitative_declarations": [],
-      "notes": null
+      "notes": "Positive-real x path to infinity."
     },
     {
       "dlmf_id": "4.4.E16",
@@ -2667,15 +2772,17 @@
       "section": "4.4",
       "section_title": "Special Values and Limits",
       "source_url": "https://dlmf.nist.gov/4.4.E16",
-      "match": "none",
-      "lean_statement": false,
+      "match": "specialization",
+      "lean_statement": true,
       "lean_proof": false,
-      "lean_declarations": [],
+      "lean_declarations": [
+        "LMLF.Blueprint.Elementary.Section44.dlmf_4_4_16"
+      ],
       "quantitative_analogue": false,
       "quantitative_statement": false,
       "quantitative_proof": false,
       "quantitative_declarations": [],
-      "notes": null
+      "notes": "One fixed admissible ray in the stated sector."
     },
     {
       "dlmf_id": "4.4.E17",
@@ -2684,15 +2791,17 @@
       "section": "4.4",
       "section_title": "Special Values and Limits",
       "source_url": "https://dlmf.nist.gov/4.4.E17",
-      "match": "none",
-      "lean_statement": false,
+      "match": "exact",
+      "lean_statement": true,
       "lean_proof": false,
-      "lean_declarations": [],
+      "lean_declarations": [
+        "LMLF.Blueprint.Elementary.Section44.dlmf_4_4_17"
+      ],
       "quantitative_analogue": false,
       "quantitative_statement": false,
       "quantitative_proof": false,
       "quantitative_declarations": [],
-      "notes": null
+      "notes": "Complex z and natural n sequence."
     },
     {
       "dlmf_id": "4.4.E18",
@@ -2701,15 +2810,17 @@
       "section": "4.4",
       "section_title": "Special Values and Limits",
       "source_url": "https://dlmf.nist.gov/4.4.E18",
-      "match": "none",
-      "lean_statement": false,
+      "match": "specialization",
+      "lean_statement": true,
       "lean_proof": false,
-      "lean_declarations": [],
+      "lean_declarations": [
+        "LMLF.Blueprint.Elementary.Section44.dlmf_4_4_18"
+      ],
       "quantitative_analogue": false,
       "quantitative_statement": false,
       "quantitative_proof": false,
       "quantitative_declarations": [],
-      "notes": null
+      "notes": "Real z = 1 specialization of the preceding limit."
     },
     {
       "dlmf_id": "4.4.E19",
@@ -2718,15 +2829,17 @@
       "section": "4.4",
       "section_title": "Special Values and Limits",
       "source_url": "https://dlmf.nist.gov/4.4.E19",
-      "match": "none",
-      "lean_statement": false,
+      "match": "exact",
+      "lean_statement": true,
       "lean_proof": false,
-      "lean_declarations": [],
+      "lean_declarations": [
+        "LMLF.Blueprint.Elementary.Section44.dlmf_4_4_19"
+      ],
       "quantitative_analogue": false,
       "quantitative_statement": false,
       "quantitative_proof": false,
       "quantitative_declarations": [],
-      "notes": null
+      "notes": "Harmonic sum over k = 1,...,n and Euler's constant."
     },
     {
       "dlmf_id": "4.5.E1",
@@ -2735,15 +2848,17 @@
       "section": "4.5",
       "section_title": "Inequalities",
       "source_url": "https://dlmf.nist.gov/4.5.E1",
-      "match": "none",
-      "lean_statement": false,
+      "match": "exact",
+      "lean_statement": true,
       "lean_proof": false,
-      "lean_declarations": [],
+      "lean_declarations": [
+        "LMLF.Blueprint.Elementary.Section45.dlmf_4_5_1"
+      ],
       "quantitative_analogue": false,
       "quantitative_statement": false,
       "quantitative_proof": false,
       "quantitative_declarations": [],
-      "notes": null
+      "notes": "Real x with x > -1 and x ≠ 0."
     },
     {
       "dlmf_id": "4.5.E2",
@@ -2752,15 +2867,17 @@
       "section": "4.5",
       "section_title": "Inequalities",
       "source_url": "https://dlmf.nist.gov/4.5.E2",
-      "match": "none",
-      "lean_statement": false,
+      "match": "exact",
+      "lean_statement": true,
       "lean_proof": false,
-      "lean_declarations": [],
+      "lean_declarations": [
+        "LMLF.Blueprint.Elementary.Section45.dlmf_4_5_2"
+      ],
       "quantitative_analogue": false,
       "quantitative_statement": false,
       "quantitative_proof": false,
       "quantitative_declarations": [],
-      "notes": null
+      "notes": "Real x with x < 1 and x ≠ 0."
     },
     {
       "dlmf_id": "4.5.E3",
@@ -2769,15 +2886,17 @@
       "section": "4.5",
       "section_title": "Inequalities",
       "source_url": "https://dlmf.nist.gov/4.5.E3",
-      "match": "none",
-      "lean_statement": false,
+      "match": "specialization",
+      "lean_statement": true,
       "lean_proof": false,
-      "lean_declarations": [],
+      "lean_declarations": [
+        "LMLF.Blueprint.Elementary.Section45.dlmf_4_5_3"
+      ],
       "quantitative_analogue": false,
       "quantitative_statement": false,
       "quantitative_proof": false,
       "quantitative_declarations": [],
-      "notes": null
+      "notes": "Real positive specialization using the displayed decimal cutoff 0.5828."
     },
     {
       "dlmf_id": "4.5.E4",
@@ -2786,15 +2905,17 @@
       "section": "4.5",
       "section_title": "Inequalities",
       "source_url": "https://dlmf.nist.gov/4.5.E4",
-      "match": "none",
-      "lean_statement": false,
+      "match": "exact",
+      "lean_statement": true,
       "lean_proof": false,
-      "lean_declarations": [],
+      "lean_declarations": [
+        "LMLF.Blueprint.Elementary.Section45.dlmf_4_5_4"
+      ],
       "quantitative_analogue": false,
       "quantitative_statement": false,
       "quantitative_proof": false,
       "quantitative_declarations": [],
-      "notes": null
+      "notes": "Positive real x."
     },
     {
       "dlmf_id": "4.5.E5",
@@ -2803,15 +2924,17 @@
       "section": "4.5",
       "section_title": "Inequalities",
       "source_url": "https://dlmf.nist.gov/4.5.E5",
-      "match": "none",
-      "lean_statement": false,
+      "match": "specialization",
+      "lean_statement": true,
       "lean_proof": false,
-      "lean_declarations": [],
+      "lean_declarations": [
+        "LMLF.Blueprint.Elementary.Section45.dlmf_4_5_5"
+      ],
       "quantitative_analogue": false,
       "quantitative_statement": false,
       "quantitative_proof": false,
       "quantitative_declarations": [],
-      "notes": null
+      "notes": "Real positive a and x specialization of the source's real-valued inequality."
     },
     {
       "dlmf_id": "4.5.E6",
@@ -2820,15 +2943,17 @@
       "section": "4.5",
       "section_title": "Inequalities",
       "source_url": "https://dlmf.nist.gov/4.5.E6",
-      "match": "none",
-      "lean_statement": false,
+      "match": "exact",
+      "lean_statement": true,
       "lean_proof": false,
-      "lean_declarations": [],
+      "lean_declarations": [
+        "LMLF.Blueprint.Elementary.Section45.dlmf_4_5_6"
+      ],
       "quantitative_analogue": false,
       "quantitative_statement": false,
       "quantitative_proof": false,
       "quantitative_declarations": [],
-      "notes": null
+      "notes": "Complex z with norm less than one and principal Complex.log."
     },
     {
       "dlmf_id": "4.5.E7",
@@ -2837,15 +2962,17 @@
       "section": "4.5",
       "section_title": "Inequalities",
       "source_url": "https://dlmf.nist.gov/4.5.E7",
-      "match": "none",
-      "lean_statement": false,
+      "match": "exact",
+      "lean_statement": true,
       "lean_proof": false,
-      "lean_declarations": [],
+      "lean_declarations": [
+        "LMLF.Blueprint.Elementary.Section45.dlmf_4_5_7"
+      ],
       "quantitative_analogue": false,
       "quantitative_statement": false,
       "quantitative_proof": false,
       "quantitative_declarations": [],
-      "notes": null
+      "notes": "Real x < 1, x ≠ 0."
     },
     {
       "dlmf_id": "4.5.E8",
@@ -2854,15 +2981,17 @@
       "section": "4.5",
       "section_title": "Inequalities",
       "source_url": "https://dlmf.nist.gov/4.5.E8",
-      "match": "none",
-      "lean_statement": false,
+      "match": "exact",
+      "lean_statement": true,
       "lean_proof": false,
-      "lean_declarations": [],
+      "lean_declarations": [
+        "LMLF.Blueprint.Elementary.Section45.dlmf_4_5_8"
+      ],
       "quantitative_analogue": false,
       "quantitative_statement": false,
       "quantitative_proof": false,
       "quantitative_declarations": [],
-      "notes": null
+      "notes": "Real x, with x ≠ 0 for the strict form; equality holds at zero."
     },
     {
       "dlmf_id": "4.5.E9",
@@ -2871,15 +3000,17 @@
       "section": "4.5",
       "section_title": "Inequalities",
       "source_url": "https://dlmf.nist.gov/4.5.E9",
-      "match": "none",
-      "lean_statement": false,
+      "match": "exact",
+      "lean_statement": true,
       "lean_proof": false,
-      "lean_declarations": [],
+      "lean_declarations": [
+        "LMLF.Blueprint.Elementary.Section45.dlmf_4_5_9"
+      ],
       "quantitative_analogue": false,
       "quantitative_statement": false,
       "quantitative_proof": false,
       "quantitative_declarations": [],
-      "notes": null
+      "notes": "Real x < 1, x ≠ 0."
     },
     {
       "dlmf_id": "4.5.E10",
@@ -2888,15 +3019,17 @@
       "section": "4.5",
       "section_title": "Inequalities",
       "source_url": "https://dlmf.nist.gov/4.5.E10",
-      "match": "none",
-      "lean_statement": false,
+      "match": "exact",
+      "lean_statement": true,
       "lean_proof": false,
-      "lean_declarations": [],
+      "lean_declarations": [
+        "LMLF.Blueprint.Elementary.Section45.dlmf_4_5_10"
+      ],
       "quantitative_analogue": false,
       "quantitative_statement": false,
       "quantitative_proof": false,
       "quantitative_declarations": [],
-      "notes": null
+      "notes": "Real x > -1, x ≠ 0."
     },
     {
       "dlmf_id": "4.5.E11",
@@ -2905,15 +3038,17 @@
       "section": "4.5",
       "section_title": "Inequalities",
       "source_url": "https://dlmf.nist.gov/4.5.E11",
-      "match": "none",
-      "lean_statement": false,
+      "match": "exact",
+      "lean_statement": true,
       "lean_proof": false,
-      "lean_declarations": [],
+      "lean_declarations": [
+        "LMLF.Blueprint.Elementary.Section45.dlmf_4_5_11"
+      ],
       "quantitative_analogue": false,
       "quantitative_statement": false,
       "quantitative_proof": false,
       "quantitative_declarations": [],
-      "notes": null
+      "notes": "Real x < 1, x ≠ 0."
     },
     {
       "dlmf_id": "4.5.E12",
@@ -2922,15 +3057,17 @@
       "section": "4.5",
       "section_title": "Inequalities",
       "source_url": "https://dlmf.nist.gov/4.5.E12",
-      "match": "none",
-      "lean_statement": false,
+      "match": "exact",
+      "lean_statement": true,
       "lean_proof": false,
-      "lean_declarations": [],
+      "lean_declarations": [
+        "LMLF.Blueprint.Elementary.Section45.dlmf_4_5_12"
+      ],
       "quantitative_analogue": false,
       "quantitative_statement": false,
       "quantitative_proof": false,
       "quantitative_declarations": [],
-      "notes": null
+      "notes": "Real x > -1, x ≠ 0."
     },
     {
       "dlmf_id": "4.5.E13",
@@ -2939,15 +3076,17 @@
       "section": "4.5",
       "section_title": "Inequalities",
       "source_url": "https://dlmf.nist.gov/4.5.E13",
-      "match": "none",
-      "lean_statement": false,
+      "match": "specialization",
+      "lean_statement": true,
       "lean_proof": false,
-      "lean_declarations": [],
+      "lean_declarations": [
+        "LMLF.Blueprint.Elementary.Section45.dlmf_4_5_13"
+      ],
       "quantitative_analogue": false,
       "quantitative_statement": false,
       "quantitative_proof": false,
       "quantitative_declarations": [],
-      "notes": null
+      "notes": "Positive real x and y, with real rpow."
     },
     {
       "dlmf_id": "4.5.E14",
@@ -2956,15 +3095,17 @@
       "section": "4.5",
       "section_title": "Inequalities",
       "source_url": "https://dlmf.nist.gov/4.5.E14",
-      "match": "none",
-      "lean_statement": false,
+      "match": "specialization",
+      "lean_statement": true,
       "lean_proof": false,
-      "lean_declarations": [],
+      "lean_declarations": [
+        "LMLF.Blueprint.Elementary.Section45.dlmf_4_5_14"
+      ],
       "quantitative_analogue": false,
       "quantitative_statement": false,
       "quantitative_proof": false,
       "quantitative_declarations": [],
-      "notes": null
+      "notes": "Real positive specialization using the displayed decimal cutoff 1.5936."
     },
     {
       "dlmf_id": "4.5.E15",
@@ -2973,15 +3114,17 @@
       "section": "4.5",
       "section_title": "Inequalities",
       "source_url": "https://dlmf.nist.gov/4.5.E15",
-      "match": "none",
-      "lean_statement": false,
+      "match": "exact",
+      "lean_statement": true,
       "lean_proof": false,
-      "lean_declarations": [],
+      "lean_declarations": [
+        "LMLF.Blueprint.Elementary.Section45.dlmf_4_5_15"
+      ],
       "quantitative_analogue": false,
       "quantitative_statement": false,
       "quantitative_proof": false,
       "quantitative_declarations": [],
-      "notes": null
+      "notes": "Complex z with 0 < |z| < 1."
     },
     {
       "dlmf_id": "4.5.E16",
@@ -2990,15 +3133,17 @@
       "section": "4.5",
       "section_title": "Inequalities",
       "source_url": "https://dlmf.nist.gov/4.5.E16",
-      "match": "none",
-      "lean_statement": false,
+      "match": "exact",
+      "lean_statement": true,
       "lean_proof": false,
-      "lean_declarations": [],
+      "lean_declarations": [
+        "LMLF.Blueprint.Elementary.Section45.dlmf_4_5_16"
+      ],
       "quantitative_analogue": false,
       "quantitative_statement": false,
       "quantitative_proof": false,
       "quantitative_declarations": [],
-      "notes": null
+      "notes": "Complex z on all of ℂ."
     },
     {
       "dlmf_id": "4.6.E1",
@@ -3007,15 +3152,17 @@
       "section": "4.6",
       "section_title": "Power Series",
       "source_url": "https://dlmf.nist.gov/4.6.E1",
-      "match": "none",
-      "lean_statement": false,
+      "match": "exact",
+      "lean_statement": true,
       "lean_proof": false,
-      "lean_declarations": [],
+      "lean_declarations": [
+        "LMLF.Blueprint.Elementary.Section46.dlmf_4_6_1"
+      ],
       "quantitative_analogue": false,
       "quantitative_statement": false,
       "quantitative_proof": false,
       "quantitative_declarations": [],
-      "notes": null
+      "notes": "Principal logarithm series on the closed unit disk excluding z = -1."
     },
     {
       "dlmf_id": "4.6.E2",
@@ -3024,15 +3171,17 @@
       "section": "4.6",
       "section_title": "Power Series",
       "source_url": "https://dlmf.nist.gov/4.6.E2",
-      "match": "none",
-      "lean_statement": false,
+      "match": "exact",
+      "lean_statement": true,
       "lean_proof": false,
-      "lean_declarations": [],
+      "lean_declarations": [
+        "LMLF.Blueprint.Elementary.Section46.dlmf_4_6_2"
+      ],
       "quantitative_analogue": false,
       "quantitative_statement": false,
       "quantitative_proof": false,
       "quantitative_declarations": [],
-      "notes": null
+      "notes": "Principal logarithm series under Re z >= 1/2."
     },
     {
       "dlmf_id": "4.6.E3",
@@ -3041,15 +3190,17 @@
       "section": "4.6",
       "section_title": "Power Series",
       "source_url": "https://dlmf.nist.gov/4.6.E3",
-      "match": "none",
-      "lean_statement": false,
+      "match": "exact",
+      "lean_statement": true,
       "lean_proof": false,
-      "lean_declarations": [],
+      "lean_declarations": [
+        "LMLF.Blueprint.Elementary.Section46.dlmf_4_6_3"
+      ],
       "quantitative_analogue": false,
       "quantitative_statement": false,
       "quantitative_proof": false,
       "quantitative_declarations": [],
-      "notes": null
+      "notes": "Principal logarithm series on |z - 1| <= 1 excluding z = 0."
     },
     {
       "dlmf_id": "4.6.E4",
@@ -3058,15 +3209,17 @@
       "section": "4.6",
       "section_title": "Power Series",
       "source_url": "https://dlmf.nist.gov/4.6.E4",
-      "match": "none",
-      "lean_statement": false,
+      "match": "exact",
+      "lean_statement": true,
       "lean_proof": false,
-      "lean_declarations": [],
+      "lean_declarations": [
+        "LMLF.Blueprint.Elementary.Section46.dlmf_4_6_4"
+      ],
       "quantitative_analogue": false,
       "quantitative_statement": false,
       "quantitative_proof": false,
       "quantitative_declarations": [],
-      "notes": null
+      "notes": "Symmetric odd-power series in the right half-plane, including the source factor 2."
     },
     {
       "dlmf_id": "4.6.E5",
@@ -3075,15 +3228,17 @@
       "section": "4.6",
       "section_title": "Power Series",
       "source_url": "https://dlmf.nist.gov/4.6.E5",
-      "match": "none",
-      "lean_statement": false,
+      "match": "exact",
+      "lean_statement": true,
       "lean_proof": false,
-      "lean_declarations": [],
+      "lean_declarations": [
+        "LMLF.Blueprint.Elementary.Section46.dlmf_4_6_5"
+      ],
       "quantitative_analogue": false,
       "quantitative_statement": false,
       "quantitative_proof": false,
       "quantitative_declarations": [],
-      "notes": null
+      "notes": "Inverse odd-power series on |z| >= 1 excluding z = +/-1, including the source factor 2."
     },
     {
       "dlmf_id": "4.6.E6",
@@ -3092,15 +3247,17 @@
       "section": "4.6",
       "section_title": "Power Series",
       "source_url": "https://dlmf.nist.gov/4.6.E6",
-      "match": "none",
-      "lean_statement": false,
+      "match": "specialization",
+      "lean_statement": true,
       "lean_proof": false,
-      "lean_declarations": [],
+      "lean_declarations": [
+        "LMLF.Blueprint.Elementary.Section46.dlmf_4_6_6"
+      ],
       "quantitative_analogue": false,
       "quantitative_statement": false,
       "quantitative_proof": false,
       "quantitative_declarations": [],
-      "notes": null
+      "notes": "Real a,z specialization of the source condition a > 0 and Re z >= -a."
     },
     {
       "dlmf_id": "4.6.E7",
@@ -3109,15 +3266,18 @@
       "section": "4.6",
       "section_title": "Power Series",
       "source_url": "https://dlmf.nist.gov/4.6.E7",
-      "match": "none",
-      "lean_statement": false,
+      "match": "exact",
+      "lean_statement": true,
       "lean_proof": false,
-      "lean_declarations": [],
+      "lean_declarations": [
+        "LMLF.Blueprint.Elementary.Section46.dlmf_4_6_7",
+        "LMLF.Blueprint.Elementary.Section46.dlmf_4_6_7_terminating"
+      ],
       "quantitative_analogue": false,
       "quantitative_statement": false,
       "quantitative_proof": false,
       "quantitative_declarations": [],
-      "notes": null
+      "notes": "Generalized binomial series on |z| < 1, together with the unrestricted terminating-polynomial case for nonnegative integral exponents."
     },
     {
       "dlmf_id": "4.7.E1",
@@ -3126,15 +3286,17 @@
       "section": "4.7",
       "section_title": "Derivatives and Differential Equations",
       "source_url": "https://dlmf.nist.gov/4.7.E1",
-      "match": "none",
-      "lean_statement": false,
+      "match": "exact",
+      "lean_statement": true,
       "lean_proof": false,
-      "lean_declarations": [],
+      "lean_declarations": [
+        "LMLF.Blueprint.Elementary.Section47.principalLog_deriv"
+      ],
       "quantitative_analogue": false,
       "quantitative_statement": false,
       "quantitative_proof": false,
       "quantitative_declarations": [],
-      "notes": null
+      "notes": "Principal complex logarithm on Mathlib's slitPlane, excluding its branch cut."
     },
     {
       "dlmf_id": "4.7.E2",
@@ -3143,15 +3305,17 @@
       "section": "4.7",
       "section_title": "Derivatives and Differential Equations",
       "source_url": "https://dlmf.nist.gov/4.7.E2",
-      "match": "none",
-      "lean_statement": false,
+      "match": "specialization",
+      "lean_statement": true,
       "lean_proof": false,
-      "lean_declarations": [],
+      "lean_declarations": [
+        "LMLF.Blueprint.Elementary.Section47.generalLog_deriv"
+      ],
       "quantitative_analogue": false,
       "quantitative_statement": false,
       "quantitative_proof": false,
       "quantitative_declarations": [],
-      "notes": null
+      "notes": "Arbitrary branch represented by an explicit HasDerivAt hypothesis."
     },
     {
       "dlmf_id": "4.7.E3",
@@ -3160,15 +3324,17 @@
       "section": "4.7",
       "section_title": "Derivatives and Differential Equations",
       "source_url": "https://dlmf.nist.gov/4.7.E3",
-      "match": "none",
-      "lean_statement": false,
+      "match": "exact",
+      "lean_statement": true,
       "lean_proof": false,
-      "lean_declarations": [],
+      "lean_declarations": [
+        "LMLF.Blueprint.Elementary.Section47.principalLog_iteratedDeriv"
+      ],
       "quantitative_analogue": false,
       "quantitative_statement": false,
       "quantitative_proof": false,
       "quantitative_declarations": [],
-      "notes": null
+      "notes": "Positive natural n and z in the principal slitPlane."
     },
     {
       "dlmf_id": "4.7.E4",
@@ -3177,15 +3343,17 @@
       "section": "4.7",
       "section_title": "Derivatives and Differential Equations",
       "source_url": "https://dlmf.nist.gov/4.7.E4",
-      "match": "none",
-      "lean_statement": false,
+      "match": "specialization",
+      "lean_statement": true,
       "lean_proof": false,
-      "lean_declarations": [],
+      "lean_declarations": [
+        "LMLF.Blueprint.Elementary.Section47.generalLog_iteratedDeriv"
+      ],
       "quantitative_analogue": false,
       "quantitative_statement": false,
       "quantitative_proof": false,
       "quantitative_declarations": [],
-      "notes": null
+      "notes": "Open local branch domain U and derivative supplied explicitly."
     },
     {
       "dlmf_id": "4.7.E5",
@@ -3194,15 +3362,17 @@
       "section": "4.7",
       "section_title": "Derivatives and Differential Equations",
       "source_url": "https://dlmf.nist.gov/4.7.E5",
-      "match": "none",
-      "lean_statement": false,
+      "match": "exact",
+      "lean_statement": true,
       "lean_proof": false,
-      "lean_declarations": [],
+      "lean_declarations": [
+        "LMLF.Blueprint.Elementary.Section47.logarithmicDifferentialEquation"
+      ],
       "quantitative_analogue": false,
       "quantitative_statement": false,
       "quantitative_proof": false,
       "quantitative_declarations": [],
-      "notes": null
+      "notes": "Reusable HasDerivAt predicate for a candidate w on domain U."
     },
     {
       "dlmf_id": "4.7.E6",
@@ -3211,15 +3381,17 @@
       "section": "4.7",
       "section_title": "Derivatives and Differential Equations",
       "source_url": "https://dlmf.nist.gov/4.7.E6",
-      "match": "none",
-      "lean_statement": false,
+      "match": "specialization",
+      "lean_statement": true,
       "lean_proof": false,
-      "lean_declarations": [],
+      "lean_declarations": [
+        "LMLF.Blueprint.Elementary.Section47.logarithmicSolution"
+      ],
       "quantitative_analogue": false,
       "quantitative_statement": false,
       "quantitative_proof": false,
       "quantitative_declarations": [],
-      "notes": null
+      "notes": "ODE and local logarithm derivative imply existence of an additive constant."
     },
     {
       "dlmf_id": "4.7.E7",
@@ -3228,15 +3400,17 @@
       "section": "4.7",
       "section_title": "Derivatives and Differential Equations",
       "source_url": "https://dlmf.nist.gov/4.7.E7",
-      "match": "none",
-      "lean_statement": false,
+      "match": "exact",
+      "lean_statement": true,
       "lean_proof": false,
-      "lean_declarations": [],
+      "lean_declarations": [
+        "LMLF.Blueprint.Elementary.Section47.exp_deriv"
+      ],
       "quantitative_analogue": false,
       "quantitative_statement": false,
       "quantitative_proof": false,
       "quantitative_declarations": [],
-      "notes": null
+      "notes": "Complex exponential."
     },
     {
       "dlmf_id": "4.7.E8",
@@ -3245,15 +3419,17 @@
       "section": "4.7",
       "section_title": "Derivatives and Differential Equations",
       "source_url": "https://dlmf.nist.gov/4.7.E8",
-      "match": "none",
-      "lean_statement": false,
+      "match": "exact",
+      "lean_statement": true,
       "lean_proof": false,
-      "lean_declarations": [],
+      "lean_declarations": [
+        "LMLF.Blueprint.Elementary.Section47.exp_mul_deriv"
+      ],
       "quantitative_analogue": false,
       "quantitative_statement": false,
       "quantitative_proof": false,
       "quantitative_declarations": [],
-      "notes": null
+      "notes": "Complex constant a."
     },
     {
       "dlmf_id": "4.7.E9",
@@ -3262,15 +3438,17 @@
       "section": "4.7",
       "section_title": "Derivatives and Differential Equations",
       "source_url": "https://dlmf.nist.gov/4.7.E9",
-      "match": "none",
-      "lean_statement": false,
+      "match": "specialization",
+      "lean_statement": true,
       "lean_proof": false,
-      "lean_declarations": [],
+      "lean_declarations": [
+        "LMLF.Blueprint.Elementary.Section47.cpow_deriv"
+      ],
       "quantitative_analogue": false,
       "quantitative_statement": false,
       "quantitative_proof": false,
       "quantitative_declarations": [],
-      "notes": null
+      "notes": "Principal complex power uses Complex.log."
     },
     {
       "dlmf_id": "4.7.E10",
@@ -3279,15 +3457,17 @@
       "section": "4.7",
       "section_title": "Derivatives and Differential Equations",
       "source_url": "https://dlmf.nist.gov/4.7.E10",
-      "match": "none",
-      "lean_statement": false,
+      "match": "specialization",
+      "lean_statement": true,
       "lean_proof": false,
-      "lean_declarations": [],
+      "lean_declarations": [
+        "LMLF.Blueprint.Elementary.Section47.z_cpow_deriv"
+      ],
       "quantitative_analogue": false,
       "quantitative_statement": false,
       "quantitative_proof": false,
       "quantitative_declarations": [],
-      "notes": null
+      "notes": "Principal branch expressed as exp(a * Complex.log z) on an explicit U contained in slitPlane."
     },
     {
       "dlmf_id": "4.7.E11",
@@ -3296,15 +3476,17 @@
       "section": "4.7",
       "section_title": "Derivatives and Differential Equations",
       "source_url": "https://dlmf.nist.gov/4.7.E11",
-      "match": "none",
-      "lean_statement": false,
+      "match": "specialization",
+      "lean_statement": true,
       "lean_proof": false,
-      "lean_declarations": [],
+      "lean_declarations": [
+        "LMLF.Blueprint.Elementary.Section47.z_cpow_iteratedDeriv"
+      ],
       "quantitative_analogue": false,
       "quantitative_statement": false,
       "quantitative_proof": false,
       "quantitative_declarations": [],
-      "notes": null
+      "notes": "Same explicit slitPlane branch domain and finite descending product."
     },
     {
       "dlmf_id": "4.7.E12",
@@ -3313,15 +3495,17 @@
       "section": "4.7",
       "section_title": "Derivatives and Differential Equations",
       "source_url": "https://dlmf.nist.gov/4.7.E12",
-      "match": "none",
-      "lean_statement": false,
+      "match": "exact",
+      "lean_statement": true,
       "lean_proof": false,
-      "lean_declarations": [],
+      "lean_declarations": [
+        "LMLF.Blueprint.Elementary.Section47.linearDifferentialEquation"
+      ],
       "quantitative_analogue": false,
       "quantitative_statement": false,
       "quantitative_proof": false,
       "quantitative_declarations": [],
-      "notes": null
+      "notes": "Reusable HasDerivAt predicate for a candidate w on domain U."
     },
     {
       "dlmf_id": "4.7.E13",
@@ -3330,15 +3514,17 @@
       "section": "4.7",
       "section_title": "Derivatives and Differential Equations",
       "source_url": "https://dlmf.nist.gov/4.7.E13",
-      "match": "none",
-      "lean_statement": false,
+      "match": "specialization",
+      "lean_statement": true,
       "lean_proof": false,
-      "lean_declarations": [],
+      "lean_declarations": [
+        "LMLF.Blueprint.Elementary.Section47.linearDifferentialSolution"
+      ],
       "quantitative_analogue": false,
       "quantitative_statement": false,
       "quantitative_proof": false,
       "quantitative_declarations": [],
-      "notes": null
+      "notes": "On an open connected domain, the complete nonvanishing solution family is characterized by C * exp(F), C ≠ 0."
     },
     {
       "dlmf_id": "4.7.E14",
@@ -3347,15 +3533,17 @@
       "section": "4.7",
       "section_title": "Derivatives and Differential Equations",
       "source_url": "https://dlmf.nist.gov/4.7.E14",
-      "match": "none",
-      "lean_statement": false,
+      "match": "exact",
+      "lean_statement": true,
       "lean_proof": false,
-      "lean_declarations": [],
+      "lean_declarations": [
+        "LMLF.Blueprint.Elementary.Section47.secondOrderExponentialEquation"
+      ],
       "quantitative_analogue": false,
       "quantitative_statement": false,
       "quantitative_proof": false,
       "quantitative_declarations": [],
-      "notes": null
+      "notes": "Reusable HasDerivAt predicate for the second-order equation on domain U, with source constraint a ≠ 0."
     },
     {
       "dlmf_id": "4.7.E15",
@@ -3364,15 +3552,17 @@
       "section": "4.7",
       "section_title": "Derivatives and Differential Equations",
       "source_url": "https://dlmf.nist.gov/4.7.E15",
-      "match": "none",
-      "lean_statement": false,
+      "match": "specialization",
+      "lean_statement": true,
       "lean_proof": false,
-      "lean_declarations": [],
+      "lean_declarations": [
+        "LMLF.Blueprint.Elementary.Section47.secondOrderExponentialSolution"
+      ],
       "quantitative_analogue": false,
       "quantitative_statement": false,
       "quantitative_proof": false,
       "quantitative_declarations": [],
-      "notes": null
+      "notes": "For a ≠ 0, an open connected domain and chosen square-root branch give the complete two-mode family."
     },
     {
       "dlmf_id": "4.8.E1",
@@ -3381,15 +3571,17 @@
       "section": "4.8",
       "section_title": "Identities",
       "source_url": "https://dlmf.nist.gov/4.8.E1",
-      "match": "none",
-      "lean_statement": false,
+      "match": "specialization",
+      "lean_statement": true,
       "lean_proof": false,
-      "lean_declarations": [],
+      "lean_declarations": [
+        "LMLF.Blueprint.Elementary.Section48.log_mul"
+      ],
       "quantitative_analogue": false,
       "quantitative_statement": false,
       "quantitative_proof": false,
       "quantitative_declarations": [],
-      "notes": null
+      "notes": "Real nonzero specialization of the general logarithm product identity."
     },
     {
       "dlmf_id": "4.8.E2",
@@ -3398,15 +3590,17 @@
       "section": "4.8",
       "section_title": "Identities",
       "source_url": "https://dlmf.nist.gov/4.8.E2",
-      "match": "none",
-      "lean_statement": false,
+      "match": "specialization",
+      "lean_statement": true,
       "lean_proof": false,
-      "lean_declarations": [],
+      "lean_declarations": [
+        "LMLF.Blueprint.Elementary.Section48.principal_log_mul"
+      ],
       "quantitative_analogue": false,
       "quantitative_statement": false,
       "quantitative_proof": false,
       "quantitative_declarations": [],
-      "notes": null
+      "notes": "Positive-real principal-branch specialization; the phase condition is automatic."
     },
     {
       "dlmf_id": "4.8.E3",
@@ -3415,15 +3609,17 @@
       "section": "4.8",
       "section_title": "Identities",
       "source_url": "https://dlmf.nist.gov/4.8.E3",
-      "match": "none",
-      "lean_statement": false,
+      "match": "specialization",
+      "lean_statement": true,
       "lean_proof": false,
-      "lean_declarations": [],
+      "lean_declarations": [
+        "LMLF.Blueprint.Elementary.Section48.log_div"
+      ],
       "quantitative_analogue": false,
       "quantitative_statement": false,
       "quantitative_proof": false,
       "quantitative_declarations": [],
-      "notes": null
+      "notes": "Real nonzero specialization of the general logarithm quotient identity."
     },
     {
       "dlmf_id": "4.8.E4",
@@ -3432,15 +3628,17 @@
       "section": "4.8",
       "section_title": "Identities",
       "source_url": "https://dlmf.nist.gov/4.8.E4",
-      "match": "none",
-      "lean_statement": false,
+      "match": "specialization",
+      "lean_statement": true,
       "lean_proof": false,
-      "lean_declarations": [],
+      "lean_declarations": [
+        "LMLF.Blueprint.Elementary.Section48.principal_log_div"
+      ],
       "quantitative_analogue": false,
       "quantitative_statement": false,
       "quantitative_proof": false,
       "quantitative_declarations": [],
-      "notes": null
+      "notes": "Positive-real principal-branch specialization; the phase-difference condition is automatic."
     },
     {
       "dlmf_id": "4.8.E5",
@@ -3449,15 +3647,17 @@
       "section": "4.8",
       "section_title": "Identities",
       "source_url": "https://dlmf.nist.gov/4.8.E5",
-      "match": "none",
-      "lean_statement": false,
+      "match": "specialization",
+      "lean_statement": true,
       "lean_proof": false,
-      "lean_declarations": [],
+      "lean_declarations": [
+        "LMLF.Blueprint.Elementary.Section48.log_zpow"
+      ],
       "quantitative_analogue": false,
       "quantitative_statement": false,
       "quantitative_proof": false,
       "quantitative_declarations": [],
-      "notes": null
+      "notes": "Real zpow specialization of the integer-power identity."
     },
     {
       "dlmf_id": "4.8.E6",
@@ -3466,15 +3666,17 @@
       "section": "4.8",
       "section_title": "Identities",
       "source_url": "https://dlmf.nist.gov/4.8.E6",
-      "match": "none",
-      "lean_statement": false,
+      "match": "specialization",
+      "lean_statement": true,
       "lean_proof": false,
-      "lean_declarations": [],
+      "lean_declarations": [
+        "LMLF.Blueprint.Elementary.Section48.principal_log_zpow"
+      ],
       "quantitative_analogue": false,
       "quantitative_statement": false,
       "quantitative_proof": false,
       "quantitative_declarations": [],
-      "notes": null
+      "notes": "Positive-real principal-branch specialization."
     },
     {
       "dlmf_id": "4.8.E7",
@@ -3483,15 +3685,17 @@
       "section": "4.8",
       "section_title": "Identities",
       "source_url": "https://dlmf.nist.gov/4.8.E7",
-      "match": "none",
-      "lean_statement": false,
+      "match": "specialization",
+      "lean_statement": true,
       "lean_proof": false,
-      "lean_declarations": [],
+      "lean_declarations": [
+        "LMLF.Blueprint.Elementary.Section48.log_inv"
+      ],
       "quantitative_analogue": false,
       "quantitative_statement": false,
       "quantitative_proof": false,
       "quantitative_declarations": [],
-      "notes": null
+      "notes": "Positive-real principal-branch specialization."
     },
     {
       "dlmf_id": "4.8.E8",
@@ -3500,15 +3704,17 @@
       "section": "4.8",
       "section_title": "Identities",
       "source_url": "https://dlmf.nist.gov/4.8.E8",
-      "match": "none",
-      "lean_statement": false,
+      "match": "exact",
+      "lean_statement": true,
       "lean_proof": false,
-      "lean_declarations": [],
+      "lean_declarations": [
+        "LMLF.Blueprint.Elementary.Section48.log_exp_branch"
+      ],
       "quantitative_analogue": false,
       "quantitative_statement": false,
       "quantitative_proof": false,
       "quantitative_declarations": [],
-      "notes": null
+      "notes": "Complex logarithm branch relation with an existential integer."
     },
     {
       "dlmf_id": "4.8.E9",
@@ -3517,15 +3723,17 @@
       "section": "4.8",
       "section_title": "Identities",
       "source_url": "https://dlmf.nist.gov/4.8.E9",
-      "match": "none",
-      "lean_statement": false,
+      "match": "specialization",
+      "lean_statement": true,
       "lean_proof": false,
-      "lean_declarations": [],
+      "lean_declarations": [
+        "LMLF.Blueprint.Elementary.Section48.principal_log_exp"
+      ],
       "quantitative_analogue": false,
       "quantitative_statement": false,
       "quantitative_proof": false,
       "quantitative_declarations": [],
-      "notes": null
+      "notes": "Complex principal branch with Mathlib's strict lower-bound convention."
     },
     {
       "dlmf_id": "4.8.E10",
@@ -3534,15 +3742,17 @@
       "section": "4.8",
       "section_title": "Identities",
       "source_url": "https://dlmf.nist.gov/4.8.E10",
-      "match": "none",
-      "lean_statement": false,
+      "match": "exact",
+      "lean_statement": true,
       "lean_proof": false,
-      "lean_declarations": [],
+      "lean_declarations": [
+        "LMLF.Blueprint.Elementary.Section48.exp_log"
+      ],
       "quantitative_analogue": false,
       "quantitative_statement": false,
       "quantitative_proof": false,
       "quantitative_declarations": [],
-      "notes": null
+      "notes": "Principal complex logarithm on nonzero arguments."
     },
     {
       "dlmf_id": "4.8.E11",
@@ -3551,15 +3761,17 @@
       "section": "4.8",
       "section_title": "Identities",
       "source_url": "https://dlmf.nist.gov/4.8.E11",
-      "match": "none",
-      "lean_statement": false,
+      "match": "specialization",
+      "lean_statement": true,
       "lean_proof": false,
-      "lean_declarations": [],
+      "lean_declarations": [
+        "LMLF.Blueprint.Elementary.Section48.log_rpow_general_branch"
+      ],
       "quantitative_analogue": false,
       "quantitative_statement": false,
       "quantitative_proof": false,
       "quantitative_declarations": [],
-      "notes": null
+      "notes": "Positive-real base and real exponent remove the complex branch ambiguity."
     },
     {
       "dlmf_id": "4.8.E12",
@@ -3568,15 +3780,17 @@
       "section": "4.8",
       "section_title": "Identities",
       "source_url": "https://dlmf.nist.gov/4.8.E12",
-      "match": "none",
-      "lean_statement": false,
+      "match": "specialization",
+      "lean_statement": true,
       "lean_proof": false,
-      "lean_declarations": [],
+      "lean_declarations": [
+        "LMLF.Blueprint.Elementary.Section48.principal_log_rpow"
+      ],
       "quantitative_analogue": false,
       "quantitative_statement": false,
       "quantitative_proof": false,
       "quantitative_declarations": [],
-      "notes": null
+      "notes": "Positive-real principal-value specialization."
     },
     {
       "dlmf_id": "4.8.E13",
@@ -3585,15 +3799,17 @@
       "section": "4.8",
       "section_title": "Identities",
       "source_url": "https://dlmf.nist.gov/4.8.E13",
-      "match": "none",
-      "lean_statement": false,
+      "match": "exact",
+      "lean_statement": true,
       "lean_proof": false,
-      "lean_declarations": [],
+      "lean_declarations": [
+        "LMLF.Blueprint.Elementary.Section48.log_rpow"
+      ],
       "quantitative_analogue": false,
       "quantitative_statement": false,
       "quantitative_proof": false,
       "quantitative_declarations": [],
-      "notes": null
+      "notes": "Real-variable identity with a positive base."
     },
     {
       "dlmf_id": "4.8.E14",
@@ -3602,15 +3818,17 @@
       "section": "4.8",
       "section_title": "Identities",
       "source_url": "https://dlmf.nist.gov/4.8.E14",
-      "match": "none",
-      "lean_statement": false,
+      "match": "specialization",
+      "lean_statement": true,
       "lean_proof": false,
-      "lean_declarations": [],
+      "lean_declarations": [
+        "LMLF.Blueprint.Elementary.Section48.rpow_add"
+      ],
       "quantitative_analogue": false,
       "quantitative_statement": false,
       "quantitative_proof": false,
       "quantitative_declarations": [],
-      "notes": null
+      "notes": "Positive-real base and real exponents."
     },
     {
       "dlmf_id": "4.8.E15",
@@ -3619,15 +3837,17 @@
       "section": "4.8",
       "section_title": "Identities",
       "source_url": "https://dlmf.nist.gov/4.8.E15",
-      "match": "none",
-      "lean_statement": false,
+      "match": "specialization",
+      "lean_statement": true,
       "lean_proof": false,
-      "lean_declarations": [],
+      "lean_declarations": [
+        "LMLF.Blueprint.Elementary.Section48.mul_rpow"
+      ],
       "quantitative_analogue": false,
       "quantitative_statement": false,
       "quantitative_proof": false,
       "quantitative_declarations": [],
-      "notes": null
+      "notes": "Positive-real bases make the phase condition automatic."
     },
     {
       "dlmf_id": "4.8.E16",
@@ -3636,15 +3856,17 @@
       "section": "4.8",
       "section_title": "Identities",
       "source_url": "https://dlmf.nist.gov/4.8.E16",
-      "match": "none",
-      "lean_statement": false,
+      "match": "specialization",
+      "lean_statement": true,
       "lean_proof": false,
-      "lean_declarations": [],
+      "lean_declarations": [
+        "LMLF.Blueprint.Elementary.Section48.exp_add"
+      ],
       "quantitative_analogue": false,
       "quantitative_statement": false,
       "quantitative_proof": false,
       "quantitative_declarations": [],
-      "notes": null
+      "notes": "Real slice of the complex exponential addition identity."
     },
     {
       "dlmf_id": "4.8.E17",
@@ -3653,15 +3875,17 @@
       "section": "4.8",
       "section_title": "Identities",
       "source_url": "https://dlmf.nist.gov/4.8.E17",
-      "match": "none",
-      "lean_statement": false,
+      "match": "specialization",
+      "lean_statement": true,
       "lean_proof": false,
-      "lean_declarations": [],
+      "lean_declarations": [
+        "LMLF.Blueprint.Elementary.Section48.exp_rpow"
+      ],
       "quantitative_analogue": false,
       "quantitative_statement": false,
       "quantitative_proof": false,
       "quantitative_declarations": [],
-      "notes": null
+      "notes": "Real variables make the stated imaginary-part restriction automatic."
     },
     {
       "dlmf_id": "4.9.E1",
@@ -3670,15 +3894,19 @@
       "section": "4.9",
       "section_title": "Continued Fractions",
       "source_url": "https://dlmf.nist.gov/4.9.E1",
-      "match": "none",
-      "lean_statement": false,
+      "match": "specialization",
+      "lean_statement": true,
       "lean_proof": false,
-      "lean_declarations": [],
+      "lean_declarations": [
+        "LMLF.Blueprint.Elementary.Section49.logarithmFractionNumerator",
+        "LMLF.Blueprint.Elementary.Section49.logarithmFractionDenominator",
+        "LMLF.Blueprint.Elementary.Section49.dlmf_4_9_1"
+      ],
       "quantitative_analogue": false,
       "quantitative_statement": false,
       "quantitative_proof": false,
       "quantitative_declarations": [],
-      "notes": null
+      "notes": "The numerator and denominator streams reproduce the displayed coefficients. The formal convergence statement uses Complex.log, adds the natural nonzero condition for 1 + z, and states the source phase restriction with Complex.arg."
     },
     {
       "dlmf_id": "4.9.E2",
@@ -3687,15 +3915,19 @@
       "section": "4.9",
       "section_title": "Continued Fractions",
       "source_url": "https://dlmf.nist.gov/4.9.E2",
-      "match": "none",
-      "lean_statement": false,
+      "match": "exact",
+      "lean_statement": true,
       "lean_proof": false,
-      "lean_declarations": [],
+      "lean_declarations": [
+        "LMLF.Blueprint.Elementary.Section49.symmetricLogFractionNumerator",
+        "LMLF.Blueprint.Elementary.Section49.symmetricLogFractionDenominator",
+        "LMLF.Blueprint.Elementary.Section49.dlmf_4_9_2"
+      ],
       "quantitative_analogue": false,
       "quantitative_statement": false,
       "quantitative_proof": false,
       "quantitative_declarations": [],
-      "notes": null
+      "notes": "The condition excludes the real cuts (-∞, -1] and [1, ∞), and the negative square numerators and odd denominators follow the DLMF display."
     },
     {
       "dlmf_id": "4.9.E3",
@@ -3704,15 +3936,23 @@
       "section": "4.9",
       "section_title": "Continued Fractions",
       "source_url": "https://dlmf.nist.gov/4.9.E3",
-      "match": "none",
-      "lean_statement": false,
+      "match": "exact",
+      "lean_statement": true,
       "lean_proof": false,
-      "lean_declarations": [],
+      "lean_declarations": [
+        "LMLF.Blueprint.Elementary.Section49.exponentialFractionNumeratorOne",
+        "LMLF.Blueprint.Elementary.Section49.exponentialFractionDenominatorOne",
+        "LMLF.Blueprint.Elementary.Section49.exponentialFractionNumeratorTwo",
+        "LMLF.Blueprint.Elementary.Section49.exponentialFractionDenominatorTwo",
+        "LMLF.Blueprint.Elementary.Section49.exponentialFractionNumeratorThree",
+        "LMLF.Blueprint.Elementary.Section49.exponentialFractionDenominatorThree",
+        "LMLF.Blueprint.Elementary.Section49.dlmf_4_9_3"
+      ],
       "quantitative_analogue": false,
       "quantitative_statement": false,
       "quantitative_proof": false,
       "quantitative_declarations": [],
-      "notes": null
+      "notes": "All three DLMF continued fractions are stated together for complex z, including their distinct initial denominators and coefficient/sign patterns."
     },
     {
       "dlmf_id": "4.9.E4",
@@ -3721,15 +3961,20 @@
       "section": "4.9",
       "section_title": "Continued Fractions",
       "source_url": "https://dlmf.nist.gov/4.9.E4",
-      "match": "none",
-      "lean_statement": false,
+      "match": "specialization",
+      "lean_statement": true,
       "lean_proof": false,
-      "lean_declarations": [],
+      "lean_declarations": [
+        "LMLF.Blueprint.Elementary.Section49.exponentialExpansion",
+        "LMLF.Blueprint.Elementary.Section49.exponentialRemainderNumerator",
+        "LMLF.Blueprint.Elementary.Section49.exponentialRemainderDenominator",
+        "LMLF.Blueprint.Elementary.Section49.dlmf_4_9_4"
+      ],
       "quantitative_analogue": false,
       "quantitative_statement": false,
       "quantitative_proof": false,
       "quantitative_declarations": [],
-      "notes": null
+      "notes": "The source's positive integer n is represented by n : ℕ with 1 ≤ n; the finite depth limit is stated as Tendsto atTop and the alternating remainder coefficients are explicit."
     },
     {
       "dlmf_id": "4.9.E5",
@@ -3738,15 +3983,17 @@
       "section": "4.9",
       "section_title": "Continued Fractions",
       "source_url": "https://dlmf.nist.gov/4.9.E5",
-      "match": "none",
-      "lean_statement": false,
+      "match": "exact",
+      "lean_statement": true,
       "lean_proof": false,
-      "lean_declarations": [],
+      "lean_declarations": [
+        "LMLF.Blueprint.Elementary.Section49.dlmf_4_9_5"
+      ],
       "quantitative_analogue": false,
       "quantitative_statement": false,
       "quantitative_proof": false,
       "quantitative_declarations": [],
-      "notes": null
+      "notes": "The finite sum uses Finset.range (n + 1), representing exactly the indices 0 through n in the source definition of e_n(z)."
     },
     {
       "dlmf_id": "4.10.E1",
@@ -3755,15 +4002,17 @@
       "section": "4.10",
       "section_title": "Integrals",
       "source_url": "https://dlmf.nist.gov/4.10.E1",
-      "match": "none",
-      "lean_statement": false,
+      "match": "specialization",
+      "lean_statement": true,
       "lean_proof": false,
-      "lean_declarations": [],
+      "lean_declarations": [
+        "LMLF.Blueprint.Elementary.Section410.dlmf_4_10_1"
+      ],
       "quantitative_analogue": false,
       "quantitative_statement": false,
       "quantitative_proof": false,
       "quantitative_declarations": [],
-      "notes": null
+      "notes": "Derivative form of the principal-logarithm antiderivative on an explicit branch domain."
     },
     {
       "dlmf_id": "4.10.E2",
@@ -3772,15 +4021,17 @@
       "section": "4.10",
       "section_title": "Integrals",
       "source_url": "https://dlmf.nist.gov/4.10.E2",
-      "match": "none",
-      "lean_statement": false,
+      "match": "specialization",
+      "lean_statement": true,
       "lean_proof": false,
-      "lean_declarations": [],
+      "lean_declarations": [
+        "LMLF.Blueprint.Elementary.Section410.dlmf_4_10_2"
+      ],
       "quantitative_analogue": false,
       "quantitative_statement": false,
       "quantitative_proof": false,
       "quantitative_declarations": [],
-      "notes": null
+      "notes": "Derivative form with the principal branch and nonzero argument."
     },
     {
       "dlmf_id": "4.10.E3",
@@ -3789,15 +4040,17 @@
       "section": "4.10",
       "section_title": "Integrals",
       "source_url": "https://dlmf.nist.gov/4.10.E3",
-      "match": "none",
-      "lean_statement": false,
+      "match": "specialization",
+      "lean_statement": true,
       "lean_proof": false,
-      "lean_declarations": [],
+      "lean_declarations": [
+        "LMLF.Blueprint.Elementary.Section410.dlmf_4_10_3"
+      ],
       "quantitative_analogue": false,
       "quantitative_statement": false,
       "quantitative_proof": false,
       "quantitative_declarations": [],
-      "notes": null
+      "notes": "Integer exponent and derivative formulation; n ≠ -1 is retained."
     },
     {
       "dlmf_id": "4.10.E4",
@@ -3806,15 +4059,17 @@
       "section": "4.10",
       "section_title": "Integrals",
       "source_url": "https://dlmf.nist.gov/4.10.E4",
-      "match": "none",
-      "lean_statement": false,
+      "match": "specialization",
+      "lean_statement": true,
       "lean_proof": false,
-      "lean_declarations": [],
+      "lean_declarations": [
+        "LMLF.Blueprint.Elementary.Section410.dlmf_4_10_4"
+      ],
       "quantitative_analogue": false,
       "quantitative_statement": false,
       "quantitative_proof": false,
       "quantitative_declarations": [],
-      "notes": null
+      "notes": "Derivative formulation on the principal branch where z and log z are nonzero."
     },
     {
       "dlmf_id": "4.10.E5",
@@ -3823,15 +4078,17 @@
       "section": "4.10",
       "section_title": "Integrals",
       "source_url": "https://dlmf.nist.gov/4.10.E5",
-      "match": "none",
-      "lean_statement": false,
+      "match": "exact",
+      "lean_statement": true,
       "lean_proof": false,
-      "lean_declarations": [],
+      "lean_declarations": [
+        "LMLF.Blueprint.Elementary.Section410.dlmf_4_10_5"
+      ],
       "quantitative_analogue": false,
       "quantitative_statement": false,
       "quantitative_proof": false,
       "quantitative_declarations": [],
-      "notes": null
+      "notes": "Improper integral over the positive interval (0,1)."
     },
     {
       "dlmf_id": "4.10.E6",
@@ -3840,15 +4097,17 @@
       "section": "4.10",
       "section_title": "Integrals",
       "source_url": "https://dlmf.nist.gov/4.10.E6",
-      "match": "none",
-      "lean_statement": false,
+      "match": "exact",
+      "lean_statement": true,
       "lean_proof": false,
-      "lean_declarations": [],
+      "lean_declarations": [
+        "LMLF.Blueprint.Elementary.Section410.dlmf_4_10_6"
+      ],
       "quantitative_analogue": false,
       "quantitative_statement": false,
       "quantitative_proof": false,
       "quantitative_declarations": [],
-      "notes": null
+      "notes": "Improper integral over the positive interval (0,1)."
     },
     {
       "dlmf_id": "4.10.E7",
@@ -3857,15 +4116,18 @@
       "section": "4.10",
       "section_title": "Integrals",
       "source_url": "https://dlmf.nist.gov/4.10.E7",
-      "match": "none",
-      "lean_statement": false,
+      "match": "specialization",
+      "lean_statement": true,
       "lean_proof": false,
-      "lean_declarations": [],
+      "lean_declarations": [
+        "LMLF.Blueprint.Elementary.Section410.dlmf_4_10_7",
+        "LMLF.Blueprint.Elementary.Section410.logarithmicIntegral"
+      ],
       "quantitative_analogue": false,
       "quantitative_statement": false,
       "quantitative_proof": false,
       "quantitative_declarations": [],
-      "notes": null
+      "notes": "For x > 1, the theorem states existence and value of the explicit symmetric-cutoff Cauchy-principal-value limit."
     },
     {
       "dlmf_id": "4.10.E8",
@@ -3874,15 +4136,17 @@
       "section": "4.10",
       "section_title": "Integrals",
       "source_url": "https://dlmf.nist.gov/4.10.E8",
-      "match": "none",
-      "lean_statement": false,
+      "match": "specialization",
+      "lean_statement": true,
       "lean_proof": false,
-      "lean_declarations": [],
+      "lean_declarations": [
+        "LMLF.Blueprint.Elementary.Section410.dlmf_4_10_8"
+      ],
       "quantitative_analogue": false,
       "quantitative_statement": false,
       "quantitative_proof": false,
       "quantitative_declarations": [],
-      "notes": null
+      "notes": "Derivative formulation of the complex antiderivative with a ≠ 0."
     },
     {
       "dlmf_id": "4.10.E9",
@@ -3891,15 +4155,17 @@
       "section": "4.10",
       "section_title": "Integrals",
       "source_url": "https://dlmf.nist.gov/4.10.E9",
-      "match": "none",
-      "lean_statement": false,
+      "match": "specialization",
+      "lean_statement": true,
       "lean_proof": false,
-      "lean_declarations": [],
+      "lean_declarations": [
+        "LMLF.Blueprint.Elementary.Section410.dlmf_4_10_9"
+      ],
       "quantitative_analogue": false,
       "quantitative_statement": false,
       "quantitative_proof": false,
       "quantitative_declarations": [],
-      "notes": null
+      "notes": "Derivative formulation with a,b ≠ 0 and the principal-log argument nonzero and off its nonpositive-real branch cut."
     },
     {
       "dlmf_id": "4.10.E10",
@@ -3908,15 +4174,17 @@
       "section": "4.10",
       "section_title": "Integrals",
       "source_url": "https://dlmf.nist.gov/4.10.E10",
-      "match": "none",
-      "lean_statement": false,
+      "match": "specialization",
+      "lean_statement": true,
       "lean_proof": false,
-      "lean_declarations": [],
+      "lean_declarations": [
+        "LMLF.Blueprint.Elementary.Section410.dlmf_4_10_10"
+      ],
       "quantitative_analogue": false,
       "quantitative_statement": false,
       "quantitative_proof": false,
       "quantitative_declarations": [],
-      "notes": null
+      "notes": "Derivative formulation with explicit nonzero and principal-log slit-domain hypotheses for the logarithm argument."
     },
     {
       "dlmf_id": "4.10.E11",
@@ -3925,15 +4193,17 @@
       "section": "4.10",
       "section_title": "Integrals",
       "source_url": "https://dlmf.nist.gov/4.10.E11",
-      "match": "none",
-      "lean_statement": false,
+      "match": "exact",
+      "lean_statement": true,
       "lean_proof": false,
-      "lean_declarations": [],
+      "lean_declarations": [
+        "LMLF.Blueprint.Elementary.Section410.dlmf_4_10_11"
+      ],
       "quantitative_analogue": false,
       "quantitative_statement": false,
       "quantitative_proof": false,
       "quantitative_declarations": [],
-      "notes": null
+      "notes": "Complex Gaussian integral with Re c > 0 and principal complex square root notation."
     },
     {
       "dlmf_id": "4.10.E12",
@@ -3942,15 +4212,17 @@
       "section": "4.10",
       "section_title": "Integrals",
       "source_url": "https://dlmf.nist.gov/4.10.E12",
-      "match": "none",
-      "lean_statement": false,
+      "match": "exact",
+      "lean_statement": true,
       "lean_proof": false,
-      "lean_declarations": [],
+      "lean_declarations": [
+        "LMLF.Blueprint.Elementary.Section410.dlmf_4_10_12"
+      ],
       "quantitative_analogue": false,
       "quantitative_statement": false,
       "quantitative_proof": false,
       "quantitative_declarations": [],
-      "notes": null
+      "notes": "Finite real integral with the stated logarithmic endpoint."
     },
     {
       "dlmf_id": "4.10.E13",
@@ -3959,15 +4231,17 @@
       "section": "4.10",
       "section_title": "Integrals",
       "source_url": "https://dlmf.nist.gov/4.10.E13",
-      "match": "none",
-      "lean_statement": false,
+      "match": "exact",
+      "lean_statement": true,
       "lean_proof": false,
-      "lean_declarations": [],
+      "lean_declarations": [
+        "LMLF.Blueprint.Elementary.Section410.dlmf_4_10_13"
+      ],
       "quantitative_analogue": false,
       "quantitative_statement": false,
       "quantitative_proof": false,
       "quantitative_declarations": [],
-      "notes": null
+      "notes": "Improper integral over (0,∞)."
     },
     {
       "dlmf_id": "4.12.E1",
@@ -3976,15 +4250,17 @@
       "section": "4.12",
       "section_title": "Generalized Logarithms and Exponentials",
       "source_url": "https://dlmf.nist.gov/4.12.E1",
-      "match": "none",
-      "lean_statement": false,
+      "match": "exact",
+      "lean_statement": true,
       "lean_proof": false,
-      "lean_declarations": [],
+      "lean_declarations": [
+        "LMLF.Blueprint.Elementary.Section412.dlmf_4_12_1"
+      ],
       "quantitative_analogue": false,
       "quantitative_statement": false,
       "quantitative_proof": false,
       "quantitative_declarations": [],
-      "notes": null
+      "notes": "Recurrence is stated for every x with -1 < x."
     },
     {
       "dlmf_id": "4.12.E2",
@@ -3993,15 +4269,17 @@
       "section": "4.12",
       "section_title": "Generalized Logarithms and Exponentials",
       "source_url": "https://dlmf.nist.gov/4.12.E2",
-      "match": "none",
-      "lean_statement": false,
+      "match": "exact",
+      "lean_statement": true,
       "lean_proof": false,
-      "lean_declarations": [],
+      "lean_declarations": [
+        "LMLF.Blueprint.Elementary.Section412.dlmf_4_12_2"
+      ],
       "quantitative_analogue": false,
       "quantitative_statement": false,
       "quantitative_proof": false,
       "quantitative_declarations": [],
-      "notes": null
+      "notes": "Origin normalization of the generalized exponential."
     },
     {
       "dlmf_id": "4.12.E3",
@@ -4010,15 +4288,17 @@
       "section": "4.12",
       "section_title": "Generalized Logarithms and Exponentials",
       "source_url": "https://dlmf.nist.gov/4.12.E3",
-      "match": "none",
-      "lean_statement": false,
+      "match": "exact",
+      "lean_statement": true,
       "lean_proof": false,
-      "lean_declarations": [],
+      "lean_declarations": [
+        "LMLF.Blueprint.Elementary.Section412.dlmf_4_12_3"
+      ],
       "quantitative_analogue": false,
       "quantitative_statement": false,
       "quantitative_proof": false,
       "quantitative_declarations": [],
-      "notes": null
+      "notes": "Generalized-logarithm shift relation for all real x."
     },
     {
       "dlmf_id": "4.12.E4",
@@ -4027,15 +4307,17 @@
       "section": "4.12",
       "section_title": "Generalized Logarithms and Exponentials",
       "source_url": "https://dlmf.nist.gov/4.12.E4",
-      "match": "none",
-      "lean_statement": false,
+      "match": "exact",
+      "lean_statement": true,
       "lean_proof": false,
-      "lean_declarations": [],
+      "lean_declarations": [
+        "LMLF.Blueprint.Elementary.Section412.dlmf_4_12_4"
+      ],
       "quantitative_analogue": false,
       "quantitative_statement": false,
       "quantitative_proof": false,
       "quantitative_declarations": [],
-      "notes": null
+      "notes": "Origin normalization of the generalized logarithm."
     },
     {
       "dlmf_id": "4.12.E5",
@@ -4044,15 +4326,17 @@
       "section": "4.12",
       "section_title": "Generalized Logarithms and Exponentials",
       "source_url": "https://dlmf.nist.gov/4.12.E5",
-      "match": "none",
-      "lean_statement": false,
+      "match": "exact",
+      "lean_statement": true,
       "lean_proof": false,
-      "lean_declarations": [],
+      "lean_declarations": [
+        "LMLF.Blueprint.Elementary.Section412.dlmf_4_12_5"
+      ],
       "quantitative_analogue": false,
       "quantitative_statement": false,
       "quantitative_proof": false,
       "quantitative_declarations": [],
-      "notes": null
+      "notes": "Identity choice on the closed unit interval."
     },
     {
       "dlmf_id": "4.12.E6",
@@ -4061,15 +4345,17 @@
       "section": "4.12",
       "section_title": "Generalized Logarithms and Exponentials",
       "source_url": "https://dlmf.nist.gov/4.12.E6",
-      "match": "none",
-      "lean_statement": false,
+      "match": "exact",
+      "lean_statement": true,
       "lean_proof": false,
-      "lean_declarations": [],
+      "lean_declarations": [
+        "LMLF.Blueprint.Elementary.Section412.dlmf_4_12_6"
+      ],
       "quantitative_analogue": false,
       "quantitative_statement": false,
       "quantitative_proof": false,
       "quantitative_declarations": [],
-      "notes": null
+      "notes": "Principal real logarithm branch on -1 < x < 0."
     },
     {
       "dlmf_id": "4.12.E7",
@@ -4078,15 +4364,17 @@
       "section": "4.12",
       "section_title": "Generalized Logarithms and Exponentials",
       "source_url": "https://dlmf.nist.gov/4.12.E7",
-      "match": "none",
-      "lean_statement": false,
+      "match": "exact",
+      "lean_statement": true,
       "lean_proof": false,
-      "lean_declarations": [],
+      "lean_declarations": [
+        "LMLF.Blueprint.Elementary.Section412.dlmf_4_12_7"
+      ],
       "quantitative_analogue": false,
       "quantitative_statement": false,
       "quantitative_proof": false,
       "quantitative_declarations": [],
-      "notes": null
+      "notes": "Natural-number floor and explicit iterated ordinary exponential for x > 1."
     },
     {
       "dlmf_id": "4.12.E8",
@@ -4095,15 +4383,17 @@
       "section": "4.12",
       "section_title": "Generalized Logarithms and Exponentials",
       "source_url": "https://dlmf.nist.gov/4.12.E8",
-      "match": "none",
-      "lean_statement": false,
+      "match": "exact",
+      "lean_statement": true,
       "lean_proof": false,
-      "lean_declarations": [],
+      "lean_declarations": [
+        "LMLF.Blueprint.Elementary.Section412.dlmf_4_12_8"
+      ],
       "quantitative_analogue": false,
       "quantitative_statement": false,
       "quantitative_proof": false,
       "quantitative_declarations": [],
-      "notes": null
+      "notes": "Negative-half-line exponential branch."
     },
     {
       "dlmf_id": "4.12.E9",
@@ -4112,15 +4402,17 @@
       "section": "4.12",
       "section_title": "Generalized Logarithms and Exponentials",
       "source_url": "https://dlmf.nist.gov/4.12.E9",
-      "match": "none",
-      "lean_statement": false,
+      "match": "exact",
+      "lean_statement": true,
       "lean_proof": false,
-      "lean_declarations": [],
+      "lean_declarations": [
+        "LMLF.Blueprint.Elementary.Section412.dlmf_4_12_9"
+      ],
       "quantitative_analogue": false,
       "quantitative_statement": false,
       "quantitative_proof": false,
       "quantitative_declarations": [],
-      "notes": null
+      "notes": "Positive integer iteration count and explicit iterated principal logarithm."
     },
     {
       "dlmf_id": "4.12.E10",
@@ -4129,15 +4421,17 @@
       "section": "4.12",
       "section_title": "Generalized Logarithms and Exponentials",
       "source_url": "https://dlmf.nist.gov/4.12.E10",
-      "match": "none",
-      "lean_statement": false,
+      "match": "exact",
+      "lean_statement": true,
       "lean_proof": false,
-      "lean_declarations": [],
+      "lean_declarations": [
+        "LMLF.Blueprint.Elementary.Section412.dlmf_4_12_10"
+      ],
       "quantitative_analogue": false,
       "quantitative_statement": false,
       "quantitative_proof": false,
       "quantitative_declarations": [],
-      "notes": null
+      "notes": "Half-open unit-interval condition selecting the unique positive iteration count, guarded by positivity of every intermediate logarithm input."
     },
     {
       "dlmf_id": "4.13.E1",

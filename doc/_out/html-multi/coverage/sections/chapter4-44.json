@@ -1,0 +1,40 @@
+{
+  "section_range": ["4.4"],
+  "numbered_formula_ids_expected": [
+    "4.4.E1", "4.4.E2", "4.4.E3", "4.4.E4", "4.4.E5", "4.4.E6",
+    "4.4.E7", "4.4.E8", "4.4.E9", "4.4.E10", "4.4.E11", "4.4.E12",
+    "4.4.E13", "4.4.E14", "4.4.E15", "4.4.E16", "4.4.E17", "4.4.E18",
+    "4.4.E19"
+  ],
+  "numbered_formula_ids_stated": [
+    "4.4.E1", "4.4.E2", "4.4.E3", "4.4.E4", "4.4.E5", "4.4.E6",
+    "4.4.E7", "4.4.E8", "4.4.E9", "4.4.E10", "4.4.E11", "4.4.E12",
+    "4.4.E13", "4.4.E14", "4.4.E15", "4.4.E16", "4.4.E17", "4.4.E18",
+    "4.4.E19"
+  ],
+  "numbered_formula_ids_omitted": [],
+  "extra_statement_ids": [],
+  "declarations": [
+    {"source_id":"4.4.E1","names":["LMLF.Blueprint.Elementary.Section44.dlmf_4_4_1"],"relation":"exact","proof_status":"missing","quantitative_analogue":"not_applicable","notes":"Principal complex logarithm at one."},
+    {"source_id":"4.4.E2","names":["LMLF.Blueprint.Elementary.Section44.dlmf_4_4_2"],"relation":"exact","proof_status":"missing","quantitative_analogue":"not_applicable","notes":"One-sided boundary limits from above and below the negative real axis."},
+    {"source_id":"4.4.E3","names":["LMLF.Blueprint.Elementary.Section44.dlmf_4_4_3"],"relation":"exact","proof_status":"missing","quantitative_analogue":"not_applicable","notes":"Principal logarithm values at ±i."},
+    {"source_id":"4.4.E4","names":["LMLF.Blueprint.Elementary.Section44.dlmf_4_4_4"],"relation":"exact","proof_status":"missing","quantitative_analogue":"not_applicable","notes":"Exponential at zero."},
+    {"source_id":"4.4.E5","names":["LMLF.Blueprint.Elementary.Section44.dlmf_4_4_5"],"relation":"exact","proof_status":"missing","quantitative_analogue":"not_applicable","notes":"Both half-turn signs are retained."},
+    {"source_id":"4.4.E6","names":["LMLF.Blueprint.Elementary.Section44.dlmf_4_4_6"],"relation":"exact","proof_status":"missing","quantitative_analogue":"not_applicable","notes":"Both quarter-turn signs are retained."},
+    {"source_id":"4.4.E7","names":["LMLF.Blueprint.Elementary.Section44.dlmf_4_4_7"],"relation":"exact","proof_status":"missing","quantitative_analogue":"not_applicable","notes":"Integer full-turn parameter."},
+    {"source_id":"4.4.E8","names":["LMLF.Blueprint.Elementary.Section44.dlmf_4_4_8"],"relation":"exact","proof_status":"missing","quantitative_analogue":"not_applicable","notes":"Both sixth-turn signs are retained."},
+    {"source_id":"4.4.E9","names":["LMLF.Blueprint.Elementary.Section44.dlmf_4_4_9"],"relation":"exact","proof_status":"missing","quantitative_analogue":"not_applicable","notes":"Both third-turn signs are retained."},
+    {"source_id":"4.4.E10","names":["LMLF.Blueprint.Elementary.Section44.dlmf_4_4_10"],"relation":"exact","proof_status":"missing","quantitative_analogue":"not_applicable","notes":"Both eighth-turn signs are retained."},
+    {"source_id":"4.4.E11","names":["LMLF.Blueprint.Elementary.Section44.dlmf_4_4_11"],"relation":"exact","proof_status":"missing","quantitative_analogue":"not_applicable","notes":"Both three-eighths-turn signs are retained."},
+    {"source_id":"4.4.E12","names":["LMLF.Blueprint.Elementary.Section44.dlmf_4_4_12"],"relation":"exact","proof_status":"missing","quantitative_analogue":"not_applicable","notes":"Principal complex powers at ±i."},
+    {"source_id":"4.4.E13","names":["LMLF.Blueprint.Elementary.Section44.dlmf_4_4_13"],"relation":"specialization","proof_status":"missing","quantitative_analogue":"not_applicable","notes":"Positive-real x path with complex a and Re a > 0."},
+    {"source_id":"4.4.E14","names":["LMLF.Blueprint.Elementary.Section44.dlmf_4_4_14"],"relation":"specialization","proof_status":"missing","quantitative_analogue":"not_applicable","notes":"Positive-real x approaching zero from the right."},
+    {"source_id":"4.4.E15","names":["LMLF.Blueprint.Elementary.Section44.dlmf_4_4_15"],"relation":"specialization","proof_status":"missing","quantitative_analogue":"not_applicable","notes":"Positive-real x path to infinity."},
+    {"source_id":"4.4.E16","names":["LMLF.Blueprint.Elementary.Section44.dlmf_4_4_16"],"relation":"specialization","proof_status":"missing","quantitative_analogue":"not_applicable","notes":"One fixed admissible ray in the stated sector."},
+    {"source_id":"4.4.E17","names":["LMLF.Blueprint.Elementary.Section44.dlmf_4_4_17"],"relation":"exact","proof_status":"missing","quantitative_analogue":"not_applicable","notes":"Complex z and natural n sequence."},
+    {"source_id":"4.4.E18","names":["LMLF.Blueprint.Elementary.Section44.dlmf_4_4_18"],"relation":"specialization","proof_status":"missing","quantitative_analogue":"not_applicable","notes":"Real z = 1 specialization of the preceding limit."},
+    {"source_id":"4.4.E19","names":["LMLF.Blueprint.Elementary.Section44.dlmf_4_4_19"],"relation":"exact","proof_status":"missing","quantitative_analogue":"not_applicable","notes":"Harmonic sum over k = 1,...,n and Euler's constant."}
+  ],
+  "shared_vocabulary_requests": [],
+  "known_gaps": []
+}

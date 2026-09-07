@@ -1,0 +1,34 @@
+{
+  "section_range": ["4.7"],
+  "numbered_formula_ids_expected": [
+    "4.7.E1", "4.7.E2", "4.7.E3", "4.7.E4", "4.7.E5", "4.7.E6",
+    "4.7.E7", "4.7.E8", "4.7.E9", "4.7.E10", "4.7.E11", "4.7.E12",
+    "4.7.E13", "4.7.E14", "4.7.E15"
+  ],
+  "numbered_formula_ids_stated": [
+    "4.7.E1", "4.7.E2", "4.7.E3", "4.7.E4", "4.7.E5", "4.7.E6",
+    "4.7.E7", "4.7.E8", "4.7.E9", "4.7.E10", "4.7.E11", "4.7.E12",
+    "4.7.E13", "4.7.E14", "4.7.E15"
+  ],
+  "numbered_formula_ids_omitted": [],
+  "extra_statement_ids": [],
+  "declarations": [
+    {"source_id":"4.7.E1","names":["LMLF.Blueprint.Elementary.Section47.principalLog_deriv"],"relation":"exact","proof_status":"missing","quantitative_analogue":"not_applicable","notes":"Principal complex logarithm on Mathlib's slitPlane, excluding its branch cut."},
+    {"source_id":"4.7.E2","names":["LMLF.Blueprint.Elementary.Section47.generalLog_deriv"],"relation":"specialization","proof_status":"missing","quantitative_analogue":"not_applicable","notes":"Arbitrary branch represented by an explicit HasDerivAt hypothesis."},
+    {"source_id":"4.7.E3","names":["LMLF.Blueprint.Elementary.Section47.principalLog_iteratedDeriv"],"relation":"exact","proof_status":"missing","quantitative_analogue":"not_applicable","notes":"Positive natural n and z in the principal slitPlane."},
+    {"source_id":"4.7.E4","names":["LMLF.Blueprint.Elementary.Section47.generalLog_iteratedDeriv"],"relation":"specialization","proof_status":"missing","quantitative_analogue":"not_applicable","notes":"Open local branch domain U and derivative supplied explicitly."},
+    {"source_id":"4.7.E5","names":["LMLF.Blueprint.Elementary.Section47.logarithmicDifferentialEquation"],"relation":"exact","proof_status":"missing","quantitative_analogue":"not_applicable","notes":"Reusable HasDerivAt predicate for a candidate w on domain U."},
+    {"source_id":"4.7.E6","names":["LMLF.Blueprint.Elementary.Section47.logarithmicSolution"],"relation":"specialization","proof_status":"missing","quantitative_analogue":"not_applicable","notes":"ODE and local logarithm derivative imply existence of an additive constant."},
+    {"source_id":"4.7.E7","names":["LMLF.Blueprint.Elementary.Section47.exp_deriv"],"relation":"exact","proof_status":"missing","quantitative_analogue":"not_applicable","notes":"Complex exponential."},
+    {"source_id":"4.7.E8","names":["LMLF.Blueprint.Elementary.Section47.exp_mul_deriv"],"relation":"exact","proof_status":"missing","quantitative_analogue":"not_applicable","notes":"Complex constant a."},
+    {"source_id":"4.7.E9","names":["LMLF.Blueprint.Elementary.Section47.cpow_deriv"],"relation":"specialization","proof_status":"missing","quantitative_analogue":"not_applicable","notes":"Principal complex power uses Complex.log."},
+    {"source_id":"4.7.E10","names":["LMLF.Blueprint.Elementary.Section47.z_cpow_deriv"],"relation":"specialization","proof_status":"missing","quantitative_analogue":"not_applicable","notes":"Principal branch expressed as exp(a * Complex.log z) on an explicit U contained in slitPlane."},
+    {"source_id":"4.7.E11","names":["LMLF.Blueprint.Elementary.Section47.z_cpow_iteratedDeriv"],"relation":"specialization","proof_status":"missing","quantitative_analogue":"not_applicable","notes":"Same explicit slitPlane branch domain and finite descending product."},
+    {"source_id":"4.7.E12","names":["LMLF.Blueprint.Elementary.Section47.linearDifferentialEquation"],"relation":"exact","proof_status":"missing","quantitative_analogue":"not_applicable","notes":"Reusable HasDerivAt predicate for a candidate w on domain U."},
+    {"source_id":"4.7.E13","names":["LMLF.Blueprint.Elementary.Section47.linearDifferentialSolution"],"relation":"specialization","proof_status":"missing","quantitative_analogue":"not_applicable","notes":"On an open connected domain, the complete nonvanishing solution family is characterized by C * exp(F), C ≠ 0."},
+    {"source_id":"4.7.E14","names":["LMLF.Blueprint.Elementary.Section47.secondOrderExponentialEquation"],"relation":"exact","proof_status":"missing","quantitative_analogue":"not_applicable","notes":"Reusable HasDerivAt predicate for the second-order equation on domain U, with source constraint a ≠ 0."},
+    {"source_id":"4.7.E15","names":["LMLF.Blueprint.Elementary.Section47.secondOrderExponentialSolution"],"relation":"specialization","proof_status":"missing","quantitative_analogue":"not_applicable","notes":"For a ≠ 0, an open connected domain and chosen square-root branch give the complete two-mode family."}
+  ],
+  "shared_vocabulary_requests": [],
+  "known_gaps": []
+}

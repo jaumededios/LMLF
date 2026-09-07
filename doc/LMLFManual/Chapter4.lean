@@ -1,5 +1,17 @@
 import VersoManual
 import LMLFManual.Components
+import LMLFManual.Chapter4.Section41
+import LMLFManual.Chapter4.Section42
+import LMLFManual.Chapter4.Section43
+import LMLFManual.Chapter4.Section44
+import LMLFManual.Chapter4.Section45
+import LMLFManual.Chapter4.Section46
+import LMLFManual.Chapter4.Section47
+import LMLFManual.Chapter4.Section48
+import LMLFManual.Chapter4.Section49
+import LMLFManual.Chapter4.Section410
+import LMLFManual.Chapter4.Section411
+import LMLFManual.Chapter4.Section412
 
 open Verso.Genre Manual
 open LMLFManual
@@ -105,3 +117,27 @@ number := false
 * [4.47 Approximations](https://dlmf.nist.gov/4.47)
 * [4.48 Software](https://dlmf.nist.gov/4.48)
 :::
+
+{include 1 LMLFManual.Chapter4.Section41}
+
+{include 1 LMLFManual.Chapter4.Section42}
+
+{include 1 LMLFManual.Chapter4.Section43}
+
+{include 1 LMLFManual.Chapter4.Section44}
+
+{include 1 LMLFManual.Chapter4.Section45}
+
+{include 1 LMLFManual.Chapter4.Section46}
+
+{include 1 LMLFManual.Chapter4.Section47}
+
+{include 1 LMLFManual.Chapter4.Section48}
+
+{include 1 LMLFManual.Chapter4.Section49}
+
+{include 1 LMLFManual.Chapter4.Section410}
+
+{include 1 LMLFManual.Chapter4.Section411}
+
+{include 1 LMLFManual.Chapter4.Section412}

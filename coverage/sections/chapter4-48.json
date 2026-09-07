@@ -1,0 +1,186 @@
+{
+  "section_range": ["4.8"],
+  "numbered_formula_ids_expected": [
+    "4.8.E1",
+    "4.8.E2",
+    "4.8.E3",
+    "4.8.E4",
+    "4.8.E5",
+    "4.8.E6",
+    "4.8.E7",
+    "4.8.E8",
+    "4.8.E9",
+    "4.8.E10",
+    "4.8.E11",
+    "4.8.E12",
+    "4.8.E13",
+    "4.8.E14",
+    "4.8.E15",
+    "4.8.E16",
+    "4.8.E17"
+  ],
+  "numbered_formula_ids_stated": [
+    "4.8.E1",
+    "4.8.E2",
+    "4.8.E3",
+    "4.8.E4",
+    "4.8.E5",
+    "4.8.E6",
+    "4.8.E7",
+    "4.8.E8",
+    "4.8.E9",
+    "4.8.E10",
+    "4.8.E11",
+    "4.8.E12",
+    "4.8.E13",
+    "4.8.E14",
+    "4.8.E15",
+    "4.8.E16",
+    "4.8.E17"
+  ],
+  "numbered_formula_ids_omitted": [],
+  "extra_statement_ids": [],
+  "declarations": [
+    {
+      "source_id": "4.8.E1",
+      "names": ["LMLF.Blueprint.Elementary.Section48.log_mul"],
+      "relation": "specialization",
+      "proof_status": "missing",
+      "quantitative_analogue": "not_applicable",
+      "notes": "Real nonzero specialization of the general logarithm product identity."
+    },
+    {
+      "source_id": "4.8.E2",
+      "names": ["LMLF.Blueprint.Elementary.Section48.principal_log_mul"],
+      "relation": "specialization",
+      "proof_status": "missing",
+      "quantitative_analogue": "not_applicable",
+      "notes": "Positive-real principal-branch specialization; the phase condition is automatic."
+    },
+    {
+      "source_id": "4.8.E3",
+      "names": ["LMLF.Blueprint.Elementary.Section48.log_div"],
+      "relation": "specialization",
+      "proof_status": "missing",
+      "quantitative_analogue": "not_applicable",
+      "notes": "Real nonzero specialization of the general logarithm quotient identity."
+    },
+    {
+      "source_id": "4.8.E4",
+      "names": ["LMLF.Blueprint.Elementary.Section48.principal_log_div"],
+      "relation": "specialization",
+      "proof_status": "missing",
+      "quantitative_analogue": "not_applicable",
+      "notes": "Positive-real principal-branch specialization; the phase-difference condition is automatic."
+    },
+    {
+      "source_id": "4.8.E5",
+      "names": ["LMLF.Blueprint.Elementary.Section48.log_zpow"],
+      "relation": "specialization",
+      "proof_status": "missing",
+      "quantitative_analogue": "not_applicable",
+      "notes": "Real zpow specialization of the integer-power identity."
+    },
+    {
+      "source_id": "4.8.E6",
+      "names": ["LMLF.Blueprint.Elementary.Section48.principal_log_zpow"],
+      "relation": "specialization",
+      "proof_status": "missing",
+      "quantitative_analogue": "not_applicable",
+      "notes": "Positive-real principal-branch specialization."
+    },
+    {
+      "source_id": "4.8.E7",
+      "names": ["LMLF.Blueprint.Elementary.Section48.log_inv"],
+      "relation": "specialization",
+      "proof_status": "missing",
+      "quantitative_analogue": "not_applicable",
+      "notes": "Positive-real principal-branch specialization."
+    },
+    {
+      "source_id": "4.8.E8",
+      "names": ["LMLF.Blueprint.Elementary.Section48.log_exp_branch"],
+      "relation": "exact",
+      "proof_status": "missing",
+      "quantitative_analogue": "not_applicable",
+      "notes": "Complex logarithm branch relation with an existential integer."
+    },
+    {
+      "source_id": "4.8.E9",
+      "names": ["LMLF.Blueprint.Elementary.Section48.principal_log_exp"],
+      "relation": "specialization",
+      "proof_status": "missing",
+      "quantitative_analogue": "not_applicable",
+      "notes": "Complex principal branch with Mathlib's strict lower-bound convention."
+    },
+    {
+      "source_id": "4.8.E10",
+      "names": ["LMLF.Blueprint.Elementary.Section48.exp_log"],
+      "relation": "exact",
+      "proof_status": "missing",
+      "quantitative_analogue": "not_applicable",
+      "notes": "Principal complex logarithm on nonzero arguments."
+    },
+    {
+      "source_id": "4.8.E11",
+      "names": ["LMLF.Blueprint.Elementary.Section48.log_rpow_general_branch"],
+      "relation": "specialization",
+      "proof_status": "missing",
+      "quantitative_analogue": "not_applicable",
+      "notes": "Positive-real base and real exponent remove the complex branch ambiguity."
+    },
+    {
+      "source_id": "4.8.E12",
+      "names": ["LMLF.Blueprint.Elementary.Section48.principal_log_rpow"],
+      "relation": "specialization",
+      "proof_status": "missing",
+      "quantitative_analogue": "not_applicable",
+      "notes": "Positive-real principal-value specialization."
+    },
+    {
+      "source_id": "4.8.E13",
+      "names": ["LMLF.Blueprint.Elementary.Section48.log_rpow"],
+      "relation": "exact",
+      "proof_status": "missing",
+      "quantitative_analogue": "not_applicable",
+      "notes": "Real-variable identity with a positive base."
+    },
+    {
+      "source_id": "4.8.E14",
+      "names": ["LMLF.Blueprint.Elementary.Section48.rpow_add"],
+      "relation": "specialization",
+      "proof_status": "missing",
+      "quantitative_analogue": "not_applicable",
+      "notes": "Positive-real base and real exponents."
+    },
+    {
+      "source_id": "4.8.E15",
+      "names": ["LMLF.Blueprint.Elementary.Section48.mul_rpow"],
+      "relation": "specialization",
+      "proof_status": "missing",
+      "quantitative_analogue": "not_applicable",
+      "notes": "Positive-real bases make the phase condition automatic."
+    },
+    {
+      "source_id": "4.8.E16",
+      "names": ["LMLF.Blueprint.Elementary.Section48.exp_add"],
+      "relation": "specialization",
+      "proof_status": "missing",
+      "quantitative_analogue": "not_applicable",
+      "notes": "Real slice of the complex exponential addition identity."
+    },
+    {
+      "source_id": "4.8.E17",
+      "names": ["LMLF.Blueprint.Elementary.Section48.exp_rpow"],
+      "relation": "specialization",
+      "proof_status": "missing",
+      "quantitative_analogue": "not_applicable",
+      "notes": "Real variables make the stated imaginary-part restriction automatic."
+    }
+  ],
+  "shared_vocabulary_requests": [],
+  "known_gaps": [
+    "The complex general-logarithm and complex-power formulas are represented by honest real-positive or real-variable specializations where Mathlib's branch conventions are canonical.",
+    "The principal-logarithm theorem uses Mathlib's strict lower boundary -pi < Im z, which is a strengthened form of the source's inclusive display."
+  ]
+}

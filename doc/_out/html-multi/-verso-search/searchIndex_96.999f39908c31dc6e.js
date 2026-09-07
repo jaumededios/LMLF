@@ -1,0 +1,1 @@
+window.docContents[96].resolve({"/Elementary-Functions/___4___8-Identities/#chapter-4-section-8":{"contents":"Source: NIST Digital Library of Mathematical Functions, §4.8.\n\n\n\n","context":"LMLF · DLMF with Lean\u0009Elementary Functions","header":"4.8. §4.8 Identities","id":"/Elementary-Functions/___4___8-Identities/#chapter-4-section-8"}});
