@@ -50,140 +50,1141 @@
  "7": "<code>Set X</code>",
  "69":
  "<code>LMLF.Integral.HasImproperIntegralAtTopBreaks.{u_1} {E : Type u_1} [NormedAddCommGroup E] [NormedSpace ℝ E]\n  [CompleteSpace E] (f : ℝ → E) (k : ℝ) : List ℝ → E → Prop</code><span class=\"sep\"></span><code class=\"docstring\">An improper integral from `k` to `+∞`, split at every point of a sorted list of exceptional\npoints. Every one-sided contribution must converge separately.\n</code>",
+ "683":
+ "<code>LMLF.Blueprint.Gamma.Section518.qJacksonIntegral (q : ℝ) (f : ℝ → ℂ) : ℂ</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 5.18.12: Jackson's q-integral on `[0,1]` for a real base. </code>",
+ "682":
+ "<code>LMLF.Blueprint.Gamma.Section518.dlmf_5_18_12 {q : ℝ} (hq₀ : 0 &lt; q) (hq₁ : q &lt; 1) {a b : ℂ} (ha : 0 &lt; a.re)\n  (hb : 0 &lt; b.re) :\n  qBeta q a b =\n    qJacksonIntegral q fun t =&gt; (↑t).cpow (a - 1) * qPochhammerInf (↑t * ↑q) ↑q / qPochhammerInf (↑t * (↑q).cpow b) ↑q</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 5.18.12: q-Beta's Jackson integral representation. </code>",
+ "681":
+ "<code>LMLF.Blueprint.Gamma.Section518.qBeta (q : ℝ) (a b : ℂ) : ℂ</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 5.18.11: the q-Beta function for a real base `q`. </code>",
+ "680":
+ "<code>LMLF.Blueprint.Gamma.Section518.dlmf_5_18_11 {q : ℝ} (hq₀ : 0 &lt; q) (hq₁ : q &lt; 1) (a b : ℂ) :\n  qBeta q a b = qGamma q a * qGamma q b / qGamma q (a + b)</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 5.18.11: q-Beta as a quotient of q-Gamma values. </code>",
  "68":
  "<code>Set.Iio.{u_1} {α : Type u_1} [Preorder α] (b : α) : Set α</code><span class=\"sep\"></span><code class=\"docstring\">`Iio b` is the left-infinite right-open interval $(-∞, b)$. </code>",
+ "679":
+ "<code>LMLF.Blueprint.Gamma.Section518.dlmf_5_18_10 (z : ℂ) : Tendsto (fun q =&gt; qGamma q z) (𝓝[&lt;] 1) (𝓝 (Complex.Gamma z))</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 5.18.10: q-Gamma tends to the ordinary Gamma function as `q → 1⁻`. </code>",
+ "678": "<code>x &lt; 2</code>",
+ "677": "<code>1 &lt; x</code>",
+ "676":
+ "<code>LMLF.Blueprint.Gamma.Section518.dlmf_5_18_9 {q r x : ℝ} (hq : 0 &lt; q) (hqr : q &lt; r) (hr : r &lt; 1) (hx₀ : 1 &lt; x)\n  (hx₁ : x &lt; 2) : qGammaReal q x &gt; qGammaReal r x</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 5.18.9: q-Gamma decreases with the base on `1 &lt; x &lt; 2`. </code>",
+ "675": "<code>0 &lt; x ∧ x &lt; 1 ∨ 2 &lt; x</code>",
+ "674": "<code>r &lt; 1</code>",
+ "673": "<code>q &lt; r</code>",
+ "672":
+ "<code>LMLF.Blueprint.Gamma.Section518.dlmf_5_18_8 {q r x : ℝ} (hq : 0 &lt; q) (hqr : q &lt; r) (hr : r &lt; 1)\n  (hx : 0 &lt; x ∧ x &lt; 1 ∨ 2 &lt; x) : qGammaReal q x &lt; qGammaReal r x</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 5.18.8: q-Gamma increases with the base on `0 &lt; x &lt; 1`. </code>",
+ "671": "<code>ConvexOn ℝ (Ioi 0) (Real.log ∘ f)</code>",
+ "670":
+ "<code>∀ {x : ℝ}, 0 &lt; x → f (x + 1) = (1 - q.rpow x) / (1 - q) * f x</code>",
  "67": "<code>List ℝ</code>",
+ "669":
+ "<code>LMLF.Blueprint.Gamma.Section518.dlmf_5_18_bohr_mollerup {q : ℝ} (hq₀ : 0 &lt; q) (hq₁ : q &lt; 1) {f : ℝ → ℝ}\n  (hf_pos : ∀ {x : ℝ}, 0 &lt; x → 0 &lt; f x) (hf_recurrence : ∀ {x : ℝ}, 0 &lt; x → f (x + 1) = (1 - q.rpow x) / (1 - q) * f x)\n  (hf_one : f 1 = 1) (hf_logConvex : ConvexOn ℝ (Ioi 0) (Real.log ∘ f)) : EqOn f (qGammaReal q) (Ioi 0)</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 5.18(ii): q-Gamma is characterized by positivity, normalization,\nthe q-recurrence, and log-convexity on the positive real axis. </code>",
+ "668":
+ "<code>LMLF.Blueprint.Gamma.Section518.dlmf_5_18_convexity {q : ℝ} (hq₀ : 0 &lt; q) (hq₁ : q &lt; 1) :\n  ConvexOn ℝ (Ioi 0) fun x =&gt; Real.log (qGammaReal q x)</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 5.18(ii): `ln Γ_q(x)` is convex for positive real `x`. </code>",
+ "667":
+ "<code>LMLF.Blueprint.Gamma.Section518.qGammaReal (q x : ℝ) : ℝ</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 5.18.8–5.18.9: the real-axis q-Gamma value used by the inequalities. </code>",
+ "666": "<code>qGammaPoleFree q ↑x</code>",
+ "665":
+ "<code>LMLF.Blueprint.Gamma.Section518.qGammaReal_coe {q x : ℝ} (hq₀ : 0 &lt; q) (hq₁ : q &lt; 1) (hx : qGammaPoleFree q ↑x) :\n  qGamma q ↑x = ↑(qGammaReal q x)</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 5.18(ii): on the positive real axis, q-Gamma is real-valued away from\nits q-Pochhammer poles; `qGammaReal` is the real-axis specialization used below. </code>",
+ "664": "<code>qGammaPoleFree q (z + 1)</code>",
+ "663": "<code>qGammaPoleFree q z</code>",
+ "662":
+ "<code>LMLF.Blueprint.Gamma.Section518.dlmf_5_18_7 {q : ℝ} (hq₀ : 0 &lt; q) (hq₁ : q &lt; 1) (z : ℂ) (hz : qGammaPoleFree q z)\n  (hz1 : qGammaPoleFree q (z + 1)) : qGamma q (z + 1) = (1 - (↑q).cpow z) / (1 - ↑q) * qGamma q z</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 5.18.7: the q-Gamma recurrence. </code>",
+ "661":
+ "<code>LMLF.Blueprint.Gamma.Section518.dlmf_5_18_6 {q : ℝ} (hq₀ : 0 &lt; q) (hq₁ : q &lt; 1) (n : ℕ) :\n  qFactorial (↑q) n = qGamma q ↑(n + 1)</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 5.18.6: q-factorials are q-Gamma values at positive integers. </code>",
+ "660":
+ "<code>LMLF.Blueprint.Gamma.Section518.dlmf_5_18_5 {q : ℝ} (hq₀ : 0 &lt; q) (hq₁ : q &lt; 1) : qGamma q 1 = 1 ∧ qGamma q 2 = 1</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 5.18.5: the first two q-Gamma values. </code>",
  "66":
  "<code>Filter.atTop.{u_3} {α : Type u_3} [Preorder α] : Filter α</code><span class=\"sep\"></span><code class=\"docstring\">`atTop` is the filter representing the limit `→ ∞` on an ordered set.\nIt is generated by the collection of up-sets `{b | a ≤ b}`.\n(The preorder need not have a top element for this to be well defined,\nand indeed is trivial when a top element `x` exists, i.e., it coincides with `pure x`.) </code>",
+ "659":
+ "<code>LMLF.Blueprint.Gamma.Section518.qGamma (q : ℝ) (z : ℂ) : ℂ</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 5.18.4: the q-Gamma function for a real base `q`. </code>",
+ "658": "<code>q &lt; 1</code>",
+ "657": "<code>0 &lt; q</code>",
+ "656":
+ "<code>LMLF.Blueprint.Gamma.Section518.dlmf_5_18_4 {q : ℝ} (hq₀ : 0 &lt; q) (hq₁ : q &lt; 1) (z : ℂ) :\n  qGamma q z = qPochhammerInf ↑q ↑q * (1 - ↑q).cpow (1 - z) / qPochhammerInf ((↑q).cpow z) ↑q</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 5.18.4: product representation of q-Gamma for `0 &lt; q &lt; 1`. </code>",
+ "655":
+ "<code>LMLF.Blueprint.Gamma.Section518.qGammaPoleFree (q : ℝ) (z : ℂ) : Prop</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 5.18.4 and 5.18.7: the ordinary finite-value domain of q-Gamma.\n\nThis excludes the zero set of the denominator product.  It is needed when a\nmeromorphic source identity is represented by Lean's totalized field quotient. </code>",
+ "654":
+ "<code>LMLF.Blueprint.Gamma.Section518.qGammaDenom (q : ℝ) (z : ℂ) : ℂ</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 5.18.4 and 5.18.7: the q-Pochhammer denominator of q-Gamma. </code>",
+ "653":
+ "<code>LMLF.Blueprint.Gamma.Section518.qPochhammerInf (a q : ℂ) : ℂ</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 5.18.3: the infinite q-Pochhammer product, totalized as `tprod`. </code>",
+ "652":
+ "<code>HasProd.{u_1, u_2} {α : Type u_1} {β : Type u_2} [CommMonoid α] [TopologicalSpace α] (f : β → α) (a : α)\n  (L : SummationFilter β := SummationFilter.unconditional β) : Prop</code><span class=\"sep\"></span><code class=\"docstring\">`HasProd f a L` means that the (potentially infinite) product of the `f b` for `b : β` converges\nto `a` along the SummationFilter `L`.\n\nBy default `L` is the `unconditional` one, corresponding to the limit of all finite sets towards\nthe entire type. So we take the product over bigger and bigger finite sets. This product operation\nis invariant under permuting the terms (while products for more general summation filters usually\nare not).\n\nFor the definition and many statements, `α` does not need to be a topological monoid, only a monoid\nwith a topology (i.e. the multiplication is not assumed to be continuous). We only add this\nassumption later, for the lemmas where it is relevant.\n\nThese are defined in an identical way to infinite sums (`HasSum`). For example, we say that\nthe function `ℕ → ℝ` sending `n` to `1 / 2` has a product of `0`, rather than saying that it does\nnot converge as some authors would. </code>",
+ "651": "<code>‖q‖ &lt; 1</code>",
+ "650":
+ "<code>LMLF.Blueprint.Gamma.Section518.dlmf_5_18_3 {a q : ℂ} (hq : ‖q‖ &lt; 1) :\n  HasProd (fun k =&gt; 1 - a * q ^ k) (qPochhammerInf a q)</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 5.18.3: the infinite q-Pochhammer product converges for `‖q‖ &lt; 1`. </code>",
  "65":
  "<code>nhds.{u_3} {X : Type u_3} [TopologicalSpace X] (x : X) : Filter X</code><span class=\"sep\"></span><code class=\"docstring\">A set is called a neighborhood of `x` if it contains an open set around `x`. The set of all\nneighborhoods of `x` forms a filter, the neighborhood filter at `x`, is here defined as the\ninfimum over the principal filters of all open sets containing `x`. </code>",
+ "649":
+ "<code>LMLF.Blueprint.Gamma.Section518.qFactorial (q : ℂ) (n : ℕ) : ℂ</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 5.18.2: the q-factorial, as the product of q-integers. </code>",
+ "648": "<code>q ≠ 1</code>",
+ "647":
+ "<code>LMLF.Blueprint.Gamma.Section518.dlmf_5_18_2 (q : ℂ) (n : ℕ) (hq : q ≠ 1) :\n  qFactorial q n = qPochhammer q q n * (1 - q)⁻¹ ^ n</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 5.18.2: q-factorial in terms of the q-Pochhammer symbol. </code>",
+ "646":
+ "<code>LMLF.Blueprint.Gamma.Section518.qPochhammer (a q : ℂ) (n : ℕ) : ℂ</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 5.18.1: the finite q-Pochhammer (q-shifted factorial) symbol. </code>",
+ "645":
+ "<code>LMLF.Blueprint.Gamma.Section518.dlmf_5_18_1 (a q : ℂ) (n : ℕ) :\n  qPochhammer a q n = ∏ k ∈ Finset.range n, (1 - a * q ^ k)</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 5.18.1: finite q-Pochhammer products. </code>",
+ "644":
+ "<code>LMLF.Blueprint.Gamma.Section517.dlmf_5_17_7 :\n  Tendsto glaisherPartialExpression atTop (nhds glaisherLogConstant) ∧\n    ↑glaisherLogConstant =\n        (↑Real.eulerMascheroniConstant + Complex.log (2 * ↑Real.pi)) / 12 - deriv riemannZeta 2 / (2 * ↑Real.pi ^ 2) ∧\n      ↑glaisherLogConstant = 1 / 12 - deriv riemannZeta (-1)</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 5.17.7: the defining limit and zeta-derivative formulas for `C`. </code>",
+ "643":
+ "<code>LMLF.Blueprint.Gamma.Section517.dlmf_5_17_6 : glaisherConstant = Real.exp glaisherLogConstant</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 5.17.6: Glaisher's constant is the exponential of `C`. </code>",
+ "642":
+ "<code>LMLF.Blueprint.Gamma.Section517.glaisherLogConstant : ℝ</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 5.17.6–5.17.7: Glaisher's constant and its logarithm. </code>",
+ "641":
+ "<code>LMLF.Blueprint.Gamma.Section517.glaisherPartialExpression (n : ℕ) : ℝ</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 5.17.7: the renormalized finite expression converging to `C`. </code>",
+ "640":
+ "<code>LMLF.Blueprint.Gamma.Section517.dlmf_5_17_5 :\n  (fun x =&gt; Complex.log (barnesG ↑(x + 1)) - barnesGAsymptoticMain x) ∼ₚ[atTop] barnesGAsymptoticTerm</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 5.17.5: the positive-real Poincare expansion of `Ln G(x+1)`. </code>",
  "64":
  "<code>Set.Ioi.{u_1} {α : Type u_1} [Preorder α] (b : α) : Set α</code><span class=\"sep\"></span><code class=\"docstring\">`Ioi a` is the left-open right-infinite interval $(a, ∞)$. </code>",
+ "639":
+ "<code>LMLF.Blueprint.Gamma.Section517.barnesGAsymptoticTerm (n : ℕ) (x : ℝ) : ℂ</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 5.17.5: the term with source index `k = n + 1`. </code>",
+ "638":
+ "<code>LMLF.Blueprint.Gamma.Section517.glaisherConstant : ℝ</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 5.17.6: the exponential definition of Glaisher's constant. </code>",
+ "637":
+ "<code>LMLF.Blueprint.Gamma.Section517.barnesGAsymptoticMain (x : ℝ) : ℂ</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 5.17.5: the principal-branch main term on the positive real axis. </code>",
+ "636":
+ "<code>LMLF.Blueprint.Gamma.Section517.dlmf_5_17_4 {x : ℝ} (hx : 0 &lt; x) :\n  Complex.log (barnesG ↑(x + 1)) =\n    ↑x / 2 * Complex.log (2 * ↑Real.pi) - 1 / 2 * ↑x * (↑x + 1) + ↑x * Complex.log (Complex.Gamma ↑(x + 1)) -\n      ∫ (t : ℝ) in 0..x, Complex.log (Complex.Gamma ↑(t + 1))</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 5.17.4: the positive-real specialization of the Barnes log integral. </code>",
+ "635":
+ "<code>LMLF.Blueprint.Gamma.Section517.dlmf_5_17_3 (z : ℂ) :\n  barnesG (z + 1) = barnesGProductPrefactor z * ∏' (k : { n // 1 ≤ n }), barnesGProductTerm z k</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 5.17.3: Barnes' canonical infinite product, indexed from `k = 1`. </code>",
+ "634":
+ "<code>LMLF.Blueprint.Gamma.Section517.dlmf_5_17_2 {n : ℕ} (hn : 2 ≤ n) : barnesG ↑n = barnesIntegerProduct n</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 5.17.2: Barnes' `G` at each integer `n ≥ 2`. </code>",
+ "633":
+ "<code>LMLF.Blueprint.Gamma.Section517.barnesIntegerProduct (n : ℕ) : ℂ</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 5.17.2: the finite product of factorials at a positive integer. </code>",
+ "632":
+ "<code>LMLF.Blueprint.Gamma.Section517.barnesG_one : barnesG 1 = 1</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 5.17.1: Barnes' normalization at one. </code>",
+ "631":
+ "<code>LMLF.Blueprint.Gamma.Section517.dlmf_5_17_1 (z : ℂ) (hz : ∀ (m : ℕ), z ≠ -↑m) :\n  barnesG (z + 1) = Complex.Gamma z * barnesG z</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 5.17.1: Barnes' functional equation on the ordinary pole-free domain. </code>",
+ "630":
+ "<code>LMLF.Blueprint.Gamma.Section517.barnesG (z : ℂ) : ℂ</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 5.17.3: Barnes' `G`-function (double gamma function), via the canonical product. </code>",
  "63":
  "<code>nhdsWithin.{u_1} {X : Type u_1} [TopologicalSpace X] (x : X) (s : Set X) : Filter X</code><span class=\"sep\"></span><code class=\"docstring\">The \"neighborhood within\" filter. Elements of `𝓝[s] x` are sets containing the\nintersection of `s` and a neighborhood of `x`. </code>",
+ "629":
+ "<code>LMLF.Blueprint.Gamma.Section517.barnesGProductPrefactor (z : ℂ) : ℂ</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 5.17.3: the non-product exponential factor in the Barnes product. </code>",
+ "628":
+ "<code>LMLF.Blueprint.Gamma.Section517.barnesGProductTerm (z : ℂ) (k : { n // 1 ≤ n }) : ℂ</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 5.17.3: the `k`th factor in Barnes' canonical product, for `k ≥ 1`. </code>",
+ "627":
+ "<code>LMLF.Blueprint.Gamma.Section516.dlmf_5_16_2 :\n  HasSum (fun k =&gt; 1 / ↑↑k * polygamma 1 ↑(↑k + 1)) (riemannZeta 3) ∧ riemannZeta 3 = -(1 / 2) * polygamma 2 1</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 5.16.2: a reciprocal-weighted trigamma sum and its second-polygamma value. </code>",
+ "626":
+ "<code>Subtype.val.{u} {α : Sort u} {p : α → Prop} (self : Subtype p) : α</code><span class=\"sep\"></span><code class=\"docstring\">The value in the underlying type that satisfies the predicate.\n</code>",
+ "625": "<code>{ n // 1 ≤ n }</code>",
+ "624":
+ "<code>SummationFilter.conditional.{u_2} (β : Type u_2) [Preorder β] [LocallyFiniteOrder β] : SummationFilter β</code><span class=\"sep\"></span><code class=\"docstring\">**Conditional summation**, for ordered types `β` such that closed intervals `[x, y]` are\nfinite: this corresponds to limits of finite sums over larger and larger intervals. </code>",
+ "623":
+ "<code>LMLF.Blueprint.Gamma.Section516.dlmf_5_16_1 :\n  HasSum (fun k =&gt; (-1) ^ ↑k * polygamma 1 ↑↑k) (-↑Real.pi ^ 2 / 8) (SummationFilter.conditional { n // 1 ≤ n })</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 5.16.1: the alternating sum of trigamma values at positive integers. </code>",
+ "622":
+ "<code>LMLF.Blueprint.Gamma.Section515.polygammaAsymptoticTerm (n k : ℕ) (x : ℝ) : ℝ</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 5.15.9: terms indexed from zero; the tail uses source index `j = k - 1`. </code>",
+ "621":
+ "<code>LMLF.Blueprint.Gamma.Section515.dlmf_5_15_9 (n : ℕ) (hn : 1 ≤ n) :\n  (fun x =&gt; realPolygamma n x) ∼ₚ[atTop] polygammaAsymptoticTerm n</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 5.15.9: on the positive real axis, the `n`-th polygamma has the displayed expansion. </code>",
+ "620":
+ "<code>LMLF.Blueprint.Gamma.Section515.trigammaAsymptoticTerm (k : ℕ) (x : ℝ) : ℝ</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 5.15.8: terms indexed from zero; the tail uses source index `j = k - 1`. </code>",
  "62":
  "<code class=\"docstring\">The interval integral `∫ x in a..b, f x` is defined\nas `∫ x in Ioc a b, f x - ∫ x in Ioc b a, f x`. If `a ≤ b`, then it equals\n`∫ x in Ioc a b, f x`, otherwise it equals `-∫ x in Ioc b a, f x`. </code>",
+ "619":
+ "<code>LMLF.Blueprint.Gamma.Section515.realPolygamma (n : ℕ) (x : ℝ) : ℝ</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 5.15.8: the positive-real restriction of the trigamma function. </code>",
+ "618":
+ "<code>LMLF.Blueprint.Gamma.Section515.dlmf_5_15_8 : (fun x =&gt; realPolygamma 1 x) ∼ₚ[atTop] trigammaAsymptoticTerm</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 5.15.8: on the positive real axis, trigamma has the displayed Poincare expansion. </code>",
+ "617": "<code>∀ (k : ℕ), ↑m * z ≠ -↑k</code>",
+ "616": "<code>1 ≤ m</code>",
+ "615":
+ "<code>LMLF.Blueprint.Gamma.Section515.dlmf_5_15_7 (n m : ℕ) (hn : 1 ≤ n) (hm : 1 ≤ m) {z : ℂ} (hz : ∀ (k : ℕ), ↑m * z ≠ -↑k) :\n  polygamma n (↑m * z) = 1 / ↑m ^ (n + 1) * ∑ k ∈ Finset.range m, polygamma n (z + ↑k / ↑m)</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 5.15.7: multiplication distributes a polygamma over the `m` residue classes. </code>",
+ "614":
+ "<code>LMLF.Blueprint.Gamma.Section515.cotPiDerivative (n : ℕ) (z : ℂ) : ℂ</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 5.15.6: the `n`-th derivative of `cot (π z)`. </code>",
+ "613":
+ "<code>LMLF.Blueprint.Gamma.Section515.dlmf_5_15_6 (n : ℕ) (hn : 1 ≤ n) {z : ℂ} (hz : ∀ (k : ℤ), z ≠ ↑k) :\n  polygamma n (1 - z) + (-1) ^ (n - 1) * polygamma n z = (-1) ^ n * ↑Real.pi * cotPiDerivative n z</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 5.15.6: the reflection identity for the `n`-th polygamma derivative. </code>",
+ "612":
+ "<code>LMLF.Blueprint.Gamma.Section515.dlmf_5_15_5 (n : ℕ) (hn : 1 ≤ n) {z : ℂ} (hz : ∀ (k : ℕ), z ≠ -↑k) :\n  polygamma n (z + 1) = polygamma n z + (-1) ^ n * ↑n.factorial / z ^ (n + 1)</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 5.15.5: the polygamma recurrence, away from the nonpositive integers. </code>",
+ "611":
+ "<code>LMLF.Blueprint.Gamma.Section515.dlmf_5_15_4 (n : ℕ) (hn : 1 ≤ n) :\n  polygamma 1 (↑n - 1 / 2) = ↑Real.pi ^ 2 / 2 - 4 * ∑ k ∈ Finset.Ico 1 n, 1 / ↑(2 * k - 1) ^ 2</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 5.15.4: trigamma at a positive half-integer is a finite odd reciprocal-square sum. </code>",
+ "610":
+ "<code>LMLF.Blueprint.Gamma.Section515.dlmf_5_15_3 (n : ℕ) (hn : 1 ≤ n) :\n  polygamma n (1 / 2) = (-1) ^ (n + 1) * ↑n.factorial * (2 ^ (n + 1) - 1) * riemannZeta (↑n + 1)</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 5.15.3: the polygamma value at one half is the odd-part zeta value. </code>",
  "61":
  "<code>Filter.Tendsto.{u_1, u_2} {α : Type u_1} {β : Type u_2} (f : α → β) (l₁ : Filter α) (l₂ : Filter β) : Prop</code><span class=\"sep\"></span><code class=\"docstring\">`Filter.Tendsto` is the generic \"limit of a function\" predicate.\n`Tendsto f l₁ l₂` asserts that for every `l₂` neighborhood `a`,\nthe `f`-preimage of `a` is an `l₁` neighborhood. </code>",
+ "609":
+ "<code>LMLF.Blueprint.Gamma.Section515.dlmf_5_15_2 (n : ℕ) (hn : 1 ≤ n) :\n  polygamma n 1 = (-1) ^ (n + 1) * ↑n.factorial * riemannZeta (↑n + 1)</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 5.15.2: the polygamma value at one is a zeta value. </code>",
+ "608":
+ "<code>LMLF.Blueprint.Gamma.Section515.polygamma (n : ℕ) (z : ℂ) : ℂ</code><span class=\"sep\"></span><code class=\"docstring\">DLMF §5.15: `ψ⁽ⁿ⁾` is the `n`-th iterated derivative of the digamma function. </code>",
+ "607":
+ "<code>LMLF.Blueprint.Gamma.Section515.dlmf_5_15_1 {z : ℂ} (hz : ∀ (k : ℕ), z ≠ -↑k) :\n  HasSum (fun k =&gt; 1 / (↑k + z) ^ 2) (polygamma 1 z)</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 5.15.1: trigamma is the reciprocal-square series away from the Gamma poles. </code>",
+ "606":
+ "<code>LMLF.Blueprint.Gamma.Section514.dysonCube (n : ℕ) : Set (Fin n → ℝ)</code><span class=\"sep\"></span><code class=\"docstring\">The cube `[-π,π]ⁿ` used by DLMF 5.14.7. </code>",
+ "605": "<code>-1 / ↑n &lt; b</code>",
+ "604":
+ "<code>LMLF.Blueprint.Gamma.Section514.dlmf_5_14_7 {n : ℕ} (hn : 0 &lt; n) {b : ℝ} (hb : -1 / ↑n &lt; b) :\n  IntegrableOn (dysonIntegrand n b) (dysonCube n) volume ∧\n    1 / (2 * Real.pi) ^ ↑n * ∫ (θ : Fin n → ℝ) in dysonCube n, dysonIntegrand n b θ =\n      Real.Gamma (1 + b * ↑n) / ∏ x, Real.Gamma (1 + b)</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 5.14.7: Dyson's circular integral. </code>",
+ "603":
+ "<code>LMLF.Blueprint.Gamma.Section514.dysonIntegrand (n : ℕ) (b : ℝ) (θ : Fin n → ℝ) : ℝ</code><span class=\"sep\"></span><code class=\"docstring\">The real circular Vandermonde integrand in Dyson's integral. </code>",
+ "602":
+ "<code>Set.univ.{u} {α : Type u} : Set α</code><span class=\"sep\"></span><code class=\"docstring\">The universal set on a type `α` is the set containing all elements of `α`.\n\nThis is conceptually the \"same as\" `α` (in set theory, it is actually the same), but type theory\nmakes the distinction that `α` is a type while `Set.univ` is a term of type `Set α`. `Set.univ` can\nitself be coerced to a type `↥Set.univ` which is in bijection with (but distinct from) `α`. </code>",
+ "601":
+ "<code>LMLF.Blueprint.Gamma.Section514.dlmf_5_14_6 {n : ℕ} (hn : 0 &lt; n) {c : ℝ} (hc : -1 / ↑n &lt; c) :\n  IntegrableOn (gaussianVandermondeIntegrand n c) univ volume ∧\n    1 / (2 * Real.pi) ^ (↑n / 2) * ∫ (t : Fin n → ℝ), gaussianVandermondeIntegrand n c t =\n      (∏ k, Real.Gamma (1 + (↑↑k + 1) * c)) / ∏ x, Real.Gamma (1 + c)</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 5.14.6: the normalized Gaussian Vandermonde integral. </code>",
+ "600":
+ "<code>LMLF.Blueprint.Gamma.Section514.gaussianVandermondeIntegrand (n : ℕ) (c : ℝ) (t : Fin n → ℝ) : ℝ</code><span class=\"sep\"></span><code class=\"docstring\">The real Gaussian Vandermonde integrand in DLMF 5.14.6. </code>",
  "60":
  "<code>MeasureTheory.MeasureSpace.volume.{u_6} {α : Type u_6} [self : MeasureSpace α] : Measure α</code><span class=\"sep\"></span><code class=\"docstring\">`volume` is the canonical measure on `α`. </code>",
  "6":
  "<code>QuantitativeAnalysis.ErrorOn.{u_1, u_2} {X : Type u_1} {E : Type u_2} [NormedAddCommGroup E] (D : Set X) (f a : X → E)\n  (b : X → ℝ) : Prop</code><span class=\"sep\"></span><code class=\"docstring\">`ErrorOn D f a b` means that `a` approximates `f` with pointwise error at most `b` on `D`. </code>",
+ "599":
+ "<code>LMLF.Blueprint.Gamma.Section514.positiveOrthant (n : ℕ) : Set (Fin n → ℝ)</code><span class=\"sep\"></span><code class=\"docstring\">The positive orthant `[0,∞)ⁿ` used by DLMF 5.14.5. </code>",
+ "598":
+ "<code>LMLF.Blueprint.Gamma.Section514.dlmf_5_14_5 {m n : ℕ} (hmn : m ≤ n) (hn : 2 ≤ n) {a c : ℝ} (ha : 0 &lt; a)\n  (hc₁ : -1 / ↑n &lt; c) (hc₂ : -(a / (↑n - 1)) &lt; c) :\n  IntegrableOn (laguerreIntegrand hmn a c) (positiveOrthant n) volume ∧\n    ∫ (t : Fin n → ℝ) in positiveOrthant n, laguerreIntegrand hmn a c t =\n      ((∏ k, (a + selbergIndex n (Fin.castLE hmn k) * c)) *\n          ∏ k, Real.Gamma (a + selbergIndex n k * c) * Real.Gamma (1 + (↑↑k + 1) * c)) /\n        ∏ x, Real.Gamma (1 + c)</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 5.14.5: the Laguerre/Selberg integral on `[0,∞)ⁿ`. </code>",
+ "597":
+ "<code>LMLF.Blueprint.Gamma.Section514.laguerreIntegrand {m n : ℕ} (hmn : m ≤ n) (a c : ℝ) (t : Fin n → ℝ) : ℝ</code><span class=\"sep\"></span><code class=\"docstring\">The real Laguerre/Selberg integrand in DLMF 5.14.5. </code>",
+ "596":
+ "<code>Fin.val {n : ℕ} (self : Fin n) : ℕ</code><span class=\"sep\"></span><code class=\"docstring\">The number that is strictly less than `n`.\n\n`Fin.val` is a coercion, so any `Fin n` can be used in a position where a `Nat` is expected.\n</code>",
+ "595":
+ "<code>Fin.castLE {n m : ℕ} (h : n ≤ m) (i : Fin n) : Fin m</code><span class=\"sep\"></span><code class=\"docstring\">Coarsens a bound to one at least as large.\n\nSee also `Fin.castAdd` for a version that represents the larger bound with addition rather than an\nexplicit inequality proof.\n</code>",
+ "594":
+ "<code>LMLF.Blueprint.Gamma.Section514.selbergIndex (n : ℕ) (k : Fin n) : ℝ</code><span class=\"sep\"></span><code class=\"docstring\">The source index `n-k` in DLMF 5.14.4–5.14.5.\n\nThe `Fin n` coordinate `k` is zero-based, so its source index is `k.1 + 1`.\nWriting the resulting value directly in `ℝ` avoids truncated natural subtraction. </code>",
+ "593":
+ "<code>LMLF.Blueprint.Gamma.Section514.unitCube (n : ℕ) : Set (Fin n → ℝ)</code><span class=\"sep\"></span><code class=\"docstring\">The unit cube `[0,1]ⁿ` used by DLMF 5.14.4. </code>",
+ "592": "<code>-(b / (↑n - 1)) &lt; c</code>",
+ "591": "<code>-(a / (↑n - 1)) &lt; c</code>",
+ "590": "<code>-1 / ↑n &lt; c</code>",
  "59":
  "<code>IntervalIntegrable.{u_3} {ε : Type u_3} [TopologicalSpace ε] [ENormedAddMonoid ε] (f : ℝ → ε) (μ : Measure ℝ)\n  (a b : ℝ) : Prop</code><span class=\"sep\"></span><code class=\"docstring\">A function `f` is called *interval integrable* with respect to a measure `μ` on an unordered\ninterval `a..b` if it is integrable on both intervals `(a, b]` and `(b, a]`. One of these\nintervals is always empty, so this property is equivalent to `f` being integrable on\n`(min a b, max a b]`. </code>",
+ "589":
+ "<code>LMLF.Blueprint.Gamma.Section514.dlmf_5_14_4 {m n : ℕ} (hmn : m ≤ n) (hn : 2 ≤ n) {a b c : ℝ} (ha : 0 &lt; a) (hb : 0 &lt; b)\n  (hc₁ : -1 / ↑n &lt; c) (hc₂ : -(a / (↑n - 1)) &lt; c) (hc₃ : -(b / (↑n - 1)) &lt; c) :\n  IntegrableOn (selbergCubeIntegrand hmn a b c) (unitCube n) volume ∧\n    ∫ (t : Fin n → ℝ) in unitCube n, selbergCubeIntegrand hmn a b c t =\n      ((∏ k, (a + selbergIndex n (Fin.castLE hmn k) * c) / (a + b + (selbergIndex n (Fin.castLE hmn k) + ↑n - 1) * c)) *\n          ∏ k,\n            Real.Gamma (a + selbergIndex n k * c) * Real.Gamma (b + selbergIndex n k * c) *\n                Real.Gamma (1 + (↑↑k + 1) * c) /\n              Real.Gamma (a + b + (selbergIndex n k + ↑n - 1) * c)) /\n        ∏ x, Real.Gamma (1 + c)</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 5.14.4: the Selberg integral on the unit cube. </code>",
+ "588":
+ "<code>LMLF.Blueprint.Gamma.Section514.firstCoordinatesProduct {m n : ℕ} (hmn : m ≤ n) (t : Fin n → ℝ) : ℝ</code><span class=\"sep\"></span><code class=\"docstring\">The first-`m` coordinate product in DLMF 5.14.4–5.14.5, with `m ≤ n`. </code>",
+ "587": "<code>m ≤ n</code>",
+ "586":
+ "<code>LMLF.Blueprint.Gamma.Section514.selbergCubeIntegrand {m n : ℕ} (hmn : m ≤ n) (a b c : ℝ) (t : Fin n → ℝ) : ℝ</code><span class=\"sep\"></span><code class=\"docstring\">The real Selberg integrand in DLMF 5.14.4 on `[0,1]ⁿ`. </code>",
+ "585":
+ "<code>LMLF.Blueprint.Gamma.Section514.dlmf_5_14_3 (n : ℕ) (t : Fin n → ℝ) :\n  vandermonde n t = ∏ j, ∏ k, if j &lt; k then t j - t k else 1</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 5.14.3: the Vandermonde determinant product. </code>",
+ "584":
+ "<code>LMLF.Blueprint.Gamma.Section514.vandermonde (n : ℕ) (t : Fin n → ℝ) : ℝ</code><span class=\"sep\"></span><code class=\"docstring\">The Vandermonde product `Δ(t₁,…,tₙ)`, DLMF 5.14.3. </code>",
+ "583":
+ "<code>Fin.castSucc {n : ℕ} : Fin n → Fin (n + 1)</code><span class=\"sep\"></span><code class=\"docstring\">Coarsens a bound by one.\n</code>",
+ "582":
+ "<code>Fin.last (n : ℕ) : Fin (n + 1)</code><span class=\"sep\"></span><code class=\"docstring\">The greatest value of `Fin (n+1)`, namely `n`.\n\nExamples:\n* `Fin.last 4 = (4 : Fin 5)`\n* `(Fin.last 0).val = (0 : Nat)`\n</code>",
+ "581": "<code>Fin (n + 1)</code>",
+ "580": "<code>∀ (i : Fin (n + 1)), 0 &lt; z i</code>",
  "58": "<code>E</code>",
+ "579": "<code>Fin (n + 1) → ℝ</code>",
+ "578":
+ "<code>LMLF.Blueprint.Gamma.Section514.dlmf_5_14_2 {n : ℕ} (hn : 0 &lt; n) (z : Fin (n + 1) → ℝ)\n  (hz : ∀ (i : Fin (n + 1)), 0 &lt; z i) :\n  IntegrableOn (fun t =&gt; (1 - ∑ i, t i).rpow (z (Fin.last n) - 1) * ∏ i, (t i).rpow (z i.castSucc - 1)) (simplex n)\n      volume ∧\n    ∫ (t : Fin n → ℝ) in simplex n, (1 - ∑ i, t i).rpow (z (Fin.last n) - 1) * ∏ i, (t i).rpow (z i.castSucc - 1) =\n      (∏ i, Real.Gamma (z i)) / Real.Gamma (∑ i, z i)</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 5.14.2: the full simplex beta integral, including the residual coordinate. </code>",
+ "577": "<code>∀ (i : Fin n), 0 &lt; z i</code>",
+ "576":
+ "<code>LMLF.Blueprint.Gamma.Section514.dlmf_5_14_1 {n : ℕ} (hn : 0 &lt; n) (z : Fin n → ℝ) (hz : ∀ (i : Fin n), 0 &lt; z i) :\n  IntegrableOn (fun t =&gt; ∏ i, (t i).rpow (z i - 1)) (simplex n) volume ∧\n    ∫ (t : Fin n → ℝ) in simplex n, ∏ i, (t i).rpow (z i - 1) = (∏ i, Real.Gamma (z i)) / Real.Gamma (1 + ∑ i, z i)</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 5.14.1: the simplex beta integral without the final barycentric coordinate. </code>",
+ "575": "<code>Fin n</code>",
+ "574": "<code>Fin n → ℝ</code>",
+ "573":
+ "<code>LMLF.Blueprint.Gamma.Section514.simplex (n : ℕ) : Set (Fin n → ℝ)</code><span class=\"sep\"></span><code class=\"docstring\">The simplex `Vₙ = {t : ℝⁿ | 0 ≤ tᵢ and ∑ᵢ tᵢ ≤ 1}` from DLMF 5.14.1–5.14.2. </code>",
+ "572": "<code>∀ (k : Fin 4), 0 &lt; (a k).re</code>",
+ "571":
+ "<code>LMLF.Blueprint.Gamma.Section513.dlmf_5_13_5 (a : Fin 4 → ℂ) (ha : ∀ (k : Fin 4), 0 &lt; (a k).re) :\n  Integrable\n      (fun t =&gt;\n        deBrangesWilsonNumerator a t / (Complex.Gamma (2 * ↑t * Complex.I) * Complex.Gamma (-2 * ↑t * Complex.I)))\n      volume ∧\n    1 / ↑(4 * Real.pi) *\n        ∫ (t : ℝ),\n          deBrangesWilsonNumerator a t / (Complex.Gamma (2 * ↑t * Complex.I) * Complex.Gamma (-2 * ↑t * Complex.I)) =\n      (∏ j, ∏ k, if j &lt; k then Complex.Gamma (a j + a k) else 1) / Complex.Gamma (∑ k, a k)</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 5.13.5: de Branges--Wilson's beta integral. </code>",
+ "570": "<code>Fin 4</code>",
  "57":
  "<code>List.{u} (α : Type u) : Type u</code><span class=\"sep\"></span><code class=\"docstring\">Linked lists: ordered lists, in which each element has a reference to the next element.\n\nMost operations on linked lists take time proportional to the length of the list, because each\nelement must be traversed to find the next element.\n\n`List α` is isomorphic to `Array α`, but they are useful for different things:\n* `List α` is easier for reasoning, and `Array α` is modeled as a wrapper around `List α`.\n* `List α` works well as a persistent data structure, when many copies of the tail are shared. When\n  the value is not shared, `Array α` will have better performance because it can do destructive\n  updates.\n</code>",
+ "569": "<code>Fin 4 → ℂ</code>",
+ "568":
+ "<code>LMLF.Blueprint.Gamma.Section513.deBrangesWilsonNumerator (a : Fin 4 → ℂ) (t : ℝ) : ℂ</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 5.13.5: the four-factor numerator in the de Branges--Wilson integrand. </code>",
+ "567": "<code>3 &lt; (a + b + c + d).re</code>",
+ "566":
+ "<code>LMLF.Blueprint.Gamma.Section513.dlmf_5_13_4 {a b c d : ℂ} (hs : 3 &lt; (a + b + c + d).re) :\n  Integrable\n      (fun t =&gt; 1 / (Complex.Gamma (a + ↑t) * Complex.Gamma (b + ↑t) * Complex.Gamma (c - ↑t) * Complex.Gamma (d - ↑t)))\n      volume ∧\n    ∫ (t : ℝ), 1 / (Complex.Gamma (a + ↑t) * Complex.Gamma (b + ↑t) * Complex.Gamma (c - ↑t) * Complex.Gamma (d - ↑t)) =\n      Complex.Gamma (a + b + c + d - 3) /\n        (Complex.Gamma (a + c - 1) * Complex.Gamma (a + d - 1) * Complex.Gamma (b + c - 1) * Complex.Gamma (b + d - 1))</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 5.13.4: Ramanujan's beta integral. </code>",
+ "565": "<code>0 &lt; d.re</code>",
+ "564":
+ "<code>LMLF.Blueprint.Gamma.Section513.dlmf_5_13_3 {a b c d : ℂ} (ha : 0 &lt; a.re) (hb : 0 &lt; b.re) (hc : 0 &lt; c.re)\n  (hd : 0 &lt; d.re) :\n  Integrable\n      (fun t =&gt;\n        Complex.Gamma (a + ↑t * Complex.I) * Complex.Gamma (b + ↑t * Complex.I) * Complex.Gamma (c - ↑t * Complex.I) *\n          Complex.Gamma (d - ↑t * Complex.I))\n      volume ∧\n    1 / (2 * ↑Real.pi) *\n        ∫ (t : ℝ),\n          Complex.Gamma (a + ↑t * Complex.I) * Complex.Gamma (b + ↑t * Complex.I) * Complex.Gamma (c - ↑t * Complex.I) *\n            Complex.Gamma (d - ↑t * Complex.I) =\n      Complex.Gamma (a + c) * Complex.Gamma (a + d) * Complex.Gamma (b + c) * Complex.Gamma (b + d) /\n        Complex.Gamma (a + b + c + d)</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 5.13.3: Barnes' beta integral with four complex parameters. </code>",
+ "563": "<code>b &lt; Real.pi</code>",
+ "562": "<code>0 &lt; b</code>",
+ "561":
+ "<code>LMLF.Blueprint.Gamma.Section513.dlmf_5_13_2 {a b : ℝ} (ha : 0 &lt; a) (hb0 : 0 &lt; b) (hbπ : b &lt; Real.pi) :\n  Integrable (fun t =&gt; ‖Complex.Gamma (↑a + ↑t * Complex.I)‖ ^ 2 * Real.exp ((2 * b - Real.pi) * t)) volume ∧\n    1 / (2 * Real.pi) * ∫ (t : ℝ), ‖Complex.Gamma (↑a + ↑t * Complex.I)‖ ^ 2 * Real.exp ((2 * b - Real.pi) * t) =\n      Real.Gamma (2 * a) / (2 * Real.sin b) ^ (2 * a)</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 5.13.2: the modulus-square Barnes integral, for real `a` and `b`. </code>",
+ "560": "<code>c &lt; b.re</code>",
  "56": "<code>ℝ → E</code>",
+ "559": "<code>-a.re &lt; c</code>",
+ "558":
+ "<code>LMLF.Blueprint.Gamma.Section513.dlmf_5_13_1 {a b z : ℂ} {c : ℝ} (hab : 0 &lt; (a + b).re) (hc : -a.re &lt; c) (hc' : c &lt; b.re)\n  (hz0 : z ≠ 0) (hz : |z.arg| &lt; Real.pi) :\n  Integrable\n      (fun t =&gt;\n        Complex.Gamma (↑c + ↑t * Complex.I + a) * Complex.Gamma (b - (↑c + ↑t * Complex.I)) *\n            z ^ (-(↑c + ↑t * Complex.I)) *\n          Complex.I)\n      volume ∧\n    (1 / (2 * ↑Real.pi * Complex.I) *\n        verticalLineIntegral c fun s =&gt; Complex.Gamma (s + a) * Complex.Gamma (b - s) * z ^ (-s)) =\n      Complex.Gamma (a + b) * z ^ a / (1 + z) ^ (a + b)</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 5.13.1: Barnes' vertical-line integral for the beta-function quotient. </code>",
+ "557":
+ "<code>LMLF.Blueprint.Gamma.Section513.verticalLineIntegral (c : ℝ) (f : ℂ → ℂ) : ℂ</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 5.13.1: the ordinary integral on the upward vertical line `Re s = c`.\n\nThe factor `Complex.I` is `ds/dt` for the parameterization `s = c + i t`, so this\ndefinition displays the contour orientation rather than hiding it in an opaque predicate.\n</code>",
+ "556": "<code>P &lt; 1</code>",
+ "555": "<code>0 &lt; P</code>",
+ "554":
+ "<code>LMLF.Blueprint.Gamma.Section512.dlmf_5_12_12 (a b : ℂ) {P : ℝ} (hP0 : 0 &lt; P) (hP1 : P &lt; 1)\n  (branch : PochhammerLogBranch a b P) (hβ : meromorphicBetaDefined a b) :\n  betaPochhammerIntegral branch =\n    -4 * Complex.exp (↑Real.pi * Complex.I * (a + b)) * Complex.sin (↑Real.pi * a) * Complex.sin (↑Real.pi * b) *\n      meromorphicBeta a b</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 5.12.12: Pochhammer's integral for arbitrary complex `a` and `b`.  The\nbranch argument is continuous around all four loops and is principal at the arbitrary\nbase point `P ∈ (0,1)`. </code>",
+ "553": "<code>PochhammerLogBranch a b P</code>",
+ "552":
+ "<code>LMLF.Blueprint.Gamma.Section512.betaPochhammerIntegral {a b : ℂ} {P : ℝ} (branch : PochhammerLogBranch a b P) : ℂ</code>",
+ "551":
+ "<code>LMLF.Blueprint.Gamma.Section512.PochhammerLogBranch.one_minus_t_principal_at_start {a b : ℂ} {P : ℝ}\n  (self : PochhammerLogBranch a b P) : 0 &lt; P → P &lt; 1 → self.logOneMinusT 0 = Complex.log (1 - ↑P)</code>",
+ "550":
+ "<code>LMLF.Blueprint.Gamma.Section512.PochhammerLogBranch.t_principal_at_start {a b : ℂ} {P : ℝ}\n  (self : PochhammerLogBranch a b P) : 0 &lt; P → P &lt; 1 → self.logT 0 = Complex.log ↑P</code>",
  "55":
  "<code>CompleteSpace.{u} (α : Type u) [UniformSpace α] : Prop</code><span class=\"sep\"></span><code class=\"docstring\">A complete space is defined here using uniformities. A uniform space\nis complete if every Cauchy filter converges. </code>",
+ "549":
+ "<code>LMLF.Blueprint.Gamma.Section512.PochhammerLogBranch.one_minus_t_exp {a b : ℂ} {P : ℝ} (self : PochhammerLogBranch a b P)\n  (u : ℝ) : 0 &lt; P → P &lt; 1 → Complex.exp (self.logOneMinusT u) = 1 - betaPochhammerCurve P u</code>",
+ "548":
+ "<code>LMLF.Blueprint.Gamma.Section512.betaPochhammerCurve (P : ℝ) : ℝ → ℂ</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 5.12.12: the Pochhammer contour with base point `P ∈ (0,1)`, positive loops\naround `1` and `0`, followed by negative loops around `1` and `0`. </code>",
+ "547":
+ "<code>LMLF.Blueprint.Gamma.Section512.PochhammerLogBranch.t_exp {a b : ℂ} {P : ℝ} (self : PochhammerLogBranch a b P) (u : ℝ) :\n  0 &lt; P → P &lt; 1 → Complex.exp (self.logT u) = betaPochhammerCurve P u</code>",
+ "546":
+ "<code>LMLF.Blueprint.Gamma.Section512.PochhammerLogBranch.one_minus_t_continuous {a b : ℂ} {P : ℝ}\n  (self : PochhammerLogBranch a b P) : ContinuousOn self.logOneMinusT (Icc 0 1)</code>",
+ "545":
+ "<code>LMLF.Blueprint.Gamma.Section512.PochhammerLogBranch.t_continuous {a b : ℂ} {P : ℝ} (self : PochhammerLogBranch a b P) :\n  ContinuousOn self.logT (Icc 0 1)</code>",
+ "544":
+ "<code>LMLF.Blueprint.Gamma.Section512.PochhammerLogBranch.logOneMinusT {a b : ℂ} {P : ℝ} (self : PochhammerLogBranch a b P) :\n  ℝ → ℂ</code>",
+ "543":
+ "<code>LMLF.Blueprint.Gamma.Section512.PochhammerLogBranch.logT {a b : ℂ} {P : ℝ} (self : PochhammerLogBranch a b P) : ℝ → ℂ</code>",
+ "542":
+ "<code>LMLF.Blueprint.Gamma.Section512.PochhammerLogBranch (a b : ℂ) (P : ℝ) : Type</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 5.12.12: logarithm lifts tied pointwise to the Pochhammer contour and its\n`1 - t` companion.  Both lifts are continuous and principal at the base point. </code>",
+ "541": "<code>∀ (n : ℤ), a ≠ ↑n</code>",
+ "540":
+ "<code>LMLF.Blueprint.Gamma.Section512.dlmf_5_12_11 {a b : ℂ} (branch : SecondLoopLogBranch a b) (hb : 0 &lt; b.re)\n  (ha : ∀ (n : ℤ), a ≠ ↑n) (hβ : meromorphicBetaDefined a b) :\n  1 / (Complex.exp (2 * ↑Real.pi * Complex.I * a) - 1) * betaSecondLoopIntegral branch = meromorphicBeta a b</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 5.12.11: the second loop representation.  The supplied branch data are\ncontinuous on the positive-ray tails and the circle, principal at the starting ray,\nand glued at the two joins.  The source additionally assumes `Re b &gt; 0`, `a ∉ ℤ`,\nand a cut between `-1` and `0`. </code>",
  "54":
  "<code>LMLF.Integral.HasImproperIntegralTailFromBreaks.{u_1} {E : Type u_1} [NormedAddCommGroup E] [NormedSpace ℝ E]\n  [CompleteSpace E] (f : ℝ → E) (c : ℝ) : List ℝ → E → Prop</code><span class=\"sep\"></span><code class=\"docstring\">Independent one-sided improper integrals on the intervals determined by a sorted list of remaining\nexceptional points, beginning immediately to the right of `c`.\n</code>",
+ "539":
+ "<code class=\"docstring\">\"Dependent\" if-then-else, normally written via the notation `if h : c then t(h) else e(h)`,\nis sugar for `dite c (fun h =&gt; t(h)) (fun h =&gt; e(h))`, and it is the same as\n`if c then t else e` except that `t` is allowed to depend on a proof `h : c`,\nand `e` can depend on `h : ¬c`. (Both branches use the same name for the hypothesis,\neven though it has different types in the two cases.)\n\nWe use this to be able to communicate the if-then-else condition to the branches.\nFor example, `Array.get arr i h` expects a proof `h : i &lt; arr.size` in order to\navoid a bounds check, so you can write `if h : i &lt; arr.size then arr.get i h else ...`\nto avoid the bounds check inside the if branch. (Of course in this case we have only\nlifted the check into an explicit `if`, but we could also use this proof multiple times\nor derive `i &lt; arr.size` from some other proposition that we are checking in the `if`.)\n</code>",
+ "538":
+ "<code>Filter.limUnder.{u_1, u_3} {X : Type u_1} [TopologicalSpace X] {α : Type u_3} [Nonempty X] (f : Filter α) (g : α → X) :\n  X</code><span class=\"sep\"></span><code class=\"docstring\">If `f` is a filter in `α` and `g : α → X` is a function, then `Filter.limUnder f g` is a limit\nof `g` at `f`, if it exists. </code>",
+ "537":
+ "<code>LMLF.Blueprint.Gamma.Section512.betaSecondLoopIntegral {a b : ℂ} (branch : SecondLoopLogBranch a b) : ℂ</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 5.12.11: the improper limit of the finite loop truncations, obtained by\nrestricting one coherent logarithm-lift datum to each canonical scale `ε = 1 / R`. </code>",
+ "536": "<code>1 &lt; R</code>",
+ "535": "<code>SecondLoopLogBranch a b</code>",
+ "534":
+ "<code>LMLF.Blueprint.Gamma.Section512.betaSecondLoopTruncation {a b : ℂ} (branch : SecondLoopLogBranch a b) (R : ℝ)\n  (_hR : 1 &lt; R) : ℂ</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 5.12.11: the finite positive-ray Hankel truncation.  The third piece runs\nfrom `ε` back out to `R` on the positive real ray; it is not a negative-ray segment. </code>",
+ "533":
+ "<code>LMLF.Blueprint.Gamma.Section512.SecondLoopLogBranch.outgoing_one_starts {a b : ℂ} (self : SecondLoopLogBranch a b)\n  (ε : ℝ) : 0 &lt; ε → ε &lt; 1 → self.logOnePlusOutgoing ε = self.logOnePlusCircle ε (2 * Real.pi)</code>",
+ "532":
+ "<code>LMLF.Blueprint.Gamma.Section512.SecondLoopLogBranch.outgoing_t_starts {a b : ℂ} (self : SecondLoopLogBranch a b)\n  (ε : ℝ) : 0 &lt; ε → ε &lt; 1 → self.logTOutgoing ε = self.logTCircle ε (2 * Real.pi)</code>",
+ "531":
+ "<code>LMLF.Blueprint.Gamma.Section512.SecondLoopLogBranch.circle_one_starts {a b : ℂ} (self : SecondLoopLogBranch a b)\n  (ε : ℝ) : 0 &lt; ε → ε &lt; 1 → self.logOnePlusCircle ε 0 = self.logOnePlusIncoming ε</code>",
+ "530":
+ "<code>LMLF.Blueprint.Gamma.Section512.SecondLoopLogBranch.circle_t_starts {a b : ℂ} (self : SecondLoopLogBranch a b) (ε : ℝ) :\n  0 &lt; ε → ε &lt; 1 → self.logTCircle ε 0 = self.logTIncoming ε</code>",
  "53":
  "<code>NormedSpace.{u_6, u_7} (𝕜 : Type u_6) (E : Type u_7) [NormedField 𝕜] [SeminormedAddCommGroup E] : Type (max u_6 u_7)</code><span class=\"sep\"></span><code class=\"docstring\">A normed space over a normed field is a vector space endowed with a norm which satisfies the\nequality `‖c • x‖ = ‖c‖ ‖x‖`. We require only `‖c • x‖ ≤ ‖c‖ ‖x‖` in the definition, then prove\n`‖c • x‖ = ‖c‖ ‖x‖` in `norm_smul`.\n\nNote that since this requires `SeminormedAddCommGroup` and not `NormedAddCommGroup`, this\ntypeclass can be used for \"seminormed spaces\" too, just as `Module` can be used for\n\"semimodules\". </code>",
+ "529":
+ "<code>LMLF.Blueprint.Gamma.Section512.SecondLoopLogBranch.incoming_one_principal {a b : ℂ} (self : SecondLoopLogBranch a b)\n  (r : ℝ) : 0 &lt; r → self.logOnePlusIncoming r = Complex.log (1 + ↑r)</code>",
+ "528":
+ "<code>LMLF.Blueprint.Gamma.Section512.SecondLoopLogBranch.incoming_t_principal {a b : ℂ} (self : SecondLoopLogBranch a b)\n  (r : ℝ) : 0 &lt; r → self.logTIncoming r = Complex.log ↑r</code>",
+ "527":
+ "<code>LMLF.Blueprint.Gamma.Section512.SecondLoopLogBranch.outgoing_one_exp {a b : ℂ} (self : SecondLoopLogBranch a b)\n  (r : ℝ) : 0 &lt; r → Complex.exp (self.logOnePlusOutgoing r) = 1 + ↑r</code>",
+ "526":
+ "<code>LMLF.Blueprint.Gamma.Section512.SecondLoopLogBranch.outgoing_t_exp {a b : ℂ} (self : SecondLoopLogBranch a b) (r : ℝ) :\n  0 &lt; r → Complex.exp (self.logTOutgoing r) = ↑r</code>",
+ "525":
+ "<code>LMLF.Blueprint.Gamma.Section512.SecondLoopLogBranch.circle_one_exp {a b : ℂ} (self : SecondLoopLogBranch a b)\n  (ε θ : ℝ) : 0 &lt; ε → ε &lt; 1 → Complex.exp (self.logOnePlusCircle ε θ) = 1 + ↑ε * Complex.exp (↑θ * Complex.I)</code>",
+ "524":
+ "<code>LMLF.Blueprint.Gamma.Section512.SecondLoopLogBranch.circle_t_exp {a b : ℂ} (self : SecondLoopLogBranch a b) (ε θ : ℝ) :\n  0 &lt; ε → ε &lt; 1 → Complex.exp (self.logTCircle ε θ) = ↑ε * Complex.exp (↑θ * Complex.I)</code>",
+ "523":
+ "<code>LMLF.Blueprint.Gamma.Section512.SecondLoopLogBranch.incoming_one_exp {a b : ℂ} (self : SecondLoopLogBranch a b)\n  (r : ℝ) : 0 &lt; r → Complex.exp (self.logOnePlusIncoming r) = 1 + ↑r</code>",
+ "522":
+ "<code>LMLF.Blueprint.Gamma.Section512.SecondLoopLogBranch.incoming_t_exp {a b : ℂ} (self : SecondLoopLogBranch a b) (r : ℝ) :\n  0 &lt; r → Complex.exp (self.logTIncoming r) = ↑r</code>",
+ "521":
+ "<code>LMLF.Blueprint.Gamma.Section512.SecondLoopLogBranch.outgoing_one_continuous {a b : ℂ} (self : SecondLoopLogBranch a b) :\n  ContinuousOn self.logOnePlusOutgoing (Ioi 0)</code>",
+ "520":
+ "<code>LMLF.Blueprint.Gamma.Section512.SecondLoopLogBranch.outgoing_t_continuous {a b : ℂ} (self : SecondLoopLogBranch a b) :\n  ContinuousOn self.logTOutgoing (Ioi 0)</code>",
  "52":
  "<code>QuantitativeAnalysis.ErrorOn.{u_1, u_3} {X : Type u_1} {E : Type u_3} [NormedAddCommGroup E] (D : Set X) (f a : X → E)\n  (b : X → ℝ) : Prop</code><span class=\"sep\"></span><code class=\"docstring\">`ErrorOn D f a b` means that `a` approximates `f` with pointwise error at most `b` on `D`. </code>",
+ "519":
+ "<code>LMLF.Blueprint.Gamma.Section512.SecondLoopLogBranch.circle_one_continuous {a b : ℂ} (self : SecondLoopLogBranch a b)\n  (ε : ℝ) : 0 &lt; ε → ε &lt; 1 → Continuous (self.logOnePlusCircle ε)</code>",
+ "518": "<code>ℝ → ℝ → ℂ</code>",
+ "517":
+ "<code>Continuous.{u, v} {X : Type u} {Y : Type v} [TopologicalSpace X] [TopologicalSpace Y] (f : X → Y) : Prop</code><span class=\"sep\"></span><code class=\"docstring\">A function between topological spaces is continuous if the preimage\nof every open set is open. Registered as a structure to make sure it is not unfolded by Lean. </code>",
+ "516":
+ "<code>LMLF.Blueprint.Gamma.Section512.SecondLoopLogBranch.circle_t_continuous {a b : ℂ} (self : SecondLoopLogBranch a b)\n  (ε : ℝ) : 0 &lt; ε → ε &lt; 1 → Continuous (self.logTCircle ε)</code>",
+ "515":
+ "<code>LMLF.Blueprint.Gamma.Section512.SecondLoopLogBranch.incoming_one_continuous {a b : ℂ} (self : SecondLoopLogBranch a b) :\n  ContinuousOn self.logOnePlusIncoming (Ioi 0)</code>",
+ "514":
+ "<code>LMLF.Blueprint.Gamma.Section512.SecondLoopLogBranch.incoming_t_continuous {a b : ℂ} (self : SecondLoopLogBranch a b) :\n  ContinuousOn self.logTIncoming (Ioi 0)</code>",
+ "513":
+ "<code>LMLF.Blueprint.Gamma.Section512.SecondLoopLogBranch.logOnePlusOutgoing {a b : ℂ} (self : SecondLoopLogBranch a b) :\n  ℝ → ℂ</code>",
+ "512":
+ "<code>LMLF.Blueprint.Gamma.Section512.SecondLoopLogBranch.logTOutgoing {a b : ℂ} (self : SecondLoopLogBranch a b) : ℝ → ℂ</code>",
+ "511":
+ "<code>LMLF.Blueprint.Gamma.Section512.SecondLoopLogBranch.logOnePlusCircle {a b : ℂ} (self : SecondLoopLogBranch a b) :\n  ℝ → ℝ → ℂ</code>",
+ "510":
+ "<code>LMLF.Blueprint.Gamma.Section512.SecondLoopLogBranch.logTCircle {a b : ℂ} (self : SecondLoopLogBranch a b) : ℝ → ℝ → ℂ</code>",
  "51":
  "<code>QuantitativeAnalysis.HasExpansionError.{u_1, u_2} {X : Type u_1} {E : Type u_2} [NormedAddCommGroup E] (f : X → E)\n  (term : ℕ → X → E) (D : ℕ → Set X) (bound : ℕ → X → ℝ) : Prop</code><span class=\"sep\"></span><code class=\"docstring\">Every finite truncation of `term` approximates `f` with the displayed pointwise bound. </code>",
+ "509":
+ "<code>LMLF.Blueprint.Gamma.Section512.SecondLoopLogBranch.logOnePlusIncoming {a b : ℂ} (self : SecondLoopLogBranch a b) :\n  ℝ → ℂ</code>",
+ "508":
+ "<code>LMLF.Blueprint.Gamma.Section512.SecondLoopLogBranch.logTIncoming {a b : ℂ} (self : SecondLoopLogBranch a b) : ℝ → ℂ</code>",
+ "507":
+ "<code>LMLF.Blueprint.Gamma.Section512.SecondLoopLogBranch (a b : ℂ) : Type</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 5.12.11: one coherent pair of logarithm lifts for the whole incoming ray,\nthe shrinking circle, and the outgoing ray.  Every finite truncation is obtained by\nrestriction of this single datum, so branch choices cannot vary with `R`. </code>",
+ "506":
+ "<code>LMLF.Blueprint.Gamma.Section512.dlmf_5_12_10 {a b : ℂ} (ha : 0 &lt; a.re) (hβ : meromorphicBetaDefined a b) :\n  (1 / (2 * ↑Real.pi * Complex.I) * betaFirstLoopIntegral fun t =&gt; t ^ (a - 1) * (t - 1) ^ (b - 1)) =\n    Complex.sin (↑Real.pi * b) / ↑Real.pi * meromorphicBeta a b</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 5.12.10: the first loop integral around `1`, with `Re a &gt; 0`. </code>",
+ "505":
+ "<code>LMLF.Blueprint.Gamma.Section512.betaFirstLoopIntegral (f : ℂ → ℂ) : ℂ</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 5.12.10: the normalized positively oriented loop about `1` used for\nthe first beta loop formula.\n\nThe associated source notation is `∫₀^(1+)`; E10 uses the source's pointwise principal\nvalues on this loop.\n</code>",
+ "504":
+ "<code>LMLF.Blueprint.Gamma.Section512.contourIntegral (f : ℂ → ℂ) (curve : ℝ → ℂ) : ℂ</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 5.12.10–5.12.12: a parametrized complex contour integral, with the\nparameter interval normalized to `[0, 1]`.\n\nThe curve is differentiated in the ordinary complex sense whenever the integral is used.\nThis definition exposes the integrand and the oriented curve rather than hiding a contour\nidentity behind an opaque proposition.\n</code>",
+ "503": "<code>b ≠ 0</code>",
+ "502": "<code>0 &lt; (a + b).re</code>",
+ "501": "<code>c &lt; 1</code>",
+ "500":
+ "<code>LMLF.Blueprint.Gamma.Section512.dlmf_5_12_9 {a b : ℂ} {c : ℝ} (hc0 : 0 &lt; c) (hc1 : c &lt; 1) (hab : 0 &lt; (a + b).re)\n  (hb0 : b ≠ 0) (hβ : meromorphicBetaDefined a b) :\n  Integrable (fun y =&gt; (↑c + Complex.I * ↑y) ^ (-a) * (1 - (↑c + Complex.I * ↑y)) ^ (-1 - b) * Complex.I) volume ∧\n    1 / (2 * ↑Real.pi * Complex.I) *\n        ∫ (y : ℝ), (↑c + Complex.I * ↑y) ^ (-a) * (1 - (↑c + Complex.I * ↑y)) ^ (-1 - b) * Complex.I =\n      1 / (b * meromorphicBeta a b)</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 5.12.9: the vertical Barnes contour representation of the beta function. </code>",
  "50":
  "<code>QuantitativeAnalysis.HasPoincareExpansion.isAsymptoticScale.{u_1, u_2} {X : Type u_1} {E : Type u_2}\n  [NormedAddCommGroup E] {l : Filter X} {f : X → E} {term : ℕ → X → E} (h : HasPoincareExpansion l f term) :\n  IsAsymptoticScale l term</code><span class=\"sep\"></span><code class=\"docstring\">The terms of every Poincaré expansion form an asymptotic scale. </code>",
  "5":
  "<code>NormedAddCommGroup.{u_8} (E : Type u_8) : Type u_8</code><span class=\"sep\"></span><code class=\"docstring\">A normed group is an additive group endowed with a norm for which `dist x y = ‖-x + y‖` defines\na metric space structure. </code>",
+ "499": "<code>meromorphicBetaDefined a b</code>",
+ "498": "<code>0 &lt; w.re</code>",
+ "497": "<code>1 &lt; (a + b).re</code>",
+ "496":
+ "<code>LMLF.Blueprint.Gamma.Section512.dlmf_5_12_8 {a b w z : ℂ} (hab : 1 &lt; (a + b).re) (hw : 0 &lt; w.re) (hz : 0 &lt; z.re)\n  (hβ : meromorphicBetaDefined a b) :\n  Integrable (fun t =&gt; 1 / ((w + Complex.I * ↑t) ^ a * (z - Complex.I * ↑t) ^ b)) volume ∧\n    1 / (2 * ↑Real.pi) * ∫ (t : ℝ), 1 / ((w + Complex.I * ↑t) ^ a * (z - Complex.I * ↑t) ^ b) =\n      (w + z) ^ (1 - a - b) / ((a + b - 1) * meromorphicBeta a b)</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 5.12.8: the Fourier integral on a vertical line, with all three real-part\nconditions from the source formula. </code>",
+ "495": "<code>|b.re| &lt; a.re</code>",
+ "494":
+ "<code>LMLF.Blueprint.Gamma.Section512.dlmf_5_12_7 {a b : ℂ} (hab : |b.re| &lt; a.re) :\n  IntegrableOn (fun t =&gt; Complex.cosh (2 * b * ↑t) / Complex.cosh ↑t ^ (2 * a)) (Ioi 0) volume ∧\n    ∫ (t : ℝ) in Ioi 0, Complex.cosh (2 * b * ↑t) / Complex.cosh ↑t ^ (2 * a) =\n      4 ^ (a - 1) * (a + b).betaIntegral (a - b)</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 5.12.7: the hyperbolic-cosine integral, convergent when\n`Re a &gt; |Re b|`. </code>",
+ "493":
+ "<code>LMLF.Blueprint.Gamma.Section512.dlmf_5_12_6 {a b : ℂ} (ha : 0 &lt; a.re) (ha0 : a ≠ 0)\n  (hβ : meromorphicBetaDefined ((a + b + 1) / 2) ((a - b + 1) / 2)) :\n  IntervalIntegrable (fun t =&gt; Complex.sin ↑t ^ (a - 1) * Complex.exp (Complex.I * b * ↑t)) volume 0 Real.pi ∧\n    ∫ (t : ℝ) in 0..Real.pi, Complex.sin ↑t ^ (a - 1) * Complex.exp (Complex.I * b * ↑t) =\n      ↑Real.pi / 2 ^ (a - 1) * Complex.exp (Complex.I * ↑Real.pi * b / 2) /\n        (a * meromorphicBeta ((a + b + 1) / 2) ((a - b + 1) / 2))</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 5.12.6: the exponential Fourier form over `[0, π]`. </code>",
+ "492":
+ "<code>meromorphicBetaDefined ((a + b + 1) / 2) ((a - b + 1) / 2)</code>",
+ "491": "<code>a ≠ 0</code>",
+ "490":
+ "<code>LMLF.Blueprint.Gamma.Section512.dlmf_5_12_5 {a b : ℂ} (ha : 0 &lt; a.re) (ha0 : a ≠ 0)\n  (hβ : meromorphicBetaDefined ((a + b + 1) / 2) ((a - b + 1) / 2)) :\n  IntervalIntegrable (fun t =&gt; Complex.cos ↑t ^ (a - 1) * Complex.cos (b * ↑t)) volume 0 (Real.pi / 2) ∧\n    ∫ (t : ℝ) in 0..Real.pi / 2, Complex.cos ↑t ^ (a - 1) * Complex.cos (b * ↑t) =\n      ↑Real.pi / 2 ^ a / (a * meromorphicBeta ((a + b + 1) / 2) ((a - b + 1) / 2))</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 5.12.5: a cosine-power integral on `[0, π/2]`. </code>",
  "49": "<code>HasPoincareExpansion l f term</code>",
+ "489": "<code>|z.arg| &lt; Real.pi</code>",
+ "488":
+ "<code>LMLF.Blueprint.Gamma.Section512.dlmf_5_12_4 {a b z : ℂ} (ha : 0 &lt; a.re) (hb : 0 &lt; b.re) (hz0 : z ≠ 0)\n  (hz : |z.arg| &lt; Real.pi) :\n  IntervalIntegrable (fun t =&gt; ↑t ^ (a - 1) * (1 - ↑t) ^ (b - 1) / (↑t + z) ^ (a + b)) volume 0 1 ∧\n    ∫ (t : ℝ) in 0..1, ↑t ^ (a - 1) * (1 - ↑t) ^ (b - 1) / (↑t + z) ^ (a + b) =\n      a.betaIntegral b * (1 + z) ^ (-a) * z ^ (-b)</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 5.12.4: the shifted beta integral, with the principal phase condition on `z`. </code>",
+ "487":
+ "<code>LMLF.Blueprint.Gamma.Section512.dlmf_5_12_3 {a b : ℂ} (ha : 0 &lt; a.re) (hb : 0 &lt; b.re) :\n  IntegrableOn (fun t =&gt; ↑t ^ (a - 1) / (1 + ↑t) ^ (a + b)) (Ioi 0) volume ∧\n    ∫ (t : ℝ) in Ioi 0, ↑t ^ (a - 1) / (1 + ↑t) ^ (a + b) = a.betaIntegral b</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 5.12.3: the beta integral on the positive half-line. </code>",
+ "486":
+ "<code>LMLF.Blueprint.Gamma.Section512.dlmf_5_12_2 {a b : ℂ} (ha : 0 &lt; a.re) (hb : 0 &lt; b.re) :\n  IntervalIntegrable (fun θ =&gt; Complex.sin ↑θ ^ (2 * a - 1) * Complex.cos ↑θ ^ (2 * b - 1)) volume 0 (Real.pi / 2) ∧\n    ∫ (θ : ℝ) in 0..Real.pi / 2, Complex.sin ↑θ ^ (2 * a - 1) * Complex.cos ↑θ ^ (2 * b - 1) = a.betaIntegral b / 2</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 5.12.2: the trigonometric form of Euler's beta integral. </code>",
+ "485": "<code>0 &lt; b.re</code>",
+ "484": "<code>0 &lt; a.re</code>",
+ "483":
+ "<code>LMLF.Blueprint.Gamma.Section512.dlmf_5_12_1 {a b : ℂ} (ha : 0 &lt; a.re) (hb : 0 &lt; b.re) :\n  a.betaIntegral b = ∫ (t : ℝ) in 0..1, ↑t ^ (a - 1) * (1 - ↑t) ^ (b - 1) ∧\n    a.betaIntegral b = Complex.Gamma a * Complex.Gamma b / Complex.Gamma (a + b)</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 5.12.1: Euler's beta integral and the Gamma quotient. </code>",
+ "482":
+ "<code>LMLF.Blueprint.Gamma.Section512.meromorphicBetaDefined (a b : ℂ) : Prop</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 5.12.5–5.12.6 and 5.12.8–5.12.12: the finite meromorphic-beta locus used by\nthe displayed identities.  The\nGamma quotient is then evaluated away from all three Gamma poles; this prevents Lean's\ntotalized field division from being mistaken for a value at a pole. </code>",
+ "481":
+ "<code>LMLF.Blueprint.Gamma.Section512.meromorphicBeta (a b : ℂ) : ℂ</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 5.12.5–5.12.6 and 5.12.8–5.12.12: the meromorphic beta function represented\nby its Gamma quotient.  This is deliberately separate from Mathlib's\n`Complex.betaIntegral`, whose definition is the convergent interval Euler integral. </code>",
+ "480":
+ "<code>LMLF.Blueprint.Gamma.Section511.dlmf_5_11_19 (a b c : ℝ) :\n  (fun z =&gt; Real.Gamma (z + a) * Real.Gamma (z + b) / Real.Gamma (z + c)) ∼ₚ[atTop] gammaProductTerm a b c</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 5.11.19: Gamma products expand in shifted Gamma terms. </code>",
  "48":
  "<code>QuantitativeAnalysis.HasPoincareExpansion.remainder_isLittleO.{u_1, u_2} {X : Type u_1} {E : Type u_2}\n  [NormedAddCommGroup E] {l : Filter X} {f : X → E} {term : ℕ → X → E} (h : HasPoincareExpansion l f term) (n : ℕ) :\n  (fun x =&gt; f x - seriesPartialSum term (n + 1) x) =o[l] term n</code><span class=\"sep\"></span><code class=\"docstring\">The remainder after retaining terms `0` through `n` is little-o of term `n`. </code>",
+ "479":
+ "<code>LMLF.Blueprint.Gamma.Section511.gammaProductTerm (a b c : ℝ) (k : ℕ) (z : ℝ) : ℝ</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 5.11.19: the Gamma-product Poincaré expansion on positive reals. </code>",
+ "478":
+ "<code>LMLF.Blueprint.Gamma.Section511.dlmf_5_11_18 (a b : ℝ) (k : ℕ) :\n  centeredRatioCoeff a b k =\n    generalizedBinomial (a - b) (2 * k) * generalizedBernoulli (a - b + 1) ((a - b + 1) / 2) (2 * k)</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 5.11.18: generalized-Bernoulli representation of `H_k`. </code>",
+ "477":
+ "<code>LMLF.Blueprint.Gamma.Section511.dlmf_5_11_17 (a b : ℝ) (k : ℕ) :\n  ratioCoeff a b k = generalizedBinomial (a - b) k * generalizedBernoulli (a - b + 1) a k</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 5.11.17: generalized-Bernoulli representation of `G_k`. </code>",
+ "476":
+ "<code>LMLF.Blueprint.Gamma.Section511.dlmf_5_11_16 (a b : ℝ) :\n  centeredRatioCoeff a b 0 = 1 ∧\n    centeredRatioCoeff a b 1 = -generalizedBinomial (a - b) 2 * (a - b + 1) / 12 ∧\n      centeredRatioCoeff a b 2 = generalizedBinomial (a - b) 4 * (2 * (a - b + 1) + 5 * (a - b + 1) ^ 2) / 240</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 5.11.16: initial explicit `H_k(a,b)` values. </code>",
+ "475":
+ "<code>LMLF.Blueprint.Gamma.Section511.dlmf_5_11_15 (a b : ℝ) :\n  ratioCoeff a b 0 = 1 ∧\n    ratioCoeff a b 1 = (a - b) * (a + b - 1) / 2 ∧\n      ratioCoeff a b 2 = generalizedBinomial (a - b) 2 * (3 * (a + b - 1) ^ 2 - (a - b + 1)) / 12</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 5.11.15: initial explicit `G_k(a,b)` values. </code>",
+ "474":
+ "<code>LMLF.Blueprint.Gamma.Section511.dlmf_5_11_14 (a b : ℝ) :\n  (fun z =&gt; Real.Gamma (z + a) / Real.Gamma (z + b)) ∼ₚ[atTop] centeredRatioTerm a b</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 5.11.14: centered quotient expansion in the coefficients `H_k(a,b)`. </code>",
+ "473":
+ "<code>LMLF.Blueprint.Gamma.Section511.centeredRatioTerm (a b : ℝ) (k : ℕ) (z : ℝ) : ℝ</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 5.11.14: centered even-power quotient terms. </code>",
+ "472":
+ "<code>LMLF.Blueprint.Gamma.Section511.centeredRatioCoeff (a b : ℝ) (k : ℕ) : ℝ</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 5.11.14 and 5.11.16: the centered ratio-expansion coefficients. </code>",
+ "471":
+ "<code>LMLF.Blueprint.Gamma.Section511.dlmf_5_11_13 (a b : ℝ) :\n  (fun z =&gt; Real.Gamma (z + a) / Real.Gamma (z + b)) ∼ₚ[atTop] ratioTerm a b</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 5.11.13: quotient expansion in the coefficients `G_k(a,b)`. </code>",
+ "470":
+ "<code>LMLF.Blueprint.Gamma.Section511.ratioTerm (a b : ℝ) (k : ℕ) (z : ℝ) : ℝ</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 5.11.13: the full Gamma-quotient Poincaré expansion. </code>",
  "47": "<code><span class=\"literal string\">\"] \"</span> : String</code>",
+ "469":
+ "<code>LMLF.Blueprint.Gamma.Section511.generalizedBinomial (a : ℝ) (n : ℕ) : ℝ</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 5.11.15–5.11.16: generalized binomial coefficients. </code>",
+ "468":
+ "<code>LMLF.Blueprint.Gamma.Section511.ratioCoeff (a b : ℝ) (k : ℕ) : ℝ</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 5.11.13 and 5.11.15: the ratio-expansion coefficients. </code>",
+ "467":
+ "<code>LMLF.Blueprint.Gamma.Section511.dlmf_5_11_12 (a b : ℝ) :\n  (fun z =&gt; Real.Gamma (z + a) / Real.Gamma (z + b)) ~[atTop] fun z =&gt; z ^ (a - b)</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 5.11.12: Gamma-quotient leading asymptotic on positive reals. </code>",
+ "466":
+ "<code>LMLF.Blueprint.Gamma.Section511.generalizedBernoulli : ℝ → ℝ → ℕ → ℝ</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 5.11.17–5.11.18: generalized Bernoulli polynomials. </code>",
+ "465":
+ "<code>LMLF.Blueprint.Gamma.Section511.generalizedBernoulliSpec : GeneralizedBernoulliSpec</code><span class=\"sep\"></span><code class=\"docstring\">The selected generalized-Bernoulli generating-function datum. </code>",
+ "464":
+ "<code>LMLF.Blueprint.Gamma.Section511.existsGeneralizedBernoulliSpec : Nonempty GeneralizedBernoulliSpec</code><span class=\"sep\"></span><code class=\"docstring\">DLMF §24.16(i): the selected generating-function specification. </code>",
+ "463": "<code>ℝ → ℝ → ℕ → ℝ</code>",
+ "462":
+ "<code>LMLF.Blueprint.Gamma.Section511.GeneralizedBernoulliSpec.generating_function (self : GeneralizedBernoulliSpec)\n  (α x t : ℝ) :\n  |t| &lt; 2 * Real.pi →\n    HasSum (fun n =&gt; self.value α x n * t ^ n / ↑n.factorial) (generalizedBernoulliKernel α t * Real.exp (x * t))</code>",
+ "461":
+ "<code>LMLF.Blueprint.Gamma.Section511.GeneralizedBernoulliSpec.value (self : GeneralizedBernoulliSpec) : ℝ → ℝ → ℕ → ℝ</code>",
+ "460":
+ "<code>LMLF.Blueprint.Gamma.Section511.GeneralizedBernoulliSpec : Type</code><span class=\"sep\"></span><code class=\"docstring\">DLMF §24.16(i): a transparent generating-function specification for\ngeneralized Bernoulli polynomials. </code>",
  "46": "<code><span class=\"literal string\">\" ∼ₚ[\"</span> : String</code>",
+ "459":
+ "<code>LMLF.Blueprint.Gamma.Section511.generalizedBernoulliKernel (α t : ℝ) : ℝ</code><span class=\"sep\"></span><code class=\"docstring\">DLMF §24.16(i), used by 5.11.17–5.11.18: the generating kernel\n`(t / (exp t - 1))^α`, continuously totalized at `t = 0`. </code>",
+ "458": "<code>|z.arg| ≤ Real.pi / 2</code>",
+ "457":
+ "<code>LMLF.Blueprint.Gamma.Section511.dlmf_5_11_11 {K : ℕ} (hK : 1 ≤ K) {z : ℂ} (hz : z ≠ 0)\n  (hsector : |z.arg| ≤ Real.pi / 2) :\n  ‖gammaRemainder K z‖ ≤\n    (if K = 1 then 4 else ‖1 + riemannZeta ↑K‖) * Real.Gamma ↑K / (2 * (2 * Real.pi) ^ (K + 1) * ‖z‖ ^ K) *\n      (1 + cappedSecant K z.arg)</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 5.11.11: the explicit sectorial bound for `R_K`. </code>",
+ "456":
+ "<code>Min.min.{u} {α : Type u} [self : Min α] : α → α → α</code><span class=\"sep\"></span><code class=\"docstring\">Returns the lesser of its two arguments. \n\nConventions for notations in identifiers:\n\n * The recommended spelling of `min` in identifiers is `min`.\n\n * The recommended spelling of `⊓` in identifiers is `inf` (`⊓` is the preferred notation for `min` when the type is not linearly ordered.).</code>",
+ "455":
+ "<code>LMLF.Blueprint.Gamma.Section511.cappedSecant (K : ℕ) (θ : ℝ) : ℝ</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 5.11.11: the capped secant factor, including the sector endpoints. </code>",
+ "454": "<code>1 ≤ K</code>",
+ "453":
+ "<code>LMLF.Blueprint.Gamma.Section511.dlmf_5_11_10 {δ : ℝ} (hδ : 0 &lt; δ) {K : ℕ} (hK : 1 ≤ K) {z : ℂ} (hz : z ≠ 0)\n  (hsector : |z.arg| ≤ Real.pi - δ) : Complex.Gamma z = gammaPrefactor z * (gammaFiniteSum K z + gammaRemainder K z)</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 5.11.10: the exact finite expansion with inherited branch and sector context. </code>",
+ "452":
+ "<code>LMLF.Blueprint.Gamma.Section511.gammaRemainder (K : ℕ) (z : ℂ) : ℂ</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 5.11.10: the remainder defined as the residual of the finite expansion.\n\nThe zero branch only totalizes the definition at a vanishing prefactor; the\nsource theorem below carries the nonzero, sectorial hypotheses under which the\nresidual is the mathematical remainder. </code>",
+ "451":
+ "<code>LMLF.Blueprint.Gamma.Section511.gammaFiniteSum (K : ℕ) (z : ℂ) : ℂ</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 5.11.10: the finite scaled-Gamma sum. </code>",
+ "450":
+ "<code>LMLF.Blueprint.Gamma.Section511.gammaPrefactor (z : ℂ) : ℂ</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 5.11.3 and 5.11.10: the principal-branch prefactor. </code>",
  "45": "<code>Lean.TSyntax `term</code>",
+ "449":
+ "<code>LMLF.Blueprint.Gamma.Section511.dlmf_5_11_2_complex_remainder_bound {n : ℕ} (hn : 1 ≤ n) {δ : ℝ} (hδ : 0 &lt; δ) {z : ℂ}\n  (hz : z ≠ 0) (hsector : |z.arg| ≤ Real.pi - δ) :\n  ‖complexDigammaRemainder n z‖ ≤ ‖complexDigammaTerm n z‖ * (1 / Real.cos (z.arg / 2)) ^ (2 * n + 1)</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 5.11(ii): the distinct complex first-neglected-term bound for E2. </code>",
+ "448": "<code>|z.arg| ≤ Real.pi - δ</code>",
+ "447": "<code>0 &lt; δ</code>",
+ "446": "<code>1 ≤ n</code>",
+ "445":
+ "<code>LMLF.Blueprint.Gamma.Section511.dlmf_5_11_1_complex_remainder_bound {n : ℕ} (hn : 1 ≤ n) {δ : ℝ} (hδ : 0 &lt; δ) {z : ℂ}\n  (hz : z ≠ 0) (hsector : |z.arg| ≤ Real.pi - δ) :\n  ‖complexStirlingRemainder δ n z‖ ≤ ‖complexStirlingTerm n z‖ * (1 / Real.cos (z.arg / 2)) ^ (2 * n)</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 5.11(ii): the complex first-neglected-term bound for E1. </code>",
+ "444":
+ "<code>LMLF.Blueprint.Gamma.Section511.complexDigammaRemainder (n : ℕ) (z : ℂ) : ℂ</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 5.11(ii): the residual after truncating E2 at source index `n-1`. </code>",
+ "443":
+ "<code>LMLF.Blueprint.Gamma.Section511.complexStirlingRemainder (δ : ℝ) (n : ℕ) (z : ℂ) : ℂ</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 5.11(ii): the residual after truncating E1 at source index `n-1`,\nusing the selected, normalized general logarithm `lnGamma`. </code>",
+ "442":
+ "<code>LMLF.Blueprint.Gamma.Section511.complexDigammaApprox (n : ℕ) (z : ℂ) : ℂ</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 5.11.2: the principal-branch finite digamma sum through source index `n-1`. </code>",
+ "441":
+ "<code>LMLF.Blueprint.Gamma.Section511.complexStirlingApprox (n : ℕ) (z : ℂ) : ℂ</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 5.11.1: the principal-branch finite sum through source index `n-1`. </code>",
+ "440":
+ "<code>LMLF.Blueprint.Gamma.Section511.lnGamma (δ : ℝ) (z : ℂ) : ℂ</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 5.11.1: the selected general logarithm of Gamma. </code>",
  "44":
  "<code>QuantitativeAnalysis.HasPoincareExpansion.{u_1, u_2} {X : Type u_1} {E : Type u_2} [NormedAddCommGroup E] (l : Filter X)\n  (f : X → E) (term : ℕ → X → E) : Prop</code><span class=\"sep\"></span><code class=\"docstring\">`f` has the Poincaré expansion `term` along `l` when every finite-truncation remainder is\nlittle-o of its last retained term. This relation does not assert convergence of an infinite sum.\n</code>",
+ "439":
+ "<code>Classical.choice.{u} {α : Sort u} : Nonempty α → α</code><span class=\"sep\"></span><code class=\"docstring\">**The axiom of choice**. `Nonempty α` is a proof that `α` has an element,\nbut the element itself is erased. The axiom `choice` supplies a particular\nelement of `α` given only this proof.\n\nThe textbook axiom of choice normally makes a family of choices all at once,\nbut that is implied from this formulation, because if `α : ι → Type` is a\nfamily of types and `h : ∀ i, Nonempty (α i)` is a proof that they are all\nnonempty, then `fun i =&gt; Classical.choice (h i) : ∀ i, α i` is a family of\nchosen elements. This is actually a bit stronger than the ZFC choice axiom;\nthis is sometimes called \"[global choice](https://en.wikipedia.org/wiki/Axiom_of_global_choice)\".\n\nIn Lean, we use the axiom of choice to derive the law of excluded middle\n(see `Classical.em`), so it will often show up in axiom listings where you\nmay not expect. You can use `#print axioms my_thm` to find out if a given\ntheorem depends on this or other axioms.\n\nThis axiom can be used to construct \"data\", but obviously there is no algorithm\nto compute it, so Lean will require you to mark any definition that would\ninvolve executing `Classical.choice` or other axioms as `noncomputable`, and\nwill not produce any executable code for such definitions.\n</code>",
+ "438":
+ "<code>LMLF.Blueprint.Gamma.Section511.lnGammaDatum : LnGammaDatum</code><span class=\"sep\"></span><code class=\"docstring\">The selected branch datum used by the complex E1 residual. </code>",
+ "437":
+ "<code>LMLF.Blueprint.Gamma.Section511.existsLnGammaDatum : Nonempty LnGammaDatum</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 5.11.1: existence/specification boundary for the selected `Ln Γ` branch. </code>",
+ "436":
+ "<code>LMLF.Blueprint.Gamma.Section511.LnGammaDatum.real_normalization (self : LnGammaDatum) {δ x : ℝ} :\n  0 &lt; δ → 0 &lt; x → gammaSectorDomain δ ↑x → self.value δ ↑x = ↑(Real.log (Real.Gamma x))</code>",
+ "435":
+ "<code>LMLF.Blueprint.Gamma.Section511.LnGammaDatum.branch_consistent (self : LnGammaDatum) {δ₁ δ₂ : ℝ} {z : ℂ} :\n  0 &lt; δ₁ → 0 &lt; δ₂ → gammaSectorDomain δ₁ z → gammaSectorDomain δ₂ z → self.value δ₁ z = self.value δ₂ z</code>",
+ "434":
+ "<code>AnalyticOnNhd.{u_1, u_2, u_3} (𝕜 : Type u_1) {E : Type u_2} {F : Type u_3} [NontriviallyNormedField 𝕜]\n  [NormedAddCommGroup E] [NormedSpace 𝕜 E] [NormedAddCommGroup F] [NormedSpace 𝕜 F] (f : E → F) (s : Set E) : Prop</code><span class=\"sep\"></span><code class=\"docstring\">Given a function `f : E → F`, we say that `f` is analytic on a set `s` if it is analytic around\nevery point of `s`. </code>",
+ "433":
+ "<code>LMLF.Blueprint.Gamma.Section511.LnGammaDatum.analytic_on (self : LnGammaDatum) {δ : ℝ} :\n  0 &lt; δ → AnalyticOnNhd ℂ (self.value δ) {z | gammaSectorDomain δ z}</code>",
+ "432": "<code>ℝ → ℂ → ℂ</code>",
+ "431":
+ "<code>LMLF.Blueprint.Gamma.Section511.LnGammaDatum.exp_eq_gamma (self : LnGammaDatum) {δ : ℝ} {z : ℂ} :\n  0 &lt; δ → gammaSectorDomain δ z → Complex.exp (self.value δ z) = Complex.Gamma z</code>",
+ "430":
+ "<code>LMLF.Blueprint.Gamma.Section511.LnGammaDatum.value (self : LnGammaDatum) : ℝ → ℂ → ℂ</code>",
  "43":
  "<code>Filter.{u_1} (α : Type u_1) : Type u_1</code><span class=\"sep\"></span><code class=\"docstring\">A filter `F` on a type `α` is a collection of sets of `α` which contains the whole `α`,\nis upwards-closed, and is stable under intersection. We do not forbid this collection to be\nall sets of `α`. </code>",
+ "429":
+ "<code>LMLF.Blueprint.Gamma.Section511.LnGammaDatum : Type</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 5.11.1: a selected branch of `Ln Γ` on each admissible sector.\n\nThe exponential compatibility field records that this is a logarithm of the\nGamma value. Analyticity on each admissible sector, overlap consistency, and\nagreement with the positive-real log-Gamma normalization make the selected\nbranch explicit. </code>",
+ "428":
+ "<code>Complex.arg (x : ℂ) : ℝ</code><span class=\"sep\"></span><code class=\"docstring\">`arg` returns values in the range $(-π, π]$, such that for `x ≠ 0`,\n`sin (arg x) = x.im / x.abs` and `cos (arg x) = x.re / x.abs`,\n`arg 0` defaults to `0` </code>",
+ "427":
+ "<code>LMLF.Blueprint.Gamma.Section511.gammaSectorDomain (δ : ℝ) (z : ℂ) : Prop</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 5.11.1: the sector domain carrying the general-logarithm branch. </code>",
+ "426":
+ "<code>LMLF.Blueprint.Gamma.Section511.complexDigammaTerm (k : ℕ) (z : ℂ) : ℂ</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 5.11.2: the complex Bernoulli term with the source's one-based index. </code>",
+ "425":
+ "<code>LMLF.Blueprint.Gamma.Section511.complexStirlingTerm (k : ℕ) (z : ℂ) : ℂ</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 5.11.1: the complex term with the source's one-based index. </code>",
+ "424":
+ "<code>Filter.atBot.{u_3} {α : Type u_3} [Preorder α] : Filter α</code><span class=\"sep\"></span><code class=\"docstring\">`atBot` is the filter representing the limit `→ -∞` on an ordered set.\nIt is generated by the collection of down-sets `{b | b ≤ a}`.\n(The preorder need not have a bottom element for this to be well defined,\nand indeed is trivial when a bottom element `x` exists, i.e., it coincides with `pure x`.) </code>",
+ "423":
+ "<code>LMLF.Blueprint.Gamma.Section511.dlmf_5_11_9 :\n  UniformAsymptoticOnBounded (fun x y =&gt; ‖Complex.Gamma (↑x + ↑y * Complex.I)‖)\n      (fun x y =&gt; √(2 * Real.pi) * |y| ^ (x - 1 / 2) * Real.exp (-Real.pi * |y| / 2)) atTop ∧\n    UniformAsymptoticOnBounded (fun x y =&gt; ‖Complex.Gamma (↑x + ↑y * Complex.I)‖)\n      (fun x y =&gt; √(2 * Real.pi) * |y| ^ (x - 1 / 2) * Real.exp (-Real.pi * |y| / 2)) atBot</code>",
+ "422":
+ "<code>TendstoUniformlyOn.{u_1, u_2, u_4} {α : Type u_1} {β : Type u_2} {ι : Type u_4} [UniformSpace β] (F : ι → α → β)\n  (f : α → β) (p : Filter ι) (s : Set α) : Prop</code><span class=\"sep\"></span><code class=\"docstring\">A sequence of functions `Fₙ` converges uniformly on a set `s` to a limiting function `f` with\nrespect to the filter `p` if, for any entourage of the diagonal `u`, one has `p`-eventually\n`(f x, Fₙ x) ∈ u` for all `x ∈ s`. </code>",
+ "421":
+ "<code>Bornology.IsBounded.{u_2} {α : Type u_2} [Bornology α] (s : Set α) : Prop</code><span class=\"sep\"></span><code class=\"docstring\">`IsBounded` is the predicate that `s` is bounded relative to the ambient bornology on `α`. </code>",
+ "420": "<code>Set ℝ</code>",
  "42": "<code>Filter X</code>",
+ "419": "<code>Filter ℝ</code>",
+ "418": "<code>ℝ → ℝ → ℝ</code>",
+ "417":
+ "<code>LMLF.Blueprint.Gamma.Section511.UniformAsymptoticOnBounded (f g : ℝ → ℝ → ℝ) (l : Filter ℝ) : Prop</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 5.11.9: uniform relative-error asymptotics on every bounded set of `x`. </code>",
+ "416":
+ "<code>LMLF.Blueprint.Gamma.Section511.dlmf_5_11_8 (h : ℝ) :\n  (fun x =&gt; Real.log (Real.Gamma (x + h)) - shiftedLogGammaMain h x) ∼ₚ[atTop] shiftedLogGammaTerm h</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 5.11.8: shifted-log-Gamma Poincaré expansion. </code>",
+ "415":
+ "<code>LMLF.Blueprint.Gamma.Section511.shiftedLogGammaTerm (h : ℝ) (k : ℕ) (x : ℝ) : ℝ</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 5.11.8: the shifted Bernoulli-series term, indexed from zero. </code>",
+ "414":
+ "<code>LMLF.Blueprint.Gamma.Section511.shiftedLogGammaMain (h x : ℝ) : ℝ</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 5.11.8: shifted-log-Gamma main term for fixed real `h`. </code>",
+ "413": "<code>0 &lt; a</code>",
+ "412":
+ "<code>LMLF.Blueprint.Gamma.Section511.dlmf_5_11_7 {a b : ℝ} (ha : 0 &lt; a) :\n  (fun z =&gt; Real.Gamma (a * z + b)) ~[atTop] fun z =&gt; √(2 * Real.pi) * Real.exp (-a * z) * (a * z) ^ (a * z + b - 1 / 2)</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 5.11.7: the leading Gamma asymptotic for fixed real `a&gt;0,b`. </code>",
+ "411":
+ "<code>LMLF.Blueprint.Gamma.Section511.dlmf_5_11_6_initial : aCoeff 0 = √2 / 2</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 5.11.6: the initial value for the auxiliary recurrence. </code>",
+ "410": "<code>1 ≤ k</code>",
  "41":
  "<code>QuantitativeAnalysis.IsAsymptoticScale.{u_1, u_2} {X : Type u_1} {E : Type u_2} [NormedAddCommGroup E] (l : Filter X)\n  (term : ℕ → X → E) : Prop</code><span class=\"sep\"></span><code class=\"docstring\">Each successive term is asymptotically smaller in norm than its predecessor along `l`. </code>",
+ "409":
+ "<code>LMLF.Blueprint.Gamma.Section511.dlmf_5_11_6 {k : ℕ} (hk : 1 ≤ k) :\n  ∑ j ∈ Finset.range (k + 1), aCoeff j * aCoeff (k - j) / (↑j + 1) = aCoeff (k - 1) / ↑k</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 5.11.6: the recurrence for the auxiliary coefficients. </code>",
+ "408":
+ "<code>LMLF.Blueprint.Gamma.Section511.dlmf_5_11_5 (k : ℕ) : gCoeff k = √2 * risingFactorial (1 / 2) k * aCoeff (2 * k)</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 5.11.5: relation between `g_k` and the auxiliary `a_k`. </code>",
+ "407":
+ "<code>LMLF.Blueprint.Gamma.Section511.dlmf_5_11_4 :\n  gCoeff 0 = 1 ∧\n    gCoeff 1 = 1 / 12 ∧\n      gCoeff 2 = 1 / 288 ∧\n        gCoeff 3 = -139 / 51840 ∧\n          gCoeff 4 = -571 / 2488320 ∧ gCoeff 5 = 163879 / 209018880 ∧ gCoeff 6 = 5246819 / 75246796800</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 5.11.4: the seven displayed initial values of `g_k`. </code>",
+ "406":
+ "<code>LMLF.Blueprint.Gamma.Section511.dlmf_5_11_3 : (fun x =&gt; scaledGammaReal x) ∼ₚ[atTop] scaledGammaTerm</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 5.11.3: `Gamma*` has the Poincaré expansion in the `g_k`. </code>",
+ "405":
+ "<code>LMLF.Blueprint.Gamma.Section511.scaledGammaTerm (k : ℕ) (x : ℝ) : ℝ</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 5.11.3: the scaled-Gamma asymptotic series on positive reals. </code>",
+ "404":
+ "<code>LMLF.Blueprint.Gamma.Section511.scaledGammaReal_factorization {x : ℝ} (hx : 0 &lt; x) :\n  Real.Gamma x = scaledGammaPrefactorReal x * scaledGammaReal x</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 5.11.3: exact positive-real factorization defining `Γ*`. </code>",
+ "403":
+ "<code>LMLF.Blueprint.Gamma.Section511.scaledGammaReal (x : ℝ) : ℝ</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 5.11.3: the scaled Gamma function on the positive real axis. </code>",
+ "402":
+ "<code>LMLF.Blueprint.Gamma.Section511.scaledGammaPrefactorReal (x : ℝ) : ℝ</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 5.11.3: the scaled Gamma function on the positive real axis. </code>",
+ "401":
+ "<code>LMLF.Blueprint.Gamma.Section511.dlmf_5_11_2_remainder_bound (n : ℕ) {x : ℝ} (hx : 0 &lt; x) :\n  0 ≤ (realDigamma x - digammaApprox n x) * digammaTerm n x ∧ |realDigamma x - digammaApprox n x| ≤ |digammaTerm n x|</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 5.11.2 and §5.11(ii): the first-neglected-term digamma bound. </code>",
+ "400":
+ "<code>LMLF.Blueprint.Gamma.Section511.dlmf_5_11_2 : (fun x =&gt; realDigamma x - Real.log x) ∼ₚ[atTop] digammaTerm</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 5.11.2: the Poincaré expansion of the digamma function. </code>",
  "40":
  "<code>Finset.range (n : ℕ) : Finset ℕ</code><span class=\"sep\"></span><code class=\"docstring\">`range n` is the set of natural numbers less than `n`. </code>",
  "4":
  "<code class=\"docstring\">The syntax `variable (X Y ... Z : Type*)` creates a new distinct implicit universe variable\n`&gt; 0` for each variable in the sequence. </code>",
+ "399":
+ "<code>LMLF.Blueprint.Gamma.Section511.digammaApprox (n : ℕ) (x : ℝ) : ℝ</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 5.11.2: the finite sum of the first `n` zero-based terms. </code>",
+ "398":
+ "<code class=\"docstring\">`let` is used to declare a local definition. Example:\n```\nlet x := 1\nlet y := x + 1\nx + y\n```\nSince functions are first class citizens in Lean, you can use `let` to declare\nlocal functions too.\n```\nlet double := fun x =&gt; 2*x\ndouble (double 3)\n```\nFor recursive definitions, you should use `let rec`.\nYou can also perform pattern matching using `let`. For example,\nassume `p` has type `Nat × Nat`, then you can write\n```\nlet (x, y) := p\nx + y\n```\n\nThe *anaphoric let* `let := v` defines a variable called `this`.\n</code>",
+ "397":
+ "<code>LMLF.Blueprint.Gamma.Section511.digammaTerm (k : ℕ) (x : ℝ) : ℝ</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 5.11.2: the digamma expansion term, indexed from zero. </code>",
+ "396":
+ "<code>LMLF.Blueprint.Gamma.Section511.realDigamma (x : ℝ) : ℝ</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 5.11.2: the real restriction of Mathlib's digamma function. </code>",
+ "395":
+ "<code>LMLF.Blueprint.Gamma.Section511.dlmf_5_11_1_remainder_bound (n : ℕ) {x : ℝ} (hx : 0 &lt; x) :\n  0 ≤ (Real.log (Real.Gamma x) - stirlingLogApprox n x) * stirlingLogTerm n x ∧\n    |Real.log (Real.Gamma x) - stirlingLogApprox n x| ≤ |stirlingLogTerm n x|</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 5.11.1 and §5.11(ii): the first-neglected-term bound for Stirling's series. </code>",
+ "394":
+ "<code>LMLF.Blueprint.Gamma.Section511.dlmf_5_11_1 :\n  (fun x =&gt; Real.log (Real.Gamma x) - stirlingLogMain x) ∼ₚ[atTop] stirlingLogTerm</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 5.11.1: Stirling's series on the positive real axis. </code>",
+ "393":
+ "<code>LMLF.Blueprint.Gamma.Section511.stirlingLogApprox (n : ℕ) (x : ℝ) : ℝ</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 5.11.1: the finite sum of the first `n` zero-based terms. </code>",
+ "392":
+ "<code>LMLF.Blueprint.Gamma.Section511.stirlingLogTerm (k : ℕ) (x : ℝ) : ℝ</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 5.11.1: the `k`th term, with index zero corresponding to DLMF `k=1`. </code>",
+ "391":
+ "<code>LMLF.Blueprint.Gamma.Section511.stirlingLogMain (x : ℝ) : ℝ</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 5.11.1: the elementary Stirling logarithm main term. </code>",
+ "390":
+ "<code>bernoulli (n : ℕ) : ℚ</code><span class=\"sep\"></span><code class=\"docstring\">The Bernoulli numbers are defined to be `bernoulli'` with a parity sign. </code>",
  "39":
  "<code>QuantitativeAnalysis.seriesPartialSum.{u_1, u_2} {X : Type u_1} {E : Type u_2} [NormedAddCommGroup E] (term : ℕ → X → E)\n  (n : ℕ) (x : X) : E</code><span class=\"sep\"></span><code class=\"docstring\">The sum of the first `n` terms of a function-valued series. </code>",
+ "389":
+ "<code>LMLF.Blueprint.Gamma.Section511.bernoulliPoly (n : ℕ) (x : ℝ) : ℝ</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 5.11.8: the ordinary Bernoulli polynomial. </code>",
+ "388":
+ "<code>LMLF.Blueprint.Gamma.Section511.aCoeff : ℕ → ℝ</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 5.11.5–5.11.6: coefficients used to generate `gCoeff`. </code>",
+ "387":
+ "<code>LMLF.Blueprint.Gamma.Section511.stirlingCoefficientSpec : StirlingCoefficientSpec</code><span class=\"sep\"></span><code class=\"docstring\">The selected coefficient specification used by DLMF 5.11.3–5.11.6. </code>",
+ "386":
+ "<code>LMLF.Blueprint.Gamma.Section511.gCoeff : ℕ → ℝ</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 5.11.4–5.11.6: Stirling's scaled-Gamma coefficients. </code>",
+ "385":
+ "<code>Nonempty.{u} (α : Sort u) : Prop</code><span class=\"sep\"></span><code class=\"docstring\">`Nonempty α` is a typeclass that says that `α` is not an empty type,\nthat is, there exists an element in the type. It differs from `Inhabited α`\nin that `Nonempty α` is a `Prop`, which means that it does not actually carry\nan element of `α`, only a proof that *there exists* such an element.\nGiven `Nonempty α`, you can construct an element of `α` *nonconstructively*\nusing `Classical.choice`.\n</code>",
+ "384":
+ "<code>LMLF.Blueprint.Gamma.Section511.existsStirlingCoefficientSpec : Nonempty StirlingCoefficientSpec</code><span class=\"sep\"></span><code class=\"docstring\">The source-facing existence/specification boundary for DLMF 5.11.3–5.11.6. </code>",
+ "383":
+ "<code>LMLF.Blueprint.Gamma.Section511.StirlingCoefficientSpec.a_initial (self : StirlingCoefficientSpec) :\n  self.aCoeff 0 = √2 / 2</code>",
+ "382":
+ "<code>LMLF.Blueprint.Gamma.Section511.StirlingCoefficientSpec.a_recurrence (self : StirlingCoefficientSpec) {k : ℕ} :\n  1 ≤ k → ∑ j ∈ Finset.range (k + 1), self.aCoeff j * self.aCoeff (k - j) / (↑j + 1) = self.aCoeff (k - 1) / ↑k</code>",
+ "381":
+ "<code>LMLF.Blueprint.Gamma.Section511.risingFactorial (a : ℝ) (n : ℕ) : ℝ</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 5.11.5: the finite rising factorial `(a)_n`. </code>",
+ "380":
+ "<code>LMLF.Blueprint.Gamma.Section511.StirlingCoefficientSpec.g_from_a (self : StirlingCoefficientSpec) (k : ℕ) :\n  self.gCoeff k = √2 * risingFactorial (1 / 2) k * self.aCoeff (2 * k)</code>",
  "38":
  "<code class=\"docstring\">Makes names from other namespaces visible without writing the namespace prefix.\n\nNames that are made available with `open` are visible within the current `section` or `namespace`\nblock. This makes referring to (type) definitions and theorems easier, but note that it can also\nmake [scoped instances], notations, and attributes from a different namespace available.\n\nThe `open` command can be used in a few different ways:\n\n* `open Some.Namespace.Path1 Some.Namespace.Path2` makes all non-protected names in\n  `Some.Namespace.Path1` and `Some.Namespace.Path2` available without the prefix, so that\n  `Some.Namespace.Path1.x` and `Some.Namespace.Path2.y` can be referred to by writing only `x` and\n  `y`.\n\n* `open Some.Namespace.Path hiding def1 def2` opens all non-protected names in `Some.Namespace.Path`\n  except `def1` and `def2`.\n\n* `open Some.Namespace.Path (def1 def2)` only makes `Some.Namespace.Path.def1` and\n  `Some.Namespace.Path.def2` available without the full prefix, so `Some.Namespace.Path.def3` would\n  be unaffected.\n\n  This works even if `def1` and `def2` are `protected`.\n\n* `open Some.Namespace.Path renaming def1 → def1', def2 → def2'` same as `open Some.Namespace.Path\n  (def1 def2)` but `def1`/`def2`'s names are changed to `def1'`/`def2'`.\n\n  This works even if `def1` and `def2` are `protected`.\n\n* `open scoped Some.Namespace.Path1 Some.Namespace.Path2` **only** opens [scoped instances],\n  notations, and attributes from `Namespace1` and `Namespace2`; it does **not** make any other name\n  available.\n\n* `open &lt;any of the open shapes above&gt; in` makes the names `open`-ed visible only in the next\n  command or expression.\n\n[scoped instance]: https://lean-lang.org/theorem_proving_in_lean4/type_classes.html#scoped-instances\n(Scoped instances in Theorem Proving in Lean)\n\n\n## Examples\n\n```lean\n/-- SKI combinators https://en.wikipedia.org/wiki/SKI_combinator_calculus -/\nnamespace Combinator.Calculus\n  def I (a : α) : α := a\n  def K (a : α) : β → α := fun _ =&gt; a\n  def S (x : α → β → γ) (y : α → β) (z : α) : γ := x z (y z)\nend Combinator.Calculus\n\nsection\n  -- open everything under `Combinator.Calculus`, *i.e.* `I`, `K` and `S`,\n  -- until the section ends\n  open Combinator.Calculus\n\n  theorem SKx_eq_K : S K x = I := rfl\nend\n\n-- open everything under `Combinator.Calculus` only for the next command (the next `theorem`, here)\nopen Combinator.Calculus in\ntheorem SKx_eq_K' : S K x = I := rfl\n\nsection\n  -- open only `S` and `K` under `Combinator.Calculus`\n  open Combinator.Calculus (S K)\n\n  theorem SKxy_eq_y : S K x y = y := rfl\n\n  -- `I` is not in scope, we have to use its full path\n  theorem SKxy_eq_Iy : S K x y = Combinator.Calculus.I y := rfl\nend\n\nsection\n  open Combinator.Calculus\n    renaming\n      I → identity,\n      K → konstant\n\n  #check identity\n  #check konstant\nend\n\nsection\n  open Combinator.Calculus\n    hiding S\n\n  #check I\n  #check K\nend\n\nsection\n  namespace Demo\n    inductive MyType\n    | val\n\n    namespace N1\n      scoped infix:68 \" ≋ \" =&gt; BEq.beq\n\n      scoped instance : BEq MyType where\n        beq _ _ := true\n\n      def Alias := MyType\n    end N1\n  end Demo\n\n  -- bring `≋` and the instance in scope, but not `Alias`\n  open scoped Demo.N1\n\n  #check Demo.MyType.val == Demo.MyType.val\n  #check Demo.MyType.val ≋ Demo.MyType.val\n  -- #check Alias -- unknown identifier 'Alias'\nend\n```\n</code>",
+ "379":
+ "<code>LMLF.Blueprint.Gamma.Section511.StirlingCoefficientSpec.g_initial (self : StirlingCoefficientSpec) :\n  self.gCoeff 0 = 1 ∧\n    self.gCoeff 1 = 1 / 12 ∧\n      self.gCoeff 2 = 1 / 288 ∧\n        self.gCoeff 3 = -139 / 51840 ∧\n          self.gCoeff 4 = -571 / 2488320 ∧ self.gCoeff 5 = 163879 / 209018880 ∧ self.gCoeff 6 = 5246819 / 75246796800</code>",
+ "378":
+ "<code>LMLF.Blueprint.Gamma.Section511.StirlingCoefficientSpec.aCoeff (self : StirlingCoefficientSpec) : ℕ → ℝ</code>",
+ "377":
+ "<code>LMLF.Blueprint.Gamma.Section511.StirlingCoefficientSpec.gCoeff (self : StirlingCoefficientSpec) : ℕ → ℝ</code>",
+ "376":
+ "<code>LMLF.Blueprint.Gamma.Section511.StirlingCoefficientSpec : Type</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 5.11.3–5.11.6: the complete selected coefficient specification. </code>",
+ "375":
+ "<code>LMLF.Blueprint.Gamma.Section510.dlmf_5_10_2 :\n  gammaContinuedFractionCoeff 0 = 1 / 12 ∧\n    gammaContinuedFractionCoeff 1 = 1 / 30 ∧\n      gammaContinuedFractionCoeff 2 = 53 / 210 ∧\n        gammaContinuedFractionCoeff 3 = 195 / 371 ∧\n          gammaContinuedFractionCoeff 4 = 22999 / 22737 ∧\n            gammaContinuedFractionCoeff 5 = 29944523 / 19733142 ∧\n              gammaContinuedFractionCoeff 6 = 109535241009 / 48264275462</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 5.10.2.  The first seven continued-fraction coefficients, as one source record. </code>",
+ "374":
+ "<code>LMLF.Blueprint.Gamma.Section510.dlmf_5_10_1 {x : ℝ} (hx : 0 &lt; x) :\n  Tendsto (continuedFractionConvergent gammaContinuedFractionCoeff ↑x) atTop\n    (nhds ↑(Real.log (Real.Gamma x) + x - (x - 1 / 2) * Real.log x - Real.log (2 * Real.pi) / 2))</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 5.10.1, specialized to positive real `x` to make the logarithm branch explicit.\n\nBecause DLMF 5.10.2 displays only `a₀` through `a₆`, the full source sequence is the\none selected by `gammaContinuedFractionCoeff` from the existence assertion, rather than\nan opaque stream with unconstrained later values.\n</code>",
+ "373":
+ "<code>LMLF.Blueprint.Gamma.Section510.gammaContinuedFractionCoeff_spec :\n  (gammaContinuedFractionCoeff 0 = 1 / 12 ∧\n      gammaContinuedFractionCoeff 1 = 1 / 30 ∧\n        gammaContinuedFractionCoeff 2 = 53 / 210 ∧\n          gammaContinuedFractionCoeff 3 = 195 / 371 ∧\n            gammaContinuedFractionCoeff 4 = 22999 / 22737 ∧\n              gammaContinuedFractionCoeff 5 = 29944523 / 19733142 ∧\n                gammaContinuedFractionCoeff 6 = 109535241009 / 48264275462) ∧\n    ∀ (x : ℝ),\n      0 &lt; x →\n        Tendsto (continuedFractionConvergent gammaContinuedFractionCoeff ↑x) atTop\n          (nhds ↑(Real.log (Real.Gamma x) + x - (x - 1 / 2) * Real.log x - Real.log (2 * Real.pi) / 2))</code><span class=\"sep\"></span><code class=\"docstring\">The displayed coefficients and convergence property of the selected DLMF sequence. </code>",
+ "372":
+ "<code>Classical.choose.{u} {α : Sort u} {p : α → Prop} (h : ∃ x, p x) : α</code><span class=\"sep\"></span><code class=\"docstring\">Given that there exists an element satisfying `p`, returns one such element.\n\nThis is a straightforward consequence of, and equivalent to, `Classical.choice`.\n\nSee also `choose_spec`, which asserts that the returned value has property `p`.\n</code>",
+ "371":
+ "<code>LMLF.Blueprint.Gamma.Section510.gammaContinuedFractionCoeff : ℕ → ℂ</code><span class=\"sep\"></span><code class=\"docstring\">The full DLMF coefficient sequence selected from the existence assertion above. </code>",
+ "370":
+ "<code>LMLF.Blueprint.Gamma.Section510.exists_gammaContinuedFractionCoeff :\n  ∃ coeff,\n    (coeff 0 = 1 / 12 ∧\n        coeff 1 = 1 / 30 ∧\n          coeff 2 = 53 / 210 ∧\n            coeff 3 = 195 / 371 ∧\n              coeff 4 = 22999 / 22737 ∧ coeff 5 = 29944523 / 19733142 ∧ coeff 6 = 109535241009 / 48264275462) ∧\n      ∀ (x : ℝ),\n        0 &lt; x →\n          Tendsto (continuedFractionConvergent coeff ↑x) atTop\n            (nhds ↑(Real.log (Real.Gamma x) + x - (x - 1 / 2) * Real.log x - Real.log (2 * Real.pi) / 2))</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 5.10.1–5.10.2, specialized to positive real arguments.\n\nThe source displays the first seven coefficients and refers to external tables for the\nrest.  This existential states that a full source sequence has those seven values and\nthat its finite convergents have the DLMF limit.\n</code>",
  "37": "<code>ℕ</code>",
+ "369":
+ "<code>LMLF.Blueprint.Gamma.Section510.continuedFractionConvergent (coeff : ℕ → ℂ) (z : ℂ) (n : ℕ) : ℂ</code><span class=\"sep\"></span><code class=\"docstring\">The depth-`n` convergent of `a₀/(z + a₁/(z + ⋯))`.\n\nDepth `n` uses the first `n + 1` coefficients, with the final denominator `z` visible\nin the recursive definition of `continuedFractionTail`.\n</code>",
+ "368": "<code>ℕ → ℂ</code>",
+ "367":
+ "<code>LMLF.Blueprint.Gamma.Section510.continuedFractionTail (coeff : ℕ → ℂ) (z : ℂ) (offset : ℕ) : ℕ → ℂ</code><span class=\"sep\"></span><code class=\"docstring\">The finite tail of a continued fraction with constant denominator `z`.\n\nThe depth-zero tail is the empty tail, and a successor depth adds the coefficient at\n`offset` above the denominator `z` and the next tail.  This is the local vocabulary used\nto expose the finite convergents in DLMF 5.10.1.\n</code>",
+ "366": "<code>0 &lt; c.re</code>",
+ "365":
+ "<code>LMLF.Blueprint.Gamma.Section59.dlmf_5_9_20 {c z : ℂ} (hc : 0 &lt; c.re) (hz : 0 &lt; z.re) :\n  IntegrableOn (fun t =&gt; (↑t ^ (z - 1) - ↑t ^ (c - 1)) / ↑(Real.log t) * ↑(Real.exp (-t))) (Ioi 0) volume ∧\n    complexSegmentIntegral Complex.Gamma c z =\n      ∫ (t : ℝ) in Ioi 0, (↑t ^ (z - 1) - ↑t ^ (c - 1)) / ↑(Real.log t) * ↑(Real.exp (-t))</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 5.9.20. Integrating Gamma along a straight segment in the right half-plane;\nthe quotient's totalized value at the removable point `t = 1` is immaterial to the integral. </code>",
+ "364":
+ "<code>LMLF.Blueprint.Gamma.Section59.complexSegmentIntegral (f : ℂ → ℂ) (a b : ℂ) : ℂ</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 5.9.20. The integral of `f` along the straight segment from `a` to `b`. </code>",
+ "363":
+ "<code>LMLF.Blueprint.Gamma.Section59.dlmf_5_9_19 (n : ℕ) {z : ℂ} (hz : 0 &lt; z.re) :\n  IntegrableOn (fun t =&gt; ↑(Real.log t) ^ n * ↑(Real.exp (-t)) * ↑t ^ (z - 1)) (Ioi 0) volume ∧\n    iteratedDeriv n Complex.Gamma z = ∫ (t : ℝ) in Ioi 0, ↑(Real.log t) ^ n * ↑(Real.exp (-t)) * ↑t ^ (z - 1)</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 5.9.19. Differentiating Euler's integral under the integral sign. </code>",
+ "362":
+ "<code>LMLF.Blueprint.Gamma.Section59.dlmf_5_9_18 :\n  IntegrableOn (fun t =&gt; Real.exp (-t) * Real.log t) (Ioi 0) volume ∧\n    IntegrableOn (fun t =&gt; (1 / (1 + t) - Real.exp (-t)) / t) (Ioi 0) volume ∧\n      IntegrableOn (fun t =&gt; (1 - Real.exp (-t)) / t) (Ioo 0 1) volume ∧\n        IntegrableOn (fun t =&gt; Real.exp (-t) / t) (Ici 1) volume ∧\n          IntegrableOn (fun t =&gt; Real.exp (-t) / (1 - Real.exp (-t)) - Real.exp (-t) / t) (Ioi 0) volume ∧\n            Real.eulerMascheroniConstant = -∫ (t : ℝ) in Ioi 0, Real.exp (-t) * Real.log t ∧\n              Real.eulerMascheroniConstant = ∫ (t : ℝ) in Ioi 0, (1 / (1 + t) - Real.exp (-t)) / t ∧\n                Real.eulerMascheroniConstant =\n                    (∫ (t : ℝ) in Ioo 0 1, (1 - Real.exp (-t)) / t) - ∫ (t : ℝ) in Ici 1, Real.exp (-t) / t ∧\n                  Real.eulerMascheroniConstant =\n                    ∫ (t : ℝ) in Ioi 0, Real.exp (-t) / (1 - Real.exp (-t)) - Real.exp (-t) / t</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 5.9.18. Four convergent integral representations of Euler's constant. </code>",
+ "361":
+ "<code>LMLF.Blueprint.Gamma.Section59.dlmf_5_9_17 {x c : ℝ} (hx : 0 &lt; x) (hc1 : 1 &lt; c) (hc2 : c &lt; 2) :\n  Integrable\n      (fun y =&gt;\n        ↑Real.pi * ↑x ^ (-(-↑c + ↑y * Complex.I) - 1) / Complex.sin (↑Real.pi * (-↑c + ↑y * Complex.I)) *\n            riemannZeta (-(-↑c + ↑y * Complex.I)) *\n          Complex.I)\n      volume ∧\n    (↑x + 1).digamma =\n      -↑Real.eulerMascheroniConstant +\n        (verticalLineIntegral c fun s =&gt; ↑Real.pi * ↑x ^ (-s - 1) / Complex.sin (↑Real.pi * s) * riemannZeta (-s)) /\n          (2 * ↑Real.pi * Complex.I)</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 5.9.17, specialized to positive real `x`. </code>",
+ "360":
+ "<code>Set.Ioo.{u_1} {α : Type u_1} [Preorder α] (a b : α) : Set α</code><span class=\"sep\"></span><code class=\"docstring\">`Ioo a b` is the left-open right-open interval $(a, b)$. </code>",
  "36": "<code>ℕ → X → ℝ</code>",
+ "359":
+ "<code>LMLF.Blueprint.Gamma.Section59.dlmf_5_9_16 {x : ℝ} (hx : 0 &lt; x) :\n  IntegrableOn (fun t =&gt; (Real.exp (-t) - Real.exp (-x * t)) / (1 - Real.exp (-t))) (Ioi 0) volume ∧\n    IntegrableOn (fun t =&gt; (1 - t ^ (x - 1)) / (1 - t)) (Ioo 0 1) volume ∧\n      (↑x).digamma + ↑Real.eulerMascheroniConstant =\n          ↑(∫ (t : ℝ) in Ioi 0, (Real.exp (-t) - Real.exp (-x * t)) / (1 - Real.exp (-t))) ∧\n        (↑x).digamma + ↑Real.eulerMascheroniConstant = ↑(∫ (t : ℝ) in Ioo 0 1, (1 - t ^ (x - 1)) / (1 - t))</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 5.9.16, specialized to the positive real axis. </code>",
+ "358":
+ "<code>LMLF.Blueprint.Gamma.Section59.dlmf_5_9_15 {x : ℝ} (hx : 0 &lt; x) :\n  IntegrableOn (fun t =&gt; t / ((t ^ 2 + x ^ 2) * (Real.exp (2 * Real.pi * t) - 1))) (Ioi 0) volume ∧\n    (↑x).digamma =\n      ↑(Real.log x - 1 / (2 * x)) - 2 * ↑(∫ (t : ℝ) in Ioi 0, t / ((t ^ 2 + x ^ 2) * (Real.exp (2 * Real.pi * t) - 1)))</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 5.9.15, specialized to the positive real axis. </code>",
+ "357":
+ "<code>LMLF.Blueprint.Gamma.Section59.dlmf_5_9_14 {x : ℝ} (hx : 0 &lt; x) :\n  IntegrableOn (fun t =&gt; (Real.exp (-t) - (1 + t) ^ (-x)) / t) (Ioi 0) volume ∧\n    (↑x).digamma = ↑(∫ (t : ℝ) in Ioi 0, (Real.exp (-t) - (1 + t) ^ (-x)) / t)</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 5.9.14, specialized to the positive real axis. </code>",
+ "356":
+ "<code>LMLF.Blueprint.Gamma.Section59.dlmf_5_9_13 {x : ℝ} (hx : 0 &lt; x) :\n  IntegrableOn (fun t =&gt; (1 / t - 1 / (1 - Real.exp (-t))) * Real.exp (-t * x)) (Ioi 0) volume ∧\n    (↑x).digamma = ↑(Real.log x) + ↑(∫ (t : ℝ) in Ioi 0, (1 / t - 1 / (1 - Real.exp (-t))) * Real.exp (-t * x))</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 5.9.13, specialized to the positive real axis. </code>",
+ "355":
+ "<code>LMLF.Blueprint.Gamma.Section59.dlmf_5_9_12 {x : ℝ} (hx : 0 &lt; x) :\n  IntegrableOn (fun t =&gt; Real.exp (-t) / t - Real.exp (-x * t) / (1 - Real.exp (-t))) (Ioi 0) volume ∧\n    (↑x).digamma = ↑(∫ (t : ℝ) in Ioi 0, Real.exp (-t) / t - Real.exp (-x * t) / (1 - Real.exp (-t)))</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 5.9.12, specialized to the positive real axis. </code>",
+ "354":
+ "<code>LMLF.Blueprint.Gamma.Section59.dlmf_5_9_11_2 {x : ℝ} (hx : 0 &lt; x) :\n  IntegrableOn (fun t =&gt; ↑(Real.exp (-2 * Real.pi * t)) * scaledGamma (↑t * Complex.I) / (↑t - Complex.I * ↑x)) (Ioi 0)\n      volume ∧\n    IntegrableOn (fun t =&gt; ↑(Real.exp (-2 * Real.pi * t)) * scaledGamma (-↑t * Complex.I) / (↑t + Complex.I * ↑x))\n        (Ioi 0) volume ∧\n      1 / scaledGamma ↑x =\n        (1 -\n            1 / (2 * ↑Real.pi * Complex.I) *\n              ∫ (t : ℝ) in Ioi 0,\n                ↑(Real.exp (-2 * Real.pi * t)) * scaledGamma (↑t * Complex.I) / (↑t - Complex.I * ↑x)) +\n          1 / (2 * ↑Real.pi * Complex.I) *\n            ∫ (t : ℝ) in Ioi 0, ↑(Real.exp (-2 * Real.pi * t)) * scaledGamma (-↑t * Complex.I) / (↑t + Complex.I * ↑x)</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 5.9.11_2, specialized to positive real arguments. </code>",
+ "353":
+ "<code>LMLF.Blueprint.Gamma.Section59.dlmf_5_9_11_1 {x : ℝ} (hx : 0 &lt; x) :\n  IntegrableOn (fun t =&gt; ↑(Real.exp (-2 * Real.pi * t)) * scaledGamma (↑t * Complex.I) / (↑t + Complex.I * ↑x)) (Ioi 0)\n      volume ∧\n    IntegrableOn (fun t =&gt; ↑(Real.exp (-2 * Real.pi * t)) * scaledGamma (-↑t * Complex.I) / (↑t - Complex.I * ↑x))\n        (Ioi 0) volume ∧\n      scaledGamma ↑x =\n        (1 -\n            1 / (2 * ↑Real.pi * Complex.I) *\n              ∫ (t : ℝ) in Ioi 0,\n                ↑(Real.exp (-2 * Real.pi * t)) * scaledGamma (↑t * Complex.I) / (↑t + Complex.I * ↑x)) +\n          1 / (2 * ↑Real.pi * Complex.I) *\n            ∫ (t : ℝ) in Ioi 0, ↑(Real.exp (-2 * Real.pi * t)) * scaledGamma (-↑t * Complex.I) / (↑t - Complex.I * ↑x)</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 5.9.11_1, specialized to positive real arguments. </code>",
+ "352":
+ "<code>LMLF.Blueprint.Gamma.Section59.scaledGamma (z : ℂ) : ℂ</code><span class=\"sep\"></span><code class=\"docstring\">The scaled Gamma function used in DLMF 5.9.11_1 and 5.9.11_2. </code>",
+ "351": "<code>c &lt; 2</code>",
+ "350": "<code>1 &lt; c</code>",
  "35": "<code>ℕ → Set X</code>",
+ "349":
+ "<code>LMLF.Blueprint.Gamma.Section59.dlmf_5_9_11 {x c : ℝ} (hx : 0 &lt; x) (hc1 : 1 &lt; c) (hc2 : c &lt; 2) :\n  Integrable\n      (fun y =&gt;\n        ↑Real.pi * ↑x ^ (-(-↑c + ↑y * Complex.I)) /\n              ((-↑c + ↑y * Complex.I) * Complex.sin (↑Real.pi * (-↑c + ↑y * Complex.I))) *\n            riemannZeta (-(-↑c + ↑y * Complex.I)) *\n          Complex.I)\n      volume ∧\n    ↑(Real.log (Real.Gamma (x + 1))) =\n      -↑Real.eulerMascheroniConstant * ↑x -\n        (verticalLineIntegral c fun s =&gt; ↑Real.pi * ↑x ^ (-s) / (s * Complex.sin (↑Real.pi * s)) * riemannZeta (-s)) /\n          (2 * ↑Real.pi * Complex.I)</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 5.9.11, specialized to positive real `x`. </code>",
+ "348":
+ "<code>LMLF.Blueprint.Gamma.Section59.verticalLineIntegral (c : ℝ) (f : ℂ → ℂ) : ℂ</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 5.9.11 and 5.9.17. Integral along the vertical line `re s = -c`, oriented upward. </code>",
+ "347":
+ "<code>LMLF.Blueprint.Gamma.Section59.dlmf_5_9_10_2 {x : ℝ} (hx : 0 &lt; x) :\n  IntegrableOn (fun t =&gt; Real.exp (-x * t) * (1 / (Real.exp t - 1) - 1 / t + 1 / 2) / t) (Ioi 0) volume ∧\n    Real.log (Real.Gamma x) =\n      (x - 1 / 2) * Real.log x - x + Real.log (2 * Real.pi) / 2 +\n        ∫ (t : ℝ) in Ioi 0, Real.exp (-x * t) * (1 / (Real.exp t - 1) - 1 / t + 1 / 2) / t</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 5.9.10_2. The Laplace-integral form of Binet's formula, for positive reals. </code>",
+ "346":
+ "<code>LMLF.Blueprint.Gamma.Section59.dlmf_5_9_10_1 {x : ℝ} (hx : 0 &lt; x) :\n  IntegrableOn (fun t =&gt; Real.log (1 - Real.exp (-2 * Real.pi * t)) / (t ^ 2 + x ^ 2)) (Ioi 0) volume ∧\n    Real.log (Real.Gamma x) =\n      (x - 1 / 2) * Real.log x - x + Real.log (2 * Real.pi) / 2 -\n        x / Real.pi * ∫ (t : ℝ) in Ioi 0, Real.log (1 - Real.exp (-2 * Real.pi * t)) / (t ^ 2 + x ^ 2)</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 5.9.10_1. The integration-by-parts form of Binet's formula, for positive reals. </code>",
+ "345":
+ "<code>LMLF.Blueprint.Gamma.Section59.dlmf_5_9_10 {x : ℝ} (hx : 0 &lt; x) :\n  IntegrableOn (fun t =&gt; Real.arctan (t / x) / (Real.exp (2 * Real.pi * t) - 1)) (Ioi 0) volume ∧\n    Real.log (Real.Gamma x) =\n      (x - 1 / 2) * Real.log x - x + Real.log (2 * Real.pi) / 2 +\n        2 * ∫ (t : ℝ) in Ioi 0, Real.arctan (t / x) / (Real.exp (2 * Real.pi * t) - 1)</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 5.9.10. Binet's first formula on the positive real axis. </code>",
+ "344":
+ "<code>LMLF.Blueprint.Gamma.Section59.dlmf_5_9_9 {n : ℕ} (hn : 2 ≤ n) :\n  Tendsto (fun R =&gt; ∫ (t : ℝ) in 0..R, Real.sin (t ^ n)) atTop\n    (𝓝 (Real.Gamma (1 + 1 / ↑n) * Real.sin (Real.pi / (2 * ↑n))))</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 5.9.9. The sine power-phase integral. </code>",
+ "343": "<code>2 ≤ n</code>",
+ "342":
+ "<code>LMLF.Blueprint.Gamma.Section59.dlmf_5_9_8 {n : ℕ} (hn : 2 ≤ n) :\n  Tendsto (fun R =&gt; ∫ (t : ℝ) in 0..R, Real.cos (t ^ n)) atTop\n    (𝓝 (Real.Gamma (1 + 1 / ↑n) * Real.cos (Real.pi / (2 * ↑n))))</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 5.9.8. The cosine power-phase integral. </code>",
+ "341": "<code>-1 &lt; z.re</code>",
+ "340":
+ "<code>LMLF.Blueprint.Gamma.Section59.dlmf_5_9_7 {z : ℂ} (hl : -1 &lt; z.re) (hu : z.re &lt; 1) :\n  Tendsto (fun R =&gt; ∫ (t : ℝ) in 0..R, ↑t ^ (z - 1) * ↑(Real.sin t)) atTop\n    (𝓝 (Complex.Gamma z * Complex.sin (↑Real.pi * z / 2)))</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 5.9.7. The conditionally convergent sine Mellin integral. </code>",
  "34":
  "<code>Nat : Type</code><span class=\"sep\"></span><code class=\"docstring\">The natural numbers, starting at zero.\n\nThis type is special-cased by both the kernel and the compiler, and overridden with an efficient\nimplementation. Both use a fast arbitrary-precision arithmetic library (usually\n[GMP](https://gmplib.org/)); at runtime, `Nat` values that are sufficiently small are unboxed.\n</code>",
+ "339":
+ "<code>Real.cos (x : ℝ) : ℝ</code><span class=\"sep\"></span><code class=\"docstring\">The real cosine function, defined as the real part of the complex cosine </code>",
+ "338": "<code>z.re &lt; 1</code>",
+ "337":
+ "<code>LMLF.Blueprint.Gamma.Section59.dlmf_5_9_6 {z : ℂ} (hl : 0 &lt; z.re) (hu : z.re &lt; 1) :\n  Tendsto (fun R =&gt; ∫ (t : ℝ) in 0..R, ↑t ^ (z - 1) * ↑(Real.cos t)) atTop\n    (𝓝 (Complex.Gamma z * Complex.cos (↑Real.pi * z / 2)))</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 5.9.6. The conditionally convergent cosine Mellin integral. </code>",
+ "336": "<code>z.re &lt; -↑n</code>",
+ "335": "<code>-↑n - 1 &lt; z.re</code>",
+ "334":
+ "<code>LMLF.Blueprint.Gamma.Section59.dlmf_5_9_5 (n : ℕ) {z : ℂ} (hl : -↑n - 1 &lt; z.re) (hu : z.re &lt; -↑n) :\n  IntegrableOn\n      (fun t =&gt; ↑t ^ (z - 1) * (↑(Real.exp (-t)) - ∑ k ∈ Finset.range (n + 1), (-1) ^ k * ↑t ^ k / ↑k.factorial))\n      (Ioi 0) volume ∧\n    Complex.Gamma z =\n      ∫ (t : ℝ) in Ioi 0,\n        ↑t ^ (z - 1) * (↑(Real.exp (-t)) - ∑ k ∈ Finset.range (n + 1), (-1) ^ k * ↑t ^ k / ↑k.factorial)</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 5.9.5. Euler's integral after subtracting a Taylor polynomial at zero. </code>",
+ "333":
+ "<code>Summable.{u_1, u_2} {α : Type u_1} {β : Type u_2} [AddCommMonoid α] [TopologicalSpace α] (f : β → α)\n  (L : SummationFilter β := SummationFilter.unconditional β) : Prop</code><span class=\"sep\"></span><code class=\"docstring\">`Summable f` means that `f` has some (infinite) sum with respect to `L`. Use `tsum` to get the\nvalue. </code>",
+ "332": "<code>∀ (k : ℕ), z ≠ -↑k</code>",
+ "331":
+ "<code>LMLF.Blueprint.Gamma.Section59.dlmf_5_9_4 {z : ℂ} (hz : ∀ (k : ℕ), z ≠ -↑k) :\n  IntegrableOn (fun t =&gt; ↑t ^ (z - 1) * ↑(Real.exp (-t))) (Ici 1) volume ∧\n    (Summable fun k =&gt; (-1) ^ k / ((z + ↑k) * ↑k.factorial)) ∧\n      Complex.Gamma z =\n        (∫ (t : ℝ) in Ici 1, ↑t ^ (z - 1) * ↑(Real.exp (-t))) + ∑' (k : ℕ), (-1) ^ k / ((z + ↑k) * ↑k.factorial)</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 5.9.4. Meromorphic continuation split at one. </code>",
+ "330":
+ "<code>MeasureTheory.Integrable.{u_5, u_8} {ε : Type u_5} [TopologicalSpace ε] [ContinuousENorm ε] {α : Type u_8}\n  {x✝ : MeasurableSpace α} (f : α → ε) (μ : Measure α := by volume_tac) : Prop</code><span class=\"sep\"></span><code class=\"docstring\">`Integrable f μ` means that `f` is measurable and that the integral `∫⁻ a, ‖f a‖ ∂μ` is finite.\n`Integrable f` means `Integrable f volume`. </code>",
  "33": "<code>ℕ → X → E</code>",
+ "329": "<code>0 &lt; c</code>",
+ "328":
+ "<code>LMLF.Blueprint.Gamma.Section59.dlmf_5_9_3 {z : ℂ} {c : ℝ} (hc : 0 &lt; c) (hz : 0 &lt; z.re) :\n  Integrable (fun t =&gt; ↑|t| ^ (2 * z - 1) * Complex.exp (-↑c * ↑t ^ 2)) volume ∧\n    ↑c ^ (-z) * Complex.Gamma z = ∫ (t : ℝ), ↑|t| ^ (2 * z - 1) * Complex.exp (-↑c * ↑t ^ 2)</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 5.9.3. Gaussian form of Euler's integral. </code>",
+ "327":
+ "<code>LMLF.Blueprint.Gamma.Section59.dlmf_5_9_2_5 {z : ℂ} (hz : 0 &lt; z.re) :\n  IntervalIntegrable (fun t =&gt; Complex.exp (-z * ↑(temmePhase t))) volume (-Real.pi) Real.pi ∧\n    1 / Complex.Gamma z =\n      Complex.exp z * z ^ (1 - z) / (2 * ↑Real.pi) * ∫ (t : ℝ) in -Real.pi..Real.pi, Complex.exp (-z * ↑(temmePhase t))</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 5.9.2_5. Temme's finite-interval representation. </code>",
+ "326":
+ "<code>Real.sin (x : ℝ) : ℝ</code><span class=\"sep\"></span><code class=\"docstring\">The real sine function, defined as the real part of the complex sine </code>",
+ "325":
+ "<code>Real.tan (x : ℝ) : ℝ</code><span class=\"sep\"></span><code class=\"docstring\">The real tangent function, defined as the real part of the complex tangent </code>",
+ "324":
+ "<code>LMLF.Blueprint.Gamma.Section59.temmePhase (t : ℝ) : ℝ</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 5.9.2_5. The phase function; its totalized value at the removable point `t = 0`\nis immaterial to the interval integral. </code>",
+ "323": "<code>ℝ → ℂ</code>",
+ "322":
+ "<code>LMLF.Blueprint.Gamma.Section59.dlmf_5_9_2 (z : ℂ) :\n  ∃ outer,\n    (∀ ε &gt; 0, Tendsto (fun R =&gt; hankelTruncation z R ε) atTop (𝓝 (outer ε))) ∧\n      Tendsto outer (𝓝[&gt;] 0) (𝓝 (2 * ↑Real.pi * Complex.I / Complex.Gamma z))</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 5.9.2. Hankel's loop integral, with both limiting processes explicit. </code>",
+ "321":
+ "<code>LMLF.Blueprint.Gamma.Section59.hankelTruncation (z : ℂ) (R ε : ℝ) : ℂ</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 5.9.2. A finite Hankel contour with explicit continuous branch arguments:\nthe lower bank uses `-π`, the circle runs through `-π ≤ θ ≤ π`, and the upper bank uses `+π`. </code>",
+ "320":
+ "<code>Real.rpow (x y : ℝ) : ℝ</code><span class=\"sep\"></span><code class=\"docstring\">The real power function `x ^ y`, defined as the real part of the complex power function.\nFor `x &gt; 0`, it is equal to `exp (y log x)`. For `x = 0`, one sets `0 ^ 0=1` and `0 ^ y=0` for\n`y ≠ 0`. For `x &lt; 0`, the definition is somewhat arbitrary as it depends on the choice of a complex\ndetermination of the logarithm. With our conventions, it is equal to `exp (y log x) cos (π y)`. </code>",
  "32":
  "<code>QuantitativeAnalysis.HasErrorFamily.{u_1, u_2} {X : Type u_1} {E : Type u_2} [NormedAddCommGroup E] (f : X → E)\n  (a : ℕ → X → E) (D : ℕ → Set X) (b : ℕ → X → ℝ) : Prop</code><span class=\"sep\"></span><code class=\"docstring\">A family of finite pointwise error estimates for one fixed target function. </code>",
+ "319": "<code>0 &lt; ν.re</code>",
+ "318": "<code>0 &lt; μ</code>",
+ "317":
+ "<code>LMLF.Blueprint.Gamma.Section59.dlmf_5_9_1 {z ν : ℂ} {μ : ℝ} (hμ : 0 &lt; μ) (hν : 0 &lt; ν.re) (hz : 0 &lt; z.re) :\n  IntegrableOn (fun t =&gt; Complex.exp (-z * ↑(t.rpow μ)) * ↑t ^ (ν - 1)) (Ioi 0) volume ∧\n    1 / ↑μ * Complex.Gamma (ν / ↑μ) / z ^ (ν / ↑μ) = ∫ (t : ℝ) in Ioi 0, Complex.exp (-z * ↑(t.rpow μ)) * ↑t ^ (ν - 1)</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 5.9.1. Generalized Euler integral, including absolute convergence. </code>",
+ "316": "<code>∀ (i : Fin m) (n : ℂ), b i ≠ -n</code>",
+ "315": "<code>BalancedGammaParameters a b</code>",
+ "314":
+ "<code>LMLF.Blueprint.Gamma.balanced_gamma_ratio_product {m : ℕ} {a b : Fin m → ℂ} (hab : BalancedGammaParameters a b)\n  (hb : ∀ (i : Fin m) (n : ℂ), b i ≠ -n) :\n  Tendsto (balancedGammaRatioProductApprox a b) atTop (nhds ((∏ i, Complex.Gamma (b i)) / ∏ i, Complex.Gamma (a i)))</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 5.8.5: the infinite product for balanced finite families of Gamma arguments. </code>",
+ "313":
+ "<code>LMLF.Blueprint.Gamma.balancedGammaRatioProductApprox {m : ℕ} (a b : Fin m → ℂ) (n : ℕ) : ℂ</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 5.8.5: the first `n` factors of the balanced Gamma-ratio product. </code>",
+ "312":
+ "<code>LMLF.Blueprint.Gamma.balancedGammaRatioFactor {m : ℕ} (a b : Fin m → ℂ) (k : ℕ) : ℂ</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 5.8.5: the factor of index `k` in the balanced Gamma-ratio product. </code>",
+ "311": "<code>Fin m</code>",
+ "310":
+ "<code>Fin (n : ℕ) : Type</code><span class=\"sep\"></span><code class=\"docstring\">Natural numbers less than some upper bound.\n\nIn particular, a `Fin n` is a natural number `i` with the constraint that `i &lt; n`. It is the\ncanonical type with `n` elements.\n</code>",
  "31":
  "<code>Set.MapsTo.{u, v} {α : Type u} {β : Type v} (f : α → β) (s : Set α) (t : Set β) : Prop</code><span class=\"sep\"></span><code class=\"docstring\">`MapsTo f s t` means that the image of `s` is contained in `t`. </code>",
+ "309": "<code>Fin m → ℂ</code>",
+ "308":
+ "<code>LMLF.Blueprint.Gamma.BalancedGammaParameters {m : ℕ} (a b : Fin m → ℂ) : Prop</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 5.8.4: the balancing condition for the product in DLMF 5.8.5. </code>",
+ "307":
+ "<code>LMLF.Blueprint.Gamma.gamma_norm_ratio_sq_product {x : ℝ} (y : ℝ) (hx : ∀ (n : ℕ), x ≠ -↑n) :\n  Tendsto (gammaNormRatioSqProductApprox x y) atTop\n    (nhds (‖Complex.Gamma ↑x / Complex.Gamma (↑x + Complex.I * ↑y)‖ ^ 2))</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 5.8.3: the infinite product for a squared Gamma-modulus ratio. </code>",
+ "306":
+ "<code>Finset.prod.{u_1, u_3} {ι : Type u_1} {M : Type u_3} [CommMonoid M] (s : Finset ι) (f : ι → M) : M</code><span class=\"sep\"></span><code class=\"docstring\">`∏ x ∈ s, f x` is the product of `f x` as `x` ranges over the elements of the finite set `s`.\n\nWhen the index type is a `Fintype`, the notation `∏ x, f x`, is a shorthand for\n`∏ x ∈ Finset.univ, f x`. </code>",
+ "305":
+ "<code>LMLF.Blueprint.Gamma.gammaNormRatioSqProductApprox (x y : ℝ) (n : ℕ) : ℝ</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 5.8.3: the first `n` factors of the real Gamma-modulus ratio product. </code>",
+ "304":
+ "<code>LMLF.Blueprint.Gamma.reciprocalGamma_weierstrassProduct (z : ℂ) :\n  Tendsto (reciprocalGammaProductApprox z) atTop (nhds (Complex.Gamma z)⁻¹)</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 5.8.2: the Weierstrass product for reciprocal Gamma. </code>",
+ "303":
+ "<code>LMLF.Blueprint.Gamma.reciprocalGammaProductApprox (z : ℂ) (n : ℕ) : ℂ</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 5.8.2: the prefactor times the first `n` factors of the Weierstrass product. </code>",
+ "302":
+ "<code>LMLF.Blueprint.Gamma.reciprocalGammaWeierstrassFactor (z : ℂ) (k : ℕ) : ℂ</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 5.8.2: the factor indexed by `k + 1` in the Weierstrass product. </code>",
+ "301":
+ "<code>LMLF.Blueprint.Gamma.gamma_limit_formula {z : ℂ} (hz : ∀ (n : ℕ), z ≠ -↑n) :\n  Tendsto (gammaLimitApprox z) atTop (nhds (Complex.Gamma z))</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 5.8.1: Euler's limit formula for Gamma. </code>",
+ "300":
+ "<code>Complex.cpow (x y : ℂ) : ℂ</code><span class=\"sep\"></span><code class=\"docstring\">The complex power function `x ^ y`, given by `x ^ y = exp(y log x)` (where `log` is the\nprincipal determination of the logarithm), unless `x = 0` where one sets `0 ^ 0 = 1` and\n`0 ^ y = 0` for `y ≠ 0`. </code>",
  "30": "<code>Set.MapsTo ψ S D</code>",
  "3": "<code>Type u_2</code>",
+ "299":
+ "<code>LMLF.Blueprint.Gamma.gammaLimitApprox (z : ℂ) (n : ℕ) : ℂ</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 5.8.1: the finite expression whose limit is Gamma. </code>",
+ "298":
+ "<code>LMLF.Blueprint.Gamma.gammaShiftedProduct (z : ℂ) (n : ℕ) : ℂ</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 5.8.1: the denominator product `z (z + 1) ⋯ (z + n - 1)`. </code>",
+ "297":
+ "<code>LMLF.Blueprint.Gamma.digamma_one_add_mul_I_im_hasSum (y : ℝ) :\n  HasSum (fun n =&gt; y / (↑(n + 1) ^ 2 + y ^ 2)) (1 + Complex.I * ↑y).digamma.im</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 5.7.8: the series for the imaginary part of digamma on `1 + iℝ`. </code>",
+ "296":
+ "<code>LMLF.Blueprint.Gamma.digamma_halfDifference_hasSum {z : ℂ} (hz : ∀ (n : ℕ), z ≠ -↑n) :\n  HasSum (fun n =&gt; 2 * (-1) ^ n / (↑n + z)) (((z + 1) / 2).digamma - (z / 2).digamma)</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 5.7.7: the alternating partial-fraction series for a digamma difference. </code>",
+ "295":
+ "<code>LMLF.Blueprint.Gamma.digamma_partialFractions_hasSum {z : ℂ} (hz : ∀ (n : ℕ), z ≠ -↑n) :\n  HasSum (fun n =&gt; z / (↑(n + 1) * (↑(n + 1) + z))) (z.digamma + ↑Real.eulerMascheroniConstant + 1 / z) ∧\n    HasSum (fun n =&gt; 1 / ↑(n + 1) - 1 / (↑n + z)) (z.digamma + ↑Real.eulerMascheroniConstant)</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 5.7.6: both partial-fraction series for digamma. </code>",
+ "294": "<code>z ≠ 1</code>",
+ "293":
+ "<code>LMLF.Blueprint.Gamma.digamma_one_add_even_hasSum {z : ℂ} (hz : ‖z‖ &lt; 2) (hz0 : z ≠ 0) (hz1 : z ≠ 1) (hzn1 : z ≠ -1) :\n  HasSum (fun n =&gt; (riemannZeta ↑(2 * (n + 1) + 1) - 1) * z ^ (2 * (n + 1)))\n    (1 / (2 * z) - ↑Real.pi / 2 * (↑Real.pi * z).cot + 1 / (z ^ 2 - 1) + 1 - ↑Real.eulerMascheroniConstant -\n      (1 + z).digamma)</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 5.7.5: the accelerated even-power series for digamma. </code>",
+ "292": "<code>‖z‖ &lt; 1</code>",
+ "291":
+ "<code>LMLF.Blueprint.Gamma.digamma_one_add_hasSum {z : ℂ} (hz : ‖z‖ &lt; 1) :\n  HasSum (fun n =&gt; (-1) ^ (n + 2) * riemannZeta ↑(n + 2) * z ^ (n + 1))\n    ((1 + z).digamma + ↑Real.eulerMascheroniConstant)</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 5.7.4: the Taylor series for digamma at `1`. </code>",
+ "290":
+ "<code>LMLF.Blueprint.Gamma.logGamma_one_add_hasSum {z : ℂ} (hz : ‖z‖ &lt; 2) (hzneg : z ≠ -1) :\n  HasSum (logGammaOnePlusSeriesTerm z)\n    (logGammaOnePlus z + Complex.log (1 + z) - z * (1 - ↑Real.eulerMascheroniConstant))</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 5.7.3: the Taylor series for the selected log-Gamma branch at `1`. </code>",
  "29": "<code>Y → X</code>",
+ "289":
+ "<code>Complex.exp (z : ℂ) : ℂ</code><span class=\"sep\"></span><code class=\"docstring\">The complex exponential function, defined via its Taylor series </code>",
+ "288": "<code>z ≠ -1</code>",
+ "287": "<code>‖z‖ &lt; 2</code>",
+ "286":
+ "<code>LMLF.Blueprint.Gamma.exp_logGammaOnePlus {z : ℂ} (hz : ‖z‖ &lt; 2) (hzneg : z ≠ -1) :\n  Complex.exp (logGammaOnePlus z) = Complex.Gamma (1 + z)</code><span class=\"sep\"></span><code class=\"docstring\">The selected branch exponentiates to Gamma away from its pole at `z = -1`. </code>",
+ "285":
+ "<code>LMLF.Blueprint.Gamma.logGammaOnePlus (z : ℂ) : ℂ</code><span class=\"sep\"></span><code class=\"docstring\">The branch of `log Gamma (1 + z)` selected by DLMF 5.7.3.\n\nIt is not the global composition `Complex.log (Complex.Gamma (1 + z))`: those principal values\ndiffer by multiples of `2 · π · i` on part of the disk.\n</code>",
+ "284":
+ "<code>LMLF.Blueprint.Gamma.logGammaOnePlusSeriesTerm (z : ℂ) (n : ℕ) : ℂ</code><span class=\"sep\"></span><code class=\"docstring\">The term of index `n + 2` in the log-Gamma series of DLMF 5.7.3. </code>",
+ "283":
+ "<code>riemannZeta (a : ℂ) : ℂ</code><span class=\"sep\"></span><code class=\"docstring\">The Riemann zeta function `ζ(s)`. </code>",
+ "282": "<code>3 ≤ k</code>",
+ "281":
+ "<code>LMLF.Blueprint.Gamma.reciprocalGammaCoeff_recurrence (k : ℕ) (hk : 3 ≤ k) :\n  ↑(k - 1) * reciprocalGammaCoeff k =\n    ↑Real.eulerMascheroniConstant * reciprocalGammaCoeff (k - 1) +\n      ∑ j ∈ Finset.Icc 2 (k - 1), (-1) ^ (j + 1) * riemannZeta ↑j * reciprocalGammaCoeff (k - j)</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 5.7.2: the finite recurrence for the reciprocal-Gamma coefficients. </code>",
+ "280":
+ "<code>LMLF.Blueprint.Gamma.reciprocalGammaCoeff_two : reciprocalGammaCoeff 2 = ↑Real.eulerMascheroniConstant</code><span class=\"sep\"></span><code class=\"docstring\">The second reciprocal-Gamma coefficient specified after DLMF 5.7.1. </code>",
  "28": "<code>Set Y</code>",
+ "279":
+ "<code>LMLF.Blueprint.Gamma.reciprocalGammaCoeff_one : reciprocalGammaCoeff 1 = 1</code><span class=\"sep\"></span><code class=\"docstring\">The first reciprocal-Gamma coefficient specified after DLMF 5.7.1. </code>",
+ "278":
+ "<code>HasSum.{u_1, u_2} {α : Type u_1} {β : Type u_2} [AddCommMonoid α] [TopologicalSpace α] (f : β → α) (a : α)\n  (L : SummationFilter β := SummationFilter.unconditional β) : Prop</code><span class=\"sep\"></span><code class=\"docstring\">`HasSum f a L` means that the (potentially infinite) sum of the `f b` for `b : β`\nconverges to `a` along the SummationFilter `L`.\n\nBy default `L` is the `unconditional` one, corresponding to the limit of all finite sets towards\nthe entire type. So we take the sum over bigger and bigger finite sets. This sum operation is\ninvariant under permuting the terms (while sums for more general summation filters usually are not).\nThis is based on Mario Carneiro's\n[infinite sum `df-tsms` in Metamath](http://us.metamath.org/mpeuni/df-tsms.html).\n\nIn particular, the function `ℕ → ℝ` sending `n` to `(-1) ^ n / (n + 1)` does not have a\nsum for this definition, although it is summable for the `conditional` summation filter that\ntakes limits of sums over `n ∈ {0, ..., X}` as `X → ∞`. However, a series which is *absolutely*\nconvergent with respect to the conditional summation filter is in fact unconditionally summable.\n\nFor the definition and many statements, `α` does not need to be a topological additive monoid,\nonly an additive monoid with a topology (i.e. the addition is not assumed to be continuous). We\nonly add this assumption later, for the lemmas where it is relevant. </code>",
+ "277":
+ "<code>LMLF.Blueprint.Gamma.reciprocalGamma_hasSum (z : ℂ) :\n  HasSum (fun n =&gt; reciprocalGammaCoeff (n + 1) * z ^ (n + 1)) (Complex.Gamma z)⁻¹</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 5.7.1: the reciprocal-Gamma Maclaurin series converges for every complex `z`. </code>",
+ "276":
+ "<code>iteratedDeriv.{u_1, u_2} {𝕜 : Type u_1} [NontriviallyNormedField 𝕜] {F : Type u_2} [NormedAddCommGroup F]\n  [NormedSpace 𝕜 F] (n : ℕ) (f : 𝕜 → F) (x : 𝕜) : F</code><span class=\"sep\"></span><code class=\"docstring\">The `n`-th iterated derivative of a function from `𝕜` to `F`, as a function from `𝕜` to `F`. </code>",
+ "275":
+ "<code>LMLF.Blueprint.Gamma.reciprocalGammaCoeff (k : ℕ) : ℂ</code><span class=\"sep\"></span><code class=\"docstring\">The Maclaurin coefficient of order `k` of the entire reciprocal-Gamma function. </code>",
+ "274": "<code>z ≠ 0</code>",
+ "273": "<code>0 ≤ z.re</code>",
+ "272":
+ "<code>LMLF.Blueprint.Gamma.norm_Gamma_rightHalfPlane_le {z : ℂ} (hz : 0 ≤ z.re) (hz0 : z ≠ 0) :\n  ‖Complex.Gamma z‖ ≤ (2 * π) ^ (1 / 2) * ‖z‖ ^ (z.re - 1 / 2) * rexp (-π * |z.im| / 2) * rexp (1 / 6 * ‖z‖⁻¹)</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 5.6.9: an explicit Gamma-modulus bound on the closed right half-plane,\naway from the pole at zero. </code>",
+ "271": "<code>1 ≤ b - a</code>",
+ "270": "<code>0 ≤ a</code>",
  "27":
  "<code>QuantitativeAnalysis.ErrorOn.comp.{u_1, u_2, u_3} {X : Type u_1} {E : Type u_2} [NormedAddCommGroup E] {Y : Type u_3}\n  {D : Set X} {f a : X → E} {b : X → ℝ} (h : ErrorOn D f a b) {S : Set Y} (ψ : Y → X) (hψ : Set.MapsTo ψ S D) :\n  ErrorOn S (f ∘ ψ) (a ∘ ψ) (b ∘ ψ)</code><span class=\"sep\"></span><code class=\"docstring\">An error bound pulls back along a map into its original domain. </code>",
+ "269": "<code>0 &lt; z.re</code>",
+ "268":
+ "<code>LMLF.Blueprint.Gamma.norm_Gamma_div_Gamma_le {z : ℂ} {a b : ℝ} (hz : 0 &lt; z.re) (ha : 0 ≤ a) (hab : 1 ≤ b - a) :\n  ‖Complex.Gamma (z + ↑a) / Complex.Gamma (z + ↑b)‖ ≤ 1 / ‖z‖ ^ (b - a)</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 5.6.8: a Gamma quotient in the open right half-plane is bounded by a\nnegative power of the modulus. </code>",
+ "267": "<code>1 / 2 ≤ x</code>",
+ "266":
+ "<code>LMLF.Blueprint.Gamma.norm_Gamma_vertical_lowerBound {x y : ℝ} (hx : 1 / 2 ≤ x) :\n  √(Real.cosh (π * y))⁻¹ * Real.Gamma x ≤ ‖Complex.Gamma (↑x + ↑y * Complex.I)‖</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 5.6.7: on `x ≥ 1 / 2`, the modulus on a vertical line has a lower\nbound involving the hyperbolic secant. </code>",
+ "265": "<code>∀ (n : ℕ), x ≠ -↑n</code>",
+ "264":
+ "<code>LMLF.Blueprint.Gamma.norm_Gamma_vertical_le {x y : ℝ} (hx : ∀ (n : ℕ), x ≠ -↑n) :\n  ‖Complex.Gamma (↑x + ↑y * Complex.I)‖ ≤ |Real.Gamma x|</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 5.6.6: moving vertically from a finite real Gamma value cannot increase\nthe modulus.  The pole exclusion makes the classical domain explicit because Mathlib\ntotalizes Gamma to zero at nonpositive integers. </code>",
+ "263":
+ "<code>LMLF.Blueprint.Gamma.kershawInequality {x s : ℝ} (hx : 0 &lt; x) (hs0 : 0 &lt; s) (hs1 : s &lt; 1) :\n  rexp ((1 - s) * realDigamma (x + √s)) ≤ Real.Gamma (x + 1) / Real.Gamma (x + s) ∧\n    Real.Gamma (x + 1) / Real.Gamma (x + s) ≤ rexp ((1 - s) * realDigamma (x + (s + 1) / 2))</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 5.6.5, Kershaw's inequality: digamma values give exponential bounds for\nthe same Gamma quotient. </code>",
+ "262":
+ "<code>LMLF.Blueprint.Gamma.realDigamma (x : ℝ) : ℝ</code><span class=\"sep\"></span><code class=\"docstring\">The real digamma function used in DLMF 5.6.5, obtained by restricting Mathlib's\n`Complex.digamma` to the real axis. </code>",
+ "261": "<code>s &lt; 1</code>",
+ "260": "<code>0 &lt; s</code>",
  "26": "<code>ErrorOn D a c d</code>",
+ "259":
+ "<code>LMLF.Blueprint.Gamma.gautschiInequality {x s : ℝ} (hx : 0 &lt; x) (hs0 : 0 &lt; s) (hs1 : s &lt; 1) :\n  x ^ (1 - s) &lt; Real.Gamma (x + 1) / Real.Gamma (x + s) ∧ Real.Gamma (x + 1) / Real.Gamma (x + s) &lt; (x + 1) ^ (1 - s)</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 5.6.4, Gautschi's inequality: a Gamma quotient lies strictly between\ntwo neighboring powers. </code>",
+ "258":
+ "<code>LMLF.Blueprint.Gamma.oneDivGammaSq_add_oneDivGammaSq_reciprocal_le_two {x : ℝ} (hx : 0 &lt; x) :\n  1 / Real.Gamma x ^ 2 + 1 / Real.Gamma (1 / x) ^ 2 ≤ 2</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 5.6.3: the squared reciprocal Gamma values at `x` and `1 / x` have sum at most two. </code>",
+ "257":
+ "<code>LMLF.Blueprint.Gamma.oneDivGamma_add_oneDivGamma_reciprocal_le_two {x : ℝ} (hx : 0 &lt; x) :\n  1 / Real.Gamma x + 1 / Real.Gamma (1 / x) ≤ 2</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 5.6.2: the reciprocal Gamma values at `x` and `1 / x` have sum at most two. </code>",
+ "256":
+ "<code>LMLF.Blueprint.Gamma.stirlingNormalizedBounds {x : ℝ} (hx : 0 &lt; x) :\n  1 &lt; (2 * π) ^ (-1 / 2) * x ^ (1 / 2 - x) * rexp x * Real.Gamma x ∧\n    (2 * π) ^ (-1 / 2) * x ^ (1 / 2 - x) * rexp x * Real.Gamma x &lt; rexp (1 / (12 * x))</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 5.6.1: the sharp elementary two-sided bound associated with Stirling's formula. </code>",
+ "255": "<code>ConvexOn ℝ (Set.Ioi 0) (Real.log ∘ f)</code>",
+ "254": "<code>f 1 = 1</code>",
+ "253": "<code>∀ {x : ℝ}, 0 &lt; x → f (x + 1) = x * f x</code>",
+ "252": "<code>∀ {x : ℝ}, 0 &lt; x → 0 &lt; f x</code>",
+ "251": "<code>ℝ → ℝ</code>",
+ "250":
+ "<code>LMLF.Blueprint.Gamma.bohrMollerup_unique {f : ℝ → ℝ} (hf_pos : ∀ {x : ℝ}, 0 &lt; x → 0 &lt; f x)\n  (hf_recurrence : ∀ {x : ℝ}, 0 &lt; x → f (x + 1) = x * f x) (hf_one : f 1 = 1)\n  (hf_logConvex : ConvexOn ℝ (Set.Ioi 0) (Real.log ∘ f)) : Set.EqOn f Real.Gamma (Set.Ioi 0)</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 5.5(iv), Bohr--Mollerup: Gamma is the unique positive log-convex normalized solution of\nthe Gamma recurrence on the positive real axis. </code>",
  "25":
  "<code>QuantitativeAnalysis.ErrorOn.trans.{u_1, u_2} {X : Type u_1} {E : Type u_2} [NormedAddCommGroup E] {D : Set X}\n  {f a c : X → E} {b d : X → ℝ} (hfa : ErrorOn D f a b) (hac : ErrorOn D a c d) : ErrorOn D f c fun x =&gt; b x + d x</code><span class=\"sep\"></span><code class=\"docstring\">Successive error bounds compose with the sum of their majorants. </code>",
+ "249":
+ "<code>LMLF.Blueprint.Gamma.digamma_multiplication (n : ℕ) (hn : 0 &lt; n) (z : ℂ) (hz : ∀ (m : ℕ), ↑n * z ≠ -↑m) :\n  (↑n * z).digamma = 1 / ↑n * ∑ k ∈ Finset.range n, (z + ↑k / ↑n).digamma + Complex.log ↑n</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 5.5.9: Gauss's multiplication formula for the digamma function. </code>",
+ "248":
+ "<code>LMLF.Blueprint.Gamma.digamma_duplication (z : ℂ) (hz : ∀ (m : ℕ), 2 * z ≠ -↑m) :\n  (2 * z).digamma = (z.digamma + (z + 1 / 2).digamma) / 2 + Complex.log 2</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 5.5.8: the duplication formula for the digamma function. </code>",
+ "247":
+ "<code>LMLF.Blueprint.Gamma.gamma_rational_product (n : ℕ) (hn : 0 &lt; n) :\n  ∏ k ∈ Finset.Ico 1 n, Real.Gamma (↑k / ↑n) = (2 * π) ^ ((↑n - 1) / 2) * ↑n ^ (-1 / 2)</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 5.5.7: the finite product of Gamma values at the nonzero fractions with denominator `n`. </code>",
+ "246": "<code>∀ (m : ℕ), ↑n * z ≠ -↑m</code>",
+ "245":
+ "<code>LMLF.Blueprint.Gamma.gamma_multiplication (n : ℕ) (hn : 0 &lt; n) (z : ℂ) (hz : ∀ (m : ℕ), ↑n * z ≠ -↑m) :\n  Complex.Gamma (↑n * z) =\n    (2 * ↑π) ^ ((1 - ↑n) / 2) * ↑n ^ (↑n * z - 1 / 2) * ∏ k ∈ Finset.range n, Complex.Gamma (z + ↑k / ↑n)</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 5.5.6: Gauss's multiplication formula for the Gamma function. </code>",
+ "244": "<code>∀ (m : ℕ), 2 * z ≠ -↑m</code>",
+ "243":
+ "<code>LMLF.Blueprint.Gamma.gamma_duplication (z : ℂ) (hz : ∀ (m : ℕ), 2 * z ≠ -↑m) :\n  Complex.Gamma (2 * z) = ↑π ^ (-1 / 2) * 2 ^ (2 * z - 1) * Complex.Gamma z * Complex.Gamma (z + 1 / 2)</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 5.5.5: Legendre's duplication formula for the Gamma function. </code>",
+ "242":
+ "<code>Complex.tan (z : ℂ) : ℂ</code><span class=\"sep\"></span><code class=\"docstring\">The complex tangent function, defined as `sin z / cos z` </code>",
+ "241":
+ "<code>LMLF.Blueprint.Gamma.digamma_reflection (z : ℂ) (hz : ∀ (k : ℤ), z ≠ ↑k) :\n  z.digamma - (1 - z).digamma = -↑π / Complex.tan (↑π * z)</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 5.5.4: the reflection formula for the digamma function. </code>",
+ "240":
+ "<code>Complex.sin (z : ℂ) : ℂ</code><span class=\"sep\"></span><code class=\"docstring\">The complex sine function, defined via `exp` </code>",
  "24": "<code>∀ x ∈ D, b x ≤ d x</code>",
+ "239":
+ "<code>Int : Type</code><span class=\"sep\"></span><code class=\"docstring\">The integers.\n\nThis type is special-cased by the compiler and overridden with an efficient implementation. The\nruntime has a special representation for `Int` that stores “small” signed numbers directly, while\nlarger numbers use a fast arbitrary-precision arithmetic library (usually\n[GMP](https://gmplib.org/)). A “small number” is an integer that can be encoded with one fewer bits\nthan the platform's pointer size (i.e. 63 bits on 64-bit architectures and 31 bits on 32-bit\narchitectures).\n</code>",
+ "238": "<code>ℤ</code>",
+ "237": "<code>∀ (k : ℤ), z ≠ ↑k</code>",
+ "236":
+ "<code>LMLF.Blueprint.Gamma.gamma_reflection (z : ℂ) (hz : ∀ (k : ℤ), z ≠ ↑k) :\n  Complex.Gamma z * Complex.Gamma (1 - z) = ↑π / Complex.sin (↑π * z)</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 5.5.3: Euler's reflection formula for the Gamma function. </code>",
+ "235":
+ "<code>LMLF.Blueprint.Gamma.digamma_recurrence (z : ℂ) (hz : ∀ (m : ℕ), z ≠ -↑m) : (z + 1).digamma = z.digamma + 1 / z</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 5.5.2: the digamma recurrence relation. </code>",
+ "234": "<code>∀ (m : ℕ), z ≠ -↑m</code>",
+ "233":
+ "<code>LMLF.Blueprint.Gamma.gamma_recurrence (z : ℂ) (hz : ∀ (m : ℕ), z ≠ -↑m) : Complex.Gamma (z + 1) = z * Complex.Gamma z</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 5.5.1: the Gamma recurrence relation, on the ordinary pointwise domain of `Gamma`. </code>",
+ "232":
+ "<code>Real.arctan (x : ℝ) : ℝ</code><span class=\"sep\"></span><code class=\"docstring\">Inverse of the `tan` function, returns values in the range `-π / 2 &lt; arctan x` and\n`arctan x &lt; π / 2` </code>",
+ "231":
+ "<code class=\"docstring\">`f.Eventually p` or `∀ᶠ x in f, p x` mean that `{x | p x} ∈ f`. E.g., `∀ᶠ x in atTop, p x`\nmeans that `p` holds true for sufficiently large `x`. </code>",
+ "230": "<code>ℕ → ℝ</code>",
  "23":
  "<code>QuantitativeAnalysis.ErrorOn.weaken.{u_1, u_2} {X : Type u_1} {E : Type u_2} [NormedAddCommGroup E] {D : Set X}\n  {f a : X → E} {b d : X → ℝ} (h : ErrorOn D f a b) (hbd : ∀ x ∈ D, b x ≤ d x) : ErrorOn D f a d</code><span class=\"sep\"></span><code class=\"docstring\">An error bound remains valid after pointwise enlargement of its majorant. </code>",
+ "229":
+ "<code>LMLF.Blueprint.Gamma.gamma_extrema_asymptotic :\n  ∃ x,\n    (∀ (n : ℕ), deriv Real.Gamma (x n) = 0 ∧ (↑(x n)).digamma = 0) ∧\n      ∃ C,\n        0 &lt; C ∧\n          ∀ᶠ (n : ℕ) in atTop,\n            |x n - (-↑n + 1 / Real.pi * Real.arctan (Real.pi / Real.log ↑n))| ≤ C / (↑n * Real.log ↑n ^ 2)</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 5.4.20: locations of the negative extrema, with an explicit eventual error bound. </code>",
+ "228":
+ "<code>Complex.cos (z : ℂ) : ℂ</code><span class=\"sep\"></span><code class=\"docstring\">The complex cosine function, defined via `exp` </code>",
+ "227":
+ "<code>Finset.Ico.{u_1} {α : Type u_1} [Preorder α] [LocallyFiniteOrder α] (a b : α) : Finset α</code><span class=\"sep\"></span><code class=\"docstring\">The finset $[a, b)$ of elements `x` such that `a ≤ x` and `x &lt; b`. Basically `Set.Ico a b` as a\nfinset. </code>",
+ "226":
+ "<code>Complex.cot (z : ℂ) : ℂ</code><span class=\"sep\"></span><code class=\"docstring\">The complex cotangent function, defined as `cos z / sin z` </code>",
+ "225":
+ "<code>Complex.log (x : ℂ) : ℂ</code><span class=\"sep\"></span><code class=\"docstring\">Inverse of the `exp` function. Returns values such that `(log x).im &gt; - π` and `(log x).im ≤ π`.\n`log 0 = 0` </code>",
+ "224": "<code>p &lt; q</code>",
+ "223": "<code>0 &lt; p</code>",
+ "222":
+ "<code>LMLF.Blueprint.Gamma.digamma_rational_value {p q : ℕ} (hp : 0 &lt; p) (hpq : p &lt; q) :\n  (↑p / ↑q).digamma =\n    -↑Real.eulerMascheroniConstant - Complex.log ↑q - ↑Real.pi / 2 * (↑Real.pi * ↑p / ↑q).cot +\n      1 / 2 *\n        ∑ k ∈ Finset.Ico 1 q,\n          Complex.cos (2 * ↑Real.pi * ↑k * ↑p / ↑q) * Complex.log (2 - 2 * Complex.cos (2 * ↑Real.pi * ↑k / ↑q))</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 5.4.19: Gauss's finite sum for digamma at a rational argument. </code>",
+ "221":
+ "<code>LMLF.Blueprint.Gamma.digamma_one_shift_imaginary_part {y : ℝ} (hy : y ≠ 0) :\n  (1 + Complex.I * ↑y).digamma.im = -1 / (2 * y) + Real.pi / 2 * (Real.cosh (Real.pi * y) / Real.sinh (Real.pi * y))</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 5.4.18: the imaginary part on the line through one. </code>",
+ "220":
+ "<code>LMLF.Blueprint.Gamma.digamma_half_shift_imaginary_part (y : ℝ) :\n  (1 / 2 + Complex.I * ↑y).digamma.im = Real.pi / 2 * (Real.sinh (Real.pi * y) / Real.cosh (Real.pi * y))</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 5.4.17: the imaginary part on the half-shifted imaginary line. </code>",
  "22": "<code>D' ⊆ D</code>",
+ "219":
+ "<code>LMLF.Blueprint.Gamma.digamma_imaginary_part {y : ℝ} (hy : y ≠ 0) :\n  (Complex.I * ↑y).digamma.im = 1 / (2 * y) + Real.pi / 2 * (Real.cosh (Real.pi * y) / Real.sinh (Real.pi * y))</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 5.4.16: the imaginary part of digamma on the imaginary axis. </code>",
+ "218": "<code>0 &lt; n</code>",
+ "217":
+ "<code>LMLF.Blueprint.Gamma.digamma_half_nat_value {n : ℕ} (hn : 0 &lt; n) :\n  (↑n + 1 / 2).digamma = -↑Real.eulerMascheroniConstant - 2 * ↑(Real.log 2) + 2 * ∑ k ∈ Finset.range n, 1 / ↑(2 * k + 1)</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 5.4.15: digamma at a positive half-integer. </code>",
+ "216":
+ "<code>LMLF.Blueprint.Gamma.digamma_nat_value (n : ℕ) :\n  (↑n + 1).digamma = ∑ k ∈ Finset.range n, 1 / ↑(k + 1) - ↑Real.eulerMascheroniConstant</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 5.4.14: digamma at a positive integer in terms of a harmonic sum. </code>",
+ "215":
+ "<code>LMLF.Blueprint.Gamma.digamma_half_values :\n  (1 / 2).digamma = -↑Real.eulerMascheroniConstant - 2 * ↑(Real.log 2) ∧\n    deriv Complex.digamma (1 / 2) = ↑Real.pi ^ 2 / 2</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 5.4.13: the corresponding values at one-half. </code>",
+ "214":
+ "<code>LMLF.Blueprint.Gamma.digamma_one_values :\n  Complex.digamma 1 = -↑Real.eulerMascheroniConstant ∧ deriv Complex.digamma 1 = ↑Real.pi ^ 2 / 6</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 5.4.12: the first two special values of digamma and its derivative. </code>",
+ "213":
+ "<code>LMLF.Blueprint.Gamma.gamma_deriv_one_value : deriv Real.Gamma 1 = -Real.eulerMascheroniConstant</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 5.4.11: Gamma's derivative at one is minus Euler's constant. </code>",
+ "212":
+ "<code>LMLF.Blueprint.Gamma.gamma_three_quarters_value : |Real.Gamma (3 / 4) - 1.22541670246517764512| &lt; 1 / 10 ^ 20</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 5.4.10: the three-quarter value of Gamma, to the displayed precision. </code>",
+ "211":
+ "<code>LMLF.Blueprint.Gamma.gamma_quarter_value : |Real.Gamma (1 / 4) - 3.62560990822190831193| &lt; 1 / 10 ^ 20</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 5.4.9: the quarter-value of Gamma, to the displayed precision. </code>",
+ "210":
+ "<code>LMLF.Blueprint.Gamma.gamma_two_thirds_value : |Real.Gamma (2 / 3) - 1.35411793942640041694| &lt; 1 / 10 ^ 20</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 5.4.8: the two-thirds value of Gamma, to the displayed precision. </code>",
  "21": "<code>ErrorOn D f a b</code>",
+ "209":
+ "<code>LMLF.Blueprint.Gamma.gamma_third_value : |Real.Gamma (1 / 3) - 2.67893853470774763365| &lt; 1 / 10 ^ 20</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 5.4.7: the one-third value of Gamma, to the displayed precision. </code>",
+ "208":
+ "<code>LMLF.Blueprint.Gamma.gamma_half_value :\n  Real.Gamma (1 / 2) = √Real.pi ∧ |Real.Gamma (1 / 2) - 1.77245385090551602729| &lt; 1 / 10 ^ 20</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 5.4.6: the half-value of Gamma, together with its displayed decimal enclosure. </code>",
+ "207":
+ "<code>Complex.sinh (z : ℂ) : ℂ</code><span class=\"sep\"></span><code class=\"docstring\">The complex hyperbolic sine function, defined via `exp` </code>",
+ "206":
+ "<code>Complex.cosh (z : ℂ) : ℂ</code><span class=\"sep\"></span><code class=\"docstring\">The complex hyperbolic cosine function, defined via `exp` </code>",
+ "205":
+ "<code>LMLF.Blueprint.Gamma.gamma_quarter_shift_product (y : ℝ) :\n  Complex.Gamma (1 / 4 + Complex.I * ↑y) * Complex.Gamma (3 / 4 - Complex.I * ↑y) =\n    ↑Real.pi * ↑√2 / (Complex.cosh (↑Real.pi * ↑y) + Complex.I * Complex.sinh (↑Real.pi * ↑y))</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 5.4.5: a quarter-shifted Gamma product. </code>",
+ "204":
+ "<code>Real.cosh (x : ℝ) : ℝ</code><span class=\"sep\"></span><code class=\"docstring\">The real hyperbolic cosine function, defined as the real part of the complex hyperbolic cosine\n</code>",
+ "203":
+ "<code>LMLF.Blueprint.Gamma.gamma_half_line_product (y : ℝ) :\n  Complex.Gamma (1 / 2 + Complex.I * ↑y) * Complex.Gamma (1 / 2 - Complex.I * ↑y) =\n      ↑(‖Complex.Gamma (1 / 2 + Complex.I * ↑y)‖ ^ 2) ∧\n    ‖Complex.Gamma (1 / 2 + Complex.I * ↑y)‖ ^ 2 = Real.pi / Real.cosh (Real.pi * y)</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 5.4.4: the half-line Gamma product and its squared modulus. </code>",
+ "202":
+ "<code>Real.sinh (x : ℝ) : ℝ</code><span class=\"sep\"></span><code class=\"docstring\">The real hyperbolic sine function, defined as the real part of the complex hyperbolic sine </code>",
+ "201":
+ "<code>Real.sqrt (x : ℝ) : ℝ</code><span class=\"sep\"></span><code class=\"docstring\">The square root of a real number. This returns 0 for negative inputs.\n\nThis has notation `√x`. Note that `√x⁻¹` is parsed as `√(x⁻¹)`. </code>",
+ "200": "<code>y ≠ 0</code>",
  "20":
  "<code>QuantitativeAnalysis.ErrorOn.restrict.{u_1, u_2} {X : Type u_1} {E : Type u_2} [NormedAddCommGroup E] {D D' : Set X}\n  {f a : X → E} {b : X → ℝ} (h : ErrorOn D f a b) (hD : D' ⊆ D) : ErrorOn D' f a b</code><span class=\"sep\"></span><code class=\"docstring\">An error bound restricts to a smaller domain. </code>",
  "2": "<code>Type u_1</code>",
+ "199":
+ "<code>LMLF.Blueprint.Gamma.gamma_imaginary_modulus {y : ℝ} (hy : y ≠ 0) :\n  ‖Complex.Gamma (Complex.I * ↑y)‖ = √(Real.pi / (y * Real.sinh (Real.pi * y)))</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 5.4.3: the modulus of Gamma on the imaginary axis. </code>",
+ "198":
+ "<code>Real.pi : ℝ</code><span class=\"sep\"></span><code class=\"docstring\">The number π = 3.14159265... Defined here using choice as twice a zero of cos in [1,2],\nfrom which one can derive all its properties. For explicit bounds on π,\nsee `Mathlib/Analysis/Real/Pi/Bounds.lean`.\n\nDenoted `π`, once the `Real` namespace is opened. </code>",
+ "197": "<code>n % 2 = 1</code>",
+ "196":
+ "<code>LMLF.Blueprint.Gamma.gamma_doubleFactorial_odd {n : ℕ} (hn : n % 2 = 1) :\n  ↑(doubleFactorial n) = Real.pi ^ (-(1 / 2)) * 2 ^ (↑n / 2 + 1 / 2) * Real.Gamma (↑n / 2 + 1)</code>",
+ "195": "<code>n % 2 = 0</code>",
+ "194":
+ "<code>LMLF.Blueprint.Gamma.gamma_doubleFactorial_even {n : ℕ} (hn : n % 2 = 0) :\n  ↑(doubleFactorial n) = 2 ^ (↑n / 2) * Real.Gamma (↑n / 2 + 1)</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 5.4.2: the even and odd double-factorial formulas. </code>",
+ "193":
+ "<code>LMLF.Blueprint.Gamma.doubleFactorial (n : ℕ) : ℕ</code><span class=\"sep\"></span><code class=\"docstring\">The natural-number double factorial used in DLMF 5.4.2. </code>",
+ "192":
+ "<code>LMLF.Blueprint.Gamma.gamma_special_factorial : Complex.Gamma 1 = 1 ∧ ∀ (n : ℕ), Complex.Gamma (↑n + 1) = ↑n.factorial</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 5.4.1: Gamma at one is one, and Gamma at a positive integer is the factorial. </code>",
+ "191":
+ "<code>LMLF.Blueprint.Gamma.digamma_abs_graph_nonnegative (x y : ℝ) : 0 ≤ ‖(↑x + ↑y * Complex.I).digamma‖</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 5.3.F6: the digamma surface uses the nonnegative absolute value of psi at `x + I y`. </code>",
+ "190":
+ "<code>LMLF.Blueprint.Gamma.reciprocal_gamma_abs_graph (x y : ℝ) :\n  ‖(Complex.Gamma (↑x + ↑y * Complex.I))⁻¹‖ = ‖Complex.Gamma (↑x + ↑y * Complex.I)‖⁻¹</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 5.3.F5: the reciprocal-Gamma surface is the reciprocal of the absolute value of the\ncomplex Gamma value at `x + I y`. </code>",
  "19": "<code>ℝ</code>",
+ "189":
+ "<code>LMLF.Blueprint.Gamma.gamma_abs_graph_nonnegative (x y : ℝ) : 0 ≤ ‖Complex.Gamma (↑x + ↑y * Complex.I)‖</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 5.3.F4: the height and color of the Gamma surface are the nonnegative absolute value of\nGamma at `x + I y`. </code>",
+ "188": "<code>∀ (n : ℕ), ↑x ≠ -↑n</code>",
+ "187":
+ "<code>LMLF.Blueprint.Gamma.digamma_graph_log_derivative {x : ℝ} (hx : ∀ (n : ℕ), ↑x ≠ -↑n) :\n  (↑x).digamma = deriv Complex.Gamma ↑x / Complex.Gamma ↑x</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 5.3.F3: the plotted psi function is the logarithmic derivative of Gamma, here written on\nthe real axis with the complex Gamma and digamma objects used by the formal development. </code>",
+ "186":
+ "<code>ConvexOn.{u_1, u_2, u_5} (𝕜 : Type u_1) {E : Type u_2} {β : Type u_5} [Semiring 𝕜] [PartialOrder 𝕜] [AddCommMonoid E]\n  [AddCommMonoid β] [PartialOrder β] [SMul 𝕜 E] [SMul 𝕜 β] (s : Set E) (f : E → β) : Prop</code><span class=\"sep\"></span><code class=\"docstring\">Convexity of functions </code>",
+ "185":
+ "<code>LMLF.Blueprint.Gamma.log_gamma_convexOn : ConvexOn ℝ (Set.Ioi 0) fun x =&gt; Real.log (Real.Gamma x)</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 5.3.F2: the logarithm of Gamma is convex on the open positive half-line. </code>",
+ "184":
+ "<code>Real.Gamma (s : ℝ) : ℝ</code><span class=\"sep\"></span><code class=\"docstring\">The `Γ` function (of a real variable `s`). </code>",
+ "183": "<code>0 &lt; x</code>",
+ "182":
+ "<code>LMLF.Blueprint.Gamma.gamma_graph_reciprocal_on_pos {x : ℝ} (hx : 0 &lt; x) : Real.Gamma x * (Real.Gamma x)⁻¹ = 1</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 5.3.F1: on the positive real axis, the plotted reciprocal of Gamma is its multiplicative\ninverse.  This is the real-positive specialization of the graph, where Gamma is nonzero. </code>",
+ "181":
+ "<code>LMLF.Blueprint.Gamma.fallingFactorial_eq_sum_lah_pochhammerSymbol (x : ℝ) (n : ℕ) :\n  fallingFactorial x n = ∑ k ∈ range (n + 1), (-1) ^ (n - k) * ↑(lahNumber n k) * pochhammerSymbol x k</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 5.2.9: falling factorials expanded in the rising-factorial basis. </code>",
+ "180":
+ "<code>LMLF.Blueprint.Gamma.pochhammerSymbol_eq_sum_lah_fallingFactorial (x : ℝ) (n : ℕ) :\n  pochhammerSymbol x n = ∑ k ∈ range (n + 1), ↑(lahNumber n k) * fallingFactorial x k</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 5.2.9: rising factorials expanded in the falling-factorial basis. </code>",
  "18":
  "<code>Set.EqOn.{u, v} {α : Type u} {β : Type v} (f₁ f₂ : α → β) (s : Set α) : Prop</code><span class=\"sep\"></span><code class=\"docstring\">Two functions `f₁ f₂ : α → β` are equal on `s` if `f₁ x = f₂ x` for all `x ∈ s`. </code>",
+ "179":
+ "<code>Nat.choose : ℕ → ℕ → ℕ</code><span class=\"sep\"></span><code class=\"docstring\">`choose n k` is the number of `k`-element subsets in an `n`-element set. Also known as binomial\ncoefficients. For the fact that this is the number of `k`-element-subsets of an `n`-element\nset, see `Finset.card_powersetCard`. </code>",
+ "178":
+ "<code>LMLF.Blueprint.Gamma.lahNumber (n k : ℕ) : ℕ</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 5.2.9: the unsigned Lah number `L(n,k)`. </code>",
+ "177":
+ "<code>LMLF.Blueprint.Gamma.fallingFactorial_eq_neg_one_pow_mul_pochhammerSymbol_neg.{u_1} {R : Type u_1} [CommRing R] (x : R)\n  (n : ℕ) : fallingFactorial x n = (-1) ^ n * pochhammerSymbol (-x) n</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 5.2.9: the descending Pochhammer polynomial is the signed rising one. </code>",
+ "176":
+ "<code>descPochhammer.{u} (R : Type u) [Ring R] : ℕ → R[X]</code><span class=\"sep\"></span><code class=\"docstring\">`descPochhammer R n` is the polynomial `X * (X - 1) * ... * (X - n + 1)`,\nwith coefficients in the ring `R`.\n</code>",
+ "175":
+ "<code>CommRing.{u} (α : Type u) : Type u</code><span class=\"sep\"></span><code class=\"docstring\">A commutative ring is a ring with commutative multiplication. </code>",
+ "174":
+ "<code>LMLF.Blueprint.Gamma.fallingFactorial.{u_1} {R : Type u_1} [CommRing R] (x : R) (n : ℕ) : R</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 5.2.9: the falling factorial, using Mathlib's descending Pochhammer polynomial. </code>",
+ "173":
+ "<code>LMLF.Blueprint.Gamma.pochhammerSymbol_two_mul_add_one (a : ℂ) (n : ℕ) :\n  pochhammerSymbol a (2 * n + 1) = 2 ^ (2 * n + 1) * pochhammerSymbol (a / 2) (n + 1) * pochhammerSymbol ((a + 1) / 2) n</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 5.2.8: duplication of an odd-indexed Pochhammer symbol. </code>",
+ "172":
+ "<code>LMLF.Blueprint.Gamma.pochhammerSymbol_two_mul (a : ℂ) (n : ℕ) :\n  pochhammerSymbol a (2 * n) = 2 ^ (2 * n) * pochhammerSymbol (a / 2) n * pochhammerSymbol ((a + 1) / 2) n</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 5.2.8: duplication of an even-indexed Pochhammer symbol. </code>",
+ "171":
+ "<code class=\"docstring\">`if c then t else e` is notation for `ite c t e`, \"if-then-else\", which decides to\nreturn `t` or `e` depending on whether `c` is true or false. The explicit argument\n`c : Prop` does not have any actual computational content, but there is an additional\n`[Decidable c]` argument synthesized by typeclass inference which actually\ndetermines how to evaluate `c` to true or false. Write `if h : c then t else e`\ninstead for a \"dependent if-then-else\" `dite`, which allows `t`/`e` to use the fact\nthat `c` is true/false.\n</code>",
+ "170":
+ "<code>LMLF.Blueprint.Gamma.pochhammerSymbol_neg_nat (m n : ℕ) :\n  pochhammerSymbol (-↑m) n = if n ≤ m then (-1) ^ n * ↑m.factorial / ↑(m - n).factorial else 0</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 5.2.7: a Pochhammer symbol beginning at a negative integer terminates. </code>",
  "17": "<code>Set.EqOn f a D</code>",
+ "169":
+ "<code>LMLF.Blueprint.Gamma.pochhammerSymbol_neg (a : ℂ) (n : ℕ) :\n  pochhammerSymbol (-a) n = (-1) ^ n * pochhammerSymbol (a - ↑n + 1) n</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 5.2.6: negating the initial value reverses a finite Pochhammer product. </code>",
+ "168": "<code>∀ (m : ℕ), a ≠ -↑m</code>",
+ "167":
+ "<code>LMLF.Blueprint.Gamma.pochhammerSymbol_eq_gamma_div {a : ℂ} (n : ℕ) (ha : ∀ (m : ℕ), a ≠ -↑m) :\n  pochhammerSymbol a n = Complex.Gamma (a + ↑n) / Complex.Gamma a</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 5.2.5: away from the poles of Gamma, a Pochhammer symbol is a Gamma quotient. </code>",
+ "166":
+ "<code>LMLF.Blueprint.Gamma.pochhammerSymbol_eq_prod (a : ℂ) (n : ℕ) : pochhammerSymbol a n = ∏ k ∈ range n, (a + ↑k)</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 5.2.4: the Pochhammer symbol is the finite rising product. </code>",
+ "165":
+ "<code>LMLF.Blueprint.Gamma.pochhammerSymbol_zero (a : ℂ) : pochhammerSymbol a 0 = 1</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 5.2.4: the zeroth Pochhammer symbol is one. </code>",
+ "164":
+ "<code>Polynomial.eval.{u} {R : Type u} [Semiring R] (x : R) (p : R[X]) : R</code><span class=\"sep\"></span><code class=\"docstring\">`eval x p` is the evaluation of the polynomial `p` at `x` </code>",
+ "163":
+ "<code>ascPochhammer.{u} (S : Type u) [Semiring S] : ℕ → S[X]</code><span class=\"sep\"></span><code class=\"docstring\">`ascPochhammer S n` is the polynomial `X * (X + 1) * ... * (X + n - 1)`,\nwith coefficients in the semiring `S`.\n</code>",
+ "162": "<code>R</code>",
+ "161":
+ "<code>CommSemiring.{u} (R : Type u) : Type u</code><span class=\"sep\"></span><code class=\"docstring\">A commutative semiring is a semiring with commutative multiplication. </code>",
+ "160":
+ "<code>LMLF.Blueprint.Gamma.pochhammerSymbol.{u_1} {R : Type u_1} [CommSemiring R] (a : R) (n : ℕ) : R</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 5.2.4: the Pochhammer symbol, using Mathlib's ascending Pochhammer polynomial. </code>",
  "16":
  "<code>QuantitativeAnalysis.ErrorOn.exact.{u_1, u_2} {X : Type u_1} {E : Type u_2} [NormedAddCommGroup E] {D : Set X}\n  {f a : X → E} (h : Set.EqOn f a D) : ErrorOn D f a fun x =&gt; 0</code><span class=\"sep\"></span><code class=\"docstring\">Functions equal on a domain have zero error there. </code>",
+ "159":
+ "<code>LMLF.Blueprint.Gamma.eulerMascheroni_decimal : |Real.eulerMascheroniConstant - 0.57721566490153286060| &lt; 1 / 10 ^ 20</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 5.2.3: the displayed twenty-decimal approximation to Euler's constant. </code>",
+ "158":
+ "<code>Real.log (x : ℝ) : ℝ</code><span class=\"sep\"></span><code class=\"docstring\">The real logarithm function, equal to the inverse of the exponential for `x &gt; 0`,\nto `log |x|` for `x &lt; 0`, and to `0` for `0`. We use this unconventional extension to\n`(-∞, 0]` as it gives the formula `log (x * y) = log x + log y` for all nonzero `x` and `y`, and\nthe derivative of `log` is `1/x` away from `0`. </code>",
+ "157":
+ "<code>Finset.Icc.{u_1} {α : Type u_1} [Preorder α] [LocallyFiniteOrder α] (a b : α) : Finset α</code><span class=\"sep\"></span><code class=\"docstring\">The finset $[a, b]$ of elements `x` such that `a ≤ x` and `x ≤ b`. Basically `Set.Icc a b` as a\nfinset. </code>",
+ "156":
+ "<code>LMLF.Blueprint.Gamma.tendsto_harmonic_sub_log_eulerMascheroni :\n  Tendsto (fun n =&gt; ∑ k ∈ Icc 1 n, (↑k)⁻¹ - Real.log ↑n) atTop (nhds Real.eulerMascheroniConstant)</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 5.2.3: the harmonic-minus-logarithm sequence tends to Euler's constant. </code>",
+ "155":
+ "<code>LMLF.Blueprint.Gamma.tendsto_digamma_residue_neg_nat (n : ℕ) :\n  Tendsto (fun z =&gt; (z + ↑n) * z.digamma) (nhdsWithin (-↑n) {-↑n}ᶜ) (nhds (-1))</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 5.2(i), surrounding 5.2.2: digamma has residue `-1` at every Gamma pole. </code>",
+ "154":
+ "<code>LMLF.Blueprint.Gamma.meromorphic_digamma : Meromorphic Complex.digamma</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 5.2(i), surrounding 5.2.2: digamma is meromorphic on the complex plane. </code>",
+ "153":
+ "<code>LMLF.Blueprint.Gamma.digamma_eq_gamma_deriv_div {z : ℂ} (hz : ∀ (n : ℕ), z ≠ -↑n) :\n  z.digamma = deriv Complex.Gamma z / Complex.Gamma z</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 5.2.2: the digamma function is the logarithmic derivative of Gamma away from its poles. </code>",
+ "152":
+ "<code>LMLF.Blueprint.Gamma.one_div_gamma_hasSimpleZero_neg_nat (n : ℕ) :\n  (Complex.Gamma (-↑n))⁻¹ = 0 ∧ deriv (fun z =&gt; (Complex.Gamma z)⁻¹) (-↑n) ≠ 0</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 5.2(i), surrounding 5.2.1: every zero of reciprocal Gamma at `-n` is simple. </code>",
+ "151":
+ "<code>LMLF.Blueprint.Gamma.one_div_gamma_eq_zero_iff (z : ℂ) : (Complex.Gamma z)⁻¹ = 0 ↔ ∃ n, z = -↑n</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 5.2(i), surrounding 5.2.1: reciprocal Gamma vanishes exactly at `-n`. </code>",
+ "150":
+ "<code>Differentiable.{u_1, u_2, u_3} (𝕜 : Type u_1) [NontriviallyNormedField 𝕜] {E : Type u_2} [AddCommGroup E] [Module 𝕜 E]\n  [TopologicalSpace E] {F : Type u_3} [AddCommGroup F] [Module 𝕜 F] [TopologicalSpace F] (f : E → F) : Prop</code><span class=\"sep\"></span><code class=\"docstring\">`Differentiable 𝕜 f` means that `f` is differentiable at any point. </code>",
  "15": "<code>Type u_3</code>",
+ "149":
+ "<code>LMLF.Blueprint.Gamma.differentiable_one_div_gamma : Differentiable ℂ fun z =&gt; (Complex.Gamma z)⁻¹</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 5.2(i), surrounding 5.2.1: the reciprocal Gamma function is entire. </code>",
+ "148":
+ "<code>LMLF.Blueprint.Gamma.tendsto_gamma_residue_neg_nat (n : ℕ) :\n  Tendsto (fun z =&gt; (z + ↑n) * Complex.Gamma z) (nhdsWithin (-↑n) {-↑n}ᶜ) (nhds ((-1) ^ n / ↑n.factorial))</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 5.2(i), surrounding 5.2.1: the pole at `-n` has residue `(-1)^n/n!`. </code>",
+ "147":
+ "<code>LMLF.Blueprint.Gamma.gamma_totalized_at_pole (n : ℕ) : Complex.Gamma (-↑n) = 0</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 5.2(i), surrounding 5.2.1: Lean's totalized Gamma is zero at a classical pole. </code>",
+ "146": "<code>∀ (n : ℕ), z ≠ -↑n</code>",
+ "145":
+ "<code>LMLF.Blueprint.Gamma.gamma_ne_zero_away_from_poles {z : ℂ} (hz : ∀ (n : ℕ), z ≠ -↑n) : Complex.Gamma z ≠ 0</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 5.2(i), surrounding 5.2.1: Gamma is nonzero away from its poles. </code>",
+ "144":
+ "<code>Meromorphic.{u_1, u_3} {𝕜 : Type u_1} [NontriviallyNormedField 𝕜] {E : Type u_3} [NormedAddCommGroup E]\n  [NormedSpace 𝕜 E] (f : 𝕜 → E) : Prop</code><span class=\"sep\"></span><code class=\"docstring\">Meromorphy of a function on all of 𝕜. </code>",
+ "143":
+ "<code>LMLF.Blueprint.Gamma.meromorphic_gamma : Meromorphic Complex.Gamma</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 5.2(i), surrounding 5.2.1: Gamma is meromorphic on the complex plane. </code>",
+ "142":
+ "<code>LMLF.Definitions.gamma_eq_eulerIntegral {s : ℂ} (hs : 0 &lt; s.re) :\n  Complex.Gamma s = ∫ (t : ℝ) in Set.Ioi 0, ↑(Real.exp (-t)) * ↑t ^ (s - 1)</code><span class=\"sep\"></span><code class=\"docstring\">On the half-plane `0 &lt; re s`, Mathlib's complex Gamma function is Euler's integral. </code>",
+ "141":
+ "<code>MeasureTheory.IntegrableOn.{u_1, u_3} {α : Type u_1} {ε : Type u_3} {mα : MeasurableSpace α} [TopologicalSpace ε]\n  [ContinuousENorm ε] (f : α → ε) (s : Set α) (μ : MeasureTheory.Measure α := by volume_tac) : Prop</code><span class=\"sep\"></span><code class=\"docstring\">A function is `IntegrableOn` a set `s` if it is almost everywhere strongly measurable on `s`\nand if the integral of its pointwise norm over `s` is less than infinity. </code>",
+ "140": "<code>0 &lt; s.re</code>",
  "14":
  "<code>QuantitativeAnalysis.NormBoundOn.{u_1, u_2} {X : Type u_1} {E : Type u_2} [NormedAddCommGroup E] (D : Set X) (f : X → E)\n  (b : X → ℝ) : Prop</code><span class=\"sep\"></span><code class=\"docstring\">`NormBoundOn D f b` means that the norm of `f` is pointwise at most `b` on `D`. </code>",
+ "139":
+ "<code>LMLF.Definitions.gamma_eulerIntegrable {s : ℂ} (hs : 0 &lt; s.re) :\n  MeasureTheory.IntegrableOn (fun t =&gt; ↑(Real.exp (-t)) * ↑t ^ (s - 1)) (Set.Ioi 0) MeasureTheory.volume</code><span class=\"sep\"></span><code class=\"docstring\">Euler's integrand for `s` is integrable on the positive real axis when `0 &lt; re s`. </code>",
+ "138":
+ "<code>LMLF.Blueprint.Gamma.Section51.primeDerivative_eq_deriv (f : ℂ → ℂ) (z : ℂ) : primeDerivative f z = deriv f z</code><span class=\"sep\"></span><code class=\"docstring\">DLMF §5.1: the prime convention is Mathlib's totalized `deriv` at the\ndisplayed argument.  No differentiability hypothesis is added here. </code>",
+ "137":
+ "<code>deriv.{u, v} {𝕜 : Type u} [NontriviallyNormedField 𝕜] {F : Type v} [AddCommGroup F] [Module 𝕜 F] [TopologicalSpace F]\n  (f : 𝕜 → F) (x : 𝕜) : F</code><span class=\"sep\"></span><code class=\"docstring\">Derivative of `f` at the point `x`, if it exists.  Zero otherwise.\n\nIf the derivative exists (i.e., `∃ f', HasDerivAt f f' x`), then\n`f x' = f x + (x' - x) • deriv f x + o(x' - x)` where `x'` converges to `x`.\n</code>",
+ "136": "<code>ℂ → ℂ</code>",
+ "135":
+ "<code>LMLF.Blueprint.Gamma.Section51.primeDerivative (f : ℂ → ℂ) (z : ℂ) : ℂ</code><span class=\"sep\"></span><code class=\"docstring\">DLMF §5.1: a prime on a complex-valued function denotes differentiation\nwith respect to its displayed complex variable.  This definition uses\nMathlib's totalized `deriv`; it is intended where differentiability has been\nestablished, since `deriv` returns a default value otherwise. </code>",
+ "134":
+ "<code>Real.eulerMascheroniConstant : ℝ</code><span class=\"sep\"></span><code class=\"docstring\">The Euler-Mascheroni constant `γ`. </code>",
+ "133":
+ "<code>LMLF.Blueprint.Gamma.Section51.eulerConstant : ℝ</code><span class=\"sep\"></span><code class=\"docstring\">DLMF §5.1: `γ` denotes Euler's constant, as defined in §5.2(ii). </code>",
+ "132":
+ "<code>Nat.factorial : ℕ → ℕ</code><span class=\"sep\"></span><code class=\"docstring\">`Nat.factorial n` is the factorial of `n`. </code>",
+ "131":
+ "<code>LMLF.Blueprint.Gamma.Section51.gamma_nat_succ_eq_factorial (n : ℕ) : gammaFunction (↑n + 1) = ↑n.factorial</code><span class=\"sep\"></span><code class=\"docstring\">DLMF §5.1: the factorial alternative specialized to nonnegative integers:\nGamma at `n + 1` is ordinary `n.factorial`.  This is the `Nat` specialization\nof the source's `(z - 1)!` notation. </code>",
+ "130":
+ "<code>LMLF.Blueprint.Gamma.Section51.pairmanF_shift_eq_psi (z : ℂ) : pairmanF (z - 1) = psiFunction z</code><span class=\"sep\"></span><code class=\"docstring\">DLMF §5.1: Pairman's shifted notation agrees with psi after replacing\n`w` by `z-1`. </code>",
  "13": "<code>X</code>",
- "122": "<code>0 &lt; x</code>",
+ "129":
+ "<code>LMLF.Blueprint.Gamma.Section51.gaussPsi_shift_eq_psi (z : ℂ) : gaussPsi (z - 1) = psiFunction z</code><span class=\"sep\"></span><code class=\"docstring\">DLMF §5.1: Gauss's shifted Ψ notation agrees with psi after replacing\n`w` by `z-1`. </code>",
+ "128":
+ "<code>LMLF.Blueprint.Gamma.Section51.gaussPi_shift_eq_gamma (z : ℂ) : gaussPi (z - 1) = gammaFunction z</code><span class=\"sep\"></span><code class=\"docstring\">DLMF §5.1: Gauss's shifted Π notation agrees with Gamma after replacing\n`w` by `z-1`. </code>",
+ "127":
+ "<code>LMLF.Blueprint.Gamma.Section51.pairmanF (w : ℂ) : ℂ</code><span class=\"sep\"></span><code class=\"docstring\">DLMF §5.1: Pairman's `𝖥(w)` notation for `ψ(w+1)`. </code>",
+ "126":
+ "<code>LMLF.Blueprint.Gamma.Section51.davisPsi (z : ℂ) : ℂ</code><span class=\"sep\"></span><code class=\"docstring\">DLMF §5.1: Davis's `Ψ(z)` notation for the psi function. </code>",
+ "125":
+ "<code>LMLF.Blueprint.Gamma.Section51.gaussPsi (w : ℂ) : ℂ</code><span class=\"sep\"></span><code class=\"docstring\">DLMF §5.1: Gauss's alternative `Ψ(w)` notation for `ψ(w+1)`. </code>",
+ "124":
+ "<code>LMLF.Blueprint.Gamma.Section51.gaussPi (w : ℂ) : ℂ</code><span class=\"sep\"></span><code class=\"docstring\">DLMF §5.1: Gauss's alternative `Π(w)` notation for `Γ(w+1)`. </code>",
+ "123":
+ "<code>Complex.betaIntegral (u v : ℂ) : ℂ</code><span class=\"sep\"></span><code class=\"docstring\">The Beta function `Β (u, v)`, defined as `∫ x:ℝ in 0..1, x ^ (u - 1) * (1 - x) ^ (v - 1)`. </code>",
+ "122":
+ "<code>LMLF.Blueprint.Gamma.Section51.betaFunction (a b : ℂ) : ℂ</code><span class=\"sep\"></span><code class=\"docstring\">DLMF §5.1: the beta function `B(a,b)`, represented by Mathlib's complex\nEuler beta integral.  Its interval-integral convergence theorem applies when\n`0 &lt; a.re` and `0 &lt; b.re`; the meromorphic continuation is a separate object. </code>",
  "121":
- "<code>LMLF.Blueprint.Gamma.stirlingLog_remainder_bounds (n : ℕ) {x : ℝ} (hx : 0 &lt; x) :\n  0 ≤ (Real.log (Real.Gamma x) - stirlingLogApprox n x) * stirlingLogTerm n x ∧\n    |Real.log (Real.Gamma x) - stirlingLogApprox n x| ≤ |stirlingLogTerm n x|</code><span class=\"sep\"></span><code class=\"docstring\">On the positive real axis, the remainder has the sign of and is bounded by the next term. </code>",
+ "<code>Complex.digamma : ℂ → ℂ</code><span class=\"sep\"></span><code class=\"docstring\">The digamma function, defined as the logarithmic derivative of the Gamma function. </code>",
  "120":
- "<code>LMLF.Blueprint.Gamma.stirlingLogApprox (n : ℕ) (x : ℝ) : ℝ</code><span class=\"sep\"></span><code class=\"docstring\">Stirling's approximation after `n` Bernoulli terms. </code>",
+ "<code>LMLF.Blueprint.Gamma.Section51.psiFunction (z : ℂ) : ℂ</code><span class=\"sep\"></span><code class=\"docstring\">DLMF §5.1: the psi (digamma) function `ψ(z)`, using Mathlib's canonical\ncomplex digamma function. </code>",
  "12":
  "<code class=\"docstring\">The universe of propositions. `Prop ≡ Sort 0`.\n\nEvery proposition is propositionally equal to either `True` or `False`. </code>",
  "119":
- "<code>Real.Gamma (s : ℝ) : ℝ</code><span class=\"sep\"></span><code class=\"docstring\">The `Γ` function (of a real variable `s`). </code>",
- "118":
- "<code>LMLF.Blueprint.Gamma.stirlingLog_hasPoincareExpansion :\n  (fun x =&gt; Real.log (Real.Gamma x) - stirlingLogMain x) ∼ₚ[atTop] stirlingLogTerm</code><span class=\"sep\"></span><code class=\"docstring\">The real-positive specialization of the Poincaré expansion in DLMF 5.11.1. </code>",
- "117":
- "<code>bernoulli (n : ℕ) : ℚ</code><span class=\"sep\"></span><code class=\"docstring\">The Bernoulli numbers are defined to be `bernoulli'` with a parity sign. </code>",
- "116":
- "<code>LMLF.Blueprint.Gamma.stirlingLogTerm (k : ℕ) (x : ℝ) : ℝ</code><span class=\"sep\"></span><code class=\"docstring\">Term `k` is the term numbered `k + 1` in DLMF 5.11.1. </code>",
- "115":
- "<code>Real.pi : ℝ</code><span class=\"sep\"></span><code class=\"docstring\">The number π = 3.14159265... Defined here using choice as twice a zero of cos in [1,2],\nfrom which one can derive all its properties. For explicit bounds on π,\nsee `Mathlib/Analysis/Real/Pi/Bounds.lean`.\n\nDenoted `π`, once the `Real` namespace is opened. </code>",
- "114":
- "<code>Real.log (x : ℝ) : ℝ</code><span class=\"sep\"></span><code class=\"docstring\">The real logarithm function, equal to the inverse of the exponential for `x &gt; 0`,\nto `log |x|` for `x &lt; 0`, and to `0` for `0`. We use this unconventional extension to\n`(-∞, 0]` as it gives the formula `log (x * y) = log x + log y` for all nonzero `x` and `y`, and\nthe derivative of `log` is `1/x` away from `0`. </code>",
- "113":
- "<code>LMLF.Blueprint.Gamma.stirlingLogMain (x : ℝ) : ℝ</code><span class=\"sep\"></span><code class=\"docstring\">The elementary part of Stirling's expansion for `log (Gamma x)`. </code>",
- "112":
  "<code>Complex.Gamma (s : ℂ) : ℂ</code><span class=\"sep\"></span><code class=\"docstring\">The `Γ` function (of a complex variable `s`). </code>",
+ "118":
+ "<code>LMLF.Blueprint.Gamma.Section51.gammaFunction (z : ℂ) : ℂ</code><span class=\"sep\"></span><code class=\"docstring\">DLMF §5.1: the Gamma function `Γ(z)`, using Mathlib's canonical complex\nGamma function. </code>",
+ "117": "<code>0 &lt; ε</code>",
+ "116":
+ "<code>LMLF.Blueprint.Gamma.Section51.exists_positive_delta_lt {ε : ℝ} (hε : 0 &lt; ε) : ∃ δ, 0 &lt; δ ∧ δ &lt; ε</code><span class=\"sep\"></span><code class=\"docstring\">DLMF §5.1: an arbitrary small positive constant can be chosen below any\ngiven positive tolerance. </code>",
+ "115":
+ "<code>LMLF.Blueprint.Gamma.Section51.real_qParameterCondition_iff (q : ℝ) : qParameterCondition ↑q ↔ |q| &lt; 1</code><span class=\"sep\"></span><code class=\"docstring\">DLMF §5.1: for a real q, the complex norm condition is the ordinary\nabsolute-value condition. </code>",
+ "114": "<code>ℂ</code>",
+ "113":
+ "<code>LMLF.Blueprint.Gamma.Section51.qParameterCondition (q : ℂ) : Prop</code><span class=\"sep\"></span><code class=\"docstring\">DLMF §5.1: the chapter's q-parameter convention is `|q| &lt; 1`; for a\ncomplex parameter this is Mathlib's norm inequality. </code>",
+ "112":
+ "<code>Complex.im (self : ℂ) : ℝ</code><span class=\"sep\"></span><code class=\"docstring\">The imaginary part of a complex number. </code>",
  "111":
- "<code>LMLF.Definitions.gamma_eq_eulerIntegral {s : ℂ} (hs : 0 &lt; s.re) :\n  Complex.Gamma s = ∫ (t : ℝ) in Set.Ioi 0, ↑(Real.exp (-t)) * ↑t ^ (s - 1)</code><span class=\"sep\"></span><code class=\"docstring\">On the half-plane `0 &lt; re s`, Mathlib's complex Gamma function is Euler's integral. </code>",
+ "<code>LMLF.Blueprint.Gamma.Section51.complexCoordinate_im (x y : ℝ) : (complexCoordinate x y).im = y</code><span class=\"sep\"></span><code class=\"docstring\">DLMF §5.1: the imaginary part of `z = x + i y` is `y`. </code>",
  "110":
- "<code>MeasureTheory.IntegrableOn.{u_1, u_3} {α : Type u_1} {ε : Type u_3} {mα : MeasurableSpace α} [TopologicalSpace ε]\n  [ContinuousENorm ε] (f : α → ε) (s : Set α) (μ : MeasureTheory.Measure α := by volume_tac) : Prop</code><span class=\"sep\"></span><code class=\"docstring\">A function is `IntegrableOn` a set `s` if it is almost everywhere strongly measurable on `s`\nand if the integral of its pointwise norm over `s` is less than infinity. </code>",
+ "<code>Complex.re (self : ℂ) : ℝ</code><span class=\"sep\"></span><code class=\"docstring\">The real part of a complex number. </code>",
  "11":
  "<code>Real : Type</code><span class=\"sep\"></span><code class=\"docstring\">The type `ℝ` of real numbers constructed as equivalence classes of Cauchy sequences of rational\nnumbers. </code>",
  "109":
- "<code>Complex.re (self : ℂ) : ℝ</code><span class=\"sep\"></span><code class=\"docstring\">The real part of a complex number. </code>",
- "108": "<code>0 &lt; s.re</code>",
+ "<code>LMLF.Blueprint.Gamma.Section51.complexCoordinate_re (x y : ℝ) : (complexCoordinate x y).re = x</code><span class=\"sep\"></span><code class=\"docstring\">DLMF §5.1: the real part of `z = x + i y` is `x`. </code>",
+ "108":
+ "<code>Complex.I : ℂ</code><span class=\"sep\"></span><code class=\"docstring\">The imaginary unit. </code>",
  "107":
  "<code>Complex : Type</code><span class=\"sep\"></span><code class=\"docstring\">Complex numbers consist of two `Real`s: a real part `re` and an imaginary part `im`. </code>",
- "106": "<code>ℂ</code>",
+ "106":
+ "<code>LMLF.Blueprint.Gamma.Section51.complexCoordinate (x y : ℝ) : ℂ</code><span class=\"sep\"></span><code class=\"docstring\">DLMF §5.1: the complex variable `z = x + i y`, represented from its real\ncoordinates. </code>",
  "105":
- "<code>LMLF.Definitions.gamma_eulerIntegrable {s : ℂ} (hs : 0 &lt; s.re) :\n  MeasureTheory.IntegrableOn (fun t =&gt; ↑(Real.exp (-t)) * ↑t ^ (s - 1)) (Set.Ioi 0) MeasureTheory.volume</code><span class=\"sep\"></span><code class=\"docstring\">Euler's integrand for `s` is integrable on the positive real axis when `0 &lt; re s`. </code>",
+ "<code>LMLF.Blueprint.Gamma.Section51.NonnegativeInteger : Type</code><span class=\"sep\"></span><code class=\"docstring\">DLMF §5.1: the symbols `j`, `m`, `n`, and (apart from §5.20) `k` denote\nnonnegative integers.  Mathlib's natural numbers are the corresponding type. </code>",
  "104":
  "<code>Tendsto (fun R =&gt; Real.exp (-h * R) • F R) atTop (nhds 0)</code>",
  "103":

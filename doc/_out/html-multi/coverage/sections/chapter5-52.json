@@ -1,0 +1,195 @@
+{
+  "section_range": ["5.2"],
+  "numbered_formula_ids_expected": [
+    "5.2.E1",
+    "5.2.E2",
+    "5.2.E3",
+    "5.2.E4",
+    "5.2.E5",
+    "5.2.E6",
+    "5.2.E7",
+    "5.2.E8",
+    "5.2.E9"
+  ],
+  "numbered_formula_ids_stated": [
+    "5.2.E1",
+    "5.2.E2",
+    "5.2.E3",
+    "5.2.E4",
+    "5.2.E5",
+    "5.2.E6",
+    "5.2.E7",
+    "5.2.E8",
+    "5.2.E9"
+  ],
+  "numbered_formula_ids_omitted": [],
+  "extra_statement_ids": [
+    "5.2.i.gamma-meromorphic",
+    "5.2.i.gamma-no-zeros",
+    "5.2.i.gamma-poles",
+    "5.2.i.reciprocal-gamma-entire",
+    "5.2.i.reciprocal-gamma-zeros",
+    "5.2.i.digamma-meromorphic",
+    "5.2.i.digamma-poles"
+  ],
+  "declarations": [
+    {
+      "source_id": "5.2.E1",
+      "names": [
+        "LMLF.Definitions.gamma_eulerIntegrable",
+        "LMLF.Definitions.gamma_eq_eulerIntegral"
+      ],
+      "relation": "exact",
+      "proof_status": "proved",
+      "quantitative_analogue": "not_applicable",
+      "notes": "The convergence assertion and Euler-integral value identity are separate proved declarations."
+    },
+    {
+      "source_id": "5.2.E2",
+      "names": ["LMLF.Blueprint.Gamma.digamma_eq_gamma_deriv_div"],
+      "relation": "exact",
+      "proof_status": "missing",
+      "quantitative_analogue": "not_applicable",
+      "notes": "Uses Mathlib's Complex.digamma and spells out the excluded nonpositive integers."
+    },
+    {
+      "source_id": "5.2.E3",
+      "names": [
+        "LMLF.Blueprint.Gamma.tendsto_harmonic_sub_log_eulerMascheroni",
+        "LMLF.Blueprint.Gamma.eulerMascheroni_decimal"
+      ],
+      "relation": "exact",
+      "proof_status": "missing",
+      "quantitative_analogue": "present",
+      "notes": "The limit and the displayed twenty-decimal value are separate declarations; the latter is a rigorous enclosure with radius 10^-20."
+    },
+    {
+      "source_id": "5.2.E4",
+      "names": [
+        "LMLF.Blueprint.Gamma.pochhammerSymbol",
+        "LMLF.Blueprint.Gamma.pochhammerSymbol_zero",
+        "LMLF.Blueprint.Gamma.pochhammerSymbol_eq_prod"
+      ],
+      "relation": "exact",
+      "proof_status": "missing",
+      "quantitative_analogue": "not_applicable",
+      "notes": "The reusable definition is Mathlib's ascending Pochhammer polynomial evaluated at the argument."
+    },
+    {
+      "source_id": "5.2.E5",
+      "names": ["LMLF.Blueprint.Gamma.pochhammerSymbol_eq_gamma_div"],
+      "relation": "exact",
+      "proof_status": "missing",
+      "quantitative_analogue": "not_applicable",
+      "notes": "Complex-variable statement with the DLMF pole exclusions made explicit."
+    },
+    {
+      "source_id": "5.2.E6",
+      "names": ["LMLF.Blueprint.Gamma.pochhammerSymbol_neg"],
+      "relation": "exact",
+      "proof_status": "missing",
+      "quantitative_analogue": "not_applicable",
+      "notes": "Complex-variable polynomial identity."
+    },
+    {
+      "source_id": "5.2.E7",
+      "names": ["LMLF.Blueprint.Gamma.pochhammerSymbol_neg_nat"],
+      "relation": "exact",
+      "proof_status": "missing",
+      "quantitative_analogue": "not_applicable",
+      "notes": "The DLMF piecewise formula is represented directly by an if-then-else."
+    },
+    {
+      "source_id": "5.2.E8",
+      "names": [
+        "LMLF.Blueprint.Gamma.pochhammerSymbol_two_mul",
+        "LMLF.Blueprint.Gamma.pochhammerSymbol_two_mul_add_one"
+      ],
+      "relation": "exact",
+      "proof_status": "missing",
+      "quantitative_analogue": "not_applicable",
+      "notes": "The even and odd lines of the source are separate declarations."
+    },
+    {
+      "source_id": "5.2.E9",
+      "names": [
+        "LMLF.Blueprint.Gamma.fallingFactorial",
+        "LMLF.Blueprint.Gamma.fallingFactorial_eq_neg_one_pow_mul_pochhammerSymbol_neg",
+        "LMLF.Blueprint.Gamma.lahNumber",
+        "LMLF.Blueprint.Gamma.pochhammerSymbol_eq_sum_lah_fallingFactorial",
+        "LMLF.Blueprint.Gamma.fallingFactorial_eq_sum_lah_pochhammerSymbol"
+      ],
+      "relation": "exact",
+      "proof_status": "missing",
+      "quantitative_analogue": "not_applicable",
+      "notes": "The signed rising-to-falling bridge is stated over commutative rings; the two real-variable change-of-basis identities include the DLMF definition of the unsigned Lah number."
+    },
+    {
+      "source_id": "5.2.i.gamma-meromorphic",
+      "names": ["LMLF.Blueprint.Gamma.meromorphic_gamma"],
+      "relation": "exact",
+      "proof_status": "missing",
+      "quantitative_analogue": "not_applicable",
+      "notes": "Formalizes the analytic-continuation paragraph following 5.2.1."
+    },
+    {
+      "source_id": "5.2.i.gamma-no-zeros",
+      "names": ["LMLF.Blueprint.Gamma.gamma_ne_zero_away_from_poles"],
+      "relation": "exact",
+      "proof_status": "missing",
+      "quantitative_analogue": "not_applicable",
+      "notes": "Mathlib totalizes Gamma at poles, so the no-zero statement explicitly excludes them."
+    },
+    {
+      "source_id": "5.2.i.gamma-poles",
+      "names": [
+        "LMLF.Blueprint.Gamma.gamma_totalized_at_pole",
+        "LMLF.Blueprint.Gamma.tendsto_gamma_residue_neg_nat"
+      ],
+      "relation": "exact",
+      "proof_status": "missing",
+      "quantitative_analogue": "not_applicable",
+      "notes": "The punctured limit records the simple pole and its residue; the companion theorem makes Lean's totalization convention explicit."
+    },
+    {
+      "source_id": "5.2.i.reciprocal-gamma-entire",
+      "names": ["LMLF.Blueprint.Gamma.differentiable_one_div_gamma"],
+      "relation": "exact",
+      "proof_status": "missing",
+      "quantitative_analogue": "not_applicable",
+      "notes": "Complex differentiability on all of C expresses entire-ness."
+    },
+    {
+      "source_id": "5.2.i.reciprocal-gamma-zeros",
+      "names": [
+        "LMLF.Blueprint.Gamma.one_div_gamma_eq_zero_iff",
+        "LMLF.Blueprint.Gamma.one_div_gamma_hasSimpleZero_neg_nat"
+      ],
+      "relation": "exact",
+      "proof_status": "missing",
+      "quantitative_analogue": "not_applicable",
+      "notes": "The zero set and nonvanishing derivative record the source's simple-zero assertion."
+    },
+    {
+      "source_id": "5.2.i.digamma-meromorphic",
+      "names": ["LMLF.Blueprint.Gamma.meromorphic_digamma"],
+      "relation": "exact",
+      "proof_status": "missing",
+      "quantitative_analogue": "not_applicable",
+      "notes": "Formalizes the paragraph following 5.2.2."
+    },
+    {
+      "source_id": "5.2.i.digamma-poles",
+      "names": ["LMLF.Blueprint.Gamma.tendsto_digamma_residue_neg_nat"],
+      "relation": "exact",
+      "proof_status": "missing",
+      "quantitative_analogue": "not_applicable",
+      "notes": "The punctured limit records a simple pole of residue -1 at every nonpositive integer."
+    }
+  ],
+  "shared_vocabulary_requests": [
+    "Consolidate section-local `pochhammerSymbol` and `fallingFactorial` names if later Chapter 5 sections need the same evaluated Mathlib Pochhammer polynomials.",
+    "Consider a shared machine-readable convention for source decimal displays as explicit error enclosures."
+  ],
+  "known_gaps": []
+}

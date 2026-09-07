@@ -1,0 +1,178 @@
+{
+  "section_range": ["5.18"],
+  "numbered_formula_ids_expected": [
+    "5.18.E1",
+    "5.18.E2",
+    "5.18.E3",
+    "5.18.E4",
+    "5.18.E5",
+    "5.18.E6",
+    "5.18.E7",
+    "5.18.E8",
+    "5.18.E9",
+    "5.18.E10",
+    "5.18.E11",
+    "5.18.E12"
+  ],
+  "numbered_formula_ids_stated": [
+    "5.18.E1",
+    "5.18.E2",
+    "5.18.E3",
+    "5.18.E4",
+    "5.18.E5",
+    "5.18.E6",
+    "5.18.E7",
+    "5.18.E8",
+    "5.18.E9",
+    "5.18.E10",
+    "5.18.E11",
+    "5.18.E12"
+  ],
+  "numbered_formula_ids_omitted": [],
+  "extra_statement_ids": [
+    "5.18.qGammaPoleFree",
+    "5.18.ii.qGammaRealBridge",
+    "5.18.ii.Convexity",
+    "5.18.ii.BohrMollerup"
+  ],
+  "declarations": [
+    {
+      "source_id": "5.18.E1",
+      "names": ["LMLF.Blueprint.Gamma.Section518.dlmf_5_18_1"],
+      "relation": "exact",
+      "proof_status": "missing",
+      "quantitative_analogue": "not_applicable",
+      "notes": "Finite q-Pochhammer product, valid for complex a, q, and every nonnegative n."
+    },
+    {
+      "source_id": "5.18.E2",
+      "names": ["LMLF.Blueprint.Gamma.Section518.dlmf_5_18_2"],
+      "relation": "exact",
+      "proof_status": "missing",
+      "quantitative_analogue": "not_applicable",
+      "notes": "The reciprocal form records q ≠ 1 explicitly; q-factorial and q-Pochhammer are complex-valued."
+    },
+    {
+      "source_id": "5.18.E3",
+      "names": ["LMLF.Blueprint.Gamma.Section518.dlmf_5_18_3"],
+      "relation": "exact",
+      "proof_status": "missing",
+      "quantitative_analogue": "not_applicable",
+      "notes": "HasProd states convergence for the source domain ‖q‖ < 1; no q > 1 claim is made."
+    },
+    {
+      "source_id": "5.18.E4",
+      "names": ["LMLF.Blueprint.Gamma.Section518.dlmf_5_18_4"],
+      "relation": "specialization",
+      "proof_status": "missing",
+      "quantitative_analogue": "not_applicable",
+      "notes": "Uses the source real-base domain 0 < q < 1 and complex z, with principal Complex.cpow; qGamma is a totalized quotient at a zero denominator, with qGammaPoleFree naming the meromorphic finite-value domain."
+    },
+    {
+      "source_id": "5.18.E5",
+      "names": ["LMLF.Blueprint.Gamma.Section518.dlmf_5_18_5"],
+      "relation": "specialization",
+      "proof_status": "missing",
+      "quantitative_analogue": "not_applicable",
+      "notes": "Real q in 0 < q < 1, matching the q-Gamma definition in this module."
+    },
+    {
+      "source_id": "5.18.E6",
+      "names": ["LMLF.Blueprint.Gamma.Section518.dlmf_5_18_6"],
+      "relation": "specialization",
+      "proof_status": "missing",
+      "quantitative_analogue": "not_applicable",
+      "notes": "Complex-valued q-factorial and q-Gamma with real q in the source range."
+    },
+    {
+      "source_id": "5.18.E7",
+      "names": ["LMLF.Blueprint.Gamma.Section518.dlmf_5_18_7"],
+      "relation": "specialization",
+      "proof_status": "missing",
+      "quantitative_analogue": "not_applicable",
+      "notes": "Complex argument recurrence with real 0 < q < 1 and principal Complex.cpow; both q-Gamma denominator products are required nonzero via qGammaPoleFree, excluding z = 0 and all totalized poles."
+    },
+    {
+      "source_id": "5.18.E8",
+      "names": ["LMLF.Blueprint.Gamma.Section518.dlmf_5_18_8"],
+      "relation": "specialization",
+      "proof_status": "missing",
+      "quantitative_analogue": "not_applicable",
+      "notes": "Real-axis qGammaReal specialization; includes both 0 < x < 1 and x > 2 cases. qGammaReal_coe records the pole-free bridge to complex q-Gamma."
+    },
+    {
+      "source_id": "5.18.E9",
+      "names": ["LMLF.Blueprint.Gamma.Section518.dlmf_5_18_9"],
+      "relation": "specialization",
+      "proof_status": "missing",
+      "quantitative_analogue": "not_applicable",
+      "notes": "Real-axis qGammaReal specialization on 1 < x < 2. qGammaReal_coe records the pole-free bridge to complex q-Gamma."
+    },
+    {
+      "source_id": "5.18.E10",
+      "names": ["LMLF.Blueprint.Gamma.Section518.dlmf_5_18_10"],
+      "relation": "specialization",
+      "proof_status": "missing",
+      "quantitative_analogue": "not_applicable",
+      "notes": "Real q approaching 1 from below and complex z, represented with nhdsWithin; qGamma and Complex.Gamma are totalized at exceptional poles, so the meromorphic source reading is pole-free."
+    },
+    {
+      "source_id": "5.18.E11",
+      "names": ["LMLF.Blueprint.Gamma.Section518.dlmf_5_18_11"],
+      "relation": "specialization",
+      "proof_status": "missing",
+      "quantitative_analogue": "not_applicable",
+      "notes": "Complex a, b with real q in 0 < q < 1; this is a totalized quotient identity, with the meromorphic q-Beta reading restricted to nonzero displayed q-Gamma denominators."
+    },
+    {
+      "source_id": "5.18.E12",
+      "names": ["LMLF.Blueprint.Gamma.Section518.dlmf_5_18_12"],
+      "relation": "specialization",
+      "proof_status": "missing",
+      "quantitative_analogue": "not_applicable",
+      "notes": "Jackson q-integral specialization with real q, Re(a) > 0, and Re(b) > 0; principal Complex.cpow is evaluated at positive sampled points."
+    },
+    {
+      "source_id": "5.18.qGammaPoleFree",
+      "names": [
+        "LMLF.Blueprint.Gamma.Section518.qGammaDenom",
+        "LMLF.Blueprint.Gamma.Section518.qGammaPoleFree"
+      ],
+      "relation": "related",
+      "proof_status": "missing",
+      "quantitative_analogue": "not_applicable",
+      "notes": "Minimal denominator and pole-free-domain vocabulary needed to state the source recurrence without Lean's totalized pole values."
+    },
+    {
+      "source_id": "5.18.ii.qGammaRealBridge",
+      "names": ["LMLF.Blueprint.Gamma.Section518.qGammaReal_coe"],
+      "relation": "specialization",
+      "proof_status": "missing",
+      "quantitative_analogue": "not_applicable",
+      "notes": "Domain-guarded bridge identifying the real-part projection qGammaReal with complex qGamma on the real axis away from q-Pochhammer poles."
+    },
+    {
+      "source_id": "5.18.ii.Convexity",
+      "names": ["LMLF.Blueprint.Gamma.Section518.dlmf_5_18_convexity"],
+      "relation": "specialization",
+      "proof_status": "missing",
+      "quantitative_analogue": "not_applicable",
+      "notes": "Source prose claim that ln Gamma_q(x) is convex for x > 0, stated on the real-axis qGammaReal specialization."
+    },
+    {
+      "source_id": "5.18.ii.BohrMollerup",
+      "names": ["LMLF.Blueprint.Gamma.Section518.dlmf_5_18_bohr_mollerup"],
+      "relation": "specialization",
+      "proof_status": "missing",
+      "quantitative_analogue": "not_applicable",
+      "notes": "Source prose claim giving the q-Bohr--Mollerup uniqueness characterization for the positive normalized log-convex q-recurrence."
+    }
+  ],
+  "shared_vocabulary_requests": [],
+  "known_gaps": [
+    "Proof bodies remain by sorry during the statement-coverage phase.",
+    "The source gives no infinite-product or q-Gamma/q-Beta convergence assertion for q > 1; this module makes no such extension.",
+    "The source's q-digamma notation and generalized ln Gamma_q asymptotic expansions are documented but not formalized here.",
+    "Registration of the standalone Section518 page in the Chapter 5 manual and rendered-site anchor verification are parent-owned integration work."
+  ]
+}

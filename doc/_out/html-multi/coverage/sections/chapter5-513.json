@@ -1,0 +1,70 @@
+{
+  "section_range": ["5.13"],
+  "numbered_formula_ids_expected": [
+    "5.13.E1",
+    "5.13.E2",
+    "5.13.E3",
+    "5.13.E4",
+    "5.13.E5"
+  ],
+  "numbered_formula_ids_stated": [
+    "5.13.E1",
+    "5.13.E2",
+    "5.13.E3",
+    "5.13.E4",
+    "5.13.E5"
+  ],
+  "numbered_formula_ids_omitted": [],
+  "extra_statement_ids": [
+    "verticalLineIntegral",
+    "deBrangesWilsonNumerator"
+  ],
+  "declarations": [
+    {
+      "source_id": "5.13.E1",
+      "names": ["LMLF.Blueprint.Gamma.Section513.dlmf_5_13_1"],
+      "relation": "exact",
+      "proof_status": "missing",
+      "quantitative_analogue": "not_applicable",
+      "notes": "Straight vertical contour parameterized by s = c + i t; principal complex powers are retained, and the source's nonzero phase domain is stated explicitly as z != 0."
+    },
+    {
+      "source_id": "5.13.E2",
+      "names": ["LMLF.Blueprint.Gamma.Section513.dlmf_5_13_2"],
+      "relation": "specialization",
+      "proof_status": "missing",
+      "quantitative_analogue": "not_applicable",
+      "notes": "Real a and b are made explicit, as required by the source inequalities a > 0 and 0 < b < pi; DLMF notes this as the c = 0, b = a, s = i t, z = exp(i(pi - 2b)) specialization of E1, up to t -> -t."
+    },
+    {
+      "source_id": "5.13.E3",
+      "names": ["LMLF.Blueprint.Gamma.Section513.dlmf_5_13_3"],
+      "relation": "exact",
+      "proof_status": "missing",
+      "quantitative_analogue": "not_applicable",
+      "notes": "All four complex real-part conditions are preserved."
+    },
+    {
+      "source_id": "5.13.E4",
+      "names": ["LMLF.Blueprint.Gamma.Section513.dlmf_5_13_4"],
+      "relation": "exact",
+      "proof_status": "missing",
+      "quantitative_analogue": "not_applicable",
+      "notes": "Only Re(a+b+c+d) > 3 is assumed, exactly as in the source."
+    },
+    {
+      "source_id": "5.13.E5",
+      "names": ["LMLF.Blueprint.Gamma.Section513.dlmf_5_13_5"],
+      "relation": "exact",
+      "proof_status": "missing",
+      "quantitative_analogue": "not_applicable",
+      "notes": "Fin 4 indexing records all four parameters and six pairwise Gamma factors; at t = 0 the totalized quotient has its removable value 0, which does not affect the ordinary integral."
+    }
+  ],
+  "shared_vocabulary_requests": [
+    "Consolidate verticalLineIntegral if later sections need the same straight vertical contour."
+  ],
+  "known_gaps": [
+    "All five declarations are intentionally proof-pending (by sorry)."
+  ]
+}

@@ -1,0 +1,117 @@
+{
+  "section_range": ["5.6"],
+  "numbered_formula_ids_expected": [
+    "5.6.E1",
+    "5.6.E2",
+    "5.6.E3",
+    "5.6.E4",
+    "5.6.E5",
+    "5.6.E6",
+    "5.6.E7",
+    "5.6.E8",
+    "5.6.E9"
+  ],
+  "numbered_formula_ids_stated": [
+    "5.6.E1",
+    "5.6.E2",
+    "5.6.E3",
+    "5.6.E4",
+    "5.6.E5",
+    "5.6.E6",
+    "5.6.E7",
+    "5.6.E8",
+    "5.6.E9"
+  ],
+  "numbered_formula_ids_omitted": [],
+  "extra_statement_ids": ["5.6.realDigamma"],
+  "declarations": [
+    {
+      "source_id": "5.6.E1",
+      "names": ["LMLF.Blueprint.Gamma.stirlingNormalizedBounds"],
+      "relation": "exact",
+      "proof_status": "missing",
+      "quantitative_analogue": "not_applicable",
+      "notes": "No matching arbitrary-positive-real Gamma bound was found in pinned Mathlib. Mathlib.Analysis.SpecialFunctions.Stirling contains related bounds only for factorials and its Stirling sequence."
+    },
+    {
+      "source_id": "5.6.E2",
+      "names": ["LMLF.Blueprint.Gamma.oneDivGamma_add_oneDivGamma_reciprocal_le_two"],
+      "relation": "exact",
+      "proof_status": "missing",
+      "quantitative_analogue": "not_applicable",
+      "notes": "No matching theorem was found in pinned Mathlib."
+    },
+    {
+      "source_id": "5.6.E3",
+      "names": ["LMLF.Blueprint.Gamma.oneDivGammaSq_add_oneDivGammaSq_reciprocal_le_two"],
+      "relation": "exact",
+      "proof_status": "missing",
+      "quantitative_analogue": "not_applicable",
+      "notes": "No matching theorem was found in pinned Mathlib."
+    },
+    {
+      "source_id": "5.6.E4",
+      "names": ["LMLF.Blueprint.Gamma.gautschiInequality"],
+      "relation": "exact",
+      "proof_status": "missing",
+      "quantitative_analogue": "not_applicable",
+      "notes": "No Gautschi inequality is present in pinned Mathlib. Real.convexOn_log_Gamma and Real.Gamma_mul_add_mul_le_rpow_Gamma_mul_rpow_Gamma are relevant proof infrastructure but do not state this quotient bound."
+    },
+    {
+      "source_id": "5.6.realDigamma",
+      "names": ["LMLF.Blueprint.Gamma.realDigamma"],
+      "relation": "related",
+      "proof_status": "proved",
+      "quantitative_analogue": "not_applicable",
+      "notes": "Local readable restriction of the canonical Complex.digamma; introduced because pinned Mathlib has no Real.digamma name."
+    },
+    {
+      "source_id": "5.6.E5",
+      "names": ["LMLF.Blueprint.Gamma.kershawInequality"],
+      "relation": "exact",
+      "proof_status": "missing",
+      "quantitative_analogue": "not_applicable",
+      "notes": "Pinned Mathlib supplies Complex.digamma and basic recurrence/meromorphic facts, but no Kershaw inequality or shared real-valued digamma wrapper."
+    },
+    {
+      "source_id": "5.6.E6",
+      "names": ["LMLF.Blueprint.Gamma.norm_Gamma_vertical_le"],
+      "relation": "specialization",
+      "proof_status": "missing",
+      "quantitative_analogue": "not_applicable",
+      "notes": "The explicit exclusion x != -n records the ordinary finite domain implicit in the source. It is necessary because Mathlib totalizes Gamma to zero at those poles. No matching norm inequality was found in pinned Mathlib."
+    },
+    {
+      "source_id": "5.6.E7",
+      "names": ["LMLF.Blueprint.Gamma.norm_Gamma_vertical_lowerBound"],
+      "relation": "exact",
+      "proof_status": "missing",
+      "quantitative_analogue": "not_applicable",
+      "notes": "The source sech(pi*y)^(1/2) is written as sqrt(cosh(pi*y)^-1), since pinned Mathlib has no named real sech. No matching Gamma norm bound was found."
+    },
+    {
+      "source_id": "5.6.E8",
+      "names": ["LMLF.Blueprint.Gamma.norm_Gamma_div_Gamma_le"],
+      "relation": "exact",
+      "proof_status": "missing",
+      "quantitative_analogue": "not_applicable",
+      "notes": "The source coordinates z=x+iy with x>0 are expressed equivalently as 0<z.re. No matching quotient bound was found in pinned Mathlib."
+    },
+    {
+      "source_id": "5.6.E9",
+      "names": ["LMLF.Blueprint.Gamma.norm_Gamma_rightHalfPlane_le"],
+      "relation": "specialization",
+      "proof_status": "missing",
+      "quantitative_analogue": "not_applicable",
+      "notes": "The source coordinates are expressed as z.re and z.im. The explicit z != 0 records the ordinary domain at the sole Gamma pole in the closed right half-plane; Mathlib totalizes Gamma there. No matching bound was found."
+    }
+  ],
+  "shared_vocabulary_requests": [
+    "Provide a canonical real-valued digamma wrapper, with a theorem identifying it with Complex.digamma on real inputs.",
+    "Consider a shared real hyperbolic secant name if later DLMF sections use sech repeatedly."
+  ],
+  "known_gaps": [
+    "All nine numbered inequalities intentionally retain proof placeholders during the statement-coverage phase.",
+    "The local realDigamma definition still needs the future proof layer to expose its logarithmic-derivative characterization on positive real inputs."
+  ]
+}

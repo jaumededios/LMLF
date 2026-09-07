@@ -1,0 +1,105 @@
+{
+  "schema_version": 1,
+  "artifact_kind": "dlmf_section_statement_coverage",
+  "section": "5.8",
+  "title": "Infinite Products",
+  "source_url": "https://dlmf.nist.gov/5.8",
+  "source_version": "1.2.7",
+  "source_release_date": "2026-06-15",
+  "unit": "numbered_formula",
+  "formula_count": 5,
+  "included_ids": [
+    "5.8.1",
+    "5.8.2",
+    "5.8.3",
+    "5.8.4",
+    "5.8.5"
+  ],
+  "omitted_ids": [],
+  "summary": {
+    "lean_statements": 5,
+    "lean_proofs": 0,
+    "quantitative_analogues": 0,
+    "quantitative_statements": 0,
+    "quantitative_proofs": 0
+  },
+  "entries": [
+    {
+      "id": "5.8.1",
+      "source_url": "https://dlmf.nist.gov/5.8.E1",
+      "match": "exact",
+      "lean_statement": true,
+      "lean_proof": false,
+      "lean_declarations": [
+        "LMLF.Blueprint.Gamma.gammaShiftedProduct",
+        "LMLF.Blueprint.Gamma.gammaLimitApprox",
+        "LMLF.Blueprint.Gamma.gamma_limit_formula"
+      ],
+      "quantitative_analogue": false,
+      "quantitative_statement": false,
+      "quantitative_proof": false,
+      "notes": "Tendsto exposes convergence of Euler's finite Gamma approximants."
+    },
+    {
+      "id": "5.8.2",
+      "source_url": "https://dlmf.nist.gov/5.8.E2",
+      "match": "exact",
+      "lean_statement": true,
+      "lean_proof": false,
+      "lean_declarations": [
+        "LMLF.Blueprint.Gamma.reciprocalGammaWeierstrassFactor",
+        "LMLF.Blueprint.Gamma.reciprocalGammaProductApprox",
+        "LMLF.Blueprint.Gamma.reciprocalGamma_weierstrassProduct"
+      ],
+      "quantitative_analogue": false,
+      "quantitative_statement": false,
+      "quantitative_proof": false,
+      "notes": "The prefactor remains inside the finite approximation, preserving the source identity at z = 0."
+    },
+    {
+      "id": "5.8.3",
+      "source_url": "https://dlmf.nist.gov/5.8.E3",
+      "match": "exact",
+      "lean_statement": true,
+      "lean_proof": false,
+      "lean_declarations": [
+        "LMLF.Blueprint.Gamma.gammaNormRatioSqProductApprox",
+        "LMLF.Blueprint.Gamma.gamma_norm_ratio_sq_product"
+      ],
+      "quantitative_analogue": false,
+      "quantitative_statement": false,
+      "quantitative_proof": false,
+      "notes": "A real finite-product sequence tends to the squared complex norm of the Gamma ratio."
+    },
+    {
+      "id": "5.8.4",
+      "source_url": "https://dlmf.nist.gov/5.8.E4",
+      "match": "exact",
+      "lean_statement": true,
+      "lean_proof": false,
+      "lean_declarations": [
+        "LMLF.Blueprint.Gamma.BalancedGammaParameters"
+      ],
+      "quantitative_analogue": false,
+      "quantitative_statement": false,
+      "quantitative_proof": false,
+      "notes": "This numbered equation is a hypothesis for 5.8.5 and is represented by a reusable predicate."
+    },
+    {
+      "id": "5.8.5",
+      "source_url": "https://dlmf.nist.gov/5.8.E5",
+      "match": "exact",
+      "lean_statement": true,
+      "lean_proof": false,
+      "lean_declarations": [
+        "LMLF.Blueprint.Gamma.balancedGammaRatioFactor",
+        "LMLF.Blueprint.Gamma.balancedGammaRatioProductApprox",
+        "LMLF.Blueprint.Gamma.balanced_gamma_ratio_product"
+      ],
+      "quantitative_analogue": false,
+      "quantitative_statement": false,
+      "quantitative_proof": false,
+      "notes": "Uses the balancing predicate from 5.8.4 and excludes nonpositive integers only from b, as DLMF states."
+    }
+  ]
+}

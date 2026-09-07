@@ -1,0 +1,89 @@
+{
+  "section_range": ["5.17"],
+  "numbered_formula_ids_expected": [
+    "5.17.E1",
+    "5.17.E2",
+    "5.17.E3",
+    "5.17.E4",
+    "5.17.E5",
+    "5.17.E6",
+    "5.17.E7"
+  ],
+  "numbered_formula_ids_stated": [
+    "5.17.E1",
+    "5.17.E2",
+    "5.17.E3",
+    "5.17.E4",
+    "5.17.E5",
+    "5.17.E6",
+    "5.17.E7"
+  ],
+  "numbered_formula_ids_omitted": [],
+  "extra_statement_ids": [],
+  "declarations": [
+    {
+      "source_id": "5.17.E1",
+      "names": [
+        "LMLF.Blueprint.Gamma.Section517.dlmf_5_17_1",
+        "LMLF.Blueprint.Gamma.Section517.barnesG_one"
+      ],
+      "relation": "specialization",
+      "proof_status": "missing",
+      "quantitative_analogue": "not_applicable",
+      "notes": "The recurrence is stated on the ordinary pole-free domain z ≠ −m (m ∈ ℕ) because Mathlib totalizes Gamma at nonpositive integers; the normalization G(1)=1 is a separate declaration."
+    },
+    {
+      "source_id": "5.17.E2",
+      "names": ["LMLF.Blueprint.Gamma.Section517.dlmf_5_17_2"],
+      "relation": "exact",
+      "proof_status": "missing",
+      "quantitative_analogue": "not_applicable",
+      "notes": "The finite product over Icc 1 (n−2) is empty at n=2 and reproduces the source factorial string."
+    },
+    {
+      "source_id": "5.17.E3",
+      "names": ["LMLF.Blueprint.Gamma.Section517.dlmf_5_17_3"],
+      "relation": "exact",
+      "proof_status": "missing",
+      "quantitative_analogue": "not_applicable",
+      "notes": "The product index subtype preserves the source lower limit k=1."
+    },
+    {
+      "source_id": "5.17.E4",
+      "names": ["LMLF.Blueprint.Gamma.Section517.dlmf_5_17_4"],
+      "relation": "specialization",
+      "proof_status": "missing",
+      "quantitative_analogue": "not_applicable",
+      "notes": "Positive-real x>0 specialization; the interval integral follows the source path from 0 to x and uses principal logs."
+    },
+    {
+      "source_id": "5.17.E5",
+      "names": ["LMLF.Blueprint.Gamma.Section517.dlmf_5_17_5"],
+      "relation": "specialization",
+      "proof_status": "missing",
+      "quantitative_analogue": "not_applicable",
+      "notes": "Positive-real x→+∞ specialization of the source sector |ph z|≤π−δ, with source k=1 represented by Lean index n=0."
+    },
+    {
+      "source_id": "5.17.E6",
+      "names": ["LMLF.Blueprint.Gamma.Section517.dlmf_5_17_6"],
+      "relation": "exact",
+      "proof_status": "missing",
+      "quantitative_analogue": "not_applicable",
+      "notes": "The exact relation A=e^C is formalized; the displayed decimal is retained in the page prose and is not treated as a finite bound."
+    },
+    {
+      "source_id": "5.17.E7",
+      "names": ["LMLF.Blueprint.Gamma.Section517.dlmf_5_17_7"],
+      "relation": "exact",
+      "proof_status": "missing",
+      "quantitative_analogue": "not_applicable",
+      "notes": "Tendsto records the defining limit and the conjunction records both zeta-derivative equalities."
+    }
+  ],
+  "shared_vocabulary_requests": [],
+  "known_gaps": [
+    "Proof bodies remain by sorry during statement coverage.",
+    "DLMF refers to Nemes for external error bounds and an exponentially improved extension for 5.17.5; neither quantitative refinement is formalized here, and the section supplies no finite quantitative bound."
+  ]
+}

@@ -1,0 +1,113 @@
+{
+  "section_range": ["5.15"],
+  "numbered_formula_ids_expected": [
+    "5.15.E1",
+    "5.15.E2",
+    "5.15.E3",
+    "5.15.E4",
+    "5.15.E5",
+    "5.15.E6",
+    "5.15.E7",
+    "5.15.E8",
+    "5.15.E9"
+  ],
+  "numbered_formula_ids_stated": [
+    "5.15.E1",
+    "5.15.E2",
+    "5.15.E3",
+    "5.15.E4",
+    "5.15.E5",
+    "5.15.E6",
+    "5.15.E7",
+    "5.15.E8",
+    "5.15.E9"
+  ],
+  "numbered_formula_ids_omitted": [],
+  "extra_statement_ids": [
+    "polygamma",
+    "cotPiDerivative",
+    "realPolygamma",
+    "trigammaAsymptoticTerm",
+    "polygammaAsymptoticTerm"
+  ],
+  "declarations": [
+    {
+      "source_id": "5.15.E1",
+      "names": ["LMLF.Blueprint.Gamma.Section515.dlmf_5_15_1"],
+      "relation": "exact",
+      "proof_status": "missing",
+      "quantitative_analogue": "not_applicable",
+      "notes": "HasSum records the reciprocal-square series and its value; the complex argument avoids all nonpositive integers."
+    },
+    {
+      "source_id": "5.15.E2",
+      "names": ["LMLF.Blueprint.Gamma.Section515.dlmf_5_15_2"],
+      "relation": "exact",
+      "proof_status": "missing",
+      "quantitative_analogue": "not_applicable",
+      "notes": "Positive order n is represented by 1 ≤ n."
+    },
+    {
+      "source_id": "5.15.E3",
+      "names": ["LMLF.Blueprint.Gamma.Section515.dlmf_5_15_3"],
+      "relation": "exact",
+      "proof_status": "missing",
+      "quantitative_analogue": "not_applicable",
+      "notes": "Positive order n is represented by 1 ≤ n."
+    },
+    {
+      "source_id": "5.15.E4",
+      "names": ["LMLF.Blueprint.Gamma.Section515.dlmf_5_15_4"],
+      "relation": "exact",
+      "proof_status": "missing",
+      "quantitative_analogue": "not_applicable",
+      "notes": "Finset.Ico 1 n is the finite source range k = 1, ..., n − 1, including the empty sum at n = 1."
+    },
+    {
+      "source_id": "5.15.E5",
+      "names": ["LMLF.Blueprint.Gamma.Section515.dlmf_5_15_5"],
+      "relation": "exact",
+      "proof_status": "missing",
+      "quantitative_analogue": "not_applicable",
+      "notes": "The nonpositive-integer exclusion is explicit."
+    },
+    {
+      "source_id": "5.15.E6",
+      "names": ["LMLF.Blueprint.Gamma.Section515.dlmf_5_15_6"],
+      "relation": "exact",
+      "proof_status": "missing",
+      "quantitative_analogue": "not_applicable",
+      "notes": "cotPiDerivative exposes the source derivative d^n/dz^n cot(πz)."
+    },
+    {
+      "source_id": "5.15.E7",
+      "names": ["LMLF.Blueprint.Gamma.Section515.dlmf_5_15_7"],
+      "relation": "exact",
+      "proof_status": "missing",
+      "quantitative_analogue": "not_applicable",
+      "notes": "Positive m and n are explicit; avoiding nonpositive integers at mz also avoids the translated poles."
+    },
+    {
+      "source_id": "5.15.E8",
+      "names": ["LMLF.Blueprint.Gamma.Section515.dlmf_5_15_8"],
+      "relation": "specialization",
+      "proof_status": "missing",
+      "quantitative_analogue": "not_applicable",
+      "notes": "The DLMF sectorial complex expansion is specialized to the positive real axis, where the phase is zero. The zero-based Lean tail index k = 2 maps to source index j = 1, giving B₂/x³ after the two leading terms."
+    },
+    {
+      "source_id": "5.15.E9",
+      "names": ["LMLF.Blueprint.Gamma.Section515.dlmf_5_15_9"],
+      "relation": "specialization",
+      "proof_status": "missing",
+      "quantitative_analogue": "not_applicable",
+      "notes": "The DLMF sectorial complex expansion is specialized to the positive real axis, with positive order n. The zero-based Lean tail index k = 2 maps to source index j = 1, giving ((n+1)!/2!) B₂/x^(n+2); at n = 1 this reduces to the E8 tail."
+    }
+  ],
+  "shared_vocabulary_requests": [
+    "Add a canonical Mathlib polygamma family (or consolidate this iterated-derivative definition) if later sections need higher Gamma derivatives."
+  ],
+  "known_gaps": [
+    "All nine declarations intentionally remain proof-pending (by sorry) in the statement-coverage phase."
+  ]
+}

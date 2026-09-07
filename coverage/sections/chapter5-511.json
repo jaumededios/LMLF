@@ -1,0 +1,201 @@
+{
+  "section_range": ["5.11"],
+  "numbered_formula_ids_expected": [
+    "5.11.E1", "5.11.E2", "5.11.E3", "5.11.E4", "5.11.E5", "5.11.E6",
+    "5.11.E7", "5.11.E8", "5.11.E9", "5.11.E10", "5.11.E11", "5.11.E12",
+    "5.11.E13", "5.11.E14", "5.11.E15", "5.11.E16", "5.11.E17", "5.11.E18",
+    "5.11.E19"
+  ],
+  "numbered_formula_ids_stated": [
+    "5.11.E1", "5.11.E2", "5.11.E3", "5.11.E4", "5.11.E5", "5.11.E6",
+    "5.11.E7", "5.11.E8", "5.11.E9", "5.11.E10", "5.11.E11", "5.11.E12",
+    "5.11.E13", "5.11.E14", "5.11.E15", "5.11.E16", "5.11.E17", "5.11.E18",
+    "5.11.E19"
+  ],
+  "numbered_formula_ids_omitted": [],
+  "extra_statement_ids": [
+    "5.11.E1.remainder-bound", "5.11.E2.remainder-bound",
+    "5.11.E1.complex-remainder-bound", "5.11.E2.complex-remainder-bound",
+    "5.11.aCoeff-initial", "5.11.risingFactorial", "5.11.generalizedBinomial",
+    "5.11.generalizedBernoulli", "5.11.generalizedBernoulli-generating",
+    "5.11.lnGamma-datum", "5.11.scaledGammaReal-factorization",
+    "5.11.uniform-bounded-x"
+  ],
+  "declarations": [
+    {
+      "source_id": "5.11.E1",
+      "names": [
+        "LMLF.Blueprint.Gamma.Section511.dlmf_5_11_1",
+        "LMLF.Blueprint.Gamma.Section511.dlmf_5_11_1_remainder_bound",
+        "LMLF.Blueprint.Gamma.Section511.dlmf_5_11_1_complex_remainder_bound"
+      ],
+      "relation": "specialization",
+      "proof_status": "missing",
+      "quantitative_analogue": "present",
+      "notes": "Positive-real specialization of the branch-sensitive logarithmic formula; the selected sectorial LnGammaDatum is analytic, overlap-consistent, and normalized to the positive-real log-Gamma, supplying the general-logarithm E1 residual while the explicit terms retain principal Complex.log. The separate first-neglected-term sign/magnitude bound and the distinct complex sector bound with sec^(2n)(ph z/2) are supplied by DLMF §5.11(ii). Complex terms use the source's one-based index n, with truncation through n-1."
+    },
+    {
+      "source_id": "5.11.E2",
+      "names": [
+        "LMLF.Blueprint.Gamma.Section511.dlmf_5_11_2",
+        "LMLF.Blueprint.Gamma.Section511.dlmf_5_11_2_remainder_bound",
+        "LMLF.Blueprint.Gamma.Section511.dlmf_5_11_2_complex_remainder_bound"
+      ],
+      "relation": "specialization",
+      "proof_status": "missing",
+      "quantitative_analogue": "present",
+      "notes": "Positive-real restriction through the real part of Complex.digamma; §5.11(ii) supplies the distinct first-neglected-term bound and the complex sector bound with sec^(2n+1)(ph z/2). Complex terms use the source's one-based index n, with truncation through n-1."
+    },
+    {
+      "source_id": "5.11.E3",
+      "names": ["LMLF.Blueprint.Gamma.Section511.dlmf_5_11_3"],
+      "relation": "specialization",
+      "proof_status": "missing",
+      "quantitative_analogue": "not_applicable",
+      "notes": "Positive-real scaled-Gamma specialization; scaledGammaReal_factorization states the exact positive-real prefactor identity, while gCoeff is the projection of an explicit StirlingCoefficientSpec carrying the initial values and coefficient equations."
+    },
+    {
+      "source_id": "5.11.E4",
+      "names": ["LMLF.Blueprint.Gamma.Section511.dlmf_5_11_4"],
+      "relation": "exact",
+      "proof_status": "missing",
+      "quantitative_analogue": "not_applicable",
+      "notes": "The seven displayed coefficient values are stated exactly over ℝ."
+    },
+    {
+      "source_id": "5.11.E5",
+      "names": ["LMLF.Blueprint.Gamma.Section511.dlmf_5_11_5"],
+      "relation": "exact",
+      "proof_status": "missing",
+      "quantitative_analogue": "not_applicable",
+      "notes": "Finite rising factorial is defined locally because the Chapter 5 page needs a real presentation."
+    },
+    {
+      "source_id": "5.11.E6",
+      "names": [
+        "LMLF.Blueprint.Gamma.Section511.dlmf_5_11_6",
+        "LMLF.Blueprint.Gamma.Section511.dlmf_5_11_6_initial"
+      ],
+      "relation": "exact",
+      "proof_status": "missing",
+      "quantitative_analogue": "not_applicable",
+      "notes": "The convolution recurrence and the displayed initial value are separate declarations."
+    },
+    {
+      "source_id": "5.11.E7",
+      "names": ["LMLF.Blueprint.Gamma.Section511.dlmf_5_11_7"],
+      "relation": "specialization",
+      "proof_status": "missing",
+      "quantitative_analogue": "not_applicable",
+      "notes": "Positive-real z with fixed real a>0 and b."
+    },
+    {
+      "source_id": "5.11.E8",
+      "names": ["LMLF.Blueprint.Gamma.Section511.dlmf_5_11_8"],
+      "relation": "specialization",
+      "proof_status": "missing",
+      "quantitative_analogue": "not_applicable",
+      "notes": "Positive-real x and fixed real h make the logarithm branch explicit; the DLMF source permits arbitrary complex h."
+    },
+    {
+      "source_id": "5.11.E9",
+      "names": [
+        "LMLF.Blueprint.Gamma.Section511.UniformAsymptoticOnBounded",
+        "LMLF.Blueprint.Gamma.Section511.dlmf_5_11_9"
+      ],
+      "relation": "specialization",
+      "proof_status": "missing",
+      "quantitative_analogue": "not_applicable",
+      "notes": "The two y directions are represented over real y; UniformAsymptoticOnBounded quantifies uniform relative-error convergence on every bornologically bounded set of real x values."
+    },
+    {
+      "source_id": "5.11.E10",
+      "names": ["LMLF.Blueprint.Gamma.Section511.dlmf_5_11_10"],
+      "relation": "exact",
+      "proof_status": "missing",
+      "quantitative_analogue": "not_applicable",
+      "notes": "Complex finite expansion with explicit K, principal-branch prefactor, residual remainder definition, and inherited hypotheses δ>0, z≠0, |arg z|≤π−δ."
+    },
+    {
+      "source_id": "5.11.E11",
+      "names": ["LMLF.Blueprint.Gamma.Section511.dlmf_5_11_11"],
+      "relation": "specialization",
+      "proof_status": "missing",
+      "quantitative_analogue": "not_applicable",
+      "notes": "The source bound is retained with complex norms, arg, and an explicit nonzero-z hypothesis; cappedSecant gives the intended capped endpoint value when cos(arg z)=0."
+    },
+    {
+      "source_id": "5.11.E12",
+      "names": ["LMLF.Blueprint.Gamma.Section511.dlmf_5_11_12"],
+      "relation": "specialization",
+      "proof_status": "missing",
+      "quantitative_analogue": "not_applicable",
+      "notes": "Positive-real specialization of the sectorial quotient asymptotic."
+    },
+    {
+      "source_id": "5.11.E13",
+      "names": ["LMLF.Blueprint.Gamma.Section511.dlmf_5_11_13"],
+      "relation": "specialization",
+      "proof_status": "missing",
+      "quantitative_analogue": "not_applicable",
+      "notes": "Positive-real Poincaré quotient expansion."
+    },
+    {
+      "source_id": "5.11.E14",
+      "names": ["LMLF.Blueprint.Gamma.Section511.dlmf_5_11_14"],
+      "relation": "specialization",
+      "proof_status": "missing",
+      "quantitative_analogue": "not_applicable",
+      "notes": "Positive-real centered quotient expansion."
+    },
+    {
+      "source_id": "5.11.E15",
+      "names": ["LMLF.Blueprint.Gamma.Section511.dlmf_5_11_15"],
+      "relation": "specialization",
+      "proof_status": "missing",
+      "quantitative_analogue": "not_applicable",
+      "notes": "Initial G coefficient identities over ℝ."
+    },
+    {
+      "source_id": "5.11.E16",
+      "names": ["LMLF.Blueprint.Gamma.Section511.dlmf_5_11_16"],
+      "relation": "specialization",
+      "proof_status": "missing",
+      "quantitative_analogue": "not_applicable",
+      "notes": "Initial H coefficient identities over ℝ."
+    },
+    {
+      "source_id": "5.11.E17",
+      "names": ["LMLF.Blueprint.Gamma.Section511.dlmf_5_11_17"],
+      "relation": "specialization",
+      "proof_status": "missing",
+      "quantitative_analogue": "not_applicable",
+      "notes": "Generalized Bernoulli polynomial vocabulary is selected by GeneralizedBernoulliSpec's local generating-function identity and projected into the ratio coefficient definition."
+    },
+    {
+      "source_id": "5.11.E18",
+      "names": ["LMLF.Blueprint.Gamma.Section511.dlmf_5_11_18"],
+      "relation": "specialization",
+      "proof_status": "missing",
+      "quantitative_analogue": "not_applicable",
+      "notes": "Generalized Bernoulli representation of the centered coefficients through the selected generating-function specification."
+    },
+    {
+      "source_id": "5.11.E19",
+      "names": ["LMLF.Blueprint.Gamma.Section511.dlmf_5_11_19"],
+      "relation": "specialization",
+      "proof_status": "missing",
+      "quantitative_analogue": "not_applicable",
+      "notes": "Positive-real Gamma-product expansion."
+    }
+  ],
+  "shared_vocabulary_requests": [
+    "Consolidate generalized Bernoulli polynomial and ratio-coefficient vocabulary if another section requires the same DLMF §5.11(iii) objects.",
+    "Consider promoting the scaled-Gamma normalization and remainder vocabulary when a complex-variable Gamma asymptotics module is proved."
+  ],
+  "known_gaps": [
+    "All theorem proofs are intentionally proof-pending (`by sorry`).",
+    "The declarations for 5.11.1, 5.11.2, 5.11.3, 5.11.7, 5.11.8, and 5.11.12–5.11.19 are explicit positive-real specializations of the source's complex sector statements.",
+    "The pinned project has no canonical generalized Bernoulli-polynomial API; §5.11.17–5.11.18 therefore expose a named GeneralizedBernoulliSpec with the local §24.16(i) generating-function relation and a proof-pending existence boundary."
+  ]
+}

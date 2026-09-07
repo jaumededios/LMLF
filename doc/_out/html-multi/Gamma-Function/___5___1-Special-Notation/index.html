@@ -1,0 +1,1270 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script>
+      (function(){
+  const {protocol:proto, host:hostName, pathname:path, search:srch, hash:hsh} = window.location;
+  if (!(path.endsWith("/") || path.endsWith(".html"))) {
+    window.location.replace(`${proto}//${hostName}${path}/${srch}${hsh}`);
+  }
+})()</script>
+    <script>
+      // Enable TypeScript checking.
+// @ts-check
+
+// Applies a saved table-of-contents width before the first paint.
+//
+// This is a tiny inline counterpart to toc-resize.js: it runs in the page head so that
+// returning desktop readers do not see the default width flash to their saved width.
+// It only records the width in the --verso-toc-user-width custom property; the
+// stylesheet clamps it and ignores it on mobile, and toc-resize.js then takes over the
+// interactive resizing. Keep the storage key in sync with toc-resize.js.
+
+(function () {
+    try {
+        const saved = localStorage.getItem("verso-toc-width");
+        // Parse to a number (as toc-resize.js does) and write that back, so a stored
+        // value with stray whitespace becomes a valid length rather than `" 420 px"`.
+        const width = saved === null ? NaN : Number(saved);
+        if (Number.isFinite(width)) {
+            document.documentElement.style.setProperty("--verso-toc-user-width", `${width}px`);
+        }
+    } catch (_) {
+        // Leave the default width in place when local storage is unavailable.
+    }
+})();
+</script>
+    <base href="./../../"><meta charset="utf-8">
+    <meta name="viewport" content="height=device-height, width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
+    <title>§5.1 Special Notation</title><link rel="stylesheet" href="book.css">
+    <link rel="stylesheet" href="verso-vars.css">
+    <script src="https://cdn.jsdelivr.net/npm/marked@11.1.1/marked.min.js" integrity="sha384-zbcZAIxlvJtNE3Dp5nxLXdXtXyxwOdnILY1TDPVmKFhl4r4nSUG1r8bcFXGVa4Te" crossorigin="anonymous"></script>
+    <script defer="defer" src="-verso-search/elasticlunr.min.js"></script>
+    <script defer="defer" src="-verso-search/fuzzysort.min.js"></script>
+    <script defer="defer" src="-verso-search/searchIndex.js"></script>
+    <script defer="defer" src="-verso-search/search-config.js"></script>
+    <script type="module" src="-verso-search/search-init.js"></script>
+    <link rel="stylesheet" href="-verso-search/search-box.css">
+    <link rel="stylesheet" href="-verso-search/search-page.css">
+    <link rel="stylesheet" href="-verso-search/search-highlight.css">
+    <link rel="stylesheet" href="-verso-search/domain-display.css">
+    <script src="-verso-search/search-highlight.js" defer="defer"></script>
+    <script src="toc-resize.js" defer="defer"></script>
+    <script src="-verso-data/katex/katex.js"></script>
+    <script src="-verso-data/katex/math.js"></script>
+    <script src="-verso-data/popper.min.js"></script>
+    <script src="-verso-data/tippy-bundle.umd.min.js"></script>
+    <link rel="stylesheet" href="-verso-data/tippy-border.css">
+    <link rel="stylesheet" href="-verso-data/katex/katex.css">
+    <style>
+:root {
+  --verso-text-font-family: Georgia, "Times New Roman", serif;
+  --verso-content-max-width: 64rem;
+  --lmlf-ink: #111;
+  --lmlf-muted: #555;
+  --lmlf-link: #0645ad;
+  --lmlf-heading: #d3dce6;
+  --lmlf-heading-dark: #bcc4cc;
+  --lmlf-rule: #a4abb2;
+  --lmlf-lean: #f4f8fc;
+  --lmlf-lean-rule: #9bb7d3;
+}
+
+body {
+  background: #fff;
+  color: var(--lmlf-ink);
+  font-family: Georgia, "Times New Roman", serif;
+}
+
+main { max-width: 74rem; }
+
+h1, h2, h3, h4,
+.lmlf-source-link,
+.lmlf-dlmf-entry__source,
+.lmlf-lean > summary {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+h2 {
+  background: var(--lmlf-heading-dark);
+  border-top: .28rem double var(--lmlf-rule);
+  color: #111;
+  padding: .38rem .55rem;
+}
+
+h3 {
+  background: var(--lmlf-heading);
+  color: #111;
+  padding: .28rem .48rem;
+}
+
+h4 { color: #222; }
+a { color: var(--lmlf-link); }
+
+.lmlf-source-link {
+  border-bottom: 1px solid #c8cdd2;
+  margin: .3rem 0 1.35rem;
+  padding: 0 0 .6rem;
+}
+
+.lmlf-source-link a { font-weight: 700; }
+
+.lmlf-dlmf-entry {
+  border-bottom: 1px solid #c8cdd2;
+  border-top: 1px solid #c8cdd2;
+  margin: 1.2rem 0 1.7rem;
+  padding: .75rem 0 .95rem;
+}
+
+.lmlf-dlmf-entry__body {
+  display: grid;
+  gap: .15rem;
+}
+
+.lmlf-dlmf-entry__source {
+  font-size: .86rem;
+  font-weight: 700;
+  margin-bottom: .65rem;
+}
+
+.lmlf-dlmf-entry__body > :first-child { margin-top: 0; }
+
+.lmlf-lean {
+  background: var(--lmlf-lean);
+  border: 1px solid var(--lmlf-lean-rule);
+  margin: .85rem 0 .15rem;
+}
+
+.lmlf-lean > summary {
+  color: #174f80;
+  cursor: pointer;
+  font-size: .86rem;
+  font-weight: 700;
+  padding: .55rem .7rem;
+}
+
+.lmlf-lean[open] > summary { border-bottom: 1px solid var(--lmlf-lean-rule); }
+.lmlf-lean__body { padding: .2rem .7rem .65rem; }
+
+.lmlf-section-list > ul {
+  list-style: none;
+  margin-left: 0;
+  padding-left: 0;
+}
+
+.lmlf-section-list li {
+  border-bottom: 1px dotted #b7bcc1;
+  padding: .24rem .15rem;
+}
+
+.lmlf-section-list li::before {
+  color: #5f6770;
+  content: "\203A";
+  display: inline-block;
+  margin-right: .48rem;
+}
+
+.lmlf-coverage {
+  border-collapse: collapse;
+  font-family: Arial, Helvetica, sans-serif;
+  margin: 1rem 0 1.4rem;
+  width: 100%;
+}
+
+.lmlf-coverage th,
+.lmlf-coverage td {
+  border-bottom: 1px solid #c8cdd2;
+  padding: .42rem .55rem;
+  text-align: right;
+}
+
+.lmlf-coverage th:first-child,
+.lmlf-coverage td:first-child { text-align: left; }
+.lmlf-coverage thead { background: var(--lmlf-heading); }
+</style><style>
+
+.hl.lean {
+  white-space: pre;
+  font-weight: normal;
+  font-style: normal;
+  font-size: inherit;
+}
+
+.hl.lean .keyword {
+  color: var(--verso-code-keyword-color,);
+  font-weight: var(--verso-code-keyword-weight, bold);
+  font-style: var(--verso-code-keyword-style, normal);
+  font-family: var(--verso-code-keyword-font-family,);
+}
+
+.hl.lean .const {
+  color: var(--verso-code-const-color,);
+  font-weight: var(--verso-code-const-weight, normal);
+  font-style: var(--verso-code-const-style, normal);
+  font-family: var(--verso-code-const-font-family,);
+}
+
+.hl.lean .var {
+  color: var(--verso-code-var-color,);
+  font-weight: var(--verso-code-var-weight, normal);
+  font-style: var(--verso-code-var-style, italic);
+  font-family: var(--verso-code-var-font-family,);
+
+  position: relative;
+}
+
+.hl.lean .literal, .hl.lean .unknown {
+  color: var(--verso-code-color,);
+  font-weight: normal;
+  font-style: normal;
+  font-family: var(--verso-code-font-family,);
+}
+
+/* These lexically-classified token kinds default to the `.unknown` appearance. The rule follows
+   `.const` so it wins for the `anon-ctor` tokens, which also carry the `const` class. */
+.hl.lean .anon-ctor,
+.hl.lean .number,
+.hl.lean .char,
+.hl.lean .comment,
+.hl.lean .punctuation,
+.hl.lean .delim,
+.hl.lean .wildcard {
+  color: var(--verso-code-color,);
+  font-weight: normal;
+  font-style: normal;
+  font-family: var(--verso-code-font-family,);
+}
+
+.hover-container {
+  width: 0;
+  height: 0;
+  position: relative;
+  display: inline;
+}
+
+.hl.lean a {
+  color: inherit;
+  text-decoration: currentcolor underline dotted;
+}
+
+.hl.lean a:hover {
+  text-decoration: currentcolor underline solid;
+}
+
+.hl.lean .hover-info {
+  white-space: normal;
+}
+
+.hl.lean .token .hover-info {
+  display: none;
+  position: absolute;
+  background-color: #e5e5e5;
+  border: 1px solid black;
+  padding: 0.5rem;
+  z-index: 300;
+}
+
+.hl.lean .hover-info.messages {
+  max-height: 10rem;
+  overflow-y: auto;
+  overflow-x: hidden;
+  scrollbar-gutter: stable;
+  padding: 0 0.5rem 0 0;
+  display: block;
+}
+
+.hl.lean .hover-info code {
+  white-space: pre-wrap;
+  background: none;
+  color: black;
+}
+
+.hl.lean .hover-info.messages > code {
+  padding: 0.5rem;
+  display: block;
+  width: fit-content;
+}
+
+.hl.lean .hover-info.messages > code:only-child {
+  margin: 0;
+}
+
+.hl.lean .hover-info.messages > code {
+  margin: 0.1rem;
+}
+
+.hl.lean .hover-info.messages > code:not(:first-child) {
+  margin-top: 0rem;
+}
+
+.hl.lean {
+}
+
+.hl.lean.block {
+  display: block;
+}
+
+.hl.lean.inline {
+  display: inline;
+  white-space: pre-wrap;
+}
+
+.hl.lean * {
+}
+
+.hl.lean .token {
+  transition: all 0.25s; /* Slight fade for highlights */
+}
+
+@media (hover: hover) {
+  .hl.lean .token.binding-hl, .hl.lean .literal:hover, .hl.lean .token.typed:hover {
+    background-color: #eee;
+    border-radius: 2px;
+    transition: none;
+  }
+}
+
+
+.hl.lean .has-info .token:not(.tactic-state):not(.tactic-state *), .hl.lean .has-info .inter-text:not(.tactic-state):not(.tactic-state *) {
+  text-decoration-style: wavy;
+  text-decoration-line: underline;
+  text-decoration-thickness: from-font;
+  text-decoration-skip-ink: none;
+}
+
+.hl.lean .has-info .hover-info {
+  display: none;
+  position: absolute;
+  transform: translate(0.25rem, 0.3rem);
+  border: 1px solid black;
+  padding: 0.5rem;
+  z-index: 400;
+  text-align: left;
+}
+
+.hl.lean .has-info.error :not(.tactic-state):not(.tactic-state *){
+  text-decoration-color: red;
+}
+
+@media (hover: hover) {
+  .hl.lean .has-info.error:hover {
+    background-color: #ffb3b3;
+  }
+}
+
+.hl.lean .hover-info.messages > code.error {
+  background-color: #e5e5e5;
+  border-left: 0.2rem solid #ffb3b3;
+}
+
+.tippy-box[data-theme~='error'] .hl.lean .hover-info.messages > code.error {
+  background: none;
+  border: none;
+}
+
+.error .verso-message, .error .verso-message .token, .error .verso-message label {
+  color: var(--verso-error-color);
+}
+
+.error .verso-message .case-label:has(input[type="checkbox"])::before {
+  background-color: var(--verso-error-color) !important;
+}
+
+.hl.lean .has-info.warning :not(.tactic-state):not(.tactic-state *) {
+  text-decoration-color: var(--verso-warning-indicator-color);
+}
+
+@media (hover: hover) {
+  .hl.lean .has-info.warning:hover {
+    background-color:var(--verso-warning-color);
+  }
+}
+
+.hl.lean .hover-info.messages > code.warning {
+  background-color: var(--verso-warning-color);
+}
+
+.lean-output {
+  border-left: 0.2em solid transparent;
+  padding: 0 0 0 0.5em;
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+.lean-output.error {
+  border-color: var(--verso-error-indicator-color);
+}
+
+.lean-output.information {
+  border-color: var(--verso-info-indicator-color);
+}
+
+.lean-output.warning {
+  border-color: var(--verso-warning-indicator-color);
+}
+
+.hl.lean .hover-info.messages > code.error {
+  background-color: #e5e5e5;
+  border-left: 0.2rem solid var(--verso-warning-color);
+}
+
+.tippy-box[data-theme~='warning'] .hl.lean .hover-info.messages > code.warning {
+  background: none;
+  border: none;
+}
+
+
+.hl.lean .has-info.information :not(.tactic-state):not(.tactic-state *) {
+  text-decoration-color: var(--verso-info-indicator-color, blue);
+}
+
+@media (hover: hover) {
+  .hl.lean .has-info.information:hover {
+    background-color: #4777ff;
+  }
+}
+
+
+.hl.lean .hover-info.messages > code.information {
+  background-color: #e5e5e5;
+  border-left: 0.2rem solid #4777ff;
+}
+
+.tippy-box[data-theme~='info'] .hl.lean .hover-info.messages > code.information {
+  background: none;
+  border: none;
+}
+
+.hl.lean div.docstring {
+  font-family: var(--verso-text-font-family, sans-serif);
+  white-space: normal;
+  max-width: calc(min(40rem, 90vw));
+  width: max-content;
+}
+
+.hl.lean div.docstring > :last-child {
+  margin-bottom: 0;
+}
+
+.hl.lean div.docstring > :first-child {
+  margin-top: 0;
+}
+
+.hl.lean .hover-info .sep {
+  display: block;
+  width: auto;
+  margin-left: 1rem;
+  margin-right: 1rem;
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+  padding: 0;
+  height: 1px;
+  border-top: 1px solid #ccc;
+}
+
+.hl.lean code {
+  font-family: var(--verso-code-font-family);
+}
+
+.hl.lean .tactic-state {
+  display: none;
+  position: relative;
+  width: fit-content;
+  border: 1px solid #888888;
+  border-radius: 0.1rem;
+  padding: 0.5rem;
+  font-family: sans-serif;
+  background-color: #ffffff;
+}
+
+.hl.lean.popup .tactic-state {
+  position: static;
+  display: block;
+  width: auto;
+  border: none;
+  padding: 0.5rem;
+  font-family: sans-serif;
+  background-color: #ffffff;
+}
+
+
+.hl.lean .tactic {
+  position: relative;
+  display: inline;
+  vertical-align: top;
+  /* Without these, mobile Safari will start making font sizes inconsistent when its text size adjustment feature is triggered.*/
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+.hl.lean .tactic:has(> .tactic-toggle:checked) {
+  display: inline-grid;
+  grid-template-columns: 1fr;
+}
+
+.hl.lean .tactic-toggle:checked ~ .tactic-state {
+  display: inline-block;
+  vertical-align: top;
+  grid-row: 2;
+  justify-self: start;
+}
+
+.hl.lean .tactic > label {
+  position: relative;
+  grid-row: 1;
+  display: inline;
+}
+
+@media (hover: hover) {
+  /* Highlight a region on hover only when its own toggle is unchecked, and only the innermost
+     hovered region: `label:hover` bubbles to ancestor labels, so suppress the highlight on a region
+     whose label contains a more deeply nested hovered tactic label. */
+  .hl.lean .tactic:has(> .tactic-toggle:not(:checked)) > label:hover:not(:has(.tactic > label:hover)) {
+    background-color: #eeeeee;
+  }
+}
+
+.hl.lean .tactic-toggle {
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0;
+  height: 0;
+  width: 0;
+  z-index: -10;
+}
+
+.hl.lean .tactic > label::after {
+  content: "";
+  border: 1px solid #bbbbbb;
+  /* These need to be em, not rem, to scale with the font */
+  border-radius: 1em;
+  height: 0.25em;
+  vertical-align: middle;
+  width: 0.6em;
+  margin-left: 0.1em;
+  margin-right: 0.1em;
+  display: inline-block;
+  transition: all 0.5s;
+}
+
+/*
+@media (hover: hover) {
+  .hl.lean .tactic > label:hover::after {
+    border: 1px solid #aaaaaa;
+    background-color: #aaaaaa;
+    transition: all 0.5s;
+  }
+}
+*/
+
+.hl.lean .tactic > label:has(+ .tactic-toggle:checked)::after {
+  border: 1px solid #999999;
+  background-color: #999999;
+  transition: all 0.5s;
+}
+
+.hl.lean .tactic-state .goal + .goal {
+  margin-top: 1.5em;
+}
+
+/*
+Some CSS frameworks customize details/summary in ways not compatible with Verso's output.
+*/
+
+.hl.lean details {
+  display: block !important;
+  margin: 0;
+}
+
+.hl.lean details summary {
+  display: list-item !important;
+  margin: 0;
+}
+
+.hl.lean details summary:focus {
+  outline: none;
+  outline-offset: none;
+  color: inherit;
+}
+
+.hl.lean ul > li {
+  margin-bottom: 0;
+}
+
+.hl.lean details summary::marker {
+  display: inline !important;
+}
+
+.hl.lean details > summary:first-of-type {
+  list-style-type: disclosure-closed;
+  list-style-position: inside;
+}
+
+.hl.lean details[open] > summary:first-of-type {
+  list-style-type: disclosure-open;
+}
+
+.hl.lean details summary::before, .hl.lean details summary::after {
+  content: "" !important;
+  background: none;
+  display: none;
+}
+
+.hl.lean .tactic-state summary {
+  /* These need to be em, not rem, to scale with the font */
+  margin-left: -0.5em;
+}
+
+.hl.lean .tactic-state details {
+  /* These need to be em, not rem, to scale with the font */
+  padding-left: 0.5em;
+}
+
+.hl.lean .case-label {
+  display: block;
+  position: relative;
+}
+
+.hl.lean .case-label input[type="checkbox"] {
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0;
+  height: 0;
+  width: 0;
+  z-index: -10;
+}
+
+.hl.lean .case-label:has(input[type="checkbox"])::before {
+  display: inline-block;
+  background-color: black;
+  content: ' ';
+  transition: ease 0.2s;
+  margin-right: 0.7em;
+  clip-path: polygon(100% 0, 0 0, 50% 100%);
+  width: 0.6em;
+  height: 0.6em;
+  vertical-align: middle;
+}
+
+.hl.lean .case-label:has(input[type="checkbox"]:not(:checked))::before {
+  transform: rotate(-90deg);
+}
+
+.hl.lean .case-label:has(input[type="checkbox"]) {
+
+}
+
+.hl.lean .case-label:has(input[type="checkbox"]:checked) {
+
+}
+
+
+.hl.lean .labeled-case > :not(:first-child) {
+  max-height: 0px;
+  display: block;
+  overflow: hidden;
+  transition: max-height 0.1s ease-in;
+  /* These need to be em, not rem, to scale with the font */
+  margin-left: 0.5em;
+  margin-top: 0.1em;
+}
+
+.hl.lean .labeled-case:has(.case-label input[type="checkbox"]:checked) > :not(:first-child) {
+  max-height: 100%;
+}
+
+
+.hl.lean .goal-name::before {
+  font-style: normal;
+  content: "case ";
+}
+
+.hl.lean .goal-name {
+  font-style: italic;
+  font-family: var(--verso-code-font-family);
+  color: inherit;
+}
+
+.hl.lean .hypotheses {
+  display: table;
+}
+
+.hl.lean .hypothesis {
+  display: table-row;
+}
+
+.hl.lean .hypothesis > * {
+  display: table-cell;
+}
+
+
+.hl.lean .hypotheses .colon {
+  text-align: center;
+  /* This needs to be em, not rem, to scale with the font */
+  min-width: 1em;
+}
+
+.hl.lean .hypotheses .name {
+  text-align: right;
+}
+
+.hl.lean .hypotheses .name,
+.hl.lean .hypotheses .type,
+.hl.lean .conclusion .type {
+  font-family: var(--verso-code-font-family);
+}
+
+.tippy-box {
+  /* Without these, mobile Safari will start making font sizes inconsistent when its text size adjustment feature is triggered.*/
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+.tippy-box[data-theme~='lean'] {
+  background-color: #e5e5e5;
+  color: black;
+  border: 1px solid black;
+}
+.tippy-box[data-theme~='lean'][data-placement^='top'] > .tippy-arrow::before {
+  border-top-color: #e5e5e5;
+}
+.tippy-box[data-theme~='lean'][data-placement^='bottom'] > .tippy-arrow::before {
+  border-bottom-color: #e5e5e5;
+}
+.tippy-box[data-theme~='lean'][data-placement^='left'] > .tippy-arrow::before {
+  border-left-color: #e5e5e5;
+}
+.tippy-box[data-theme~='lean'][data-placement^='right'] > .tippy-arrow::before {
+  border-right-color: #e5e5e5;
+}
+
+.tippy-box[data-theme~='message'][data-placement^='top'] > .tippy-arrow::before {
+  border-top-color: #e5e5e5;
+  border-width: 11px 11px 0;
+}
+.tippy-box[data-theme~='message'][data-placement^='top'] > .tippy-arrow::after {
+  bottom: -11px;
+  border-width: 11px 11px 0;
+}
+.tippy-box[data-theme~='message'][data-placement^='bottom'] > .tippy-arrow::before {
+  border-width: 0 11px 11px;
+}
+.tippy-box[data-theme~='message'][data-placement^='bottom'] > .tippy-arrow::after {
+  top: -11px;
+  border-width: 0 11px 11px;
+}
+.tippy-box[data-theme~='message'][data-placement^='left'] > .tippy-arrow::before {
+  border-left-color: #e5e5e5;
+  border-width: 11px 0 11px 11px;
+}
+.tippy-box[data-theme~='message'][data-placement^='left'] > .tippy-arrow::after {
+  right: -11px;
+  border-width: 11px 0 11px 11px;
+}
+
+.tippy-box[data-theme~='message'][data-placement^='right'] > .tippy-arrow::before {
+  border-right-color: #e5e5e5;
+  border-width: 11px 11px 11px 0;
+}
+.tippy-box[data-theme~='message'][data-placement^='right'] > .tippy-arrow::after {
+  left: -11px;
+  border-width: 11px 11px 11px 0;
+}
+
+
+
+.tippy-box[data-theme~='warning'] {
+  background-color: #e5e5e5;
+  color: black;
+  border: 3px solid var(--verso-warning-color);
+}
+
+.tippy-box[data-theme~='error'] {
+  background-color: #e5e5e5;
+  color: black;
+  border: 3px solid #f7a7af;
+}
+
+.tippy-box[data-theme~='info'] {
+  background-color: #e5e5e5;
+  color: black;
+  border: 3px solid #99b3c2;
+}
+
+.tippy-box[data-theme~='tactic'] {
+  background-color: white;
+  color: black;
+  border: 1px solid black;
+}
+.tippy-box[data-theme~='tactic'][data-placement^='top'] > .tippy-arrow::before {
+  border-top-color: white;
+}
+.tippy-box[data-theme~='tactic'][data-placement^='bottom'] > .tippy-arrow::before {
+  border-bottom-color: white;
+}
+.tippy-box[data-theme~='tactic'][data-placement^='left'] > .tippy-arrow::before {
+  border-left-color: white;
+}
+.tippy-box[data-theme~='tactic'][data-placement^='right'] > .tippy-arrow::before {
+  border-right-color: white;
+}
+
+.extra-doc-links {
+  list-style-type: none;
+  margin-left: 0;
+  padding: 0;
+}
+
+.extra-doc-links > li {
+  display: inline-block;
+}
+
+.extra-doc-links > li:not(:last-child)::after {
+  content: '|';
+  display: inline-block;
+  margin: 0 0.25em;
+}
+
+.verso-message .trace {
+  display: block;
+}
+
+.verso-message .trace > summary::marker {
+  color: var(--verso-text-color);
+}
+
+.verso-message .trace-children {
+  margin: 0;
+  padding: 0;
+}
+
+.verso-message .trace-children > li {
+  list-style-type: none;
+  margin-left: 1.5em;
+}
+
+.verso-message .trace-children > li:not(:has(.trace)) {
+  margin-left: 0;
+}
+
+.verso-message .trace-class {
+  color: color-mix(in srgb, currentColor 70%, transparent);
+  font-weight: bold;
+  margin: 0;
+  padding: 0;
+}
+
+.verso-message .text {
+  white-space: pre-wrap;
+}
+
+</style><script>
+
+window.onload = async () => {
+
+    // Don't show hovers inside of closed tactic states
+    function blockedByTactic(elem) {
+      let parent = elem.parentNode;
+      while (parent && "classList" in parent) {
+        if (parent.classList.contains("tactic")) {
+          const toggle = parent.querySelector(":scope > input.tactic-toggle");
+          if (toggle) {
+            return !toggle.checked;
+          }
+        }
+        parent = parent.parentNode;
+      }
+      return false;
+    }
+
+    // Track whether any tippy is visible (O(1) check instead of DOM scan)
+    let visibleTippyCount = 0;
+    function blockedByTippy(elem) {
+      return visibleTippyCount > 0;
+    }
+
+    // Binding highlights via event delegation with cached lookups
+    const bindingCache = new Map(); // context+binding -> [token elements]
+    let highlightedTokens = [];
+    function getBindingTokens(context, binding) {
+      const key = context + "\0" + binding;
+      let tokens = bindingCache.get(key);
+      if (!tokens) {
+        tokens = [];
+        for (const example of document.querySelectorAll(".hl.lean")) {
+          if (example.dataset.leanContext == context) {
+            for (const tok of example.querySelectorAll(".token[data-binding=\"" + CSS.escape(binding) + "\"]")) {
+              tokens.push(tok);
+            }
+          }
+        }
+        bindingCache.set(key, tokens);
+      }
+      return tokens;
+    }
+    for (const container of document.querySelectorAll(".hl.lean")) {
+      container.addEventListener("mouseover", (event) => {
+        const c = event.target.closest(".token");
+        if (!c || !c.dataset.binding || c.dataset.binding === "" || !container.contains(c)) return;
+        if (blockedByTactic(c)) return;
+        const tokens = getBindingTokens(container.dataset.leanContext, c.dataset.binding);
+        for (const tok of tokens) {
+          tok.classList.add("binding-hl");
+        }
+        highlightedTokens = tokens;
+      });
+      container.addEventListener("mouseout", (event) => {
+        const c = event.target.closest(".token");
+        if (!c || !container.contains(c)) return;
+        for (const tok of highlightedTokens) {
+          tok.classList.remove("binding-hl");
+        }
+        highlightedTokens = [];
+      });
+    }
+    /* Render docstrings */
+    if ('undefined' !== typeof marked) {
+        for (const d of document.querySelectorAll("code.docstring, pre.docstring")) {
+            const str = d.innerText;
+            const html = marked.parse(str);
+            const rendered = document.createElement("div");
+            rendered.classList.add("docstring");
+            rendered.innerHTML = html;
+            d.parentNode.replaceChild(rendered, d);
+        }
+    }
+    // Add hovers
+    const versoDocData = await (fetch("-verso-docs.json").then((resp) => resp.json()));
+
+    function hideParentTooltips(element) {
+      let parent = element.parentElement;
+      while (parent) {
+        const tippyInstance = parent._tippy;
+        if (tippyInstance) {
+          tippyInstance.hide();
+        }
+        parent = parent.parentElement;
+      }
+    }
+
+
+
+    const defaultTippyProps = {
+      /* DEBUG -- remove the space: * /
+      onHide(any) { return false; },
+      trigger: "click",
+      // */
+      /* theme: "lean", */
+      maxWidth: "none",
+      appendTo: () => document.body,
+      interactive: true,
+      delay: [100, null],
+      /* ignoreAttributes: true, */
+      followCursor: 'initial',
+      onShow(inst) {
+        if (inst.reference.className == 'tactic') {
+          const toggle = inst.reference.querySelector(":scope > input.tactic-toggle");
+          if (toggle && toggle.checked) {
+            return false;
+          }
+          hideParentTooltips(inst.reference);
+          if (blockedByTippy(inst.reference)) { return false; }
+
+        } else if (inst.reference.querySelector(".hover-info") || "versoHover" in inst.reference.dataset) {
+          if (blockedByTactic(inst.reference)) { return false };
+          if (blockedByTippy(inst.reference)) { return false; }
+        } else { // Nothing to show here!
+          return false;
+        }
+      },
+      onShown(inst) { visibleTippyCount++; },
+      onHidden(inst) { visibleTippyCount = Math.max(0, visibleTippyCount - 1); },
+      content (tgt) {
+        const content = document.createElement("span");
+        if (tgt.className == 'tactic') {
+          const state = tgt.querySelector(":scope > .tactic-state").cloneNode(true);
+          state.style.display = "block";
+          content.appendChild(state);
+          content.style.display = "block";
+          content.className = "hl lean popup";
+        } else {
+          content.className = "hl lean";
+          content.style.display = "block";
+          content.style.maxHeight = "300px";
+          content.style.overflowY = "auto";
+          content.style.overflowX = "hidden";
+          const hoverId = tgt.dataset.versoHover;
+          const hoverInfo = tgt.querySelector(".hover-info");
+          if (hoverId) { // Docstrings from the table
+            // TODO stop doing an implicit conversion from string to number here
+            let data = versoDocData[hoverId];
+            if (data) {
+              const info = document.createElement("span");
+              info.className = "hover-info";
+              info.style.display = "block";
+              info.innerHTML = data;
+              content.appendChild(info);
+              /* Render docstrings - TODO server-side */
+              if ('undefined' !== typeof marked) {
+                  for (const d of content.querySelectorAll("code.docstring, pre.docstring")) {
+                      const str = d.innerText;
+                      const html = marked.parse(str);
+                      const rendered = document.createElement("div");
+                      rendered.classList.add("docstring");
+                      rendered.innerHTML = html;
+                      d.parentNode.replaceChild(rendered, d);
+                  }
+              }
+            } else {
+              content.innerHTML = "Failed to load doc ID: " + hoverId;
+            }
+          } else if (hoverInfo) { // The inline info, still used for compiler messages
+            content.appendChild(hoverInfo.cloneNode(true));
+          }
+          const extraLinks = tgt.parentElement.dataset['versoLinks'];
+          if (extraLinks) {
+            try {
+              const extras = JSON.parse(extraLinks);
+              const links = document.createElement('ul');
+              links.className = 'extra-doc-links';
+              extras.forEach((l) => {
+                const li = document.createElement('li');
+                li.innerHTML = "<a href=\"" + l['href'] + "\" title=\"" + l.long + "\">" + l.short + "</a>";
+                links.appendChild(li);
+              });
+              content.appendChild(links);
+            } catch (error) {
+              console.error(error);
+            }
+          }
+        }
+        return content;
+      }
+    };
+
+
+    document.querySelectorAll('.hl.lean .const.token, .hl.lean .keyword.token, .hl.lean .literal.token, .hl.lean .option.token, .hl.lean .var.token, .hl.lean .typed.token, .hl.lean .level-var, .hl.lean .level-const, .hl.lean .level-op, .hl.lean .sort').forEach(element => {
+      element.setAttribute('data-tippy-theme', 'lean');
+    });
+    document.querySelectorAll('.hl.lean .has-info.warning').forEach(element => {
+      element.setAttribute('data-tippy-theme', 'warning message');
+    });
+    document.querySelectorAll('.hl.lean .has-info.information').forEach(element => {
+      element.setAttribute('data-tippy-theme', 'info message');
+    });
+    document.querySelectorAll('.hl.lean .has-info.error').forEach(element => {
+      element.setAttribute('data-tippy-theme', 'error message');
+    });
+    document.querySelectorAll('.hl.lean .tactic').forEach(element => {
+      element.setAttribute('data-tippy-theme', 'tactic');
+    });
+    // Skip tokens inside closed tactics — they interfere with tactic tippys
+    const closedTactics = new Set();
+    document.querySelectorAll('.hl.lean .tactic').forEach(tactic => {
+      const toggle = tactic.querySelector(':scope > input.tactic-toggle');
+      if (toggle && !toggle.checked) closedTactics.add(tactic);
+    });
+    function isInsideClosedTactic(el) {
+      const tactic = el.closest('.tactic');
+      return tactic && tactic !== el && closedTactics.has(tactic);
+    }
+
+    const tokenSelector = '.hl.lean .const.token, .hl.lean .keyword.token, .hl.lean .literal.token, .hl.lean .option.token, .hl.lean .var.token, .hl.lean .typed.token, .hl.lean .has-info, .hl.lean .tactic, .hl.lean .level-var, .hl.lean .level-const, .hl.lean .level-op, .hl.lean .sort';
+    tippy(Array.from(document.querySelectorAll(tokenSelector)).filter(el => !isInsideClosedTactic(el)), defaultTippyProps);
+
+    // Create/destroy token tippys when tactic checkbox toggles
+    const tacticTippySelector = '.const.token, .keyword.token, .literal.token, .option.token, .var.token, .typed.token, .has-info, .level-var, .level-const, .level-op, .sort';
+    document.querySelectorAll('.hl.lean .tactic').forEach(tactic => {
+      const toggle = tactic.querySelector(':scope > input.tactic-toggle');
+      if (toggle) toggle.addEventListener('change', () => {
+        if (toggle.checked) {
+          closedTactics.delete(tactic);
+          tactic.querySelectorAll('.token').forEach(tok => {
+            if (!tok._tippy && tok.matches(tacticTippySelector)) {
+              tippy(tok, defaultTippyProps);
+            }
+          });
+        } else {
+          closedTactics.add(tactic);
+          tactic.querySelectorAll('.token').forEach(tok => {
+            if (tok._tippy) tok._tippy.destroy();
+          });
+        }
+      });
+  });
+}
+</script>
+    </head>
+  <body>
+    <header>
+      <div class="header-logo-wrapper"></div>
+      <div class="header-title-wrapper">
+        <a href="" class="header-title"><h1>
+            LMLF</h1>
+          </a></div>
+      </header>
+    <label for="toggle-toc" id="toggle-toc-click"><span class="line line1"></span><span class="line line2"></span><span class="line line3"></span></label><div class="with-toc">
+      <div class="toc-backdrop" onclick="document.getElementById('toggle-toc-click')?.click()"></div>
+      <nav id="toc">
+        <input type="checkbox" id="toggle-toc"><div class="first">
+          <a href="" class="toc-title"><h1>
+              LMLF</h1>
+            </a><div class="split-tocs">
+            <div class="split-toc book">
+              <div class="title">
+                <label for="--verso-manual-toc-----bookRoot" class="toggle-split-toc"><input type="checkbox" class="toggle-split-toc" id="--verso-manual-toc-----bookRoot"></label><span class="">Table of Contents</span></div>
+              <table><tr class="unnumbered"><td class="num"><td><a href="Coverage/#coverage">Coverage</a></td></tr><tr class="numbered"><td class="num">1.</td><td><a href="Finite-error-bounds/#chapter-1">Finite error bounds</a></td></tr><tr class="numbered"><td class="num">2.</td><td><a href="Approximants-and-series/#chapter-2">Approximants and series</a></td></tr><tr class="numbered"><td class="num">3.</td><td><a href="Improper-integrals/#chapter-3">Improper integrals</a></td></tr><tr class="numbered"><td class="num">4.</td><td><a href="Elementary-Functions/#chapter-4">Elementary Functions</a></td></tr><tr class="current numbered"><td class="num">5.</td><td><a href="Gamma-Function/#chapter-5">Gamma Function</a></td></tr><tr class="numbered"><td class="num">6.</td><td><a href="Exponential___-Logarithmic___-Sine___-and-Cosine-Integrals/#chapter-6">Exponential, Logarithmic, Sine, and Cosine Integrals</a></td></tr><tr class="numbered"><td class="num">7.</td><td><a href="Error-Functions___-Dawson___s-and-Fresnel-Integrals/#chapter-7">Error Functions, Dawson's and Fresnel Integrals</a></td></tr><tr class="numbered"><td class="num">8.</td><td><a href="Incomplete-Gamma-and-Related-Functions/#chapter-8">Incomplete Gamma and Related Functions</a></td></tr><tr class="numbered"><td class="num">9.</td><td><a href="Airy-and-Related-Functions/#chapter-9">Airy and Related Functions</a></td></tr><tr class="numbered"><td class="num">10.</td><td><a href="Bessel-Functions/#chapter-10">Bessel Functions</a></td></tr></table></div>
+            <div class="split-toc">
+              <div class="title">
+                <label for="--verso-manual-toc-chapter-5" class="toggle-split-toc"><input type="checkbox" class="toggle-split-toc" id="--verso-manual-toc-chapter-5" checked="checked"></label><span class="number">5.</span> <span class=""><a href="Gamma-Function/#chapter-5">Gamma Function</a></span></div>
+              <table><tr class="unnumbered"><td class="num"><td><a href="Gamma-Function/Chapter-contents/#LMLF-___-DLMF-with-Lean--Gamma-Function--Chapter-contents">Chapter contents</a></td></tr><tr class="current numbered"><td class="num">5.1.</td><td><a href="Gamma-Function/___5___1-Special-Notation/#chapter-5-section-1">§5.1 Special Notation</a></td></tr><tr class="numbered"><td class="num">5.2.</td><td><a href="Gamma-Function/___5___2-Definitions/#chapter-5-section-2">§5.2 Definitions</a></td></tr><tr class="numbered"><td class="num">5.3.</td><td><a href="Gamma-Function/Gamma-Function-___-___5___3-Graphics/#chapter-5-section-5-3">Gamma Function · §5.3 Graphics</a></td></tr><tr class="numbered"><td class="num">5.4.</td><td><a href="Gamma-Function/Gamma-Function-___-___5___4-Special-Values-and-Extrema/#chapter-5-section-5-4">Gamma Function · §5.4 Special Values and Extrema</a></td></tr><tr class="numbered"><td class="num">5.5.</td><td><a href="Gamma-Function/___5___5-Functional-Relations/#chapter-5-section-5">§5.5 Functional Relations</a></td></tr><tr class="numbered"><td class="num">5.6.</td><td><a href="Gamma-Function/Gamma-Function-Inequalities/#chapter-5-section-6">Gamma-Function Inequalities</a></td></tr><tr class="numbered"><td class="num">5.7.</td><td><a href="Gamma-Function/___5___7-Series-Expansions/#chapter-5-section-7">§5.7 Series Expansions</a></td></tr><tr class="numbered"><td class="num">5.8.</td><td><a href="Gamma-Function/___5___8-Infinite-Products/#chapter-5-section-8">§5.8 Infinite Products</a></td></tr><tr class="numbered"><td class="num">5.9.</td><td><a href="Gamma-Function/___5___9-Integral-Representations/#chapter-5-section-9">§5.9 Integral Representations</a></td></tr><tr class="numbered"><td class="num">5.10.</td><td><a href="Gamma-Function/___5___10-Continued-Fractions/#chapter-5-section-10">§5.10 Continued Fractions</a></td></tr><tr class="numbered"><td class="num">5.11.</td><td><a href="Gamma-Function/___5___11-Asymptotic-Expansions/#chapter-5-section-11">§5.11 Asymptotic Expansions</a></td></tr><tr class="numbered"><td class="num">5.12.</td><td><a href="Gamma-Function/___5___12-Beta-Function/#chapter-5-section-12">§5.12 Beta Function</a></td></tr><tr class="numbered"><td class="num">5.13.</td><td><a href="Gamma-Function/___5___13-Integrals/#chapter-5-section-13">§5.13 Integrals</a></td></tr><tr class="numbered"><td class="num">5.14.</td><td><a href="Gamma-Function/___5___14-Multidimensional-Integrals/#chapter-5-section-14">§5.14 Multidimensional Integrals</a></td></tr><tr class="numbered"><td class="num">5.15.</td><td><a href="Gamma-Function/___5___15-Polygamma-Functions/#chapter-5-section-15">§5.15 Polygamma Functions</a></td></tr><tr class="numbered"><td class="num">5.16.</td><td><a href="Gamma-Function/___5___16-Sums/#chapter-5-section-16">§5.16 Sums</a></td></tr><tr class="numbered"><td class="num">5.17.</td><td><a href="Gamma-Function/___5___17-Barnes___-G-Function-_LPAR_Double-Gamma-Function_RPAR_/#chapter-5-section-17">§5.17 Barnes' G-Function (Double Gamma Function)</a></td></tr><tr class="numbered"><td class="num">5.18.</td><td><a href="Gamma-Function/___5___18-q-Gamma-and-q-Beta-Functions/#chapter-5-section-18">§5.18 q-Gamma and q-Beta Functions</a></td></tr></table></div>
+            <div class="split-toc">
+              <div class="title">
+                <label for="--verso-manual-toc-chapter-5-section-1" class="toggle-split-toc"><input type="checkbox" class="toggle-split-toc" id="--verso-manual-toc-chapter-5-section-1" checked="checked"></label><span class="number">5.1.</span> <span class="current"><a href="Gamma-Function/___5___1-Special-Notation/#chapter-5-section-1">§5.1 Special Notation</a></span></div>
+              <table><tr class="unnumbered"><td class="num"><td><a href="Gamma-Function/___5___1-Special-Notation/#LMLF-___-DLMF-with-Lean--Gamma-Function--___5___1-Special-Notation--___5___1-Special-Notation">§5.1 Special Notation</a></td></tr></table></div>
+            </div>
+          </div>
+        <div class="last"></div>
+        </nav>
+      <div class="toc-resize-handle"></div>
+      <main><div class="content-wrapper">
+          <nav class="prev-next-buttons">
+            <a class="local-button active" href="Gamma-Function/Chapter-contents/#LMLF-___-DLMF-with-Lean--Gamma-Function--Chapter-contents" rel="prev" title="Chapter contents"><span class="arrow">←</span><span class="where">Chapter contents</span></a><a class="local-button active" href="Gamma-Function/___5___2-Definitions/#chapter-5-section-2" rel="next" title="5.2. §5.2 Definitions"><span class="where">5.2. §5.2 Definitions</span><span class="arrow">→</span></a></nav>
+          <section>
+            <h1>
+              5.1. §5.1 Special Notation<span class="permalink-widget inline"><a href="find/?domain=Verso.Genre.Manual.section&amp;name=chapter-5-section-1" title="Permalink">🔗</a></span></h1>
+            <div class="lmlf-source-link">
+              <p>
+                Source: NIST Digital Library of Mathematical Functions, §5.1.</p>
+              <a href="https://dlmf.nist.gov/5.1">Open this chapter in the DLMF ↗</a></div>
+            <section>
+              <h2 id="LMLF-___-DLMF-with-Lean--Gamma-Function--___5___1-Special-Notation--___5___1-Special-Notation">
+                §5.1 Special Notation<span class="permalink-widget inline"><a href="find/?domain=Verso.Genre.Manual.section&amp;name=LMLF-___-DLMF-with-Lean--Gamma-Function--___5___1-Special-Notation--___5___1-Special-Notation" title="Permalink">🔗</a></span></h2>
+              <p>
+                Section 5.1 is the notation contract for the rest of Chapter 5.  It does not number
+equations: instead, it fixes the domains of the recurring indices and variables, the
+meaning of the small parameter <code>δ</code>, the Euler constant <code>γ</code>, and the names used for the
+principal Gamma-family functions.  The declarations below keep those conventions visible
+while reusing Mathlib's functions in every later section.</p>
+              <section>
+                <h3 id="LMLF-___-DLMF-with-Lean--Gamma-Function--___5___1-Special-Notation--___5___1-Special-Notation--Variables-and-parameters">
+                  Variables and parameters<span class="permalink-widget inline"><a href="find/?domain=Verso.Genre.Manual.section&amp;name=LMLF-___-DLMF-with-Lean--Gamma-Function--___5___1-Special-Notation--___5___1-Special-Notation--Variables-and-parameters" title="Permalink">🔗</a></span></h3>
+                <article class="lmlf-dlmf-entry"><div class="lmlf-dlmf-entry__source">
+                    <a href="https://dlmf.nist.gov/5.1">DLMF 5.1.variables ↗</a></div>
+                  <div class="lmlf-dlmf-entry__body">
+                    <p>
+                      The source convention is
+<code class="math display">j,m,n\ \text{are nonnegative integers},\qquad k\ \text{is a nonnegative integer except in §5.20},</code>
+<code class="math display">x,y\in\mathbb R,\qquad z=x+\mathrm{i}y,\qquad a,b,q,s,w\in\mathbb R\ \text{or}\ \mathbb C,\qquad |q|&lt;1.</code></p>
+                    <p>
+                      Thus <code>j</code>, <code>m</code>, <code>n</code>, and the usual Chapter 5 <code>k</code>-indices are naturally represented by
+<code>ℕ</code>; the stated §5.20 exception is a local convention of that later section.  Real
+coordinates determine a complex argument through <code>z = x + i y</code>.  When a parameter is
+allowed to be real or complex, the formal development uses <code>ℂ</code> and inserts the canonical
+real-to-complex coercion.  The q restriction is a norm inequality in the complex model.</p>
+                    <details class="lmlf-lean" open=""><summary>Lean · variable domains and complex coordinates</summary><div class="lmlf-lean__body">
+                        <code class="hl lean block" data-lean-context="examples"><span class="keyword token" data-binding="kw-occ-Lean.Parser.Command.namespace-441" data-verso-hover="0">namespace</span><span class="inter-text"> </span><span class="unknown token" data-binding="">LMLF.Blueprint.Gamma.Section51</span></code><code class="hl lean block" data-lean-context="examples"><span class="keyword token" data-binding="kw-occ-Lean.Parser.Command.abbrev-764">abbrev</span><span class="inter-text"> </span><span class="const token" data-binding="const-LMLF.Blueprint.Gamma.Section51.NonnegativeInteger" data-verso-hover="105" id="LMLF___Blueprint___Gamma___Section51___NonnegativeInteger">NonnegativeInteger</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Command.declValSimple-790">:=</span><span class="inter-text"> </span><span class="const token" data-binding="const-Nat" data-verso-hover="34">ℕ</span></code><code class="hl lean block" data-lean-context="examples"><span class="keyword token" data-binding="kw-occ-Lean.Parser.Command.definition-955">def</span><span class="inter-text"> </span><span class="const token" data-binding="const-LMLF.Blueprint.Gamma.Section51.complexCoordinate" data-verso-hover="106" id="LMLF___Blueprint___Gamma___Section51___complexCoordinate">complexCoordinate</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-977">(</span><span class="var token" data-binding="var-_uniq.11" data-verso-hover="19">x</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.13" data-verso-hover="19">y</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-977">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Real" data-verso-hover="11">ℝ</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-977">)</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeSpec-989">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Complex" data-verso-hover="107">ℂ</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Command.declValSimple-995">:=</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-998">(</span><span class="var token" data-binding="var-_uniq.11" data-verso-hover="19">x</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeAscription-998">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Complex" data-verso-hover="107">ℂ</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.typeAscription-998">)</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_+_»-998">+</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-1010">(</span><span class="var token" data-binding="var-_uniq.13" data-verso-hover="19">y</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeAscription-1010">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Complex" data-verso-hover="107">ℂ</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.typeAscription-1010">)</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_*_»-1010">*</span><span class="inter-text"> </span><span class="const token" data-binding="const-Complex.I" data-verso-hover="108">Complex.I</span></code><code class="hl lean block" data-lean-context="examples"><span class="keyword token" data-binding="kw-occ-Lean.Parser.Command.theorem-1156">theorem</span><span class="inter-text"> </span><span class="has-info warning"><span class="hover-container"><span class="hover-info messages"><code class="verso-message warning"><span class="text"></span><span class="text">declaration uses `</span><span class="highlighted"><span class="inter-text"></span><span class="unknown token" data-binding="">sorry</span><span class="inter-text"></span></span><span class="text">`</span></code></span></span><span class="const token" data-binding="const-LMLF.Blueprint.Gamma.Section51.complexCoordinate_re" data-verso-hover="109" id="LMLF___Blueprint___Gamma___Section51___complexCoordinate_re">complexCoordinate_re</span></span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-1185">(</span><span class="var token" data-binding="var-_uniq.226" data-verso-hover="19">x</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.228" data-verso-hover="19">y</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-1185">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Real" data-verso-hover="11">ℝ</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-1185">)</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeSpec-1197">:</span><span class="inter-text">
+    </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-1203">(</span><a href="Gamma-Function/___5___1-Special-Notation/#LMLF___Blueprint___Gamma___Section51___complexCoordinate" title="Definition of example"><span class="const token" data-binding="const-LMLF.Blueprint.Gamma.Section51.complexCoordinate" data-verso-hover="106">complexCoordinate</span></a><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.226" data-verso-hover="19">x</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.228" data-verso-hover="19">y</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.paren-1203">)</span><span class="built-in delim token" data-binding="">.</span><span class="const token" data-binding="const-Complex.re" data-verso-hover="110">re</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_=_»-1203">=</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.226" data-verso-hover="19">x</span></code><code class="hl lean block" data-lean-context="examples"><span class="keyword token" data-binding="kw-occ-Lean.Parser.Command.theorem-1380">theorem</span><span class="inter-text"> </span><span class="has-info warning"><span class="hover-container"><span class="hover-info messages"><code class="verso-message warning"><span class="text"></span><span class="text">declaration uses `</span><span class="highlighted"><span class="inter-text"></span><span class="unknown token" data-binding="">sorry</span><span class="inter-text"></span></span><span class="text">`</span></code></span></span><span class="const token" data-binding="const-LMLF.Blueprint.Gamma.Section51.complexCoordinate_im" data-verso-hover="111" id="LMLF___Blueprint___Gamma___Section51___complexCoordinate_im">complexCoordinate_im</span></span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-1409">(</span><span class="var token" data-binding="var-_uniq.236" data-verso-hover="19">x</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.238" data-verso-hover="19">y</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-1409">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Real" data-verso-hover="11">ℝ</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-1409">)</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeSpec-1421">:</span><span class="inter-text">
+    </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-1427">(</span><a href="Gamma-Function/___5___1-Special-Notation/#LMLF___Blueprint___Gamma___Section51___complexCoordinate" title="Definition of example"><span class="const token" data-binding="const-LMLF.Blueprint.Gamma.Section51.complexCoordinate" data-verso-hover="106">complexCoordinate</span></a><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.236" data-verso-hover="19">x</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.238" data-verso-hover="19">y</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.paren-1427">)</span><span class="built-in delim token" data-binding="">.</span><span class="const token" data-binding="const-Complex.im" data-verso-hover="112">im</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_=_»-1427">=</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.238" data-verso-hover="19">y</span></code><code class="hl lean block" data-lean-context="examples"><span class="keyword token" data-binding="kw-occ-Lean.Parser.Command.definition-1669">def</span><span class="inter-text"> </span><span class="const token" data-binding="const-LMLF.Blueprint.Gamma.Section51.qParameterCondition" data-verso-hover="113" id="LMLF___Blueprint___Gamma___Section51___qParameterCondition">qParameterCondition</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-1693">(</span><span class="var token" data-binding="var-_uniq.246" data-verso-hover="114">q</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-1693">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Complex" data-verso-hover="107">ℂ</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-1693">)</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeSpec-1703">:</span><span class="inter-text"> </span><span class="sort token" data-binding="sort-14430969920833713138" data-verso-hover="12">Prop</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Command.declValSimple-1710">:=</span><span class="inter-text"> </span><span class="unknown token" data-binding="">‖</span><span class="var token" data-binding="var-_uniq.246" data-verso-hover="114">q</span><span class="unknown token" data-binding="">‖</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_<_»-1713">&lt;</span><span class="inter-text"> </span><span class="literal number token" data-binding="" data-verso-hover="19">1</span></code><code class="hl lean block" data-lean-context="examples"><span class="keyword token" data-binding="kw-occ-Lean.Parser.Command.theorem-1903">theorem</span><span class="inter-text"> </span><span class="has-info warning"><span class="hover-container"><span class="hover-info messages"><code class="verso-message warning"><span class="text"></span><span class="text">declaration uses `</span><span class="highlighted"><span class="inter-text"></span><span class="unknown token" data-binding="">sorry</span><span class="inter-text"></span></span><span class="text">`</span></code></span></span><span class="const token" data-binding="const-LMLF.Blueprint.Gamma.Section51.real_qParameterCondition_iff" data-verso-hover="115" id="LMLF___Blueprint___Gamma___Section51___real_qParameterCondition_iff">real_qParameterCondition_iff</span></span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-1940">(</span><span class="var token" data-binding="var-_uniq.319" data-verso-hover="19">q</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-1940">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Real" data-verso-hover="11">ℝ</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-1940">)</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeSpec-1950">:</span><span class="inter-text">
+    </span><a href="Gamma-Function/___5___1-Special-Notation/#LMLF___Blueprint___Gamma___Section51___qParameterCondition" title="Definition of example"><span class="const token" data-binding="const-LMLF.Blueprint.Gamma.Section51.qParameterCondition" data-verso-hover="113">qParameterCondition</span></a><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-1976">(</span><span class="var token" data-binding="var-_uniq.319" data-verso-hover="19">q</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeAscription-1976">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Complex" data-verso-hover="107">ℂ</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.typeAscription-1976">)</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_↔_»-1956">↔</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-group-1990">|</span><span class="var token" data-binding="var-_uniq.319" data-verso-hover="19">q</span><span class="built-in delim token" data-binding="kw-occ-«term|___|»-1990">|</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_<_»-1990">&lt;</span><span class="inter-text"> </span><span class="literal number token" data-binding="" data-verso-hover="19">1</span></code></div>
+                      </details></div>
+                  </article><article class="lmlf-dlmf-entry"><div class="lmlf-dlmf-entry__source">
+                    <a href="https://dlmf.nist.gov/5.1">DLMF 5.1.delta ↗</a></div>
+                  <div class="lmlf-dlmf-entry__body">
+                    <p>
+                      <code class="math display">\delta&gt;0,\qquad \delta\ \text{arbitrarily small}.</code></p>
+                    <p>
+                      The symbol <code>δ</code> is an arbitrary small positive constant.  Its use is local to a
+statement—typically as a sector margin or an error tolerance—and means <code>δ &gt; 0</code>, with
+the intended choice made as small as needed.  The elementary formal content is that every
+positive tolerance admits such a choice:</p>
+                    <details class="lmlf-lean" open=""><summary>Lean · positive-small convention</summary><div class="lmlf-lean__body">
+                        <code class="hl lean block" data-lean-context="examples"><span class="keyword token" data-binding="kw-occ-Lean.Parser.Command.theorem-2199">theorem</span><span class="inter-text"> </span><span class="has-info warning"><span class="hover-container"><span class="hover-info messages"><code class="verso-message warning"><span class="text"></span><span class="text">declaration uses `</span><span class="highlighted"><span class="inter-text"></span><span class="unknown token" data-binding="">sorry</span><span class="inter-text"></span></span><span class="text">`</span></code></span></span><span class="const token" data-binding="const-LMLF.Blueprint.Gamma.Section51.exists_positive_delta_lt" data-verso-hover="116" id="LMLF___Blueprint___Gamma___Section51___exists_positive_delta_lt">exists_positive_delta_lt</span></span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.implicitBinder-2232">{</span><span class="var token" data-binding="var-_uniq.445" data-verso-hover="19">ε</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.implicitBinder-2232">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Real" data-verso-hover="11">ℝ</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.implicitBinder-2232">}</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-2243">(</span><span class="var token" data-binding="var-_uniq.506" data-verso-hover="117">hε</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-2243">:</span><span class="inter-text"> </span><span class="literal number token" data-binding="" data-verso-hover="19">0</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_<_»-2250">&lt;</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.445" data-verso-hover="19">ε</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-2243">)</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeSpec-2258">:</span><span class="inter-text">
+    </span><span class="unknown token" data-binding="">∃</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.511" data-verso-hover="19">δ</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.unbracketedExplicitBinders-2268">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Real" data-verso-hover="11">ℝ</span><span class="punctuation separator token" data-binding="kw-occ-«term∃_,_»-2264">,</span><span class="inter-text"> </span><span class="literal number token" data-binding="" data-verso-hover="19">0</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_<_»-2278">&lt;</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.511" data-verso-hover="19">δ</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_∧_»-2278">∧</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.511" data-verso-hover="19">δ</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_<_»-2289">&lt;</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.445" data-verso-hover="19">ε</span></code></div>
+                      </details></div>
+                  </article></section>
+              <section>
+                <h3 id="LMLF-___-DLMF-with-Lean--Gamma-Function--___5___1-Special-Notation--___5___1-Special-Notation--Function-names-and-historical-alternatives">
+                  Function names and historical alternatives<span class="permalink-widget inline"><a href="find/?domain=Verso.Genre.Manual.section&amp;name=LMLF-___-DLMF-with-Lean--Gamma-Function--___5___1-Special-Notation--___5___1-Special-Notation--Function-names-and-historical-alternatives" title="Permalink">🔗</a></span></h3>
+                <article class="lmlf-dlmf-entry"><div class="lmlf-dlmf-entry__source">
+                    <a href="https://dlmf.nist.gov/5.1">DLMF 5.1.functions ↗</a></div>
+                  <div class="lmlf-dlmf-entry__body">
+                    <p>
+                      The principal functions named by the source are
+<code class="math display">\Gamma(z),\qquad \psi(z),\qquad B(a,b),\qquad \Gamma_q(z).</code></p>
+                    <p>
+                      Here <code>Γ</code> is the Gamma function, <code>ψ</code> is the psi (digamma) function, <code>B</code> is the beta
+function, and <code>Γ_q</code> is the q-Gamma function.  The Gamma and psi declarations below
+are the canonical complex Mathlib objects used throughout LMLF.  For <code>B</code>, Mathlib's
+<code>Complex.betaIntegral</code> is the interval Euler integral: its convergence theorem applies
+when <code>0 &lt; Re a</code> and <code>0 &lt; Re b</code>.  The Lean wrapper accepts arbitrary complex arguments,
+but its Euler-integral interpretation is used with those hypotheses; it is not the
+meromorphic continuation, which is introduced separately in §5.12 when needed.  The
+q-Gamma object is defined with its q-products in §5.18, where the same <code>|q|&lt;1</code>
+convention is used; this section intentionally introduces no second q-Gamma
+implementation.</p>
+                    <details class="lmlf-lean" open=""><summary>Lean · canonical Gamma-family names</summary><div class="lmlf-lean__body">
+                        <code class="hl lean block" data-lean-context="examples"><span class="keyword token" data-binding="kw-occ-Lean.Parser.Command.noncomputable-2525">noncomputable</span><span class="inter-text"> </span><span class="keyword token" data-binding="kw-occ-Lean.Parser.Command.definition-2539">def</span><span class="inter-text"> </span><span class="const token" data-binding="const-LMLF.Blueprint.Gamma.Section51.gammaFunction" data-verso-hover="118" id="LMLF___Blueprint___Gamma___Section51___gammaFunction">gammaFunction</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-2557">(</span><span class="var token" data-binding="var-_uniq.581" data-verso-hover="114">z</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-2557">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Complex" data-verso-hover="107">ℂ</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-2557">)</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeSpec-2567">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Complex" data-verso-hover="107">ℂ</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Command.declValSimple-2573">:=</span><span class="inter-text"> </span><span class="const token" data-binding="const-Complex.Gamma" data-verso-hover="119">Complex.Gamma</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.581" data-verso-hover="114">z</span></code><code class="hl lean block" data-lean-context="examples"><span class="keyword token" data-binding="kw-occ-Lean.Parser.Command.noncomputable-2752">noncomputable</span><span class="inter-text"> </span><span class="keyword token" data-binding="kw-occ-Lean.Parser.Command.definition-2766">def</span><span class="inter-text"> </span><span class="const token" data-binding="const-LMLF.Blueprint.Gamma.Section51.psiFunction" data-verso-hover="120" id="LMLF___Blueprint___Gamma___Section51___psiFunction">psiFunction</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-2782">(</span><span class="var token" data-binding="var-_uniq.589" data-verso-hover="114">z</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-2782">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Complex" data-verso-hover="107">ℂ</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-2782">)</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeSpec-2792">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Complex" data-verso-hover="107">ℂ</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Command.declValSimple-2798">:=</span><span class="inter-text"> </span><span class="const token" data-binding="const-Complex.digamma" data-verso-hover="121">Complex.digamma</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.589" data-verso-hover="114">z</span></code><code class="hl lean block" data-lean-context="examples"><span class="keyword token" data-binding="kw-occ-Lean.Parser.Command.noncomputable-3106">noncomputable</span><span class="inter-text"> </span><span class="keyword token" data-binding="kw-occ-Lean.Parser.Command.definition-3120">def</span><span class="inter-text"> </span><span class="const token" data-binding="const-LMLF.Blueprint.Gamma.Section51.betaFunction" data-verso-hover="122" id="LMLF___Blueprint___Gamma___Section51___betaFunction">betaFunction</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-3137">(</span><span class="var token" data-binding="var-_uniq.597" data-verso-hover="114">a</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.599" data-verso-hover="114">b</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-3137">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Complex" data-verso-hover="107">ℂ</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-3137">)</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeSpec-3149">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Complex" data-verso-hover="107">ℂ</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Command.declValSimple-3155">:=</span><span class="inter-text"> </span><span class="const token" data-binding="const-Complex.betaIntegral" data-verso-hover="123">Complex.betaIntegral</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.597" data-verso-hover="114">a</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.599" data-verso-hover="114">b</span></code></div>
+                      </details></div>
+                  </article><article class="lmlf-dlmf-entry"><div class="lmlf-dlmf-entry__source">
+                    <a href="https://dlmf.nist.gov/5.1">DLMF 5.1.alternatives ↗</a></div>
+                  <div class="lmlf-dlmf-entry__body">
+                    <p>
+                      <code class="math display">\Gamma(z)=\Pi(z-1)=(z-1)!,\qquad
+\psi(z)=\Psi(z-1)=\Psi(z)=\mathsf F(z-1).</code></p>
+                    <p>
+                      The source records historical alternatives for the first two functions:
+<code>Γ(z)</code> may be written as Gauss's <code>Π(z−1)</code> or as <code>(z−1)!</code>; and <code>ψ(z)</code> may be
+written as Gauss's <code>Ψ(z−1)</code>, Davis's <code>Ψ(z)</code>, or Pairman's <code>𝖥(z−1)</code>.  These are
+not different functions.  The shifted aliases below make the argument shift explicit,
+which avoids confusing Gauss's <code>Π</code> with a finite product or a q-Pochhammer symbol.
+The factorial display is source notation for a general complex argument; the Lean
+factorial declaration below intentionally records only its <code>Nat</code> specialization
+<code>z = n + 1</code>, where the right side is ordinary <code>n.factorial</code>.</p>
+                    <details class="lmlf-lean" open=""><summary>Lean · historical notation aliases</summary><div class="lmlf-lean__body">
+                        <code class="hl lean block" data-lean-context="examples"><span class="keyword token" data-binding="kw-occ-Lean.Parser.Command.noncomputable-3302">noncomputable</span><span class="inter-text"> </span><span class="keyword token" data-binding="kw-occ-Lean.Parser.Command.definition-3316">def</span><span class="inter-text"> </span><span class="const token" data-binding="const-LMLF.Blueprint.Gamma.Section51.gaussPi" data-verso-hover="124" id="LMLF___Blueprint___Gamma___Section51___gaussPi">gaussPi</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-3328">(</span><span class="var token" data-binding="var-_uniq.609" data-verso-hover="114">w</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-3328">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Complex" data-verso-hover="107">ℂ</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-3328">)</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeSpec-3338">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Complex" data-verso-hover="107">ℂ</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Command.declValSimple-3344">:=</span><span class="inter-text"> </span><a href="Gamma-Function/___5___1-Special-Notation/#LMLF___Blueprint___Gamma___Section51___gammaFunction" title="Definition of example"><span class="const token" data-binding="const-LMLF.Blueprint.Gamma.Section51.gammaFunction" data-verso-hover="118">gammaFunction</span></a><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-3361">(</span><span class="var token" data-binding="var-_uniq.609" data-verso-hover="114">w</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_+_»-3362">+</span><span class="inter-text"> </span><span class="literal number token" data-binding="" data-verso-hover="114">1</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.paren-3361">)</span></code><code class="hl lean block" data-lean-context="examples"><span class="keyword token" data-binding="kw-occ-Lean.Parser.Command.noncomputable-3484">noncomputable</span><span class="inter-text"> </span><span class="keyword token" data-binding="kw-occ-Lean.Parser.Command.definition-3498">def</span><span class="inter-text"> </span><span class="const token" data-binding="const-LMLF.Blueprint.Gamma.Section51.gaussPsi" data-verso-hover="125" id="LMLF___Blueprint___Gamma___Section51___gaussPsi">gaussPsi</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-3511">(</span><span class="var token" data-binding="var-_uniq.700" data-verso-hover="114">w</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-3511">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Complex" data-verso-hover="107">ℂ</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-3511">)</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeSpec-3521">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Complex" data-verso-hover="107">ℂ</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Command.declValSimple-3527">:=</span><span class="inter-text"> </span><a href="Gamma-Function/___5___1-Special-Notation/#LMLF___Blueprint___Gamma___Section51___psiFunction" title="Definition of example"><span class="const token" data-binding="const-LMLF.Blueprint.Gamma.Section51.psiFunction" data-verso-hover="120">psiFunction</span></a><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-3542">(</span><span class="var token" data-binding="var-_uniq.700" data-verso-hover="114">w</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_+_»-3543">+</span><span class="inter-text"> </span><span class="literal number token" data-binding="" data-verso-hover="114">1</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.paren-3542">)</span></code><code class="hl lean block" data-lean-context="examples"><span class="keyword token" data-binding="kw-occ-Lean.Parser.Command.noncomputable-3661">noncomputable</span><span class="inter-text"> </span><span class="keyword token" data-binding="kw-occ-Lean.Parser.Command.definition-3675">def</span><span class="inter-text"> </span><span class="const token" data-binding="const-LMLF.Blueprint.Gamma.Section51.davisPsi" data-verso-hover="126" id="LMLF___Blueprint___Gamma___Section51___davisPsi">davisPsi</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-3688">(</span><span class="var token" data-binding="var-_uniq.791" data-verso-hover="114">z</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-3688">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Complex" data-verso-hover="107">ℂ</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-3688">)</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeSpec-3698">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Complex" data-verso-hover="107">ℂ</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Command.declValSimple-3704">:=</span><span class="inter-text"> </span><a href="Gamma-Function/___5___1-Special-Notation/#LMLF___Blueprint___Gamma___Section51___psiFunction" title="Definition of example"><span class="const token" data-binding="const-LMLF.Blueprint.Gamma.Section51.psiFunction" data-verso-hover="120">psiFunction</span></a><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.791" data-verso-hover="114">z</span></code><code class="hl lean block" data-lean-context="examples"><span class="keyword token" data-binding="kw-occ-Lean.Parser.Command.noncomputable-3829">noncomputable</span><span class="inter-text"> </span><span class="keyword token" data-binding="kw-occ-Lean.Parser.Command.definition-3843">def</span><span class="inter-text"> </span><span class="const token" data-binding="const-LMLF.Blueprint.Gamma.Section51.pairmanF" data-verso-hover="127" id="LMLF___Blueprint___Gamma___Section51___pairmanF">pairmanF</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-3856">(</span><span class="var token" data-binding="var-_uniq.799" data-verso-hover="114">w</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-3856">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Complex" data-verso-hover="107">ℂ</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-3856">)</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeSpec-3866">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Complex" data-verso-hover="107">ℂ</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Command.declValSimple-3872">:=</span><span class="inter-text"> </span><a href="Gamma-Function/___5___1-Special-Notation/#LMLF___Blueprint___Gamma___Section51___psiFunction" title="Definition of example"><span class="const token" data-binding="const-LMLF.Blueprint.Gamma.Section51.psiFunction" data-verso-hover="120">psiFunction</span></a><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-3887">(</span><span class="var token" data-binding="var-_uniq.799" data-verso-hover="114">w</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_+_»-3888">+</span><span class="inter-text"> </span><span class="literal number token" data-binding="" data-verso-hover="114">1</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.paren-3887">)</span></code><code class="hl lean block" data-lean-context="examples"><span class="keyword token" data-binding="kw-occ-Lean.Parser.Command.theorem-4049">theorem</span><span class="inter-text"> </span><span class="has-info warning"><span class="hover-container"><span class="hover-info messages"><code class="verso-message warning"><span class="text"></span><span class="text">declaration uses `</span><span class="highlighted"><span class="inter-text"></span><span class="unknown token" data-binding="">sorry</span><span class="inter-text"></span></span><span class="text">`</span></code></span></span><span class="const token" data-binding="const-LMLF.Blueprint.Gamma.Section51.gaussPi_shift_eq_gamma" data-verso-hover="128" id="LMLF___Blueprint___Gamma___Section51___gaussPi_shift_eq_gamma">gaussPi_shift_eq_gamma</span></span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-4080">(</span><span class="var token" data-binding="var-_uniq.890" data-verso-hover="114">z</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-4080">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Complex" data-verso-hover="107">ℂ</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-4080">)</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeSpec-4090">:</span><span class="inter-text">
+    </span><a href="Gamma-Function/___5___1-Special-Notation/#LMLF___Blueprint___Gamma___Section51___gaussPi" title="Definition of example"><span class="const token" data-binding="const-LMLF.Blueprint.Gamma.Section51.gaussPi" data-verso-hover="124">gaussPi</span></a><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-4104">(</span><span class="var token" data-binding="var-_uniq.890" data-verso-hover="114">z</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_-_»-4105">-</span><span class="inter-text"> </span><span class="literal number token" data-binding="" data-verso-hover="114">1</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.paren-4104">)</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_=_»-4096">=</span><span class="inter-text"> </span><a href="Gamma-Function/___5___1-Special-Notation/#LMLF___Blueprint___Gamma___Section51___gammaFunction" title="Definition of example"><span class="const token" data-binding="const-LMLF.Blueprint.Gamma.Section51.gammaFunction" data-verso-hover="118">gammaFunction</span></a><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.890" data-verso-hover="114">z</span></code><code class="hl lean block" data-lean-context="examples"><span class="keyword token" data-binding="kw-occ-Lean.Parser.Command.theorem-4309">theorem</span><span class="inter-text"> </span><span class="has-info warning"><span class="hover-container"><span class="hover-info messages"><code class="verso-message warning"><span class="text"></span><span class="text">declaration uses `</span><span class="highlighted"><span class="inter-text"></span><span class="unknown token" data-binding="">sorry</span><span class="inter-text"></span></span><span class="text">`</span></code></span></span><span class="const token" data-binding="const-LMLF.Blueprint.Gamma.Section51.gaussPsi_shift_eq_psi" data-verso-hover="129" id="LMLF___Blueprint___Gamma___Section51___gaussPsi_shift_eq_psi">gaussPsi_shift_eq_psi</span></span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-4339">(</span><span class="var token" data-binding="var-_uniq.975" data-verso-hover="114">z</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-4339">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Complex" data-verso-hover="107">ℂ</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-4339">)</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeSpec-4349">:</span><span class="inter-text">
+    </span><a href="Gamma-Function/___5___1-Special-Notation/#LMLF___Blueprint___Gamma___Section51___gaussPsi" title="Definition of example"><span class="const token" data-binding="const-LMLF.Blueprint.Gamma.Section51.gaussPsi" data-verso-hover="125">gaussPsi</span></a><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-4364">(</span><span class="var token" data-binding="var-_uniq.975" data-verso-hover="114">z</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_-_»-4365">-</span><span class="inter-text"> </span><span class="literal number token" data-binding="" data-verso-hover="114">1</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.paren-4364">)</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_=_»-4355">=</span><span class="inter-text"> </span><a href="Gamma-Function/___5___1-Special-Notation/#LMLF___Blueprint___Gamma___Section51___psiFunction" title="Definition of example"><span class="const token" data-binding="const-LMLF.Blueprint.Gamma.Section51.psiFunction" data-verso-hover="120">psiFunction</span></a><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.975" data-verso-hover="114">z</span></code><code class="hl lean block" data-lean-context="examples"><span class="keyword token" data-binding="kw-occ-Lean.Parser.Command.theorem-4565">theorem</span><span class="inter-text"> </span><span class="has-info warning"><span class="hover-container"><span class="hover-info messages"><code class="verso-message warning"><span class="text"></span><span class="text">declaration uses `</span><span class="highlighted"><span class="inter-text"></span><span class="unknown token" data-binding="">sorry</span><span class="inter-text"></span></span><span class="text">`</span></code></span></span><span class="const token" data-binding="const-LMLF.Blueprint.Gamma.Section51.pairmanF_shift_eq_psi" data-verso-hover="130" id="LMLF___Blueprint___Gamma___Section51___pairmanF_shift_eq_psi">pairmanF_shift_eq_psi</span></span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-4595">(</span><span class="var token" data-binding="var-_uniq.1060" data-verso-hover="114">z</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-4595">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Complex" data-verso-hover="107">ℂ</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-4595">)</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeSpec-4605">:</span><span class="inter-text">
+    </span><a href="Gamma-Function/___5___1-Special-Notation/#LMLF___Blueprint___Gamma___Section51___pairmanF" title="Definition of example"><span class="const token" data-binding="const-LMLF.Blueprint.Gamma.Section51.pairmanF" data-verso-hover="127">pairmanF</span></a><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-4620">(</span><span class="var token" data-binding="var-_uniq.1060" data-verso-hover="114">z</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_-_»-4621">-</span><span class="inter-text"> </span><span class="literal number token" data-binding="" data-verso-hover="114">1</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.paren-4620">)</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_=_»-4611">=</span><span class="inter-text"> </span><a href="Gamma-Function/___5___1-Special-Notation/#LMLF___Blueprint___Gamma___Section51___psiFunction" title="Definition of example"><span class="const token" data-binding="const-LMLF.Blueprint.Gamma.Section51.psiFunction" data-verso-hover="120">psiFunction</span></a><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.1060" data-verso-hover="114">z</span></code><code class="hl lean block" data-lean-context="examples"><span class="keyword token" data-binding="kw-occ-Lean.Parser.Command.theorem-4932">theorem</span><span class="inter-text"> </span><span class="has-info warning"><span class="hover-container"><span class="hover-info messages"><code class="verso-message warning"><span class="text"></span><span class="text">declaration uses `</span><span class="highlighted"><span class="inter-text"></span><span class="unknown token" data-binding="">sorry</span><span class="inter-text"></span></span><span class="text">`</span></code></span></span><span class="const token" data-binding="const-LMLF.Blueprint.Gamma.Section51.gamma_nat_succ_eq_factorial" data-verso-hover="131" id="LMLF___Blueprint___Gamma___Section51___gamma_nat_succ_eq_factorial">gamma_nat_succ_eq_factorial</span></span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-4968">(</span><span class="var token" data-binding="var-_uniq.1145" data-verso-hover="37">n</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-4968">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Nat" data-verso-hover="34">ℕ</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-4968">)</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeSpec-4978">:</span><span class="inter-text">
+    </span><a href="Gamma-Function/___5___1-Special-Notation/#LMLF___Blueprint___Gamma___Section51___gammaFunction" title="Definition of example"><span class="const token" data-binding="const-LMLF.Blueprint.Gamma.Section51.gammaFunction" data-verso-hover="118">gammaFunction</span></a><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-4998">(</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-4999">(</span><span class="var token" data-binding="var-_uniq.1145" data-verso-hover="37">n</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeAscription-4999">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Complex" data-verso-hover="107">ℂ</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.typeAscription-4999">)</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_+_»-4999">+</span><span class="inter-text"> </span><span class="literal number token" data-binding="" data-verso-hover="114">1</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.paren-4998">)</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_=_»-4984">=</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-5016">(</span><span class="var token" data-binding="var-_uniq.1145" data-verso-hover="37">n</span><span class="built-in delim token" data-binding="">.</span><span class="const token" data-binding="const-Nat.factorial" data-verso-hover="132">factorial</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeAscription-5016">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Complex" data-verso-hover="107">ℂ</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.typeAscription-5016">)</span></code></div>
+                      </details></div>
+                  </article></section>
+              <section>
+                <h3 id="LMLF-___-DLMF-with-Lean--Gamma-Function--___5___1-Special-Notation--___5___1-Special-Notation--Constants-and-derivatives">
+                  Constants and derivatives<span class="permalink-widget inline"><a href="find/?domain=Verso.Genre.Manual.section&amp;name=LMLF-___-DLMF-with-Lean--Gamma-Function--___5___1-Special-Notation--___5___1-Special-Notation--Constants-and-derivatives" title="Permalink">🔗</a></span></h3>
+                <article class="lmlf-dlmf-entry"><div class="lmlf-dlmf-entry__source">
+                    <a href="https://dlmf.nist.gov/5.1">DLMF 5.1.constants ↗</a></div>
+                  <div class="lmlf-dlmf-entry__body">
+                    <p>
+                      <code class="math display">\gamma\ \text{is Euler's constant},\qquad f'(u)=\frac{d}{du}f(u).</code></p>
+                    <p>
+                      The symbol <code>γ</code> means Euler's constant, with its definition deferred by the source to
+<a href="https://dlmf.nist.gov/5.2#ii">§5.2(ii)</a>.  A prime means differentiation with respect
+to the displayed variable: for a complex function this is Mathlib's <code>deriv</code> at the
+complex argument.  Mathlib's <code>deriv</code> is totalized, so at a point where differentiability
+has not been established it returns a default value rather than certifying that a
+derivative exists.  Accordingly, the notation below is intended only on a
+differentiability domain; the declaration itself carries no such premise.  These
+conventions explain, for example, why later formulas write <code>Γ'(z)</code> and <code>ψ'(z)</code> without
+introducing a new derivative operator.</p>
+                    <details class="lmlf-lean" open=""><summary>Lean · Euler constant and prime notation</summary><div class="lmlf-lean__body">
+                        <code class="hl lean block" data-lean-context="examples"><span class="keyword token" data-binding="kw-occ-Lean.Parser.Command.noncomputable-5240">noncomputable</span><span class="inter-text"> </span><span class="keyword token" data-binding="kw-occ-Lean.Parser.Command.abbrev-5254">abbrev</span><span class="inter-text"> </span><span class="const token" data-binding="const-LMLF.Blueprint.Gamma.Section51.eulerConstant" data-verso-hover="133" id="LMLF___Blueprint___Gamma___Section51___eulerConstant">eulerConstant</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeSpec-5275">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Real" data-verso-hover="11">ℝ</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Command.declValSimple-5281">:=</span><span class="inter-text"> </span><span class="const token" data-binding="const-Real.eulerMascheroniConstant" data-verso-hover="134">Real.eulerMascheroniConstant</span></code><code class="hl lean block" data-lean-context="examples"><span class="keyword token" data-binding="kw-occ-Lean.Parser.Command.noncomputable-5659">noncomputable</span><span class="inter-text"> </span><span class="keyword token" data-binding="kw-occ-Lean.Parser.Command.definition-5673">def</span><span class="inter-text"> </span><span class="const token" data-binding="const-LMLF.Blueprint.Gamma.Section51.primeDerivative" data-verso-hover="135" id="LMLF___Blueprint___Gamma___Section51___primeDerivative">primeDerivative</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-5693">(</span><span class="var token" data-binding="var-_uniq.1298" data-verso-hover="136">f</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-5693">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Complex" data-verso-hover="107">ℂ</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-Lean.Parser.Term.arrow-5698">→</span><span class="inter-text"> </span><span class="const token" data-binding="const-Complex" data-verso-hover="107">ℂ</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-5693">)</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-5711">(</span><span class="var token" data-binding="var-_uniq.1300" data-verso-hover="114">z</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-5711">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Complex" data-verso-hover="107">ℂ</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-5711">)</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeSpec-5721">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Complex" data-verso-hover="107">ℂ</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Command.declValSimple-5727">:=</span><span class="inter-text"> </span><span class="const token" data-binding="const-deriv" data-verso-hover="137">deriv</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.1298" data-verso-hover="136">f</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.1300" data-verso-hover="114">z</span></code><code class="hl lean block" data-lean-context="examples"><span class="keyword token" data-binding="kw-occ-Lean.Parser.Command.theorem-5954">theorem</span><span class="inter-text"> </span><span class="const token" data-binding="const-LMLF.Blueprint.Gamma.Section51.primeDerivative_eq_deriv" data-verso-hover="138" id="LMLF___Blueprint___Gamma___Section51___primeDerivative_eq_deriv">primeDerivative_eq_deriv</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-5987">(</span><span class="var token" data-binding="var-_uniq.1891" data-verso-hover="136">f</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-5987">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Complex" data-verso-hover="107">ℂ</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-Lean.Parser.Term.arrow-5992">→</span><span class="inter-text"> </span><span class="const token" data-binding="const-Complex" data-verso-hover="107">ℂ</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-5987">)</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-6005">(</span><span class="var token" data-binding="var-_uniq.1893" data-verso-hover="114">z</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-6005">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Complex" data-verso-hover="107">ℂ</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-6005">)</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeSpec-6015">:</span><span class="inter-text">
+    </span><a href="Gamma-Function/___5___1-Special-Notation/#LMLF___Blueprint___Gamma___Section51___primeDerivative" title="Definition of example"><span class="const token" data-binding="const-LMLF.Blueprint.Gamma.Section51.primeDerivative" data-verso-hover="135">primeDerivative</span></a><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.1891" data-verso-hover="136">f</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.1893" data-verso-hover="114">z</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_=_»-6021">=</span><span class="inter-text"> </span><span class="const token" data-binding="const-deriv" data-verso-hover="137">deriv</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.1891" data-verso-hover="136">f</span><span class="inter-text"> </span><span class="unknown token" data-binding="">z</span></code></div>
+                      </details></div>
+                  </article><p>
+                  The source page supplies conventions rather than numbered mathematical claims, so the
+manifest records these notation anchors as extra statement IDs.  Later sections may use
+the canonical objects directly; the aliases above are provided when a historical symbol
+must be displayed faithfully.
+</p>
+                </section>
+              </section>
+            </section>
+          <nav class="prev-next-buttons">
+            <a class="local-button active" href="Gamma-Function/Chapter-contents/#LMLF-___-DLMF-with-Lean--Gamma-Function--Chapter-contents" rel="prev" title="Chapter contents"><span class="arrow">←</span><span class="where">Chapter contents</span></a><a class="local-button active" href="Gamma-Function/___5___2-Definitions/#chapter-5-section-2" rel="next" title="5.2. §5.2 Definitions"><span class="where">5.2. §5.2 Definitions</span><span class="arrow">→</span></a></nav>
+          </div>
+        </main></div>
+    </body>
+  </html>

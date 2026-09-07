@@ -1,0 +1,176 @@
+{
+  "schema_version": 1,
+  "artifact_kind": "dlmf_section_statement_coverage",
+  "section": "5.12",
+  "title": "Beta Function",
+  "source_url": "https://dlmf.nist.gov/5.12",
+  "source_version": "1.2.7",
+  "source_release_date": "2026-06-15",
+  "unit": "numbered_formula",
+  "formula_count": 12,
+  "included_ids": [
+    "5.12.1", "5.12.2", "5.12.3", "5.12.4", "5.12.5", "5.12.6",
+    "5.12.7", "5.12.8", "5.12.9", "5.12.10", "5.12.11", "5.12.12"
+  ],
+  "omitted_ids": [],
+  "summary": {
+    "lean_statements": 12,
+    "lean_proofs": 0,
+    "quantitative_analogues": 0,
+    "quantitative_statements": 0,
+    "quantitative_proofs": 0
+  },
+  "entries": [
+    {
+      "id": "5.12.1",
+      "source_url": "https://dlmf.nist.gov/5.12.E1",
+      "match": "exact",
+      "lean_statement": true,
+      "lean_proof": false,
+      "lean_declarations": ["LMLF.Blueprint.Gamma.Section512.dlmf_5_12_1"],
+      "quantitative_analogue": false,
+      "quantitative_statement": false,
+      "quantitative_proof": false,
+      "notes": "Complex beta integral with Re a > 0 and Re b > 0; records both the defining integral and Gamma quotient."
+    },
+    {
+      "id": "5.12.2",
+      "source_url": "https://dlmf.nist.gov/5.12.E2",
+      "match": "exact",
+      "lean_statement": true,
+      "lean_proof": false,
+      "lean_declarations": ["LMLF.Blueprint.Gamma.Section512.dlmf_5_12_2"],
+      "quantitative_analogue": false,
+      "quantitative_statement": false,
+      "quantitative_proof": false,
+      "notes": "Complex sine/cosine powers and explicit interval integrability."
+    },
+    {
+      "id": "5.12.3",
+      "source_url": "https://dlmf.nist.gov/5.12.E3",
+      "match": "exact",
+      "lean_statement": true,
+      "lean_proof": false,
+      "lean_declarations": ["LMLF.Blueprint.Gamma.Section512.dlmf_5_12_3"],
+      "quantitative_analogue": false,
+      "quantitative_statement": false,
+      "quantitative_proof": false,
+      "notes": "Improper positive-half-line integral with the inherited half-plane assumptions."
+    },
+    {
+      "id": "5.12.4",
+      "source_url": "https://dlmf.nist.gov/5.12.E4",
+      "match": "exact",
+      "lean_statement": true,
+      "lean_proof": false,
+      "lean_declarations": ["LMLF.Blueprint.Gamma.Section512.dlmf_5_12_4"],
+      "quantitative_analogue": false,
+      "quantitative_statement": false,
+      "quantitative_proof": false,
+      "notes": "Principal phase condition is represented by z ≠ 0 together with |arg z| < pi."
+    },
+    {
+      "id": "5.12.5",
+      "source_url": "https://dlmf.nist.gov/5.12.E5",
+      "match": "specialization",
+      "lean_statement": true,
+      "lean_proof": false,
+      "lean_declarations": ["LMLF.Blueprint.Gamma.Section512.meromorphicBeta", "LMLF.Blueprint.Gamma.Section512.meromorphicBetaDefined", "LMLF.Blueprint.Gamma.Section512.dlmf_5_12_5"],
+      "quantitative_analogue": false,
+      "quantitative_statement": false,
+      "quantitative_proof": false,
+      "notes": "Complex cosine-power integral; source condition Re a > 0 retained, with a ≠ 0 and meromorphicBetaDefined excluding poles of the continued beta quotient."
+    },
+    {
+      "id": "5.12.6",
+      "source_url": "https://dlmf.nist.gov/5.12.E6",
+      "match": "specialization",
+      "lean_statement": true,
+      "lean_proof": false,
+      "lean_declarations": ["LMLF.Blueprint.Gamma.Section512.meromorphicBeta", "LMLF.Blueprint.Gamma.Section512.meromorphicBetaDefined", "LMLF.Blueprint.Gamma.Section512.dlmf_5_12_6"],
+      "quantitative_analogue": false,
+      "quantitative_statement": false,
+      "quantitative_proof": false,
+      "notes": "Complex sine-power Fourier integral; source condition Re a > 0 retained, with a ≠ 0 and meromorphicBetaDefined excluding poles of the continued beta quotient."
+    },
+    {
+      "id": "5.12.7",
+      "source_url": "https://dlmf.nist.gov/5.12.E7",
+      "match": "exact",
+      "lean_statement": true,
+      "lean_proof": false,
+      "lean_declarations": ["LMLF.Blueprint.Gamma.Section512.dlmf_5_12_7"],
+      "quantitative_analogue": false,
+      "quantitative_statement": false,
+      "quantitative_proof": false,
+      "notes": "Improper hyperbolic integral with Re a > |Re b|."
+    },
+    {
+      "id": "5.12.8",
+      "source_url": "https://dlmf.nist.gov/5.12.E8",
+      "match": "specialization",
+      "lean_statement": true,
+      "lean_proof": false,
+      "lean_declarations": ["LMLF.Blueprint.Gamma.Section512.meromorphicBeta", "LMLF.Blueprint.Gamma.Section512.meromorphicBetaDefined", "LMLF.Blueprint.Gamma.Section512.dlmf_5_12_8"],
+      "quantitative_analogue": false,
+      "quantitative_statement": false,
+      "quantitative_proof": false,
+      "notes": "Vertical Fourier integral; Re(a+b)>1 and Re w, Re z > 0 are explicit, with meromorphicBetaDefined for unrestricted individual parameters away from poles."
+    },
+    {
+      "id": "5.12.9",
+      "source_url": "https://dlmf.nist.gov/5.12.E9",
+      "match": "specialization",
+      "lean_statement": true,
+      "lean_proof": false,
+      "lean_declarations": ["LMLF.Blueprint.Gamma.Section512.meromorphicBeta", "LMLF.Blueprint.Gamma.Section512.meromorphicBetaDefined", "LMLF.Blueprint.Gamma.Section512.dlmf_5_12_9"],
+      "quantitative_analogue": false,
+      "quantitative_statement": false,
+      "quantitative_proof": false,
+      "notes": "Barnes vertical contour parameterized by y with the orientation factor i, b ≠ 0, and meromorphicBetaDefined away from poles."
+    },
+    {
+      "id": "5.12.10",
+      "source_url": "https://dlmf.nist.gov/5.12.E10",
+      "match": "specialization",
+      "lean_statement": true,
+      "lean_proof": false,
+      "lean_declarations": ["LMLF.Blueprint.Gamma.Section512.meromorphicBeta", "LMLF.Blueprint.Gamma.Section512.meromorphicBetaDefined", "LMLF.Blueprint.Gamma.Section512.contourIntegral", "LMLF.Blueprint.Gamma.Section512.betaFirstLoopIntegral", "LMLF.Blueprint.Gamma.Section512.dlmf_5_12_10"],
+      "quantitative_analogue": false,
+      "quantitative_statement": false,
+      "quantitative_proof": false,
+      "notes": "The source's positively oriented loop uses pointwise principal powers, as prescribed for E10, with meromorphicBetaDefined away from poles."
+    },
+    {
+      "id": "5.12.11",
+      "source_url": "https://dlmf.nist.gov/5.12.E11",
+      "match": "specialization",
+      "lean_statement": true,
+      "lean_proof": false,
+      "lean_declarations": ["LMLF.Blueprint.Gamma.Section512.meromorphicBeta", "LMLF.Blueprint.Gamma.Section512.meromorphicBetaDefined", "LMLF.Blueprint.Gamma.Section512.SecondLoopLogBranch", "LMLF.Blueprint.Gamma.Section512.betaSecondLoopTruncation", "LMLF.Blueprint.Gamma.Section512.betaSecondLoopIntegral", "LMLF.Blueprint.Gamma.Section512.dlmf_5_12_11"],
+      "quantitative_analogue": false,
+      "quantitative_statement": false,
+      "quantitative_proof": false,
+      "notes": "Finite truncations use incoming and outgoing positive-ray tails (r > 0), a positively oriented circle with 0 < ε < 1, endpoint gluing, and one global pair of logarithm lifts with pointwise exponential equations only on those domains; meromorphicBetaDefined excludes poles."
+    },
+    {
+      "id": "5.12.12",
+      "source_url": "https://dlmf.nist.gov/5.12.E12",
+      "match": "specialization",
+      "lean_statement": true,
+      "lean_proof": false,
+      "lean_declarations": ["LMLF.Blueprint.Gamma.Section512.meromorphicBeta", "LMLF.Blueprint.Gamma.Section512.meromorphicBetaDefined", "LMLF.Blueprint.Gamma.Section512.PochhammerLogBranch", "LMLF.Blueprint.Gamma.Section512.betaPochhammerCurve", "LMLF.Blueprint.Gamma.Section512.betaPochhammerIntegral", "LMLF.Blueprint.Gamma.Section512.dlmf_5_12_12"],
+      "quantitative_analogue": false,
+      "quantitative_statement": false,
+      "quantitative_proof": false,
+      "notes": "Complex a,b off the Gamma pole locus and P ∈ (0,1), with the oriented Pochhammer contour and explicit logarithm lifts tied pointwise to t and 1−t only under the base-point domain predicates, principal at P."
+    }
+  ],
+  "shared_vocabulary_requests": [
+    "Consolidate contourIntegral, SecondLoopLogBranch, and PochhammerLogBranch if later DLMF sections need the same branch-aware contour infrastructure."
+  ],
+  "known_gaps": [
+    "All twelve statements remain proof-pending by contract (by sorry).",
+    "The contour records use local explicit contour parameterizations and finite-truncation vocabulary; a future contour-integral library can replace these definitions without changing the source-facing theorem statements. E11 uses one global logarithm-lift datum across all truncation scales, and E12 ties both lifts pointwise to its Pochhammer contour. The meromorphic records are stated on the finite Gamma-quotient locus via meromorphicBetaDefined, so poles are intentionally omitted as a specialization."
+  ]
+}

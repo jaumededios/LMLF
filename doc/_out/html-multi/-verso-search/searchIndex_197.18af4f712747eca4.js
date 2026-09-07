@@ -1,1 +1,0 @@
-window.docContents[197].resolve({"/Elementary-Functions/#chapter-4":{"contents":"Source: NIST Digital Library of Mathematical Functions, Chapter 4.\n\n\n\n","context":"LMLF · DLMF with Lean","header":"4. Elementary Functions","id":"/Elementary-Functions/#chapter-4"}});

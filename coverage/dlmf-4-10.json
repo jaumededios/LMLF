@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-09-06T21:17:18+00:00",
+  "generated_at": "2026-09-07T00:08:12+00:00",
   "source": {
     "name": "NIST Digital Library of Mathematical Functions",
     "base_url": "https://dlmf.nist.gov",
@@ -31,9 +31,9 @@
     },
     "5": {
       "formulas": 169,
-      "lean_statements": 2,
+      "lean_statements": 160,
       "lean_proofs": 1,
-      "quantitative_statements": 1,
+      "quantitative_statements": 3,
       "quantitative_proofs": 0
     },
     "6": {
@@ -10814,14 +10814,14 @@
       "lean_statement": true,
       "lean_proof": true,
       "lean_declarations": [
-        "LMLF.Definitions.gamma_eulerIntegrable",
-        "LMLF.Definitions.gamma_eq_eulerIntegral"
+        "LMLF.Definitions.gamma_eq_eulerIntegral",
+        "LMLF.Definitions.gamma_eulerIntegrable"
       ],
       "quantitative_analogue": false,
       "quantitative_statement": false,
       "quantitative_proof": false,
       "quantitative_declarations": [],
-      "notes": "The integrability and value identity are separate proved declarations."
+      "notes": "The convergence assertion and Euler-integral value identity are separate proved declarations."
     },
     {
       "dlmf_id": "5.2.E2",
@@ -10830,15 +10830,17 @@
       "section": "5.2",
       "section_title": "Definitions",
       "source_url": "https://dlmf.nist.gov/5.2.E2",
-      "match": "none",
-      "lean_statement": false,
+      "match": "exact",
+      "lean_statement": true,
       "lean_proof": false,
-      "lean_declarations": [],
+      "lean_declarations": [
+        "LMLF.Blueprint.Gamma.digamma_eq_gamma_deriv_div"
+      ],
       "quantitative_analogue": false,
       "quantitative_statement": false,
       "quantitative_proof": false,
       "quantitative_declarations": [],
-      "notes": null
+      "notes": "Uses Mathlib's Complex.digamma and spells out the excluded nonpositive integers."
     },
     {
       "dlmf_id": "5.2.E3",
@@ -10847,15 +10849,19 @@
       "section": "5.2",
       "section_title": "Definitions",
       "source_url": "https://dlmf.nist.gov/5.2.E3",
-      "match": "none",
-      "lean_statement": false,
+      "match": "exact",
+      "lean_statement": true,
       "lean_proof": false,
-      "lean_declarations": [],
-      "quantitative_analogue": false,
-      "quantitative_statement": false,
+      "lean_declarations": [
+        "LMLF.Blueprint.Gamma.tendsto_harmonic_sub_log_eulerMascheroni"
+      ],
+      "quantitative_analogue": true,
+      "quantitative_statement": true,
       "quantitative_proof": false,
-      "quantitative_declarations": [],
-      "notes": null
+      "quantitative_declarations": [
+        "LMLF.Blueprint.Gamma.eulerMascheroni_decimal"
+      ],
+      "notes": "The limit and the displayed twenty-decimal value are separate declarations; the latter is a rigorous enclosure with radius 10^-20."
     },
     {
       "dlmf_id": "5.2.E4",
@@ -10864,15 +10870,19 @@
       "section": "5.2",
       "section_title": "Definitions",
       "source_url": "https://dlmf.nist.gov/5.2.E4",
-      "match": "none",
-      "lean_statement": false,
+      "match": "exact",
+      "lean_statement": true,
       "lean_proof": false,
-      "lean_declarations": [],
+      "lean_declarations": [
+        "LMLF.Blueprint.Gamma.pochhammerSymbol",
+        "LMLF.Blueprint.Gamma.pochhammerSymbol_zero",
+        "LMLF.Blueprint.Gamma.pochhammerSymbol_eq_prod"
+      ],
       "quantitative_analogue": false,
       "quantitative_statement": false,
       "quantitative_proof": false,
       "quantitative_declarations": [],
-      "notes": null
+      "notes": "The reusable definition is Mathlib's ascending Pochhammer polynomial evaluated at the argument."
     },
     {
       "dlmf_id": "5.2.E5",
@@ -10881,15 +10891,17 @@
       "section": "5.2",
       "section_title": "Definitions",
       "source_url": "https://dlmf.nist.gov/5.2.E5",
-      "match": "none",
-      "lean_statement": false,
+      "match": "exact",
+      "lean_statement": true,
       "lean_proof": false,
-      "lean_declarations": [],
+      "lean_declarations": [
+        "LMLF.Blueprint.Gamma.pochhammerSymbol_eq_gamma_div"
+      ],
       "quantitative_analogue": false,
       "quantitative_statement": false,
       "quantitative_proof": false,
       "quantitative_declarations": [],
-      "notes": null
+      "notes": "Complex-variable statement with the DLMF pole exclusions made explicit."
     },
     {
       "dlmf_id": "5.2.E6",
@@ -10898,15 +10910,17 @@
       "section": "5.2",
       "section_title": "Definitions",
       "source_url": "https://dlmf.nist.gov/5.2.E6",
-      "match": "none",
-      "lean_statement": false,
+      "match": "exact",
+      "lean_statement": true,
       "lean_proof": false,
-      "lean_declarations": [],
+      "lean_declarations": [
+        "LMLF.Blueprint.Gamma.pochhammerSymbol_neg"
+      ],
       "quantitative_analogue": false,
       "quantitative_statement": false,
       "quantitative_proof": false,
       "quantitative_declarations": [],
-      "notes": null
+      "notes": "Complex-variable polynomial identity."
     },
     {
       "dlmf_id": "5.2.E7",
@@ -10915,15 +10929,17 @@
       "section": "5.2",
       "section_title": "Definitions",
       "source_url": "https://dlmf.nist.gov/5.2.E7",
-      "match": "none",
-      "lean_statement": false,
+      "match": "exact",
+      "lean_statement": true,
       "lean_proof": false,
-      "lean_declarations": [],
+      "lean_declarations": [
+        "LMLF.Blueprint.Gamma.pochhammerSymbol_neg_nat"
+      ],
       "quantitative_analogue": false,
       "quantitative_statement": false,
       "quantitative_proof": false,
       "quantitative_declarations": [],
-      "notes": null
+      "notes": "The DLMF piecewise formula is represented directly by an if-then-else."
     },
     {
       "dlmf_id": "5.2.E8",
@@ -10932,15 +10948,18 @@
       "section": "5.2",
       "section_title": "Definitions",
       "source_url": "https://dlmf.nist.gov/5.2.E8",
-      "match": "none",
-      "lean_statement": false,
+      "match": "exact",
+      "lean_statement": true,
       "lean_proof": false,
-      "lean_declarations": [],
+      "lean_declarations": [
+        "LMLF.Blueprint.Gamma.pochhammerSymbol_two_mul",
+        "LMLF.Blueprint.Gamma.pochhammerSymbol_two_mul_add_one"
+      ],
       "quantitative_analogue": false,
       "quantitative_statement": false,
       "quantitative_proof": false,
       "quantitative_declarations": [],
-      "notes": null
+      "notes": "The even and odd lines of the source are separate declarations."
     },
     {
       "dlmf_id": "5.2.E9",
@@ -10949,15 +10968,21 @@
       "section": "5.2",
       "section_title": "Definitions",
       "source_url": "https://dlmf.nist.gov/5.2.E9",
-      "match": "none",
-      "lean_statement": false,
+      "match": "exact",
+      "lean_statement": true,
       "lean_proof": false,
-      "lean_declarations": [],
+      "lean_declarations": [
+        "LMLF.Blueprint.Gamma.fallingFactorial",
+        "LMLF.Blueprint.Gamma.fallingFactorial_eq_neg_one_pow_mul_pochhammerSymbol_neg",
+        "LMLF.Blueprint.Gamma.lahNumber",
+        "LMLF.Blueprint.Gamma.pochhammerSymbol_eq_sum_lah_fallingFactorial",
+        "LMLF.Blueprint.Gamma.fallingFactorial_eq_sum_lah_pochhammerSymbol"
+      ],
       "quantitative_analogue": false,
       "quantitative_statement": false,
       "quantitative_proof": false,
       "quantitative_declarations": [],
-      "notes": null
+      "notes": "The signed rising-to-falling bridge is stated over commutative rings; the two real-variable change-of-basis identities include the DLMF definition of the unsigned Lah number."
     },
     {
       "dlmf_id": "5.4.E1",
@@ -10966,15 +10991,17 @@
       "section": "5.4",
       "section_title": "Special Values and Extrema",
       "source_url": "https://dlmf.nist.gov/5.4.E1",
-      "match": "none",
-      "lean_statement": false,
+      "match": "exact",
+      "lean_statement": true,
       "lean_proof": false,
-      "lean_declarations": [],
+      "lean_declarations": [
+        "LMLF.Blueprint.Gamma.gamma_special_factorial"
+      ],
       "quantitative_analogue": false,
       "quantitative_statement": false,
       "quantitative_proof": false,
       "quantitative_declarations": [],
-      "notes": null
+      "notes": "Complex formulation of the integer special values."
     },
     {
       "dlmf_id": "5.4.E2",
@@ -10983,15 +11010,19 @@
       "section": "5.4",
       "section_title": "Special Values and Extrema",
       "source_url": "https://dlmf.nist.gov/5.4.E2",
-      "match": "none",
-      "lean_statement": false,
+      "match": "specialization",
+      "lean_statement": true,
       "lean_proof": false,
-      "lean_declarations": [],
+      "lean_declarations": [
+        "LMLF.Blueprint.Gamma.doubleFactorial",
+        "LMLF.Blueprint.Gamma.gamma_doubleFactorial_even",
+        "LMLF.Blueprint.Gamma.gamma_doubleFactorial_odd"
+      ],
       "quantitative_analogue": false,
       "quantitative_statement": false,
       "quantitative_proof": false,
       "quantitative_declarations": [],
-      "notes": null
+      "notes": "Real-positive Gamma specialization with explicit parity hypotheses and a finite-product double factorial; the manual records the source note that the odd line also applies at n = -1, outside the Nat specialization."
     },
     {
       "dlmf_id": "5.4.E3",
@@ -11000,15 +11031,17 @@
       "section": "5.4",
       "section_title": "Special Values and Extrema",
       "source_url": "https://dlmf.nist.gov/5.4.E3",
-      "match": "none",
-      "lean_statement": false,
+      "match": "specialization",
+      "lean_statement": true,
       "lean_proof": false,
-      "lean_declarations": [],
+      "lean_declarations": [
+        "LMLF.Blueprint.Gamma.gamma_imaginary_modulus"
+      ],
       "quantitative_analogue": false,
       "quantitative_statement": false,
       "quantitative_proof": false,
       "quantitative_declarations": [],
-      "notes": null
+      "notes": "Real y specialization, with y ≠ 0 made explicit for the displayed quotient."
     },
     {
       "dlmf_id": "5.4.E4",
@@ -11017,15 +11050,17 @@
       "section": "5.4",
       "section_title": "Special Values and Extrema",
       "source_url": "https://dlmf.nist.gov/5.4.E4",
-      "match": "none",
-      "lean_statement": false,
+      "match": "exact",
+      "lean_statement": true,
       "lean_proof": false,
-      "lean_declarations": [],
+      "lean_declarations": [
+        "LMLF.Blueprint.Gamma.gamma_half_line_product"
+      ],
       "quantitative_analogue": false,
       "quantitative_statement": false,
       "quantitative_proof": false,
       "quantitative_declarations": [],
-      "notes": null
+      "notes": "Complex identity with the real squared norm cast into ℂ."
     },
     {
       "dlmf_id": "5.4.E5",
@@ -11034,15 +11069,17 @@
       "section": "5.4",
       "section_title": "Special Values and Extrema",
       "source_url": "https://dlmf.nist.gov/5.4.E5",
-      "match": "none",
-      "lean_statement": false,
+      "match": "specialization",
+      "lean_statement": true,
       "lean_proof": false,
-      "lean_declarations": [],
+      "lean_declarations": [
+        "LMLF.Blueprint.Gamma.gamma_quarter_shift_product"
+      ],
       "quantitative_analogue": false,
       "quantitative_statement": false,
       "quantitative_proof": false,
       "quantitative_declarations": [],
-      "notes": null
+      "notes": "Real y parameter specialization of the complex-line identity."
     },
     {
       "dlmf_id": "5.4.E6",
@@ -11051,15 +11088,17 @@
       "section": "5.4",
       "section_title": "Special Values and Extrema",
       "source_url": "https://dlmf.nist.gov/5.4.E6",
-      "match": "none",
-      "lean_statement": false,
+      "match": "specialization",
+      "lean_statement": true,
       "lean_proof": false,
-      "lean_declarations": [],
+      "lean_declarations": [
+        "LMLF.Blueprint.Gamma.gamma_half_value"
+      ],
       "quantitative_analogue": false,
       "quantitative_statement": false,
       "quantitative_proof": false,
       "quantitative_declarations": [],
-      "notes": null
+      "notes": "Real Gamma exact value plus an enclosure for the displayed decimal."
     },
     {
       "dlmf_id": "5.4.E7",
@@ -11068,15 +11107,17 @@
       "section": "5.4",
       "section_title": "Special Values and Extrema",
       "source_url": "https://dlmf.nist.gov/5.4.E7",
-      "match": "none",
-      "lean_statement": false,
+      "match": "specialization",
+      "lean_statement": true,
       "lean_proof": false,
-      "lean_declarations": [],
+      "lean_declarations": [
+        "LMLF.Blueprint.Gamma.gamma_third_value"
+      ],
       "quantitative_analogue": false,
       "quantitative_statement": false,
       "quantitative_proof": false,
       "quantitative_declarations": [],
-      "notes": null
+      "notes": "Real Gamma numerical enclosure matching the displayed decimal."
     },
     {
       "dlmf_id": "5.4.E8",
@@ -11085,15 +11126,17 @@
       "section": "5.4",
       "section_title": "Special Values and Extrema",
       "source_url": "https://dlmf.nist.gov/5.4.E8",
-      "match": "none",
-      "lean_statement": false,
+      "match": "specialization",
+      "lean_statement": true,
       "lean_proof": false,
-      "lean_declarations": [],
+      "lean_declarations": [
+        "LMLF.Blueprint.Gamma.gamma_two_thirds_value"
+      ],
       "quantitative_analogue": false,
       "quantitative_statement": false,
       "quantitative_proof": false,
       "quantitative_declarations": [],
-      "notes": null
+      "notes": "Real Gamma numerical enclosure matching the displayed decimal."
     },
     {
       "dlmf_id": "5.4.E9",
@@ -11102,15 +11145,17 @@
       "section": "5.4",
       "section_title": "Special Values and Extrema",
       "source_url": "https://dlmf.nist.gov/5.4.E9",
-      "match": "none",
-      "lean_statement": false,
+      "match": "specialization",
+      "lean_statement": true,
       "lean_proof": false,
-      "lean_declarations": [],
+      "lean_declarations": [
+        "LMLF.Blueprint.Gamma.gamma_quarter_value"
+      ],
       "quantitative_analogue": false,
       "quantitative_statement": false,
       "quantitative_proof": false,
       "quantitative_declarations": [],
-      "notes": null
+      "notes": "Real Gamma numerical enclosure matching the displayed decimal."
     },
     {
       "dlmf_id": "5.4.E10",
@@ -11119,15 +11164,17 @@
       "section": "5.4",
       "section_title": "Special Values and Extrema",
       "source_url": "https://dlmf.nist.gov/5.4.E10",
-      "match": "none",
-      "lean_statement": false,
+      "match": "specialization",
+      "lean_statement": true,
       "lean_proof": false,
-      "lean_declarations": [],
+      "lean_declarations": [
+        "LMLF.Blueprint.Gamma.gamma_three_quarters_value"
+      ],
       "quantitative_analogue": false,
       "quantitative_statement": false,
       "quantitative_proof": false,
       "quantitative_declarations": [],
-      "notes": null
+      "notes": "Real Gamma numerical enclosure matching the displayed decimal."
     },
     {
       "dlmf_id": "5.4.E11",
@@ -11136,15 +11183,17 @@
       "section": "5.4",
       "section_title": "Special Values and Extrema",
       "source_url": "https://dlmf.nist.gov/5.4.E11",
-      "match": "none",
-      "lean_statement": false,
+      "match": "specialization",
+      "lean_statement": true,
       "lean_proof": false,
-      "lean_declarations": [],
+      "lean_declarations": [
+        "LMLF.Blueprint.Gamma.gamma_deriv_one_value"
+      ],
       "quantitative_analogue": false,
       "quantitative_statement": false,
       "quantitative_proof": false,
       "quantitative_declarations": [],
-      "notes": null
+      "notes": "Signed real derivative identity at 1, preserving the source's negative sign."
     },
     {
       "dlmf_id": "5.4.E12",
@@ -11153,15 +11202,17 @@
       "section": "5.4",
       "section_title": "Special Values and Extrema",
       "source_url": "https://dlmf.nist.gov/5.4.E12",
-      "match": "none",
-      "lean_statement": false,
+      "match": "specialization",
+      "lean_statement": true,
       "lean_proof": false,
-      "lean_declarations": [],
+      "lean_declarations": [
+        "LMLF.Blueprint.Gamma.digamma_one_values"
+      ],
       "quantitative_analogue": false,
       "quantitative_statement": false,
       "quantitative_proof": false,
       "quantitative_declarations": [],
-      "notes": null
+      "notes": "Complex digamma value at 1 together with the source's signed positive derivative identity."
     },
     {
       "dlmf_id": "5.4.E13",
@@ -11170,15 +11221,17 @@
       "section": "5.4",
       "section_title": "Special Values and Extrema",
       "source_url": "https://dlmf.nist.gov/5.4.E13",
-      "match": "none",
-      "lean_statement": false,
+      "match": "specialization",
+      "lean_statement": true,
       "lean_proof": false,
-      "lean_declarations": [],
+      "lean_declarations": [
+        "LMLF.Blueprint.Gamma.digamma_half_values"
+      ],
       "quantitative_analogue": false,
       "quantitative_statement": false,
       "quantitative_proof": false,
       "quantitative_declarations": [],
-      "notes": null
+      "notes": "Complex digamma value at 1/2 together with the source's signed positive derivative identity."
     },
     {
       "dlmf_id": "5.4.E14",
@@ -11187,15 +11240,17 @@
       "section": "5.4",
       "section_title": "Special Values and Extrema",
       "source_url": "https://dlmf.nist.gov/5.4.E14",
-      "match": "none",
-      "lean_statement": false,
+      "match": "specialization",
+      "lean_statement": true,
       "lean_proof": false,
-      "lean_declarations": [],
+      "lean_declarations": [
+        "LMLF.Blueprint.Gamma.digamma_nat_value"
+      ],
       "quantitative_analogue": false,
       "quantitative_statement": false,
       "quantitative_proof": false,
       "quantitative_declarations": [],
-      "notes": null
+      "notes": "Natural-number specialization with a finite complex harmonic sum."
     },
     {
       "dlmf_id": "5.4.E15",
@@ -11204,15 +11259,17 @@
       "section": "5.4",
       "section_title": "Special Values and Extrema",
       "source_url": "https://dlmf.nist.gov/5.4.E15",
-      "match": "none",
-      "lean_statement": false,
+      "match": "specialization",
+      "lean_statement": true,
       "lean_proof": false,
-      "lean_declarations": [],
+      "lean_declarations": [
+        "LMLF.Blueprint.Gamma.digamma_half_nat_value"
+      ],
       "quantitative_analogue": false,
       "quantitative_statement": false,
       "quantitative_proof": false,
       "quantitative_declarations": [],
-      "notes": null
+      "notes": "Positive natural-number specialization with an odd reciprocal sum."
     },
     {
       "dlmf_id": "5.4.E16",
@@ -11221,15 +11278,17 @@
       "section": "5.4",
       "section_title": "Special Values and Extrema",
       "source_url": "https://dlmf.nist.gov/5.4.E16",
-      "match": "none",
-      "lean_statement": false,
+      "match": "specialization",
+      "lean_statement": true,
       "lean_proof": false,
-      "lean_declarations": [],
+      "lean_declarations": [
+        "LMLF.Blueprint.Gamma.digamma_imaginary_part"
+      ],
       "quantitative_analogue": false,
       "quantitative_statement": false,
       "quantitative_proof": false,
       "quantitative_declarations": [],
-      "notes": null
+      "notes": "Real y line formula, writing coth as cosh/sinh and requiring y ≠ 0."
     },
     {
       "dlmf_id": "5.4.E17",
@@ -11238,15 +11297,17 @@
       "section": "5.4",
       "section_title": "Special Values and Extrema",
       "source_url": "https://dlmf.nist.gov/5.4.E17",
-      "match": "none",
-      "lean_statement": false,
+      "match": "specialization",
+      "lean_statement": true,
       "lean_proof": false,
-      "lean_declarations": [],
+      "lean_declarations": [
+        "LMLF.Blueprint.Gamma.digamma_half_shift_imaginary_part"
+      ],
       "quantitative_analogue": false,
       "quantitative_statement": false,
       "quantitative_proof": false,
       "quantitative_declarations": [],
-      "notes": null
+      "notes": "Real y specialization with tanh written as sinh/cosh."
     },
     {
       "dlmf_id": "5.4.E18",
@@ -11255,15 +11316,17 @@
       "section": "5.4",
       "section_title": "Special Values and Extrema",
       "source_url": "https://dlmf.nist.gov/5.4.E18",
-      "match": "none",
-      "lean_statement": false,
+      "match": "specialization",
+      "lean_statement": true,
       "lean_proof": false,
-      "lean_declarations": [],
+      "lean_declarations": [
+        "LMLF.Blueprint.Gamma.digamma_one_shift_imaginary_part"
+      ],
       "quantitative_analogue": false,
       "quantitative_statement": false,
       "quantitative_proof": false,
       "quantitative_declarations": [],
-      "notes": null
+      "notes": "Real y line formula, writing coth as cosh/sinh and requiring y ≠ 0."
     },
     {
       "dlmf_id": "5.4.E19",
@@ -11272,15 +11335,17 @@
       "section": "5.4",
       "section_title": "Special Values and Extrema",
       "source_url": "https://dlmf.nist.gov/5.4.E19",
-      "match": "none",
-      "lean_statement": false,
+      "match": "specialization",
+      "lean_statement": true,
       "lean_proof": false,
-      "lean_declarations": [],
+      "lean_declarations": [
+        "LMLF.Blueprint.Gamma.digamma_rational_value"
+      ],
       "quantitative_analogue": false,
       "quantitative_statement": false,
       "quantitative_proof": false,
       "quantitative_declarations": [],
-      "notes": null
+      "notes": "Natural p,q specialization of the rational formula, with complex logarithm and trigonometric functions."
     },
     {
       "dlmf_id": "5.4.E20",
@@ -11289,15 +11354,17 @@
       "section": "5.4",
       "section_title": "Special Values and Extrema",
       "source_url": "https://dlmf.nist.gov/5.4.E20",
-      "match": "none",
-      "lean_statement": false,
+      "match": "specialization",
+      "lean_statement": true,
       "lean_proof": false,
-      "lean_declarations": [],
+      "lean_declarations": [
+        "LMLF.Blueprint.Gamma.gamma_extrema_asymptotic"
+      ],
       "quantitative_analogue": false,
       "quantitative_statement": false,
       "quantitative_proof": false,
       "quantitative_declarations": [],
-      "notes": null
+      "notes": "Real critical-point sequence with both Gamma' and digamma zero conditions and an explicit eventual bound for the O term; the manual reproduces all eleven Table 5.4.1 decimal rows as labelled approximations."
     },
     {
       "dlmf_id": "5.5.E1",
@@ -11306,15 +11373,17 @@
       "section": "5.5",
       "section_title": "Functional Relations",
       "source_url": "https://dlmf.nist.gov/5.5.E1",
-      "match": "none",
-      "lean_statement": false,
+      "match": "specialization",
+      "lean_statement": true,
       "lean_proof": false,
-      "lean_declarations": [],
+      "lean_declarations": [
+        "LMLF.Blueprint.Gamma.gamma_recurrence"
+      ],
       "quantitative_analogue": false,
       "quantitative_statement": false,
       "quantitative_proof": false,
       "quantitative_declarations": [],
-      "notes": null
+      "notes": "Pointwise specialization to the ordinary pole-free domain of DLMF's meromorphic identity. Mathlib match: Complex.Gamma_add_one."
     },
     {
       "dlmf_id": "5.5.E2",
@@ -11323,15 +11392,17 @@
       "section": "5.5",
       "section_title": "Functional Relations",
       "source_url": "https://dlmf.nist.gov/5.5.E2",
-      "match": "none",
-      "lean_statement": false,
+      "match": "specialization",
+      "lean_statement": true,
       "lean_proof": false,
-      "lean_declarations": [],
+      "lean_declarations": [
+        "LMLF.Blueprint.Gamma.digamma_recurrence"
+      ],
       "quantitative_analogue": false,
       "quantitative_statement": false,
       "quantitative_proof": false,
       "quantitative_declarations": [],
-      "notes": null
+      "notes": "Pointwise specialization to the ordinary pole-free domain of DLMF's meromorphic identity. Mathlib match: Complex.digamma_apply_add_one."
     },
     {
       "dlmf_id": "5.5.E3",
@@ -11340,15 +11411,17 @@
       "section": "5.5",
       "section_title": "Functional Relations",
       "source_url": "https://dlmf.nist.gov/5.5.E3",
-      "match": "none",
-      "lean_statement": false,
+      "match": "exact",
+      "lean_statement": true,
       "lean_proof": false,
-      "lean_declarations": [],
+      "lean_declarations": [
+        "LMLF.Blueprint.Gamma.gamma_reflection"
+      ],
       "quantitative_analogue": false,
       "quantitative_statement": false,
       "quantitative_proof": false,
       "quantitative_declarations": [],
-      "notes": null
+      "notes": "Mathlib match: Complex.Gamma_mul_Gamma_one_sub; Mathlib's theorem is unconditional under its totalized conventions."
     },
     {
       "dlmf_id": "5.5.E4",
@@ -11357,15 +11430,17 @@
       "section": "5.5",
       "section_title": "Functional Relations",
       "source_url": "https://dlmf.nist.gov/5.5.E4",
-      "match": "none",
-      "lean_statement": false,
+      "match": "exact",
+      "lean_statement": true,
       "lean_proof": false,
-      "lean_declarations": [],
+      "lean_declarations": [
+        "LMLF.Blueprint.Gamma.digamma_reflection"
+      ],
       "quantitative_analogue": false,
       "quantitative_statement": false,
       "quantitative_proof": false,
       "quantitative_declarations": [],
-      "notes": null
+      "notes": "No matching digamma reflection theorem was found in pinned Mathlib."
     },
     {
       "dlmf_id": "5.5.E5",
@@ -11374,15 +11449,17 @@
       "section": "5.5",
       "section_title": "Functional Relations",
       "source_url": "https://dlmf.nist.gov/5.5.E5",
-      "match": "none",
-      "lean_statement": false,
+      "match": "exact",
+      "lean_statement": true,
       "lean_proof": false,
-      "lean_declarations": [],
+      "lean_declarations": [
+        "LMLF.Blueprint.Gamma.gamma_duplication"
+      ],
       "quantitative_analogue": false,
       "quantitative_statement": false,
       "quantitative_proof": false,
       "quantitative_declarations": [],
-      "notes": null
+      "notes": "Equivalent Mathlib theorem: Complex.Gamma_mul_Gamma_add_half (opposite algebraic orientation)."
     },
     {
       "dlmf_id": "5.5.E6",
@@ -11391,15 +11468,17 @@
       "section": "5.5",
       "section_title": "Functional Relations",
       "source_url": "https://dlmf.nist.gov/5.5.E6",
-      "match": "none",
-      "lean_statement": false,
+      "match": "exact",
+      "lean_statement": true,
       "lean_proof": false,
-      "lean_declarations": [],
+      "lean_declarations": [
+        "LMLF.Blueprint.Gamma.gamma_multiplication"
+      ],
       "quantitative_analogue": false,
       "quantitative_statement": false,
       "quantitative_proof": false,
       "quantitative_declarations": [],
-      "notes": null
+      "notes": "No general finite Gamma multiplication theorem was found in pinned Mathlib."
     },
     {
       "dlmf_id": "5.5.E7",
@@ -11408,15 +11487,17 @@
       "section": "5.5",
       "section_title": "Functional Relations",
       "source_url": "https://dlmf.nist.gov/5.5.E7",
-      "match": "none",
-      "lean_statement": false,
+      "match": "exact",
+      "lean_statement": true,
       "lean_proof": false,
-      "lean_declarations": [],
+      "lean_declarations": [
+        "LMLF.Blueprint.Gamma.gamma_rational_product"
+      ],
       "quantitative_analogue": false,
       "quantitative_statement": false,
       "quantitative_proof": false,
       "quantitative_declarations": [],
-      "notes": null
+      "notes": "Real-valued presentation of the same identity; no matching finite-product theorem was found in pinned Mathlib."
     },
     {
       "dlmf_id": "5.5.E8",
@@ -11425,15 +11506,17 @@
       "section": "5.5",
       "section_title": "Functional Relations",
       "source_url": "https://dlmf.nist.gov/5.5.E8",
-      "match": "none",
-      "lean_statement": false,
+      "match": "specialization",
+      "lean_statement": true,
       "lean_proof": false,
-      "lean_declarations": [],
+      "lean_declarations": [
+        "LMLF.Blueprint.Gamma.digamma_duplication"
+      ],
       "quantitative_analogue": false,
       "quantitative_statement": false,
       "quantitative_proof": false,
       "quantitative_declarations": [],
-      "notes": null
+      "notes": "Pointwise specialization to arguments at which all displayed digamma values are finite. No matching digamma duplication theorem was found in pinned Mathlib."
     },
     {
       "dlmf_id": "5.5.E9",
@@ -11442,15 +11525,17 @@
       "section": "5.5",
       "section_title": "Functional Relations",
       "source_url": "https://dlmf.nist.gov/5.5.E9",
-      "match": "none",
-      "lean_statement": false,
+      "match": "specialization",
+      "lean_statement": true,
       "lean_proof": false,
-      "lean_declarations": [],
+      "lean_declarations": [
+        "LMLF.Blueprint.Gamma.digamma_multiplication"
+      ],
       "quantitative_analogue": false,
       "quantitative_statement": false,
       "quantitative_proof": false,
       "quantitative_declarations": [],
-      "notes": null
+      "notes": "Pointwise specialization to arguments at which all displayed digamma values are finite. DLMF notes that E9 follows from E6 by logarithmic differentiation; the file states both pointwise formulas separately. No general digamma multiplication theorem was found in pinned Mathlib."
     },
     {
       "dlmf_id": "5.6.E1",
@@ -11459,15 +11544,17 @@
       "section": "5.6",
       "section_title": "Inequalities",
       "source_url": "https://dlmf.nist.gov/5.6.E1",
-      "match": "none",
-      "lean_statement": false,
+      "match": "exact",
+      "lean_statement": true,
       "lean_proof": false,
-      "lean_declarations": [],
+      "lean_declarations": [
+        "LMLF.Blueprint.Gamma.stirlingNormalizedBounds"
+      ],
       "quantitative_analogue": false,
       "quantitative_statement": false,
       "quantitative_proof": false,
       "quantitative_declarations": [],
-      "notes": null
+      "notes": "No matching arbitrary-positive-real Gamma bound was found in pinned Mathlib. Mathlib.Analysis.SpecialFunctions.Stirling contains related bounds only for factorials and its Stirling sequence."
     },
     {
       "dlmf_id": "5.6.E2",
@@ -11476,15 +11563,17 @@
       "section": "5.6",
       "section_title": "Inequalities",
       "source_url": "https://dlmf.nist.gov/5.6.E2",
-      "match": "none",
-      "lean_statement": false,
+      "match": "exact",
+      "lean_statement": true,
       "lean_proof": false,
-      "lean_declarations": [],
+      "lean_declarations": [
+        "LMLF.Blueprint.Gamma.oneDivGamma_add_oneDivGamma_reciprocal_le_two"
+      ],
       "quantitative_analogue": false,
       "quantitative_statement": false,
       "quantitative_proof": false,
       "quantitative_declarations": [],
-      "notes": null
+      "notes": "No matching theorem was found in pinned Mathlib."
     },
     {
       "dlmf_id": "5.6.E3",
@@ -11493,15 +11582,17 @@
       "section": "5.6",
       "section_title": "Inequalities",
       "source_url": "https://dlmf.nist.gov/5.6.E3",
-      "match": "none",
-      "lean_statement": false,
+      "match": "exact",
+      "lean_statement": true,
       "lean_proof": false,
-      "lean_declarations": [],
+      "lean_declarations": [
+        "LMLF.Blueprint.Gamma.oneDivGammaSq_add_oneDivGammaSq_reciprocal_le_two"
+      ],
       "quantitative_analogue": false,
       "quantitative_statement": false,
       "quantitative_proof": false,
       "quantitative_declarations": [],
-      "notes": null
+      "notes": "No matching theorem was found in pinned Mathlib."
     },
     {
       "dlmf_id": "5.6.E4",
@@ -11510,15 +11601,17 @@
       "section": "5.6",
       "section_title": "Inequalities",
       "source_url": "https://dlmf.nist.gov/5.6.E4",
-      "match": "none",
-      "lean_statement": false,
+      "match": "exact",
+      "lean_statement": true,
       "lean_proof": false,
-      "lean_declarations": [],
+      "lean_declarations": [
+        "LMLF.Blueprint.Gamma.gautschiInequality"
+      ],
       "quantitative_analogue": false,
       "quantitative_statement": false,
       "quantitative_proof": false,
       "quantitative_declarations": [],
-      "notes": null
+      "notes": "No Gautschi inequality is present in pinned Mathlib. Real.convexOn_log_Gamma and Real.Gamma_mul_add_mul_le_rpow_Gamma_mul_rpow_Gamma are relevant proof infrastructure but do not state this quotient bound."
     },
     {
       "dlmf_id": "5.6.E5",
@@ -11527,15 +11620,17 @@
       "section": "5.6",
       "section_title": "Inequalities",
       "source_url": "https://dlmf.nist.gov/5.6.E5",
-      "match": "none",
-      "lean_statement": false,
+      "match": "exact",
+      "lean_statement": true,
       "lean_proof": false,
-      "lean_declarations": [],
+      "lean_declarations": [
+        "LMLF.Blueprint.Gamma.kershawInequality"
+      ],
       "quantitative_analogue": false,
       "quantitative_statement": false,
       "quantitative_proof": false,
       "quantitative_declarations": [],
-      "notes": null
+      "notes": "Pinned Mathlib supplies Complex.digamma and basic recurrence/meromorphic facts, but no Kershaw inequality or shared real-valued digamma wrapper."
     },
     {
       "dlmf_id": "5.6.E6",
@@ -11544,15 +11639,17 @@
       "section": "5.6",
       "section_title": "Inequalities",
       "source_url": "https://dlmf.nist.gov/5.6.E6",
-      "match": "none",
-      "lean_statement": false,
+      "match": "specialization",
+      "lean_statement": true,
       "lean_proof": false,
-      "lean_declarations": [],
+      "lean_declarations": [
+        "LMLF.Blueprint.Gamma.norm_Gamma_vertical_le"
+      ],
       "quantitative_analogue": false,
       "quantitative_statement": false,
       "quantitative_proof": false,
       "quantitative_declarations": [],
-      "notes": null
+      "notes": "The explicit exclusion x != -n records the ordinary finite domain implicit in the source. It is necessary because Mathlib totalizes Gamma to zero at those poles. No matching norm inequality was found in pinned Mathlib."
     },
     {
       "dlmf_id": "5.6.E7",
@@ -11561,15 +11658,17 @@
       "section": "5.6",
       "section_title": "Inequalities",
       "source_url": "https://dlmf.nist.gov/5.6.E7",
-      "match": "none",
-      "lean_statement": false,
+      "match": "exact",
+      "lean_statement": true,
       "lean_proof": false,
-      "lean_declarations": [],
+      "lean_declarations": [
+        "LMLF.Blueprint.Gamma.norm_Gamma_vertical_lowerBound"
+      ],
       "quantitative_analogue": false,
       "quantitative_statement": false,
       "quantitative_proof": false,
       "quantitative_declarations": [],
-      "notes": null
+      "notes": "The source sech(pi*y)^(1/2) is written as sqrt(cosh(pi*y)^-1), since pinned Mathlib has no named real sech. No matching Gamma norm bound was found."
     },
     {
       "dlmf_id": "5.6.E8",
@@ -11578,15 +11677,17 @@
       "section": "5.6",
       "section_title": "Inequalities",
       "source_url": "https://dlmf.nist.gov/5.6.E8",
-      "match": "none",
-      "lean_statement": false,
+      "match": "exact",
+      "lean_statement": true,
       "lean_proof": false,
-      "lean_declarations": [],
+      "lean_declarations": [
+        "LMLF.Blueprint.Gamma.norm_Gamma_div_Gamma_le"
+      ],
       "quantitative_analogue": false,
       "quantitative_statement": false,
       "quantitative_proof": false,
       "quantitative_declarations": [],
-      "notes": null
+      "notes": "The source coordinates z=x+iy with x>0 are expressed equivalently as 0<z.re. No matching quotient bound was found in pinned Mathlib."
     },
     {
       "dlmf_id": "5.6.E9",
@@ -11595,15 +11696,17 @@
       "section": "5.6",
       "section_title": "Inequalities",
       "source_url": "https://dlmf.nist.gov/5.6.E9",
-      "match": "none",
-      "lean_statement": false,
+      "match": "specialization",
+      "lean_statement": true,
       "lean_proof": false,
-      "lean_declarations": [],
+      "lean_declarations": [
+        "LMLF.Blueprint.Gamma.norm_Gamma_rightHalfPlane_le"
+      ],
       "quantitative_analogue": false,
       "quantitative_statement": false,
       "quantitative_proof": false,
       "quantitative_declarations": [],
-      "notes": null
+      "notes": "The source coordinates are expressed as z.re and z.im. The explicit z != 0 records the ordinary domain at the sole Gamma pole in the closed right half-plane; Mathlib totalizes Gamma there. No matching bound was found."
     },
     {
       "dlmf_id": "5.7.E1",
@@ -11612,15 +11715,20 @@
       "section": "5.7",
       "section_title": "Series Expansions",
       "source_url": "https://dlmf.nist.gov/5.7.E1",
-      "match": "none",
-      "lean_statement": false,
+      "match": "exact",
+      "lean_statement": true,
       "lean_proof": false,
-      "lean_declarations": [],
+      "lean_declarations": [
+        "LMLF.Blueprint.Gamma.reciprocalGammaCoeff",
+        "LMLF.Blueprint.Gamma.reciprocalGamma_hasSum",
+        "LMLF.Blueprint.Gamma.reciprocalGammaCoeff_one",
+        "LMLF.Blueprint.Gamma.reciprocalGammaCoeff_two"
+      ],
       "quantitative_analogue": false,
       "quantitative_statement": false,
       "quantitative_proof": false,
       "quantitative_declarations": [],
-      "notes": null
+      "notes": "HasSum records both global convergence and the value; the two unnumbered initial coefficients are included."
     },
     {
       "dlmf_id": "5.7.E2",
@@ -11629,15 +11737,17 @@
       "section": "5.7",
       "section_title": "Series Expansions",
       "source_url": "https://dlmf.nist.gov/5.7.E2",
-      "match": "none",
-      "lean_statement": false,
+      "match": "exact",
+      "lean_statement": true,
       "lean_proof": false,
-      "lean_declarations": [],
+      "lean_declarations": [
+        "LMLF.Blueprint.Gamma.reciprocalGammaCoeff_recurrence"
+      ],
       "quantitative_analogue": false,
       "quantitative_statement": false,
       "quantitative_proof": false,
       "quantitative_declarations": [],
-      "notes": null
+      "notes": "The source ellipsis is expanded as a finite sum from 2 through k-1."
     },
     {
       "dlmf_id": "5.7.E3",
@@ -11646,15 +11756,20 @@
       "section": "5.7",
       "section_title": "Series Expansions",
       "source_url": "https://dlmf.nist.gov/5.7.E3",
-      "match": "none",
-      "lean_statement": false,
+      "match": "exact",
+      "lean_statement": true,
       "lean_proof": false,
-      "lean_declarations": [],
+      "lean_declarations": [
+        "LMLF.Blueprint.Gamma.logGammaOnePlusSeriesTerm",
+        "LMLF.Blueprint.Gamma.logGammaOnePlus",
+        "LMLF.Blueprint.Gamma.exp_logGammaOnePlus",
+        "LMLF.Blueprint.Gamma.logGamma_one_add_hasSum"
+      ],
       "quantitative_analogue": false,
       "quantitative_statement": false,
       "quantitative_proof": false,
       "quantitative_declarations": [],
-      "notes": null
+      "notes": "Uses a named branch-consistent log-Gamma, an exponential-to-Gamma bridge, and HasSum for the series beginning at k=2; z = -1 is explicitly excluded because the source expression contains log 0."
     },
     {
       "dlmf_id": "5.7.E4",
@@ -11663,15 +11778,17 @@
       "section": "5.7",
       "section_title": "Series Expansions",
       "source_url": "https://dlmf.nist.gov/5.7.E4",
-      "match": "none",
-      "lean_statement": false,
+      "match": "exact",
+      "lean_statement": true,
       "lean_proof": false,
-      "lean_declarations": [],
+      "lean_declarations": [
+        "LMLF.Blueprint.Gamma.digamma_one_add_hasSum"
+      ],
       "quantitative_analogue": false,
       "quantitative_statement": false,
       "quantitative_proof": false,
       "quantitative_declarations": [],
-      "notes": null
+      "notes": "HasSum records the disk of convergence and exact digamma value."
     },
     {
       "dlmf_id": "5.7.E5",
@@ -11680,15 +11797,17 @@
       "section": "5.7",
       "section_title": "Series Expansions",
       "source_url": "https://dlmf.nist.gov/5.7.E5",
-      "match": "none",
-      "lean_statement": false,
+      "match": "exact",
+      "lean_statement": true,
       "lean_proof": false,
-      "lean_declarations": [],
+      "lean_declarations": [
+        "LMLF.Blueprint.Gamma.digamma_one_add_even_hasSum"
+      ],
       "quantitative_analogue": false,
       "quantitative_statement": false,
       "quantitative_proof": false,
       "quantitative_declarations": [],
-      "notes": null
+      "notes": "The radius-two condition and exclusions z = 0, 1, -1 are explicit."
     },
     {
       "dlmf_id": "5.7.E6",
@@ -11697,15 +11816,17 @@
       "section": "5.7",
       "section_title": "Series Expansions",
       "source_url": "https://dlmf.nist.gov/5.7.E6",
-      "match": "none",
-      "lean_statement": false,
+      "match": "exact",
+      "lean_statement": true,
       "lean_proof": false,
-      "lean_declarations": [],
+      "lean_declarations": [
+        "LMLF.Blueprint.Gamma.digamma_partialFractions_hasSum"
+      ],
       "quantitative_analogue": false,
       "quantitative_statement": false,
       "quantitative_proof": false,
       "quantitative_declarations": [],
-      "notes": null
+      "notes": "One theorem contains both HasSum assertions in the chained source identity."
     },
     {
       "dlmf_id": "5.7.E7",
@@ -11714,15 +11835,17 @@
       "section": "5.7",
       "section_title": "Series Expansions",
       "source_url": "https://dlmf.nist.gov/5.7.E7",
-      "match": "none",
-      "lean_statement": false,
+      "match": "exact",
+      "lean_statement": true,
       "lean_proof": false,
-      "lean_declarations": [],
+      "lean_declarations": [
+        "LMLF.Blueprint.Gamma.digamma_halfDifference_hasSum"
+      ],
       "quantitative_analogue": false,
       "quantitative_statement": false,
       "quantitative_proof": false,
       "quantitative_declarations": [],
-      "notes": null
+      "notes": "The nonpositive-integer exclusions preceding 5.7.6 also govern this formula."
     },
     {
       "dlmf_id": "5.7.E8",
@@ -11731,15 +11854,17 @@
       "section": "5.7",
       "section_title": "Series Expansions",
       "source_url": "https://dlmf.nist.gov/5.7.E8",
-      "match": "none",
-      "lean_statement": false,
+      "match": "exact",
+      "lean_statement": true,
       "lean_proof": false,
-      "lean_declarations": [],
+      "lean_declarations": [
+        "LMLF.Blueprint.Gamma.digamma_one_add_mul_I_im_hasSum"
+      ],
       "quantitative_analogue": false,
       "quantitative_statement": false,
       "quantitative_proof": false,
       "quantitative_declarations": [],
-      "notes": null
+      "notes": "The summand and target are real-valued; DLMF imposes no further condition on y."
     },
     {
       "dlmf_id": "5.8.E1",
@@ -11748,15 +11873,19 @@
       "section": "5.8",
       "section_title": "Infinite Products",
       "source_url": "https://dlmf.nist.gov/5.8.E1",
-      "match": "none",
-      "lean_statement": false,
+      "match": "exact",
+      "lean_statement": true,
       "lean_proof": false,
-      "lean_declarations": [],
+      "lean_declarations": [
+        "LMLF.Blueprint.Gamma.gammaShiftedProduct",
+        "LMLF.Blueprint.Gamma.gammaLimitApprox",
+        "LMLF.Blueprint.Gamma.gamma_limit_formula"
+      ],
       "quantitative_analogue": false,
       "quantitative_statement": false,
       "quantitative_proof": false,
       "quantitative_declarations": [],
-      "notes": null
+      "notes": "Tendsto exposes convergence of Euler's finite Gamma approximants."
     },
     {
       "dlmf_id": "5.8.E2",
@@ -11765,15 +11894,19 @@
       "section": "5.8",
       "section_title": "Infinite Products",
       "source_url": "https://dlmf.nist.gov/5.8.E2",
-      "match": "none",
-      "lean_statement": false,
+      "match": "exact",
+      "lean_statement": true,
       "lean_proof": false,
-      "lean_declarations": [],
+      "lean_declarations": [
+        "LMLF.Blueprint.Gamma.reciprocalGammaWeierstrassFactor",
+        "LMLF.Blueprint.Gamma.reciprocalGammaProductApprox",
+        "LMLF.Blueprint.Gamma.reciprocalGamma_weierstrassProduct"
+      ],
       "quantitative_analogue": false,
       "quantitative_statement": false,
       "quantitative_proof": false,
       "quantitative_declarations": [],
-      "notes": null
+      "notes": "The prefactor remains inside the finite approximation, preserving the source identity at z = 0."
     },
     {
       "dlmf_id": "5.8.E3",
@@ -11782,15 +11915,18 @@
       "section": "5.8",
       "section_title": "Infinite Products",
       "source_url": "https://dlmf.nist.gov/5.8.E3",
-      "match": "none",
-      "lean_statement": false,
+      "match": "exact",
+      "lean_statement": true,
       "lean_proof": false,
-      "lean_declarations": [],
+      "lean_declarations": [
+        "LMLF.Blueprint.Gamma.gammaNormRatioSqProductApprox",
+        "LMLF.Blueprint.Gamma.gamma_norm_ratio_sq_product"
+      ],
       "quantitative_analogue": false,
       "quantitative_statement": false,
       "quantitative_proof": false,
       "quantitative_declarations": [],
-      "notes": null
+      "notes": "A real finite-product sequence tends to the squared complex norm of the Gamma ratio."
     },
     {
       "dlmf_id": "5.8.E4",
@@ -11799,15 +11935,17 @@
       "section": "5.8",
       "section_title": "Infinite Products",
       "source_url": "https://dlmf.nist.gov/5.8.E4",
-      "match": "none",
-      "lean_statement": false,
+      "match": "exact",
+      "lean_statement": true,
       "lean_proof": false,
-      "lean_declarations": [],
+      "lean_declarations": [
+        "LMLF.Blueprint.Gamma.BalancedGammaParameters"
+      ],
       "quantitative_analogue": false,
       "quantitative_statement": false,
       "quantitative_proof": false,
       "quantitative_declarations": [],
-      "notes": null
+      "notes": "This numbered equation is a hypothesis for 5.8.5 and is represented by a reusable predicate."
     },
     {
       "dlmf_id": "5.8.E5",
@@ -11816,15 +11954,19 @@
       "section": "5.8",
       "section_title": "Infinite Products",
       "source_url": "https://dlmf.nist.gov/5.8.E5",
-      "match": "none",
-      "lean_statement": false,
+      "match": "exact",
+      "lean_statement": true,
       "lean_proof": false,
-      "lean_declarations": [],
+      "lean_declarations": [
+        "LMLF.Blueprint.Gamma.balancedGammaRatioFactor",
+        "LMLF.Blueprint.Gamma.balancedGammaRatioProductApprox",
+        "LMLF.Blueprint.Gamma.balanced_gamma_ratio_product"
+      ],
       "quantitative_analogue": false,
       "quantitative_statement": false,
       "quantitative_proof": false,
       "quantitative_declarations": [],
-      "notes": null
+      "notes": "Uses the balancing predicate from 5.8.4 and excludes nonpositive integers only from b, as DLMF states."
     },
     {
       "dlmf_id": "5.9.E1",
@@ -11833,10 +11975,12 @@
       "section": "5.9",
       "section_title": "Integral Representations",
       "source_url": "https://dlmf.nist.gov/5.9.E1",
-      "match": "none",
-      "lean_statement": false,
+      "match": "exact",
+      "lean_statement": true,
       "lean_proof": false,
-      "lean_declarations": [],
+      "lean_declarations": [
+        "LMLF.Blueprint.Gamma.Section59.dlmf_5_9_1"
+      ],
       "quantitative_analogue": false,
       "quantitative_statement": false,
       "quantitative_proof": false,
@@ -11850,15 +11994,17 @@
       "section": "5.9",
       "section_title": "Integral Representations",
       "source_url": "https://dlmf.nist.gov/5.9.E2",
-      "match": "none",
-      "lean_statement": false,
+      "match": "exact",
+      "lean_statement": true,
       "lean_proof": false,
-      "lean_declarations": [],
+      "lean_declarations": [
+        "LMLF.Blueprint.Gamma.Section59.dlmf_5_9_2"
+      ],
       "quantitative_analogue": false,
       "quantitative_statement": false,
       "quantitative_proof": false,
       "quantitative_declarations": [],
-      "notes": null
+      "notes": "Branch-aware finite Hankel contour: lower and upper banks use continuous arguments -π and +π."
     },
     {
       "dlmf_id": "5.9.E2_5",
@@ -11867,10 +12013,12 @@
       "section": "5.9",
       "section_title": "Integral Representations",
       "source_url": "https://dlmf.nist.gov/5.9.E2_5",
-      "match": "none",
-      "lean_statement": false,
+      "match": "exact",
+      "lean_statement": true,
       "lean_proof": false,
-      "lean_declarations": [],
+      "lean_declarations": [
+        "LMLF.Blueprint.Gamma.Section59.dlmf_5_9_2_5"
+      ],
       "quantitative_analogue": false,
       "quantitative_statement": false,
       "quantitative_proof": false,
@@ -11884,10 +12032,12 @@
       "section": "5.9",
       "section_title": "Integral Representations",
       "source_url": "https://dlmf.nist.gov/5.9.E3",
-      "match": "none",
-      "lean_statement": false,
+      "match": "exact",
+      "lean_statement": true,
       "lean_proof": false,
-      "lean_declarations": [],
+      "lean_declarations": [
+        "LMLF.Blueprint.Gamma.Section59.dlmf_5_9_3"
+      ],
       "quantitative_analogue": false,
       "quantitative_statement": false,
       "quantitative_proof": false,
@@ -11901,10 +12051,12 @@
       "section": "5.9",
       "section_title": "Integral Representations",
       "source_url": "https://dlmf.nist.gov/5.9.E4",
-      "match": "none",
-      "lean_statement": false,
+      "match": "exact",
+      "lean_statement": true,
       "lean_proof": false,
-      "lean_declarations": [],
+      "lean_declarations": [
+        "LMLF.Blueprint.Gamma.Section59.dlmf_5_9_4"
+      ],
       "quantitative_analogue": false,
       "quantitative_statement": false,
       "quantitative_proof": false,
@@ -11918,10 +12070,12 @@
       "section": "5.9",
       "section_title": "Integral Representations",
       "source_url": "https://dlmf.nist.gov/5.9.E5",
-      "match": "none",
-      "lean_statement": false,
+      "match": "exact",
+      "lean_statement": true,
       "lean_proof": false,
-      "lean_declarations": [],
+      "lean_declarations": [
+        "LMLF.Blueprint.Gamma.Section59.dlmf_5_9_5"
+      ],
       "quantitative_analogue": false,
       "quantitative_statement": false,
       "quantitative_proof": false,
@@ -11935,10 +12089,12 @@
       "section": "5.9",
       "section_title": "Integral Representations",
       "source_url": "https://dlmf.nist.gov/5.9.E6",
-      "match": "none",
-      "lean_statement": false,
+      "match": "exact",
+      "lean_statement": true,
       "lean_proof": false,
-      "lean_declarations": [],
+      "lean_declarations": [
+        "LMLF.Blueprint.Gamma.Section59.dlmf_5_9_6"
+      ],
       "quantitative_analogue": false,
       "quantitative_statement": false,
       "quantitative_proof": false,
@@ -11952,10 +12108,12 @@
       "section": "5.9",
       "section_title": "Integral Representations",
       "source_url": "https://dlmf.nist.gov/5.9.E7",
-      "match": "none",
-      "lean_statement": false,
+      "match": "exact",
+      "lean_statement": true,
       "lean_proof": false,
-      "lean_declarations": [],
+      "lean_declarations": [
+        "LMLF.Blueprint.Gamma.Section59.dlmf_5_9_7"
+      ],
       "quantitative_analogue": false,
       "quantitative_statement": false,
       "quantitative_proof": false,
@@ -11969,10 +12127,12 @@
       "section": "5.9",
       "section_title": "Integral Representations",
       "source_url": "https://dlmf.nist.gov/5.9.E8",
-      "match": "none",
-      "lean_statement": false,
+      "match": "exact",
+      "lean_statement": true,
       "lean_proof": false,
-      "lean_declarations": [],
+      "lean_declarations": [
+        "LMLF.Blueprint.Gamma.Section59.dlmf_5_9_8"
+      ],
       "quantitative_analogue": false,
       "quantitative_statement": false,
       "quantitative_proof": false,
@@ -11986,10 +12146,12 @@
       "section": "5.9",
       "section_title": "Integral Representations",
       "source_url": "https://dlmf.nist.gov/5.9.E9",
-      "match": "none",
-      "lean_statement": false,
+      "match": "exact",
+      "lean_statement": true,
       "lean_proof": false,
-      "lean_declarations": [],
+      "lean_declarations": [
+        "LMLF.Blueprint.Gamma.Section59.dlmf_5_9_9"
+      ],
       "quantitative_analogue": false,
       "quantitative_statement": false,
       "quantitative_proof": false,
@@ -12003,15 +12165,17 @@
       "section": "5.9",
       "section_title": "Integral Representations",
       "source_url": "https://dlmf.nist.gov/5.9.E10",
-      "match": "none",
-      "lean_statement": false,
+      "match": "specialization",
+      "lean_statement": true,
       "lean_proof": false,
-      "lean_declarations": [],
+      "lean_declarations": [
+        "LMLF.Blueprint.Gamma.Section59.dlmf_5_9_10"
+      ],
       "quantitative_analogue": false,
       "quantitative_statement": false,
       "quantitative_proof": false,
       "quantitative_declarations": [],
-      "notes": null
+      "notes": "Positive-real specialization; branch and contour conditions are stated in the documentation and Lean signature."
     },
     {
       "dlmf_id": "5.9.E10_1",
@@ -12020,15 +12184,17 @@
       "section": "5.9",
       "section_title": "Integral Representations",
       "source_url": "https://dlmf.nist.gov/5.9.E10_1",
-      "match": "none",
-      "lean_statement": false,
+      "match": "specialization",
+      "lean_statement": true,
       "lean_proof": false,
-      "lean_declarations": [],
+      "lean_declarations": [
+        "LMLF.Blueprint.Gamma.Section59.dlmf_5_9_10_1"
+      ],
       "quantitative_analogue": false,
       "quantitative_statement": false,
       "quantitative_proof": false,
       "quantitative_declarations": [],
-      "notes": null
+      "notes": "Positive-real specialization; branch and contour conditions are stated in the documentation and Lean signature."
     },
     {
       "dlmf_id": "5.9.E10_2",
@@ -12037,15 +12203,17 @@
       "section": "5.9",
       "section_title": "Integral Representations",
       "source_url": "https://dlmf.nist.gov/5.9.E10_2",
-      "match": "none",
-      "lean_statement": false,
+      "match": "specialization",
+      "lean_statement": true,
       "lean_proof": false,
-      "lean_declarations": [],
+      "lean_declarations": [
+        "LMLF.Blueprint.Gamma.Section59.dlmf_5_9_10_2"
+      ],
       "quantitative_analogue": false,
       "quantitative_statement": false,
       "quantitative_proof": false,
       "quantitative_declarations": [],
-      "notes": null
+      "notes": "Positive-real specialization; branch and contour conditions are stated in the documentation and Lean signature."
     },
     {
       "dlmf_id": "5.9.E11",
@@ -12054,15 +12222,17 @@
       "section": "5.9",
       "section_title": "Integral Representations",
       "source_url": "https://dlmf.nist.gov/5.9.E11",
-      "match": "none",
-      "lean_statement": false,
+      "match": "specialization",
+      "lean_statement": true,
       "lean_proof": false,
-      "lean_declarations": [],
+      "lean_declarations": [
+        "LMLF.Blueprint.Gamma.Section59.dlmf_5_9_11"
+      ],
       "quantitative_analogue": false,
       "quantitative_statement": false,
       "quantitative_proof": false,
       "quantitative_declarations": [],
-      "notes": null
+      "notes": "Positive-real specialization; branch and contour conditions are stated in the documentation and Lean signature."
     },
     {
       "dlmf_id": "5.9.E11_1",
@@ -12071,15 +12241,17 @@
       "section": "5.9",
       "section_title": "Integral Representations",
       "source_url": "https://dlmf.nist.gov/5.9.E11_1",
-      "match": "none",
-      "lean_statement": false,
+      "match": "specialization",
+      "lean_statement": true,
       "lean_proof": false,
-      "lean_declarations": [],
+      "lean_declarations": [
+        "LMLF.Blueprint.Gamma.Section59.dlmf_5_9_11_1"
+      ],
       "quantitative_analogue": false,
       "quantitative_statement": false,
       "quantitative_proof": false,
       "quantitative_declarations": [],
-      "notes": null
+      "notes": "Positive-real specialization; branch and contour conditions are stated in the documentation and Lean signature."
     },
     {
       "dlmf_id": "5.9.E11_2",
@@ -12088,15 +12260,17 @@
       "section": "5.9",
       "section_title": "Integral Representations",
       "source_url": "https://dlmf.nist.gov/5.9.E11_2",
-      "match": "none",
-      "lean_statement": false,
+      "match": "specialization",
+      "lean_statement": true,
       "lean_proof": false,
-      "lean_declarations": [],
+      "lean_declarations": [
+        "LMLF.Blueprint.Gamma.Section59.dlmf_5_9_11_2"
+      ],
       "quantitative_analogue": false,
       "quantitative_statement": false,
       "quantitative_proof": false,
       "quantitative_declarations": [],
-      "notes": null
+      "notes": "Positive-real specialization; branch and contour conditions are stated in the documentation and Lean signature."
     },
     {
       "dlmf_id": "5.9.E12",
@@ -12105,15 +12279,17 @@
       "section": "5.9",
       "section_title": "Integral Representations",
       "source_url": "https://dlmf.nist.gov/5.9.E12",
-      "match": "none",
-      "lean_statement": false,
+      "match": "specialization",
+      "lean_statement": true,
       "lean_proof": false,
-      "lean_declarations": [],
+      "lean_declarations": [
+        "LMLF.Blueprint.Gamma.Section59.dlmf_5_9_12"
+      ],
       "quantitative_analogue": false,
       "quantitative_statement": false,
       "quantitative_proof": false,
       "quantitative_declarations": [],
-      "notes": null
+      "notes": "Positive-real specialization; branch and contour conditions are stated in the documentation and Lean signature."
     },
     {
       "dlmf_id": "5.9.E13",
@@ -12122,15 +12298,17 @@
       "section": "5.9",
       "section_title": "Integral Representations",
       "source_url": "https://dlmf.nist.gov/5.9.E13",
-      "match": "none",
-      "lean_statement": false,
+      "match": "specialization",
+      "lean_statement": true,
       "lean_proof": false,
-      "lean_declarations": [],
+      "lean_declarations": [
+        "LMLF.Blueprint.Gamma.Section59.dlmf_5_9_13"
+      ],
       "quantitative_analogue": false,
       "quantitative_statement": false,
       "quantitative_proof": false,
       "quantitative_declarations": [],
-      "notes": null
+      "notes": "Positive-real specialization; branch and contour conditions are stated in the documentation and Lean signature."
     },
     {
       "dlmf_id": "5.9.E14",
@@ -12139,15 +12317,17 @@
       "section": "5.9",
       "section_title": "Integral Representations",
       "source_url": "https://dlmf.nist.gov/5.9.E14",
-      "match": "none",
-      "lean_statement": false,
+      "match": "specialization",
+      "lean_statement": true,
       "lean_proof": false,
-      "lean_declarations": [],
+      "lean_declarations": [
+        "LMLF.Blueprint.Gamma.Section59.dlmf_5_9_14"
+      ],
       "quantitative_analogue": false,
       "quantitative_statement": false,
       "quantitative_proof": false,
       "quantitative_declarations": [],
-      "notes": null
+      "notes": "Positive-real specialization; branch and contour conditions are stated in the documentation and Lean signature."
     },
     {
       "dlmf_id": "5.9.E15",
@@ -12156,15 +12336,17 @@
       "section": "5.9",
       "section_title": "Integral Representations",
       "source_url": "https://dlmf.nist.gov/5.9.E15",
-      "match": "none",
-      "lean_statement": false,
+      "match": "specialization",
+      "lean_statement": true,
       "lean_proof": false,
-      "lean_declarations": [],
+      "lean_declarations": [
+        "LMLF.Blueprint.Gamma.Section59.dlmf_5_9_15"
+      ],
       "quantitative_analogue": false,
       "quantitative_statement": false,
       "quantitative_proof": false,
       "quantitative_declarations": [],
-      "notes": null
+      "notes": "Positive-real specialization; branch and contour conditions are stated in the documentation and Lean signature."
     },
     {
       "dlmf_id": "5.9.E16",
@@ -12173,15 +12355,17 @@
       "section": "5.9",
       "section_title": "Integral Representations",
       "source_url": "https://dlmf.nist.gov/5.9.E16",
-      "match": "none",
-      "lean_statement": false,
+      "match": "specialization",
+      "lean_statement": true,
       "lean_proof": false,
-      "lean_declarations": [],
+      "lean_declarations": [
+        "LMLF.Blueprint.Gamma.Section59.dlmf_5_9_16"
+      ],
       "quantitative_analogue": false,
       "quantitative_statement": false,
       "quantitative_proof": false,
       "quantitative_declarations": [],
-      "notes": null
+      "notes": "Positive-real specialization; branch and contour conditions are stated in the documentation and Lean signature."
     },
     {
       "dlmf_id": "5.9.E17",
@@ -12190,15 +12374,17 @@
       "section": "5.9",
       "section_title": "Integral Representations",
       "source_url": "https://dlmf.nist.gov/5.9.E17",
-      "match": "none",
-      "lean_statement": false,
+      "match": "specialization",
+      "lean_statement": true,
       "lean_proof": false,
-      "lean_declarations": [],
+      "lean_declarations": [
+        "LMLF.Blueprint.Gamma.Section59.dlmf_5_9_17"
+      ],
       "quantitative_analogue": false,
       "quantitative_statement": false,
       "quantitative_proof": false,
       "quantitative_declarations": [],
-      "notes": null
+      "notes": "Positive-real specialization; branch and contour conditions are stated in the documentation and Lean signature."
     },
     {
       "dlmf_id": "5.9.E18",
@@ -12207,10 +12393,12 @@
       "section": "5.9",
       "section_title": "Integral Representations",
       "source_url": "https://dlmf.nist.gov/5.9.E18",
-      "match": "none",
-      "lean_statement": false,
+      "match": "exact",
+      "lean_statement": true,
       "lean_proof": false,
-      "lean_declarations": [],
+      "lean_declarations": [
+        "LMLF.Blueprint.Gamma.Section59.dlmf_5_9_18"
+      ],
       "quantitative_analogue": false,
       "quantitative_statement": false,
       "quantitative_proof": false,
@@ -12224,10 +12412,12 @@
       "section": "5.9",
       "section_title": "Integral Representations",
       "source_url": "https://dlmf.nist.gov/5.9.E19",
-      "match": "none",
-      "lean_statement": false,
+      "match": "exact",
+      "lean_statement": true,
       "lean_proof": false,
-      "lean_declarations": [],
+      "lean_declarations": [
+        "LMLF.Blueprint.Gamma.Section59.dlmf_5_9_19"
+      ],
       "quantitative_analogue": false,
       "quantitative_statement": false,
       "quantitative_proof": false,
@@ -12241,10 +12431,12 @@
       "section": "5.9",
       "section_title": "Integral Representations",
       "source_url": "https://dlmf.nist.gov/5.9.E20",
-      "match": "none",
-      "lean_statement": false,
+      "match": "exact",
+      "lean_statement": true,
       "lean_proof": false,
-      "lean_declarations": [],
+      "lean_declarations": [
+        "LMLF.Blueprint.Gamma.Section59.dlmf_5_9_20"
+      ],
       "quantitative_analogue": false,
       "quantitative_statement": false,
       "quantitative_proof": false,
@@ -12258,15 +12450,22 @@
       "section": "5.10",
       "section_title": "Continued Fractions",
       "source_url": "https://dlmf.nist.gov/5.10.E1",
-      "match": "none",
-      "lean_statement": false,
+      "match": "specialization",
+      "lean_statement": true,
       "lean_proof": false,
-      "lean_declarations": [],
+      "lean_declarations": [
+        "LMLF.Blueprint.Gamma.Section510.continuedFractionTail",
+        "LMLF.Blueprint.Gamma.Section510.continuedFractionConvergent",
+        "LMLF.Blueprint.Gamma.Section510.exists_gammaContinuedFractionCoeff",
+        "LMLF.Blueprint.Gamma.Section510.gammaContinuedFractionCoeff",
+        "LMLF.Blueprint.Gamma.Section510.gammaContinuedFractionCoeff_spec",
+        "LMLF.Blueprint.Gamma.Section510.dlmf_5_10_1"
+      ],
       "quantitative_analogue": false,
       "quantitative_statement": false,
       "quantitative_proof": false,
       "quantitative_declarations": [],
-      "notes": null
+      "notes": "Positive-real specialization of the source condition Re z > 0; finite convergents make the continued fraction's limit explicit. A proof-pending existential supplies the full coefficient sequence and its convergence; the reader-facing sequence is its Classical.choose."
     },
     {
       "dlmf_id": "5.10.E2",
@@ -12275,15 +12474,20 @@
       "section": "5.10",
       "section_title": "Continued Fractions",
       "source_url": "https://dlmf.nist.gov/5.10.E2",
-      "match": "none",
-      "lean_statement": false,
+      "match": "exact",
+      "lean_statement": true,
       "lean_proof": false,
-      "lean_declarations": [],
+      "lean_declarations": [
+        "LMLF.Blueprint.Gamma.Section510.exists_gammaContinuedFractionCoeff",
+        "LMLF.Blueprint.Gamma.Section510.gammaContinuedFractionCoeff",
+        "LMLF.Blueprint.Gamma.Section510.gammaContinuedFractionCoeff_spec",
+        "LMLF.Blueprint.Gamma.Section510.dlmf_5_10_2"
+      ],
       "quantitative_analogue": false,
       "quantitative_statement": false,
       "quantitative_proof": false,
       "quantitative_declarations": [],
-      "notes": null
+      "notes": "The seven displayed coefficients are kept as one grouped source record; later coefficients are present in the existential full sequence because §5.10 refers to external tables for them."
     },
     {
       "dlmf_id": "5.11.E1",
@@ -12292,19 +12496,20 @@
       "section": "5.11",
       "section_title": "Asymptotic Expansions",
       "source_url": "https://dlmf.nist.gov/5.11.E1",
-      "match": "consequence",
+      "match": "specialization",
       "lean_statement": true,
       "lean_proof": false,
       "lean_declarations": [
-        "LMLF.Blueprint.Gamma.stirlingLog_hasPoincareExpansion"
+        "LMLF.Blueprint.Gamma.Section511.dlmf_5_11_1"
       ],
       "quantitative_analogue": true,
       "quantitative_statement": true,
       "quantitative_proof": false,
       "quantitative_declarations": [
-        "LMLF.Blueprint.Gamma.stirlingLog_remainder_bounds"
+        "LMLF.Blueprint.Gamma.Section511.dlmf_5_11_1_remainder_bound",
+        "LMLF.Blueprint.Gamma.Section511.dlmf_5_11_1_complex_remainder_bound"
       ],
-      "notes": "Real-positive specialization. The quantitative bound is the first-neglected-term result from DLMF §5.11(ii); both theorem declarations are proof-pending."
+      "notes": "Positive-real specialization of the branch-sensitive logarithmic formula; the selected sectorial LnGammaDatum is analytic, overlap-consistent, and normalized to the positive-real log-Gamma, supplying the general-logarithm E1 residual while the explicit terms retain principal Complex.log. The separate first-neglected-term sign/magnitude bound and the distinct complex sector bound with sec^(2n)(ph z/2) are supplied by DLMF §5.11(ii). Complex terms use the source's one-based index n, with truncation through n-1."
     },
     {
       "dlmf_id": "5.11.E2",
@@ -12313,15 +12518,20 @@
       "section": "5.11",
       "section_title": "Asymptotic Expansions",
       "source_url": "https://dlmf.nist.gov/5.11.E2",
-      "match": "none",
-      "lean_statement": false,
+      "match": "specialization",
+      "lean_statement": true,
       "lean_proof": false,
-      "lean_declarations": [],
-      "quantitative_analogue": false,
-      "quantitative_statement": false,
+      "lean_declarations": [
+        "LMLF.Blueprint.Gamma.Section511.dlmf_5_11_2"
+      ],
+      "quantitative_analogue": true,
+      "quantitative_statement": true,
       "quantitative_proof": false,
-      "quantitative_declarations": [],
-      "notes": null
+      "quantitative_declarations": [
+        "LMLF.Blueprint.Gamma.Section511.dlmf_5_11_2_remainder_bound",
+        "LMLF.Blueprint.Gamma.Section511.dlmf_5_11_2_complex_remainder_bound"
+      ],
+      "notes": "Positive-real restriction through the real part of Complex.digamma; §5.11(ii) supplies the distinct first-neglected-term bound and the complex sector bound with sec^(2n+1)(ph z/2). Complex terms use the source's one-based index n, with truncation through n-1."
     },
     {
       "dlmf_id": "5.11.E3",
@@ -12330,15 +12540,17 @@
       "section": "5.11",
       "section_title": "Asymptotic Expansions",
       "source_url": "https://dlmf.nist.gov/5.11.E3",
-      "match": "none",
-      "lean_statement": false,
+      "match": "specialization",
+      "lean_statement": true,
       "lean_proof": false,
-      "lean_declarations": [],
+      "lean_declarations": [
+        "LMLF.Blueprint.Gamma.Section511.dlmf_5_11_3"
+      ],
       "quantitative_analogue": false,
       "quantitative_statement": false,
       "quantitative_proof": false,
       "quantitative_declarations": [],
-      "notes": null
+      "notes": "Positive-real scaled-Gamma specialization; scaledGammaReal_factorization states the exact positive-real prefactor identity, while gCoeff is the projection of an explicit StirlingCoefficientSpec carrying the initial values and coefficient equations."
     },
     {
       "dlmf_id": "5.11.E4",
@@ -12347,15 +12559,17 @@
       "section": "5.11",
       "section_title": "Asymptotic Expansions",
       "source_url": "https://dlmf.nist.gov/5.11.E4",
-      "match": "none",
-      "lean_statement": false,
+      "match": "exact",
+      "lean_statement": true,
       "lean_proof": false,
-      "lean_declarations": [],
+      "lean_declarations": [
+        "LMLF.Blueprint.Gamma.Section511.dlmf_5_11_4"
+      ],
       "quantitative_analogue": false,
       "quantitative_statement": false,
       "quantitative_proof": false,
       "quantitative_declarations": [],
-      "notes": null
+      "notes": "The seven displayed coefficient values are stated exactly over ℝ."
     },
     {
       "dlmf_id": "5.11.E5",
@@ -12364,15 +12578,17 @@
       "section": "5.11",
       "section_title": "Asymptotic Expansions",
       "source_url": "https://dlmf.nist.gov/5.11.E5",
-      "match": "none",
-      "lean_statement": false,
+      "match": "exact",
+      "lean_statement": true,
       "lean_proof": false,
-      "lean_declarations": [],
+      "lean_declarations": [
+        "LMLF.Blueprint.Gamma.Section511.dlmf_5_11_5"
+      ],
       "quantitative_analogue": false,
       "quantitative_statement": false,
       "quantitative_proof": false,
       "quantitative_declarations": [],
-      "notes": null
+      "notes": "Finite rising factorial is defined locally because the Chapter 5 page needs a real presentation."
     },
     {
       "dlmf_id": "5.11.E6",
@@ -12381,15 +12597,18 @@
       "section": "5.11",
       "section_title": "Asymptotic Expansions",
       "source_url": "https://dlmf.nist.gov/5.11.E6",
-      "match": "none",
-      "lean_statement": false,
+      "match": "exact",
+      "lean_statement": true,
       "lean_proof": false,
-      "lean_declarations": [],
+      "lean_declarations": [
+        "LMLF.Blueprint.Gamma.Section511.dlmf_5_11_6",
+        "LMLF.Blueprint.Gamma.Section511.dlmf_5_11_6_initial"
+      ],
       "quantitative_analogue": false,
       "quantitative_statement": false,
       "quantitative_proof": false,
       "quantitative_declarations": [],
-      "notes": null
+      "notes": "The convolution recurrence and the displayed initial value are separate declarations."
     },
     {
       "dlmf_id": "5.11.E7",
@@ -12398,15 +12617,17 @@
       "section": "5.11",
       "section_title": "Asymptotic Expansions",
       "source_url": "https://dlmf.nist.gov/5.11.E7",
-      "match": "none",
-      "lean_statement": false,
+      "match": "specialization",
+      "lean_statement": true,
       "lean_proof": false,
-      "lean_declarations": [],
+      "lean_declarations": [
+        "LMLF.Blueprint.Gamma.Section511.dlmf_5_11_7"
+      ],
       "quantitative_analogue": false,
       "quantitative_statement": false,
       "quantitative_proof": false,
       "quantitative_declarations": [],
-      "notes": null
+      "notes": "Positive-real z with fixed real a>0 and b."
     },
     {
       "dlmf_id": "5.11.E8",
@@ -12415,15 +12636,17 @@
       "section": "5.11",
       "section_title": "Asymptotic Expansions",
       "source_url": "https://dlmf.nist.gov/5.11.E8",
-      "match": "none",
-      "lean_statement": false,
+      "match": "specialization",
+      "lean_statement": true,
       "lean_proof": false,
-      "lean_declarations": [],
+      "lean_declarations": [
+        "LMLF.Blueprint.Gamma.Section511.dlmf_5_11_8"
+      ],
       "quantitative_analogue": false,
       "quantitative_statement": false,
       "quantitative_proof": false,
       "quantitative_declarations": [],
-      "notes": null
+      "notes": "Positive-real x and fixed real h make the logarithm branch explicit; the DLMF source permits arbitrary complex h."
     },
     {
       "dlmf_id": "5.11.E9",
@@ -12432,15 +12655,18 @@
       "section": "5.11",
       "section_title": "Asymptotic Expansions",
       "source_url": "https://dlmf.nist.gov/5.11.E9",
-      "match": "none",
-      "lean_statement": false,
+      "match": "specialization",
+      "lean_statement": true,
       "lean_proof": false,
-      "lean_declarations": [],
+      "lean_declarations": [
+        "LMLF.Blueprint.Gamma.Section511.UniformAsymptoticOnBounded",
+        "LMLF.Blueprint.Gamma.Section511.dlmf_5_11_9"
+      ],
       "quantitative_analogue": false,
       "quantitative_statement": false,
       "quantitative_proof": false,
       "quantitative_declarations": [],
-      "notes": null
+      "notes": "The two y directions are represented over real y; UniformAsymptoticOnBounded quantifies uniform relative-error convergence on every bornologically bounded set of real x values."
     },
     {
       "dlmf_id": "5.11.E10",
@@ -12449,15 +12675,17 @@
       "section": "5.11",
       "section_title": "Asymptotic Expansions",
       "source_url": "https://dlmf.nist.gov/5.11.E10",
-      "match": "none",
-      "lean_statement": false,
+      "match": "exact",
+      "lean_statement": true,
       "lean_proof": false,
-      "lean_declarations": [],
+      "lean_declarations": [
+        "LMLF.Blueprint.Gamma.Section511.dlmf_5_11_10"
+      ],
       "quantitative_analogue": false,
       "quantitative_statement": false,
       "quantitative_proof": false,
       "quantitative_declarations": [],
-      "notes": null
+      "notes": "Complex finite expansion with explicit K, principal-branch prefactor, residual remainder definition, and inherited hypotheses δ>0, z≠0, |arg z|≤π−δ."
     },
     {
       "dlmf_id": "5.11.E11",
@@ -12466,15 +12694,17 @@
       "section": "5.11",
       "section_title": "Asymptotic Expansions",
       "source_url": "https://dlmf.nist.gov/5.11.E11",
-      "match": "none",
-      "lean_statement": false,
+      "match": "specialization",
+      "lean_statement": true,
       "lean_proof": false,
-      "lean_declarations": [],
+      "lean_declarations": [
+        "LMLF.Blueprint.Gamma.Section511.dlmf_5_11_11"
+      ],
       "quantitative_analogue": false,
       "quantitative_statement": false,
       "quantitative_proof": false,
       "quantitative_declarations": [],
-      "notes": null
+      "notes": "The source bound is retained with complex norms, arg, and an explicit nonzero-z hypothesis; cappedSecant gives the intended capped endpoint value when cos(arg z)=0."
     },
     {
       "dlmf_id": "5.11.E12",
@@ -12483,15 +12713,17 @@
       "section": "5.11",
       "section_title": "Asymptotic Expansions",
       "source_url": "https://dlmf.nist.gov/5.11.E12",
-      "match": "none",
-      "lean_statement": false,
+      "match": "specialization",
+      "lean_statement": true,
       "lean_proof": false,
-      "lean_declarations": [],
+      "lean_declarations": [
+        "LMLF.Blueprint.Gamma.Section511.dlmf_5_11_12"
+      ],
       "quantitative_analogue": false,
       "quantitative_statement": false,
       "quantitative_proof": false,
       "quantitative_declarations": [],
-      "notes": null
+      "notes": "Positive-real specialization of the sectorial quotient asymptotic."
     },
     {
       "dlmf_id": "5.11.E13",
@@ -12500,15 +12732,17 @@
       "section": "5.11",
       "section_title": "Asymptotic Expansions",
       "source_url": "https://dlmf.nist.gov/5.11.E13",
-      "match": "none",
-      "lean_statement": false,
+      "match": "specialization",
+      "lean_statement": true,
       "lean_proof": false,
-      "lean_declarations": [],
+      "lean_declarations": [
+        "LMLF.Blueprint.Gamma.Section511.dlmf_5_11_13"
+      ],
       "quantitative_analogue": false,
       "quantitative_statement": false,
       "quantitative_proof": false,
       "quantitative_declarations": [],
-      "notes": null
+      "notes": "Positive-real Poincaré quotient expansion."
     },
     {
       "dlmf_id": "5.11.E14",
@@ -12517,15 +12751,17 @@
       "section": "5.11",
       "section_title": "Asymptotic Expansions",
       "source_url": "https://dlmf.nist.gov/5.11.E14",
-      "match": "none",
-      "lean_statement": false,
+      "match": "specialization",
+      "lean_statement": true,
       "lean_proof": false,
-      "lean_declarations": [],
+      "lean_declarations": [
+        "LMLF.Blueprint.Gamma.Section511.dlmf_5_11_14"
+      ],
       "quantitative_analogue": false,
       "quantitative_statement": false,
       "quantitative_proof": false,
       "quantitative_declarations": [],
-      "notes": null
+      "notes": "Positive-real centered quotient expansion."
     },
     {
       "dlmf_id": "5.11.E15",
@@ -12534,15 +12770,17 @@
       "section": "5.11",
       "section_title": "Asymptotic Expansions",
       "source_url": "https://dlmf.nist.gov/5.11.E15",
-      "match": "none",
-      "lean_statement": false,
+      "match": "specialization",
+      "lean_statement": true,
       "lean_proof": false,
-      "lean_declarations": [],
+      "lean_declarations": [
+        "LMLF.Blueprint.Gamma.Section511.dlmf_5_11_15"
+      ],
       "quantitative_analogue": false,
       "quantitative_statement": false,
       "quantitative_proof": false,
       "quantitative_declarations": [],
-      "notes": null
+      "notes": "Initial G coefficient identities over ℝ."
     },
     {
       "dlmf_id": "5.11.E16",
@@ -12551,15 +12789,17 @@
       "section": "5.11",
       "section_title": "Asymptotic Expansions",
       "source_url": "https://dlmf.nist.gov/5.11.E16",
-      "match": "none",
-      "lean_statement": false,
+      "match": "specialization",
+      "lean_statement": true,
       "lean_proof": false,
-      "lean_declarations": [],
+      "lean_declarations": [
+        "LMLF.Blueprint.Gamma.Section511.dlmf_5_11_16"
+      ],
       "quantitative_analogue": false,
       "quantitative_statement": false,
       "quantitative_proof": false,
       "quantitative_declarations": [],
-      "notes": null
+      "notes": "Initial H coefficient identities over ℝ."
     },
     {
       "dlmf_id": "5.11.E17",
@@ -12568,15 +12808,17 @@
       "section": "5.11",
       "section_title": "Asymptotic Expansions",
       "source_url": "https://dlmf.nist.gov/5.11.E17",
-      "match": "none",
-      "lean_statement": false,
+      "match": "specialization",
+      "lean_statement": true,
       "lean_proof": false,
-      "lean_declarations": [],
+      "lean_declarations": [
+        "LMLF.Blueprint.Gamma.Section511.dlmf_5_11_17"
+      ],
       "quantitative_analogue": false,
       "quantitative_statement": false,
       "quantitative_proof": false,
       "quantitative_declarations": [],
-      "notes": null
+      "notes": "Generalized Bernoulli polynomial vocabulary is selected by GeneralizedBernoulliSpec's local generating-function identity and projected into the ratio coefficient definition."
     },
     {
       "dlmf_id": "5.11.E18",
@@ -12585,15 +12827,17 @@
       "section": "5.11",
       "section_title": "Asymptotic Expansions",
       "source_url": "https://dlmf.nist.gov/5.11.E18",
-      "match": "none",
-      "lean_statement": false,
+      "match": "specialization",
+      "lean_statement": true,
       "lean_proof": false,
-      "lean_declarations": [],
+      "lean_declarations": [
+        "LMLF.Blueprint.Gamma.Section511.dlmf_5_11_18"
+      ],
       "quantitative_analogue": false,
       "quantitative_statement": false,
       "quantitative_proof": false,
       "quantitative_declarations": [],
-      "notes": null
+      "notes": "Generalized Bernoulli representation of the centered coefficients through the selected generating-function specification."
     },
     {
       "dlmf_id": "5.11.E19",
@@ -12602,15 +12846,17 @@
       "section": "5.11",
       "section_title": "Asymptotic Expansions",
       "source_url": "https://dlmf.nist.gov/5.11.E19",
-      "match": "none",
-      "lean_statement": false,
+      "match": "specialization",
+      "lean_statement": true,
       "lean_proof": false,
-      "lean_declarations": [],
+      "lean_declarations": [
+        "LMLF.Blueprint.Gamma.Section511.dlmf_5_11_19"
+      ],
       "quantitative_analogue": false,
       "quantitative_statement": false,
       "quantitative_proof": false,
       "quantitative_declarations": [],
-      "notes": null
+      "notes": "Positive-real Gamma-product expansion."
     },
     {
       "dlmf_id": "5.12.E1",
@@ -12619,15 +12865,17 @@
       "section": "5.12",
       "section_title": "Beta Function",
       "source_url": "https://dlmf.nist.gov/5.12.E1",
-      "match": "none",
-      "lean_statement": false,
+      "match": "exact",
+      "lean_statement": true,
       "lean_proof": false,
-      "lean_declarations": [],
+      "lean_declarations": [
+        "LMLF.Blueprint.Gamma.Section512.dlmf_5_12_1"
+      ],
       "quantitative_analogue": false,
       "quantitative_statement": false,
       "quantitative_proof": false,
       "quantitative_declarations": [],
-      "notes": null
+      "notes": "Complex beta integral with Re a > 0 and Re b > 0; records both the defining integral and Gamma quotient."
     },
     {
       "dlmf_id": "5.12.E2",
@@ -12636,15 +12884,17 @@
       "section": "5.12",
       "section_title": "Beta Function",
       "source_url": "https://dlmf.nist.gov/5.12.E2",
-      "match": "none",
-      "lean_statement": false,
+      "match": "exact",
+      "lean_statement": true,
       "lean_proof": false,
-      "lean_declarations": [],
+      "lean_declarations": [
+        "LMLF.Blueprint.Gamma.Section512.dlmf_5_12_2"
+      ],
       "quantitative_analogue": false,
       "quantitative_statement": false,
       "quantitative_proof": false,
       "quantitative_declarations": [],
-      "notes": null
+      "notes": "Complex sine/cosine powers and explicit interval integrability."
     },
     {
       "dlmf_id": "5.12.E3",
@@ -12653,15 +12903,17 @@
       "section": "5.12",
       "section_title": "Beta Function",
       "source_url": "https://dlmf.nist.gov/5.12.E3",
-      "match": "none",
-      "lean_statement": false,
+      "match": "exact",
+      "lean_statement": true,
       "lean_proof": false,
-      "lean_declarations": [],
+      "lean_declarations": [
+        "LMLF.Blueprint.Gamma.Section512.dlmf_5_12_3"
+      ],
       "quantitative_analogue": false,
       "quantitative_statement": false,
       "quantitative_proof": false,
       "quantitative_declarations": [],
-      "notes": null
+      "notes": "Improper positive-half-line integral with the inherited half-plane assumptions."
     },
     {
       "dlmf_id": "5.12.E4",
@@ -12670,15 +12922,17 @@
       "section": "5.12",
       "section_title": "Beta Function",
       "source_url": "https://dlmf.nist.gov/5.12.E4",
-      "match": "none",
-      "lean_statement": false,
+      "match": "exact",
+      "lean_statement": true,
       "lean_proof": false,
-      "lean_declarations": [],
+      "lean_declarations": [
+        "LMLF.Blueprint.Gamma.Section512.dlmf_5_12_4"
+      ],
       "quantitative_analogue": false,
       "quantitative_statement": false,
       "quantitative_proof": false,
       "quantitative_declarations": [],
-      "notes": null
+      "notes": "Principal phase condition is represented by z ≠ 0 together with |arg z| < pi."
     },
     {
       "dlmf_id": "5.12.E5",
@@ -12687,15 +12941,19 @@
       "section": "5.12",
       "section_title": "Beta Function",
       "source_url": "https://dlmf.nist.gov/5.12.E5",
-      "match": "none",
-      "lean_statement": false,
+      "match": "specialization",
+      "lean_statement": true,
       "lean_proof": false,
-      "lean_declarations": [],
+      "lean_declarations": [
+        "LMLF.Blueprint.Gamma.Section512.meromorphicBeta",
+        "LMLF.Blueprint.Gamma.Section512.meromorphicBetaDefined",
+        "LMLF.Blueprint.Gamma.Section512.dlmf_5_12_5"
+      ],
       "quantitative_analogue": false,
       "quantitative_statement": false,
       "quantitative_proof": false,
       "quantitative_declarations": [],
-      "notes": null
+      "notes": "Complex cosine-power integral; source condition Re a > 0 retained, with a ≠ 0 and meromorphicBetaDefined excluding poles of the continued beta quotient."
     },
     {
       "dlmf_id": "5.12.E6",
@@ -12704,15 +12962,19 @@
       "section": "5.12",
       "section_title": "Beta Function",
       "source_url": "https://dlmf.nist.gov/5.12.E6",
-      "match": "none",
-      "lean_statement": false,
+      "match": "specialization",
+      "lean_statement": true,
       "lean_proof": false,
-      "lean_declarations": [],
+      "lean_declarations": [
+        "LMLF.Blueprint.Gamma.Section512.meromorphicBeta",
+        "LMLF.Blueprint.Gamma.Section512.meromorphicBetaDefined",
+        "LMLF.Blueprint.Gamma.Section512.dlmf_5_12_6"
+      ],
       "quantitative_analogue": false,
       "quantitative_statement": false,
       "quantitative_proof": false,
       "quantitative_declarations": [],
-      "notes": null
+      "notes": "Complex sine-power Fourier integral; source condition Re a > 0 retained, with a ≠ 0 and meromorphicBetaDefined excluding poles of the continued beta quotient."
     },
     {
       "dlmf_id": "5.12.E7",
@@ -12721,15 +12983,17 @@
       "section": "5.12",
       "section_title": "Beta Function",
       "source_url": "https://dlmf.nist.gov/5.12.E7",
-      "match": "none",
-      "lean_statement": false,
+      "match": "exact",
+      "lean_statement": true,
       "lean_proof": false,
-      "lean_declarations": [],
+      "lean_declarations": [
+        "LMLF.Blueprint.Gamma.Section512.dlmf_5_12_7"
+      ],
       "quantitative_analogue": false,
       "quantitative_statement": false,
       "quantitative_proof": false,
       "quantitative_declarations": [],
-      "notes": null
+      "notes": "Improper hyperbolic integral with Re a > |Re b|."
     },
     {
       "dlmf_id": "5.12.E8",
@@ -12738,15 +13002,19 @@
       "section": "5.12",
       "section_title": "Beta Function",
       "source_url": "https://dlmf.nist.gov/5.12.E8",
-      "match": "none",
-      "lean_statement": false,
+      "match": "specialization",
+      "lean_statement": true,
       "lean_proof": false,
-      "lean_declarations": [],
+      "lean_declarations": [
+        "LMLF.Blueprint.Gamma.Section512.meromorphicBeta",
+        "LMLF.Blueprint.Gamma.Section512.meromorphicBetaDefined",
+        "LMLF.Blueprint.Gamma.Section512.dlmf_5_12_8"
+      ],
       "quantitative_analogue": false,
       "quantitative_statement": false,
       "quantitative_proof": false,
       "quantitative_declarations": [],
-      "notes": null
+      "notes": "Vertical Fourier integral; Re(a+b)>1 and Re w, Re z > 0 are explicit, with meromorphicBetaDefined for unrestricted individual parameters away from poles."
     },
     {
       "dlmf_id": "5.12.E9",
@@ -12755,15 +13023,19 @@
       "section": "5.12",
       "section_title": "Beta Function",
       "source_url": "https://dlmf.nist.gov/5.12.E9",
-      "match": "none",
-      "lean_statement": false,
+      "match": "specialization",
+      "lean_statement": true,
       "lean_proof": false,
-      "lean_declarations": [],
+      "lean_declarations": [
+        "LMLF.Blueprint.Gamma.Section512.meromorphicBeta",
+        "LMLF.Blueprint.Gamma.Section512.meromorphicBetaDefined",
+        "LMLF.Blueprint.Gamma.Section512.dlmf_5_12_9"
+      ],
       "quantitative_analogue": false,
       "quantitative_statement": false,
       "quantitative_proof": false,
       "quantitative_declarations": [],
-      "notes": null
+      "notes": "Barnes vertical contour parameterized by y with the orientation factor i, b ≠ 0, and meromorphicBetaDefined away from poles."
     },
     {
       "dlmf_id": "5.12.E10",
@@ -12772,15 +13044,21 @@
       "section": "5.12",
       "section_title": "Beta Function",
       "source_url": "https://dlmf.nist.gov/5.12.E10",
-      "match": "none",
-      "lean_statement": false,
+      "match": "specialization",
+      "lean_statement": true,
       "lean_proof": false,
-      "lean_declarations": [],
+      "lean_declarations": [
+        "LMLF.Blueprint.Gamma.Section512.meromorphicBeta",
+        "LMLF.Blueprint.Gamma.Section512.meromorphicBetaDefined",
+        "LMLF.Blueprint.Gamma.Section512.contourIntegral",
+        "LMLF.Blueprint.Gamma.Section512.betaFirstLoopIntegral",
+        "LMLF.Blueprint.Gamma.Section512.dlmf_5_12_10"
+      ],
       "quantitative_analogue": false,
       "quantitative_statement": false,
       "quantitative_proof": false,
       "quantitative_declarations": [],
-      "notes": null
+      "notes": "The source's positively oriented loop uses pointwise principal powers, as prescribed for E10, with meromorphicBetaDefined away from poles."
     },
     {
       "dlmf_id": "5.12.E11",
@@ -12789,15 +13067,22 @@
       "section": "5.12",
       "section_title": "Beta Function",
       "source_url": "https://dlmf.nist.gov/5.12.E11",
-      "match": "none",
-      "lean_statement": false,
+      "match": "specialization",
+      "lean_statement": true,
       "lean_proof": false,
-      "lean_declarations": [],
+      "lean_declarations": [
+        "LMLF.Blueprint.Gamma.Section512.meromorphicBeta",
+        "LMLF.Blueprint.Gamma.Section512.meromorphicBetaDefined",
+        "LMLF.Blueprint.Gamma.Section512.SecondLoopLogBranch",
+        "LMLF.Blueprint.Gamma.Section512.betaSecondLoopTruncation",
+        "LMLF.Blueprint.Gamma.Section512.betaSecondLoopIntegral",
+        "LMLF.Blueprint.Gamma.Section512.dlmf_5_12_11"
+      ],
       "quantitative_analogue": false,
       "quantitative_statement": false,
       "quantitative_proof": false,
       "quantitative_declarations": [],
-      "notes": null
+      "notes": "Finite truncations use incoming and outgoing positive-ray tails (r > 0), a positively oriented circle with 0 < ε < 1, endpoint gluing, and one global pair of logarithm lifts with pointwise exponential equations only on those domains; meromorphicBetaDefined excludes poles."
     },
     {
       "dlmf_id": "5.12.E12",
@@ -12806,15 +13091,22 @@
       "section": "5.12",
       "section_title": "Beta Function",
       "source_url": "https://dlmf.nist.gov/5.12.E12",
-      "match": "none",
-      "lean_statement": false,
+      "match": "specialization",
+      "lean_statement": true,
       "lean_proof": false,
-      "lean_declarations": [],
+      "lean_declarations": [
+        "LMLF.Blueprint.Gamma.Section512.meromorphicBeta",
+        "LMLF.Blueprint.Gamma.Section512.meromorphicBetaDefined",
+        "LMLF.Blueprint.Gamma.Section512.PochhammerLogBranch",
+        "LMLF.Blueprint.Gamma.Section512.betaPochhammerCurve",
+        "LMLF.Blueprint.Gamma.Section512.betaPochhammerIntegral",
+        "LMLF.Blueprint.Gamma.Section512.dlmf_5_12_12"
+      ],
       "quantitative_analogue": false,
       "quantitative_statement": false,
       "quantitative_proof": false,
       "quantitative_declarations": [],
-      "notes": null
+      "notes": "Complex a,b off the Gamma pole locus and P ∈ (0,1), with the oriented Pochhammer contour and explicit logarithm lifts tied pointwise to t and 1−t only under the base-point domain predicates, principal at P."
     },
     {
       "dlmf_id": "5.13.E1",
@@ -12823,15 +13115,17 @@
       "section": "5.13",
       "section_title": "Integrals",
       "source_url": "https://dlmf.nist.gov/5.13.E1",
-      "match": "none",
-      "lean_statement": false,
+      "match": "exact",
+      "lean_statement": true,
       "lean_proof": false,
-      "lean_declarations": [],
+      "lean_declarations": [
+        "LMLF.Blueprint.Gamma.Section513.dlmf_5_13_1"
+      ],
       "quantitative_analogue": false,
       "quantitative_statement": false,
       "quantitative_proof": false,
       "quantitative_declarations": [],
-      "notes": null
+      "notes": "Straight vertical contour parameterized by s = c + i t; principal complex powers are retained, and the source's nonzero phase domain is stated explicitly as z != 0."
     },
     {
       "dlmf_id": "5.13.E2",
@@ -12840,15 +13134,17 @@
       "section": "5.13",
       "section_title": "Integrals",
       "source_url": "https://dlmf.nist.gov/5.13.E2",
-      "match": "none",
-      "lean_statement": false,
+      "match": "specialization",
+      "lean_statement": true,
       "lean_proof": false,
-      "lean_declarations": [],
+      "lean_declarations": [
+        "LMLF.Blueprint.Gamma.Section513.dlmf_5_13_2"
+      ],
       "quantitative_analogue": false,
       "quantitative_statement": false,
       "quantitative_proof": false,
       "quantitative_declarations": [],
-      "notes": null
+      "notes": "Real a and b are made explicit, as required by the source inequalities a > 0 and 0 < b < pi; DLMF notes this as the c = 0, b = a, s = i t, z = exp(i(pi - 2b)) specialization of E1, up to t -> -t."
     },
     {
       "dlmf_id": "5.13.E3",
@@ -12857,15 +13153,17 @@
       "section": "5.13",
       "section_title": "Integrals",
       "source_url": "https://dlmf.nist.gov/5.13.E3",
-      "match": "none",
-      "lean_statement": false,
+      "match": "exact",
+      "lean_statement": true,
       "lean_proof": false,
-      "lean_declarations": [],
+      "lean_declarations": [
+        "LMLF.Blueprint.Gamma.Section513.dlmf_5_13_3"
+      ],
       "quantitative_analogue": false,
       "quantitative_statement": false,
       "quantitative_proof": false,
       "quantitative_declarations": [],
-      "notes": null
+      "notes": "All four complex real-part conditions are preserved."
     },
     {
       "dlmf_id": "5.13.E4",
@@ -12874,15 +13172,17 @@
       "section": "5.13",
       "section_title": "Integrals",
       "source_url": "https://dlmf.nist.gov/5.13.E4",
-      "match": "none",
-      "lean_statement": false,
+      "match": "exact",
+      "lean_statement": true,
       "lean_proof": false,
-      "lean_declarations": [],
+      "lean_declarations": [
+        "LMLF.Blueprint.Gamma.Section513.dlmf_5_13_4"
+      ],
       "quantitative_analogue": false,
       "quantitative_statement": false,
       "quantitative_proof": false,
       "quantitative_declarations": [],
-      "notes": null
+      "notes": "Only Re(a+b+c+d) > 3 is assumed, exactly as in the source."
     },
     {
       "dlmf_id": "5.13.E5",
@@ -12891,15 +13191,17 @@
       "section": "5.13",
       "section_title": "Integrals",
       "source_url": "https://dlmf.nist.gov/5.13.E5",
-      "match": "none",
-      "lean_statement": false,
+      "match": "exact",
+      "lean_statement": true,
       "lean_proof": false,
-      "lean_declarations": [],
+      "lean_declarations": [
+        "LMLF.Blueprint.Gamma.Section513.dlmf_5_13_5"
+      ],
       "quantitative_analogue": false,
       "quantitative_statement": false,
       "quantitative_proof": false,
       "quantitative_declarations": [],
-      "notes": null
+      "notes": "Fin 4 indexing records all four parameters and six pairwise Gamma factors; at t = 0 the totalized quotient has its removable value 0, which does not affect the ordinary integral."
     },
     {
       "dlmf_id": "5.14.E1",
@@ -12908,15 +13210,17 @@
       "section": "5.14",
       "section_title": "Multidimensional Integrals",
       "source_url": "https://dlmf.nist.gov/5.14.E1",
-      "match": "none",
-      "lean_statement": false,
+      "match": "specialization",
+      "lean_statement": true,
       "lean_proof": false,
-      "lean_declarations": [],
+      "lean_declarations": [
+        "LMLF.Blueprint.Gamma.Section514.dlmf_5_14_1"
+      ],
       "quantitative_analogue": false,
       "quantitative_statement": false,
       "quantitative_proof": false,
       "quantitative_declarations": [],
-      "notes": null
+      "notes": "Positive-real, positive-dimensional parameters z : Fin n → ℝ (with 0 < n) replace the source complex parameters; simplex volume and IntegrableOn are explicit. Zero-base Real.rpow values on the simplex boundary are a.e. representatives."
     },
     {
       "dlmf_id": "5.14.E2",
@@ -12925,15 +13229,17 @@
       "section": "5.14",
       "section_title": "Multidimensional Integrals",
       "source_url": "https://dlmf.nist.gov/5.14.E2",
-      "match": "none",
-      "lean_statement": false,
+      "match": "specialization",
+      "lean_statement": true,
       "lean_proof": false,
-      "lean_declarations": [],
+      "lean_declarations": [
+        "LMLF.Blueprint.Gamma.Section514.dlmf_5_14_2"
+      ],
       "quantitative_analogue": false,
       "quantitative_statement": false,
       "quantitative_proof": false,
       "quantitative_declarations": [],
-      "notes": null
+      "notes": "Positive-real, positive-dimensional parameters z : Fin (n+1) → ℝ (with 0 < n) and the residual barycentric coordinate are explicit. Zero-base Real.rpow values on the simplex boundary are a.e. representatives."
     },
     {
       "dlmf_id": "5.14.E3",
@@ -12942,15 +13248,18 @@
       "section": "5.14",
       "section_title": "Multidimensional Integrals",
       "source_url": "https://dlmf.nist.gov/5.14.E3",
-      "match": "none",
-      "lean_statement": false,
+      "match": "exact",
+      "lean_statement": true,
       "lean_proof": false,
-      "lean_declarations": [],
+      "lean_declarations": [
+        "LMLF.Blueprint.Gamma.Section514.vandermonde",
+        "LMLF.Blueprint.Gamma.Section514.dlmf_5_14_3"
+      ],
       "quantitative_analogue": false,
       "quantitative_statement": false,
       "quantitative_proof": false,
       "quantitative_declarations": [],
-      "notes": null
+      "notes": "The Vandermonde product is recorded directly over real coordinate vectors."
     },
     {
       "dlmf_id": "5.14.E4",
@@ -12959,15 +13268,17 @@
       "section": "5.14",
       "section_title": "Multidimensional Integrals",
       "source_url": "https://dlmf.nist.gov/5.14.E4",
-      "match": "none",
-      "lean_statement": false,
+      "match": "specialization",
+      "lean_statement": true,
       "lean_proof": false,
-      "lean_declarations": [],
+      "lean_declarations": [
+        "LMLF.Blueprint.Gamma.Section514.dlmf_5_14_4"
+      ],
       "quantitative_analogue": false,
       "quantitative_statement": false,
       "quantitative_proof": false,
       "quantitative_declarations": [],
-      "notes": null
+      "notes": "Positive-real a,b with admissible real c; n ≥ 2 is imposed so the source's displayed n−1 denominators are literal. With zero-based k : Fin n, selbergIndex n k = n − k.1 − 1 in ℝ denotes source n−k, and the source 2n−k−1 factor is selbergIndex n k + n − 1; this avoids truncated Nat subtraction. Real.rpow on boundary/diagonal null sets is an a.e. representative."
     },
     {
       "dlmf_id": "5.14.E5",
@@ -12976,15 +13287,17 @@
       "section": "5.14",
       "section_title": "Multidimensional Integrals",
       "source_url": "https://dlmf.nist.gov/5.14.E5",
-      "match": "none",
-      "lean_statement": false,
+      "match": "specialization",
+      "lean_statement": true,
       "lean_proof": false,
-      "lean_declarations": [],
+      "lean_declarations": [
+        "LMLF.Blueprint.Gamma.Section514.dlmf_5_14_5"
+      ],
       "quantitative_analogue": false,
       "quantitative_statement": false,
       "quantitative_proof": false,
       "quantitative_declarations": [],
-      "notes": null
+      "notes": "Positive-real a with admissible real c on the explicit positive orthant; n ≥ 2 is imposed for the displayed n−1 denominators. Real.rpow on boundary/diagonal null sets is an a.e. representative."
     },
     {
       "dlmf_id": "5.14.E6",
@@ -12993,15 +13306,17 @@
       "section": "5.14",
       "section_title": "Multidimensional Integrals",
       "source_url": "https://dlmf.nist.gov/5.14.E6",
-      "match": "none",
-      "lean_statement": false,
+      "match": "specialization",
+      "lean_statement": true,
       "lean_proof": false,
-      "lean_declarations": [],
+      "lean_declarations": [
+        "LMLF.Blueprint.Gamma.Section514.dlmf_5_14_6"
+      ],
       "quantitative_analogue": false,
       "quantitative_statement": false,
       "quantitative_proof": false,
       "quantitative_declarations": [],
-      "notes": null
+      "notes": "The source's complex c is specialized to real c with 0 < n, with whole-space volume and Gaussian integrability explicit. Real.rpow on the Vandermonde diagonal null set is an a.e. representative."
     },
     {
       "dlmf_id": "5.14.E7",
@@ -13010,15 +13325,17 @@
       "section": "5.14",
       "section_title": "Multidimensional Integrals",
       "source_url": "https://dlmf.nist.gov/5.14.E7",
-      "match": "none",
-      "lean_statement": false,
+      "match": "specialization",
+      "lean_statement": true,
       "lean_proof": false,
-      "lean_declarations": [],
+      "lean_declarations": [
+        "LMLF.Blueprint.Gamma.Section514.dlmf_5_14_7"
+      ],
       "quantitative_analogue": false,
       "quantitative_statement": false,
       "quantitative_proof": false,
       "quantitative_declarations": [],
-      "notes": null
+      "notes": "The source's complex b is specialized to real b with 0 < n; unit-circle factors remain complex before taking their norms. Real.rpow on collision hyperplanes is an a.e. representative."
     },
     {
       "dlmf_id": "5.15.E1",
@@ -13027,15 +13344,17 @@
       "section": "5.15",
       "section_title": "Polygamma Functions",
       "source_url": "https://dlmf.nist.gov/5.15.E1",
-      "match": "none",
-      "lean_statement": false,
+      "match": "exact",
+      "lean_statement": true,
       "lean_proof": false,
-      "lean_declarations": [],
+      "lean_declarations": [
+        "LMLF.Blueprint.Gamma.Section515.dlmf_5_15_1"
+      ],
       "quantitative_analogue": false,
       "quantitative_statement": false,
       "quantitative_proof": false,
       "quantitative_declarations": [],
-      "notes": null
+      "notes": "HasSum records the reciprocal-square series and its value; the complex argument avoids all nonpositive integers."
     },
     {
       "dlmf_id": "5.15.E2",
@@ -13044,15 +13363,17 @@
       "section": "5.15",
       "section_title": "Polygamma Functions",
       "source_url": "https://dlmf.nist.gov/5.15.E2",
-      "match": "none",
-      "lean_statement": false,
+      "match": "exact",
+      "lean_statement": true,
       "lean_proof": false,
-      "lean_declarations": [],
+      "lean_declarations": [
+        "LMLF.Blueprint.Gamma.Section515.dlmf_5_15_2"
+      ],
       "quantitative_analogue": false,
       "quantitative_statement": false,
       "quantitative_proof": false,
       "quantitative_declarations": [],
-      "notes": null
+      "notes": "Positive order n is represented by 1 ≤ n."
     },
     {
       "dlmf_id": "5.15.E3",
@@ -13061,15 +13382,17 @@
       "section": "5.15",
       "section_title": "Polygamma Functions",
       "source_url": "https://dlmf.nist.gov/5.15.E3",
-      "match": "none",
-      "lean_statement": false,
+      "match": "exact",
+      "lean_statement": true,
       "lean_proof": false,
-      "lean_declarations": [],
+      "lean_declarations": [
+        "LMLF.Blueprint.Gamma.Section515.dlmf_5_15_3"
+      ],
       "quantitative_analogue": false,
       "quantitative_statement": false,
       "quantitative_proof": false,
       "quantitative_declarations": [],
-      "notes": null
+      "notes": "Positive order n is represented by 1 ≤ n."
     },
     {
       "dlmf_id": "5.15.E4",
@@ -13078,15 +13401,17 @@
       "section": "5.15",
       "section_title": "Polygamma Functions",
       "source_url": "https://dlmf.nist.gov/5.15.E4",
-      "match": "none",
-      "lean_statement": false,
+      "match": "exact",
+      "lean_statement": true,
       "lean_proof": false,
-      "lean_declarations": [],
+      "lean_declarations": [
+        "LMLF.Blueprint.Gamma.Section515.dlmf_5_15_4"
+      ],
       "quantitative_analogue": false,
       "quantitative_statement": false,
       "quantitative_proof": false,
       "quantitative_declarations": [],
-      "notes": null
+      "notes": "Finset.Ico 1 n is the finite source range k = 1, ..., n − 1, including the empty sum at n = 1."
     },
     {
       "dlmf_id": "5.15.E5",
@@ -13095,15 +13420,17 @@
       "section": "5.15",
       "section_title": "Polygamma Functions",
       "source_url": "https://dlmf.nist.gov/5.15.E5",
-      "match": "none",
-      "lean_statement": false,
+      "match": "exact",
+      "lean_statement": true,
       "lean_proof": false,
-      "lean_declarations": [],
+      "lean_declarations": [
+        "LMLF.Blueprint.Gamma.Section515.dlmf_5_15_5"
+      ],
       "quantitative_analogue": false,
       "quantitative_statement": false,
       "quantitative_proof": false,
       "quantitative_declarations": [],
-      "notes": null
+      "notes": "The nonpositive-integer exclusion is explicit."
     },
     {
       "dlmf_id": "5.15.E6",
@@ -13112,15 +13439,17 @@
       "section": "5.15",
       "section_title": "Polygamma Functions",
       "source_url": "https://dlmf.nist.gov/5.15.E6",
-      "match": "none",
-      "lean_statement": false,
+      "match": "exact",
+      "lean_statement": true,
       "lean_proof": false,
-      "lean_declarations": [],
+      "lean_declarations": [
+        "LMLF.Blueprint.Gamma.Section515.dlmf_5_15_6"
+      ],
       "quantitative_analogue": false,
       "quantitative_statement": false,
       "quantitative_proof": false,
       "quantitative_declarations": [],
-      "notes": null
+      "notes": "cotPiDerivative exposes the source derivative d^n/dz^n cot(πz)."
     },
     {
       "dlmf_id": "5.15.E7",
@@ -13129,15 +13458,17 @@
       "section": "5.15",
       "section_title": "Polygamma Functions",
       "source_url": "https://dlmf.nist.gov/5.15.E7",
-      "match": "none",
-      "lean_statement": false,
+      "match": "exact",
+      "lean_statement": true,
       "lean_proof": false,
-      "lean_declarations": [],
+      "lean_declarations": [
+        "LMLF.Blueprint.Gamma.Section515.dlmf_5_15_7"
+      ],
       "quantitative_analogue": false,
       "quantitative_statement": false,
       "quantitative_proof": false,
       "quantitative_declarations": [],
-      "notes": null
+      "notes": "Positive m and n are explicit; avoiding nonpositive integers at mz also avoids the translated poles."
     },
     {
       "dlmf_id": "5.15.E8",
@@ -13146,15 +13477,17 @@
       "section": "5.15",
       "section_title": "Polygamma Functions",
       "source_url": "https://dlmf.nist.gov/5.15.E8",
-      "match": "none",
-      "lean_statement": false,
+      "match": "specialization",
+      "lean_statement": true,
       "lean_proof": false,
-      "lean_declarations": [],
+      "lean_declarations": [
+        "LMLF.Blueprint.Gamma.Section515.dlmf_5_15_8"
+      ],
       "quantitative_analogue": false,
       "quantitative_statement": false,
       "quantitative_proof": false,
       "quantitative_declarations": [],
-      "notes": null
+      "notes": "The DLMF sectorial complex expansion is specialized to the positive real axis, where the phase is zero. The zero-based Lean tail index k = 2 maps to source index j = 1, giving B₂/x³ after the two leading terms."
     },
     {
       "dlmf_id": "5.15.E9",
@@ -13163,15 +13496,17 @@
       "section": "5.15",
       "section_title": "Polygamma Functions",
       "source_url": "https://dlmf.nist.gov/5.15.E9",
-      "match": "none",
-      "lean_statement": false,
+      "match": "specialization",
+      "lean_statement": true,
       "lean_proof": false,
-      "lean_declarations": [],
+      "lean_declarations": [
+        "LMLF.Blueprint.Gamma.Section515.dlmf_5_15_9"
+      ],
       "quantitative_analogue": false,
       "quantitative_statement": false,
       "quantitative_proof": false,
       "quantitative_declarations": [],
-      "notes": null
+      "notes": "The DLMF sectorial complex expansion is specialized to the positive real axis, with positive order n. The zero-based Lean tail index k = 2 maps to source index j = 1, giving ((n+1)!/2!) B₂/x^(n+2); at n = 1 this reduces to the E8 tail."
     },
     {
       "dlmf_id": "5.16.E1",
@@ -13180,15 +13515,17 @@
       "section": "5.16",
       "section_title": "Sums",
       "source_url": "https://dlmf.nist.gov/5.16.E1",
-      "match": "none",
-      "lean_statement": false,
+      "match": "exact",
+      "lean_statement": true,
       "lean_proof": false,
-      "lean_declarations": [],
+      "lean_declarations": [
+        "LMLF.Blueprint.Gamma.Section516.dlmf_5_16_1"
+      ],
       "quantitative_analogue": false,
       "quantitative_statement": false,
       "quantitative_proof": false,
       "quantitative_declarations": [],
-      "notes": null
+      "notes": "The subtype {n : ℕ // 1 ≤ n} represents the source range k = 1, 2, … directly; the built-in SummationFilter.conditional records the ordinary ordered partial sums because the alternating trigamma series is conditionally convergent."
     },
     {
       "dlmf_id": "5.16.E2",
@@ -13197,15 +13534,17 @@
       "section": "5.16",
       "section_title": "Sums",
       "source_url": "https://dlmf.nist.gov/5.16.E2",
-      "match": "none",
-      "lean_statement": false,
+      "match": "exact",
+      "lean_statement": true,
       "lean_proof": false,
-      "lean_declarations": [],
+      "lean_declarations": [
+        "LMLF.Blueprint.Gamma.Section516.dlmf_5_16_2"
+      ],
       "quantitative_analogue": false,
       "quantitative_statement": false,
       "quantitative_proof": false,
       "quantitative_declarations": [],
-      "notes": null
+      "notes": "The subtype {n : ℕ // 1 ≤ n} preserves the source lower limit, and the conjunction records both equalities in the display."
     },
     {
       "dlmf_id": "5.17.E1",
@@ -13214,15 +13553,18 @@
       "section": "5.17",
       "section_title": "Barnes’ 𝐺-Function (Double Gamma Function)",
       "source_url": "https://dlmf.nist.gov/5.17.E1",
-      "match": "none",
-      "lean_statement": false,
+      "match": "specialization",
+      "lean_statement": true,
       "lean_proof": false,
-      "lean_declarations": [],
+      "lean_declarations": [
+        "LMLF.Blueprint.Gamma.Section517.dlmf_5_17_1",
+        "LMLF.Blueprint.Gamma.Section517.barnesG_one"
+      ],
       "quantitative_analogue": false,
       "quantitative_statement": false,
       "quantitative_proof": false,
       "quantitative_declarations": [],
-      "notes": null
+      "notes": "The recurrence is stated on the ordinary pole-free domain z ≠ −m (m ∈ ℕ) because Mathlib totalizes Gamma at nonpositive integers; the normalization G(1)=1 is a separate declaration."
     },
     {
       "dlmf_id": "5.17.E2",
@@ -13231,15 +13573,17 @@
       "section": "5.17",
       "section_title": "Barnes’ 𝐺-Function (Double Gamma Function)",
       "source_url": "https://dlmf.nist.gov/5.17.E2",
-      "match": "none",
-      "lean_statement": false,
+      "match": "exact",
+      "lean_statement": true,
       "lean_proof": false,
-      "lean_declarations": [],
+      "lean_declarations": [
+        "LMLF.Blueprint.Gamma.Section517.dlmf_5_17_2"
+      ],
       "quantitative_analogue": false,
       "quantitative_statement": false,
       "quantitative_proof": false,
       "quantitative_declarations": [],
-      "notes": null
+      "notes": "The finite product over Icc 1 (n−2) is empty at n=2 and reproduces the source factorial string."
     },
     {
       "dlmf_id": "5.17.E3",
@@ -13248,15 +13592,17 @@
       "section": "5.17",
       "section_title": "Barnes’ 𝐺-Function (Double Gamma Function)",
       "source_url": "https://dlmf.nist.gov/5.17.E3",
-      "match": "none",
-      "lean_statement": false,
+      "match": "exact",
+      "lean_statement": true,
       "lean_proof": false,
-      "lean_declarations": [],
+      "lean_declarations": [
+        "LMLF.Blueprint.Gamma.Section517.dlmf_5_17_3"
+      ],
       "quantitative_analogue": false,
       "quantitative_statement": false,
       "quantitative_proof": false,
       "quantitative_declarations": [],
-      "notes": null
+      "notes": "The product index subtype preserves the source lower limit k=1."
     },
     {
       "dlmf_id": "5.17.E4",
@@ -13265,15 +13611,17 @@
       "section": "5.17",
       "section_title": "Barnes’ 𝐺-Function (Double Gamma Function)",
       "source_url": "https://dlmf.nist.gov/5.17.E4",
-      "match": "none",
-      "lean_statement": false,
+      "match": "specialization",
+      "lean_statement": true,
       "lean_proof": false,
-      "lean_declarations": [],
+      "lean_declarations": [
+        "LMLF.Blueprint.Gamma.Section517.dlmf_5_17_4"
+      ],
       "quantitative_analogue": false,
       "quantitative_statement": false,
       "quantitative_proof": false,
       "quantitative_declarations": [],
-      "notes": null
+      "notes": "Positive-real x>0 specialization; the interval integral follows the source path from 0 to x and uses principal logs."
     },
     {
       "dlmf_id": "5.17.E5",
@@ -13282,15 +13630,17 @@
       "section": "5.17",
       "section_title": "Barnes’ 𝐺-Function (Double Gamma Function)",
       "source_url": "https://dlmf.nist.gov/5.17.E5",
-      "match": "none",
-      "lean_statement": false,
+      "match": "specialization",
+      "lean_statement": true,
       "lean_proof": false,
-      "lean_declarations": [],
+      "lean_declarations": [
+        "LMLF.Blueprint.Gamma.Section517.dlmf_5_17_5"
+      ],
       "quantitative_analogue": false,
       "quantitative_statement": false,
       "quantitative_proof": false,
       "quantitative_declarations": [],
-      "notes": null
+      "notes": "Positive-real x→+∞ specialization of the source sector |ph z|≤π−δ, with source k=1 represented by Lean index n=0."
     },
     {
       "dlmf_id": "5.17.E6",
@@ -13299,15 +13649,17 @@
       "section": "5.17",
       "section_title": "Barnes’ 𝐺-Function (Double Gamma Function)",
       "source_url": "https://dlmf.nist.gov/5.17.E6",
-      "match": "none",
-      "lean_statement": false,
+      "match": "exact",
+      "lean_statement": true,
       "lean_proof": false,
-      "lean_declarations": [],
+      "lean_declarations": [
+        "LMLF.Blueprint.Gamma.Section517.dlmf_5_17_6"
+      ],
       "quantitative_analogue": false,
       "quantitative_statement": false,
       "quantitative_proof": false,
       "quantitative_declarations": [],
-      "notes": null
+      "notes": "The exact relation A=e^C is formalized; the displayed decimal is retained in the page prose and is not treated as a finite bound."
     },
     {
       "dlmf_id": "5.17.E7",
@@ -13316,15 +13668,17 @@
       "section": "5.17",
       "section_title": "Barnes’ 𝐺-Function (Double Gamma Function)",
       "source_url": "https://dlmf.nist.gov/5.17.E7",
-      "match": "none",
-      "lean_statement": false,
+      "match": "exact",
+      "lean_statement": true,
       "lean_proof": false,
-      "lean_declarations": [],
+      "lean_declarations": [
+        "LMLF.Blueprint.Gamma.Section517.dlmf_5_17_7"
+      ],
       "quantitative_analogue": false,
       "quantitative_statement": false,
       "quantitative_proof": false,
       "quantitative_declarations": [],
-      "notes": null
+      "notes": "Tendsto records the defining limit and the conjunction records both zeta-derivative equalities."
     },
     {
       "dlmf_id": "5.18.E1",
@@ -13333,15 +13687,17 @@
       "section": "5.18",
       "section_title": "𝑞-Gamma and 𝑞-Beta Functions",
       "source_url": "https://dlmf.nist.gov/5.18.E1",
-      "match": "none",
-      "lean_statement": false,
+      "match": "exact",
+      "lean_statement": true,
       "lean_proof": false,
-      "lean_declarations": [],
+      "lean_declarations": [
+        "LMLF.Blueprint.Gamma.Section518.dlmf_5_18_1"
+      ],
       "quantitative_analogue": false,
       "quantitative_statement": false,
       "quantitative_proof": false,
       "quantitative_declarations": [],
-      "notes": null
+      "notes": "Finite q-Pochhammer product, valid for complex a, q, and every nonnegative n."
     },
     {
       "dlmf_id": "5.18.E2",
@@ -13350,15 +13706,17 @@
       "section": "5.18",
       "section_title": "𝑞-Gamma and 𝑞-Beta Functions",
       "source_url": "https://dlmf.nist.gov/5.18.E2",
-      "match": "none",
-      "lean_statement": false,
+      "match": "exact",
+      "lean_statement": true,
       "lean_proof": false,
-      "lean_declarations": [],
+      "lean_declarations": [
+        "LMLF.Blueprint.Gamma.Section518.dlmf_5_18_2"
+      ],
       "quantitative_analogue": false,
       "quantitative_statement": false,
       "quantitative_proof": false,
       "quantitative_declarations": [],
-      "notes": null
+      "notes": "The reciprocal form records q ≠ 1 explicitly; q-factorial and q-Pochhammer are complex-valued."
     },
     {
       "dlmf_id": "5.18.E3",
@@ -13367,15 +13725,17 @@
       "section": "5.18",
       "section_title": "𝑞-Gamma and 𝑞-Beta Functions",
       "source_url": "https://dlmf.nist.gov/5.18.E3",
-      "match": "none",
-      "lean_statement": false,
+      "match": "exact",
+      "lean_statement": true,
       "lean_proof": false,
-      "lean_declarations": [],
+      "lean_declarations": [
+        "LMLF.Blueprint.Gamma.Section518.dlmf_5_18_3"
+      ],
       "quantitative_analogue": false,
       "quantitative_statement": false,
       "quantitative_proof": false,
       "quantitative_declarations": [],
-      "notes": null
+      "notes": "HasProd states convergence for the source domain ‖q‖ < 1; no q > 1 claim is made."
     },
     {
       "dlmf_id": "5.18.E4",
@@ -13384,15 +13744,17 @@
       "section": "5.18",
       "section_title": "𝑞-Gamma and 𝑞-Beta Functions",
       "source_url": "https://dlmf.nist.gov/5.18.E4",
-      "match": "none",
-      "lean_statement": false,
+      "match": "specialization",
+      "lean_statement": true,
       "lean_proof": false,
-      "lean_declarations": [],
+      "lean_declarations": [
+        "LMLF.Blueprint.Gamma.Section518.dlmf_5_18_4"
+      ],
       "quantitative_analogue": false,
       "quantitative_statement": false,
       "quantitative_proof": false,
       "quantitative_declarations": [],
-      "notes": null
+      "notes": "Uses the source real-base domain 0 < q < 1 and complex z, with principal Complex.cpow; qGamma is a totalized quotient at a zero denominator, with qGammaPoleFree naming the meromorphic finite-value domain."
     },
     {
       "dlmf_id": "5.18.E5",
@@ -13401,15 +13763,17 @@
       "section": "5.18",
       "section_title": "𝑞-Gamma and 𝑞-Beta Functions",
       "source_url": "https://dlmf.nist.gov/5.18.E5",
-      "match": "none",
-      "lean_statement": false,
+      "match": "specialization",
+      "lean_statement": true,
       "lean_proof": false,
-      "lean_declarations": [],
+      "lean_declarations": [
+        "LMLF.Blueprint.Gamma.Section518.dlmf_5_18_5"
+      ],
       "quantitative_analogue": false,
       "quantitative_statement": false,
       "quantitative_proof": false,
       "quantitative_declarations": [],
-      "notes": null
+      "notes": "Real q in 0 < q < 1, matching the q-Gamma definition in this module."
     },
     {
       "dlmf_id": "5.18.E6",
@@ -13418,15 +13782,17 @@
       "section": "5.18",
       "section_title": "𝑞-Gamma and 𝑞-Beta Functions",
       "source_url": "https://dlmf.nist.gov/5.18.E6",
-      "match": "none",
-      "lean_statement": false,
+      "match": "specialization",
+      "lean_statement": true,
       "lean_proof": false,
-      "lean_declarations": [],
+      "lean_declarations": [
+        "LMLF.Blueprint.Gamma.Section518.dlmf_5_18_6"
+      ],
       "quantitative_analogue": false,
       "quantitative_statement": false,
       "quantitative_proof": false,
       "quantitative_declarations": [],
-      "notes": null
+      "notes": "Complex-valued q-factorial and q-Gamma with real q in the source range."
     },
     {
       "dlmf_id": "5.18.E7",
@@ -13435,15 +13801,17 @@
       "section": "5.18",
       "section_title": "𝑞-Gamma and 𝑞-Beta Functions",
       "source_url": "https://dlmf.nist.gov/5.18.E7",
-      "match": "none",
-      "lean_statement": false,
+      "match": "specialization",
+      "lean_statement": true,
       "lean_proof": false,
-      "lean_declarations": [],
+      "lean_declarations": [
+        "LMLF.Blueprint.Gamma.Section518.dlmf_5_18_7"
+      ],
       "quantitative_analogue": false,
       "quantitative_statement": false,
       "quantitative_proof": false,
       "quantitative_declarations": [],
-      "notes": null
+      "notes": "Complex argument recurrence with real 0 < q < 1 and principal Complex.cpow; both q-Gamma denominator products are required nonzero via qGammaPoleFree, excluding z = 0 and all totalized poles."
     },
     {
       "dlmf_id": "5.18.E8",
@@ -13452,15 +13820,17 @@
       "section": "5.18",
       "section_title": "𝑞-Gamma and 𝑞-Beta Functions",
       "source_url": "https://dlmf.nist.gov/5.18.E8",
-      "match": "none",
-      "lean_statement": false,
+      "match": "specialization",
+      "lean_statement": true,
       "lean_proof": false,
-      "lean_declarations": [],
+      "lean_declarations": [
+        "LMLF.Blueprint.Gamma.Section518.dlmf_5_18_8"
+      ],
       "quantitative_analogue": false,
       "quantitative_statement": false,
       "quantitative_proof": false,
       "quantitative_declarations": [],
-      "notes": null
+      "notes": "Real-axis qGammaReal specialization; includes both 0 < x < 1 and x > 2 cases. qGammaReal_coe records the pole-free bridge to complex q-Gamma."
     },
     {
       "dlmf_id": "5.18.E9",
@@ -13469,15 +13839,17 @@
       "section": "5.18",
       "section_title": "𝑞-Gamma and 𝑞-Beta Functions",
       "source_url": "https://dlmf.nist.gov/5.18.E9",
-      "match": "none",
-      "lean_statement": false,
+      "match": "specialization",
+      "lean_statement": true,
       "lean_proof": false,
-      "lean_declarations": [],
+      "lean_declarations": [
+        "LMLF.Blueprint.Gamma.Section518.dlmf_5_18_9"
+      ],
       "quantitative_analogue": false,
       "quantitative_statement": false,
       "quantitative_proof": false,
       "quantitative_declarations": [],
-      "notes": null
+      "notes": "Real-axis qGammaReal specialization on 1 < x < 2. qGammaReal_coe records the pole-free bridge to complex q-Gamma."
     },
     {
       "dlmf_id": "5.18.E10",
@@ -13486,15 +13858,17 @@
       "section": "5.18",
       "section_title": "𝑞-Gamma and 𝑞-Beta Functions",
       "source_url": "https://dlmf.nist.gov/5.18.E10",
-      "match": "none",
-      "lean_statement": false,
+      "match": "specialization",
+      "lean_statement": true,
       "lean_proof": false,
-      "lean_declarations": [],
+      "lean_declarations": [
+        "LMLF.Blueprint.Gamma.Section518.dlmf_5_18_10"
+      ],
       "quantitative_analogue": false,
       "quantitative_statement": false,
       "quantitative_proof": false,
       "quantitative_declarations": [],
-      "notes": null
+      "notes": "Real q approaching 1 from below and complex z, represented with nhdsWithin; qGamma and Complex.Gamma are totalized at exceptional poles, so the meromorphic source reading is pole-free."
     },
     {
       "dlmf_id": "5.18.E11",
@@ -13503,15 +13877,17 @@
       "section": "5.18",
       "section_title": "𝑞-Gamma and 𝑞-Beta Functions",
       "source_url": "https://dlmf.nist.gov/5.18.E11",
-      "match": "none",
-      "lean_statement": false,
+      "match": "specialization",
+      "lean_statement": true,
       "lean_proof": false,
-      "lean_declarations": [],
+      "lean_declarations": [
+        "LMLF.Blueprint.Gamma.Section518.dlmf_5_18_11"
+      ],
       "quantitative_analogue": false,
       "quantitative_statement": false,
       "quantitative_proof": false,
       "quantitative_declarations": [],
-      "notes": null
+      "notes": "Complex a, b with real q in 0 < q < 1; this is a totalized quotient identity, with the meromorphic q-Beta reading restricted to nonzero displayed q-Gamma denominators."
     },
     {
       "dlmf_id": "5.18.E12",
@@ -13520,15 +13896,17 @@
       "section": "5.18",
       "section_title": "𝑞-Gamma and 𝑞-Beta Functions",
       "source_url": "https://dlmf.nist.gov/5.18.E12",
-      "match": "none",
-      "lean_statement": false,
+      "match": "specialization",
+      "lean_statement": true,
       "lean_proof": false,
-      "lean_declarations": [],
+      "lean_declarations": [
+        "LMLF.Blueprint.Gamma.Section518.dlmf_5_18_12"
+      ],
       "quantitative_analogue": false,
       "quantitative_statement": false,
       "quantitative_proof": false,
       "quantitative_declarations": [],
-      "notes": null
+      "notes": "Jackson q-integral specialization with real q, Re(a) > 0, and Re(b) > 0; principal Complex.cpow is evaluated at positive sampled points."
     },
     {
       "dlmf_id": "5.19.E1",

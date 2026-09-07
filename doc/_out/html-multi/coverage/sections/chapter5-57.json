@@ -1,0 +1,149 @@
+{
+  "schema_version": 1,
+  "artifact_kind": "dlmf_section_statement_coverage",
+  "section": "5.7",
+  "title": "Series Expansions",
+  "source_url": "https://dlmf.nist.gov/5.7",
+  "source_version": "1.2.7",
+  "source_release_date": "2026-06-15",
+  "unit": "numbered_formula",
+  "formula_count": 8,
+  "included_ids": [
+    "5.7.1",
+    "5.7.2",
+    "5.7.3",
+    "5.7.4",
+    "5.7.5",
+    "5.7.6",
+    "5.7.7",
+    "5.7.8"
+  ],
+  "omitted_ids": [],
+  "summary": {
+    "lean_statements": 8,
+    "lean_proofs": 0,
+    "quantitative_analogues": 0,
+    "quantitative_statements": 0,
+    "quantitative_proofs": 0
+  },
+  "entries": [
+    {
+      "id": "5.7.1",
+      "source_url": "https://dlmf.nist.gov/5.7.E1",
+      "match": "exact",
+      "lean_statement": true,
+      "lean_proof": false,
+      "lean_declarations": [
+        "LMLF.Blueprint.Gamma.reciprocalGammaCoeff",
+        "LMLF.Blueprint.Gamma.reciprocalGamma_hasSum",
+        "LMLF.Blueprint.Gamma.reciprocalGammaCoeff_one",
+        "LMLF.Blueprint.Gamma.reciprocalGammaCoeff_two"
+      ],
+      "quantitative_analogue": false,
+      "quantitative_statement": false,
+      "quantitative_proof": false,
+      "notes": "HasSum records both global convergence and the value; the two unnumbered initial coefficients are included."
+    },
+    {
+      "id": "5.7.2",
+      "source_url": "https://dlmf.nist.gov/5.7.E2",
+      "match": "exact",
+      "lean_statement": true,
+      "lean_proof": false,
+      "lean_declarations": [
+        "LMLF.Blueprint.Gamma.reciprocalGammaCoeff_recurrence"
+      ],
+      "quantitative_analogue": false,
+      "quantitative_statement": false,
+      "quantitative_proof": false,
+      "notes": "The source ellipsis is expanded as a finite sum from 2 through k-1."
+    },
+    {
+      "id": "5.7.3",
+      "source_url": "https://dlmf.nist.gov/5.7.E3",
+      "match": "exact",
+      "lean_statement": true,
+      "lean_proof": false,
+      "lean_declarations": [
+        "LMLF.Blueprint.Gamma.logGammaOnePlusSeriesTerm",
+        "LMLF.Blueprint.Gamma.logGammaOnePlus",
+        "LMLF.Blueprint.Gamma.exp_logGammaOnePlus",
+        "LMLF.Blueprint.Gamma.logGamma_one_add_hasSum"
+      ],
+      "quantitative_analogue": false,
+      "quantitative_statement": false,
+      "quantitative_proof": false,
+      "notes": "Uses a named branch-consistent log-Gamma, an exponential-to-Gamma bridge, and HasSum for the series beginning at k=2; z = -1 is explicitly excluded because the source expression contains log 0."
+    },
+    {
+      "id": "5.7.4",
+      "source_url": "https://dlmf.nist.gov/5.7.E4",
+      "match": "exact",
+      "lean_statement": true,
+      "lean_proof": false,
+      "lean_declarations": [
+        "LMLF.Blueprint.Gamma.digamma_one_add_hasSum"
+      ],
+      "quantitative_analogue": false,
+      "quantitative_statement": false,
+      "quantitative_proof": false,
+      "notes": "HasSum records the disk of convergence and exact digamma value."
+    },
+    {
+      "id": "5.7.5",
+      "source_url": "https://dlmf.nist.gov/5.7.E5",
+      "match": "exact",
+      "lean_statement": true,
+      "lean_proof": false,
+      "lean_declarations": [
+        "LMLF.Blueprint.Gamma.digamma_one_add_even_hasSum"
+      ],
+      "quantitative_analogue": false,
+      "quantitative_statement": false,
+      "quantitative_proof": false,
+      "notes": "The radius-two condition and exclusions z = 0, 1, -1 are explicit."
+    },
+    {
+      "id": "5.7.6",
+      "source_url": "https://dlmf.nist.gov/5.7.E6",
+      "match": "exact",
+      "lean_statement": true,
+      "lean_proof": false,
+      "lean_declarations": [
+        "LMLF.Blueprint.Gamma.digamma_partialFractions_hasSum"
+      ],
+      "quantitative_analogue": false,
+      "quantitative_statement": false,
+      "quantitative_proof": false,
+      "notes": "One theorem contains both HasSum assertions in the chained source identity."
+    },
+    {
+      "id": "5.7.7",
+      "source_url": "https://dlmf.nist.gov/5.7.E7",
+      "match": "exact",
+      "lean_statement": true,
+      "lean_proof": false,
+      "lean_declarations": [
+        "LMLF.Blueprint.Gamma.digamma_halfDifference_hasSum"
+      ],
+      "quantitative_analogue": false,
+      "quantitative_statement": false,
+      "quantitative_proof": false,
+      "notes": "The nonpositive-integer exclusions preceding 5.7.6 also govern this formula."
+    },
+    {
+      "id": "5.7.8",
+      "source_url": "https://dlmf.nist.gov/5.7.E8",
+      "match": "exact",
+      "lean_statement": true,
+      "lean_proof": false,
+      "lean_declarations": [
+        "LMLF.Blueprint.Gamma.digamma_one_add_mul_I_im_hasSum"
+      ],
+      "quantitative_analogue": false,
+      "quantitative_statement": false,
+      "quantitative_proof": false,
+      "notes": "The summand and target are real-valued; DLMF imposes no further condition on y."
+    }
+  ]
+}

@@ -18,16 +18,23 @@ The boolean fields are deliberately independent:
 - `quantitative_statement`: the distinct estimate has a checked Lean declaration.
 - `quantitative_proof`: the distinct estimate has a proof.
 
-`match` is `exact`, `consequence`, or `none`. An unmapped row has all five booleans set to `false`;
+`match` is `exact`, `specialization`, `consequence`, or `none`. An unmapped row has all five booleans set to `false`;
 this means no corresponding declaration is currently catalogued in LMLF, not that the mathematics is
 absent from Mathlib or another Lean library.
 
-Regenerate the ledger from the current DLMF section pages with:
+Synchronize the reviewed Chapter 5 manifests (both the author-contract and earlier page shapes),
+validate their IDs against the schema-v2 inventory, and regenerate both ledgers with one
+idempotent command:
 
 ```sh
-python3 scripts/update_dlmf_coverage.py
-python3 scripts/update_dlmf_source_inventory.py
+python3 scripts/sync_chapter5_coverage.py
 ```
+
+The command replaces only Chapter 5.1--5.18 formula overrides, preserves overrides for other
+sections, updates the rendered summary rows from the generated ledger, and may be rerun after any
+manifest edit.  Its output is stable apart from the generators' UTC `generated_at` timestamps.
+The lower-level generators remain useful for a ledger rebuild when no reviewed Chapter 5
+specialization overrides are present.
 
 Update `overrides.json` whenever a statement or proof lands. The generator rejects inconsistent
 states such as a proof without a statement.

@@ -1,0 +1,40 @@
+{
+  "section_range": ["5.4"],
+  "numbered_formula_ids_expected": [
+    "5.4.E1", "5.4.E2", "5.4.E3", "5.4.E4", "5.4.E5", "5.4.E6", "5.4.E7", "5.4.E8", "5.4.E9", "5.4.E10",
+    "5.4.E11", "5.4.E12", "5.4.E13", "5.4.E14", "5.4.E15", "5.4.E16", "5.4.E17", "5.4.E18", "5.4.E19", "5.4.E20"
+  ],
+  "numbered_formula_ids_stated": [
+    "5.4.E1", "5.4.E2", "5.4.E3", "5.4.E4", "5.4.E5", "5.4.E6", "5.4.E7", "5.4.E8", "5.4.E9", "5.4.E10",
+    "5.4.E11", "5.4.E12", "5.4.E13", "5.4.E14", "5.4.E15", "5.4.E16", "5.4.E17", "5.4.E18", "5.4.E19", "5.4.E20"
+  ],
+  "numbered_formula_ids_omitted": [],
+  "extra_statement_ids": [],
+  "declarations": [
+    {"source_id": "5.4.E1", "names": ["LMLF.Blueprint.Gamma.gamma_special_factorial"], "relation": "exact", "proof_status": "missing", "quantitative_analogue": "not_applicable", "notes": "Complex formulation of the integer special values."},
+    {"source_id": "5.4.E2", "names": ["LMLF.Blueprint.Gamma.doubleFactorial", "LMLF.Blueprint.Gamma.gamma_doubleFactorial_even", "LMLF.Blueprint.Gamma.gamma_doubleFactorial_odd"], "relation": "specialization", "proof_status": "missing", "quantitative_analogue": "not_applicable", "notes": "Real-positive Gamma specialization with explicit parity hypotheses and a finite-product double factorial; the manual records the source note that the odd line also applies at n = -1, outside the Nat specialization."},
+    {"source_id": "5.4.E3", "names": ["LMLF.Blueprint.Gamma.gamma_imaginary_modulus"], "relation": "specialization", "proof_status": "missing", "quantitative_analogue": "not_applicable", "notes": "Real y specialization, with y ≠ 0 made explicit for the displayed quotient."},
+    {"source_id": "5.4.E4", "names": ["LMLF.Blueprint.Gamma.gamma_half_line_product"], "relation": "exact", "proof_status": "missing", "quantitative_analogue": "not_applicable", "notes": "Complex identity with the real squared norm cast into ℂ."},
+    {"source_id": "5.4.E5", "names": ["LMLF.Blueprint.Gamma.gamma_quarter_shift_product"], "relation": "specialization", "proof_status": "missing", "quantitative_analogue": "not_applicable", "notes": "Real y parameter specialization of the complex-line identity."},
+    {"source_id": "5.4.E6", "names": ["LMLF.Blueprint.Gamma.gamma_half_value"], "relation": "specialization", "proof_status": "missing", "quantitative_analogue": "not_applicable", "notes": "Real Gamma exact value plus an enclosure for the displayed decimal."},
+    {"source_id": "5.4.E7", "names": ["LMLF.Blueprint.Gamma.gamma_third_value"], "relation": "specialization", "proof_status": "missing", "quantitative_analogue": "not_applicable", "notes": "Real Gamma numerical enclosure matching the displayed decimal."},
+    {"source_id": "5.4.E8", "names": ["LMLF.Blueprint.Gamma.gamma_two_thirds_value"], "relation": "specialization", "proof_status": "missing", "quantitative_analogue": "not_applicable", "notes": "Real Gamma numerical enclosure matching the displayed decimal."},
+    {"source_id": "5.4.E9", "names": ["LMLF.Blueprint.Gamma.gamma_quarter_value"], "relation": "specialization", "proof_status": "missing", "quantitative_analogue": "not_applicable", "notes": "Real Gamma numerical enclosure matching the displayed decimal."},
+    {"source_id": "5.4.E10", "names": ["LMLF.Blueprint.Gamma.gamma_three_quarters_value"], "relation": "specialization", "proof_status": "missing", "quantitative_analogue": "not_applicable", "notes": "Real Gamma numerical enclosure matching the displayed decimal."},
+    {"source_id": "5.4.E11", "names": ["LMLF.Blueprint.Gamma.gamma_deriv_one_value"], "relation": "specialization", "proof_status": "missing", "quantitative_analogue": "not_applicable", "notes": "Signed real derivative identity at 1, preserving the source's negative sign."},
+    {"source_id": "5.4.E12", "names": ["LMLF.Blueprint.Gamma.digamma_one_values"], "relation": "specialization", "proof_status": "missing", "quantitative_analogue": "not_applicable", "notes": "Complex digamma value at 1 together with the source's signed positive derivative identity."},
+    {"source_id": "5.4.E13", "names": ["LMLF.Blueprint.Gamma.digamma_half_values"], "relation": "specialization", "proof_status": "missing", "quantitative_analogue": "not_applicable", "notes": "Complex digamma value at 1/2 together with the source's signed positive derivative identity."},
+    {"source_id": "5.4.E14", "names": ["LMLF.Blueprint.Gamma.digamma_nat_value"], "relation": "specialization", "proof_status": "missing", "quantitative_analogue": "not_applicable", "notes": "Natural-number specialization with a finite complex harmonic sum."},
+    {"source_id": "5.4.E15", "names": ["LMLF.Blueprint.Gamma.digamma_half_nat_value"], "relation": "specialization", "proof_status": "missing", "quantitative_analogue": "not_applicable", "notes": "Positive natural-number specialization with an odd reciprocal sum."},
+    {"source_id": "5.4.E16", "names": ["LMLF.Blueprint.Gamma.digamma_imaginary_part"], "relation": "specialization", "proof_status": "missing", "quantitative_analogue": "not_applicable", "notes": "Real y line formula, writing coth as cosh/sinh and requiring y ≠ 0."},
+    {"source_id": "5.4.E17", "names": ["LMLF.Blueprint.Gamma.digamma_half_shift_imaginary_part"], "relation": "specialization", "proof_status": "missing", "quantitative_analogue": "not_applicable", "notes": "Real y specialization with tanh written as sinh/cosh."},
+    {"source_id": "5.4.E18", "names": ["LMLF.Blueprint.Gamma.digamma_one_shift_imaginary_part"], "relation": "specialization", "proof_status": "missing", "quantitative_analogue": "not_applicable", "notes": "Real y line formula, writing coth as cosh/sinh and requiring y ≠ 0."},
+    {"source_id": "5.4.E19", "names": ["LMLF.Blueprint.Gamma.digamma_rational_value"], "relation": "specialization", "proof_status": "missing", "quantitative_analogue": "not_applicable", "notes": "Natural p,q specialization of the rational formula, with complex logarithm and trigonometric functions."},
+    {"source_id": "5.4.E20", "names": ["LMLF.Blueprint.Gamma.gamma_extrema_asymptotic"], "relation": "specialization", "proof_status": "missing", "quantitative_analogue": "not_applicable", "notes": "Real critical-point sequence with both Gamma' and digamma zero conditions and an explicit eventual bound for the O term; the manual reproduces all eleven Table 5.4.1 decimal rows as labelled approximations."}
+  ],
+  "shared_vocabulary_requests": [],
+  "known_gaps": [
+    "The manual reproduces Table 5.4.1's eleven decimal rows as labelled approximations; those rounded cells are intentionally not encoded as exact Lean equalities.",
+    "All proofs remain sorry by design during the statement-coverage phase; no shared aggregators or generated output were edited."
+  ]
+}

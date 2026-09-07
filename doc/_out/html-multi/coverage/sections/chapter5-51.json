@@ -1,0 +1,93 @@
+{
+  "section_range": ["5.1"],
+  "numbered_formula_ids_expected": [],
+  "numbered_formula_ids_stated": [],
+  "numbered_formula_ids_omitted": [],
+  "extra_statement_ids": [
+    "5.1.variables",
+    "5.1.delta",
+    "5.1.functions",
+    "5.1.alternatives",
+    "5.1.constants"
+  ],
+  "declarations": [
+    {
+      "source_id": "5.1.variables",
+      "names": [
+        "LMLF.Blueprint.Gamma.Section51.NonnegativeInteger",
+        "LMLF.Blueprint.Gamma.Section51.complexCoordinate",
+        "LMLF.Blueprint.Gamma.Section51.complexCoordinate_re",
+        "LMLF.Blueprint.Gamma.Section51.complexCoordinate_im",
+        "LMLF.Blueprint.Gamma.Section51.qParameterCondition",
+        "LMLF.Blueprint.Gamma.Section51.real_qParameterCondition_iff"
+      ],
+      "relation": "exact",
+      "proof_status": "missing",
+      "quantitative_analogue": "not_applicable",
+      "notes": "The notation table is encoded with natural-number indices, explicit real-to-complex coordinates, and the complex norm form of |q| < 1."
+    },
+    {
+      "source_id": "5.1.delta",
+      "names": ["LMLF.Blueprint.Gamma.Section51.exists_positive_delta_lt"],
+      "relation": "consequence",
+      "proof_status": "missing",
+      "quantitative_analogue": "not_applicable",
+      "notes": "The source says δ is arbitrary small and positive; the declaration states the precise existence property used by later estimates."
+    },
+    {
+      "source_id": "5.1.functions",
+      "names": [
+        "LMLF.Blueprint.Gamma.Section51.gammaFunction",
+        "LMLF.Blueprint.Gamma.Section51.psiFunction",
+        "LMLF.Blueprint.Gamma.Section51.betaFunction"
+      ],
+      "relation": "exact",
+      "proof_status": "missing",
+      "quantitative_analogue": "not_applicable",
+      "notes": "Gamma and psi use the canonical complex Mathlib objects. betaFunction is Mathlib's Euler interval integral, whose convergence theorem uses 0 < Re a and 0 < Re b; it is not the meromorphic continuation. q-Gamma remains defined in Section518."
+    },
+    {
+      "source_id": "5.1.alternatives",
+      "names": [
+        "LMLF.Blueprint.Gamma.Section51.gaussPi",
+        "LMLF.Blueprint.Gamma.Section51.gaussPsi",
+        "LMLF.Blueprint.Gamma.Section51.davisPsi",
+        "LMLF.Blueprint.Gamma.Section51.pairmanF",
+        "LMLF.Blueprint.Gamma.Section51.gaussPi_shift_eq_gamma",
+        "LMLF.Blueprint.Gamma.Section51.gaussPsi_shift_eq_psi",
+        "LMLF.Blueprint.Gamma.Section51.pairmanF_shift_eq_psi"
+      ],
+      "relation": "exact",
+      "proof_status": "missing",
+      "quantitative_analogue": "not_applicable",
+      "notes": "Historical Pi/Psi/F notation is represented by shifted aliases of the canonical Gamma and digamma objects."
+    },
+    {
+      "source_id": "5.1.alternatives",
+      "names": ["LMLF.Blueprint.Gamma.Section51.gamma_nat_succ_eq_factorial"],
+      "relation": "specialization",
+      "proof_status": "missing",
+      "quantitative_analogue": "not_applicable",
+      "notes": "Nat specialization of the source's general-complex factorial alternative: z = n + 1 and ordinary n.factorial."
+    },
+    {
+      "source_id": "5.1.constants",
+      "names": [
+        "LMLF.Blueprint.Gamma.Section51.eulerConstant",
+        "LMLF.Blueprint.Gamma.Section51.primeDerivative",
+        "LMLF.Blueprint.Gamma.Section51.primeDerivative_eq_deriv"
+      ],
+      "relation": "exact",
+      "proof_status": "missing",
+      "quantitative_analogue": "not_applicable",
+      "notes": "Euler's constant is Mathlib's Real.eulerMascheroniConstant. A prime is exposed as Mathlib's totalized complex deriv and is intended only where differentiability has been established."
+    }
+  ],
+  "shared_vocabulary_requests": [
+    "Keep Section518.qGamma as the single q-Gamma implementation; if a chapter-wide notation namespace is introduced later, re-export it there rather than duplicating it in Section51."
+  ],
+  "known_gaps": [
+    "DLMF §5.1 has no numbered equations; all coverage is recorded as notation and convention anchors.",
+    "The source's prose does not define a separate Lean object for 'real or complex variable'; the formalization uses ℂ with canonical coercions and explains that choice in the manual."
+  ]
+}

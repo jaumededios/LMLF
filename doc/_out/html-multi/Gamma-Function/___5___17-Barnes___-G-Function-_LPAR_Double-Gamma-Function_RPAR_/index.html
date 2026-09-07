@@ -1,0 +1,1310 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script>
+      (function(){
+  const {protocol:proto, host:hostName, pathname:path, search:srch, hash:hsh} = window.location;
+  if (!(path.endsWith("/") || path.endsWith(".html"))) {
+    window.location.replace(`${proto}//${hostName}${path}/${srch}${hsh}`);
+  }
+})()</script>
+    <script>
+      // Enable TypeScript checking.
+// @ts-check
+
+// Applies a saved table-of-contents width before the first paint.
+//
+// This is a tiny inline counterpart to toc-resize.js: it runs in the page head so that
+// returning desktop readers do not see the default width flash to their saved width.
+// It only records the width in the --verso-toc-user-width custom property; the
+// stylesheet clamps it and ignores it on mobile, and toc-resize.js then takes over the
+// interactive resizing. Keep the storage key in sync with toc-resize.js.
+
+(function () {
+    try {
+        const saved = localStorage.getItem("verso-toc-width");
+        // Parse to a number (as toc-resize.js does) and write that back, so a stored
+        // value with stray whitespace becomes a valid length rather than `" 420 px"`.
+        const width = saved === null ? NaN : Number(saved);
+        if (Number.isFinite(width)) {
+            document.documentElement.style.setProperty("--verso-toc-user-width", `${width}px`);
+        }
+    } catch (_) {
+        // Leave the default width in place when local storage is unavailable.
+    }
+})();
+</script>
+    <base href="./../../"><meta charset="utf-8">
+    <meta name="viewport" content="height=device-height, width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
+    <title>§5.17 Barnes' G-Function (Double Gamma Function)</title><link rel="stylesheet" href="book.css">
+    <link rel="stylesheet" href="verso-vars.css">
+    <script src="https://cdn.jsdelivr.net/npm/marked@11.1.1/marked.min.js" integrity="sha384-zbcZAIxlvJtNE3Dp5nxLXdXtXyxwOdnILY1TDPVmKFhl4r4nSUG1r8bcFXGVa4Te" crossorigin="anonymous"></script>
+    <script defer="defer" src="-verso-search/elasticlunr.min.js"></script>
+    <script defer="defer" src="-verso-search/fuzzysort.min.js"></script>
+    <script defer="defer" src="-verso-search/searchIndex.js"></script>
+    <script defer="defer" src="-verso-search/search-config.js"></script>
+    <script type="module" src="-verso-search/search-init.js"></script>
+    <link rel="stylesheet" href="-verso-search/search-box.css">
+    <link rel="stylesheet" href="-verso-search/search-page.css">
+    <link rel="stylesheet" href="-verso-search/search-highlight.css">
+    <link rel="stylesheet" href="-verso-search/domain-display.css">
+    <script src="-verso-search/search-highlight.js" defer="defer"></script>
+    <script src="toc-resize.js" defer="defer"></script>
+    <script src="-verso-data/katex/katex.js"></script>
+    <script src="-verso-data/katex/math.js"></script>
+    <script src="-verso-data/popper.min.js"></script>
+    <script src="-verso-data/tippy-bundle.umd.min.js"></script>
+    <link rel="stylesheet" href="-verso-data/tippy-border.css">
+    <link rel="stylesheet" href="-verso-data/katex/katex.css">
+    <style>
+:root {
+  --verso-text-font-family: Georgia, "Times New Roman", serif;
+  --verso-content-max-width: 64rem;
+  --lmlf-ink: #111;
+  --lmlf-muted: #555;
+  --lmlf-link: #0645ad;
+  --lmlf-heading: #d3dce6;
+  --lmlf-heading-dark: #bcc4cc;
+  --lmlf-rule: #a4abb2;
+  --lmlf-lean: #f4f8fc;
+  --lmlf-lean-rule: #9bb7d3;
+}
+
+body {
+  background: #fff;
+  color: var(--lmlf-ink);
+  font-family: Georgia, "Times New Roman", serif;
+}
+
+main { max-width: 74rem; }
+
+h1, h2, h3, h4,
+.lmlf-source-link,
+.lmlf-dlmf-entry__source,
+.lmlf-lean > summary {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+h2 {
+  background: var(--lmlf-heading-dark);
+  border-top: .28rem double var(--lmlf-rule);
+  color: #111;
+  padding: .38rem .55rem;
+}
+
+h3 {
+  background: var(--lmlf-heading);
+  color: #111;
+  padding: .28rem .48rem;
+}
+
+h4 { color: #222; }
+a { color: var(--lmlf-link); }
+
+.lmlf-source-link {
+  border-bottom: 1px solid #c8cdd2;
+  margin: .3rem 0 1.35rem;
+  padding: 0 0 .6rem;
+}
+
+.lmlf-source-link a { font-weight: 700; }
+
+.lmlf-dlmf-entry {
+  border-bottom: 1px solid #c8cdd2;
+  border-top: 1px solid #c8cdd2;
+  margin: 1.2rem 0 1.7rem;
+  padding: .75rem 0 .95rem;
+}
+
+.lmlf-dlmf-entry__body {
+  display: grid;
+  gap: .15rem;
+}
+
+.lmlf-dlmf-entry__source {
+  font-size: .86rem;
+  font-weight: 700;
+  margin-bottom: .65rem;
+}
+
+.lmlf-dlmf-entry__body > :first-child { margin-top: 0; }
+
+.lmlf-lean {
+  background: var(--lmlf-lean);
+  border: 1px solid var(--lmlf-lean-rule);
+  margin: .85rem 0 .15rem;
+}
+
+.lmlf-lean > summary {
+  color: #174f80;
+  cursor: pointer;
+  font-size: .86rem;
+  font-weight: 700;
+  padding: .55rem .7rem;
+}
+
+.lmlf-lean[open] > summary { border-bottom: 1px solid var(--lmlf-lean-rule); }
+.lmlf-lean__body { padding: .2rem .7rem .65rem; }
+
+.lmlf-section-list > ul {
+  list-style: none;
+  margin-left: 0;
+  padding-left: 0;
+}
+
+.lmlf-section-list li {
+  border-bottom: 1px dotted #b7bcc1;
+  padding: .24rem .15rem;
+}
+
+.lmlf-section-list li::before {
+  color: #5f6770;
+  content: "\203A";
+  display: inline-block;
+  margin-right: .48rem;
+}
+
+.lmlf-coverage {
+  border-collapse: collapse;
+  font-family: Arial, Helvetica, sans-serif;
+  margin: 1rem 0 1.4rem;
+  width: 100%;
+}
+
+.lmlf-coverage th,
+.lmlf-coverage td {
+  border-bottom: 1px solid #c8cdd2;
+  padding: .42rem .55rem;
+  text-align: right;
+}
+
+.lmlf-coverage th:first-child,
+.lmlf-coverage td:first-child { text-align: left; }
+.lmlf-coverage thead { background: var(--lmlf-heading); }
+</style><style>
+
+.hl.lean {
+  white-space: pre;
+  font-weight: normal;
+  font-style: normal;
+  font-size: inherit;
+}
+
+.hl.lean .keyword {
+  color: var(--verso-code-keyword-color,);
+  font-weight: var(--verso-code-keyword-weight, bold);
+  font-style: var(--verso-code-keyword-style, normal);
+  font-family: var(--verso-code-keyword-font-family,);
+}
+
+.hl.lean .const {
+  color: var(--verso-code-const-color,);
+  font-weight: var(--verso-code-const-weight, normal);
+  font-style: var(--verso-code-const-style, normal);
+  font-family: var(--verso-code-const-font-family,);
+}
+
+.hl.lean .var {
+  color: var(--verso-code-var-color,);
+  font-weight: var(--verso-code-var-weight, normal);
+  font-style: var(--verso-code-var-style, italic);
+  font-family: var(--verso-code-var-font-family,);
+
+  position: relative;
+}
+
+.hl.lean .literal, .hl.lean .unknown {
+  color: var(--verso-code-color,);
+  font-weight: normal;
+  font-style: normal;
+  font-family: var(--verso-code-font-family,);
+}
+
+/* These lexically-classified token kinds default to the `.unknown` appearance. The rule follows
+   `.const` so it wins for the `anon-ctor` tokens, which also carry the `const` class. */
+.hl.lean .anon-ctor,
+.hl.lean .number,
+.hl.lean .char,
+.hl.lean .comment,
+.hl.lean .punctuation,
+.hl.lean .delim,
+.hl.lean .wildcard {
+  color: var(--verso-code-color,);
+  font-weight: normal;
+  font-style: normal;
+  font-family: var(--verso-code-font-family,);
+}
+
+.hover-container {
+  width: 0;
+  height: 0;
+  position: relative;
+  display: inline;
+}
+
+.hl.lean a {
+  color: inherit;
+  text-decoration: currentcolor underline dotted;
+}
+
+.hl.lean a:hover {
+  text-decoration: currentcolor underline solid;
+}
+
+.hl.lean .hover-info {
+  white-space: normal;
+}
+
+.hl.lean .token .hover-info {
+  display: none;
+  position: absolute;
+  background-color: #e5e5e5;
+  border: 1px solid black;
+  padding: 0.5rem;
+  z-index: 300;
+}
+
+.hl.lean .hover-info.messages {
+  max-height: 10rem;
+  overflow-y: auto;
+  overflow-x: hidden;
+  scrollbar-gutter: stable;
+  padding: 0 0.5rem 0 0;
+  display: block;
+}
+
+.hl.lean .hover-info code {
+  white-space: pre-wrap;
+  background: none;
+  color: black;
+}
+
+.hl.lean .hover-info.messages > code {
+  padding: 0.5rem;
+  display: block;
+  width: fit-content;
+}
+
+.hl.lean .hover-info.messages > code:only-child {
+  margin: 0;
+}
+
+.hl.lean .hover-info.messages > code {
+  margin: 0.1rem;
+}
+
+.hl.lean .hover-info.messages > code:not(:first-child) {
+  margin-top: 0rem;
+}
+
+.hl.lean {
+}
+
+.hl.lean.block {
+  display: block;
+}
+
+.hl.lean.inline {
+  display: inline;
+  white-space: pre-wrap;
+}
+
+.hl.lean * {
+}
+
+.hl.lean .token {
+  transition: all 0.25s; /* Slight fade for highlights */
+}
+
+@media (hover: hover) {
+  .hl.lean .token.binding-hl, .hl.lean .literal:hover, .hl.lean .token.typed:hover {
+    background-color: #eee;
+    border-radius: 2px;
+    transition: none;
+  }
+}
+
+
+.hl.lean .has-info .token:not(.tactic-state):not(.tactic-state *), .hl.lean .has-info .inter-text:not(.tactic-state):not(.tactic-state *) {
+  text-decoration-style: wavy;
+  text-decoration-line: underline;
+  text-decoration-thickness: from-font;
+  text-decoration-skip-ink: none;
+}
+
+.hl.lean .has-info .hover-info {
+  display: none;
+  position: absolute;
+  transform: translate(0.25rem, 0.3rem);
+  border: 1px solid black;
+  padding: 0.5rem;
+  z-index: 400;
+  text-align: left;
+}
+
+.hl.lean .has-info.error :not(.tactic-state):not(.tactic-state *){
+  text-decoration-color: red;
+}
+
+@media (hover: hover) {
+  .hl.lean .has-info.error:hover {
+    background-color: #ffb3b3;
+  }
+}
+
+.hl.lean .hover-info.messages > code.error {
+  background-color: #e5e5e5;
+  border-left: 0.2rem solid #ffb3b3;
+}
+
+.tippy-box[data-theme~='error'] .hl.lean .hover-info.messages > code.error {
+  background: none;
+  border: none;
+}
+
+.error .verso-message, .error .verso-message .token, .error .verso-message label {
+  color: var(--verso-error-color);
+}
+
+.error .verso-message .case-label:has(input[type="checkbox"])::before {
+  background-color: var(--verso-error-color) !important;
+}
+
+.hl.lean .has-info.warning :not(.tactic-state):not(.tactic-state *) {
+  text-decoration-color: var(--verso-warning-indicator-color);
+}
+
+@media (hover: hover) {
+  .hl.lean .has-info.warning:hover {
+    background-color:var(--verso-warning-color);
+  }
+}
+
+.hl.lean .hover-info.messages > code.warning {
+  background-color: var(--verso-warning-color);
+}
+
+.lean-output {
+  border-left: 0.2em solid transparent;
+  padding: 0 0 0 0.5em;
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+.lean-output.error {
+  border-color: var(--verso-error-indicator-color);
+}
+
+.lean-output.information {
+  border-color: var(--verso-info-indicator-color);
+}
+
+.lean-output.warning {
+  border-color: var(--verso-warning-indicator-color);
+}
+
+.hl.lean .hover-info.messages > code.error {
+  background-color: #e5e5e5;
+  border-left: 0.2rem solid var(--verso-warning-color);
+}
+
+.tippy-box[data-theme~='warning'] .hl.lean .hover-info.messages > code.warning {
+  background: none;
+  border: none;
+}
+
+
+.hl.lean .has-info.information :not(.tactic-state):not(.tactic-state *) {
+  text-decoration-color: var(--verso-info-indicator-color, blue);
+}
+
+@media (hover: hover) {
+  .hl.lean .has-info.information:hover {
+    background-color: #4777ff;
+  }
+}
+
+
+.hl.lean .hover-info.messages > code.information {
+  background-color: #e5e5e5;
+  border-left: 0.2rem solid #4777ff;
+}
+
+.tippy-box[data-theme~='info'] .hl.lean .hover-info.messages > code.information {
+  background: none;
+  border: none;
+}
+
+.hl.lean div.docstring {
+  font-family: var(--verso-text-font-family, sans-serif);
+  white-space: normal;
+  max-width: calc(min(40rem, 90vw));
+  width: max-content;
+}
+
+.hl.lean div.docstring > :last-child {
+  margin-bottom: 0;
+}
+
+.hl.lean div.docstring > :first-child {
+  margin-top: 0;
+}
+
+.hl.lean .hover-info .sep {
+  display: block;
+  width: auto;
+  margin-left: 1rem;
+  margin-right: 1rem;
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+  padding: 0;
+  height: 1px;
+  border-top: 1px solid #ccc;
+}
+
+.hl.lean code {
+  font-family: var(--verso-code-font-family);
+}
+
+.hl.lean .tactic-state {
+  display: none;
+  position: relative;
+  width: fit-content;
+  border: 1px solid #888888;
+  border-radius: 0.1rem;
+  padding: 0.5rem;
+  font-family: sans-serif;
+  background-color: #ffffff;
+}
+
+.hl.lean.popup .tactic-state {
+  position: static;
+  display: block;
+  width: auto;
+  border: none;
+  padding: 0.5rem;
+  font-family: sans-serif;
+  background-color: #ffffff;
+}
+
+
+.hl.lean .tactic {
+  position: relative;
+  display: inline;
+  vertical-align: top;
+  /* Without these, mobile Safari will start making font sizes inconsistent when its text size adjustment feature is triggered.*/
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+.hl.lean .tactic:has(> .tactic-toggle:checked) {
+  display: inline-grid;
+  grid-template-columns: 1fr;
+}
+
+.hl.lean .tactic-toggle:checked ~ .tactic-state {
+  display: inline-block;
+  vertical-align: top;
+  grid-row: 2;
+  justify-self: start;
+}
+
+.hl.lean .tactic > label {
+  position: relative;
+  grid-row: 1;
+  display: inline;
+}
+
+@media (hover: hover) {
+  /* Highlight a region on hover only when its own toggle is unchecked, and only the innermost
+     hovered region: `label:hover` bubbles to ancestor labels, so suppress the highlight on a region
+     whose label contains a more deeply nested hovered tactic label. */
+  .hl.lean .tactic:has(> .tactic-toggle:not(:checked)) > label:hover:not(:has(.tactic > label:hover)) {
+    background-color: #eeeeee;
+  }
+}
+
+.hl.lean .tactic-toggle {
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0;
+  height: 0;
+  width: 0;
+  z-index: -10;
+}
+
+.hl.lean .tactic > label::after {
+  content: "";
+  border: 1px solid #bbbbbb;
+  /* These need to be em, not rem, to scale with the font */
+  border-radius: 1em;
+  height: 0.25em;
+  vertical-align: middle;
+  width: 0.6em;
+  margin-left: 0.1em;
+  margin-right: 0.1em;
+  display: inline-block;
+  transition: all 0.5s;
+}
+
+/*
+@media (hover: hover) {
+  .hl.lean .tactic > label:hover::after {
+    border: 1px solid #aaaaaa;
+    background-color: #aaaaaa;
+    transition: all 0.5s;
+  }
+}
+*/
+
+.hl.lean .tactic > label:has(+ .tactic-toggle:checked)::after {
+  border: 1px solid #999999;
+  background-color: #999999;
+  transition: all 0.5s;
+}
+
+.hl.lean .tactic-state .goal + .goal {
+  margin-top: 1.5em;
+}
+
+/*
+Some CSS frameworks customize details/summary in ways not compatible with Verso's output.
+*/
+
+.hl.lean details {
+  display: block !important;
+  margin: 0;
+}
+
+.hl.lean details summary {
+  display: list-item !important;
+  margin: 0;
+}
+
+.hl.lean details summary:focus {
+  outline: none;
+  outline-offset: none;
+  color: inherit;
+}
+
+.hl.lean ul > li {
+  margin-bottom: 0;
+}
+
+.hl.lean details summary::marker {
+  display: inline !important;
+}
+
+.hl.lean details > summary:first-of-type {
+  list-style-type: disclosure-closed;
+  list-style-position: inside;
+}
+
+.hl.lean details[open] > summary:first-of-type {
+  list-style-type: disclosure-open;
+}
+
+.hl.lean details summary::before, .hl.lean details summary::after {
+  content: "" !important;
+  background: none;
+  display: none;
+}
+
+.hl.lean .tactic-state summary {
+  /* These need to be em, not rem, to scale with the font */
+  margin-left: -0.5em;
+}
+
+.hl.lean .tactic-state details {
+  /* These need to be em, not rem, to scale with the font */
+  padding-left: 0.5em;
+}
+
+.hl.lean .case-label {
+  display: block;
+  position: relative;
+}
+
+.hl.lean .case-label input[type="checkbox"] {
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0;
+  height: 0;
+  width: 0;
+  z-index: -10;
+}
+
+.hl.lean .case-label:has(input[type="checkbox"])::before {
+  display: inline-block;
+  background-color: black;
+  content: ' ';
+  transition: ease 0.2s;
+  margin-right: 0.7em;
+  clip-path: polygon(100% 0, 0 0, 50% 100%);
+  width: 0.6em;
+  height: 0.6em;
+  vertical-align: middle;
+}
+
+.hl.lean .case-label:has(input[type="checkbox"]:not(:checked))::before {
+  transform: rotate(-90deg);
+}
+
+.hl.lean .case-label:has(input[type="checkbox"]) {
+
+}
+
+.hl.lean .case-label:has(input[type="checkbox"]:checked) {
+
+}
+
+
+.hl.lean .labeled-case > :not(:first-child) {
+  max-height: 0px;
+  display: block;
+  overflow: hidden;
+  transition: max-height 0.1s ease-in;
+  /* These need to be em, not rem, to scale with the font */
+  margin-left: 0.5em;
+  margin-top: 0.1em;
+}
+
+.hl.lean .labeled-case:has(.case-label input[type="checkbox"]:checked) > :not(:first-child) {
+  max-height: 100%;
+}
+
+
+.hl.lean .goal-name::before {
+  font-style: normal;
+  content: "case ";
+}
+
+.hl.lean .goal-name {
+  font-style: italic;
+  font-family: var(--verso-code-font-family);
+  color: inherit;
+}
+
+.hl.lean .hypotheses {
+  display: table;
+}
+
+.hl.lean .hypothesis {
+  display: table-row;
+}
+
+.hl.lean .hypothesis > * {
+  display: table-cell;
+}
+
+
+.hl.lean .hypotheses .colon {
+  text-align: center;
+  /* This needs to be em, not rem, to scale with the font */
+  min-width: 1em;
+}
+
+.hl.lean .hypotheses .name {
+  text-align: right;
+}
+
+.hl.lean .hypotheses .name,
+.hl.lean .hypotheses .type,
+.hl.lean .conclusion .type {
+  font-family: var(--verso-code-font-family);
+}
+
+.tippy-box {
+  /* Without these, mobile Safari will start making font sizes inconsistent when its text size adjustment feature is triggered.*/
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+.tippy-box[data-theme~='lean'] {
+  background-color: #e5e5e5;
+  color: black;
+  border: 1px solid black;
+}
+.tippy-box[data-theme~='lean'][data-placement^='top'] > .tippy-arrow::before {
+  border-top-color: #e5e5e5;
+}
+.tippy-box[data-theme~='lean'][data-placement^='bottom'] > .tippy-arrow::before {
+  border-bottom-color: #e5e5e5;
+}
+.tippy-box[data-theme~='lean'][data-placement^='left'] > .tippy-arrow::before {
+  border-left-color: #e5e5e5;
+}
+.tippy-box[data-theme~='lean'][data-placement^='right'] > .tippy-arrow::before {
+  border-right-color: #e5e5e5;
+}
+
+.tippy-box[data-theme~='message'][data-placement^='top'] > .tippy-arrow::before {
+  border-top-color: #e5e5e5;
+  border-width: 11px 11px 0;
+}
+.tippy-box[data-theme~='message'][data-placement^='top'] > .tippy-arrow::after {
+  bottom: -11px;
+  border-width: 11px 11px 0;
+}
+.tippy-box[data-theme~='message'][data-placement^='bottom'] > .tippy-arrow::before {
+  border-width: 0 11px 11px;
+}
+.tippy-box[data-theme~='message'][data-placement^='bottom'] > .tippy-arrow::after {
+  top: -11px;
+  border-width: 0 11px 11px;
+}
+.tippy-box[data-theme~='message'][data-placement^='left'] > .tippy-arrow::before {
+  border-left-color: #e5e5e5;
+  border-width: 11px 0 11px 11px;
+}
+.tippy-box[data-theme~='message'][data-placement^='left'] > .tippy-arrow::after {
+  right: -11px;
+  border-width: 11px 0 11px 11px;
+}
+
+.tippy-box[data-theme~='message'][data-placement^='right'] > .tippy-arrow::before {
+  border-right-color: #e5e5e5;
+  border-width: 11px 11px 11px 0;
+}
+.tippy-box[data-theme~='message'][data-placement^='right'] > .tippy-arrow::after {
+  left: -11px;
+  border-width: 11px 11px 11px 0;
+}
+
+
+
+.tippy-box[data-theme~='warning'] {
+  background-color: #e5e5e5;
+  color: black;
+  border: 3px solid var(--verso-warning-color);
+}
+
+.tippy-box[data-theme~='error'] {
+  background-color: #e5e5e5;
+  color: black;
+  border: 3px solid #f7a7af;
+}
+
+.tippy-box[data-theme~='info'] {
+  background-color: #e5e5e5;
+  color: black;
+  border: 3px solid #99b3c2;
+}
+
+.tippy-box[data-theme~='tactic'] {
+  background-color: white;
+  color: black;
+  border: 1px solid black;
+}
+.tippy-box[data-theme~='tactic'][data-placement^='top'] > .tippy-arrow::before {
+  border-top-color: white;
+}
+.tippy-box[data-theme~='tactic'][data-placement^='bottom'] > .tippy-arrow::before {
+  border-bottom-color: white;
+}
+.tippy-box[data-theme~='tactic'][data-placement^='left'] > .tippy-arrow::before {
+  border-left-color: white;
+}
+.tippy-box[data-theme~='tactic'][data-placement^='right'] > .tippy-arrow::before {
+  border-right-color: white;
+}
+
+.extra-doc-links {
+  list-style-type: none;
+  margin-left: 0;
+  padding: 0;
+}
+
+.extra-doc-links > li {
+  display: inline-block;
+}
+
+.extra-doc-links > li:not(:last-child)::after {
+  content: '|';
+  display: inline-block;
+  margin: 0 0.25em;
+}
+
+.verso-message .trace {
+  display: block;
+}
+
+.verso-message .trace > summary::marker {
+  color: var(--verso-text-color);
+}
+
+.verso-message .trace-children {
+  margin: 0;
+  padding: 0;
+}
+
+.verso-message .trace-children > li {
+  list-style-type: none;
+  margin-left: 1.5em;
+}
+
+.verso-message .trace-children > li:not(:has(.trace)) {
+  margin-left: 0;
+}
+
+.verso-message .trace-class {
+  color: color-mix(in srgb, currentColor 70%, transparent);
+  font-weight: bold;
+  margin: 0;
+  padding: 0;
+}
+
+.verso-message .text {
+  white-space: pre-wrap;
+}
+
+</style><script>
+
+window.onload = async () => {
+
+    // Don't show hovers inside of closed tactic states
+    function blockedByTactic(elem) {
+      let parent = elem.parentNode;
+      while (parent && "classList" in parent) {
+        if (parent.classList.contains("tactic")) {
+          const toggle = parent.querySelector(":scope > input.tactic-toggle");
+          if (toggle) {
+            return !toggle.checked;
+          }
+        }
+        parent = parent.parentNode;
+      }
+      return false;
+    }
+
+    // Track whether any tippy is visible (O(1) check instead of DOM scan)
+    let visibleTippyCount = 0;
+    function blockedByTippy(elem) {
+      return visibleTippyCount > 0;
+    }
+
+    // Binding highlights via event delegation with cached lookups
+    const bindingCache = new Map(); // context+binding -> [token elements]
+    let highlightedTokens = [];
+    function getBindingTokens(context, binding) {
+      const key = context + "\0" + binding;
+      let tokens = bindingCache.get(key);
+      if (!tokens) {
+        tokens = [];
+        for (const example of document.querySelectorAll(".hl.lean")) {
+          if (example.dataset.leanContext == context) {
+            for (const tok of example.querySelectorAll(".token[data-binding=\"" + CSS.escape(binding) + "\"]")) {
+              tokens.push(tok);
+            }
+          }
+        }
+        bindingCache.set(key, tokens);
+      }
+      return tokens;
+    }
+    for (const container of document.querySelectorAll(".hl.lean")) {
+      container.addEventListener("mouseover", (event) => {
+        const c = event.target.closest(".token");
+        if (!c || !c.dataset.binding || c.dataset.binding === "" || !container.contains(c)) return;
+        if (blockedByTactic(c)) return;
+        const tokens = getBindingTokens(container.dataset.leanContext, c.dataset.binding);
+        for (const tok of tokens) {
+          tok.classList.add("binding-hl");
+        }
+        highlightedTokens = tokens;
+      });
+      container.addEventListener("mouseout", (event) => {
+        const c = event.target.closest(".token");
+        if (!c || !container.contains(c)) return;
+        for (const tok of highlightedTokens) {
+          tok.classList.remove("binding-hl");
+        }
+        highlightedTokens = [];
+      });
+    }
+    /* Render docstrings */
+    if ('undefined' !== typeof marked) {
+        for (const d of document.querySelectorAll("code.docstring, pre.docstring")) {
+            const str = d.innerText;
+            const html = marked.parse(str);
+            const rendered = document.createElement("div");
+            rendered.classList.add("docstring");
+            rendered.innerHTML = html;
+            d.parentNode.replaceChild(rendered, d);
+        }
+    }
+    // Add hovers
+    const versoDocData = await (fetch("-verso-docs.json").then((resp) => resp.json()));
+
+    function hideParentTooltips(element) {
+      let parent = element.parentElement;
+      while (parent) {
+        const tippyInstance = parent._tippy;
+        if (tippyInstance) {
+          tippyInstance.hide();
+        }
+        parent = parent.parentElement;
+      }
+    }
+
+
+
+    const defaultTippyProps = {
+      /* DEBUG -- remove the space: * /
+      onHide(any) { return false; },
+      trigger: "click",
+      // */
+      /* theme: "lean", */
+      maxWidth: "none",
+      appendTo: () => document.body,
+      interactive: true,
+      delay: [100, null],
+      /* ignoreAttributes: true, */
+      followCursor: 'initial',
+      onShow(inst) {
+        if (inst.reference.className == 'tactic') {
+          const toggle = inst.reference.querySelector(":scope > input.tactic-toggle");
+          if (toggle && toggle.checked) {
+            return false;
+          }
+          hideParentTooltips(inst.reference);
+          if (blockedByTippy(inst.reference)) { return false; }
+
+        } else if (inst.reference.querySelector(".hover-info") || "versoHover" in inst.reference.dataset) {
+          if (blockedByTactic(inst.reference)) { return false };
+          if (blockedByTippy(inst.reference)) { return false; }
+        } else { // Nothing to show here!
+          return false;
+        }
+      },
+      onShown(inst) { visibleTippyCount++; },
+      onHidden(inst) { visibleTippyCount = Math.max(0, visibleTippyCount - 1); },
+      content (tgt) {
+        const content = document.createElement("span");
+        if (tgt.className == 'tactic') {
+          const state = tgt.querySelector(":scope > .tactic-state").cloneNode(true);
+          state.style.display = "block";
+          content.appendChild(state);
+          content.style.display = "block";
+          content.className = "hl lean popup";
+        } else {
+          content.className = "hl lean";
+          content.style.display = "block";
+          content.style.maxHeight = "300px";
+          content.style.overflowY = "auto";
+          content.style.overflowX = "hidden";
+          const hoverId = tgt.dataset.versoHover;
+          const hoverInfo = tgt.querySelector(".hover-info");
+          if (hoverId) { // Docstrings from the table
+            // TODO stop doing an implicit conversion from string to number here
+            let data = versoDocData[hoverId];
+            if (data) {
+              const info = document.createElement("span");
+              info.className = "hover-info";
+              info.style.display = "block";
+              info.innerHTML = data;
+              content.appendChild(info);
+              /* Render docstrings - TODO server-side */
+              if ('undefined' !== typeof marked) {
+                  for (const d of content.querySelectorAll("code.docstring, pre.docstring")) {
+                      const str = d.innerText;
+                      const html = marked.parse(str);
+                      const rendered = document.createElement("div");
+                      rendered.classList.add("docstring");
+                      rendered.innerHTML = html;
+                      d.parentNode.replaceChild(rendered, d);
+                  }
+              }
+            } else {
+              content.innerHTML = "Failed to load doc ID: " + hoverId;
+            }
+          } else if (hoverInfo) { // The inline info, still used for compiler messages
+            content.appendChild(hoverInfo.cloneNode(true));
+          }
+          const extraLinks = tgt.parentElement.dataset['versoLinks'];
+          if (extraLinks) {
+            try {
+              const extras = JSON.parse(extraLinks);
+              const links = document.createElement('ul');
+              links.className = 'extra-doc-links';
+              extras.forEach((l) => {
+                const li = document.createElement('li');
+                li.innerHTML = "<a href=\"" + l['href'] + "\" title=\"" + l.long + "\">" + l.short + "</a>";
+                links.appendChild(li);
+              });
+              content.appendChild(links);
+            } catch (error) {
+              console.error(error);
+            }
+          }
+        }
+        return content;
+      }
+    };
+
+
+    document.querySelectorAll('.hl.lean .const.token, .hl.lean .keyword.token, .hl.lean .literal.token, .hl.lean .option.token, .hl.lean .var.token, .hl.lean .typed.token, .hl.lean .level-var, .hl.lean .level-const, .hl.lean .level-op, .hl.lean .sort').forEach(element => {
+      element.setAttribute('data-tippy-theme', 'lean');
+    });
+    document.querySelectorAll('.hl.lean .has-info.warning').forEach(element => {
+      element.setAttribute('data-tippy-theme', 'warning message');
+    });
+    document.querySelectorAll('.hl.lean .has-info.information').forEach(element => {
+      element.setAttribute('data-tippy-theme', 'info message');
+    });
+    document.querySelectorAll('.hl.lean .has-info.error').forEach(element => {
+      element.setAttribute('data-tippy-theme', 'error message');
+    });
+    document.querySelectorAll('.hl.lean .tactic').forEach(element => {
+      element.setAttribute('data-tippy-theme', 'tactic');
+    });
+    // Skip tokens inside closed tactics — they interfere with tactic tippys
+    const closedTactics = new Set();
+    document.querySelectorAll('.hl.lean .tactic').forEach(tactic => {
+      const toggle = tactic.querySelector(':scope > input.tactic-toggle');
+      if (toggle && !toggle.checked) closedTactics.add(tactic);
+    });
+    function isInsideClosedTactic(el) {
+      const tactic = el.closest('.tactic');
+      return tactic && tactic !== el && closedTactics.has(tactic);
+    }
+
+    const tokenSelector = '.hl.lean .const.token, .hl.lean .keyword.token, .hl.lean .literal.token, .hl.lean .option.token, .hl.lean .var.token, .hl.lean .typed.token, .hl.lean .has-info, .hl.lean .tactic, .hl.lean .level-var, .hl.lean .level-const, .hl.lean .level-op, .hl.lean .sort';
+    tippy(Array.from(document.querySelectorAll(tokenSelector)).filter(el => !isInsideClosedTactic(el)), defaultTippyProps);
+
+    // Create/destroy token tippys when tactic checkbox toggles
+    const tacticTippySelector = '.const.token, .keyword.token, .literal.token, .option.token, .var.token, .typed.token, .has-info, .level-var, .level-const, .level-op, .sort';
+    document.querySelectorAll('.hl.lean .tactic').forEach(tactic => {
+      const toggle = tactic.querySelector(':scope > input.tactic-toggle');
+      if (toggle) toggle.addEventListener('change', () => {
+        if (toggle.checked) {
+          closedTactics.delete(tactic);
+          tactic.querySelectorAll('.token').forEach(tok => {
+            if (!tok._tippy && tok.matches(tacticTippySelector)) {
+              tippy(tok, defaultTippyProps);
+            }
+          });
+        } else {
+          closedTactics.add(tactic);
+          tactic.querySelectorAll('.token').forEach(tok => {
+            if (tok._tippy) tok._tippy.destroy();
+          });
+        }
+      });
+  });
+}
+</script>
+    </head>
+  <body>
+    <header>
+      <div class="header-logo-wrapper"></div>
+      <div class="header-title-wrapper">
+        <a href="" class="header-title"><h1>
+            LMLF</h1>
+          </a></div>
+      </header>
+    <label for="toggle-toc" id="toggle-toc-click"><span class="line line1"></span><span class="line line2"></span><span class="line line3"></span></label><div class="with-toc">
+      <div class="toc-backdrop" onclick="document.getElementById('toggle-toc-click')?.click()"></div>
+      <nav id="toc">
+        <input type="checkbox" id="toggle-toc"><div class="first">
+          <a href="" class="toc-title"><h1>
+              LMLF</h1>
+            </a><div class="split-tocs">
+            <div class="split-toc book">
+              <div class="title">
+                <label for="--verso-manual-toc-----bookRoot" class="toggle-split-toc"><input type="checkbox" class="toggle-split-toc" id="--verso-manual-toc-----bookRoot"></label><span class="">Table of Contents</span></div>
+              <table><tr class="unnumbered"><td class="num"><td><a href="Coverage/#coverage">Coverage</a></td></tr><tr class="numbered"><td class="num">1.</td><td><a href="Finite-error-bounds/#chapter-1">Finite error bounds</a></td></tr><tr class="numbered"><td class="num">2.</td><td><a href="Approximants-and-series/#chapter-2">Approximants and series</a></td></tr><tr class="numbered"><td class="num">3.</td><td><a href="Improper-integrals/#chapter-3">Improper integrals</a></td></tr><tr class="numbered"><td class="num">4.</td><td><a href="Elementary-Functions/#chapter-4">Elementary Functions</a></td></tr><tr class="current numbered"><td class="num">5.</td><td><a href="Gamma-Function/#chapter-5">Gamma Function</a></td></tr><tr class="numbered"><td class="num">6.</td><td><a href="Exponential___-Logarithmic___-Sine___-and-Cosine-Integrals/#chapter-6">Exponential, Logarithmic, Sine, and Cosine Integrals</a></td></tr><tr class="numbered"><td class="num">7.</td><td><a href="Error-Functions___-Dawson___s-and-Fresnel-Integrals/#chapter-7">Error Functions, Dawson's and Fresnel Integrals</a></td></tr><tr class="numbered"><td class="num">8.</td><td><a href="Incomplete-Gamma-and-Related-Functions/#chapter-8">Incomplete Gamma and Related Functions</a></td></tr><tr class="numbered"><td class="num">9.</td><td><a href="Airy-and-Related-Functions/#chapter-9">Airy and Related Functions</a></td></tr><tr class="numbered"><td class="num">10.</td><td><a href="Bessel-Functions/#chapter-10">Bessel Functions</a></td></tr></table></div>
+            <div class="split-toc">
+              <div class="title">
+                <label for="--verso-manual-toc-chapter-5" class="toggle-split-toc"><input type="checkbox" class="toggle-split-toc" id="--verso-manual-toc-chapter-5" checked="checked"></label><span class="number">5.</span> <span class=""><a href="Gamma-Function/#chapter-5">Gamma Function</a></span></div>
+              <table><tr class="unnumbered"><td class="num"><td><a href="Gamma-Function/Chapter-contents/#LMLF-___-DLMF-with-Lean--Gamma-Function--Chapter-contents">Chapter contents</a></td></tr><tr class="numbered"><td class="num">5.1.</td><td><a href="Gamma-Function/___5___1-Special-Notation/#chapter-5-section-1">§5.1 Special Notation</a></td></tr><tr class="numbered"><td class="num">5.2.</td><td><a href="Gamma-Function/___5___2-Definitions/#chapter-5-section-2">§5.2 Definitions</a></td></tr><tr class="numbered"><td class="num">5.3.</td><td><a href="Gamma-Function/Gamma-Function-___-___5___3-Graphics/#chapter-5-section-5-3">Gamma Function · §5.3 Graphics</a></td></tr><tr class="numbered"><td class="num">5.4.</td><td><a href="Gamma-Function/Gamma-Function-___-___5___4-Special-Values-and-Extrema/#chapter-5-section-5-4">Gamma Function · §5.4 Special Values and Extrema</a></td></tr><tr class="numbered"><td class="num">5.5.</td><td><a href="Gamma-Function/___5___5-Functional-Relations/#chapter-5-section-5">§5.5 Functional Relations</a></td></tr><tr class="numbered"><td class="num">5.6.</td><td><a href="Gamma-Function/Gamma-Function-Inequalities/#chapter-5-section-6">Gamma-Function Inequalities</a></td></tr><tr class="numbered"><td class="num">5.7.</td><td><a href="Gamma-Function/___5___7-Series-Expansions/#chapter-5-section-7">§5.7 Series Expansions</a></td></tr><tr class="numbered"><td class="num">5.8.</td><td><a href="Gamma-Function/___5___8-Infinite-Products/#chapter-5-section-8">§5.8 Infinite Products</a></td></tr><tr class="numbered"><td class="num">5.9.</td><td><a href="Gamma-Function/___5___9-Integral-Representations/#chapter-5-section-9">§5.9 Integral Representations</a></td></tr><tr class="numbered"><td class="num">5.10.</td><td><a href="Gamma-Function/___5___10-Continued-Fractions/#chapter-5-section-10">§5.10 Continued Fractions</a></td></tr><tr class="numbered"><td class="num">5.11.</td><td><a href="Gamma-Function/___5___11-Asymptotic-Expansions/#chapter-5-section-11">§5.11 Asymptotic Expansions</a></td></tr><tr class="numbered"><td class="num">5.12.</td><td><a href="Gamma-Function/___5___12-Beta-Function/#chapter-5-section-12">§5.12 Beta Function</a></td></tr><tr class="numbered"><td class="num">5.13.</td><td><a href="Gamma-Function/___5___13-Integrals/#chapter-5-section-13">§5.13 Integrals</a></td></tr><tr class="numbered"><td class="num">5.14.</td><td><a href="Gamma-Function/___5___14-Multidimensional-Integrals/#chapter-5-section-14">§5.14 Multidimensional Integrals</a></td></tr><tr class="numbered"><td class="num">5.15.</td><td><a href="Gamma-Function/___5___15-Polygamma-Functions/#chapter-5-section-15">§5.15 Polygamma Functions</a></td></tr><tr class="numbered"><td class="num">5.16.</td><td><a href="Gamma-Function/___5___16-Sums/#chapter-5-section-16">§5.16 Sums</a></td></tr><tr class="current numbered"><td class="num">5.17.</td><td><a href="Gamma-Function/___5___17-Barnes___-G-Function-_LPAR_Double-Gamma-Function_RPAR_/#chapter-5-section-17">§5.17 Barnes' G-Function (Double Gamma Function)</a></td></tr><tr class="numbered"><td class="num">5.18.</td><td><a href="Gamma-Function/___5___18-q-Gamma-and-q-Beta-Functions/#chapter-5-section-18">§5.18 q-Gamma and q-Beta Functions</a></td></tr></table></div>
+            <div class="split-toc">
+              <div class="title">
+                <span class="no-toggle"></span><span class="number">5.17.</span> <span class="current"><a href="Gamma-Function/___5___17-Barnes___-G-Function-_LPAR_Double-Gamma-Function_RPAR_/#chapter-5-section-17">§5.17 Barnes' G-Function (Double Gamma Function)</a></span></div>
+              </div>
+            </div>
+          </div>
+        <div class="last"></div>
+        </nav>
+      <div class="toc-resize-handle"></div>
+      <main><div class="content-wrapper">
+          <nav class="prev-next-buttons">
+            <a class="local-button active" href="Gamma-Function/___5___16-Sums/#chapter-5-section-16" rel="prev" title="5.16. §5.16 Sums"><span class="arrow">←</span><span class="where">5.16. §5.16 Sums</span></a><a class="local-button active" href="Gamma-Function/___5___18-q-Gamma-and-q-Beta-Functions/#chapter-5-section-18" rel="next" title="5.18. §5.18 q-Gamma and q-Beta Functions"><span class="where">5.18. §5.18 q-Gamma and q-Beta Functions</span><span class="arrow">→</span></a></nav>
+          <section>
+            <h1>
+              5.17. §5.17 Barnes' G-Function (Double Gamma Function)<span class="permalink-widget inline"><a href="find/?domain=Verso.Genre.Manual.section&amp;name=chapter-5-section-17" title="Permalink">🔗</a></span></h1>
+            <div class="lmlf-source-link">
+              <p>
+                Source: NIST Digital Library of Mathematical Functions, §5.17.</p>
+              <a href="https://dlmf.nist.gov/5.17">Open this chapter in the DLMF ↗</a></div>
+            <p>
+              DLMF §5.17 introduces Barnes' <code>G</code>-function, also called the double gamma
+function.  Its canonical product (5.17.3) displays the factors and the zeros
+they contribute.  The logarithms in (5.17.4) and (5.17.5) are the source
+branches: principal on the positive real axis and continued by continuity.
+The positive-real specializations use the filter <code>atTop</code> on <code>x &gt; 0</code> for the
+sector in (5.17.5).</p>
+            <code class="hl lean block" data-lean-context="examples"><span class="keyword token" data-binding="kw-occ-Lean.Parser.Command.noncomputable-932">noncomputable</span><span class="inter-text"> </span><span class="keyword token" data-binding="kw-occ-Lean.Parser.Command.definition-946">def</span><span class="inter-text"> </span><span class="const token" data-binding="const-LMLF.Blueprint.Gamma.Section517.barnesGProductTerm" data-verso-hover="628" id="LMLF___Blueprint___Gamma___Section517___barnesGProductTerm">barnesGProductTerm</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-969">(</span><span class="var token" data-binding="var-_uniq.8" data-verso-hover="114">z</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-969">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Complex" data-verso-hover="107">ℂ</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-969">)</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-979">(</span><span class="var token" data-binding="var-_uniq.69" data-verso-hover="625">k</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-979">:</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-«term{_:_//_}»-984">{</span><span class="var token" data-binding="var-_uniq.13" data-verso-hover="37">n</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-«term{_:_//_}»-984">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Nat" data-verso-hover="34">ℕ</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term{_:_//_}»-984">//</span><span class="inter-text"> </span><span class="literal number token" data-binding="" data-verso-hover="37">1</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_≤_»-996">≤</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.13" data-verso-hover="37">n</span><span class="punctuation bracket token" data-binding="kw-occ-«term{_:_//_}»-984">}</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-979">)</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeSpec-1006">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Complex" data-verso-hover="107">ℂ</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Command.declValSimple-1012">:=</span><span class="inter-text">
+  </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-1017">(</span><span class="literal number token" data-binding="" data-verso-hover="114">1</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_+_»-1018">+</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.8" data-verso-hover="114">z</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_/_»-1022">/</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-1026">(</span><span class="var token" data-binding="var-_uniq.69" data-verso-hover="625">k</span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.proj-1027">.</span><span class="const token" data-binding="const-Subtype.val" data-verso-hover="626">1</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeAscription-1026">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Complex" data-verso-hover="107">ℂ</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.typeAscription-1026">)</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.paren-1017">)</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_^_»-1017">^</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.69" data-verso-hover="625">k</span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.proj-1041">.</span><span class="const token" data-binding="const-Subtype.val" data-verso-hover="626">1</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_*_»-1017">*</span><span class="inter-text">
+    </span><span class="const token" data-binding="const-Complex.exp" data-verso-hover="289">Complex.exp</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-1063">(</span><span class="punctuation operator token" data-binding="kw-occ-«term-_»-1064">-</span><span class="var token" data-binding="var-_uniq.8" data-verso-hover="114">z</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_+_»-1064">+</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.8" data-verso-hover="114">z</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_^_»-1069">^</span><span class="inter-text"> </span><span class="literal number token" data-binding="" data-verso-hover="37">2</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_/_»-1069">/</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-1077">(</span><span class="literal number token" data-binding="" data-verso-hover="114">2</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_*_»-1078">*</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-1082">(</span><span class="var token" data-binding="var-_uniq.69" data-verso-hover="625">k</span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.proj-1083">.</span><span class="const token" data-binding="const-Subtype.val" data-verso-hover="626">1</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeAscription-1082">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Complex" data-verso-hover="107">ℂ</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.typeAscription-1082">)</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.paren-1077">)</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.paren-1063">)</span></code><code class="hl lean block" data-lean-context="examples"><span class="keyword token" data-binding="kw-occ-Lean.Parser.Command.noncomputable-1244">noncomputable</span><span class="inter-text"> </span><span class="keyword token" data-binding="kw-occ-Lean.Parser.Command.definition-1258">def</span><span class="inter-text"> </span><span class="const token" data-binding="const-LMLF.Blueprint.Gamma.Section517.barnesGProductPrefactor" data-verso-hover="629" id="LMLF___Blueprint___Gamma___Section517___barnesGProductPrefactor">barnesGProductPrefactor</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-1286">(</span><span class="var token" data-binding="var-_uniq.898" data-verso-hover="114">z</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-1286">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Complex" data-verso-hover="107">ℂ</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-1286">)</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeSpec-1296">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Complex" data-verso-hover="107">ℂ</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Command.declValSimple-1302">:=</span><span class="inter-text">
+  </span><span class="const token" data-binding="const-Complex.exp" data-verso-hover="289">Complex.exp</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-1319">(</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-1320">(</span><span class="var token" data-binding="var-_uniq.898" data-verso-hover="114">z</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_/_»-1321">/</span><span class="inter-text"> </span><span class="literal number token" data-binding="" data-verso-hover="114">2</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.paren-1320">)</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_*_»-1320">*</span><span class="inter-text"> </span><span class="const token" data-binding="const-Complex.log" data-verso-hover="225">Complex.log</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-1342">(</span><span class="literal number token" data-binding="" data-verso-hover="114">2</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_*_»-1343">*</span><span class="inter-text"> </span><span class="const token" data-binding="const-Real.pi" data-verso-hover="198">Real.pi</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.paren-1342">)</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_-_»-1320">-</span><span class="inter-text">
+    </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-1362">(</span><span class="literal number token" data-binding="" data-verso-hover="114">1</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_/_»-1363">/</span><span class="inter-text"> </span><span class="literal number token" data-binding="" data-verso-hover="114">2</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.paren-1362">)</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_*_»-1362">*</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.898" data-verso-hover="114">z</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_*_»-1362">*</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-1376">(</span><span class="var token" data-binding="var-_uniq.898" data-verso-hover="114">z</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_+_»-1377">+</span><span class="inter-text"> </span><span class="literal number token" data-binding="" data-verso-hover="114">1</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.paren-1376">)</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_-_»-1320">-</span><span class="inter-text">
+      </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-1392">(</span><span class="literal number token" data-binding="" data-verso-hover="114">1</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_/_»-1393">/</span><span class="inter-text"> </span><span class="literal number token" data-binding="" data-verso-hover="114">2</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.paren-1392">)</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_*_»-1392">*</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-1402">(</span><span class="const token" data-binding="const-Real.eulerMascheroniConstant" data-verso-hover="134">Real.eulerMascheroniConstant</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeAscription-1402">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Complex" data-verso-hover="107">ℂ</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.typeAscription-1402">)</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_*_»-1392">*</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.898" data-verso-hover="114">z</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_^_»-1441">^</span><span class="inter-text"> </span><span class="literal number token" data-binding="" data-verso-hover="37">2</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.paren-1319">)</span></code><code class="hl lean block" data-lean-context="examples"><span class="keyword token" data-binding="kw-occ-Lean.Parser.Command.noncomputable-1600">noncomputable</span><span class="inter-text"> </span><span class="keyword token" data-binding="kw-occ-Lean.Parser.Command.definition-1614">def</span><span class="inter-text"> </span><span class="const token" data-binding="const-LMLF.Blueprint.Gamma.Section517.barnesG" data-verso-hover="630" id="LMLF___Blueprint___Gamma___Section517___barnesG">barnesG</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-1626">(</span><span class="var token" data-binding="var-_uniq.1998" data-verso-hover="114">z</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-1626">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Complex" data-verso-hover="107">ℂ</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-1626">)</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeSpec-1636">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Complex" data-verso-hover="107">ℂ</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Command.declValSimple-1642">:=</span><span class="inter-text">
+  </span><a href="Gamma-Function/___5___17-Barnes___-G-Function-_LPAR_Double-Gamma-Function_RPAR_/#LMLF___Blueprint___Gamma___Section517___barnesGProductPrefactor" title="Definition of example"><span class="const token" data-binding="const-LMLF.Blueprint.Gamma.Section517.barnesGProductPrefactor" data-verso-hover="629">barnesGProductPrefactor</span></a><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-1671">(</span><span class="var token" data-binding="var-_uniq.1998" data-verso-hover="114">z</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_-_»-1672">-</span><span class="inter-text"> </span><span class="literal number token" data-binding="" data-verso-hover="114">1</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.paren-1671">)</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_*_»-1647">*</span><span class="inter-text">
+    </span><span class="unknown token" data-binding="">∏'</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.2138" data-verso-hover="625">k</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-group-1692">:</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-«term{_:_//_}»-1694">{</span><span class="var token" data-binding="var-_uniq.2082" data-verso-hover="37">n</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-«term{_:_//_}»-1694">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Nat" data-verso-hover="34">ℕ</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term{_:_//_}»-1694">//</span><span class="inter-text"> </span><span class="literal number token" data-binding="" data-verso-hover="37">1</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_≤_»-1706">≤</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.2082" data-verso-hover="37">n</span><span class="punctuation bracket token" data-binding="kw-occ-«term{_:_//_}»-1694">}</span><span class="punctuation separator token" data-binding="kw-occ-«term∏'_,_»-1685">,</span><span class="inter-text"> </span><a href="Gamma-Function/___5___17-Barnes___-G-Function-_LPAR_Double-Gamma-Function_RPAR_/#LMLF___Blueprint___Gamma___Section517___barnesGProductTerm" title="Definition of example"><span class="const token" data-binding="const-LMLF.Blueprint.Gamma.Section517.barnesGProductTerm" data-verso-hover="628">barnesGProductTerm</span></a><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-1735">(</span><span class="var token" data-binding="var-_uniq.1998" data-verso-hover="114">z</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_-_»-1736">-</span><span class="inter-text"> </span><span class="literal number token" data-binding="" data-verso-hover="114">1</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.paren-1735">)</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.2138" data-verso-hover="625">k</span></code><article class="lmlf-dlmf-entry"><div class="lmlf-dlmf-entry__source">
+                <a href="https://dlmf.nist.gov/5.17.E1">DLMF 5.17.1 ↗</a></div>
+              <div class="lmlf-dlmf-entry__body">
+                <p>
+                  <code class="math display">\[
+G(z+1)=\Gamma(z)G(z),\qquad G(1)=1.
+\]</code></p>
+                <p>
+                  Away from the nonpositive integers, Barnes' function satisfies the first-order
+recurrence with the Gamma function; its normalization at one is one.  The
+pole-free guard is explicit because Mathlib totalizes <code>Complex.Gamma</code> by
+assigning zero at its poles.  The recurrence also keeps the zero structure of
+the canonical function explicit: zeros at nonpositive integers are not
+silently replaced by a nonvanishing surrogate.</p>
+                <details class="lmlf-lean" open=""><summary>Barnes recurrence</summary><div class="lmlf-lean__body">
+                    <code class="hl lean block" data-lean-context="examples"><span class="keyword token" data-binding="kw-occ-Lean.Parser.Command.theorem-3880">theorem</span><span class="inter-text"> </span><span class="has-info warning"><span class="hover-container"><span class="hover-info messages"><code class="verso-message warning"><span class="text"></span><span class="text">declaration uses `</span><span class="highlighted"><span class="inter-text"></span><span class="unknown token" data-binding="">sorry</span><span class="inter-text"></span></span><span class="text">`</span></code></span></span><span class="const token" data-binding="const-LMLF.Blueprint.Gamma.Section517.dlmf_5_17_1" data-verso-hover="631" id="LMLF___Blueprint___Gamma___Section517___dlmf_5_17_1">dlmf_5_17_1</span></span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-3900">(</span><span class="var token" data-binding="var-_uniq.7239" data-verso-hover="114">z</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-3900">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Complex" data-verso-hover="107">ℂ</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-3900">)</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-3910">(</span><span class="var token" data-binding="var-_uniq.7282" data-verso-hover="234">hz</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-3910">:</span><span class="inter-text"> </span><span class="unknown token" data-binding="">∀</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.7242" data-verso-hover="37">m</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeSpec-3922">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Nat" data-verso-hover="34">ℕ</span><span class="punctuation separator token" data-binding="kw-occ-Lean.Parser.Term.forall-3916">,</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.7239" data-verso-hover="114">z</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_≠_»-3929">≠</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term-_»-3935">-</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-3936">(</span><span class="var token" data-binding="var-_uniq.7242" data-verso-hover="37">m</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeAscription-3936">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Complex" data-verso-hover="107">ℂ</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.typeAscription-3936">)</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-3910">)</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeSpec-3947">:</span><span class="inter-text">
+    </span><a href="Gamma-Function/___5___17-Barnes___-G-Function-_LPAR_Double-Gamma-Function_RPAR_/#LMLF___Blueprint___Gamma___Section517___barnesG" title="Definition of example"><span class="const token" data-binding="const-LMLF.Blueprint.Gamma.Section517.barnesG" data-verso-hover="630">barnesG</span></a><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-3961">(</span><span class="var token" data-binding="var-_uniq.7239" data-verso-hover="114">z</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_+_»-3962">+</span><span class="inter-text"> </span><span class="literal number token" data-binding="" data-verso-hover="114">1</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.paren-3961">)</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_=_»-3953">=</span><span class="inter-text"> </span><span class="const token" data-binding="const-Complex.Gamma" data-verso-hover="119">Complex.Gamma</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.7239" data-verso-hover="114">z</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_*_»-3971">*</span><span class="inter-text"> </span><a href="Gamma-Function/___5___17-Barnes___-G-Function-_LPAR_Double-Gamma-Function_RPAR_/#LMLF___Blueprint___Gamma___Section517___barnesG" title="Definition of example"><span class="const token" data-binding="const-LMLF.Blueprint.Gamma.Section517.barnesG" data-verso-hover="630">barnesG</span></a><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.7239" data-verso-hover="114">z</span></code><code class="hl lean block" data-lean-context="examples"><span class="keyword token" data-binding="kw-occ-Lean.Parser.Command.theorem-4161">theorem</span><span class="inter-text"> </span><span class="has-info warning"><span class="hover-container"><span class="hover-info messages"><code class="verso-message warning"><span class="text"></span><span class="text">declaration uses `</span><span class="highlighted"><span class="inter-text"></span><span class="unknown token" data-binding="">sorry</span><span class="inter-text"></span></span><span class="text">`</span></code></span></span><span class="const token" data-binding="const-LMLF.Blueprint.Gamma.Section517.barnesG_one" data-verso-hover="632" id="LMLF___Blueprint___Gamma___Section517___barnesG_one">barnesG_one</span></span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeSpec-4181">:</span><span class="inter-text"> </span><a href="Gamma-Function/___5___17-Barnes___-G-Function-_LPAR_Double-Gamma-Function_RPAR_/#LMLF___Blueprint___Gamma___Section517___barnesG" title="Definition of example"><span class="const token" data-binding="const-LMLF.Blueprint.Gamma.Section517.barnesG" data-verso-hover="630">barnesG</span></a><span class="inter-text"> </span><span class="literal number token" data-binding="" data-verso-hover="114">1</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_=_»-4183">=</span><span class="inter-text"> </span><span class="literal number token" data-binding="" data-verso-hover="114">1</span></code></div>
+                  </details></div>
+              </article><article class="lmlf-dlmf-entry"><div class="lmlf-dlmf-entry__source">
+                <a href="https://dlmf.nist.gov/5.17.E2">DLMF 5.17.2 ↗</a></div>
+              <div class="lmlf-dlmf-entry__body">
+                <p>
+                  <code class="math display">\[
+G(n)=(n-2)!(n-3)!\cdots1!,\qquad n=2,3,\ldots.
+\]</code></p>
+                <p>
+                  At each integer <code>n ≥ 2</code>, repeated use of the recurrence gives the finite
+factorial product beginning with <code>(n−2)!</code> and ending with <code>1!</code>.  The finite
+product over <code>Finset.Icc 1 (n−2)</code> is empty at <code>n=2</code>, hence equals one as
+required.</p>
+                <details class="lmlf-lean" open=""><summary>Lean statement · integer values</summary><div class="lmlf-lean__body">
+                    <code class="hl lean block" data-lean-context="examples"><span class="keyword token" data-binding="kw-occ-Lean.Parser.Command.noncomputable-1877">noncomputable</span><span class="inter-text"> </span><span class="keyword token" data-binding="kw-occ-Lean.Parser.Command.definition-1891">def</span><span class="inter-text"> </span><span class="const token" data-binding="const-LMLF.Blueprint.Gamma.Section517.barnesIntegerProduct" data-verso-hover="633" id="LMLF___Blueprint___Gamma___Section517___barnesIntegerProduct">barnesIntegerProduct</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-1916">(</span><span class="var token" data-binding="var-_uniq.2329" data-verso-hover="37">n</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-1916">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Nat" data-verso-hover="34">ℕ</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-1916">)</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeSpec-1926">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Complex" data-verso-hover="107">ℂ</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Command.declValSimple-1932">:=</span><span class="inter-text">
+  </span><span class="unknown token" data-binding="">∏</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.2581" data-verso-hover="37">k</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-Lean.«binderPred∈_»-1943">∈</span><span class="inter-text"> </span><span class="const token" data-binding="const-Finset.Icc" data-verso-hover="157">Finset.Icc</span><span class="inter-text"> </span><span class="literal number token" data-binding="" data-verso-hover="37">1</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-1960">(</span><span class="var token" data-binding="var-_uniq.2329" data-verso-hover="37">n</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_-_»-1961">-</span><span class="inter-text"> </span><span class="literal number token" data-binding="" data-verso-hover="37">2</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.paren-1960">)</span><span class="punctuation separator token" data-binding="kw-occ-BigOperators.bigprod-1937">,</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-1969">(</span><span class="var token" data-binding="var-_uniq.2581" data-verso-hover="37">k</span><span class="built-in delim token" data-binding="">.</span><span class="const token" data-binding="const-Nat.factorial" data-verso-hover="132">factorial</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeAscription-1969">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Complex" data-verso-hover="107">ℂ</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.typeAscription-1969">)</span></code><code class="hl lean block" data-lean-context="examples"><span class="keyword token" data-binding="kw-occ-Lean.Parser.Command.theorem-4368">theorem</span><span class="inter-text"> </span><span class="has-info warning"><span class="hover-container"><span class="hover-info messages"><code class="verso-message warning"><span class="text"></span><span class="text">declaration uses `</span><span class="highlighted"><span class="inter-text"></span><span class="unknown token" data-binding="">sorry</span><span class="inter-text"></span></span><span class="text">`</span></code></span></span><span class="const token" data-binding="const-LMLF.Blueprint.Gamma.Section517.dlmf_5_17_2" data-verso-hover="634" id="LMLF___Blueprint___Gamma___Section517___dlmf_5_17_2">dlmf_5_17_2</span></span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.implicitBinder-4388">{</span><span class="var token" data-binding="var-_uniq.7466" data-verso-hover="37">n</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.implicitBinder-4388">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Nat" data-verso-hover="34">ℕ</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.implicitBinder-4388">}</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-4398">(</span><span class="var token" data-binding="var-_uniq.7517" data-verso-hover="343">hn</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-4398">:</span><span class="inter-text"> </span><span class="literal number token" data-binding="" data-verso-hover="37">2</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_≤_»-4404">≤</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.7466" data-verso-hover="37">n</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-4398">)</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeSpec-4413">:</span><span class="inter-text">
+    </span><a href="Gamma-Function/___5___17-Barnes___-G-Function-_LPAR_Double-Gamma-Function_RPAR_/#LMLF___Blueprint___Gamma___Section517___barnesG" title="Definition of example"><span class="const token" data-binding="const-LMLF.Blueprint.Gamma.Section517.barnesG" data-verso-hover="630">barnesG</span></a><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-4427">(</span><span class="var token" data-binding="var-_uniq.7466" data-verso-hover="37">n</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeAscription-4427">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Complex" data-verso-hover="107">ℂ</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.typeAscription-4427">)</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_=_»-4419">=</span><span class="inter-text"> </span><a href="Gamma-Function/___5___17-Barnes___-G-Function-_LPAR_Double-Gamma-Function_RPAR_/#LMLF___Blueprint___Gamma___Section517___barnesIntegerProduct" title="Definition of example"><span class="const token" data-binding="const-LMLF.Blueprint.Gamma.Section517.barnesIntegerProduct" data-verso-hover="633">barnesIntegerProduct</span></a><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.7466" data-verso-hover="37">n</span></code></div>
+                  </details></div>
+              </article><article class="lmlf-dlmf-entry"><div class="lmlf-dlmf-entry__source">
+                <a href="https://dlmf.nist.gov/5.17.E3">DLMF 5.17.3 ↗</a></div>
+              <div class="lmlf-dlmf-entry__body">
+                <p>
+                  <code class="math display">\[
+G(z+1)=(2\pi)^{z/2}\exp\!\left(-\frac12z(z+1)-\frac12\gamma z^2\right)
+\prod_{k=1}^{\infty}\left(\left(1+\frac zk\right)^k
+\exp\!\left(-z+\frac{z^2}{2k}\right)\right).
+\]</code></p>
+                <p>
+                  For complex <code>z</code>, the canonical product multiplies the exponential prefactor
+by the factors indexed from <code>k=1</code>.  The index <code>{n : ℕ // 1 ≤ n}</code> records that
+lower limit directly, while <code>∏'</code> denotes the infinite product.</p>
+                <details class="lmlf-lean" open=""><summary>Lean statement · canonical product</summary><div class="lmlf-lean__body">
+                    <code class="hl lean block" data-lean-context="examples"><span class="keyword token" data-binding="kw-occ-Lean.Parser.Command.theorem-4652">theorem</span><span class="inter-text"> </span><span class="has-info warning"><span class="hover-container"><span class="hover-info messages"><code class="verso-message warning"><span class="text"></span><span class="text">declaration uses `</span><span class="highlighted"><span class="inter-text"></span><span class="unknown token" data-binding="">sorry</span><span class="inter-text"></span></span><span class="text">`</span></code></span></span><span class="const token" data-binding="const-LMLF.Blueprint.Gamma.Section517.dlmf_5_17_3" data-verso-hover="635" id="LMLF___Blueprint___Gamma___Section517___dlmf_5_17_3">dlmf_5_17_3</span></span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-4672">(</span><span class="var token" data-binding="var-_uniq.7552" data-verso-hover="114">z</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-4672">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Complex" data-verso-hover="107">ℂ</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-4672">)</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeSpec-4682">:</span><span class="inter-text">
+    </span><a href="Gamma-Function/___5___17-Barnes___-G-Function-_LPAR_Double-Gamma-Function_RPAR_/#LMLF___Blueprint___Gamma___Section517___barnesG" title="Definition of example"><span class="const token" data-binding="const-LMLF.Blueprint.Gamma.Section517.barnesG" data-verso-hover="630">barnesG</span></a><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-4696">(</span><span class="var token" data-binding="var-_uniq.7552" data-verso-hover="114">z</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_+_»-4697">+</span><span class="inter-text"> </span><span class="literal number token" data-binding="" data-verso-hover="114">1</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.paren-4696">)</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_=_»-4688">=</span><span class="inter-text">
+      </span><a href="Gamma-Function/___5___17-Barnes___-G-Function-_LPAR_Double-Gamma-Function_RPAR_/#LMLF___Blueprint___Gamma___Section517___barnesGProductPrefactor" title="Definition of example"><span class="const token" data-binding="const-LMLF.Blueprint.Gamma.Section517.barnesGProductPrefactor" data-verso-hover="629">barnesGProductPrefactor</span></a><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.7552" data-verso-hover="114">z</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_*_»-4712">*</span><span class="inter-text">
+        </span><span class="unknown token" data-binding="">∏'</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.7707" data-verso-hover="625">k</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-group-4755">:</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-«term{_:_//_}»-4757">{</span><span class="var token" data-binding="var-_uniq.7651" data-verso-hover="37">n</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-«term{_:_//_}»-4757">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Nat" data-verso-hover="34">ℕ</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term{_:_//_}»-4757">//</span><span class="inter-text"> </span><span class="literal number token" data-binding="" data-verso-hover="37">1</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_≤_»-4769">≤</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.7651" data-verso-hover="37">n</span><span class="punctuation bracket token" data-binding="kw-occ-«term{_:_//_}»-4757">}</span><span class="punctuation separator token" data-binding="kw-occ-«term∏'_,_»-4748">,</span><span class="inter-text"> </span><a href="Gamma-Function/___5___17-Barnes___-G-Function-_LPAR_Double-Gamma-Function_RPAR_/#LMLF___Blueprint___Gamma___Section517___barnesGProductTerm" title="Definition of example"><span class="const token" data-binding="const-LMLF.Blueprint.Gamma.Section517.barnesGProductTerm" data-verso-hover="628">barnesGProductTerm</span></a><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.7552" data-verso-hover="114">z</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.7707" data-verso-hover="625">k</span></code></div>
+                  </details></div>
+              </article><article class="lmlf-dlmf-entry"><div class="lmlf-dlmf-entry__source">
+                <a href="https://dlmf.nist.gov/5.17.E4">DLMF 5.17.4 ↗</a></div>
+              <div class="lmlf-dlmf-entry__body">
+                <p>
+                  <code class="math display">\[
+\operatorname{Ln}G(z+1)=\frac12z\ln(2\pi)-\frac12z(z+1)
++z\operatorname{Ln}\Gamma(z+1)-\int_0^z\operatorname{Ln}\Gamma(t+1)\,dt.
+\]</code></p>
+                <p>
+                  The source identity is complex and uses a path from <code>0</code> to <code>z</code>, with the
+specified continuation of the general logarithms.  For real <code>x&gt;0</code>, the path
+integral is the interval integral along the positive real axis and the
+principal logarithms agree with the continued branch there.</p>
+                <details class="lmlf-lean" open=""><summary>Lean statement · positive-real integral specialization</summary><div class="lmlf-lean__body">
+                    <code class="hl lean block" data-lean-context="examples"><span class="keyword token" data-binding="kw-occ-Lean.Parser.Command.theorem-5047">theorem</span><span class="inter-text"> </span><span class="has-info warning"><span class="hover-container"><span class="hover-info messages"><code class="verso-message warning"><span class="text"></span><span class="text">declaration uses `</span><span class="highlighted"><span class="inter-text"></span><span class="unknown token" data-binding="">sorry</span><span class="inter-text"></span></span><span class="text">`</span></code></span></span><span class="const token" data-binding="const-LMLF.Blueprint.Gamma.Section517.dlmf_5_17_4" data-verso-hover="636" id="LMLF___Blueprint___Gamma___Section517___dlmf_5_17_4">dlmf_5_17_4</span></span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.implicitBinder-5067">{</span><span class="var token" data-binding="var-_uniq.7806" data-verso-hover="19">x</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.implicitBinder-5067">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Real" data-verso-hover="11">ℝ</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.implicitBinder-5067">}</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-5077">(</span><span class="var token" data-binding="var-_uniq.7867" data-verso-hover="183">hx</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-5077">:</span><span class="inter-text"> </span><span class="literal number token" data-binding="" data-verso-hover="19">0</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_<_»-5083">&lt;</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.7806" data-verso-hover="19">x</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-5077">)</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeSpec-5090">:</span><span class="inter-text">
+    </span><span class="const token" data-binding="const-Complex.log" data-verso-hover="225">Complex.log</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-5108">(</span><a href="Gamma-Function/___5___17-Barnes___-G-Function-_LPAR_Double-Gamma-Function_RPAR_/#LMLF___Blueprint___Gamma___Section517___barnesG" title="Definition of example"><span class="const token" data-binding="const-LMLF.Blueprint.Gamma.Section517.barnesG" data-verso-hover="630">barnesG</span></a><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-5117">(</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-5118">(</span><span class="var token" data-binding="var-_uniq.7806" data-verso-hover="19">x</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_+_»-5119">+</span><span class="inter-text"> </span><span class="literal number token" data-binding="" data-verso-hover="19">1</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeAscription-5118">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Real" data-verso-hover="11">ℝ</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.typeAscription-5118">)</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeAscription-5117">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Complex" data-verso-hover="107">ℂ</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.typeAscription-5117">)</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.paren-5108">)</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_=_»-5096">=</span><span class="inter-text">
+      </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-5148">(</span><span class="var token" data-binding="var-_uniq.7806" data-verso-hover="19">x</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeAscription-5148">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Complex" data-verso-hover="107">ℂ</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.typeAscription-5148">)</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_/_»-5148">/</span><span class="inter-text"> </span><span class="literal number token" data-binding="" data-verso-hover="114">2</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_*_»-5148">*</span><span class="inter-text"> </span><span class="const token" data-binding="const-Complex.log" data-verso-hover="225">Complex.log</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-5176">(</span><span class="literal number token" data-binding="" data-verso-hover="114">2</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_*_»-5177">*</span><span class="inter-text"> </span><span class="const token" data-binding="const-Real.pi" data-verso-hover="198">Real.pi</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.paren-5176">)</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_-_»-5148">-</span><span class="inter-text">
+        </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-5200">(</span><span class="literal number token" data-binding="" data-verso-hover="114">1</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_/_»-5201">/</span><span class="inter-text"> </span><span class="literal number token" data-binding="" data-verso-hover="114">2</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeAscription-5200">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Complex" data-verso-hover="107">ℂ</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.typeAscription-5200">)</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_*_»-5200">*</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-5216">(</span><span class="var token" data-binding="var-_uniq.7806" data-verso-hover="19">x</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeAscription-5216">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Complex" data-verso-hover="107">ℂ</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.typeAscription-5216">)</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_*_»-5200">*</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-5228">(</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-5229">(</span><span class="var token" data-binding="var-_uniq.7806" data-verso-hover="19">x</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeAscription-5229">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Complex" data-verso-hover="107">ℂ</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.typeAscription-5229">)</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_+_»-5229">+</span><span class="inter-text"> </span><span class="literal number token" data-binding="" data-verso-hover="114">1</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.paren-5228">)</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_+_»-5148">+</span><span class="inter-text">
+        </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-5254">(</span><span class="var token" data-binding="var-_uniq.7806" data-verso-hover="19">x</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeAscription-5254">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Complex" data-verso-hover="107">ℂ</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.typeAscription-5254">)</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_*_»-5254">*</span><span class="inter-text"> </span><span class="const token" data-binding="const-Complex.log" data-verso-hover="225">Complex.log</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-5278">(</span><span class="const token" data-binding="const-Complex.Gamma" data-verso-hover="119">Complex.Gamma</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-5293">(</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-5294">(</span><span class="var token" data-binding="var-_uniq.7806" data-verso-hover="19">x</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_+_»-5295">+</span><span class="inter-text"> </span><span class="literal number token" data-binding="" data-verso-hover="19">1</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeAscription-5294">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Real" data-verso-hover="11">ℝ</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.typeAscription-5294">)</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeAscription-5293">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Complex" data-verso-hover="107">ℂ</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.typeAscription-5293">)</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.paren-5278">)</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_-_»-5148">-</span><span class="inter-text">
+        </span><span class="unknown token" data-binding="">∫</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.8678" data-verso-hover="19">t</span><span class="inter-text"> </span><span class="keyword token" data-binding="kw-occ-«term∫_In_.._,_»-5326" data-verso-hover="62">in</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-5335">(</span><span class="literal number token" data-binding="" data-verso-hover="19">0</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeAscription-5335">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Real" data-verso-hover="11">ℝ</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.typeAscription-5335">)</span><span class="built-in delim token" data-binding="kw-occ-«term∫_In_.._,_»-5326">..</span><span class="var token" data-binding="var-_uniq.7806" data-verso-hover="19">x</span><span class="punctuation separator token" data-binding="kw-occ-«term∫_In_.._,_»-5326">,</span><span class="inter-text"> </span><span class="const token" data-binding="const-Complex.log" data-verso-hover="225">Complex.log</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-5361">(</span><span class="const token" data-binding="const-Complex.Gamma" data-verso-hover="119">Complex.Gamma</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-5376">(</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-5377">(</span><span class="var token" data-binding="var-_uniq.8678" data-verso-hover="19">t</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_+_»-5378">+</span><span class="inter-text"> </span><span class="literal number token" data-binding="" data-verso-hover="19">1</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeAscription-5377">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Real" data-verso-hover="11">ℝ</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.typeAscription-5377">)</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeAscription-5376">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Complex" data-verso-hover="107">ℂ</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.typeAscription-5376">)</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.paren-5361">)</span></code></div>
+                  </details></div>
+              </article><article class="lmlf-dlmf-entry"><div class="lmlf-dlmf-entry__source">
+                <a href="https://dlmf.nist.gov/5.17.E5">DLMF 5.17.5 ↗</a></div>
+              <div class="lmlf-dlmf-entry__body">
+                <p>
+                  <code class="math display">\[
+\operatorname{Ln}G(z+1)\sim\frac14z^2+z\operatorname{Ln}\Gamma(z+1)
+-\left(\frac12z(z+1)+\frac1{12}\right)\ln z-\ln A
++\sum_{k=1}^{\infty}\frac{B_{2k+2}}{2k(2k+1)(2k+2)z^{2k}}.
+\]</code></p>
+                <p>
+                  As <code>z</code> tends to infinity in <code>|ph z| ≤ π−δ</code> with <code>δ&gt;0</code>, DLMF gives a
+Poincaré expansion in Bernoulli numbers, with <code>A</code> Glaisher's constant.  On
+the positive real axis, <code>x → +∞</code> lies in every such sector, and the source
+index <code>k=1,2,…</code> corresponds to index <code>n=0,1,…</code> in
+<code>barnesGAsymptoticTerm</code>.  DLMF also points to Nemes for error
+  bounds and an exponentially improved extension.</p>
+                <details class="lmlf-lean" open=""><summary>Lean statement · positive-real Poincare specialization</summary><div class="lmlf-lean__body">
+                    <code class="hl lean block" data-lean-context="examples"><span class="keyword token" data-binding="kw-occ-Lean.Parser.Command.noncomputable-2982">noncomputable</span><span class="inter-text"> </span><span class="keyword token" data-binding="kw-occ-Lean.Parser.Command.definition-2996">def</span><span class="inter-text"> </span><span class="const token" data-binding="const-LMLF.Blueprint.Gamma.Section517.barnesGAsymptoticMain" data-verso-hover="637" id="LMLF___Blueprint___Gamma___Section517___barnesGAsymptoticMain">barnesGAsymptoticMain</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-3022">(</span><span class="var token" data-binding="var-_uniq.4924" data-verso-hover="19">x</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-3022">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Real" data-verso-hover="11">ℝ</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-3022">)</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeSpec-3032">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Complex" data-verso-hover="107">ℂ</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Command.declValSimple-3038">:=</span><span class="inter-text">
+  </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-3043">(</span><span class="literal number token" data-binding="" data-verso-hover="114">1</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_/_»-3044">/</span><span class="inter-text"> </span><span class="literal number token" data-binding="" data-verso-hover="114">4</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeAscription-3043">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Complex" data-verso-hover="107">ℂ</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.typeAscription-3043">)</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_*_»-3043">*</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-3059">(</span><span class="var token" data-binding="var-_uniq.4924" data-verso-hover="19">x</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeAscription-3059">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Complex" data-verso-hover="107">ℂ</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.typeAscription-3059">)</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_^_»-3059">^</span><span class="inter-text"> </span><span class="literal number token" data-binding="" data-verso-hover="37">2</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_+_»-3043">+</span><span class="inter-text">
+    </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-3079">(</span><span class="var token" data-binding="var-_uniq.4924" data-verso-hover="19">x</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeAscription-3079">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Complex" data-verso-hover="107">ℂ</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.typeAscription-3079">)</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_*_»-3079">*</span><span class="inter-text"> </span><span class="const token" data-binding="const-Complex.log" data-verso-hover="225">Complex.log</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-3103">(</span><span class="const token" data-binding="const-Complex.Gamma" data-verso-hover="119">Complex.Gamma</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-3118">(</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-3119">(</span><span class="var token" data-binding="var-_uniq.4924" data-verso-hover="19">x</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_+_»-3120">+</span><span class="inter-text"> </span><span class="literal number token" data-binding="" data-verso-hover="19">1</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeAscription-3119">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Real" data-verso-hover="11">ℝ</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.typeAscription-3119">)</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeAscription-3118">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Complex" data-verso-hover="107">ℂ</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.typeAscription-3118">)</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.paren-3103">)</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_-_»-3043">-</span><span class="inter-text">
+    </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-3147">(</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-3148">(</span><span class="literal number token" data-binding="" data-verso-hover="114">1</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_/_»-3149">/</span><span class="inter-text"> </span><span class="literal number token" data-binding="" data-verso-hover="114">2</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeAscription-3148">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Complex" data-verso-hover="107">ℂ</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.typeAscription-3148">)</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_*_»-3148">*</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-3164">(</span><span class="var token" data-binding="var-_uniq.4924" data-verso-hover="19">x</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeAscription-3164">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Complex" data-verso-hover="107">ℂ</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.typeAscription-3164">)</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_*_»-3148">*</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-3176">(</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-3177">(</span><span class="var token" data-binding="var-_uniq.4924" data-verso-hover="19">x</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeAscription-3177">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Complex" data-verso-hover="107">ℂ</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.typeAscription-3177">)</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_+_»-3177">+</span><span class="inter-text"> </span><span class="literal number token" data-binding="" data-verso-hover="114">1</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.paren-3176">)</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_+_»-3148">+</span><span class="inter-text"> </span><span class="literal number token" data-binding="" data-verso-hover="114">1</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_/_»-3194">/</span><span class="inter-text"> </span><span class="literal number token" data-binding="" data-verso-hover="114">12</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.paren-3147">)</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_*_»-3147">*</span><span class="inter-text">
+      </span><span class="const token" data-binding="const-Complex.log" data-verso-hover="225">Complex.log</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-3222">(</span><span class="var token" data-binding="var-_uniq.4924" data-verso-hover="19">x</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeAscription-3222">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Complex" data-verso-hover="107">ℂ</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.typeAscription-3222">)</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_-_»-3043">-</span><span class="inter-text">
+    </span><span class="const token" data-binding="const-Complex.log" data-verso-hover="225">Complex.log</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-3250">(</span><a href="Gamma-Function/___5___17-Barnes___-G-Function-_LPAR_Double-Gamma-Function_RPAR_/#LMLF___Blueprint___Gamma___Section517___glaisherConstant" title="Definition of example"><span class="const token" data-binding="const-LMLF.Blueprint.Gamma.Section517.glaisherConstant" data-verso-hover="638">glaisherConstant</span></a><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeAscription-3250">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Complex" data-verso-hover="107">ℂ</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.typeAscription-3250">)</span></code><code class="hl lean block" data-lean-context="examples"><span class="keyword token" data-binding="kw-occ-Lean.Parser.Command.noncomputable-3406">noncomputable</span><span class="inter-text"> </span><span class="keyword token" data-binding="kw-occ-Lean.Parser.Command.definition-3420">def</span><span class="inter-text"> </span><span class="const token" data-binding="const-LMLF.Blueprint.Gamma.Section517.barnesGAsymptoticTerm" data-verso-hover="639" id="LMLF___Blueprint___Gamma___Section517___barnesGAsymptoticTerm">barnesGAsymptoticTerm</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-3446">(</span><span class="var token" data-binding="var-_uniq.6263" data-verso-hover="37">n</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-3446">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Nat" data-verso-hover="34">ℕ</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-3446">)</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-3456">(</span><span class="var token" data-binding="var-_uniq.6265" data-verso-hover="19">x</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-3456">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Real" data-verso-hover="11">ℝ</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-3456">)</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeSpec-3466">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Complex" data-verso-hover="107">ℂ</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Command.declValSimple-3472">:=</span><span class="inter-text">
+  </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-3477">(</span><span class="const token" data-binding="const-bernoulli" data-verso-hover="390">bernoulli</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-3488">(</span><span class="literal number token" data-binding="" data-verso-hover="37">2</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_*_»-3489">*</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.6263" data-verso-hover="37">n</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_+_»-3489">+</span><span class="inter-text"> </span><span class="literal number token" data-binding="" data-verso-hover="37">4</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.paren-3488">)</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeAscription-3477">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Complex" data-verso-hover="107">ℂ</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.typeAscription-3477">)</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_/_»-3477">/</span><span class="inter-text">
+    </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-3513">(</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-3514">(</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-3515">(</span><span class="literal number token" data-binding="" data-verso-hover="37">2</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_*_»-3516">*</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.6263" data-verso-hover="37">n</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_+_»-3516">+</span><span class="inter-text"> </span><span class="literal number token" data-binding="" data-verso-hover="37">2</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeAscription-3515">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Nat" data-verso-hover="34">ℕ</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.typeAscription-3515">)</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeAscription-3514">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Complex" data-verso-hover="107">ℂ</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.typeAscription-3514">)</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_*_»-3514">*</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-3542">(</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-3543">(</span><span class="literal number token" data-binding="" data-verso-hover="37">2</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_*_»-3544">*</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.6263" data-verso-hover="37">n</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_+_»-3544">+</span><span class="inter-text"> </span><span class="literal number token" data-binding="" data-verso-hover="37">3</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeAscription-3543">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Nat" data-verso-hover="34">ℕ</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.typeAscription-3543">)</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeAscription-3542">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Complex" data-verso-hover="107">ℂ</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.typeAscription-3542">)</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_*_»-3514">*</span><span class="inter-text">
+      </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-3576">(</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-3577">(</span><span class="literal number token" data-binding="" data-verso-hover="37">2</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_*_»-3578">*</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.6263" data-verso-hover="37">n</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_+_»-3578">+</span><span class="inter-text"> </span><span class="literal number token" data-binding="" data-verso-hover="37">4</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeAscription-3577">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Nat" data-verso-hover="34">ℕ</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.typeAscription-3577">)</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeAscription-3576">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Complex" data-verso-hover="107">ℂ</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.typeAscription-3576">)</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_*_»-3514">*</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-3604">(</span><span class="var token" data-binding="var-_uniq.6265" data-verso-hover="19">x</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeAscription-3604">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Complex" data-verso-hover="107">ℂ</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.typeAscription-3604">)</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_^_»-3604">^</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-3616">(</span><span class="literal number token" data-binding="" data-verso-hover="37">2</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_*_»-3617">*</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.6263" data-verso-hover="37">n</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_+_»-3617">+</span><span class="inter-text"> </span><span class="literal number token" data-binding="" data-verso-hover="37">2</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.paren-3616">)</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.paren-3513">)</span></code><code class="hl lean block" data-lean-context="examples"><span class="keyword token" data-binding="kw-occ-Lean.Parser.Command.theorem-5584">theorem</span><span class="inter-text"> </span><span class="has-info warning"><span class="hover-container"><span class="hover-info messages"><code class="verso-message warning"><span class="text"></span><span class="text">declaration uses `</span><span class="highlighted"><span class="inter-text"></span><span class="unknown token" data-binding="">sorry</span><span class="inter-text"></span></span><span class="text">`</span></code></span></span><span class="const token" data-binding="const-LMLF.Blueprint.Gamma.Section517.dlmf_5_17_5" data-verso-hover="640" id="LMLF___Blueprint___Gamma___Section517___dlmf_5_17_5">dlmf_5_17_5</span></span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeSpec-5604">:</span><span class="inter-text">
+    </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-5610">(</span><span class="keyword token" data-binding="kw-occ-Lean.Parser.Term.fun-5611">fun</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.9405" data-verso-hover="19">x</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeSpec-5617">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Real" data-verso-hover="11">ℝ</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.basicFun-5615">↦</span><span class="inter-text">
+      </span><span class="const token" data-binding="const-Complex.log" data-verso-hover="225">Complex.log</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-5645">(</span><a href="Gamma-Function/___5___17-Barnes___-G-Function-_LPAR_Double-Gamma-Function_RPAR_/#LMLF___Blueprint___Gamma___Section517___barnesG" title="Definition of example"><span class="const token" data-binding="const-LMLF.Blueprint.Gamma.Section517.barnesG" data-verso-hover="630">barnesG</span></a><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-5654">(</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-5655">(</span><span class="var token" data-binding="var-_uniq.9405" data-verso-hover="19">x</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_+_»-5656">+</span><span class="inter-text"> </span><span class="literal number token" data-binding="" data-verso-hover="19">1</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeAscription-5655">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Real" data-verso-hover="11">ℝ</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.typeAscription-5655">)</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeAscription-5654">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Complex" data-verso-hover="107">ℂ</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.typeAscription-5654">)</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.paren-5645">)</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_-_»-5633">-</span><span class="inter-text"> </span><a href="Gamma-Function/___5___17-Barnes___-G-Function-_LPAR_Double-Gamma-Function_RPAR_/#LMLF___Blueprint___Gamma___Section517___barnesGAsymptoticMain" title="Definition of example"><span class="const token" data-binding="const-LMLF.Blueprint.Gamma.Section517.barnesGAsymptoticMain" data-verso-hover="637">barnesGAsymptoticMain</span></a><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.9405" data-verso-hover="19">x</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.paren-5610">)</span><span class="inter-text"> </span><span class="unknown token" data-binding="">∼ₚ[</span><span class="const token" data-binding="const-Filter.atTop" data-verso-hover="66">atTop</span><span class="punctuation bracket token" data-binding="kw-occ-«term_∼ₚ[_]_»-5610">]</span><span class="inter-text">
+        </span><a href="Gamma-Function/___5___17-Barnes___-G-Function-_LPAR_Double-Gamma-Function_RPAR_/#LMLF___Blueprint___Gamma___Section517___barnesGAsymptoticTerm" title="Definition of example"><span class="const token" data-binding="const-LMLF.Blueprint.Gamma.Section517.barnesGAsymptoticTerm" data-verso-hover="639">barnesGAsymptoticTerm</span></a></code></div>
+                  </details></div>
+              </article><article class="lmlf-dlmf-entry"><div class="lmlf-dlmf-entry__source">
+                <a href="https://dlmf.nist.gov/5.17.E6">DLMF 5.17.6 ↗</a></div>
+              <div class="lmlf-dlmf-entry__body">
+                <p>
+                  <code class="math display">\[
+A=e^C=1.28242\,71291\,00622\,63687\ldots.
+\]</code></p>
+                <p>
+                  Glaisher's constant <code>A</code> is the exponential of the constant <code>C</code>; the displayed
+digits give its decimal expansion.</p>
+                <details class="lmlf-lean" open=""><summary>Lean statement · Glaisher constant</summary><div class="lmlf-lean__body">
+                    <code class="hl lean block" data-lean-context="examples"><span class="keyword token" data-binding="kw-occ-Lean.Parser.Command.noncomputable-2137">noncomputable</span><span class="inter-text"> </span><span class="keyword token" data-binding="kw-occ-Lean.Parser.Command.definition-2151">def</span><span class="inter-text"> </span><span class="const token" data-binding="const-LMLF.Blueprint.Gamma.Section517.glaisherPartialExpression" data-verso-hover="641" id="LMLF___Blueprint___Gamma___Section517___glaisherPartialExpression">glaisherPartialExpression</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-2181">(</span><span class="var token" data-binding="var-_uniq.2640" data-verso-hover="37">n</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-2181">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Nat" data-verso-hover="34">ℕ</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-2181">)</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeSpec-2191">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Real" data-verso-hover="11">ℝ</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Command.declValSimple-2197">:=</span><span class="inter-text">
+  </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-2202">(</span><span class="unknown token" data-binding="">∑</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.2749" data-verso-hover="37">k</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-Lean.«binderPred∈_»-2209">∈</span><span class="inter-text"> </span><span class="const token" data-binding="const-Finset.Icc" data-verso-hover="157">Finset.Icc</span><span class="inter-text"> </span><span class="literal number token" data-binding="" data-verso-hover="37">1</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.2640" data-verso-hover="37">n</span><span class="punctuation separator token" data-binding="kw-occ-BigOperators.bigsum-2203">,</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-2229">(</span><span class="var token" data-binding="var-_uniq.2749" data-verso-hover="37">k</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeAscription-2229">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Real" data-verso-hover="11">ℝ</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.typeAscription-2229">)</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_*_»-2229">*</span><span class="inter-text"> </span><span class="const token" data-binding="const-Real.log" data-verso-hover="158">Real.log</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-2250">(</span><span class="var token" data-binding="var-_uniq.2749" data-verso-hover="37">k</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeAscription-2250">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Real" data-verso-hover="11">ℝ</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.typeAscription-2250">)</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.paren-2202">)</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_-_»-2202">-</span><span class="inter-text">
+    </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-2267">(</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-2268">(</span><span class="literal number token" data-binding="" data-verso-hover="19">1</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_/_»-2269">/</span><span class="inter-text"> </span><span class="literal number token" data-binding="" data-verso-hover="19">2</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeAscription-2268">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Real" data-verso-hover="11">ℝ</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.typeAscription-2268">)</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_*_»-2268">*</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-2284">(</span><span class="var token" data-binding="var-_uniq.2640" data-verso-hover="37">n</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeAscription-2284">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Real" data-verso-hover="11">ℝ</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.typeAscription-2284">)</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_^_»-2284">^</span><span class="inter-text"> </span><span class="literal number token" data-binding="" data-verso-hover="37">2</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_+_»-2268">+</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-2300">(</span><span class="literal number token" data-binding="" data-verso-hover="19">1</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_/_»-2301">/</span><span class="inter-text"> </span><span class="literal number token" data-binding="" data-verso-hover="19">2</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeAscription-2300">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Real" data-verso-hover="11">ℝ</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.typeAscription-2300">)</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_*_»-2300">*</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-2316">(</span><span class="var token" data-binding="var-_uniq.2640" data-verso-hover="37">n</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeAscription-2316">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Real" data-verso-hover="11">ℝ</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.typeAscription-2316">)</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_+_»-2268">+</span><span class="inter-text"> </span><span class="literal number token" data-binding="" data-verso-hover="19">1</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_/_»-2328">/</span><span class="inter-text"> </span><span class="literal number token" data-binding="" data-verso-hover="19">12</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.paren-2267">)</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_*_»-2267">*</span><span class="inter-text">
+      </span><span class="const token" data-binding="const-Real.log" data-verso-hover="158">Real.log</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-2353">(</span><span class="var token" data-binding="var-_uniq.2640" data-verso-hover="37">n</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeAscription-2353">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Real" data-verso-hover="11">ℝ</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.typeAscription-2353">)</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_+_»-2202">+</span><span class="inter-text">
+    </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-2369">(</span><span class="literal number token" data-binding="" data-verso-hover="19">1</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_/_»-2370">/</span><span class="inter-text"> </span><span class="literal number token" data-binding="" data-verso-hover="19">4</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeAscription-2369">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Real" data-verso-hover="11">ℝ</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.typeAscription-2369">)</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_*_»-2369">*</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-2385">(</span><span class="var token" data-binding="var-_uniq.2640" data-verso-hover="37">n</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeAscription-2385">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Real" data-verso-hover="11">ℝ</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.typeAscription-2385">)</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_^_»-2385">^</span><span class="inter-text"> </span><span class="literal number token" data-binding="" data-verso-hover="37">2</span></code><code class="hl lean block" data-lean-context="examples"><span class="keyword token" data-binding="kw-occ-Lean.Parser.Command.noncomputable-2540">noncomputable</span><span class="inter-text"> </span><span class="keyword token" data-binding="kw-occ-Lean.Parser.Command.definition-2554">def</span><span class="inter-text"> </span><span class="const token" data-binding="const-LMLF.Blueprint.Gamma.Section517.glaisherLogConstant" data-verso-hover="642" id="LMLF___Blueprint___Gamma___Section517___glaisherLogConstant">glaisherLogConstant</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeSpec-2578">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Real" data-verso-hover="11">ℝ</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Command.declValSimple-2584">:=</span><span class="inter-text">
+  </span><span class="const token" data-binding="const-Filter.limUnder" data-verso-hover="538">limUnder</span><span class="inter-text"> </span><span class="const token" data-binding="const-Filter.atTop" data-verso-hover="66">atTop</span><span class="inter-text"> </span><a href="Gamma-Function/___5___17-Barnes___-G-Function-_LPAR_Double-Gamma-Function_RPAR_/#LMLF___Blueprint___Gamma___Section517___glaisherPartialExpression" title="Definition of example"><span class="const token" data-binding="const-LMLF.Blueprint.Gamma.Section517.glaisherPartialExpression" data-verso-hover="641">glaisherPartialExpression</span></a></code><code class="hl lean block" data-lean-context="examples"><span class="keyword token" data-binding="kw-occ-Lean.Parser.Command.noncomputable-2765">noncomputable</span><span class="inter-text"> </span><span class="keyword token" data-binding="kw-occ-Lean.Parser.Command.definition-2779">def</span><span class="inter-text"> </span><span class="const token" data-binding="const-LMLF.Blueprint.Gamma.Section517.glaisherConstant" data-verso-hover="638" id="LMLF___Blueprint___Gamma___Section517___glaisherConstant">glaisherConstant</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeSpec-2800">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Real" data-verso-hover="11">ℝ</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Command.declValSimple-2806">:=</span><span class="inter-text"> </span><span class="const token" data-binding="const-Real.exp" data-verso-hover="103">Real.exp</span><span class="inter-text"> </span><a href="Gamma-Function/___5___17-Barnes___-G-Function-_LPAR_Double-Gamma-Function_RPAR_/#LMLF___Blueprint___Gamma___Section517___glaisherLogConstant" title="Definition of example"><span class="const token" data-binding="const-LMLF.Blueprint.Gamma.Section517.glaisherLogConstant" data-verso-hover="642">glaisherLogConstant</span></a></code><code class="hl lean block" data-lean-context="examples"><span class="keyword token" data-binding="kw-occ-Lean.Parser.Command.theorem-5927">theorem</span><span class="inter-text"> </span><span class="has-info warning"><span class="hover-container"><span class="hover-info messages"><code class="verso-message warning"><span class="text"></span><span class="text">declaration uses `</span><span class="highlighted"><span class="inter-text"></span><span class="unknown token" data-binding="">sorry</span><span class="inter-text"></span></span><span class="text">`</span></code></span></span><span class="const token" data-binding="const-LMLF.Blueprint.Gamma.Section517.dlmf_5_17_6" data-verso-hover="643" id="LMLF___Blueprint___Gamma___Section517___dlmf_5_17_6">dlmf_5_17_6</span></span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeSpec-5947">:</span><span class="inter-text">
+    </span><a href="Gamma-Function/___5___17-Barnes___-G-Function-_LPAR_Double-Gamma-Function_RPAR_/#LMLF___Blueprint___Gamma___Section517___glaisherConstant" title="Definition of example"><span class="const token" data-binding="const-LMLF.Blueprint.Gamma.Section517.glaisherConstant" data-verso-hover="638">glaisherConstant</span></a><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_=_»-5953">=</span><span class="inter-text"> </span><span class="const token" data-binding="const-Real.exp" data-verso-hover="103">Real.exp</span><span class="inter-text"> </span><a href="Gamma-Function/___5___17-Barnes___-G-Function-_LPAR_Double-Gamma-Function_RPAR_/#LMLF___Blueprint___Gamma___Section517___glaisherLogConstant" title="Definition of example"><span class="const token" data-binding="const-LMLF.Blueprint.Gamma.Section517.glaisherLogConstant" data-verso-hover="642">glaisherLogConstant</span></a></code></div>
+                  </details></div>
+              </article><article class="lmlf-dlmf-entry"><div class="lmlf-dlmf-entry__source">
+                <a href="https://dlmf.nist.gov/5.17.E7">DLMF 5.17.7 ↗</a></div>
+              <div class="lmlf-dlmf-entry__body">
+                <p>
+                  <code class="math display">\[
+C=\lim_{n\to\infty}\left(\sum_{k=1}^n k\ln k-
+\left(\frac12n^2+\frac12n+\frac1{12}\right)\ln n+\frac14n^2\right)
+=\frac{\gamma+\ln(2\pi)}{12}-\frac{\zeta'(2)}{2\pi^2}
+=\frac1{12}-\zeta'(-1).
+\]</code></p>
+                <p>
+                  The constant <code>C</code> is the limit of the renormalized weighted logarithmic sum,
+and the source gives two equivalent forms in terms of derivatives of the
+Riemann zeta function.  The finite sum uses <code>Finset.Icc 1 n</code>, preserving the
+source lower limit, and the two derivatives are taken at <code>2</code> and <code>−1</code>.</p>
+                <details class="lmlf-lean" open=""><summary>Lean statement · Glaisher logarithm</summary><div class="lmlf-lean__body">
+                    <code class="hl lean block" data-lean-context="examples"><span class="keyword token" data-binding="kw-occ-Lean.Parser.Command.theorem-6190">theorem</span><span class="inter-text"> </span><span class="has-info warning"><span class="hover-container"><span class="hover-info messages"><code class="verso-message warning"><span class="text"></span><span class="text">declaration uses `</span><span class="highlighted"><span class="inter-text"></span><span class="unknown token" data-binding="">sorry</span><span class="inter-text"></span></span><span class="text">`</span></code></span></span><span class="const token" data-binding="const-LMLF.Blueprint.Gamma.Section517.dlmf_5_17_7" data-verso-hover="644" id="LMLF___Blueprint___Gamma___Section517___dlmf_5_17_7">dlmf_5_17_7</span></span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeSpec-6210">:</span><span class="inter-text">
+    </span><span class="const token" data-binding="const-Filter.Tendsto" data-verso-hover="61">Tendsto</span><span class="inter-text"> </span><a href="Gamma-Function/___5___17-Barnes___-G-Function-_LPAR_Double-Gamma-Function_RPAR_/#LMLF___Blueprint___Gamma___Section517___glaisherPartialExpression" title="Definition of example"><span class="const token" data-binding="const-LMLF.Blueprint.Gamma.Section517.glaisherPartialExpression" data-verso-hover="641">glaisherPartialExpression</span></a><span class="inter-text"> </span><span class="const token" data-binding="const-Filter.atTop" data-verso-hover="66">atTop</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-6256">(</span><span class="const token" data-binding="const-nhds" data-verso-hover="65">nhds</span><span class="inter-text"> </span><a href="Gamma-Function/___5___17-Barnes___-G-Function-_LPAR_Double-Gamma-Function_RPAR_/#LMLF___Blueprint___Gamma___Section517___glaisherLogConstant" title="Definition of example"><span class="const token" data-binding="const-LMLF.Blueprint.Gamma.Section517.glaisherLogConstant" data-verso-hover="642">glaisherLogConstant</span></a><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.paren-6256">)</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_∧_»-6216">∧</span><span class="inter-text">
+      </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-6293">(</span><a href="Gamma-Function/___5___17-Barnes___-G-Function-_LPAR_Double-Gamma-Function_RPAR_/#LMLF___Blueprint___Gamma___Section517___glaisherLogConstant" title="Definition of example"><span class="const token" data-binding="const-LMLF.Blueprint.Gamma.Section517.glaisherLogConstant" data-verso-hover="642">glaisherLogConstant</span></a><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeAscription-6293">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Complex" data-verso-hover="107">ℂ</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.typeAscription-6293">)</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_=_»-6293">=</span><span class="inter-text">
+        </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-6331">(</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-6332">(</span><span class="const token" data-binding="const-Real.eulerMascheroniConstant" data-verso-hover="134">Real.eulerMascheroniConstant</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeAscription-6332">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Complex" data-verso-hover="107">ℂ</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.typeAscription-6332">)</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_+_»-6332">+</span><span class="inter-text"> </span><span class="const token" data-binding="const-Complex.log" data-verso-hover="225">Complex.log</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-6383">(</span><span class="literal number token" data-binding="" data-verso-hover="114">2</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_*_»-6384">*</span><span class="inter-text"> </span><span class="const token" data-binding="const-Real.pi" data-verso-hover="198">Real.pi</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.paren-6383">)</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.paren-6331">)</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_/_»-6331">/</span><span class="inter-text"> </span><span class="literal number token" data-binding="" data-verso-hover="114">12</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_-_»-6331">-</span><span class="inter-text">
+          </span><span class="const token" data-binding="const-deriv" data-verso-hover="137">deriv</span><span class="inter-text"> </span><span class="const token" data-binding="const-riemannZeta" data-verso-hover="283">riemannZeta</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-6433">(</span><span class="literal number token" data-binding="" data-verso-hover="114">2</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeAscription-6433">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Complex" data-verso-hover="107">ℂ</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.typeAscription-6433">)</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_/_»-6415">/</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-6445">(</span><span class="literal number token" data-binding="" data-verso-hover="114">2</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_*_»-6446">*</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-6450">(</span><span class="const token" data-binding="const-Real.pi" data-verso-hover="198">Real.pi</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeAscription-6450">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Complex" data-verso-hover="107">ℂ</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.typeAscription-6450">)</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_^_»-6450">^</span><span class="inter-text"> </span><span class="literal number token" data-binding="" data-verso-hover="37">2</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.paren-6445">)</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_∧_»-6293">∧</span><span class="inter-text">
+      </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-6481">(</span><a href="Gamma-Function/___5___17-Barnes___-G-Function-_LPAR_Double-Gamma-Function_RPAR_/#LMLF___Blueprint___Gamma___Section517___glaisherLogConstant" title="Definition of example"><span class="const token" data-binding="const-LMLF.Blueprint.Gamma.Section517.glaisherLogConstant" data-verso-hover="642">glaisherLogConstant</span></a><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeAscription-6481">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Complex" data-verso-hover="107">ℂ</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.typeAscription-6481">)</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_=_»-6481">=</span><span class="inter-text">
+        </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-6519">(</span><span class="literal number token" data-binding="" data-verso-hover="114">1</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_/_»-6520">/</span><span class="inter-text"> </span><span class="literal number token" data-binding="" data-verso-hover="114">12</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeAscription-6519">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Complex" data-verso-hover="107">ℂ</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.typeAscription-6519">)</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_-_»-6519">-</span><span class="inter-text"> </span><span class="const token" data-binding="const-deriv" data-verso-hover="137">deriv</span><span class="inter-text"> </span><span class="const token" data-binding="const-riemannZeta" data-verso-hover="283">riemannZeta</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-6554">(</span><span class="punctuation operator token" data-binding="kw-occ-«term-_»-6555">-</span><span class="literal number token" data-binding="" data-verso-hover="114">1</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeAscription-6554">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Complex" data-verso-hover="107">ℂ</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.typeAscription-6554">)</span></code></div>
+                  </details></div>
+              </article></section>
+          <nav class="prev-next-buttons">
+            <a class="local-button active" href="Gamma-Function/___5___16-Sums/#chapter-5-section-16" rel="prev" title="5.16. §5.16 Sums"><span class="arrow">←</span><span class="where">5.16. §5.16 Sums</span></a><a class="local-button active" href="Gamma-Function/___5___18-q-Gamma-and-q-Beta-Functions/#chapter-5-section-18" rel="next" title="5.18. §5.18 q-Gamma and q-Beta Functions"><span class="where">5.18. §5.18 q-Gamma and q-Beta Functions</span><span class="arrow">→</span></a></nav>
+          </div>
+        </main></div>
+    </body>
+  </html>

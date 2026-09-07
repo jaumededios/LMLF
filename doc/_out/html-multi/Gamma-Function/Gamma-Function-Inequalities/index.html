@@ -1,0 +1,1316 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script>
+      (function(){
+  const {protocol:proto, host:hostName, pathname:path, search:srch, hash:hsh} = window.location;
+  if (!(path.endsWith("/") || path.endsWith(".html"))) {
+    window.location.replace(`${proto}//${hostName}${path}/${srch}${hsh}`);
+  }
+})()</script>
+    <script>
+      // Enable TypeScript checking.
+// @ts-check
+
+// Applies a saved table-of-contents width before the first paint.
+//
+// This is a tiny inline counterpart to toc-resize.js: it runs in the page head so that
+// returning desktop readers do not see the default width flash to their saved width.
+// It only records the width in the --verso-toc-user-width custom property; the
+// stylesheet clamps it and ignores it on mobile, and toc-resize.js then takes over the
+// interactive resizing. Keep the storage key in sync with toc-resize.js.
+
+(function () {
+    try {
+        const saved = localStorage.getItem("verso-toc-width");
+        // Parse to a number (as toc-resize.js does) and write that back, so a stored
+        // value with stray whitespace becomes a valid length rather than `" 420 px"`.
+        const width = saved === null ? NaN : Number(saved);
+        if (Number.isFinite(width)) {
+            document.documentElement.style.setProperty("--verso-toc-user-width", `${width}px`);
+        }
+    } catch (_) {
+        // Leave the default width in place when local storage is unavailable.
+    }
+})();
+</script>
+    <base href="./../../"><meta charset="utf-8">
+    <meta name="viewport" content="height=device-height, width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
+    <title>Gamma-Function Inequalities</title><link rel="stylesheet" href="book.css">
+    <link rel="stylesheet" href="verso-vars.css">
+    <script src="https://cdn.jsdelivr.net/npm/marked@11.1.1/marked.min.js" integrity="sha384-zbcZAIxlvJtNE3Dp5nxLXdXtXyxwOdnILY1TDPVmKFhl4r4nSUG1r8bcFXGVa4Te" crossorigin="anonymous"></script>
+    <script defer="defer" src="-verso-search/elasticlunr.min.js"></script>
+    <script defer="defer" src="-verso-search/fuzzysort.min.js"></script>
+    <script defer="defer" src="-verso-search/searchIndex.js"></script>
+    <script defer="defer" src="-verso-search/search-config.js"></script>
+    <script type="module" src="-verso-search/search-init.js"></script>
+    <link rel="stylesheet" href="-verso-search/search-box.css">
+    <link rel="stylesheet" href="-verso-search/search-page.css">
+    <link rel="stylesheet" href="-verso-search/search-highlight.css">
+    <link rel="stylesheet" href="-verso-search/domain-display.css">
+    <script src="-verso-search/search-highlight.js" defer="defer"></script>
+    <script src="toc-resize.js" defer="defer"></script>
+    <script src="-verso-data/katex/katex.js"></script>
+    <script src="-verso-data/katex/math.js"></script>
+    <script src="-verso-data/popper.min.js"></script>
+    <script src="-verso-data/tippy-bundle.umd.min.js"></script>
+    <link rel="stylesheet" href="-verso-data/tippy-border.css">
+    <link rel="stylesheet" href="-verso-data/katex/katex.css">
+    <style>
+:root {
+  --verso-text-font-family: Georgia, "Times New Roman", serif;
+  --verso-content-max-width: 64rem;
+  --lmlf-ink: #111;
+  --lmlf-muted: #555;
+  --lmlf-link: #0645ad;
+  --lmlf-heading: #d3dce6;
+  --lmlf-heading-dark: #bcc4cc;
+  --lmlf-rule: #a4abb2;
+  --lmlf-lean: #f4f8fc;
+  --lmlf-lean-rule: #9bb7d3;
+}
+
+body {
+  background: #fff;
+  color: var(--lmlf-ink);
+  font-family: Georgia, "Times New Roman", serif;
+}
+
+main { max-width: 74rem; }
+
+h1, h2, h3, h4,
+.lmlf-source-link,
+.lmlf-dlmf-entry__source,
+.lmlf-lean > summary {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+h2 {
+  background: var(--lmlf-heading-dark);
+  border-top: .28rem double var(--lmlf-rule);
+  color: #111;
+  padding: .38rem .55rem;
+}
+
+h3 {
+  background: var(--lmlf-heading);
+  color: #111;
+  padding: .28rem .48rem;
+}
+
+h4 { color: #222; }
+a { color: var(--lmlf-link); }
+
+.lmlf-source-link {
+  border-bottom: 1px solid #c8cdd2;
+  margin: .3rem 0 1.35rem;
+  padding: 0 0 .6rem;
+}
+
+.lmlf-source-link a { font-weight: 700; }
+
+.lmlf-dlmf-entry {
+  border-bottom: 1px solid #c8cdd2;
+  border-top: 1px solid #c8cdd2;
+  margin: 1.2rem 0 1.7rem;
+  padding: .75rem 0 .95rem;
+}
+
+.lmlf-dlmf-entry__body {
+  display: grid;
+  gap: .15rem;
+}
+
+.lmlf-dlmf-entry__source {
+  font-size: .86rem;
+  font-weight: 700;
+  margin-bottom: .65rem;
+}
+
+.lmlf-dlmf-entry__body > :first-child { margin-top: 0; }
+
+.lmlf-lean {
+  background: var(--lmlf-lean);
+  border: 1px solid var(--lmlf-lean-rule);
+  margin: .85rem 0 .15rem;
+}
+
+.lmlf-lean > summary {
+  color: #174f80;
+  cursor: pointer;
+  font-size: .86rem;
+  font-weight: 700;
+  padding: .55rem .7rem;
+}
+
+.lmlf-lean[open] > summary { border-bottom: 1px solid var(--lmlf-lean-rule); }
+.lmlf-lean__body { padding: .2rem .7rem .65rem; }
+
+.lmlf-section-list > ul {
+  list-style: none;
+  margin-left: 0;
+  padding-left: 0;
+}
+
+.lmlf-section-list li {
+  border-bottom: 1px dotted #b7bcc1;
+  padding: .24rem .15rem;
+}
+
+.lmlf-section-list li::before {
+  color: #5f6770;
+  content: "\203A";
+  display: inline-block;
+  margin-right: .48rem;
+}
+
+.lmlf-coverage {
+  border-collapse: collapse;
+  font-family: Arial, Helvetica, sans-serif;
+  margin: 1rem 0 1.4rem;
+  width: 100%;
+}
+
+.lmlf-coverage th,
+.lmlf-coverage td {
+  border-bottom: 1px solid #c8cdd2;
+  padding: .42rem .55rem;
+  text-align: right;
+}
+
+.lmlf-coverage th:first-child,
+.lmlf-coverage td:first-child { text-align: left; }
+.lmlf-coverage thead { background: var(--lmlf-heading); }
+</style><style>
+
+.hl.lean {
+  white-space: pre;
+  font-weight: normal;
+  font-style: normal;
+  font-size: inherit;
+}
+
+.hl.lean .keyword {
+  color: var(--verso-code-keyword-color,);
+  font-weight: var(--verso-code-keyword-weight, bold);
+  font-style: var(--verso-code-keyword-style, normal);
+  font-family: var(--verso-code-keyword-font-family,);
+}
+
+.hl.lean .const {
+  color: var(--verso-code-const-color,);
+  font-weight: var(--verso-code-const-weight, normal);
+  font-style: var(--verso-code-const-style, normal);
+  font-family: var(--verso-code-const-font-family,);
+}
+
+.hl.lean .var {
+  color: var(--verso-code-var-color,);
+  font-weight: var(--verso-code-var-weight, normal);
+  font-style: var(--verso-code-var-style, italic);
+  font-family: var(--verso-code-var-font-family,);
+
+  position: relative;
+}
+
+.hl.lean .literal, .hl.lean .unknown {
+  color: var(--verso-code-color,);
+  font-weight: normal;
+  font-style: normal;
+  font-family: var(--verso-code-font-family,);
+}
+
+/* These lexically-classified token kinds default to the `.unknown` appearance. The rule follows
+   `.const` so it wins for the `anon-ctor` tokens, which also carry the `const` class. */
+.hl.lean .anon-ctor,
+.hl.lean .number,
+.hl.lean .char,
+.hl.lean .comment,
+.hl.lean .punctuation,
+.hl.lean .delim,
+.hl.lean .wildcard {
+  color: var(--verso-code-color,);
+  font-weight: normal;
+  font-style: normal;
+  font-family: var(--verso-code-font-family,);
+}
+
+.hover-container {
+  width: 0;
+  height: 0;
+  position: relative;
+  display: inline;
+}
+
+.hl.lean a {
+  color: inherit;
+  text-decoration: currentcolor underline dotted;
+}
+
+.hl.lean a:hover {
+  text-decoration: currentcolor underline solid;
+}
+
+.hl.lean .hover-info {
+  white-space: normal;
+}
+
+.hl.lean .token .hover-info {
+  display: none;
+  position: absolute;
+  background-color: #e5e5e5;
+  border: 1px solid black;
+  padding: 0.5rem;
+  z-index: 300;
+}
+
+.hl.lean .hover-info.messages {
+  max-height: 10rem;
+  overflow-y: auto;
+  overflow-x: hidden;
+  scrollbar-gutter: stable;
+  padding: 0 0.5rem 0 0;
+  display: block;
+}
+
+.hl.lean .hover-info code {
+  white-space: pre-wrap;
+  background: none;
+  color: black;
+}
+
+.hl.lean .hover-info.messages > code {
+  padding: 0.5rem;
+  display: block;
+  width: fit-content;
+}
+
+.hl.lean .hover-info.messages > code:only-child {
+  margin: 0;
+}
+
+.hl.lean .hover-info.messages > code {
+  margin: 0.1rem;
+}
+
+.hl.lean .hover-info.messages > code:not(:first-child) {
+  margin-top: 0rem;
+}
+
+.hl.lean {
+}
+
+.hl.lean.block {
+  display: block;
+}
+
+.hl.lean.inline {
+  display: inline;
+  white-space: pre-wrap;
+}
+
+.hl.lean * {
+}
+
+.hl.lean .token {
+  transition: all 0.25s; /* Slight fade for highlights */
+}
+
+@media (hover: hover) {
+  .hl.lean .token.binding-hl, .hl.lean .literal:hover, .hl.lean .token.typed:hover {
+    background-color: #eee;
+    border-radius: 2px;
+    transition: none;
+  }
+}
+
+
+.hl.lean .has-info .token:not(.tactic-state):not(.tactic-state *), .hl.lean .has-info .inter-text:not(.tactic-state):not(.tactic-state *) {
+  text-decoration-style: wavy;
+  text-decoration-line: underline;
+  text-decoration-thickness: from-font;
+  text-decoration-skip-ink: none;
+}
+
+.hl.lean .has-info .hover-info {
+  display: none;
+  position: absolute;
+  transform: translate(0.25rem, 0.3rem);
+  border: 1px solid black;
+  padding: 0.5rem;
+  z-index: 400;
+  text-align: left;
+}
+
+.hl.lean .has-info.error :not(.tactic-state):not(.tactic-state *){
+  text-decoration-color: red;
+}
+
+@media (hover: hover) {
+  .hl.lean .has-info.error:hover {
+    background-color: #ffb3b3;
+  }
+}
+
+.hl.lean .hover-info.messages > code.error {
+  background-color: #e5e5e5;
+  border-left: 0.2rem solid #ffb3b3;
+}
+
+.tippy-box[data-theme~='error'] .hl.lean .hover-info.messages > code.error {
+  background: none;
+  border: none;
+}
+
+.error .verso-message, .error .verso-message .token, .error .verso-message label {
+  color: var(--verso-error-color);
+}
+
+.error .verso-message .case-label:has(input[type="checkbox"])::before {
+  background-color: var(--verso-error-color) !important;
+}
+
+.hl.lean .has-info.warning :not(.tactic-state):not(.tactic-state *) {
+  text-decoration-color: var(--verso-warning-indicator-color);
+}
+
+@media (hover: hover) {
+  .hl.lean .has-info.warning:hover {
+    background-color:var(--verso-warning-color);
+  }
+}
+
+.hl.lean .hover-info.messages > code.warning {
+  background-color: var(--verso-warning-color);
+}
+
+.lean-output {
+  border-left: 0.2em solid transparent;
+  padding: 0 0 0 0.5em;
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+.lean-output.error {
+  border-color: var(--verso-error-indicator-color);
+}
+
+.lean-output.information {
+  border-color: var(--verso-info-indicator-color);
+}
+
+.lean-output.warning {
+  border-color: var(--verso-warning-indicator-color);
+}
+
+.hl.lean .hover-info.messages > code.error {
+  background-color: #e5e5e5;
+  border-left: 0.2rem solid var(--verso-warning-color);
+}
+
+.tippy-box[data-theme~='warning'] .hl.lean .hover-info.messages > code.warning {
+  background: none;
+  border: none;
+}
+
+
+.hl.lean .has-info.information :not(.tactic-state):not(.tactic-state *) {
+  text-decoration-color: var(--verso-info-indicator-color, blue);
+}
+
+@media (hover: hover) {
+  .hl.lean .has-info.information:hover {
+    background-color: #4777ff;
+  }
+}
+
+
+.hl.lean .hover-info.messages > code.information {
+  background-color: #e5e5e5;
+  border-left: 0.2rem solid #4777ff;
+}
+
+.tippy-box[data-theme~='info'] .hl.lean .hover-info.messages > code.information {
+  background: none;
+  border: none;
+}
+
+.hl.lean div.docstring {
+  font-family: var(--verso-text-font-family, sans-serif);
+  white-space: normal;
+  max-width: calc(min(40rem, 90vw));
+  width: max-content;
+}
+
+.hl.lean div.docstring > :last-child {
+  margin-bottom: 0;
+}
+
+.hl.lean div.docstring > :first-child {
+  margin-top: 0;
+}
+
+.hl.lean .hover-info .sep {
+  display: block;
+  width: auto;
+  margin-left: 1rem;
+  margin-right: 1rem;
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+  padding: 0;
+  height: 1px;
+  border-top: 1px solid #ccc;
+}
+
+.hl.lean code {
+  font-family: var(--verso-code-font-family);
+}
+
+.hl.lean .tactic-state {
+  display: none;
+  position: relative;
+  width: fit-content;
+  border: 1px solid #888888;
+  border-radius: 0.1rem;
+  padding: 0.5rem;
+  font-family: sans-serif;
+  background-color: #ffffff;
+}
+
+.hl.lean.popup .tactic-state {
+  position: static;
+  display: block;
+  width: auto;
+  border: none;
+  padding: 0.5rem;
+  font-family: sans-serif;
+  background-color: #ffffff;
+}
+
+
+.hl.lean .tactic {
+  position: relative;
+  display: inline;
+  vertical-align: top;
+  /* Without these, mobile Safari will start making font sizes inconsistent when its text size adjustment feature is triggered.*/
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+.hl.lean .tactic:has(> .tactic-toggle:checked) {
+  display: inline-grid;
+  grid-template-columns: 1fr;
+}
+
+.hl.lean .tactic-toggle:checked ~ .tactic-state {
+  display: inline-block;
+  vertical-align: top;
+  grid-row: 2;
+  justify-self: start;
+}
+
+.hl.lean .tactic > label {
+  position: relative;
+  grid-row: 1;
+  display: inline;
+}
+
+@media (hover: hover) {
+  /* Highlight a region on hover only when its own toggle is unchecked, and only the innermost
+     hovered region: `label:hover` bubbles to ancestor labels, so suppress the highlight on a region
+     whose label contains a more deeply nested hovered tactic label. */
+  .hl.lean .tactic:has(> .tactic-toggle:not(:checked)) > label:hover:not(:has(.tactic > label:hover)) {
+    background-color: #eeeeee;
+  }
+}
+
+.hl.lean .tactic-toggle {
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0;
+  height: 0;
+  width: 0;
+  z-index: -10;
+}
+
+.hl.lean .tactic > label::after {
+  content: "";
+  border: 1px solid #bbbbbb;
+  /* These need to be em, not rem, to scale with the font */
+  border-radius: 1em;
+  height: 0.25em;
+  vertical-align: middle;
+  width: 0.6em;
+  margin-left: 0.1em;
+  margin-right: 0.1em;
+  display: inline-block;
+  transition: all 0.5s;
+}
+
+/*
+@media (hover: hover) {
+  .hl.lean .tactic > label:hover::after {
+    border: 1px solid #aaaaaa;
+    background-color: #aaaaaa;
+    transition: all 0.5s;
+  }
+}
+*/
+
+.hl.lean .tactic > label:has(+ .tactic-toggle:checked)::after {
+  border: 1px solid #999999;
+  background-color: #999999;
+  transition: all 0.5s;
+}
+
+.hl.lean .tactic-state .goal + .goal {
+  margin-top: 1.5em;
+}
+
+/*
+Some CSS frameworks customize details/summary in ways not compatible with Verso's output.
+*/
+
+.hl.lean details {
+  display: block !important;
+  margin: 0;
+}
+
+.hl.lean details summary {
+  display: list-item !important;
+  margin: 0;
+}
+
+.hl.lean details summary:focus {
+  outline: none;
+  outline-offset: none;
+  color: inherit;
+}
+
+.hl.lean ul > li {
+  margin-bottom: 0;
+}
+
+.hl.lean details summary::marker {
+  display: inline !important;
+}
+
+.hl.lean details > summary:first-of-type {
+  list-style-type: disclosure-closed;
+  list-style-position: inside;
+}
+
+.hl.lean details[open] > summary:first-of-type {
+  list-style-type: disclosure-open;
+}
+
+.hl.lean details summary::before, .hl.lean details summary::after {
+  content: "" !important;
+  background: none;
+  display: none;
+}
+
+.hl.lean .tactic-state summary {
+  /* These need to be em, not rem, to scale with the font */
+  margin-left: -0.5em;
+}
+
+.hl.lean .tactic-state details {
+  /* These need to be em, not rem, to scale with the font */
+  padding-left: 0.5em;
+}
+
+.hl.lean .case-label {
+  display: block;
+  position: relative;
+}
+
+.hl.lean .case-label input[type="checkbox"] {
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0;
+  height: 0;
+  width: 0;
+  z-index: -10;
+}
+
+.hl.lean .case-label:has(input[type="checkbox"])::before {
+  display: inline-block;
+  background-color: black;
+  content: ' ';
+  transition: ease 0.2s;
+  margin-right: 0.7em;
+  clip-path: polygon(100% 0, 0 0, 50% 100%);
+  width: 0.6em;
+  height: 0.6em;
+  vertical-align: middle;
+}
+
+.hl.lean .case-label:has(input[type="checkbox"]:not(:checked))::before {
+  transform: rotate(-90deg);
+}
+
+.hl.lean .case-label:has(input[type="checkbox"]) {
+
+}
+
+.hl.lean .case-label:has(input[type="checkbox"]:checked) {
+
+}
+
+
+.hl.lean .labeled-case > :not(:first-child) {
+  max-height: 0px;
+  display: block;
+  overflow: hidden;
+  transition: max-height 0.1s ease-in;
+  /* These need to be em, not rem, to scale with the font */
+  margin-left: 0.5em;
+  margin-top: 0.1em;
+}
+
+.hl.lean .labeled-case:has(.case-label input[type="checkbox"]:checked) > :not(:first-child) {
+  max-height: 100%;
+}
+
+
+.hl.lean .goal-name::before {
+  font-style: normal;
+  content: "case ";
+}
+
+.hl.lean .goal-name {
+  font-style: italic;
+  font-family: var(--verso-code-font-family);
+  color: inherit;
+}
+
+.hl.lean .hypotheses {
+  display: table;
+}
+
+.hl.lean .hypothesis {
+  display: table-row;
+}
+
+.hl.lean .hypothesis > * {
+  display: table-cell;
+}
+
+
+.hl.lean .hypotheses .colon {
+  text-align: center;
+  /* This needs to be em, not rem, to scale with the font */
+  min-width: 1em;
+}
+
+.hl.lean .hypotheses .name {
+  text-align: right;
+}
+
+.hl.lean .hypotheses .name,
+.hl.lean .hypotheses .type,
+.hl.lean .conclusion .type {
+  font-family: var(--verso-code-font-family);
+}
+
+.tippy-box {
+  /* Without these, mobile Safari will start making font sizes inconsistent when its text size adjustment feature is triggered.*/
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+.tippy-box[data-theme~='lean'] {
+  background-color: #e5e5e5;
+  color: black;
+  border: 1px solid black;
+}
+.tippy-box[data-theme~='lean'][data-placement^='top'] > .tippy-arrow::before {
+  border-top-color: #e5e5e5;
+}
+.tippy-box[data-theme~='lean'][data-placement^='bottom'] > .tippy-arrow::before {
+  border-bottom-color: #e5e5e5;
+}
+.tippy-box[data-theme~='lean'][data-placement^='left'] > .tippy-arrow::before {
+  border-left-color: #e5e5e5;
+}
+.tippy-box[data-theme~='lean'][data-placement^='right'] > .tippy-arrow::before {
+  border-right-color: #e5e5e5;
+}
+
+.tippy-box[data-theme~='message'][data-placement^='top'] > .tippy-arrow::before {
+  border-top-color: #e5e5e5;
+  border-width: 11px 11px 0;
+}
+.tippy-box[data-theme~='message'][data-placement^='top'] > .tippy-arrow::after {
+  bottom: -11px;
+  border-width: 11px 11px 0;
+}
+.tippy-box[data-theme~='message'][data-placement^='bottom'] > .tippy-arrow::before {
+  border-width: 0 11px 11px;
+}
+.tippy-box[data-theme~='message'][data-placement^='bottom'] > .tippy-arrow::after {
+  top: -11px;
+  border-width: 0 11px 11px;
+}
+.tippy-box[data-theme~='message'][data-placement^='left'] > .tippy-arrow::before {
+  border-left-color: #e5e5e5;
+  border-width: 11px 0 11px 11px;
+}
+.tippy-box[data-theme~='message'][data-placement^='left'] > .tippy-arrow::after {
+  right: -11px;
+  border-width: 11px 0 11px 11px;
+}
+
+.tippy-box[data-theme~='message'][data-placement^='right'] > .tippy-arrow::before {
+  border-right-color: #e5e5e5;
+  border-width: 11px 11px 11px 0;
+}
+.tippy-box[data-theme~='message'][data-placement^='right'] > .tippy-arrow::after {
+  left: -11px;
+  border-width: 11px 11px 11px 0;
+}
+
+
+
+.tippy-box[data-theme~='warning'] {
+  background-color: #e5e5e5;
+  color: black;
+  border: 3px solid var(--verso-warning-color);
+}
+
+.tippy-box[data-theme~='error'] {
+  background-color: #e5e5e5;
+  color: black;
+  border: 3px solid #f7a7af;
+}
+
+.tippy-box[data-theme~='info'] {
+  background-color: #e5e5e5;
+  color: black;
+  border: 3px solid #99b3c2;
+}
+
+.tippy-box[data-theme~='tactic'] {
+  background-color: white;
+  color: black;
+  border: 1px solid black;
+}
+.tippy-box[data-theme~='tactic'][data-placement^='top'] > .tippy-arrow::before {
+  border-top-color: white;
+}
+.tippy-box[data-theme~='tactic'][data-placement^='bottom'] > .tippy-arrow::before {
+  border-bottom-color: white;
+}
+.tippy-box[data-theme~='tactic'][data-placement^='left'] > .tippy-arrow::before {
+  border-left-color: white;
+}
+.tippy-box[data-theme~='tactic'][data-placement^='right'] > .tippy-arrow::before {
+  border-right-color: white;
+}
+
+.extra-doc-links {
+  list-style-type: none;
+  margin-left: 0;
+  padding: 0;
+}
+
+.extra-doc-links > li {
+  display: inline-block;
+}
+
+.extra-doc-links > li:not(:last-child)::after {
+  content: '|';
+  display: inline-block;
+  margin: 0 0.25em;
+}
+
+.verso-message .trace {
+  display: block;
+}
+
+.verso-message .trace > summary::marker {
+  color: var(--verso-text-color);
+}
+
+.verso-message .trace-children {
+  margin: 0;
+  padding: 0;
+}
+
+.verso-message .trace-children > li {
+  list-style-type: none;
+  margin-left: 1.5em;
+}
+
+.verso-message .trace-children > li:not(:has(.trace)) {
+  margin-left: 0;
+}
+
+.verso-message .trace-class {
+  color: color-mix(in srgb, currentColor 70%, transparent);
+  font-weight: bold;
+  margin: 0;
+  padding: 0;
+}
+
+.verso-message .text {
+  white-space: pre-wrap;
+}
+
+</style><script>
+
+window.onload = async () => {
+
+    // Don't show hovers inside of closed tactic states
+    function blockedByTactic(elem) {
+      let parent = elem.parentNode;
+      while (parent && "classList" in parent) {
+        if (parent.classList.contains("tactic")) {
+          const toggle = parent.querySelector(":scope > input.tactic-toggle");
+          if (toggle) {
+            return !toggle.checked;
+          }
+        }
+        parent = parent.parentNode;
+      }
+      return false;
+    }
+
+    // Track whether any tippy is visible (O(1) check instead of DOM scan)
+    let visibleTippyCount = 0;
+    function blockedByTippy(elem) {
+      return visibleTippyCount > 0;
+    }
+
+    // Binding highlights via event delegation with cached lookups
+    const bindingCache = new Map(); // context+binding -> [token elements]
+    let highlightedTokens = [];
+    function getBindingTokens(context, binding) {
+      const key = context + "\0" + binding;
+      let tokens = bindingCache.get(key);
+      if (!tokens) {
+        tokens = [];
+        for (const example of document.querySelectorAll(".hl.lean")) {
+          if (example.dataset.leanContext == context) {
+            for (const tok of example.querySelectorAll(".token[data-binding=\"" + CSS.escape(binding) + "\"]")) {
+              tokens.push(tok);
+            }
+          }
+        }
+        bindingCache.set(key, tokens);
+      }
+      return tokens;
+    }
+    for (const container of document.querySelectorAll(".hl.lean")) {
+      container.addEventListener("mouseover", (event) => {
+        const c = event.target.closest(".token");
+        if (!c || !c.dataset.binding || c.dataset.binding === "" || !container.contains(c)) return;
+        if (blockedByTactic(c)) return;
+        const tokens = getBindingTokens(container.dataset.leanContext, c.dataset.binding);
+        for (const tok of tokens) {
+          tok.classList.add("binding-hl");
+        }
+        highlightedTokens = tokens;
+      });
+      container.addEventListener("mouseout", (event) => {
+        const c = event.target.closest(".token");
+        if (!c || !container.contains(c)) return;
+        for (const tok of highlightedTokens) {
+          tok.classList.remove("binding-hl");
+        }
+        highlightedTokens = [];
+      });
+    }
+    /* Render docstrings */
+    if ('undefined' !== typeof marked) {
+        for (const d of document.querySelectorAll("code.docstring, pre.docstring")) {
+            const str = d.innerText;
+            const html = marked.parse(str);
+            const rendered = document.createElement("div");
+            rendered.classList.add("docstring");
+            rendered.innerHTML = html;
+            d.parentNode.replaceChild(rendered, d);
+        }
+    }
+    // Add hovers
+    const versoDocData = await (fetch("-verso-docs.json").then((resp) => resp.json()));
+
+    function hideParentTooltips(element) {
+      let parent = element.parentElement;
+      while (parent) {
+        const tippyInstance = parent._tippy;
+        if (tippyInstance) {
+          tippyInstance.hide();
+        }
+        parent = parent.parentElement;
+      }
+    }
+
+
+
+    const defaultTippyProps = {
+      /* DEBUG -- remove the space: * /
+      onHide(any) { return false; },
+      trigger: "click",
+      // */
+      /* theme: "lean", */
+      maxWidth: "none",
+      appendTo: () => document.body,
+      interactive: true,
+      delay: [100, null],
+      /* ignoreAttributes: true, */
+      followCursor: 'initial',
+      onShow(inst) {
+        if (inst.reference.className == 'tactic') {
+          const toggle = inst.reference.querySelector(":scope > input.tactic-toggle");
+          if (toggle && toggle.checked) {
+            return false;
+          }
+          hideParentTooltips(inst.reference);
+          if (blockedByTippy(inst.reference)) { return false; }
+
+        } else if (inst.reference.querySelector(".hover-info") || "versoHover" in inst.reference.dataset) {
+          if (blockedByTactic(inst.reference)) { return false };
+          if (blockedByTippy(inst.reference)) { return false; }
+        } else { // Nothing to show here!
+          return false;
+        }
+      },
+      onShown(inst) { visibleTippyCount++; },
+      onHidden(inst) { visibleTippyCount = Math.max(0, visibleTippyCount - 1); },
+      content (tgt) {
+        const content = document.createElement("span");
+        if (tgt.className == 'tactic') {
+          const state = tgt.querySelector(":scope > .tactic-state").cloneNode(true);
+          state.style.display = "block";
+          content.appendChild(state);
+          content.style.display = "block";
+          content.className = "hl lean popup";
+        } else {
+          content.className = "hl lean";
+          content.style.display = "block";
+          content.style.maxHeight = "300px";
+          content.style.overflowY = "auto";
+          content.style.overflowX = "hidden";
+          const hoverId = tgt.dataset.versoHover;
+          const hoverInfo = tgt.querySelector(".hover-info");
+          if (hoverId) { // Docstrings from the table
+            // TODO stop doing an implicit conversion from string to number here
+            let data = versoDocData[hoverId];
+            if (data) {
+              const info = document.createElement("span");
+              info.className = "hover-info";
+              info.style.display = "block";
+              info.innerHTML = data;
+              content.appendChild(info);
+              /* Render docstrings - TODO server-side */
+              if ('undefined' !== typeof marked) {
+                  for (const d of content.querySelectorAll("code.docstring, pre.docstring")) {
+                      const str = d.innerText;
+                      const html = marked.parse(str);
+                      const rendered = document.createElement("div");
+                      rendered.classList.add("docstring");
+                      rendered.innerHTML = html;
+                      d.parentNode.replaceChild(rendered, d);
+                  }
+              }
+            } else {
+              content.innerHTML = "Failed to load doc ID: " + hoverId;
+            }
+          } else if (hoverInfo) { // The inline info, still used for compiler messages
+            content.appendChild(hoverInfo.cloneNode(true));
+          }
+          const extraLinks = tgt.parentElement.dataset['versoLinks'];
+          if (extraLinks) {
+            try {
+              const extras = JSON.parse(extraLinks);
+              const links = document.createElement('ul');
+              links.className = 'extra-doc-links';
+              extras.forEach((l) => {
+                const li = document.createElement('li');
+                li.innerHTML = "<a href=\"" + l['href'] + "\" title=\"" + l.long + "\">" + l.short + "</a>";
+                links.appendChild(li);
+              });
+              content.appendChild(links);
+            } catch (error) {
+              console.error(error);
+            }
+          }
+        }
+        return content;
+      }
+    };
+
+
+    document.querySelectorAll('.hl.lean .const.token, .hl.lean .keyword.token, .hl.lean .literal.token, .hl.lean .option.token, .hl.lean .var.token, .hl.lean .typed.token, .hl.lean .level-var, .hl.lean .level-const, .hl.lean .level-op, .hl.lean .sort').forEach(element => {
+      element.setAttribute('data-tippy-theme', 'lean');
+    });
+    document.querySelectorAll('.hl.lean .has-info.warning').forEach(element => {
+      element.setAttribute('data-tippy-theme', 'warning message');
+    });
+    document.querySelectorAll('.hl.lean .has-info.information').forEach(element => {
+      element.setAttribute('data-tippy-theme', 'info message');
+    });
+    document.querySelectorAll('.hl.lean .has-info.error').forEach(element => {
+      element.setAttribute('data-tippy-theme', 'error message');
+    });
+    document.querySelectorAll('.hl.lean .tactic').forEach(element => {
+      element.setAttribute('data-tippy-theme', 'tactic');
+    });
+    // Skip tokens inside closed tactics — they interfere with tactic tippys
+    const closedTactics = new Set();
+    document.querySelectorAll('.hl.lean .tactic').forEach(tactic => {
+      const toggle = tactic.querySelector(':scope > input.tactic-toggle');
+      if (toggle && !toggle.checked) closedTactics.add(tactic);
+    });
+    function isInsideClosedTactic(el) {
+      const tactic = el.closest('.tactic');
+      return tactic && tactic !== el && closedTactics.has(tactic);
+    }
+
+    const tokenSelector = '.hl.lean .const.token, .hl.lean .keyword.token, .hl.lean .literal.token, .hl.lean .option.token, .hl.lean .var.token, .hl.lean .typed.token, .hl.lean .has-info, .hl.lean .tactic, .hl.lean .level-var, .hl.lean .level-const, .hl.lean .level-op, .hl.lean .sort';
+    tippy(Array.from(document.querySelectorAll(tokenSelector)).filter(el => !isInsideClosedTactic(el)), defaultTippyProps);
+
+    // Create/destroy token tippys when tactic checkbox toggles
+    const tacticTippySelector = '.const.token, .keyword.token, .literal.token, .option.token, .var.token, .typed.token, .has-info, .level-var, .level-const, .level-op, .sort';
+    document.querySelectorAll('.hl.lean .tactic').forEach(tactic => {
+      const toggle = tactic.querySelector(':scope > input.tactic-toggle');
+      if (toggle) toggle.addEventListener('change', () => {
+        if (toggle.checked) {
+          closedTactics.delete(tactic);
+          tactic.querySelectorAll('.token').forEach(tok => {
+            if (!tok._tippy && tok.matches(tacticTippySelector)) {
+              tippy(tok, defaultTippyProps);
+            }
+          });
+        } else {
+          closedTactics.add(tactic);
+          tactic.querySelectorAll('.token').forEach(tok => {
+            if (tok._tippy) tok._tippy.destroy();
+          });
+        }
+      });
+  });
+}
+</script>
+    </head>
+  <body>
+    <header>
+      <div class="header-logo-wrapper"></div>
+      <div class="header-title-wrapper">
+        <a href="" class="header-title"><h1>
+            LMLF</h1>
+          </a></div>
+      </header>
+    <label for="toggle-toc" id="toggle-toc-click"><span class="line line1"></span><span class="line line2"></span><span class="line line3"></span></label><div class="with-toc">
+      <div class="toc-backdrop" onclick="document.getElementById('toggle-toc-click')?.click()"></div>
+      <nav id="toc">
+        <input type="checkbox" id="toggle-toc"><div class="first">
+          <a href="" class="toc-title"><h1>
+              LMLF</h1>
+            </a><div class="split-tocs">
+            <div class="split-toc book">
+              <div class="title">
+                <label for="--verso-manual-toc-----bookRoot" class="toggle-split-toc"><input type="checkbox" class="toggle-split-toc" id="--verso-manual-toc-----bookRoot"></label><span class="">Table of Contents</span></div>
+              <table><tr class="unnumbered"><td class="num"><td><a href="Coverage/#coverage">Coverage</a></td></tr><tr class="numbered"><td class="num">1.</td><td><a href="Finite-error-bounds/#chapter-1">Finite error bounds</a></td></tr><tr class="numbered"><td class="num">2.</td><td><a href="Approximants-and-series/#chapter-2">Approximants and series</a></td></tr><tr class="numbered"><td class="num">3.</td><td><a href="Improper-integrals/#chapter-3">Improper integrals</a></td></tr><tr class="numbered"><td class="num">4.</td><td><a href="Elementary-Functions/#chapter-4">Elementary Functions</a></td></tr><tr class="current numbered"><td class="num">5.</td><td><a href="Gamma-Function/#chapter-5">Gamma Function</a></td></tr><tr class="numbered"><td class="num">6.</td><td><a href="Exponential___-Logarithmic___-Sine___-and-Cosine-Integrals/#chapter-6">Exponential, Logarithmic, Sine, and Cosine Integrals</a></td></tr><tr class="numbered"><td class="num">7.</td><td><a href="Error-Functions___-Dawson___s-and-Fresnel-Integrals/#chapter-7">Error Functions, Dawson's and Fresnel Integrals</a></td></tr><tr class="numbered"><td class="num">8.</td><td><a href="Incomplete-Gamma-and-Related-Functions/#chapter-8">Incomplete Gamma and Related Functions</a></td></tr><tr class="numbered"><td class="num">9.</td><td><a href="Airy-and-Related-Functions/#chapter-9">Airy and Related Functions</a></td></tr><tr class="numbered"><td class="num">10.</td><td><a href="Bessel-Functions/#chapter-10">Bessel Functions</a></td></tr></table></div>
+            <div class="split-toc">
+              <div class="title">
+                <label for="--verso-manual-toc-chapter-5" class="toggle-split-toc"><input type="checkbox" class="toggle-split-toc" id="--verso-manual-toc-chapter-5" checked="checked"></label><span class="number">5.</span> <span class=""><a href="Gamma-Function/#chapter-5">Gamma Function</a></span></div>
+              <table><tr class="unnumbered"><td class="num"><td><a href="Gamma-Function/Chapter-contents/#LMLF-___-DLMF-with-Lean--Gamma-Function--Chapter-contents">Chapter contents</a></td></tr><tr class="numbered"><td class="num">5.1.</td><td><a href="Gamma-Function/___5___1-Special-Notation/#chapter-5-section-1">§5.1 Special Notation</a></td></tr><tr class="numbered"><td class="num">5.2.</td><td><a href="Gamma-Function/___5___2-Definitions/#chapter-5-section-2">§5.2 Definitions</a></td></tr><tr class="numbered"><td class="num">5.3.</td><td><a href="Gamma-Function/Gamma-Function-___-___5___3-Graphics/#chapter-5-section-5-3">Gamma Function · §5.3 Graphics</a></td></tr><tr class="numbered"><td class="num">5.4.</td><td><a href="Gamma-Function/Gamma-Function-___-___5___4-Special-Values-and-Extrema/#chapter-5-section-5-4">Gamma Function · §5.4 Special Values and Extrema</a></td></tr><tr class="numbered"><td class="num">5.5.</td><td><a href="Gamma-Function/___5___5-Functional-Relations/#chapter-5-section-5">§5.5 Functional Relations</a></td></tr><tr class="current numbered"><td class="num">5.6.</td><td><a href="Gamma-Function/Gamma-Function-Inequalities/#chapter-5-section-6">Gamma-Function Inequalities</a></td></tr><tr class="numbered"><td class="num">5.7.</td><td><a href="Gamma-Function/___5___7-Series-Expansions/#chapter-5-section-7">§5.7 Series Expansions</a></td></tr><tr class="numbered"><td class="num">5.8.</td><td><a href="Gamma-Function/___5___8-Infinite-Products/#chapter-5-section-8">§5.8 Infinite Products</a></td></tr><tr class="numbered"><td class="num">5.9.</td><td><a href="Gamma-Function/___5___9-Integral-Representations/#chapter-5-section-9">§5.9 Integral Representations</a></td></tr><tr class="numbered"><td class="num">5.10.</td><td><a href="Gamma-Function/___5___10-Continued-Fractions/#chapter-5-section-10">§5.10 Continued Fractions</a></td></tr><tr class="numbered"><td class="num">5.11.</td><td><a href="Gamma-Function/___5___11-Asymptotic-Expansions/#chapter-5-section-11">§5.11 Asymptotic Expansions</a></td></tr><tr class="numbered"><td class="num">5.12.</td><td><a href="Gamma-Function/___5___12-Beta-Function/#chapter-5-section-12">§5.12 Beta Function</a></td></tr><tr class="numbered"><td class="num">5.13.</td><td><a href="Gamma-Function/___5___13-Integrals/#chapter-5-section-13">§5.13 Integrals</a></td></tr><tr class="numbered"><td class="num">5.14.</td><td><a href="Gamma-Function/___5___14-Multidimensional-Integrals/#chapter-5-section-14">§5.14 Multidimensional Integrals</a></td></tr><tr class="numbered"><td class="num">5.15.</td><td><a href="Gamma-Function/___5___15-Polygamma-Functions/#chapter-5-section-15">§5.15 Polygamma Functions</a></td></tr><tr class="numbered"><td class="num">5.16.</td><td><a href="Gamma-Function/___5___16-Sums/#chapter-5-section-16">§5.16 Sums</a></td></tr><tr class="numbered"><td class="num">5.17.</td><td><a href="Gamma-Function/___5___17-Barnes___-G-Function-_LPAR_Double-Gamma-Function_RPAR_/#chapter-5-section-17">§5.17 Barnes' G-Function (Double Gamma Function)</a></td></tr><tr class="numbered"><td class="num">5.18.</td><td><a href="Gamma-Function/___5___18-q-Gamma-and-q-Beta-Functions/#chapter-5-section-18">§5.18 q-Gamma and q-Beta Functions</a></td></tr></table></div>
+            <div class="split-toc">
+              <div class="title">
+                <label for="--verso-manual-toc-chapter-5-section-6" class="toggle-split-toc"><input type="checkbox" class="toggle-split-toc" id="--verso-manual-toc-chapter-5-section-6" checked="checked"></label><span class="number">5.6.</span> <span class="current"><a href="Gamma-Function/Gamma-Function-Inequalities/#chapter-5-section-6">Gamma-Function Inequalities</a></span></div>
+              <table><tr class="unnumbered"><td class="num"><td><a href="Gamma-Function/Gamma-Function-Inequalities/#LMLF-___-DLMF-with-Lean--Gamma-Function--Gamma-Function-Inequalities--___5___6-Inequalities">§5.6 Inequalities</a></td></tr></table></div>
+            </div>
+          </div>
+        <div class="last"></div>
+        </nav>
+      <div class="toc-resize-handle"></div>
+      <main><div class="content-wrapper">
+          <nav class="prev-next-buttons">
+            <a class="local-button active" href="Gamma-Function/___5___5-Functional-Relations/#chapter-5-section-5" rel="prev" title="5.5. §5.5 Functional Relations"><span class="arrow">←</span><span class="where">5.5. §5.5 Functional Relations</span></a><a class="local-button active" href="Gamma-Function/___5___7-Series-Expansions/#chapter-5-section-7" rel="next" title="5.7. §5.7 Series Expansions"><span class="where">5.7. §5.7 Series Expansions</span><span class="arrow">→</span></a></nav>
+          <section>
+            <h1>
+              5.6. Gamma-Function Inequalities<span class="permalink-widget inline"><a href="find/?domain=Verso.Genre.Manual.section&amp;name=chapter-5-section-6" title="Permalink">🔗</a></span></h1>
+            <div class="lmlf-source-link">
+              <p>
+                Source: NIST Digital Library of Mathematical Functions, §5.6.</p>
+              <a href="https://dlmf.nist.gov/5.6">Open this chapter in the DLMF ↗</a></div>
+            <section>
+              <h2 id="LMLF-___-DLMF-with-Lean--Gamma-Function--Gamma-Function-Inequalities--___5___6-Inequalities">
+                §5.6 Inequalities<span class="permalink-widget inline"><a href="find/?domain=Verso.Genre.Manual.section&amp;name=LMLF-___-DLMF-with-Lean--Gamma-Function--Gamma-Function-Inequalities--___5___6-Inequalities" title="Permalink">🔗</a></span></h2>
+              <section>
+                <h3 id="LMLF-___-DLMF-with-Lean--Gamma-Function--Gamma-Function-Inequalities--___5___6-Inequalities--___5___6_LPAR_i_RPAR_-Real-Variables">
+                  §5.6(i) Real Variables<span class="permalink-widget inline"><a href="find/?domain=Verso.Genre.Manual.section&amp;name=LMLF-___-DLMF-with-Lean--Gamma-Function--Gamma-Function-Inequalities--___5___6-Inequalities--___5___6_LPAR_i_RPAR_-Real-Variables" title="Permalink">🔗</a></span></h3>
+                <p>
+                  Throughout this subsection, <code class="math inline">x&gt;0</code>. Real powers in the declarations below use Mathlib's
+real-power operation.</p>
+                <article class="lmlf-dlmf-entry"><div class="lmlf-dlmf-entry__source">
+                    <a href="https://dlmf.nist.gov/5.6.E1">DLMF 5.6.1 ↗</a></div>
+                  <div class="lmlf-dlmf-entry__body">
+                    <p>
+                      <code class="math display">1&lt;(2\pi)^{-1/2}x^{1/2-x}e^x\Gamma(x)&lt;e^{1/(12x)}.</code></p>
+                    <p>
+                      After division by the leading term in Stirling's formula, the Gamma function is strictly larger
+than one and strictly smaller than the elementary exponential correction <code class="math inline">e^{1/(12x)}</code>.</p>
+                    <details class="lmlf-lean" open=""><summary>Lean · LMLF.Blueprint.Gamma · two-sided normalized bound</summary><div class="lmlf-lean__body">
+                        <code class="hl lean block" data-lean-context="examples"><span class="keyword token" data-binding="kw-occ-Lean.Parser.Command.namespace-411" data-verso-hover="0">namespace</span><span class="inter-text"> </span><span class="unknown token" data-binding="">LMLF.Blueprint.Gamma</span><span class="inter-text">
+
+</span><span class="keyword token" data-binding="kw-occ-Lean.Parser.Command.open-443" data-verso-hover="38">open</span><span class="inter-text"> </span><span class="keyword token" data-binding="kw-occ-Lean.Parser.Command.openScoped-448">scoped</span><span class="inter-text"> </span><span class="unknown token" data-binding="">Real</span></code><code class="hl lean block" data-lean-context="examples"><span class="keyword token" data-binding="kw-occ-Lean.Parser.Command.theorem-621">theorem</span><span class="inter-text"> </span><span class="has-info warning"><span class="hover-container"><span class="hover-info messages"><code class="verso-message warning"><span class="text"></span><span class="text">declaration uses `</span><span class="highlighted"><span class="inter-text"></span><span class="unknown token" data-binding="">sorry</span><span class="inter-text"></span></span><span class="text">`</span></code></span></span><span class="const token" data-binding="const-LMLF.Blueprint.Gamma.stirlingNormalizedBounds" data-verso-hover="256" id="LMLF___Blueprint___Gamma___stirlingNormalizedBounds">stirlingNormalizedBounds</span></span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.implicitBinder-654">{</span><span class="var token" data-binding="var-_uniq.5" data-verso-hover="19">x</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.implicitBinder-654">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Real" data-verso-hover="11">ℝ</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.implicitBinder-654">}</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-664">(</span><span class="var token" data-binding="var-_uniq.66" data-verso-hover="183">hx</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-664">:</span><span class="inter-text"> </span><span class="literal number token" data-binding="" data-verso-hover="19">0</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_<_»-670">&lt;</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.5" data-verso-hover="19">x</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-664">)</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeSpec-677">:</span><span class="inter-text">
+    </span><span class="literal number token" data-binding="" data-verso-hover="19">1</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_<_»-683">&lt;</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-687">(</span><span class="literal number token" data-binding="" data-verso-hover="19">2</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_*_»-688">*</span><span class="inter-text"> </span><span class="const token" data-binding="const-Real.pi" data-verso-hover="198">Real.pi</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.paren-687">)</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_^_»-687">^</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-703">(</span><span class="punctuation operator token" data-binding="kw-occ-«term-_»-704">-</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-705">(</span><span class="literal number token" data-binding="" data-verso-hover="19">1</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeAscription-705">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Real" data-verso-hover="11">ℝ</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.typeAscription-705">)</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_/_»-704">/</span><span class="inter-text"> </span><span class="literal number token" data-binding="" data-verso-hover="19">2</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.paren-703">)</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_*_»-687">*</span><span class="inter-text">
+          </span><span class="var token" data-binding="var-_uniq.5" data-verso-hover="19">x</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_^_»-732">^</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-736">(</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-737">(</span><span class="literal number token" data-binding="" data-verso-hover="19">1</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeAscription-737">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Real" data-verso-hover="11">ℝ</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.typeAscription-737">)</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_/_»-737">/</span><span class="inter-text"> </span><span class="literal number token" data-binding="" data-verso-hover="19">2</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_-_»-737">-</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.5" data-verso-hover="19">x</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.paren-736">)</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_*_»-687">*</span><span class="inter-text"> </span><span class="const token" data-binding="const-Real.exp" data-verso-hover="103">Real.exp</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.5" data-verso-hover="19">x</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_*_»-687">*</span><span class="inter-text"> </span><span class="const token" data-binding="const-Real.Gamma" data-verso-hover="184">Real.Gamma</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.5" data-verso-hover="19">x</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_∧_»-683">∧</span><span class="inter-text">
+      </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-794">(</span><span class="literal number token" data-binding="" data-verso-hover="19">2</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_*_»-795">*</span><span class="inter-text"> </span><span class="const token" data-binding="const-Real.pi" data-verso-hover="198">Real.pi</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.paren-794">)</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_^_»-794">^</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-810">(</span><span class="punctuation operator token" data-binding="kw-occ-«term-_»-811">-</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-812">(</span><span class="literal number token" data-binding="" data-verso-hover="19">1</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeAscription-812">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Real" data-verso-hover="11">ℝ</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.typeAscription-812">)</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_/_»-811">/</span><span class="inter-text"> </span><span class="literal number token" data-binding="" data-verso-hover="19">2</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.paren-810">)</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_*_»-794">*</span><span class="inter-text">
+          </span><span class="var token" data-binding="var-_uniq.5" data-verso-hover="19">x</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_^_»-839">^</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-843">(</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-844">(</span><span class="literal number token" data-binding="" data-verso-hover="19">1</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeAscription-844">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Real" data-verso-hover="11">ℝ</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.typeAscription-844">)</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_/_»-844">/</span><span class="inter-text"> </span><span class="literal number token" data-binding="" data-verso-hover="19">2</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_-_»-844">-</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.5" data-verso-hover="19">x</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.paren-843">)</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_*_»-794">*</span><span class="inter-text"> </span><span class="const token" data-binding="const-Real.exp" data-verso-hover="103">Real.exp</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.5" data-verso-hover="19">x</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_*_»-794">*</span><span class="inter-text"> </span><span class="const token" data-binding="const-Real.Gamma" data-verso-hover="184">Real.Gamma</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.5" data-verso-hover="19">x</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_<_»-794">&lt;</span><span class="inter-text">
+        </span><span class="const token" data-binding="const-Real.exp" data-verso-hover="103">Real.exp</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-910">(</span><span class="literal number token" data-binding="" data-verso-hover="19">1</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_/_»-911">/</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-915">(</span><span class="literal number token" data-binding="" data-verso-hover="19">12</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_*_»-916">*</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.5" data-verso-hover="19">x</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.paren-915">)</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.paren-910">)</span></code></div>
+                      </details></div>
+                  </article><article class="lmlf-dlmf-entry"><div class="lmlf-dlmf-entry__source">
+                    <a href="https://dlmf.nist.gov/5.6.E2">DLMF 5.6.2 ↗</a></div>
+                  <div class="lmlf-dlmf-entry__body">
+                    <p>
+                      <code class="math display">\frac1{\Gamma(x)}+\frac1{\Gamma(1/x)}\le 2.</code></p>
+                    <p>
+                      The reciprocal Gamma values at the positive reciprocal arguments <code class="math inline">x</code> and <code class="math inline">1/x</code> have sum at
+most two.</p>
+                    <details class="lmlf-lean" open=""><summary>Lean · LMLF.Blueprint.Gamma</summary><div class="lmlf-lean__body">
+                        <code class="hl lean block" data-lean-context="examples"><span class="keyword token" data-binding="kw-occ-Lean.Parser.Command.theorem-1125">theorem</span><span class="inter-text"> </span><span class="has-info warning"><span class="hover-container"><span class="hover-info messages"><code class="verso-message warning"><span class="text"></span><span class="text">declaration uses `</span><span class="highlighted"><span class="inter-text"></span><span class="unknown token" data-binding="">sorry</span><span class="inter-text"></span></span><span class="text">`</span></code></span></span><span class="const token" data-binding="const-LMLF.Blueprint.Gamma.oneDivGamma_add_oneDivGamma_reciprocal_le_two" data-verso-hover="257" id="LMLF___Blueprint___Gamma___oneDivGamma_add_oneDivGamma_reciprocal_le_two">oneDivGamma_add_oneDivGamma_reciprocal_le_two</span></span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.implicitBinder-1179">{</span><span class="var token" data-binding="var-_uniq.955" data-verso-hover="19">x</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.implicitBinder-1179">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Real" data-verso-hover="11">ℝ</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.implicitBinder-1179">}</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-1189">(</span><span class="var token" data-binding="var-_uniq.1016" data-verso-hover="183">hx</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-1189">:</span><span class="inter-text"> </span><span class="literal number token" data-binding="" data-verso-hover="19">0</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_<_»-1195">&lt;</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.955" data-verso-hover="19">x</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-1189">)</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeSpec-1202">:</span><span class="inter-text">
+    </span><span class="literal number token" data-binding="" data-verso-hover="19">1</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_/_»-1208">/</span><span class="inter-text"> </span><span class="const token" data-binding="const-Real.Gamma" data-verso-hover="184">Real.Gamma</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.955" data-verso-hover="19">x</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_+_»-1208">+</span><span class="inter-text"> </span><span class="literal number token" data-binding="" data-verso-hover="19">1</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_/_»-1227">/</span><span class="inter-text"> </span><span class="const token" data-binding="const-Real.Gamma" data-verso-hover="184">Real.Gamma</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-1242">(</span><span class="literal number token" data-binding="" data-verso-hover="19">1</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_/_»-1243">/</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.955" data-verso-hover="19">x</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.paren-1242">)</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_≤_»-1208">≤</span><span class="inter-text"> </span><span class="literal number token" data-binding="" data-verso-hover="19">2</span></code></div>
+                      </details></div>
+                  </article><article class="lmlf-dlmf-entry"><div class="lmlf-dlmf-entry__source">
+                    <a href="https://dlmf.nist.gov/5.6.E3">DLMF 5.6.3 ↗</a></div>
+                  <div class="lmlf-dlmf-entry__body">
+                    <p>
+                      <code class="math display">\frac1{\Gamma(x)^2}+\frac1{\Gamma(1/x)^2}\le 2.</code></p>
+                    <p>
+                      The corresponding sum of squared reciprocal Gamma values is also at most two.</p>
+                    <details class="lmlf-lean" open=""><summary>Lean · LMLF.Blueprint.Gamma</summary><div class="lmlf-lean__body">
+                        <code class="hl lean block" data-lean-context="examples"><span class="keyword token" data-binding="kw-occ-Lean.Parser.Command.theorem-1489">theorem</span><span class="inter-text"> </span><span class="has-info warning"><span class="hover-container"><span class="hover-info messages"><code class="verso-message warning"><span class="text"></span><span class="text">declaration uses `</span><span class="highlighted"><span class="inter-text"></span><span class="unknown token" data-binding="">sorry</span><span class="inter-text"></span></span><span class="text">`</span></code></span></span><span class="const token" data-binding="const-LMLF.Blueprint.Gamma.oneDivGammaSq_add_oneDivGammaSq_reciprocal_le_two" data-verso-hover="258" id="LMLF___Blueprint___Gamma___oneDivGammaSq_add_oneDivGammaSq_reciprocal_le_two">oneDivGammaSq_add_oneDivGammaSq_reciprocal_le_two</span></span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.implicitBinder-1547">{</span><span class="var token" data-binding="var-_uniq.1363" data-verso-hover="19">x</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.implicitBinder-1547">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Real" data-verso-hover="11">ℝ</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.implicitBinder-1547">}</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-1557">(</span><span class="var token" data-binding="var-_uniq.1424" data-verso-hover="183">hx</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-1557">:</span><span class="inter-text"> </span><span class="literal number token" data-binding="" data-verso-hover="19">0</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_<_»-1563">&lt;</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.1363" data-verso-hover="19">x</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-1557">)</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeSpec-1570">:</span><span class="inter-text">
+    </span><span class="literal number token" data-binding="" data-verso-hover="19">1</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_/_»-1576">/</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-1580">(</span><span class="const token" data-binding="const-Real.Gamma" data-verso-hover="184">Real.Gamma</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.1363" data-verso-hover="19">x</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.paren-1580">)</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_^_»-1580">^</span><span class="inter-text"> </span><span class="literal number token" data-binding="" data-verso-hover="37">2</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_+_»-1576">+</span><span class="inter-text"> </span><span class="literal number token" data-binding="" data-verso-hover="19">1</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_/_»-1601">/</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-1605">(</span><span class="const token" data-binding="const-Real.Gamma" data-verso-hover="184">Real.Gamma</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-1617">(</span><span class="literal number token" data-binding="" data-verso-hover="19">1</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_/_»-1618">/</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.1363" data-verso-hover="19">x</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.paren-1617">)</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.paren-1605">)</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_^_»-1605">^</span><span class="inter-text"> </span><span class="literal number token" data-binding="" data-verso-hover="37">2</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_≤_»-1576">≤</span><span class="inter-text"> </span><span class="literal number token" data-binding="" data-verso-hover="19">2</span></code></div>
+                      </details></div>
+                  </article><section>
+                  <h4 id="LMLF-___-DLMF-with-Lean--Gamma-Function--Gamma-Function-Inequalities--___5___6-Inequalities--___5___6_LPAR_i_RPAR_-Real-Variables--Gautschi___s-Inequality">
+                    Gautschi's Inequality<span class="permalink-widget inline"><a href="find/?domain=Verso.Genre.Manual.section&amp;name=LMLF-___-DLMF-with-Lean--Gamma-Function--Gamma-Function-Inequalities--___5___6-Inequalities--___5___6_LPAR_i_RPAR_-Real-Variables--Gautschi___s-Inequality" title="Permalink">🔗</a></span></h4>
+                  <article class="lmlf-dlmf-entry"><div class="lmlf-dlmf-entry__source">
+                      <a href="https://dlmf.nist.gov/5.6.E4">DLMF 5.6.4 ↗</a></div>
+                    <div class="lmlf-dlmf-entry__body">
+                      <p>
+                        For <code class="math inline">0&lt;s&lt;1</code>,
+<code class="math display">x^{1-s}&lt;\frac{\Gamma(x+1)}{\Gamma(x+s)}&lt;(x+1)^{1-s}.</code></p>
+                      <p>
+                        Gautschi's inequality places the Gamma quotient strictly between the same positive real power at
+two consecutive arguments. Both the subsection assumption <code class="math inline">x&gt;0</code> and the local restriction
+<code class="math inline">0&lt;s&lt;1</code> are explicit in the declaration.</p>
+                      <details class="lmlf-lean" open=""><summary>Lean · LMLF.Blueprint.Gamma · Gautschi's inequality</summary><div class="lmlf-lean__body">
+                          <code class="hl lean block" data-lean-context="examples"><span class="keyword token" data-binding="kw-occ-Lean.Parser.Command.theorem-1851">theorem</span><span class="inter-text"> </span><span class="has-info warning"><span class="hover-container"><span class="hover-info messages"><code class="verso-message warning"><span class="text"></span><span class="text">declaration uses `</span><span class="highlighted"><span class="inter-text"></span><span class="unknown token" data-binding="">sorry</span><span class="inter-text"></span></span><span class="text">`</span></code></span></span><span class="const token" data-binding="const-LMLF.Blueprint.Gamma.gautschiInequality" data-verso-hover="259" id="LMLF___Blueprint___Gamma___gautschiInequality">gautschiInequality</span></span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.implicitBinder-1878">{</span><span class="var token" data-binding="var-_uniq.2574" data-verso-hover="19">x</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.2576" data-verso-hover="19">s</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.implicitBinder-1878">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Real" data-verso-hover="11">ℝ</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.implicitBinder-1878">}</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-1890">(</span><span class="var token" data-binding="var-_uniq.2637" data-verso-hover="183">hx</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-1890">:</span><span class="inter-text"> </span><span class="literal number token" data-binding="" data-verso-hover="19">0</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_<_»-1896">&lt;</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.2574" data-verso-hover="19">x</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-1890">)</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-1903">(</span><span class="var token" data-binding="var-_uniq.2684" data-verso-hover="260">hs0</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-1903">:</span><span class="inter-text"> </span><span class="literal number token" data-binding="" data-verso-hover="19">0</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_<_»-1910">&lt;</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.2576" data-verso-hover="19">s</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-1903">)</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-1917">(</span><span class="var token" data-binding="var-_uniq.2729" data-verso-hover="261">hs1</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-1917">:</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.2576" data-verso-hover="19">s</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_<_»-1924">&lt;</span><span class="inter-text"> </span><span class="literal number token" data-binding="" data-verso-hover="19">1</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-1917">)</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeSpec-1931">:</span><span class="inter-text">
+    </span><span class="var token" data-binding="var-_uniq.2574" data-verso-hover="19">x</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_^_»-1937">^</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-1941">(</span><span class="literal number token" data-binding="" data-verso-hover="19">1</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_-_»-1942">-</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.2576" data-verso-hover="19">s</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.paren-1941">)</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_<_»-1937">&lt;</span><span class="inter-text"> </span><span class="const token" data-binding="const-Real.Gamma" data-verso-hover="184">Real.Gamma</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-1962">(</span><span class="var token" data-binding="var-_uniq.2574" data-verso-hover="19">x</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_+_»-1963">+</span><span class="inter-text"> </span><span class="literal number token" data-binding="" data-verso-hover="19">1</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.paren-1962">)</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_/_»-1951">/</span><span class="inter-text"> </span><span class="const token" data-binding="const-Real.Gamma" data-verso-hover="184">Real.Gamma</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-1983">(</span><span class="var token" data-binding="var-_uniq.2574" data-verso-hover="19">x</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_+_»-1984">+</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.2576" data-verso-hover="19">s</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.paren-1983">)</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_∧_»-1937">∧</span><span class="inter-text">
+      </span><span class="const token" data-binding="const-Real.Gamma" data-verso-hover="184">Real.Gamma</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-2012">(</span><span class="var token" data-binding="var-_uniq.2574" data-verso-hover="19">x</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_+_»-2013">+</span><span class="inter-text"> </span><span class="literal number token" data-binding="" data-verso-hover="19">1</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.paren-2012">)</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_/_»-2001">/</span><span class="inter-text"> </span><span class="const token" data-binding="const-Real.Gamma" data-verso-hover="184">Real.Gamma</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-2033">(</span><span class="var token" data-binding="var-_uniq.2574" data-verso-hover="19">x</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_+_»-2034">+</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.2576" data-verso-hover="19">s</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.paren-2033">)</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_<_»-2001">&lt;</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-2043">(</span><span class="var token" data-binding="var-_uniq.2574" data-verso-hover="19">x</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_+_»-2044">+</span><span class="inter-text"> </span><span class="literal number token" data-binding="" data-verso-hover="19">1</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.paren-2043">)</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_^_»-2043">^</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-2053">(</span><span class="literal number token" data-binding="" data-verso-hover="19">1</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_-_»-2054">-</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.2576" data-verso-hover="19">s</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.paren-2053">)</span></code></div>
+                        </details></div>
+                    </article></section>
+                <section>
+                  <h4 id="LMLF-___-DLMF-with-Lean--Gamma-Function--Gamma-Function-Inequalities--___5___6-Inequalities--___5___6_LPAR_i_RPAR_-Real-Variables--Kershaw___s-Inequality">
+                    Kershaw's Inequality<span class="permalink-widget inline"><a href="find/?domain=Verso.Genre.Manual.section&amp;name=LMLF-___-DLMF-with-Lean--Gamma-Function--Gamma-Function-Inequalities--___5___6-Inequalities--___5___6_LPAR_i_RPAR_-Real-Variables--Kershaw___s-Inequality" title="Permalink">🔗</a></span></h4>
+                  <article class="lmlf-dlmf-entry"><div class="lmlf-dlmf-entry__source">
+                      <a href="https://dlmf.nist.gov/5.6.E5">DLMF 5.6.5 ↗</a></div>
+                    <div class="lmlf-dlmf-entry__body">
+                      <p>
+                        For <code class="math inline">0&lt;s&lt;1</code>,
+<code class="math display">\exp\!\left((1-s)\psi(x+\sqrt{s})\right)
+\le \frac{\Gamma(x+1)}{\Gamma(x+s)}
+\le \exp\!\left((1-s)\psi\!\left(x+\frac{s+1}{2}\right)\right).</code></p>
+                      <p>
+                        Kershaw's inequality gives two non-strict exponential bounds for the Gamma quotient. Mathlib has
+a canonical complex digamma function but no separate real-valued name, so <code>realDigamma</code> restricts
+that function to the real axis by taking its real part. Every digamma argument here is positive.</p>
+                      <details class="lmlf-lean" open=""><summary>Lean · LMLF.Blueprint.Gamma · real digamma and Kershaw's inequality</summary><div class="lmlf-lean__body">
+                          <code class="hl lean block" data-lean-context="examples"><span class="keyword token" data-binding="kw-occ-Lean.Parser.Command.noncomputable-2256">noncomputable</span><span class="inter-text"> </span><span class="keyword token" data-binding="kw-occ-Lean.Parser.Command.definition-2270">def</span><span class="inter-text"> </span><span class="const token" data-binding="const-LMLF.Blueprint.Gamma.realDigamma" data-verso-hover="262" id="LMLF___Blueprint___Gamma___realDigamma">realDigamma</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-2286">(</span><span class="var token" data-binding="var-_uniq.3156" data-verso-hover="19">x</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-2286">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Real" data-verso-hover="11">ℝ</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-2286">)</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeSpec-2296">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Real" data-verso-hover="11">ℝ</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Command.declValSimple-2302">:=</span><span class="inter-text">
+  </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-2307">(</span><span class="const token" data-binding="const-Complex.digamma" data-verso-hover="121">Complex.digamma</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-2324">(</span><span class="var token" data-binding="var-_uniq.3156" data-verso-hover="19">x</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeAscription-2324">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Complex" data-verso-hover="107">ℂ</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.typeAscription-2324">)</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.paren-2307">)</span><span class="built-in delim token" data-binding="">.</span><span class="const token" data-binding="const-Complex.re" data-verso-hover="110">re</span></code><code class="hl lean block" data-lean-context="examples"><span class="keyword token" data-binding="kw-occ-Lean.Parser.Command.theorem-2504">theorem</span><span class="inter-text"> </span><span class="has-info warning"><span class="hover-container"><span class="hover-info messages"><code class="verso-message warning"><span class="text"></span><span class="text">declaration uses `</span><span class="highlighted"><span class="inter-text"></span><span class="unknown token" data-binding="">sorry</span><span class="inter-text"></span></span><span class="text">`</span></code></span></span><span class="const token" data-binding="const-LMLF.Blueprint.Gamma.kershawInequality" data-verso-hover="263" id="LMLF___Blueprint___Gamma___kershawInequality">kershawInequality</span></span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.implicitBinder-2530">{</span><span class="var token" data-binding="var-_uniq.3222" data-verso-hover="19">x</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.3224" data-verso-hover="19">s</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.implicitBinder-2530">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Real" data-verso-hover="11">ℝ</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.implicitBinder-2530">}</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-2542">(</span><span class="var token" data-binding="var-_uniq.3285" data-verso-hover="183">hx</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-2542">:</span><span class="inter-text"> </span><span class="literal number token" data-binding="" data-verso-hover="19">0</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_<_»-2548">&lt;</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.3222" data-verso-hover="19">x</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-2542">)</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-2555">(</span><span class="var token" data-binding="var-_uniq.3332" data-verso-hover="260">hs0</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-2555">:</span><span class="inter-text"> </span><span class="literal number token" data-binding="" data-verso-hover="19">0</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_<_»-2562">&lt;</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.3224" data-verso-hover="19">s</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-2555">)</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-2569">(</span><span class="var token" data-binding="var-_uniq.3377" data-verso-hover="261">hs1</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-2569">:</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.3224" data-verso-hover="19">s</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_<_»-2576">&lt;</span><span class="inter-text"> </span><span class="literal number token" data-binding="" data-verso-hover="19">1</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-2569">)</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeSpec-2583">:</span><span class="inter-text">
+    </span><span class="const token" data-binding="const-Real.exp" data-verso-hover="103">Real.exp</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-2598">(</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-2599">(</span><span class="literal number token" data-binding="" data-verso-hover="19">1</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_-_»-2600">-</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.3224" data-verso-hover="19">s</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.paren-2599">)</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_*_»-2599">*</span><span class="inter-text"> </span><a href="Gamma-Function/Gamma-Function-Inequalities/#LMLF___Blueprint___Gamma___realDigamma" title="Definition of example"><span class="const token" data-binding="const-LMLF.Blueprint.Gamma.realDigamma" data-verso-hover="262">realDigamma</span></a><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-2621">(</span><span class="var token" data-binding="var-_uniq.3222" data-verso-hover="19">x</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_+_»-2622">+</span><span class="inter-text"> </span><span class="const token" data-binding="const-Real.sqrt" data-verso-hover="201">Real.sqrt</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.3224" data-verso-hover="19">s</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.paren-2621">)</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.paren-2598">)</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_≤_»-2589">≤</span><span class="inter-text">
+        </span><span class="const token" data-binding="const-Real.Gamma" data-verso-hover="184">Real.Gamma</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-2663">(</span><span class="var token" data-binding="var-_uniq.3222" data-verso-hover="19">x</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_+_»-2664">+</span><span class="inter-text"> </span><span class="literal number token" data-binding="" data-verso-hover="19">1</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.paren-2663">)</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_/_»-2652">/</span><span class="inter-text"> </span><span class="const token" data-binding="const-Real.Gamma" data-verso-hover="184">Real.Gamma</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-2684">(</span><span class="var token" data-binding="var-_uniq.3222" data-verso-hover="19">x</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_+_»-2685">+</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.3224" data-verso-hover="19">s</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.paren-2684">)</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_∧_»-2589">∧</span><span class="inter-text">
+      </span><span class="const token" data-binding="const-Real.Gamma" data-verso-hover="184">Real.Gamma</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-2713">(</span><span class="var token" data-binding="var-_uniq.3222" data-verso-hover="19">x</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_+_»-2714">+</span><span class="inter-text"> </span><span class="literal number token" data-binding="" data-verso-hover="19">1</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.paren-2713">)</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_/_»-2702">/</span><span class="inter-text"> </span><span class="const token" data-binding="const-Real.Gamma" data-verso-hover="184">Real.Gamma</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-2734">(</span><span class="var token" data-binding="var-_uniq.3222" data-verso-hover="19">x</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_+_»-2735">+</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.3224" data-verso-hover="19">s</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.paren-2734">)</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_≤_»-2702">≤</span><span class="inter-text">
+        </span><span class="const token" data-binding="const-Real.exp" data-verso-hover="103">Real.exp</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-2763">(</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-2764">(</span><span class="literal number token" data-binding="" data-verso-hover="19">1</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_-_»-2765">-</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.3224" data-verso-hover="19">s</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.paren-2764">)</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_*_»-2764">*</span><span class="inter-text"> </span><a href="Gamma-Function/Gamma-Function-Inequalities/#LMLF___Blueprint___Gamma___realDigamma" title="Definition of example"><span class="const token" data-binding="const-LMLF.Blueprint.Gamma.realDigamma" data-verso-hover="262">realDigamma</span></a><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-2786">(</span><span class="var token" data-binding="var-_uniq.3222" data-verso-hover="19">x</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_+_»-2787">+</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-2791">(</span><span class="var token" data-binding="var-_uniq.3224" data-verso-hover="19">s</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_+_»-2792">+</span><span class="inter-text"> </span><span class="literal number token" data-binding="" data-verso-hover="19">1</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.paren-2791">)</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_/_»-2791">/</span><span class="inter-text"> </span><span class="literal number token" data-binding="" data-verso-hover="19">2</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.paren-2786">)</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.paren-2763">)</span></code></div>
+                        </details></div>
+                    </article></section>
+                </section>
+              <section>
+                <h3 id="LMLF-___-DLMF-with-Lean--Gamma-Function--Gamma-Function-Inequalities--___5___6-Inequalities--___5___6_LPAR_ii_RPAR_-Complex-Variables">
+                  §5.6(ii) Complex Variables<span class="permalink-widget inline"><a href="find/?domain=Verso.Genre.Manual.section&amp;name=LMLF-___-DLMF-with-Lean--Gamma-Function--Gamma-Function-Inequalities--___5___6-Inequalities--___5___6_LPAR_ii_RPAR_-Complex-Variables" title="Permalink">🔗</a></span></h3>
+                <p>
+                  For real <code class="math inline">x,y</code>, write <code class="math inline">x+iy</code> for the corresponding complex number. Complex absolute values are
+represented by the norm in Lean.</p>
+                <article class="lmlf-dlmf-entry"><div class="lmlf-dlmf-entry__source">
+                    <a href="https://dlmf.nist.gov/5.6.E6">DLMF 5.6.6 ↗</a></div>
+                  <div class="lmlf-dlmf-entry__body">
+                    <p>
+                      <code class="math display">|\Gamma(x+iy)|\le |\Gamma(x)|.</code></p>
+                    <p>
+                      The Gamma modulus cannot increase when a finite real argument is moved vertically in the complex
+plane. DLMF's usual Gamma function is singular at the nonpositive integers; Mathlib instead assigns
+zero there. The explicit hypothesis <code class="math inline">x\ne-n</code> for every nonnegative integer <code class="math inline">n</code> therefore records
+the classical domain of the right-hand side and prevents the totalized value from changing the
+statement.</p>
+                    <details class="lmlf-lean" open=""><summary>Lean · LMLF.Blueprint.Gamma · vertical upper bound</summary><div class="lmlf-lean__body">
+                        <code class="hl lean block" data-lean-context="examples"><span class="keyword token" data-binding="kw-occ-Lean.Parser.Command.theorem-3105">theorem</span><span class="inter-text"> </span><span class="has-info warning"><span class="hover-container"><span class="hover-info messages"><code class="verso-message warning"><span class="text"></span><span class="text">declaration uses `</span><span class="highlighted"><span class="inter-text"></span><span class="unknown token" data-binding="">sorry</span><span class="inter-text"></span></span><span class="text">`</span></code></span></span><span class="const token" data-binding="const-LMLF.Blueprint.Gamma.norm_Gamma_vertical_le" data-verso-hover="264" id="LMLF___Blueprint___Gamma___norm_Gamma_vertical_le">norm_Gamma_vertical_le</span></span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.implicitBinder-3136">{</span><span class="var token" data-binding="var-_uniq.3925" data-verso-hover="19">x</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.3927" data-verso-hover="19">y</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.implicitBinder-3136">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Real" data-verso-hover="11">ℝ</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.implicitBinder-3136">}</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-3148">(</span><span class="var token" data-binding="var-_uniq.3970" data-verso-hover="265">hx</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-3148">:</span><span class="inter-text"> </span><span class="unknown token" data-binding="">∀</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.3930" data-verso-hover="37">n</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeSpec-3160">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Nat" data-verso-hover="34">ℕ</span><span class="punctuation separator token" data-binding="kw-occ-Lean.Parser.Term.forall-3154">,</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.3925" data-verso-hover="19">x</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_≠_»-3167">≠</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term-_»-3173">-</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-3174">(</span><span class="var token" data-binding="var-_uniq.3930" data-verso-hover="37">n</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeAscription-3174">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Real" data-verso-hover="11">ℝ</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.typeAscription-3174">)</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-3148">)</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeSpec-3185">:</span><span class="inter-text">
+    </span><span class="unknown token" data-binding="">‖</span><span class="const token" data-binding="const-Complex.Gamma" data-verso-hover="119">Complex.Gamma</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-3208">(</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-3209">(</span><span class="var token" data-binding="var-_uniq.3925" data-verso-hover="19">x</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeAscription-3209">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Complex" data-verso-hover="107">ℂ</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.typeAscription-3209">)</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_+_»-3209">+</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.3927" data-verso-hover="19">y</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_*_»-3221">*</span><span class="inter-text"> </span><span class="const token" data-binding="const-Complex.I" data-verso-hover="108">Complex.I</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.paren-3208">)</span><span class="unknown token" data-binding="">‖</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_≤_»-3191">≤</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-group-3243">|</span><span class="const token" data-binding="const-Real.Gamma" data-verso-hover="184">Real.Gamma</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.3925" data-verso-hover="19">x</span><span class="built-in delim token" data-binding="kw-occ-«term|___|»-3243">|</span></code></div>
+                      </details></div>
+                  </article><article class="lmlf-dlmf-entry"><div class="lmlf-dlmf-entry__source">
+                    <a href="https://dlmf.nist.gov/5.6.E7">DLMF 5.6.7 ↗</a></div>
+                  <div class="lmlf-dlmf-entry__body">
+                    <p>
+                      For <code class="math inline">x\ge\tfrac12</code>,
+<code class="math display">|\Gamma(x+iy)|\ge \operatorname{sech}(\pi y)^{1/2}\Gamma(x).</code></p>
+                    <p>
+                      On and to the right of the vertical line <code class="math inline">x=1/2</code>, the Gamma modulus is bounded below by its real
+value multiplied by the square root of the hyperbolic secant. Since Mathlib has no named real
+hyperbolic secant, the declaration writes the factor as <code>Real.sqrt ((Real.cosh (Real.pi * y))⁻¹)</code>,
+i.e. the square root of <code class="math inline">\operatorname{sech}(\pi y)</code>.</p>
+                    <details class="lmlf-lean" open=""><summary>Lean · LMLF.Blueprint.Gamma · vertical lower bound</summary><div class="lmlf-lean__body">
+                        <code class="hl lean block" data-lean-context="examples"><span class="keyword token" data-binding="kw-occ-Lean.Parser.Command.theorem-3472">theorem</span><span class="inter-text"> </span><span class="has-info warning"><span class="hover-container"><span class="hover-info messages"><code class="verso-message warning"><span class="text"></span><span class="text">declaration uses `</span><span class="highlighted"><span class="inter-text"></span><span class="unknown token" data-binding="">sorry</span><span class="inter-text"></span></span><span class="text">`</span></code></span></span><span class="const token" data-binding="const-LMLF.Blueprint.Gamma.norm_Gamma_vertical_lowerBound" data-verso-hover="266" id="LMLF___Blueprint___Gamma___norm_Gamma_vertical_lowerBound">norm_Gamma_vertical_lowerBound</span></span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.implicitBinder-3511">{</span><span class="var token" data-binding="var-_uniq.4276" data-verso-hover="19">x</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.4278" data-verso-hover="19">y</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.implicitBinder-3511">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Real" data-verso-hover="11">ℝ</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.implicitBinder-3511">}</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-3523">(</span><span class="var token" data-binding="var-_uniq.4405" data-verso-hover="267">hx</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-3523">:</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-3529">(</span><span class="literal number token" data-binding="" data-verso-hover="19">1</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeAscription-3529">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Real" data-verso-hover="11">ℝ</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.typeAscription-3529">)</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_/_»-3529">/</span><span class="inter-text"> </span><span class="literal number token" data-binding="" data-verso-hover="19">2</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_≤_»-3529">≤</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.4276" data-verso-hover="19">x</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-3523">)</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeSpec-3550">:</span><span class="inter-text">
+    </span><span class="const token" data-binding="const-Real.sqrt" data-verso-hover="201">Real.sqrt</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-3566">(</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-3567">(</span><span class="const token" data-binding="const-Real.cosh" data-verso-hover="204">Real.cosh</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-3578">(</span><span class="const token" data-binding="const-Real.pi" data-verso-hover="198">Real.pi</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_*_»-3579">*</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.4278" data-verso-hover="19">y</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.paren-3578">)</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.paren-3567">)</span><span class="punctuation operator token" data-binding="kw-occ-«term_⁻¹»-3567">⁻¹</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.paren-3566">)</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_*_»-3556">*</span><span class="inter-text"> </span><span class="const token" data-binding="const-Real.Gamma" data-verso-hover="184">Real.Gamma</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.4276" data-verso-hover="19">x</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_≤_»-3556">≤</span><span class="inter-text">
+      </span><span class="unknown token" data-binding="">‖</span><span class="const token" data-binding="const-Complex.Gamma" data-verso-hover="119">Complex.Gamma</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-3641">(</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-3642">(</span><span class="var token" data-binding="var-_uniq.4276" data-verso-hover="19">x</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeAscription-3642">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Complex" data-verso-hover="107">ℂ</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.typeAscription-3642">)</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_+_»-3642">+</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.4278" data-verso-hover="19">y</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_*_»-3654">*</span><span class="inter-text"> </span><span class="const token" data-binding="const-Complex.I" data-verso-hover="108">Complex.I</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.paren-3641">)</span><span class="unknown token" data-binding="">‖</span></code></div>
+                      </details></div>
+                  </article><article class="lmlf-dlmf-entry"><div class="lmlf-dlmf-entry__source">
+                    <a href="https://dlmf.nist.gov/5.6.E8">DLMF 5.6.8 ↗</a></div>
+                  <div class="lmlf-dlmf-entry__body">
+                    <p>
+                      For <code class="math inline">b-a\ge1</code>, <code class="math inline">a\ge0</code>, and <code class="math inline">z=x+iy</code> with <code class="math inline">x&gt;0</code>,
+<code class="math display">\left|\frac{\Gamma(z+a)}{\Gamma(z+b)}\right|\le\frac1{|z|^{b-a}}.</code></p>
+                    <p>
+                      Here <code class="math inline">a,b</code> are real and <code class="math inline">z</code> is complex. The declaration replaces the coordinates by the
+coordinate-free condition <code class="math inline">\Re z&gt;0</code>; this is exactly the source condition <code class="math inline">x&gt;0</code> for
+<code class="math inline">z=x+iy</code>.</p>
+                    <details class="lmlf-lean" open=""><summary>Lean · LMLF.Blueprint.Gamma · quotient bound</summary><div class="lmlf-lean__body">
+                        <code class="hl lean block" data-lean-context="examples"><span class="keyword token" data-binding="kw-occ-Lean.Parser.Command.theorem-3880">theorem</span><span class="inter-text"> </span><span class="has-info warning"><span class="hover-container"><span class="hover-info messages"><code class="verso-message warning"><span class="text"></span><span class="text">declaration uses `</span><span class="highlighted"><span class="inter-text"></span><span class="unknown token" data-binding="">sorry</span><span class="inter-text"></span></span><span class="text">`</span></code></span></span><span class="const token" data-binding="const-LMLF.Blueprint.Gamma.norm_Gamma_div_Gamma_le" data-verso-hover="268" id="LMLF___Blueprint___Gamma___norm_Gamma_div_Gamma_le">norm_Gamma_div_Gamma_le</span></span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.implicitBinder-3912">{</span><span class="var token" data-binding="var-_uniq.4821" data-verso-hover="114">z</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.implicitBinder-3912">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Complex" data-verso-hover="107">ℂ</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.implicitBinder-3912">}</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.implicitBinder-3922">{</span><span class="var token" data-binding="var-_uniq.4823" data-verso-hover="19">a</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.4825" data-verso-hover="19">b</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.implicitBinder-3922">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Real" data-verso-hover="11">ℝ</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.implicitBinder-3922">}</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-3934">(</span><span class="var token" data-binding="var-_uniq.4886" data-verso-hover="269">hz</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-3934">:</span><span class="inter-text"> </span><span class="literal number token" data-binding="" data-verso-hover="19">0</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_<_»-3940">&lt;</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.4821" data-verso-hover="114">z</span><span class="built-in delim token" data-binding="">.</span><span class="const token" data-binding="const-Complex.re" data-verso-hover="110">re</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-3934">)</span><span class="inter-text">
+    </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-3954">(</span><span class="var token" data-binding="var-_uniq.4936" data-verso-hover="270">ha</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-3954">:</span><span class="inter-text"> </span><span class="literal number token" data-binding="" data-verso-hover="19">0</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_≤_»-3960">≤</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.4823" data-verso-hover="19">a</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-3954">)</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-3969">(</span><span class="var token" data-binding="var-_uniq.5030" data-verso-hover="271">hab</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-3969">:</span><span class="inter-text"> </span><span class="literal number token" data-binding="" data-verso-hover="19">1</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_≤_»-3976">≤</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.4825" data-verso-hover="19">b</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_-_»-3982">-</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.4823" data-verso-hover="19">a</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-3969">)</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeSpec-3989">:</span><span class="inter-text">
+    </span><span class="unknown token" data-binding="">‖</span><span class="const token" data-binding="const-Complex.Gamma" data-verso-hover="119">Complex.Gamma</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-4012">(</span><span class="var token" data-binding="var-_uniq.4821" data-verso-hover="114">z</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_+_»-4013">+</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-4017">(</span><span class="var token" data-binding="var-_uniq.4823" data-verso-hover="19">a</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeAscription-4017">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Complex" data-verso-hover="107">ℂ</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.typeAscription-4017">)</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.paren-4012">)</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_/_»-3998">/</span><span class="inter-text"> </span><span class="const token" data-binding="const-Complex.Gamma" data-verso-hover="119">Complex.Gamma</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-4044">(</span><span class="var token" data-binding="var-_uniq.4821" data-verso-hover="114">z</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_+_»-4045">+</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-4049">(</span><span class="var token" data-binding="var-_uniq.4825" data-verso-hover="19">b</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeAscription-4049">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Complex" data-verso-hover="107">ℂ</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.typeAscription-4049">)</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.paren-4044">)</span><span class="unknown token" data-binding="">‖</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_≤_»-3995">≤</span><span class="inter-text">
+      </span><span class="literal number token" data-binding="" data-verso-hover="19">1</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_/_»-4073">/</span><span class="inter-text"> </span><span class="unknown token" data-binding="">‖</span><span class="var token" data-binding="var-_uniq.4821" data-verso-hover="114">z</span><span class="unknown token" data-binding="">‖</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_^_»-4077">^</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-4087">(</span><span class="var token" data-binding="var-_uniq.4825" data-verso-hover="19">b</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_-_»-4088">-</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.4823" data-verso-hover="19">a</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.paren-4087">)</span></code></div>
+                      </details></div>
+                  </article><article class="lmlf-dlmf-entry"><div class="lmlf-dlmf-entry__source">
+                    <a href="https://dlmf.nist.gov/5.6.E9">DLMF 5.6.9 ↗</a></div>
+                  <div class="lmlf-dlmf-entry__body">
+                    <p>
+                      For <code class="math inline">z=x+iy</code> with <code class="math inline">x\ge0</code>,
+<code class="math display">|\Gamma(z)|\le (2\pi)^{1/2}|z|^{x-1/2}e^{-\pi|y|/2}
+\exp\!\left(\frac16|z|^{-1}\right).</code></p>
+                    <p>
+                      This explicit bound holds on the closed right half-plane. The declaration writes <code class="math inline">x</code> and <code class="math inline">y</code> as
+the real and imaginary parts of <code class="math inline">z</code>, and makes <code class="math inline">z\ne0</code> explicit because the source Gamma function
+has a pole there whereas Mathlib's totalized Gamma value is zero.</p>
+                    <details class="lmlf-lean" open=""><summary>Lean · LMLF.Blueprint.Gamma · right-half-plane bound</summary><div class="lmlf-lean__body">
+                        <code class="hl lean block" data-lean-context="examples"><span class="keyword token" data-binding="kw-occ-Lean.Parser.Command.theorem-4300">theorem</span><span class="inter-text"> </span><span class="has-info warning"><span class="hover-container"><span class="hover-info messages"><code class="verso-message warning"><span class="text"></span><span class="text">declaration uses `</span><span class="highlighted"><span class="inter-text"></span><span class="unknown token" data-binding="">sorry</span><span class="inter-text"></span></span><span class="text">`</span></code></span></span><span class="const token" data-binding="const-LMLF.Blueprint.Gamma.norm_Gamma_rightHalfPlane_le" data-verso-hover="272" id="LMLF___Blueprint___Gamma___norm_Gamma_rightHalfPlane_le">norm_Gamma_rightHalfPlane_le</span></span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.implicitBinder-4337">{</span><span class="var token" data-binding="var-_uniq.5411" data-verso-hover="114">z</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.implicitBinder-4337">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Complex" data-verso-hover="107">ℂ</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.implicitBinder-4337">}</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-4347">(</span><span class="var token" data-binding="var-_uniq.5472" data-verso-hover="273">hz</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-4347">:</span><span class="inter-text"> </span><span class="literal number token" data-binding="" data-verso-hover="19">0</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_≤_»-4353">≤</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.5411" data-verso-hover="114">z</span><span class="built-in delim token" data-binding="">.</span><span class="const token" data-binding="const-Complex.re" data-verso-hover="110">re</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-4347">)</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-4365">(</span><span class="var token" data-binding="var-_uniq.5517" data-verso-hover="274">hz0</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-4365">:</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.5411" data-verso-hover="114">z</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_≠_»-4372">≠</span><span class="inter-text"> </span><span class="literal number token" data-binding="" data-verso-hover="114">0</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-4365">)</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeSpec-4381">:</span><span class="inter-text">
+    </span><span class="unknown token" data-binding="">‖</span><span class="const token" data-binding="const-Complex.Gamma" data-verso-hover="119">Complex.Gamma</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.5411" data-verso-hover="114">z</span><span class="unknown token" data-binding="">‖</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_≤_»-4387">≤</span><span class="inter-text">
+      </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-4419">(</span><span class="literal number token" data-binding="" data-verso-hover="19">2</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_*_»-4420">*</span><span class="inter-text"> </span><span class="const token" data-binding="const-Real.pi" data-verso-hover="198">Real.pi</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.paren-4419">)</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_^_»-4419">^</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-4435">(</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-4436">(</span><span class="literal number token" data-binding="" data-verso-hover="19">1</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeAscription-4436">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Real" data-verso-hover="11">ℝ</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.typeAscription-4436">)</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_/_»-4436">/</span><span class="inter-text"> </span><span class="literal number token" data-binding="" data-verso-hover="19">2</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.paren-4435">)</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_*_»-4419">*</span><span class="inter-text">
+        </span><span class="unknown token" data-binding="">‖</span><span class="var token" data-binding="var-_uniq.5411" data-verso-hover="114">z</span><span class="unknown token" data-binding="">‖</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_^_»-4461">^</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-4471">(</span><span class="var token" data-binding="var-_uniq.5411" data-verso-hover="114">z</span><span class="built-in delim token" data-binding="">.</span><span class="const token" data-binding="const-Complex.re" data-verso-hover="110">re</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_-_»-4472">-</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-4479">(</span><span class="literal number token" data-binding="" data-verso-hover="19">1</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeAscription-4479">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Real" data-verso-hover="11">ℝ</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.typeAscription-4479">)</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_/_»-4479">/</span><span class="inter-text"> </span><span class="literal number token" data-binding="" data-verso-hover="19">2</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.paren-4471">)</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_*_»-4419">*</span><span class="inter-text">
+        </span><span class="const token" data-binding="const-Real.exp" data-verso-hover="103">Real.exp</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-4513">(</span><span class="punctuation operator token" data-binding="kw-occ-«term-_»-4514">-</span><span class="const token" data-binding="const-Real.pi" data-verso-hover="198">Real.pi</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_*_»-4514">*</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-group-4525">|</span><span class="var token" data-binding="var-_uniq.5411" data-verso-hover="114">z</span><span class="built-in delim token" data-binding="">.</span><span class="const token" data-binding="const-Complex.im" data-verso-hover="112">im</span><span class="built-in delim token" data-binding="kw-occ-«term|___|»-4525">|</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_/_»-4514">/</span><span class="inter-text"> </span><span class="literal number token" data-binding="" data-verso-hover="19">2</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.paren-4513">)</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_*_»-4419">*</span><span class="inter-text">
+        </span><span class="const token" data-binding="const-Real.exp" data-verso-hover="103">Real.exp</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-4556">(</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-4557">(</span><span class="literal number token" data-binding="" data-verso-hover="19">1</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeAscription-4557">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Real" data-verso-hover="11">ℝ</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.typeAscription-4557">)</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_/_»-4557">/</span><span class="inter-text"> </span><span class="literal number token" data-binding="" data-verso-hover="19">6</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_*_»-4557">*</span><span class="inter-text"> </span><span class="unknown token" data-binding="">‖</span><span class="var token" data-binding="var-_uniq.5411" data-verso-hover="114">z</span><span class="unknown token" data-binding="">‖</span><span class="punctuation operator token" data-binding="kw-occ-«term_⁻¹»-4573">⁻¹</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.paren-4556">)</span></code></div>
+                      </details></div>
+                  </article></section>
+              </section>
+            </section>
+          <nav class="prev-next-buttons">
+            <a class="local-button active" href="Gamma-Function/___5___5-Functional-Relations/#chapter-5-section-5" rel="prev" title="5.5. §5.5 Functional Relations"><span class="arrow">←</span><span class="where">5.5. §5.5 Functional Relations</span></a><a class="local-button active" href="Gamma-Function/___5___7-Series-Expansions/#chapter-5-section-7" rel="next" title="5.7. §5.7 Series Expansions"><span class="where">5.7. §5.7 Series Expansions</span><span class="arrow">→</span></a></nav>
+          </div>
+        </main></div>
+    </body>
+  </html>

@@ -2,7 +2,7 @@
   "$schema": "dlmf-source-inventory.schema.json",
   "schema_version": 2,
   "artifact_kind": "dlmf_structural_source_inventory",
-  "generated_at": "2026-09-06T21:34:44+00:00",
+  "generated_at": "2026-09-07T00:08:38+00:00",
   "source": {
     "name": "NIST Digital Library of Mathematical Functions",
     "base_url": "https://dlmf.nist.gov",
@@ -74,25 +74,25 @@
       "unreviewed": 4792
     },
     "lean_statement_status": {
-      "checked": 2,
-      "unknown": 4790
+      "checked": 160,
+      "unknown": 4632
     },
     "lean_proof_status": {
-      "missing": 1,
+      "missing": 159,
       "proved": 1,
-      "unknown": 4790
+      "unknown": 4632
     },
     "quantitative_analogue_status": {
-      "present": 1,
-      "unknown": 4791
+      "present": 3,
+      "unknown": 4789
     },
     "quantitative_statement_status": {
-      "checked": 1,
-      "unknown": 4791
+      "checked": 3,
+      "unknown": 4789
     },
     "quantitative_proof_status": {
-      "missing": 1,
-      "unknown": 4791
+      "missing": 3,
+      "unknown": 4789
     }
   },
   "sections": [
@@ -41418,8 +41418,8 @@
         "proof_status": "proved",
         "coverage_relation": "exact",
         "declarations": [
-          "LMLF.Definitions.gamma_eulerIntegrable",
-          "LMLF.Definitions.gamma_eq_eulerIntegral"
+          "LMLF.Definitions.gamma_eq_eulerIntegral",
+          "LMLF.Definitions.gamma_eulerIntegrable"
         ],
         "evidence_source": "coverage/overrides.json"
       },
@@ -41459,11 +41459,13 @@
         "state": "unreviewed"
       },
       "lean": {
-        "statement_status": "unknown",
-        "proof_status": "unknown",
-        "coverage_relation": "unknown",
-        "declarations": [],
-        "evidence_source": null
+        "statement_status": "checked",
+        "proof_status": "missing",
+        "coverage_relation": "exact",
+        "declarations": [
+          "LMLF.Blueprint.Gamma.digamma_eq_gamma_deriv_div"
+        ],
+        "evidence_source": "coverage/overrides.json"
       },
       "quantitative": {
         "analogue_status": "unknown",
@@ -41567,18 +41569,22 @@
         "state": "unreviewed"
       },
       "lean": {
-        "statement_status": "unknown",
-        "proof_status": "unknown",
-        "coverage_relation": "unknown",
-        "declarations": [],
-        "evidence_source": null
+        "statement_status": "checked",
+        "proof_status": "missing",
+        "coverage_relation": "exact",
+        "declarations": [
+          "LMLF.Blueprint.Gamma.tendsto_harmonic_sub_log_eulerMascheroni"
+        ],
+        "evidence_source": "coverage/overrides.json"
       },
       "quantitative": {
-        "analogue_status": "unknown",
-        "statement_status": "unknown",
-        "proof_status": "unknown",
-        "declarations": [],
-        "evidence_source": null
+        "analogue_status": "present",
+        "statement_status": "checked",
+        "proof_status": "missing",
+        "declarations": [
+          "LMLF.Blueprint.Gamma.eulerMascheroni_decimal"
+        ],
+        "evidence_source": "coverage/overrides.json"
       }
     },
     {
@@ -41745,11 +41751,15 @@
         "state": "unreviewed"
       },
       "lean": {
-        "statement_status": "unknown",
-        "proof_status": "unknown",
-        "coverage_relation": "unknown",
-        "declarations": [],
-        "evidence_source": null
+        "statement_status": "checked",
+        "proof_status": "missing",
+        "coverage_relation": "exact",
+        "declarations": [
+          "LMLF.Blueprint.Gamma.pochhammerSymbol",
+          "LMLF.Blueprint.Gamma.pochhammerSymbol_zero",
+          "LMLF.Blueprint.Gamma.pochhammerSymbol_eq_prod"
+        ],
+        "evidence_source": "coverage/overrides.json"
       },
       "quantitative": {
         "analogue_status": "unknown",
@@ -41787,11 +41797,13 @@
         "state": "unreviewed"
       },
       "lean": {
-        "statement_status": "unknown",
-        "proof_status": "unknown",
-        "coverage_relation": "unknown",
-        "declarations": [],
-        "evidence_source": null
+        "statement_status": "checked",
+        "proof_status": "missing",
+        "coverage_relation": "exact",
+        "declarations": [
+          "LMLF.Blueprint.Gamma.pochhammerSymbol_eq_gamma_div"
+        ],
+        "evidence_source": "coverage/overrides.json"
       },
       "quantitative": {
         "analogue_status": "unknown",
@@ -41829,11 +41841,13 @@
         "state": "unreviewed"
       },
       "lean": {
-        "statement_status": "unknown",
-        "proof_status": "unknown",
-        "coverage_relation": "unknown",
-        "declarations": [],
-        "evidence_source": null
+        "statement_status": "checked",
+        "proof_status": "missing",
+        "coverage_relation": "exact",
+        "declarations": [
+          "LMLF.Blueprint.Gamma.pochhammerSymbol_neg"
+        ],
+        "evidence_source": "coverage/overrides.json"
       },
       "quantitative": {
         "analogue_status": "unknown",
@@ -41904,11 +41918,13 @@
         "state": "unreviewed"
       },
       "lean": {
-        "statement_status": "unknown",
-        "proof_status": "unknown",
-        "coverage_relation": "unknown",
-        "declarations": [],
-        "evidence_source": null
+        "statement_status": "checked",
+        "proof_status": "missing",
+        "coverage_relation": "exact",
+        "declarations": [
+          "LMLF.Blueprint.Gamma.pochhammerSymbol_neg_nat"
+        ],
+        "evidence_source": "coverage/overrides.json"
       },
       "quantitative": {
         "analogue_status": "unknown",
@@ -41983,11 +41999,14 @@
         "state": "unreviewed"
       },
       "lean": {
-        "statement_status": "unknown",
-        "proof_status": "unknown",
-        "coverage_relation": "unknown",
-        "declarations": [],
-        "evidence_source": null
+        "statement_status": "checked",
+        "proof_status": "missing",
+        "coverage_relation": "exact",
+        "declarations": [
+          "LMLF.Blueprint.Gamma.pochhammerSymbol_two_mul",
+          "LMLF.Blueprint.Gamma.pochhammerSymbol_two_mul_add_one"
+        ],
+        "evidence_source": "coverage/overrides.json"
       },
       "quantitative": {
         "analogue_status": "unknown",
@@ -42095,11 +42114,17 @@
         "state": "unreviewed"
       },
       "lean": {
-        "statement_status": "unknown",
-        "proof_status": "unknown",
-        "coverage_relation": "unknown",
-        "declarations": [],
-        "evidence_source": null
+        "statement_status": "checked",
+        "proof_status": "missing",
+        "coverage_relation": "exact",
+        "declarations": [
+          "LMLF.Blueprint.Gamma.fallingFactorial",
+          "LMLF.Blueprint.Gamma.fallingFactorial_eq_neg_one_pow_mul_pochhammerSymbol_neg",
+          "LMLF.Blueprint.Gamma.lahNumber",
+          "LMLF.Blueprint.Gamma.pochhammerSymbol_eq_sum_lah_fallingFactorial",
+          "LMLF.Blueprint.Gamma.fallingFactorial_eq_sum_lah_pochhammerSymbol"
+        ],
+        "evidence_source": "coverage/overrides.json"
       },
       "quantitative": {
         "analogue_status": "unknown",
@@ -42537,11 +42562,13 @@
         "state": "unreviewed"
       },
       "lean": {
-        "statement_status": "unknown",
-        "proof_status": "unknown",
-        "coverage_relation": "unknown",
-        "declarations": [],
-        "evidence_source": null
+        "statement_status": "checked",
+        "proof_status": "missing",
+        "coverage_relation": "exact",
+        "declarations": [
+          "LMLF.Blueprint.Gamma.gamma_special_factorial"
+        ],
+        "evidence_source": "coverage/overrides.json"
       },
       "quantitative": {
         "analogue_status": "unknown",
@@ -42579,11 +42606,15 @@
         "state": "unreviewed"
       },
       "lean": {
-        "statement_status": "unknown",
-        "proof_status": "unknown",
-        "coverage_relation": "unknown",
-        "declarations": [],
-        "evidence_source": null
+        "statement_status": "checked",
+        "proof_status": "missing",
+        "coverage_relation": "specialization",
+        "declarations": [
+          "LMLF.Blueprint.Gamma.doubleFactorial",
+          "LMLF.Blueprint.Gamma.gamma_doubleFactorial_even",
+          "LMLF.Blueprint.Gamma.gamma_doubleFactorial_odd"
+        ],
+        "evidence_source": "coverage/overrides.json"
       },
       "quantitative": {
         "analogue_status": "unknown",
@@ -42621,11 +42652,13 @@
         "state": "unreviewed"
       },
       "lean": {
-        "statement_status": "unknown",
-        "proof_status": "unknown",
-        "coverage_relation": "unknown",
-        "declarations": [],
-        "evidence_source": null
+        "statement_status": "checked",
+        "proof_status": "missing",
+        "coverage_relation": "specialization",
+        "declarations": [
+          "LMLF.Blueprint.Gamma.gamma_imaginary_modulus"
+        ],
+        "evidence_source": "coverage/overrides.json"
       },
       "quantitative": {
         "analogue_status": "unknown",
@@ -42663,11 +42696,13 @@
         "state": "unreviewed"
       },
       "lean": {
-        "statement_status": "unknown",
-        "proof_status": "unknown",
-        "coverage_relation": "unknown",
-        "declarations": [],
-        "evidence_source": null
+        "statement_status": "checked",
+        "proof_status": "missing",
+        "coverage_relation": "exact",
+        "declarations": [
+          "LMLF.Blueprint.Gamma.gamma_half_line_product"
+        ],
+        "evidence_source": "coverage/overrides.json"
       },
       "quantitative": {
         "analogue_status": "unknown",
@@ -42705,11 +42740,13 @@
         "state": "unreviewed"
       },
       "lean": {
-        "statement_status": "unknown",
-        "proof_status": "unknown",
-        "coverage_relation": "unknown",
-        "declarations": [],
-        "evidence_source": null
+        "statement_status": "checked",
+        "proof_status": "missing",
+        "coverage_relation": "specialization",
+        "declarations": [
+          "LMLF.Blueprint.Gamma.gamma_quarter_shift_product"
+        ],
+        "evidence_source": "coverage/overrides.json"
       },
       "quantitative": {
         "analogue_status": "unknown",
@@ -42747,11 +42784,13 @@
         "state": "unreviewed"
       },
       "lean": {
-        "statement_status": "unknown",
-        "proof_status": "unknown",
-        "coverage_relation": "unknown",
-        "declarations": [],
-        "evidence_source": null
+        "statement_status": "checked",
+        "proof_status": "missing",
+        "coverage_relation": "specialization",
+        "declarations": [
+          "LMLF.Blueprint.Gamma.gamma_half_value"
+        ],
+        "evidence_source": "coverage/overrides.json"
       },
       "quantitative": {
         "analogue_status": "unknown",
@@ -42822,11 +42861,13 @@
         "state": "unreviewed"
       },
       "lean": {
-        "statement_status": "unknown",
-        "proof_status": "unknown",
-        "coverage_relation": "unknown",
-        "declarations": [],
-        "evidence_source": null
+        "statement_status": "checked",
+        "proof_status": "missing",
+        "coverage_relation": "specialization",
+        "declarations": [
+          "LMLF.Blueprint.Gamma.gamma_third_value"
+        ],
+        "evidence_source": "coverage/overrides.json"
       },
       "quantitative": {
         "analogue_status": "unknown",
@@ -42897,11 +42938,13 @@
         "state": "unreviewed"
       },
       "lean": {
-        "statement_status": "unknown",
-        "proof_status": "unknown",
-        "coverage_relation": "unknown",
-        "declarations": [],
-        "evidence_source": null
+        "statement_status": "checked",
+        "proof_status": "missing",
+        "coverage_relation": "specialization",
+        "declarations": [
+          "LMLF.Blueprint.Gamma.gamma_two_thirds_value"
+        ],
+        "evidence_source": "coverage/overrides.json"
       },
       "quantitative": {
         "analogue_status": "unknown",
@@ -42972,11 +43015,13 @@
         "state": "unreviewed"
       },
       "lean": {
-        "statement_status": "unknown",
-        "proof_status": "unknown",
-        "coverage_relation": "unknown",
-        "declarations": [],
-        "evidence_source": null
+        "statement_status": "checked",
+        "proof_status": "missing",
+        "coverage_relation": "specialization",
+        "declarations": [
+          "LMLF.Blueprint.Gamma.gamma_quarter_value"
+        ],
+        "evidence_source": "coverage/overrides.json"
       },
       "quantitative": {
         "analogue_status": "unknown",
@@ -43047,11 +43092,13 @@
         "state": "unreviewed"
       },
       "lean": {
-        "statement_status": "unknown",
-        "proof_status": "unknown",
-        "coverage_relation": "unknown",
-        "declarations": [],
-        "evidence_source": null
+        "statement_status": "checked",
+        "proof_status": "missing",
+        "coverage_relation": "specialization",
+        "declarations": [
+          "LMLF.Blueprint.Gamma.gamma_three_quarters_value"
+        ],
+        "evidence_source": "coverage/overrides.json"
       },
       "quantitative": {
         "analogue_status": "unknown",
@@ -43122,11 +43169,13 @@
         "state": "unreviewed"
       },
       "lean": {
-        "statement_status": "unknown",
-        "proof_status": "unknown",
-        "coverage_relation": "unknown",
-        "declarations": [],
-        "evidence_source": null
+        "statement_status": "checked",
+        "proof_status": "missing",
+        "coverage_relation": "specialization",
+        "declarations": [
+          "LMLF.Blueprint.Gamma.gamma_deriv_one_value"
+        ],
+        "evidence_source": "coverage/overrides.json"
       },
       "quantitative": {
         "analogue_status": "unknown",
@@ -43234,11 +43283,13 @@
         "state": "unreviewed"
       },
       "lean": {
-        "statement_status": "unknown",
-        "proof_status": "unknown",
-        "coverage_relation": "unknown",
-        "declarations": [],
-        "evidence_source": null
+        "statement_status": "checked",
+        "proof_status": "missing",
+        "coverage_relation": "specialization",
+        "declarations": [
+          "LMLF.Blueprint.Gamma.digamma_one_values"
+        ],
+        "evidence_source": "coverage/overrides.json"
       },
       "quantitative": {
         "analogue_status": "unknown",
@@ -43280,11 +43331,13 @@
         "state": "unreviewed"
       },
       "lean": {
-        "statement_status": "unknown",
-        "proof_status": "unknown",
-        "coverage_relation": "unknown",
-        "declarations": [],
-        "evidence_source": null
+        "statement_status": "checked",
+        "proof_status": "missing",
+        "coverage_relation": "specialization",
+        "declarations": [
+          "LMLF.Blueprint.Gamma.digamma_half_values"
+        ],
+        "evidence_source": "coverage/overrides.json"
       },
       "quantitative": {
         "analogue_status": "unknown",
@@ -43322,11 +43375,13 @@
         "state": "unreviewed"
       },
       "lean": {
-        "statement_status": "unknown",
-        "proof_status": "unknown",
-        "coverage_relation": "unknown",
-        "declarations": [],
-        "evidence_source": null
+        "statement_status": "checked",
+        "proof_status": "missing",
+        "coverage_relation": "specialization",
+        "declarations": [
+          "LMLF.Blueprint.Gamma.digamma_nat_value"
+        ],
+        "evidence_source": "coverage/overrides.json"
       },
       "quantitative": {
         "analogue_status": "unknown",
@@ -43364,11 +43419,13 @@
         "state": "unreviewed"
       },
       "lean": {
-        "statement_status": "unknown",
-        "proof_status": "unknown",
-        "coverage_relation": "unknown",
-        "declarations": [],
-        "evidence_source": null
+        "statement_status": "checked",
+        "proof_status": "missing",
+        "coverage_relation": "specialization",
+        "declarations": [
+          "LMLF.Blueprint.Gamma.digamma_half_nat_value"
+        ],
+        "evidence_source": "coverage/overrides.json"
       },
       "quantitative": {
         "analogue_status": "unknown",
@@ -43406,11 +43463,13 @@
         "state": "unreviewed"
       },
       "lean": {
-        "statement_status": "unknown",
-        "proof_status": "unknown",
-        "coverage_relation": "unknown",
-        "declarations": [],
-        "evidence_source": null
+        "statement_status": "checked",
+        "proof_status": "missing",
+        "coverage_relation": "specialization",
+        "declarations": [
+          "LMLF.Blueprint.Gamma.digamma_imaginary_part"
+        ],
+        "evidence_source": "coverage/overrides.json"
       },
       "quantitative": {
         "analogue_status": "unknown",
@@ -43448,11 +43507,13 @@
         "state": "unreviewed"
       },
       "lean": {
-        "statement_status": "unknown",
-        "proof_status": "unknown",
-        "coverage_relation": "unknown",
-        "declarations": [],
-        "evidence_source": null
+        "statement_status": "checked",
+        "proof_status": "missing",
+        "coverage_relation": "specialization",
+        "declarations": [
+          "LMLF.Blueprint.Gamma.digamma_half_shift_imaginary_part"
+        ],
+        "evidence_source": "coverage/overrides.json"
       },
       "quantitative": {
         "analogue_status": "unknown",
@@ -43490,11 +43551,13 @@
         "state": "unreviewed"
       },
       "lean": {
-        "statement_status": "unknown",
-        "proof_status": "unknown",
-        "coverage_relation": "unknown",
-        "declarations": [],
-        "evidence_source": null
+        "statement_status": "checked",
+        "proof_status": "missing",
+        "coverage_relation": "specialization",
+        "declarations": [
+          "LMLF.Blueprint.Gamma.digamma_one_shift_imaginary_part"
+        ],
+        "evidence_source": "coverage/overrides.json"
       },
       "quantitative": {
         "analogue_status": "unknown",
@@ -43532,11 +43595,13 @@
         "state": "unreviewed"
       },
       "lean": {
-        "statement_status": "unknown",
-        "proof_status": "unknown",
-        "coverage_relation": "unknown",
-        "declarations": [],
-        "evidence_source": null
+        "statement_status": "checked",
+        "proof_status": "missing",
+        "coverage_relation": "specialization",
+        "declarations": [
+          "LMLF.Blueprint.Gamma.digamma_rational_value"
+        ],
+        "evidence_source": "coverage/overrides.json"
       },
       "quantitative": {
         "analogue_status": "unknown",
@@ -44135,11 +44200,13 @@
         "state": "unreviewed"
       },
       "lean": {
-        "statement_status": "unknown",
-        "proof_status": "unknown",
-        "coverage_relation": "unknown",
-        "declarations": [],
-        "evidence_source": null
+        "statement_status": "checked",
+        "proof_status": "missing",
+        "coverage_relation": "specialization",
+        "declarations": [
+          "LMLF.Blueprint.Gamma.gamma_extrema_asymptotic"
+        ],
+        "evidence_source": "coverage/overrides.json"
       },
       "quantitative": {
         "analogue_status": "unknown",
@@ -44276,11 +44343,13 @@
         "state": "unreviewed"
       },
       "lean": {
-        "statement_status": "unknown",
-        "proof_status": "unknown",
-        "coverage_relation": "unknown",
-        "declarations": [],
-        "evidence_source": null
+        "statement_status": "checked",
+        "proof_status": "missing",
+        "coverage_relation": "specialization",
+        "declarations": [
+          "LMLF.Blueprint.Gamma.gamma_recurrence"
+        ],
+        "evidence_source": "coverage/overrides.json"
       },
       "quantitative": {
         "analogue_status": "unknown",
@@ -44318,11 +44387,13 @@
         "state": "unreviewed"
       },
       "lean": {
-        "statement_status": "unknown",
-        "proof_status": "unknown",
-        "coverage_relation": "unknown",
-        "declarations": [],
-        "evidence_source": null
+        "statement_status": "checked",
+        "proof_status": "missing",
+        "coverage_relation": "specialization",
+        "declarations": [
+          "LMLF.Blueprint.Gamma.digamma_recurrence"
+        ],
+        "evidence_source": "coverage/overrides.json"
       },
       "quantitative": {
         "analogue_status": "unknown",
@@ -44426,11 +44497,13 @@
         "state": "unreviewed"
       },
       "lean": {
-        "statement_status": "unknown",
-        "proof_status": "unknown",
-        "coverage_relation": "unknown",
-        "declarations": [],
-        "evidence_source": null
+        "statement_status": "checked",
+        "proof_status": "missing",
+        "coverage_relation": "exact",
+        "declarations": [
+          "LMLF.Blueprint.Gamma.gamma_reflection"
+        ],
+        "evidence_source": "coverage/overrides.json"
       },
       "quantitative": {
         "analogue_status": "unknown",
@@ -44468,11 +44541,13 @@
         "state": "unreviewed"
       },
       "lean": {
-        "statement_status": "unknown",
-        "proof_status": "unknown",
-        "coverage_relation": "unknown",
-        "declarations": [],
-        "evidence_source": null
+        "statement_status": "checked",
+        "proof_status": "missing",
+        "coverage_relation": "exact",
+        "declarations": [
+          "LMLF.Blueprint.Gamma.digamma_reflection"
+        ],
+        "evidence_source": "coverage/overrides.json"
       },
       "quantitative": {
         "analogue_status": "unknown",
@@ -44609,11 +44684,13 @@
         "state": "unreviewed"
       },
       "lean": {
-        "statement_status": "unknown",
-        "proof_status": "unknown",
-        "coverage_relation": "unknown",
-        "declarations": [],
-        "evidence_source": null
+        "statement_status": "checked",
+        "proof_status": "missing",
+        "coverage_relation": "exact",
+        "declarations": [
+          "LMLF.Blueprint.Gamma.gamma_duplication"
+        ],
+        "evidence_source": "coverage/overrides.json"
       },
       "quantitative": {
         "analogue_status": "unknown",
@@ -44684,11 +44761,13 @@
         "state": "unreviewed"
       },
       "lean": {
-        "statement_status": "unknown",
-        "proof_status": "unknown",
-        "coverage_relation": "unknown",
-        "declarations": [],
-        "evidence_source": null
+        "statement_status": "checked",
+        "proof_status": "missing",
+        "coverage_relation": "exact",
+        "declarations": [
+          "LMLF.Blueprint.Gamma.gamma_multiplication"
+        ],
+        "evidence_source": "coverage/overrides.json"
       },
       "quantitative": {
         "analogue_status": "unknown",
@@ -44726,11 +44805,13 @@
         "state": "unreviewed"
       },
       "lean": {
-        "statement_status": "unknown",
-        "proof_status": "unknown",
-        "coverage_relation": "unknown",
-        "declarations": [],
-        "evidence_source": null
+        "statement_status": "checked",
+        "proof_status": "missing",
+        "coverage_relation": "exact",
+        "declarations": [
+          "LMLF.Blueprint.Gamma.gamma_rational_product"
+        ],
+        "evidence_source": "coverage/overrides.json"
       },
       "quantitative": {
         "analogue_status": "unknown",
@@ -44768,11 +44849,13 @@
         "state": "unreviewed"
       },
       "lean": {
-        "statement_status": "unknown",
-        "proof_status": "unknown",
-        "coverage_relation": "unknown",
-        "declarations": [],
-        "evidence_source": null
+        "statement_status": "checked",
+        "proof_status": "missing",
+        "coverage_relation": "specialization",
+        "declarations": [
+          "LMLF.Blueprint.Gamma.digamma_duplication"
+        ],
+        "evidence_source": "coverage/overrides.json"
       },
       "quantitative": {
         "analogue_status": "unknown",
@@ -44810,11 +44893,13 @@
         "state": "unreviewed"
       },
       "lean": {
-        "statement_status": "unknown",
-        "proof_status": "unknown",
-        "coverage_relation": "unknown",
-        "declarations": [],
-        "evidence_source": null
+        "statement_status": "checked",
+        "proof_status": "missing",
+        "coverage_relation": "specialization",
+        "declarations": [
+          "LMLF.Blueprint.Gamma.digamma_multiplication"
+        ],
+        "evidence_source": "coverage/overrides.json"
       },
       "quantitative": {
         "analogue_status": "unknown",
@@ -45149,11 +45234,13 @@
         "state": "unreviewed"
       },
       "lean": {
-        "statement_status": "unknown",
-        "proof_status": "unknown",
-        "coverage_relation": "unknown",
-        "declarations": [],
-        "evidence_source": null
+        "statement_status": "checked",
+        "proof_status": "missing",
+        "coverage_relation": "exact",
+        "declarations": [
+          "LMLF.Blueprint.Gamma.stirlingNormalizedBounds"
+        ],
+        "evidence_source": "coverage/overrides.json"
       },
       "quantitative": {
         "analogue_status": "unknown",
@@ -45191,11 +45278,13 @@
         "state": "unreviewed"
       },
       "lean": {
-        "statement_status": "unknown",
-        "proof_status": "unknown",
-        "coverage_relation": "unknown",
-        "declarations": [],
-        "evidence_source": null
+        "statement_status": "checked",
+        "proof_status": "missing",
+        "coverage_relation": "exact",
+        "declarations": [
+          "LMLF.Blueprint.Gamma.oneDivGamma_add_oneDivGamma_reciprocal_le_two"
+        ],
+        "evidence_source": "coverage/overrides.json"
       },
       "quantitative": {
         "analogue_status": "unknown",
@@ -45233,11 +45322,13 @@
         "state": "unreviewed"
       },
       "lean": {
-        "statement_status": "unknown",
-        "proof_status": "unknown",
-        "coverage_relation": "unknown",
-        "declarations": [],
-        "evidence_source": null
+        "statement_status": "checked",
+        "proof_status": "missing",
+        "coverage_relation": "exact",
+        "declarations": [
+          "LMLF.Blueprint.Gamma.oneDivGammaSq_add_oneDivGammaSq_reciprocal_le_two"
+        ],
+        "evidence_source": "coverage/overrides.json"
       },
       "quantitative": {
         "analogue_status": "unknown",
@@ -45308,11 +45399,13 @@
         "state": "unreviewed"
       },
       "lean": {
-        "statement_status": "unknown",
-        "proof_status": "unknown",
-        "coverage_relation": "unknown",
-        "declarations": [],
-        "evidence_source": null
+        "statement_status": "checked",
+        "proof_status": "missing",
+        "coverage_relation": "exact",
+        "declarations": [
+          "LMLF.Blueprint.Gamma.gautschiInequality"
+        ],
+        "evidence_source": "coverage/overrides.json"
       },
       "quantitative": {
         "analogue_status": "unknown",
@@ -45383,11 +45476,13 @@
         "state": "unreviewed"
       },
       "lean": {
-        "statement_status": "unknown",
-        "proof_status": "unknown",
-        "coverage_relation": "unknown",
-        "declarations": [],
-        "evidence_source": null
+        "statement_status": "checked",
+        "proof_status": "missing",
+        "coverage_relation": "exact",
+        "declarations": [
+          "LMLF.Blueprint.Gamma.kershawInequality"
+        ],
+        "evidence_source": "coverage/overrides.json"
       },
       "quantitative": {
         "analogue_status": "unknown",
@@ -45524,11 +45619,13 @@
         "state": "unreviewed"
       },
       "lean": {
-        "statement_status": "unknown",
-        "proof_status": "unknown",
-        "coverage_relation": "unknown",
-        "declarations": [],
-        "evidence_source": null
+        "statement_status": "checked",
+        "proof_status": "missing",
+        "coverage_relation": "specialization",
+        "declarations": [
+          "LMLF.Blueprint.Gamma.norm_Gamma_vertical_le"
+        ],
+        "evidence_source": "coverage/overrides.json"
       },
       "quantitative": {
         "analogue_status": "unknown",
@@ -45566,11 +45663,13 @@
         "state": "unreviewed"
       },
       "lean": {
-        "statement_status": "unknown",
-        "proof_status": "unknown",
-        "coverage_relation": "unknown",
-        "declarations": [],
-        "evidence_source": null
+        "statement_status": "checked",
+        "proof_status": "missing",
+        "coverage_relation": "exact",
+        "declarations": [
+          "LMLF.Blueprint.Gamma.norm_Gamma_vertical_lowerBound"
+        ],
+        "evidence_source": "coverage/overrides.json"
       },
       "quantitative": {
         "analogue_status": "unknown",
@@ -45641,11 +45740,13 @@
         "state": "unreviewed"
       },
       "lean": {
-        "statement_status": "unknown",
-        "proof_status": "unknown",
-        "coverage_relation": "unknown",
-        "declarations": [],
-        "evidence_source": null
+        "statement_status": "checked",
+        "proof_status": "missing",
+        "coverage_relation": "exact",
+        "declarations": [
+          "LMLF.Blueprint.Gamma.norm_Gamma_div_Gamma_le"
+        ],
+        "evidence_source": "coverage/overrides.json"
       },
       "quantitative": {
         "analogue_status": "unknown",
@@ -45716,11 +45817,13 @@
         "state": "unreviewed"
       },
       "lean": {
-        "statement_status": "unknown",
-        "proof_status": "unknown",
-        "coverage_relation": "unknown",
-        "declarations": [],
-        "evidence_source": null
+        "statement_status": "checked",
+        "proof_status": "missing",
+        "coverage_relation": "specialization",
+        "declarations": [
+          "LMLF.Blueprint.Gamma.norm_Gamma_rightHalfPlane_le"
+        ],
+        "evidence_source": "coverage/overrides.json"
       },
       "quantitative": {
         "analogue_status": "unknown",
@@ -45824,11 +45927,16 @@
         "state": "unreviewed"
       },
       "lean": {
-        "statement_status": "unknown",
-        "proof_status": "unknown",
-        "coverage_relation": "unknown",
-        "declarations": [],
-        "evidence_source": null
+        "statement_status": "checked",
+        "proof_status": "missing",
+        "coverage_relation": "exact",
+        "declarations": [
+          "LMLF.Blueprint.Gamma.reciprocalGammaCoeff",
+          "LMLF.Blueprint.Gamma.reciprocalGamma_hasSum",
+          "LMLF.Blueprint.Gamma.reciprocalGammaCoeff_one",
+          "LMLF.Blueprint.Gamma.reciprocalGammaCoeff_two"
+        ],
+        "evidence_source": "coverage/overrides.json"
       },
       "quantitative": {
         "analogue_status": "unknown",
@@ -45866,11 +45974,13 @@
         "state": "unreviewed"
       },
       "lean": {
-        "statement_status": "unknown",
-        "proof_status": "unknown",
-        "coverage_relation": "unknown",
-        "declarations": [],
-        "evidence_source": null
+        "statement_status": "checked",
+        "proof_status": "missing",
+        "coverage_relation": "exact",
+        "declarations": [
+          "LMLF.Blueprint.Gamma.reciprocalGammaCoeff_recurrence"
+        ],
+        "evidence_source": "coverage/overrides.json"
       },
       "quantitative": {
         "analogue_status": "unknown",
@@ -45908,11 +46018,16 @@
         "state": "unreviewed"
       },
       "lean": {
-        "statement_status": "unknown",
-        "proof_status": "unknown",
-        "coverage_relation": "unknown",
-        "declarations": [],
-        "evidence_source": null
+        "statement_status": "checked",
+        "proof_status": "missing",
+        "coverage_relation": "exact",
+        "declarations": [
+          "LMLF.Blueprint.Gamma.logGammaOnePlusSeriesTerm",
+          "LMLF.Blueprint.Gamma.logGammaOnePlus",
+          "LMLF.Blueprint.Gamma.exp_logGammaOnePlus",
+          "LMLF.Blueprint.Gamma.logGamma_one_add_hasSum"
+        ],
+        "evidence_source": "coverage/overrides.json"
       },
       "quantitative": {
         "analogue_status": "unknown",
@@ -45950,11 +46065,13 @@
         "state": "unreviewed"
       },
       "lean": {
-        "statement_status": "unknown",
-        "proof_status": "unknown",
-        "coverage_relation": "unknown",
-        "declarations": [],
-        "evidence_source": null
+        "statement_status": "checked",
+        "proof_status": "missing",
+        "coverage_relation": "exact",
+        "declarations": [
+          "LMLF.Blueprint.Gamma.digamma_one_add_hasSum"
+        ],
+        "evidence_source": "coverage/overrides.json"
       },
       "quantitative": {
         "analogue_status": "unknown",
@@ -45992,11 +46109,13 @@
         "state": "unreviewed"
       },
       "lean": {
-        "statement_status": "unknown",
-        "proof_status": "unknown",
-        "coverage_relation": "unknown",
-        "declarations": [],
-        "evidence_source": null
+        "statement_status": "checked",
+        "proof_status": "missing",
+        "coverage_relation": "exact",
+        "declarations": [
+          "LMLF.Blueprint.Gamma.digamma_one_add_even_hasSum"
+        ],
+        "evidence_source": "coverage/overrides.json"
       },
       "quantitative": {
         "analogue_status": "unknown",
@@ -46133,11 +46252,13 @@
         "state": "unreviewed"
       },
       "lean": {
-        "statement_status": "unknown",
-        "proof_status": "unknown",
-        "coverage_relation": "unknown",
-        "declarations": [],
-        "evidence_source": null
+        "statement_status": "checked",
+        "proof_status": "missing",
+        "coverage_relation": "exact",
+        "declarations": [
+          "LMLF.Blueprint.Gamma.digamma_partialFractions_hasSum"
+        ],
+        "evidence_source": "coverage/overrides.json"
       },
       "quantitative": {
         "analogue_status": "unknown",
@@ -46175,11 +46296,13 @@
         "state": "unreviewed"
       },
       "lean": {
-        "statement_status": "unknown",
-        "proof_status": "unknown",
-        "coverage_relation": "unknown",
-        "declarations": [],
-        "evidence_source": null
+        "statement_status": "checked",
+        "proof_status": "missing",
+        "coverage_relation": "exact",
+        "declarations": [
+          "LMLF.Blueprint.Gamma.digamma_halfDifference_hasSum"
+        ],
+        "evidence_source": "coverage/overrides.json"
       },
       "quantitative": {
         "analogue_status": "unknown",
@@ -46217,11 +46340,13 @@
         "state": "unreviewed"
       },
       "lean": {
-        "statement_status": "unknown",
-        "proof_status": "unknown",
-        "coverage_relation": "unknown",
-        "declarations": [],
-        "evidence_source": null
+        "statement_status": "checked",
+        "proof_status": "missing",
+        "coverage_relation": "exact",
+        "declarations": [
+          "LMLF.Blueprint.Gamma.digamma_one_add_mul_I_im_hasSum"
+        ],
+        "evidence_source": "coverage/overrides.json"
       },
       "quantitative": {
         "analogue_status": "unknown",
@@ -46325,11 +46450,15 @@
         "state": "unreviewed"
       },
       "lean": {
-        "statement_status": "unknown",
-        "proof_status": "unknown",
-        "coverage_relation": "unknown",
-        "declarations": [],
-        "evidence_source": null
+        "statement_status": "checked",
+        "proof_status": "missing",
+        "coverage_relation": "exact",
+        "declarations": [
+          "LMLF.Blueprint.Gamma.gammaShiftedProduct",
+          "LMLF.Blueprint.Gamma.gammaLimitApprox",
+          "LMLF.Blueprint.Gamma.gamma_limit_formula"
+        ],
+        "evidence_source": "coverage/overrides.json"
       },
       "quantitative": {
         "analogue_status": "unknown",
@@ -46367,11 +46496,15 @@
         "state": "unreviewed"
       },
       "lean": {
-        "statement_status": "unknown",
-        "proof_status": "unknown",
-        "coverage_relation": "unknown",
-        "declarations": [],
-        "evidence_source": null
+        "statement_status": "checked",
+        "proof_status": "missing",
+        "coverage_relation": "exact",
+        "declarations": [
+          "LMLF.Blueprint.Gamma.reciprocalGammaWeierstrassFactor",
+          "LMLF.Blueprint.Gamma.reciprocalGammaProductApprox",
+          "LMLF.Blueprint.Gamma.reciprocalGamma_weierstrassProduct"
+        ],
+        "evidence_source": "coverage/overrides.json"
       },
       "quantitative": {
         "analogue_status": "unknown",
@@ -46409,11 +46542,14 @@
         "state": "unreviewed"
       },
       "lean": {
-        "statement_status": "unknown",
-        "proof_status": "unknown",
-        "coverage_relation": "unknown",
-        "declarations": [],
-        "evidence_source": null
+        "statement_status": "checked",
+        "proof_status": "missing",
+        "coverage_relation": "exact",
+        "declarations": [
+          "LMLF.Blueprint.Gamma.gammaNormRatioSqProductApprox",
+          "LMLF.Blueprint.Gamma.gamma_norm_ratio_sq_product"
+        ],
+        "evidence_source": "coverage/overrides.json"
       },
       "quantitative": {
         "analogue_status": "unknown",
@@ -46484,11 +46620,13 @@
         "state": "unreviewed"
       },
       "lean": {
-        "statement_status": "unknown",
-        "proof_status": "unknown",
-        "coverage_relation": "unknown",
-        "declarations": [],
-        "evidence_source": null
+        "statement_status": "checked",
+        "proof_status": "missing",
+        "coverage_relation": "exact",
+        "declarations": [
+          "LMLF.Blueprint.Gamma.BalancedGammaParameters"
+        ],
+        "evidence_source": "coverage/overrides.json"
       },
       "quantitative": {
         "analogue_status": "unknown",
@@ -46526,11 +46664,15 @@
         "state": "unreviewed"
       },
       "lean": {
-        "statement_status": "unknown",
-        "proof_status": "unknown",
-        "coverage_relation": "unknown",
-        "declarations": [],
-        "evidence_source": null
+        "statement_status": "checked",
+        "proof_status": "missing",
+        "coverage_relation": "exact",
+        "declarations": [
+          "LMLF.Blueprint.Gamma.balancedGammaRatioFactor",
+          "LMLF.Blueprint.Gamma.balancedGammaRatioProductApprox",
+          "LMLF.Blueprint.Gamma.balanced_gamma_ratio_product"
+        ],
+        "evidence_source": "coverage/overrides.json"
       },
       "quantitative": {
         "analogue_status": "unknown",
@@ -46667,11 +46809,13 @@
         "state": "unreviewed"
       },
       "lean": {
-        "statement_status": "unknown",
-        "proof_status": "unknown",
-        "coverage_relation": "unknown",
-        "declarations": [],
-        "evidence_source": null
+        "statement_status": "checked",
+        "proof_status": "missing",
+        "coverage_relation": "exact",
+        "declarations": [
+          "LMLF.Blueprint.Gamma.Section59.dlmf_5_9_1"
+        ],
+        "evidence_source": "coverage/overrides.json"
       },
       "quantitative": {
         "analogue_status": "unknown",
@@ -46742,11 +46886,13 @@
         "state": "unreviewed"
       },
       "lean": {
-        "statement_status": "unknown",
-        "proof_status": "unknown",
-        "coverage_relation": "unknown",
-        "declarations": [],
-        "evidence_source": null
+        "statement_status": "checked",
+        "proof_status": "missing",
+        "coverage_relation": "exact",
+        "declarations": [
+          "LMLF.Blueprint.Gamma.Section59.dlmf_5_9_2"
+        ],
+        "evidence_source": "coverage/overrides.json"
       },
       "quantitative": {
         "analogue_status": "unknown",
@@ -46850,11 +46996,13 @@
         "state": "unreviewed"
       },
       "lean": {
-        "statement_status": "unknown",
-        "proof_status": "unknown",
-        "coverage_relation": "unknown",
-        "declarations": [],
-        "evidence_source": null
+        "statement_status": "checked",
+        "proof_status": "missing",
+        "coverage_relation": "exact",
+        "declarations": [
+          "LMLF.Blueprint.Gamma.Section59.dlmf_5_9_2_5"
+        ],
+        "evidence_source": "coverage/overrides.json"
       },
       "quantitative": {
         "analogue_status": "unknown",
@@ -46925,11 +47073,13 @@
         "state": "unreviewed"
       },
       "lean": {
-        "statement_status": "unknown",
-        "proof_status": "unknown",
-        "coverage_relation": "unknown",
-        "declarations": [],
-        "evidence_source": null
+        "statement_status": "checked",
+        "proof_status": "missing",
+        "coverage_relation": "exact",
+        "declarations": [
+          "LMLF.Blueprint.Gamma.Section59.dlmf_5_9_3"
+        ],
+        "evidence_source": "coverage/overrides.json"
       },
       "quantitative": {
         "analogue_status": "unknown",
@@ -46967,11 +47117,13 @@
         "state": "unreviewed"
       },
       "lean": {
-        "statement_status": "unknown",
-        "proof_status": "unknown",
-        "coverage_relation": "unknown",
-        "declarations": [],
-        "evidence_source": null
+        "statement_status": "checked",
+        "proof_status": "missing",
+        "coverage_relation": "exact",
+        "declarations": [
+          "LMLF.Blueprint.Gamma.Section59.dlmf_5_9_4"
+        ],
+        "evidence_source": "coverage/overrides.json"
       },
       "quantitative": {
         "analogue_status": "unknown",
@@ -47009,11 +47161,13 @@
         "state": "unreviewed"
       },
       "lean": {
-        "statement_status": "unknown",
-        "proof_status": "unknown",
-        "coverage_relation": "unknown",
-        "declarations": [],
-        "evidence_source": null
+        "statement_status": "checked",
+        "proof_status": "missing",
+        "coverage_relation": "exact",
+        "declarations": [
+          "LMLF.Blueprint.Gamma.Section59.dlmf_5_9_5"
+        ],
+        "evidence_source": "coverage/overrides.json"
       },
       "quantitative": {
         "analogue_status": "unknown",
@@ -47051,11 +47205,13 @@
         "state": "unreviewed"
       },
       "lean": {
-        "statement_status": "unknown",
-        "proof_status": "unknown",
-        "coverage_relation": "unknown",
-        "declarations": [],
-        "evidence_source": null
+        "statement_status": "checked",
+        "proof_status": "missing",
+        "coverage_relation": "exact",
+        "declarations": [
+          "LMLF.Blueprint.Gamma.Section59.dlmf_5_9_6"
+        ],
+        "evidence_source": "coverage/overrides.json"
       },
       "quantitative": {
         "analogue_status": "unknown",
@@ -47093,11 +47249,13 @@
         "state": "unreviewed"
       },
       "lean": {
-        "statement_status": "unknown",
-        "proof_status": "unknown",
-        "coverage_relation": "unknown",
-        "declarations": [],
-        "evidence_source": null
+        "statement_status": "checked",
+        "proof_status": "missing",
+        "coverage_relation": "exact",
+        "declarations": [
+          "LMLF.Blueprint.Gamma.Section59.dlmf_5_9_7"
+        ],
+        "evidence_source": "coverage/overrides.json"
       },
       "quantitative": {
         "analogue_status": "unknown",
@@ -47135,11 +47293,13 @@
         "state": "unreviewed"
       },
       "lean": {
-        "statement_status": "unknown",
-        "proof_status": "unknown",
-        "coverage_relation": "unknown",
-        "declarations": [],
-        "evidence_source": null
+        "statement_status": "checked",
+        "proof_status": "missing",
+        "coverage_relation": "exact",
+        "declarations": [
+          "LMLF.Blueprint.Gamma.Section59.dlmf_5_9_8"
+        ],
+        "evidence_source": "coverage/overrides.json"
       },
       "quantitative": {
         "analogue_status": "unknown",
@@ -47177,11 +47337,13 @@
         "state": "unreviewed"
       },
       "lean": {
-        "statement_status": "unknown",
-        "proof_status": "unknown",
-        "coverage_relation": "unknown",
-        "declarations": [],
-        "evidence_source": null
+        "statement_status": "checked",
+        "proof_status": "missing",
+        "coverage_relation": "exact",
+        "declarations": [
+          "LMLF.Blueprint.Gamma.Section59.dlmf_5_9_9"
+        ],
+        "evidence_source": "coverage/overrides.json"
       },
       "quantitative": {
         "analogue_status": "unknown",
@@ -47252,11 +47414,13 @@
         "state": "unreviewed"
       },
       "lean": {
-        "statement_status": "unknown",
-        "proof_status": "unknown",
-        "coverage_relation": "unknown",
-        "declarations": [],
-        "evidence_source": null
+        "statement_status": "checked",
+        "proof_status": "missing",
+        "coverage_relation": "specialization",
+        "declarations": [
+          "LMLF.Blueprint.Gamma.Section59.dlmf_5_9_10"
+        ],
+        "evidence_source": "coverage/overrides.json"
       },
       "quantitative": {
         "analogue_status": "unknown",
@@ -47327,11 +47491,13 @@
         "state": "unreviewed"
       },
       "lean": {
-        "statement_status": "unknown",
-        "proof_status": "unknown",
-        "coverage_relation": "unknown",
-        "declarations": [],
-        "evidence_source": null
+        "statement_status": "checked",
+        "proof_status": "missing",
+        "coverage_relation": "specialization",
+        "declarations": [
+          "LMLF.Blueprint.Gamma.Section59.dlmf_5_9_10_1"
+        ],
+        "evidence_source": "coverage/overrides.json"
       },
       "quantitative": {
         "analogue_status": "unknown",
@@ -47435,11 +47601,13 @@
         "state": "unreviewed"
       },
       "lean": {
-        "statement_status": "unknown",
-        "proof_status": "unknown",
-        "coverage_relation": "unknown",
-        "declarations": [],
-        "evidence_source": null
+        "statement_status": "checked",
+        "proof_status": "missing",
+        "coverage_relation": "specialization",
+        "declarations": [
+          "LMLF.Blueprint.Gamma.Section59.dlmf_5_9_10_2"
+        ],
+        "evidence_source": "coverage/overrides.json"
       },
       "quantitative": {
         "analogue_status": "unknown",
@@ -47510,11 +47678,13 @@
         "state": "unreviewed"
       },
       "lean": {
-        "statement_status": "unknown",
-        "proof_status": "unknown",
-        "coverage_relation": "unknown",
-        "declarations": [],
-        "evidence_source": null
+        "statement_status": "checked",
+        "proof_status": "missing",
+        "coverage_relation": "specialization",
+        "declarations": [
+          "LMLF.Blueprint.Gamma.Section59.dlmf_5_9_11"
+        ],
+        "evidence_source": "coverage/overrides.json"
       },
       "quantitative": {
         "analogue_status": "unknown",
@@ -47618,11 +47788,13 @@
         "state": "unreviewed"
       },
       "lean": {
-        "statement_status": "unknown",
-        "proof_status": "unknown",
-        "coverage_relation": "unknown",
-        "declarations": [],
-        "evidence_source": null
+        "statement_status": "checked",
+        "proof_status": "missing",
+        "coverage_relation": "specialization",
+        "declarations": [
+          "LMLF.Blueprint.Gamma.Section59.dlmf_5_9_11_1"
+        ],
+        "evidence_source": "coverage/overrides.json"
       },
       "quantitative": {
         "analogue_status": "unknown",
@@ -47693,11 +47865,13 @@
         "state": "unreviewed"
       },
       "lean": {
-        "statement_status": "unknown",
-        "proof_status": "unknown",
-        "coverage_relation": "unknown",
-        "declarations": [],
-        "evidence_source": null
+        "statement_status": "checked",
+        "proof_status": "missing",
+        "coverage_relation": "specialization",
+        "declarations": [
+          "LMLF.Blueprint.Gamma.Section59.dlmf_5_9_11_2"
+        ],
+        "evidence_source": "coverage/overrides.json"
       },
       "quantitative": {
         "analogue_status": "unknown",
@@ -47900,11 +48074,13 @@
         "state": "unreviewed"
       },
       "lean": {
-        "statement_status": "unknown",
-        "proof_status": "unknown",
-        "coverage_relation": "unknown",
-        "declarations": [],
-        "evidence_source": null
+        "statement_status": "checked",
+        "proof_status": "missing",
+        "coverage_relation": "specialization",
+        "declarations": [
+          "LMLF.Blueprint.Gamma.Section59.dlmf_5_9_12"
+        ],
+        "evidence_source": "coverage/overrides.json"
       },
       "quantitative": {
         "analogue_status": "unknown",
@@ -47942,11 +48118,13 @@
         "state": "unreviewed"
       },
       "lean": {
-        "statement_status": "unknown",
-        "proof_status": "unknown",
-        "coverage_relation": "unknown",
-        "declarations": [],
-        "evidence_source": null
+        "statement_status": "checked",
+        "proof_status": "missing",
+        "coverage_relation": "specialization",
+        "declarations": [
+          "LMLF.Blueprint.Gamma.Section59.dlmf_5_9_13"
+        ],
+        "evidence_source": "coverage/overrides.json"
       },
       "quantitative": {
         "analogue_status": "unknown",
@@ -47984,11 +48162,13 @@
         "state": "unreviewed"
       },
       "lean": {
-        "statement_status": "unknown",
-        "proof_status": "unknown",
-        "coverage_relation": "unknown",
-        "declarations": [],
-        "evidence_source": null
+        "statement_status": "checked",
+        "proof_status": "missing",
+        "coverage_relation": "specialization",
+        "declarations": [
+          "LMLF.Blueprint.Gamma.Section59.dlmf_5_9_14"
+        ],
+        "evidence_source": "coverage/overrides.json"
       },
       "quantitative": {
         "analogue_status": "unknown",
@@ -48026,11 +48206,13 @@
         "state": "unreviewed"
       },
       "lean": {
-        "statement_status": "unknown",
-        "proof_status": "unknown",
-        "coverage_relation": "unknown",
-        "declarations": [],
-        "evidence_source": null
+        "statement_status": "checked",
+        "proof_status": "missing",
+        "coverage_relation": "specialization",
+        "declarations": [
+          "LMLF.Blueprint.Gamma.Section59.dlmf_5_9_15"
+        ],
+        "evidence_source": "coverage/overrides.json"
       },
       "quantitative": {
         "analogue_status": "unknown",
@@ -48068,11 +48250,13 @@
         "state": "unreviewed"
       },
       "lean": {
-        "statement_status": "unknown",
-        "proof_status": "unknown",
-        "coverage_relation": "unknown",
-        "declarations": [],
-        "evidence_source": null
+        "statement_status": "checked",
+        "proof_status": "missing",
+        "coverage_relation": "specialization",
+        "declarations": [
+          "LMLF.Blueprint.Gamma.Section59.dlmf_5_9_16"
+        ],
+        "evidence_source": "coverage/overrides.json"
       },
       "quantitative": {
         "analogue_status": "unknown",
@@ -48110,11 +48294,13 @@
         "state": "unreviewed"
       },
       "lean": {
-        "statement_status": "unknown",
-        "proof_status": "unknown",
-        "coverage_relation": "unknown",
-        "declarations": [],
-        "evidence_source": null
+        "statement_status": "checked",
+        "proof_status": "missing",
+        "coverage_relation": "specialization",
+        "declarations": [
+          "LMLF.Blueprint.Gamma.Section59.dlmf_5_9_17"
+        ],
+        "evidence_source": "coverage/overrides.json"
       },
       "quantitative": {
         "analogue_status": "unknown",
@@ -48152,11 +48338,13 @@
         "state": "unreviewed"
       },
       "lean": {
-        "statement_status": "unknown",
-        "proof_status": "unknown",
-        "coverage_relation": "unknown",
-        "declarations": [],
-        "evidence_source": null
+        "statement_status": "checked",
+        "proof_status": "missing",
+        "coverage_relation": "exact",
+        "declarations": [
+          "LMLF.Blueprint.Gamma.Section59.dlmf_5_9_18"
+        ],
+        "evidence_source": "coverage/overrides.json"
       },
       "quantitative": {
         "analogue_status": "unknown",
@@ -48194,11 +48382,13 @@
         "state": "unreviewed"
       },
       "lean": {
-        "statement_status": "unknown",
-        "proof_status": "unknown",
-        "coverage_relation": "unknown",
-        "declarations": [],
-        "evidence_source": null
+        "statement_status": "checked",
+        "proof_status": "missing",
+        "coverage_relation": "exact",
+        "declarations": [
+          "LMLF.Blueprint.Gamma.Section59.dlmf_5_9_19"
+        ],
+        "evidence_source": "coverage/overrides.json"
       },
       "quantitative": {
         "analogue_status": "unknown",
@@ -48269,11 +48459,13 @@
         "state": "unreviewed"
       },
       "lean": {
-        "statement_status": "unknown",
-        "proof_status": "unknown",
-        "coverage_relation": "unknown",
-        "declarations": [],
-        "evidence_source": null
+        "statement_status": "checked",
+        "proof_status": "missing",
+        "coverage_relation": "exact",
+        "declarations": [
+          "LMLF.Blueprint.Gamma.Section59.dlmf_5_9_20"
+        ],
+        "evidence_source": "coverage/overrides.json"
       },
       "quantitative": {
         "analogue_status": "unknown",
@@ -48542,11 +48734,18 @@
         "state": "unreviewed"
       },
       "lean": {
-        "statement_status": "unknown",
-        "proof_status": "unknown",
-        "coverage_relation": "unknown",
-        "declarations": [],
-        "evidence_source": null
+        "statement_status": "checked",
+        "proof_status": "missing",
+        "coverage_relation": "specialization",
+        "declarations": [
+          "LMLF.Blueprint.Gamma.Section510.continuedFractionTail",
+          "LMLF.Blueprint.Gamma.Section510.continuedFractionConvergent",
+          "LMLF.Blueprint.Gamma.Section510.exists_gammaContinuedFractionCoeff",
+          "LMLF.Blueprint.Gamma.Section510.gammaContinuedFractionCoeff",
+          "LMLF.Blueprint.Gamma.Section510.gammaContinuedFractionCoeff_spec",
+          "LMLF.Blueprint.Gamma.Section510.dlmf_5_10_1"
+        ],
+        "evidence_source": "coverage/overrides.json"
       },
       "quantitative": {
         "analogue_status": "unknown",
@@ -48641,11 +48840,16 @@
         "state": "unreviewed"
       },
       "lean": {
-        "statement_status": "unknown",
-        "proof_status": "unknown",
-        "coverage_relation": "unknown",
-        "declarations": [],
-        "evidence_source": null
+        "statement_status": "checked",
+        "proof_status": "missing",
+        "coverage_relation": "exact",
+        "declarations": [
+          "LMLF.Blueprint.Gamma.Section510.exists_gammaContinuedFractionCoeff",
+          "LMLF.Blueprint.Gamma.Section510.gammaContinuedFractionCoeff",
+          "LMLF.Blueprint.Gamma.Section510.gammaContinuedFractionCoeff_spec",
+          "LMLF.Blueprint.Gamma.Section510.dlmf_5_10_2"
+        ],
+        "evidence_source": "coverage/overrides.json"
       },
       "quantitative": {
         "analogue_status": "unknown",
@@ -48883,9 +49087,9 @@
       "lean": {
         "statement_status": "checked",
         "proof_status": "missing",
-        "coverage_relation": "consequence",
+        "coverage_relation": "specialization",
         "declarations": [
-          "LMLF.Blueprint.Gamma.stirlingLog_hasPoincareExpansion"
+          "LMLF.Blueprint.Gamma.Section511.dlmf_5_11_1"
         ],
         "evidence_source": "coverage/overrides.json"
       },
@@ -48894,7 +49098,8 @@
         "statement_status": "checked",
         "proof_status": "missing",
         "declarations": [
-          "LMLF.Blueprint.Gamma.stirlingLog_remainder_bounds"
+          "LMLF.Blueprint.Gamma.Section511.dlmf_5_11_1_remainder_bound",
+          "LMLF.Blueprint.Gamma.Section511.dlmf_5_11_1_complex_remainder_bound"
         ],
         "evidence_source": "coverage/overrides.json"
       }
@@ -48960,18 +49165,23 @@
         "state": "unreviewed"
       },
       "lean": {
-        "statement_status": "unknown",
-        "proof_status": "unknown",
-        "coverage_relation": "unknown",
-        "declarations": [],
-        "evidence_source": null
+        "statement_status": "checked",
+        "proof_status": "missing",
+        "coverage_relation": "specialization",
+        "declarations": [
+          "LMLF.Blueprint.Gamma.Section511.dlmf_5_11_2"
+        ],
+        "evidence_source": "coverage/overrides.json"
       },
       "quantitative": {
-        "analogue_status": "unknown",
-        "statement_status": "unknown",
-        "proof_status": "unknown",
-        "declarations": [],
-        "evidence_source": null
+        "analogue_status": "present",
+        "statement_status": "checked",
+        "proof_status": "missing",
+        "declarations": [
+          "LMLF.Blueprint.Gamma.Section511.dlmf_5_11_2_remainder_bound",
+          "LMLF.Blueprint.Gamma.Section511.dlmf_5_11_2_complex_remainder_bound"
+        ],
+        "evidence_source": "coverage/overrides.json"
       }
     },
     {
@@ -49035,11 +49245,13 @@
         "state": "unreviewed"
       },
       "lean": {
-        "statement_status": "unknown",
-        "proof_status": "unknown",
-        "coverage_relation": "unknown",
-        "declarations": [],
-        "evidence_source": null
+        "statement_status": "checked",
+        "proof_status": "missing",
+        "coverage_relation": "specialization",
+        "declarations": [
+          "LMLF.Blueprint.Gamma.Section511.dlmf_5_11_3"
+        ],
+        "evidence_source": "coverage/overrides.json"
       },
       "quantitative": {
         "analogue_status": "unknown",
@@ -49167,11 +49379,13 @@
         "state": "unreviewed"
       },
       "lean": {
-        "statement_status": "unknown",
-        "proof_status": "unknown",
-        "coverage_relation": "unknown",
-        "declarations": [],
-        "evidence_source": null
+        "statement_status": "checked",
+        "proof_status": "missing",
+        "coverage_relation": "exact",
+        "declarations": [
+          "LMLF.Blueprint.Gamma.Section511.dlmf_5_11_4"
+        ],
+        "evidence_source": "coverage/overrides.json"
       },
       "quantitative": {
         "analogue_status": "unknown",
@@ -49209,11 +49423,13 @@
         "state": "unreviewed"
       },
       "lean": {
-        "statement_status": "unknown",
-        "proof_status": "unknown",
-        "coverage_relation": "unknown",
-        "declarations": [],
-        "evidence_source": null
+        "statement_status": "checked",
+        "proof_status": "missing",
+        "coverage_relation": "exact",
+        "declarations": [
+          "LMLF.Blueprint.Gamma.Section511.dlmf_5_11_5"
+        ],
+        "evidence_source": "coverage/overrides.json"
       },
       "quantitative": {
         "analogue_status": "unknown",
@@ -49251,11 +49467,14 @@
         "state": "unreviewed"
       },
       "lean": {
-        "statement_status": "unknown",
-        "proof_status": "unknown",
-        "coverage_relation": "unknown",
-        "declarations": [],
-        "evidence_source": null
+        "statement_status": "checked",
+        "proof_status": "missing",
+        "coverage_relation": "exact",
+        "declarations": [
+          "LMLF.Blueprint.Gamma.Section511.dlmf_5_11_6",
+          "LMLF.Blueprint.Gamma.Section511.dlmf_5_11_6_initial"
+        ],
+        "evidence_source": "coverage/overrides.json"
       },
       "quantitative": {
         "analogue_status": "unknown",
@@ -49359,11 +49578,13 @@
         "state": "unreviewed"
       },
       "lean": {
-        "statement_status": "unknown",
-        "proof_status": "unknown",
-        "coverage_relation": "unknown",
-        "declarations": [],
-        "evidence_source": null
+        "statement_status": "checked",
+        "proof_status": "missing",
+        "coverage_relation": "specialization",
+        "declarations": [
+          "LMLF.Blueprint.Gamma.Section511.dlmf_5_11_7"
+        ],
+        "evidence_source": "coverage/overrides.json"
       },
       "quantitative": {
         "analogue_status": "unknown",
@@ -49401,11 +49622,13 @@
         "state": "unreviewed"
       },
       "lean": {
-        "statement_status": "unknown",
-        "proof_status": "unknown",
-        "coverage_relation": "unknown",
-        "declarations": [],
-        "evidence_source": null
+        "statement_status": "checked",
+        "proof_status": "missing",
+        "coverage_relation": "specialization",
+        "declarations": [
+          "LMLF.Blueprint.Gamma.Section511.dlmf_5_11_8"
+        ],
+        "evidence_source": "coverage/overrides.json"
       },
       "quantitative": {
         "analogue_status": "unknown",
@@ -49542,11 +49765,14 @@
         "state": "unreviewed"
       },
       "lean": {
-        "statement_status": "unknown",
-        "proof_status": "unknown",
-        "coverage_relation": "unknown",
-        "declarations": [],
-        "evidence_source": null
+        "statement_status": "checked",
+        "proof_status": "missing",
+        "coverage_relation": "specialization",
+        "declarations": [
+          "LMLF.Blueprint.Gamma.Section511.UniformAsymptoticOnBounded",
+          "LMLF.Blueprint.Gamma.Section511.dlmf_5_11_9"
+        ],
+        "evidence_source": "coverage/overrides.json"
       },
       "quantitative": {
         "analogue_status": "unknown",
@@ -49749,11 +49975,13 @@
         "state": "unreviewed"
       },
       "lean": {
-        "statement_status": "unknown",
-        "proof_status": "unknown",
-        "coverage_relation": "unknown",
-        "declarations": [],
-        "evidence_source": null
+        "statement_status": "checked",
+        "proof_status": "missing",
+        "coverage_relation": "exact",
+        "declarations": [
+          "LMLF.Blueprint.Gamma.Section511.dlmf_5_11_10"
+        ],
+        "evidence_source": "coverage/overrides.json"
       },
       "quantitative": {
         "analogue_status": "unknown",
@@ -49791,11 +50019,13 @@
         "state": "unreviewed"
       },
       "lean": {
-        "statement_status": "unknown",
-        "proof_status": "unknown",
-        "coverage_relation": "unknown",
-        "declarations": [],
-        "evidence_source": null
+        "statement_status": "checked",
+        "proof_status": "missing",
+        "coverage_relation": "specialization",
+        "declarations": [
+          "LMLF.Blueprint.Gamma.Section511.dlmf_5_11_11"
+        ],
+        "evidence_source": "coverage/overrides.json"
       },
       "quantitative": {
         "analogue_status": "unknown",
@@ -50031,11 +50261,13 @@
         "state": "unreviewed"
       },
       "lean": {
-        "statement_status": "unknown",
-        "proof_status": "unknown",
-        "coverage_relation": "unknown",
-        "declarations": [],
-        "evidence_source": null
+        "statement_status": "checked",
+        "proof_status": "missing",
+        "coverage_relation": "specialization",
+        "declarations": [
+          "LMLF.Blueprint.Gamma.Section511.dlmf_5_11_12"
+        ],
+        "evidence_source": "coverage/overrides.json"
       },
       "quantitative": {
         "analogue_status": "unknown",
@@ -50073,11 +50305,13 @@
         "state": "unreviewed"
       },
       "lean": {
-        "statement_status": "unknown",
-        "proof_status": "unknown",
-        "coverage_relation": "unknown",
-        "declarations": [],
-        "evidence_source": null
+        "statement_status": "checked",
+        "proof_status": "missing",
+        "coverage_relation": "specialization",
+        "declarations": [
+          "LMLF.Blueprint.Gamma.Section511.dlmf_5_11_13"
+        ],
+        "evidence_source": "coverage/overrides.json"
       },
       "quantitative": {
         "analogue_status": "unknown",
@@ -50115,11 +50349,13 @@
         "state": "unreviewed"
       },
       "lean": {
-        "statement_status": "unknown",
-        "proof_status": "unknown",
-        "coverage_relation": "unknown",
-        "declarations": [],
-        "evidence_source": null
+        "statement_status": "checked",
+        "proof_status": "missing",
+        "coverage_relation": "specialization",
+        "declarations": [
+          "LMLF.Blueprint.Gamma.Section511.dlmf_5_11_14"
+        ],
+        "evidence_source": "coverage/overrides.json"
       },
       "quantitative": {
         "analogue_status": "unknown",
@@ -50198,11 +50434,13 @@
         "state": "unreviewed"
       },
       "lean": {
-        "statement_status": "unknown",
-        "proof_status": "unknown",
-        "coverage_relation": "unknown",
-        "declarations": [],
-        "evidence_source": null
+        "statement_status": "checked",
+        "proof_status": "missing",
+        "coverage_relation": "specialization",
+        "declarations": [
+          "LMLF.Blueprint.Gamma.Section511.dlmf_5_11_15"
+        ],
+        "evidence_source": "coverage/overrides.json"
       },
       "quantitative": {
         "analogue_status": "unknown",
@@ -50248,11 +50486,13 @@
         "state": "unreviewed"
       },
       "lean": {
-        "statement_status": "unknown",
-        "proof_status": "unknown",
-        "coverage_relation": "unknown",
-        "declarations": [],
-        "evidence_source": null
+        "statement_status": "checked",
+        "proof_status": "missing",
+        "coverage_relation": "specialization",
+        "declarations": [
+          "LMLF.Blueprint.Gamma.Section511.dlmf_5_11_16"
+        ],
+        "evidence_source": "coverage/overrides.json"
       },
       "quantitative": {
         "analogue_status": "unknown",
@@ -50290,11 +50530,13 @@
         "state": "unreviewed"
       },
       "lean": {
-        "statement_status": "unknown",
-        "proof_status": "unknown",
-        "coverage_relation": "unknown",
-        "declarations": [],
-        "evidence_source": null
+        "statement_status": "checked",
+        "proof_status": "missing",
+        "coverage_relation": "specialization",
+        "declarations": [
+          "LMLF.Blueprint.Gamma.Section511.dlmf_5_11_17"
+        ],
+        "evidence_source": "coverage/overrides.json"
       },
       "quantitative": {
         "analogue_status": "unknown",
@@ -50332,11 +50574,13 @@
         "state": "unreviewed"
       },
       "lean": {
-        "statement_status": "unknown",
-        "proof_status": "unknown",
-        "coverage_relation": "unknown",
-        "declarations": [],
-        "evidence_source": null
+        "statement_status": "checked",
+        "proof_status": "missing",
+        "coverage_relation": "specialization",
+        "declarations": [
+          "LMLF.Blueprint.Gamma.Section511.dlmf_5_11_18"
+        ],
+        "evidence_source": "coverage/overrides.json"
       },
       "quantitative": {
         "analogue_status": "unknown",
@@ -50407,11 +50651,13 @@
         "state": "unreviewed"
       },
       "lean": {
-        "statement_status": "unknown",
-        "proof_status": "unknown",
-        "coverage_relation": "unknown",
-        "declarations": [],
-        "evidence_source": null
+        "statement_status": "checked",
+        "proof_status": "missing",
+        "coverage_relation": "specialization",
+        "declarations": [
+          "LMLF.Blueprint.Gamma.Section511.dlmf_5_11_19"
+        ],
+        "evidence_source": "coverage/overrides.json"
       },
       "quantitative": {
         "analogue_status": "unknown",
@@ -50548,11 +50794,13 @@
         "state": "unreviewed"
       },
       "lean": {
-        "statement_status": "unknown",
-        "proof_status": "unknown",
-        "coverage_relation": "unknown",
-        "declarations": [],
-        "evidence_source": null
+        "statement_status": "checked",
+        "proof_status": "missing",
+        "coverage_relation": "exact",
+        "declarations": [
+          "LMLF.Blueprint.Gamma.Section512.dlmf_5_12_1"
+        ],
+        "evidence_source": "coverage/overrides.json"
       },
       "quantitative": {
         "analogue_status": "unknown",
@@ -50590,11 +50838,13 @@
         "state": "unreviewed"
       },
       "lean": {
-        "statement_status": "unknown",
-        "proof_status": "unknown",
-        "coverage_relation": "unknown",
-        "declarations": [],
-        "evidence_source": null
+        "statement_status": "checked",
+        "proof_status": "missing",
+        "coverage_relation": "exact",
+        "declarations": [
+          "LMLF.Blueprint.Gamma.Section512.dlmf_5_12_2"
+        ],
+        "evidence_source": "coverage/overrides.json"
       },
       "quantitative": {
         "analogue_status": "unknown",
@@ -50632,11 +50882,13 @@
         "state": "unreviewed"
       },
       "lean": {
-        "statement_status": "unknown",
-        "proof_status": "unknown",
-        "coverage_relation": "unknown",
-        "declarations": [],
-        "evidence_source": null
+        "statement_status": "checked",
+        "proof_status": "missing",
+        "coverage_relation": "exact",
+        "declarations": [
+          "LMLF.Blueprint.Gamma.Section512.dlmf_5_12_3"
+        ],
+        "evidence_source": "coverage/overrides.json"
       },
       "quantitative": {
         "analogue_status": "unknown",
@@ -50674,11 +50926,13 @@
         "state": "unreviewed"
       },
       "lean": {
-        "statement_status": "unknown",
-        "proof_status": "unknown",
-        "coverage_relation": "unknown",
-        "declarations": [],
-        "evidence_source": null
+        "statement_status": "checked",
+        "proof_status": "missing",
+        "coverage_relation": "exact",
+        "declarations": [
+          "LMLF.Blueprint.Gamma.Section512.dlmf_5_12_4"
+        ],
+        "evidence_source": "coverage/overrides.json"
       },
       "quantitative": {
         "analogue_status": "unknown",
@@ -50716,11 +50970,15 @@
         "state": "unreviewed"
       },
       "lean": {
-        "statement_status": "unknown",
-        "proof_status": "unknown",
-        "coverage_relation": "unknown",
-        "declarations": [],
-        "evidence_source": null
+        "statement_status": "checked",
+        "proof_status": "missing",
+        "coverage_relation": "specialization",
+        "declarations": [
+          "LMLF.Blueprint.Gamma.Section512.meromorphicBeta",
+          "LMLF.Blueprint.Gamma.Section512.meromorphicBetaDefined",
+          "LMLF.Blueprint.Gamma.Section512.dlmf_5_12_5"
+        ],
+        "evidence_source": "coverage/overrides.json"
       },
       "quantitative": {
         "analogue_status": "unknown",
@@ -50758,11 +51016,15 @@
         "state": "unreviewed"
       },
       "lean": {
-        "statement_status": "unknown",
-        "proof_status": "unknown",
-        "coverage_relation": "unknown",
-        "declarations": [],
-        "evidence_source": null
+        "statement_status": "checked",
+        "proof_status": "missing",
+        "coverage_relation": "specialization",
+        "declarations": [
+          "LMLF.Blueprint.Gamma.Section512.meromorphicBeta",
+          "LMLF.Blueprint.Gamma.Section512.meromorphicBetaDefined",
+          "LMLF.Blueprint.Gamma.Section512.dlmf_5_12_6"
+        ],
+        "evidence_source": "coverage/overrides.json"
       },
       "quantitative": {
         "analogue_status": "unknown",
@@ -50800,11 +51062,13 @@
         "state": "unreviewed"
       },
       "lean": {
-        "statement_status": "unknown",
-        "proof_status": "unknown",
-        "coverage_relation": "unknown",
-        "declarations": [],
-        "evidence_source": null
+        "statement_status": "checked",
+        "proof_status": "missing",
+        "coverage_relation": "exact",
+        "declarations": [
+          "LMLF.Blueprint.Gamma.Section512.dlmf_5_12_7"
+        ],
+        "evidence_source": "coverage/overrides.json"
       },
       "quantitative": {
         "analogue_status": "unknown",
@@ -50842,11 +51106,15 @@
         "state": "unreviewed"
       },
       "lean": {
-        "statement_status": "unknown",
-        "proof_status": "unknown",
-        "coverage_relation": "unknown",
-        "declarations": [],
-        "evidence_source": null
+        "statement_status": "checked",
+        "proof_status": "missing",
+        "coverage_relation": "specialization",
+        "declarations": [
+          "LMLF.Blueprint.Gamma.Section512.meromorphicBeta",
+          "LMLF.Blueprint.Gamma.Section512.meromorphicBetaDefined",
+          "LMLF.Blueprint.Gamma.Section512.dlmf_5_12_8"
+        ],
+        "evidence_source": "coverage/overrides.json"
       },
       "quantitative": {
         "analogue_status": "unknown",
@@ -50884,11 +51152,15 @@
         "state": "unreviewed"
       },
       "lean": {
-        "statement_status": "unknown",
-        "proof_status": "unknown",
-        "coverage_relation": "unknown",
-        "declarations": [],
-        "evidence_source": null
+        "statement_status": "checked",
+        "proof_status": "missing",
+        "coverage_relation": "specialization",
+        "declarations": [
+          "LMLF.Blueprint.Gamma.Section512.meromorphicBeta",
+          "LMLF.Blueprint.Gamma.Section512.meromorphicBetaDefined",
+          "LMLF.Blueprint.Gamma.Section512.dlmf_5_12_9"
+        ],
+        "evidence_source": "coverage/overrides.json"
       },
       "quantitative": {
         "analogue_status": "unknown",
@@ -50926,11 +51198,17 @@
         "state": "unreviewed"
       },
       "lean": {
-        "statement_status": "unknown",
-        "proof_status": "unknown",
-        "coverage_relation": "unknown",
-        "declarations": [],
-        "evidence_source": null
+        "statement_status": "checked",
+        "proof_status": "missing",
+        "coverage_relation": "specialization",
+        "declarations": [
+          "LMLF.Blueprint.Gamma.Section512.meromorphicBeta",
+          "LMLF.Blueprint.Gamma.Section512.meromorphicBetaDefined",
+          "LMLF.Blueprint.Gamma.Section512.contourIntegral",
+          "LMLF.Blueprint.Gamma.Section512.betaFirstLoopIntegral",
+          "LMLF.Blueprint.Gamma.Section512.dlmf_5_12_10"
+        ],
+        "evidence_source": "coverage/overrides.json"
       },
       "quantitative": {
         "analogue_status": "unknown",
@@ -51034,11 +51312,18 @@
         "state": "unreviewed"
       },
       "lean": {
-        "statement_status": "unknown",
-        "proof_status": "unknown",
-        "coverage_relation": "unknown",
-        "declarations": [],
-        "evidence_source": null
+        "statement_status": "checked",
+        "proof_status": "missing",
+        "coverage_relation": "specialization",
+        "declarations": [
+          "LMLF.Blueprint.Gamma.Section512.meromorphicBeta",
+          "LMLF.Blueprint.Gamma.Section512.meromorphicBetaDefined",
+          "LMLF.Blueprint.Gamma.Section512.SecondLoopLogBranch",
+          "LMLF.Blueprint.Gamma.Section512.betaSecondLoopTruncation",
+          "LMLF.Blueprint.Gamma.Section512.betaSecondLoopIntegral",
+          "LMLF.Blueprint.Gamma.Section512.dlmf_5_12_11"
+        ],
+        "evidence_source": "coverage/overrides.json"
       },
       "quantitative": {
         "analogue_status": "unknown",
@@ -51142,11 +51427,18 @@
         "state": "unreviewed"
       },
       "lean": {
-        "statement_status": "unknown",
-        "proof_status": "unknown",
-        "coverage_relation": "unknown",
-        "declarations": [],
-        "evidence_source": null
+        "statement_status": "checked",
+        "proof_status": "missing",
+        "coverage_relation": "specialization",
+        "declarations": [
+          "LMLF.Blueprint.Gamma.Section512.meromorphicBeta",
+          "LMLF.Blueprint.Gamma.Section512.meromorphicBetaDefined",
+          "LMLF.Blueprint.Gamma.Section512.PochhammerLogBranch",
+          "LMLF.Blueprint.Gamma.Section512.betaPochhammerCurve",
+          "LMLF.Blueprint.Gamma.Section512.betaPochhammerIntegral",
+          "LMLF.Blueprint.Gamma.Section512.dlmf_5_12_12"
+        ],
+        "evidence_source": "coverage/overrides.json"
       },
       "quantitative": {
         "analogue_status": "unknown",
@@ -51283,11 +51575,13 @@
         "state": "unreviewed"
       },
       "lean": {
-        "statement_status": "unknown",
-        "proof_status": "unknown",
-        "coverage_relation": "unknown",
-        "declarations": [],
-        "evidence_source": null
+        "statement_status": "checked",
+        "proof_status": "missing",
+        "coverage_relation": "exact",
+        "declarations": [
+          "LMLF.Blueprint.Gamma.Section513.dlmf_5_13_1"
+        ],
+        "evidence_source": "coverage/overrides.json"
       },
       "quantitative": {
         "analogue_status": "unknown",
@@ -51325,11 +51619,13 @@
         "state": "unreviewed"
       },
       "lean": {
-        "statement_status": "unknown",
-        "proof_status": "unknown",
-        "coverage_relation": "unknown",
-        "declarations": [],
-        "evidence_source": null
+        "statement_status": "checked",
+        "proof_status": "missing",
+        "coverage_relation": "specialization",
+        "declarations": [
+          "LMLF.Blueprint.Gamma.Section513.dlmf_5_13_2"
+        ],
+        "evidence_source": "coverage/overrides.json"
       },
       "quantitative": {
         "analogue_status": "unknown",
@@ -51400,11 +51696,13 @@
         "state": "unreviewed"
       },
       "lean": {
-        "statement_status": "unknown",
-        "proof_status": "unknown",
-        "coverage_relation": "unknown",
-        "declarations": [],
-        "evidence_source": null
+        "statement_status": "checked",
+        "proof_status": "missing",
+        "coverage_relation": "exact",
+        "declarations": [
+          "LMLF.Blueprint.Gamma.Section513.dlmf_5_13_3"
+        ],
+        "evidence_source": "coverage/overrides.json"
       },
       "quantitative": {
         "analogue_status": "unknown",
@@ -51475,11 +51773,13 @@
         "state": "unreviewed"
       },
       "lean": {
-        "statement_status": "unknown",
-        "proof_status": "unknown",
-        "coverage_relation": "unknown",
-        "declarations": [],
-        "evidence_source": null
+        "statement_status": "checked",
+        "proof_status": "missing",
+        "coverage_relation": "exact",
+        "declarations": [
+          "LMLF.Blueprint.Gamma.Section513.dlmf_5_13_4"
+        ],
+        "evidence_source": "coverage/overrides.json"
       },
       "quantitative": {
         "analogue_status": "unknown",
@@ -51550,11 +51850,13 @@
         "state": "unreviewed"
       },
       "lean": {
-        "statement_status": "unknown",
-        "proof_status": "unknown",
-        "coverage_relation": "unknown",
-        "declarations": [],
-        "evidence_source": null
+        "statement_status": "checked",
+        "proof_status": "missing",
+        "coverage_relation": "exact",
+        "declarations": [
+          "LMLF.Blueprint.Gamma.Section513.dlmf_5_13_5"
+        ],
+        "evidence_source": "coverage/overrides.json"
       },
       "quantitative": {
         "analogue_status": "unknown",
@@ -51691,11 +51993,13 @@
         "state": "unreviewed"
       },
       "lean": {
-        "statement_status": "unknown",
-        "proof_status": "unknown",
-        "coverage_relation": "unknown",
-        "declarations": [],
-        "evidence_source": null
+        "statement_status": "checked",
+        "proof_status": "missing",
+        "coverage_relation": "specialization",
+        "declarations": [
+          "LMLF.Blueprint.Gamma.Section514.dlmf_5_14_1"
+        ],
+        "evidence_source": "coverage/overrides.json"
       },
       "quantitative": {
         "analogue_status": "unknown",
@@ -51733,11 +52037,13 @@
         "state": "unreviewed"
       },
       "lean": {
-        "statement_status": "unknown",
-        "proof_status": "unknown",
-        "coverage_relation": "unknown",
-        "declarations": [],
-        "evidence_source": null
+        "statement_status": "checked",
+        "proof_status": "missing",
+        "coverage_relation": "specialization",
+        "declarations": [
+          "LMLF.Blueprint.Gamma.Section514.dlmf_5_14_2"
+        ],
+        "evidence_source": "coverage/overrides.json"
       },
       "quantitative": {
         "analogue_status": "unknown",
@@ -51808,11 +52114,14 @@
         "state": "unreviewed"
       },
       "lean": {
-        "statement_status": "unknown",
-        "proof_status": "unknown",
-        "coverage_relation": "unknown",
-        "declarations": [],
-        "evidence_source": null
+        "statement_status": "checked",
+        "proof_status": "missing",
+        "coverage_relation": "exact",
+        "declarations": [
+          "LMLF.Blueprint.Gamma.Section514.vandermonde",
+          "LMLF.Blueprint.Gamma.Section514.dlmf_5_14_3"
+        ],
+        "evidence_source": "coverage/overrides.json"
       },
       "quantitative": {
         "analogue_status": "unknown",
@@ -51850,11 +52159,13 @@
         "state": "unreviewed"
       },
       "lean": {
-        "statement_status": "unknown",
-        "proof_status": "unknown",
-        "coverage_relation": "unknown",
-        "declarations": [],
-        "evidence_source": null
+        "statement_status": "checked",
+        "proof_status": "missing",
+        "coverage_relation": "specialization",
+        "declarations": [
+          "LMLF.Blueprint.Gamma.Section514.dlmf_5_14_4"
+        ],
+        "evidence_source": "coverage/overrides.json"
       },
       "quantitative": {
         "analogue_status": "unknown",
@@ -51925,11 +52236,13 @@
         "state": "unreviewed"
       },
       "lean": {
-        "statement_status": "unknown",
-        "proof_status": "unknown",
-        "coverage_relation": "unknown",
-        "declarations": [],
-        "evidence_source": null
+        "statement_status": "checked",
+        "proof_status": "missing",
+        "coverage_relation": "specialization",
+        "declarations": [
+          "LMLF.Blueprint.Gamma.Section514.dlmf_5_14_5"
+        ],
+        "evidence_source": "coverage/overrides.json"
       },
       "quantitative": {
         "analogue_status": "unknown",
@@ -52000,11 +52313,13 @@
         "state": "unreviewed"
       },
       "lean": {
-        "statement_status": "unknown",
-        "proof_status": "unknown",
-        "coverage_relation": "unknown",
-        "declarations": [],
-        "evidence_source": null
+        "statement_status": "checked",
+        "proof_status": "missing",
+        "coverage_relation": "specialization",
+        "declarations": [
+          "LMLF.Blueprint.Gamma.Section514.dlmf_5_14_6"
+        ],
+        "evidence_source": "coverage/overrides.json"
       },
       "quantitative": {
         "analogue_status": "unknown",
@@ -52075,11 +52390,13 @@
         "state": "unreviewed"
       },
       "lean": {
-        "statement_status": "unknown",
-        "proof_status": "unknown",
-        "coverage_relation": "unknown",
-        "declarations": [],
-        "evidence_source": null
+        "statement_status": "checked",
+        "proof_status": "missing",
+        "coverage_relation": "specialization",
+        "declarations": [
+          "LMLF.Blueprint.Gamma.Section514.dlmf_5_14_7"
+        ],
+        "evidence_source": "coverage/overrides.json"
       },
       "quantitative": {
         "analogue_status": "unknown",
@@ -52216,11 +52533,13 @@
         "state": "unreviewed"
       },
       "lean": {
-        "statement_status": "unknown",
-        "proof_status": "unknown",
-        "coverage_relation": "unknown",
-        "declarations": [],
-        "evidence_source": null
+        "statement_status": "checked",
+        "proof_status": "missing",
+        "coverage_relation": "exact",
+        "declarations": [
+          "LMLF.Blueprint.Gamma.Section515.dlmf_5_15_1"
+        ],
+        "evidence_source": "coverage/overrides.json"
       },
       "quantitative": {
         "analogue_status": "unknown",
@@ -52258,11 +52577,13 @@
         "state": "unreviewed"
       },
       "lean": {
-        "statement_status": "unknown",
-        "proof_status": "unknown",
-        "coverage_relation": "unknown",
-        "declarations": [],
-        "evidence_source": null
+        "statement_status": "checked",
+        "proof_status": "missing",
+        "coverage_relation": "exact",
+        "declarations": [
+          "LMLF.Blueprint.Gamma.Section515.dlmf_5_15_2"
+        ],
+        "evidence_source": "coverage/overrides.json"
       },
       "quantitative": {
         "analogue_status": "unknown",
@@ -52300,11 +52621,13 @@
         "state": "unreviewed"
       },
       "lean": {
-        "statement_status": "unknown",
-        "proof_status": "unknown",
-        "coverage_relation": "unknown",
-        "declarations": [],
-        "evidence_source": null
+        "statement_status": "checked",
+        "proof_status": "missing",
+        "coverage_relation": "exact",
+        "declarations": [
+          "LMLF.Blueprint.Gamma.Section515.dlmf_5_15_3"
+        ],
+        "evidence_source": "coverage/overrides.json"
       },
       "quantitative": {
         "analogue_status": "unknown",
@@ -52342,11 +52665,13 @@
         "state": "unreviewed"
       },
       "lean": {
-        "statement_status": "unknown",
-        "proof_status": "unknown",
-        "coverage_relation": "unknown",
-        "declarations": [],
-        "evidence_source": null
+        "statement_status": "checked",
+        "proof_status": "missing",
+        "coverage_relation": "exact",
+        "declarations": [
+          "LMLF.Blueprint.Gamma.Section515.dlmf_5_15_4"
+        ],
+        "evidence_source": "coverage/overrides.json"
       },
       "quantitative": {
         "analogue_status": "unknown",
@@ -52384,11 +52709,13 @@
         "state": "unreviewed"
       },
       "lean": {
-        "statement_status": "unknown",
-        "proof_status": "unknown",
-        "coverage_relation": "unknown",
-        "declarations": [],
-        "evidence_source": null
+        "statement_status": "checked",
+        "proof_status": "missing",
+        "coverage_relation": "exact",
+        "declarations": [
+          "LMLF.Blueprint.Gamma.Section515.dlmf_5_15_5"
+        ],
+        "evidence_source": "coverage/overrides.json"
       },
       "quantitative": {
         "analogue_status": "unknown",
@@ -52426,11 +52753,13 @@
         "state": "unreviewed"
       },
       "lean": {
-        "statement_status": "unknown",
-        "proof_status": "unknown",
-        "coverage_relation": "unknown",
-        "declarations": [],
-        "evidence_source": null
+        "statement_status": "checked",
+        "proof_status": "missing",
+        "coverage_relation": "exact",
+        "declarations": [
+          "LMLF.Blueprint.Gamma.Section515.dlmf_5_15_6"
+        ],
+        "evidence_source": "coverage/overrides.json"
       },
       "quantitative": {
         "analogue_status": "unknown",
@@ -52468,11 +52797,13 @@
         "state": "unreviewed"
       },
       "lean": {
-        "statement_status": "unknown",
-        "proof_status": "unknown",
-        "coverage_relation": "unknown",
-        "declarations": [],
-        "evidence_source": null
+        "statement_status": "checked",
+        "proof_status": "missing",
+        "coverage_relation": "exact",
+        "declarations": [
+          "LMLF.Blueprint.Gamma.Section515.dlmf_5_15_7"
+        ],
+        "evidence_source": "coverage/overrides.json"
       },
       "quantitative": {
         "analogue_status": "unknown",
@@ -52543,11 +52874,13 @@
         "state": "unreviewed"
       },
       "lean": {
-        "statement_status": "unknown",
-        "proof_status": "unknown",
-        "coverage_relation": "unknown",
-        "declarations": [],
-        "evidence_source": null
+        "statement_status": "checked",
+        "proof_status": "missing",
+        "coverage_relation": "specialization",
+        "declarations": [
+          "LMLF.Blueprint.Gamma.Section515.dlmf_5_15_8"
+        ],
+        "evidence_source": "coverage/overrides.json"
       },
       "quantitative": {
         "analogue_status": "unknown",
@@ -52585,11 +52918,13 @@
         "state": "unreviewed"
       },
       "lean": {
-        "statement_status": "unknown",
-        "proof_status": "unknown",
-        "coverage_relation": "unknown",
-        "declarations": [],
-        "evidence_source": null
+        "statement_status": "checked",
+        "proof_status": "missing",
+        "coverage_relation": "specialization",
+        "declarations": [
+          "LMLF.Blueprint.Gamma.Section515.dlmf_5_15_9"
+        ],
+        "evidence_source": "coverage/overrides.json"
       },
       "quantitative": {
         "analogue_status": "unknown",
@@ -52759,11 +53094,13 @@
         "state": "unreviewed"
       },
       "lean": {
-        "statement_status": "unknown",
-        "proof_status": "unknown",
-        "coverage_relation": "unknown",
-        "declarations": [],
-        "evidence_source": null
+        "statement_status": "checked",
+        "proof_status": "missing",
+        "coverage_relation": "exact",
+        "declarations": [
+          "LMLF.Blueprint.Gamma.Section516.dlmf_5_16_1"
+        ],
+        "evidence_source": "coverage/overrides.json"
       },
       "quantitative": {
         "analogue_status": "unknown",
@@ -52801,11 +53138,13 @@
         "state": "unreviewed"
       },
       "lean": {
-        "statement_status": "unknown",
-        "proof_status": "unknown",
-        "coverage_relation": "unknown",
-        "declarations": [],
-        "evidence_source": null
+        "statement_status": "checked",
+        "proof_status": "missing",
+        "coverage_relation": "exact",
+        "declarations": [
+          "LMLF.Blueprint.Gamma.Section516.dlmf_5_16_2"
+        ],
+        "evidence_source": "coverage/overrides.json"
       },
       "quantitative": {
         "analogue_status": "unknown",
@@ -53012,11 +53351,14 @@
         "state": "unreviewed"
       },
       "lean": {
-        "statement_status": "unknown",
-        "proof_status": "unknown",
-        "coverage_relation": "unknown",
-        "declarations": [],
-        "evidence_source": null
+        "statement_status": "checked",
+        "proof_status": "missing",
+        "coverage_relation": "specialization",
+        "declarations": [
+          "LMLF.Blueprint.Gamma.Section517.dlmf_5_17_1",
+          "LMLF.Blueprint.Gamma.Section517.barnesG_one"
+        ],
+        "evidence_source": "coverage/overrides.json"
       },
       "quantitative": {
         "analogue_status": "unknown",
@@ -53054,11 +53396,13 @@
         "state": "unreviewed"
       },
       "lean": {
-        "statement_status": "unknown",
-        "proof_status": "unknown",
-        "coverage_relation": "unknown",
-        "declarations": [],
-        "evidence_source": null
+        "statement_status": "checked",
+        "proof_status": "missing",
+        "coverage_relation": "exact",
+        "declarations": [
+          "LMLF.Blueprint.Gamma.Section517.dlmf_5_17_2"
+        ],
+        "evidence_source": "coverage/overrides.json"
       },
       "quantitative": {
         "analogue_status": "unknown",
@@ -53096,11 +53440,13 @@
         "state": "unreviewed"
       },
       "lean": {
-        "statement_status": "unknown",
-        "proof_status": "unknown",
-        "coverage_relation": "unknown",
-        "declarations": [],
-        "evidence_source": null
+        "statement_status": "checked",
+        "proof_status": "missing",
+        "coverage_relation": "exact",
+        "declarations": [
+          "LMLF.Blueprint.Gamma.Section517.dlmf_5_17_3"
+        ],
+        "evidence_source": "coverage/overrides.json"
       },
       "quantitative": {
         "analogue_status": "unknown",
@@ -53138,11 +53484,13 @@
         "state": "unreviewed"
       },
       "lean": {
-        "statement_status": "unknown",
-        "proof_status": "unknown",
-        "coverage_relation": "unknown",
-        "declarations": [],
-        "evidence_source": null
+        "statement_status": "checked",
+        "proof_status": "missing",
+        "coverage_relation": "specialization",
+        "declarations": [
+          "LMLF.Blueprint.Gamma.Section517.dlmf_5_17_4"
+        ],
+        "evidence_source": "coverage/overrides.json"
       },
       "quantitative": {
         "analogue_status": "unknown",
@@ -53213,11 +53561,13 @@
         "state": "unreviewed"
       },
       "lean": {
-        "statement_status": "unknown",
-        "proof_status": "unknown",
-        "coverage_relation": "unknown",
-        "declarations": [],
-        "evidence_source": null
+        "statement_status": "checked",
+        "proof_status": "missing",
+        "coverage_relation": "specialization",
+        "declarations": [
+          "LMLF.Blueprint.Gamma.Section517.dlmf_5_17_5"
+        ],
+        "evidence_source": "coverage/overrides.json"
       },
       "quantitative": {
         "analogue_status": "unknown",
@@ -53321,11 +53671,13 @@
         "state": "unreviewed"
       },
       "lean": {
-        "statement_status": "unknown",
-        "proof_status": "unknown",
-        "coverage_relation": "unknown",
-        "declarations": [],
-        "evidence_source": null
+        "statement_status": "checked",
+        "proof_status": "missing",
+        "coverage_relation": "exact",
+        "declarations": [
+          "LMLF.Blueprint.Gamma.Section517.dlmf_5_17_6"
+        ],
+        "evidence_source": "coverage/overrides.json"
       },
       "quantitative": {
         "analogue_status": "unknown",
@@ -53396,11 +53748,13 @@
         "state": "unreviewed"
       },
       "lean": {
-        "statement_status": "unknown",
-        "proof_status": "unknown",
-        "coverage_relation": "unknown",
-        "declarations": [],
-        "evidence_source": null
+        "statement_status": "checked",
+        "proof_status": "missing",
+        "coverage_relation": "exact",
+        "declarations": [
+          "LMLF.Blueprint.Gamma.Section517.dlmf_5_17_7"
+        ],
+        "evidence_source": "coverage/overrides.json"
       },
       "quantitative": {
         "analogue_status": "unknown",
@@ -53570,11 +53924,13 @@
         "state": "unreviewed"
       },
       "lean": {
-        "statement_status": "unknown",
-        "proof_status": "unknown",
-        "coverage_relation": "unknown",
-        "declarations": [],
-        "evidence_source": null
+        "statement_status": "checked",
+        "proof_status": "missing",
+        "coverage_relation": "exact",
+        "declarations": [
+          "LMLF.Blueprint.Gamma.Section518.dlmf_5_18_1"
+        ],
+        "evidence_source": "coverage/overrides.json"
       },
       "quantitative": {
         "analogue_status": "unknown",
@@ -53612,11 +53968,13 @@
         "state": "unreviewed"
       },
       "lean": {
-        "statement_status": "unknown",
-        "proof_status": "unknown",
-        "coverage_relation": "unknown",
-        "declarations": [],
-        "evidence_source": null
+        "statement_status": "checked",
+        "proof_status": "missing",
+        "coverage_relation": "exact",
+        "declarations": [
+          "LMLF.Blueprint.Gamma.Section518.dlmf_5_18_2"
+        ],
+        "evidence_source": "coverage/overrides.json"
       },
       "quantitative": {
         "analogue_status": "unknown",
@@ -53687,11 +54045,13 @@
         "state": "unreviewed"
       },
       "lean": {
-        "statement_status": "unknown",
-        "proof_status": "unknown",
-        "coverage_relation": "unknown",
-        "declarations": [],
-        "evidence_source": null
+        "statement_status": "checked",
+        "proof_status": "missing",
+        "coverage_relation": "exact",
+        "declarations": [
+          "LMLF.Blueprint.Gamma.Section518.dlmf_5_18_3"
+        ],
+        "evidence_source": "coverage/overrides.json"
       },
       "quantitative": {
         "analogue_status": "unknown",
@@ -53828,11 +54188,13 @@
         "state": "unreviewed"
       },
       "lean": {
-        "statement_status": "unknown",
-        "proof_status": "unknown",
-        "coverage_relation": "unknown",
-        "declarations": [],
-        "evidence_source": null
+        "statement_status": "checked",
+        "proof_status": "missing",
+        "coverage_relation": "specialization",
+        "declarations": [
+          "LMLF.Blueprint.Gamma.Section518.dlmf_5_18_4"
+        ],
+        "evidence_source": "coverage/overrides.json"
       },
       "quantitative": {
         "analogue_status": "unknown",
@@ -53870,11 +54232,13 @@
         "state": "unreviewed"
       },
       "lean": {
-        "statement_status": "unknown",
-        "proof_status": "unknown",
-        "coverage_relation": "unknown",
-        "declarations": [],
-        "evidence_source": null
+        "statement_status": "checked",
+        "proof_status": "missing",
+        "coverage_relation": "specialization",
+        "declarations": [
+          "LMLF.Blueprint.Gamma.Section518.dlmf_5_18_5"
+        ],
+        "evidence_source": "coverage/overrides.json"
       },
       "quantitative": {
         "analogue_status": "unknown",
@@ -53912,11 +54276,13 @@
         "state": "unreviewed"
       },
       "lean": {
-        "statement_status": "unknown",
-        "proof_status": "unknown",
-        "coverage_relation": "unknown",
-        "declarations": [],
-        "evidence_source": null
+        "statement_status": "checked",
+        "proof_status": "missing",
+        "coverage_relation": "specialization",
+        "declarations": [
+          "LMLF.Blueprint.Gamma.Section518.dlmf_5_18_6"
+        ],
+        "evidence_source": "coverage/overrides.json"
       },
       "quantitative": {
         "analogue_status": "unknown",
@@ -53954,11 +54320,13 @@
         "state": "unreviewed"
       },
       "lean": {
-        "statement_status": "unknown",
-        "proof_status": "unknown",
-        "coverage_relation": "unknown",
-        "declarations": [],
-        "evidence_source": null
+        "statement_status": "checked",
+        "proof_status": "missing",
+        "coverage_relation": "specialization",
+        "declarations": [
+          "LMLF.Blueprint.Gamma.Section518.dlmf_5_18_7"
+        ],
+        "evidence_source": "coverage/overrides.json"
       },
       "quantitative": {
         "analogue_status": "unknown",
@@ -54029,11 +54397,13 @@
         "state": "unreviewed"
       },
       "lean": {
-        "statement_status": "unknown",
-        "proof_status": "unknown",
-        "coverage_relation": "unknown",
-        "declarations": [],
-        "evidence_source": null
+        "statement_status": "checked",
+        "proof_status": "missing",
+        "coverage_relation": "specialization",
+        "declarations": [
+          "LMLF.Blueprint.Gamma.Section518.dlmf_5_18_8"
+        ],
+        "evidence_source": "coverage/overrides.json"
       },
       "quantitative": {
         "analogue_status": "unknown",
@@ -54071,11 +54441,13 @@
         "state": "unreviewed"
       },
       "lean": {
-        "statement_status": "unknown",
-        "proof_status": "unknown",
-        "coverage_relation": "unknown",
-        "declarations": [],
-        "evidence_source": null
+        "statement_status": "checked",
+        "proof_status": "missing",
+        "coverage_relation": "specialization",
+        "declarations": [
+          "LMLF.Blueprint.Gamma.Section518.dlmf_5_18_9"
+        ],
+        "evidence_source": "coverage/overrides.json"
       },
       "quantitative": {
         "analogue_status": "unknown",
@@ -54113,11 +54485,13 @@
         "state": "unreviewed"
       },
       "lean": {
-        "statement_status": "unknown",
-        "proof_status": "unknown",
-        "coverage_relation": "unknown",
-        "declarations": [],
-        "evidence_source": null
+        "statement_status": "checked",
+        "proof_status": "missing",
+        "coverage_relation": "specialization",
+        "declarations": [
+          "LMLF.Blueprint.Gamma.Section518.dlmf_5_18_10"
+        ],
+        "evidence_source": "coverage/overrides.json"
       },
       "quantitative": {
         "analogue_status": "unknown",
@@ -54254,11 +54628,13 @@
         "state": "unreviewed"
       },
       "lean": {
-        "statement_status": "unknown",
-        "proof_status": "unknown",
-        "coverage_relation": "unknown",
-        "declarations": [],
-        "evidence_source": null
+        "statement_status": "checked",
+        "proof_status": "missing",
+        "coverage_relation": "specialization",
+        "declarations": [
+          "LMLF.Blueprint.Gamma.Section518.dlmf_5_18_11"
+        ],
+        "evidence_source": "coverage/overrides.json"
       },
       "quantitative": {
         "analogue_status": "unknown",
@@ -54296,11 +54672,13 @@
         "state": "unreviewed"
       },
       "lean": {
-        "statement_status": "unknown",
-        "proof_status": "unknown",
-        "coverage_relation": "unknown",
-        "declarations": [],
-        "evidence_source": null
+        "statement_status": "checked",
+        "proof_status": "missing",
+        "coverage_relation": "specialization",
+        "declarations": [
+          "LMLF.Blueprint.Gamma.Section518.dlmf_5_18_12"
+        ],
+        "evidence_source": "coverage/overrides.json"
       },
       "quantitative": {
         "analogue_status": "unknown",

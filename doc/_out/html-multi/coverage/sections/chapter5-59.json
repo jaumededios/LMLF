@@ -1,0 +1,327 @@
+{
+  "section_range": [
+    "5.9"
+  ],
+  "numbered_formula_ids_expected": [
+    "5.9.E1",
+    "5.9.E2",
+    "5.9.E2_5",
+    "5.9.E3",
+    "5.9.E4",
+    "5.9.E5",
+    "5.9.E6",
+    "5.9.E7",
+    "5.9.E8",
+    "5.9.E9",
+    "5.9.E10",
+    "5.9.E10_1",
+    "5.9.E10_2",
+    "5.9.E11",
+    "5.9.E11_1",
+    "5.9.E11_2",
+    "5.9.E12",
+    "5.9.E13",
+    "5.9.E14",
+    "5.9.E15",
+    "5.9.E16",
+    "5.9.E17",
+    "5.9.E18",
+    "5.9.E19",
+    "5.9.E20"
+  ],
+  "numbered_formula_ids_stated": [
+    "5.9.E1",
+    "5.9.E2",
+    "5.9.E2_5",
+    "5.9.E3",
+    "5.9.E4",
+    "5.9.E5",
+    "5.9.E6",
+    "5.9.E7",
+    "5.9.E8",
+    "5.9.E9",
+    "5.9.E10",
+    "5.9.E10_1",
+    "5.9.E10_2",
+    "5.9.E11",
+    "5.9.E11_1",
+    "5.9.E11_2",
+    "5.9.E12",
+    "5.9.E13",
+    "5.9.E14",
+    "5.9.E15",
+    "5.9.E16",
+    "5.9.E17",
+    "5.9.E18",
+    "5.9.E19",
+    "5.9.E20"
+  ],
+  "numbered_formula_ids_omitted": [],
+  "extra_statement_ids": [
+    "complexSegmentIntegral",
+    "hankelTruncation",
+    "temmePhase",
+    "verticalLineIntegral",
+    "scaledGamma"
+  ],
+  "declarations": [
+    {
+      "source_id": "5.9.E1",
+      "names": [
+        "LMLF.Blueprint.Gamma.Section59.dlmf_5_9_1"
+      ],
+      "relation": "exact",
+      "proof_status": "missing",
+      "quantitative_analogue": "not_applicable",
+      "notes": ""
+    },
+    {
+      "source_id": "5.9.E2",
+      "names": [
+        "LMLF.Blueprint.Gamma.Section59.dlmf_5_9_2"
+      ],
+      "relation": "exact",
+      "proof_status": "missing",
+      "quantitative_analogue": "not_applicable",
+      "notes": "Branch-aware finite Hankel contour: lower and upper banks use continuous arguments -π and +π."
+    },
+    {
+      "source_id": "5.9.E2_5",
+      "names": [
+        "LMLF.Blueprint.Gamma.Section59.dlmf_5_9_2_5"
+      ],
+      "relation": "exact",
+      "proof_status": "missing",
+      "quantitative_analogue": "not_applicable",
+      "notes": ""
+    },
+    {
+      "source_id": "5.9.E3",
+      "names": [
+        "LMLF.Blueprint.Gamma.Section59.dlmf_5_9_3"
+      ],
+      "relation": "exact",
+      "proof_status": "missing",
+      "quantitative_analogue": "not_applicable",
+      "notes": ""
+    },
+    {
+      "source_id": "5.9.E4",
+      "names": [
+        "LMLF.Blueprint.Gamma.Section59.dlmf_5_9_4"
+      ],
+      "relation": "exact",
+      "proof_status": "missing",
+      "quantitative_analogue": "not_applicable",
+      "notes": ""
+    },
+    {
+      "source_id": "5.9.E5",
+      "names": [
+        "LMLF.Blueprint.Gamma.Section59.dlmf_5_9_5"
+      ],
+      "relation": "exact",
+      "proof_status": "missing",
+      "quantitative_analogue": "not_applicable",
+      "notes": ""
+    },
+    {
+      "source_id": "5.9.E6",
+      "names": [
+        "LMLF.Blueprint.Gamma.Section59.dlmf_5_9_6"
+      ],
+      "relation": "exact",
+      "proof_status": "missing",
+      "quantitative_analogue": "not_applicable",
+      "notes": ""
+    },
+    {
+      "source_id": "5.9.E7",
+      "names": [
+        "LMLF.Blueprint.Gamma.Section59.dlmf_5_9_7"
+      ],
+      "relation": "exact",
+      "proof_status": "missing",
+      "quantitative_analogue": "not_applicable",
+      "notes": ""
+    },
+    {
+      "source_id": "5.9.E8",
+      "names": [
+        "LMLF.Blueprint.Gamma.Section59.dlmf_5_9_8"
+      ],
+      "relation": "exact",
+      "proof_status": "missing",
+      "quantitative_analogue": "not_applicable",
+      "notes": ""
+    },
+    {
+      "source_id": "5.9.E9",
+      "names": [
+        "LMLF.Blueprint.Gamma.Section59.dlmf_5_9_9"
+      ],
+      "relation": "exact",
+      "proof_status": "missing",
+      "quantitative_analogue": "not_applicable",
+      "notes": ""
+    },
+    {
+      "source_id": "5.9.E10",
+      "names": [
+        "LMLF.Blueprint.Gamma.Section59.dlmf_5_9_10"
+      ],
+      "relation": "specialization",
+      "proof_status": "missing",
+      "quantitative_analogue": "not_applicable",
+      "notes": "Positive-real specialization; branch and contour conditions are stated in the documentation and Lean signature."
+    },
+    {
+      "source_id": "5.9.E10_1",
+      "names": [
+        "LMLF.Blueprint.Gamma.Section59.dlmf_5_9_10_1"
+      ],
+      "relation": "specialization",
+      "proof_status": "missing",
+      "quantitative_analogue": "not_applicable",
+      "notes": "Positive-real specialization; branch and contour conditions are stated in the documentation and Lean signature."
+    },
+    {
+      "source_id": "5.9.E10_2",
+      "names": [
+        "LMLF.Blueprint.Gamma.Section59.dlmf_5_9_10_2"
+      ],
+      "relation": "specialization",
+      "proof_status": "missing",
+      "quantitative_analogue": "not_applicable",
+      "notes": "Positive-real specialization; branch and contour conditions are stated in the documentation and Lean signature."
+    },
+    {
+      "source_id": "5.9.E11",
+      "names": [
+        "LMLF.Blueprint.Gamma.Section59.dlmf_5_9_11"
+      ],
+      "relation": "specialization",
+      "proof_status": "missing",
+      "quantitative_analogue": "not_applicable",
+      "notes": "Positive-real specialization; branch and contour conditions are stated in the documentation and Lean signature."
+    },
+    {
+      "source_id": "5.9.E11_1",
+      "names": [
+        "LMLF.Blueprint.Gamma.Section59.dlmf_5_9_11_1"
+      ],
+      "relation": "specialization",
+      "proof_status": "missing",
+      "quantitative_analogue": "not_applicable",
+      "notes": "Positive-real specialization; branch and contour conditions are stated in the documentation and Lean signature."
+    },
+    {
+      "source_id": "5.9.E11_2",
+      "names": [
+        "LMLF.Blueprint.Gamma.Section59.dlmf_5_9_11_2"
+      ],
+      "relation": "specialization",
+      "proof_status": "missing",
+      "quantitative_analogue": "not_applicable",
+      "notes": "Positive-real specialization; branch and contour conditions are stated in the documentation and Lean signature."
+    },
+    {
+      "source_id": "5.9.E12",
+      "names": [
+        "LMLF.Blueprint.Gamma.Section59.dlmf_5_9_12"
+      ],
+      "relation": "specialization",
+      "proof_status": "missing",
+      "quantitative_analogue": "not_applicable",
+      "notes": "Positive-real specialization; branch and contour conditions are stated in the documentation and Lean signature."
+    },
+    {
+      "source_id": "5.9.E13",
+      "names": [
+        "LMLF.Blueprint.Gamma.Section59.dlmf_5_9_13"
+      ],
+      "relation": "specialization",
+      "proof_status": "missing",
+      "quantitative_analogue": "not_applicable",
+      "notes": "Positive-real specialization; branch and contour conditions are stated in the documentation and Lean signature."
+    },
+    {
+      "source_id": "5.9.E14",
+      "names": [
+        "LMLF.Blueprint.Gamma.Section59.dlmf_5_9_14"
+      ],
+      "relation": "specialization",
+      "proof_status": "missing",
+      "quantitative_analogue": "not_applicable",
+      "notes": "Positive-real specialization; branch and contour conditions are stated in the documentation and Lean signature."
+    },
+    {
+      "source_id": "5.9.E15",
+      "names": [
+        "LMLF.Blueprint.Gamma.Section59.dlmf_5_9_15"
+      ],
+      "relation": "specialization",
+      "proof_status": "missing",
+      "quantitative_analogue": "not_applicable",
+      "notes": "Positive-real specialization; branch and contour conditions are stated in the documentation and Lean signature."
+    },
+    {
+      "source_id": "5.9.E16",
+      "names": [
+        "LMLF.Blueprint.Gamma.Section59.dlmf_5_9_16"
+      ],
+      "relation": "specialization",
+      "proof_status": "missing",
+      "quantitative_analogue": "not_applicable",
+      "notes": "Positive-real specialization; branch and contour conditions are stated in the documentation and Lean signature."
+    },
+    {
+      "source_id": "5.9.E17",
+      "names": [
+        "LMLF.Blueprint.Gamma.Section59.dlmf_5_9_17"
+      ],
+      "relation": "specialization",
+      "proof_status": "missing",
+      "quantitative_analogue": "not_applicable",
+      "notes": "Positive-real specialization; branch and contour conditions are stated in the documentation and Lean signature."
+    },
+    {
+      "source_id": "5.9.E18",
+      "names": [
+        "LMLF.Blueprint.Gamma.Section59.dlmf_5_9_18"
+      ],
+      "relation": "exact",
+      "proof_status": "missing",
+      "quantitative_analogue": "not_applicable",
+      "notes": ""
+    },
+    {
+      "source_id": "5.9.E19",
+      "names": [
+        "LMLF.Blueprint.Gamma.Section59.dlmf_5_9_19"
+      ],
+      "relation": "exact",
+      "proof_status": "missing",
+      "quantitative_analogue": "not_applicable",
+      "notes": ""
+    },
+    {
+      "source_id": "5.9.E20",
+      "names": [
+        "LMLF.Blueprint.Gamma.Section59.dlmf_5_9_20"
+      ],
+      "relation": "exact",
+      "proof_status": "missing",
+      "quantitative_analogue": "not_applicable",
+      "notes": ""
+    }
+  ],
+  "shared_vocabulary_requests": [
+    "Consolidate straight-segment, finite Hankel-contour, and vertical-line integration vocabulary if another section needs the same constructions.",
+    "Consolidate the scaled Gamma normalization with §5.11 when that section receives a complex-variable treatment."
+  ],
+  "known_gaps": [
+    "All 25 statements are proof-pending (`by sorry`).",
+    "DLMF 5.9.E10, E10_1, E10_2, E11, E11_1, E11_2, and E12–E17 are represented by positive-real specializations rather than their full branch-sensitive complex forms."
+  ]
+}

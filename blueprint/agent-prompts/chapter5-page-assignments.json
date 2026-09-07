@@ -1,0 +1,24 @@
+{
+  "author_contract": "blueprint/agent-prompts/dlmf-section-author.md",
+  "referee_contract": "blueprint/agent-prompts/dlmf-section-referee.md",
+  "pages": [
+    {"section":"5.1","slug":"51","lean_file":"LMLF/Blueprint/Gamma/Section51.lean","doc_file":"doc/LMLFManual/Chapter5/Section51.lean","manifest_file":"coverage/sections/chapter5-51.json","reviewers":1},
+    {"section":"5.2","slug":"52","lean_file":"LMLF/Blueprint/Gamma/Section52.lean","doc_file":"doc/LMLFManual/Chapter5/Section52.lean","manifest_file":"coverage/sections/chapter5-52.json","reviewers":1},
+    {"section":"5.3","slug":"53","lean_file":"LMLF/Blueprint/Gamma/Section53.lean","doc_file":"doc/LMLFManual/Chapter5/Section53.lean","manifest_file":"coverage/sections/chapter5-53.json","reviewers":1},
+    {"section":"5.4","slug":"54","lean_file":"LMLF/Blueprint/Gamma/Section54.lean","doc_file":"doc/LMLFManual/Chapter5/Section54.lean","manifest_file":"coverage/sections/chapter5-54.json","reviewers":1},
+    {"section":"5.5","slug":"55","lean_file":"LMLF/Blueprint/Gamma/Section55.lean","doc_file":"doc/LMLFManual/Chapter5/Section55.lean","manifest_file":"coverage/sections/chapter5-55.json","reviewers":1},
+    {"section":"5.6","slug":"56","lean_file":"LMLF/Blueprint/Gamma/Section56.lean","doc_file":"doc/LMLFManual/Chapter5/Section56.lean","manifest_file":"coverage/sections/chapter5-56.json","reviewers":2},
+    {"section":"5.7","slug":"57","lean_file":"LMLF/Blueprint/Gamma/Section57.lean","doc_file":"doc/LMLFManual/Chapter5/Section57.lean","manifest_file":"coverage/sections/chapter5-57.json","reviewers":1},
+    {"section":"5.8","slug":"58","lean_file":"LMLF/Blueprint/Gamma/Section58.lean","doc_file":"doc/LMLFManual/Chapter5/Section58.lean","manifest_file":"coverage/sections/chapter5-58.json","reviewers":1},
+    {"section":"5.9","slug":"59","lean_file":"LMLF/Blueprint/Gamma/Section59.lean","doc_file":"doc/LMLFManual/Chapter5/Section59.lean","manifest_file":"coverage/sections/chapter5-59.json","reviewers":2},
+    {"section":"5.10","slug":"510","lean_file":"LMLF/Blueprint/Gamma/Section510.lean","doc_file":"doc/LMLFManual/Chapter5/Section510.lean","manifest_file":"coverage/sections/chapter5-510.json","reviewers":2},
+    {"section":"5.11","slug":"511","lean_file":"LMLF/Blueprint/Gamma/Section511.lean","doc_file":"doc/LMLFManual/Chapter5/Section511.lean","manifest_file":"coverage/sections/chapter5-511.json","reviewers":2},
+    {"section":"5.12","slug":"512","lean_file":"LMLF/Blueprint/Gamma/Section512.lean","doc_file":"doc/LMLFManual/Chapter5/Section512.lean","manifest_file":"coverage/sections/chapter5-512.json","reviewers":1},
+    {"section":"5.13","slug":"513","lean_file":"LMLF/Blueprint/Gamma/Section513.lean","doc_file":"doc/LMLFManual/Chapter5/Section513.lean","manifest_file":"coverage/sections/chapter5-513.json","reviewers":2},
+    {"section":"5.14","slug":"514","lean_file":"LMLF/Blueprint/Gamma/Section514.lean","doc_file":"doc/LMLFManual/Chapter5/Section514.lean","manifest_file":"coverage/sections/chapter5-514.json","reviewers":1},
+    {"section":"5.15","slug":"515","lean_file":"LMLF/Blueprint/Gamma/Section515.lean","doc_file":"doc/LMLFManual/Chapter5/Section515.lean","manifest_file":"coverage/sections/chapter5-515.json","reviewers":1},
+    {"section":"5.16","slug":"516","lean_file":"LMLF/Blueprint/Gamma/Section516.lean","doc_file":"doc/LMLFManual/Chapter5/Section516.lean","manifest_file":"coverage/sections/chapter5-516.json","reviewers":1},
+    {"section":"5.17","slug":"517","lean_file":"LMLF/Blueprint/Gamma/Section517.lean","doc_file":"doc/LMLFManual/Chapter5/Section517.lean","manifest_file":"coverage/sections/chapter5-517.json","reviewers":1},
+    {"section":"5.18","slug":"518","lean_file":"LMLF/Blueprint/Gamma/Section518.lean","doc_file":"doc/LMLFManual/Chapter5/Section518.lean","manifest_file":"coverage/sections/chapter5-518.json","reviewers":2}
+  ]
+}

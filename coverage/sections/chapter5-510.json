@@ -1,0 +1,66 @@
+{
+  "schema_version": 1,
+  "artifact_kind": "dlmf_section_statement_coverage",
+  "section": "5.10",
+  "title": "Continued Fractions",
+  "source_url": "https://dlmf.nist.gov/5.10",
+  "source_version": "1.2.7",
+  "source_release_date": "2026-06-15",
+  "unit": "numbered_formula",
+  "formula_count": 2,
+  "included_ids": ["5.10.1", "5.10.2"],
+  "omitted_ids": [],
+  "summary": {
+    "lean_statements": 2,
+    "lean_proofs": 0,
+    "quantitative_analogues": 0,
+    "quantitative_statements": 0,
+    "quantitative_proofs": 0
+  },
+  "entries": [
+    {
+      "id": "5.10.1",
+      "source_url": "https://dlmf.nist.gov/5.10.E1",
+      "match": "specialization",
+      "lean_statement": true,
+      "lean_proof": false,
+      "lean_declarations": [
+        "LMLF.Blueprint.Gamma.Section510.continuedFractionTail",
+        "LMLF.Blueprint.Gamma.Section510.continuedFractionConvergent",
+        "LMLF.Blueprint.Gamma.Section510.exists_gammaContinuedFractionCoeff",
+        "LMLF.Blueprint.Gamma.Section510.gammaContinuedFractionCoeff",
+        "LMLF.Blueprint.Gamma.Section510.gammaContinuedFractionCoeff_spec",
+        "LMLF.Blueprint.Gamma.Section510.dlmf_5_10_1"
+      ],
+      "quantitative_analogue": false,
+      "quantitative_statement": false,
+      "quantitative_proof": false,
+      "notes": "Positive-real specialization of the source condition Re z > 0; finite convergents make the continued fraction's limit explicit. A proof-pending existential supplies the full coefficient sequence and its convergence; the reader-facing sequence is its Classical.choose."
+    },
+    {
+      "id": "5.10.2",
+      "source_url": "https://dlmf.nist.gov/5.10.E2",
+      "match": "exact",
+      "lean_statement": true,
+      "lean_proof": false,
+      "lean_declarations": [
+        "LMLF.Blueprint.Gamma.Section510.exists_gammaContinuedFractionCoeff",
+        "LMLF.Blueprint.Gamma.Section510.gammaContinuedFractionCoeff",
+        "LMLF.Blueprint.Gamma.Section510.gammaContinuedFractionCoeff_spec",
+        "LMLF.Blueprint.Gamma.Section510.dlmf_5_10_2"
+      ],
+      "quantitative_analogue": false,
+      "quantitative_statement": false,
+      "quantitative_proof": false,
+      "notes": "The seven displayed coefficients are kept as one grouped source record; later coefficients are present in the existential full sequence because §5.10 refers to external tables for them."
+    }
+  ],
+  "shared_vocabulary_requests": [
+    "Consolidate continuedFractionTail and continuedFractionConvergent if another section needs continued-fraction limits."
+  ],
+  "known_gaps": [
+    "Both statements are proof-pending (by sorry).",
+    "DLMF 5.10.1 is represented on the positive real axis rather than with the full complex general-logarithm branch convention.",
+    "DLMF 5.10.2 lists a₀ through a₆ and points to external tables for later coefficients. The existence assertion for a full sequence with those values and the E1 convergence/value remains proof-pending."
+  ]
+}

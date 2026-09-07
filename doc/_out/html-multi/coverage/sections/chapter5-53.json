@@ -1,0 +1,69 @@
+{
+  "section_range": ["5.3"],
+  "numbered_formula_ids_expected": [],
+  "numbered_formula_ids_stated": [],
+  "numbered_formula_ids_omitted": [],
+  "extra_statement_ids": [
+    "5.3.F1",
+    "5.3.F2",
+    "5.3.F3",
+    "5.3.F4",
+    "5.3.F5",
+    "5.3.F6"
+  ],
+  "declarations": [
+    {
+      "source_id": "5.3.F1",
+      "names": ["LMLF.Blueprint.Gamma.gamma_graph_reciprocal_on_pos"],
+      "relation": "specialization",
+      "proof_status": "missing",
+      "quantitative_analogue": "not_applicable",
+      "notes": "The figure pairs Gamma with its reciprocal; the Lean statement specializes the displayed relation to positive real x, where Gamma is nonzero."
+    },
+    {
+      "source_id": "5.3.F2",
+      "names": ["LMLF.Blueprint.Gamma.log_gamma_convexOn"],
+      "relation": "exact",
+      "proof_status": "missing",
+      "quantitative_analogue": "not_applicable",
+      "notes": "The ConvexOn domain is exactly the open positive half-line named in the caption."
+    },
+    {
+      "source_id": "5.3.F3",
+      "names": ["LMLF.Blueprint.Gamma.digamma_graph_log_derivative"],
+      "relation": "related",
+      "proof_status": "missing",
+      "quantitative_analogue": "not_applicable",
+      "notes": "The caption identifies the plotted psi function; the declaration records its standard logarithmic-derivative interpretation from the Gamma definitions."
+    },
+    {
+      "source_id": "5.3.F4",
+      "names": ["LMLF.Blueprint.Gamma.gamma_abs_graph_nonnegative"],
+      "relation": "related",
+      "proof_status": "missing",
+      "quantitative_analogue": "not_applicable",
+      "notes": "The figure is a surface of the absolute value; the declaration records the nonnegativity of its height for real coordinates x and y."
+    },
+    {
+      "source_id": "5.3.F5",
+      "names": ["LMLF.Blueprint.Gamma.reciprocal_gamma_abs_graph"],
+      "relation": "related",
+      "proof_status": "missing",
+      "quantitative_analogue": "not_applicable",
+      "notes": "The declaration identifies the norm of the complex reciprocal with the reciprocal of the Gamma norm, matching the plotted quantity 1/|Gamma|."
+    },
+    {
+      "source_id": "5.3.F6",
+      "names": ["LMLF.Blueprint.Gamma.digamma_abs_graph_nonnegative"],
+      "relation": "related",
+      "proof_status": "missing",
+      "quantitative_analogue": "not_applicable",
+      "notes": "The figure is a surface of the absolute value of psi; the declaration records the nonnegativity of its height."
+    }
+  ],
+  "shared_vocabulary_requests": [],
+  "known_gaps": [
+    "DLMF §5.3 has no numbered equations; its six source items are figure captions. Figure 5.3.1's x₀ = 1.46… and Γ(x₀) = 0.88… values are reproduced as caption approximations, but are intentionally not promoted to exact decimal theorem statements.",
+    "Main-manual integration and regenerated rendered output are parent-owned; this task does not edit the shared Chapter5 aggregator."
+  ]
+}
