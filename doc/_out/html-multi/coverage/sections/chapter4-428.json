@@ -1,0 +1,25 @@
+{
+  "section_range": ["4.28"],
+  "numbered_formula_ids_expected": ["4.28.E1", "4.28.E2", "4.28.E3", "4.28.E4", "4.28.E5", "4.28.E6", "4.28.E7", "4.28.E8", "4.28.E9", "4.28.E10", "4.28.E11", "4.28.E12", "4.28.E13"],
+  "numbered_formula_ids_stated": ["4.28.E1", "4.28.E2", "4.28.E3", "4.28.E4", "4.28.E5", "4.28.E6", "4.28.E7", "4.28.E8", "4.28.E9", "4.28.E10", "4.28.E11", "4.28.E12", "4.28.E13"],
+  "numbered_formula_ids_omitted": [],
+  "extra_statement_ids": ["4.28#info@annotation-note-1", "4.28#p1", "4.28#Px1.p1", "4.28#Px2.p1", "4.28.hyperbolicCosecant", "4.28.hyperbolicSecant", "4.28.hyperbolicCotangent", "4.28.complexCosecant", "4.28.complexSecant"],
+  "declarations": [
+    {"source_id":"4.28.E1","names":["LMLF.Blueprint.Elementary.Section428.dlmf_4_28_1"],"relation":"exact","proof_status":"missing","quantitative_analogue":"not_applicable","notes":"Complex exponential definition of sinh."},
+    {"source_id":"4.28.E2","names":["LMLF.Blueprint.Elementary.Section428.dlmf_4_28_2"],"relation":"exact","proof_status":"missing","quantitative_analogue":"not_applicable","notes":"Complex exponential definition of cosh."},
+    {"source_id":"4.28.E3","names":["LMLF.Blueprint.Elementary.Section428.dlmf_4_28_3"],"relation":"exact","proof_status":"missing","quantitative_analogue":"not_applicable","notes":"Both signed exponential combinations are retained as a conjunction."},
+    {"source_id":"4.28.E4","names":["LMLF.Blueprint.Elementary.Section428.dlmf_4_28_4"],"relation":"exact","proof_status":"missing","quantitative_analogue":"not_applicable","notes":"Quotient definition of tanh."},
+    {"source_id":"4.28.E5","names":["LMLF.Blueprint.Elementary.Section428.hyperbolicCosecant"],"relation":"exact","proof_status":"not_applicable","quantitative_analogue":"not_applicable","notes":"Transparent reciprocal definition of csch."},
+    {"source_id":"4.28.E6","names":["LMLF.Blueprint.Elementary.Section428.hyperbolicSecant"],"relation":"exact","proof_status":"not_applicable","quantitative_analogue":"not_applicable","notes":"Transparent reciprocal definition of sech."},
+    {"source_id":"4.28.E7","names":["LMLF.Blueprint.Elementary.Section428.hyperbolicCotangent"],"relation":"exact","proof_status":"not_applicable","quantitative_analogue":"not_applicable","notes":"Transparent reciprocal definition of coth."},
+    {"source_id":"4.28.E8","names":["LMLF.Blueprint.Elementary.Section428.dlmf_4_28_8"],"relation":"exact","proof_status":"missing","quantitative_analogue":"not_applicable","notes":"Imaginary-argument sine identity over complex z."},
+    {"source_id":"4.28.E9","names":["LMLF.Blueprint.Elementary.Section428.dlmf_4_28_9"],"relation":"exact","proof_status":"missing","quantitative_analogue":"not_applicable","notes":"Imaginary-argument cosine identity over complex z."},
+    {"source_id":"4.28.E10","names":["LMLF.Blueprint.Elementary.Section428.dlmf_4_28_10"],"relation":"exact","proof_status":"missing","quantitative_analogue":"not_applicable","notes":"Imaginary-argument tangent identity."},
+    {"source_id":"4.28.E11","names":["LMLF.Blueprint.Elementary.Section428.dlmf_4_28_11"],"relation":"specialization","proof_status":"missing","quantitative_analogue":"not_applicable","notes":"Uses the local transparent reciprocal definition complexCosecant because Mathlib has no dedicated Complex.csc name."},
+    {"source_id":"4.28.E12","names":["LMLF.Blueprint.Elementary.Section428.dlmf_4_28_12"],"relation":"specialization","proof_status":"missing","quantitative_analogue":"not_applicable","notes":"Uses the local transparent reciprocal definition complexSecant because Mathlib has no dedicated Complex.sec name."},
+    {"source_id":"4.28.E13","names":["LMLF.Blueprint.Elementary.Section428.dlmf_4_28_13"],"relation":"exact","proof_status":"missing","quantitative_analogue":"not_applicable","notes":"Imaginary-argument cotangent identity with transparent coth."},
+    {"source_id":"4.28#Px2.p1","names":["LMLF.Blueprint.Elementary.Section428.dlmf_4_28_periodicity_and_zeros"],"relation":"exact","proof_status":"missing","quantitative_analogue":"not_applicable","notes":"Periods of sinh, cosh, tanh and both integer-indexed zero sets."}
+  ],
+  "shared_vocabulary_requests": [],
+  "known_gaps": []
+}

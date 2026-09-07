@@ -1,0 +1,712 @@
+{
+  "section_range": [
+    "4.23"
+  ],
+  "numbered_formula_ids_expected": [
+    "4.23.E1",
+    "4.23.E2",
+    "4.23.E3",
+    "4.23.E4",
+    "4.23.E5",
+    "4.23.E6",
+    "4.23.E7",
+    "4.23.E8",
+    "4.23.E9",
+    "4.23.E10",
+    "4.23.E11",
+    "4.23.E12",
+    "4.23.E13",
+    "4.23.E14",
+    "4.23.E15",
+    "4.23.E16",
+    "4.23.E17",
+    "4.23.E18",
+    "4.23.E19",
+    "4.23.E20",
+    "4.23.E21",
+    "4.23.E22",
+    "4.23.E23",
+    "4.23.E24",
+    "4.23.E25",
+    "4.23.E26",
+    "4.23.E27",
+    "4.23.E28",
+    "4.23.E29",
+    "4.23.E30",
+    "4.23.E31",
+    "4.23.E32",
+    "4.23.E33",
+    "4.23.E34",
+    "4.23.E35",
+    "4.23.E36",
+    "4.23.E37",
+    "4.23.E38",
+    "4.23.E39",
+    "4.23.E40",
+    "4.23.E41",
+    "4.23.E42"
+  ],
+  "numbered_formula_ids_stated": [
+    "4.23.E1",
+    "4.23.E2",
+    "4.23.E3",
+    "4.23.E4",
+    "4.23.E5",
+    "4.23.E6",
+    "4.23.E7",
+    "4.23.E8",
+    "4.23.E9",
+    "4.23.E10",
+    "4.23.E11",
+    "4.23.E12",
+    "4.23.E13",
+    "4.23.E14",
+    "4.23.E15",
+    "4.23.E16",
+    "4.23.E17",
+    "4.23.E18",
+    "4.23.E19",
+    "4.23.E20",
+    "4.23.E21",
+    "4.23.E22",
+    "4.23.E23",
+    "4.23.E24",
+    "4.23.E25",
+    "4.23.E26",
+    "4.23.E27",
+    "4.23.E28",
+    "4.23.E29",
+    "4.23.E30",
+    "4.23.E31",
+    "4.23.E32",
+    "4.23.E33",
+    "4.23.E34",
+    "4.23.E35",
+    "4.23.E36",
+    "4.23.E37",
+    "4.23.E38",
+    "4.23.E39",
+    "4.23.E40",
+    "4.23.E41",
+    "4.23.E42"
+  ],
+  "numbered_formula_ids_omitted": [],
+  "extra_statement_ids": [
+    "4.23#i.p1",
+    "4.23#ii.info@annotation-note-1",
+    "4.23#ii.p1",
+    "4.23#ii.p2",
+    "4.23#ii.p3",
+    "4.23#F1.t1.r1",
+    "4.23#F1.t1.r2",
+    "4.23#F1@caption",
+    "4.23#ii.p4",
+    "4.23#iii.info@annotation-note-1",
+    "4.23#iii.p1",
+    "4.23#iv.info@annotation-note-1",
+    "4.23#iv.p1",
+    "4.23#Px1.p1",
+    "4.23#Px2.p1",
+    "4.23#Px2.p2",
+    "4.23#Px3.p1",
+    "4.23#Px4.p1",
+    "4.23#v.info@annotation-note-1",
+    "4.23#v.p1",
+    "4.23#vi.info@annotation-note-1",
+    "4.23#vi.info@editorial-change-note-1",
+    "4.23#vi.p1",
+    "4.23#E34.info@editorial-change-note-1",
+    "4.23#E35.info@editorial-change-note-1",
+    "4.23#vii.info@annotation-note-1",
+    "4.23#T1@caption",
+    "4.23#T1.t1.r1",
+    "4.23#T1.t1.r2",
+    "4.23#T1.t1.r3",
+    "4.23#T1.t1.r4",
+    "4.23#T1.t1.r5",
+    "4.23#T1.t1.r6",
+    "4.23#vii.p1",
+    "4.23#viii.info@annotation-note-1",
+    "4.23#viii.p1",
+    "4.23#viii.p2",
+    "principalArcsin",
+    "principalArccos",
+    "principalArctan",
+    "principalArccsc",
+    "principalArcsec",
+    "principalArccot",
+    "principalArcsinDomain",
+    "principalArctanDomain",
+    "SqrtContinuation",
+    "SqrtPath",
+    "SqrtPath.integral",
+    "RationalPath",
+    "RationalPath.integral",
+    "arcsinPathValue",
+    "arccosPathValue",
+    "arctanPathValue",
+    "arccscPathValue",
+    "arcsecPathValue",
+    "arccotPathValue",
+    "realCoth",
+    "realSech",
+    "realCsch",
+    "principalArcsinh",
+    "principalArccsch",
+    "principalArccosh",
+    "principalArcsech",
+    "principalArctanh",
+    "principalArccoth",
+    "realSec",
+    "realCot",
+    "realCsc",
+    "boundaryLimit",
+    "imaginaryCutBoundaryLimit",
+    "arcsinBoundaryValue",
+    "arcsinNegativeBoundaryValue",
+    "arccosBoundaryValue",
+    "arccosNegativeBoundaryValue",
+    "arctanImaginaryBoundaryValue",
+    "alpha",
+    "beta",
+    "gudermannian",
+    "inverseGudermannian"
+  ],
+  "nonformula_inventory_ids": [
+    "dlmf:4.23#i.p1", "dlmf:4.23#ii.info@annotation-note-1",
+    "dlmf:4.23#ii.p1", "dlmf:4.23#ii.p2", "dlmf:4.23#ii.p3",
+    "dlmf:4.23#F1.t1.r1", "dlmf:4.23#F1.t1.r2", "dlmf:4.23#F1@caption",
+    "dlmf:4.23#ii.p4", "dlmf:4.23#iii.info@annotation-note-1",
+    "dlmf:4.23#iii.p1", "dlmf:4.23#iv.info@annotation-note-1",
+    "dlmf:4.23#iv.p1", "dlmf:4.23#Px1.p1", "dlmf:4.23#Px2.p1",
+    "dlmf:4.23#Px2.p2", "dlmf:4.23#Px3.p1", "dlmf:4.23#Px4.p1",
+    "dlmf:4.23#v.info@annotation-note-1", "dlmf:4.23#v.p1",
+    "dlmf:4.23#vi.info@annotation-note-1",
+    "dlmf:4.23#vi.info@editorial-change-note-1", "dlmf:4.23#vi.p1",
+    "dlmf:4.23#E34.info@editorial-change-note-1",
+    "dlmf:4.23#E35.info@editorial-change-note-1",
+    "dlmf:4.23#vii.info@annotation-note-1", "dlmf:4.23#T1@caption",
+    "dlmf:4.23#T1.t1.r1", "dlmf:4.23#T1.t1.r2",
+    "dlmf:4.23#T1.t1.r3", "dlmf:4.23#T1.t1.r4",
+    "dlmf:4.23#T1.t1.r5", "dlmf:4.23#T1.t1.r6",
+    "dlmf:4.23#vii.p1", "dlmf:4.23#viii.info@annotation-note-1",
+    "dlmf:4.23#viii.p1", "dlmf:4.23#viii.p2"
+  ],
+  "declarations": [
+    {
+      "source_id": "4.23.E1",
+      "names": [
+        "LMLF.Blueprint.Elementary.Section423.dlmf_4_23_1"
+      ],
+      "relation": "specialization",
+      "proof_status": "missing",
+      "quantitative_analogue": "not_applicable",
+      "notes": "Direct existence statement for the oriented square-root path integral: some P : SqrtPath 0 z satisfies sin(P.integral) = z; the adjacent path disclosure exposes its branch and interval-integrability data."
+    },
+    {
+      "source_id": "4.23.E2",
+      "names": [
+        "LMLF.Blueprint.Elementary.Section423.dlmf_4_23_2"
+      ],
+      "relation": "specialization",
+      "proof_status": "missing",
+      "quantitative_analogue": "not_applicable",
+      "notes": "Direct existence statement for the oriented square-root path integral: some P : SqrtPath z 1 satisfies cos(P.integral) = z; the adjacent path disclosure exposes its branch and interval-integrability data."
+    },
+    {
+      "source_id": "4.23.E3",
+      "names": [
+        "LMLF.Blueprint.Elementary.Section423.dlmf_4_23_3"
+      ],
+      "relation": "specialization",
+      "proof_status": "missing",
+      "quantitative_analogue": "not_applicable",
+      "notes": "Direct existence statement for the oriented rational path integral: some P : RationalPath 0 z satisfies tan(P.integral) = z, with the ±i exclusions retained."
+    },
+    {
+      "source_id": "4.23.E4",
+      "names": [
+        "LMLF.Blueprint.Elementary.Section423.dlmf_4_23_4"
+      ],
+      "relation": "specialization",
+      "proof_status": "missing",
+      "quantitative_analogue": "not_applicable",
+      "notes": "Direct reciprocal multivalued relation generalArccscValue z w ↔ generalArcsinValue (1 / z) w; the corresponding 0-to-1/z square-root path API remains disclosed adjacent to E1–E3."
+    },
+    {
+      "source_id": "4.23.E5",
+      "names": [
+        "LMLF.Blueprint.Elementary.Section423.dlmf_4_23_5"
+      ],
+      "relation": "specialization",
+      "proof_status": "missing",
+      "quantitative_analogue": "not_applicable",
+      "notes": "Direct reciprocal multivalued relation generalArcsecValue z w ↔ generalArccosValue (1 / z) w; the corresponding 1/z-to-1 square-root path API remains disclosed adjacent to E1–E3."
+    },
+    {
+      "source_id": "4.23.E6",
+      "names": [
+        "LMLF.Blueprint.Elementary.Section423.dlmf_4_23_6"
+      ],
+      "relation": "specialization",
+      "proof_status": "missing",
+      "quantitative_analogue": "not_applicable",
+      "notes": "Direct reciprocal multivalued relation generalArccotValue z w ↔ generalArctanValue (1 / z) w, retaining z ≠ 0 and the ±i exclusions; the 0-to-1/z rational path API remains disclosed adjacent to E1–E3."
+    },
+    {
+      "source_id": "4.23.E7",
+      "names": [
+        "LMLF.Blueprint.Elementary.Section423.dlmf_4_23_7"
+      ],
+      "relation": "specialization",
+      "proof_status": "missing",
+      "quantitative_analogue": "not_applicable",
+      "notes": ""
+    },
+    {
+      "source_id": "4.23.E8",
+      "names": [
+        "LMLF.Blueprint.Elementary.Section423.dlmf_4_23_8"
+      ],
+      "relation": "specialization",
+      "proof_status": "missing",
+      "quantitative_analogue": "not_applicable",
+      "notes": ""
+    },
+    {
+      "source_id": "4.23.E9",
+      "names": [
+        "LMLF.Blueprint.Elementary.Section423.dlmf_4_23_9"
+      ],
+      "relation": "specialization",
+      "proof_status": "missing",
+      "quantitative_analogue": "not_applicable",
+      "notes": ""
+    },
+    {
+      "source_id": "4.23.E10",
+      "names": [
+        "LMLF.Blueprint.Elementary.Section423.dlmf_4_23_10"
+      ],
+      "relation": "specialization",
+      "proof_status": "missing",
+      "quantitative_analogue": "not_applicable",
+      "notes": ""
+    },
+    {
+      "source_id": "4.23.E11",
+      "names": [
+        "LMLF.Blueprint.Elementary.Section423.dlmf_4_23_11"
+      ],
+      "relation": "specialization",
+      "proof_status": "missing",
+      "quantitative_analogue": "not_applicable",
+      "notes": ""
+    },
+    {
+      "source_id": "4.23.E12",
+      "names": [
+        "LMLF.Blueprint.Elementary.Section423.dlmf_4_23_12"
+      ],
+      "relation": "specialization",
+      "proof_status": "missing",
+      "quantitative_analogue": "not_applicable",
+      "notes": ""
+    },
+    {
+      "source_id": "4.23.E13",
+      "names": [
+        "LMLF.Blueprint.Elementary.Section423.dlmf_4_23_13"
+      ],
+      "relation": "specialization",
+      "proof_status": "missing",
+      "quantitative_analogue": "not_applicable",
+      "notes": ""
+    },
+    {
+      "source_id": "4.23.E14",
+      "names": [
+        "LMLF.Blueprint.Elementary.Section423.dlmf_4_23_14"
+      ],
+      "relation": "specialization",
+      "proof_status": "missing",
+      "quantitative_analogue": "not_applicable",
+      "notes": ""
+    },
+    {
+      "source_id": "4.23.E15",
+      "names": [
+        "LMLF.Blueprint.Elementary.Section423.dlmf_4_23_15"
+      ],
+      "relation": "specialization",
+      "proof_status": "missing",
+      "quantitative_analogue": "not_applicable",
+      "notes": ""
+    },
+    {
+      "source_id": "4.23.E16",
+      "names": [
+        "LMLF.Blueprint.Elementary.Section423.dlmf_4_23_16"
+      ],
+      "relation": "specialization",
+      "proof_status": "missing",
+      "quantitative_analogue": "not_applicable",
+      "notes": ""
+    },
+    {
+      "source_id": "4.23.E17",
+      "names": [
+        "LMLF.Blueprint.Elementary.Section423.dlmf_4_23_17"
+      ],
+      "relation": "specialization",
+      "proof_status": "missing",
+      "quantitative_analogue": "not_applicable",
+      "notes": ""
+    },
+    {
+      "source_id": "4.23.E18",
+      "names": [
+        "LMLF.Blueprint.Elementary.Section423.dlmf_4_23_18"
+      ],
+      "relation": "specialization",
+      "proof_status": "missing",
+      "quantitative_analogue": "not_applicable",
+      "notes": ""
+    },
+    {
+      "source_id": "4.23.E19",
+      "names": [
+        "LMLF.Blueprint.Elementary.Section423.dlmf_4_23_19"
+      ],
+      "relation": "specialization",
+      "proof_status": "missing",
+      "quantitative_analogue": "not_applicable",
+      "notes": ""
+    },
+    {
+      "source_id": "4.23.E20",
+      "names": [
+        "LMLF.Blueprint.Elementary.Section423.dlmf_4_23_20"
+      ],
+      "relation": "specialization",
+      "proof_status": "missing",
+      "quantitative_analogue": "not_applicable",
+      "notes": ""
+    },
+    {
+      "source_id": "4.23.E21",
+      "names": [
+        "LMLF.Blueprint.Elementary.Section423.dlmf_4_23_21"
+      ],
+      "relation": "specialization",
+      "proof_status": "missing",
+      "quantitative_analogue": "not_applicable",
+      "notes": ""
+    },
+    {
+      "source_id": "4.23.E22",
+      "names": [
+        "LMLF.Blueprint.Elementary.Section423.dlmf_4_23_22"
+      ],
+      "relation": "specialization",
+      "proof_status": "missing",
+      "quantitative_analogue": "not_applicable",
+      "notes": ""
+    },
+    {
+      "source_id": "4.23.E23",
+      "names": [
+        "LMLF.Blueprint.Elementary.Section423.dlmf_4_23_23"
+      ],
+      "relation": "specialization",
+      "proof_status": "missing",
+      "quantitative_analogue": "not_applicable",
+      "notes": "The disclosure is the displayed logarithmic two-square-root definition of principal arccosine on the principal cut-plane domain."
+    },
+    {
+      "source_id": "4.23.E24",
+      "names": [
+        "LMLF.Blueprint.Elementary.Section423.dlmf_4_23_24"
+      ],
+      "relation": "specialization",
+      "proof_status": "missing",
+      "quantitative_analogue": "not_applicable",
+      "notes": ""
+    },
+    {
+      "source_id": "4.23.E25",
+      "names": [
+        "LMLF.Blueprint.Elementary.Section423.dlmf_4_23_25"
+      ],
+      "relation": "specialization",
+      "proof_status": "missing",
+      "quantitative_analogue": "not_applicable",
+      "notes": ""
+    },
+    {
+      "source_id": "4.23.E26",
+      "names": [
+        "LMLF.Blueprint.Elementary.Section423.dlmf_4_23_26"
+      ],
+      "relation": "specialization",
+      "proof_status": "missing",
+      "quantitative_analogue": "not_applicable",
+      "notes": ""
+    },
+    {
+      "source_id": "4.23.E27",
+      "names": [
+        "LMLF.Blueprint.Elementary.Section423.dlmf_4_23_27"
+      ],
+      "relation": "specialization",
+      "proof_status": "missing",
+      "quantitative_analogue": "not_applicable",
+      "notes": ""
+    },
+    {
+      "source_id": "4.23.E28",
+      "names": [
+        "LMLF.Blueprint.Elementary.Section423.dlmf_4_23_28"
+      ],
+      "relation": "related",
+      "proof_status": "missing",
+      "quantitative_analogue": "not_applicable",
+      "notes": ""
+    },
+    {
+      "source_id": "4.23.E29",
+      "names": [
+        "LMLF.Blueprint.Elementary.Section423.dlmf_4_23_29"
+      ],
+      "relation": "related",
+      "proof_status": "missing",
+      "quantitative_analogue": "not_applicable",
+      "notes": ""
+    },
+    {
+      "source_id": "4.23.E30",
+      "names": [
+        "LMLF.Blueprint.Elementary.Section423.dlmf_4_23_30"
+      ],
+      "relation": "related",
+      "proof_status": "missing",
+      "quantitative_analogue": "not_applicable",
+      "notes": ""
+    },
+    {
+      "source_id": "4.23.E31",
+      "names": [
+        "LMLF.Blueprint.Elementary.Section423.dlmf_4_23_31"
+      ],
+      "relation": "related",
+      "proof_status": "missing",
+      "quantitative_analogue": "not_applicable",
+      "notes": ""
+    },
+    {
+      "source_id": "4.23.E32",
+      "names": [
+        "LMLF.Blueprint.Elementary.Section423.dlmf_4_23_32"
+      ],
+      "relation": "related",
+      "proof_status": "missing",
+      "quantitative_analogue": "not_applicable",
+      "notes": ""
+    },
+    {
+      "source_id": "4.23.E33",
+      "names": [
+        "LMLF.Blueprint.Elementary.Section423.dlmf_4_23_33"
+      ],
+      "relation": "related",
+      "proof_status": "missing",
+      "quantitative_analogue": "not_applicable",
+      "notes": ""
+    },
+    {
+      "source_id": "4.23.E34",
+      "names": [
+        "LMLF.Blueprint.Elementary.Section423.dlmf_4_23_34"
+      ],
+      "relation": "specialization",
+      "proof_status": "missing",
+      "quantitative_analogue": "not_applicable",
+      "notes": ""
+    },
+    {
+      "source_id": "4.23.E35",
+      "names": [
+        "LMLF.Blueprint.Elementary.Section423.dlmf_4_23_35"
+      ],
+      "relation": "specialization",
+      "proof_status": "missing",
+      "quantitative_analogue": "not_applicable",
+      "notes": ""
+    },
+    {
+      "source_id": "4.23.E36",
+      "names": [
+        "LMLF.Blueprint.Elementary.Section423.dlmf_4_23_36"
+      ],
+      "relation": "specialization",
+      "proof_status": "missing",
+      "quantitative_analogue": "not_applicable",
+      "notes": ""
+    },
+    {
+      "source_id": "4.23.E37",
+      "names": [
+        "LMLF.Blueprint.Elementary.Section423.dlmf_4_23_37"
+      ],
+      "relation": "related",
+      "proof_status": "missing",
+      "quantitative_analogue": "not_applicable",
+      "notes": "Reusable coordinate/integral vocabulary declaration."
+    },
+    {
+      "source_id": "4.23.E38",
+      "names": [
+        "LMLF.Blueprint.Elementary.Section423.dlmf_4_23_38"
+      ],
+      "relation": "related",
+      "proof_status": "missing",
+      "quantitative_analogue": "not_applicable",
+      "notes": "Reusable coordinate/integral vocabulary declaration."
+    },
+    {
+      "source_id": "4.23.E39",
+      "names": [
+        "LMLF.Blueprint.Elementary.Section423.dlmf_4_23_39"
+      ],
+      "relation": "related",
+      "proof_status": "missing",
+      "quantitative_analogue": "not_applicable",
+      "notes": "Reusable coordinate/integral vocabulary declaration."
+    },
+    {
+      "source_id": "4.23.E40",
+      "names": [
+        "LMLF.Blueprint.Elementary.Section423.dlmf_4_23_40"
+      ],
+      "relation": "specialization",
+      "proof_status": "missing",
+      "quantitative_analogue": "not_applicable",
+      "notes": "Full source equivalence chain is exposed as conjunctions with the displayed Gudermannian member; x ≠ 0 records the csch/coth terms' domain."
+    },
+    {
+      "source_id": "4.23.E41",
+      "names": [
+        "LMLF.Blueprint.Elementary.Section423.dlmf_4_23_41"
+      ],
+      "relation": "specialization",
+      "proof_status": "missing",
+      "quantitative_analogue": "not_applicable",
+      "notes": "Integral definition on the strict cosine interval; the companion chain is exposed in E42 under the same interval and x ≠ 0 for cot/csc terms."
+    },
+    {
+      "source_id": "4.23.E42",
+      "names": [
+        "LMLF.Blueprint.Elementary.Section423.dlmf_4_23_42"
+      ],
+      "relation": "specialization",
+      "proof_status": "missing",
+      "quantitative_analogue": "not_applicable",
+      "notes": "Full source inverse-Gudermannian equivalence chain is exposed as conjunctions on −π/2 < x < π/2 with x ≠ 0 for the csc/cot terms."
+    },
+    {
+      "source_id": "4.23#F1.t1.r1",
+      "names": [
+        "LMLF.Blueprint.Elementary.Section423.dlmf_4_23_F1_t1_r1"
+      ],
+      "relation": "related",
+      "proof_status": "missing",
+      "quantitative_analogue": "not_applicable",
+      "notes": "Formal figure caption string."
+    },
+    {
+      "source_id": "4.23#F1.t1.r2",
+      "names": [
+        "LMLF.Blueprint.Elementary.Section423.dlmf_4_23_F1_t1_r2"
+      ],
+      "relation": "related",
+      "proof_status": "missing",
+      "quantitative_analogue": "not_applicable",
+      "notes": "Formal four-panel label list."
+    },
+    {
+      "source_id": "4.23#T1@caption",
+      "names": [
+        "LMLF.Blueprint.Elementary.Section423.dlmf_4_23_T1_caption"
+      ],
+      "relation": "related",
+      "proof_status": "missing",
+      "quantitative_analogue": "not_applicable",
+      "notes": "Formal header and five six-cell special-value rows; one-sided values are represented explicitly."
+    },
+    {
+      "source_id": "4.23#T1.t1.r1",
+      "names": [
+        "LMLF.Blueprint.Elementary.Section423.dlmf_4_23_T1_t1_r1"
+      ],
+      "relation": "related",
+      "proof_status": "missing",
+      "quantitative_analogue": "not_applicable",
+      "notes": "Formal negative-infinity row with none for nonvalues."
+    },
+    {
+      "source_id": "4.23#T1.t1.r2",
+      "names": [
+        "LMLF.Blueprint.Elementary.Section423.dlmf_4_23_T1_t1_r2"
+      ],
+      "relation": "related",
+      "proof_status": "missing",
+      "quantitative_analogue": "not_applicable",
+      "notes": "Formal negative-one row."
+    },
+    {
+      "source_id": "4.23#T1.t1.r3",
+      "names": [
+        "LMLF.Blueprint.Elementary.Section423.dlmf_4_23_T1_t1_r3"
+      ],
+      "relation": "related",
+      "proof_status": "missing",
+      "quantitative_analogue": "not_applicable",
+      "notes": "Formal zero row; one-sided arccotangent convention is described in prose."
+    },
+    {
+      "source_id": "4.23#T1.t1.r4",
+      "names": [
+        "LMLF.Blueprint.Elementary.Section423.dlmf_4_23_T1_t1_r4"
+      ],
+      "relation": "related",
+      "proof_status": "missing",
+      "quantitative_analogue": "not_applicable",
+      "notes": "Formal positive-one row."
+    },
+    {
+      "source_id": "4.23#T1.t1.r5",
+      "names": [
+        "LMLF.Blueprint.Elementary.Section423.dlmf_4_23_T1_t1_r5"
+      ],
+      "relation": "related",
+      "proof_status": "missing",
+      "quantitative_analogue": "not_applicable",
+      "notes": "Formal positive-infinity row with none for nonvalues."
+    },
+    {
+      "source_id": "4.23#T1.t1.r6",
+      "names": [
+        "LMLF.Blueprint.Elementary.Section423.dlmf_4_23_T1_t1_r6"
+      ],
+      "relation": "related",
+      "proof_status": "missing",
+      "quantitative_analogue": "not_applicable",
+      "notes": "Formal positive-infinity row; table rows are indexed header, -infinity, -1, 0, 1, +infinity."
+    }
+  ],
+  "shared_vocabulary_requests": [],
+  "known_gaps": [
+    "One-sided analytic boundary limits and the full path-integral construction are represented by explicit path objects and signed principal specializations; the image geometry remains prose-only.",
+    "Figure geometry is represented by its official caption and panel labels; the image itself is not formalized."
+  ]
+}

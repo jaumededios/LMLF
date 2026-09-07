@@ -165,6 +165,13 @@ def ZeroTerminated {K : Type} [Zero K] (a : ℕ → K) : Prop :=
 abbrev CFCoefficients (K : Type := ℚ) [Zero K] :=
   {a : ℕ → K // ZeroTerminated a}
 ```
+
+```anchor CFCoefficients.eq_zero_of_le (module := LMLF.Definitions.ContinuedFraction) -showProofStates
+theorem CFCoefficients.eq_zero_of_le {K : Type} [Zero K]
+    (a : CFCoefficients K) {k j : ℕ} (hk : a k = 0) (hkj : k ≤ j) :
+    a j = 0 :=
+  a.property k hk j hkj
+```
 :::
 
 The extraction itself repeatedly takes the normalized reciprocal of the

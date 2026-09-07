@@ -1,0 +1,23 @@
+{
+  "section_range": ["4.42"],
+  "numbered_formula_ids_expected": ["4.42.E1","4.42.E2","4.42.E3","4.42.E4","4.42.E5","4.42.E6","4.42.E7","4.42.E8","4.42.E9","4.42.E10","4.42.E11","4.42.E12"],
+  "numbered_formula_ids_stated": ["4.42.E1","4.42.E2","4.42.E3","4.42.E4","4.42.E5","4.42.E6","4.42.E7","4.42.E8","4.42.E9","4.42.E10","4.42.E11","4.42.E12"],
+  "numbered_formula_ids_omitted": [],
+  "extra_statement_ids": ["4.42#i.p1","4.42#ii.p1","4.42#iii.p1","4.42#F1@caption","4.42#F2@caption","4.42#F3@caption"],
+  "declarations": [
+    {"source_id":"4.42.E1","names":["LMLF.Blueprint.Elementary.Section442.rightTriangleData","LMLF.Blueprint.Elementary.Section442.dlmf_4_42_1"],"relation":"specialization","proof_status":"missing","quantitative_analogue":"not_applicable","notes":"Real-positive acute planar right-triangle sine ratio with A=arcsin(a/c) compatibility."},
+    {"source_id":"4.42.E2","names":["LMLF.Blueprint.Elementary.Section442.rightTriangleData","LMLF.Blueprint.Elementary.Section442.dlmf_4_42_2"],"relation":"specialization","proof_status":"missing","quantitative_analogue":"not_applicable","notes":"Real-positive acute planar right-triangle cosine ratio with opposite/base compatibility."},
+    {"source_id":"4.42.E3","names":["LMLF.Blueprint.Elementary.Section442.dlmf_4_42_3"],"relation":"specialization","proof_status":"missing","quantitative_analogue":"not_applicable","notes":"Real-positive acute planar right-triangle tangent ratio."},
+    {"source_id":"4.42.E4","names":["LMLF.Blueprint.Elementary.Section442.planarTriangleData","LMLF.Blueprint.Elementary.Section442.dlmf_4_42_4"],"relation":"specialization","proof_status":"missing","quantitative_analogue":"not_applicable","notes":"Law of sines on positive nondegenerate planar data with common circumradius relation."},
+    {"source_id":"4.42.E5","names":["LMLF.Blueprint.Elementary.Section442.planarTriangleData","LMLF.Blueprint.Elementary.Section442.dlmf_4_42_5"],"relation":"specialization","proof_status":"missing","quantitative_analogue":"not_applicable","notes":"Law of cosines on side-angle compatible positive planar triangle data."},
+    {"source_id":"4.42.E6","names":["LMLF.Blueprint.Elementary.Section442.dlmf_4_42_6"],"relation":"specialization","proof_status":"missing","quantitative_analogue":"not_applicable","notes":"Projection form with explicit planar angle-sum specialization."},
+    {"source_id":"4.42.E7","names":["LMLF.Blueprint.Elementary.Section442.dlmf_4_42_7"],"relation":"specialization","proof_status":"missing","quantitative_analogue":"not_applicable","notes":"Included-angle and Heron area equality; semiperimeter is explicit."},
+    {"source_id":"4.42.E8","names":["LMLF.Blueprint.Elementary.Section442.sphericalTriangleData","LMLF.Blueprint.Elementary.Section442.dlmf_4_42_8"],"relation":"specialization","proof_status":"missing","quantitative_analogue":"not_applicable","notes":"Spherical side cosine law with explicit arc-angle compatibility."},
+    {"source_id":"4.42.E9","names":["LMLF.Blueprint.Elementary.Section442.dlmf_4_42_9"],"relation":"specialization","proof_status":"missing","quantitative_analogue":"not_applicable","notes":"Spherical sine law with all denominators nonzero by domain."},
+    {"source_id":"4.42.E10","names":["LMLF.Blueprint.Elementary.Section442.dlmf_4_42_10"],"relation":"specialization","proof_status":"missing","quantitative_analogue":"not_applicable","notes":"Spherical mixed sine-cosine relation."},
+    {"source_id":"4.42.E11","names":["LMLF.Blueprint.Elementary.Section442.sphericalTriangleData","LMLF.Blueprint.Elementary.Section442.dlmf_4_42_11"],"relation":"specialization","proof_status":"missing","quantitative_analogue":"not_applicable","notes":"Spherical cotangent form with explicit b ≠ π/2 and B ≠ π/2 exclusions for tangent denominators."},
+    {"source_id":"4.42.E12","names":["LMLF.Blueprint.Elementary.Section442.dlmf_4_42_12"],"relation":"specialization","proof_status":"missing","quantitative_analogue":"not_applicable","notes":"Spherical cosine law for angles."}
+  ],
+  "shared_vocabulary_requests": [],
+  "known_gaps": []
+}

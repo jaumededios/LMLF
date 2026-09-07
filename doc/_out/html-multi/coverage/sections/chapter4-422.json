@@ -1,0 +1,55 @@
+{
+  "section_range": ["4.22"],
+  "numbered_formula_ids_expected": ["4.22.E1", "4.22.E2", "4.22.E3", "4.22.E4", "4.22.E5"],
+  "numbered_formula_ids_stated": ["4.22.E1", "4.22.E2", "4.22.E3", "4.22.E4", "4.22.E5"],
+  "numbered_formula_ids_omitted": [],
+  "extra_statement_ids": [
+    "sineProductTerm", "cosineProductTerm", "cotangentPartialFractionTerm",
+    "cosecantSquareTerm", "cosecantPartialFractionTerm", "sineProductValue",
+    "symmetricIntegerSummation"
+  ],
+  "declarations": [
+    {
+      "source_id": "4.22.E1",
+      "names": ["LMLF.Blueprint.Elementary.Section422.dlmf_4_22_1"],
+      "relation": "exact",
+      "proof_status": "missing",
+      "quantitative_analogue": "not_applicable",
+      "notes": "Genuine HasProd over natural indices, with the source's n=1 lower limit represented by n+1; normalized value and leading z factor are explicit, including z=0."
+    },
+    {
+      "source_id": "4.22.E2",
+      "names": ["LMLF.Blueprint.Elementary.Section422.dlmf_4_22_2"],
+      "relation": "exact",
+      "proof_status": "missing",
+      "quantitative_analogue": "not_applicable",
+      "notes": "Genuine HasProd over the positive odd factors."
+    },
+    {
+      "source_id": "4.22.E3",
+      "names": ["LMLF.Blueprint.Elementary.Section422.dlmf_4_22_3"],
+      "relation": "exact",
+      "proof_status": "missing",
+      "quantitative_analogue": "not_applicable",
+      "notes": "Actual infinite partial-fraction sum with positive lower limit and all integer poles excluded."
+    },
+    {
+      "source_id": "4.22.E4",
+      "names": ["LMLF.Blueprint.Elementary.Section422.dlmf_4_22_4"],
+      "relation": "exact",
+      "proof_status": "missing",
+      "quantitative_analogue": "not_applicable",
+      "notes": "Bilateral HasSum over an explicit filter of Finset.Icc (−N) N symmetric integer intervals."
+    },
+    {
+      "source_id": "4.22.E5",
+      "names": ["LMLF.Blueprint.Elementary.Section422.dlmf_4_22_5"],
+      "relation": "exact",
+      "proof_status": "missing",
+      "quantitative_analogue": "not_applicable",
+      "notes": "Actual alternating infinite partial-fraction sum with all integer poles excluded."
+    }
+  ],
+  "shared_vocabulary_requests": [],
+  "known_gaps": []
+}

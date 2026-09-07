@@ -113,6 +113,14 @@ abbrev CFCoefficients (K : Type := ℚ) [Zero K] :=
 instance {K : Type} [Zero K] : CoeFun (CFCoefficients K) (fun _ => ℕ → K) :=
   ⟨fun a => a.1⟩
 
+/-- Once a normalized numerator is zero, any later numerator is zero. -/
+-- ANCHOR: CFCoefficients.eq_zero_of_le
+theorem CFCoefficients.eq_zero_of_le {K : Type} [Zero K]
+    (a : CFCoefficients K) {k j : ℕ} (hk : a k = 0) (hkj : k ≤ j) :
+    a j = 0 :=
+  a.property k hk j hkj
+-- ANCHOR_END: CFCoefficients.eq_zero_of_le
+
 /-- Canonicalize the raw algorithm by setting the current and all later
 coefficients to zero as soon as a zero numerator is encountered. -/
 -- ANCHOR: cfracCoeffValue

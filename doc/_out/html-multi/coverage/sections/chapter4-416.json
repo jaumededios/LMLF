@@ -1,0 +1,227 @@
+{
+  "section_range": [
+    "4.16"
+  ],
+  "numbered_formula_ids_expected": [],
+  "numbered_formula_ids_stated": [],
+  "numbered_formula_ids_omitted": [],
+  "extra_statement_ids": [
+    "4.16.F1",
+    "4.16.T1@caption",
+    "4.16.T2@caption",
+    "4.16.T3@caption",
+    "4.16.T1.t1.r1",
+    "4.16.T1.t1.r2",
+    "4.16.T1.t1.r3",
+    "4.16.T1.t1.r4",
+    "4.16.T1.t1.r5",
+    "4.16.T2.t1.r1",
+    "4.16.T2.t1.r2",
+    "4.16.T2.t1.r3",
+    "4.16.T2.t1.r4",
+    "4.16.T2.t1.r5",
+    "4.16.T2.t1.r6",
+    "4.16.T2.t1.r7",
+    "4.16.T3.t1.r1",
+    "4.16.T3.t1.r2",
+    "4.16.T3.t1.r3",
+    "4.16.T3.t1.r4",
+    "4.16.T3.t1.r5",
+    "4.16.T3.t1.r6",
+    "4.16.T3.t1.r7"
+  ],
+  "declarations": [
+    {
+      "source_id": "4.16.T1.t1.r1",
+      "names": [
+        "LMLF.Blueprint.Elementary.Section416.table4161_row1"
+      ],
+      "relation": "specialization",
+      "proof_status": "missing",
+      "quantitative_analogue": "not_applicable",
+      "notes": "Quadrant I signs for all six functions."
+    },
+    {
+      "source_id": "4.16.T1.t1.r2",
+      "names": [
+        "LMLF.Blueprint.Elementary.Section416.table4161_row2"
+      ],
+      "relation": "specialization",
+      "proof_status": "missing",
+      "quantitative_analogue": "not_applicable",
+      "notes": "Quadrant II signs for all six functions."
+    },
+    {
+      "source_id": "4.16.T1.t1.r3",
+      "names": [
+        "LMLF.Blueprint.Elementary.Section416.table4161_row3"
+      ],
+      "relation": "specialization",
+      "proof_status": "missing",
+      "quantitative_analogue": "not_applicable",
+      "notes": "Quadrant III signs for all six functions."
+    },
+    {
+      "source_id": "4.16.T1.t1.r4",
+      "names": [
+        "LMLF.Blueprint.Elementary.Section416.table4161_row4"
+      ],
+      "relation": "specialization",
+      "proof_status": "missing",
+      "quantitative_analogue": "not_applicable",
+      "notes": "Quadrant IV signs for all six functions."
+    },
+    {
+      "source_id": "4.16.T2.t1.r1",
+      "names": [
+        "LMLF.Blueprint.Elementary.Section416.table4162_sin"
+      ],
+      "relation": "specialization",
+      "proof_status": "missing",
+      "quantitative_analogue": "not_applicable",
+      "notes": "All nine sine transformations."
+    },
+    {
+      "source_id": "4.16.T2.t1.r2",
+      "names": [
+        "LMLF.Blueprint.Elementary.Section416.table4162_cos"
+      ],
+      "relation": "specialization",
+      "proof_status": "missing",
+      "quantitative_analogue": "not_applicable",
+      "notes": "All nine cosine transformations."
+    },
+    {
+      "source_id": "4.16.T2.t1.r3",
+      "names": [
+        "LMLF.Blueprint.Elementary.Section416.table4162_tan"
+      ],
+      "relation": "specialization",
+      "proof_status": "missing",
+      "quantitative_analogue": "not_applicable",
+      "notes": "All nine tangent transformations with non-pole hypotheses."
+    },
+    {
+      "source_id": "4.16.T2.t1.r4",
+      "names": [
+        "LMLF.Blueprint.Elementary.Section416.table4162_csc"
+      ],
+      "relation": "specialization",
+      "proof_status": "missing",
+      "quantitative_analogue": "not_applicable",
+      "notes": "All nine cosecant transformations with non-pole hypotheses."
+    },
+    {
+      "source_id": "4.16.T2.t1.r5",
+      "names": [
+        "LMLF.Blueprint.Elementary.Section416.table4162_sec"
+      ],
+      "relation": "specialization",
+      "proof_status": "missing",
+      "quantitative_analogue": "not_applicable",
+      "notes": "All nine secant transformations with non-pole hypotheses."
+    },
+    {
+      "source_id": "4.16.T2.t1.r6",
+      "names": [
+        "LMLF.Blueprint.Elementary.Section416.table4162_cot"
+      ],
+      "relation": "specialization",
+      "proof_status": "missing",
+      "quantitative_analogue": "not_applicable",
+      "notes": "All nine cotangent transformations with non-pole hypotheses."
+    },
+    {
+      "source_id": "4.16.T3.t1.r1",
+      "names": [
+        "LMLF.Blueprint.Elementary.Section416.table4163_sin"
+      ],
+      "relation": "specialization",
+      "proof_status": "missing",
+      "quantitative_analogue": "not_applicable",
+      "notes": "Complete six-cell sine-input row with nonnegative radicand and cosine sign."
+    },
+    {
+      "source_id": "4.16.T3.t1.r2",
+      "names": [
+        "LMLF.Blueprint.Elementary.Section416.table4163_cos"
+      ],
+      "relation": "specialization",
+      "proof_status": "missing",
+      "quantitative_analogue": "not_applicable",
+      "notes": "Complete six-cell cosine-input row with nonnegative radicand and sine sign."
+    },
+    {
+      "source_id": "4.16.T3.t1.r3",
+      "names": [
+        "LMLF.Blueprint.Elementary.Section416.table4163_tan"
+      ],
+      "relation": "specialization",
+      "proof_status": "missing",
+      "quantitative_analogue": "not_applicable",
+      "notes": "Complete six-cell tangent-input row with positive-cosine branch, nonzero value, and radicand hypotheses."
+    },
+    {
+      "source_id": "4.16.T3.t1.r4",
+      "names": [
+        "LMLF.Blueprint.Elementary.Section416.table4163_csc"
+      ],
+      "relation": "specialization",
+      "proof_status": "missing",
+      "quantitative_analogue": "not_applicable",
+      "notes": "Complete six-cell cosecant-input row with nonzero value, sign, and radicand hypotheses."
+    },
+    {
+      "source_id": "4.16.T3.t1.r5",
+      "names": [
+        "LMLF.Blueprint.Elementary.Section416.table4163_sec"
+      ],
+      "relation": "specialization",
+      "proof_status": "missing",
+      "quantitative_analogue": "not_applicable",
+      "notes": "Complete six-cell secant-input row with nonzero value, sign, and radicand hypotheses."
+    },
+    {
+      "source_id": "4.16.T3.t1.r6",
+      "names": [
+        "LMLF.Blueprint.Elementary.Section416.table4163_cot"
+      ],
+      "relation": "specialization",
+      "proof_status": "missing",
+      "quantitative_analogue": "not_applicable",
+      "notes": "Complete six-cell cotangent-input row with positive-cosine branch, nonzero value, and radicand hypotheses."
+    },
+    {
+      "source_id": "4.16.T1.t1.r5",
+      "names": [
+        "LMLF.Blueprint.Elementary.Section416.table4161_row5"
+      ],
+      "relation": "specialization",
+      "proof_status": "missing",
+      "quantitative_analogue": "not_applicable",
+      "notes": "Axis boundary values, including totalized reciprocal and pole conventions."
+    },
+    {
+      "source_id": "4.16.T2.t1.r7",
+      "names": [
+        "LMLF.Blueprint.Elementary.Section416.table4162_row7"
+      ],
+      "relation": "specialization",
+      "proof_status": "missing",
+      "quantitative_analogue": "not_applicable",
+      "notes": "Shared six-function period cross-check for the source row/API mapping."
+    },
+    {
+      "source_id": "4.16.T3.t1.r7",
+      "names": [
+        "LMLF.Blueprint.Elementary.Section416.table4163_row7"
+      ],
+      "relation": "specialization",
+      "proof_status": "missing",
+      "quantitative_analogue": "not_applicable",
+      "notes": "Principal nonnegative real square-root convention."
+    }
+  ],
+  "shared_vocabulary_requests": [],
+  "known_gaps": []
+}

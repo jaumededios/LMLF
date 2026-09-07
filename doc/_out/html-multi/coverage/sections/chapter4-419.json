@@ -1,0 +1,33 @@
+{
+  "section_range": ["4.19"],
+  "numbered_formula_ids_expected": ["4.19.E1","4.19.E2","4.19.E3","4.19.E4","4.19.E5","4.19.E6","4.19.E7","4.19.E8","4.19.E9"],
+  "numbered_formula_ids_stated": ["4.19.E1","4.19.E2","4.19.E3","4.19.E4","4.19.E5","4.19.E6","4.19.E7","4.19.E8","4.19.E9"],
+  "numbered_formula_ids_omitted": [],
+  "extra_statement_ids": ["4.19.bernoulliNumber","4.19.eulerNumber","4.19.csc","4.19.sec","4.19.sinRatio","4.19.tanRatio","4.19.tanTerm","4.19.cscTerm","4.19.secTerm","4.19.cotTerm","4.19.logSinRatioTerm","4.19.logCosTerm","4.19.logTanRatioTerm"],
+  "declarations": [
+    {"source_id":"4.19.E1","names":["LMLF.Blueprint.Elementary.Section419.dlmf_4_19_1"],"relation":"exact","proof_status":"missing","quantitative_analogue":"not_applicable","notes":"Entire sine Maclaurin series, stated with HasSum."},
+    {"source_id":"4.19.E2","names":["LMLF.Blueprint.Elementary.Section419.dlmf_4_19_2"],"relation":"exact","proof_status":"missing","quantitative_analogue":"not_applicable","notes":"Entire cosine Maclaurin series, stated with HasSum."},
+    {"source_id":"4.19.E3","names":["LMLF.Blueprint.Elementary.Section419.dlmf_4_19_3"],"relation":"exact","proof_status":"missing","quantitative_analogue":"not_applicable","notes":"Tangent power series on the exact disk |z| < pi/2."},
+    {"source_id":"4.19.E4","names":["LMLF.Blueprint.Elementary.Section419.dlmf_4_19_4"],"relation":"exact","proof_status":"missing","quantitative_analogue":"not_applicable","notes":"Cosecant Laurent series; HasSum records the series after the 1/z principal part."},
+    {"source_id":"4.19.E5","names":["LMLF.Blueprint.Elementary.Section419.dlmf_4_19_5"],"relation":"exact","proof_status":"missing","quantitative_analogue":"not_applicable","notes":"Secant power series on the exact disk |z| < pi/2."},
+    {"source_id":"4.19.E6","names":["LMLF.Blueprint.Elementary.Section419.dlmf_4_19_6"],"relation":"exact","proof_status":"missing","quantitative_analogue":"not_applicable","notes":"Cotangent Laurent series; HasSum records the series after the 1/z principal part."},
+    {"source_id":"4.19.E7","names":["LMLF.Blueprint.Elementary.Section419.dlmf_4_19_7"],"relation":"exact","proof_status":"missing","quantitative_analogue":"not_applicable","notes":"Principal-logarithm series for sin(z)/z on |z| < pi."},
+    {"source_id":"4.19.E8","names":["LMLF.Blueprint.Elementary.Section419.dlmf_4_19_8"],"relation":"exact","proof_status":"missing","quantitative_analogue":"not_applicable","notes":"Principal-logarithm series for cos(z) on |z| < pi/2."},
+    {"source_id":"4.19.E9","names":["LMLF.Blueprint.Elementary.Section419.dlmf_4_19_9"],"relation":"exact","proof_status":"missing","quantitative_analogue":"not_applicable","notes":"Principal-logarithm series for tan(z)/z on |z| < pi/2; tanRatio explicitly sets its removable center to 1."},
+    {"source_id":"4.19.bernoulliNumber","names":["LMLF.Blueprint.Elementary.Section419.bernoulliNumber"],"relation":"related","proof_status":"not_applicable","quantitative_analogue":"not_applicable","notes":"Canonical Mathlib Bernoulli sequence cast to complex coefficients."},
+    {"source_id":"4.19.eulerNumber","names":["LMLF.Blueprint.Elementary.Section419.eulerNumber"],"relation":"related","proof_status":"not_applicable","quantitative_analogue":"not_applicable","notes":"Transparent recursive Euler-number specification with E0 = 1 and vanishing odd values."},
+    {"source_id":"4.19.csc","names":["LMLF.Blueprint.Elementary.Section419.csc"],"relation":"related","proof_status":"not_applicable","quantitative_analogue":"not_applicable","notes":"Reusable reciprocal notation for the cosecant Laurent declaration."},
+    {"source_id":"4.19.sec","names":["LMLF.Blueprint.Elementary.Section419.sec"],"relation":"related","proof_status":"not_applicable","quantitative_analogue":"not_applicable","notes":"Reusable reciprocal notation for the secant power-series declaration."},
+    {"source_id":"4.19.sinRatio","names":["LMLF.Blueprint.Elementary.Section419.sinRatio"],"relation":"related","proof_status":"not_applicable","quantitative_analogue":"not_applicable","notes":"Removable extension of sin(z)/z with sinRatio(0) = 1."},
+    {"source_id":"4.19.tanRatio","names":["LMLF.Blueprint.Elementary.Section419.tanRatio"],"relation":"related","proof_status":"not_applicable","quantitative_analogue":"not_applicable","notes":"Removable extension of tan(z)/z with tanRatio(0) = 1."},
+    {"source_id":"4.19.tanTerm","names":["LMLF.Blueprint.Elementary.Section419.tanTerm"],"relation":"related","proof_status":"not_applicable","quantitative_analogue":"not_applicable","notes":"Reusable Bernoulli coefficient summand for E3."},
+    {"source_id":"4.19.cscTerm","names":["LMLF.Blueprint.Elementary.Section419.cscTerm"],"relation":"related","proof_status":"not_applicable","quantitative_analogue":"not_applicable","notes":"Reusable Laurent-tail summand for E4."},
+    {"source_id":"4.19.secTerm","names":["LMLF.Blueprint.Elementary.Section419.secTerm"],"relation":"related","proof_status":"not_applicable","quantitative_analogue":"not_applicable","notes":"Reusable Euler coefficient summand for E5."},
+    {"source_id":"4.19.cotTerm","names":["LMLF.Blueprint.Elementary.Section419.cotTerm"],"relation":"related","proof_status":"not_applicable","quantitative_analogue":"not_applicable","notes":"Reusable Laurent-tail summand for E6."},
+    {"source_id":"4.19.logSinRatioTerm","names":["LMLF.Blueprint.Elementary.Section419.logSinRatioTerm"],"relation":"related","proof_status":"not_applicable","quantitative_analogue":"not_applicable","notes":"Reusable Bernoulli summand for E7."},
+    {"source_id":"4.19.logCosTerm","names":["LMLF.Blueprint.Elementary.Section419.logCosTerm"],"relation":"related","proof_status":"not_applicable","quantitative_analogue":"not_applicable","notes":"Reusable Bernoulli summand for E8."},
+    {"source_id":"4.19.logTanRatioTerm","names":["LMLF.Blueprint.Elementary.Section419.logTanRatioTerm"],"relation":"related","proof_status":"not_applicable","quantitative_analogue":"not_applicable","notes":"Reusable Bernoulli summand for E9."}
+  ],
+  "shared_vocabulary_requests": [],
+  "known_gaps": []
+}

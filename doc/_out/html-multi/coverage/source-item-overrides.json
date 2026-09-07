@@ -1,0 +1,4398 @@
+{
+  "dlmf:4.13#E10.info@annotation-note-1": {
+    "review": {
+      "state": "reviewed_no_claim"
+    },
+    "lean": {
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "coverage_relation": "unknown",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-413.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-413.json"
+    }
+  },
+  "dlmf:4.13#E10.info@editorial-change-note-1": {
+    "review": {
+      "state": "reviewed_no_claim"
+    },
+    "lean": {
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "coverage_relation": "unknown",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-413.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-413.json"
+    }
+  },
+  "dlmf:4.13#E11.info@annotation-note-1": {
+    "review": {
+      "state": "reviewed_no_claim"
+    },
+    "lean": {
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "coverage_relation": "unknown",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-413.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-413.json"
+    }
+  },
+  "dlmf:4.13#E11.info@editorial-change-note-1": {
+    "review": {
+      "state": "reviewed_no_claim"
+    },
+    "lean": {
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "coverage_relation": "unknown",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-413.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-413.json"
+    }
+  },
+  "dlmf:4.13#E12.info@editorial-change-note-1": {
+    "review": {
+      "state": "reviewed_no_claim"
+    },
+    "lean": {
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "coverage_relation": "unknown",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-413.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-413.json"
+    }
+  },
+  "dlmf:4.13#E13.info@editorial-change-note-1": {
+    "review": {
+      "state": "reviewed_no_claim"
+    },
+    "lean": {
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "coverage_relation": "unknown",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-413.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-413.json"
+    }
+  },
+  "dlmf:4.13#E14.info@editorial-change-note-1": {
+    "review": {
+      "state": "reviewed_no_claim"
+    },
+    "lean": {
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "coverage_relation": "unknown",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-413.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-413.json"
+    }
+  },
+  "dlmf:4.13#E15.info@editorial-change-note-1": {
+    "review": {
+      "state": "reviewed_no_claim"
+    },
+    "lean": {
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "coverage_relation": "unknown",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-413.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-413.json"
+    }
+  },
+  "dlmf:4.13#E16.info@annotation-note-1": {
+    "review": {
+      "state": "reviewed_no_claim"
+    },
+    "lean": {
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "coverage_relation": "unknown",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-413.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-413.json"
+    }
+  },
+  "dlmf:4.13#E16.info@editorial-change-note-1": {
+    "review": {
+      "state": "reviewed_no_claim"
+    },
+    "lean": {
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "coverage_relation": "unknown",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-413.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-413.json"
+    }
+  },
+  "dlmf:4.13#E1_1.info@annotation-note-1": {
+    "review": {
+      "state": "reviewed_no_claim"
+    },
+    "lean": {
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "coverage_relation": "unknown",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-413.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-413.json"
+    }
+  },
+  "dlmf:4.13#E1_1.info@editorial-change-note-1": {
+    "review": {
+      "state": "reviewed_no_claim"
+    },
+    "lean": {
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "coverage_relation": "unknown",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-413.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-413.json"
+    }
+  },
+  "dlmf:4.13#E1_2.info@editorial-change-note-1": {
+    "review": {
+      "state": "reviewed_no_claim"
+    },
+    "lean": {
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "coverage_relation": "unknown",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-413.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-413.json"
+    }
+  },
+  "dlmf:4.13#E1_3.info@editorial-change-note-1": {
+    "review": {
+      "state": "reviewed_no_claim"
+    },
+    "lean": {
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "coverage_relation": "unknown",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-413.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-413.json"
+    }
+  },
+  "dlmf:4.13#E3_1.info@editorial-change-note-1": {
+    "review": {
+      "state": "reviewed_no_claim"
+    },
+    "lean": {
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "coverage_relation": "unknown",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-413.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-413.json"
+    }
+  },
+  "dlmf:4.13#E3_1.info@proof-sketch-1": {
+    "review": {
+      "state": "claims_identified"
+    },
+    "lean": {
+      "statement_status": "checked",
+      "proof_status": "missing",
+      "coverage_relation": "partial",
+      "declarations": [
+        "LMLF.Blueprint.Elementary.Section413.dlmf_4_13_proof_E3_1"
+      ],
+      "evidence_source": "coverage/sections/chapter4-413.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-413.json"
+    }
+  },
+  "dlmf:4.13#E3_2.info@editorial-change-note-1": {
+    "review": {
+      "state": "reviewed_no_claim"
+    },
+    "lean": {
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "coverage_relation": "unknown",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-413.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-413.json"
+    }
+  },
+  "dlmf:4.13#E3_2.info@proof-sketch-1": {
+    "review": {
+      "state": "claims_identified"
+    },
+    "lean": {
+      "statement_status": "checked",
+      "proof_status": "missing",
+      "coverage_relation": "partial",
+      "declarations": [
+        "LMLF.Blueprint.Elementary.Section413.dlmf_4_13_proof_E3_2"
+      ],
+      "evidence_source": "coverage/sections/chapter4-413.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-413.json"
+    }
+  },
+  "dlmf:4.13#E4_1.info@annotation-note-1": {
+    "review": {
+      "state": "reviewed_no_claim"
+    },
+    "lean": {
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "coverage_relation": "unknown",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-413.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-413.json"
+    }
+  },
+  "dlmf:4.13#E4_1.info@editorial-change-note-1": {
+    "review": {
+      "state": "reviewed_no_claim"
+    },
+    "lean": {
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "coverage_relation": "unknown",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-413.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-413.json"
+    }
+  },
+  "dlmf:4.13#E4_2.info@annotation-note-1": {
+    "review": {
+      "state": "reviewed_no_claim"
+    },
+    "lean": {
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "coverage_relation": "unknown",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-413.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-413.json"
+    }
+  },
+  "dlmf:4.13#E4_2.info@editorial-change-note-1": {
+    "review": {
+      "state": "reviewed_no_claim"
+    },
+    "lean": {
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "coverage_relation": "unknown",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-413.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-413.json"
+    }
+  },
+  "dlmf:4.13#E5_1.info@annotation-note-1": {
+    "review": {
+      "state": "reviewed_no_claim"
+    },
+    "lean": {
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "coverage_relation": "unknown",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-413.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-413.json"
+    }
+  },
+  "dlmf:4.13#E5_1.info@editorial-change-note-1": {
+    "review": {
+      "state": "reviewed_no_claim"
+    },
+    "lean": {
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "coverage_relation": "unknown",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-413.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-413.json"
+    }
+  },
+  "dlmf:4.13#E5_2.info@annotation-note-1": {
+    "review": {
+      "state": "reviewed_no_claim"
+    },
+    "lean": {
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "coverage_relation": "unknown",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-413.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-413.json"
+    }
+  },
+  "dlmf:4.13#E5_3.info@annotation-note-1": {
+    "review": {
+      "state": "reviewed_no_claim"
+    },
+    "lean": {
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "coverage_relation": "unknown",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-413.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-413.json"
+    }
+  },
+  "dlmf:4.13#E5_3.info@editorial-change-note-1": {
+    "review": {
+      "state": "reviewed_no_claim"
+    },
+    "lean": {
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "coverage_relation": "unknown",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-413.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-413.json"
+    }
+  },
+  "dlmf:4.13#E9_1.info@editorial-change-note-1": {
+    "review": {
+      "state": "reviewed_no_claim"
+    },
+    "lean": {
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "coverage_relation": "unknown",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-413.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-413.json"
+    }
+  },
+  "dlmf:4.13#E9_1.info@proof-sketch-1": {
+    "review": {
+      "state": "claims_identified"
+    },
+    "lean": {
+      "statement_status": "checked",
+      "proof_status": "missing",
+      "coverage_relation": "partial",
+      "declarations": [
+        "LMLF.Blueprint.Elementary.Section413.dlmf_4_13_proof_E9_1"
+      ],
+      "evidence_source": "coverage/sections/chapter4-413.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-413.json"
+    }
+  },
+  "dlmf:4.13#E9_2.info@editorial-change-note-1": {
+    "review": {
+      "state": "reviewed_no_claim"
+    },
+    "lean": {
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "coverage_relation": "unknown",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-413.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-413.json"
+    }
+  },
+  "dlmf:4.13#F1.info@editorial-change-note-1": {
+    "review": {
+      "state": "reviewed_no_claim"
+    },
+    "lean": {
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "coverage_relation": "unknown",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-413.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-413.json"
+    }
+  },
+  "dlmf:4.13#F1@caption": {
+    "review": {
+      "state": "reviewed_no_claim"
+    },
+    "lean": {
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "coverage_relation": "unknown",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-413.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-413.json"
+    }
+  },
+  "dlmf:4.13#F2.info@editorial-change-note-1": {
+    "review": {
+      "state": "reviewed_no_claim"
+    },
+    "lean": {
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "coverage_relation": "unknown",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-413.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-413.json"
+    }
+  },
+  "dlmf:4.13#F2@caption": {
+    "review": {
+      "state": "reviewed_no_claim"
+    },
+    "lean": {
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "coverage_relation": "unknown",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-413.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-413.json"
+    }
+  },
+  "dlmf:4.13#info@annotation-note-1": {
+    "review": {
+      "state": "reviewed_no_claim"
+    },
+    "lean": {
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "coverage_relation": "unknown",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-413.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-413.json"
+    }
+  },
+  "dlmf:4.13#info@editorial-change-note-1": {
+    "review": {
+      "state": "reviewed_no_claim"
+    },
+    "lean": {
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "coverage_relation": "unknown",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-413.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-413.json"
+    }
+  },
+  "dlmf:4.13#info@editorial-change-note-2": {
+    "review": {
+      "state": "reviewed_no_claim"
+    },
+    "lean": {
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "coverage_relation": "unknown",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-413.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-413.json"
+    }
+  },
+  "dlmf:4.13#info@editorial-change-note-3": {
+    "review": {
+      "state": "reviewed_no_claim"
+    },
+    "lean": {
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "coverage_relation": "unknown",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-413.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-413.json"
+    }
+  },
+  "dlmf:4.13#info@editorial-change-note-4": {
+    "review": {
+      "state": "reviewed_no_claim"
+    },
+    "lean": {
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "coverage_relation": "unknown",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-413.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-413.json"
+    }
+  },
+  "dlmf:4.13#p1": {
+    "review": {
+      "state": "reviewed_no_claim"
+    },
+    "lean": {
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "coverage_relation": "unknown",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-413.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-413.json"
+    }
+  },
+  "dlmf:4.13#p2": {
+    "review": {
+      "state": "reviewed_no_claim"
+    },
+    "lean": {
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "coverage_relation": "unknown",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-413.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-413.json"
+    }
+  },
+  "dlmf:4.13#p3": {
+    "review": {
+      "state": "reviewed_no_claim"
+    },
+    "lean": {
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "coverage_relation": "unknown",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-413.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-413.json"
+    }
+  },
+  "dlmf:4.13#p4": {
+    "review": {
+      "state": "reviewed_no_claim"
+    },
+    "lean": {
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "coverage_relation": "unknown",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-413.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-413.json"
+    }
+  },
+  "dlmf:4.13#p5": {
+    "review": {
+      "state": "reviewed_no_claim"
+    },
+    "lean": {
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "coverage_relation": "unknown",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-413.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-413.json"
+    }
+  },
+  "dlmf:4.13#p6": {
+    "review": {
+      "state": "reviewed_no_claim"
+    },
+    "lean": {
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "coverage_relation": "unknown",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-413.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-413.json"
+    }
+  },
+  "dlmf:4.13#p7": {
+    "review": {
+      "state": "reviewed_no_claim"
+    },
+    "lean": {
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "coverage_relation": "unknown",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-413.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-413.json"
+    }
+  },
+  "dlmf:4.13#p8": {
+    "review": {
+      "state": "reviewed_no_claim"
+    },
+    "lean": {
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "coverage_relation": "unknown",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-413.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-413.json"
+    }
+  },
+  "dlmf:4.13#p9": {
+    "review": {
+      "state": "reviewed_no_claim"
+    },
+    "lean": {
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "coverage_relation": "unknown",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-413.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-413.json"
+    }
+  },
+  "dlmf:4.23#E34.info@editorial-change-note-1": {
+    "review": {
+      "state": "reviewed_no_claim"
+    },
+    "lean": {
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "coverage_relation": "unknown",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-423.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-423.json"
+    }
+  },
+  "dlmf:4.23#E35.info@editorial-change-note-1": {
+    "review": {
+      "state": "reviewed_no_claim"
+    },
+    "lean": {
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "coverage_relation": "unknown",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-423.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-423.json"
+    }
+  },
+  "dlmf:4.23#F1.t1.r1": {
+    "review": {
+      "state": "claims_identified"
+    },
+    "lean": {
+      "statement_status": "checked",
+      "proof_status": "missing",
+      "coverage_relation": "partial",
+      "declarations": [
+        "LMLF.Blueprint.Elementary.Section423.dlmf_4_23_F1_t1_r1"
+      ],
+      "evidence_source": "coverage/sections/chapter4-423.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-423.json"
+    }
+  },
+  "dlmf:4.23#F1.t1.r2": {
+    "review": {
+      "state": "claims_identified"
+    },
+    "lean": {
+      "statement_status": "checked",
+      "proof_status": "missing",
+      "coverage_relation": "partial",
+      "declarations": [
+        "LMLF.Blueprint.Elementary.Section423.dlmf_4_23_F1_t1_r2"
+      ],
+      "evidence_source": "coverage/sections/chapter4-423.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-423.json"
+    }
+  },
+  "dlmf:4.23#F1@caption": {
+    "review": {
+      "state": "reviewed_no_claim"
+    },
+    "lean": {
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "coverage_relation": "unknown",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-423.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-423.json"
+    }
+  },
+  "dlmf:4.23#Px1.p1": {
+    "review": {
+      "state": "reviewed_no_claim"
+    },
+    "lean": {
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "coverage_relation": "unknown",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-423.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-423.json"
+    }
+  },
+  "dlmf:4.23#Px2.p1": {
+    "review": {
+      "state": "reviewed_no_claim"
+    },
+    "lean": {
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "coverage_relation": "unknown",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-423.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-423.json"
+    }
+  },
+  "dlmf:4.23#Px2.p2": {
+    "review": {
+      "state": "reviewed_no_claim"
+    },
+    "lean": {
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "coverage_relation": "unknown",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-423.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-423.json"
+    }
+  },
+  "dlmf:4.23#Px3.p1": {
+    "review": {
+      "state": "reviewed_no_claim"
+    },
+    "lean": {
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "coverage_relation": "unknown",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-423.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-423.json"
+    }
+  },
+  "dlmf:4.23#Px4.p1": {
+    "review": {
+      "state": "reviewed_no_claim"
+    },
+    "lean": {
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "coverage_relation": "unknown",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-423.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-423.json"
+    }
+  },
+  "dlmf:4.23#T1.t1.r1": {
+    "review": {
+      "state": "claims_identified"
+    },
+    "lean": {
+      "statement_status": "checked",
+      "proof_status": "missing",
+      "coverage_relation": "partial",
+      "declarations": [
+        "LMLF.Blueprint.Elementary.Section423.dlmf_4_23_T1_t1_r1"
+      ],
+      "evidence_source": "coverage/sections/chapter4-423.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-423.json"
+    }
+  },
+  "dlmf:4.23#T1.t1.r2": {
+    "review": {
+      "state": "claims_identified"
+    },
+    "lean": {
+      "statement_status": "checked",
+      "proof_status": "missing",
+      "coverage_relation": "partial",
+      "declarations": [
+        "LMLF.Blueprint.Elementary.Section423.dlmf_4_23_T1_t1_r2"
+      ],
+      "evidence_source": "coverage/sections/chapter4-423.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-423.json"
+    }
+  },
+  "dlmf:4.23#T1.t1.r3": {
+    "review": {
+      "state": "claims_identified"
+    },
+    "lean": {
+      "statement_status": "checked",
+      "proof_status": "missing",
+      "coverage_relation": "partial",
+      "declarations": [
+        "LMLF.Blueprint.Elementary.Section423.dlmf_4_23_T1_t1_r3"
+      ],
+      "evidence_source": "coverage/sections/chapter4-423.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-423.json"
+    }
+  },
+  "dlmf:4.23#T1.t1.r4": {
+    "review": {
+      "state": "claims_identified"
+    },
+    "lean": {
+      "statement_status": "checked",
+      "proof_status": "missing",
+      "coverage_relation": "partial",
+      "declarations": [
+        "LMLF.Blueprint.Elementary.Section423.dlmf_4_23_T1_t1_r4"
+      ],
+      "evidence_source": "coverage/sections/chapter4-423.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-423.json"
+    }
+  },
+  "dlmf:4.23#T1.t1.r5": {
+    "review": {
+      "state": "claims_identified"
+    },
+    "lean": {
+      "statement_status": "checked",
+      "proof_status": "missing",
+      "coverage_relation": "partial",
+      "declarations": [
+        "LMLF.Blueprint.Elementary.Section423.dlmf_4_23_T1_t1_r5"
+      ],
+      "evidence_source": "coverage/sections/chapter4-423.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-423.json"
+    }
+  },
+  "dlmf:4.23#T1.t1.r6": {
+    "review": {
+      "state": "claims_identified"
+    },
+    "lean": {
+      "statement_status": "checked",
+      "proof_status": "missing",
+      "coverage_relation": "partial",
+      "declarations": [
+        "LMLF.Blueprint.Elementary.Section423.dlmf_4_23_T1_t1_r6"
+      ],
+      "evidence_source": "coverage/sections/chapter4-423.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-423.json"
+    }
+  },
+  "dlmf:4.23#T1@caption": {
+    "review": {
+      "state": "claims_identified"
+    },
+    "lean": {
+      "statement_status": "checked",
+      "proof_status": "missing",
+      "coverage_relation": "partial",
+      "declarations": [
+        "LMLF.Blueprint.Elementary.Section423.dlmf_4_23_T1_caption"
+      ],
+      "evidence_source": "coverage/sections/chapter4-423.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-423.json"
+    }
+  },
+  "dlmf:4.23#i.p1": {
+    "review": {
+      "state": "reviewed_no_claim"
+    },
+    "lean": {
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "coverage_relation": "unknown",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-423.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-423.json"
+    }
+  },
+  "dlmf:4.23#ii.info@annotation-note-1": {
+    "review": {
+      "state": "reviewed_no_claim"
+    },
+    "lean": {
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "coverage_relation": "unknown",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-423.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-423.json"
+    }
+  },
+  "dlmf:4.23#ii.p1": {
+    "review": {
+      "state": "reviewed_no_claim"
+    },
+    "lean": {
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "coverage_relation": "unknown",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-423.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-423.json"
+    }
+  },
+  "dlmf:4.23#ii.p2": {
+    "review": {
+      "state": "reviewed_no_claim"
+    },
+    "lean": {
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "coverage_relation": "unknown",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-423.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-423.json"
+    }
+  },
+  "dlmf:4.23#ii.p3": {
+    "review": {
+      "state": "reviewed_no_claim"
+    },
+    "lean": {
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "coverage_relation": "unknown",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-423.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-423.json"
+    }
+  },
+  "dlmf:4.23#ii.p4": {
+    "review": {
+      "state": "reviewed_no_claim"
+    },
+    "lean": {
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "coverage_relation": "unknown",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-423.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-423.json"
+    }
+  },
+  "dlmf:4.23#iii.info@annotation-note-1": {
+    "review": {
+      "state": "reviewed_no_claim"
+    },
+    "lean": {
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "coverage_relation": "unknown",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-423.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-423.json"
+    }
+  },
+  "dlmf:4.23#iii.p1": {
+    "review": {
+      "state": "reviewed_no_claim"
+    },
+    "lean": {
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "coverage_relation": "unknown",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-423.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-423.json"
+    }
+  },
+  "dlmf:4.23#iv.info@annotation-note-1": {
+    "review": {
+      "state": "reviewed_no_claim"
+    },
+    "lean": {
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "coverage_relation": "unknown",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-423.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-423.json"
+    }
+  },
+  "dlmf:4.23#iv.p1": {
+    "review": {
+      "state": "reviewed_no_claim"
+    },
+    "lean": {
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "coverage_relation": "unknown",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-423.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-423.json"
+    }
+  },
+  "dlmf:4.23#v.info@annotation-note-1": {
+    "review": {
+      "state": "reviewed_no_claim"
+    },
+    "lean": {
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "coverage_relation": "unknown",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-423.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-423.json"
+    }
+  },
+  "dlmf:4.23#v.p1": {
+    "review": {
+      "state": "reviewed_no_claim"
+    },
+    "lean": {
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "coverage_relation": "unknown",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-423.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-423.json"
+    }
+  },
+  "dlmf:4.23#vi.info@annotation-note-1": {
+    "review": {
+      "state": "reviewed_no_claim"
+    },
+    "lean": {
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "coverage_relation": "unknown",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-423.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-423.json"
+    }
+  },
+  "dlmf:4.23#vi.info@editorial-change-note-1": {
+    "review": {
+      "state": "reviewed_no_claim"
+    },
+    "lean": {
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "coverage_relation": "unknown",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-423.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-423.json"
+    }
+  },
+  "dlmf:4.23#vi.p1": {
+    "review": {
+      "state": "reviewed_no_claim"
+    },
+    "lean": {
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "coverage_relation": "unknown",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-423.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-423.json"
+    }
+  },
+  "dlmf:4.23#vii.info@annotation-note-1": {
+    "review": {
+      "state": "reviewed_no_claim"
+    },
+    "lean": {
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "coverage_relation": "unknown",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-423.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-423.json"
+    }
+  },
+  "dlmf:4.23#vii.p1": {
+    "review": {
+      "state": "reviewed_no_claim"
+    },
+    "lean": {
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "coverage_relation": "unknown",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-423.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-423.json"
+    }
+  },
+  "dlmf:4.23#viii.info@annotation-note-1": {
+    "review": {
+      "state": "reviewed_no_claim"
+    },
+    "lean": {
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "coverage_relation": "unknown",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-423.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-423.json"
+    }
+  },
+  "dlmf:4.23#viii.p1": {
+    "review": {
+      "state": "reviewed_no_claim"
+    },
+    "lean": {
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "coverage_relation": "unknown",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-423.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-423.json"
+    }
+  },
+  "dlmf:4.23#viii.p2": {
+    "review": {
+      "state": "reviewed_no_claim"
+    },
+    "lean": {
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "coverage_relation": "unknown",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-423.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-423.json"
+    }
+  },
+  "dlmf:4.27#p1": {
+    "review": {
+      "state": "reviewed_no_claim"
+    },
+    "lean": {
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "coverage_relation": "unknown",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-427.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-427.json"
+    }
+  },
+  "dlmf:4.28#Px1.p1": {
+    "review": {
+      "state": "reviewed_no_claim"
+    },
+    "lean": {
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "coverage_relation": "unknown",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-428.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-428.json"
+    }
+  },
+  "dlmf:4.28#Px2.p1": {
+    "review": {
+      "state": "claims_identified"
+    },
+    "lean": {
+      "statement_status": "checked",
+      "proof_status": "missing",
+      "coverage_relation": "exact",
+      "declarations": [
+        "LMLF.Blueprint.Elementary.Section428.dlmf_4_28_periodicity_and_zeros"
+      ],
+      "evidence_source": "coverage/sections/chapter4-428.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-428.json"
+    }
+  },
+  "dlmf:4.28#info@annotation-note-1": {
+    "review": {
+      "state": "reviewed_no_claim"
+    },
+    "lean": {
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "coverage_relation": "unknown",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-428.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-428.json"
+    }
+  },
+  "dlmf:4.28#p1": {
+    "review": {
+      "state": "reviewed_no_claim"
+    },
+    "lean": {
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "coverage_relation": "unknown",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-428.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-428.json"
+    }
+  },
+  "dlmf:4.29#F1@caption": {
+    "review": {
+      "state": "claims_identified"
+    },
+    "lean": {
+      "statement_status": "checked",
+      "proof_status": "missing",
+      "coverage_relation": "specialization",
+      "declarations": [
+        "LMLF.Blueprint.Elementary.Section429.dlmf_4_29_F1"
+      ],
+      "evidence_source": "coverage/sections/chapter4-429.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-429.json"
+    }
+  },
+  "dlmf:4.29#F2@caption": {
+    "review": {
+      "state": "claims_identified"
+    },
+    "lean": {
+      "statement_status": "checked",
+      "proof_status": "missing",
+      "coverage_relation": "specialization",
+      "declarations": [
+        "LMLF.Blueprint.Elementary.Section429.dlmf_4_29_F2"
+      ],
+      "evidence_source": "coverage/sections/chapter4-429.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-429.json"
+    }
+  },
+  "dlmf:4.29#F3@caption": {
+    "review": {
+      "state": "claims_identified"
+    },
+    "lean": {
+      "statement_status": "checked",
+      "proof_status": "missing",
+      "coverage_relation": "specialization",
+      "declarations": [
+        "LMLF.Blueprint.Elementary.Section429.dlmf_4_29_F3"
+      ],
+      "evidence_source": "coverage/sections/chapter4-429.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-429.json"
+    }
+  },
+  "dlmf:4.29#F4@caption": {
+    "review": {
+      "state": "claims_identified"
+    },
+    "lean": {
+      "statement_status": "checked",
+      "proof_status": "missing",
+      "coverage_relation": "specialization",
+      "declarations": [
+        "LMLF.Blueprint.Elementary.Section429.dlmf_4_29_F4"
+      ],
+      "evidence_source": "coverage/sections/chapter4-429.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-429.json"
+    }
+  },
+  "dlmf:4.29#F5@caption": {
+    "review": {
+      "state": "claims_identified"
+    },
+    "lean": {
+      "statement_status": "checked",
+      "proof_status": "missing",
+      "coverage_relation": "specialization",
+      "declarations": [
+        "LMLF.Blueprint.Elementary.Section429.dlmf_4_29_F5"
+      ],
+      "evidence_source": "coverage/sections/chapter4-429.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-429.json"
+    }
+  },
+  "dlmf:4.29#F6@caption": {
+    "review": {
+      "state": "claims_identified"
+    },
+    "lean": {
+      "statement_status": "checked",
+      "proof_status": "missing",
+      "coverage_relation": "specialization",
+      "declarations": [
+        "LMLF.Blueprint.Elementary.Section429.dlmf_4_29_F6"
+      ],
+      "evidence_source": "coverage/sections/chapter4-429.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-429.json"
+    }
+  },
+  "dlmf:4.29#i.info@annotation-note-1": {
+    "review": {
+      "state": "claims_identified"
+    },
+    "lean": {
+      "statement_status": "checked",
+      "proof_status": "missing",
+      "coverage_relation": "specialization",
+      "declarations": [
+        "LMLF.Blueprint.Elementary.Section429.dlmf_4_29_notes"
+      ],
+      "evidence_source": "coverage/sections/chapter4-429.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-429.json"
+    }
+  },
+  "dlmf:4.29#ii.p1": {
+    "review": {
+      "state": "claims_identified"
+    },
+    "lean": {
+      "statement_status": "checked",
+      "proof_status": "missing",
+      "coverage_relation": "exact",
+      "declarations": [
+        "LMLF.Blueprint.Elementary.Section429.dlmf_4_29_ii_p1"
+      ],
+      "evidence_source": "coverage/sections/chapter4-429.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-429.json"
+    }
+  },
+  "dlmf:4.29#ii.p2": {
+    "review": {
+      "state": "claims_identified"
+    },
+    "lean": {
+      "statement_status": "checked",
+      "proof_status": "missing",
+      "coverage_relation": "exact",
+      "declarations": [
+        "LMLF.Blueprint.Elementary.Section429.dlmf_4_29_ii_p2"
+      ],
+      "evidence_source": "coverage/sections/chapter4-429.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-429.json"
+    }
+  },
+  "dlmf:4.30#T1.t1.r1": {
+    "review": {
+      "state": "claims_identified"
+    },
+    "lean": {
+      "statement_status": "checked",
+      "proof_status": "not_applicable",
+      "coverage_relation": "partial",
+      "declarations": [
+        "LMLF.Blueprint.Elementary.Section430.HyperbolicInterrelationRow"
+      ],
+      "evidence_source": "coverage/sections/chapter4-430.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-430.json"
+    }
+  },
+  "dlmf:4.30#T1.t1.r2": {
+    "review": {
+      "state": "claims_identified"
+    },
+    "lean": {
+      "statement_status": "checked",
+      "proof_status": "not_applicable",
+      "coverage_relation": "specialization",
+      "declarations": [
+        "LMLF.Blueprint.Elementary.Section430.table4301_sinhRow"
+      ],
+      "evidence_source": "coverage/sections/chapter4-430.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-430.json"
+    }
+  },
+  "dlmf:4.30#T1.t1.r3": {
+    "review": {
+      "state": "claims_identified"
+    },
+    "lean": {
+      "statement_status": "checked",
+      "proof_status": "not_applicable",
+      "coverage_relation": "specialization",
+      "declarations": [
+        "LMLF.Blueprint.Elementary.Section430.table4301_coshRow"
+      ],
+      "evidence_source": "coverage/sections/chapter4-430.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-430.json"
+    }
+  },
+  "dlmf:4.30#T1.t1.r4": {
+    "review": {
+      "state": "claims_identified"
+    },
+    "lean": {
+      "statement_status": "checked",
+      "proof_status": "not_applicable",
+      "coverage_relation": "specialization",
+      "declarations": [
+        "LMLF.Blueprint.Elementary.Section430.table4301_tanhRow"
+      ],
+      "evidence_source": "coverage/sections/chapter4-430.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-430.json"
+    }
+  },
+  "dlmf:4.30#T1.t1.r5": {
+    "review": {
+      "state": "claims_identified"
+    },
+    "lean": {
+      "statement_status": "checked",
+      "proof_status": "not_applicable",
+      "coverage_relation": "specialization",
+      "declarations": [
+        "LMLF.Blueprint.Elementary.Section430.table4301_cschRow"
+      ],
+      "evidence_source": "coverage/sections/chapter4-430.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-430.json"
+    }
+  },
+  "dlmf:4.30#T1.t1.r6": {
+    "review": {
+      "state": "claims_identified"
+    },
+    "lean": {
+      "statement_status": "checked",
+      "proof_status": "not_applicable",
+      "coverage_relation": "specialization",
+      "declarations": [
+        "LMLF.Blueprint.Elementary.Section430.table4301_sechRow"
+      ],
+      "evidence_source": "coverage/sections/chapter4-430.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-430.json"
+    }
+  },
+  "dlmf:4.30#T1.t1.r7": {
+    "review": {
+      "state": "claims_identified"
+    },
+    "lean": {
+      "statement_status": "checked",
+      "proof_status": "not_applicable",
+      "coverage_relation": "specialization",
+      "declarations": [
+        "LMLF.Blueprint.Elementary.Section430.table4301_cothRow"
+      ],
+      "evidence_source": "coverage/sections/chapter4-430.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-430.json"
+    }
+  },
+  "dlmf:4.30#T1@caption": {
+    "review": {
+      "state": "claims_identified"
+    },
+    "lean": {
+      "statement_status": "checked",
+      "proof_status": "not_applicable",
+      "coverage_relation": "specialization",
+      "declarations": [
+        "LMLF.Blueprint.Elementary.Section430.table4301"
+      ],
+      "evidence_source": "coverage/sections/chapter4-430.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-430.json"
+    }
+  },
+  "dlmf:4.30#info@annotation-note-1": {
+    "review": {
+      "state": "reviewed_no_claim"
+    },
+    "lean": {
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "coverage_relation": "unknown",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-430.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-430.json"
+    }
+  },
+  "dlmf:4.31#T1.t1.r1": {
+    "review": {
+      "state": "claims_identified"
+    },
+    "lean": {
+      "statement_status": "checked",
+      "proof_status": "missing",
+      "coverage_relation": "exact",
+      "declarations": [
+        "LMLF.Blueprint.Elementary.Section431.dlmf_4_31_T1_header"
+      ],
+      "evidence_source": "coverage/sections/chapter4-431.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-431.json"
+    }
+  },
+  "dlmf:4.31#T1.t1.r2": {
+    "review": {
+      "state": "claims_identified"
+    },
+    "lean": {
+      "statement_status": "checked",
+      "proof_status": "missing",
+      "coverage_relation": "specialization",
+      "declarations": [
+        "LMLF.Blueprint.Elementary.Section431.dlmf_4_31_T1_sinh"
+      ],
+      "evidence_source": "coverage/sections/chapter4-431.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-431.json"
+    }
+  },
+  "dlmf:4.31#T1.t1.r3": {
+    "review": {
+      "state": "claims_identified"
+    },
+    "lean": {
+      "statement_status": "checked",
+      "proof_status": "missing",
+      "coverage_relation": "specialization",
+      "declarations": [
+        "LMLF.Blueprint.Elementary.Section431.dlmf_4_31_T1_cosh"
+      ],
+      "evidence_source": "coverage/sections/chapter4-431.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-431.json"
+    }
+  },
+  "dlmf:4.31#T1.t1.r4": {
+    "review": {
+      "state": "claims_identified"
+    },
+    "lean": {
+      "statement_status": "checked",
+      "proof_status": "missing",
+      "coverage_relation": "specialization",
+      "declarations": [
+        "LMLF.Blueprint.Elementary.Section431.dlmf_4_31_T1_tanh"
+      ],
+      "evidence_source": "coverage/sections/chapter4-431.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-431.json"
+    }
+  },
+  "dlmf:4.31#T1.t1.r5": {
+    "review": {
+      "state": "claims_identified"
+    },
+    "lean": {
+      "statement_status": "checked",
+      "proof_status": "missing",
+      "coverage_relation": "specialization",
+      "declarations": [
+        "LMLF.Blueprint.Elementary.Section431.dlmf_4_31_T1_csch"
+      ],
+      "evidence_source": "coverage/sections/chapter4-431.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-431.json"
+    }
+  },
+  "dlmf:4.31#T1.t1.r6": {
+    "review": {
+      "state": "claims_identified"
+    },
+    "lean": {
+      "statement_status": "checked",
+      "proof_status": "missing",
+      "coverage_relation": "specialization",
+      "declarations": [
+        "LMLF.Blueprint.Elementary.Section431.dlmf_4_31_T1_sech"
+      ],
+      "evidence_source": "coverage/sections/chapter4-431.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-431.json"
+    }
+  },
+  "dlmf:4.31#T1.t1.r7": {
+    "review": {
+      "state": "claims_identified"
+    },
+    "lean": {
+      "statement_status": "checked",
+      "proof_status": "missing",
+      "coverage_relation": "specialization",
+      "declarations": [
+        "LMLF.Blueprint.Elementary.Section431.dlmf_4_31_T1_coth"
+      ],
+      "evidence_source": "coverage/sections/chapter4-431.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-431.json"
+    }
+  },
+  "dlmf:4.31#T1@caption": {
+    "review": {
+      "state": "claims_identified"
+    },
+    "lean": {
+      "statement_status": "checked",
+      "proof_status": "missing",
+      "coverage_relation": "partial",
+      "declarations": [
+        "LMLF.Blueprint.Elementary.Section431.dlmf_4_31_T1_caption"
+      ],
+      "evidence_source": "coverage/sections/chapter4-431.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-431.json"
+    }
+  },
+  "dlmf:4.31#info@annotation-note-1": {
+    "review": {
+      "state": "claims_identified"
+    },
+    "lean": {
+      "statement_status": "checked",
+      "proof_status": "missing",
+      "coverage_relation": "partial",
+      "declarations": [
+        "LMLF.Blueprint.Elementary.Section431.dlmf_4_31_notes"
+      ],
+      "evidence_source": "coverage/sections/chapter4-431.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-431.json"
+    }
+  },
+  "dlmf:4.31#p1": {
+    "review": {
+      "state": "claims_identified"
+    },
+    "lean": {
+      "statement_status": "checked",
+      "proof_status": "missing",
+      "coverage_relation": "partial",
+      "declarations": [
+        "LMLF.Blueprint.Elementary.Section431.dlmf_4_31_p1"
+      ],
+      "evidence_source": "coverage/sections/chapter4-431.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-431.json"
+    }
+  },
+  "dlmf:4.33#p1": {
+    "review": {
+      "state": "reviewed_no_claim"
+    },
+    "lean": {
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "coverage_relation": "unknown",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-433.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-433.json"
+    }
+  },
+  "dlmf:4.33#p2": {
+    "review": {
+      "state": "reviewed_no_claim"
+    },
+    "lean": {
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "coverage_relation": "unknown",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-433.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-433.json"
+    }
+  },
+  "dlmf:4.34#p1": {
+    "review": {
+      "state": "reviewed_no_claim"
+    },
+    "lean": {
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "coverage_relation": "unknown",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-434.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-434.json"
+    }
+  },
+  "dlmf:4.36#p1": {
+    "review": {
+      "state": "reviewed_no_claim"
+    },
+    "lean": {
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "coverage_relation": "unknown",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-436.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-436.json"
+    }
+  },
+  "dlmf:4.37#F1.t1.r1": {
+    "review": {
+      "state": "reviewed_no_claim"
+    },
+    "lean": {
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "coverage_relation": "unknown",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-437.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-437.json"
+    }
+  },
+  "dlmf:4.37#F1.t1.r2": {
+    "review": {
+      "state": "reviewed_no_claim"
+    },
+    "lean": {
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "coverage_relation": "unknown",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-437.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-437.json"
+    }
+  },
+  "dlmf:4.37#F1.t1.r3": {
+    "review": {
+      "state": "reviewed_no_claim"
+    },
+    "lean": {
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "coverage_relation": "unknown",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-437.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-437.json"
+    }
+  },
+  "dlmf:4.37#F1.t1.r4": {
+    "review": {
+      "state": "reviewed_no_claim"
+    },
+    "lean": {
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "coverage_relation": "unknown",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-437.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-437.json"
+    }
+  },
+  "dlmf:4.37#F1@caption": {
+    "review": {
+      "state": "reviewed_no_claim"
+    },
+    "lean": {
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "coverage_relation": "unknown",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-437.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-437.json"
+    }
+  },
+  "dlmf:4.37#Px1.p1": {
+    "review": {
+      "state": "reviewed_no_claim"
+    },
+    "lean": {
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "coverage_relation": "unknown",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-437.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-437.json"
+    }
+  },
+  "dlmf:4.37#Px2.p1": {
+    "review": {
+      "state": "reviewed_no_claim"
+    },
+    "lean": {
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "coverage_relation": "unknown",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-437.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-437.json"
+    }
+  },
+  "dlmf:4.37#Px2.p2": {
+    "review": {
+      "state": "reviewed_no_claim"
+    },
+    "lean": {
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "coverage_relation": "unknown",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-437.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-437.json"
+    }
+  },
+  "dlmf:4.37#Px2.p3": {
+    "review": {
+      "state": "reviewed_no_claim"
+    },
+    "lean": {
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "coverage_relation": "unknown",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-437.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-437.json"
+    }
+  },
+  "dlmf:4.37#Px2.p4": {
+    "review": {
+      "state": "reviewed_no_claim"
+    },
+    "lean": {
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "coverage_relation": "unknown",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-437.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-437.json"
+    }
+  },
+  "dlmf:4.37#Px3.p1": {
+    "review": {
+      "state": "reviewed_no_claim"
+    },
+    "lean": {
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "coverage_relation": "unknown",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-437.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-437.json"
+    }
+  },
+  "dlmf:4.37#Px4.p1": {
+    "review": {
+      "state": "reviewed_no_claim"
+    },
+    "lean": {
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "coverage_relation": "unknown",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-437.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-437.json"
+    }
+  },
+  "dlmf:4.37#i.p1": {
+    "review": {
+      "state": "reviewed_no_claim"
+    },
+    "lean": {
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "coverage_relation": "unknown",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-437.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-437.json"
+    }
+  },
+  "dlmf:4.37#ii.info@annotation-note-1": {
+    "review": {
+      "state": "reviewed_no_claim"
+    },
+    "lean": {
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "coverage_relation": "unknown",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-437.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-437.json"
+    }
+  },
+  "dlmf:4.37#ii.p1": {
+    "review": {
+      "state": "reviewed_no_claim"
+    },
+    "lean": {
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "coverage_relation": "unknown",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-437.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-437.json"
+    }
+  },
+  "dlmf:4.37#ii.p2": {
+    "review": {
+      "state": "reviewed_no_claim"
+    },
+    "lean": {
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "coverage_relation": "unknown",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-437.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-437.json"
+    }
+  },
+  "dlmf:4.37#ii.p3": {
+    "review": {
+      "state": "reviewed_no_claim"
+    },
+    "lean": {
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "coverage_relation": "unknown",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-437.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-437.json"
+    }
+  },
+  "dlmf:4.37#ii.p4": {
+    "review": {
+      "state": "reviewed_no_claim"
+    },
+    "lean": {
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "coverage_relation": "unknown",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-437.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-437.json"
+    }
+  },
+  "dlmf:4.37#iii.info@annotation-note-1": {
+    "review": {
+      "state": "reviewed_no_claim"
+    },
+    "lean": {
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "coverage_relation": "unknown",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-437.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-437.json"
+    }
+  },
+  "dlmf:4.37#iii.p1": {
+    "review": {
+      "state": "reviewed_no_claim"
+    },
+    "lean": {
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "coverage_relation": "unknown",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-437.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-437.json"
+    }
+  },
+  "dlmf:4.37#iv.info@annotation-note-1": {
+    "review": {
+      "state": "reviewed_no_claim"
+    },
+    "lean": {
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "coverage_relation": "unknown",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-437.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-437.json"
+    }
+  },
+  "dlmf:4.37#iv.info@editorial-change-note-1": {
+    "review": {
+      "state": "reviewed_no_claim"
+    },
+    "lean": {
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "coverage_relation": "unknown",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-437.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-437.json"
+    }
+  },
+  "dlmf:4.37#iv.p1": {
+    "review": {
+      "state": "reviewed_no_claim"
+    },
+    "lean": {
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "coverage_relation": "unknown",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-437.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-437.json"
+    }
+  },
+  "dlmf:4.37#v.p1": {
+    "review": {
+      "state": "reviewed_no_claim"
+    },
+    "lean": {
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "coverage_relation": "unknown",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-437.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-437.json"
+    }
+  },
+  "dlmf:4.37#vi.p1": {
+    "review": {
+      "state": "reviewed_no_claim"
+    },
+    "lean": {
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "coverage_relation": "unknown",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-437.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-437.json"
+    }
+  },
+  "dlmf:4.38#i.info@annotation-note-1": {
+    "review": {
+      "state": "reviewed_no_claim"
+    },
+    "lean": {
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "coverage_relation": "unknown",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-438.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-438.json"
+    }
+  },
+  "dlmf:4.38#i.p1": {
+    "review": {
+      "state": "reviewed_no_claim"
+    },
+    "lean": {
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "coverage_relation": "unknown",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-438.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-438.json"
+    }
+  },
+  "dlmf:4.38#ii.info@annotation-note-1": {
+    "review": {
+      "state": "reviewed_no_claim"
+    },
+    "lean": {
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "coverage_relation": "unknown",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-438.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-438.json"
+    }
+  },
+  "dlmf:4.38#ii.p1": {
+    "review": {
+      "state": "reviewed_no_claim"
+    },
+    "lean": {
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "coverage_relation": "unknown",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-438.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-438.json"
+    }
+  },
+  "dlmf:4.38#iii.info@annotation-note-1": {
+    "review": {
+      "state": "reviewed_no_claim"
+    },
+    "lean": {
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "coverage_relation": "unknown",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-438.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-438.json"
+    }
+  },
+  "dlmf:4.38#iii.p1": {
+    "review": {
+      "state": "reviewed_no_claim"
+    },
+    "lean": {
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "coverage_relation": "unknown",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-438.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-438.json"
+    }
+  },
+  "dlmf:4.39#p1": {
+    "review": {
+      "state": "claims_identified"
+    },
+    "lean": {
+      "statement_status": "checked",
+      "proof_status": "missing",
+      "coverage_relation": "partial",
+      "declarations": [
+        "LMLF.Blueprint.Elementary.Section439.arcsinhCut",
+        "LMLF.Blueprint.Elementary.Section439.arctanhCut"
+      ],
+      "evidence_source": "coverage/sections/chapter4-439.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-439.json"
+    }
+  },
+  "dlmf:4.39#p2": {
+    "review": {
+      "state": "reviewed_no_claim"
+    },
+    "lean": {
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "coverage_relation": "unknown",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-439.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-439.json"
+    }
+  },
+  "dlmf:4.42#F1@caption": {
+    "review": {
+      "state": "reviewed_no_claim"
+    },
+    "lean": {
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "coverage_relation": "unknown",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-442.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-442.json"
+    }
+  },
+  "dlmf:4.42#F2@caption": {
+    "review": {
+      "state": "reviewed_no_claim"
+    },
+    "lean": {
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "coverage_relation": "unknown",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-442.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-442.json"
+    }
+  },
+  "dlmf:4.42#F3@caption": {
+    "review": {
+      "state": "reviewed_no_claim"
+    },
+    "lean": {
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "coverage_relation": "unknown",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-442.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-442.json"
+    }
+  },
+  "dlmf:4.42#i.p1": {
+    "review": {
+      "state": "reviewed_no_claim"
+    },
+    "lean": {
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "coverage_relation": "unknown",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-442.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-442.json"
+    }
+  },
+  "dlmf:4.42#ii.p1": {
+    "review": {
+      "state": "reviewed_no_claim"
+    },
+    "lean": {
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "coverage_relation": "unknown",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-442.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-442.json"
+    }
+  },
+  "dlmf:4.42#iii.p1": {
+    "review": {
+      "state": "reviewed_no_claim"
+    },
+    "lean": {
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "coverage_relation": "unknown",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-442.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-442.json"
+    }
+  },
+  "dlmf:4.43#E1.info@editorial-change-note-1": {
+    "review": {
+      "state": "reviewed_no_claim"
+    },
+    "lean": {
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "coverage_relation": "unknown",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-443.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-443.json"
+    }
+  },
+  "dlmf:4.43#E2.info@editorial-change-note-1": {
+    "review": {
+      "state": "reviewed_no_claim"
+    },
+    "lean": {
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "coverage_relation": "unknown",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-443.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-443.json"
+    }
+  },
+  "dlmf:4.43#I3.ix1.p1": {
+    "review": {
+      "state": "reviewed_no_claim"
+    },
+    "lean": {
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "coverage_relation": "unknown",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-443.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-443.json"
+    }
+  },
+  "dlmf:4.43#I3.ix2.p1": {
+    "review": {
+      "state": "reviewed_no_claim"
+    },
+    "lean": {
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "coverage_relation": "unknown",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-443.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-443.json"
+    }
+  },
+  "dlmf:4.43#I3.ix3.p1": {
+    "review": {
+      "state": "reviewed_no_claim"
+    },
+    "lean": {
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "coverage_relation": "unknown",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-443.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-443.json"
+    }
+  },
+  "dlmf:4.43#info@annotation-note-1": {
+    "review": {
+      "state": "reviewed_no_claim"
+    },
+    "lean": {
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "coverage_relation": "unknown",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-443.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-443.json"
+    }
+  },
+  "dlmf:4.43#info@editorial-change-note-1": {
+    "review": {
+      "state": "reviewed_no_claim"
+    },
+    "lean": {
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "coverage_relation": "unknown",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-443.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-443.json"
+    }
+  },
+  "dlmf:4.43#p1": {
+    "review": {
+      "state": "reviewed_no_claim"
+    },
+    "lean": {
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "coverage_relation": "unknown",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-443.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-443.json"
+    }
+  },
+  "dlmf:4.43#p2": {
+    "review": {
+      "state": "reviewed_no_claim"
+    },
+    "lean": {
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "coverage_relation": "unknown",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-443.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-443.json"
+    }
+  },
+  "dlmf:4.44#info@editorial-change-note-1": {
+    "review": {
+      "state": "reviewed_no_claim"
+    },
+    "lean": {
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "coverage_relation": "unknown",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-444.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-444.json"
+    }
+  },
+  "dlmf:4.44#p1": {
+    "review": {
+      "state": "reviewed_no_claim"
+    },
+    "lean": {
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "coverage_relation": "unknown",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-444.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-444.json"
+    }
+  },
+  "dlmf:4.44#p2": {
+    "review": {
+      "state": "reviewed_no_claim"
+    },
+    "lean": {
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "coverage_relation": "unknown",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-444.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-444.json"
+    }
+  },
+  "dlmf:4.44#p3": {
+    "review": {
+      "state": "reviewed_no_claim"
+    },
+    "lean": {
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "coverage_relation": "unknown",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-444.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-444.json"
+    }
+  },
+  "dlmf:4.45#E8.info@editorial-change-note-1": {
+    "review": {
+      "state": "reviewed_no_claim"
+    },
+    "lean": {
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "coverage_relation": "unknown",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-445.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-445.json"
+    }
+  },
+  "dlmf:4.45#E9.info@editorial-change-note-1": {
+    "review": {
+      "state": "reviewed_no_claim"
+    },
+    "lean": {
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "coverage_relation": "unknown",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-445.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-445.json"
+    }
+  },
+  "dlmf:4.45#Px1.p1": {
+    "review": {
+      "state": "reviewed_no_claim"
+    },
+    "lean": {
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "coverage_relation": "unknown",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-445.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-445.json"
+    }
+  },
+  "dlmf:4.45#Px1.p2": {
+    "review": {
+      "state": "reviewed_no_claim"
+    },
+    "lean": {
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "coverage_relation": "unknown",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-445.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-445.json"
+    }
+  },
+  "dlmf:4.45#Px2.p1": {
+    "review": {
+      "state": "reviewed_no_claim"
+    },
+    "lean": {
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "coverage_relation": "unknown",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-445.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-445.json"
+    }
+  },
+  "dlmf:4.45#Px3.p1": {
+    "review": {
+      "state": "reviewed_no_claim"
+    },
+    "lean": {
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "coverage_relation": "unknown",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-445.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-445.json"
+    }
+  },
+  "dlmf:4.45#Px3.p2": {
+    "review": {
+      "state": "reviewed_no_claim"
+    },
+    "lean": {
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "coverage_relation": "unknown",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-445.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-445.json"
+    }
+  },
+  "dlmf:4.45#Px4.p1": {
+    "review": {
+      "state": "reviewed_no_claim"
+    },
+    "lean": {
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "coverage_relation": "unknown",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-445.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-445.json"
+    }
+  },
+  "dlmf:4.45#Px4.p2": {
+    "review": {
+      "state": "reviewed_no_claim"
+    },
+    "lean": {
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "coverage_relation": "unknown",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-445.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-445.json"
+    }
+  },
+  "dlmf:4.45#Px4.p3": {
+    "review": {
+      "state": "reviewed_no_claim"
+    },
+    "lean": {
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "coverage_relation": "unknown",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-445.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-445.json"
+    }
+  },
+  "dlmf:4.45#Px4.p4": {
+    "review": {
+      "state": "reviewed_no_claim"
+    },
+    "lean": {
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "coverage_relation": "unknown",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-445.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-445.json"
+    }
+  },
+  "dlmf:4.45#Px4.p5": {
+    "review": {
+      "state": "reviewed_no_claim"
+    },
+    "lean": {
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "coverage_relation": "unknown",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-445.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-445.json"
+    }
+  },
+  "dlmf:4.45#Px4.p6": {
+    "review": {
+      "state": "reviewed_no_claim"
+    },
+    "lean": {
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "coverage_relation": "unknown",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-445.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-445.json"
+    }
+  },
+  "dlmf:4.45#Px5.p1": {
+    "review": {
+      "state": "reviewed_no_claim"
+    },
+    "lean": {
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "coverage_relation": "unknown",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-445.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-445.json"
+    }
+  },
+  "dlmf:4.45#Px6.p1": {
+    "review": {
+      "state": "reviewed_no_claim"
+    },
+    "lean": {
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "coverage_relation": "unknown",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-445.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-445.json"
+    }
+  },
+  "dlmf:4.45#ii.p1": {
+    "review": {
+      "state": "reviewed_no_claim"
+    },
+    "lean": {
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "coverage_relation": "unknown",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-445.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-445.json"
+    }
+  },
+  "dlmf:4.45#ii.p2": {
+    "review": {
+      "state": "reviewed_no_claim"
+    },
+    "lean": {
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "coverage_relation": "unknown",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-445.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-445.json"
+    }
+  },
+  "dlmf:4.45#ii.p3": {
+    "review": {
+      "state": "reviewed_no_claim"
+    },
+    "lean": {
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "coverage_relation": "unknown",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-445.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-445.json"
+    }
+  },
+  "dlmf:4.45#iii.info@editorial-change-note-1": {
+    "review": {
+      "state": "reviewed_no_claim"
+    },
+    "lean": {
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "coverage_relation": "unknown",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-445.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-445.json"
+    }
+  },
+  "dlmf:4.45#iii.p1": {
+    "review": {
+      "state": "reviewed_no_claim"
+    },
+    "lean": {
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "coverage_relation": "unknown",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-445.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-445.json"
+    }
+  },
+  "dlmf:4.45#iii.p2": {
+    "review": {
+      "state": "reviewed_no_claim"
+    },
+    "lean": {
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "coverage_relation": "unknown",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-445.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-445.json"
+    }
+  },
+  "dlmf:4.45#iii.p3": {
+    "review": {
+      "state": "reviewed_no_claim"
+    },
+    "lean": {
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "coverage_relation": "unknown",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-445.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-445.json"
+    }
+  },
+  "dlmf:4.46#p1": {
+    "review": {
+      "state": "reviewed_no_claim"
+    },
+    "lean": {
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "coverage_relation": "unknown",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-446.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-446.json"
+    }
+  },
+  "dlmf:4.46#p2": {
+    "review": {
+      "state": "reviewed_no_claim"
+    },
+    "lean": {
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "coverage_relation": "unknown",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-446.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-446.json"
+    }
+  },
+  "dlmf:4.46#p3": {
+    "review": {
+      "state": "reviewed_no_claim"
+    },
+    "lean": {
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "coverage_relation": "unknown",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-446.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-446.json"
+    }
+  },
+  "dlmf:4.46#p4": {
+    "review": {
+      "state": "reviewed_no_claim"
+    },
+    "lean": {
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "coverage_relation": "unknown",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-446.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-446.json"
+    }
+  },
+  "dlmf:4.47#i.p1": {
+    "review": {
+      "state": "reviewed_no_claim"
+    },
+    "lean": {
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "coverage_relation": "unknown",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-447.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-447.json"
+    }
+  },
+  "dlmf:4.47#ii.p1": {
+    "review": {
+      "state": "reviewed_no_claim"
+    },
+    "lean": {
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "coverage_relation": "unknown",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-447.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-447.json"
+    }
+  },
+  "dlmf:4.47#iii.p1": {
+    "review": {
+      "state": "reviewed_no_claim"
+    },
+    "lean": {
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "coverage_relation": "unknown",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-447.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-447.json"
+    }
+  },
+  "dlmf:4.47#iv.p1": {
+    "review": {
+      "state": "reviewed_no_claim"
+    },
+    "lean": {
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "coverage_relation": "unknown",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-447.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-447.json"
+    }
+  },
+  "dlmf:4.48#I1.i1.p1": {
+    "review": {
+      "state": "reviewed_no_claim"
+    },
+    "lean": {
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "coverage_relation": "unknown",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-448.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-448.json"
+    }
+  },
+  "dlmf:4.48#I1.i2.p1": {
+    "review": {
+      "state": "reviewed_no_claim"
+    },
+    "lean": {
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "coverage_relation": "unknown",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-448.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-448.json"
+    }
+  },
+  "dlmf:4.48#I1.i3.p1": {
+    "review": {
+      "state": "reviewed_no_claim"
+    },
+    "lean": {
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "coverage_relation": "unknown",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-448.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-448.json"
+    }
+  },
+  "dlmf:4.48#I2.i1.p1": {
+    "review": {
+      "state": "reviewed_no_claim"
+    },
+    "lean": {
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "coverage_relation": "unknown",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-448.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-448.json"
+    }
+  },
+  "dlmf:4.48#I2.i2.p1": {
+    "review": {
+      "state": "reviewed_no_claim"
+    },
+    "lean": {
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "coverage_relation": "unknown",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-448.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-448.json"
+    }
+  },
+  "dlmf:4.48#I2.i3.p1": {
+    "review": {
+      "state": "reviewed_no_claim"
+    },
+    "lean": {
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "coverage_relation": "unknown",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-448.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-448.json"
+    }
+  },
+  "dlmf:4.48#I2.i4.p1": {
+    "review": {
+      "state": "reviewed_no_claim"
+    },
+    "lean": {
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "coverage_relation": "unknown",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-448.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-448.json"
+    }
+  },
+  "dlmf:4.48#I2.i5.p1": {
+    "review": {
+      "state": "reviewed_no_claim"
+    },
+    "lean": {
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "coverage_relation": "unknown",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-448.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-448.json"
+    }
+  },
+  "dlmf:4.48#I3.i1.p1": {
+    "review": {
+      "state": "reviewed_no_claim"
+    },
+    "lean": {
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "coverage_relation": "unknown",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-448.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-448.json"
+    }
+  },
+  "dlmf:4.48#I3.i2.p1": {
+    "review": {
+      "state": "reviewed_no_claim"
+    },
+    "lean": {
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "coverage_relation": "unknown",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-448.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-448.json"
+    }
+  },
+  "dlmf:4.48#I4.i1.p1": {
+    "review": {
+      "state": "reviewed_no_claim"
+    },
+    "lean": {
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "coverage_relation": "unknown",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-448.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-448.json"
+    }
+  },
+  "dlmf:4.48#i.p1": {
+    "review": {
+      "state": "reviewed_no_claim"
+    },
+    "lean": {
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "coverage_relation": "unknown",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-448.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-448.json"
+    }
+  },
+  "dlmf:4.48#i.p2": {
+    "review": {
+      "state": "reviewed_no_claim"
+    },
+    "lean": {
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "coverage_relation": "unknown",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-448.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-448.json"
+    }
+  },
+  "dlmf:4.48#i.p3": {
+    "review": {
+      "state": "reviewed_no_claim"
+    },
+    "lean": {
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "coverage_relation": "unknown",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-448.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-448.json"
+    }
+  },
+  "dlmf:4.48#ii.p1": {
+    "review": {
+      "state": "reviewed_no_claim"
+    },
+    "lean": {
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "coverage_relation": "unknown",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-448.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-448.json"
+    }
+  },
+  "dlmf:4.48#ii.p2": {
+    "review": {
+      "state": "reviewed_no_claim"
+    },
+    "lean": {
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "coverage_relation": "unknown",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-448.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-448.json"
+    }
+  },
+  "dlmf:4.48#iii.info@editorial-change-note-1": {
+    "review": {
+      "state": "reviewed_no_claim"
+    },
+    "lean": {
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "coverage_relation": "unknown",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-448.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-448.json"
+    }
+  },
+  "dlmf:4.48#iii.p1": {
+    "review": {
+      "state": "reviewed_no_claim"
+    },
+    "lean": {
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "coverage_relation": "unknown",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-448.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-448.json"
+    }
+  },
+  "dlmf:4.48#iii.p2": {
+    "review": {
+      "state": "reviewed_no_claim"
+    },
+    "lean": {
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "coverage_relation": "unknown",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-448.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-448.json"
+    }
+  },
+  "dlmf:4.48#iv.info@editorial-change-note-1": {
+    "review": {
+      "state": "reviewed_no_claim"
+    },
+    "lean": {
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "coverage_relation": "unknown",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-448.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-448.json"
+    }
+  },
+  "dlmf:4.48#iv.p1": {
+    "review": {
+      "state": "reviewed_no_claim"
+    },
+    "lean": {
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "coverage_relation": "unknown",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-448.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-448.json"
+    }
+  },
+  "dlmf:4.48#iv.p2": {
+    "review": {
+      "state": "reviewed_no_claim"
+    },
+    "lean": {
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "coverage_relation": "unknown",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-448.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-448.json"
+    }
+  },
+  "dlmf:4.48#v.p1": {
+    "review": {
+      "state": "reviewed_no_claim"
+    },
+    "lean": {
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "coverage_relation": "unknown",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-448.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter4-448.json"
+    }
+  }
+}

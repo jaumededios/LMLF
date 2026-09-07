@@ -1,0 +1,16 @@
+{
+  "section_range": ["4.43"],
+  "numbered_formula_ids_expected": ["4.43.E1", "4.43.E2"],
+  "numbered_formula_ids_stated": ["4.43.E1", "4.43.E2"],
+  "numbered_formula_ids_omitted": [],
+  "extra_statement_ids": ["depressedCubic", "cubicDiscriminant", "sineScale", "hyperbolicScale", "cubicSineRoot", "cubicCoshRoot", "cubicSinhRoot", "4.43.E2a", "4.43.E2b", "4.43.E2c", "dlmf:4.43#info@annotation-note-1", "dlmf:4.43#info@editorial-change-note-1", "dlmf:4.43#p1", "dlmf:4.43#E1.info@editorial-change-note-1", "dlmf:4.43#E2.info@editorial-change-note-1", "dlmf:4.43#I3.ix1.p1", "dlmf:4.43#I3.ix2.p1", "dlmf:4.43#I3.ix3.p1", "dlmf:4.43#p2"],
+  "declarations": [
+    {"source_id":"4.43.E1","names":["LMLF.Blueprint.Elementary.Section443.dlmf_4_43_1"],"relation":"exact","proof_status":"missing","quantitative_analogue":"not_applicable","notes":"Regime-specific real scale factors."},
+    {"source_id":"4.43.E2","names":["LMLF.Blueprint.Elementary.Section443.dlmf_4_43_2"],"relation":"exact","proof_status":"missing","quantitative_analogue":"not_applicable","notes":"Three discriminant/branch regimes with complete phase-indexed root triples."},
+    {"source_id":"4.43.E2a","names":["LMLF.Blueprint.Elementary.Section443.dlmf_4_43_2a"],"relation":"exact","proof_status":"missing","quantitative_analogue":"not_applicable","notes":"Three real sine roots."},
+    {"source_id":"4.43.E2b","names":["LMLF.Blueprint.Elementary.Section443.dlmf_4_43_2b"],"relation":"exact","proof_status":"missing","quantitative_analogue":"not_applicable","notes":"Hyperbolic-cosine branch triple."},
+    {"source_id":"4.43.E2c","names":["LMLF.Blueprint.Elementary.Section443.dlmf_4_43_2c"],"relation":"exact","proof_status":"missing","quantitative_analogue":"not_applicable","notes":"Hyperbolic-sine branch triple."}
+  ],
+  "shared_vocabulary_requests": [],
+  "known_gaps": ["The historical erratum and bibliography are represented in mathematical prose; no additional numbered formula is present.", "Complex root conjugacy is described in prose, while branch-indexed polynomial identities are exposed by E2a–E2c."]
+}

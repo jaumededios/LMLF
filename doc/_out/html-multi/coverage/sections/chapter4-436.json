@@ -1,0 +1,16 @@
+{
+  "section_range": ["4.36"],
+  "numbered_formula_ids_expected": ["4.36.E1","4.36.E2","4.36.E3","4.36.E4","4.36.E5"],
+  "numbered_formula_ids_stated": ["4.36.E1","4.36.E2","4.36.E3","4.36.E4","4.36.E5"],
+  "numbered_formula_ids_omitted": [],
+  "extra_statement_ids": ["4.36#p1","4.36.sinhProduct","4.36.coshProduct","4.36.cothPartial","4.36.cschSqPartial","4.36.cschPartial"],
+  "declarations": [
+    {"source_id":"4.36.E1","names":["LMLF.Blueprint.Elementary.Section436.dlmf_4_36_1"],"relation":"exact","proof_status":"missing","quantitative_analogue":"not_applicable","notes":"Ordered finite products converge to sinh for every complex z."},
+    {"source_id":"4.36.E2","names":["LMLF.Blueprint.Elementary.Section436.dlmf_4_36_2"],"relation":"exact","proof_status":"missing","quantitative_analogue":"not_applicable","notes":"Odd-indexed ordered finite products converge to cosh for every complex z."},
+    {"source_id":"4.36.E3","names":["LMLF.Blueprint.Elementary.Section436.dlmf_4_36_3"],"relation":"exact","proof_status":"missing","quantitative_analogue":"not_applicable","notes":"Positive-index partial fractions converge away from the full sinh zero lattice."},
+    {"source_id":"4.36.E4","names":["LMLF.Blueprint.Elementary.Section436.dlmf_4_36_4"],"relation":"exact","proof_status":"missing","quantitative_analogue":"not_applicable","notes":"Symmetric -N..N partial sums converge away from all csch poles."},
+    {"source_id":"4.36.E5","names":["LMLF.Blueprint.Elementary.Section436.dlmf_4_36_5"],"relation":"exact","proof_status":"missing","quantitative_analogue":"not_applicable","notes":"Alternating positive-index partial fractions converge away from all csch poles."}
+  ],
+  "shared_vocabulary_requests": [],
+  "known_gaps": []
+}

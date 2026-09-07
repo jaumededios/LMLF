@@ -1,0 +1,1 @@
+window.docContents[13].resolve({"/Elementary-Functions/___4___46-Tables/#chapter-4-section-46":{"contents":"Source: NIST Digital Library of Mathematical Functions, §4.46.\n\n\n\n","context":"LMLF · DLMF with Lean\u0009Elementary Functions","header":"4.46. §4.46 Tables","id":"/Elementary-Functions/___4___46-Tables/#chapter-4-section-46"}});

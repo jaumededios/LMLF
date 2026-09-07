@@ -1,0 +1,36 @@
+{
+  "section_range": ["4.20"],
+  "numbered_formula_ids_expected": [
+    "4.20.E1", "4.20.E2", "4.20.E3", "4.20.E4", "4.20.E5",
+    "4.20.E6", "4.20.E7", "4.20.E8", "4.20.E9", "4.20.E10",
+    "4.20.E11", "4.20.E12", "4.20.E13", "4.20.E14"
+  ],
+  "numbered_formula_ids_stated": [
+    "4.20.E1", "4.20.E2", "4.20.E3", "4.20.E4", "4.20.E5",
+    "4.20.E6", "4.20.E7", "4.20.E8", "4.20.E9", "4.20.E10",
+    "4.20.E11", "4.20.E12", "4.20.E13", "4.20.E14"
+  ],
+  "numbered_formula_ids_omitted": [],
+  "extra_statement_ids": [
+    "sec", "csc", "cot", "secondOrderCandidate", "energyCandidate",
+    "riccatiCandidate"
+  ],
+  "declarations": [
+    {"source_id":"4.20.E1","names":["LMLF.Blueprint.Elementary.Section420.dlmf_4_20_1"],"relation":"exact","proof_status":"missing","quantitative_analogue":"not_applicable","notes":"Complex derivative of sine."},
+    {"source_id":"4.20.E2","names":["LMLF.Blueprint.Elementary.Section420.dlmf_4_20_2"],"relation":"exact","proof_status":"missing","quantitative_analogue":"not_applicable","notes":"Complex derivative of cosine."},
+    {"source_id":"4.20.E3","names":["LMLF.Blueprint.Elementary.Section420.dlmf_4_20_3"],"relation":"exact","proof_status":"missing","quantitative_analogue":"not_applicable","notes":"Pole exclusion is expressed as cos z ≠ 0."},
+    {"source_id":"4.20.E4","names":["LMLF.Blueprint.Elementary.Section420.dlmf_4_20_4"],"relation":"exact","proof_status":"missing","quantitative_analogue":"not_applicable","notes":"Pole exclusion is expressed as sin z ≠ 0."},
+    {"source_id":"4.20.E5","names":["LMLF.Blueprint.Elementary.Section420.dlmf_4_20_5"],"relation":"exact","proof_status":"missing","quantitative_analogue":"not_applicable","notes":"Pole exclusion is expressed as cos z ≠ 0."},
+    {"source_id":"4.20.E6","names":["LMLF.Blueprint.Elementary.Section420.dlmf_4_20_6"],"relation":"exact","proof_status":"missing","quantitative_analogue":"not_applicable","notes":"Pole exclusion is expressed as sin z ≠ 0."},
+    {"source_id":"4.20.E7","names":["LMLF.Blueprint.Elementary.Section420.dlmf_4_20_7"],"relation":"exact","proof_status":"missing","quantitative_analogue":"not_applicable","notes":"All complex derivatives of sine."},
+    {"source_id":"4.20.E8","names":["LMLF.Blueprint.Elementary.Section420.dlmf_4_20_8"],"relation":"exact","proof_status":"missing","quantitative_analogue":"not_applicable","notes":"All complex derivatives of cosine."},
+    {"source_id":"4.20.E9","names":["LMLF.Blueprint.Elementary.Section420.dlmf_4_20_9"],"relation":"specialization","proof_status":"missing","quantitative_analogue":"not_applicable","notes":"Candidate-family evaluation of the ODE; a ≠ 0 is retained as the source's standing parameter condition."},
+    {"source_id":"4.20.E10","names":["LMLF.Blueprint.Elementary.Section420.dlmf_4_20_10"],"relation":"specialization","proof_status":"missing","quantitative_analogue":"not_applicable","notes":"Candidate-family evaluation of the first-order equation with a ≠ 0."},
+    {"source_id":"4.20.E11","names":["LMLF.Blueprint.Elementary.Section420.dlmf_4_20_11"],"relation":"specialization","proof_status":"missing","quantitative_analogue":"not_applicable","notes":"Tangent candidate evaluation on its pole-free locus, with a ≠ 0."},
+    {"source_id":"4.20.E12","names":["LMLF.Blueprint.Elementary.Section420.dlmf_4_20_12"],"relation":"exact","proof_status":"missing","quantitative_analogue":"not_applicable","notes":"Classification equivalence for all globally differentiable solutions, with arbitrary complex A and B."},
+    {"source_id":"4.20.E13","names":["LMLF.Blueprint.Elementary.Section420.dlmf_4_20_13"],"relation":"related","proof_status":"missing","quantitative_analogue":"not_applicable","notes":"DLMF phase-shifted sine family extended with the two constant equilibria ±1/a."},
+    {"source_id":"4.20.E14","names":["LMLF.Blueprint.Elementary.Section420.dlmf_4_20_14"],"relation":"related","proof_status":"missing","quantitative_analogue":"not_applicable","notes":"DLMF tangent family extended on an open preconnected domain with the two constant equilibria ±I/a."}
+  ],
+  "shared_vocabulary_requests": [],
+  "known_gaps": []
+}

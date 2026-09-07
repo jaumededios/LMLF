@@ -1,0 +1,27 @@
+{
+  "section_range": ["4.31"],
+  "numbered_formula_ids_expected": ["4.31.E1", "4.31.E2", "4.31.E3"],
+  "numbered_formula_ids_stated": ["4.31.E1", "4.31.E2", "4.31.E3"],
+  "numbered_formula_ids_omitted": [],
+  "extra_statement_ids": [
+    "4.31#T1@caption", "4.31#T1.t1.r1", "4.31#T1.t1.r2", "4.31#T1.t1.r3", "4.31#T1.t1.r4",
+    "4.31#T1.t1.r5", "4.31#T1.t1.r6", "4.31#T1.t1.r7", "4.31#p1", "4.31#info"
+  ],
+  "declarations": [
+    {"source_id":"4.31.E1","names":["LMLF.Blueprint.Elementary.Section431.dlmf_4_31_1"],"relation":"exact","proof_status":"missing","quantitative_analogue":"not_applicable","notes":"Punctured complex limit."},
+    {"source_id":"4.31.E2","names":["LMLF.Blueprint.Elementary.Section431.dlmf_4_31_2"],"relation":"exact","proof_status":"missing","quantitative_analogue":"not_applicable","notes":"Punctured complex limit."},
+    {"source_id":"4.31.E3","names":["LMLF.Blueprint.Elementary.Section431.dlmf_4_31_3"],"relation":"exact","proof_status":"missing","quantitative_analogue":"not_applicable","notes":"Punctured complex limit."},
+    {"source_id":"4.31#T1@caption","names":["LMLF.Blueprint.Elementary.Section431.dlmf_4_31_T1_caption"],"relation":"related","proof_status":"missing","quantitative_analogue":"not_applicable","notes":"Cross-row caption check."},
+    {"source_id":"4.31#T1.t1.r1","names":["LMLF.Blueprint.Elementary.Section431.dlmf_4_31_T1_header"],"relation":"exact","proof_status":"missing","quantitative_analogue":"not_applicable","notes":"Table argument columns."},
+    {"source_id":"4.31#T1.t1.r2","names":["LMLF.Blueprint.Elementary.Section431.dlmf_4_31_T1_sinh"],"relation":"specialization","proof_status":"missing","quantitative_analogue":"not_applicable","notes":"Complex sample values and real infinity limit."},
+    {"source_id":"4.31#T1.t1.r3","names":["LMLF.Blueprint.Elementary.Section431.dlmf_4_31_T1_cosh"],"relation":"specialization","proof_status":"missing","quantitative_analogue":"not_applicable","notes":"Complex sample values and real infinity limit."},
+    {"source_id":"4.31#T1.t1.r4","names":["LMLF.Blueprint.Elementary.Section431.dlmf_4_31_T1_tanh"],"relation":"specialization","proof_status":"missing","quantitative_analogue":"not_applicable","notes":"Pole markers and real infinity limit."},
+    {"source_id":"4.31#T1.t1.r5","names":["LMLF.Blueprint.Elementary.Section431.dlmf_4_31_T1_csch"],"relation":"specialization","proof_status":"missing","quantitative_analogue":"not_applicable","notes":"Pole markers and real infinity limit."},
+    {"source_id":"4.31#T1.t1.r6","names":["LMLF.Blueprint.Elementary.Section431.dlmf_4_31_T1_sech"],"relation":"specialization","proof_status":"missing","quantitative_analogue":"not_applicable","notes":"Pole markers and real infinity limit."},
+    {"source_id":"4.31#T1.t1.r7","names":["LMLF.Blueprint.Elementary.Section431.dlmf_4_31_T1_coth"],"relation":"specialization","proof_status":"missing","quantitative_analogue":"not_applicable","notes":"Pole markers and real infinity limit."},
+    {"source_id":"4.31#p1","names":["LMLF.Blueprint.Elementary.Section431.dlmf_4_31_p1"],"relation":"related","proof_status":"missing","quantitative_analogue":"not_applicable","notes":"Prose restatement of origin limits."},
+    {"source_id":"4.31#info","names":["LMLF.Blueprint.Elementary.Section431.dlmf_4_31_notes"],"relation":"related","proof_status":"missing","quantitative_analogue":"not_applicable","notes":"References and representative limits."}
+  ],
+  "shared_vocabulary_requests": [],
+  "known_gaps": []
+}

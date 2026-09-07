@@ -1,0 +1,14 @@
+{
+  "section_range": ["4.33"],
+  "numbered_formula_ids_expected": ["4.33.E1", "4.33.E2", "4.33.E3"],
+  "numbered_formula_ids_stated": ["4.33.E1", "4.33.E2", "4.33.E3"],
+  "numbered_formula_ids_omitted": [],
+  "extra_statement_ids": ["4.33#p1", "4.33#p2"],
+  "declarations": [
+    {"source_id":"4.33.E1","names":["LMLF.Blueprint.Elementary.Section433.dlmf_4_33_1"],"relation":"exact","proof_status":"missing","quantitative_analogue":"not_applicable","notes":"Entire complex odd Maclaurin series with explicit 2n+1 factorial indexing."},
+    {"source_id":"4.33.E2","names":["LMLF.Blueprint.Elementary.Section433.dlmf_4_33_2"],"relation":"exact","proof_status":"missing","quantitative_analogue":"not_applicable","notes":"Entire complex even Maclaurin series with explicit 2n factorial indexing."},
+    {"source_id":"4.33.E3","names":["LMLF.Blueprint.Elementary.Section433.dlmf_4_33_3"],"relation":"specialization","proof_status":"missing","quantitative_analogue":"not_applicable","notes":"Equivalent all-power Taylor-coefficient encoding of the Bernoulli-number tanh series on the sharp disk |z| < π/2."}
+  ],
+  "shared_vocabulary_requests": [],
+  "known_gaps": []
+}

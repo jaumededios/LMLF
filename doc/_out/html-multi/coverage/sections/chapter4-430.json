@@ -1,0 +1,19 @@
+{
+  "section_range": ["4.30"],
+  "numbered_formula_ids_expected": [],
+  "numbered_formula_ids_stated": [],
+  "numbered_formula_ids_omitted": [],
+  "extra_statement_ids": ["4.30#info@annotation-note-1", "4.30#T1@caption", "4.30#T1.t1.r1", "4.30#T1.t1.r2", "4.30#T1.t1.r3", "4.30#T1.t1.r4", "4.30#T1.t1.r5", "4.30#T1.t1.r6", "4.30#T1.t1.r7"],
+  "declarations": [
+    {"source_id":"4.30#T1.t1.r1","names":["LMLF.Blueprint.Elementary.Section430.HyperbolicInterrelationRow"],"relation":"related","proof_status":"not_applicable","quantitative_analogue":"not_applicable","notes":"Reusable six-column row shape representing the table headings and their real-valued expressions."},
+    {"source_id":"4.30#T1.t1.r2","names":["LMLF.Blueprint.Elementary.Section430.table4301_sinhRow"],"relation":"specialization","proof_status":"not_applicable","quantitative_analogue":"not_applicable","notes":"Real-valued row for known sinh theta = a, with principal Real.sqrt."},
+    {"source_id":"4.30#T1.t1.r3","names":["LMLF.Blueprint.Elementary.Section430.table4301_coshRow"],"relation":"specialization","proof_status":"not_applicable","quantitative_analogue":"not_applicable","notes":"Real-valued row for known cosh theta = a, with principal Real.sqrt."},
+    {"source_id":"4.30#T1.t1.r4","names":["LMLF.Blueprint.Elementary.Section430.table4301_tanhRow"],"relation":"specialization","proof_status":"not_applicable","quantitative_analogue":"not_applicable","notes":"Real-valued row for known tanh theta = a, with principal Real.sqrt."},
+    {"source_id":"4.30#T1.t1.r5","names":["LMLF.Blueprint.Elementary.Section430.table4301_cschRow"],"relation":"specialization","proof_status":"not_applicable","quantitative_analogue":"not_applicable","notes":"Real-valued row for known csch theta = a, with principal Real.sqrt."},
+    {"source_id":"4.30#T1.t1.r6","names":["LMLF.Blueprint.Elementary.Section430.table4301_sechRow"],"relation":"specialization","proof_status":"not_applicable","quantitative_analogue":"not_applicable","notes":"Real-valued row for known sech theta = a, with principal Real.sqrt."},
+    {"source_id":"4.30#T1.t1.r7","names":["LMLF.Blueprint.Elementary.Section430.table4301_cothRow"],"relation":"specialization","proof_status":"not_applicable","quantitative_analogue":"not_applicable","notes":"Real-valued row for known coth theta = a, with principal Real.sqrt."},
+    {"source_id":"4.30#T1@caption","names":["LMLF.Blueprint.Elementary.Section430.table4301"],"relation":"specialization","proof_status":"not_applicable","quantitative_analogue":"not_applicable","notes":"Complete Table 4.30.1 in source row order."}
+  ],
+  "shared_vocabulary_requests": [],
+  "known_gaps": []
+}

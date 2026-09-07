@@ -1,0 +1,185 @@
+{
+  "section_range": ["4.39"],
+  "numbered_formula_ids_expected": ["4.39.E1", "4.39.E2", "4.39.E3"],
+  "numbered_formula_ids_stated": ["4.39.E1", "4.39.E2", "4.39.E3"],
+  "numbered_formula_ids_omitted": [],
+  "extra_statement_ids": [
+    "4.39#p1",
+    "4.39#p2",
+    "4.39.tanhPole",
+    "4.39.tanhPoleSet",
+    "4.39.arcsinhCut",
+    "4.39.arctanhCut",
+    "4.39.principalArcsinh",
+    "4.39.principalArctanh",
+    "4.39.tanhTail",
+    "4.39.tanhConvergent",
+    "4.39.arcsinhNumerator",
+    "4.39.arcsinhTail",
+    "4.39.arcsinhConvergent",
+    "4.39.arctanhNumerator",
+    "4.39.arctanhTail",
+    "4.39.arctanhConvergent"
+  ],
+  "declarations": [
+    {
+      "source_id": "4.39.E1",
+      "names": ["LMLF.Blueprint.Elementary.Section439.dlmf_4_39_1"],
+      "relation": "exact",
+      "proof_status": "missing",
+      "quantitative_analogue": "not_applicable",
+      "notes": "Finite bottom-up convergents converge to Complex.tanh away from the odd imaginary half-period poles."
+    },
+    {
+      "source_id": "4.39.E2",
+      "names": ["LMLF.Blueprint.Elementary.Section439.dlmf_4_39_2"],
+      "relation": "specialization",
+      "proof_status": "missing",
+      "quantitative_analogue": "not_applicable",
+      "notes": "Principal logarithmic arcsinh and square-root branches are made explicit on the open Figure 4.37.1(i) cut plane."
+    },
+    {
+      "source_id": "4.39.E3",
+      "names": ["LMLF.Blueprint.Elementary.Section439.dlmf_4_39_3"],
+      "relation": "specialization",
+      "proof_status": "missing",
+      "quantitative_analogue": "not_applicable",
+      "notes": "Principal logarithmic arctanh branch is made explicit on the open Figure 4.37.1(iii) cut plane."
+    },
+    {
+      "source_id": "4.39#p1",
+      "names": [
+        "LMLF.Blueprint.Elementary.Section439.arcsinhCut",
+        "LMLF.Blueprint.Elementary.Section439.arctanhCut"
+      ],
+      "relation": "related",
+      "proof_status": "missing",
+      "quantitative_analogue": "not_applicable",
+      "notes": "The linked Figure 4.37.1(i)/(iii) open cut-plane conditions are represented by the two explicit branch predicates in the manual disclosures."
+    },
+    {
+      "source_id": "4.39#p2",
+      "names": [],
+      "relation": "related",
+      "proof_status": "not_applicable",
+      "quantitative_analogue": "not_applicable",
+      "notes": "The Lorentzen--Waadeland and Cuyt bibliographic references are preserved as prose; they carry no additional mathematical declaration."
+    },
+    {
+      "source_id": "4.39.tanhPole",
+      "names": ["LMLF.Blueprint.Elementary.Section439.tanhPole"],
+      "relation": "related",
+      "proof_status": "not_applicable",
+      "quantitative_analogue": "not_applicable",
+      "notes": "Odd imaginary half-period pole parametrization used by E1."
+    },
+    {
+      "source_id": "4.39.tanhPoleSet",
+      "names": ["LMLF.Blueprint.Elementary.Section439.tanhPoleSet"],
+      "relation": "related",
+      "proof_status": "not_applicable",
+      "quantitative_analogue": "not_applicable",
+      "notes": "Range of the pole parametrization used as the E1 domain exclusion."
+    },
+    {
+      "source_id": "4.39.arcsinhCut",
+      "names": ["LMLF.Blueprint.Elementary.Section439.arcsinhCut"],
+      "relation": "specialization",
+      "proof_status": "not_applicable",
+      "quantitative_analogue": "not_applicable",
+      "notes": "Open principal cut plane for E2, matching Figure 4.37.1(i)."
+    },
+    {
+      "source_id": "4.39.arctanhCut",
+      "names": ["LMLF.Blueprint.Elementary.Section439.arctanhCut"],
+      "relation": "specialization",
+      "proof_status": "not_applicable",
+      "quantitative_analogue": "not_applicable",
+      "notes": "Open principal cut plane for E3, matching Figure 4.37.1(iii)."
+    },
+    {
+      "source_id": "4.39.principalArcsinh",
+      "names": ["LMLF.Blueprint.Elementary.Section439.principalArcsinh"],
+      "relation": "specialization",
+      "proof_status": "not_applicable",
+      "quantitative_analogue": "not_applicable",
+      "notes": "Explicit principal logarithmic arcsinh expression used as the E2 target."
+    },
+    {
+      "source_id": "4.39.principalArctanh",
+      "names": ["LMLF.Blueprint.Elementary.Section439.principalArctanh"],
+      "relation": "specialization",
+      "proof_status": "not_applicable",
+      "quantitative_analogue": "not_applicable",
+      "notes": "Explicit principal logarithmic arctanh expression used as the E3 target."
+    },
+    {
+      "source_id": "4.39.tanhTail",
+      "names": ["LMLF.Blueprint.Elementary.Section439.tanhTail"],
+      "relation": "related",
+      "proof_status": "not_applicable",
+      "quantitative_analogue": "not_applicable",
+      "notes": "Bottom-up finite odd-denominator tail for E1."
+    },
+    {
+      "source_id": "4.39.tanhConvergent",
+      "names": ["LMLF.Blueprint.Elementary.Section439.tanhConvergent"],
+      "relation": "related",
+      "proof_status": "not_applicable",
+      "quantitative_analogue": "not_applicable",
+      "notes": "Finite E1 truncation with leading denominator 1 and depth-indexed tail."
+    },
+    {
+      "source_id": "4.39.arcsinhNumerator",
+      "names": ["LMLF.Blueprint.Elementary.Section439.arcsinhNumerator"],
+      "relation": "related",
+      "proof_status": "not_applicable",
+      "quantitative_analogue": "not_applicable",
+      "notes": "Repeated (1·2),(1·2),(3·4),(3·4),… numerator stream for E2."
+    },
+    {
+      "source_id": "4.39.arcsinhTail",
+      "names": ["LMLF.Blueprint.Elementary.Section439.arcsinhTail"],
+      "relation": "related",
+      "proof_status": "not_applicable",
+      "quantitative_analogue": "not_applicable",
+      "notes": "Bottom-up finite odd-denominator tail for E2."
+    },
+    {
+      "source_id": "4.39.arcsinhConvergent",
+      "names": ["LMLF.Blueprint.Elementary.Section439.arcsinhConvergent"],
+      "relation": "related",
+      "proof_status": "not_applicable",
+      "quantitative_analogue": "not_applicable",
+      "notes": "Finite E2 truncation exposing the initial 1·2 numerator and tail."
+    },
+    {
+      "source_id": "4.39.arctanhNumerator",
+      "names": ["LMLF.Blueprint.Elementary.Section439.arctanhNumerator"],
+      "relation": "related",
+      "proof_status": "not_applicable",
+      "quantitative_analogue": "not_applicable",
+      "notes": "Squared 1²,2²,3²,… numerator stream for E3."
+    },
+    {
+      "source_id": "4.39.arctanhTail",
+      "names": ["LMLF.Blueprint.Elementary.Section439.arctanhTail"],
+      "relation": "related",
+      "proof_status": "not_applicable",
+      "quantitative_analogue": "not_applicable",
+      "notes": "Bottom-up finite odd-denominator tail with the E3 minus signs."
+    },
+    {
+      "source_id": "4.39.arctanhConvergent",
+      "names": ["LMLF.Blueprint.Elementary.Section439.arctanhConvergent"],
+      "relation": "related",
+      "proof_status": "not_applicable",
+      "quantitative_analogue": "not_applicable",
+      "notes": "Finite E3 truncation exposing the squared numerator stream and alternating signs."
+    }
+  ],
+  "shared_vocabulary_requests": [],
+  "known_gaps": [
+    "Figure 4.37.1 is linked from the prose rather than reproduced as a local raster graphic."
+  ]
+}

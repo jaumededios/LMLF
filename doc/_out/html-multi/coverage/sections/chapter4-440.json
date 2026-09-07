@@ -1,0 +1,221 @@
+{
+  "section_range": [
+    "4.40"
+  ],
+  "numbered_formula_ids_expected": [
+    "4.40.E1",
+    "4.40.E2",
+    "4.40.E3",
+    "4.40.E4",
+    "4.40.E5",
+    "4.40.E6",
+    "4.40.E7",
+    "4.40.E8",
+    "4.40.E9",
+    "4.40.E10",
+    "4.40.E11",
+    "4.40.E12",
+    "4.40.E13",
+    "4.40.E14",
+    "4.40.E15",
+    "4.40.E16"
+  ],
+  "numbered_formula_ids_stated": [
+    "4.40.E1",
+    "4.40.E2",
+    "4.40.E3",
+    "4.40.E4",
+    "4.40.E5",
+    "4.40.E6",
+    "4.40.E7",
+    "4.40.E8",
+    "4.40.E9",
+    "4.40.E10",
+    "4.40.E11",
+    "4.40.E12",
+    "4.40.E13",
+    "4.40.E14",
+    "4.40.E15",
+    "4.40.E16"
+  ],
+  "numbered_formula_ids_omitted": [],
+  "extra_statement_ids": [
+    "truncatedIntegral",
+    "symmetricTruncatedIntegral",
+    "arsinh",
+    "arcosh",
+    "artanh",
+    "arcsch",
+    "arsech",
+    "arcoth",
+    "gd",
+    "e9Value"
+  ],
+  "declarations": [
+    {
+      "source_id": "4.40.E1",
+      "names": [
+        "LMLF.Blueprint.Elementary.Section440.dlmf_4_40_1"
+      ],
+      "relation": "exact",
+      "proof_status": "missing",
+      "quantitative_analogue": "not_applicable",
+      "notes": ""
+    },
+    {
+      "source_id": "4.40.E2",
+      "names": [
+        "LMLF.Blueprint.Elementary.Section440.dlmf_4_40_2"
+      ],
+      "relation": "exact",
+      "proof_status": "missing",
+      "quantitative_analogue": "not_applicable",
+      "notes": ""
+    },
+    {
+      "source_id": "4.40.E3",
+      "names": [
+        "LMLF.Blueprint.Elementary.Section440.dlmf_4_40_3"
+      ],
+      "relation": "exact",
+      "proof_status": "missing",
+      "quantitative_analogue": "not_applicable",
+      "notes": ""
+    },
+    {
+      "source_id": "4.40.E4",
+      "names": [
+        "LMLF.Blueprint.Elementary.Section440.dlmf_4_40_4"
+      ],
+      "relation": "exact",
+      "proof_status": "missing",
+      "quantitative_analogue": "not_applicable",
+      "notes": "Real positive-interval specialization of the principal logarithm formula."
+    },
+    {
+      "source_id": "4.40.E5",
+      "names": [
+        "LMLF.Blueprint.Elementary.Section440.dlmf_4_40_5"
+      ],
+      "relation": "exact",
+      "proof_status": "missing",
+      "quantitative_analogue": "not_applicable",
+      "notes": ""
+    },
+    {
+      "source_id": "4.40.E6",
+      "names": [
+        "LMLF.Blueprint.Elementary.Section440.dlmf_4_40_6"
+      ],
+      "relation": "exact",
+      "proof_status": "missing",
+      "quantitative_analogue": "not_applicable",
+      "notes": "Real positive-interval specialization of the principal logarithm formula."
+    },
+    {
+      "source_id": "4.40.E7",
+      "names": [
+        "LMLF.Blueprint.Elementary.Section440.dlmf_4_40_7"
+      ],
+      "relation": "specialization",
+      "proof_status": "missing",
+      "quantitative_analogue": "not_applicable",
+      "notes": "Real-parameter specialization with explicit improper endpoint truncation and convergence filter."
+    },
+    {
+      "source_id": "4.40.E8",
+      "names": [
+        "LMLF.Blueprint.Elementary.Section440.dlmf_4_40_8"
+      ],
+      "relation": "specialization",
+      "proof_status": "missing",
+      "quantitative_analogue": "not_applicable",
+      "notes": "Real-parameter specialization with explicit improper endpoint truncation and convergence filter."
+    },
+    {
+      "source_id": "4.40.E9",
+      "names": [
+        "LMLF.Blueprint.Elementary.Section440.dlmf_4_40_9"
+      ],
+      "relation": "specialization",
+      "proof_status": "missing",
+      "quantitative_analogue": "not_applicable",
+      "notes": "Real-parameter specialization with symmetric improper endpoint truncation; the quotient is continuously extended to value 4 at a=0."
+    },
+    {
+      "source_id": "4.40.E10",
+      "names": [
+        "LMLF.Blueprint.Elementary.Section440.dlmf_4_40_10"
+      ],
+      "relation": "specialization",
+      "proof_status": "missing",
+      "quantitative_analogue": "not_applicable",
+      "notes": "Real-parameter specialization with explicit improper endpoint truncation and convergence filter."
+    },
+    {
+      "source_id": "4.40.E11",
+      "names": [
+        "LMLF.Blueprint.Elementary.Section440.dlmf_4_40_11"
+      ],
+      "relation": "exact",
+      "proof_status": "missing",
+      "quantitative_analogue": "not_applicable",
+      "notes": ""
+    },
+    {
+      "source_id": "4.40.E12",
+      "names": [
+        "LMLF.Blueprint.Elementary.Section440.dlmf_4_40_12"
+      ],
+      "relation": "exact",
+      "proof_status": "missing",
+      "quantitative_analogue": "not_applicable",
+      "notes": ""
+    },
+    {
+      "source_id": "4.40.E13",
+      "names": [
+        "LMLF.Blueprint.Elementary.Section440.dlmf_4_40_13"
+      ],
+      "relation": "exact",
+      "proof_status": "missing",
+      "quantitative_analogue": "not_applicable",
+      "notes": ""
+    },
+    {
+      "source_id": "4.40.E14",
+      "names": [
+        "LMLF.Blueprint.Elementary.Section440.dlmf_4_40_14"
+      ],
+      "relation": "exact",
+      "proof_status": "missing",
+      "quantitative_analogue": "not_applicable",
+      "notes": ""
+    },
+    {
+      "source_id": "4.40.E15",
+      "names": [
+        "LMLF.Blueprint.Elementary.Section440.dlmf_4_40_15"
+      ],
+      "relation": "exact",
+      "proof_status": "missing",
+      "quantitative_analogue": "not_applicable",
+      "notes": ""
+    },
+    {
+      "source_id": "4.40.E16",
+      "names": [
+        "LMLF.Blueprint.Elementary.Section440.dlmf_4_40_16"
+      ],
+      "relation": "exact",
+      "proof_status": "missing",
+      "quantitative_analogue": "not_applicable",
+      "notes": ""
+    }
+  ],
+  "shared_vocabulary_requests": [],
+  "known_gaps": [
+    "Complex continuation mentioned by DLMF is not formalized; the declarations use the stated real specializations and explicit branch-avoiding prose.",
+    "The compendia bibliography has no numbered mathematical display in the inventory and is represented by prose."
+  ]
+}

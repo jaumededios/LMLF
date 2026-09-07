@@ -1,0 +1,94 @@
+{
+  "section_range": ["4.25"],
+  "numbered_formula_ids_expected": ["4.25.E1", "4.25.E2", "4.25.E3", "4.25.E4", "4.25.E5"],
+  "numbered_formula_ids_stated": ["4.25.E1", "4.25.E2", "4.25.E3", "4.25.E4", "4.25.E5"],
+  "numbered_formula_ids_omitted": [],
+  "extra_statement_ids": [
+    "4.25.continuedFractionTail",
+    "4.25.continuedFractionConvergent",
+    "4.25.tangentFractionNumerator",
+    "4.25.oddFractionDenominator",
+    "4.25.tangentPole",
+    "4.25.scaledTangentFractionNumerator",
+    "4.25.scaledTangentFractionDenominator",
+    "4.25.arcsineFractionNumerator",
+    "4.25.arcsineFractionDenominator",
+    "4.25.principalArcsin",
+    "4.25.arctangentFractionNumerator",
+    "4.25.arctangentFractionDenominator",
+    "4.25.principalArctan",
+    "4.25.exponentialArctanFractionNumerator",
+    "4.25.exponentialArctanFractionDenominator"
+  ],
+  "declarations": [
+    {
+      "source_id": "4.25.E1",
+      "names": [
+        "LMLF.Blueprint.Elementary.Section425.tangentFractionNumerator",
+        "LMLF.Blueprint.Elementary.Section425.oddFractionDenominator",
+        "LMLF.Blueprint.Elementary.Section425.tangentPole",
+        "LMLF.Blueprint.Elementary.Section425.dlmf_4_25_1"
+      ],
+      "relation": "exact",
+      "proof_status": "missing",
+      "quantitative_analogue": "not_applicable",
+      "notes": "The explicit streams reproduce z, -z², -z², … over 1, 3, 5, …, and the theorem excludes every pole (2k+1)π/2 while stating convergence atTop to Complex.tan z."
+    },
+    {
+      "source_id": "4.25.E2",
+      "names": [
+        "LMLF.Blueprint.Elementary.Section425.scaledTangentFractionNumerator",
+        "LMLF.Blueprint.Elementary.Section425.scaledTangentFractionDenominator",
+        "LMLF.Blueprint.Elementary.Section425.dlmf_4_25_2"
+      ],
+      "relation": "exact",
+      "proof_status": "missing",
+      "quantitative_analogue": "not_applicable",
+      "notes": "The theorem keeps the source condition |Re z| < π/2 and the integer-indexed exclusions for az, with the coefficient stream (n+1)^2-a^2 times tan² z."
+    },
+    {
+      "source_id": "4.25.E3",
+      "names": [
+        "LMLF.Blueprint.Elementary.Section425.arcsineFractionNumerator",
+        "LMLF.Blueprint.Elementary.Section425.arcsineFractionDenominator",
+        "LMLF.Blueprint.Elementary.Section425.principalArcsin",
+        "LMLF.Blueprint.Elementary.Section425.dlmf_4_25_3"
+      ],
+      "relation": "specialization",
+      "proof_status": "missing",
+      "quantitative_analogue": "not_applicable",
+      "notes": "The displayed coefficient stream is exact; the statement writes principal arcsin using its logarithmic formula and spells out the open cut plane C minus (-∞,-1] and [1,∞)."
+    },
+    {
+      "source_id": "4.25.E4",
+      "names": [
+        "LMLF.Blueprint.Elementary.Section425.arctangentFractionNumerator",
+        "LMLF.Blueprint.Elementary.Section425.arctangentFractionDenominator",
+        "LMLF.Blueprint.Elementary.Section425.principalArctan",
+        "LMLF.Blueprint.Elementary.Section425.dlmf_4_25_4"
+      ],
+      "relation": "specialization",
+      "proof_status": "missing",
+      "quantitative_analogue": "not_applicable",
+      "notes": "The coefficient stream is exact, while the principal arctangent branch is exposed by its logarithmic expression and the two imaginary-ray cuts."
+    },
+    {
+      "source_id": "4.25.E5",
+      "names": [
+        "LMLF.Blueprint.Elementary.Section425.exponentialArctanFractionNumerator",
+        "LMLF.Blueprint.Elementary.Section425.exponentialArctanFractionDenominator",
+        "LMLF.Blueprint.Elementary.Section425.dlmf_4_25_5"
+      ],
+      "relation": "specialization",
+      "proof_status": "missing",
+      "quantitative_analogue": "not_applicable",
+      "notes": "The streams reproduce the printed z-a, 3z, 5z, … denominators and a²+n² numerators. The principal arctan(1/z) presentation makes z ≠ 0 and the transformed imaginary-segment cut explicit, matching the source's arccotangent open cut plane."
+    }
+  ],
+  "shared_vocabulary_requests": [
+    "Consider consolidating continuedFractionTail and continuedFractionConvergent for reuse across Chapter 4 continued-fraction pages."
+  ],
+  "known_gaps": [
+    "The mathematical convergence proofs are left for the proof phase; the statements record the DLMF limits with explicit streams and domains."
+  ]
+}

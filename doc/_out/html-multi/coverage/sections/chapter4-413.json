@@ -1,0 +1,450 @@
+{
+  "section_range": [
+    "4.13"
+  ],
+  "numbered_formula_ids_expected": [
+    "4.13.E1",
+    "4.13.E1_1",
+    "4.13.E1_2",
+    "4.13.E1_3",
+    "4.13.E2",
+    "4.13.E3",
+    "4.13.E3_1",
+    "4.13.E3_2",
+    "4.13.E4",
+    "4.13.E4_1",
+    "4.13.E4_2",
+    "4.13.E5",
+    "4.13.E5_1",
+    "4.13.E5_2",
+    "4.13.E5_3",
+    "4.13.E6",
+    "4.13.E7",
+    "4.13.E8",
+    "4.13.E9",
+    "4.13.E9_1",
+    "4.13.E9_2",
+    "4.13.E10",
+    "4.13.E11",
+    "4.13.E12",
+    "4.13.E13",
+    "4.13.E14",
+    "4.13.E15",
+    "4.13.E16"
+  ],
+  "numbered_formula_ids_stated": [
+    "4.13.E1",
+    "4.13.E1_1",
+    "4.13.E1_2",
+    "4.13.E1_3",
+    "4.13.E2",
+    "4.13.E3",
+    "4.13.E3_1",
+    "4.13.E3_2",
+    "4.13.E4",
+    "4.13.E4_1",
+    "4.13.E4_2",
+    "4.13.E5",
+    "4.13.E5_1",
+    "4.13.E5_2",
+    "4.13.E5_3",
+    "4.13.E6",
+    "4.13.E7",
+    "4.13.E8",
+    "4.13.E9",
+    "4.13.E9_1",
+    "4.13.E9_2",
+    "4.13.E10",
+    "4.13.E11",
+    "4.13.E12",
+    "4.13.E13",
+    "4.13.E14",
+    "4.13.E15",
+    "4.13.E16"
+  ],
+  "numbered_formula_ids_omitted": [],
+  "extra_statement_ids": [
+    "4.13#info@annotation-note-1",
+    "4.13#info@editorial-change-note-1",
+    "4.13#info@editorial-change-note-2",
+    "4.13#info@editorial-change-note-3",
+    "4.13#info@editorial-change-note-4",
+    "4.13#p1",
+    "4.13#p2",
+    "4.13#F1@caption",
+    "4.13#F1.info@editorial-change-note-1",
+    "4.13#p3",
+    "4.13#E1_1.info@annotation-note-1",
+    "4.13#E1_1.info@editorial-change-note-1",
+    "4.13#F2@caption",
+    "4.13#F2.info@editorial-change-note-1",
+    "4.13#p4",
+    "4.13#E1_2.info@editorial-change-note-1",
+    "4.13#E1_3.info@editorial-change-note-1",
+    "4.13#p5",
+    "4.13#E3_1.info@proof-sketch-1",
+    "4.13#E3_1.info@editorial-change-note-1",
+    "4.13#E3_2.info@proof-sketch-1",
+    "4.13#E3_2.info@editorial-change-note-1",
+    "4.13#E4_1.info@annotation-note-1",
+    "4.13#E4_1.info@editorial-change-note-1",
+    "4.13#E4_2.info@annotation-note-1",
+    "4.13#E4_2.info@editorial-change-note-1",
+    "4.13#E5_1.info@annotation-note-1",
+    "4.13#E5_1.info@editorial-change-note-1",
+    "4.13#E5_2.info@annotation-note-1",
+    "4.13#E5_3.info@annotation-note-1",
+    "4.13#E5_3.info@editorial-change-note-1",
+    "4.13#E9_1.info@proof-sketch-1",
+    "4.13#E9_1.info@editorial-change-note-1",
+    "4.13#E9_2.info@editorial-change-note-1",
+    "4.13#p6",
+    "4.13#E10.info@annotation-note-1",
+    "4.13#E10.info@editorial-change-note-1",
+    "4.13#E11.info@annotation-note-1",
+    "4.13#E11.info@editorial-change-note-1",
+    "4.13#p7",
+    "4.13#E12.info@editorial-change-note-1",
+    "4.13#E13.info@editorial-change-note-1",
+    "4.13#E14.info@editorial-change-note-1",
+    "4.13#E15.info@editorial-change-note-1",
+    "4.13#E16.info@annotation-note-1",
+    "4.13#E16.info@editorial-change-note-1",
+    "4.13#p8",
+    "4.13#p9"
+  ],
+  "declarations": [
+    {
+      "source_id": "4.13.E1",
+      "names": [
+        "LMLF.Blueprint.Elementary.Section413.dlmf_4_13_1"
+      ],
+      "relation": "specialization",
+      "proof_status": "missing",
+      "quantitative_analogue": "not_applicable",
+      "notes": "Selected LambertBranch equation on its declared domain."
+    },
+    {
+      "source_id": "4.13.E1_1",
+      "names": [
+        "LMLF.Blueprint.Elementary.Section413.dlmf_4_13_1_1"
+      ],
+      "relation": "specialization",
+      "proof_status": "missing",
+      "quantitative_analogue": "not_applicable",
+      "notes": "Additive o(1) expansion on an explicit large-argument filter with an indexed analytic branch selector, excluded cut, and eventual positive-real logarithmic-strip normalization around 2πk."
+    },
+    {
+      "source_id": "4.13.E1_2",
+      "names": [
+        "LMLF.Blueprint.Elementary.Section413.dlmf_4_13_1_2"
+      ],
+      "relation": "specialization",
+      "proof_status": "missing",
+      "quantitative_analogue": "not_applicable",
+      "notes": "WrightOmega structure exposes the selected branch equation."
+    },
+    {
+      "source_id": "4.13.E1_3",
+      "names": [
+        "LMLF.Blueprint.Elementary.Section413.dlmf_4_13_1_3"
+      ],
+      "relation": "specialization",
+      "proof_status": "missing",
+      "quantitative_analogue": "not_applicable",
+      "notes": "TreeFunction structure exposes the selected branch equation."
+    },
+    {
+      "source_id": "4.13.E2",
+      "names": [
+        "LMLF.Blueprint.Elementary.Section413.dlmf_4_13_2"
+      ],
+      "relation": "specialization",
+      "proof_status": "missing",
+      "quantitative_analogue": "not_applicable",
+      "notes": "Principal index-0 values with an explicit W₀(-e⁻¹)=-1 endpoint normalization hypothesis, and a nonprincipal boundary branch whose side fixes the branch index, opposite one-sided cut approach, analytic trace, and branch-point value; no incompatible real-imaginary restriction is imposed."
+    },
+    {
+      "source_id": "4.13.E3",
+      "names": [
+        "LMLF.Blueprint.Elementary.Section413.dlmf_4_13_3"
+      ],
+      "relation": "specialization",
+      "proof_status": "missing",
+      "quantitative_analogue": "not_applicable",
+      "notes": "Moved WrightOmega relation using the selected branch structure."
+    },
+    {
+      "source_id": "4.13.E3_1",
+      "names": [
+        "LMLF.Blueprint.Elementary.Section413.dlmf_4_13_3_1"
+      ],
+      "relation": "specialization",
+      "proof_status": "missing",
+      "quantitative_analogue": "not_applicable",
+      "notes": "Correct Lambert equation at x exp x, principal selector, x ≥ -1, and real-range hypothesis."
+    },
+    {
+      "source_id": "4.13.E3_2",
+      "names": [
+        "LMLF.Blueprint.Elementary.Section413.dlmf_4_13_3_2"
+      ],
+      "relation": "specialization",
+      "proof_status": "missing",
+      "quantitative_analogue": "not_applicable",
+      "notes": "The boundary-branch structure supplies the side-to-index relation, opposite one-sided analytic trace, Lambert equation, and lower range; the theorem gives the x < -1 simplification without arbitrary local root hypotheses."
+    },
+    {
+      "source_id": "4.13.E4",
+      "names": [
+        "LMLF.Blueprint.Elementary.Section413.dlmf_4_13_4"
+      ],
+      "relation": "specialization",
+      "proof_status": "missing",
+      "quantitative_analogue": "not_applicable",
+      "notes": "Derivative identity on a selected branch away from its cut, z = 0, and W = -1."
+    },
+    {
+      "source_id": "4.13.E4_1",
+      "names": [
+        "LMLF.Blueprint.Elementary.Section413.dlmf_4_13_4_1"
+      ],
+      "relation": "specialization",
+      "proof_status": "missing",
+      "quantitative_analogue": "not_applicable",
+      "notes": "Nth derivative uses the canonical derivativePolynomial sequence, branch-domain and noncritical-point hypotheses, and ContDiffAt regularity."
+    },
+    {
+      "source_id": "4.13.E4_2",
+      "names": [
+        "LMLF.Blueprint.Elementary.Section413.dlmf_4_13_4_2"
+      ],
+      "relation": "specialization",
+      "proof_status": "missing",
+      "quantitative_analogue": "not_applicable",
+      "notes": "Direct initial value and recurrence for the canonical complex derivative polynomials."
+    },
+    {
+      "source_id": "4.13.E5",
+      "names": [
+        "LMLF.Blueprint.Elementary.Section413.dlmf_4_13_5"
+      ],
+      "relation": "specialization",
+      "proof_status": "missing",
+      "quantitative_analogue": "not_applicable",
+      "notes": "Principal LambertBranch Maclaurin series with n=0 coefficient explicitly zero and |z| < e^-1."
+    },
+    {
+      "source_id": "4.13.E5_1",
+      "names": [
+        "LMLF.Blueprint.Elementary.Section413.dlmf_4_13_5_1"
+      ],
+      "relation": "specialization",
+      "proof_status": "missing",
+      "quantitative_analogue": "not_applicable",
+      "notes": "Parameterized principal series with a ∈ ℂ, z ≠ 0, branch domain, and |z| < e^-1."
+    },
+    {
+      "source_id": "4.13.E5_2",
+      "names": [
+        "LMLF.Blueprint.Elementary.Section413.dlmf_4_13_5_2"
+      ],
+      "relation": "specialization",
+      "proof_status": "missing",
+      "quantitative_analogue": "not_applicable",
+      "notes": "Reciprocal principal series with branch-domain and radius conditions."
+    },
+    {
+      "source_id": "4.13.E5_3",
+      "names": [
+        "LMLF.Blueprint.Elementary.Section413.dlmf_4_13_5_3"
+      ],
+      "relation": "specialization",
+      "proof_status": "missing",
+      "quantitative_analogue": "not_applicable",
+      "notes": "Principal square series with branch-domain and radius conditions."
+    },
+    {
+      "source_id": "4.13.E6",
+      "names": [
+        "LMLF.Blueprint.Elementary.Section413.dlmf_4_13_6"
+      ],
+      "relation": "specialization",
+      "proof_status": "missing",
+      "quantitative_analogue": "not_applicable",
+      "notes": "Branch-point series tied to BranchPointCoefficients and a side-indexed boundary branch selector."
+    },
+    {
+      "source_id": "4.13.E7",
+      "names": [
+        "LMLF.Blueprint.Elementary.Section413.dlmf_4_13_7"
+      ],
+      "relation": "specialization",
+      "proof_status": "missing",
+      "quantitative_analogue": "not_applicable",
+      "notes": "Initial coefficient values for a BranchPointCoefficients object."
+    },
+    {
+      "source_id": "4.13.E8",
+      "names": [
+        "LMLF.Blueprint.Elementary.Section413.dlmf_4_13_8"
+      ],
+      "relation": "specialization",
+      "proof_status": "missing",
+      "quantitative_analogue": "not_applicable",
+      "notes": "Recurrence projection for the same BranchPointCoefficients object used by E6."
+    },
+    {
+      "source_id": "4.13.E9",
+      "names": [
+        "LMLF.Blueprint.Elementary.Section413.dlmf_4_13_9"
+      ],
+      "relation": "specialization",
+      "proof_status": "missing",
+      "quantitative_analogue": "not_applicable",
+      "notes": "Odd-coefficient product relation for c and an explicitly constrained imported g sequence, tied to branchPointG."
+    },
+    {
+      "source_id": "4.13.E9_1",
+      "names": [
+        "LMLF.Blueprint.Elementary.Section413.dlmf_4_13_9_1"
+      ],
+      "relation": "specialization",
+      "proof_status": "missing",
+      "quantitative_analogue": "not_applicable",
+      "notes": "Principal branch-point series tied to BranchPointDCoefficients and complex half-powers."
+    },
+    {
+      "source_id": "4.13.E9_2",
+      "names": [
+        "LMLF.Blueprint.Elementary.Section413.dlmf_4_13_9_2"
+      ],
+      "relation": "specialization",
+      "proof_status": "missing",
+      "quantitative_analogue": "not_applicable",
+      "notes": "Initial values and real-cast recurrence for the BranchPointDCoefficients object used by E9_1."
+    },
+    {
+      "source_id": "4.13.E10",
+      "names": [
+        "LMLF.Blueprint.Elementary.Section413.dlmf_4_13_10"
+      ],
+      "relation": "specialization",
+      "proof_status": "missing",
+      "quantitative_analogue": "not_applicable",
+      "notes": "Finite-order Poincare remainder bounds for an indexed analytic branch whose positive-real logarithmic-strip normalization identifies W_k, on an explicit large-argument filter."
+    },
+    {
+      "source_id": "4.13.E11",
+      "names": [
+        "LMLF.Blueprint.Elementary.Section413.dlmf_4_13_11"
+      ],
+      "relation": "specialization",
+      "proof_status": "missing",
+      "quantitative_analogue": "not_applicable",
+      "notes": "Finite-order Poincare remainder bounds for the analytic one-sided trace selected by the signed boundary branch along x → 0⁻."
+    },
+    {
+      "source_id": "4.13.E12",
+      "names": [
+        "LMLF.Blueprint.Elementary.Section413.dlmf_4_13_12"
+      ],
+      "relation": "specialization",
+      "proof_status": "missing",
+      "quantitative_analogue": "not_applicable",
+      "notes": "Antiderivative identity on the nonzero complement of the principal excluded cut, with analytic selected-branch hypotheses."
+    },
+    {
+      "source_id": "4.13.E13",
+      "names": [
+        "LMLF.Blueprint.Elementary.Section413.dlmf_4_13_13"
+      ],
+      "relation": "specialization",
+      "proof_status": "missing",
+      "quantitative_analogue": "not_applicable",
+      "notes": "Antiderivative of W/z on the same nonzero principal-cut complement with analytic selected-branch hypotheses."
+    },
+    {
+      "source_id": "4.13.E14",
+      "names": [
+        "LMLF.Blueprint.Elementary.Section413.dlmf_4_13_14"
+      ],
+      "relation": "specialization",
+      "proof_status": "missing",
+      "quantitative_analogue": "not_applicable",
+      "notes": "Corrected sin(W) derivative factor for the displayed 2∫ sin(W) identity on the nonzero principal-cut complement with analytic selected-branch hypotheses."
+    },
+    {
+      "source_id": "4.13.E15",
+      "names": [
+        "LMLF.Blueprint.Elementary.Section413.dlmf_4_13_15"
+      ],
+      "relation": "specialization",
+      "proof_status": "missing",
+      "quantitative_analogue": "not_applicable",
+      "notes": "Principal LambertBranch finite integral off the excluded principalCut, with analytic and interval-integrability hypotheses."
+    },
+    {
+      "source_id": "4.13.E16",
+      "names": [
+        "LMLF.Blueprint.Elementary.Section413.dlmf_4_13_16"
+      ],
+      "relation": "specialization",
+      "proof_status": "missing",
+      "quantitative_analogue": "not_applicable",
+      "notes": "Principal LambertBranch logarithmic integral off the excluded principalCut, with analytic and interval-integrability hypotheses."
+    },
+    {"source_id":"4.13#info@annotation-note-1","source_url":"https://dlmf.nist.gov/4.13#info","names":[],"relation":"related","proof_status":"not_applicable","quantitative_analogue":"not_applicable","notes":"Section-level annotation reproduced or disclosed in the reader-facing page."},
+    {"source_id":"4.13#info@editorial-change-note-1","source_url":"https://dlmf.nist.gov/4.13#info","names":[],"relation":"related","proof_status":"not_applicable","quantitative_analogue":"not_applicable","notes":"Section-level editorial note mapped exactly; no additional Lean formula claimed."},
+    {"source_id":"4.13#info@editorial-change-note-2","source_url":"https://dlmf.nist.gov/4.13#info","names":[],"relation":"related","proof_status":"not_applicable","quantitative_analogue":"not_applicable","notes":"Section-level editorial note mapped exactly; no additional Lean formula claimed."},
+    {"source_id":"4.13#info@editorial-change-note-3","source_url":"https://dlmf.nist.gov/4.13#info","names":[],"relation":"related","proof_status":"not_applicable","quantitative_analogue":"not_applicable","notes":"Section-level editorial note mapped exactly; no additional Lean formula claimed."},
+    {"source_id":"4.13#info@editorial-change-note-4","source_url":"https://dlmf.nist.gov/4.13#info","names":[],"relation":"related","proof_status":"not_applicable","quantitative_analogue":"not_applicable","notes":"Section-level editorial note mapped exactly; no additional Lean formula claimed."},
+    {"source_id":"4.13#p1","source_url":"https://dlmf.nist.gov/4.13#p1","names":[],"relation":"related","proof_status":"not_applicable","quantitative_analogue":"not_applicable","notes":"DLMF prose block mapped to the Lambert W introduction and branch convention."},
+    {"source_id":"4.13#p2","source_url":"https://dlmf.nist.gov/4.13#p2","names":[],"relation":"related","proof_status":"not_applicable","quantitative_analogue":"not_applicable","notes":"DLMF prose block mapped to the branch and cut discussion."},
+    {"source_id":"4.13#F1@caption","source_url":"https://dlmf.nist.gov/4.13#F1","names":[],"relation":"related","proof_status":"not_applicable","quantitative_analogue":"not_applicable","notes":"Figure 4.13.1 caption mapped to the source-linked reader-facing figure entry."},
+    {"source_id":"4.13#F1.info@editorial-change-note-1","source_url":"https://dlmf.nist.gov/4.13#F1.info","names":[],"relation":"related","proof_status":"not_applicable","quantitative_analogue":"not_applicable","notes":"Figure 4.13.1 editorial note mapped; raster geometry is not formalized."},
+    {"source_id":"4.13#p3","source_url":"https://dlmf.nist.gov/4.13#p3","names":[],"relation":"related","proof_status":"not_applicable","quantitative_analogue":"not_applicable","notes":"DLMF prose block mapped to the large-argument branch expansion context."},
+    {"source_id":"4.13#E1_1.info@annotation-note-1","source_url":"https://dlmf.nist.gov/4.13#E1_1.info","names":[],"relation":"related","proof_status":"not_applicable","quantitative_analogue":"not_applicable","notes":"E1_1 annotation mapped to the normalized branch and asymptotic disclosure."},
+    {"source_id":"4.13#E1_1.info@editorial-change-note-1","source_url":"https://dlmf.nist.gov/4.13#E1_1.info","names":[],"relation":"related","proof_status":"not_applicable","quantitative_analogue":"not_applicable","notes":"E1_1 editorial note mapped; no additional formula claimed."},
+    {"source_id":"4.13#F2@caption","source_url":"https://dlmf.nist.gov/4.13#F2","names":[],"relation":"related","proof_status":"not_applicable","quantitative_analogue":"not_applicable","notes":"Figure 4.13.2 caption mapped to the source-linked reader-facing figure entry."},
+    {"source_id":"4.13#F2.info@editorial-change-note-1","source_url":"https://dlmf.nist.gov/4.13#F2.info","names":[],"relation":"related","proof_status":"not_applicable","quantitative_analogue":"not_applicable","notes":"Figure 4.13.2 editorial note mapped; raster geometry is not formalized."},
+    {"source_id":"4.13#p4","source_url":"https://dlmf.nist.gov/4.13#p4","names":[],"relation":"related","proof_status":"not_applicable","quantitative_analogue":"not_applicable","notes":"DLMF prose block mapped to the Wright omega and tree-function context."},
+    {"source_id":"4.13#E1_2.info@editorial-change-note-1","source_url":"https://dlmf.nist.gov/4.13#E1_2.info","names":[],"relation":"related","proof_status":"not_applicable","quantitative_analogue":"not_applicable","notes":"E1_2 editorial note mapped; no additional formula claimed."},
+    {"source_id":"4.13#E1_3.info@editorial-change-note-1","source_url":"https://dlmf.nist.gov/4.13#E1_3.info","names":[],"relation":"related","proof_status":"not_applicable","quantitative_analogue":"not_applicable","notes":"E1_3 editorial note mapped; no additional formula claimed."},
+    {"source_id":"4.13#p5","source_url":"https://dlmf.nist.gov/4.13#p5","names":[],"relation":"related","proof_status":"not_applicable","quantitative_analogue":"not_applicable","notes":"DLMF prose block mapped to special values and real simplifications."},
+    {"source_id":"4.13#E3_1.info@proof-sketch-1","source_url":"https://dlmf.nist.gov/4.13#E3_1.info","names":["LMLF.Blueprint.Elementary.Section413.dlmf_4_13_proof_E3_1"],"relation":"related","proof_status":"missing","quantitative_analogue":"not_applicable","notes":"Proof-sketch substitution anchor; Lean records the transformed argument and principal selector."},
+    {"source_id":"4.13#E3_1.info@editorial-change-note-1","source_url":"https://dlmf.nist.gov/4.13#E3_1.info","names":[],"relation":"related","proof_status":"not_applicable","quantitative_analogue":"not_applicable","notes":"E3_1 editorial note mapped; no additional formula claimed."},
+    {"source_id":"4.13#E3_2.info@proof-sketch-1","source_url":"https://dlmf.nist.gov/4.13#E3_2.info","names":["LMLF.Blueprint.Elementary.Section413.dlmf_4_13_proof_E3_2"],"relation":"related","proof_status":"missing","quantitative_analogue":"not_applicable","notes":"Signed proof-sketch substitution anchor using the explicit selected boundary side."},
+    {"source_id":"4.13#E3_2.info@editorial-change-note-1","source_url":"https://dlmf.nist.gov/4.13#E3_2.info","names":[],"relation":"related","proof_status":"not_applicable","quantitative_analogue":"not_applicable","notes":"E3_2 editorial note mapped; no additional formula claimed."},
+    {"source_id":"4.13#E4_1.info@annotation-note-1","source_url":"https://dlmf.nist.gov/4.13#E4_1.info","names":[],"relation":"related","proof_status":"not_applicable","quantitative_analogue":"not_applicable","notes":"E4_1 coefficient-polynomial annotation mapped."},
+    {"source_id":"4.13#E4_1.info@editorial-change-note-1","source_url":"https://dlmf.nist.gov/4.13#E4_1.info","names":[],"relation":"related","proof_status":"not_applicable","quantitative_analogue":"not_applicable","notes":"E4_1 editorial note mapped; no additional formula claimed."},
+    {"source_id":"4.13#E4_2.info@annotation-note-1","source_url":"https://dlmf.nist.gov/4.13#E4_2.info","names":[],"relation":"related","proof_status":"not_applicable","quantitative_analogue":"not_applicable","notes":"E4_2 recurrence annotation mapped."},
+    {"source_id":"4.13#E4_2.info@editorial-change-note-1","source_url":"https://dlmf.nist.gov/4.13#E4_2.info","names":[],"relation":"related","proof_status":"not_applicable","quantitative_analogue":"not_applicable","notes":"E4_2 editorial note mapped; no additional formula claimed."},
+    {"source_id":"4.13#E5_1.info@annotation-note-1","source_url":"https://dlmf.nist.gov/4.13#E5_1.info","names":[],"relation":"related","proof_status":"not_applicable","quantitative_analogue":"not_applicable","notes":"E5_1 convergence annotation mapped."},
+    {"source_id":"4.13#E5_1.info@editorial-change-note-1","source_url":"https://dlmf.nist.gov/4.13#E5_1.info","names":[],"relation":"related","proof_status":"not_applicable","quantitative_analogue":"not_applicable","notes":"E5_1 editorial note mapped; no additional formula claimed."},
+    {"source_id":"4.13#E5_2.info@annotation-note-1","source_url":"https://dlmf.nist.gov/4.13#E5_2.info","names":[],"relation":"related","proof_status":"not_applicable","quantitative_analogue":"not_applicable","notes":"E5_2 convergence annotation mapped."},
+    {"source_id":"4.13#E5_3.info@annotation-note-1","source_url":"https://dlmf.nist.gov/4.13#E5_3.info","names":[],"relation":"related","proof_status":"not_applicable","quantitative_analogue":"not_applicable","notes":"E5_3 convergence annotation mapped."},
+    {"source_id":"4.13#E5_3.info@editorial-change-note-1","source_url":"https://dlmf.nist.gov/4.13#E5_3.info","names":[],"relation":"related","proof_status":"not_applicable","quantitative_analogue":"not_applicable","notes":"E5_3 editorial note mapped; no additional formula claimed."},
+    {"source_id":"4.13#E9_1.info@proof-sketch-1","source_url":"https://dlmf.nist.gov/4.13#E9_1.info","names":["LMLF.Blueprint.Elementary.Section413.dlmf_4_13_proof_E9_1"],"relation":"related","proof_status":"missing","quantitative_analogue":"not_applicable","notes":"Proof-sketch anchor explicitly substitutes the named square-root series and its derivative into the Lambert ODE."},
+    {"source_id":"4.13#E9_1.info@editorial-change-note-1","source_url":"https://dlmf.nist.gov/4.13#E9_1.info","names":[],"relation":"related","proof_status":"not_applicable","quantitative_analogue":"not_applicable","notes":"E9_1 editorial note mapped; no additional formula claimed."},
+    {"source_id":"4.13#E9_2.info@editorial-change-note-1","source_url":"https://dlmf.nist.gov/4.13#E9_2.info","names":[],"relation":"related","proof_status":"not_applicable","quantitative_analogue":"not_applicable","notes":"E9_2 editorial note mapped; no additional formula claimed."},
+    {"source_id":"4.13#p6","source_url":"https://dlmf.nist.gov/4.13#p6","names":[],"relation":"related","proof_status":"not_applicable","quantitative_analogue":"not_applicable","notes":"DLMF prose block mapped to the complete asymptotic expansion context."},
+    {"source_id":"4.13#E10.info@annotation-note-1","source_url":"https://dlmf.nist.gov/4.13#E10.info","names":[],"relation":"related","proof_status":"not_applicable","quantitative_analogue":"not_applicable","notes":"E10 Poincare/asymptotic annotation mapped."},
+    {"source_id":"4.13#E10.info@editorial-change-note-1","source_url":"https://dlmf.nist.gov/4.13#E10.info","names":[],"relation":"related","proof_status":"not_applicable","quantitative_analogue":"not_applicable","notes":"E10 editorial note mapped; no additional formula claimed."},
+    {"source_id":"4.13#E11.info@annotation-note-1","source_url":"https://dlmf.nist.gov/4.13#E11.info","names":[],"relation":"related","proof_status":"not_applicable","quantitative_analogue":"not_applicable","notes":"E11 signed asymptotic annotation mapped with the selected side argument."},
+    {"source_id":"4.13#E11.info@editorial-change-note-1","source_url":"https://dlmf.nist.gov/4.13#E11.info","names":[],"relation":"related","proof_status":"not_applicable","quantitative_analogue":"not_applicable","notes":"E11 editorial note mapped; no additional formula claimed."},
+    {"source_id":"4.13#p7","source_url":"https://dlmf.nist.gov/4.13#p7","names":[],"relation":"related","proof_status":"not_applicable","quantitative_analogue":"not_applicable","notes":"DLMF prose block mapped to the antiderivative formulas."},
+    {"source_id":"4.13#E12.info@editorial-change-note-1","source_url":"https://dlmf.nist.gov/4.13#E12.info","names":[],"relation":"related","proof_status":"not_applicable","quantitative_analogue":"not_applicable","notes":"E12 editorial note mapped; domain convention is disclosed in the declaration and prose."},
+    {"source_id":"4.13#E13.info@editorial-change-note-1","source_url":"https://dlmf.nist.gov/4.13#E13.info","names":[],"relation":"related","proof_status":"not_applicable","quantitative_analogue":"not_applicable","notes":"E13 editorial note mapped; domain convention is disclosed in the declaration and prose."},
+    {"source_id":"4.13#E14.info@editorial-change-note-1","source_url":"https://dlmf.nist.gov/4.13#E14.info","names":[],"relation":"related","proof_status":"not_applicable","quantitative_analogue":"not_applicable","notes":"E14 editorial note mapped; domain convention is disclosed in the declaration and prose."},
+    {"source_id":"4.13#E15.info@editorial-change-note-1","source_url":"https://dlmf.nist.gov/4.13#E15.info","names":[],"relation":"related","proof_status":"not_applicable","quantitative_analogue":"not_applicable","notes":"E15 editorial note mapped; totalized interval-integrability convention is disclosed in the declaration."},
+    {"source_id":"4.13#E16.info@annotation-note-1","source_url":"https://dlmf.nist.gov/4.13#E16.info","names":[],"relation":"related","proof_status":"not_applicable","quantitative_analogue":"not_applicable","notes":"E16 endpoint/logarithm annotation mapped; totalized interval-integrability convention is disclosed."},
+    {"source_id":"4.13#E16.info@editorial-change-note-1","source_url":"https://dlmf.nist.gov/4.13#E16.info","names":[],"relation":"related","proof_status":"not_applicable","quantitative_analogue":"not_applicable","notes":"E16 editorial note mapped; no additional formula claimed."},
+    {"source_id":"4.13#p8","source_url":"https://dlmf.nist.gov/4.13#p8","names":[],"relation":"related","proof_status":"not_applicable","quantitative_analogue":"not_applicable","notes":"DLMF prose block mapped to the principal integral representations."},
+    {"source_id":"4.13#p9","source_url":"https://dlmf.nist.gov/4.13#p9","names":[],"relation":"related","proof_status":"not_applicable","quantitative_analogue":"not_applicable","notes":"DLMF prose block and cross-reference mapped to the reader-facing conclusion."}
+  ],
+  "shared_vocabulary_requests": [],
+  "known_gaps": [
+    "Figures F1 and F2 are represented by source-linked reader-facing captions and branch/cut descriptions; raster graphics are not embedded."
+  ]
+}

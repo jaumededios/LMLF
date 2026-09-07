@@ -1,0 +1,1 @@
+window.docContents[79].resolve({"/Elementary-Functions/___4___40-Integrals/#chapter-4-section-40":{"contents":"Source: NIST Digital Library of Mathematical Functions, §4.40.\n\n\n\n","context":"LMLF · DLMF with Lean\u0009Elementary Functions","header":"4.40. §4.40 Integrals","id":"/Elementary-Functions/___4___40-Integrals/#chapter-4-section-40"}});

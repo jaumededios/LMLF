@@ -1,0 +1,36 @@
+{
+  "section_range": ["4.15"],
+  "numbered_formula_ids_expected": ["4.15.E1", "4.15.E2", "4.15.E3"],
+  "numbered_formula_ids_stated": ["4.15.E1", "4.15.E2", "4.15.E3"],
+  "numbered_formula_ids_omitted": [],
+  "extra_statement_ids": [
+    "4.15.F1", "4.15.F2", "4.15.F3", "4.15.F4", "4.15.F5", "4.15.F6",
+    "4.15.F7", "4.15.F8", "4.15.F9", "4.15.F10", "4.15.F11", "4.15.F12", "4.15.F13",
+    "SlitSide", "SineCorrespondence", "reciprocalTrigDomain", "principalArccscDomain",
+    "surfaceHeight", "surfacePhase", "arcsinBranchCut", "arctanBranchCut", "arccscBranchCut",
+    "principalArcsin", "complexSecCsc", "principalArccsc", "sineConformalTable",
+    "sineConformalTable_spec", "sineSurfaceHeight", "arcsinSurfaceHeight", "tanSurfaceHeight",
+    "arctanSurfaceHeight", "cscSurfaceHeight", "arccscSurfaceHeight"
+  ],
+  "declarations": [
+    {"source_id":"4.15.E1","names":["LMLF.Blueprint.Elementary.Section415.dlmf_4_15_1"],"relation":"exact","proof_status":"missing","quantitative_analogue":"not_applicable","notes":"Modulus translation on the explicitly pole-free cosine and shifted-sine domain."},
+    {"source_id":"4.15.E2","names":["LMLF.Blueprint.Elementary.Section415.dlmf_4_15_2"],"relation":"exact","proof_status":"missing","quantitative_analogue":"not_applicable","notes":"Cotangent/negative-tangent modulus translation with both meromorphic pole exclusions."},
+    {"source_id":"4.15.E3","names":["LMLF.Blueprint.Elementary.Section415.dlmf_4_15_3"],"relation":"specialization","proof_status":"missing","quantitative_analogue":"not_applicable","notes":"Secant/cosecant modulus translation under reciprocalTrigDomain."},
+    {"source_id":"4.15.F1","names":[],"relation":"exact","proof_status":"not_applicable","quantitative_analogue":"not_applicable","notes":"Linked source plot of real sine and cosine, including periodic extrema and zeros."},
+    {"source_id":"4.15.F2","names":[],"relation":"exact","proof_status":"not_applicable","quantitative_analogue":"not_applicable","notes":"Linked source plot of principal arcsine and arccosine."},
+    {"source_id":"4.15.F3","names":[],"relation":"exact","proof_status":"not_applicable","quantitative_analogue":"not_applicable","notes":"Linked source plot of tangent and cotangent, including poles and periodic branches."},
+    {"source_id":"4.15.F4","names":[],"relation":"exact","proof_status":"not_applicable","quantitative_analogue":"not_applicable","notes":"Linked source plot of principal arctangent and arccotangent, including the arccotangent jump at zero."},
+    {"source_id":"4.15.F5","names":["LMLF.Blueprint.Elementary.Section415.complexSecCsc"],"relation":"specialization","proof_status":"missing","quantitative_analogue":"not_applicable","notes":"Linked source plot of reciprocal trigonometric functions with poles inherited from sine and cosine."},
+    {"source_id":"4.15.F6","names":[],"relation":"exact","proof_status":"not_applicable","quantitative_analogue":"not_applicable","notes":"Linked source plot of principal arccosecant and arcsecant, complex for -1 < x < 1."},
+    {"source_id":"4.15.F7","names":["LMLF.Blueprint.Elementary.Section415.SlitSide","LMLF.Blueprint.Elementary.Section415.SineCorrespondence","LMLF.Blueprint.Elementary.Section415.sineConformalTable","LMLF.Blueprint.Elementary.Section415.sineConformalTable_spec"],"relation":"specialization","proof_status":"missing","quantitative_analogue":"not_applicable","notes":"Complete four-row source table with labels A through F and C/C̄, E/Ē upper/lower slit-side tags."},
+    {"source_id":"4.15.F8","names":["LMLF.Blueprint.Elementary.Section415.surfaceHeight","LMLF.Blueprint.Elementary.Section415.surfacePhase","LMLF.Blueprint.Elementary.Section415.sineSurfaceHeight"],"relation":"specialization","proof_status":"missing","quantitative_analogue":"not_applicable","notes":"Sine surface uses modulus as height and argument as phase."},
+    {"source_id":"4.15.F9","names":["LMLF.Blueprint.Elementary.Section415.principalArcsin","LMLF.Blueprint.Elementary.Section415.arcsinBranchCut","LMLF.Blueprint.Elementary.Section415.arcsinSurfaceHeight"],"relation":"specialization","proof_status":"missing","quantitative_analogue":"not_applicable","notes":"Principal arcsine surface and its two real branch cuts, excluded by the surface theorem hypothesis."},
+    {"source_id":"4.15.F10","names":["LMLF.Blueprint.Elementary.Section415.tanSurfaceHeight"],"relation":"specialization","proof_status":"missing","quantitative_analogue":"not_applicable","notes":"Tangent surface with real-periodic structure and an explicit cosine-zero pole exclusion."},
+    {"source_id":"4.15.F11","names":["LMLF.Blueprint.Elementary.Section415.arctanBranchCut","LMLF.Blueprint.Elementary.Section415.arctanSurfaceHeight"],"relation":"specialization","proof_status":"missing","quantitative_analogue":"not_applicable","notes":"Principal arctangent surface and its imaginary-axis branch cuts, excluded by hypothesis."},
+    {"source_id":"4.15.F12","names":["LMLF.Blueprint.Elementary.Section415.complexCsc","LMLF.Blueprint.Elementary.Section415.cscSurfaceHeight"],"relation":"specialization","proof_status":"missing","quantitative_analogue":"not_applicable","notes":"Cosecant surface and explicit exclusions at zeros of sine."},
+    {"source_id":"4.15.F13","names":["LMLF.Blueprint.Elementary.Section415.principalArccsc","LMLF.Blueprint.Elementary.Section415.arccscBranchCut","LMLF.Blueprint.Elementary.Section415.principalArccscDomain","LMLF.Blueprint.Elementary.Section415.arccscSurfaceHeight"],"relation":"specialization","proof_status":"missing","quantitative_analogue":"not_applicable","notes":"Principal arccosecant surface with explicit pole exclusion at zero and real branch cut [-1,1]."},
+    {"source_id":"4.15.surface-vocabulary","names":["LMLF.Blueprint.Elementary.Section415.surfaceHeight","LMLF.Blueprint.Elementary.Section415.surfacePhase"],"relation":"exact","proof_status":"missing","quantitative_analogue":"not_applicable","notes":"Height is modulus and color is phase, matching the source graphics convention."}
+  ],
+  "shared_vocabulary_requests": [],
+  "known_gaps": []
+}

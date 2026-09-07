@@ -1,0 +1,21 @@
+{
+  "section_range": ["4.18"],
+  "numbered_formula_ids_expected": ["4.18.E1", "4.18.E2", "4.18.E3", "4.18.E4", "4.18.E5", "4.18.E6", "4.18.E7", "4.18.E8", "4.18.E9", "4.18.E10"],
+  "numbered_formula_ids_stated": ["4.18.E1", "4.18.E2", "4.18.E3", "4.18.E4", "4.18.E5", "4.18.E6", "4.18.E7", "4.18.E8", "4.18.E9", "4.18.E10"],
+  "numbered_formula_ids_omitted": [],
+  "extra_statement_ids": ["4.18.sinc", "4.18.csch"],
+  "declarations": [
+    {"source_id":"4.18.E1","names":["LMLF.Blueprint.Elementary.Section418.dlmf_4_18_1"],"relation":"exact","proof_status":"missing","quantitative_analogue":"not_applicable","notes":"Real x on the closed interval [0, π/2], with both inequalities retained."},
+    {"source_id":"4.18.E2","names":["LMLF.Blueprint.Elementary.Section418.dlmf_4_18_2"],"relation":"exact","proof_status":"missing","quantitative_analogue":"not_applicable","notes":"Real x on [0, π/2), excluding the tangent pole."},
+    {"source_id":"4.18.E3","names":["LMLF.Blueprint.Elementary.Section418.sinc","LMLF.Blueprint.Elementary.Section418.dlmf_4_18_3"],"relation":"specialization","proof_status":"missing","quantitative_analogue":"not_applicable","notes":"Real-variable statement with continuous sinc totalization at x = 0."},
+    {"source_id":"4.18.E4","names":["LMLF.Blueprint.Elementary.Section418.dlmf_4_18_4"],"relation":"exact","proof_status":"missing","quantitative_analogue":"not_applicable","notes":"Strict lower and non-strict upper bounds on 0 < x < 1."},
+    {"source_id":"4.18.E5","names":["LMLF.Blueprint.Elementary.Section418.dlmf_4_18_5"],"relation":"specialization","proof_status":"missing","quantitative_analogue":"not_applicable","notes":"Complex z expressed as x + i y with real coordinates and norm notation."},
+    {"source_id":"4.18.E6","names":["LMLF.Blueprint.Elementary.Section418.dlmf_4_18_6"],"relation":"specialization","proof_status":"missing","quantitative_analogue":"not_applicable","notes":"Complex z expressed as x + i y with real coordinates and norm notation."},
+    {"source_id":"4.18.E7","names":["LMLF.Blueprint.Elementary.Section418.csch","LMLF.Blueprint.Elementary.Section418.dlmf_4_18_7"],"relation":"specialization","proof_status":"missing","quantitative_analogue":"not_applicable","notes":"Uses reciprocal real csch and explicit y ≠ 0 to avoid the totalized singular axis."},
+    {"source_id":"4.18.E8","names":["LMLF.Blueprint.Elementary.Section418.dlmf_4_18_8"],"relation":"exact","proof_status":"missing","quantitative_analogue":"not_applicable","notes":"Complex norm bound for all z."},
+    {"source_id":"4.18.E9","names":["LMLF.Blueprint.Elementary.Section418.dlmf_4_18_9"],"relation":"exact","proof_status":"missing","quantitative_analogue":"not_applicable","notes":"Complex norm bound for all z."},
+    {"source_id":"4.18.E10","names":["LMLF.Blueprint.Elementary.Section418.dlmf_4_18_10"],"relation":"exact","proof_status":"missing","quantitative_analogue":"not_applicable","notes":"Unit-disc hypothesis, strict cosine bound, and 6/5 sine constant retained."}
+  ],
+  "shared_vocabulary_requests": [],
+  "known_gaps": []
+}

@@ -1,0 +1,23 @@
+{
+  "section_range": ["4.29"],
+  "numbered_formula_ids_expected": [],
+  "numbered_formula_ids_stated": [],
+  "numbered_formula_ids_omitted": [],
+  "extra_statement_ids": [
+    "4.29#F1", "4.29#F2", "4.29#F3", "4.29#F4", "4.29#F5", "4.29#F6",
+    "4.29#ii.p1", "4.29#ii.p2", "4.29#i.info"
+  ],
+  "declarations": [
+    {"source_id":"4.29#F1","names":["LMLF.Blueprint.Elementary.Section429.dlmf_4_29_F1"],"relation":"specialization","proof_status":"missing","quantitative_analogue":"not_applicable","notes":"Real graph ordering."},
+    {"source_id":"4.29#F2","names":["LMLF.Blueprint.Elementary.Section429.dlmf_4_29_F2"],"relation":"specialization","proof_status":"missing","quantitative_analogue":"not_applicable","notes":"Real cosh range and non-real complex preimages below 1, representing the principal arccosh branch."},
+    {"source_id":"4.29#F3","names":["LMLF.Blueprint.Elementary.Section429.dlmf_4_29_F3"],"relation":"specialization","proof_status":"missing","quantitative_analogue":"not_applicable","notes":"Real tanh/coth graph and pole exclusion."},
+    {"source_id":"4.29#F4","names":["LMLF.Blueprint.Elementary.Section429.dlmf_4_29_F4"],"relation":"specialization","proof_status":"missing","quantitative_analogue":"not_applicable","notes":"Strict real coth range including nonattainment of ±1; the complex-coth preimage clause excludes zeros of sinh so totalized pole values are not treated as inverse values."},
+    {"source_id":"4.29#F5","names":["LMLF.Blueprint.Elementary.Section429.dlmf_4_29_F5"],"relation":"specialization","proof_status":"missing","quantitative_analogue":"not_applicable","notes":"csch pole and sech denominator."},
+    {"source_id":"4.29#F6","names":["LMLF.Blueprint.Elementary.Section429.dlmf_4_29_F6"],"relation":"specialization","proof_status":"missing","quantitative_analogue":"not_applicable","notes":"Real sech range and non-real complex preimages for targets outside (0,1], representing the principal arcsech branch."},
+    {"source_id":"4.29#ii.p1","names":["LMLF.Blueprint.Elementary.Section429.dlmf_4_29_ii_p1"],"relation":"exact","proof_status":"missing","quantitative_analogue":"not_applicable","notes":"Complex rotation identities."},
+    {"source_id":"4.29#ii.p2","names":["LMLF.Blueprint.Elementary.Section429.dlmf_4_29_ii_p2"],"relation":"exact","proof_status":"missing","quantitative_analogue":"not_applicable","notes":"Complex surface correspondence."},
+    {"source_id":"4.29#i.info","names":["LMLF.Blueprint.Elementary.Section429.dlmf_4_29_notes"],"relation":"specialization","proof_status":"missing","quantitative_analogue":"not_applicable","notes":"NIST graph note and real branch facts."}
+  ],
+  "shared_vocabulary_requests": [],
+  "known_gaps": []
+}

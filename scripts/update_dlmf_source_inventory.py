@@ -4,6 +4,8 @@
 This inventory records stable source locations and content hashes.  It deliberately does not copy
 DLMF formula bodies or prose.  Structural source blocks are candidates for later human review; the
 generator does not infer that every paragraph, table row, caption, or annotation is theorem-shaped.
+Formula statuses come from ``coverage/overrides.json``; non-formula statuses come from the separate
+``coverage/source-item-overrides.json`` map.
 """
 
 from __future__ import annotations
@@ -390,12 +392,153 @@ def apply_formula_override(
         }
 
 
+def validate_source_item_override(item_id: str, raw: object) -> dict[str, object]:
+    """Validate and return one normalized non-formula status override.
+
+    Source-item overrides are deliberately kept separate from the formula override map.  The
+    sync command writes the complete schema-v2 status objects, so the inventory generator can
+    reject malformed or formula-shaped rows before applying them.
+    """
+
+    if not isinstance(raw, dict):
+        raise ValueError(f"{item_id}: source-item override must be an object")
+    review = raw.get("review")
+    lean = raw.get("lean")
+    quantitative = raw.get("quantitative")
+    if not isinstance(review, dict) or review.get("state") not in {
+        "reviewed_no_claim",
+        "claims_identified",
+        "mixed",
+    }:
+        raise ValueError(f"{item_id}: malformed source-item review state")
+    if not isinstance(lean, dict):
+        raise ValueError(f"{item_id}: source-item lean status must be an object")
+    lean_statement = lean.get("statement_status")
+    lean_proof = lean.get("proof_status")
+    if lean_statement not in {"reviewed_absent", "checked"}:
+        raise ValueError(f"{item_id}: malformed source-item Lean statement status")
+    if lean_proof not in {"not_applicable", "missing", "proved"}:
+        raise ValueError(f"{item_id}: malformed source-item Lean proof status")
+    if lean.get("coverage_relation") not in {
+        "unknown",
+        "exact",
+        "equivalent",
+        "specialization",
+        "consequence",
+        "generalization",
+        "partial",
+    }:
+        raise ValueError(f"{item_id}: malformed source-item coverage relation")
+    declarations = lean.get("declarations")
+    if not isinstance(declarations, list) or not all(
+        isinstance(name, str) and name for name in declarations
+    ) or len(set(declarations)) != len(declarations):
+        raise ValueError(f"{item_id}: malformed source-item declarations")
+    if lean_statement == "checked" and not declarations:
+        raise ValueError(f"{item_id}: checked source-item Lean status requires declarations")
+    if lean_statement == "reviewed_absent" and declarations:
+        raise ValueError(f"{item_id}: reviewed_absent source-item Lean status forbids declarations")
+    if lean_proof in {"proved", "missing"} and lean_statement != "checked":
+        raise ValueError(f"{item_id}: source-item proof requires a checked statement")
+    if lean_statement == "reviewed_absent" and lean_proof != "not_applicable":
+        raise ValueError(f"{item_id}: absent source-item statement requires not_applicable proof")
+    if not isinstance(lean.get("evidence_source"), str) or not lean["evidence_source"]:
+        raise ValueError(f"{item_id}: source-item evidence_source is required")
+    if not isinstance(quantitative, dict):
+        raise ValueError(f"{item_id}: source-item quantitative status must be an object")
+    analogue_status = quantitative.get("analogue_status")
+    q_statement = quantitative.get("statement_status")
+    q_proof = quantitative.get("proof_status")
+    if analogue_status not in {
+        "not_applicable",
+        "source_already_quantitative",
+        "candidate",
+        "present",
+    }:
+        raise ValueError(f"{item_id}: malformed source-item quantitative analogue status")
+    if q_statement not in {"reviewed_absent", "checked", "unknown"}:
+        raise ValueError(f"{item_id}: malformed source-item quantitative statement status")
+    if q_proof not in {
+        "not_applicable",
+        "missing",
+        "proved",
+        "unknown",
+    }:
+        raise ValueError(f"{item_id}: malformed source-item quantitative proof status")
+    q_declarations = quantitative.get("declarations")
+    if not isinstance(q_declarations, list) or not all(
+        isinstance(name, str) and name for name in q_declarations
+    ) or len(set(q_declarations)) != len(q_declarations):
+        raise ValueError(f"{item_id}: malformed source-item quantitative declarations")
+    if q_statement == "checked" and not q_declarations:
+        raise ValueError(f"{item_id}: checked quantitative status requires declarations")
+    if q_statement == "reviewed_absent" and q_declarations:
+        raise ValueError(f"{item_id}: reviewed_absent quantitative status forbids declarations")
+    if q_statement == "unknown" and q_declarations:
+        raise ValueError(f"{item_id}: unknown quantitative status forbids declarations")
+    if q_statement == "checked" and q_proof == "unknown":
+        raise ValueError(f"{item_id}: checked quantitative status requires an explicit proof status")
+    if q_statement == "unknown" and q_proof != "unknown":
+        raise ValueError(f"{item_id}: unknown quantitative statement requires unknown proof status")
+    if q_proof in {"proved", "missing"} and q_statement != "checked":
+        raise ValueError(f"{item_id}: quantitative proof requires a checked statement")
+    if q_statement == "reviewed_absent" and q_proof not in {"not_applicable", "unknown"}:
+        raise ValueError(f"{item_id}: absent quantitative statement requires no proof")
+    if analogue_status == "not_applicable":
+        if (q_statement, q_proof, q_declarations) != (
+            "reviewed_absent",
+            "not_applicable",
+            [],
+        ):
+            raise ValueError(f"{item_id}: not_applicable analogue has inconsistent quantitative status")
+    elif analogue_status == "candidate":
+        if q_declarations or q_statement == "checked" or q_proof in {"proved", "missing"}:
+            raise ValueError(f"{item_id}: candidate analogue cannot carry a checked quantitative claim")
+    elif analogue_status in {"present", "source_already_quantitative"}:
+        if q_proof in {"proved", "missing"} and q_statement != "checked":
+            raise ValueError(f"{item_id}: present analogue proof requires checked statement")
+    review_state = review["state"]
+    has_claim = (
+        lean_statement == "checked"
+        or bool(declarations)
+        or analogue_status == "candidate"
+        or analogue_status in {"present", "source_already_quantitative"}
+        or q_statement == "checked"
+        or bool(q_declarations)
+    )
+    if review_state == "reviewed_no_claim":
+        if has_claim or lean_proof != "not_applicable" or analogue_status != "not_applicable":
+            raise ValueError(f"{item_id}: reviewed_no_claim conflicts with identified statuses")
+    elif review_state == "claims_identified" and not has_claim:
+        raise ValueError(f"{item_id}: claims_identified requires a qualitative or quantitative claim")
+    if not isinstance(quantitative.get("evidence_source"), str) or not quantitative[
+        "evidence_source"
+    ]:
+        raise ValueError(f"{item_id}: source-item quantitative evidence_source is required")
+    return raw
+
+
+def apply_source_item_override(
+    item: dict[str, object], item_id: str, overrides: dict[str, object]
+) -> None:
+    raw = overrides.get(item_id)
+    if raw is None:
+        return
+    if item["kind"] == "numbered_formula":
+        raise ValueError(f"{item_id}: source-item override targets a numbered formula")
+    validate_source_item_override(item_id, raw)
+    item["review"] = raw["review"]
+    item["lean"] = raw["lean"]
+    item["quantitative"] = raw["quantitative"]
+
+
 def extract_section(
     chapter: int,
     section_id: str,
     title: str,
     source: str,
     overrides: dict[str, object],
+    source_item_overrides: dict[str, object] | None = None,
 ) -> tuple[dict[str, object], list[dict[str, object]]]:
     parser = TreeParser()
     parser.feed(source)
@@ -566,6 +709,12 @@ def extract_section(
             )
         )
 
+    source_item_overrides = source_item_overrides or {}
+    for item in items:
+        item_id = str(item["id"])
+        if item["kind"] != "numbered_formula":
+            apply_source_item_override(item, item_id, source_item_overrides)
+
     item_ids = [str(item["id"]) for item in items]
     duplicates = sorted(item_id for item_id, count in Counter(item_ids).items() if count > 1)
     if duplicates:
@@ -643,7 +792,10 @@ def validate_structural_counts(
         )
 
 
-def build_inventory(overrides_path: pathlib.Path) -> dict[str, object]:
+def build_inventory(
+    overrides_path: pathlib.Path,
+    source_item_overrides_path: pathlib.Path | None = None,
+) -> dict[str, object]:
     chapter_sources = {chapter: fetch(f"{BASE_URL}/{chapter}") for chapter in CHAPTERS}
     versions: set[tuple[str, str]] = set()
     for chapter, source in chapter_sources.items():
@@ -680,11 +832,25 @@ def build_inventory(overrides_path: pathlib.Path) -> dict[str, object]:
     overrides = json.loads(overrides_path.read_text(encoding="utf-8"))
     if not isinstance(overrides, dict):
         raise ValueError("Coverage overrides must be a JSON object")
+    if source_item_overrides_path is None:
+        source_item_overrides_path = overrides_path.parent / "source-item-overrides.json"
+    if source_item_overrides_path.exists():
+        source_item_overrides = json.loads(source_item_overrides_path.read_text(encoding="utf-8"))
+    else:
+        source_item_overrides = {}
+    if not isinstance(source_item_overrides, dict):
+        raise ValueError("Source-item overrides must be a JSON object")
+    for item_id, raw in source_item_overrides.items():
+        if not isinstance(item_id, str) or not item_id.startswith("dlmf:"):
+            raise ValueError(f"malformed source-item override ID {item_id!r}; expected dlmf:")
+        validate_source_item_override(item_id, raw)
 
     def fetch_and_extract(spec: tuple[int, str, str]):
         chapter, section_id, title = spec
         source = fetch(f"{BASE_URL}/{section_id}")
-        return extract_section(chapter, section_id, title, source, overrides)
+        return extract_section(
+            chapter, section_id, title, source, overrides, source_item_overrides
+        )
 
     with concurrent.futures.ThreadPoolExecutor(max_workers=6) as executor:
         extracted = list(executor.map(fetch_and_extract, section_specs))
@@ -696,6 +862,17 @@ def build_inventory(overrides_path: pathlib.Path) -> dict[str, object]:
     item_ids = [str(item["id"]) for item in items]
     if len(item_ids) != len(set(item_ids)):
         raise RuntimeError("Source item IDs are not globally unique")
+    item_by_id = {str(item["id"]): item for item in items}
+    unknown_ids = sorted(set(source_item_overrides) - set(item_by_id))
+    if unknown_ids:
+        raise ValueError(f"source-item overrides reference unknown inventory IDs: {unknown_ids}")
+    formula_ids = sorted(
+        item_id
+        for item_id in source_item_overrides
+        if item_by_id[item_id]["kind"] == "numbered_formula"
+    )
+    if formula_ids:
+        raise ValueError(f"source-item overrides must be non-formula IDs: {formula_ids}")
 
     return {
         "$schema": "dlmf-source-inventory.schema.json",
@@ -712,8 +889,10 @@ def build_inventory(overrides_path: pathlib.Path) -> dict[str, object]:
         },
         "scope": {
             "description": (
-                "Structural source candidates in DLMF Chapters 4--10. Every item remains "
-                "unreviewed; inclusion does not assert that the source block is theorem-shaped."
+                "Structural source candidates in DLMF Chapters 4--10. Items may be marked "
+                "reviewed_no_claim or claims_identified by section manifests; unreviewed "
+                "items remain candidates, and inclusion does not assert that a source block "
+                "is theorem-shaped."
             ),
             "included_kinds": list(EXPECTED_ITEM_COUNTS),
             "body_policy": (
@@ -772,6 +951,11 @@ def main() -> None:
         "--overrides", type=pathlib.Path, default=pathlib.Path("coverage/overrides.json")
     )
     parser.add_argument(
+        "--source-item-overrides",
+        type=pathlib.Path,
+        default=pathlib.Path("coverage/source-item-overrides.json"),
+    )
+    parser.add_argument(
         "--schema",
         type=pathlib.Path,
         default=pathlib.Path("coverage/dlmf-source-inventory.schema.json"),
@@ -783,7 +967,7 @@ def main() -> None:
     )
     args = parser.parse_args()
 
-    inventory = build_inventory(args.overrides)
+    inventory = build_inventory(args.overrides, args.source_item_overrides)
     schema_validated = validate_json_schema(inventory, args.schema)
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(

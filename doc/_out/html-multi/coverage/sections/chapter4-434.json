@@ -1,0 +1,25 @@
+{
+  "section_range": ["4.34"],
+  "numbered_formula_ids_expected": ["4.34.E1","4.34.E2","4.34.E3","4.34.E4","4.34.E5","4.34.E6","4.34.E7","4.34.E8","4.34.E9","4.34.E10","4.34.E11","4.34.E12","4.34.E13","4.34.E14"],
+  "numbered_formula_ids_stated": ["4.34.E1","4.34.E2","4.34.E3","4.34.E4","4.34.E5","4.34.E6","4.34.E7","4.34.E8","4.34.E9","4.34.E10","4.34.E11","4.34.E12","4.34.E13","4.34.E14"],
+  "numbered_formula_ids_omitted": [],
+  "extra_statement_ids": ["4.34#p1"],
+  "declarations": [
+    {"source_id":"4.34.E1","names":["LMLF.Blueprint.Elementary.Section434.dlmf_4_34_1"],"relation":"exact","proof_status":"missing","quantitative_analogue":"not_applicable","notes":"Complex local derivative of sinh."},
+    {"source_id":"4.34.E2","names":["LMLF.Blueprint.Elementary.Section434.dlmf_4_34_2"],"relation":"exact","proof_status":"missing","quantitative_analogue":"not_applicable","notes":"Complex local derivative of cosh."},
+    {"source_id":"4.34.E3","names":["LMLF.Blueprint.Elementary.Section434.dlmf_4_34_3"],"relation":"exact","proof_status":"missing","quantitative_analogue":"not_applicable","notes":"Derivative of tanh with cosh pole excluded."},
+    {"source_id":"4.34.E4","names":["LMLF.Blueprint.Elementary.Section434.dlmf_4_34_4"],"relation":"exact","proof_status":"missing","quantitative_analogue":"not_applicable","notes":"Derivative of csch using explicit reciprocal forms and poles excluded."},
+    {"source_id":"4.34.E5","names":["LMLF.Blueprint.Elementary.Section434.dlmf_4_34_5"],"relation":"exact","proof_status":"missing","quantitative_analogue":"not_applicable","notes":"Derivative of sech with cosh nonzero."},
+    {"source_id":"4.34.E6","names":["LMLF.Blueprint.Elementary.Section434.dlmf_4_34_6"],"relation":"exact","proof_status":"missing","quantitative_analogue":"not_applicable","notes":"Derivative of coth with tanh and sinh poles excluded."},
+    {"source_id":"4.34.E7","names":["LMLF.Blueprint.Elementary.Section434.secondOrderODE","LMLF.Blueprint.Elementary.Section434.dlmf_4_34_7"],"relation":"specialization","proof_status":"missing","quantitative_analogue":"not_applicable","notes":"Transparent second-order ODE predicate, instantiated on the named A cosh(az)+B sinh(az) family; no arbitrary-function assertion."},
+    {"source_id":"4.34.E8","names":["LMLF.Blueprint.Elementary.Section434.quadraticPlusODE","LMLF.Blueprint.Elementary.Section434.dlmf_4_34_8"],"relation":"specialization","proof_status":"missing","quantitative_analogue":"not_applicable","notes":"Transparent first-integral predicate, instantiated on the sinh(az+c)/a family."},
+    {"source_id":"4.34.E9","names":["LMLF.Blueprint.Elementary.Section434.quadraticMinusODE","LMLF.Blueprint.Elementary.Section434.dlmf_4_34_9"],"relation":"specialization","proof_status":"missing","quantitative_analogue":"not_applicable","notes":"Transparent first-integral predicate, instantiated on the cosh(az+c)/a family."},
+    {"source_id":"4.34.E10","names":["LMLF.Blueprint.Elementary.Section434.riccatiODE","LMLF.Blueprint.Elementary.Section434.dlmf_4_34_10"],"relation":"specialization","proof_status":"missing","quantitative_analogue":"not_applicable","notes":"Transparent Riccati predicate, instantiated on the tanh(az+c)/a family."},
+    {"source_id":"4.34.E11","names":["LMLF.Blueprint.Elementary.Section434.dlmf_4_34_11"],"relation":"specialization","proof_status":"missing","quantitative_analogue":"not_applicable","notes":"Displayed complete-family candidate shown to satisfy the second-order ODE; a ≠ 0 explicit."},
+    {"source_id":"4.34.E12","names":["LMLF.Blueprint.Elementary.Section434.dlmf_4_34_12"],"relation":"specialization","proof_status":"missing","quantitative_analogue":"not_applicable","notes":"Sinh parametrization derivative with a ≠ 0."},
+    {"source_id":"4.34.E13","names":["LMLF.Blueprint.Elementary.Section434.dlmf_4_34_13"],"relation":"specialization","proof_status":"missing","quantitative_analogue":"not_applicable","notes":"Cosh parametrization derivative with a ≠ 0."},
+    {"source_id":"4.34.E14","names":["LMLF.Blueprint.Elementary.Section434.dlmf_4_34_14"],"relation":"specialization","proof_status":"missing","quantitative_analogue":"not_applicable","notes":"Coth parametrization derivative with sinh(az+c) nonzero."}
+  ],
+  "shared_vocabulary_requests": [],
+  "known_gaps": []
+}

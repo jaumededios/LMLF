@@ -1,0 +1,21 @@
+{
+  "section_range": ["4.14"],
+  "numbered_formula_ids_expected": ["4.14.E1", "4.14.E2", "4.14.E3", "4.14.E4", "4.14.E5", "4.14.E6", "4.14.E7", "4.14.E8", "4.14.E9", "4.14.E10"],
+  "numbered_formula_ids_stated": ["4.14.E1", "4.14.E2", "4.14.E3", "4.14.E4", "4.14.E5", "4.14.E6", "4.14.E7", "4.14.E8", "4.14.E9", "4.14.E10"],
+  "numbered_formula_ids_omitted": [],
+  "extra_statement_ids": ["4.14.prose.zeros"],
+  "declarations": [
+    {"source_id":"4.14.E1","names":["LMLF.Blueprint.Elementary.Section414.dlmf_4_14_1"],"relation":"exact","proof_status":"missing","quantitative_analogue":"not_applicable","notes":"Complex exponential definition of sine."},
+    {"source_id":"4.14.E2","names":["LMLF.Blueprint.Elementary.Section414.dlmf_4_14_2"],"relation":"exact","proof_status":"missing","quantitative_analogue":"not_applicable","notes":"Complex exponential definition of cosine."},
+    {"source_id":"4.14.E3","names":["LMLF.Blueprint.Elementary.Section414.dlmf_4_14_3"],"relation":"exact","proof_status":"missing","quantitative_analogue":"not_applicable","notes":"Both signed exponential combinations."},
+    {"source_id":"4.14.E4","names":["LMLF.Blueprint.Elementary.Section414.dlmf_4_14_4"],"relation":"exact","proof_status":"missing","quantitative_analogue":"not_applicable","notes":"Cosine nonzero domain."},
+    {"source_id":"4.14.E5","names":["LMLF.Blueprint.Elementary.Section414.csc","LMLF.Blueprint.Elementary.Section414.dlmf_4_14_5"],"relation":"exact","proof_status":"missing","quantitative_analogue":"not_applicable","notes":"Named cosecant definition; sine nonzero domain for the meromorphic interpretation."},
+    {"source_id":"4.14.E6","names":["LMLF.Blueprint.Elementary.Section414.sec","LMLF.Blueprint.Elementary.Section414.dlmf_4_14_6"],"relation":"exact","proof_status":"missing","quantitative_analogue":"not_applicable","notes":"Named secant definition; cosine nonzero domain for the meromorphic interpretation."},
+    {"source_id":"4.14.E7","names":["LMLF.Blueprint.Elementary.Section414.dlmf_4_14_7"],"relation":"exact","proof_status":"missing","quantitative_analogue":"not_applicable","notes":"Both quotient denominators nonzero."},
+    {"source_id":"4.14.E8","names":["LMLF.Blueprint.Elementary.Section414.dlmf_4_14_8"],"relation":"exact","proof_status":"missing","quantitative_analogue":"not_applicable","notes":"Complex period 2π."},
+    {"source_id":"4.14.E9","names":["LMLF.Blueprint.Elementary.Section414.dlmf_4_14_9"],"relation":"exact","proof_status":"missing","quantitative_analogue":"not_applicable","notes":"Complex period 2π."},
+    {"source_id":"4.14.E10","names":["LMLF.Blueprint.Elementary.Section414.dlmf_4_14_10"],"relation":"specialization","proof_status":"missing","quantitative_analogue":"not_applicable","notes":"Period π with an explicit shifted-point non-pole hypothesis."}
+  ],
+  "shared_vocabulary_requests": [],
+  "known_gaps": []
+}

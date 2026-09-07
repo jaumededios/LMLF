@@ -1,0 +1,32 @@
+{
+  "section_range":["4.26"],
+  "numbered_formula_ids_expected":["4.26.E1","4.26.E2","4.26.E3","4.26.E4","4.26.E5","4.26.E6","4.26.E7","4.26.E8","4.26.E9","4.26.E10","4.26.E11","4.26.E12","4.26.E13","4.26.E14","4.26.E15","4.26.E16","4.26.E17","4.26.E18","4.26.E19","4.26.E20","4.26.E21"],
+  "numbered_formula_ids_stated":["4.26.E1","4.26.E2","4.26.E3","4.26.E4","4.26.E5","4.26.E6","4.26.E7","4.26.E8","4.26.E9","4.26.E10","4.26.E11","4.26.E12","4.26.E13","4.26.E14","4.26.E15","4.26.E16","4.26.E17","4.26.E18","4.26.E19","4.26.E20","4.26.E21"],
+  "numbered_formula_ids_omitted":[],
+  "extra_statement_ids":[],
+  "declarations":[
+    {"source_id":"4.26.E1","names":["LMLF.Blueprint.Elementary.Section426.dlmf_4_26_1"],"relation":"exact","proof_status":"missing","quantitative_analogue":"not_applicable","notes":"Derivative encoding of the real antiderivative, valid for all real x."},
+    {"source_id":"4.26.E2","names":["LMLF.Blueprint.Elementary.Section426.dlmf_4_26_2"],"relation":"exact","proof_status":"missing","quantitative_analogue":"not_applicable","notes":"Derivative encoding of the real antiderivative, valid for all real x."},
+    {"source_id":"4.26.E3","names":["LMLF.Blueprint.Elementary.Section426.dlmf_4_26_3"],"relation":"specialization","proof_status":"missing","quantitative_analogue":"not_applicable","notes":"Real-domain integral identity with explicit endpoint/branch/convergence hypotheses."},
+    {"source_id":"4.26.E4","names":["LMLF.Blueprint.Elementary.Section426.dlmf_4_26_4"],"relation":"specialization","proof_status":"missing","quantitative_analogue":"not_applicable","notes":"Real-domain integral identity with explicit endpoint/branch/convergence hypotheses."},
+    {"source_id":"4.26.E5","names":["LMLF.Blueprint.Elementary.Section426.dlmf_4_26_5"],"relation":"specialization","proof_status":"missing","quantitative_analogue":"not_applicable","notes":"Real-domain integral identity with explicit endpoint/branch/convergence hypotheses."},
+    {"source_id":"4.26.E6","names":["LMLF.Blueprint.Elementary.Section426.dlmf_4_26_6"],"relation":"specialization","proof_status":"missing","quantitative_analogue":"not_applicable","notes":"Real-domain integral identity with explicit endpoint/branch/convergence hypotheses."},
+    {"source_id":"4.26.E7","names":["LMLF.Blueprint.Elementary.Section426.dlmf_4_26_7"],"relation":"specialization","proof_status":"missing","quantitative_analogue":"not_applicable","notes":"Real-domain integral identity with explicit endpoint/branch/convergence hypotheses."},
+    {"source_id":"4.26.E8","names":["LMLF.Blueprint.Elementary.Section426.dlmf_4_26_8"],"relation":"specialization","proof_status":"missing","quantitative_analogue":"not_applicable","notes":"Real-domain integral identity with explicit endpoint/branch/convergence hypotheses."},
+    {"source_id":"4.26.E9","names":["LMLF.Blueprint.Elementary.Section426.dlmf_4_26_9"],"relation":"specialization","proof_status":"missing","quantitative_analogue":"not_applicable","notes":"Orthogonality on [0,π] for distinct positive integer frequencies."},
+    {"source_id":"4.26.E10","names":["LMLF.Blueprint.Elementary.Section426.dlmf_4_26_10"],"relation":"specialization","proof_status":"missing","quantitative_analogue":"not_applicable","notes":"Orthogonality on [0,π] for distinct positive integer frequencies."},
+    {"source_id":"4.26.E11","names":["LMLF.Blueprint.Elementary.Section426.dlmf_4_26_11"],"relation":"specialization","proof_status":"missing","quantitative_analogue":"not_applicable","notes":"Real-domain integral identity with explicit endpoint/branch/convergence hypotheses."},
+    {"source_id":"4.26.E12","names":["LMLF.Blueprint.Elementary.Section426.dlmf_4_26_12"],"relation":"exact","proof_status":"missing","quantitative_analogue":"not_applicable","notes":"Conditional improper limit over finite intervals, with positive/zero/negative integer cases."},
+    {"source_id":"4.26.E13","names":["LMLF.Blueprint.Elementary.Section426.dlmf_4_26_13"],"relation":"exact","proof_status":"missing","quantitative_analogue":"not_applicable","notes":"Two conditional Fresnel limits represented by Tendsto of finite interval integrals."},
+    {"source_id":"4.26.E14","names":["LMLF.Blueprint.Elementary.Section426.dlmf_4_26_14"],"relation":"specialization","proof_status":"missing","quantitative_analogue":"not_applicable","notes":"Real-domain integral identity with explicit endpoint/branch/convergence hypotheses."},
+    {"source_id":"4.26.E15","names":["LMLF.Blueprint.Elementary.Section426.dlmf_4_26_15"],"relation":"specialization","proof_status":"missing","quantitative_analogue":"not_applicable","notes":"Real-domain integral identity with explicit endpoint/branch/convergence hypotheses."},
+    {"source_id":"4.26.E16","names":["LMLF.Blueprint.Elementary.Section426.dlmf_4_26_16"],"relation":"specialization","proof_status":"missing","quantitative_analogue":"not_applicable","notes":"Real-domain integral identity with explicit endpoint/branch/convergence hypotheses."},
+    {"source_id":"4.26.E17","names":["LMLF.Blueprint.Elementary.Section426.dlmf_4_26_17"],"relation":"specialization","proof_status":"missing","quantitative_analogue":"not_applicable","notes":"Real-domain integral identity with explicit endpoint/branch/convergence hypotheses."},
+    {"source_id":"4.26.E18","names":["LMLF.Blueprint.Elementary.Section426.dlmf_4_26_18"],"relation":"specialization","proof_status":"missing","quantitative_analogue":"not_applicable","notes":"Real-domain integral identity with explicit endpoint/branch/convergence hypotheses."},
+    {"source_id":"4.26.E19","names":["LMLF.Blueprint.Elementary.Section426.dlmf_4_26_19"],"relation":"specialization","proof_status":"missing","quantitative_analogue":"not_applicable","notes":"Real-domain integral identity with explicit endpoint/branch/convergence hypotheses."},
+    {"source_id":"4.26.E20","names":["LMLF.Blueprint.Elementary.Section426.dlmf_4_26_20"],"relation":"specialization","proof_status":"missing","quantitative_analogue":"not_applicable","notes":"Real-domain integral identity with explicit endpoint/branch/convergence hypotheses."},
+    {"source_id":"4.26.E21","names":["LMLF.Blueprint.Elementary.Section426.dlmf_4_26_21"],"relation":"specialization","proof_status":"missing","quantitative_analogue":"not_applicable","notes":"Real-domain integral identity with explicit endpoint/branch/convergence hypotheses."}
+  ],
+  "shared_vocabulary_requests":[],
+  "known_gaps":[]
+}

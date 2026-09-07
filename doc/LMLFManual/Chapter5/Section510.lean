@@ -59,6 +59,13 @@ abbrev CFCoefficients (K : Type := ℚ) [Zero K] :=
   {a : ℕ → K // ZeroTerminated a}
 ```
 
+```anchor CFCoefficients.eq_zero_of_le (module := LMLF.Definitions.ContinuedFraction) -showProofStates
+theorem CFCoefficients.eq_zero_of_le {K : Type} [Zero K]
+    (a : CFCoefficients K) {k j : ℕ} (hk : a k = 0) (hkj : k ≤ j) :
+    a j = 0 :=
+  a.property k hk j hkj
+```
+
 ```anchor cfracCoeff (module := LMLF.Definitions.ContinuedFraction) -showProofStates
 def cfracCoeff (s : OddAsymptoticSeries) : CFCoefficients :=
   ⟨cfracCoeffValue s, cfracCoeffValue_zeroTerminated s⟩

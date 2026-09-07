@@ -12,6 +12,42 @@ import LMLFManual.Chapter4.Section49
 import LMLFManual.Chapter4.Section410
 import LMLFManual.Chapter4.Section411
 import LMLFManual.Chapter4.Section412
+import LMLFManual.Chapter4.Section413
+import LMLFManual.Chapter4.Section414
+import LMLFManual.Chapter4.Section415
+import LMLFManual.Chapter4.Section416
+import LMLFManual.Chapter4.Section417
+import LMLFManual.Chapter4.Section418
+import LMLFManual.Chapter4.Section419
+import LMLFManual.Chapter4.Section420
+import LMLFManual.Chapter4.Section421
+import LMLFManual.Chapter4.Section422
+import LMLFManual.Chapter4.Section423
+import LMLFManual.Chapter4.Section424
+import LMLFManual.Chapter4.Section425
+import LMLFManual.Chapter4.Section426
+import LMLFManual.Chapter4.Section427
+import LMLFManual.Chapter4.Section428
+import LMLFManual.Chapter4.Section429
+import LMLFManual.Chapter4.Section430
+import LMLFManual.Chapter4.Section431
+import LMLFManual.Chapter4.Section432
+import LMLFManual.Chapter4.Section433
+import LMLFManual.Chapter4.Section434
+import LMLFManual.Chapter4.Section435
+import LMLFManual.Chapter4.Section436
+import LMLFManual.Chapter4.Section437
+import LMLFManual.Chapter4.Section438
+import LMLFManual.Chapter4.Section439
+import LMLFManual.Chapter4.Section440
+import LMLFManual.Chapter4.Section441
+import LMLFManual.Chapter4.Section442
+import LMLFManual.Chapter4.Section443
+import LMLFManual.Chapter4.Section444
+import LMLFManual.Chapter4.Section445
+import LMLFManual.Chapter4.Section446
+import LMLFManual.Chapter4.Section447
+import LMLFManual.Chapter4.Section448
 
 open Verso.Genre Manual
 open LMLFManual
@@ -141,3 +177,75 @@ number := false
 {include 1 LMLFManual.Chapter4.Section411}
 
 {include 1 LMLFManual.Chapter4.Section412}
+
+{include 1 LMLFManual.Chapter4.Section413}
+
+{include 1 LMLFManual.Chapter4.Section414}
+
+{include 1 LMLFManual.Chapter4.Section415}
+
+{include 1 LMLFManual.Chapter4.Section416}
+
+{include 1 LMLFManual.Chapter4.Section417}
+
+{include 1 LMLFManual.Chapter4.Section418}
+
+{include 1 LMLFManual.Chapter4.Section419}
+
+{include 1 LMLFManual.Chapter4.Section420}
+
+{include 1 LMLFManual.Chapter4.Section421}
+
+{include 1 LMLFManual.Chapter4.Section422}
+
+{include 1 LMLFManual.Chapter4.Section423}
+
+{include 1 LMLFManual.Chapter4.Section424}
+
+{include 1 LMLFManual.Chapter4.Section425}
+
+{include 1 LMLFManual.Chapter4.Section426}
+
+{include 1 LMLFManual.Chapter4.Section427}
+
+{include 1 LMLFManual.Chapter4.Section428}
+
+{include 1 LMLFManual.Chapter4.Section429}
+
+{include 1 LMLFManual.Chapter4.Section430}
+
+{include 1 LMLFManual.Chapter4.Section431}
+
+{include 1 LMLFManual.Chapter4.Section432}
+
+{include 1 LMLFManual.Chapter4.Section433}
+
+{include 1 LMLFManual.Chapter4.Section434}
+
+{include 1 LMLFManual.Chapter4.Section435}
+
+{include 1 LMLFManual.Chapter4.Section436}
+
+{include 1 LMLFManual.Chapter4.Section437}
+
+{include 1 LMLFManual.Chapter4.Section438}
+
+{include 1 LMLFManual.Chapter4.Section439}
+
+{include 1 LMLFManual.Chapter4.Section440}
+
+{include 1 LMLFManual.Chapter4.Section441}
+
+{include 1 LMLFManual.Chapter4.Section442}
+
+{include 1 LMLFManual.Chapter4.Section443}
+
+{include 1 LMLFManual.Chapter4.Section444}
+
+{include 1 LMLFManual.Chapter4.Section445}
+
+{include 1 LMLFManual.Chapter4.Section446}
+
+{include 1 LMLFManual.Chapter4.Section447}
+
+{include 1 LMLFManual.Chapter4.Section448}
