@@ -13,7 +13,7 @@ This is bookkeeping for implementations, not an implementation framework. It doe
 
 Independent review verified the 13 theorem headings and 44 exercise headings and mechanically checked the table totals and subsection sums. It did not independently re-decompose every mathematical sentence and display into the 108 editorial claim rows. Accordingly, `108` is a disclosed editorial inventory, not a canonical or effort-weighted count.
 
-The accepted Wronskian, Theorem 1.1, and Theorem 1.2 slices check `C05-01-02`–`C05-01-11`. The accepted [first-order slice](chapter05-first-order.md) now adds `C05-01-01`, so all eleven §1 claim components are checked; the two §1 exercises remain unproved. The accepted [local Gauss-series slice](chapter05-hypergeometric-series.md) adds exactly `C05-09-01`, the separately accepted [local Gauss-ODE slice](chapter05-hypergeometric-ode.md) completes `C05-09-02`, and the accepted [exceptional-shift slice](chapter05-hypergeometric-exceptional-shift.md) completes `C05-09-03`. The accepted [holomorphic-IVP development](chapter05-holomorphic-global-ivp.md), supported by its [whole-ball local theorem](chapter05-holomorphic-local-ivp.md), adds exactly `C05-03-01` and `C05-03-02` and completes `T05-3.1`.
+The accepted Wronskian, Theorem 1.1, and Theorem 1.2 slices check `C05-01-02`–`C05-01-11`. The accepted [first-order slice](chapter05-first-order.md) now adds `C05-01-01`, so all eleven §1 claim components are checked; the two §1 exercises remain unproved. The accepted [local Gauss-series slice](chapter05-hypergeometric-series.md) adds exactly `C05-09-01`, the separately accepted [local Gauss-ODE slice](chapter05-hypergeometric-ode.md) completes `C05-09-02`, and the accepted [exceptional-shift slice](chapter05-hypergeometric-exceptional-shift.md) completes `C05-09-03`. The accepted [principal Gauss milestone](chapter05-hypergeometric-principal.md) implements a substantial but incomplete part of `C05-09-04`, so that row remains pending and earns no additional checklist count. The accepted [holomorphic-IVP development](chapter05-holomorphic-global-ivp.md), supported by its [whole-ball local theorem](chapter05-holomorphic-local-ivp.md), adds exactly `C05-03-01` and `C05-03-02` and completes `T05-3.1`.
 
 ## Subsection counts
 
@@ -153,11 +153,27 @@ The accepted Wronskian, Theorem 1.1, and Theorem 1.2 slices check `C05-01-02`–
 | C05-09-01 | 159 | Define the hypergeometric series and its sum `F(a,b;c;z)` for nonexceptional `c` and `‖z‖<1`. | checked | [`gaussHypergeometricSeriesSum`](../../LMLF/Definitions/Hypergeometric.lean#L19), [`ordinaryHypergeometricSeries_radius_ge_one`](../../LMLF/Definitions/Hypergeometric.lean#L31), [`hasSum_gaussHypergeometricSeries`](../../LMLF/Definitions/Hypergeometric.lean#L83), [`gaussHypergeometricSeriesSum_analyticOnNhd`](../../LMLF/Definitions/Hypergeometric.lean#L139) |
 | C05-09-02 | 159 | Define the gamma-regularized function and its Pochhammer series, which exists and solves the equation for all parameters. | checked | [`regularizedGaussHypergeometricSeriesSum`](../../LMLF/Definitions/Hypergeometric.lean#L27), [`hasSum_regularizedGaussHypergeometricSeries`](../../LMLF/Definitions/Hypergeometric.lean#L99), [`regularizedGaussHypergeometricSeriesSum_zero`](../../LMLF/Definitions/Hypergeometric.lean#L129), [`regularizedGaussHypergeometricSeriesSum_gaussEquation`](../../LMLF/ODE/Hypergeometric.lean#L67), [`gaussHypergeometricSeriesSum_gaussEquation`](../../LMLF/ODE/Hypergeometric.lean#L196) |
 | C05-09-03 | 159 | At nonpositive integral `c`, identity (9.05) moves the regularized solution to exponent `1−c`. | checked | [`regularizedGaussHypergeometricSeriesSum_neg_nat`](../../LMLF/Results/Hypergeometric.lean#L70), [`regularizedGaussHypergeometricSeriesSum_neg_nat_eq_gauss`](../../LMLF/Results/Hypergeometric.lean#L120), [`exceptionalGaussExponentCertificate`](../../LMLFTest/Results/Hypergeometric.lean#L83) |
-| C05-09-04 | 159 | Analytic continuation across `‖z‖=1` gives a principal branch cut on `[1,∞)` and only possible branch points/poles at `1` and infinity; other branches are generally singular at `z=0`. | pending | unassigned |
+| C05-09-04 | 159 | Analytic continuation across `‖z‖=1` gives a principal branch cut on `[1,∞)` and only possible branch points/poles at `1` and infinity; other branches are generally singular at `z=0`. | pending | partial: [accepted principal blueprint](chapter05-hypergeometric-principal.md), [`gaussHypergeometricDomain`](../../LMLF/ODE/Hypergeometric/Principal.lean#L21), [`regularizedGaussHypergeometric`](../../LMLF/ODE/Hypergeometric/Principal.lean#L500), [`gaussHypergeometric`](../../LMLF/ODE/Hypergeometric/Principal.lean#L514), [`regularizedGaussHypergeometric_analyticOnNhd`](../../LMLF/ODE/Hypergeometric/Principal.lean#L557), [`regularizedGaussHypergeometric_gaussEquation`](../../LMLF/ODE/Hypergeometric/Principal.lean#L694), [`regularizedGaussHypergeometric_neg_nat`](../../LMLF/Results/HypergeometricPrincipal.lean#L72) |
 | C05-09-05 | 160 | For fixed nonsingular `z`, each branch is entire separately in `a,b,c`. | pending | unassigned |
 | C05-09-06 | 160 | Principal `(1−z)^(−a)` equals the corresponding hypergeometric specialization, including the geometric-series case. | pending | unassigned |
 | C05-09-07 | 160–161 | Euler’s beta-integral represents the principal hypergeometric function under the stated real-part and cut conditions, with the noted continuation to a cut boundary. | pending | unassigned |
 | C05-09-08 | 161 | Gauss’s value at `z=1` is the gamma quotient (9.10)/(9.11) when `Re(c−a−b)>0`, with the stated classical-`F` restriction. | pending | unassigned |
+
+The accepted partial work for `C05-09-04` constructs the Gamma-regularized principal function on
+`ℂ \ [1,∞)` for all parameters and the single Gamma-scaled ordinary function; proves whole-disk
+germ agreement and uniqueness, analyticity and the polynomial Gauss equation on that domain
+including `0`, the off-domain series fallback, both principal exceptional shifts, and the two
+all-ambient early-termination zero results. It does **not** yet prove continuation across an
+interior point of the chosen cut, classify the behavior at `1` or infinity, or formulate and prove
+the parameter-qualified singular behavior of a nonprincipal branch at `0`. Accordingly the whole
+row stays `pending`; the terminating equality at `z=1` is only a fallback regression and earns no
+`C05-09-08` credit. This milestone also proves no part of Theorem 3.2 or Theorem 9.1 and makes no
+parameter-entireness or numerical claim.
+
+The next source task is `C05-09-06`, specifically Olver's printed p. 160, §9.3 identity
+`F(a,1;1;z) = (1-z)^(-a)` and its `a = 1` geometric-series case. Its natural-language proof is in
+preparation and has not yet been accepted for Lean; the book task does not require a general
+`b = c` theorem or a parameter-infrastructure detour.
 
 ### §10. Other hypergeometric solutions (7)
 

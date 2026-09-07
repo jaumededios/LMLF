@@ -31,10 +31,12 @@ globs = [
   "LMLF.ODE.HolomorphicSecondOrder",
   "LMLF.ODE.FundamentalPair",
   "LMLF.ODE.Hypergeometric",
+  "LMLF.ODE.Hypergeometric.Principal",
   "LMLF.ODE.Wronskian",
   "LMLF.Quantitative.Basic",
   "LMLF.Results",
   "LMLF.Results.Hypergeometric",
+  "LMLF.Results.HypergeometricPrincipal",
   "LMLF.Audit.Definitions",
 ]
 
@@ -49,8 +51,10 @@ globs = [
   "LMLFTest.ODE.HolomorphicSecondOrder",
   "LMLFTest.ODE.FundamentalPair",
   "LMLFTest.ODE.Hypergeometric",
+  "LMLFTest.ODE.Hypergeometric.Principal",
   "LMLFTest.ODE.Wronskian",
   "LMLFTest.Results.Hypergeometric",
+  "LMLFTest.Results.HypergeometricPrincipal",
   "LMLFTest.Integral.Improper.IMP001PublicUse",
   "LMLFTest.Integral.Improper.IMP001Regressions",
   "LMLFTest.Integral.Improper.IMP001EndpointAE",

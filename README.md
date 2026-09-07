@@ -19,7 +19,8 @@ the [Chapter 5 checklist](blueprint/olver/chapter05.md), the approved
 [local Gauss-ODE](blueprint/olver/chapter05-hypergeometric-ode.md) blueprints, together with the
 accepted [exceptional-shift blueprint](blueprint/olver/chapter05-hypergeometric-exceptional-shift.md)
 and the accepted [local](blueprint/olver/chapter05-holomorphic-local-ivp.md) and
-[global](blueprint/olver/chapter05-holomorphic-global-ivp.md) holomorphic-IVP blueprints.
+[global](blueprint/olver/chapter05-holomorphic-global-ivp.md) holomorphic-IVP blueprints, and the
+accepted [principal Gauss blueprint](blueprint/olver/chapter05-hypergeometric-principal.md).
 The first accepted Lean slice checks exactly `C05-01-08`–`C05-01-11`: the
 Wronskian derivative, Abel identity, zero/nowhere-zero alternative, and
 constant-Wronskian corollary. The accepted Theorem 1.1 slice now also checks
@@ -66,7 +67,8 @@ the origin. The accepted exceptional-shift identities and focused consumers are 
 [`LMLFTest/Results/Hypergeometric.lean`](LMLFTest/Results/Hypergeometric.lean). They complete
 `C05-09-03` on the source disk: the unconditional factorization by `z^(N+1)` remains valid when its
 Pochhammer prefactor vanishes, while the exact nonzero residual-factor certificate assumes exactly
-that this prefactor is nonzero. No continuation or principal-branch claim is made.
+that this prefactor is nonzero. Those local modules themselves make no continuation or
+principal-branch claim.
 
 The accepted holomorphic-IVP implementation is split between the analysis-only whole-ball theorem
 in [`LMLF/ODE/HolomorphicLinear/Local.lean`](LMLF/ODE/HolomorphicLinear/Local.lean#L373), the
@@ -74,15 +76,30 @@ global Banach-valued theorem in
 [`LMLF/ODE/HolomorphicLinear.lean`](LMLF/ODE/HolomorphicLinear.lean#L289), and the downstream scalar
 existence, uniqueness, and infinitude theorems in
 [`LMLF/ODE/HolomorphicSecondOrder.lean`](LMLF/ODE/HolomorphicSecondOrder.lean#L18). All topology,
-germ, covering, and Picard machinery remains private. The focused Gauss consumer calls the scalar
-theorem for arbitrary `a`, `b`, and `c` (including `c = -N`) on nonsingular simply connected
-subdomains of the unit disk; it does not define or continue a principal Gauss function.
+germ, covering, and Picard machinery remains private. That earlier focused Gauss consumer calls
+the scalar theorem for arbitrary `a`, `b`, and `c` (including `c = -N`) on nonsingular simply
+connected subdomains of the unit disk; that local consumer does not itself define or continue a
+principal Gauss function.
 
-The next planned source checkpoint is the construction of principal regularized and ordinary Gauss
-functions on `D = ℂ \ [1,∞)`, with agreement to the full unit-disk germ and the differential
-equation. Its 706-line natural-language proof packet is complete and its first fresh mathematical
-review is running; no Lean implementation is authorized and `C05-09-04` remains pending with no
-current credit. The value at `z = 1` is a later, distinct task.
+The accepted principal milestone constructs regularized and ordinary Gauss functions on
+`D = ℂ \ [1,∞)`, with full unit-disk-germ agreement, holomorphy, germ uniqueness, and the
+polynomial differential equation on all of `D`, including `0`. The accepted implementation and
+focused consumers are in
+[`LMLF/ODE/Hypergeometric/Principal.lean`](LMLF/ODE/Hypergeometric/Principal.lean),
+[`LMLFTest/ODE/Hypergeometric/Principal.lean`](LMLFTest/ODE/Hypergeometric/Principal.lean),
+[`LMLF/Results/HypergeometricPrincipal.lean`](LMLF/Results/HypergeometricPrincipal.lean), and
+[`LMLFTest/Results/HypergeometricPrincipal.lean`](LMLFTest/Results/HypergeometricPrincipal.lean).
+It also proves the two principal exceptional-shift forms and both all-ambient early-termination
+zero theorems. This is partial progress on `C05-09-04`, whose row remains pending: continuation
+across interior points of the chosen cut, classification at `1` and infinity, and the qualified
+nonprincipal singularity statement at `0` remain unproved. The metrics therefore stay
+`16/108 = 14.81%`, `3/13 = 23.08%`, and `0/44`.
+
+The next source task is `C05-09-06`: Olver's exact printed p. 160, §9.3 specialization
+`F(a,1;1;z) = (1-z)^(-a)`, including the `a = 1` geometric-series case. Its natural-language
+proof is currently being prepared and is not yet Lean-approved. A general `b = c` theorem is not
+required by the book statement, and no general parameter-infrastructure side project is part of
+this checkpoint.
 
 Both bounded A/B candidates were mathematically correct and built
 successfully. The Sol candidate was selected because it had cleaner public
@@ -137,6 +154,14 @@ Planning and review artifacts are kept explicit:
 - [`LMLFTest/Results/Hypergeometric.lean`](LMLFTest/Results/Hypergeometric.lean) provides the local
   edge-case consumers and the named analytic-factor/exponent certificate that composes the result
   leaf with the existing analyticity and ODE APIs.
+- [`LMLF/ODE/Hypergeometric/Principal.lean`](LMLF/ODE/Hypergeometric/Principal.lean) provides the
+  accepted principal cut-plane functions, germ characterizations, analyticity, and Gauss equations.
+- [`LMLFTest/ODE/Hypergeometric/Principal.lean`](LMLFTest/ODE/Hypergeometric/Principal.lean) provides
+  the focused principal-domain, germ, equation, Gamma-bridge, and boundary-fallback consumers.
+- [`LMLF/Results/HypergeometricPrincipal.lean`](LMLF/Results/HypergeometricPrincipal.lean) and
+  [`LMLFTest/Results/HypergeometricPrincipal.lean`](LMLFTest/Results/HypergeometricPrincipal.lean)
+  provide the accepted principal exceptional shifts, global early-termination consequences, and
+  their focused consumers.
 - `LMLF/Quantitative/Basic.lean` provides the eight candidate finite-error declarations.
 - [`LMLF/ODE/LinearFirstOrder.lean`](LMLF/ODE/LinearFirstOrder.lean) provides the accepted real and
   complex exponential-of-an-integral solution and classification API.

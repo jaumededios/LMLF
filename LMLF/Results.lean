@@ -6,9 +6,11 @@ import LMLF.ODE.LinearSecondOrder
 import LMLF.ODE.HolomorphicSecondOrder
 import LMLF.ODE.FundamentalPair
 import LMLF.ODE.Hypergeometric
+import LMLF.ODE.Hypergeometric.Principal
 import LMLF.ODE.Wronskian
 import LMLF.Quantitative.Basic
 import LMLF.Results.Hypergeometric
+import LMLF.Results.HypergeometricPrincipal
 
 /-!
 # LMLF.Results
