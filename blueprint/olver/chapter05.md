@@ -61,8 +61,8 @@ The accepted first slice (Wronskian derivative, Abel identity, zero/nonzero dich
 | Label | Page | Short source paraphrase | Status | Future Lean link |
 |---|---:|---|---|---|
 | C05-01-01 | 139 | The first-order homogeneous scalar equation has the exponential-of-an-integral general solution (1.02). | pending | unassigned |
-| C05-01-02 | 139 | Under continuous coefficients, the second-order equation has infinitely many twice-continuously-differentiable solutions. | pending | unassigned |
-| C05-01-03 | 139–141 | Prescribing `w(x₀)` and `w′(x₀)` selects a unique solution on the interval. | pending | unassigned |
+| C05-01-02 | 139 | Under continuous coefficients, the second-order equation has infinitely many twice-continuously-differentiable solutions. | pending | [reviewed NL proof](chapter05-global-ivp.md) |
+| C05-01-03 | 139–141 | Prescribing `w(x₀)` and `w′(x₀)` selects a unique solution on the interval. | pending | [reviewed NL proof](chapter05-global-ivp.md) |
 | C05-01-04 | 141 | A fundamental pair is a pair spanning every solution by constant linear combination; the canonical IVP pair is an example. | pending | unassigned |
 | C05-01-05 | 141–142 | Define the Wronskian of two solutions by `w₁ w₂′ − w₂ w₁′`. | pending | unassigned |
 | C05-01-06 | 142 | Define linear independence by vanishing of a constant linear combination only for zero coefficients. | pending | unassigned |

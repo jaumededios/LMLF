@@ -19,6 +19,12 @@ of the disclosed claim-component inventory, `0/13` whole numbered theorems,
 and `0/44` exercises. The full fundamental-pair equivalence in Theorem 1.2
 remains pending.
 
+The next implementation target is Olver Theorem 1.1. Its
+[approved global-IVP blueprint](blueprint/olver/chapter05-global-ivp.md) proves the real and complex
+phase, `C²`, uniqueness, and infinitude forms; Lean work is in progress in
+`LMLF/ODE/LinearSecondOrder.lean`, so `C05-01-02` and `C05-01-03` remain pending and the current
+coverage counts do not change.
+
 Both bounded A/B candidates were mathematically correct and built
 successfully. The Sol candidate was selected because it had cleaner public
 hypotheses and helper boundaries, explicit `Or` and `Xor` forms of the global
