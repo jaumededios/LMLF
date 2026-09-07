@@ -305,7 +305,7 @@ referee independently passed a 2,803-job affected build and clean local checks. 
 were local; no CI was run.
 
 This slice adds exactly `C05-09-02`. Current Chapter 5 coverage is
-`14/108 = 12.96%` claim components, `2/13 = 15.38%` whole numbered theorems, and
+`16/108 = 14.81%` claim components, `3/13 = 23.08%` whole numbered theorems, and
 `0/44 = 0%` exercises. No §8 component, numbered theorem, or exercise receives credit from this
 slice. It supplies no analytic continuation, cut-plane or boundary values, parameter analyticity,
 transformation formulas, or numerics. The later accepted

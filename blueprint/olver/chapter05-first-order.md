@@ -357,6 +357,5 @@ read by the natural-language referees.
 
 - This slice adds exactly `C05-01-01`; §1 now has all `11/11` claim components checked.
 - The two §1 exercises remain unproved.
-- Current Chapter 5 claim-component coverage is `14/108 = 12.96%` after the separately accepted
-  local Gauss-series, local Gauss-ODE, and exceptional-shift slices.
-- Whole numbered theorems remain `2/13 = 15.38%`; exercises remain `0/44 = 0%`.
+- Current Chapter 5 claim-component coverage is `16/108 = 14.81%`.
+- Whole numbered theorems are now `3/13 = 23.08%`; exercises remain `0/44 = 0%`.

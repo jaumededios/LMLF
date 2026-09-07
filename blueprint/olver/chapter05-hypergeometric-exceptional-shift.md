@@ -369,7 +369,8 @@ two public theorems and the named test. The code referee independently passed th
 no CI was run.
 
 This slice adds exactly `C05-09-03`. Current Chapter 5 coverage is
-`14/108 = 12.96%` claim components, `2/13 = 15.38%` whole numbered theorems, and
-`0/44 = 0%` exercises. No §8 or §3 component, numbered theorem, or exercise receives credit. The
-result is a local series identity and analytic factorization only: it supplies no analytic
-continuation, principal branch, parameter entireness, or numerical result.
+`16/108 = 14.81%` claim components, `3/13 = 23.08%` whole numbered theorems, and
+`0/44 = 0%` exercises. No §8 or §3 component, numbered theorem, or exercise receives credit from
+this exceptional-shift slice. The result is a local series identity and analytic factorization
+only: it supplies no analytic continuation, principal branch, parameter entireness, or numerical
+result.

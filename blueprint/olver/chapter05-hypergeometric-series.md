@@ -62,8 +62,8 @@ The accepted scope is deliberately local.
 
 This historical slice itself added exactly one claim component; the separately accepted ODE slice
 and exceptional-shift slice add two more. Current Chapter 5 coverage is
-`14/108 = 12.96%` claim components,
-`2/13 = 15.38%` whole numbered theorems, and
+`16/108 = 14.81%` claim components,
+`3/13 = 23.08%` whole numbered theorems, and
 `0/44 = 0%` exercises.
 
 ## Local objects and totalization discipline

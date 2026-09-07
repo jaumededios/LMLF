@@ -6,14 +6,14 @@ This is bookkeeping for implementations, not an implementation framework. It doe
 
 ## Denominators and counting rule
 
-- **Whole-numbered-theorem metric:** `2 / 13 = 15.38%`. The denominator is the thirteen items explicitly headed “Theorem” in Chapter 5. A theorem counts only when its complete printed statement, including all cases and hypotheses, has a checked Lean implementation. Lemma 14.1 is not silently promoted into this denominator.
-- **Claim-component metric:** `14 / 108 = 12.96%`. The denominator is the 108 rows in “Claim components.” Each row is one independently reusable definition, formula/result family, or mathematical-prose conclusion. Equivalent displayed forms and contiguous formulas proved as one family are deliberately bundled; routine algebraic lines used only inside a proof are excluded.
+- **Whole-numbered-theorem metric:** `3 / 13 = 23.08%`. The denominator is the thirteen items explicitly headed “Theorem” in Chapter 5. A theorem counts only when its complete printed statement, including all cases and hypotheses, has a checked Lean implementation. Lemma 14.1 is not silently promoted into this denominator.
+- **Claim-component metric:** `16 / 108 = 14.81%`. The denominator is the 108 rows in “Claim components.” Each row is one independently reusable definition, formula/result family, or mathematical-prose conclusion. Equivalent displayed forms and contiguous formulas proved as one family are deliberately bundled; routine algebraic lines used only inside a proof are excluded.
 - **Exercises:** `0 / 44 = 0%`, reported separately. Exercises are not in either denominator above.
 - Percentages are Chapter-5-only unit coverage, not estimates of proof effort or of the whole book. Later chapters should add their own audited denominators rather than extrapolating from this chapter.
 
 Independent review verified the 13 theorem headings and 44 exercise headings and mechanically checked the table totals and subsection sums. It did not independently re-decompose every mathematical sentence and display into the 108 editorial claim rows. Accordingly, `108` is a disclosed editorial inventory, not a canonical or effort-weighted count.
 
-The accepted Wronskian, Theorem 1.1, and Theorem 1.2 slices check `C05-01-02`–`C05-01-11`. The accepted [first-order slice](chapter05-first-order.md) now adds `C05-01-01`, so all eleven §1 claim components are checked; the two §1 exercises remain unproved. The accepted [local Gauss-series slice](chapter05-hypergeometric-series.md) adds exactly `C05-09-01`, the separately accepted [local Gauss-ODE slice](chapter05-hypergeometric-ode.md) completes `C05-09-02`, and the accepted [exceptional-shift slice](chapter05-hypergeometric-exceptional-shift.md) completes `C05-09-03`.
+The accepted Wronskian, Theorem 1.1, and Theorem 1.2 slices check `C05-01-02`–`C05-01-11`. The accepted [first-order slice](chapter05-first-order.md) now adds `C05-01-01`, so all eleven §1 claim components are checked; the two §1 exercises remain unproved. The accepted [local Gauss-series slice](chapter05-hypergeometric-series.md) adds exactly `C05-09-01`, the separately accepted [local Gauss-ODE slice](chapter05-hypergeometric-ode.md) completes `C05-09-02`, and the accepted [exceptional-shift slice](chapter05-hypergeometric-exceptional-shift.md) completes `C05-09-03`. The accepted [holomorphic-IVP development](chapter05-holomorphic-global-ivp.md), supported by its [whole-ball local theorem](chapter05-holomorphic-local-ivp.md), adds exactly `C05-03-01` and `C05-03-02` and completes `T05-3.1`.
 
 ## Subsection counts
 
@@ -44,7 +44,7 @@ The accepted Wronskian, Theorem 1.1, and Theorem 1.2 slices check `C05-01-02`–
 | T05-1.2 | 141–142 | Fundamental pair, nowhere-zero Wronskian, and linear independence are equivalent. | checked | [`complexFundamentalPair_iff`](../../LMLF/ODE/FundamentalPair.lean#L353), [`realFundamentalPair_iff`](../../LMLF/ODE/FundamentalPair.lean#L373), [`complexSecondOrderFundamentalPair_iff`](../../LMLF/ODE/FundamentalPair.lean#L485), [`realSecondOrderFundamentalPair_iff`](../../LMLF/ODE/FundamentalPair.lean#L510) |
 | T05-2.1 | 143–144 | Real-parameter solutions and specified mixed derivatives depend continuously on parameter and variable. | pending | unassigned |
 | T05-2.2 | 144–145 | Holomorphic parameter dependence of coefficients and initial data gives holomorphic dependence of the solution and its first two `x`-derivatives. | pending | unassigned |
-| T05-3.1 | 145–146 | Holomorphic coefficients on a simply connected domain give holomorphic solutions and a unique solution for prescribed initial data. | pending | unassigned |
+| T05-3.1 | 145–146 | Holomorphic coefficients on a simply connected domain give holomorphic solutions and a unique solution for prescribed initial data. | checked | [`exists_unique_holomorphicSecondOrderLinear`](../../LMLF/ODE/HolomorphicSecondOrder.lean#L18), [`infinite_holomorphicSecondOrderLinearSolutions`](../../LMLF/ODE/HolomorphicSecondOrder.lean#L93) |
 | T05-3.2 | 146–147 | Jointly continuous, separately holomorphic coefficients and holomorphic initial data give holomorphic parameter dependence for complex-variable solutions. | pending | unassigned |
 | T05-4.1 | 149–150 | A Frobenius series converges to a solution up to the nearest coefficient singularity when the other exponent is not a positive-integer shift. | pending | unassigned |
 | T05-8.1 | 156–158 | Every second-order homogeneous linear ODE with at most three regular singularities, including infinity, transforms to the hypergeometric equation. | pending | unassigned |
@@ -84,8 +84,8 @@ The accepted Wronskian, Theorem 1.1, and Theorem 1.2 slices check `C05-01-02`–
 
 | Label | Page | Short source paraphrase | Status | Future Lean link |
 |---|---:|---|---|---|
-| C05-03-01 | 145–146 | Holomorphic coefficients on a simply connected domain admit infinitely many holomorphic solutions. | pending | unassigned |
-| C05-03-02 | 145–146 | Complex initial value and derivative determine a unique holomorphic solution. | pending | unassigned |
+| C05-03-01 | 145–146 | Holomorphic coefficients on a simply connected domain admit infinitely many holomorphic solutions. | checked | [`infinite_holomorphicSecondOrderLinearSolutions`](../../LMLF/ODE/HolomorphicSecondOrder.lean#L93) |
+| C05-03-02 | 145–146 | Complex initial value and derivative determine a unique holomorphic solution. | checked | [`exists_unique_holomorphicSecondOrderLinear`](../../LMLF/ODE/HolomorphicSecondOrder.lean#L18), [`exists_unique_holomorphicLinearIVP`](../../LMLF/ODE/HolomorphicLinear.lean#L289) |
 | C05-03-03 | 146 | Fundamental-pair, Wronskian, linear-independence, Abel, and equivalence results from §1 extend to the complex domain. | pending | unassigned |
 | C05-03-04 | 146 | The Picard-series representation (3.03) is named the Liouville–Neumann expansion. | pending | unassigned |
 | C05-03-05 | 146 | Local Taylor solutions exist up to the nearest coefficient singularity, with arbitrary first two coefficients and the stated recurrence thereafter. | pending | unassigned |
@@ -250,7 +250,7 @@ These are implementation obligations once their parent results are attempted, bu
 | PI05-1.3 | 142 | Two-by-two linear algebra and zero-initial-data uniqueness prove the implication cycle in Theorem 1.2. | pending | support-only; unassigned |
 | PI05-2.1 | 143–144 | Uniform continuity of iterates and parameter-uniform majorants justify joint continuity and differentiated limits. | pending | support-only; unassigned |
 | PI05-2.2 | 144–145 | Holomorphic iterates plus compact-uniform convergence justify holomorphic parameter limits. | pending | support-only; unassigned |
-| PI05-3.1 | 145–146 | Disk-local Liouville–Neumann convergence and continuation through a finite disk chain prove global existence. | pending | support-only; unassigned |
+| PI05-3.1 | 145–146 | Disk-local Liouville–Neumann convergence and continuation through a finite disk chain prove global existence. | accepted alternative support | [`exists_unique_holomorphicLinearIVP_ball`](../../LMLF/ODE/HolomorphicLinear/Local.lean#L373), [`exists_unique_holomorphicLinearIVP`](../../LMLF/ODE/HolomorphicLinear.lean#L289) |
 | PI05-3.2 | 146–147 | Piecewise `R₂` paths reduce the complex ODE to real path-parameter equations for Theorem 3.2. | pending | support-only; unassigned |
 | PI05-4.1 | 149–150 | Cauchy coefficient bounds and the majorizing recurrence prove the Frobenius radius bound. | pending | support-only; unassigned |
 | PI05-5.1 | 152–153 | Differentiating the parameterized ODE and commuting mixed derivatives proves the coalescing-solution limit solves it. | pending | support-only; unassigned |
@@ -265,6 +265,13 @@ These are implementation obligations once their parent results are attempted, bu
 | PI05-14.1 | 181 | Differentiating Legendre’s equation and using recessive uniqueness proves the derivative representation for `Q_n^m`. | pending | support-only; unassigned |
 | PI05-14.2 | 183–184 | A generating-function integral, Fourier coefficient extraction, and the `P/Q` integrals prove the addition theorem. | pending | support-only; unassigned |
 | PI05-15.1 | 187–188 | Imaginary-axis asymptotics and a two-equation coefficient solve produce the Maclaurin constants. | pending | support-only; unassigned |
+
+`PI05-3.1` is excluded from every coverage denominator. Olver's source proof continues the local
+Liouville--Neumann construction through a finite chain of disks. The accepted Lean development
+proves the same global existence and uniqueness conclusion from the whole-ball local theorem by a
+private solution-sheaf, étale-covering, and lift argument. The row therefore records accepted
+alternative proof support, not a claim that the source's finite-disk-chain proof was mechanically
+checked, and it earns no additional metric credit.
 
 ## Exercises (separate denominator: 44)
 

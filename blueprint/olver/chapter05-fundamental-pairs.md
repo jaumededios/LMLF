@@ -433,8 +433,8 @@ Wronskian, or duplicate Abel proof.
 Natural-language and checked Lean scope completed here is `C05-01-04`--`C05-01-07`, including all
 of Theorem 1.2:
 
-- claim components: `14/108 = 12.96%`;
-- whole numbered theorems: `2/13 = 15.38%`;
+- claim components: `16/108 = 14.81%`;
+- whole numbered theorems: `3/13 = 23.08%`;
 - exercises: `0/44 = 0%`.
 
 The later [first-order](chapter05-first-order.md),

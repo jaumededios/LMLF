@@ -17,7 +17,9 @@ the [Chapter 5 checklist](blueprint/olver/chapter05.md), the approved
 [first-order blueprint](blueprint/olver/chapter05-first-order.md), and the accepted
 [local Gauss-series](blueprint/olver/chapter05-hypergeometric-series.md) and
 [local Gauss-ODE](blueprint/olver/chapter05-hypergeometric-ode.md) blueprints, together with the
-accepted [exceptional-shift blueprint](blueprint/olver/chapter05-hypergeometric-exceptional-shift.md).
+accepted [exceptional-shift blueprint](blueprint/olver/chapter05-hypergeometric-exceptional-shift.md)
+and the accepted [local](blueprint/olver/chapter05-holomorphic-local-ivp.md) and
+[global](blueprint/olver/chapter05-holomorphic-global-ivp.md) holomorphic-IVP blueprints.
 The first accepted Lean slice checks exactly `C05-01-08`–`C05-01-11`: the
 Wronskian derivative, Abel identity, zero/nowhere-zero alternative, and
 constant-Wronskian corollary. The accepted Theorem 1.1 slice now also checks
@@ -26,9 +28,10 @@ initial value and derivative, and infinitely many solutions. The accepted Theore
 `C05-01-04`--`C05-01-07`: interval-relative spanning and linear independence, the existing
 Wronskian definition, the full three-way equivalence, explicit Cramer representations, and the
 normalized canonical pair. The accepted first-order slice completes `C05-01-01`, and the accepted
-local Gauss-series, ODE, and exceptional-shift slices complete `C05-09-01`--`C05-09-03`. Chapter 5
-therefore stands at `14/108 = 12.96%` of the disclosed claim-component inventory,
-`2/13 = 15.38%` whole numbered theorems, and `0/44` exercises. All eleven claim components in §1
+local Gauss-series, ODE, and exceptional-shift slices complete `C05-09-01`--`C05-09-03`. The
+accepted holomorphic-IVP development completes `C05-03-01`, `C05-03-02`, and all of `T05-3.1`.
+Chapter 5 therefore stands at `16/108 = 14.81%` of the disclosed claim-component inventory,
+`3/13 = 23.08%` whole numbered theorems, and `0/44` exercises. All eleven claim components in §1
 are now checked; its two
 exercises remain unproved.
 
@@ -64,6 +67,22 @@ the origin. The accepted exceptional-shift identities and focused consumers are 
 `C05-09-03` on the source disk: the unconditional factorization by `z^(N+1)` remains valid when its
 Pochhammer prefactor vanishes, while the exact nonzero residual-factor certificate assumes exactly
 that this prefactor is nonzero. No continuation or principal-branch claim is made.
+
+The accepted holomorphic-IVP implementation is split between the analysis-only whole-ball theorem
+in [`LMLF/ODE/HolomorphicLinear/Local.lean`](LMLF/ODE/HolomorphicLinear/Local.lean#L373), the
+global Banach-valued theorem in
+[`LMLF/ODE/HolomorphicLinear.lean`](LMLF/ODE/HolomorphicLinear.lean#L289), and the downstream scalar
+existence, uniqueness, and infinitude theorems in
+[`LMLF/ODE/HolomorphicSecondOrder.lean`](LMLF/ODE/HolomorphicSecondOrder.lean#L18). All topology,
+germ, covering, and Picard machinery remains private. The focused Gauss consumer calls the scalar
+theorem for arbitrary `a`, `b`, and `c` (including `c = -N`) on nonsingular simply connected
+subdomains of the unit disk; it does not define or continue a principal Gauss function.
+
+The next planned source checkpoint is the construction of principal regularized and ordinary Gauss
+functions on `D = ℂ \ [1,∞)`, with agreement to the full unit-disk germ and the differential
+equation. Its 706-line natural-language proof packet is complete and its first fresh mathematical
+review is running; no Lean implementation is authorized and `C05-09-04` remains pending with no
+current credit. The value at `z = 1` is a later, distinct task.
 
 Both bounded A/B candidates were mathematically correct and built
 successfully. The Sol candidate was selected because it had cleaner public
@@ -135,6 +154,16 @@ Planning and review artifacts are kept explicit:
   complex fundamental-pair equivalences, Cramer representations, and normalized canonical pairs.
 - [`LMLFTest/ODE/FundamentalPair.lean`](LMLFTest/ODE/FundamentalPair.lean) provides its nonpublic
   off-domain-invariance and canonical-pair consumers.
+- [`LMLF/ODE/HolomorphicLinear/Local.lean`](LMLF/ODE/HolomorphicLinear/Local.lean) provides the
+  accepted analysis-only whole-ball holomorphic Banach-valued IVP theorem.
+- [`LMLF/ODE/HolomorphicLinear.lean`](LMLF/ODE/HolomorphicLinear.lean) provides its accepted global
+  simply-connected-domain continuation theorem with private topology and germ machinery.
+- [`LMLF/ODE/HolomorphicSecondOrder.lean`](LMLF/ODE/HolomorphicSecondOrder.lean) provides the
+  accepted scalar second-order existence, uniqueness, and infinitude consequences.
+- [`LMLFTest/ODE/HolomorphicLinear/Local.lean`](LMLFTest/ODE/HolomorphicLinear/Local.lean),
+  [`LMLFTest/ODE/HolomorphicLinear.lean`](LMLFTest/ODE/HolomorphicLinear.lean), and
+  [`LMLFTest/ODE/HolomorphicSecondOrder.lean`](LMLFTest/ODE/HolomorphicSecondOrder.lean) provide the
+  focused interface and downstream Gauss consumers.
 - `LMLF/Definitions.lean` and `LMLF/Results.lean` are the public semantic umbrellas.
 - `LMLF/Audit/Definitions.lean` is a separately built regression consumer and is not imported by
   `LMLF.lean`.
