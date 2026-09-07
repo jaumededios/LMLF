@@ -27,7 +27,7 @@ The anchored Lean statement below is the algebraic principal branch-value specia
 path-integral continuation and winding construction remain documented here in prose.
 :::leanStatement "Lean statement · general logarithm"
 ```anchor dlmf_4_2_1 (module := LMLF.Blueprint.Elementary.Section42) -showProofStates
-theorem dlmf_4_2_1 (z : ℂ) (hz : z ≠ 0) : generalLogBranch z (Complex.log z) := by sorry
+theorem dlmf_4_2_1 (z : ℂ) (hz : z ≠ 0) : generalLogBranch z (Complex.log z)
 ```
 :::
 ::::
@@ -39,30 +39,30 @@ on the cut the upper and lower
 values differ by the sign of `iπ`, and the general value adds `2 k π i`. Source links: [E2](https://dlmf.nist.gov/4.2.E2), [E3](https://dlmf.nist.gov/4.2.E3), [E4](https://dlmf.nist.gov/4.2.E4), [E5](https://dlmf.nist.gov/4.2.E5), [E6](https://dlmf.nist.gov/4.2.E6), and [E7](https://dlmf.nist.gov/4.2.E7).
 :::leanStatement "Lean statements · principal and general logarithms"
 ```anchor dlmf_4_2_2 (module := LMLF.Blueprint.Elementary.Section42) -showProofStates
-theorem dlmf_4_2_2 (z : ℂ) (hz : principalLogDomain z) : Complex.exp (Complex.log z) = z := by sorry
+theorem dlmf_4_2_2 (z : ℂ) (hz : principalLogDomain z) : Complex.exp (Complex.log z) = z
 ```
 ```anchor dlmf_4_2_3 (module := LMLF.Blueprint.Elementary.Section42) -showProofStates
 theorem dlmf_4_2_3 (z : ℂ) (hz : principalLogDomain z) :
-    Complex.log z = Real.log ‖z‖ + Complex.I * Complex.arg z := by sorry
+    Complex.log z = Real.log ‖z‖ + Complex.I * Complex.arg z
 ```
 ```anchor dlmf_4_2_4 (module := LMLF.Blueprint.Elementary.Section42) -showProofStates
 theorem dlmf_4_2_4 (x : ℝ) (hx : x < 0) :
     closedCutPoint x = (x : ℂ) ∧
-      upperCutLog x - lowerCutLog x = 2 * Real.pi * Complex.I := by sorry
+      upperCutLog x - lowerCutLog x = 2 * Real.pi * Complex.I
 ```
 ```anchor dlmf_4_2_5 (module := LMLF.Blueprint.Elementary.Section42) -showProofStates
 theorem dlmf_4_2_5 (z : ℂ) (hz : closedPrincipalLogDomain z)
     (hphase : closedPrincipalPhase (Complex.log z)) :
-    Complex.log z = Real.log ‖z‖ + Complex.I * Complex.arg z := by sorry
+    Complex.log z = Real.log ‖z‖ + Complex.I * Complex.arg z
 ```
 ```anchor dlmf_4_2_6 (module := LMLF.Blueprint.Elementary.Section42) -showProofStates
 theorem dlmf_4_2_6 (z : ℂ) (k : ℤ) (hz : z ≠ 0) :
-    generalLogValue z k = Complex.log z + 2 * k * Real.pi * Complex.I := by sorry
+    generalLogValue z k = Complex.log z + 2 * k * Real.pi * Complex.I
 ```
 ```anchor dlmf_4_2_7 (module := LMLF.Blueprint.Elementary.Section42) -showProofStates
 theorem dlmf_4_2_7 (x : ℝ) (hx : x < 0) :
     upperCutLog x = Real.log |x| + Real.pi * Complex.I ∧
-      lowerCutLog x = Real.log |x| - Real.pi * Complex.I := by sorry
+      lowerCutLog x = Real.log |x| - Real.pi * Complex.I
 ```
 :::
 ::::
@@ -85,43 +85,43 @@ def logBase (a z : ℂ) : ℂ := Complex.log z / Complex.log a
 :::leanStatement "Lean statements · logarithms to a general base"
 ```anchor dlmf_4_2_8 (module := LMLF.Blueprint.Elementary.Section42) -showProofStates
 theorem dlmf_4_2_8 (a z : ℂ) (ha0 : a ≠ 0) (ha1 : a ≠ 1) (hz : z ≠ 0)
-    (hden : Complex.log a ≠ 0) : logBase a z = Complex.log z / Complex.log a := by sorry
+    (hden : Complex.log a ≠ 0) : logBase a z = Complex.log z / Complex.log a
 ```
 ```anchor dlmf_4_2_9 (module := LMLF.Blueprint.Elementary.Section42) -showProofStates
 theorem dlmf_4_2_9 (a b z : ℂ) (ha0 : a ≠ 0) (ha1 : a ≠ 1) (hb0 : b ≠ 0) (hb1 : b ≠ 1)
     (hz : z ≠ 0) (hba : Complex.log a ≠ 0) (hbb : Complex.log b ≠ 0) :
-    logBase a z = logBase b z / logBase b a := by sorry
+    logBase a z = logBase b z / logBase b a
 ```
 ```anchor dlmf_4_2_10 (module := LMLF.Blueprint.Elementary.Section42) -showProofStates
 theorem dlmf_4_2_10 (a b : ℂ) (ha0 : a ≠ 0) (ha1 : a ≠ 1) (hb0 : b ≠ 0) (hb1 : b ≠ 1)
-    (hba : Complex.log a ≠ 0) (hbb : Complex.log b ≠ 0) : logBase a b = 1 / logBase b a := by sorry
+    (hba : Complex.log a ≠ 0) (hbb : Complex.log b ≠ 0) : logBase a b = 1 / logBase b a
 ```
 ```anchor dlmf_4_2_11 (module := LMLF.Blueprint.Elementary.Section42) -showProofStates
-theorem dlmf_4_2_11 : |Real.exp 1 - 2.71828| < 0.00001 := by sorry
+theorem dlmf_4_2_11 : |Real.exp 1 - 2.71828| < 0.00001
 ```
 ```anchor dlmf_4_2_12 (module := LMLF.Blueprint.Elementary.Section42) -showProofStates
-theorem dlmf_4_2_12 : Real.log (Real.exp 1) = 1 := by sorry
+theorem dlmf_4_2_12 : Real.log (Real.exp 1) = 1
 ```
 ```anchor dlmf_4_2_13 (module := LMLF.Blueprint.Elementary.Section42) -showProofStates
-theorem dlmf_4_2_13 : ∫ x in (1 : ℝ)..Real.exp 1, 1 / x = 1 := by sorry
+theorem dlmf_4_2_13 : ∫ x in (1 : ℝ)..Real.exp 1, 1 / x = 1
 ```
 ```anchor dlmf_4_2_14 (module := LMLF.Blueprint.Elementary.Section42) -showProofStates
-theorem dlmf_4_2_14 (z : ℂ) (hz : z ≠ 0) : logBase (Real.exp 1) z = Complex.log z := by sorry
+theorem dlmf_4_2_14 (z : ℂ) (hz : z ≠ 0) : logBase (Real.exp 1) z = Complex.log z
 ```
 ```anchor dlmf_4_2_15 (module := LMLF.Blueprint.Elementary.Section42) -showProofStates
 theorem dlmf_4_2_15 (z : ℂ) (hz : z ≠ 0) (h10 : Real.log 10 ≠ 0) :
     logBase 10 z = Complex.log z / Real.log 10 ∧
-      logBase 10 z = logBase 10 (Real.exp 1) * Complex.log z := by sorry
+      logBase 10 z = logBase 10 (Real.exp 1) * Complex.log z
 ```
 ```anchor dlmf_4_2_16 (module := LMLF.Blueprint.Elementary.Section42) -showProofStates
 theorem dlmf_4_2_16 (z : ℂ) (hz : z ≠ 0) (h10 : Real.log 10 ≠ 0) :
-    Complex.log z = Real.log 10 * logBase 10 z := by sorry
+    Complex.log z = Real.log 10 * logBase 10 z
 ```
 ```anchor dlmf_4_2_17 (module := LMLF.Blueprint.Elementary.Section42) -showProofStates
-theorem dlmf_4_2_17 : |1 / Real.log 10 - 0.43429| < 0.00001 := by sorry
+theorem dlmf_4_2_17 : |1 / Real.log 10 - 0.43429| < 0.00001
 ```
 ```anchor dlmf_4_2_18 (module := LMLF.Blueprint.Elementary.Section42) -showProofStates
-theorem dlmf_4_2_18 : |Real.log 10 - 2.30258| < 0.00001 := by sorry
+theorem dlmf_4_2_18 : |Real.log 10 - 2.30258| < 0.00001
 ```
 :::
 ::::
@@ -133,29 +133,29 @@ Source links: [E19](https://dlmf.nist.gov/4.2.E19), [E20](https://dlmf.nist.gov/
 :::leanStatement "Lean statements · exponential function"
 ```anchor dlmf_4_2_19 (module := LMLF.Blueprint.Elementary.Section42) -showProofStates
 theorem dlmf_4_2_19 (z : ℂ) :
-    HasSum (fun n : ℕ ↦ z ^ n / Nat.factorial n) (Complex.exp z) := by sorry
+    HasSum (fun n : ℕ ↦ z ^ n / Nat.factorial n) (Complex.exp z)
 ```
 ```anchor dlmf_4_2_20 (module := LMLF.Blueprint.Elementary.Section42) -showProofStates
-theorem dlmf_4_2_20 (z : ℂ) : Complex.exp (z + 2 * Real.pi * Complex.I) = Complex.exp z := by sorry
+theorem dlmf_4_2_20 (z : ℂ) : Complex.exp (z + 2 * Real.pi * Complex.I) = Complex.exp z
 ```
 ```anchor dlmf_4_2_21 (module := LMLF.Blueprint.Elementary.Section42) -showProofStates
-theorem dlmf_4_2_21 (z : ℂ) : Complex.exp (-z) = 1 / Complex.exp z := by sorry
+theorem dlmf_4_2_21 (z : ℂ) : Complex.exp (-z) = 1 / Complex.exp z
 ```
 ```anchor dlmf_4_2_22 (module := LMLF.Blueprint.Elementary.Section42) -showProofStates
-theorem dlmf_4_2_22 (z : ℂ) : ‖Complex.exp z‖ = Real.exp z.re := by sorry
+theorem dlmf_4_2_22 (z : ℂ) : ‖Complex.exp z‖ = Real.exp z.re
 ```
 ```anchor dlmf_4_2_23 (module := LMLF.Blueprint.Elementary.Section42) -showProofStates
 theorem dlmf_4_2_23 (z : ℂ) :
-    ∃ k : ℤ, z.im + 2 * k * Real.pi = Complex.arg (Complex.exp z) := by sorry
+    ∃ k : ℤ, z.im + 2 * k * Real.pi = Complex.arg (Complex.exp z)
 ```
 ```anchor dlmf_4_2_24 (module := LMLF.Blueprint.Elementary.Section42) -showProofStates
 theorem dlmf_4_2_24 (x y : ℝ) :
     Complex.exp (x + Complex.I * y) =
-      Real.exp x * Real.cos y + Complex.I * (Real.exp x * Real.sin y) := by sorry
+      Real.exp x * Real.cos y + Complex.I * (Real.exp x * Real.sin y)
 ```
 ```anchor dlmf_4_2_25 (module := LMLF.Blueprint.Elementary.Section42) -showProofStates
 theorem dlmf_4_2_25 (ζ : ℂ) (hζ : ζ ≠ 0) :
-    ∀ z : ℂ, Complex.exp z = ζ ↔ ∃ k : ℤ, z = generalLogValue ζ k := by sorry
+    ∀ z : ℂ, Complex.exp z = ζ ↔ ∃ k : ℤ, z = generalLogValue ζ k
 ```
 :::
 ::::
@@ -173,51 +173,51 @@ Source links: [E26](https://dlmf.nist.gov/4.2.E26), [E27](https://dlmf.nist.gov/
 :::leanStatement "Lean statements · powers"
 ```anchor dlmf_4_2_26 (module := LMLF.Blueprint.Elementary.Section42) -showProofStates
 theorem dlmf_4_2_26 (z a : ℂ) (k : ℤ) (hz : z ≠ 0) :
-    generalPowerValue z a k = Complex.exp (a * generalLogValue z k) := by sorry
+    generalPowerValue z a k = Complex.exp (a * generalLogValue z k)
 ```
 ```anchor dlmf_4_2_27 (module := LMLF.Blueprint.Elementary.Section42) -showProofStates
 theorem dlmf_4_2_27 (z : ℂ) (n : ℕ) (hz : z ≠ 0) :
     generalPowerValue z n 0 = z ^ n ∧
-      generalPowerValue z (- (n : ℂ)) 0 = 1 / z ^ n := by sorry
+      generalPowerValue z (- (n : ℂ)) 0 = 1 / z ^ n
 ```
 ```anchor dlmf_4_2_28 (module := LMLF.Blueprint.Elementary.Section42) -showProofStates
-theorem dlmf_4_2_28 (z a : ℂ) (hz : principalLogDomain z) : principalPower z a = Complex.exp (a * Complex.log z) := by sorry
+theorem dlmf_4_2_28 (z a : ℂ) (hz : principalLogDomain z) : principalPower z a = Complex.exp (a * Complex.log z)
 ```
 ```anchor dlmf_4_2_29 (module := LMLF.Blueprint.Elementary.Section42) -showProofStates
-theorem dlmf_4_2_29 (z a : ℂ) (hz : principalLogDomain z) : ‖principalPower z a‖ = ‖z‖ ^ a.re * Real.exp (-a.im * Complex.arg z) := by sorry
+theorem dlmf_4_2_29 (z a : ℂ) (hz : principalLogDomain z) : ‖principalPower z a‖ = ‖z‖ ^ a.re * Real.exp (-a.im * Complex.arg z)
 ```
 ```anchor dlmf_4_2_30 (module := LMLF.Blueprint.Elementary.Section42) -showProofStates
-theorem dlmf_4_2_30 (z a : ℂ) (hz : principalLogDomain z) : ∃ k : ℤ, Complex.arg (principalPower z a) = a.re * Complex.arg z + a.im * Real.log ‖z‖ + 2 * k * Real.pi := by sorry
+theorem dlmf_4_2_30 (z a : ℂ) (hz : principalLogDomain z) : ∃ k : ℤ, Complex.arg (principalPower z a) = a.re * Complex.arg z + a.im * Real.log ‖z‖ + 2 * k * Real.pi
 ```
 ```anchor dlmf_4_2_31a (module := LMLF.Blueprint.Elementary.Section42) -showProofStates
-theorem dlmf_4_2_31a (z : ℂ) (a : ℝ) (hz : principalLogDomain z) : ‖principalPower z a‖ = ‖z‖ ^ a := by sorry
+theorem dlmf_4_2_31a (z : ℂ) (a : ℝ) (hz : principalLogDomain z) : ‖principalPower z a‖ = ‖z‖ ^ a
 ```
 ```anchor dlmf_4_2_31b (module := LMLF.Blueprint.Elementary.Section42) -showProofStates
-theorem dlmf_4_2_31b (z : ℂ) (a : ℝ) (hz : principalLogDomain z) : ∃ k : ℤ, Complex.arg (principalPower z a) = a * Complex.arg z + 2 * k * Real.pi := by sorry
+theorem dlmf_4_2_31b (z : ℂ) (a : ℝ) (hz : principalLogDomain z) : ∃ k : ℤ, Complex.arg (principalPower z a) = a * Complex.arg z + 2 * k * Real.pi
 ```
 ```anchor dlmf_4_2_32 (module := LMLF.Blueprint.Elementary.Section42) -showProofStates
-theorem dlmf_4_2_32 (z : ℂ) : (Real.exp 1 : ℂ) ^ z = Complex.exp z := by sorry
+theorem dlmf_4_2_32 (z : ℂ) : (Real.exp 1 : ℂ) ^ z = Complex.exp z
 ```
 ```anchor dlmf_4_2_33 (module := LMLF.Blueprint.Elementary.Section42) -showProofStates
-theorem dlmf_4_2_33 (z : ℂ) : ∀ k : ℤ, generalPowerValue (Real.exp 1) z k = Complex.exp z * Complex.exp (2 * k * z * Real.pi * Complex.I) := by sorry
+theorem dlmf_4_2_33 (z : ℂ) : ∀ k : ℤ, generalPowerValue (Real.exp 1) z k = Complex.exp z * Complex.exp (2 * k * z * Real.pi * Complex.I)
 ```
 ```anchor dlmf_4_2_34 (module := LMLF.Blueprint.Elementary.Section42) -showProofStates
-theorem dlmf_4_2_34 : (Real.exp 1 : ℝ) = ∑' n : ℕ, (1 : ℝ) / Nat.factorial n := by sorry
+theorem dlmf_4_2_34 : (Real.exp 1 : ℝ) = ∑' n : ℕ, (1 : ℝ) / Nat.factorial n
 ```
 ```anchor dlmf_4_2_35 (module := LMLF.Blueprint.Elementary.Section42) -showProofStates
 theorem dlmf_4_2_35 (z w a : ℂ) (hz : z ≠ 0) (ha : a ≠ 0) (hw : w ≠ 0) :
     (∃ k : ℤ, generalPowerValue z a k = w) ↔
-      ∃ k : ℤ, z = Complex.exp ((1 / a) * generalLogValue w k) := by sorry
+      ∃ k : ℤ, z = Complex.exp ((1 / a) * generalLogValue w k)
 ```
 ```anchor dlmf_4_2_36 (module := LMLF.Blueprint.Elementary.Section42) -showProofStates
 theorem dlmf_4_2_36 (a w : ℂ) (ha : a ≠ 0) (hw : w ≠ 0)
     (hphase : -Real.pi < ((1 / a) * Complex.log w).im ∧
       ((1 / a) * Complex.log w).im ≤ Real.pi) :
-    principalPower (Complex.exp ((1 / a) * Complex.log w)) a = w := by sorry
+    principalPower (Complex.exp ((1 / a) * Complex.log w)) a = w
 ```
 ```anchor dlmf_4_2_37 (module := LMLF.Blueprint.Elementary.Section42) -showProofStates
 theorem dlmf_4_2_37 (z : ℂ) : Complex.sqrt (z ^ 2) =
-    if 0 < z.re ∨ (z.re = 0 ∧ 0 ≤ z.im) then z else -z := by sorry
+    if 0 < z.re ∨ (z.re = 0 ∧ 0 ≤ z.im) then z else -z
 ```
 :::
 ::::

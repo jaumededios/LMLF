@@ -43,7 +43,7 @@ which excludes the branch cut and the origin.
 :::leanStatement "Principal logarithm derivative"
 ```anchor dlmf_4_7_1 (module := LMLF.Blueprint.Elementary.Section47) -showProofStates
 theorem principalLog_deriv {z : ℂ} (hz : z ∈ Complex.slitPlane) :
-    deriv Complex.log z = 1 / z := by sorry
+    deriv Complex.log z = 1 / z
 ```
 :::
 ::::
@@ -58,7 +58,7 @@ the Lean statement records the branch through its `HasDerivAt` hypothesis.
 ```anchor dlmf_4_7_2 (module := LMLF.Blueprint.Elementary.Section47) -showProofStates
 theorem generalLog_deriv (Ln : ℂ → ℂ) {z : ℂ} (hz : z ≠ 0)
     (hLn : HasDerivAt Ln (1 / z) z) :
-    deriv Ln z = 1 / z := by sorry
+    deriv Ln z = 1 / z
 ```
 :::
 ::::
@@ -74,7 +74,7 @@ factorial coefficient and negative power.
 theorem principalLog_iteratedDeriv {z : ℂ} (n : ℕ) (hn : 0 < n)
     (hz : z ∈ Complex.slitPlane) :
     iteratedDeriv n Complex.log z =
-      (-1 : ℂ) ^ (n - 1) * (n - 1).factorial * z ^ (-n : ℤ) := by sorry
+      (-1 : ℂ) ^ (n - 1) * (n - 1).factorial * z ^ (-n : ℤ)
 ```
 :::
 ::::
@@ -90,7 +90,7 @@ first derivative is `1 / z`; this is a branch-explicit specialization.
 theorem generalLog_iteratedDeriv (Ln : ℂ → ℂ) (U : Set ℂ) {z : ℂ} (n : ℕ)
     (hUopen : IsOpen U) (hn : 0 < n) (hz : z ∈ U)
     (hLn : ∀ w ∈ U, HasDerivAt Ln (1 / w) w) :
-    iteratedDeriv n Ln z = (-1 : ℂ) ^ (n - 1) * (n - 1).factorial * z ^ (-n : ℤ) := by sorry
+    iteratedDeriv n Ln z = (-1 : ℂ) ^ (n - 1) * (n - 1).factorial * z ^ (-n : ℤ)
 ```
 :::
 ::::
@@ -124,7 +124,7 @@ theorem logarithmicSolution (f w Ln : ℂ → ℂ) (U : Set ℂ)
     (hUopen : IsOpen U) (hUconn : IsPreconnected U)
     (hODE : ∀ z ∈ U, HasDerivAt w (deriv f z / f z) z)
     (hLn : ∀ z ∈ U, HasDerivAt (fun u => Ln (f u)) (deriv f z / f z) z) :
-    ∃ C : ℂ, ∀ z ∈ U, w z - Ln (f z) = C := by sorry
+    ∃ C : ℂ, ∀ z ∈ U, w z - Ln (f z) = C
 ```
 :::
 ::::
@@ -141,7 +141,7 @@ The complex exponential is its own derivative.
 
 :::leanStatement "Exponential derivative"
 ```anchor dlmf_4_7_7 (module := LMLF.Blueprint.Elementary.Section47) -showProofStates
-theorem exp_deriv (z : ℂ) : deriv Complex.exp z = Complex.exp z := by sorry
+theorem exp_deriv (z : ℂ) : deriv Complex.exp z = Complex.exp z
 ```
 :::
 ::::
@@ -154,7 +154,7 @@ The chain rule inserts the constant multiplier `a`.
 :::leanStatement "Scaled exponential derivative"
 ```anchor dlmf_4_7_8 (module := LMLF.Blueprint.Elementary.Section47) -showProofStates
 theorem exp_mul_deriv (a z : ℂ) :
-    deriv (fun w : ℂ => Complex.exp (a * w)) z = a * Complex.exp (a * z) := by sorry
+    deriv (fun w : ℂ => Complex.exp (a * w)) z = a * Complex.exp (a * z)
 ```
 :::
 ::::
@@ -168,7 +168,7 @@ DLMF's general-power note replaces it by the branch used to define the power.
 :::leanStatement "Principal constant-base power derivative"
 ```anchor dlmf_4_7_9 (module := LMLF.Blueprint.Elementary.Section47) -showProofStates
 theorem cpow_deriv (a z : ℂ) (ha : a ≠ 0) :
-    deriv (fun w : ℂ => a ^ w) z = a ^ z * Complex.log a := by sorry
+    deriv (fun w : ℂ => a ^ w) z = a ^ z * Complex.log a
 ```
 :::
 ::::
@@ -184,7 +184,7 @@ principal branch in the base gives the displayed rule.
 theorem z_cpow_deriv (a : ℂ) (U : Set ℂ) {z : ℂ} (hz : z ∈ U)
     (hU : ∀ w ∈ U, w ∈ Complex.slitPlane) :
     deriv (fun w : ℂ => Complex.exp (a * Complex.log w)) z =
-      a * Complex.exp (a * Complex.log z) / z := by sorry
+      a * Complex.exp (a * Complex.log z) / z
 ```
 :::
 ::::
@@ -200,7 +200,7 @@ the same explicit slit-plane branch domain.
 theorem z_cpow_iteratedDeriv (a : ℂ) (U : Set ℂ) {z : ℂ} (n : ℕ)
     (hz : z ∈ U) (hU : ∀ w ∈ U, w ∈ Complex.slitPlane) :
     iteratedDeriv n (fun w : ℂ => Complex.exp (a * Complex.log w)) z =
-      (∏ k : Fin n, (a - (k : ℂ))) * Complex.exp (a * Complex.log z) / z ^ n := by sorry
+      (∏ k : Fin n, (a - (k : ℂ))) * Complex.exp (a * Complex.log z) / z ^ n
 ```
 :::
 ::::
@@ -232,7 +232,7 @@ theorem linearDifferentialSolution (f F w : ℂ → ℂ) (U : Set ℂ)
     (hF : ∀ z ∈ U, HasDerivAt F (f z) z)
     (hw : ∀ z ∈ U, HasDerivAt w (f z * w z) z)
     (hw0 : ∀ z ∈ U, w z ≠ 0) :
-    (∃ C : ℂ, C ≠ 0 ∧ ∀ z ∈ U, w z = C * Complex.exp (F z)) := by sorry
+    (∃ C : ℂ, C ≠ 0 ∧ ∀ z ∈ U, w z = C * Complex.exp (F z))
 ```
 :::
 ::::
@@ -265,7 +265,7 @@ theorem secondOrderExponentialSolution (a : ℂ) (w : ℂ → ℂ) (U : Set ℂ)
     (hsq : (Complex.sqrt a) ^ 2 = a)
     (hw : ∀ z ∈ U, HasDerivAt (deriv w) (a * w z) z) :
     (∃ A B : ℂ, ∀ z ∈ U, w z = A * Complex.exp (Complex.sqrt a * z) +
-      B * Complex.exp (-Complex.sqrt a * z)) := by sorry
+      B * Complex.exp (-Complex.sqrt a * z))
 ```
 :::
 ::::

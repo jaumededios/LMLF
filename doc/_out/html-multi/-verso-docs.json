@@ -1414,304 +1414,304 @@
  "279":
  "<code>LMLF.Blueprint.Elementary.Section46.dlmf_4_6_2 {z : ℂ} (hz : 1 / 2 ≤ z.re) : HasSum (logRatioTerm z) (Complex.log z)</code><span class=\"sep\"></span><code class=\"docstring\">DLMF §4.6.2: logarithm series when `Re z ≥ 1/2`. </code>",
  "278":
- "<code>HAdd.hAdd.{u, v, w} {α : Type u} {β : Type v} {γ : outParam (Type w)} [self : HAdd α β γ] : α → β → γ</code><span class=\"sep\"></span><code class=\"docstring\">`a + b` computes the sum of `a` and `b`.\nThe meaning of this notation is type-dependent. \n\nConventions for notations in identifiers:\n\n * The recommended spelling of `+` in identifiers is `add`.</code>",
+ "<code class=\"docstring\">The `sorry` tactic is a temporary placeholder for an incomplete tactic proof,\nclosing the main goal using `exact sorry`.\n\nThis is intended for stubbing-out incomplete parts of a proof while still having a syntactically correct proof skeleton.\nLean will give a warning whenever a proof uses `sorry`, so you aren't likely to miss it,\nbut you can double check if a theorem depends on `sorry` by looking for `sorryAx` in the output\nof the `#print axioms my_thm` command, the axiom used by the implementation of `sorry`.\n</code>",
  "277":
- "<code>Ne.{u} {α : Sort u} (a b : α) : Prop</code><span class=\"sep\"></span><code class=\"docstring\">`a ≠ b`, or `Ne a b` is defined as `¬ (a = b)` or `a = b → False`,\nand asserts that `a` and `b` are not equal.\n\n\nConventions for notations in identifiers:\n\n * The recommended spelling of `≠` in identifiers is `ne`.</code>",
+ "<code>HAdd.hAdd.{u, v, w} {α : Type u} {β : Type v} {γ : outParam (Type w)} [self : HAdd α β γ] : α → β → γ</code><span class=\"sep\"></span><code class=\"docstring\">`a + b` computes the sum of `a` and `b`.\nThe meaning of this notation is type-dependent. \n\nConventions for notations in identifiers:\n\n * The recommended spelling of `+` in identifiers is `add`.</code>",
  "276":
- "<code>LE.le.{u} {α : Type u} [self : LE α] : α → α → Prop</code><span class=\"sep\"></span><code class=\"docstring\">The less-equal relation: `x ≤ y` \n\nConventions for notations in identifiers:\n\n * The recommended spelling of `≤` in identifiers is `le`.</code>",
+ "<code>Ne.{u} {α : Sort u} (a b : α) : Prop</code><span class=\"sep\"></span><code class=\"docstring\">`a ≠ b`, or `Ne a b` is defined as `¬ (a = b)` or `a = b → False`,\nand asserts that `a` and `b` are not equal.\n\n\nConventions for notations in identifiers:\n\n * The recommended spelling of `≠` in identifiers is `ne`.</code>",
  "275":
+ "<code>LE.le.{u} {α : Type u} [self : LE α] : α → α → Prop</code><span class=\"sep\"></span><code class=\"docstring\">The less-equal relation: `x ≤ y` \n\nConventions for notations in identifiers:\n\n * The recommended spelling of `≤` in identifiers is `le`.</code>",
+ "274":
  "<code>Norm.norm.{u_8} {E : Type u_8} [self : Norm E] : E → ℝ</code><span class=\"sep\"></span><code class=\"docstring\">the `ℝ`-valued norm function. </code>",
- "274": "<code>z ≠ -1</code>",
- "273": "<code>‖z‖ ≤ 1</code>",
- "272":
- "<code>LMLF.Blueprint.Elementary.Section46.dlmf_4_6_1 {z : ℂ} (hz : ‖z‖ ≤ 1) (hz1 : z ≠ -1) :\n  HasSum (logOneAddTerm z) (Complex.log (1 + z))</code><span class=\"sep\"></span><code class=\"docstring\">DLMF §4.6.1: logarithm series on `|z| ≤ 1`, excluding `z = -1`. </code>",
- "271":
- "<code>LMLF.Blueprint.Elementary.Section46.generalizedBinomial (a : ℂ) (n : ℕ) : ℂ</code><span class=\"sep\"></span><code class=\"docstring\">DLMF §4.6.7: generalized binomial coefficient. </code>",
+ "273":
+ "<code class=\"docstring\">`by tac` constructs a term of the expected type by running the tactic(s) `tac`. </code>",
+ "272": "<code>z ≠ -1</code>",
+ "271": "<code>‖z‖ ≤ 1</code>",
  "270":
- "<code>LMLF.Blueprint.Elementary.Section46.logShiftedTerm (a z : ℝ) (n : ℕ) : ℂ</code><span class=\"sep\"></span><code class=\"docstring\">DLMF §4.6.6: the `n`th odd term in the shifted logarithm series. </code>",
+ "<code>LMLF.Blueprint.Elementary.Section46.dlmf_4_6_1 {z : ℂ} (hz : ‖z‖ ≤ 1) (hz1 : z ≠ -1) :\n  HasSum (logOneAddTerm z) (Complex.log (1 + z))</code><span class=\"sep\"></span><code class=\"docstring\">DLMF §4.6.1: logarithm series on `|z| ≤ 1`, excluding `z = -1`. </code>",
  "27":
  "<code>QuantitativeAnalysis.ErrorOn.comp.{u_1, u_2, u_3} {X : Type u_1} {E : Type u_2} [NormedAddCommGroup E] {Y : Type u_3}\n  {D : Set X} {f a : X → E} {b : X → ℝ} (h : ErrorOn D f a b) {S : Set Y} (ψ : Y → X) (hψ : Set.MapsTo ψ S D) :\n  ErrorOn S (f ∘ ψ) (a ∘ ψ) (b ∘ ψ)</code><span class=\"sep\"></span><code class=\"docstring\">An error bound pulls back along a map into its original domain. </code>",
  "269":
- "<code>LMLF.Blueprint.Elementary.Section46.logInverseOddTerm (z : ℂ) (n : ℕ) : ℂ</code><span class=\"sep\"></span><code class=\"docstring\">DLMF §4.6.5: the `n`th odd inverse-power term. </code>",
+ "<code>LMLF.Blueprint.Elementary.Section46.generalizedBinomial (a : ℂ) (n : ℕ) : ℂ</code><span class=\"sep\"></span><code class=\"docstring\">DLMF §4.6.7: generalized binomial coefficient. </code>",
  "268":
- "<code>LMLF.Blueprint.Elementary.Section46.logSymmetricTerm (z : ℂ) (n : ℕ) : ℂ</code><span class=\"sep\"></span><code class=\"docstring\">DLMF §4.6.4: the `n`th odd term in the symmetric logarithm series. </code>",
+ "<code>LMLF.Blueprint.Elementary.Section46.logShiftedTerm (a z : ℝ) (n : ℕ) : ℂ</code><span class=\"sep\"></span><code class=\"docstring\">DLMF §4.6.6: the `n`th odd term in the shifted logarithm series. </code>",
  "267":
- "<code>LMLF.Blueprint.Elementary.Section46.logSubOneTerm (z : ℂ) (n : ℕ) : ℂ</code><span class=\"sep\"></span><code class=\"docstring\">DLMF §4.6.3: the `n`th term of the logarithm series at `z-1`. </code>",
+ "<code>LMLF.Blueprint.Elementary.Section46.logInverseOddTerm (z : ℂ) (n : ℕ) : ℂ</code><span class=\"sep\"></span><code class=\"docstring\">DLMF §4.6.5: the `n`th odd inverse-power term. </code>",
  "266":
- "<code>LMLF.Blueprint.Elementary.Section46.logRatioTerm (z : ℂ) (n : ℕ) : ℂ</code><span class=\"sep\"></span><code class=\"docstring\">DLMF §4.6.2: the `n`th term of the logarithm series in `(z-1)/z`. </code>",
+ "<code>LMLF.Blueprint.Elementary.Section46.logSymmetricTerm (z : ℂ) (n : ℕ) : ℂ</code><span class=\"sep\"></span><code class=\"docstring\">DLMF §4.6.4: the `n`th odd term in the symmetric logarithm series. </code>",
  "265":
- "<code>LMLF.Blueprint.Elementary.Section46.logOneAddTerm (z : ℂ) (n : ℕ) : ℂ</code><span class=\"sep\"></span><code class=\"docstring\">DLMF §4.6.1: the `n`th term of the logarithm series at `1+z`. </code>",
+ "<code>LMLF.Blueprint.Elementary.Section46.logSubOneTerm (z : ℂ) (n : ℕ) : ℂ</code><span class=\"sep\"></span><code class=\"docstring\">DLMF §4.6.3: the `n`th term of the logarithm series at `z-1`. </code>",
  "264":
- "<code>LMLF.Blueprint.Elementary.Section45.dlmf_4_5_16 (z : ℂ) :\n  ‖Complex.exp z - 1‖ ≤ Real.exp ‖z‖ - 1 ∧ Real.exp ‖z‖ - 1 ≤ ‖z‖ * Real.exp ‖z‖</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 4.5.16: the global complex exponential increment estimate. </code>",
- "263": "<code>0 &lt; ‖z‖</code>",
+ "<code>LMLF.Blueprint.Elementary.Section46.logRatioTerm (z : ℂ) (n : ℕ) : ℂ</code><span class=\"sep\"></span><code class=\"docstring\">DLMF §4.6.2: the `n`th term of the logarithm series in `(z-1)/z`. </code>",
+ "263":
+ "<code>LMLF.Blueprint.Elementary.Section46.logOneAddTerm (z : ℂ) (n : ℕ) : ℂ</code><span class=\"sep\"></span><code class=\"docstring\">DLMF §4.6.1: the `n`th term of the logarithm series at `1+z`. </code>",
  "262":
- "<code>LMLF.Blueprint.Elementary.Section45.dlmf_4_5_15 {z : ℂ} (hz : 0 &lt; ‖z‖) (hz1 : ‖z‖ &lt; 1) :\n  1 / 4 * ‖z‖ &lt; ‖Complex.exp z - 1‖ ∧ ‖Complex.exp z - 1‖ &lt; 7 / 4 * ‖z‖</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 4.5.15: the two-sided complex estimate for `exp z - 1`. </code>",
- "261": "<code>x ≤ 1.5936</code>",
+ "<code>LMLF.Blueprint.Elementary.Section45.dlmf_4_5_16 (z : ℂ) :\n  ‖Complex.exp z - 1‖ ≤ Real.exp ‖z‖ - 1 ∧ Real.exp ‖z‖ - 1 ≤ ‖z‖ * Real.exp ‖z‖</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 4.5.16: the global complex exponential increment estimate. </code>",
+ "261": "<code>0 &lt; ‖z‖</code>",
  "260":
- "<code>LMLF.Blueprint.Elementary.Section45.dlmf_4_5_14 {x : ℝ} (hx : 0 &lt; x) (hxmax : x ≤ 1.5936) : Real.exp (-x) &lt; 1 - x / 2</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 4.5.14: the small-positive-`x` upper bound for `exp (-x)`. </code>",
+ "<code>LMLF.Blueprint.Elementary.Section45.dlmf_4_5_15 {z : ℂ} (hz : 0 &lt; ‖z‖) (hz1 : ‖z‖ &lt; 1) :\n  1 / 4 * ‖z‖ &lt; ‖Complex.exp z - 1‖ ∧ ‖Complex.exp z - 1‖ &lt; 7 / 4 * ‖z‖</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 4.5.15: the two-sided complex estimate for `exp z - 1`. </code>",
  "26": "<code>ErrorOn D a c d</code>",
- "259": "<code>0 &lt; y</code>",
+ "259": "<code>x ≤ 1.5936</code>",
  "258":
- "<code>LMLF.Blueprint.Elementary.Section45.dlmf_4_5_13 {x y : ℝ} (hx : 0 &lt; x) (hy : 0 &lt; y) :\n  Real.exp (x * y / (x + y)) &lt; (1 + x / y) ^ y ∧ (1 + x / y) ^ y &lt; Real.exp x</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 4.5.13: the weighted power bound for positive `x` and `y`. </code>",
- "257":
- "<code>LMLF.Blueprint.Elementary.Section45.dlmf_4_5_12 {x : ℝ} (hx : -1 &lt; x) (hx0 : x ≠ 0) : Real.exp (x / (1 + x)) &lt; 1 + x</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 4.5.12: the upper bound for `1+x` when `x &gt; -1`. </code>",
+ "<code>LMLF.Blueprint.Elementary.Section45.dlmf_4_5_14 {x : ℝ} (hx : 0 &lt; x) (hxmax : x ≤ 1.5936) : Real.exp (-x) &lt; 1 - x / 2</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 4.5.14: the small-positive-`x` upper bound for `exp (-x)`. </code>",
+ "257": "<code>0 &lt; y</code>",
  "256":
- "<code>LMLF.Blueprint.Elementary.Section45.dlmf_4_5_11 {x : ℝ} (hx : x &lt; 1) (hx0 : x ≠ 0) :\n  x &lt; Real.exp x - 1 ∧ Real.exp x - 1 &lt; x / (1 - x)</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 4.5.11: the two-sided bound for `exp x - 1` when `x &lt; 1`. </code>",
+ "<code>LMLF.Blueprint.Elementary.Section45.dlmf_4_5_13 {x y : ℝ} (hx : 0 &lt; x) (hy : 0 &lt; y) :\n  Real.exp (x * y / (x + y)) &lt; (1 + x / y) ^ y ∧ (1 + x / y) ^ y &lt; Real.exp x</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 4.5.13: the weighted power bound for positive `x` and `y`. </code>",
  "255":
- "<code>LMLF.Blueprint.Elementary.Section45.dlmf_4_5_10 {x : ℝ} (hx : -1 &lt; x) (hx0 : x ≠ 0) :\n  x / (1 + x) &lt; 1 - Real.exp (-x) ∧ 1 - Real.exp (-x) &lt; x</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 4.5.10: the two-sided bound for `1-exp(-x)` when `x &gt; -1`. </code>",
+ "<code>LMLF.Blueprint.Elementary.Section45.dlmf_4_5_12 {x : ℝ} (hx : -1 &lt; x) (hx0 : x ≠ 0) : Real.exp (x / (1 + x)) &lt; 1 + x</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 4.5.12: the upper bound for `1+x` when `x &gt; -1`. </code>",
  "254":
- "<code>LMLF.Blueprint.Elementary.Section45.dlmf_4_5_9 {x : ℝ} (hx : x &lt; 1) (hx0 : x ≠ 0) : Real.exp x &lt; 1 / (1 - x)</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 4.5.9: the exponential bound for `x &lt; 1`. </code>",
+ "<code>LMLF.Blueprint.Elementary.Section45.dlmf_4_5_11 {x : ℝ} (hx : x &lt; 1) (hx0 : x ≠ 0) :\n  x &lt; Real.exp x - 1 ∧ Real.exp x - 1 &lt; x / (1 - x)</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 4.5.11: the two-sided bound for `exp x - 1` when `x &lt; 1`. </code>",
  "253":
- "<code>LMLF.Blueprint.Elementary.Section45.dlmf_4_5_8 {x : ℝ} (hx0 : x ≠ 0) : 1 + x &lt; Real.exp x</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 4.5.8: the strict tangent-line bound for the real exponential. </code>",
+ "<code>LMLF.Blueprint.Elementary.Section45.dlmf_4_5_10 {x : ℝ} (hx : -1 &lt; x) (hx0 : x ≠ 0) :\n  x / (1 + x) &lt; 1 - Real.exp (-x) ∧ 1 - Real.exp (-x) &lt; x</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 4.5.10: the two-sided bound for `1-exp(-x)` when `x &gt; -1`. </code>",
  "252":
- "<code>LMLF.Blueprint.Elementary.Section45.dlmf_4_5_7 {x : ℝ} (hx : x &lt; 1) (hx0 : x ≠ 0) :\n  Real.exp (-x / (1 - x)) &lt; 1 - x ∧ 1 - x &lt; Real.exp (-x)</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 4.5.7: the two-sided exponential bound for `x &lt; 1`. </code>",
- "251": "<code>‖z‖ &lt; 1</code>",
+ "<code>LMLF.Blueprint.Elementary.Section45.dlmf_4_5_9 {x : ℝ} (hx : x &lt; 1) (hx0 : x ≠ 0) : Real.exp x &lt; 1 / (1 - x)</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 4.5.9: the exponential bound for `x &lt; 1`. </code>",
+ "251":
+ "<code>LMLF.Blueprint.Elementary.Section45.dlmf_4_5_8 {x : ℝ} (hx0 : x ≠ 0) : 1 + x &lt; Real.exp x</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 4.5.8: the strict tangent-line bound for the real exponential. </code>",
  "250":
- "<code>LMLF.Blueprint.Elementary.Section45.dlmf_4_5_6 {z : ℂ} (hz : ‖z‖ &lt; 1) : ‖Complex.log (1 + z)‖ ≤ -Real.log (1 - ‖z‖)</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 4.5.6: the principal complex-logarithm estimate for `|z| &lt; 1`. </code>",
+ "<code>LMLF.Blueprint.Elementary.Section45.dlmf_4_5_7 {x : ℝ} (hx : x &lt; 1) (hx0 : x ≠ 0) :\n  Real.exp (-x / (1 - x)) &lt; 1 - x ∧ 1 - x &lt; Real.exp (-x)</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 4.5.7: the two-sided exponential bound for `x &lt; 1`. </code>",
  "25":
  "<code>QuantitativeAnalysis.ErrorOn.trans.{u_1, u_2} {X : Type u_1} {E : Type u_2} [NormedAddCommGroup E] {D : Set X}\n  {f a c : X → E} {b d : X → ℝ} (hfa : ErrorOn D f a b) (hac : ErrorOn D a c d) : ErrorOn D f c fun x =&gt; b x + d x</code><span class=\"sep\"></span><code class=\"docstring\">Successive error bounds compose with the sum of their majorants. </code>",
- "249": "<code>0 &lt; a</code>",
+ "249": "<code>‖z‖ &lt; 1</code>",
  "248":
+ "<code>LMLF.Blueprint.Elementary.Section45.dlmf_4_5_6 {z : ℂ} (hz : ‖z‖ &lt; 1) : ‖Complex.log (1 + z)‖ ≤ -Real.log (1 - ‖z‖)</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 4.5.6: the principal complex-logarithm estimate for `|z| &lt; 1`. </code>",
+ "247": "<code>0 &lt; a</code>",
+ "246":
  "<code>LMLF.Blueprint.Elementary.Section45.dlmf_4_5_5 {a x : ℝ} (ha : 0 &lt; a) (hx : 0 &lt; x) : Real.log x ≤ a * (x ^ (1 / a) - 1)</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 4.5.5: the power-form logarithm inequality for positive `a` and `x`. </code>",
- "247":
- "<code>LMLF.Blueprint.Elementary.Section45.dlmf_4_5_4 {x : ℝ} (hx : 0 &lt; x) : Real.log x ≤ x - 1</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 4.5.4: the standard upper bound for `log x` on the positive reals. </code>",
- "246": "<code>x ≤ 0.5828</code>",
  "245":
- "<code>LMLF.Blueprint.Elementary.Section45.dlmf_4_5_3 {x : ℝ} (hx : 0 &lt; x) (hxmax : x ≤ 0.5828) :\n  |Real.log (1 - x)| &lt; 3 / 2 * x</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 4.5.3: the small-positive-`x` bound for `|log (1-x)|`. </code>",
- "244": "<code>x &lt; 1</code>",
+ "<code>LMLF.Blueprint.Elementary.Section45.dlmf_4_5_4 {x : ℝ} (hx : 0 &lt; x) : Real.log x ≤ x - 1</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 4.5.4: the standard upper bound for `log x` on the positive reals. </code>",
+ "244": "<code>x ≤ 0.5828</code>",
  "243":
+ "<code>LMLF.Blueprint.Elementary.Section45.dlmf_4_5_3 {x : ℝ} (hx : 0 &lt; x) (hxmax : x ≤ 0.5828) :\n  |Real.log (1 - x)| &lt; 3 / 2 * x</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 4.5.3: the small-positive-`x` bound for `|log (1-x)|`. </code>",
+ "242": "<code>x &lt; 1</code>",
+ "241":
  "<code>LMLF.Blueprint.Elementary.Section45.dlmf_4_5_2 {x : ℝ} (hx : x &lt; 1) (hx0 : x ≠ 0) :\n  x &lt; -Real.log (1 - x) ∧ -Real.log (1 - x) &lt; x / (1 - x)</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 4.5.2: the two-sided bound for `log (1-x)` when `x &lt; 1`, `x ≠ 0`. </code>",
- "242": "<code>x ≠ 0</code>",
- "241": "<code>-1 &lt; x</code>",
- "240":
- "<code>LMLF.Blueprint.Elementary.Section45.dlmf_4_5_1 {x : ℝ} (hx : -1 &lt; x) (hx0 : x ≠ 0) :\n  x / (1 + x) &lt; Real.log (1 + x) ∧ Real.log (1 + x) &lt; x</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 4.5.1: the two-sided logarithm bound for `x &gt; -1`, `x ≠ 0`. </code>",
+ "240": "<code>x ≠ 0</code>",
  "24": "<code>∀ x ∈ D, b x ≤ d x</code>",
- "239":
- "<code>Real.eulerMascheroniConstant : ℝ</code><span class=\"sep\"></span><code class=\"docstring\">The Euler-Mascheroni constant `γ`. </code>",
+ "239": "<code>-1 &lt; x</code>",
  "238":
- "<code>Finset.Icc.{u_1} {α : Type u_1} [Preorder α] [LocallyFiniteOrder α] (a b : α) : Finset α</code><span class=\"sep\"></span><code class=\"docstring\">The finset $[a, b]$ of elements `x` such that `a ≤ x` and `x ≤ b`. Basically `Set.Icc a b` as a\nfinset. </code>",
+ "<code>LMLF.Blueprint.Elementary.Section45.dlmf_4_5_1 {x : ℝ} (hx : -1 &lt; x) (hx0 : x ≠ 0) :\n  x / (1 + x) &lt; Real.log (1 + x) ∧ Real.log (1 + x) &lt; x</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 4.5.1: the two-sided logarithm bound for `x &gt; -1`, `x ≠ 0`. </code>",
  "237":
- "<code>LMLF.Blueprint.Elementary.Section44.dlmf_4_4_19 :\n  Tendsto (fun n =&gt; ∑ k ∈ Icc 1 n, (↑k)⁻¹ - Real.log ↑n) atTop (𝓝 Real.eulerMascheroniConstant)</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 4.4.19: harmonic numbers minus their logarithm tend to Euler's constant. </code>",
+ "<code>Real.eulerMascheroniConstant : ℝ</code><span class=\"sep\"></span><code class=\"docstring\">The Euler-Mascheroni constant `γ`. </code>",
  "236":
- "<code>LMLF.Blueprint.Elementary.Section44.dlmf_4_4_18 : Tendsto (fun n =&gt; (1 + 1 / ↑n) ^ n) atTop (𝓝 (Real.exp 1))</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 4.4.18: the standard limit defining `e`. </code>",
+ "<code>Finset.Icc.{u_1} {α : Type u_1} [Preorder α] [LocallyFiniteOrder α] (a b : α) : Finset α</code><span class=\"sep\"></span><code class=\"docstring\">The finset $[a, b]$ of elements `x` such that `a ≤ x` and `x ≤ b`. Basically `Set.Icc a b` as a\nfinset. </code>",
  "235":
+ "<code>LMLF.Blueprint.Elementary.Section44.dlmf_4_4_19 :\n  Tendsto (fun n =&gt; ∑ k ∈ Icc 1 n, (↑k)⁻¹ - Real.log ↑n) atTop (𝓝 Real.eulerMascheroniConstant)</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 4.4.19: harmonic numbers minus their logarithm tend to Euler's constant. </code>",
+ "234":
+ "<code>LMLF.Blueprint.Elementary.Section44.dlmf_4_4_18 : Tendsto (fun n =&gt; (1 + 1 / ↑n) ^ n) atTop (𝓝 (Real.exp 1))</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 4.4.18: the standard limit defining `e`. </code>",
+ "233":
  "<code>LMLF.Blueprint.Elementary.Section44.dlmf_4_4_17 (z : ℂ) : Tendsto (fun n =&gt; (1 + z / ↑n) ^ n) atTop (𝓝 (Complex.exp z))</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 4.4.17: the defining exponential limit. </code>",
- "234": "<code>δ ≤ Real.pi / 2</code>",
- "233": "<code>0 &lt; δ</code>",
- "232":
- "<code>LMLF.Blueprint.Elementary.Section44.dlmf_4_4_16 {a : ℂ} {δ : ℝ} (hδ₀ : 0 &lt; δ) (hδ₁ : δ ≤ Real.pi / 2) :\n  Tendsto\n    (fun r =&gt;\n      (↑r * Complex.exp (Complex.I * (↑Real.pi / 2 - ↑δ))) ^ a *\n        Complex.exp (-(↑r * Complex.exp (Complex.I * (↑Real.pi / 2 - ↑δ)))))\n    atTop (𝓝 0)</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 4.4.16: sectorial exponential decay for complex powers. </code>",
- "231":
- "<code>LMLF.Blueprint.Elementary.Section44.dlmf_4_4_15 {a : ℂ} : Tendsto (fun x =&gt; ↑x ^ a * Complex.exp (-↑x)) atTop (𝓝 0)</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 4.4.15: exponential decay dominates a power at infinity. </code>",
+ "232": "<code>δ ≤ Real.pi / 2</code>",
+ "231": "<code>0 &lt; δ</code>",
  "230":
- "<code>LMLF.Blueprint.Elementary.Section44.dlmf_4_4_14 {a : ℂ} (ha : 0 &lt; a.re) :\n  Tendsto (fun x =&gt; ↑x ^ a * ↑(Real.log x)) (𝓝[&gt;] 0) (𝓝 0)</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 4.4.14: a positive power times a logarithm at zero. </code>",
+ "<code>LMLF.Blueprint.Elementary.Section44.dlmf_4_4_16 {a : ℂ} {δ : ℝ} (hδ₀ : 0 &lt; δ) (hδ₁ : δ ≤ Real.pi / 2) :\n  Tendsto\n    (fun r =&gt;\n      (↑r * Complex.exp (Complex.I * (↑Real.pi / 2 - ↑δ))) ^ a *\n        Complex.exp (-(↑r * Complex.exp (Complex.I * (↑Real.pi / 2 - ↑δ)))))\n    atTop (𝓝 0)</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 4.4.16: sectorial exponential decay for complex powers. </code>",
  "23":
  "<code>QuantitativeAnalysis.ErrorOn.weaken.{u_1, u_2} {X : Type u_1} {E : Type u_2} [NormedAddCommGroup E] {D : Set X}\n  {f a : X → E} {b d : X → ℝ} (h : ErrorOn D f a b) (hbd : ∀ x ∈ D, b x ≤ d x) : ErrorOn D f a d</code><span class=\"sep\"></span><code class=\"docstring\">An error bound remains valid after pointwise enlargement of its majorant. </code>",
- "229": "<code>0 &lt; a.re</code>",
+ "229":
+ "<code>LMLF.Blueprint.Elementary.Section44.dlmf_4_4_15 {a : ℂ} : Tendsto (fun x =&gt; ↑x ^ a * Complex.exp (-↑x)) atTop (𝓝 0)</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 4.4.15: exponential decay dominates a power at infinity. </code>",
  "228":
- "<code>LMLF.Blueprint.Elementary.Section44.dlmf_4_4_13 {a : ℂ} (ha : 0 &lt; a.re) :\n  Tendsto (fun x =&gt; ↑x ^ (-a) * Complex.log ↑x) atTop (𝓝 0)</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 4.4.13: a logarithm divided by a positive power at infinity. </code>",
- "227":
- "<code>LMLF.Blueprint.Elementary.Section44.dlmf_4_4_12 :\n  Complex.I ^ Complex.I = Complex.exp (-↑Real.pi / 2) ∧ (-Complex.I) ^ Complex.I = Complex.exp (↑Real.pi / 2)</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 4.4.12: imaginary powers of the imaginary unit. </code>",
+ "<code>LMLF.Blueprint.Elementary.Section44.dlmf_4_4_14 {a : ℂ} (ha : 0 &lt; a.re) :\n  Tendsto (fun x =&gt; ↑x ^ a * ↑(Real.log x)) (𝓝[&gt;] 0) (𝓝 0)</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 4.4.14: a positive power times a logarithm at zero. </code>",
+ "227": "<code>0 &lt; a.re</code>",
  "226":
- "<code>LMLF.Blueprint.Elementary.Section44.dlmf_4_4_11 :\n  Complex.exp (3 * ↑Real.pi / 4 * Complex.I) = -(1 / ↑√2) + Complex.I * (1 / ↑√2) ∧\n    Complex.exp (-3 * ↑Real.pi / 4 * Complex.I) = -(1 / ↑√2) - Complex.I * (1 / ↑√2)</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 4.4.11: exponential values at the three-eighths turns. </code>",
+ "<code>LMLF.Blueprint.Elementary.Section44.dlmf_4_4_13 {a : ℂ} (ha : 0 &lt; a.re) :\n  Tendsto (fun x =&gt; ↑x ^ (-a) * Complex.log ↑x) atTop (𝓝 0)</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 4.4.13: a logarithm divided by a positive power at infinity. </code>",
  "225":
- "<code>LMLF.Blueprint.Elementary.Section44.dlmf_4_4_10 :\n  Complex.exp (↑Real.pi / 4 * Complex.I) = 1 / ↑√2 + Complex.I * (1 / ↑√2) ∧\n    Complex.exp (-↑Real.pi / 4 * Complex.I) = 1 / ↑√2 - Complex.I * (1 / ↑√2)</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 4.4.10: exponential values at the eighth-turns. </code>",
+ "<code>LMLF.Blueprint.Elementary.Section44.dlmf_4_4_12 :\n  Complex.I ^ Complex.I = Complex.exp (-↑Real.pi / 2) ∧ (-Complex.I) ^ Complex.I = Complex.exp (↑Real.pi / 2)</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 4.4.12: imaginary powers of the imaginary unit. </code>",
  "224":
- "<code>LMLF.Blueprint.Elementary.Section44.dlmf_4_4_9 :\n  Complex.exp (2 * ↑Real.pi / 3 * Complex.I) = -(1 / 2) + Complex.I * (↑√3 / 2) ∧\n    Complex.exp (-2 * ↑Real.pi / 3 * Complex.I) = -(1 / 2) - Complex.I * (↑√3 / 2)</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 4.4.9: exponential values at the third-turns. </code>",
+ "<code>LMLF.Blueprint.Elementary.Section44.dlmf_4_4_11 :\n  Complex.exp (3 * ↑Real.pi / 4 * Complex.I) = -(1 / ↑√2) + Complex.I * (1 / ↑√2) ∧\n    Complex.exp (-3 * ↑Real.pi / 4 * Complex.I) = -(1 / ↑√2) - Complex.I * (1 / ↑√2)</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 4.4.11: exponential values at the three-eighths turns. </code>",
  "223":
- "<code>Real.sqrt (x : ℝ) : ℝ</code><span class=\"sep\"></span><code class=\"docstring\">The square root of a real number. This returns 0 for negative inputs.\n\nThis has notation `√x`. Note that `√x⁻¹` is parsed as `√(x⁻¹)`. </code>",
+ "<code>LMLF.Blueprint.Elementary.Section44.dlmf_4_4_10 :\n  Complex.exp (↑Real.pi / 4 * Complex.I) = 1 / ↑√2 + Complex.I * (1 / ↑√2) ∧\n    Complex.exp (-↑Real.pi / 4 * Complex.I) = 1 / ↑√2 - Complex.I * (1 / ↑√2)</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 4.4.10: exponential values at the eighth-turns. </code>",
  "222":
- "<code>LMLF.Blueprint.Elementary.Section44.dlmf_4_4_8 :\n  Complex.exp (↑Real.pi / 3 * Complex.I) = 1 / 2 + Complex.I * (↑√3 / 2) ∧\n    Complex.exp (-↑Real.pi / 3 * Complex.I) = 1 / 2 - Complex.I * (↑√3 / 2)</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 4.4.8: exponential values at the sixth-turns. </code>",
+ "<code>LMLF.Blueprint.Elementary.Section44.dlmf_4_4_9 :\n  Complex.exp (2 * ↑Real.pi / 3 * Complex.I) = -(1 / 2) + Complex.I * (↑√3 / 2) ∧\n    Complex.exp (-2 * ↑Real.pi / 3 * Complex.I) = -(1 / 2) - Complex.I * (↑√3 / 2)</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 4.4.9: exponential values at the third-turns. </code>",
  "221":
- "<code>LMLF.Blueprint.Elementary.Section44.dlmf_4_4_7 (k : ℤ) : Complex.exp (2 * ↑Real.pi * ↑k * Complex.I) = 1</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 4.4.7: integer full turns of the exponential. </code>",
+ "<code>Real.sqrt (x : ℝ) : ℝ</code><span class=\"sep\"></span><code class=\"docstring\">The square root of a real number. This returns 0 for negative inputs.\n\nThis has notation `√x`. Note that `√x⁻¹` is parsed as `√(x⁻¹)`. </code>",
  "220":
- "<code>LMLF.Blueprint.Elementary.Section44.dlmf_4_4_6 :\n  Complex.exp (↑Real.pi / 2 * Complex.I) = Complex.I ∧ Complex.exp (-↑Real.pi / 2 * Complex.I) = -Complex.I</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 4.4.6: exponential values at the quarter-turns. </code>",
+ "<code>LMLF.Blueprint.Elementary.Section44.dlmf_4_4_8 :\n  Complex.exp (↑Real.pi / 3 * Complex.I) = 1 / 2 + Complex.I * (↑√3 / 2) ∧\n    Complex.exp (-↑Real.pi / 3 * Complex.I) = 1 / 2 - Complex.I * (↑√3 / 2)</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 4.4.8: exponential values at the sixth-turns. </code>",
  "22": "<code>D' ⊆ D</code>",
  "219":
- "<code>LMLF.Blueprint.Elementary.Section44.dlmf_4_4_5 :\n  Complex.exp (↑Real.pi * Complex.I) = -1 ∧ Complex.exp (-↑Real.pi * Complex.I) = -1</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 4.4.5: exponential values at the two half-turns. </code>",
+ "<code>LMLF.Blueprint.Elementary.Section44.dlmf_4_4_7 (k : ℤ) : Complex.exp (2 * ↑Real.pi * ↑k * Complex.I) = 1</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 4.4.7: integer full turns of the exponential. </code>",
  "218":
- "<code>LMLF.Blueprint.Elementary.Section44.dlmf_4_4_4 : Complex.exp 0 = 1</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 4.4.4: the zeroth exponential power. </code>",
+ "<code>LMLF.Blueprint.Elementary.Section44.dlmf_4_4_6 :\n  Complex.exp (↑Real.pi / 2 * Complex.I) = Complex.I ∧ Complex.exp (-↑Real.pi / 2 * Complex.I) = -Complex.I</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 4.4.6: exponential values at the quarter-turns. </code>",
  "217":
- "<code>LMLF.Blueprint.Elementary.Section44.dlmf_4_4_3 :\n  Complex.log Complex.I = ↑Real.pi / 2 * Complex.I ∧ Complex.log (-Complex.I) = -(↑Real.pi / 2) * Complex.I</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 4.4.3: the principal logarithm at the two imaginary units. </code>",
+ "<code>LMLF.Blueprint.Elementary.Section44.dlmf_4_4_5 :\n  Complex.exp (↑Real.pi * Complex.I) = -1 ∧ Complex.exp (-↑Real.pi * Complex.I) = -1</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 4.4.5: exponential values at the two half-turns. </code>",
  "216":
- "<code>LMLF.Blueprint.Elementary.Section44.dlmf_4_4_2 :\n  Tendsto (fun t =&gt; Complex.log (-1 + ↑t * Complex.I)) (𝓝[&gt;] 0) (𝓝 (↑Real.pi * Complex.I)) ∧\n    Tendsto (fun t =&gt; Complex.log (-1 - ↑t * Complex.I)) (𝓝[&gt;] 0) (𝓝 (-↑Real.pi * Complex.I))</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 4.4.2: the two boundary values of the principal logarithm at `-1`. </code>",
+ "<code>LMLF.Blueprint.Elementary.Section44.dlmf_4_4_4 : Complex.exp 0 = 1</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 4.4.4: the zeroth exponential power. </code>",
  "215":
- "<code>LMLF.Blueprint.Elementary.Section44.dlmf_4_4_1 : Complex.log 1 = 0</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 4.4.1: the principal logarithm at one. </code>",
+ "<code>LMLF.Blueprint.Elementary.Section44.dlmf_4_4_3 :\n  Complex.log Complex.I = ↑Real.pi / 2 * Complex.I ∧ Complex.log (-Complex.I) = -(↑Real.pi / 2) * Complex.I</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 4.4.3: the principal logarithm at the two imaginary units. </code>",
  "214":
- "<code>LMLF.Blueprint.Elementary.Section43.complex_exp_surface_height (x y : ℝ) :\n  ‖Complex.exp (↑x + ↑y * Complex.I)‖ = Real.exp x</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 4.3.F4: the exponential surface has magnitude `exp x` at `x + i y`. </code>",
- "213": "<code>↑x + ↑y * Complex.I ∈ principalLogSurfaceDomain</code>",
+ "<code>LMLF.Blueprint.Elementary.Section44.dlmf_4_4_2 :\n  Tendsto (fun t =&gt; Complex.log (-1 + ↑t * Complex.I)) (𝓝[&gt;] 0) (𝓝 (↑Real.pi * Complex.I)) ∧\n    Tendsto (fun t =&gt; Complex.log (-1 - ↑t * Complex.I)) (𝓝[&gt;] 0) (𝓝 (-↑Real.pi * Complex.I))</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 4.4.2: the two boundary values of the principal logarithm at `-1`. </code>",
+ "213":
+ "<code>LMLF.Blueprint.Elementary.Section44.dlmf_4_4_1 : Complex.log 1 = 0</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 4.4.1: the principal logarithm at one. </code>",
  "212":
- "<code>LMLF.Blueprint.Elementary.Section43.principal_log_surface_height {x y : ℝ}\n  (hxy : ↑x + ↑y * Complex.I ∈ principalLogSurfaceDomain) :\n  principalLogSurfaceHeight x y = ‖Complex.log (↑x + ↑y * Complex.I)‖</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 4.3.F3: on the displayed slit-plane domain, the surface height is the\nabsolute value shown in the source caption. </code>",
- "211":
- "<code>LMLF.Blueprint.Elementary.Section43.principalLogSurfaceDomain : Set ℂ</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 4.3.F3: the principal-logarithm plot uses the plane slit along the\nnonpositive real axis as its displayed domain. </code>",
+ "<code>LMLF.Blueprint.Elementary.Section43.complex_exp_surface_height (x y : ℝ) :\n  ‖Complex.exp (↑x + ↑y * Complex.I)‖ = Real.exp x</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 4.3.F4: the exponential surface has magnitude `exp x` at `x + i y`. </code>",
+ "211": "<code>↑x + ↑y * Complex.I ∈ principalLogSurfaceDomain</code>",
  "210":
- "<code>LMLF.Blueprint.Elementary.Section43.principalLogSurfaceHeight (x y : ℝ) : ℝ</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 4.3.F3: the plotted surface height is the modulus of the principal\nlogarithm. </code>",
+ "<code>LMLF.Blueprint.Elementary.Section43.principal_log_surface_height {x y : ℝ}\n  (hxy : ↑x + ↑y * Complex.I ∈ principalLogSurfaceDomain) :\n  principalLogSurfaceHeight x y = ‖Complex.log (↑x + ↑y * Complex.I)‖</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 4.3.F3: on the displayed slit-plane domain, the surface height is the\nabsolute value shown in the source caption. </code>",
  "21": "<code>ErrorOn D f a b</code>",
  "209":
- "<code>LMLF.Blueprint.Elementary.Section43.conformal_map_nine_point_table_spec {r : ℝ} (hr : 0 &lt; r) :\n  conformalMapNinePointTable r =\n    [(0, Complex.exp 0), (↑r, Complex.exp ↑r), (↑r + ↑Real.pi * Complex.I, Complex.exp (↑r + ↑Real.pi * Complex.I)),\n      (↑r - ↑Real.pi * Complex.I, Complex.exp (↑r - ↑Real.pi * Complex.I)),\n      (↑Real.pi * Complex.I, Complex.exp (↑Real.pi * Complex.I)),\n      (-↑Real.pi * Complex.I, Complex.exp (-↑Real.pi * Complex.I)),\n      (-↑r + ↑Real.pi * Complex.I, Complex.exp (-↑r + ↑Real.pi * Complex.I)),\n      (-↑r - ↑Real.pi * Complex.I, Complex.exp (-↑r - ↑Real.pi * Complex.I)), (-↑r, Complex.exp (-↑r))]</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 4.3.F2: the nine-point table is the image of each listed `z` under\nthe exponential map, for every positive real parameter `r`. </code>",
+ "<code>LMLF.Blueprint.Elementary.Section43.principalLogSurfaceDomain : Set ℂ</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 4.3.F3: the principal-logarithm plot uses the plane slit along the\nnonpositive real axis as its displayed domain. </code>",
  "208":
- "<code>LMLF.Blueprint.Elementary.Section43.conformalMapNinePointTable (r : ℝ) : List (ℂ × ℂ)</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 4.3.F2: the complete nine-point correspondence table for `w = exp z`.\nThe entries with `± i 0` represent the two sides of the negative-real-axis cut. </code>",
- "207": "<code>0 &lt; r</code>",
+ "<code>LMLF.Blueprint.Elementary.Section43.principalLogSurfaceHeight (x y : ℝ) : ℝ</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 4.3.F3: the plotted surface height is the modulus of the principal\nlogarithm. </code>",
+ "207":
+ "<code>LMLF.Blueprint.Elementary.Section43.conformal_map_nine_point_table_spec {r : ℝ} (hr : 0 &lt; r) :\n  conformalMapNinePointTable r =\n    [(0, Complex.exp 0), (↑r, Complex.exp ↑r), (↑r + ↑Real.pi * Complex.I, Complex.exp (↑r + ↑Real.pi * Complex.I)),\n      (↑r - ↑Real.pi * Complex.I, Complex.exp (↑r - ↑Real.pi * Complex.I)),\n      (↑Real.pi * Complex.I, Complex.exp (↑Real.pi * Complex.I)),\n      (-↑Real.pi * Complex.I, Complex.exp (-↑Real.pi * Complex.I)),\n      (-↑r + ↑Real.pi * Complex.I, Complex.exp (-↑r + ↑Real.pi * Complex.I)),\n      (-↑r - ↑Real.pi * Complex.I, Complex.exp (-↑r - ↑Real.pi * Complex.I)), (-↑r, Complex.exp (-↑r))]</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 4.3.F2: the nine-point table is the image of each listed `z` under\nthe exponential map, for every positive real parameter `r`. </code>",
  "206":
+ "<code>LMLF.Blueprint.Elementary.Section43.conformalMapNinePointTable (r : ℝ) : List (ℂ × ℂ)</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 4.3.F2: the complete nine-point correspondence table for `w = exp z`.\nThe entries with `± i 0` represent the two sides of the negative-real-axis cut. </code>",
+ "205": "<code>0 &lt; r</code>",
+ "204":
  "<code>LMLF.Blueprint.Elementary.Section43.conformal_map_boundary_values {r : ℝ} (hr : 0 &lt; r) :\n  Complex.exp (↑r + ↑Real.pi * Complex.I) = -↑(Real.exp r) ∧\n    Complex.exp (↑r - ↑Real.pi * Complex.I) = -↑(Real.exp r) ∧\n      Complex.exp (↑Real.pi * Complex.I) = -1 ∧ Complex.exp (-↑r + ↑Real.pi * Complex.I) = -↑(Real.exp (-r))</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 4.3.F2: the boundary points of the strip map to the two sides of the\nnegative real-axis cut, with the real parameter `r` controlling the radius. </code>",
- "205": "<code>z.im &lt; Real.pi</code>",
- "204": "<code>-Real.pi &lt; z.im</code>",
- "203":
- "<code>LMLF.Blueprint.Elementary.Section43.principal_log_exp_on_strip {z : ℂ} (hlo : -Real.pi &lt; z.im) (hhi : z.im &lt; Real.pi) :\n  Complex.log (Complex.exp z) = z</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 4.3.F2: on the principal strip, taking the principal logarithm after\nexponentiation recovers the original complex coordinate. </code>",
- "202": "<code>|z.arg| &lt; Real.pi</code>",
+ "203": "<code>z.im &lt; Real.pi</code>",
+ "202": "<code>-Real.pi &lt; z.im</code>",
  "201":
- "<code>LMLF.Blueprint.Elementary.Section43.complex_exp_principal_log_inverse {z : ℂ} (hz : z ≠ 0) (harg : |z.arg| &lt; Real.pi) :\n  Complex.exp (Complex.log z) = z</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 4.3.F2: the exponential sends the horizontal strip to the slit plane;\nthe principal logarithm is its inverse there. </code>",
- "200": "<code>0 &lt; x</code>",
+ "<code>LMLF.Blueprint.Elementary.Section43.principal_log_exp_on_strip {z : ℂ} (hlo : -Real.pi &lt; z.im) (hhi : z.im &lt; Real.pi) :\n  Complex.log (Complex.exp z) = z</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 4.3.F2: on the principal strip, taking the principal logarithm after\nexponentiation recovers the original complex coordinate. </code>",
+ "200": "<code>|z.arg| &lt; Real.pi</code>",
  "20":
  "<code>QuantitativeAnalysis.ErrorOn.restrict.{u_1, u_2} {X : Type u_1} {E : Type u_2} [NormedAddCommGroup E] {D D' : Set X}\n  {f a : X → E} {b : X → ℝ} (h : ErrorOn D f a b) (hD : D' ⊆ D) : ErrorOn D' f a b</code><span class=\"sep\"></span><code class=\"docstring\">An error bound restricts to a smaller domain. </code>",
  "2": "<code>Type u_1</code>",
  "199":
- "<code>LMLF.Blueprint.Elementary.Section43.real_exp_log_inverse {x : ℝ} (hx : 0 &lt; x) : Real.exp (Real.log x) = x</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 4.3.F1: exponentiating the real logarithm recovers every positive real. </code>",
- "198":
- "<code>LMLF.Blueprint.Elementary.Section43.real_log_exp_inverse (x : ℝ) : Real.log (Real.exp x) = x</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 4.3.F1: the real exponential and logarithm are inverse on their natural domains. </code>",
+ "<code>LMLF.Blueprint.Elementary.Section43.complex_exp_principal_log_inverse {z : ℂ} (hz : z ≠ 0) (harg : |z.arg| &lt; Real.pi) :\n  Complex.exp (Complex.log z) = z</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 4.3.F2: the exponential sends the horizontal strip to the slit plane;\nthe principal logarithm is its inverse there. </code>",
+ "198": "<code>0 &lt; x</code>",
  "197":
- "<code class=\"docstring\">`if c then t else e` is notation for `ite c t e`, \"if-then-else\", which decides to\nreturn `t` or `e` depending on whether `c` is true or false. The explicit argument\n`c : Prop` does not have any actual computational content, but there is an additional\n`[Decidable c]` argument synthesized by typeclass inference which actually\ndetermines how to evaluate `c` to true or false. Write `if h : c then t else e`\ninstead for a \"dependent if-then-else\" `dite`, which allows `t`/`e` to use the fact\nthat `c` is true/false.\n</code>",
+ "<code>LMLF.Blueprint.Elementary.Section43.real_exp_log_inverse {x : ℝ} (hx : 0 &lt; x) : Real.exp (Real.log x) = x</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 4.3.F1: exponentiating the real logarithm recovers every positive real. </code>",
  "196":
- "<code>Complex.sqrt (a : ℂ) : ℂ</code><span class=\"sep\"></span><code class=\"docstring\">The square root of a complex number. </code>",
+ "<code>LMLF.Blueprint.Elementary.Section43.real_log_exp_inverse (x : ℝ) : Real.log (Real.exp x) = x</code><span class=\"sep\"></span><code class=\"docstring\">DLMF 4.3.F1: the real exponential and logarithm are inverse on their natural domains. </code>",
  "195":
- "<code>LMLF.Blueprint.Elementary.Section42.dlmf_4_2_37 (z : ℂ) :\n  (z ^ 2).sqrt = if 0 &lt; z.re ∨ z.re = 0 ∧ 0 ≤ z.im then z else -z</code>",
+ "<code class=\"docstring\">`if c then t else e` is notation for `ite c t e`, \"if-then-else\", which decides to\nreturn `t` or `e` depending on whether `c` is true or false. The explicit argument\n`c : Prop` does not have any actual computational content, but there is an additional\n`[Decidable c]` argument synthesized by typeclass inference which actually\ndetermines how to evaluate `c` to true or false. Write `if h : c then t else e`\ninstead for a \"dependent if-then-else\" `dite`, which allows `t`/`e` to use the fact\nthat `c` is true/false.\n</code>",
  "194":
- "<code>-Real.pi &lt; (1 / a * Complex.log w).im ∧ (1 / a * Complex.log w).im ≤ Real.pi</code>",
+ "<code>Complex.sqrt (a : ℂ) : ℂ</code><span class=\"sep\"></span><code class=\"docstring\">The square root of a complex number. </code>",
  "193":
- "<code>LMLF.Blueprint.Elementary.Section42.dlmf_4_2_36 (a w : ℂ) (ha : a ≠ 0) (hw : w ≠ 0)\n  (hphase : -Real.pi &lt; (1 / a * Complex.log w).im ∧ (1 / a * Complex.log w).im ≤ Real.pi) :\n  principalPower (Complex.exp (1 / a * Complex.log w)) a = w</code>",
- "192": "<code>w ≠ 0</code>",
+ "<code>LMLF.Blueprint.Elementary.Section42.dlmf_4_2_37 (z : ℂ) :\n  (z ^ 2).sqrt = if 0 &lt; z.re ∨ z.re = 0 ∧ 0 ≤ z.im then z else -z</code>",
+ "192":
+ "<code>-Real.pi &lt; (1 / a * Complex.log w).im ∧ (1 / a * Complex.log w).im ≤ Real.pi</code>",
  "191":
- "<code>LMLF.Blueprint.Elementary.Section42.dlmf_4_2_35 (z w a : ℂ) (hz : z ≠ 0) (ha : a ≠ 0) (hw : w ≠ 0) :\n  (∃ k, generalPowerValue z a k = w) ↔ ∃ k, z = Complex.exp (1 / a * generalLogValue w k)</code>",
- "190":
- "<code>LMLF.Blueprint.Elementary.Section42.dlmf_4_2_34 : Real.exp 1 = ∑' (n : ℕ), 1 / ↑n.factorial</code>",
+ "<code>LMLF.Blueprint.Elementary.Section42.dlmf_4_2_36 (a w : ℂ) (ha : a ≠ 0) (hw : w ≠ 0)\n  (hphase : -Real.pi &lt; (1 / a * Complex.log w).im ∧ (1 / a * Complex.log w).im ≤ Real.pi) :\n  principalPower (Complex.exp (1 / a * Complex.log w)) a = w</code>",
+ "190": "<code>w ≠ 0</code>",
  "19": "<code>ℝ</code>",
  "189":
- "<code>LMLF.Blueprint.Elementary.Section42.dlmf_4_2_33 (z : ℂ) (k : ℤ) :\n  generalPowerValue (↑(Real.exp 1)) z k = Complex.exp z * Complex.exp (2 * ↑k * z * ↑Real.pi * Complex.I)</code>",
+ "<code>LMLF.Blueprint.Elementary.Section42.dlmf_4_2_35 (z w a : ℂ) (hz : z ≠ 0) (ha : a ≠ 0) (hw : w ≠ 0) :\n  (∃ k, generalPowerValue z a k = w) ↔ ∃ k, z = Complex.exp (1 / a * generalLogValue w k)</code>",
  "188":
- "<code>LMLF.Blueprint.Elementary.Section42.dlmf_4_2_32 (z : ℂ) : ↑(Real.exp 1) ^ z = Complex.exp z</code>",
+ "<code>LMLF.Blueprint.Elementary.Section42.dlmf_4_2_34 : Real.exp 1 = ∑' (n : ℕ), 1 / ↑n.factorial</code>",
  "187":
- "<code>LMLF.Blueprint.Elementary.Section42.dlmf_4_2_31b (z : ℂ) (a : ℝ) (hz : principalLogDomain z) :\n  ∃ k, (principalPower z ↑a).arg = a * z.arg + 2 * ↑k * Real.pi</code>",
+ "<code>LMLF.Blueprint.Elementary.Section42.dlmf_4_2_33 (z : ℂ) (k : ℤ) :\n  generalPowerValue (↑(Real.exp 1)) z k = Complex.exp z * Complex.exp (2 * ↑k * z * ↑Real.pi * Complex.I)</code>",
  "186":
- "<code>LMLF.Blueprint.Elementary.Section42.dlmf_4_2_31a (z : ℂ) (a : ℝ) (hz : principalLogDomain z) :\n  ‖principalPower z ↑a‖ = ‖z‖ ^ a</code>",
+ "<code>LMLF.Blueprint.Elementary.Section42.dlmf_4_2_32 (z : ℂ) : ↑(Real.exp 1) ^ z = Complex.exp z</code>",
  "185":
- "<code>LMLF.Blueprint.Elementary.Section42.dlmf_4_2_30 (z a : ℂ) (hz : principalLogDomain z) :\n  ∃ k, (principalPower z a).arg = a.re * z.arg + a.im * Real.log ‖z‖ + 2 * ↑k * Real.pi</code>",
+ "<code>LMLF.Blueprint.Elementary.Section42.dlmf_4_2_31b (z : ℂ) (a : ℝ) (hz : principalLogDomain z) :\n  ∃ k, (principalPower z ↑a).arg = a * z.arg + 2 * ↑k * Real.pi</code>",
  "184":
- "<code>LMLF.Blueprint.Elementary.Section42.dlmf_4_2_29 (z a : ℂ) (hz : principalLogDomain z) :\n  ‖principalPower z a‖ = ‖z‖ ^ a.re * Real.exp (-a.im * z.arg)</code>",
+ "<code>LMLF.Blueprint.Elementary.Section42.dlmf_4_2_31a (z : ℂ) (a : ℝ) (hz : principalLogDomain z) :\n  ‖principalPower z ↑a‖ = ‖z‖ ^ a</code>",
  "183":
- "<code>LMLF.Blueprint.Elementary.Section42.principalPower (z a : ℂ) : ℂ</code>",
+ "<code>LMLF.Blueprint.Elementary.Section42.dlmf_4_2_30 (z a : ℂ) (hz : principalLogDomain z) :\n  ∃ k, (principalPower z a).arg = a.re * z.arg + a.im * Real.log ‖z‖ + 2 * ↑k * Real.pi</code>",
  "182":
- "<code>LMLF.Blueprint.Elementary.Section42.dlmf_4_2_28 (z a : ℂ) (hz : principalLogDomain z) :\n  principalPower z a = Complex.exp (a * Complex.log z)</code>",
+ "<code>LMLF.Blueprint.Elementary.Section42.dlmf_4_2_29 (z a : ℂ) (hz : principalLogDomain z) :\n  ‖principalPower z a‖ = ‖z‖ ^ a.re * Real.exp (-a.im * z.arg)</code>",
  "181":
- "<code>LMLF.Blueprint.Elementary.Section42.dlmf_4_2_27 (z : ℂ) (n : ℕ) (hz : z ≠ 0) :\n  generalPowerValue z (↑n) 0 = z ^ n ∧ generalPowerValue z (-↑n) 0 = 1 / z ^ n</code>",
+ "<code>LMLF.Blueprint.Elementary.Section42.principalPower (z a : ℂ) : ℂ</code>",
  "180":
- "<code>LMLF.Blueprint.Elementary.Section42.generalPowerValue (z a : ℂ) (k : ℤ) : ℂ</code>",
+ "<code>LMLF.Blueprint.Elementary.Section42.dlmf_4_2_28 (z a : ℂ) (hz : principalLogDomain z) :\n  principalPower z a = Complex.exp (a * Complex.log z)</code>",
  "18":
  "<code>Set.EqOn.{u, v} {α : Type u} {β : Type v} (f₁ f₂ : α → β) (s : Set α) : Prop</code><span class=\"sep\"></span><code class=\"docstring\">Two functions `f₁ f₂ : α → β` are equal on `s` if `f₁ x = f₂ x` for all `x ∈ s`. </code>",
  "179":
- "<code>LMLF.Blueprint.Elementary.Section42.dlmf_4_2_26 (z a : ℂ) (k : ℤ) (hz : z ≠ 0) :\n  generalPowerValue z a k = Complex.exp (a * generalLogValue z k)</code>",
- "178": "<code>ζ ≠ 0</code>",
+ "<code>LMLF.Blueprint.Elementary.Section42.dlmf_4_2_27 (z : ℂ) (n : ℕ) (hz : z ≠ 0) :\n  generalPowerValue z (↑n) 0 = z ^ n ∧ generalPowerValue z (-↑n) 0 = 1 / z ^ n</code>",
+ "178":
+ "<code>LMLF.Blueprint.Elementary.Section42.generalPowerValue (z a : ℂ) (k : ℤ) : ℂ</code>",
  "177":
- "<code>LMLF.Blueprint.Elementary.Section42.dlmf_4_2_25 (ζ : ℂ) (hζ : ζ ≠ 0) (z : ℂ) :\n  Complex.exp z = ζ ↔ ∃ k, z = generalLogValue ζ k</code>",
- "176":
- "<code>Real.sin (x : ℝ) : ℝ</code><span class=\"sep\"></span><code class=\"docstring\">The real sine function, defined as the real part of the complex sine </code>",
+ "<code>LMLF.Blueprint.Elementary.Section42.dlmf_4_2_26 (z a : ℂ) (k : ℤ) (hz : z ≠ 0) :\n  generalPowerValue z a k = Complex.exp (a * generalLogValue z k)</code>",
+ "176": "<code>ζ ≠ 0</code>",
  "175":
- "<code>Real.cos (x : ℝ) : ℝ</code><span class=\"sep\"></span><code class=\"docstring\">The real cosine function, defined as the real part of the complex cosine </code>",
+ "<code>LMLF.Blueprint.Elementary.Section42.dlmf_4_2_25 (ζ : ℂ) (hζ : ζ ≠ 0) (z : ℂ) :\n  Complex.exp z = ζ ↔ ∃ k, z = generalLogValue ζ k</code>",
  "174":
- "<code>LMLF.Blueprint.Elementary.Section42.dlmf_4_2_24 (x y : ℝ) :\n  Complex.exp (↑x + Complex.I * ↑y) = ↑(Real.exp x) * ↑(Real.cos y) + Complex.I * (↑(Real.exp x) * ↑(Real.sin y))</code>",
+ "<code>Real.sin (x : ℝ) : ℝ</code><span class=\"sep\"></span><code class=\"docstring\">The real sine function, defined as the real part of the complex sine </code>",
  "173":
- "<code>LMLF.Blueprint.Elementary.Section42.dlmf_4_2_23 (z : ℂ) : ∃ k, z.im + 2 * ↑k * Real.pi = (Complex.exp z).arg</code>",
+ "<code>Real.cos (x : ℝ) : ℝ</code><span class=\"sep\"></span><code class=\"docstring\">The real cosine function, defined as the real part of the complex cosine </code>",
  "172":
- "<code>LMLF.Blueprint.Elementary.Section42.dlmf_4_2_22 (z : ℂ) : ‖Complex.exp z‖ = Real.exp z.re</code>",
+ "<code>LMLF.Blueprint.Elementary.Section42.dlmf_4_2_24 (x y : ℝ) :\n  Complex.exp (↑x + Complex.I * ↑y) = ↑(Real.exp x) * ↑(Real.cos y) + Complex.I * (↑(Real.exp x) * ↑(Real.sin y))</code>",
  "171":
- "<code>LMLF.Blueprint.Elementary.Section42.dlmf_4_2_21 (z : ℂ) : Complex.exp (-z) = 1 / Complex.exp z</code>",
+ "<code>LMLF.Blueprint.Elementary.Section42.dlmf_4_2_23 (z : ℂ) : ∃ k, z.im + 2 * ↑k * Real.pi = (Complex.exp z).arg</code>",
  "170":
- "<code>LMLF.Blueprint.Elementary.Section42.dlmf_4_2_20 (z : ℂ) : Complex.exp (z + 2 * ↑Real.pi * Complex.I) = Complex.exp z</code>",
+ "<code>LMLF.Blueprint.Elementary.Section42.dlmf_4_2_22 (z : ℂ) : ‖Complex.exp z‖ = Real.exp z.re</code>",
  "17": "<code>Set.EqOn f a D</code>",
  "169":
- "<code>Nat.factorial : ℕ → ℕ</code><span class=\"sep\"></span><code class=\"docstring\">`Nat.factorial n` is the factorial of `n`. </code>",
+ "<code>LMLF.Blueprint.Elementary.Section42.dlmf_4_2_21 (z : ℂ) : Complex.exp (-z) = 1 / Complex.exp z</code>",
  "168":
- "<code>HasSum.{u_1, u_2} {α : Type u_1} {β : Type u_2} [AddCommMonoid α] [TopologicalSpace α] (f : β → α) (a : α)\n  (L : SummationFilter β := SummationFilter.unconditional β) : Prop</code><span class=\"sep\"></span><code class=\"docstring\">`HasSum f a L` means that the (potentially infinite) sum of the `f b` for `b : β`\nconverges to `a` along the SummationFilter `L`.\n\nBy default `L` is the `unconditional` one, corresponding to the limit of all finite sets towards\nthe entire type. So we take the sum over bigger and bigger finite sets. This sum operation is\ninvariant under permuting the terms (while sums for more general summation filters usually are not).\nThis is based on Mario Carneiro's\n[infinite sum `df-tsms` in Metamath](http://us.metamath.org/mpeuni/df-tsms.html).\n\nIn particular, the function `ℕ → ℝ` sending `n` to `(-1) ^ n / (n + 1)` does not have a\nsum for this definition, although it is summable for the `conditional` summation filter that\ntakes limits of sums over `n ∈ {0, ..., X}` as `X → ∞`. However, a series which is *absolutely*\nconvergent with respect to the conditional summation filter is in fact unconditionally summable.\n\nFor the definition and many statements, `α` does not need to be a topological additive monoid,\nonly an additive monoid with a topology (i.e. the addition is not assumed to be continuous). We\nonly add this assumption later, for the lemmas where it is relevant. </code>",
+ "<code>LMLF.Blueprint.Elementary.Section42.dlmf_4_2_20 (z : ℂ) : Complex.exp (z + 2 * ↑Real.pi * Complex.I) = Complex.exp z</code>",
  "167":
- "<code>LMLF.Blueprint.Elementary.Section42.dlmf_4_2_19 (z : ℂ) : HasSum (fun n =&gt; z ^ n / ↑n.factorial) (Complex.exp z)</code>",
+ "<code>Nat.factorial : ℕ → ℕ</code><span class=\"sep\"></span><code class=\"docstring\">`Nat.factorial n` is the factorial of `n`. </code>",
  "166":
- "<code>LMLF.Blueprint.Elementary.Section42.dlmf_4_2_18 : |Real.log 10 - 2.30258| &lt; 1e-5</code>",
+ "<code>HasSum.{u_1, u_2} {α : Type u_1} {β : Type u_2} [AddCommMonoid α] [TopologicalSpace α] (f : β → α) (a : α)\n  (L : SummationFilter β := SummationFilter.unconditional β) : Prop</code><span class=\"sep\"></span><code class=\"docstring\">`HasSum f a L` means that the (potentially infinite) sum of the `f b` for `b : β`\nconverges to `a` along the SummationFilter `L`.\n\nBy default `L` is the `unconditional` one, corresponding to the limit of all finite sets towards\nthe entire type. So we take the sum over bigger and bigger finite sets. This sum operation is\ninvariant under permuting the terms (while sums for more general summation filters usually are not).\nThis is based on Mario Carneiro's\n[infinite sum `df-tsms` in Metamath](http://us.metamath.org/mpeuni/df-tsms.html).\n\nIn particular, the function `ℕ → ℝ` sending `n` to `(-1) ^ n / (n + 1)` does not have a\nsum for this definition, although it is summable for the `conditional` summation filter that\ntakes limits of sums over `n ∈ {0, ..., X}` as `X → ∞`. However, a series which is *absolutely*\nconvergent with respect to the conditional summation filter is in fact unconditionally summable.\n\nFor the definition and many statements, `α` does not need to be a topological additive monoid,\nonly an additive monoid with a topology (i.e. the addition is not assumed to be continuous). We\nonly add this assumption later, for the lemmas where it is relevant. </code>",
  "165":
- "<code>LMLF.Blueprint.Elementary.Section42.dlmf_4_2_17 : |1 / Real.log 10 - 0.43429| &lt; 1e-5</code>",
+ "<code>LMLF.Blueprint.Elementary.Section42.dlmf_4_2_19 (z : ℂ) : HasSum (fun n =&gt; z ^ n / ↑n.factorial) (Complex.exp z)</code>",
  "164":
- "<code>LMLF.Blueprint.Elementary.Section42.dlmf_4_2_16 (z : ℂ) (hz : z ≠ 0) (h10 : Real.log 10 ≠ 0) :\n  Complex.log z = ↑(Real.log 10) * logBase 10 z</code>",
- "163": "<code>Real.log 10 ≠ 0</code>",
+ "<code>LMLF.Blueprint.Elementary.Section42.dlmf_4_2_18 : |Real.log 10 - 2.30258| &lt; 1e-5</code>",
+ "163":
+ "<code>LMLF.Blueprint.Elementary.Section42.dlmf_4_2_17 : |1 / Real.log 10 - 0.43429| &lt; 1e-5</code>",
  "162":
- "<code>LMLF.Blueprint.Elementary.Section42.dlmf_4_2_15 (z : ℂ) (hz : z ≠ 0) (h10 : Real.log 10 ≠ 0) :\n  logBase 10 z = Complex.log z / ↑(Real.log 10) ∧ logBase 10 z = logBase 10 ↑(Real.exp 1) * Complex.log z</code>",
- "161":
- "<code>LMLF.Blueprint.Elementary.Section42.dlmf_4_2_14 (z : ℂ) (hz : z ≠ 0) : logBase (↑(Real.exp 1)) z = Complex.log z</code>",
+ "<code>LMLF.Blueprint.Elementary.Section42.dlmf_4_2_16 (z : ℂ) (hz : z ≠ 0) (h10 : Real.log 10 ≠ 0) :\n  Complex.log z = ↑(Real.log 10) * logBase 10 z</code>",
+ "161": "<code>Real.log 10 ≠ 0</code>",
  "160":
- "<code>LMLF.Blueprint.Elementary.Section42.dlmf_4_2_13 : ∫ (x : ℝ) in 1..Real.exp 1, 1 / x = 1</code>",
+ "<code>LMLF.Blueprint.Elementary.Section42.dlmf_4_2_15 (z : ℂ) (hz : z ≠ 0) (h10 : Real.log 10 ≠ 0) :\n  logBase 10 z = Complex.log z / ↑(Real.log 10) ∧ logBase 10 z = logBase 10 ↑(Real.exp 1) * Complex.log z</code>",
  "16":
  "<code>QuantitativeAnalysis.ErrorOn.exact.{u_1, u_2} {X : Type u_1} {E : Type u_2} [NormedAddCommGroup E] {D : Set X}\n  {f a : X → E} (h : Set.EqOn f a D) : ErrorOn D f a fun x =&gt; 0</code><span class=\"sep\"></span><code class=\"docstring\">Functions equal on a domain have zero error there. </code>",
  "159":
- "<code>LMLF.Blueprint.Elementary.Section42.dlmf_4_2_12 : Real.log (Real.exp 1) = 1</code>",
+ "<code>LMLF.Blueprint.Elementary.Section42.dlmf_4_2_14 (z : ℂ) (hz : z ≠ 0) : logBase (↑(Real.exp 1)) z = Complex.log z</code>",
  "158":
- "<code>LMLF.Blueprint.Elementary.Section42.dlmf_4_2_11 : |Real.exp 1 - 2.71828| &lt; 1e-5</code>",
+ "<code>LMLF.Blueprint.Elementary.Section42.dlmf_4_2_13 : ∫ (x : ℝ) in 1..Real.exp 1, 1 / x = 1</code>",
  "157":
+ "<code>LMLF.Blueprint.Elementary.Section42.dlmf_4_2_12 : Real.log (Real.exp 1) = 1</code>",
+ "156":
+ "<code>LMLF.Blueprint.Elementary.Section42.dlmf_4_2_11 : |Real.exp 1 - 2.71828| &lt; 1e-5</code>",
+ "155":
  "<code>LMLF.Blueprint.Elementary.Section42.dlmf_4_2_10 (a b : ℂ) (ha0 : a ≠ 0) (ha1 : a ≠ 1) (hb0 : b ≠ 0) (hb1 : b ≠ 1)\n  (hba : Complex.log a ≠ 0) (hbb : Complex.log b ≠ 0) : logBase a b = 1 / logBase b a</code>",
- "156": "<code>Complex.log b ≠ 0</code>",
- "155": "<code>b ≠ 1</code>",
- "154": "<code>b ≠ 0</code>",
- "153":
+ "154": "<code>Complex.log b ≠ 0</code>",
+ "153": "<code>b ≠ 1</code>",
+ "152": "<code>b ≠ 0</code>",
+ "151":
  "<code>LMLF.Blueprint.Elementary.Section42.dlmf_4_2_9 (a b z : ℂ) (ha0 : a ≠ 0) (ha1 : a ≠ 1) (hb0 : b ≠ 0) (hb1 : b ≠ 1)\n  (hz : z ≠ 0) (hba : Complex.log a ≠ 0) (hbb : Complex.log b ≠ 0) : logBase a z = logBase b z / logBase b a</code>",
- "152": "<code>Complex.log a ≠ 0</code>",
- "151": "<code>a ≠ 1</code>",
- "150": "<code>a ≠ 0</code>",
+ "150": "<code>Complex.log a ≠ 0</code>",
  "15": "<code>Type u_3</code>",
- "149":
- "<code>LMLF.Blueprint.Elementary.Section42.dlmf_4_2_8 (a z : ℂ) (ha0 : a ≠ 0) (ha1 : a ≠ 1) (hz : z ≠ 0)\n  (hden : Complex.log a ≠ 0) : logBase a z = Complex.log z / Complex.log a</code>",
- "148":
- "<code>LMLF.Blueprint.Elementary.Section42.logBase (a z : ℂ) : ℂ</code>",
+ "149": "<code>a ≠ 1</code>",
+ "148": "<code>a ≠ 0</code>",
  "147":
- "<code>LMLF.Blueprint.Elementary.Section42.dlmf_4_2_7 (x : ℝ) (hx : x &lt; 0) :\n  upperCutLog x = ↑(Real.log |x|) + ↑Real.pi * Complex.I ∧ lowerCutLog x = ↑(Real.log |x|) - ↑Real.pi * Complex.I</code>",
+ "<code>LMLF.Blueprint.Elementary.Section42.dlmf_4_2_8 (a z : ℂ) (ha0 : a ≠ 0) (ha1 : a ≠ 1) (hz : z ≠ 0)\n  (hden : Complex.log a ≠ 0) : logBase a z = Complex.log z / Complex.log a</code>",
  "146":
- "<code>LMLF.Blueprint.Elementary.Section42.generalLogValue (z : ℂ) (k : ℤ) : ℂ</code>",
- "145": "<code>ℤ</code>",
+ "<code>LMLF.Blueprint.Elementary.Section42.logBase (a z : ℂ) : ℂ</code>",
+ "145":
+ "<code>LMLF.Blueprint.Elementary.Section42.dlmf_4_2_7 (x : ℝ) (hx : x &lt; 0) :\n  upperCutLog x = ↑(Real.log |x|) + ↑Real.pi * Complex.I ∧ lowerCutLog x = ↑(Real.log |x|) - ↑Real.pi * Complex.I</code>",
  "144":
+ "<code>LMLF.Blueprint.Elementary.Section42.generalLogValue (z : ℂ) (k : ℤ) : ℂ</code>",
+ "143": "<code>ℤ</code>",
+ "142":
  "<code>LMLF.Blueprint.Elementary.Section42.dlmf_4_2_6 (z : ℂ) (k : ℤ) (hz : z ≠ 0) :\n  generalLogValue z k = Complex.log z + 2 * ↑k * ↑Real.pi * Complex.I</code>",
- "143":
- "<code>LMLF.Blueprint.Elementary.Section42.closedPrincipalPhase (u : ℂ) : Prop</code>",
- "142": "<code>closedPrincipalPhase (Complex.log z)</code>",
  "141":
- "<code>LMLF.Blueprint.Elementary.Section42.closedPrincipalLogDomain (z : ℂ) : Prop</code>",
- "140": "<code>closedPrincipalLogDomain z</code>",
+ "<code>LMLF.Blueprint.Elementary.Section42.closedPrincipalPhase (u : ℂ) : Prop</code>",
+ "140": "<code>closedPrincipalPhase (Complex.log z)</code>",
  "14":
  "<code>QuantitativeAnalysis.NormBoundOn.{u_1, u_2} {X : Type u_1} {E : Type u_2} [NormedAddCommGroup E] (D : Set X) (f : X → E)\n  (b : X → ℝ) : Prop</code><span class=\"sep\"></span><code class=\"docstring\">`NormBoundOn D f b` means that the norm of `f` is pointwise at most `b` on `D`. </code>",
  "139":
- "<code>LMLF.Blueprint.Elementary.Section42.dlmf_4_2_5 (z : ℂ) (hz : closedPrincipalLogDomain z)\n  (hphase : closedPrincipalPhase (Complex.log z)) : Complex.log z = ↑(Real.log ‖z‖) + Complex.I * ↑z.arg</code>",
- "138":
- "<code>Real.pi : ℝ</code><span class=\"sep\"></span><code class=\"docstring\">The number π = 3.14159265... Defined here using choice as twice a zero of cos in [1,2],\nfrom which one can derive all its properties. For explicit bounds on π,\nsee `Mathlib/Analysis/Real/Pi/Bounds.lean`.\n\nDenoted `π`, once the `Real` namespace is opened. </code>",
+ "<code>LMLF.Blueprint.Elementary.Section42.closedPrincipalLogDomain (z : ℂ) : Prop</code>",
+ "138": "<code>closedPrincipalLogDomain z</code>",
  "137":
- "<code>LMLF.Blueprint.Elementary.Section42.lowerCutLog (x : ℝ) : ℂ</code>",
+ "<code>LMLF.Blueprint.Elementary.Section42.dlmf_4_2_5 (z : ℂ) (hz : closedPrincipalLogDomain z)\n  (hphase : closedPrincipalPhase (Complex.log z)) : Complex.log z = ↑(Real.log ‖z‖) + Complex.I * ↑z.arg</code>",
  "136":
- "<code>LMLF.Blueprint.Elementary.Section42.upperCutLog (x : ℝ) : ℂ</code>",
+ "<code>Real.pi : ℝ</code><span class=\"sep\"></span><code class=\"docstring\">The number π = 3.14159265... Defined here using choice as twice a zero of cos in [1,2],\nfrom which one can derive all its properties. For explicit bounds on π,\nsee `Mathlib/Analysis/Real/Pi/Bounds.lean`.\n\nDenoted `π`, once the `Real` namespace is opened. </code>",
  "135":
- "<code>LMLF.Blueprint.Elementary.Section42.closedCutPoint (x : ℝ) : ℂ</code>",
- "134": "<code>x &lt; 0</code>",
+ "<code>LMLF.Blueprint.Elementary.Section42.lowerCutLog (x : ℝ) : ℂ</code>",
+ "134":
+ "<code>LMLF.Blueprint.Elementary.Section42.upperCutLog (x : ℝ) : ℂ</code>",
  "133":
- "<code>LMLF.Blueprint.Elementary.Section42.dlmf_4_2_4 (x : ℝ) (hx : x &lt; 0) :\n  closedCutPoint x = ↑x ∧ upperCutLog x - lowerCutLog x = 2 * ↑Real.pi * Complex.I</code>",
- "132":
- "<code>Complex.arg (x : ℂ) : ℝ</code><span class=\"sep\"></span><code class=\"docstring\">`arg` returns values in the range $(-π, π]$, such that for `x ≠ 0`,\n`sin (arg x) = x.im / x.abs` and `cos (arg x) = x.re / x.abs`,\n`arg 0` defaults to `0` </code>",
+ "<code>LMLF.Blueprint.Elementary.Section42.closedCutPoint (x : ℝ) : ℂ</code>",
+ "132": "<code>x &lt; 0</code>",
  "131":
- "<code>Real.log (x : ℝ) : ℝ</code><span class=\"sep\"></span><code class=\"docstring\">The real logarithm function, equal to the inverse of the exponential for `x &gt; 0`,\nto `log |x|` for `x &lt; 0`, and to `0` for `0`. We use this unconventional extension to\n`(-∞, 0]` as it gives the formula `log (x * y) = log x + log y` for all nonzero `x` and `y`, and\nthe derivative of `log` is `1/x` away from `0`. </code>",
+ "<code>LMLF.Blueprint.Elementary.Section42.dlmf_4_2_4 (x : ℝ) (hx : x &lt; 0) :\n  closedCutPoint x = ↑x ∧ upperCutLog x - lowerCutLog x = 2 * ↑Real.pi * Complex.I</code>",
  "130":
- "<code>LMLF.Blueprint.Elementary.Section42.dlmf_4_2_3 (z : ℂ) (hz : principalLogDomain z) :\n  Complex.log z = ↑(Real.log ‖z‖) + Complex.I * ↑z.arg</code>",
+ "<code>Complex.arg (x : ℂ) : ℝ</code><span class=\"sep\"></span><code class=\"docstring\">`arg` returns values in the range $(-π, π]$, such that for `x ≠ 0`,\n`sin (arg x) = x.im / x.abs` and `cos (arg x) = x.re / x.abs`,\n`arg 0` defaults to `0` </code>",
  "13": "<code>X</code>",
  "129":
- "<code>Complex.exp (z : ℂ) : ℂ</code><span class=\"sep\"></span><code class=\"docstring\">The complex exponential function, defined via its Taylor series </code>",
+ "<code>Real.log (x : ℝ) : ℝ</code><span class=\"sep\"></span><code class=\"docstring\">The real logarithm function, equal to the inverse of the exponential for `x &gt; 0`,\nto `log |x|` for `x &lt; 0`, and to `0` for `0`. We use this unconventional extension to\n`(-∞, 0]` as it gives the formula `log (x * y) = log x + log y` for all nonzero `x` and `y`, and\nthe derivative of `log` is `1/x` away from `0`. </code>",
  "128":
- "<code>LMLF.Blueprint.Elementary.Section42.principalLogDomain (z : ℂ) : Prop</code>",
- "127": "<code>principalLogDomain z</code>",
+ "<code>LMLF.Blueprint.Elementary.Section42.dlmf_4_2_3 (z : ℂ) (hz : principalLogDomain z) :\n  Complex.log z = ↑(Real.log ‖z‖) + Complex.I * ↑z.arg</code>",
+ "127":
+ "<code>Complex.exp (z : ℂ) : ℂ</code><span class=\"sep\"></span><code class=\"docstring\">The complex exponential function, defined via its Taylor series </code>",
  "126":
- "<code>LMLF.Blueprint.Elementary.Section42.dlmf_4_2_2 (z : ℂ) (hz : principalLogDomain z) : Complex.exp (Complex.log z) = z</code>",
- "125":
- "<code class=\"docstring\">The `sorry` tactic is a temporary placeholder for an incomplete tactic proof,\nclosing the main goal using `exact sorry`.\n\nThis is intended for stubbing-out incomplete parts of a proof while still having a syntactically correct proof skeleton.\nLean will give a warning whenever a proof uses `sorry`, so you aren't likely to miss it,\nbut you can double check if a theorem depends on `sorry` by looking for `sorryAx` in the output\nof the `#print axioms my_thm` command, the axiom used by the implementation of `sorry`.\n</code>",
+ "<code>LMLF.Blueprint.Elementary.Section42.principalLogDomain (z : ℂ) : Prop</code>",
+ "125": "<code>principalLogDomain z</code>",
  "124":
- "<code class=\"docstring\">`by tac` constructs a term of the expected type by running the tactic(s) `tac`. </code>",
+ "<code>LMLF.Blueprint.Elementary.Section42.dlmf_4_2_2 (z : ℂ) (hz : principalLogDomain z) : Complex.exp (Complex.log z) = z</code>",
  "123":
  "<code>Complex.log (x : ℂ) : ℂ</code><span class=\"sep\"></span><code class=\"docstring\">Inverse of the `exp` function. Returns values such that `(log x).im &gt; - π` and `(log x).im ≤ π`.\n`log 0 = 0` </code>",
  "122":
