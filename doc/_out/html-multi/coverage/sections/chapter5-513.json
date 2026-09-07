@@ -16,8 +16,34 @@
   ],
   "numbered_formula_ids_omitted": [],
   "extra_statement_ids": [
-    "verticalLineIntegral",
-    "deBrangesWilsonNumerator"
+    "VerticalLine",
+    "VerticalLine.point",
+    "VerticalLine.tangent",
+    "VerticalLine.integrand",
+    "VerticalLine.integral",
+    "VerticalLine.Integrable",
+    "verticalLine",
+    "PrincipalPowerPoint",
+    "principalPowerPointCoe",
+    "PoleFreeGammaPoint",
+    "poleFreeGammaPointCoe",
+    "BarnesFirstDomain",
+    "BarnesFirstDomain.integrand",
+    "dlmf_5_13_1_integrable",
+    "BarnesModulusDomain",
+    "BarnesModulusDomain.integrand",
+    "dlmf_5_13_2_integrable",
+    "BarnesBetaDomain",
+    "BarnesBetaDomain.integrand",
+    "BarnesBetaDomain.integral",
+    "dlmf_5_13_3_integrable",
+    "RamanujanBetaDomain",
+    "RamanujanBetaDomain.integrand",
+    "dlmf_5_13_4_integrable",
+    "DeBrangesWilsonDomain",
+    "DeBrangesWilsonDomain.numerator",
+    "DeBrangesWilsonDomain.integrand",
+    "dlmf_5_13_5_integrable"
   ],
   "declarations": [
     {
@@ -26,7 +52,7 @@
       "relation": "exact",
       "proof_status": "missing",
       "quantitative_analogue": "not_applicable",
-      "notes": "Straight vertical contour parameterized by s = c + i t; principal complex powers are retained, and the source's nonzero phase domain is stated explicitly as z != 0."
+      "notes": "Exact source identity over typed BarnesFirstDomain data; PrincipalPowerPoint records z != 0 and |arg z| < pi, while VerticalLine packages the upward tangent. Convergence is stated separately by dlmf_5_13_1_integrable."
     },
     {
       "source_id": "5.13.E2",
@@ -34,7 +60,7 @@
       "relation": "specialization",
       "proof_status": "missing",
       "quantitative_analogue": "not_applicable",
-      "notes": "Real a and b are made explicit, as required by the source inequalities a > 0 and 0 < b < pi; DLMF notes this as the c = 0, b = a, s = i t, z = exp(i(pi - 2b)) specialization of E1, up to t -> -t."
+      "notes": "Real a and b are made explicit, as required by the source inequalities a > 0 and 0 < b < pi; convergence is separate in dlmf_5_13_2_integrable. DLMF notes this as the c = 0, b = a, s = i t, z = exp(i(pi - 2b)) specialization of E1, up to t -> -t."
     },
     {
       "source_id": "5.13.E3",
@@ -42,7 +68,7 @@
       "relation": "exact",
       "proof_status": "missing",
       "quantitative_analogue": "not_applicable",
-      "notes": "All four complex real-part conditions are preserved."
+      "notes": "All four complex real-part conditions are preserved in BarnesBetaDomain; its normalized integral and convergence declaration are separate."
     },
     {
       "source_id": "5.13.E4",
@@ -50,7 +76,7 @@
       "relation": "exact",
       "proof_status": "missing",
       "quantitative_analogue": "not_applicable",
-      "notes": "Only Re(a+b+c+d) > 3 is assumed, exactly as in the source."
+      "notes": "Only Re(a+b+c+d) > 3 is assumed, exactly as in the source; the reciprocal-Gamma integrand and convergence declaration are named separately."
     },
     {
       "source_id": "5.13.E5",
@@ -58,12 +84,10 @@
       "relation": "exact",
       "proof_status": "missing",
       "quantitative_analogue": "not_applicable",
-      "notes": "Fin 4 indexing records all four parameters and six pairwise Gamma factors; at t = 0 the totalized quotient has its removable value 0, which does not affect the ordinary integral."
+      "notes": "Fin 4 indexing records all four parameters and six pairwise Gamma factors. DeBrangesWilsonDomain carries a pole-free parameter subtype; reciprocal-Gamma factors give the removable t = 0 extension of the displayed quotient, and convergence is separate."
     }
   ],
-  "shared_vocabulary_requests": [
-    "Consolidate verticalLineIntegral if later sections need the same straight vertical contour."
-  ],
+  "shared_vocabulary_requests": [],
   "known_gaps": [
     "All five declarations are intentionally proof-pending (by sorry)."
   ]

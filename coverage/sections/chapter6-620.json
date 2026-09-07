@@ -1,0 +1,41 @@
+{
+  "section_range": ["6.20"],
+  "numbered_formula_ids_expected": [],
+  "numbered_formula_ids_stated": [],
+  "numbered_formula_ids_omitted": [],
+  "extra_statement_ids": [],
+  "nonformula_inventory_ids": [
+    "dlmf:6.20#i.p1",
+    "dlmf:6.20#I1.i1.p1",
+    "dlmf:6.20#I1.i2.p1",
+    "dlmf:6.20#I1.i3.p1",
+    "dlmf:6.20#I1.i4.p1",
+    "dlmf:6.20#ii.p1",
+    "dlmf:6.20#I2.i1.p1",
+    "dlmf:6.20#I2.i2.p1",
+    "dlmf:6.20#I2.i3.p1",
+    "dlmf:6.20#I2.i4.p1",
+    "dlmf:6.20#I2.i5.p1",
+    "dlmf:6.20#iii.p1",
+    "dlmf:6.20#I3.i1.p1",
+    "dlmf:6.20#I3.i2.p1"
+  ],
+  "declarations": [
+    {"source_id":"dlmf:6.20#i.p1","source_url":"https://dlmf.nist.gov/6.20#i.p1","names":["LMLF.Blueprint.ExponentialIntegrals.Section620.elementaryApproximationSources"],"relation":"related","proof_status":"not_applicable","quantitative_analogue":"not_applicable","notes":"Typed bibliographic index for the four elementary-approximation source families; mathematical approximation data remain in the cited references."},
+    {"source_id":"dlmf:6.20#I1.i1.p1","source_url":"https://dlmf.nist.gov/6.20#I1.i1.p1","names":["LMLF.Blueprint.ExponentialIntegrals.Section620.elementaryApproximationSources"],"relation":"related","proof_status":"not_applicable","quantitative_analogue":"not_applicable","notes":"Hastings (1955): several minimax polynomial/rational approximations for E1(x)+ln x, x exp(x) E1(x), f, and g; included in A&S Chapter 5."},
+    {"source_id":"dlmf:6.20#I1.i2.p1","source_url":"https://dlmf.nist.gov/6.20#I1.i2.p1","names":["LMLF.Blueprint.ExponentialIntegrals.Section620.elementaryApproximationSources"],"relation":"related","proof_status":"not_applicable","quantitative_analogue":"not_applicable","notes":"Cody and Thacher (1968): minimax rational approximations for E1(x), up to 20S."},
+    {"source_id":"dlmf:6.20#I1.i3.p1","source_url":"https://dlmf.nist.gov/6.20#I1.i3.p1","names":["LMLF.Blueprint.ExponentialIntegrals.Section620.elementaryApproximationSources"],"relation":"related","proof_status":"not_applicable","quantitative_analogue":"not_applicable","notes":"Cody and Thacher (1969): minimax rational approximations for Ei(x), up to 20S."},
+    {"source_id":"dlmf:6.20#I1.i4.p1","source_url":"https://dlmf.nist.gov/6.20#I1.i4.p1","names":["LMLF.Blueprint.ExponentialIntegrals.Section620.elementaryApproximationSources"],"relation":"related","proof_status":"not_applicable","quantitative_analogue":"not_applicable","notes":"MacLeod (1996b): rational approximations for sine/cosine integrals and f,g, up to 20S."},
+    {"source_id":"dlmf:6.20#ii.p1","source_url":"https://dlmf.nist.gov/6.20#ii.p1","names":["LMLF.Blueprint.ExponentialIntegrals.Section620.chebyshevApproximationSources"],"relation":"related","proof_status":"not_applicable","quantitative_analogue":"not_applicable","notes":"Typed bibliographic index for the five Chebyshev-expansion source families."},
+    {"source_id":"dlmf:6.20#I2.i1.p1","source_url":"https://dlmf.nist.gov/6.20#I2.i1.p1","names":["LMLF.Blueprint.ExponentialIntegrals.Section620.chebyshevApproximationSources"],"relation":"related","proof_status":"not_applicable","quantitative_analogue":"not_applicable","notes":"Clenshaw (1962): Chebyshev coefficients for -E1(x)-ln|x| on [-4,4] and exp(x)E1(x) for x >= 4, at 20D."},
+    {"source_id":"dlmf:6.20#I2.i2.p1","source_url":"https://dlmf.nist.gov/6.20#I2.i2.p1","names":["LMLF.Blueprint.ExponentialIntegrals.Section620.chebyshevApproximationSources"],"relation":"related","proof_status":"not_applicable","quantitative_analogue":"not_applicable","notes":"Luke and Wimp (1963): Ei for x <= -4 and Si,Ci for x >= 4, at 20D."},
+    {"source_id":"dlmf:6.20#I2.i3.p1","source_url":"https://dlmf.nist.gov/6.20#I2.i3.p1","names":["LMLF.Blueprint.ExponentialIntegrals.Section620.chebyshevApproximationSources"],"relation":"related","proof_status":"not_applicable","quantitative_analogue":"not_applicable","notes":"Luke (1969b), pp. 41-42: Chebyshev expansions of Ein(ax), Si(ax), Cin(ax) for -1 <= x <= 1 and a complex, with Bessel-series coefficients."},
+    {"source_id":"dlmf:6.20#I2.i4.p1","source_url":"https://dlmf.nist.gov/6.20#I2.i4.p1","names":["LMLF.Blueprint.ExponentialIntegrals.Section620.chebyshevApproximationSources"],"relation":"related","proof_status":"not_applicable","quantitative_analogue":"not_applicable","notes":"Luke (1969b), pp. 321-322: real-range Ein/E1/Ei expansions and sine/cosine coefficients on pp. 325-327."},
+    {"source_id":"dlmf:6.20#I2.i5.p1","source_url":"https://dlmf.nist.gov/6.20#I2.i5.p1","names":["LMLF.Blueprint.ExponentialIntegrals.Section620.chebyshevApproximationSources"],"relation":"related","proof_status":"not_applicable","quantitative_analogue":"not_applicable","notes":"Luke (1969b), p. 25: U-function expansion near infinity, induced E1/f/g expansions via 6.11.2/6.11.3, and backward recursion when |ph z| < pi."},
+    {"source_id":"dlmf:6.20#iii.p1","source_url":"https://dlmf.nist.gov/6.20#iii.p1","names":["LMLF.Blueprint.ExponentialIntegrals.Section620.rationalApproximationSources"],"relation":"related","proof_status":"not_applicable","quantitative_analogue":"not_applicable","notes":"Typed bibliographic index for the two Padé/rational source families."},
+    {"source_id":"dlmf:6.20#I3.i1.p1","source_url":"https://dlmf.nist.gov/6.20#I3.i1.p1","names":["LMLF.Blueprint.ExponentialIntegrals.Section620.rationalApproximationSources"],"relation":"related","proof_status":"not_applicable","quantitative_analogue":"not_applicable","notes":"Luke (1969b), pp. 402, 410, 415-421: main diagonal Pade approximations for Ein, Si, Cin near the origin and E1 for large modulus, with selected-value errors."},
+    {"source_id":"dlmf:6.20#I3.i2.p1","source_url":"https://dlmf.nist.gov/6.20#I3.i2.p1","names":["LMLF.Blueprint.ExponentialIntegrals.Section620.rationalApproximationSources"],"relation":"related","proof_status":"not_applicable","quantitative_analogue":"not_applicable","notes":"Luke (1969b), pp. 411-414: rational approximations for Ein(z)."}
+  ],
+  "shared_vocabulary_requests": [],
+  "known_gaps": ["Section 6.20 supplies literature pointers and approximation regimes but no Lean-ready coefficient tables, error theorems, or numbered equations; the page preserves those claims as source-linked prose and typed citation-family indexes."]
+}

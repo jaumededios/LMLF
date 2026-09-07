@@ -1,0 +1,1 @@
+window.docContents[196].resolve({"/Elementary-Functions/___4___44-Other-Applications/#chapter-4-section-44":{"contents":"Source: NIST Digital Library of Mathematical Functions, §4.44.\n\n\n\n","context":"LMLF · DLMF with Lean\u0009Elementary Functions","header":"4.44. §4.44 Other Applications","id":"/Elementary-Functions/___4___44-Other-Applications/#chapter-4-section-44"}});

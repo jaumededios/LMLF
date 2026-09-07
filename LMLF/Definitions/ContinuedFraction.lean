@@ -148,6 +148,7 @@ def cfracCoeff (s : OddAsymptoticSeries) : CFCoefficients :=
 It represents the odd function of `z` after the substitution `x = z⁻²` and
 multiplication by `z⁻¹`.
 -/
+-- ANCHOR: formalContinuedFractionFrom
 noncomputable def formalContinuedFractionFrom
     (a : CFCoefficients) (offset : ℕ) : ℕ → ℚ⟦X⟧
   | 0 => 0
@@ -155,11 +156,14 @@ noncomputable def formalContinuedFractionFrom
       PowerSeries.C (a offset) *
         (1 + PowerSeries.X *
           formalContinuedFractionFrom a (offset + 1) depth)⁻¹
+-- ANCHOR_END: formalContinuedFractionFrom
 
 /-- The finite normalized formal continued fraction, with optional offset. -/
+-- ANCHOR: formalContinuedFractionConvergent
 noncomputable def formalContinuedFractionConvergent
     (a : CFCoefficients) (depth : ℕ) (offset : ℕ := 0) : ℚ⟦X⟧ :=
   formalContinuedFractionFrom a offset depth
+-- ANCHOR_END: formalContinuedFractionConvergent
 
 /-- The formal continued fraction whose coefficient of degree `n` is read
 from the depth-`n + 1` convergent, where that coefficient has stabilized. -/

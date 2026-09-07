@@ -213,17 +213,80 @@ theorem digamma_rational_value {p q : ℕ} (hp : 0 < p) (hpq : p < q) :
 := by
   sorry
 
-/-- DLMF 5.4.20: locations of the negative extrema, with an explicit eventual error bound. -/
+/-! ### Extrema -/
+
+/-- DLMF 5.4, Table 5.4.1: the source interval selecting the indexed
+extremum `xₙ`.
+
+The first interval contains the positive minimum `x₀`; for `n > 0`, the
+interval between consecutive negative Gamma poles selects the `n`th negative
+extremum. This normalization makes the indexed source sequence a reusable
+object rather than an arbitrary sequence of critical points.
+-/
+-- ANCHOR: gammaExtremumInterval
+def gammaExtremumInterval (n : ℕ) : Set ℝ :=
+  if n = 0 then Set.Ioo (1 : ℝ) 2
+  else Set.Ioo (-(n : ℝ)) ((1 : ℝ) - n)
+-- ANCHOR_END: gammaExtremumInterval
+
+/-- DLMF 5.4, Table 5.4.1: the normalized real critical point `xₙ`.
+
+The two zero conditions are persistent data of the point, while
+`in_index_interval` records the source indexing convention.
+-/
+-- ANCHOR: GammaExtremum
+structure GammaExtremum (n : ℕ) where
+  location : ℝ
+  in_index_interval : location ∈ gammaExtremumInterval n
+  derivative_zero : deriv Real.Gamma location = 0
+  digamma_zero : Complex.digamma (location : ℂ) = 0
+-- ANCHOR_END: GammaExtremum
+
+/-- DLMF 5.4, Table 5.4.1: the Gamma value recorded at a critical point. -/
+-- ANCHOR: GammaExtremum.value
+noncomputable def GammaExtremum.value {n : ℕ} (p : GammaExtremum n) : ℝ :=
+  Real.Gamma p.location
+-- ANCHOR_END: GammaExtremum.value
+
+/-- DLMF 5.4, Table 5.4.1: the indexed family of Gamma extrema `xₙ`. -/
+-- ANCHOR: GammaExtremaSequence
+structure GammaExtremaSequence where
+  point : ∀ n : ℕ, GammaExtremum n
+-- ANCHOR_END: GammaExtremaSequence
+
+/-- DLMF 5.4, Table 5.4.1: the displayed extrema form an indexed family. -/
+-- ANCHOR: gamma_extrema_exists
+theorem gamma_extrema_exists : Nonempty GammaExtremaSequence
+-- ANCHOR_END: gamma_extrema_exists
+:= by
+  sorry
+
+/-- DLMF 5.4, Table 5.4.1: the normalized extrema sequence is canonical.
+
+The interval normalization gives the source sequence its index; uniqueness is
+stated separately so downstream estimates can use one named sequence.
+-/
+-- ANCHOR: gamma_extrema_unique
+theorem gamma_extrema_unique (a b : GammaExtremaSequence) : a = b
+-- ANCHOR_END: gamma_extrema_unique
+:= by
+  sorry
+
+/-- DLMF 5.4, Table 5.4.1: the canonical indexed extrema sequence extracted
+from the qualitative existence declaration. -/
+-- ANCHOR: gammaExtrema
+noncomputable def gammaExtrema : GammaExtremaSequence :=
+  Classical.choice gamma_extrema_exists
+-- ANCHOR_END: gammaExtrema
+
+/-- DLMF 5.4.20: locations of the indexed extrema, with an explicit eventual error bound. -/
 -- ANCHOR: gamma_extrema_asymptotic
 theorem gamma_extrema_asymptotic :
-    ∃ x : ℕ → ℝ,
-      (∀ n : ℕ,
-        deriv Real.Gamma (x n) = 0 ∧
-          Complex.digamma (x n : ℂ) = 0) ∧
-        ∃ C : ℝ, 0 < C ∧
-          ∀ᶠ n : ℕ in atTop,
-            |x n - (-n + 1 / Real.pi * Real.arctan (Real.pi / Real.log n))| ≤
-              C / (n * (Real.log n) ^ 2)
+    ∃ C : ℝ, 0 < C ∧
+      ∀ᶠ n : ℕ in atTop,
+        |(gammaExtrema.point n).location -
+            (-n + 1 / Real.pi * Real.arctan (Real.pi / Real.log n))| ≤
+          C / (n * (Real.log n) ^ 2)
 -- ANCHOR_END: gamma_extrema_asymptotic
 := by
   sorry

@@ -1,6 +1,8 @@
 import LMLF.Basic
 import LMLF.Definitions
 import LMLF.Results
+import LMLF.Integral.Domain
+import LMLF.Integral.Curve
 import LMLF.Blueprint.Elementary
 import LMLF.Blueprint.Gamma.Section51
 import LMLF.Blueprint.Gamma.Section52
@@ -20,6 +22,7 @@ import LMLF.Blueprint.Gamma.Section515
 import LMLF.Blueprint.Gamma.Section516
 import LMLF.Blueprint.Gamma.Section517
 import LMLF.Blueprint.Gamma.Section518
+import LMLF.Blueprint.ExponentialIntegrals
 
 /-!
 # LMLF

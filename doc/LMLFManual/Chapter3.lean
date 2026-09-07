@@ -4,6 +4,7 @@ import LMLF.Integral.Improper.Basic
 import LMLF.Integral.Improper.Bochner
 import LMLF.Integral.Improper.Abel
 import LMLF.Integral.Curve
+import LMLF.Integral.Domain
 import LMLFManual.Components
 
 open Verso.Genre Manual
@@ -87,6 +88,31 @@ def HasImproperIntegralAtTopExcept
     [CompleteSpace E] (f : ℝ → E) (k : ℝ) (S : Finset ℝ) (I : E) : Prop :=
   (∀ c ∈ S, k < c) ∧
     HasImproperIntegralAtTopBreaks f k (S.sort (· ≤ ·)) I
+```
+:::
+
+Finite-dimensional formulas use the same object-first discipline. A
+`MultidimensionalDomain n` fixes the coordinate type `Fin n → ℝ` and its carrier;
+`domainIntegral` is the restricted volume integral, while `domainIntegrable`
+records convergence separately. This lets Chapter 5 name a simplex, cube, or
+orthant without duplicating measure-theoretic plumbing.
+
+:::leanStatement "Lean · typed multidimensional domains"
+```anchor MultidimensionalDomain (module := LMLF.Integral.Domain) -showProofStates
+structure MultidimensionalDomain (n : ℕ) where
+  carrier : Set (Fin n → ℝ)
+```
+
+```anchor domainIntegral (module := LMLF.Integral.Domain) -showProofStates
+noncomputable def domainIntegral {n : ℕ} (D : MultidimensionalDomain n)
+    (f : (Fin n → ℝ) → ℝ) : ℝ :=
+  ∫ t in D.carrier, f t
+```
+
+```anchor domainIntegrable (module := LMLF.Integral.Domain) -showProofStates
+def domainIntegrable {n : ℕ} (D : MultidimensionalDomain n)
+    (f : (Fin n → ℝ) → ℝ) : Prop :=
+  IntegrableOn f D.carrier volume
 ```
 :::
 
@@ -283,6 +309,159 @@ def C1Contour.Integrable (γ : C1Contour) (f : ℂ → ℂ) : Prop :=
 ```
 :::
 
+A contour assembled from finitely many smooth pieces uses
+`PiecewiseC1Contour`. Its finite break set is constrained to `[0,1]`, the path
+is continuous across every join, and the endpoint equations expose the start
+and finish compatibility. The tangent may jump at a join, but away from the
+break set it is the derivative and is continuous on the remaining pieces.
+
+:::leanStatement "Lean · piecewise C¹ contours"
+```anchor PiecewiseC1Contour (module := LMLF.Integral.Curve) -showProofStates
+structure PiecewiseC1Contour where
+  point : ℝ → ℂ
+  tangent : ℝ → ℂ
+  start : ℂ
+  finish : ℂ
+  breaks : Finset ℝ
+  breaks_mem : ∀ t ∈ breaks, t ∈ Icc (0 : ℝ) 1
+  point_zero : point 0 = start
+  point_one : point 1 = finish
+  point_continuous : ContinuousOn point (Icc (0 : ℝ) 1)
+  hasDerivOffBreaks : ∀ t ∈ Icc (0 : ℝ) 1, t ∉ breaks →
+    HasDerivAt point (tangent t) t
+  tangent_continuous_off_breaks :
+    ContinuousOn tangent (Icc (0 : ℝ) 1 \ (breaks : Set ℝ))
+```
+
+```anchor PiecewiseC1Contour.integral₂ (module := LMLF.Integral.Curve) -showProofStates
+def PiecewiseC1Contour.integral₂ (γ : PiecewiseC1Contour)
+    (f : ℂ → ℂ → ℂ → ℂ) (log₁ log₂ : ℝ → ℂ) : ℂ :=
+  ∫ t in (0 : ℝ)..1, f (γ.point t) (log₁ t) (log₂ t) * γ.tangent t
+```
+
+```anchor PiecewiseC1Contour.Integrable₂ (module := LMLF.Integral.Curve) -showProofStates
+def PiecewiseC1Contour.Integrable₂ (γ : PiecewiseC1Contour)
+    (f : ℂ → ℂ → ℂ → ℂ) (log₁ log₂ : ℝ → ℂ) : Prop :=
+  IntervalIntegrable
+    (fun t => f (γ.point t) (log₁ t) (log₂ t) * γ.tangent t) volume 0 1
+```
+:::
+
+For Mellin--Barnes formulas, `VerticalLine` is the canonical upward contour
+`t ↦ c + it`. Its whole-line Bochner integral is distinct from the symmetric
+finite-cutoff interface used for formulas whose convergence is stated as a
+limit of finite segments.
+
+:::leanStatement "Lean · vertical-line contours"
+```anchor VerticalLine (module := LMLF.Integral.Curve) -showProofStates
+structure VerticalLine where
+  offset : ℝ
+```
+
+```anchor VerticalLine.point (module := LMLF.Integral.Curve) -showProofStates
+def VerticalLine.point (γ : VerticalLine) (t : ℝ) : ℂ :=
+  (γ.offset : ℂ) + (t : ℂ) * Complex.I
+```
+
+```anchor VerticalLine.tangent (module := LMLF.Integral.Curve) -showProofStates
+def VerticalLine.tangent (_γ : VerticalLine) : ℂ := Complex.I
+```
+
+```anchor VerticalLine.integrand (module := LMLF.Integral.Curve) -showProofStates
+def VerticalLine.integrand (γ : VerticalLine) (f : ℂ → ℂ) : ℝ → ℂ := fun t ↦
+  f (γ.point t) * γ.tangent
+```
+
+```anchor VerticalLine.integral (module := LMLF.Integral.Curve) -showProofStates
+noncomputable def VerticalLine.integral (γ : VerticalLine) (f : ℂ → ℂ) : ℂ :=
+  ∫ t : ℝ, γ.integrand f t
+```
+
+```anchor VerticalLine.Integrable (module := LMLF.Integral.Curve) -showProofStates
+def VerticalLine.Integrable (γ : VerticalLine) (f : ℂ → ℂ) : Prop :=
+  MeasureTheory.Integrable (γ.integrand f)
+```
+
+```anchor verticalLine (module := LMLF.Integral.Curve) -showProofStates
+def verticalLine (c : ℝ) : VerticalLine := ⟨c⟩
+```
+
+```anchor VerticalLine.symmetricSegment (module := LMLF.Integral.Curve) -showProofStates
+noncomputable def VerticalLine.symmetricSegment (γ : VerticalLine) (L : ℝ) : C1Contour where
+  point u := γ.point (-L + 2 * L * u)
+  tangent _ := (2 * L : ℂ) * Complex.I
+  start := γ.point (-L)
+  finish := γ.point L
+  point_zero := by sorry
+  point_one := by sorry
+  hasDeriv := by sorry
+  tangent_continuous := by fun_prop
+```
+
+```anchor VerticalLine.symmetricSegmentIntegral (module := LMLF.Integral.Curve) -showProofStates
+noncomputable def VerticalLine.symmetricSegmentIntegral
+    (γ : VerticalLine) (L : ℝ) (f : ℂ → ℂ) : ℂ :=
+  (γ.symmetricSegment L).integral f
+```
+
+```anchor VerticalLine.symmetricSegmentIntegrable (module := LMLF.Integral.Curve) -showProofStates
+def VerticalLine.symmetricSegmentIntegrable
+    (γ : VerticalLine) (f : ℂ → ℂ) : Prop :=
+  ∀ L : ℝ, 0 < L → (γ.symmetricSegment L).Integrable f
+```
+
+```anchor VerticalLine.symmetricSegmentValue (module := LMLF.Integral.Curve) -showProofStates
+noncomputable def VerticalLine.symmetricSegmentValue
+    (γ : VerticalLine) (f : ℂ → ℂ) : ℂ :=
+  limUnder atTop (fun L : ℝ => γ.symmetricSegmentIntegral L f)
+```
+
+```anchor VerticalLine.symmetricSegmentConverges (module := LMLF.Integral.Curve) -showProofStates
+def VerticalLine.symmetricSegmentConverges
+    (γ : VerticalLine) (f : ℂ → ℂ) : Prop :=
+  Tendsto (fun L : ℝ => γ.symmetricSegmentIntegral L f) atTop
+    (𝓝 (γ.symmetricSegmentValue f))
+```
+:::
+
+For a ray extending to infinity, `ImproperC1Ray` stores the point, its
+tangent, the initial point, a derivative certificate, tangent continuity, and
+escape to infinity.  Its finite and improper integral predicates use that
+stored tangent and a forward parameter limit.
+
+:::leanStatement "Lean · typed improper C¹ rays"
+```anchor ImproperC1Ray (module := LMLF.Integral.Curve) -showProofStates
+structure ImproperC1Ray where
+  point : ℝ → ℂ
+  tangent : ℝ → ℂ
+  start : ℂ
+  point_zero : point 0 = start
+  hasDeriv : ∀ t : ℝ, 0 ≤ t → HasDerivWithinAt point (tangent t) (Set.Ici 0) t
+  tangent_continuous : ContinuousOn tangent (Set.Ici 0)
+  escape : Tendsto (fun t : ℝ => ‖point t‖) atTop atTop
+```
+
+```anchor ImproperC1Ray.HasIntegral (module := LMLF.Integral.Curve) -showProofStates
+def ImproperC1Ray.HasIntegral
+    (γ : ImproperC1Ray) (f : ℂ → ℂ) (R : ℝ) (value : ℂ) : Prop :=
+  0 ≤ R ∧
+    IntervalIntegrable
+        (fun t : ℝ => f (γ.point t) * γ.tangent t) volume 0 R ∧
+    value = ∫ t in (0 : ℝ)..R, f (γ.point t) * γ.tangent t
+```
+
+```anchor ImproperC1Ray.HasImproperIntegral (module := LMLF.Integral.Curve) -showProofStates
+def ImproperC1Ray.HasImproperIntegral
+    (γ : ImproperC1Ray) (f : ℂ → ℂ) (value : ℂ) : Prop :=
+  (∀ R : ℝ, 0 ≤ R →
+      IntervalIntegrable
+        (fun t : ℝ => f (γ.point t) * γ.tangent t) volume 0 R) ∧
+    Tendsto
+      (fun R : ℝ => ∫ t in (0 : ℝ)..R, f (γ.point t) * γ.tangent t)
+      atTop (𝓝 value)
+```
+:::
+
 Expressions such as $`z^s` or $`\log z` need more data when the contour winds
 around zero. A `LogLiftedC1Contour` carries a continuous
 choice of logarithm along the path. Its integral may depend on both the point
@@ -334,6 +513,11 @@ structure HankelRadii where
   inner_lt_outer : inner < outer
 ```
 
+```anchor HankelRadii.of (module := LMLF.Integral.Curve) -showProofStates
+def HankelRadii.of (ε : PositiveRadius) (R : OuterRadius ε) : HankelRadii :=
+  ⟨ε, R, ε.property, R.property⟩
+```
+
 ```anchor hankelLowerBank_spec (module := LMLF.Integral.Curve) -showProofStates
 theorem hankelLowerBank_spec (ρ : HankelRadii) :
     (∀ u, (hankelLowerBank ρ).point u =
@@ -380,9 +564,18 @@ structure HankelContour where
   upper_log_join : innerCircle.logLift 1 = upperBank.logLift 0
 ```
 
+```anchor hankelContour (module := LMLF.Integral.Curve) -showProofStates
+noncomputable def hankelContour (ρ : HankelRadii) : HankelContour
+```
+
 ```anchor HankelContour.integral (module := LMLF.Integral.Curve) -showProofStates
 def HankelContour.integral (γ : HankelContour) (f : ℂ → ℂ → ℂ) : ℂ :=
   γ.lowerBank.integral f + γ.innerCircle.integral f + γ.upperBank.integral f
+```
+
+```anchor HankelContour.Integrable (module := LMLF.Integral.Curve) -showProofStates
+def HankelContour.Integrable (γ : HankelContour) (f : ℂ → ℂ → ℂ) : Prop :=
+  γ.lowerBank.Integrable f ∧ γ.innerCircle.Integrable f ∧ γ.upperBank.Integrable f
 ```
 :::
 

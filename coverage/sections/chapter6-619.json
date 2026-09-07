@@ -1,0 +1,103 @@
+{
+  "section_range": ["6.19"],
+  "numbered_formula_ids_expected": [],
+  "numbered_formula_ids_stated": [],
+  "numbered_formula_ids_omitted": [],
+  "extra_statement_ids": [
+    "6.19#i.p1",
+    "6.19#ii.p1",
+    "6.19#I1.i1.p1",
+    "6.19#I1.i2.p1",
+    "6.19#iii.p1",
+    "6.19#I2.i1.p1",
+    "6.19#I2.i2.p1"
+  ],
+  "nonformula_inventory_ids": [
+    "dlmf:6.19#i.p1",
+    "dlmf:6.19#ii.p1",
+    "dlmf:6.19#I1.i1.p1",
+    "dlmf:6.19#I1.i2.p1",
+    "dlmf:6.19#iii.p1",
+    "dlmf:6.19#I2.i1.p1",
+    "dlmf:6.19#I2.i2.p1"
+  ],
+  "declarations": [
+    {
+      "source_id": "6.19#i.p1",
+      "source_url": "https://dlmf.nist.gov/6.19#i.p1",
+      "names": [
+        "LMLF.Blueprint.ExponentialIntegrals.Section619.TableSource",
+        "LMLF.Blueprint.ExponentialIntegrals.Section619.indexReferences"
+      ],
+      "relation": "related",
+      "proof_status": "not_applicable",
+      "quantitative_analogue": "not_applicable",
+      "notes": "Typed bibliography for the two comprehensive table indexes named in the introduction."
+    },
+    {
+      "source_id": "6.19#ii.p1",
+      "source_url": "https://dlmf.nist.gov/6.19#ii.p1",
+      "names": [
+        "LMLF.Blueprint.ExponentialIntegrals.Section619.TableQuantity",
+        "LMLF.Blueprint.ExponentialIntegrals.Section619.AxisGrid",
+        "LMLF.Blueprint.ExponentialIntegrals.Section619.TableGrid",
+        "LMLF.Blueprint.ExponentialIntegrals.Section619.TableAccuracy",
+        "LMLF.Blueprint.ExponentialIntegrals.Section619.TableRecord",
+        "LMLF.Blueprint.ExponentialIntegrals.Section619.realVariableTables"
+      ],
+      "relation": "related",
+      "proof_status": "not_applicable",
+      "quantitative_analogue": "not_applicable",
+      "notes": "Typed catalog of the real-variable tables, grids, source pages, and stated accuracy."
+    },
+    {
+      "source_id": "6.19#I1.i1.p1",
+      "source_url": "https://dlmf.nist.gov/6.19#I1.i1.p1",
+      "names": ["LMLF.Blueprint.ExponentialIntegrals.Section619.realVariableTables"],
+      "relation": "related",
+      "proof_status": "not_applicable",
+      "quantitative_analogue": "not_applicable",
+      "notes": "Abramowitz–Stegun real-variable table entry."
+    },
+    {
+      "source_id": "6.19#I1.i2.p1",
+      "source_url": "https://dlmf.nist.gov/6.19#I1.i2.p1",
+      "names": ["LMLF.Blueprint.ExponentialIntegrals.Section619.realVariableTables"],
+      "relation": "related",
+      "proof_status": "not_applicable",
+      "quantitative_analogue": "not_applicable",
+      "notes": "Zhang–Jin real-variable table entry, with 8S accuracy for Ei and E1."
+    },
+    {
+      "source_id": "6.19#iii.p1",
+      "source_url": "https://dlmf.nist.gov/6.19#iii.p1",
+      "names": ["LMLF.Blueprint.ExponentialIntegrals.Section619.complexVariableTables"],
+      "relation": "related",
+      "proof_status": "not_applicable",
+      "quantitative_analogue": "not_applicable",
+      "notes": "Typed catalog of the complex-variable tables."
+    },
+    {
+      "source_id": "6.19#I2.i1.p1",
+      "source_url": "https://dlmf.nist.gov/6.19#I2.i1.p1",
+      "names": ["LMLF.Blueprint.ExponentialIntegrals.Section619.complexVariableTables"],
+      "relation": "related",
+      "proof_status": "not_applicable",
+      "quantitative_analogue": "not_applicable",
+      "notes": "Abramowitz–Stegun complex-variable table entries."
+    },
+    {
+      "source_id": "6.19#I2.i2.p1",
+      "source_url": "https://dlmf.nist.gov/6.19#I2.i2.p1",
+      "names": ["LMLF.Blueprint.ExponentialIntegrals.Section619.complexVariableTables"],
+      "relation": "related",
+      "proof_status": "not_applicable",
+      "quantitative_analogue": "not_applicable",
+      "notes": "Zhang–Jin complex-variable table entry."
+    }
+  ],
+  "shared_vocabulary_requests": [],
+  "known_gaps": [
+    "The source is a bibliography; external table values are not reproduced or claimed as Lean data."
+  ]
+}

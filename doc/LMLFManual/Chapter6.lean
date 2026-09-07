@@ -1,5 +1,26 @@
 import VersoManual
 import LMLFManual.Components
+import LMLFManual.Chapter6.Section61
+import LMLFManual.Chapter6.Section62
+import LMLFManual.Chapter6.Section63
+import LMLFManual.Chapter6.Section64
+import LMLFManual.Chapter6.Section65
+import LMLFManual.Chapter6.Section66
+import LMLFManual.Chapter6.Section67
+import LMLFManual.Chapter6.Section68
+import LMLFManual.Chapter6.Section69
+import LMLFManual.Chapter6.Section610
+import LMLFManual.Chapter6.Section611
+import LMLFManual.Chapter6.Section612
+import LMLFManual.Chapter6.Section613
+import LMLFManual.Chapter6.Section614
+import LMLFManual.Chapter6.Section615
+import LMLFManual.Chapter6.Section616
+import LMLFManual.Chapter6.Section617
+import LMLFManual.Chapter6.Section618
+import LMLFManual.Chapter6.Section619
+import LMLFManual.Chapter6.Section620
+import LMLFManual.Chapter6.Section621
 
 open Verso.Genre Manual
 open LMLFManual
@@ -54,3 +75,45 @@ number := false
 * [6.20 Approximations](https://dlmf.nist.gov/6.20)
 * [6.21 Software](https://dlmf.nist.gov/6.21)
 :::
+
+{include 1 LMLFManual.Chapter6.Section61}
+
+{include 1 LMLFManual.Chapter6.Section62}
+
+{include 1 LMLFManual.Chapter6.Section63}
+
+{include 1 LMLFManual.Chapter6.Section64}
+
+{include 1 LMLFManual.Chapter6.Section65}
+
+{include 1 LMLFManual.Chapter6.Section66}
+
+{include 1 LMLFManual.Chapter6.Section67}
+
+{include 1 LMLFManual.Chapter6.Section68}
+
+{include 1 LMLFManual.Chapter6.Section69}
+
+{include 1 LMLFManual.Chapter6.Section610}
+
+{include 1 LMLFManual.Chapter6.Section611}
+
+{include 1 LMLFManual.Chapter6.Section612}
+
+{include 1 LMLFManual.Chapter6.Section613}
+
+{include 1 LMLFManual.Chapter6.Section614}
+
+{include 1 LMLFManual.Chapter6.Section615}
+
+{include 1 LMLFManual.Chapter6.Section616}
+
+{include 1 LMLFManual.Chapter6.Section617}
+
+{include 1 LMLFManual.Chapter6.Section618}
+
+{include 1 LMLFManual.Chapter6.Section619}
+
+{include 1 LMLFManual.Chapter6.Section620}
+
+{include 1 LMLFManual.Chapter6.Section621}

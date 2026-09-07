@@ -1,0 +1,13 @@
+{
+  "section_range": ["6.17"],
+  "numbered_formula_ids_expected": [],
+  "numbered_formula_ids_stated": [],
+  "numbered_formula_ids_omitted": [],
+  "extra_statement_ids": ["dlmf:6.17#p1"],
+  "nonformula_inventory_ids": ["dlmf:6.17#p1"],
+  "declarations": [
+    {"source_id":"dlmf:6.17#p1","source_url":"https://dlmf.nist.gov/6.17#p1","names":["LMLF.Blueprint.ExponentialIntegrals.Section617.PhysicalApplication","LMLF.Blueprint.ExponentialIntegrals.Section617.citedPhysicalApplications"],"relation":"related","proof_status":"not_applicable","quantitative_analogue":"not_applicable","notes":"Typed vocabulary records the six application areas named by the DLMF survey and preserves the source's bibliographic scope."}
+  ],
+  "shared_vocabulary_requests": [],
+  "known_gaps": []
+}

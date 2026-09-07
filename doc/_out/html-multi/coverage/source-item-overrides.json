@@ -4394,5 +4394,2532 @@
       "declarations": [],
       "evidence_source": "coverage/sections/chapter4-448.json"
     }
+  },
+  "dlmf:5.4#T1@caption": {
+    "review": {
+      "state": "reviewed_no_claim"
+    },
+    "lean": {
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "coverage_relation": "unknown",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter5-54.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter5-54.json"
+    }
+  },
+  "dlmf:5.4#iii.p1": {
+    "review": {
+      "state": "reviewed_no_claim"
+    },
+    "lean": {
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "coverage_relation": "unknown",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter5-54.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter5-54.json"
+    }
+  },
+  "dlmf:5.4#iii.p2": {
+    "review": {
+      "state": "reviewed_no_claim"
+    },
+    "lean": {
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "coverage_relation": "unknown",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter5-54.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter5-54.json"
+    }
+  },
+  "dlmf:6.1#p1": {
+    "review": {
+      "state": "claims_identified"
+    },
+    "lean": {
+      "statement_status": "checked",
+      "proof_status": "not_applicable",
+      "coverage_relation": "partial",
+      "declarations": [
+        "LMLF.Blueprint.ExponentialIntegrals.Section61.argumentDerivative"
+      ],
+      "evidence_source": "coverage/sections/chapter6-61.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter6-61.json"
+    }
+  },
+  "dlmf:6.1#p1.t1.r1": {
+    "review": {
+      "state": "claims_identified"
+    },
+    "lean": {
+      "statement_status": "checked",
+      "proof_status": "not_applicable",
+      "coverage_relation": "partial",
+      "declarations": [
+        "LMLF.Blueprint.ExponentialIntegrals.Section61.RealVariable"
+      ],
+      "evidence_source": "coverage/sections/chapter6-61.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter6-61.json"
+    }
+  },
+  "dlmf:6.1#p1.t1.r2": {
+    "review": {
+      "state": "claims_identified"
+    },
+    "lean": {
+      "statement_status": "checked",
+      "proof_status": "not_applicable",
+      "coverage_relation": "partial",
+      "declarations": [
+        "LMLF.Blueprint.ExponentialIntegrals.Section61.ComplexVariable"
+      ],
+      "evidence_source": "coverage/sections/chapter6-61.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter6-61.json"
+    }
+  },
+  "dlmf:6.1#p1.t1.r3": {
+    "review": {
+      "state": "claims_identified"
+    },
+    "lean": {
+      "statement_status": "checked",
+      "proof_status": "not_applicable",
+      "coverage_relation": "partial",
+      "declarations": [
+        "LMLF.Blueprint.ExponentialIntegrals.Section61.NonnegativeIndex"
+      ],
+      "evidence_source": "coverage/sections/chapter6-61.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter6-61.json"
+    }
+  },
+  "dlmf:6.1#p1.t1.r4": {
+    "review": {
+      "state": "claims_identified"
+    },
+    "lean": {
+      "statement_status": "checked",
+      "proof_status": "not_applicable",
+      "coverage_relation": "partial",
+      "declarations": [
+        "LMLF.Blueprint.ExponentialIntegrals.Section61.SmallPositive"
+      ],
+      "evidence_source": "coverage/sections/chapter6-61.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter6-61.json"
+    }
+  },
+  "dlmf:6.1#p1.t1.r5": {
+    "review": {
+      "state": "claims_identified"
+    },
+    "lean": {
+      "statement_status": "checked",
+      "proof_status": "not_applicable",
+      "coverage_relation": "partial",
+      "declarations": [
+        "LMLF.Blueprint.ExponentialIntegrals.Section61.eulerConstant"
+      ],
+      "evidence_source": "coverage/sections/chapter6-61.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter6-61.json"
+    }
+  },
+  "dlmf:6.1#p2": {
+    "review": {
+      "state": "claims_identified"
+    },
+    "lean": {
+      "statement_status": "checked",
+      "proof_status": "not_applicable",
+      "coverage_relation": "partial",
+      "declarations": [
+        "LMLF.Blueprint.ExponentialIntegrals.Section61.Chapter6Function"
+      ],
+      "evidence_source": "coverage/sections/chapter6-61.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter6-61.json"
+    }
+  },
+  "dlmf:6.1#p3": {
+    "review": {
+      "state": "claims_identified"
+    },
+    "lean": {
+      "statement_status": "checked",
+      "proof_status": "not_applicable",
+      "coverage_relation": "partial",
+      "declarations": [
+        "LMLF.Blueprint.ExponentialIntegrals.Section61.ExternalNotation"
+      ],
+      "evidence_source": "coverage/sections/chapter6-61.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter6-61.json"
+    }
+  },
+  "dlmf:6.10#i.info@annotation-note-1": {
+    "review": {
+      "state": "reviewed_no_claim"
+    },
+    "lean": {
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "coverage_relation": "unknown",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter6-610.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter6-610.json"
+    }
+  },
+  "dlmf:6.10#i.p1": {
+    "review": {
+      "state": "reviewed_no_claim"
+    },
+    "lean": {
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "coverage_relation": "unknown",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter6-610.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter6-610.json"
+    }
+  },
+  "dlmf:6.10#i.p2": {
+    "review": {
+      "state": "reviewed_no_claim"
+    },
+    "lean": {
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "coverage_relation": "unknown",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter6-610.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter6-610.json"
+    }
+  },
+  "dlmf:6.10#ii.p1": {
+    "review": {
+      "state": "reviewed_no_claim"
+    },
+    "lean": {
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "coverage_relation": "unknown",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter6-610.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter6-610.json"
+    }
+  },
+  "dlmf:6.10#ii.p2": {
+    "review": {
+      "state": "reviewed_no_claim"
+    },
+    "lean": {
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "coverage_relation": "unknown",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter6-610.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter6-610.json"
+    }
+  },
+  "dlmf:6.11#Px1.p1": {
+    "review": {
+      "state": "reviewed_no_claim"
+    },
+    "lean": {
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "coverage_relation": "unknown",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter6-611.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter6-611.json"
+    }
+  },
+  "dlmf:6.11#Px2.p1": {
+    "review": {
+      "state": "reviewed_no_claim"
+    },
+    "lean": {
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "coverage_relation": "unknown",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter6-611.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter6-611.json"
+    }
+  },
+  "dlmf:6.11#info@annotation-note-1": {
+    "review": {
+      "state": "reviewed_no_claim"
+    },
+    "lean": {
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "coverage_relation": "unknown",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter6-611.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter6-611.json"
+    }
+  },
+  "dlmf:6.11#p1": {
+    "review": {
+      "state": "reviewed_no_claim"
+    },
+    "lean": {
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "coverage_relation": "unknown",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter6-611.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter6-611.json"
+    }
+  },
+  "dlmf:6.12#i.info@annotation-note-1": {
+    "review": {
+      "state": "reviewed_no_claim"
+    },
+    "lean": {
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "coverage_relation": "unknown",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter6-612.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter6-612.json"
+    }
+  },
+  "dlmf:6.12#i.p1": {
+    "review": {
+      "state": "reviewed_no_claim"
+    },
+    "lean": {
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "coverage_relation": "unknown",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter6-612.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter6-612.json"
+    }
+  },
+  "dlmf:6.12#i.p2": {
+    "review": {
+      "state": "reviewed_no_claim"
+    },
+    "lean": {
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "coverage_relation": "unknown",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter6-612.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter6-612.json"
+    }
+  },
+  "dlmf:6.12#i.p3": {
+    "review": {
+      "state": "reviewed_no_claim"
+    },
+    "lean": {
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "coverage_relation": "unknown",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter6-612.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter6-612.json"
+    }
+  },
+  "dlmf:6.12#ii.info@annotation-note-1": {
+    "review": {
+      "state": "reviewed_no_claim"
+    },
+    "lean": {
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "coverage_relation": "unknown",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter6-612.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter6-612.json"
+    }
+  },
+  "dlmf:6.12#ii.p1": {
+    "review": {
+      "state": "reviewed_no_claim"
+    },
+    "lean": {
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "coverage_relation": "unknown",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter6-612.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter6-612.json"
+    }
+  },
+  "dlmf:6.12#ii.p2": {
+    "review": {
+      "state": "reviewed_no_claim"
+    },
+    "lean": {
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "coverage_relation": "unknown",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter6-612.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter6-612.json"
+    }
+  },
+  "dlmf:6.12#ii.p3": {
+    "review": {
+      "state": "reviewed_no_claim"
+    },
+    "lean": {
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "coverage_relation": "unknown",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter6-612.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter6-612.json"
+    }
+  },
+  "dlmf:6.13#E1.info@annotation-note-1": {
+    "review": {
+      "state": "reviewed_no_claim"
+    },
+    "lean": {
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "coverage_relation": "unknown",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter6-613.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter6-613.json"
+    }
+  },
+  "dlmf:6.13#E2.info@editorial-change-note-1": {
+    "review": {
+      "state": "reviewed_no_claim"
+    },
+    "lean": {
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "coverage_relation": "unknown",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter6-613.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter6-613.json"
+    }
+  },
+  "dlmf:6.13#info@annotation-note-1": {
+    "review": {
+      "state": "reviewed_no_claim"
+    },
+    "lean": {
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "coverage_relation": "unknown",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter6-613.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter6-613.json"
+    }
+  },
+  "dlmf:6.13#info@editorial-change-note-1": {
+    "review": {
+      "state": "reviewed_no_claim"
+    },
+    "lean": {
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "coverage_relation": "unknown",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter6-613.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter6-613.json"
+    }
+  },
+  "dlmf:6.13#p1": {
+    "review": {
+      "state": "reviewed_no_claim"
+    },
+    "lean": {
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "coverage_relation": "unknown",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter6-613.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter6-613.json"
+    }
+  },
+  "dlmf:6.13#p2": {
+    "review": {
+      "state": "reviewed_no_claim"
+    },
+    "lean": {
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "coverage_relation": "unknown",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter6-613.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter6-613.json"
+    }
+  },
+  "dlmf:6.14#i.info@annotation-note-1": {
+    "review": {
+      "state": "reviewed_no_claim"
+    },
+    "lean": {
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "coverage_relation": "unknown",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter6-614.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter6-614.json"
+    }
+  },
+  "dlmf:6.14#i.p1": {
+    "review": {
+      "state": "reviewed_no_claim"
+    },
+    "lean": {
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "coverage_relation": "unknown",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter6-614.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter6-614.json"
+    }
+  },
+  "dlmf:6.14#ii.info@annotation-note-1": {
+    "review": {
+      "state": "reviewed_no_claim"
+    },
+    "lean": {
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "coverage_relation": "unknown",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter6-614.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter6-614.json"
+    }
+  },
+  "dlmf:6.14#ii.p1": {
+    "review": {
+      "state": "reviewed_no_claim"
+    },
+    "lean": {
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "coverage_relation": "unknown",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter6-614.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter6-614.json"
+    }
+  },
+  "dlmf:6.14#iii.p1": {
+    "review": {
+      "state": "reviewed_no_claim"
+    },
+    "lean": {
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "coverage_relation": "unknown",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter6-614.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter6-614.json"
+    }
+  },
+  "dlmf:6.15#info@annotation-note-1": {
+    "review": {
+      "state": "reviewed_no_claim"
+    },
+    "lean": {
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "coverage_relation": "unknown",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter6-615.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter6-615.json"
+    }
+  },
+  "dlmf:6.15#p1": {
+    "review": {
+      "state": "reviewed_no_claim"
+    },
+    "lean": {
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "coverage_relation": "unknown",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter6-615.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter6-615.json"
+    }
+  },
+  "dlmf:6.15#p2": {
+    "review": {
+      "state": "reviewed_no_claim"
+    },
+    "lean": {
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "coverage_relation": "unknown",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter6-615.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter6-615.json"
+    }
+  },
+  "dlmf:6.16#F1@caption": {
+    "review": {
+      "state": "reviewed_no_claim"
+    },
+    "lean": {
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "coverage_relation": "unknown",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter6-616.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter6-616.json"
+    }
+  },
+  "dlmf:6.16#F2@caption": {
+    "review": {
+      "state": "reviewed_no_claim"
+    },
+    "lean": {
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "coverage_relation": "unknown",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter6-616.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter6-616.json"
+    }
+  },
+  "dlmf:6.16#i.info@annotation-note-1": {
+    "review": {
+      "state": "reviewed_no_claim"
+    },
+    "lean": {
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "coverage_relation": "unknown",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter6-616.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter6-616.json"
+    }
+  },
+  "dlmf:6.16#i.p1": {
+    "review": {
+      "state": "reviewed_no_claim"
+    },
+    "lean": {
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "coverage_relation": "unknown",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter6-616.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter6-616.json"
+    }
+  },
+  "dlmf:6.16#i.p2": {
+    "review": {
+      "state": "reviewed_no_claim"
+    },
+    "lean": {
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "coverage_relation": "unknown",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter6-616.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter6-616.json"
+    }
+  },
+  "dlmf:6.16#i.p3": {
+    "review": {
+      "state": "reviewed_no_claim"
+    },
+    "lean": {
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "coverage_relation": "unknown",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter6-616.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter6-616.json"
+    }
+  },
+  "dlmf:6.16#ii.info@annotation-note-1": {
+    "review": {
+      "state": "reviewed_no_claim"
+    },
+    "lean": {
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "coverage_relation": "unknown",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter6-616.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter6-616.json"
+    }
+  },
+  "dlmf:6.16#ii.p1": {
+    "review": {
+      "state": "reviewed_no_claim"
+    },
+    "lean": {
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "coverage_relation": "unknown",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter6-616.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter6-616.json"
+    }
+  },
+  "dlmf:6.17#p1": {
+    "review": {
+      "state": "claims_identified"
+    },
+    "lean": {
+      "statement_status": "checked",
+      "proof_status": "not_applicable",
+      "coverage_relation": "partial",
+      "declarations": [
+        "LMLF.Blueprint.ExponentialIntegrals.Section617.PhysicalApplication",
+        "LMLF.Blueprint.ExponentialIntegrals.Section617.citedPhysicalApplications"
+      ],
+      "evidence_source": "coverage/sections/chapter6-617.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter6-617.json"
+    }
+  },
+  "dlmf:6.18#i.p1": {
+    "review": {
+      "state": "reviewed_no_claim"
+    },
+    "lean": {
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "coverage_relation": "unknown",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter6-618.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter6-618.json"
+    }
+  },
+  "dlmf:6.18#i.p2": {
+    "review": {
+      "state": "reviewed_no_claim"
+    },
+    "lean": {
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "coverage_relation": "unknown",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter6-618.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter6-618.json"
+    }
+  },
+  "dlmf:6.18#i.p3": {
+    "review": {
+      "state": "reviewed_no_claim"
+    },
+    "lean": {
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "coverage_relation": "unknown",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter6-618.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter6-618.json"
+    }
+  },
+  "dlmf:6.18#i.p4": {
+    "review": {
+      "state": "reviewed_no_claim"
+    },
+    "lean": {
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "coverage_relation": "unknown",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter6-618.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter6-618.json"
+    }
+  },
+  "dlmf:6.18#ii.p1": {
+    "review": {
+      "state": "reviewed_no_claim"
+    },
+    "lean": {
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "coverage_relation": "unknown",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter6-618.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter6-618.json"
+    }
+  },
+  "dlmf:6.18#iii.p1": {
+    "review": {
+      "state": "reviewed_no_claim"
+    },
+    "lean": {
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "coverage_relation": "unknown",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter6-618.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter6-618.json"
+    }
+  },
+  "dlmf:6.18#iv.p1": {
+    "review": {
+      "state": "reviewed_no_claim"
+    },
+    "lean": {
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "coverage_relation": "unknown",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter6-618.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter6-618.json"
+    }
+  },
+  "dlmf:6.19#I1.i1.p1": {
+    "review": {
+      "state": "claims_identified"
+    },
+    "lean": {
+      "statement_status": "checked",
+      "proof_status": "not_applicable",
+      "coverage_relation": "partial",
+      "declarations": [
+        "LMLF.Blueprint.ExponentialIntegrals.Section619.realVariableTables"
+      ],
+      "evidence_source": "coverage/sections/chapter6-619.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter6-619.json"
+    }
+  },
+  "dlmf:6.19#I1.i2.p1": {
+    "review": {
+      "state": "claims_identified"
+    },
+    "lean": {
+      "statement_status": "checked",
+      "proof_status": "not_applicable",
+      "coverage_relation": "partial",
+      "declarations": [
+        "LMLF.Blueprint.ExponentialIntegrals.Section619.realVariableTables"
+      ],
+      "evidence_source": "coverage/sections/chapter6-619.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter6-619.json"
+    }
+  },
+  "dlmf:6.19#I2.i1.p1": {
+    "review": {
+      "state": "claims_identified"
+    },
+    "lean": {
+      "statement_status": "checked",
+      "proof_status": "not_applicable",
+      "coverage_relation": "partial",
+      "declarations": [
+        "LMLF.Blueprint.ExponentialIntegrals.Section619.complexVariableTables"
+      ],
+      "evidence_source": "coverage/sections/chapter6-619.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter6-619.json"
+    }
+  },
+  "dlmf:6.19#I2.i2.p1": {
+    "review": {
+      "state": "claims_identified"
+    },
+    "lean": {
+      "statement_status": "checked",
+      "proof_status": "not_applicable",
+      "coverage_relation": "partial",
+      "declarations": [
+        "LMLF.Blueprint.ExponentialIntegrals.Section619.complexVariableTables"
+      ],
+      "evidence_source": "coverage/sections/chapter6-619.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter6-619.json"
+    }
+  },
+  "dlmf:6.19#i.p1": {
+    "review": {
+      "state": "claims_identified"
+    },
+    "lean": {
+      "statement_status": "checked",
+      "proof_status": "not_applicable",
+      "coverage_relation": "partial",
+      "declarations": [
+        "LMLF.Blueprint.ExponentialIntegrals.Section619.TableSource",
+        "LMLF.Blueprint.ExponentialIntegrals.Section619.indexReferences"
+      ],
+      "evidence_source": "coverage/sections/chapter6-619.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter6-619.json"
+    }
+  },
+  "dlmf:6.19#ii.p1": {
+    "review": {
+      "state": "claims_identified"
+    },
+    "lean": {
+      "statement_status": "checked",
+      "proof_status": "not_applicable",
+      "coverage_relation": "partial",
+      "declarations": [
+        "LMLF.Blueprint.ExponentialIntegrals.Section619.TableQuantity",
+        "LMLF.Blueprint.ExponentialIntegrals.Section619.AxisGrid",
+        "LMLF.Blueprint.ExponentialIntegrals.Section619.TableGrid",
+        "LMLF.Blueprint.ExponentialIntegrals.Section619.TableAccuracy",
+        "LMLF.Blueprint.ExponentialIntegrals.Section619.TableRecord",
+        "LMLF.Blueprint.ExponentialIntegrals.Section619.realVariableTables"
+      ],
+      "evidence_source": "coverage/sections/chapter6-619.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter6-619.json"
+    }
+  },
+  "dlmf:6.19#iii.p1": {
+    "review": {
+      "state": "claims_identified"
+    },
+    "lean": {
+      "statement_status": "checked",
+      "proof_status": "not_applicable",
+      "coverage_relation": "partial",
+      "declarations": [
+        "LMLF.Blueprint.ExponentialIntegrals.Section619.complexVariableTables"
+      ],
+      "evidence_source": "coverage/sections/chapter6-619.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter6-619.json"
+    }
+  },
+  "dlmf:6.2#Px1.p1": {
+    "review": {
+      "state": "reviewed_no_claim"
+    },
+    "lean": {
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "coverage_relation": "unknown",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter6-62.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter6-62.json"
+    }
+  },
+  "dlmf:6.2#Px2.p1": {
+    "review": {
+      "state": "reviewed_no_claim"
+    },
+    "lean": {
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "coverage_relation": "unknown",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter6-62.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter6-62.json"
+    }
+  },
+  "dlmf:6.2#i.info@annotation-note-1": {
+    "review": {
+      "state": "reviewed_no_claim"
+    },
+    "lean": {
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "coverage_relation": "unknown",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter6-62.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter6-62.json"
+    }
+  },
+  "dlmf:6.2#i.p1": {
+    "review": {
+      "state": "reviewed_no_claim"
+    },
+    "lean": {
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "coverage_relation": "unknown",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter6-62.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter6-62.json"
+    }
+  },
+  "dlmf:6.2#i.p2": {
+    "review": {
+      "state": "reviewed_no_claim"
+    },
+    "lean": {
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "coverage_relation": "unknown",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter6-62.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter6-62.json"
+    }
+  },
+  "dlmf:6.2#i.p3": {
+    "review": {
+      "state": "reviewed_no_claim"
+    },
+    "lean": {
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "coverage_relation": "unknown",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter6-62.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter6-62.json"
+    }
+  },
+  "dlmf:6.2#i.p4": {
+    "review": {
+      "state": "reviewed_no_claim"
+    },
+    "lean": {
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "coverage_relation": "unknown",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter6-62.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter6-62.json"
+    }
+  },
+  "dlmf:6.2#i.p5": {
+    "review": {
+      "state": "reviewed_no_claim"
+    },
+    "lean": {
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "coverage_relation": "unknown",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter6-62.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter6-62.json"
+    }
+  },
+  "dlmf:6.2#ii.info@annotation-note-1": {
+    "review": {
+      "state": "reviewed_no_claim"
+    },
+    "lean": {
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "coverage_relation": "unknown",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter6-62.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter6-62.json"
+    }
+  },
+  "dlmf:6.2#ii.p1": {
+    "review": {
+      "state": "reviewed_no_claim"
+    },
+    "lean": {
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "coverage_relation": "unknown",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter6-62.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter6-62.json"
+    }
+  },
+  "dlmf:6.2#iii.p1": {
+    "review": {
+      "state": "reviewed_no_claim"
+    },
+    "lean": {
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "coverage_relation": "unknown",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter6-62.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter6-62.json"
+    }
+  },
+  "dlmf:6.20#I1.i1.p1": {
+    "review": {
+      "state": "claims_identified"
+    },
+    "lean": {
+      "statement_status": "checked",
+      "proof_status": "not_applicable",
+      "coverage_relation": "partial",
+      "declarations": [
+        "LMLF.Blueprint.ExponentialIntegrals.Section620.elementaryApproximationSources"
+      ],
+      "evidence_source": "coverage/sections/chapter6-620.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter6-620.json"
+    }
+  },
+  "dlmf:6.20#I1.i2.p1": {
+    "review": {
+      "state": "claims_identified"
+    },
+    "lean": {
+      "statement_status": "checked",
+      "proof_status": "not_applicable",
+      "coverage_relation": "partial",
+      "declarations": [
+        "LMLF.Blueprint.ExponentialIntegrals.Section620.elementaryApproximationSources"
+      ],
+      "evidence_source": "coverage/sections/chapter6-620.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter6-620.json"
+    }
+  },
+  "dlmf:6.20#I1.i3.p1": {
+    "review": {
+      "state": "claims_identified"
+    },
+    "lean": {
+      "statement_status": "checked",
+      "proof_status": "not_applicable",
+      "coverage_relation": "partial",
+      "declarations": [
+        "LMLF.Blueprint.ExponentialIntegrals.Section620.elementaryApproximationSources"
+      ],
+      "evidence_source": "coverage/sections/chapter6-620.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter6-620.json"
+    }
+  },
+  "dlmf:6.20#I1.i4.p1": {
+    "review": {
+      "state": "claims_identified"
+    },
+    "lean": {
+      "statement_status": "checked",
+      "proof_status": "not_applicable",
+      "coverage_relation": "partial",
+      "declarations": [
+        "LMLF.Blueprint.ExponentialIntegrals.Section620.elementaryApproximationSources"
+      ],
+      "evidence_source": "coverage/sections/chapter6-620.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter6-620.json"
+    }
+  },
+  "dlmf:6.20#I2.i1.p1": {
+    "review": {
+      "state": "claims_identified"
+    },
+    "lean": {
+      "statement_status": "checked",
+      "proof_status": "not_applicable",
+      "coverage_relation": "partial",
+      "declarations": [
+        "LMLF.Blueprint.ExponentialIntegrals.Section620.chebyshevApproximationSources"
+      ],
+      "evidence_source": "coverage/sections/chapter6-620.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter6-620.json"
+    }
+  },
+  "dlmf:6.20#I2.i2.p1": {
+    "review": {
+      "state": "claims_identified"
+    },
+    "lean": {
+      "statement_status": "checked",
+      "proof_status": "not_applicable",
+      "coverage_relation": "partial",
+      "declarations": [
+        "LMLF.Blueprint.ExponentialIntegrals.Section620.chebyshevApproximationSources"
+      ],
+      "evidence_source": "coverage/sections/chapter6-620.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter6-620.json"
+    }
+  },
+  "dlmf:6.20#I2.i3.p1": {
+    "review": {
+      "state": "claims_identified"
+    },
+    "lean": {
+      "statement_status": "checked",
+      "proof_status": "not_applicable",
+      "coverage_relation": "partial",
+      "declarations": [
+        "LMLF.Blueprint.ExponentialIntegrals.Section620.chebyshevApproximationSources"
+      ],
+      "evidence_source": "coverage/sections/chapter6-620.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter6-620.json"
+    }
+  },
+  "dlmf:6.20#I2.i4.p1": {
+    "review": {
+      "state": "claims_identified"
+    },
+    "lean": {
+      "statement_status": "checked",
+      "proof_status": "not_applicable",
+      "coverage_relation": "partial",
+      "declarations": [
+        "LMLF.Blueprint.ExponentialIntegrals.Section620.chebyshevApproximationSources"
+      ],
+      "evidence_source": "coverage/sections/chapter6-620.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter6-620.json"
+    }
+  },
+  "dlmf:6.20#I2.i5.p1": {
+    "review": {
+      "state": "claims_identified"
+    },
+    "lean": {
+      "statement_status": "checked",
+      "proof_status": "not_applicable",
+      "coverage_relation": "partial",
+      "declarations": [
+        "LMLF.Blueprint.ExponentialIntegrals.Section620.chebyshevApproximationSources"
+      ],
+      "evidence_source": "coverage/sections/chapter6-620.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter6-620.json"
+    }
+  },
+  "dlmf:6.20#I3.i1.p1": {
+    "review": {
+      "state": "claims_identified"
+    },
+    "lean": {
+      "statement_status": "checked",
+      "proof_status": "not_applicable",
+      "coverage_relation": "partial",
+      "declarations": [
+        "LMLF.Blueprint.ExponentialIntegrals.Section620.rationalApproximationSources"
+      ],
+      "evidence_source": "coverage/sections/chapter6-620.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter6-620.json"
+    }
+  },
+  "dlmf:6.20#I3.i2.p1": {
+    "review": {
+      "state": "claims_identified"
+    },
+    "lean": {
+      "statement_status": "checked",
+      "proof_status": "not_applicable",
+      "coverage_relation": "partial",
+      "declarations": [
+        "LMLF.Blueprint.ExponentialIntegrals.Section620.rationalApproximationSources"
+      ],
+      "evidence_source": "coverage/sections/chapter6-620.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter6-620.json"
+    }
+  },
+  "dlmf:6.20#i.p1": {
+    "review": {
+      "state": "claims_identified"
+    },
+    "lean": {
+      "statement_status": "checked",
+      "proof_status": "not_applicable",
+      "coverage_relation": "partial",
+      "declarations": [
+        "LMLF.Blueprint.ExponentialIntegrals.Section620.elementaryApproximationSources"
+      ],
+      "evidence_source": "coverage/sections/chapter6-620.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter6-620.json"
+    }
+  },
+  "dlmf:6.20#ii.p1": {
+    "review": {
+      "state": "claims_identified"
+    },
+    "lean": {
+      "statement_status": "checked",
+      "proof_status": "not_applicable",
+      "coverage_relation": "partial",
+      "declarations": [
+        "LMLF.Blueprint.ExponentialIntegrals.Section620.chebyshevApproximationSources"
+      ],
+      "evidence_source": "coverage/sections/chapter6-620.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter6-620.json"
+    }
+  },
+  "dlmf:6.20#iii.p1": {
+    "review": {
+      "state": "claims_identified"
+    },
+    "lean": {
+      "statement_status": "checked",
+      "proof_status": "not_applicable",
+      "coverage_relation": "partial",
+      "declarations": [
+        "LMLF.Blueprint.ExponentialIntegrals.Section620.rationalApproximationSources"
+      ],
+      "evidence_source": "coverage/sections/chapter6-620.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter6-620.json"
+    }
+  },
+  "dlmf:6.21#I1.i1.p1": {
+    "review": {
+      "state": "claims_identified"
+    },
+    "lean": {
+      "statement_status": "checked",
+      "proof_status": "not_applicable",
+      "coverage_relation": "partial",
+      "declarations": [
+        "LMLF.Blueprint.ExponentialIntegrals.Section621.realVariableSoftware"
+      ],
+      "evidence_source": "coverage/sections/chapter6-621.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter6-621.json"
+    }
+  },
+  "dlmf:6.21#I1.i2.p1": {
+    "review": {
+      "state": "claims_identified"
+    },
+    "lean": {
+      "statement_status": "checked",
+      "proof_status": "not_applicable",
+      "coverage_relation": "partial",
+      "declarations": [
+        "LMLF.Blueprint.ExponentialIntegrals.Section621.realVariableSoftware"
+      ],
+      "evidence_source": "coverage/sections/chapter6-621.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter6-621.json"
+    }
+  },
+  "dlmf:6.21#I1.i3.p1": {
+    "review": {
+      "state": "claims_identified"
+    },
+    "lean": {
+      "statement_status": "checked",
+      "proof_status": "not_applicable",
+      "coverage_relation": "partial",
+      "declarations": [
+        "LMLF.Blueprint.ExponentialIntegrals.Section621.realVariableSoftware"
+      ],
+      "evidence_source": "coverage/sections/chapter6-621.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter6-621.json"
+    }
+  },
+  "dlmf:6.21#I2.i1.p1": {
+    "review": {
+      "state": "claims_identified"
+    },
+    "lean": {
+      "statement_status": "checked",
+      "proof_status": "not_applicable",
+      "coverage_relation": "partial",
+      "declarations": [
+        "LMLF.Blueprint.ExponentialIntegrals.Section621.complexVariableSoftware"
+      ],
+      "evidence_source": "coverage/sections/chapter6-621.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter6-621.json"
+    }
+  },
+  "dlmf:6.21#i.p1": {
+    "review": {
+      "state": "reviewed_no_claim"
+    },
+    "lean": {
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "coverage_relation": "unknown",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter6-621.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter6-621.json"
+    }
+  },
+  "dlmf:6.21#i.p2": {
+    "review": {
+      "state": "claims_identified"
+    },
+    "lean": {
+      "statement_status": "checked",
+      "proof_status": "not_applicable",
+      "coverage_relation": "partial",
+      "declarations": [
+        "LMLF.Blueprint.ExponentialIntegrals.Section621.softwareDirectories"
+      ],
+      "evidence_source": "coverage/sections/chapter6-621.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter6-621.json"
+    }
+  },
+  "dlmf:6.21#ii.info@editorial-change-note-1": {
+    "review": {
+      "state": "reviewed_no_claim"
+    },
+    "lean": {
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "coverage_relation": "unknown",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter6-621.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter6-621.json"
+    }
+  },
+  "dlmf:6.21#ii.p1": {
+    "review": {
+      "state": "claims_identified"
+    },
+    "lean": {
+      "statement_status": "checked",
+      "proof_status": "not_applicable",
+      "coverage_relation": "partial",
+      "declarations": [
+        "LMLF.Blueprint.ExponentialIntegrals.Section621.realVariableSoftware"
+      ],
+      "evidence_source": "coverage/sections/chapter6-621.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter6-621.json"
+    }
+  },
+  "dlmf:6.21#iii.p1": {
+    "review": {
+      "state": "claims_identified"
+    },
+    "lean": {
+      "statement_status": "checked",
+      "proof_status": "not_applicable",
+      "coverage_relation": "partial",
+      "declarations": [
+        "LMLF.Blueprint.ExponentialIntegrals.Section621.complexVariableSoftware"
+      ],
+      "evidence_source": "coverage/sections/chapter6-621.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter6-621.json"
+    }
+  },
+  "dlmf:6.3#F1@caption": {
+    "review": {
+      "state": "claims_identified"
+    },
+    "lean": {
+      "statement_status": "checked",
+      "proof_status": "not_applicable",
+      "coverage_relation": "partial",
+      "declarations": [
+        "LMLF.Blueprint.ExponentialIntegrals.Section63.figure631PlotInterval"
+      ],
+      "evidence_source": "coverage/sections/chapter6-63.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter6-63.json"
+    }
+  },
+  "dlmf:6.3#F2@caption": {
+    "review": {
+      "state": "claims_identified"
+    },
+    "lean": {
+      "statement_status": "checked",
+      "proof_status": "not_applicable",
+      "coverage_relation": "partial",
+      "declarations": [
+        "LMLF.Blueprint.ExponentialIntegrals.Section63.figure632PlotInterval"
+      ],
+      "evidence_source": "coverage/sections/chapter6-63.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter6-63.json"
+    }
+  },
+  "dlmf:6.3#F3@caption": {
+    "review": {
+      "state": "claims_identified"
+    },
+    "lean": {
+      "statement_status": "checked",
+      "proof_status": "not_applicable",
+      "coverage_relation": "partial",
+      "declarations": [
+        "LMLF.Blueprint.ExponentialIntegrals.Section63.figure633PlotRectangle",
+        "LMLF.Blueprint.ExponentialIntegrals.Section63.principalE1Cut"
+      ],
+      "evidence_source": "coverage/sections/chapter6-63.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter6-63.json"
+    }
+  },
+  "dlmf:6.3#i.info@annotation-note-1": {
+    "review": {
+      "state": "reviewed_no_claim"
+    },
+    "lean": {
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "coverage_relation": "unknown",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter6-63.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter6-63.json"
+    }
+  },
+  "dlmf:6.3#i.p1": {
+    "review": {
+      "state": "reviewed_no_claim"
+    },
+    "lean": {
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "coverage_relation": "unknown",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter6-63.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter6-63.json"
+    }
+  },
+  "dlmf:6.3#ii.info@annotation-note-1": {
+    "review": {
+      "state": "reviewed_no_claim"
+    },
+    "lean": {
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "coverage_relation": "unknown",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter6-63.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter6-63.json"
+    }
+  },
+  "dlmf:6.4#info@annotation-note-1": {
+    "review": {
+      "state": "reviewed_no_claim"
+    },
+    "lean": {
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "coverage_relation": "unknown",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter6-64.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter6-64.json"
+    }
+  },
+  "dlmf:6.4#p1": {
+    "review": {
+      "state": "reviewed_no_claim"
+    },
+    "lean": {
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "coverage_relation": "unknown",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter6-64.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter6-64.json"
+    }
+  },
+  "dlmf:6.4#p2": {
+    "review": {
+      "state": "reviewed_no_claim"
+    },
+    "lean": {
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "coverage_relation": "unknown",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter6-64.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter6-64.json"
+    }
+  },
+  "dlmf:6.4#p3": {
+    "review": {
+      "state": "reviewed_no_claim"
+    },
+    "lean": {
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "coverage_relation": "unknown",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter6-64.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter6-64.json"
+    }
+  },
+  "dlmf:6.5#info@annotation-note-1": {
+    "review": {
+      "state": "reviewed_no_claim"
+    },
+    "lean": {
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "coverage_relation": "unknown",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter6-65.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter6-65.json"
+    }
+  },
+  "dlmf:6.5#p1": {
+    "review": {
+      "state": "reviewed_no_claim"
+    },
+    "lean": {
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "coverage_relation": "unknown",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter6-65.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter6-65.json"
+    }
+  },
+  "dlmf:6.5#p2": {
+    "review": {
+      "state": "reviewed_no_claim"
+    },
+    "lean": {
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "coverage_relation": "unknown",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter6-65.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter6-65.json"
+    }
+  },
+  "dlmf:6.6#info@annotation-note-1": {
+    "review": {
+      "state": "reviewed_no_claim"
+    },
+    "lean": {
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "coverage_relation": "unknown",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter6-66.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter6-66.json"
+    }
+  },
+  "dlmf:6.6#p1": {
+    "review": {
+      "state": "claims_identified"
+    },
+    "lean": {
+      "statement_status": "checked",
+      "proof_status": "missing",
+      "coverage_relation": "partial",
+      "declarations": [
+        "LMLF.Blueprint.ExponentialIntegrals.Section66.eiSeriesTerm_summable",
+        "LMLF.Blueprint.ExponentialIntegrals.Section66.e1SeriesTerm_summable",
+        "LMLF.Blueprint.ExponentialIntegrals.Section66.e1DigammaSeriesTerm_summable",
+        "LMLF.Blueprint.ExponentialIntegrals.Section66.einSeriesTerm_summable",
+        "LMLF.Blueprint.ExponentialIntegrals.Section66.siSeriesTerm_summable",
+        "LMLF.Blueprint.ExponentialIntegrals.Section66.ciSeriesTerm_summable"
+      ],
+      "evidence_source": "coverage/sections/chapter6-66.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter6-66.json"
+    }
+  },
+  "dlmf:6.7#i.info@annotation-note-1": {
+    "review": {
+      "state": "reviewed_no_claim"
+    },
+    "lean": {
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "coverage_relation": "unknown",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter6-67.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter6-67.json"
+    }
+  },
+  "dlmf:6.7#i.p1": {
+    "review": {
+      "state": "reviewed_no_claim"
+    },
+    "lean": {
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "coverage_relation": "unknown",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter6-67.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter6-67.json"
+    }
+  },
+  "dlmf:6.7#i.p2": {
+    "review": {
+      "state": "reviewed_no_claim"
+    },
+    "lean": {
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "coverage_relation": "unknown",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter6-67.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter6-67.json"
+    }
+  },
+  "dlmf:6.7#ii.info@annotation-note-1": {
+    "review": {
+      "state": "reviewed_no_claim"
+    },
+    "lean": {
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "coverage_relation": "unknown",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter6-67.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter6-67.json"
+    }
+  },
+  "dlmf:6.7#ii.p1": {
+    "review": {
+      "state": "reviewed_no_claim"
+    },
+    "lean": {
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "coverage_relation": "unknown",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter6-67.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter6-67.json"
+    }
+  },
+  "dlmf:6.7#iii.info@annotation-note-1": {
+    "review": {
+      "state": "reviewed_no_claim"
+    },
+    "lean": {
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "coverage_relation": "unknown",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter6-67.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter6-67.json"
+    }
+  },
+  "dlmf:6.7#iii.p1": {
+    "review": {
+      "state": "reviewed_no_claim"
+    },
+    "lean": {
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "coverage_relation": "unknown",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter6-67.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter6-67.json"
+    }
+  },
+  "dlmf:6.7#iii.p2": {
+    "review": {
+      "state": "reviewed_no_claim"
+    },
+    "lean": {
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "coverage_relation": "unknown",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter6-67.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter6-67.json"
+    }
+  },
+  "dlmf:6.7#iv.p1": {
+    "review": {
+      "state": "reviewed_no_claim"
+    },
+    "lean": {
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "coverage_relation": "unknown",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter6-67.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter6-67.json"
+    }
+  },
+  "dlmf:6.8#info@annotation-note-1": {
+    "review": {
+      "state": "reviewed_no_claim"
+    },
+    "lean": {
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "coverage_relation": "unknown",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter6-68.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter6-68.json"
+    }
+  },
+  "dlmf:6.8#p1": {
+    "review": {
+      "state": "reviewed_no_claim"
+    },
+    "lean": {
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "coverage_relation": "unknown",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter6-68.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter6-68.json"
+    }
+  },
+  "dlmf:6.9#info@annotation-note-1": {
+    "review": {
+      "state": "reviewed_no_claim"
+    },
+    "lean": {
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "coverage_relation": "unknown",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter6-69.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter6-69.json"
+    }
+  },
+  "dlmf:6.9#p1": {
+    "review": {
+      "state": "reviewed_no_claim"
+    },
+    "lean": {
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "coverage_relation": "unknown",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter6-69.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter6-69.json"
+    }
+  },
+  "dlmf:6.9#p2": {
+    "review": {
+      "state": "reviewed_no_claim"
+    },
+    "lean": {
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "coverage_relation": "unknown",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter6-69.json"
+    },
+    "quantitative": {
+      "analogue_status": "not_applicable",
+      "statement_status": "reviewed_absent",
+      "proof_status": "not_applicable",
+      "declarations": [],
+      "evidence_source": "coverage/sections/chapter6-69.json"
+    }
   }
 }

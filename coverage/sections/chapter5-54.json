@@ -9,7 +9,18 @@
     "5.4.E11", "5.4.E12", "5.4.E13", "5.4.E14", "5.4.E15", "5.4.E16", "5.4.E17", "5.4.E18", "5.4.E19", "5.4.E20"
   ],
   "numbered_formula_ids_omitted": [],
-  "extra_statement_ids": [],
+  "extra_statement_ids": [
+    "gammaExtremumInterval",
+    "GammaExtremum",
+    "GammaExtremum.value",
+    "GammaExtremaSequence",
+    "gamma_extrema_exists",
+    "gamma_extrema_unique",
+    "gammaExtrema",
+    "dlmf:5.4#T1@caption",
+    "dlmf:5.4#iii.p1",
+    "dlmf:5.4#iii.p2"
+  ],
   "declarations": [
     {"source_id": "5.4.E1", "names": ["LMLF.Blueprint.Gamma.gamma_special_factorial"], "relation": "exact", "proof_status": "missing", "quantitative_analogue": "not_applicable", "notes": "Complex formulation of the integer special values."},
     {"source_id": "5.4.E2", "names": ["LMLF.Blueprint.Gamma.doubleFactorial", "LMLF.Blueprint.Gamma.gamma_doubleFactorial_even", "LMLF.Blueprint.Gamma.gamma_doubleFactorial_odd"], "relation": "specialization", "proof_status": "missing", "quantitative_analogue": "not_applicable", "notes": "Real-positive Gamma specialization with explicit parity hypotheses and a finite-product double factorial; the manual records the source note that the odd line also applies at n = -1, outside the Nat specialization."},
@@ -30,7 +41,7 @@
     {"source_id": "5.4.E17", "names": ["LMLF.Blueprint.Gamma.digamma_half_shift_imaginary_part"], "relation": "specialization", "proof_status": "missing", "quantitative_analogue": "not_applicable", "notes": "Real y specialization with tanh written as sinh/cosh."},
     {"source_id": "5.4.E18", "names": ["LMLF.Blueprint.Gamma.digamma_one_shift_imaginary_part"], "relation": "specialization", "proof_status": "missing", "quantitative_analogue": "not_applicable", "notes": "Real y line formula, writing coth as cosh/sinh and requiring y ≠ 0."},
     {"source_id": "5.4.E19", "names": ["LMLF.Blueprint.Gamma.digamma_rational_value"], "relation": "specialization", "proof_status": "missing", "quantitative_analogue": "not_applicable", "notes": "Natural p,q specialization of the rational formula, with complex logarithm and trigonometric functions."},
-    {"source_id": "5.4.E20", "names": ["LMLF.Blueprint.Gamma.gamma_extrema_asymptotic"], "relation": "specialization", "proof_status": "missing", "quantitative_analogue": "not_applicable", "notes": "Real critical-point sequence with both Gamma' and digamma zero conditions and an explicit eventual bound for the O term; the manual reproduces all eleven Table 5.4.1 decimal rows as labelled approximations."}
+    {"source_id": "5.4.E20", "names": ["LMLF.Blueprint.Gamma.gammaExtremumInterval", "LMLF.Blueprint.Gamma.GammaExtremum", "LMLF.Blueprint.Gamma.GammaExtremaSequence", "LMLF.Blueprint.Gamma.gamma_extrema_exists", "LMLF.Blueprint.Gamma.gamma_extrema_unique", "LMLF.Blueprint.Gamma.gammaExtrema", "LMLF.Blueprint.Gamma.gamma_extrema_asymptotic"], "relation": "specialization", "proof_status": "missing", "quantitative_analogue": "not_applicable", "notes": "The normalized real critical-point sequence object uses the source-index intervals (1,2) for x₀ and (-n,1-n) for n>0; existence and uniqueness are stated separately, and gammaExtrema is the canonical extractor from gamma_extrema_exists. E20 adds the explicit eventual bound for that same canonical sequence. The manual reproduces all eleven Table 5.4.1 decimal rows as labelled approximations."}
   ],
   "shared_vocabulary_requests": [],
   "known_gaps": [

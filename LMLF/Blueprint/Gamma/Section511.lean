@@ -4,6 +4,8 @@ import Mathlib.Analysis.Asymptotics.AsymptoticEquivalent
 import Mathlib.Analysis.SpecialFunctions.Gamma.Digamma
 import Mathlib.NumberTheory.Bernoulli
 import Mathlib.NumberTheory.LSeries.RiemannZeta
+import Mathlib.RingTheory.PowerSeries.Binomial
+import Mathlib.RingTheory.PowerSeries.Substitution
 
 /-!
 # DLMF §5.11: asymptotic expansions of the Gamma function
@@ -64,45 +66,67 @@ noncomputable def bernoulliPoly (n : ℕ) (x : ℝ) : ℝ :=
     (n.choose j : ℝ) * (bernoulli (n - j) : ℝ) * x ^ j
 -- ANCHOR_END: bernoulliPoly
 
-/-- DLMF 5.11.3–5.11.6: the complete selected coefficient specification. -/
--- ANCHOR: StirlingCoefficientSpec
-structure StirlingCoefficientSpec where
-  gCoeff : ℕ → ℝ
-  aCoeff : ℕ → ℝ
-  g_initial :
-    gCoeff 0 = 1 ∧
-      gCoeff 1 = 1 / 12 ∧
-      gCoeff 2 = 1 / 288 ∧
-      gCoeff 3 = -(139 : ℝ) / 51840 ∧
-      gCoeff 4 = -(571 : ℝ) / 2488320 ∧
-      gCoeff 5 = 163879 / 209018880 ∧
-      gCoeff 6 = 5246819 / 75246796800
-  g_from_a : ∀ k, gCoeff k = Real.sqrt 2 * risingFactorial (1 / 2) k * aCoeff (2 * k)
-  a_recurrence : ∀ {k}, 1 ≤ k →
-    ∑ j ∈ Finset.range (k + 1),
-      aCoeff j * aCoeff (k - j) / (j + 1) = aCoeff (k - 1) / k
-  a_initial : aCoeff 0 = Real.sqrt 2 / 2
--- ANCHOR_END: StirlingCoefficientSpec
+/-- DLMF 5.11.5–5.11.6: finite recurrence step for the normalized stream.
+At stage `n`, the two endpoint terms are isolated from the convolution. -/
+-- ANCHOR: aCoeffStep
+noncomputable def aCoeffStep (a : ℕ → ℝ) (n : ℕ) : ℝ :=
+  let α : ℝ := Real.sqrt 2 / 2
+  let interior : ℝ :=
+    ∑ j ∈ Finset.Icc 1 n,
+      a j * a (n + 1 - j) / (j + 1)
+  (a n / (n + 1) - interior) / (α * (1 + 1 / (n + 2)))
+-- ANCHOR_END: aCoeffStep
 
-/-- The source-facing existence/specification boundary for DLMF 5.11.3–5.11.6. -/
--- ANCHOR: existsStirlingCoefficientSpec
-theorem existsStirlingCoefficientSpec : Nonempty StirlingCoefficientSpec
--- ANCHOR_END: existsStirlingCoefficientSpec
-  := by sorry
+/-- DLMF 5.11.5–5.11.6: finite-state stream carrying the normalized prefix. -/
+-- ANCHOR: aCoeffState
+noncomputable def aCoeffState : ℕ → (ℕ → ℝ) :=
+  Nat.rec (fun k ↦ if k = 0 then Real.sqrt 2 / 2 else 0)
+    (fun n state k ↦ if k = n + 1 then aCoeffStep state n else state k)
+-- ANCHOR_END: aCoeffState
 
-/-- The selected coefficient specification used by DLMF 5.11.3–5.11.6. -/
-noncomputable def stirlingCoefficientSpec : StirlingCoefficientSpec :=
-  Classical.choice existsStirlingCoefficientSpec
+/-- DLMF 5.11.5–5.11.6: canonical normalized coefficient map. -/
+-- ANCHOR: aCoeff
+noncomputable def aCoeff (k : ℕ) : ℝ :=
+  aCoeffState (k + 1) k
+-- ANCHOR_END: aCoeff
 
-/-- DLMF 5.11.4–5.11.6: Stirling's scaled-Gamma coefficients. -/
+/-- DLMF 5.11.3–5.11.6: scaled-Gamma coefficients reconstructed from the
+canonical `aCoeff` stream. -/
 -- ANCHOR: gCoeff
-noncomputable def gCoeff : ℕ → ℝ := stirlingCoefficientSpec.gCoeff
+noncomputable def gCoeff (k : ℕ) : ℝ :=
+  Real.sqrt 2 * risingFactorial (1 / 2) k * aCoeff (2 * k)
 -- ANCHOR_END: gCoeff
 
-/-- DLMF 5.11.5–5.11.6: coefficients used to generate `gCoeff`. -/
--- ANCHOR: aCoeff
-noncomputable def aCoeff : ℕ → ℝ := stirlingCoefficientSpec.aCoeff
--- ANCHOR_END: aCoeff
+/-- DLMF 5.11.5–5.11.6: the canonical stream has the source recurrence. -/
+-- ANCHOR: aCoeff_recurrence
+theorem aCoeff_recurrence {k : ℕ} (hk : 1 ≤ k) :
+    ∑ j ∈ Finset.range (k + 1),
+      aCoeff j * aCoeff (k - j) / (j + 1) = aCoeff (k - 1) / k
+-- ANCHOR_END: aCoeff_recurrence
+  := by sorry
+
+/-- DLMF 5.11.6: initial value of the canonical stream. -/
+-- ANCHOR: aCoeff_initial
+theorem aCoeff_initial : aCoeff 0 = Real.sqrt 2 / 2
+-- ANCHOR_END: aCoeff_initial
+  := by sorry
+
+/-- DLMF 5.11.5: the map is determined by its normalized recurrence. -/
+-- ANCHOR: aCoeff_unique
+theorem aCoeff_unique (a : ℕ → ℝ)
+    (ha0 : a 0 = Real.sqrt 2 / 2)
+    (ha : ∀ {k : ℕ}, 1 ≤ k →
+      ∑ j ∈ Finset.range (k + 1),
+        a j * a (k - j) / (j + 1) = a (k - 1) / k) :
+    a = aCoeff
+-- ANCHOR_END: aCoeff_unique
+  := by sorry
+
+/-- DLMF 5.11.5: finite-prefix access to the canonical map. -/
+-- ANCHOR: aCoeff_prefix
+theorem aCoeff_prefix (k : ℕ) : aCoeff k = aCoeffState (k + 1) k
+-- ANCHOR_END: aCoeff_prefix
+  := by rfl
 
 /-- DLMF §24.16(i), used by 5.11.17–5.11.18: the generating kernel
 `(t / (exp t - 1))^α`, continuously totalized at `t = 0`. -/
@@ -111,33 +135,40 @@ noncomputable def generalizedBernoulliKernel (α t : ℝ) : ℝ :=
   if t = 0 then 1 else (t / (Real.exp t - 1)) ^ α
 -- ANCHOR_END: generalizedBernoulliKernel
 
-/-- DLMF §24.16(i): a transparent generating-function specification for
-generalized Bernoulli polynomials. -/
--- ANCHOR: GeneralizedBernoulliSpec
-structure GeneralizedBernoulliSpec where
-  value : ℝ → ℝ → ℕ → ℝ
-  generating_function : ∀ α x t, |t| < 2 * Real.pi →
-    HasSum (fun n : ℕ ↦ value α x n * t ^ n / (n.factorial : ℝ))
-      (generalizedBernoulliKernel α t * Real.exp (x * t))
--- ANCHOR_END: GeneralizedBernoulliSpec
+/-- DLMF §24.16(i): canonical formal generating series. The base Bernoulli
+series is raised by the formal binomial map and multiplied by the formal
+exponential; coefficients are data, not a selected witness. -/
+-- ANCHOR: generalizedBernoulliFormal
+noncomputable def generalizedBernoulliFormal (α x : ℝ) : PowerSeries ℝ :=
+  PowerSeries.subst
+      (bernoulliPowerSeries ℝ - 1)
+      (PowerSeries.binomialSeries ℝ α) *
+    PowerSeries.rescale x (PowerSeries.exp ℝ)
+-- ANCHOR_END: generalizedBernoulliFormal
 
-/-- DLMF §24.16(i): the selected generating-function specification. -/
--- ANCHOR: existsGeneralizedBernoulliSpec
-theorem existsGeneralizedBernoulliSpec : Nonempty GeneralizedBernoulliSpec
--- ANCHOR_END: existsGeneralizedBernoulliSpec
+/-- DLMF 5.11.17–5.11.18: canonical generalized Bernoulli polynomial map. -/
+-- ANCHOR: generalizedBernoulli
+noncomputable def generalizedBernoulli (α x : ℝ) (n : ℕ) : ℝ :=
+  (n.factorial : ℝ) * PowerSeries.coeff n (generalizedBernoulliFormal α x)
+-- ANCHOR_END: generalizedBernoulli
+
+/-- DLMF §24.16(i), used by 5.11.17–5.11.18: semantic generating-function
+identity for the canonical coefficient map. -/
+-- ANCHOR: generalizedBernoulli_generating
+theorem generalizedBernoulli_generating (α x : ℝ) :
+    ∀ t : ℝ, |t| < 2 * Real.pi →
+      HasSum (fun n : ℕ ↦ generalizedBernoulli α x n * t ^ n / (n.factorial : ℝ))
+        (generalizedBernoulliKernel α t * Real.exp (x * t))
+-- ANCHOR_END: generalizedBernoulli_generating
   := by sorry
 
-/-- The selected generalized-Bernoulli generating-function datum. -/
--- ANCHOR: generalizedBernoulliSpec
-noncomputable def generalizedBernoulliSpec : GeneralizedBernoulliSpec :=
-  Classical.choice existsGeneralizedBernoulliSpec
--- ANCHOR_END: generalizedBernoulliSpec
-
-/-- DLMF 5.11.17–5.11.18: generalized Bernoulli polynomials. -/
--- ANCHOR: generalizedBernoulli
-noncomputable def generalizedBernoulli : ℝ → ℝ → ℕ → ℝ :=
-  generalizedBernoulliSpec.value
--- ANCHOR_END: generalizedBernoulli
+/-- DLMF 5.11.17: finite-prefix access to the generalized Bernoulli data. -/
+-- ANCHOR: generalizedBernoulli_prefix
+theorem generalizedBernoulli_prefix (α x : ℝ) (n : ℕ) :
+    generalizedBernoulli α x n =
+      (n.factorial : ℝ) * PowerSeries.coeff n (generalizedBernoulliFormal α x)
+-- ANCHOR_END: generalizedBernoulli_prefix
+  := by rfl
 
 /-- DLMF 5.11.13 and 5.11.15: the ratio-expansion coefficients. -/
 -- ANCHOR: ratioCoeff
@@ -245,12 +276,12 @@ def gammaSectorDomain (δ : ℝ) (z : ℂ) : Prop :=
   z ≠ 0 ∧ |Complex.arg z| ≤ Real.pi - δ
 -- ANCHOR_END: gammaSectorDomain
 
-/-- DLMF 5.11.1: a selected branch of `Ln Γ` on each admissible sector.
+/-- DLMF 5.11.1: a branch datum for `Ln Γ` on each admissible sector.
 
 The exponential compatibility field records that this is a logarithm of the
 Gamma value. Analyticity on each admissible sector, overlap consistency, and
-agreement with the positive-real log-Gamma normalization make the selected
-branch explicit. -/
+agreement with the positive-real log-Gamma normalization make the branch data
+explicit. -/
 -- ANCHOR: LnGammaDatum
 structure LnGammaDatum where
   value : ℝ → ℂ → ℂ
@@ -266,20 +297,18 @@ structure LnGammaDatum where
       value δ (x : ℂ) = (Real.log (Real.Gamma x) : ℂ)
 -- ANCHOR_END: LnGammaDatum
 
-/-- DLMF 5.11.1: existence/specification boundary for the selected `Ln Γ` branch. -/
+/-- DLMF 5.11.1: existence/specification boundary for an admissible `Ln Γ` branch datum. -/
 -- ANCHOR: existsLnGammaDatum
 theorem existsLnGammaDatum : Nonempty LnGammaDatum
 -- ANCHOR_END: existsLnGammaDatum
   := by sorry
 
-/-- The selected branch datum used by the complex E1 residual. -/
--- ANCHOR: lnGammaDatum
-noncomputable def lnGammaDatum : LnGammaDatum := Classical.choice existsLnGammaDatum
--- ANCHOR_END: lnGammaDatum
-
-/-- DLMF 5.11.1: the selected general logarithm of Gamma. -/
+/-- DLMF 5.11.1: the general logarithm of Gamma carried by an explicit
+sectorial branch datum. Keeping the datum as an argument avoids selecting an
+arbitrary witness from `Nonempty LnGammaDatum`. -/
 -- ANCHOR: lnGamma
-noncomputable def lnGamma (δ : ℝ) (z : ℂ) : ℂ := lnGammaDatum.value δ z
+noncomputable def lnGamma (datum : LnGammaDatum) (δ : ℝ) (z : ℂ) : ℂ :=
+  datum.value δ z
 -- ANCHOR_END: lnGamma
 
 /-- DLMF 5.11.1: the principal-branch finite sum through source index `n-1`. -/
@@ -297,10 +326,11 @@ noncomputable def complexDigammaApprox (n : ℕ) (z : ℂ) : ℂ :=
 -- ANCHOR_END: complexDigammaApprox
 
 /-- DLMF 5.11(ii): the residual after truncating E1 at source index `n-1`,
-using the selected, normalized general logarithm `lnGamma`. -/
+using the explicit normalized general logarithm `datum`. -/
 -- ANCHOR: complexStirlingRemainder
-noncomputable def complexStirlingRemainder (δ : ℝ) (n : ℕ) (z : ℂ) : ℂ :=
-  lnGamma δ z - complexStirlingApprox n z
+noncomputable def complexStirlingRemainder (datum : LnGammaDatum)
+    (δ : ℝ) (n : ℕ) (z : ℂ) : ℂ :=
+  lnGamma datum δ z - complexStirlingApprox n z
 -- ANCHOR_END: complexStirlingRemainder
 
 /-- DLMF 5.11(ii): the residual after truncating E2 at source index `n-1`. -/
@@ -311,10 +341,11 @@ noncomputable def complexDigammaRemainder (n : ℕ) (z : ℂ) : ℂ :=
 
 /-- DLMF 5.11(ii): the complex first-neglected-term bound for E1. -/
 -- ANCHOR: dlmf_5_11_1_complex_remainder_bound
-theorem dlmf_5_11_1_complex_remainder_bound {n : ℕ} (hn : 1 ≤ n)
+theorem dlmf_5_11_1_complex_remainder_bound (datum : LnGammaDatum)
+    {n : ℕ} (hn : 1 ≤ n)
     {δ : ℝ} (hδ : 0 < δ) {z : ℂ} (hz : z ≠ 0)
     (hsector : |Complex.arg z| ≤ Real.pi - δ) :
-    ‖complexStirlingRemainder δ n z‖ ≤
+    ‖complexStirlingRemainder datum δ n z‖ ≤
       ‖complexStirlingTerm n z‖ *
         (1 / Real.cos (Complex.arg z / 2)) ^ (2 * n)
 -- ANCHOR_END: dlmf_5_11_1_complex_remainder_bound
@@ -342,6 +373,13 @@ noncomputable def scaledGammaTerm (k : ℕ) (x : ℝ) : ℝ :=
 theorem dlmf_5_11_3 :
     (fun x : ℝ ↦ scaledGammaReal x) ∼ₚ[atTop] scaledGammaTerm
 -- ANCHOR_END: dlmf_5_11_3
+:= by sorry
+
+/-- DLMF 5.11.3: positive-real consequence `Γ*(x) ∼ 1`. -/
+-- ANCHOR: scaledGammaReal_asymptotic_one
+theorem scaledGammaReal_asymptotic_one :
+    (fun x : ℝ ↦ scaledGammaReal x) ~[atTop] (fun _ : ℝ ↦ (1 : ℝ))
+-- ANCHOR_END: scaledGammaReal_asymptotic_one
 := by sorry
 
 /-- DLMF 5.11.4: the seven displayed initial values of `g_k`. -/
@@ -477,6 +515,14 @@ theorem dlmf_5_11_11 {K : ℕ} (hK : 1 ≤ K) {z : ℂ} (hz : z ≠ 0)
         (2 * (2 * Real.pi) ^ (K + 1) * ‖z‖ ^ K) *
         (1 + cappedSecant K (Complex.arg z))
 -- ANCHOR_END: dlmf_5_11_11
+:= by sorry
+
+/-- DLMF 5.11.10–5.11.11: on the positive real ray, the substantive
+remainder content decays to zero for every retained finite sum. -/
+-- ANCHOR: gammaRemainder_tendsto_zero
+theorem gammaRemainder_tendsto_zero (K : ℕ) (hK : 1 ≤ K) :
+    Tendsto (fun x : ℝ ↦ gammaRemainder K (x : ℂ)) atTop (nhds 0)
+-- ANCHOR_END: gammaRemainder_tendsto_zero
 := by sorry
 
 /-- DLMF 5.11.12: Gamma-quotient leading asymptotic on positive reals. -/

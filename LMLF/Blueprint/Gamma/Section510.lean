@@ -70,9 +70,10 @@ theorem gammaContinuedFractionCoeff_algorithm (k : ℕ) :
     gammaContinuedFractionCoeff k =
       LMLF.cfracCoeff
         (fun n => bernoulli (2 * n + 2) /
-          (((2 * n + 2 : ℕ) : ℚ) * ((2 * n + 1 : ℕ) : ℚ))) k := by
-  rfl
+          (((2 * n + 2 : ℕ) : ℚ) * ((2 * n + 1 : ℕ) : ℚ))) k
 -- ANCHOR_END: gammaContinuedFractionCoeff_algorithm
+:= by
+  rfl
 
 /-- DLMF 5.10.1, specialized to positive real `x` so that the logarithm
 branch is unambiguous. -/

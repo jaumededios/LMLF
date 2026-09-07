@@ -1,0 +1,289 @@
+{
+  "section_range": [
+    "6.7"
+  ],
+  "numbered_formula_ids_expected": [
+    "6.7.E1",
+    "6.7.E2",
+    "6.7.E3",
+    "6.7.E4",
+    "6.7.E5",
+    "6.7.E6",
+    "6.7.E7",
+    "6.7.E8",
+    "6.7.E9",
+    "6.7.E10",
+    "6.7.E11",
+    "6.7.E12",
+    "6.7.E13",
+    "6.7.E14",
+    "6.7.E15",
+    "6.7.E16"
+  ],
+  "numbered_formula_ids_stated": [
+    "6.7.E1",
+    "6.7.E2",
+    "6.7.E3",
+    "6.7.E4",
+    "6.7.E5",
+    "6.7.E6",
+    "6.7.E7",
+    "6.7.E8",
+    "6.7.E9",
+    "6.7.E10",
+    "6.7.E11",
+    "6.7.E12",
+    "6.7.E13",
+    "6.7.E14",
+    "6.7.E15",
+    "6.7.E16"
+  ],
+  "numbered_formula_ids_omitted": [],
+  "extra_statement_ids": [
+    "dlmf:6.7#i.info@annotation-note-1",
+    "dlmf:6.7#i.p1",
+    "dlmf:6.7#i.p2",
+    "dlmf:6.7#ii.info@annotation-note-1",
+    "dlmf:6.7#ii.p1",
+    "dlmf:6.7#iii.info@annotation-note-1",
+    "dlmf:6.7#iii.p1",
+    "dlmf:6.7#iii.p2",
+    "dlmf:6.7#iv.p1"
+  ],
+  "declarations": [
+    {
+      "source_id": "6.7.E1",
+      "names": [
+        "dlmf_6_7_1"
+      ],
+      "relation": "specialization",
+      "proof_status": "missing",
+      "quantitative_analogue": "not_applicable",
+      "notes": "Positive real a,b specialization; both improper-integral forms converge to the canonical value exp(ab)·principalE1(ab)."
+    },
+    {
+      "source_id": "6.7.E2",
+      "names": [
+        "dlmf_6_7_2"
+      ],
+      "relation": "specialization",
+      "proof_status": "missing",
+      "quantitative_analogue": "not_applicable",
+      "notes": "x>0 and 0\u2264\u03b1<1 keep the finite interval away from t=1; the right side uses canonical realEi values."
+    },
+    {
+      "source_id": "6.7.E3",
+      "names": [
+        "dlmf_6_7_3"
+      ],
+      "relation": "specialization",
+      "proof_status": "missing",
+      "quantitative_analogue": "not_applicable",
+      "notes": "a>0 and x>0; the oscillatory tail is stated as an improper integral at its direct principalE1 value."
+    },
+    {
+      "source_id": "6.7.E4",
+      "names": [
+        "dlmf_6_7_4"
+      ],
+      "relation": "specialization",
+      "proof_status": "missing",
+      "quantitative_analogue": "not_applicable",
+      "notes": "a>0 and x>0; the weighted oscillatory tail is stated at its direct principalE1 value."
+    },
+    {
+      "source_id": "6.7.E5",
+      "names": [
+        "dlmf_6_7_5"
+      ],
+      "relation": "specialization",
+      "proof_status": "missing",
+      "quantitative_analogue": "not_applicable",
+      "notes": "a>0 and x∈ℝ; the decaying tail is stated at its direct principalE1 value."
+    },
+    {
+      "source_id": "6.7.E6",
+      "names": [
+        "dlmf_6_7_6"
+      ],
+      "relation": "specialization",
+      "proof_status": "missing",
+      "quantitative_analogue": "not_applicable",
+      "notes": "a>0 and x∈ℝ; the weighted decaying tail is stated at its direct principalE1 value."
+    },
+    {
+      "source_id": "6.7.E7",
+      "names": [
+        "dlmf_6_7_7"
+      ],
+      "relation": "exact",
+      "proof_status": "missing",
+      "quantitative_analogue": "not_applicable",
+      "notes": "Real a,b finite integral."
+    },
+    {
+      "source_id": "6.7.E8",
+      "names": [
+        "dlmf_6_7_8"
+      ],
+      "relation": "exact",
+      "proof_status": "missing",
+      "quantitative_analogue": "not_applicable",
+      "notes": "Real a,b finite integral."
+    },
+    {
+      "source_id": "6.7.E9",
+      "names": [
+        "dlmf_6_7_9"
+      ],
+      "relation": "exact",
+      "proof_status": "missing",
+      "quantitative_analogue": "not_applicable",
+      "notes": "Complex z and the canonical named lower-case sine integral si."
+    },
+    {
+      "source_id": "6.7.E10",
+      "names": [
+        "dlmf_6_7_10"
+      ],
+      "relation": "exact",
+      "proof_status": "missing",
+      "quantitative_analogue": "not_applicable",
+      "notes": "Complex z and principal branches."
+    },
+    {
+      "source_id": "6.7.E11",
+      "names": [
+        "dlmf_6_7_11"
+      ],
+      "relation": "exact",
+      "proof_status": "missing",
+      "quantitative_analogue": "not_applicable",
+      "notes": "Real a,b finite integral with removable endpoint behavior."
+    },
+    {
+      "source_id": "6.7.E12",
+      "names": [
+        "dlmf_6_7_12"
+      ],
+      "relation": "specialization",
+      "proof_status": "missing",
+      "quantitative_analogue": "not_applicable",
+      "notes": "Typed principal-cut path with phase bound and HasImproperPathIntegral stated directly at exp(i z)·(g(z)+i f(z)), the value forced by the DLMF identity."
+    },
+    {
+      "source_id": "6.7.E13",
+      "names": [
+        "dlmf_6_7_13"
+      ],
+      "relation": "specialization",
+      "proof_status": "missing",
+      "quantitative_analogue": "not_applicable",
+      "notes": "z>0 real specialization of canonical principalAuxiliaryF; both displayed integral forms retained."
+    },
+    {
+      "source_id": "6.7.E14",
+      "names": [
+        "dlmf_6_7_14"
+      ],
+      "relation": "specialization",
+      "proof_status": "missing",
+      "quantitative_analogue": "not_applicable",
+      "notes": "z>0 real specialization of canonical principalAuxiliaryG; both displayed integral forms retained."
+    },
+    {
+      "source_id": "6.7.E15",
+      "names": [
+        "dlmf_6_7_15"
+      ],
+      "relation": "specialization",
+      "proof_status": "missing",
+      "quantitative_analogue": "not_applicable",
+      "notes": "z>0 real Bessel-kernel transform using canonical principalK0Value, its positive-real improper-integral specification, and Real.sqrt; the integral is stated directly at principalAuxiliaryF z / 2."
+    },
+    {
+      "source_id": "6.7.E16",
+      "names": [
+        "dlmf_6_7_16"
+      ],
+      "relation": "specialization",
+      "proof_status": "missing",
+      "quantitative_analogue": "not_applicable",
+      "notes": "z>0 real Bessel-kernel transform using canonical principalK0Value, its positive-real improper-integral specification, and Real.sqrt; the integral is stated directly at principalAuxiliaryG z / 2."
+    },
+    {
+      "source_id": "dlmf:6.7#i.info@annotation-note-1",
+      "names": [],
+      "relation": "related",
+      "proof_status": "not_applicable",
+      "quantitative_analogue": "not_applicable",
+      "notes": "Reader disclosure at https://dlmf.nist.gov/6.7#i.info: E1-E2 follow §6.2(i), E3-E6 follow differentiation with respect to x, and E7-E8 follow replacement of trigonometric functions by exponentials."
+    },
+    {
+      "source_id": "dlmf:6.7#i.p1",
+      "names": [],
+      "relation": "related",
+      "proof_status": "not_applicable",
+      "quantitative_analogue": "not_applicable",
+      "notes": "Reader disclosure at https://dlmf.nist.gov/6.7#i.p1: formula block E1-E8 with the stated domains a>0,b>0; 0≤α<1,x>0; a>0,x>0; a>0,x∈ℝ; and a,b∈ℝ."
+    },
+    {
+      "source_id": "dlmf:6.7#i.p2",
+      "names": [],
+      "relation": "related",
+      "proof_status": "not_applicable",
+      "quantitative_analogue": "not_applicable",
+      "notes": "Reader disclosure at https://dlmf.nist.gov/6.7#i.p2: Lebedev (1965, p. 42) notes finite forms in E1 and elementary functions for integrals of exp(z)R(z) with arbitrary rational R(z)."
+    },
+    {
+      "source_id": "dlmf:6.7#ii.info@annotation-note-1",
+      "names": [],
+      "relation": "related",
+      "proof_status": "not_applicable",
+      "quantitative_analogue": "not_applicable",
+      "notes": "Reader disclosure at https://dlmf.nist.gov/6.7#ii.info: Nielsen (1906b, p. 13) is cited with the warning that Eq. (27) contains sign errors."
+    },
+    {
+      "source_id": "dlmf:6.7#ii.p1",
+      "names": [],
+      "relation": "related",
+      "proof_status": "not_applicable",
+      "quantitative_analogue": "not_applicable",
+      "notes": "Reader disclosure at https://dlmf.nist.gov/6.7#ii.p1: after z∈ℂ, E9-E10 use complex z, while E11 is the finite Ein/Cin integral with a,b∈ℝ."
+    },
+    {
+      "source_id": "dlmf:6.7#iii.info@annotation-note-1",
+      "names": [],
+      "relation": "related",
+      "proof_status": "not_applicable",
+      "quantitative_analogue": "not_applicable",
+      "notes": "Reader disclosure at https://dlmf.nist.gov/6.7#iii.info: E12-E14 follow §6.5.7, §6.2.1, and §6.2.2; second E13/E14 forms cite Temme (1996b, pp. 187-188); E15-E16 use §10.32.10."
+    },
+    {
+      "source_id": "dlmf:6.7#iii.p1",
+      "names": [],
+      "relation": "related",
+      "proof_status": "not_applicable",
+      "quantitative_analogue": "not_applicable",
+      "notes": "Reader disclosure at https://dlmf.nist.gov/6.7#iii.p1: the E12 integration path does not cross the negative real axis or pass through the origin."
+    },
+    {
+      "source_id": "dlmf:6.7#iii.p2",
+      "names": [],
+      "relation": "related",
+      "proof_status": "not_applicable",
+      "quantitative_analogue": "not_applicable",
+      "notes": "Reader disclosure at https://dlmf.nist.gov/6.7#iii.p2: first E13/E14 integrals require |ph z|<π, second ones require Re z≥0 and (for E14) z≠0; E15-E16 use the same phase preface and refer to §10.25(ii) for K0."
+    },
+    {
+      "source_id": "dlmf:6.7#iv.p1",
+      "names": [],
+      "relation": "related",
+      "proof_status": "not_applicable",
+      "quantitative_analogue": "not_applicable",
+      "notes": "Reader disclosure at https://dlmf.nist.gov/6.7#iv.p1: lists the cited integral-representation compendia, including Bierens de Haan (1939, pp. 56–59, 72–73, 82–84, 121, 133–136, 155, 179–181, 223, 225–227, 230, 259–260, 374, 377, 397–398, 408, 416, 424, 431, 438–439, 442–444, 488, 496–500, 567–571, 585, 602, 638, 675–677), together with their stated years and page ranges."
+    }
+  ],
+  "shared_vocabulary_requests": [],
+  "known_gaps": []
+}

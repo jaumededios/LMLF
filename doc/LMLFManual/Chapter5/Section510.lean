@@ -44,7 +44,7 @@ def continuedFractionConvergent {K : Type*} [DivisionRing K]
 :::
 
 The formal coefficient extractor acts on the odd asymptotic germ
-$`z^{-1}(s_0+s_1z^{-2}+s_2z^{-4}+\cdots)`$. Its codomain is a subtype of
+$`z^{-1}(s_0+s_1z^{-2}+s_2z^{-4}+\cdots)`. Its codomain is a subtype of
 coefficient streams: once a numerator is zero, every later numerator is zero.
 This removes the otherwise invisible and non-unique tail after termination.
 
@@ -143,6 +143,14 @@ def logGammaStirlingSeries (n : ℕ) : ℚ :=
 ```anchor gammaContinuedFractionCoeff (module := LMLF.Blueprint.Gamma.Section510) -showProofStates
 def gammaContinuedFractionCoeff : LMLF.CFCoefficients :=
   LMLF.cfracCoeff logGammaStirlingSeries
+```
+
+```anchor gammaContinuedFractionCoeff_algorithm (module := LMLF.Blueprint.Gamma.Section510) -showProofStates
+theorem gammaContinuedFractionCoeff_algorithm (k : ℕ) :
+    gammaContinuedFractionCoeff k =
+      LMLF.cfracCoeff
+        (fun n => bernoulli (2 * n + 2) /
+          (((2 * n + 2 : ℕ) : ℚ) * ((2 * n + 1 : ℕ) : ℚ))) k
 ```
 
 ```anchor gammaContinuedFraction_reconstructs_stirling (module := LMLF.Blueprint.Gamma.Section510) -showProofStates

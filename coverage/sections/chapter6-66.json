@@ -1,0 +1,86 @@
+{
+  "section_range": ["6.6"],
+  "numbered_formula_ids_expected": ["6.6.E1","6.6.E2","6.6.E3","6.6.E4","6.6.E5","6.6.E6"],
+  "numbered_formula_ids_stated": ["6.6.E1","6.6.E2","6.6.E3","6.6.E4","6.6.E5","6.6.E6"],
+  "numbered_formula_ids_omitted": [],
+  "extra_statement_ids": [
+    "6.6.eiSeriesTerm","6.6.e1SeriesTerm","6.6.e1DigammaSeriesTerm",
+    "6.6.einSeriesTerm","6.6.siSeriesTerm","6.6.ciSeriesTerm",
+    "6.6#info@annotation-note-1","6.6#p1"
+  ],
+  "declarations": [
+    {
+      "source_id": "6.6.E1",
+      "names": ["LMLF.Blueprint.ExponentialIntegrals.Section62.realEi", "LMLF.Blueprint.ExponentialIntegrals.Section66.dlmf_6_6_1"],
+      "relation": "specialization",
+      "proof_status": "missing",
+      "quantitative_analogue": "not_applicable",
+      "notes": "Positive-real Ei series for the canonical §6.2 realEi map, with the positive-domain hypothesis and a transparent n+1 reindex."
+    },
+    {
+      "source_id": "6.6.E2",
+      "names": ["LMLF.Blueprint.ExponentialIntegrals.Section62.principalE1", "LMLF.Blueprint.ExponentialIntegrals.Section66.dlmf_6_6_2"],
+      "relation": "specialization",
+      "proof_status": "missing",
+      "quantitative_analogue": "not_applicable",
+      "notes": "Principal complex E1 series for the canonical principalE1 map on principalCutDomain, away from its logarithmic singularity at zero; the reusable e1SeriesTerm uses the correct (-1)^(n+1) zero-based reindex."
+    },
+    {
+      "source_id": "6.6.E3",
+      "names": ["LMLF.Blueprint.ExponentialIntegrals.Section62.principalE1", "LMLF.Blueprint.ExponentialIntegrals.Section66.dlmf_6_6_3"],
+      "relation": "specialization",
+      "proof_status": "missing",
+      "quantitative_analogue": "not_applicable",
+      "notes": "Digamma-weighted principal E1 series for the canonical principalE1 map on principalCutDomain, with canonical Complex.digamma."
+    },
+    {
+      "source_id": "6.6.E4",
+      "names": ["LMLF.Blueprint.ExponentialIntegrals.Section66.dlmf_6_6_4","LMLF.Blueprint.ExponentialIntegrals.Section62.principalEin"],
+      "relation": "exact",
+      "proof_status": "missing",
+      "quantitative_analogue": "not_applicable",
+      "notes": "Entire complementary exponential-integral series."
+    },
+    {
+      "source_id": "6.6.E5",
+      "names": ["LMLF.Blueprint.ExponentialIntegrals.Section66.dlmf_6_6_5","LMLF.Blueprint.ExponentialIntegrals.Section62.principalSi"],
+      "relation": "exact",
+      "proof_status": "missing",
+      "quantitative_analogue": "not_applicable",
+      "notes": "Entire odd sine-integral series."
+    },
+    {
+      "source_id": "6.6.E6",
+      "names": ["LMLF.Blueprint.ExponentialIntegrals.Section62.principalCi", "LMLF.Blueprint.ExponentialIntegrals.Section66.dlmf_6_6_6"],
+      "relation": "specialization",
+      "proof_status": "missing",
+      "quantitative_analogue": "not_applicable",
+      "notes": "Principal complex Ci series for the canonical principalCi map on the open principal cut plane; the reusable ciSeriesTerm uses the correct (-1)^(n+1) zero-based reindex."
+    },
+    {
+      "source_id": "6.6#p1",
+      "names": [
+        "LMLF.Blueprint.ExponentialIntegrals.Section66.eiSeriesTerm_summable",
+        "LMLF.Blueprint.ExponentialIntegrals.Section66.e1SeriesTerm_summable",
+        "LMLF.Blueprint.ExponentialIntegrals.Section66.e1DigammaSeriesTerm_summable",
+        "LMLF.Blueprint.ExponentialIntegrals.Section66.einSeriesTerm_summable",
+        "LMLF.Blueprint.ExponentialIntegrals.Section66.siSeriesTerm_summable",
+        "LMLF.Blueprint.ExponentialIntegrals.Section66.ciSeriesTerm_summable"
+      ],
+      "relation": "related",
+      "proof_status": "missing",
+      "quantitative_analogue": "not_applicable",
+      "notes": "Six independently reusable Summable declarations, one for each displayed power-series term family; no quantitative analogue is introduced."
+    },
+    {
+      "source_id": "6.6#info@annotation-note-1",
+      "names": [],
+      "relation": "related",
+      "proof_status": "not_applicable",
+      "quantitative_analogue": "not_applicable",
+      "notes": "Olver citation and E3 cross-references are reproduced in source-linked prose."
+    }
+  ],
+  "shared_vocabulary_requests": [],
+  "known_gaps": []
+}

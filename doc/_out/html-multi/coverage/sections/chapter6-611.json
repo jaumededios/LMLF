@@ -1,0 +1,81 @@
+{
+  "section_range": ["6.11"],
+  "numbered_formula_ids_expected": ["6.11.E1", "6.11.E2", "6.11.E3"],
+  "numbered_formula_ids_stated": ["6.11.E1", "6.11.E2", "6.11.E3"],
+  "numbered_formula_ids_omitted": [],
+  "extra_statement_ids": [
+    "6.11#info@annotation-note-1",
+    "6.11#p1",
+    "6.11#Px1.p1",
+    "6.11#Px2.p1",
+    "6.11.upperIncompleteGammaZero",
+    "6.11.tricomiU11",
+    "6.11.auxiliaryF",
+    "6.11.auxiliaryG",
+    "6.11.principalRelationDomain"
+  ],
+  "declarations": [
+    {
+      "source_id": "6.11.E1",
+      "names": ["LMLF.Blueprint.ExponentialIntegrals.Section62.principalE1", "LMLF.Blueprint.ExponentialIntegrals.Section611.upperIncompleteGammaZero", "LMLF.Blueprint.ExponentialIntegrals.Section611.principalRelationDomain", "LMLF.Blueprint.ExponentialIntegrals.Section611.dlmf_6_11_1"],
+      "relation": "exact",
+      "proof_status": "missing",
+      "quantitative_analogue": "not_applicable",
+      "notes": "Principal-domain identity identifying the canonical §6.2 principalE1 map with the Ein-log-γ upper incomplete gamma reconstruction Γ(0,z)."
+    },
+    {
+      "source_id": "6.11.E2",
+      "names": ["LMLF.Blueprint.ExponentialIntegrals.Section62.principalE1", "LMLF.Blueprint.ExponentialIntegrals.Section611.tricomiU11", "LMLF.Blueprint.ExponentialIntegrals.Section611.dlmf_6_11_2"],
+      "relation": "exact",
+      "proof_status": "missing",
+      "quantitative_analogue": "not_applicable",
+      "notes": "Principal-domain identity relating the canonical §6.2 principalE1 map to the normalized tricomiU11 value U(1,1,z)."
+    },
+    {
+      "source_id": "6.11.E3",
+      "names": ["LMLF.Blueprint.ExponentialIntegrals.Section611.auxiliaryF", "LMLF.Blueprint.ExponentialIntegrals.Section611.auxiliaryG", "LMLF.Blueprint.ExponentialIntegrals.Section611.tricomiU11", "LMLF.Blueprint.ExponentialIntegrals.Section611.dlmf_6_11_3"],
+      "relation": "exact",
+      "proof_status": "missing",
+      "quantitative_analogue": "not_applicable",
+      "notes": "Principal-domain auxiliary-function relation g(z)+i f(z)=U(1,1,-iz), using the canonical §6.2 principalAuxiliaryF/G maps through the local names auxiliaryF/G and normalized tricomiU11."
+    },
+    {
+      "source_id": "6.11#info@annotation-note-1",
+      "names": [],
+      "relation": "related",
+      "proof_status": "not_applicable",
+      "quantitative_analogue": "not_applicable",
+      "notes": "Temme and DLMF cross-references for E1-E3 are reproduced in the manual."
+    },
+    {
+      "source_id": "6.11#p1",
+      "names": [],
+      "relation": "related",
+      "proof_status": "not_applicable",
+      "quantitative_analogue": "not_applicable",
+      "notes": "Section-level notation and relations-to-other-functions introduction."
+    },
+    {
+      "source_id": "6.11#Px1.p1",
+      "names": [],
+      "relation": "related",
+      "proof_status": "not_applicable",
+      "quantitative_analogue": "not_applicable",
+      "notes": "Incomplete-gamma subsection explanation and Temme reference."
+    },
+    {
+      "source_id": "6.11#Px2.p1",
+      "names": [],
+      "relation": "related",
+      "proof_status": "not_applicable",
+      "quantitative_analogue": "not_applicable",
+      "notes": "Confluent-hypergeometric subsection explanation and notation references."
+    }
+  ],
+  "shared_vocabulary_requests": [
+    "Canonical Mathlib APIs for general-parameter incomplete gamma and Tricomi U would permit replacing the page's normalized (1,1) interface in future consolidation."
+  ],
+  "known_gaps": [
+    "The repository has no general-parameter analytic implementation of Tricomi U; this page uses the normalized principal specialization tricomiU11 required by E2/E3."
+  ]
+}

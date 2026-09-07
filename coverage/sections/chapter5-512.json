@@ -14,7 +14,7 @@
   ],
   "omitted_ids": [],
   "summary": {
-    "lean_statements": 12,
+    "lean_statements": 25,
     "lean_proofs": 0,
     "quantitative_analogues": 0,
     "quantitative_statements": 0,
@@ -27,7 +27,7 @@
       "match": "exact",
       "lean_statement": true,
       "lean_proof": false,
-      "lean_declarations": ["LMLF.Blueprint.Gamma.Section512.dlmf_5_12_1"],
+      "lean_declarations": ["LMLF.Blueprint.Gamma.Section512.dlmf_5_12_1_integrable", "LMLF.Blueprint.Gamma.Section512.dlmf_5_12_1_euler", "LMLF.Blueprint.Gamma.Section512.dlmf_5_12_1"],
       "quantitative_analogue": false,
       "quantitative_statement": false,
       "quantitative_proof": false,
@@ -39,7 +39,7 @@
       "match": "exact",
       "lean_statement": true,
       "lean_proof": false,
-      "lean_declarations": ["LMLF.Blueprint.Gamma.Section512.dlmf_5_12_2"],
+      "lean_declarations": ["LMLF.Blueprint.Gamma.Section512.dlmf_5_12_2_integrable", "LMLF.Blueprint.Gamma.Section512.dlmf_5_12_2"],
       "quantitative_analogue": false,
       "quantitative_statement": false,
       "quantitative_proof": false,
@@ -51,7 +51,7 @@
       "match": "exact",
       "lean_statement": true,
       "lean_proof": false,
-      "lean_declarations": ["LMLF.Blueprint.Gamma.Section512.dlmf_5_12_3"],
+      "lean_declarations": ["LMLF.Blueprint.Gamma.Section512.dlmf_5_12_3_integrable", "LMLF.Blueprint.Gamma.Section512.dlmf_5_12_3"],
       "quantitative_analogue": false,
       "quantitative_statement": false,
       "quantitative_proof": false,
@@ -63,7 +63,7 @@
       "match": "exact",
       "lean_statement": true,
       "lean_proof": false,
-      "lean_declarations": ["LMLF.Blueprint.Gamma.Section512.dlmf_5_12_4"],
+      "lean_declarations": ["LMLF.Blueprint.Gamma.Section512.dlmf_5_12_4_integrable", "LMLF.Blueprint.Gamma.Section512.dlmf_5_12_4"],
       "quantitative_analogue": false,
       "quantitative_statement": false,
       "quantitative_proof": false,
@@ -75,11 +75,11 @@
       "match": "specialization",
       "lean_statement": true,
       "lean_proof": false,
-      "lean_declarations": ["LMLF.Blueprint.Gamma.Section512.meromorphicBeta", "LMLF.Blueprint.Gamma.Section512.meromorphicBetaDefined", "LMLF.Blueprint.Gamma.Section512.dlmf_5_12_5"],
+      "lean_declarations": ["LMLF.Blueprint.Gamma.Section512.CosineBetaDomain", "LMLF.Blueprint.Gamma.Section512.betaCosineIntegrand", "LMLF.Blueprint.Gamma.Section512.betaCosineIntegral", "LMLF.Blueprint.Gamma.Section512.dlmf_5_12_5_integrable", "LMLF.Blueprint.Gamma.Section512.dlmf_5_12_5"],
       "quantitative_analogue": false,
       "quantitative_statement": false,
       "quantitative_proof": false,
-      "notes": "Complex cosine-power integral; source condition Re a > 0 retained, with a ≠ 0 and meromorphicBetaDefined excluding poles of the continued beta quotient."
+      "notes": "Complex cosine-power integral; source condition Re a > 0 retained, with a ≠ 0 and GammaQuotientDefined guarding the displayed transformed Gamma quotient."
     },
     {
       "id": "5.12.6",
@@ -87,11 +87,11 @@
       "match": "specialization",
       "lean_statement": true,
       "lean_proof": false,
-      "lean_declarations": ["LMLF.Blueprint.Gamma.Section512.meromorphicBeta", "LMLF.Blueprint.Gamma.Section512.meromorphicBetaDefined", "LMLF.Blueprint.Gamma.Section512.dlmf_5_12_6"],
+      "lean_declarations": ["LMLF.Blueprint.Gamma.Section512.FourierBetaDomain", "LMLF.Blueprint.Gamma.Section512.betaSineFourierIntegrand", "LMLF.Blueprint.Gamma.Section512.betaSineFourierIntegral", "LMLF.Blueprint.Gamma.Section512.dlmf_5_12_6_integrable", "LMLF.Blueprint.Gamma.Section512.dlmf_5_12_6"],
       "quantitative_analogue": false,
       "quantitative_statement": false,
       "quantitative_proof": false,
-      "notes": "Complex sine-power Fourier integral; source condition Re a > 0 retained, with a ≠ 0 and meromorphicBetaDefined excluding poles of the continued beta quotient."
+      "notes": "Complex sine-power Fourier integral; source condition Re a > 0 retained, with a ≠ 0 and GammaQuotientDefined guarding the displayed transformed Gamma quotient."
     },
     {
       "id": "5.12.7",
@@ -99,7 +99,7 @@
       "match": "exact",
       "lean_statement": true,
       "lean_proof": false,
-      "lean_declarations": ["LMLF.Blueprint.Gamma.Section512.dlmf_5_12_7"],
+      "lean_declarations": ["LMLF.Blueprint.Gamma.Section512.HyperbolicBetaDomain", "LMLF.Blueprint.Gamma.Section512.betaHyperbolicIntegrand", "LMLF.Blueprint.Gamma.Section512.betaHyperbolicIntegral", "LMLF.Blueprint.Gamma.Section512.dlmf_5_12_7_integrable", "LMLF.Blueprint.Gamma.Section512.dlmf_5_12_7"],
       "quantitative_analogue": false,
       "quantitative_statement": false,
       "quantitative_proof": false,
@@ -111,11 +111,11 @@
       "match": "specialization",
       "lean_statement": true,
       "lean_proof": false,
-      "lean_declarations": ["LMLF.Blueprint.Gamma.Section512.meromorphicBeta", "LMLF.Blueprint.Gamma.Section512.meromorphicBetaDefined", "LMLF.Blueprint.Gamma.Section512.dlmf_5_12_8"],
+      "lean_declarations": ["LMLF.Blueprint.Gamma.Section512.VerticalGammaQuotientDomain", "LMLF.Blueprint.Gamma.Section512.betaVerticalIntegrand", "LMLF.Blueprint.Gamma.Section512.betaVerticalIntegral", "LMLF.Blueprint.Gamma.Section512.dlmf_5_12_8_integrable", "LMLF.Blueprint.Gamma.Section512.dlmf_5_12_8"],
       "quantitative_analogue": false,
       "quantitative_statement": false,
       "quantitative_proof": false,
-      "notes": "Vertical Fourier integral; Re(a+b)>1 and Re w, Re z > 0 are explicit, with meromorphicBetaDefined for unrestricted individual parameters away from poles."
+      "notes": "Vertical Fourier integral; Re(a+b)>1 and Re w, Re z > 0 are explicit, with GammaQuotientDefined for the displayed quotient."
     },
     {
       "id": "5.12.9",
@@ -123,11 +123,11 @@
       "match": "specialization",
       "lean_statement": true,
       "lean_proof": false,
-      "lean_declarations": ["LMLF.Blueprint.Gamma.Section512.meromorphicBeta", "LMLF.Blueprint.Gamma.Section512.meromorphicBetaDefined", "LMLF.Blueprint.Gamma.Section512.dlmf_5_12_9"],
+      "lean_declarations": ["LMLF.Blueprint.Gamma.Section512.BarnesBetaDomain", "LMLF.Blueprint.Gamma.Section512.betaBarnesIntegrand", "LMLF.Blueprint.Gamma.Section512.betaBarnesIntegral", "LMLF.Blueprint.Gamma.Section512.dlmf_5_12_9_integrable", "LMLF.Blueprint.Gamma.Section512.dlmf_5_12_9"],
       "quantitative_analogue": false,
       "quantitative_statement": false,
       "quantitative_proof": false,
-      "notes": "Barnes vertical contour parameterized by y with the orientation factor i, b ≠ 0, and meromorphicBetaDefined away from poles."
+      "notes": "Barnes vertical contour parameterized by y with the orientation factor i, b ≠ 0, and GammaQuotientDefined for the displayed quotient."
     },
     {
       "id": "5.12.10",
@@ -135,11 +135,11 @@
       "match": "specialization",
       "lean_statement": true,
       "lean_proof": false,
-      "lean_declarations": ["LMLF.Blueprint.Gamma.Section512.meromorphicBeta", "LMLF.Blueprint.Gamma.Section512.meromorphicBetaDefined", "LMLF.Blueprint.Gamma.Section512.contourIntegral", "LMLF.Blueprint.Gamma.Section512.betaFirstLoopIntegral", "LMLF.Blueprint.Gamma.Section512.dlmf_5_12_10"],
+      "lean_declarations": ["LMLF.Blueprint.Gamma.Section512.FirstLoopBetaDomain", "LMLF.Blueprint.Gamma.Section512.betaFirstLoopContour", "LMLF.Blueprint.Gamma.Section512.betaFirstLoopIntegrand", "LMLF.Blueprint.Gamma.Section512.betaFirstLoopIntegral", "LMLF.Blueprint.Gamma.Section512.dlmf_5_12_10_integrable", "LMLF.Blueprint.Gamma.Section512.dlmf_5_12_10"],
       "quantitative_analogue": false,
       "quantitative_statement": false,
       "quantitative_proof": false,
-      "notes": "The source's positively oriented loop uses pointwise principal powers, as prescribed for E10, with meromorphicBetaDefined away from poles."
+      "notes": "The source's positively oriented loop uses pointwise principal powers, as prescribed for E10, with GammaQuotientDefined for the displayed quotient."
     },
     {
       "id": "5.12.11",
@@ -147,11 +147,11 @@
       "match": "specialization",
       "lean_statement": true,
       "lean_proof": false,
-      "lean_declarations": ["LMLF.Blueprint.Gamma.Section512.meromorphicBeta", "LMLF.Blueprint.Gamma.Section512.meromorphicBetaDefined", "LMLF.Blueprint.Gamma.Section512.SecondLoopLogBranch", "LMLF.Blueprint.Gamma.Section512.betaSecondLoopTruncation", "LMLF.Blueprint.Gamma.Section512.betaSecondLoopIntegral", "LMLF.Blueprint.Gamma.Section512.dlmf_5_12_11"],
+      "lean_declarations": ["LMLF.Blueprint.Gamma.Section512.SecondLoopLogBranch", "LMLF.Blueprint.Gamma.Section512.SecondLoopDomain", "LMLF.Blueprint.Gamma.Section512.canonicalSecondLoopLogBranch", "LMLF.Blueprint.Gamma.Section512.betaSecondLoopTruncation", "LMLF.Blueprint.Gamma.Section512.betaSecondLoopFamily", "LMLF.Blueprint.Gamma.Section512.SecondLoopIntegralData", "LMLF.Blueprint.Gamma.Section512.betaSecondLoopIntegral", "LMLF.Blueprint.Gamma.Section512.betaSecondLoopConverges", "LMLF.Blueprint.Gamma.Section512.dlmf_5_12_11_converges", "LMLF.Blueprint.Gamma.Section512.dlmf_5_12_11"],
       "quantitative_analogue": false,
       "quantitative_statement": false,
       "quantitative_proof": false,
-      "notes": "Finite truncations use incoming and outgoing positive-ray tails (r > 0), a positively oriented circle with 0 < ε < 1, endpoint gluing, and one global pair of logarithm lifts with pointwise exponential equations only on those domains; meromorphicBetaDefined excludes poles."
+      "notes": "Finite truncations use incoming and outgoing positive-ray tails (r > 0), a positively oriented circle with 0 < ε < 1, endpoint gluing, and one global pair of logarithm lifts with explicit +2πi t-monodromy and principal 1+t return; convergence is supplied by SecondLoopIntegralData under Re b > 0, a ∉ ℤ, and a cut between -1 and 0; GammaQuotientDefined is a conservative quotient guard."
     },
     {
       "id": "5.12.12",
@@ -159,18 +159,18 @@
       "match": "specialization",
       "lean_statement": true,
       "lean_proof": false,
-      "lean_declarations": ["LMLF.Blueprint.Gamma.Section512.meromorphicBeta", "LMLF.Blueprint.Gamma.Section512.meromorphicBetaDefined", "LMLF.Blueprint.Gamma.Section512.PochhammerLogBranch", "LMLF.Blueprint.Gamma.Section512.betaPochhammerCurve", "LMLF.Blueprint.Gamma.Section512.betaPochhammerIntegral", "LMLF.Blueprint.Gamma.Section512.dlmf_5_12_12"],
+      "lean_declarations": ["LMLF.Integral.PiecewiseC1Contour", "LMLF.Integral.PiecewiseC1Contour.integral₂", "LMLF.Integral.PiecewiseC1Contour.Integrable₂", "LMLF.Blueprint.Gamma.Section512.PochhammerLogBranch", "LMLF.Blueprint.Gamma.Section512.betaPochhammerCurve", "LMLF.Blueprint.Gamma.Section512.betaPochhammerIntegral", "LMLF.Blueprint.Gamma.Section512.PochhammerLogBranch.Integrable", "LMLF.Blueprint.Gamma.Section512.dlmf_5_12_12_integrable", "LMLF.Blueprint.Gamma.Section512.dlmf_5_12_12"],
       "quantitative_analogue": false,
       "quantitative_statement": false,
       "quantitative_proof": false,
-      "notes": "Complex a,b off the Gamma pole locus and P ∈ (0,1), with the oriented Pochhammer contour and explicit logarithm lifts tied pointwise to t and 1−t only under the base-point domain predicates, principal at P."
+      "notes": "Complex a,b on the conservative GammaQuotientDefined guard and P ∈ (0,1), using the shared LMLF.Integral.PiecewiseC1Contour two-log API for the oriented (1+,0+,1−,0−) Pochhammer contour, with explicit logarithm lifts tied pointwise to t and 1−t, principal at P."
     }
   ],
   "shared_vocabulary_requests": [
-    "Consolidate contourIntegral, SecondLoopLogBranch, and PochhammerLogBranch if later DLMF sections need the same branch-aware contour infrastructure."
+    "Reuse shared LMLF.Integral.C1Contour, PiecewiseC1Contour, and LogLiftedC1Contour vocabulary in later branch-sensitive sections; generalize the multi-piece second-loop branch only if another section needs it."
   ],
   "known_gaps": [
     "All twelve statements remain proof-pending by contract (by sorry).",
-    "The contour records use local explicit contour parameterizations and finite-truncation vocabulary; a future contour-integral library can replace these definitions without changing the source-facing theorem statements. E11 uses one global logarithm-lift datum across all truncation scales, and E12 ties both lifts pointwise to its Pochhammer contour. The meromorphic records are stated on the finite Gamma-quotient locus via meromorphicBetaDefined, so poles are intentionally omitted as a specialization."
+    "All twelve source identities remain proof-pending by contract. E11 uses one global logarithm-lift datum across all truncation scales, and SecondLoopIntegralData explicitly supplies the actual limit under the typed domain hypotheses; no unconditional totalized limit is exposed. E12 ties both lifts pointwise to its Pochhammer contour. GammaQuotientDefined is a conservative all-three-Gamma nonvanishing guard, so poles and some finite continuation values are intentionally omitted as a specialization."
   ]
 }

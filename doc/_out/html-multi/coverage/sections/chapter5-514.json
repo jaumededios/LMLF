@@ -21,12 +21,19 @@
   "numbered_formula_ids_omitted": [],
   "extra_statement_ids": [
     "simplex",
+    "MultidimensionalDomain",
+    "domainIntegral",
+    "domainIntegrable",
     "unitCube",
     "positiveOrthant",
     "dysonCube",
+    "wholeSpace",
     "vandermonde",
+    "firstCoordinateSelection",
     "firstCoordinatesProduct",
     "selbergIndex",
+    "simplexBetaIntegrand",
+    "fullSimplexBetaIntegrand",
     "selbergCubeIntegrand",
     "laguerreIntegrand",
     "gaussianVandermondeIntegrand",
@@ -35,19 +42,19 @@
   "declarations": [
     {
       "source_id": "5.14.E1",
-      "names": ["LMLF.Blueprint.Gamma.Section514.dlmf_5_14_1"],
+      "names": ["LMLF.Blueprint.Gamma.Section514.dlmf_5_14_1_integrable", "LMLF.Blueprint.Gamma.Section514.dlmf_5_14_1"],
       "relation": "specialization",
       "proof_status": "missing",
       "quantitative_analogue": "not_applicable",
-      "notes": "Positive-real, positive-dimensional parameters z : Fin n → ℝ (with 0 < n) replace the source complex parameters; simplex volume and IntegrableOn are explicit. Zero-base Real.rpow values on the simplex boundary are a.e. representatives."
+      "notes": "Positive-real, positive-dimensional parameters z : Fin n → ℝ (with 0 < n) replace the source complex parameters. The typed simplex uses domainIntegrable for convergence and domainIntegral for the value; zero-base Real.rpow values on the simplex boundary are a.e. representatives."
     },
     {
       "source_id": "5.14.E2",
-      "names": ["LMLF.Blueprint.Gamma.Section514.dlmf_5_14_2"],
+      "names": ["LMLF.Blueprint.Gamma.Section514.dlmf_5_14_2_integrable", "LMLF.Blueprint.Gamma.Section514.dlmf_5_14_2"],
       "relation": "specialization",
       "proof_status": "missing",
       "quantitative_analogue": "not_applicable",
-      "notes": "Positive-real, positive-dimensional parameters z : Fin (n+1) → ℝ (with 0 < n) and the residual barycentric coordinate are explicit. Zero-base Real.rpow values on the simplex boundary are a.e. representatives."
+      "notes": "Positive-real, positive-dimensional parameters z : Fin (n+1) → ℝ (with 0 < n) and the residual barycentric coordinate are explicit. Convergence and value are separate declarations over the typed simplex; zero-base Real.rpow values on the boundary are a.e. representatives."
     },
     {
       "source_id": "5.14.E3",
@@ -59,40 +66,40 @@
     },
     {
       "source_id": "5.14.E4",
-      "names": ["LMLF.Blueprint.Gamma.Section514.dlmf_5_14_4"],
+      "names": ["LMLF.Blueprint.Gamma.Section514.dlmf_5_14_4_integrable", "LMLF.Blueprint.Gamma.Section514.dlmf_5_14_4"],
       "relation": "specialization",
       "proof_status": "missing",
       "quantitative_analogue": "not_applicable",
-      "notes": "Positive-real a,b with admissible real c; n ≥ 2 is imposed so the source's displayed n−1 denominators are literal. With zero-based k : Fin n, selbergIndex n k = n − k.1 − 1 in ℝ denotes source n−k, and the source 2n−k−1 factor is selbergIndex n k + n − 1; this avoids truncated Nat subtraction. Real.rpow on boundary/diagonal null sets is an a.e. representative."
+      "notes": "Positive-real a,b with admissible real c; n ≥ 2 is imposed so the source's displayed n−1 denominators are literal. The typed cube, domainIntegrable convergence statement, and domainIntegral value statement are separate. firstCoordinateSelection hmn is the canonical first-coordinate inclusion; selbergIndex n k = n − k.1 − 1 in ℝ avoids truncated Nat subtraction. Real.rpow on boundary/diagonal null sets is an a.e. representative."
     },
     {
       "source_id": "5.14.E5",
-      "names": ["LMLF.Blueprint.Gamma.Section514.dlmf_5_14_5"],
+      "names": ["LMLF.Blueprint.Gamma.Section514.dlmf_5_14_5_integrable", "LMLF.Blueprint.Gamma.Section514.dlmf_5_14_5"],
       "relation": "specialization",
       "proof_status": "missing",
       "quantitative_analogue": "not_applicable",
-      "notes": "Positive-real a with admissible real c on the explicit positive orthant; n ≥ 2 is imposed for the displayed n−1 denominators. Real.rpow on boundary/diagonal null sets is an a.e. representative."
+      "notes": "Positive-real a with admissible real c on the typed positive orthant; n ≥ 2 is imposed for the displayed n−1 denominators. Convergence is domainIntegrable and the source value is domainIntegral; firstCoordinateSelection supplies the canonical moment coordinates. Real.rpow on boundary/diagonal null sets is an a.e. representative."
     },
     {
       "source_id": "5.14.E6",
-      "names": ["LMLF.Blueprint.Gamma.Section514.dlmf_5_14_6"],
+      "names": ["LMLF.Blueprint.Gamma.Section514.dlmf_5_14_6_integrable", "LMLF.Blueprint.Gamma.Section514.dlmf_5_14_6"],
       "relation": "specialization",
       "proof_status": "missing",
       "quantitative_analogue": "not_applicable",
-      "notes": "The source's complex c is specialized to real c with 0 < n, with whole-space volume and Gaussian integrability explicit. Real.rpow on the Vandermonde diagonal null set is an a.e. representative."
+      "notes": "The source's complex c is specialized to real c with 0 < n. wholeSpace n is a typed full-dimensional domain; its domainIntegrable convergence declaration is separate from the normalized domainIntegral value. Real.rpow on the Vandermonde diagonal null set is an a.e. representative."
     },
     {
       "source_id": "5.14.E7",
-      "names": ["LMLF.Blueprint.Gamma.Section514.dlmf_5_14_7"],
+      "names": ["LMLF.Blueprint.Gamma.Section514.dlmf_5_14_7_integrable", "LMLF.Blueprint.Gamma.Section514.dlmf_5_14_7"],
       "relation": "specialization",
       "proof_status": "missing",
       "quantitative_analogue": "not_applicable",
-      "notes": "The source's complex b is specialized to real b with 0 < n; unit-circle factors remain complex before taking their norms. Real.rpow on collision hyperplanes is an a.e. representative."
+      "notes": "The source's complex b is specialized to real b with 0 < n; unit-circle factors remain complex before taking their norms. dysonCube n is typed, and convergence is separate from the normalized domainIntegral value. Real.rpow on collision hyperplanes is an a.e. representative."
     }
   ],
   "shared_vocabulary_requests": [],
   "known_gaps": [
-    "All seven declarations are intentionally proof-pending (by sorry).",
+    "All fourteen declarations are intentionally proof-pending (by sorry).",
     "The readable Lean statements use real/positive-real parameter specializations rather than the source's full complex parameter domains; E1/E2/E6/E7 also state positive dimension explicitly."
   ]
 }

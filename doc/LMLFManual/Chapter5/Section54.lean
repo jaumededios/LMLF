@@ -323,22 +323,64 @@ some positive C.
 
 Compare [Figure 5.3.1](https://dlmf.nist.gov/5.3#F1) for the corresponding graph.
 
+The table is represented by a normalized object interface. The source-indexed
+point `x₀` is selected in `(1,2)`, while `xₙ` for `n > 0` is selected in the
+interval `(-n,1-n)` between consecutive negative Gamma poles. A
+`GammaExtremum` stores that interval membership together with the two
+critical-point conditions from the source, and its `value` is the Gamma value
+at that location. A `GammaExtremaSequence` is the indexed family `xₙ`; the
+conditions are carried by each point instead of being repeated as an opaque
+predicate in later statements. The decimal table entries remain displayed
+numerical approximations, not exact decimal equalities.
+
+:::leanStatement "Lean · critical-point object"
+```anchor gammaExtremumInterval (module := LMLF.Blueprint.Gamma.Section54) -showProofStates
+def gammaExtremumInterval (n : ℕ) : Set ℝ :=
+  if n = 0 then Set.Ioo (1 : ℝ) 2
+  else Set.Ioo (-(n : ℝ)) ((1 : ℝ) - n)
+```
+```anchor GammaExtremum (module := LMLF.Blueprint.Gamma.Section54) -showProofStates
+structure GammaExtremum (n : ℕ) where
+  location : ℝ
+  in_index_interval : location ∈ gammaExtremumInterval n
+  derivative_zero : deriv Real.Gamma location = 0
+  digamma_zero : Complex.digamma (location : ℂ) = 0
+```
+```anchor GammaExtremum.value (module := LMLF.Blueprint.Gamma.Section54) -showProofStates
+noncomputable def GammaExtremum.value {n : ℕ} (p : GammaExtremum n) : ℝ :=
+  Real.Gamma p.location
+```
+```anchor GammaExtremaSequence (module := LMLF.Blueprint.Gamma.Section54) -showProofStates
+structure GammaExtremaSequence where
+  point : ∀ n : ℕ, GammaExtremum n
+```
+```anchor gamma_extrema_exists (module := LMLF.Blueprint.Gamma.Section54) -showProofStates
+theorem gamma_extrema_exists : Nonempty GammaExtremaSequence
+```
+```anchor gamma_extrema_unique (module := LMLF.Blueprint.Gamma.Section54) -showProofStates
+theorem gamma_extrema_unique (a b : GammaExtremaSequence) : a = b
+```
+```anchor gammaExtrema (module := LMLF.Blueprint.Gamma.Section54) -showProofStates
+noncomputable def gammaExtrema : GammaExtremaSequence :=
+  Classical.choice gamma_extrema_exists
+```
+:::
+
 ::::dlmfEntry "5.4.20" "https://dlmf.nist.gov/5.4.E20"
 $$`x_n=-n+\frac1\pi\arctan\left(\frac\pi{\ln n}\right)
 +O\left(\frac1{n(\ln n)^2}\right),\qquad n\to\infty.`
-There is a real critical-point sequence whose difference from the displayed approximation is eventually
-bounded by a constant multiple of 1/(n(ln n)^2); this is the real sequence specialization.
+The canonical indexed family obtained from the qualitative declaration above
+has location difference from the displayed approximation eventually bounded
+by a constant multiple of `1/(n(ln n)^2)`; this is the real sequence
+specialization.
 :::leanStatement "Lean · extrema locations"
 ```anchor gamma_extrema_asymptotic (module := LMLF.Blueprint.Gamma.Section54) -showProofStates
 theorem gamma_extrema_asymptotic :
-    ∃ x : ℕ → ℝ,
-      (∀ n : ℕ,
-        deriv Real.Gamma (x n) = 0 ∧
-          Complex.digamma (x n : ℂ) = 0) ∧
-        ∃ C : ℝ, 0 < C ∧
-          ∀ᶠ n : ℕ in atTop,
-            |x n - (-n + 1 / Real.pi * Real.arctan (Real.pi / Real.log n))| ≤
-              C / (n * (Real.log n) ^ 2)
+    ∃ C : ℝ, 0 < C ∧
+      ∀ᶠ n : ℕ in atTop,
+        |(gammaExtrema.point n).location -
+            (-n + 1 / Real.pi * Real.arctan (Real.pi / Real.log n))| ≤
+          C / (n * (Real.log n) ^ 2)
 ```
 :::
 ::::

@@ -1,0 +1,19 @@
+{
+  "section_range":["6.13"],
+  "numbered_formula_ids_expected":["6.13.E1","6.13.E2"],
+  "numbered_formula_ids_stated":["6.13.E1","6.13.E2"],
+  "numbered_formula_ids_omitted":[],
+  "extra_statement_ids":["dlmf:6.13#info@annotation-note-1","dlmf:6.13#info@editorial-change-note-1","dlmf:6.13#p1","dlmf:6.13#E1.info@annotation-note-1","dlmf:6.13#p2","dlmf:6.13#E2.info@editorial-change-note-1"],
+  "declarations":[
+    {"source_id":"6.13.E1","names":["LMLF.Blueprint.ExponentialIntegrals.Section613.dlmf_6_13_1"],"relation":"specialization","proof_status":"missing","quantitative_analogue":true,"quantitative_statement":true,"quantitative_proof":false,"quantitative_declarations":["LMLF.Blueprint.ExponentialIntegrals.Section613.dlmf_6_13_1_approx"],"notes":"The qualitative declaration is exactly one positive zero of the canonical §6.2 realEi map, expressed with the direct predicate 0 < x ∧ realEi x = 0. The separate quantitative declaration supplies the 30-digit enclosure shown by the DLMF decimal."},
+    {"source_id":"6.13.E2","names":["LMLF.Blueprint.ExponentialIntegrals.Section613.dlmf_6_13_2","LMLF.Blueprint.ExponentialIntegrals.Section613.HasSix13DisplayedExpansion","LMLF.Blueprint.ExponentialIntegrals.Section613.Six13CoefficientContinuation","LMLF.Blueprint.ExponentialIntegrals.Section613.Six13AsymptoticData","LMLF.Blueprint.ExponentialIntegrals.Section613.dlmf_6_13_2_all_orders_auxiliary"],"relation":"specialization","proof_status":"missing","quantitative_analogue":"present","quantitative_statement":true,"quantitative_proof":false,"quantitative_declarations":["LMLF.Blueprint.ExponentialIntegrals.Section613.dlmf_6_13_2_remainder","LMLF.Blueprint.ExponentialIntegrals.Section613.HasSix13DisplayedRemainderBound"],"notes":"Primary statement is the finite displayed prefix for the complete positive Ci and lower-case si zero families, with α=kπ and α=(k+1/2)π. The quantitative companion retains the source's next-term absolute bound and same-sign property for the displayed terms. Six13AsymptoticData and its arbitrary coefficient continuation remain explicitly auxiliary for an all-orders formulation of the source ellipsis."},
+    {"source_id":"dlmf:6.13#info@annotation-note-1","names":[],"relation":"related","proof_status":"not_applicable","quantitative_analogue":"not_applicable","notes":"Section notes reproduced at https://dlmf.nist.gov/6.13#info, including the Cody and Thacher reference for x₀."},
+    {"source_id":"dlmf:6.13#info@editorial-change-note-1","names":[],"relation":"related","proof_status":"not_applicable","quantitative_analogue":"not_applicable","notes":"Editorial addition reproduced at https://dlmf.nist.gov/6.13#info, concerning the E2 remainder remark and Nemes reference."},
+    {"source_id":"dlmf:6.13#p1","names":[],"relation":"related","proof_status":"not_applicable","quantitative_analogue":"not_applicable","notes":"Definitions of the Ci and lower-case si zero sequences and the unique Ei zero reproduced at https://dlmf.nist.gov/6.13#p1."},
+    {"source_id":"dlmf:6.13#E1.info@annotation-note-1","names":[],"relation":"related","proof_status":"not_applicable","quantitative_analogue":"not_applicable","notes":"Numerical-reference note for x₀ reproduced at https://dlmf.nist.gov/6.13#E1.info."},
+    {"source_id":"dlmf:6.13#p2","names":[],"relation":"related","proof_status":"not_applicable","quantitative_analogue":"not_applicable","notes":"Indexing and asymptotic parameter choices reproduced at https://dlmf.nist.gov/6.13#p2."},
+    {"source_id":"dlmf:6.13#E2.info@editorial-change-note-1","names":[],"relation":"related","proof_status":"not_applicable","quantitative_analogue":"not_applicable","notes":"Fraction-formatting clarification reproduced at https://dlmf.nist.gov/6.13#E2.info."}
+  ],
+  "shared_vocabulary_requests":[],
+  "known_gaps":[]
+}

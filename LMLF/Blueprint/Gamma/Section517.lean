@@ -39,11 +39,38 @@ noncomputable def barnesGProductPrefactor (z : ℂ) : ℂ :=
       (1 / 2) * (Real.eulerMascheroniConstant : ℂ) * z ^ 2)
 -- ANCHOR_END: barnesGProductPrefactor
 
+/-- DLMF 5.17.3: the finite `N`-factor approximant to Barnes' canonical product. -/
+-- ANCHOR: barnesGProductPartialProduct
+noncomputable def barnesGProductPartialProduct (z : ℂ) (N : ℕ) : ℂ :=
+  ∏ k ∈ Finset.range N,
+    barnesGProductTerm z ⟨k + 1, Nat.succ_le_succ (Nat.zero_le k)⟩
+-- ANCHOR_END: barnesGProductPartialProduct
+
+/-- DLMF 5.17.3: the canonical infinite product value for Barnes' factors. -/
+-- ANCHOR: barnesGProduct
+noncomputable def barnesGProduct (z : ℂ) : ℂ :=
+  ∏' k : {n : ℕ // 1 ≤ n}, barnesGProductTerm z k
+-- ANCHOR_END: barnesGProduct
+
+/-- DLMF 5.17.3: convergence of the canonical Barnes product. -/
+-- ANCHOR: barnesGProduct_hasProd
+theorem barnesGProduct_hasProd (z : ℂ) :
+    HasProd (fun k : {n : ℕ // 1 ≤ n} ↦ barnesGProductTerm z k) (barnesGProduct z)
+-- ANCHOR_END: barnesGProduct_hasProd
+    := by sorry
+
+/-- DLMF 5.17.3: the finite canonical products converge to the product value. -/
+-- ANCHOR: barnesGProduct_partialProduct_tendsto
+theorem barnesGProduct_partialProduct_tendsto (z : ℂ) :
+    Tendsto (barnesGProductPartialProduct z) atTop (nhds (barnesGProduct z))
+-- ANCHOR_END: barnesGProduct_partialProduct_tendsto
+    := by sorry
+
 /-- DLMF 5.17.3: Barnes' `G`-function (double gamma function), via the canonical product. -/
 -- ANCHOR: barnesG
 noncomputable def barnesG (z : ℂ) : ℂ :=
   barnesGProductPrefactor (z - 1) *
-    ∏' k : {n : ℕ // 1 ≤ n}, barnesGProductTerm (z - 1) k
+    barnesGProduct (z - 1)
 -- ANCHOR_END: barnesG
 
 /-- DLMF 5.17.2: the finite product of factorials at a positive integer. -/
@@ -61,10 +88,10 @@ noncomputable def glaisherPartialExpression (n : ℕ) : ℝ :=
     (1 / 4 : ℝ) * (n : ℝ) ^ 2
 -- ANCHOR_END: glaisherPartialExpression
 
-/-- DLMF 5.17.6–5.17.7: Glaisher's constant and its logarithm. -/
+/-- DLMF 5.17.7: the canonical zeta-derivative value of Glaisher's logarithm. -/
 -- ANCHOR: glaisherLogConstant
 noncomputable def glaisherLogConstant : ℝ :=
-  limUnder atTop glaisherPartialExpression
+  ((1 / 12 : ℂ) - deriv riemannZeta (-1 : ℂ)).re
 -- ANCHOR_END: glaisherLogConstant
 
 /-- DLMF 5.17.6: the exponential definition of Glaisher's constant. -/
@@ -121,7 +148,7 @@ theorem dlmf_5_17_2 {n : ℕ} (hn : 2 ≤ n) :
 theorem dlmf_5_17_3 (z : ℂ) :
     barnesG (z + 1) =
       barnesGProductPrefactor z *
-        ∏' k : {n : ℕ // 1 ≤ n}, barnesGProductTerm z k
+        barnesGProduct z
 -- ANCHOR_END: dlmf_5_17_3
     := by sorry
 
@@ -157,12 +184,19 @@ theorem dlmf_5_17_6 :
 -- ANCHOR_END: dlmf_5_17_6
     := by sorry
 
-/-- DLMF 5.17.7: the defining limit and zeta-derivative formulas for `C`. -/
+/-- DLMF 5.17.7: convergence of the renormalized expression to `C`. -/
+-- DLMF 5.17.7 https://dlmf.nist.gov/5.17.E7
+-- ANCHOR: glaisherPartialExpression_tendsto
+theorem glaisherPartialExpression_tendsto :
+    Tendsto glaisherPartialExpression atTop (nhds glaisherLogConstant)
+-- ANCHOR_END: glaisherPartialExpression_tendsto
+    := by sorry
+
+/-- DLMF 5.17.7: the two zeta-derivative value identities for `C`. -/
 -- DLMF 5.17.7 https://dlmf.nist.gov/5.17.E7
 -- ANCHOR: dlmf_5_17_7
 theorem dlmf_5_17_7 :
-    Tendsto glaisherPartialExpression atTop (nhds glaisherLogConstant) ∧
-      (glaisherLogConstant : ℂ) =
+    (glaisherLogConstant : ℂ) =
         ((Real.eulerMascheroniConstant : ℂ) + Complex.log (2 * Real.pi)) / 12 -
           deriv riemannZeta (2 : ℂ) / (2 * (Real.pi : ℂ) ^ 2) ∧
       (glaisherLogConstant : ℂ) =

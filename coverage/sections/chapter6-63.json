@@ -1,0 +1,81 @@
+{
+  "section_range": ["6.3"],
+  "numbered_formula_ids_expected": [],
+  "numbered_formula_ids_stated": [],
+  "numbered_formula_ids_omitted": [],
+  "extra_statement_ids": [
+    "figure631PlotInterval", "figure632PlotInterval",
+    "figure633PlotRectangle", "principalE1Cut"
+  ],
+  "nonformula_inventory_ids": [
+    "dlmf:6.3#i.info@annotation-note-1",
+    "dlmf:6.3#F1@caption",
+    "dlmf:6.3#F2@caption",
+    "dlmf:6.3#i.p1",
+    "dlmf:6.3#ii.info@annotation-note-1",
+    "dlmf:6.3#F3@caption"
+  ],
+  "declarations": [
+    {
+      "source_id": "dlmf:6.3#i.info@annotation-note-1",
+      "source_url": "https://dlmf.nist.gov/6.3#i.info",
+      "names": [],
+      "relation": "related",
+      "proof_status": "not_applicable",
+      "quantitative_analogue": "not_applicable",
+      "notes": "NIST-production note for the real-variable graphics is reproduced in the direct source-linked manual entry."
+    },
+    {
+      "source_id": "dlmf:6.3#F1@caption",
+      "source_url": "https://dlmf.nist.gov/6.3#F1",
+      "names": ["LMLF.Blueprint.ExponentialIntegrals.Section63.figure631PlotInterval"],
+      "relation": "related",
+      "proof_status": "not_applicable",
+      "quantitative_analogue": "not_applicable",
+      "notes": "Figure 6.3.1 caption and exact plotting interval 0 < x <= 2 are reproduced at the canonical figure permalink."
+    },
+    {
+      "source_id": "dlmf:6.3#F2@caption",
+      "source_url": "https://dlmf.nist.gov/6.3#F2",
+      "names": ["LMLF.Blueprint.ExponentialIntegrals.Section63.figure632PlotInterval"],
+      "relation": "related",
+      "proof_status": "not_applicable",
+      "quantitative_analogue": "not_applicable",
+      "notes": "Figure 6.3.2 caption and exact plotting interval 0 <= x <= 15 are reproduced at the canonical figure permalink."
+    },
+    {
+      "source_id": "dlmf:6.3#i.p1",
+      "source_url": "https://dlmf.nist.gov/6.3#i.p1",
+      "names": [],
+      "relation": "related",
+      "proof_status": "not_applicable",
+      "quantitative_analogue": "not_applicable",
+      "notes": "The real-variable prose and its direct cross-reference to Figure 6.16.2 for li(x) are reproduced in the source-linked entry."
+    },
+    {
+      "source_id": "dlmf:6.3#ii.info@annotation-note-1",
+      "source_url": "https://dlmf.nist.gov/6.3#ii.info",
+      "names": [],
+      "relation": "related",
+      "proof_status": "not_applicable",
+      "quantitative_analogue": "not_applicable",
+      "notes": "NIST-production note for the complex-variable surface is reproduced in the direct source-linked manual entry."
+    },
+    {
+      "source_id": "dlmf:6.3#F3@caption",
+      "source_url": "https://dlmf.nist.gov/6.3#F3",
+      "names": [
+        "LMLF.Blueprint.ExponentialIntegrals.Section63.figure633PlotRectangle",
+        "LMLF.Blueprint.ExponentialIntegrals.Section63.principalE1Cut"
+      ],
+      "relation": "related",
+      "proof_status": "not_applicable",
+      "quantitative_analogue": "not_applicable",
+      "notes": "Figure 6.3.3 caption, rectangular plotting domain, principal-value cut, and logarithmic divergence are reproduced in source-linked prose; only the concrete rectangle and cut are typed."
+    }
+  ],
+  "shared_vocabulary_requests": [],
+  "known_gaps": [
+    "The section is graphics-only; raster geometry, sampled values, and the logarithmic asymptotic rate remain in source-linked prose rather than being invented as Lean data."
+  ]
+}

@@ -28,40 +28,71 @@ choice visible; the declarations retain Chapter 2's `∼ₚ` notation.
 number := false
 %%%
 
-The coefficient streams below are projections of the named specification
-`StirlingCoefficientSpec`; its fields record the displayed initial values,
-the relation to `aCoeff`, and the recurrence. This keeps the source equations
-part of the API rather than treating the streams as unconstrained symbols.
+The coefficient streams below are canonical maps. A finite-state computation
+isolates each new coefficient in the DLMF convolution, and the scaled-Gamma
+coefficients are reconstructed from that stream. The recurrence and initial
+value are exposed as semantic laws, rather than hiding the data behind a
+selected existence witness.
 
-```anchor StirlingCoefficientSpec (module := LMLF.Blueprint.Gamma.Section511) -showProofStates
-structure StirlingCoefficientSpec where
-  gCoeff : ℕ → ℝ
-  aCoeff : ℕ → ℝ
-  g_initial :
-    gCoeff 0 = 1 ∧
-      gCoeff 1 = 1 / 12 ∧
-      gCoeff 2 = 1 / 288 ∧
-      gCoeff 3 = -(139 : ℝ) / 51840 ∧
-      gCoeff 4 = -(571 : ℝ) / 2488320 ∧
-      gCoeff 5 = 163879 / 209018880 ∧
-      gCoeff 6 = 5246819 / 75246796800
-  g_from_a : ∀ k, gCoeff k = Real.sqrt 2 * risingFactorial (1 / 2) k * aCoeff (2 * k)
-  a_recurrence : ∀ {k}, 1 ≤ k →
-    ∑ j ∈ Finset.range (k + 1),
-      aCoeff j * aCoeff (k - j) / (j + 1) = aCoeff (k - 1) / k
-  a_initial : aCoeff 0 = Real.sqrt 2 / 2
+The finite products used by the coefficient formulas are introduced once in
+this shared vocabulary block before any numbered formula uses them.
+
+```anchor risingFactorial (module := LMLF.Blueprint.Gamma.Section511) -showProofStates
+def risingFactorial (a : ℝ) (n : ℕ) : ℝ :=
+  ∏ j ∈ Finset.range n, (a + j)
 ```
 
-```anchor existsStirlingCoefficientSpec (module := LMLF.Blueprint.Gamma.Section511) -showProofStates
-theorem existsStirlingCoefficientSpec : Nonempty StirlingCoefficientSpec
+```anchor generalizedBinomial (module := LMLF.Blueprint.Gamma.Section511) -showProofStates
+def generalizedBinomial (a : ℝ) (n : ℕ) : ℝ :=
+  (∏ j ∈ Finset.range n, (a - j)) / n.factorial
 ```
 
-```anchor gCoeff (module := LMLF.Blueprint.Gamma.Section511) -showProofStates
-noncomputable def gCoeff : ℕ → ℝ := stirlingCoefficientSpec.gCoeff
+```anchor aCoeffStep (module := LMLF.Blueprint.Gamma.Section511) -showProofStates
+noncomputable def aCoeffStep (a : ℕ → ℝ) (n : ℕ) : ℝ :=
+  let α : ℝ := Real.sqrt 2 / 2
+  let interior : ℝ :=
+    ∑ j ∈ Finset.Icc 1 n,
+      a j * a (n + 1 - j) / (j + 1)
+  (a n / (n + 1) - interior) / (α * (1 + 1 / (n + 2)))
+```
+
+```anchor aCoeffState (module := LMLF.Blueprint.Gamma.Section511) -showProofStates
+noncomputable def aCoeffState : ℕ → (ℕ → ℝ) :=
+  Nat.rec (fun k ↦ if k = 0 then Real.sqrt 2 / 2 else 0)
+    (fun n state k ↦ if k = n + 1 then aCoeffStep state n else state k)
 ```
 
 ```anchor aCoeff (module := LMLF.Blueprint.Gamma.Section511) -showProofStates
-noncomputable def aCoeff : ℕ → ℝ := stirlingCoefficientSpec.aCoeff
+noncomputable def aCoeff (k : ℕ) : ℝ :=
+  aCoeffState (k + 1) k
+```
+
+```anchor gCoeff (module := LMLF.Blueprint.Gamma.Section511) -showProofStates
+noncomputable def gCoeff (k : ℕ) : ℝ :=
+  Real.sqrt 2 * risingFactorial (1 / 2) k * aCoeff (2 * k)
+```
+
+```anchor aCoeff_recurrence (module := LMLF.Blueprint.Gamma.Section511) -showProofStates
+theorem aCoeff_recurrence {k : ℕ} (hk : 1 ≤ k) :
+    ∑ j ∈ Finset.range (k + 1),
+      aCoeff j * aCoeff (k - j) / (j + 1) = aCoeff (k - 1) / k
+```
+
+```anchor aCoeff_unique (module := LMLF.Blueprint.Gamma.Section511) -showProofStates
+theorem aCoeff_unique (a : ℕ → ℝ)
+    (ha0 : a 0 = Real.sqrt 2 / 2)
+    (ha : ∀ {k : ℕ}, 1 ≤ k →
+      ∑ j ∈ Finset.range (k + 1),
+        a j * a (k - j) / (j + 1) = a (k - 1) / k) :
+    a = aCoeff
+```
+
+```anchor aCoeff_initial (module := LMLF.Blueprint.Gamma.Section511) -showProofStates
+theorem aCoeff_initial : aCoeff 0 = Real.sqrt 2 / 2
+```
+
+```anchor aCoeff_prefix (module := LMLF.Blueprint.Gamma.Section511) -showProofStates
+theorem aCoeff_prefix (k : ℕ) : aCoeff k = aCoeffState (k + 1) k
 ```
 
 ```anchor bernoulliPoly (module := LMLF.Blueprint.Gamma.Section511) -showProofStates
@@ -182,7 +213,7 @@ $$`
 `
 
 For positive real `x`, `scaledGammaReal` is `Γ*(x)` and its formal series is
-represented by `scaledGammaTerm`.
+represented by the coefficient map displayed below.
 
 :::leanStatement "Lean statement · positive-real specialization"
 ```anchor scaledGammaPrefactorReal (module := LMLF.Blueprint.Gamma.Section511) -showProofStates
@@ -211,6 +242,15 @@ noncomputable def scaledGammaTerm (k : ℕ) (x : ℝ) : ℝ :=
 theorem dlmf_5_11_3 :
     (fun x : ℝ ↦ scaledGammaReal x) ∼ₚ[atTop] scaledGammaTerm
 ```
+
+In particular, the positive-real specialization makes the source's main
+property `Γ*(x) ∼ 1` explicit in the ordinary Chapter 1–3 asymptotic
+equivalence notation.
+
+```anchor scaledGammaReal_asymptotic_one (module := LMLF.Blueprint.Gamma.Section511) -showProofStates
+theorem scaledGammaReal_asymptotic_one :
+    (fun x : ℝ ↦ scaledGammaReal x) ~[atTop] (fun _ : ℝ ↦ (1 : ℝ))
+```
 :::
 ::::
 
@@ -238,12 +278,8 @@ theorem dlmf_5_11_4 :
 ::::dlmfEntry "5.11.5" "https://dlmf.nist.gov/5.11.E5"
 $$`g_k=\sqrt{2}\left(\frac12\right)_k a_{2k}.`
 
-Here `(1/2)_k` is the finite rising factorial, exposed as `risingFactorial`.
-
-```anchor risingFactorial (module := LMLF.Blueprint.Gamma.Section511) -showProofStates
-def risingFactorial (a : ℝ) (n : ℕ) : ℝ :=
-  ∏ j ∈ Finset.range n, (a + j)
-```
+Here `(1/2)_k` is the finite rising factorial `risingFactorial` introduced in
+the shared vocabulary block above.
 
 ```anchor dlmf_5_11_5 (module := LMLF.Blueprint.Gamma.Section511) -showProofStates
 theorem dlmf_5_11_5 (k : ℕ) :
@@ -370,9 +406,11 @@ noncomputable def complexDigammaTerm (k : ℕ) (z : ℂ) : ℂ :=
 ```
 
 The explicit terms use principal `Complex.log z`, while the left side of E1
-uses a selected general logarithm of Gamma. The branch datum is indexed by the
-sector margin `δ`, is analytic on each admissible sector, agrees on overlapping
-sectors, and is normalized to `Real.log (Real.Gamma x)` on positive reals.
+uses a general logarithm of Gamma carried by an explicit branch datum. The
+datum is indexed by the sector margin `δ`, is analytic on each admissible
+sector, agrees on overlapping sectors, and is normalized to
+`Real.log (Real.Gamma x)` on positive reals. No arbitrary branch witness is
+selected globally; the complex residual APIs take this datum as an argument.
 
 ```anchor gammaSectorDomain (module := LMLF.Blueprint.Gamma.Section511) -showProofStates
 def gammaSectorDomain (δ : ℝ) (z : ℂ) : Prop :=
@@ -398,12 +436,9 @@ structure LnGammaDatum where
 theorem existsLnGammaDatum : Nonempty LnGammaDatum
 ```
 
-```anchor lnGammaDatum (module := LMLF.Blueprint.Gamma.Section511) -showProofStates
-noncomputable def lnGammaDatum : LnGammaDatum := Classical.choice existsLnGammaDatum
-```
-
 ```anchor lnGamma (module := LMLF.Blueprint.Gamma.Section511) -showProofStates
-noncomputable def lnGamma (δ : ℝ) (z : ℂ) : ℂ := lnGammaDatum.value δ z
+noncomputable def lnGamma (datum : LnGammaDatum) (δ : ℝ) (z : ℂ) : ℂ :=
+  datum.value δ z
 ```
 
 ```anchor complexStirlingApprox (module := LMLF.Blueprint.Gamma.Section511) -showProofStates
@@ -419,8 +454,9 @@ noncomputable def complexDigammaApprox (n : ℕ) (z : ℂ) : ℂ :=
 ```
 
 ```anchor complexStirlingRemainder (module := LMLF.Blueprint.Gamma.Section511) -showProofStates
-noncomputable def complexStirlingRemainder (δ : ℝ) (n : ℕ) (z : ℂ) : ℂ :=
-  lnGamma δ z - complexStirlingApprox n z
+noncomputable def complexStirlingRemainder (datum : LnGammaDatum)
+    (δ : ℝ) (n : ℕ) (z : ℂ) : ℂ :=
+  lnGamma datum δ z - complexStirlingApprox n z
 ```
 
 ```anchor complexDigammaRemainder (module := LMLF.Blueprint.Gamma.Section511) -showProofStates
@@ -429,10 +465,11 @@ noncomputable def complexDigammaRemainder (n : ℕ) (z : ℂ) : ℂ :=
 ```
 
 ```anchor dlmf_5_11_1_complex_remainder_bound (module := LMLF.Blueprint.Gamma.Section511) -showProofStates
-theorem dlmf_5_11_1_complex_remainder_bound {n : ℕ} (hn : 1 ≤ n)
+theorem dlmf_5_11_1_complex_remainder_bound (datum : LnGammaDatum)
+    {n : ℕ} (hn : 1 ≤ n)
     {δ : ℝ} (hδ : 0 < δ) {z : ℂ} (hz : z ≠ 0)
     (hsector : |Complex.arg z| ≤ Real.pi - δ) :
-    ‖complexStirlingRemainder δ n z‖ ≤
+    ‖complexStirlingRemainder datum δ n z‖ ≤
       ‖complexStirlingTerm n z‖ *
         (1 / Real.cos (Complex.arg z / 2)) ^ (2 * n)
 ```
@@ -510,6 +547,16 @@ theorem dlmf_5_11_11 {K : ℕ} (hK : 1 ≤ K) {z : ℂ} (hz : z ≠ 0)
         (2 * (2 * Real.pi) ^ (K + 1) * ‖z‖ ^ K) *
         (1 + cappedSecant K (Complex.arg z))
 ```
+
+The residual is retained as a named definition because the exact E10
+bookkeeping identity is accompanied by substantive content: E11 gives its
+sectorial quantitative bound, and on the positive real ray the remainder
+decays to zero.
+
+```anchor gammaRemainder_tendsto_zero (module := LMLF.Blueprint.Gamma.Section511) -showProofStates
+theorem gammaRemainder_tendsto_zero (K : ℕ) (hK : 1 ≤ K) :
+    Tendsto (fun x : ℝ ↦ gammaRemainder K (x : ℂ)) atTop (nhds 0)
+```
 ::::
 
 # §5.11(iii) Ratios
@@ -521,35 +568,41 @@ In this subsection the source allows real or complex constants and approaches
 in a sector. The declarations below give positive-real specializations, so
 all powers and Gamma values use their unambiguous real meanings.
 
-The generalized Bernoulli polynomials are selected by an explicit generating
-function specification. The ratio coefficients below are then defined from
-that selected object, rather than chosen independently.
+The generalized Bernoulli polynomials are canonical formal coefficients. Their
+formal generating series raises the Bernoulli series by the binomial map and
+multiplies by the formal exponential; the analytic generating-function law is
+then stated separately. The ratio coefficients below are defined from this
+canonical map.
 
 ```anchor generalizedBernoulliKernel (module := LMLF.Blueprint.Gamma.Section511) -showProofStates
 noncomputable def generalizedBernoulliKernel (α t : ℝ) : ℝ :=
   if t = 0 then 1 else (t / (Real.exp t - 1)) ^ α
 ```
 
-```anchor GeneralizedBernoulliSpec (module := LMLF.Blueprint.Gamma.Section511) -showProofStates
-structure GeneralizedBernoulliSpec where
-  value : ℝ → ℝ → ℕ → ℝ
-  generating_function : ∀ α x t, |t| < 2 * Real.pi →
-    HasSum (fun n : ℕ ↦ value α x n * t ^ n / (n.factorial : ℝ))
-      (generalizedBernoulliKernel α t * Real.exp (x * t))
-```
-
-```anchor existsGeneralizedBernoulliSpec (module := LMLF.Blueprint.Gamma.Section511) -showProofStates
-theorem existsGeneralizedBernoulliSpec : Nonempty GeneralizedBernoulliSpec
-```
-
-```anchor generalizedBernoulliSpec (module := LMLF.Blueprint.Gamma.Section511) -showProofStates
-noncomputable def generalizedBernoulliSpec : GeneralizedBernoulliSpec :=
-  Classical.choice existsGeneralizedBernoulliSpec
+```anchor generalizedBernoulliFormal (module := LMLF.Blueprint.Gamma.Section511) -showProofStates
+noncomputable def generalizedBernoulliFormal (α x : ℝ) : PowerSeries ℝ :=
+  PowerSeries.subst
+      (bernoulliPowerSeries ℝ - 1)
+      (PowerSeries.binomialSeries ℝ α) *
+    PowerSeries.rescale x (PowerSeries.exp ℝ)
 ```
 
 ```anchor generalizedBernoulli (module := LMLF.Blueprint.Gamma.Section511) -showProofStates
-noncomputable def generalizedBernoulli : ℝ → ℝ → ℕ → ℝ :=
-  generalizedBernoulliSpec.value
+noncomputable def generalizedBernoulli (α x : ℝ) (n : ℕ) : ℝ :=
+  (n.factorial : ℝ) * PowerSeries.coeff n (generalizedBernoulliFormal α x)
+```
+
+```anchor generalizedBernoulli_generating (module := LMLF.Blueprint.Gamma.Section511) -showProofStates
+theorem generalizedBernoulli_generating (α x : ℝ) :
+    ∀ t : ℝ, |t| < 2 * Real.pi →
+      HasSum (fun n : ℕ ↦ generalizedBernoulli α x n * t ^ n / (n.factorial : ℝ))
+        (generalizedBernoulliKernel α t * Real.exp (x * t))
+```
+
+```anchor generalizedBernoulli_prefix (module := LMLF.Blueprint.Gamma.Section511) -showProofStates
+theorem generalizedBernoulli_prefix (α x : ℝ) (n : ℕ) :
+    generalizedBernoulli α x n =
+      (n.factorial : ℝ) * PowerSeries.coeff n (generalizedBernoulliFormal α x)
 ```
 
 ::::dlmfEntry "5.11.12" "https://dlmf.nist.gov/5.11.E12"
@@ -618,12 +671,8 @@ G_0=1,\quad G_1=\frac12(a-b)(a+b-1),\quad
 G_2=\frac1{12}{a-b\choose2}\left(3(a+b-1)^2-(a-b+1)\right).
 `
 
-The generalized binomial coefficient is written as a finite falling product.
-
-```anchor generalizedBinomial (module := LMLF.Blueprint.Gamma.Section511) -showProofStates
-def generalizedBinomial (a : ℝ) (n : ℕ) : ℝ :=
-  (∏ j ∈ Finset.range n, (a - j)) / n.factorial
-```
+The generalized binomial coefficient is the finite falling product
+`generalizedBinomial` introduced in the shared vocabulary block above.
 
 ```anchor dlmf_5_11_15 (module := LMLF.Blueprint.Gamma.Section511) -showProofStates
 theorem dlmf_5_11_15 (a b : ℝ) :

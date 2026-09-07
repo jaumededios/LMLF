@@ -1,0 +1,19 @@
+{
+  "section_range": ["6.16"],
+  "numbered_formula_ids_expected": ["6.16.E1", "6.16.E2", "6.16.E3", "6.16.E4", "6.16.E5"],
+  "numbered_formula_ids_stated": ["6.16.E1", "6.16.E2", "6.16.E3", "6.16.E4", "6.16.E5"],
+  "numbered_formula_ids_omitted": [],
+  "extra_statement_ids": ["6.16.F1", "6.16.F2"],
+  "nonformula_inventory_ids": ["dlmf:6.16#i.info@annotation-note-1", "dlmf:6.16#i.p1", "dlmf:6.16#i.p2", "dlmf:6.16#i.p3", "dlmf:6.16#F1@caption", "dlmf:6.16#ii.info@annotation-note-1", "dlmf:6.16#ii.p1", "dlmf:6.16#F2@caption"],
+  "declarations": [
+    {"source_id":"6.16.E1","source_url":"https://dlmf.nist.gov/6.16.E1","names":["LMLF.Blueprint.ExponentialIntegrals.Section616.gibbsTerm","LMLF.Blueprint.ExponentialIntegrals.Section616.sawtoothValueOnDomain","LMLF.Blueprint.ExponentialIntegrals.Section616.dlmf_6_16_1"],"relation":"specialization","proof_status":"missing","quantitative_analogue":"not_applicable","notes":"Odd-harmonic Fourier series on the actual source domain -π < x < π, with a domain-indexed sawtooth value and the three piecewise values including the midpoint at x=0; no value is exported outside the source interval."},
+    {"source_id":"6.16.E2","source_url":"https://dlmf.nist.gov/6.16.E2","names":["LMLF.Blueprint.ExponentialIntegrals.Section616.sinePartial","LMLF.Blueprint.ExponentialIntegrals.Section616.sineRemainder","LMLF.Blueprint.ExponentialIntegrals.Section616.dlmf_6_16_2"],"relation":"specialization","proof_status":"missing","quantitative_analogue":"not_applicable","notes":"Finite partial sum, interval integral, and decomposition through the canonical §6.2 principalSi real restriction and named remainder."},
+    {"source_id":"6.16.E3","source_url":"https://dlmf.nist.gov/6.16.E3","names":["LMLF.Blueprint.ExponentialIntegrals.Section616.sineRemainder"],"relation":"exact","proof_status":"missing","quantitative_analogue":"not_applicable","notes":"The canonical remainder is defined directly by the source's interval-integral expression; E4 separately estimates this named object."},
+    {"source_id":"6.16.E4","source_url":"https://dlmf.nist.gov/6.16.E4","names":["LMLF.Blueprint.ExponentialIntegrals.Section616.sineRemainder","LMLF.Blueprint.ExponentialIntegrals.Section616.dlmf_6_16_4"],"relation":"specialization","proof_status":"missing","quantitative_analogue":"not_applicable","notes":"Fixed-x specialization of the source's uniform O(n^-1) remainder order on [-π,π], using the canonical named remainder."},
+    {"source_id":"6.16.E5","source_url":"https://dlmf.nist.gov/6.16.E5","names":["LMLF.Blueprint.ExponentialIntegrals.Section616.realLogarithmicIntegral","LMLF.Blueprint.ExponentialIntegrals.Section616.realLogarithmicIntegral_pv","LMLF.Blueprint.ExponentialIntegrals.Section616.primeCountingReal","LMLF.Blueprint.ExponentialIntegrals.Section616.dlmf_6_16_5"],"relation":"specialization","proof_status":"missing","quantitative_analogue":"not_applicable","notes":"Real-variable specialization using the canonical realLogarithmicIntegral map defined by (realEi (log x)).re and characterized for x > 1 by hasLogarithmicIntegralPV, Mathlib's canonical prime count after floor, and the global RiemannHypothesis proposition."},
+    {"source_id":"6.16.F1","source_url":"https://dlmf.nist.gov/6.16.F1","names":[],"relation":"related","proof_status":"not_applicable","quantitative_analogue":"not_applicable","notes":"Figure caption and plotted range reproduced in manual prose."},
+    {"source_id":"6.16.F2","source_url":"https://dlmf.nist.gov/6.16.F2","names":[],"relation":"related","proof_status":"not_applicable","quantitative_analogue":"not_applicable","notes":"Figure caption and comparison range reproduced in manual prose."}
+  ],
+  "shared_vocabulary_requests": [],
+  "known_gaps": ["The figures are documented by exact captions and permalinks; raster geometry is not encoded as invented Lean data."]
+}

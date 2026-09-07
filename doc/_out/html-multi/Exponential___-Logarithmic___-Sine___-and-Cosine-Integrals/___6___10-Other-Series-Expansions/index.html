@@ -1,0 +1,1397 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script>
+      (function(){
+  const {protocol:proto, host:hostName, pathname:path, search:srch, hash:hsh} = window.location;
+  if (!(path.endsWith("/") || path.endsWith(".html"))) {
+    window.location.replace(`${proto}//${hostName}${path}/${srch}${hsh}`);
+  }
+})()</script>
+    <script>
+      // Enable TypeScript checking.
+// @ts-check
+
+// Applies a saved table-of-contents width before the first paint.
+//
+// This is a tiny inline counterpart to toc-resize.js: it runs in the page head so that
+// returning desktop readers do not see the default width flash to their saved width.
+// It only records the width in the --verso-toc-user-width custom property; the
+// stylesheet clamps it and ignores it on mobile, and toc-resize.js then takes over the
+// interactive resizing. Keep the storage key in sync with toc-resize.js.
+
+(function () {
+    try {
+        const saved = localStorage.getItem("verso-toc-width");
+        // Parse to a number (as toc-resize.js does) and write that back, so a stored
+        // value with stray whitespace becomes a valid length rather than `" 420 px"`.
+        const width = saved === null ? NaN : Number(saved);
+        if (Number.isFinite(width)) {
+            document.documentElement.style.setProperty("--verso-toc-user-width", `${width}px`);
+        }
+    } catch (_) {
+        // Leave the default width in place when local storage is unavailable.
+    }
+})();
+</script>
+    <base href="./../../"><meta charset="utf-8">
+    <meta name="viewport" content="height=device-height, width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
+    <title>§6.10 Other Series Expansions</title><link rel="stylesheet" href="book.css">
+    <link rel="stylesheet" href="verso-vars.css">
+    <script src="https://cdn.jsdelivr.net/npm/marked@11.1.1/marked.min.js" integrity="sha384-zbcZAIxlvJtNE3Dp5nxLXdXtXyxwOdnILY1TDPVmKFhl4r4nSUG1r8bcFXGVa4Te" crossorigin="anonymous"></script>
+    <script defer="defer" src="-verso-search/elasticlunr.min.js"></script>
+    <script defer="defer" src="-verso-search/fuzzysort.min.js"></script>
+    <script defer="defer" src="-verso-search/searchIndex.js"></script>
+    <script defer="defer" src="-verso-search/search-config.js"></script>
+    <script type="module" src="-verso-search/search-init.js"></script>
+    <link rel="stylesheet" href="-verso-search/search-box.css">
+    <link rel="stylesheet" href="-verso-search/search-page.css">
+    <link rel="stylesheet" href="-verso-search/search-highlight.css">
+    <link rel="stylesheet" href="-verso-search/domain-display.css">
+    <script src="-verso-search/search-highlight.js" defer="defer"></script>
+    <script src="toc-resize.js" defer="defer"></script>
+    <script src="-verso-data/katex/katex.js"></script>
+    <script src="-verso-data/katex/math.js"></script>
+    <script src="-verso-data/popper.min.js"></script>
+    <script src="-verso-data/tippy-bundle.umd.min.js"></script>
+    <link rel="stylesheet" href="-verso-data/tippy-border.css">
+    <link rel="stylesheet" href="-verso-data/katex/katex.css">
+    <style>
+:root {
+  --verso-text-font-family: Georgia, "Times New Roman", serif;
+  --verso-content-max-width: 64rem;
+  --lmlf-ink: #111;
+  --lmlf-muted: #555;
+  --lmlf-link: #0645ad;
+  --lmlf-heading: #d3dce6;
+  --lmlf-heading-dark: #bcc4cc;
+  --lmlf-rule: #a4abb2;
+  --lmlf-lean: #f4f8fc;
+  --lmlf-lean-rule: #9bb7d3;
+}
+
+body {
+  background: #fff;
+  color: var(--lmlf-ink);
+  font-family: Georgia, "Times New Roman", serif;
+}
+
+main { max-width: 74rem; }
+
+h1, h2, h3, h4,
+.lmlf-source-link,
+.lmlf-dlmf-entry__source,
+.lmlf-lean > summary {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+h2 {
+  background: var(--lmlf-heading-dark);
+  border-top: .28rem double var(--lmlf-rule);
+  color: #111;
+  padding: .38rem .55rem;
+}
+
+h3 {
+  background: var(--lmlf-heading);
+  color: #111;
+  padding: .28rem .48rem;
+}
+
+h4 { color: #222; }
+a { color: var(--lmlf-link); }
+
+.lmlf-source-link {
+  border-bottom: 1px solid #c8cdd2;
+  margin: .3rem 0 1.35rem;
+  padding: 0 0 .6rem;
+}
+
+.lmlf-source-link a { font-weight: 700; }
+
+.lmlf-dlmf-entry {
+  border-bottom: 1px solid #c8cdd2;
+  border-top: 1px solid #c8cdd2;
+  margin: 1.2rem 0 1.7rem;
+  padding: .75rem 0 .95rem;
+}
+
+.lmlf-dlmf-entry__body {
+  display: grid;
+  gap: .15rem;
+}
+
+.lmlf-dlmf-entry__source {
+  font-size: .86rem;
+  font-weight: 700;
+  margin-bottom: .65rem;
+}
+
+.lmlf-dlmf-entry__body > :first-child { margin-top: 0; }
+
+.lmlf-lean {
+  background: var(--lmlf-lean);
+  border: 1px solid var(--lmlf-lean-rule);
+  margin: .85rem 0 .15rem;
+}
+
+.lmlf-lean > summary {
+  color: #174f80;
+  cursor: pointer;
+  font-size: .86rem;
+  font-weight: 700;
+  padding: .55rem .7rem;
+}
+
+.lmlf-lean[open] > summary { border-bottom: 1px solid var(--lmlf-lean-rule); }
+.lmlf-lean__body { padding: .2rem .7rem .65rem; }
+
+/* Blueprint declarations elaborate with `sorry`, but proof status is not part of the
+   reader-facing statement. Verso attaches that warning to the theorem name; suppress only
+   its popover and warning decoration inside LMLF statement disclosures. */
+.lmlf-lean .has-info.warning { text-decoration: none; }
+.lmlf-lean .has-info.warning > .hover-container { display: none; }
+
+.lmlf-section-list > ul {
+  list-style: none;
+  margin-left: 0;
+  padding-left: 0;
+}
+
+.lmlf-section-list li {
+  border-bottom: 1px dotted #b7bcc1;
+  padding: .24rem .15rem;
+}
+
+.lmlf-section-list li::before {
+  color: #5f6770;
+  content: "\203A";
+  display: inline-block;
+  margin-right: .48rem;
+}
+
+.lmlf-coverage {
+  border-collapse: collapse;
+  font-family: Arial, Helvetica, sans-serif;
+  margin: 1rem 0 1.4rem;
+  width: 100%;
+}
+
+.lmlf-coverage th,
+.lmlf-coverage td {
+  border-bottom: 1px solid #c8cdd2;
+  padding: .42rem .55rem;
+  text-align: right;
+}
+
+.lmlf-coverage th:first-child,
+.lmlf-coverage td:first-child { text-align: left; }
+.lmlf-coverage thead { background: var(--lmlf-heading); }
+</style><style>
+
+.hl.lean {
+  white-space: pre;
+  font-weight: normal;
+  font-style: normal;
+  font-size: inherit;
+}
+
+.hl.lean .keyword {
+  color: var(--verso-code-keyword-color,);
+  font-weight: var(--verso-code-keyword-weight, bold);
+  font-style: var(--verso-code-keyword-style, normal);
+  font-family: var(--verso-code-keyword-font-family,);
+}
+
+.hl.lean .const {
+  color: var(--verso-code-const-color,);
+  font-weight: var(--verso-code-const-weight, normal);
+  font-style: var(--verso-code-const-style, normal);
+  font-family: var(--verso-code-const-font-family,);
+}
+
+.hl.lean .var {
+  color: var(--verso-code-var-color,);
+  font-weight: var(--verso-code-var-weight, normal);
+  font-style: var(--verso-code-var-style, italic);
+  font-family: var(--verso-code-var-font-family,);
+
+  position: relative;
+}
+
+.hl.lean .literal, .hl.lean .unknown {
+  color: var(--verso-code-color,);
+  font-weight: normal;
+  font-style: normal;
+  font-family: var(--verso-code-font-family,);
+}
+
+/* These lexically-classified token kinds default to the `.unknown` appearance. The rule follows
+   `.const` so it wins for the `anon-ctor` tokens, which also carry the `const` class. */
+.hl.lean .anon-ctor,
+.hl.lean .number,
+.hl.lean .char,
+.hl.lean .comment,
+.hl.lean .punctuation,
+.hl.lean .delim,
+.hl.lean .wildcard {
+  color: var(--verso-code-color,);
+  font-weight: normal;
+  font-style: normal;
+  font-family: var(--verso-code-font-family,);
+}
+
+.hover-container {
+  width: 0;
+  height: 0;
+  position: relative;
+  display: inline;
+}
+
+.hl.lean a {
+  color: inherit;
+  text-decoration: currentcolor underline dotted;
+}
+
+.hl.lean a:hover {
+  text-decoration: currentcolor underline solid;
+}
+
+.hl.lean .hover-info {
+  white-space: normal;
+}
+
+.hl.lean .token .hover-info {
+  display: none;
+  position: absolute;
+  background-color: #e5e5e5;
+  border: 1px solid black;
+  padding: 0.5rem;
+  z-index: 300;
+}
+
+.hl.lean .hover-info.messages {
+  max-height: 10rem;
+  overflow-y: auto;
+  overflow-x: hidden;
+  scrollbar-gutter: stable;
+  padding: 0 0.5rem 0 0;
+  display: block;
+}
+
+.hl.lean .hover-info code {
+  white-space: pre-wrap;
+  background: none;
+  color: black;
+}
+
+.hl.lean .hover-info.messages > code {
+  padding: 0.5rem;
+  display: block;
+  width: fit-content;
+}
+
+.hl.lean .hover-info.messages > code:only-child {
+  margin: 0;
+}
+
+.hl.lean .hover-info.messages > code {
+  margin: 0.1rem;
+}
+
+.hl.lean .hover-info.messages > code:not(:first-child) {
+  margin-top: 0rem;
+}
+
+.hl.lean {
+}
+
+.hl.lean.block {
+  display: block;
+}
+
+.hl.lean.inline {
+  display: inline;
+  white-space: pre-wrap;
+}
+
+.hl.lean * {
+}
+
+.hl.lean .token {
+  transition: all 0.25s; /* Slight fade for highlights */
+}
+
+@media (hover: hover) {
+  .hl.lean .token.binding-hl, .hl.lean .literal:hover, .hl.lean .token.typed:hover {
+    background-color: #eee;
+    border-radius: 2px;
+    transition: none;
+  }
+}
+
+
+.hl.lean .has-info .token:not(.tactic-state):not(.tactic-state *), .hl.lean .has-info .inter-text:not(.tactic-state):not(.tactic-state *) {
+  text-decoration-style: wavy;
+  text-decoration-line: underline;
+  text-decoration-thickness: from-font;
+  text-decoration-skip-ink: none;
+}
+
+.hl.lean .has-info .hover-info {
+  display: none;
+  position: absolute;
+  transform: translate(0.25rem, 0.3rem);
+  border: 1px solid black;
+  padding: 0.5rem;
+  z-index: 400;
+  text-align: left;
+}
+
+.hl.lean .has-info.error :not(.tactic-state):not(.tactic-state *){
+  text-decoration-color: red;
+}
+
+@media (hover: hover) {
+  .hl.lean .has-info.error:hover {
+    background-color: #ffb3b3;
+  }
+}
+
+.hl.lean .hover-info.messages > code.error {
+  background-color: #e5e5e5;
+  border-left: 0.2rem solid #ffb3b3;
+}
+
+.tippy-box[data-theme~='error'] .hl.lean .hover-info.messages > code.error {
+  background: none;
+  border: none;
+}
+
+.error .verso-message, .error .verso-message .token, .error .verso-message label {
+  color: var(--verso-error-color);
+}
+
+.error .verso-message .case-label:has(input[type="checkbox"])::before {
+  background-color: var(--verso-error-color) !important;
+}
+
+.hl.lean .has-info.warning :not(.tactic-state):not(.tactic-state *) {
+  text-decoration-color: var(--verso-warning-indicator-color);
+}
+
+@media (hover: hover) {
+  .hl.lean .has-info.warning:hover {
+    background-color:var(--verso-warning-color);
+  }
+}
+
+.hl.lean .hover-info.messages > code.warning {
+  background-color: var(--verso-warning-color);
+}
+
+.lean-output {
+  border-left: 0.2em solid transparent;
+  padding: 0 0 0 0.5em;
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+.lean-output.error {
+  border-color: var(--verso-error-indicator-color);
+}
+
+.lean-output.information {
+  border-color: var(--verso-info-indicator-color);
+}
+
+.lean-output.warning {
+  border-color: var(--verso-warning-indicator-color);
+}
+
+.hl.lean .hover-info.messages > code.error {
+  background-color: #e5e5e5;
+  border-left: 0.2rem solid var(--verso-warning-color);
+}
+
+.tippy-box[data-theme~='warning'] .hl.lean .hover-info.messages > code.warning {
+  background: none;
+  border: none;
+}
+
+
+.hl.lean .has-info.information :not(.tactic-state):not(.tactic-state *) {
+  text-decoration-color: var(--verso-info-indicator-color, blue);
+}
+
+@media (hover: hover) {
+  .hl.lean .has-info.information:hover {
+    background-color: #4777ff;
+  }
+}
+
+
+.hl.lean .hover-info.messages > code.information {
+  background-color: #e5e5e5;
+  border-left: 0.2rem solid #4777ff;
+}
+
+.tippy-box[data-theme~='info'] .hl.lean .hover-info.messages > code.information {
+  background: none;
+  border: none;
+}
+
+.hl.lean div.docstring {
+  font-family: var(--verso-text-font-family, sans-serif);
+  white-space: normal;
+  max-width: calc(min(40rem, 90vw));
+  width: max-content;
+}
+
+.hl.lean div.docstring > :last-child {
+  margin-bottom: 0;
+}
+
+.hl.lean div.docstring > :first-child {
+  margin-top: 0;
+}
+
+.hl.lean .hover-info .sep {
+  display: block;
+  width: auto;
+  margin-left: 1rem;
+  margin-right: 1rem;
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+  padding: 0;
+  height: 1px;
+  border-top: 1px solid #ccc;
+}
+
+.hl.lean code {
+  font-family: var(--verso-code-font-family);
+}
+
+.hl.lean .tactic-state {
+  display: none;
+  position: relative;
+  width: fit-content;
+  border: 1px solid #888888;
+  border-radius: 0.1rem;
+  padding: 0.5rem;
+  font-family: sans-serif;
+  background-color: #ffffff;
+}
+
+.hl.lean.popup .tactic-state {
+  position: static;
+  display: block;
+  width: auto;
+  border: none;
+  padding: 0.5rem;
+  font-family: sans-serif;
+  background-color: #ffffff;
+}
+
+
+.hl.lean .tactic {
+  position: relative;
+  display: inline;
+  vertical-align: top;
+  /* Without these, mobile Safari will start making font sizes inconsistent when its text size adjustment feature is triggered.*/
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+.hl.lean .tactic:has(> .tactic-toggle:checked) {
+  display: inline-grid;
+  grid-template-columns: 1fr;
+}
+
+.hl.lean .tactic-toggle:checked ~ .tactic-state {
+  display: inline-block;
+  vertical-align: top;
+  grid-row: 2;
+  justify-self: start;
+}
+
+.hl.lean .tactic > label {
+  position: relative;
+  grid-row: 1;
+  display: inline;
+}
+
+@media (hover: hover) {
+  /* Highlight a region on hover only when its own toggle is unchecked, and only the innermost
+     hovered region: `label:hover` bubbles to ancestor labels, so suppress the highlight on a region
+     whose label contains a more deeply nested hovered tactic label. */
+  .hl.lean .tactic:has(> .tactic-toggle:not(:checked)) > label:hover:not(:has(.tactic > label:hover)) {
+    background-color: #eeeeee;
+  }
+}
+
+.hl.lean .tactic-toggle {
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0;
+  height: 0;
+  width: 0;
+  z-index: -10;
+}
+
+.hl.lean .tactic > label::after {
+  content: "";
+  border: 1px solid #bbbbbb;
+  /* These need to be em, not rem, to scale with the font */
+  border-radius: 1em;
+  height: 0.25em;
+  vertical-align: middle;
+  width: 0.6em;
+  margin-left: 0.1em;
+  margin-right: 0.1em;
+  display: inline-block;
+  transition: all 0.5s;
+}
+
+/*
+@media (hover: hover) {
+  .hl.lean .tactic > label:hover::after {
+    border: 1px solid #aaaaaa;
+    background-color: #aaaaaa;
+    transition: all 0.5s;
+  }
+}
+*/
+
+.hl.lean .tactic > label:has(+ .tactic-toggle:checked)::after {
+  border: 1px solid #999999;
+  background-color: #999999;
+  transition: all 0.5s;
+}
+
+.hl.lean .tactic-state .goal + .goal {
+  margin-top: 1.5em;
+}
+
+/*
+Some CSS frameworks customize details/summary in ways not compatible with Verso's output.
+*/
+
+.hl.lean details {
+  display: block !important;
+  margin: 0;
+}
+
+.hl.lean details summary {
+  display: list-item !important;
+  margin: 0;
+}
+
+.hl.lean details summary:focus {
+  outline: none;
+  outline-offset: none;
+  color: inherit;
+}
+
+.hl.lean ul > li {
+  margin-bottom: 0;
+}
+
+.hl.lean details summary::marker {
+  display: inline !important;
+}
+
+.hl.lean details > summary:first-of-type {
+  list-style-type: disclosure-closed;
+  list-style-position: inside;
+}
+
+.hl.lean details[open] > summary:first-of-type {
+  list-style-type: disclosure-open;
+}
+
+.hl.lean details summary::before, .hl.lean details summary::after {
+  content: "" !important;
+  background: none;
+  display: none;
+}
+
+.hl.lean .tactic-state summary {
+  /* These need to be em, not rem, to scale with the font */
+  margin-left: -0.5em;
+}
+
+.hl.lean .tactic-state details {
+  /* These need to be em, not rem, to scale with the font */
+  padding-left: 0.5em;
+}
+
+.hl.lean .case-label {
+  display: block;
+  position: relative;
+}
+
+.hl.lean .case-label input[type="checkbox"] {
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0;
+  height: 0;
+  width: 0;
+  z-index: -10;
+}
+
+.hl.lean .case-label:has(input[type="checkbox"])::before {
+  display: inline-block;
+  background-color: black;
+  content: ' ';
+  transition: ease 0.2s;
+  margin-right: 0.7em;
+  clip-path: polygon(100% 0, 0 0, 50% 100%);
+  width: 0.6em;
+  height: 0.6em;
+  vertical-align: middle;
+}
+
+.hl.lean .case-label:has(input[type="checkbox"]:not(:checked))::before {
+  transform: rotate(-90deg);
+}
+
+.hl.lean .case-label:has(input[type="checkbox"]) {
+
+}
+
+.hl.lean .case-label:has(input[type="checkbox"]:checked) {
+
+}
+
+
+.hl.lean .labeled-case > :not(:first-child) {
+  max-height: 0px;
+  display: block;
+  overflow: hidden;
+  transition: max-height 0.1s ease-in;
+  /* These need to be em, not rem, to scale with the font */
+  margin-left: 0.5em;
+  margin-top: 0.1em;
+}
+
+.hl.lean .labeled-case:has(.case-label input[type="checkbox"]:checked) > :not(:first-child) {
+  max-height: 100%;
+}
+
+
+.hl.lean .goal-name::before {
+  font-style: normal;
+  content: "case ";
+}
+
+.hl.lean .goal-name {
+  font-style: italic;
+  font-family: var(--verso-code-font-family);
+  color: inherit;
+}
+
+.hl.lean .hypotheses {
+  display: table;
+}
+
+.hl.lean .hypothesis {
+  display: table-row;
+}
+
+.hl.lean .hypothesis > * {
+  display: table-cell;
+}
+
+
+.hl.lean .hypotheses .colon {
+  text-align: center;
+  /* This needs to be em, not rem, to scale with the font */
+  min-width: 1em;
+}
+
+.hl.lean .hypotheses .name {
+  text-align: right;
+}
+
+.hl.lean .hypotheses .name,
+.hl.lean .hypotheses .type,
+.hl.lean .conclusion .type {
+  font-family: var(--verso-code-font-family);
+}
+
+.tippy-box {
+  /* Without these, mobile Safari will start making font sizes inconsistent when its text size adjustment feature is triggered.*/
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+.tippy-box[data-theme~='lean'] {
+  background-color: #e5e5e5;
+  color: black;
+  border: 1px solid black;
+}
+.tippy-box[data-theme~='lean'][data-placement^='top'] > .tippy-arrow::before {
+  border-top-color: #e5e5e5;
+}
+.tippy-box[data-theme~='lean'][data-placement^='bottom'] > .tippy-arrow::before {
+  border-bottom-color: #e5e5e5;
+}
+.tippy-box[data-theme~='lean'][data-placement^='left'] > .tippy-arrow::before {
+  border-left-color: #e5e5e5;
+}
+.tippy-box[data-theme~='lean'][data-placement^='right'] > .tippy-arrow::before {
+  border-right-color: #e5e5e5;
+}
+
+.tippy-box[data-theme~='message'][data-placement^='top'] > .tippy-arrow::before {
+  border-top-color: #e5e5e5;
+  border-width: 11px 11px 0;
+}
+.tippy-box[data-theme~='message'][data-placement^='top'] > .tippy-arrow::after {
+  bottom: -11px;
+  border-width: 11px 11px 0;
+}
+.tippy-box[data-theme~='message'][data-placement^='bottom'] > .tippy-arrow::before {
+  border-width: 0 11px 11px;
+}
+.tippy-box[data-theme~='message'][data-placement^='bottom'] > .tippy-arrow::after {
+  top: -11px;
+  border-width: 0 11px 11px;
+}
+.tippy-box[data-theme~='message'][data-placement^='left'] > .tippy-arrow::before {
+  border-left-color: #e5e5e5;
+  border-width: 11px 0 11px 11px;
+}
+.tippy-box[data-theme~='message'][data-placement^='left'] > .tippy-arrow::after {
+  right: -11px;
+  border-width: 11px 0 11px 11px;
+}
+
+.tippy-box[data-theme~='message'][data-placement^='right'] > .tippy-arrow::before {
+  border-right-color: #e5e5e5;
+  border-width: 11px 11px 11px 0;
+}
+.tippy-box[data-theme~='message'][data-placement^='right'] > .tippy-arrow::after {
+  left: -11px;
+  border-width: 11px 11px 11px 0;
+}
+
+
+
+.tippy-box[data-theme~='warning'] {
+  background-color: #e5e5e5;
+  color: black;
+  border: 3px solid var(--verso-warning-color);
+}
+
+.tippy-box[data-theme~='error'] {
+  background-color: #e5e5e5;
+  color: black;
+  border: 3px solid #f7a7af;
+}
+
+.tippy-box[data-theme~='info'] {
+  background-color: #e5e5e5;
+  color: black;
+  border: 3px solid #99b3c2;
+}
+
+.tippy-box[data-theme~='tactic'] {
+  background-color: white;
+  color: black;
+  border: 1px solid black;
+}
+.tippy-box[data-theme~='tactic'][data-placement^='top'] > .tippy-arrow::before {
+  border-top-color: white;
+}
+.tippy-box[data-theme~='tactic'][data-placement^='bottom'] > .tippy-arrow::before {
+  border-bottom-color: white;
+}
+.tippy-box[data-theme~='tactic'][data-placement^='left'] > .tippy-arrow::before {
+  border-left-color: white;
+}
+.tippy-box[data-theme~='tactic'][data-placement^='right'] > .tippy-arrow::before {
+  border-right-color: white;
+}
+
+.extra-doc-links {
+  list-style-type: none;
+  margin-left: 0;
+  padding: 0;
+}
+
+.extra-doc-links > li {
+  display: inline-block;
+}
+
+.extra-doc-links > li:not(:last-child)::after {
+  content: '|';
+  display: inline-block;
+  margin: 0 0.25em;
+}
+
+.verso-message .trace {
+  display: block;
+}
+
+.verso-message .trace > summary::marker {
+  color: var(--verso-text-color);
+}
+
+.verso-message .trace-children {
+  margin: 0;
+  padding: 0;
+}
+
+.verso-message .trace-children > li {
+  list-style-type: none;
+  margin-left: 1.5em;
+}
+
+.verso-message .trace-children > li:not(:has(.trace)) {
+  margin-left: 0;
+}
+
+.verso-message .trace-class {
+  color: color-mix(in srgb, currentColor 70%, transparent);
+  font-weight: bold;
+  margin: 0;
+  padding: 0;
+}
+
+.verso-message .text {
+  white-space: pre-wrap;
+}
+
+</style><script>
+      
+document.addEventListener("DOMContentLoaded", () => {
+  document.querySelectorAll(".lmlf-lean .has-info.warning").forEach(element => {
+    const message = element.querySelector(".verso-message.warning");
+    if (message?.textContent.trim() === "declaration uses `sorry`") {
+      if (element._tippy) element._tippy.destroy();
+      element.classList.remove("warning");
+      element.querySelector(":scope > .hover-container")?.remove();
+    }
+  });
+});
+</script>
+    <script>
+      
+window.onload = async () => {
+
+    // Don't show hovers inside of closed tactic states
+    function blockedByTactic(elem) {
+      let parent = elem.parentNode;
+      while (parent && "classList" in parent) {
+        if (parent.classList.contains("tactic")) {
+          const toggle = parent.querySelector(":scope > input.tactic-toggle");
+          if (toggle) {
+            return !toggle.checked;
+          }
+        }
+        parent = parent.parentNode;
+      }
+      return false;
+    }
+
+    // Track whether any tippy is visible (O(1) check instead of DOM scan)
+    let visibleTippyCount = 0;
+    function blockedByTippy(elem) {
+      return visibleTippyCount > 0;
+    }
+
+    // Binding highlights via event delegation with cached lookups
+    const bindingCache = new Map(); // context+binding -> [token elements]
+    let highlightedTokens = [];
+    function getBindingTokens(context, binding) {
+      const key = context + "\0" + binding;
+      let tokens = bindingCache.get(key);
+      if (!tokens) {
+        tokens = [];
+        for (const example of document.querySelectorAll(".hl.lean")) {
+          if (example.dataset.leanContext == context) {
+            for (const tok of example.querySelectorAll(".token[data-binding=\"" + CSS.escape(binding) + "\"]")) {
+              tokens.push(tok);
+            }
+          }
+        }
+        bindingCache.set(key, tokens);
+      }
+      return tokens;
+    }
+    for (const container of document.querySelectorAll(".hl.lean")) {
+      container.addEventListener("mouseover", (event) => {
+        const c = event.target.closest(".token");
+        if (!c || !c.dataset.binding || c.dataset.binding === "" || !container.contains(c)) return;
+        if (blockedByTactic(c)) return;
+        const tokens = getBindingTokens(container.dataset.leanContext, c.dataset.binding);
+        for (const tok of tokens) {
+          tok.classList.add("binding-hl");
+        }
+        highlightedTokens = tokens;
+      });
+      container.addEventListener("mouseout", (event) => {
+        const c = event.target.closest(".token");
+        if (!c || !container.contains(c)) return;
+        for (const tok of highlightedTokens) {
+          tok.classList.remove("binding-hl");
+        }
+        highlightedTokens = [];
+      });
+    }
+    /* Render docstrings */
+    if ('undefined' !== typeof marked) {
+        for (const d of document.querySelectorAll("code.docstring, pre.docstring")) {
+            const str = d.innerText;
+            const html = marked.parse(str);
+            const rendered = document.createElement("div");
+            rendered.classList.add("docstring");
+            rendered.innerHTML = html;
+            d.parentNode.replaceChild(rendered, d);
+        }
+    }
+    // Add hovers
+    const versoDocData = await (fetch("-verso-docs.json").then((resp) => resp.json()));
+
+    function hideParentTooltips(element) {
+      let parent = element.parentElement;
+      while (parent) {
+        const tippyInstance = parent._tippy;
+        if (tippyInstance) {
+          tippyInstance.hide();
+        }
+        parent = parent.parentElement;
+      }
+    }
+
+
+
+    const defaultTippyProps = {
+      /* DEBUG -- remove the space: * /
+      onHide(any) { return false; },
+      trigger: "click",
+      // */
+      /* theme: "lean", */
+      maxWidth: "none",
+      appendTo: () => document.body,
+      interactive: true,
+      delay: [100, null],
+      /* ignoreAttributes: true, */
+      followCursor: 'initial',
+      onShow(inst) {
+        if (inst.reference.className == 'tactic') {
+          const toggle = inst.reference.querySelector(":scope > input.tactic-toggle");
+          if (toggle && toggle.checked) {
+            return false;
+          }
+          hideParentTooltips(inst.reference);
+          if (blockedByTippy(inst.reference)) { return false; }
+
+        } else if (inst.reference.querySelector(".hover-info") || "versoHover" in inst.reference.dataset) {
+          if (blockedByTactic(inst.reference)) { return false };
+          if (blockedByTippy(inst.reference)) { return false; }
+        } else { // Nothing to show here!
+          return false;
+        }
+      },
+      onShown(inst) { visibleTippyCount++; },
+      onHidden(inst) { visibleTippyCount = Math.max(0, visibleTippyCount - 1); },
+      content (tgt) {
+        const content = document.createElement("span");
+        if (tgt.className == 'tactic') {
+          const state = tgt.querySelector(":scope > .tactic-state").cloneNode(true);
+          state.style.display = "block";
+          content.appendChild(state);
+          content.style.display = "block";
+          content.className = "hl lean popup";
+        } else {
+          content.className = "hl lean";
+          content.style.display = "block";
+          content.style.maxHeight = "300px";
+          content.style.overflowY = "auto";
+          content.style.overflowX = "hidden";
+          const hoverId = tgt.dataset.versoHover;
+          const hoverInfo = tgt.querySelector(".hover-info");
+          if (hoverId) { // Docstrings from the table
+            // TODO stop doing an implicit conversion from string to number here
+            let data = versoDocData[hoverId];
+            if (data) {
+              const info = document.createElement("span");
+              info.className = "hover-info";
+              info.style.display = "block";
+              info.innerHTML = data;
+              content.appendChild(info);
+              /* Render docstrings - TODO server-side */
+              if ('undefined' !== typeof marked) {
+                  for (const d of content.querySelectorAll("code.docstring, pre.docstring")) {
+                      const str = d.innerText;
+                      const html = marked.parse(str);
+                      const rendered = document.createElement("div");
+                      rendered.classList.add("docstring");
+                      rendered.innerHTML = html;
+                      d.parentNode.replaceChild(rendered, d);
+                  }
+              }
+            } else {
+              content.innerHTML = "Failed to load doc ID: " + hoverId;
+            }
+          } else if (hoverInfo) { // The inline info, still used for compiler messages
+            content.appendChild(hoverInfo.cloneNode(true));
+          }
+          const extraLinks = tgt.parentElement.dataset['versoLinks'];
+          if (extraLinks) {
+            try {
+              const extras = JSON.parse(extraLinks);
+              const links = document.createElement('ul');
+              links.className = 'extra-doc-links';
+              extras.forEach((l) => {
+                const li = document.createElement('li');
+                li.innerHTML = "<a href=\"" + l['href'] + "\" title=\"" + l.long + "\">" + l.short + "</a>";
+                links.appendChild(li);
+              });
+              content.appendChild(links);
+            } catch (error) {
+              console.error(error);
+            }
+          }
+        }
+        return content;
+      }
+    };
+
+
+    document.querySelectorAll('.hl.lean .const.token, .hl.lean .keyword.token, .hl.lean .literal.token, .hl.lean .option.token, .hl.lean .var.token, .hl.lean .typed.token, .hl.lean .level-var, .hl.lean .level-const, .hl.lean .level-op, .hl.lean .sort').forEach(element => {
+      element.setAttribute('data-tippy-theme', 'lean');
+    });
+    document.querySelectorAll('.hl.lean .has-info.warning').forEach(element => {
+      element.setAttribute('data-tippy-theme', 'warning message');
+    });
+    document.querySelectorAll('.hl.lean .has-info.information').forEach(element => {
+      element.setAttribute('data-tippy-theme', 'info message');
+    });
+    document.querySelectorAll('.hl.lean .has-info.error').forEach(element => {
+      element.setAttribute('data-tippy-theme', 'error message');
+    });
+    document.querySelectorAll('.hl.lean .tactic').forEach(element => {
+      element.setAttribute('data-tippy-theme', 'tactic');
+    });
+    // Skip tokens inside closed tactics — they interfere with tactic tippys
+    const closedTactics = new Set();
+    document.querySelectorAll('.hl.lean .tactic').forEach(tactic => {
+      const toggle = tactic.querySelector(':scope > input.tactic-toggle');
+      if (toggle && !toggle.checked) closedTactics.add(tactic);
+    });
+    function isInsideClosedTactic(el) {
+      const tactic = el.closest('.tactic');
+      return tactic && tactic !== el && closedTactics.has(tactic);
+    }
+
+    const tokenSelector = '.hl.lean .const.token, .hl.lean .keyword.token, .hl.lean .literal.token, .hl.lean .option.token, .hl.lean .var.token, .hl.lean .typed.token, .hl.lean .has-info, .hl.lean .tactic, .hl.lean .level-var, .hl.lean .level-const, .hl.lean .level-op, .hl.lean .sort';
+    tippy(Array.from(document.querySelectorAll(tokenSelector)).filter(el => !isInsideClosedTactic(el)), defaultTippyProps);
+
+    // Create/destroy token tippys when tactic checkbox toggles
+    const tacticTippySelector = '.const.token, .keyword.token, .literal.token, .option.token, .var.token, .typed.token, .has-info, .level-var, .level-const, .level-op, .sort';
+    document.querySelectorAll('.hl.lean .tactic').forEach(tactic => {
+      const toggle = tactic.querySelector(':scope > input.tactic-toggle');
+      if (toggle) toggle.addEventListener('change', () => {
+        if (toggle.checked) {
+          closedTactics.delete(tactic);
+          tactic.querySelectorAll('.token').forEach(tok => {
+            if (!tok._tippy && tok.matches(tacticTippySelector)) {
+              tippy(tok, defaultTippyProps);
+            }
+          });
+        } else {
+          closedTactics.add(tactic);
+          tactic.querySelectorAll('.token').forEach(tok => {
+            if (tok._tippy) tok._tippy.destroy();
+          });
+        }
+      });
+  });
+}
+</script>
+    </head>
+  <body>
+    <header>
+      <div class="header-logo-wrapper"></div>
+      <div class="header-title-wrapper">
+        <a href="" class="header-title"><h1>
+            LMLF</h1>
+          </a></div>
+      </header>
+    <label for="toggle-toc" id="toggle-toc-click"><span class="line line1"></span><span class="line line2"></span><span class="line line3"></span></label><div class="with-toc">
+      <div class="toc-backdrop" onclick="document.getElementById('toggle-toc-click')?.click()"></div>
+      <nav id="toc">
+        <input type="checkbox" id="toggle-toc"><div class="first">
+          <a href="" class="toc-title"><h1>
+              LMLF</h1>
+            </a><div class="split-tocs">
+            <div class="split-toc book">
+              <div class="title">
+                <label for="--verso-manual-toc-----bookRoot" class="toggle-split-toc"><input type="checkbox" class="toggle-split-toc" id="--verso-manual-toc-----bookRoot"></label><span class="">Table of Contents</span></div>
+              <table><tr class="unnumbered"><td class="num"><td><a href="Coverage/#coverage">Coverage</a></td></tr><tr class="numbered"><td class="num">1.</td><td><a href="Finite-error-bounds/#chapter-1">Finite error bounds</a></td></tr><tr class="numbered"><td class="num">2.</td><td><a href="Approximants-and-series/#chapter-2">Approximants and series</a></td></tr><tr class="numbered"><td class="num">3.</td><td><a href="Improper-integrals/#chapter-3">Improper integrals</a></td></tr><tr class="numbered"><td class="num">4.</td><td><a href="Elementary-Functions/#chapter-4">Elementary Functions</a></td></tr><tr class="numbered"><td class="num">5.</td><td><a href="Gamma-Function/#chapter-5">Gamma Function</a></td></tr><tr class="current numbered"><td class="num">6.</td><td><a href="Exponential___-Logarithmic___-Sine___-and-Cosine-Integrals/#chapter-6">Exponential, Logarithmic, Sine, and Cosine Integrals</a></td></tr><tr class="numbered"><td class="num">7.</td><td><a href="Error-Functions___-Dawson___s-and-Fresnel-Integrals/#chapter-7">Error Functions, Dawson's and Fresnel Integrals</a></td></tr><tr class="numbered"><td class="num">8.</td><td><a href="Incomplete-Gamma-and-Related-Functions/#chapter-8">Incomplete Gamma and Related Functions</a></td></tr><tr class="numbered"><td class="num">9.</td><td><a href="Airy-and-Related-Functions/#chapter-9">Airy and Related Functions</a></td></tr><tr class="numbered"><td class="num">10.</td><td><a href="Bessel-Functions/#chapter-10">Bessel Functions</a></td></tr></table></div>
+            <div class="split-toc">
+              <div class="title">
+                <label for="--verso-manual-toc-chapter-6" class="toggle-split-toc"><input type="checkbox" class="toggle-split-toc" id="--verso-manual-toc-chapter-6" checked="checked"></label><span class="number">6.</span> <span class=""><a href="Exponential___-Logarithmic___-Sine___-and-Cosine-Integrals/#chapter-6">Exponential, Logarithmic, Sine, and Cosine Integrals</a></span></div>
+              <table><tr class="unnumbered"><td class="num"><td><a href="Exponential___-Logarithmic___-Sine___-and-Cosine-Integrals/Chapter-contents/#LMLF-___-DLMF-with-Lean--Exponential___-Logarithmic___-Sine___-and-Cosine-Integrals--Chapter-contents">Chapter contents</a></td></tr><tr class="numbered"><td class="num">6.1.</td><td><a href="Exponential___-Logarithmic___-Sine___-and-Cosine-Integrals/___6___1-Special-Notation/#chapter-6-section-1">§6.1 Special Notation</a></td></tr><tr class="numbered"><td class="num">6.2.</td><td><a href="Exponential___-Logarithmic___-Sine___-and-Cosine-Integrals/___6___2-Definitions-and-Interrelations/#chapter-6-section-2">§6.2 Definitions and Interrelations</a></td></tr><tr class="numbered"><td class="num">6.3.</td><td><a href="Exponential___-Logarithmic___-Sine___-and-Cosine-Integrals/___6___3-Graphics/#chapter-6-section-3">§6.3 Graphics</a></td></tr><tr class="numbered"><td class="num">6.4.</td><td><a href="Exponential___-Logarithmic___-Sine___-and-Cosine-Integrals/___6___4-Analytic-Continuation/#chapter-6-section-4">§6.4 Analytic Continuation</a></td></tr><tr class="numbered"><td class="num">6.5.</td><td><a href="Exponential___-Logarithmic___-Sine___-and-Cosine-Integrals/___6___5-Further-Interrelations/#chapter-6-section-5">§6.5 Further Interrelations</a></td></tr><tr class="numbered"><td class="num">6.6.</td><td><a href="Exponential___-Logarithmic___-Sine___-and-Cosine-Integrals/___6___6-Power-Series/#chapter-6-section-6">§6.6 Power Series</a></td></tr><tr class="numbered"><td class="num">6.7.</td><td><a href="Exponential___-Logarithmic___-Sine___-and-Cosine-Integrals/___6___7-Relations-to-Other-Functions/#chapter-6-section-7">§6.7 Relations to Other Functions</a></td></tr><tr class="numbered"><td class="num">6.8.</td><td><a href="Exponential___-Logarithmic___-Sine___-and-Cosine-Integrals/___6___8-Inequalities/#chapter-6-section-8">§6.8 Inequalities</a></td></tr><tr class="numbered"><td class="num">6.9.</td><td><a href="Exponential___-Logarithmic___-Sine___-and-Cosine-Integrals/___6___9-Continued-Fraction/#chapter-6-section-9">§6.9 Continued Fraction</a></td></tr><tr class="current numbered"><td class="num">6.10.</td><td><a href="Exponential___-Logarithmic___-Sine___-and-Cosine-Integrals/___6___10-Other-Series-Expansions/#chapter-6-section-10">§6.10 Other Series Expansions</a></td></tr><tr class="numbered"><td class="num">6.11.</td><td><a href="Exponential___-Logarithmic___-Sine___-and-Cosine-Integrals/___6___11-Relations-to-Other-Functions/#chapter-6-section-11">§6.11 Relations to Other Functions</a></td></tr><tr class="numbered"><td class="num">6.12.</td><td><a href="Exponential___-Logarithmic___-Sine___-and-Cosine-Integrals/___6___12-Asymptotic-Expansions/#chapter-6-section-12">§6.12 Asymptotic Expansions</a></td></tr><tr class="numbered"><td class="num">6.13.</td><td><a href="Exponential___-Logarithmic___-Sine___-and-Cosine-Integrals/___6___13-Zeros/#chapter-6-section-13">§6.13 Zeros</a></td></tr><tr class="numbered"><td class="num">6.14.</td><td><a href="Exponential___-Logarithmic___-Sine___-and-Cosine-Integrals/___6___14-Integrals/#chapter-6-section-14">§6.14 Integrals</a></td></tr><tr class="numbered"><td class="num">6.15.</td><td><a href="Exponential___-Logarithmic___-Sine___-and-Cosine-Integrals/___6___15-Sums/#chapter-6-section-15">§6.15 Sums</a></td></tr><tr class="numbered"><td class="num">6.16.</td><td><a href="Exponential___-Logarithmic___-Sine___-and-Cosine-Integrals/___6___16-Mathematical-Applications/#chapter-6-section-16">§6.16 Mathematical Applications</a></td></tr><tr class="numbered"><td class="num">6.17.</td><td><a href="Exponential___-Logarithmic___-Sine___-and-Cosine-Integrals/___6___17-Physical-Applications/#chapter-6-section-17">§6.17 Physical Applications</a></td></tr><tr class="numbered"><td class="num">6.18.</td><td><a href="Exponential___-Logarithmic___-Sine___-and-Cosine-Integrals/___6___18-Methods-of-Computation/#chapter-6-section-18">§6.18 Methods of Computation</a></td></tr><tr class="numbered"><td class="num">6.19.</td><td><a href="Exponential___-Logarithmic___-Sine___-and-Cosine-Integrals/___6___19-Tables/#chapter-6-section-19">§6.19 Tables</a></td></tr><tr class="numbered"><td class="num">6.20.</td><td><a href="Exponential___-Logarithmic___-Sine___-and-Cosine-Integrals/___6___20-Approximations/#chapter-6-section-20">§6.20 Approximations</a></td></tr><tr class="numbered"><td class="num">6.21.</td><td><a href="Exponential___-Logarithmic___-Sine___-and-Cosine-Integrals/___6___21-Software/#chapter-6-section-21">§6.21 Software</a></td></tr></table></div>
+            <div class="split-toc">
+              <div class="title">
+                <label for="--verso-manual-toc-chapter-6-section-10" class="toggle-split-toc"><input type="checkbox" class="toggle-split-toc" id="--verso-manual-toc-chapter-6-section-10" checked="checked"></label><span class="number">6.10.</span> <span class="current"><a href="Exponential___-Logarithmic___-Sine___-and-Cosine-Integrals/___6___10-Other-Series-Expansions/#chapter-6-section-10">§6.10 Other Series Expansions</a></span></div>
+              <table><tr class="unnumbered"><td class="num"><td><a href="Exponential___-Logarithmic___-Sine___-and-Cosine-Integrals/___6___10-Other-Series-Expansions/#LMLF-___-DLMF-with-Lean--Exponential___-Logarithmic___-Sine___-and-Cosine-Integrals--___6___10-Other-Series-Expansions--___6___10-Other-Series-Expansions">§6.10 Other Series Expansions</a></td></tr></table></div>
+            </div>
+          </div>
+        <div class="last"></div>
+        </nav>
+      <div class="toc-resize-handle"></div>
+      <main><div class="content-wrapper">
+          <nav class="prev-next-buttons">
+            <a class="local-button active" href="Exponential___-Logarithmic___-Sine___-and-Cosine-Integrals/___6___9-Continued-Fraction/#chapter-6-section-9" rel="prev" title="6.9. §6.9 Continued Fraction"><span class="arrow">←</span><span class="where">6.9. §6.9 Continued Fraction</span></a><a class="local-button active" href="Exponential___-Logarithmic___-Sine___-and-Cosine-Integrals/___6___11-Relations-to-Other-Functions/#chapter-6-section-11" rel="next" title="6.11. §6.11 Relations to Other Functions"><span class="where">6.11. §6.11 Relations to Other Functions</span><span class="arrow">→</span></a></nav>
+          <section>
+            <h1>
+              6.10. §6.10 Other Series Expansions<span class="permalink-widget inline"><a href="find/?domain=Verso.Genre.Manual.section&amp;name=chapter-6-section-10" title="Permalink">🔗</a></span></h1>
+            <div class="lmlf-source-link">
+              <p>
+                Source: NIST Digital Library of Mathematical Functions, §6.10.</p>
+              <a href="https://dlmf.nist.gov/6.10">Open this chapter in the DLMF ↗</a></div>
+            <section>
+              <h2 id="LMLF-___-DLMF-with-Lean--Exponential___-Logarithmic___-Sine___-and-Cosine-Integrals--___6___10-Other-Series-Expansions--___6___10-Other-Series-Expansions">
+                §6.10 Other Series Expansions<span class="permalink-widget inline"><a href="find/?domain=Verso.Genre.Manual.section&amp;name=LMLF-___-DLMF-with-Lean--Exponential___-Logarithmic___-Sine___-and-Cosine-Integrals--___6___10-Other-Series-Expansions--___6___10-Other-Series-Expansions" title="Permalink">🔗</a></span></h2>
+              <p>
+                The first subsection gives an inverse-factorial expansion for the exponential
+integral.  The coefficients are fixed by their initial values and a finite
+recurrence.  The second subsection records expansions in spherical and
+modified spherical Bessel functions; the real formula for Ei
+is stated away from its logarithmic singularity at zero.</p>
+              <p>
+                The Lean disclosures use the canonical §6.2 relations for E1, Ei, Si, Cin,
+and Ein.  The inverse-factorial coefficients are an
+executable finite-prefix construction.  Spherical and modified spherical
+Bessel functions are represented by normalized families whose initial values
+and recurrences identify the DLMF functions; this is the reusable interface
+needed because Mathlib does not currently provide these two families as named
+maps.</p>
+              <article class="lmlf-dlmf-entry"><div class="lmlf-dlmf-entry__source">
+                  <a href="https://dlmf.nist.gov/6.10#i.p1">DLMF Inverse-factorial subsection ↗</a></div>
+                <div class="lmlf-dlmf-entry__body">
+                  <p>
+                    The inverse-factorial subsection introduces the coefficient family used in
+E1--E3; the first three displays below give its expansion, initial values, and
+finite recurrence.</p>
+                  </div>
+                </article><article class="lmlf-dlmf-entry"><div class="lmlf-dlmf-entry__source">
+                  <a href="https://dlmf.nist.gov/6.10#i.info">DLMF Inverse-factorial source note ↗</a></div>
+                <div class="lmlf-dlmf-entry__body">
+                  <p>
+                    The source note cites Nielsen (1906a, p. 283).  It also records that the
+recurrence in E3 follows from the generating function
+<code>1/(1-ln(1-t)) = Σₖ cₖ tᵏ</code>, and points to the related result in §6.18(i).
+For the more general incomplete-gamma and logarithmic-integral results, the
+same source note warns that Nielsen's Formula (3) is incorrect.</p>
+                  </div>
+                </article><article class="lmlf-dlmf-entry"><div class="lmlf-dlmf-entry__source">
+                  <a href="https://dlmf.nist.gov/6.10#i.p2">DLMF Inverse-factorial generating function ↗</a></div>
+                <div class="lmlf-dlmf-entry__body">
+                  <p>
+                    The generating-function specification fixes the same coefficients used by the
+executable finite-prefix construction, so the recurrence is not an arbitrary
+sequence assumption.</p>
+                  </div>
+                </article><article class="lmlf-dlmf-entry"><div class="lmlf-dlmf-entry__source">
+                  <a href="https://dlmf.nist.gov/6.10.E1">DLMF Inverse-factorial expansion ↗</a></div>
+                <div class="lmlf-dlmf-entry__body">
+                  <p>
+                    For complex z with positive real part, the inverse-factorial series is</p>
+                  <p>
+                    <code class="math display">\operatorname{E}_{1}(z)=e^{-z}\left(\frac{c_{0}}{z}+\frac{c_{1}}{z(z+1)}+\frac{2!c_{2}}{z(z+1)(z+2)}+\frac{3!c_{3}}{z(z+1)(z+2)(z+3)}+\cdots\right).</code>$$</p>
+                  <details class="lmlf-lean" open=""><summary>6.10.E1 inverse-factorial expansion</summary><div class="lmlf-lean__body">
+                      <code class="hl lean block" data-lean-context="examples"><span class="keyword token" data-binding="kw-occ-Lean.Parser.Command.theorem-3552">theorem</span><span class="inter-text"> </span><span class="has-info warning"><span class="hover-container"><span class="hover-info messages"><code class="verso-message warning"><span class="text"></span><span class="text">declaration uses `</span><span class="highlighted"><span class="inter-text"></span><span class="unknown token" data-binding="">sorry</span><span class="inter-text"></span></span><span class="text">`</span></code></span></span><span class="const token" data-binding="const-LMLF.Blueprint.ExponentialIntegrals.Section610.dlmf_6_10_1" data-verso-hover="2731" id="LMLF___Blueprint___ExponentialIntegrals___Section610___dlmf_6_10_1">dlmf_6_10_1</span></span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-3572">(</span><span class="var token" data-binding="var-_uniq.5990" data-verso-hover="171">z</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-3572">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Complex" data-verso-hover="165">ℂ</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-3572">)</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-3582">(</span><span class="var token" data-binding="var-_uniq.6051" data-verso-hover="1579">hz</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-3582">:</span><span class="inter-text"> </span><span class="literal number token" data-binding="" data-verso-hover="19">0</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_<_»-3588">&lt;</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.5990" data-verso-hover="171">z</span><span class="built-in delim token" data-binding="">.</span><span class="const token" data-binding="const-Complex.re" data-verso-hover="287">re</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-3582">)</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeSpec-3598">:</span><span class="inter-text">
+    </span><span class="const token" data-binding="const-HasSum" data-verso-hover="336">HasSum</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-3611">(</span><span class="const token" data-binding="const-LMLF.Blueprint.ExponentialIntegrals.Section610.inverseFactorialTerm" data-verso-hover="2732">inverseFactorialTerm</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.5990" data-verso-hover="171">z</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.paren-3611">)</span><span class="inter-text">
+      </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-3642">(</span><span class="const token" data-binding="const-Complex.exp" data-verso-hover="239">Complex.exp</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.5990" data-verso-hover="171">z</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_*_»-3643">*</span><span class="inter-text">
+        </span><span class="const token" data-binding="const-LMLF.Blueprint.ExponentialIntegrals.Section62.principalE1" data-verso-hover="2575">LMLF.Blueprint.ExponentialIntegrals.Section62.principalE1</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.5990" data-verso-hover="171">z</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.paren-3642">)</span></code></div>
+                    </details></div>
+                </article><p>
+                The coefficient stream is executable: <code>inverseFactorialPrefix (n + 1)</code> stores
+the first (n+1) coefficients, and <code>inverseFactorialCoeff n</code> reads its last
+entry.  The next entry is computed by the finite sum in the recurrence, so
+the API does not quantify over an arbitrary sequence.</p>
+              <details class="lmlf-lean" open=""><summary>6.10 coefficient prefix algorithm</summary><div class="lmlf-lean__body">
+                  <code class="hl lean block" data-lean-context="examples"><span class="keyword token" data-binding="kw-occ-Lean.Parser.Command.definition-893">def</span><span class="inter-text"> </span><span class="const token" data-binding="const-LMLF.Blueprint.ExponentialIntegrals.Section610.inverseFactorialPrefix" data-verso-hover="2733" id="LMLF___Blueprint___ExponentialIntegrals___Section610___inverseFactorialPrefix">inverseFactorialPrefix</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeSpec-920">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Nat" data-verso-hover="34">ℕ</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-Lean.Parser.Term.arrow-922">→</span><span class="inter-text"> </span><span class="const token" data-binding="const-List" data-verso-hover="107">List</span><span class="inter-text"> </span><span class="const token" data-binding="const-Complex" data-verso-hover="165">ℂ</span><span class="inter-text">
+  </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.matchAlts-941">|</span><span class="inter-text"> </span><span class="literal number token" data-binding="" data-verso-hover="37">0</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.matchAlts-941">=&gt;</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-«term[_]»-948">[</span><span class="punctuation bracket token" data-binding="kw-occ-«term[_]»-948">]</span><span class="inter-text">
+  </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.matchAlts-941">|</span><span class="inter-text"> </span><span class="literal number token" data-binding="" data-verso-hover="37">1</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.matchAlts-941">=&gt;</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-«term[_]»-960">[</span><span class="literal number token" data-binding="" data-verso-hover="171">1</span><span class="punctuation bracket token" data-binding="kw-occ-«term[_]»-960">]</span><span class="inter-text">
+  </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.matchAlts-941">|</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.384" data-verso-hover="37">n</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_+_»-968">+</span><span class="inter-text"> </span><span class="literal number token" data-binding="">2</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.matchAlts-941">=&gt;</span><span class="inter-text">
+      </span><span class="keyword token" data-binding="kw-occ-Lean.Parser.Term.let-983" data-verso-hover="936">let</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.430" data-verso-hover="2734">xs</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.letIdDecl-987">:=</span><span class="inter-text"> </span><a href="Exponential___-Logarithmic___-Sine___-and-Cosine-Integrals/___6___10-Other-Series-Expansions/#LMLF___Blueprint___ExponentialIntegrals___Section610___inverseFactorialPrefix" title="Definition of example"><span class="const token" data-binding="const-LMLF.Blueprint.ExponentialIntegrals.Section610.inverseFactorialPrefix" data-verso-hover="2733">inverseFactorialPrefix</span></a><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-1016">(</span><span class="var token" data-binding="var-_uniq.384" data-verso-hover="37">n</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_+_»-1017">+</span><span class="inter-text"> </span><span class="literal number token" data-binding="" data-verso-hover="37">1</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.paren-1016">)</span><span class="inter-text">
+      </span><span class="var token" data-binding="var-_uniq.430" data-verso-hover="2734">xs</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_++_»-1030">++</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-«term[_]»-1036">[</span><span class="const token" data-binding="const-LMLF.Blueprint.ExponentialIntegrals.Section610.inverseFactorialNext" data-verso-hover="2735">inverseFactorialNext</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.430" data-verso-hover="2734">xs</span><span class="punctuation bracket token" data-binding="kw-occ-«term[_]»-1036">]</span></code></div>
+                </details><details class="lmlf-lean" open=""><summary>6.10 coefficient map</summary><div class="lmlf-lean__body">
+                  <code class="hl lean block" data-lean-context="examples"><span class="keyword token" data-binding="kw-occ-Lean.Parser.Command.definition-1210">def</span><span class="inter-text"> </span><span class="const token" data-binding="const-LMLF.Blueprint.ExponentialIntegrals.Section610.inverseFactorialCoeff" data-verso-hover="2736" id="LMLF___Blueprint___ExponentialIntegrals___Section610___inverseFactorialCoeff">inverseFactorialCoeff</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-1236">(</span><span class="var token" data-binding="var-_uniq.638" data-verso-hover="37">n</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-1236">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Nat" data-verso-hover="34">ℕ</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-1236">)</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeSpec-1246">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Complex" data-verso-hover="165">ℂ</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Command.declValSimple-1252">:=</span><span class="inter-text">
+  </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-1257">(</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-1258">(</span><a href="Exponential___-Logarithmic___-Sine___-and-Cosine-Integrals/___6___10-Other-Series-Expansions/#LMLF___Blueprint___ExponentialIntegrals___Section610___inverseFactorialPrefix" title="Definition of example"><span class="const token" data-binding="const-LMLF.Blueprint.ExponentialIntegrals.Section610.inverseFactorialPrefix" data-verso-hover="2733">inverseFactorialPrefix</span></a><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-1282">(</span><span class="var token" data-binding="var-_uniq.638" data-verso-hover="37">n</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_+_»-1283">+</span><span class="inter-text"> </span><span class="literal number token" data-binding="" data-verso-hover="37">1</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.paren-1282">)</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.paren-1258">)</span><span class="punctuation bracket token" data-binding="kw-occ-«term__[_]_?»-1258">[</span><span class="var token" data-binding="var-_uniq.638" data-verso-hover="37">n</span><span class="punctuation bracket token" data-binding="kw-occ-«term__[_]_?»-1258">]</span><span class="punctuation operator token" data-binding="kw-occ-«term__[_]_?»-1258">?</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.paren-1257">)</span><span class="built-in delim token" data-binding="">.</span><span class="const token" data-binding="const-Option.getD" data-verso-hover="2737">getD</span><span class="inter-text"> </span><span class="literal number token" data-binding="" data-verso-hover="171">0</span></code></div>
+                </details><article class="lmlf-dlmf-entry"><div class="lmlf-dlmf-entry__source">
+                  <a href="https://dlmf.nist.gov/6.10.E2">DLMF Initial inverse-factorial coefficients ↗</a></div>
+                <div class="lmlf-dlmf-entry__body">
+                  <p>
+                    The first coefficients are</p>
+                  <p>
+                    <code class="math display">c_{0}=1,\qquad c_{1}=-1,\qquad c_{2}=\frac{1}{2},\qquad c_{3}=-\frac{1}{3},\qquad c_{4}=\frac{1}{6}.</code>$$</p>
+                  <details class="lmlf-lean" open=""><summary>6.10.E2 initial coefficients</summary><div class="lmlf-lean__body">
+                      <code class="hl lean block" data-lean-context="examples"><span class="keyword token" data-binding="kw-occ-Lean.Parser.Command.theorem-3866">theorem</span><span class="inter-text"> </span><span class="has-info warning"><span class="hover-container"><span class="hover-info messages"><code class="verso-message warning"><span class="text"></span><span class="text">declaration uses `</span><span class="highlighted"><span class="inter-text"></span><span class="unknown token" data-binding="">sorry</span><span class="inter-text"></span></span><span class="text">`</span></code></span></span><span class="const token" data-binding="const-LMLF.Blueprint.ExponentialIntegrals.Section610.dlmf_6_10_2" data-verso-hover="2738" id="LMLF___Blueprint___ExponentialIntegrals___Section610___dlmf_6_10_2">dlmf_6_10_2</span></span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeSpec-3886">:</span><span class="inter-text">
+    </span><a href="Exponential___-Logarithmic___-Sine___-and-Cosine-Integrals/___6___10-Other-Series-Expansions/#LMLF___Blueprint___ExponentialIntegrals___Section610___inverseFactorialCoeff" title="Definition of example"><span class="const token" data-binding="const-LMLF.Blueprint.ExponentialIntegrals.Section610.inverseFactorialCoeff" data-verso-hover="2736">inverseFactorialCoeff</span></a><span class="inter-text"> </span><span class="literal number token" data-binding="" data-verso-hover="37">0</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_=_»-3892">=</span><span class="inter-text"> </span><span class="literal number token" data-binding="" data-verso-hover="171">1</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_∧_»-3892">∧</span><span class="inter-text"> </span><a href="Exponential___-Logarithmic___-Sine___-and-Cosine-Integrals/___6___10-Other-Series-Expansions/#LMLF___Blueprint___ExponentialIntegrals___Section610___inverseFactorialCoeff" title="Definition of example"><span class="const token" data-binding="const-LMLF.Blueprint.ExponentialIntegrals.Section610.inverseFactorialCoeff" data-verso-hover="2736">inverseFactorialCoeff</span></a><span class="inter-text"> </span><span class="literal number token" data-binding="" data-verso-hover="37">1</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_=_»-3924">=</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term-_»-3950">-</span><span class="literal number token" data-binding="" data-verso-hover="171">1</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_∧_»-3924">∧</span><span class="inter-text">
+      </span><a href="Exponential___-Logarithmic___-Sine___-and-Cosine-Integrals/___6___10-Other-Series-Expansions/#LMLF___Blueprint___ExponentialIntegrals___Section610___inverseFactorialCoeff" title="Definition of example"><span class="const token" data-binding="const-LMLF.Blueprint.ExponentialIntegrals.Section610.inverseFactorialCoeff" data-verso-hover="2736">inverseFactorialCoeff</span></a><span class="inter-text"> </span><span class="literal number token" data-binding="" data-verso-hover="37">2</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_=_»-3963">=</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-3989">(</span><span class="literal number token" data-binding="" data-verso-hover="171">1</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_/_»-3990">/</span><span class="inter-text"> </span><span class="literal number token" data-binding="" data-verso-hover="171">2</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeAscription-3989">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Complex" data-verso-hover="165">ℂ</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.typeAscription-3989">)</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_∧_»-3963">∧</span><span class="inter-text">
+      </span><a href="Exponential___-Logarithmic___-Sine___-and-Cosine-Integrals/___6___10-Other-Series-Expansions/#LMLF___Blueprint___ExponentialIntegrals___Section610___inverseFactorialCoeff" title="Definition of example"><span class="const token" data-binding="const-LMLF.Blueprint.ExponentialIntegrals.Section610.inverseFactorialCoeff" data-verso-hover="2736">inverseFactorialCoeff</span></a><span class="inter-text"> </span><span class="literal number token" data-binding="" data-verso-hover="37">3</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_=_»-4013">=</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term-_»-4039">-</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-4040">(</span><span class="literal number token" data-binding="" data-verso-hover="171">1</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_/_»-4041">/</span><span class="inter-text"> </span><span class="literal number token" data-binding="" data-verso-hover="171">3</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeAscription-4040">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Complex" data-verso-hover="165">ℂ</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.typeAscription-4040">)</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_∧_»-4013">∧</span><span class="inter-text"> </span><a href="Exponential___-Logarithmic___-Sine___-and-Cosine-Integrals/___6___10-Other-Series-Expansions/#LMLF___Blueprint___ExponentialIntegrals___Section610___inverseFactorialCoeff" title="Definition of example"><span class="const token" data-binding="const-LMLF.Blueprint.ExponentialIntegrals.Section610.inverseFactorialCoeff" data-verso-hover="2736">inverseFactorialCoeff</span></a><span class="inter-text"> </span><span class="literal number token" data-binding="" data-verso-hover="37">4</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_=_»-4058">=</span><span class="inter-text"> </span><span class="literal number token" data-binding="" data-verso-hover="171">1</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_/_»-4084">/</span><span class="inter-text"> </span><span class="literal number token" data-binding="" data-verso-hover="171">6</span></code></div>
+                    </details></div>
+                </article><article class="lmlf-dlmf-entry"><div class="lmlf-dlmf-entry__source">
+                  <a href="https://dlmf.nist.gov/6.10.E3">DLMF Coefficient recurrence ↗</a></div>
+                <div class="lmlf-dlmf-entry__body">
+                  <p>
+                    The subsequent coefficients satisfy</p>
+                  <p>
+                    <code class="math display">c_{k}=-\sum_{j=0}^{k-1}\frac{c_{j}}{k-j},\qquad k\geq 1.</code>$$</p>
+                  <details class="lmlf-lean" open=""><summary>6.10.E3 coefficient recurrence</summary><div class="lmlf-lean__body">
+                      <code class="hl lean block" data-lean-context="examples"><span class="keyword token" data-binding="kw-occ-Lean.Parser.Command.theorem-4240">theorem</span><span class="inter-text"> </span><span class="has-info warning"><span class="hover-container"><span class="hover-info messages"><code class="verso-message warning"><span class="text"></span><span class="text">declaration uses `</span><span class="highlighted"><span class="inter-text"></span><span class="unknown token" data-binding="">sorry</span><span class="inter-text"></span></span><span class="text">`</span></code></span></span><span class="const token" data-binding="const-LMLF.Blueprint.ExponentialIntegrals.Section610.dlmf_6_10_3" data-verso-hover="2739" id="LMLF___Blueprint___ExponentialIntegrals___Section610___dlmf_6_10_3">dlmf_6_10_3</span></span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeSpec-4260">:</span><span class="inter-text">
+    </span><span class="unknown token" data-binding="">∀</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.6804" data-verso-hover="37">k</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeSpec-4272">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Nat" data-verso-hover="34">ℕ</span><span class="punctuation separator token" data-binding="kw-occ-Lean.Parser.Term.forall-4266">,</span><span class="inter-text"> </span><span class="literal number token" data-binding="" data-verso-hover="37">1</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_≤_»-4279">≤</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.6804" data-verso-hover="37">k</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-Lean.Parser.Term.arrow-4279">→</span><span class="inter-text"> </span><a href="Exponential___-Logarithmic___-Sine___-and-Cosine-Integrals/___6___10-Other-Series-Expansions/#LMLF___Blueprint___ExponentialIntegrals___Section610___inverseFactorialCoeff" title="Definition of example"><span class="const token" data-binding="const-LMLF.Blueprint.ExponentialIntegrals.Section610.inverseFactorialCoeff" data-verso-hover="2736">inverseFactorialCoeff</span></a><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.6804" data-verso-hover="37">k</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_=_»-4291">=</span><span class="inter-text">
+      </span><span class="punctuation operator token" data-binding="kw-occ-«term-_»-4323">-</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-4324">(</span><span class="const token" data-binding="const-Finset.sum" data-verso-hover="702">Finset.sum</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-4336">(</span><span class="const token" data-binding="const-Finset.range" data-verso-hover="40">Finset.range</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.6804" data-verso-hover="37">k</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.paren-4336">)</span><span class="inter-text"> </span><span class="keyword token" data-binding="kw-occ-Lean.Parser.Term.fun-4353">fun</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.6871" data-verso-hover="37">j</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.basicFun-4357">=&gt;</span><span class="inter-text">
+        </span><a href="Exponential___-Logarithmic___-Sine___-and-Cosine-Integrals/___6___10-Other-Series-Expansions/#LMLF___Blueprint___ExponentialIntegrals___Section610___inverseFactorialCoeff" title="Definition of example"><span class="const token" data-binding="const-LMLF.Blueprint.ExponentialIntegrals.Section610.inverseFactorialCoeff" data-verso-hover="2736">inverseFactorialCoeff</span></a><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.6871" data-verso-hover="37">j</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_/_»-4370">/</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-4396">(</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-4397">(</span><span class="var token" data-binding="var-_uniq.6804" data-verso-hover="37">k</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_-_»-4398">-</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.6871" data-verso-hover="37">j</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeAscription-4397">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Nat" data-verso-hover="34">ℕ</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.typeAscription-4397">)</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeAscription-4396">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Complex" data-verso-hover="165">ℂ</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.typeAscription-4396">)</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.paren-4324">)</span></code></div>
+                    </details></div>
+                </article><p>
+                The next subsection uses the standard spherical-Bessel notation of §10.47(ii).</p>
+              <article class="lmlf-dlmf-entry"><div class="lmlf-dlmf-entry__source">
+                  <a href="https://dlmf.nist.gov/6.10#ii.p1">DLMF Spherical-Bessel subsection ↗</a></div>
+                <div class="lmlf-dlmf-entry__body">
+                  <p>
+                    For the notation in E4--E8, consult the DLMF definition of spherical and
+modified spherical Bessel functions in <a href="https://dlmf.nist.gov/10.47#ii">§10.47(ii)</a>.
+The series statements below expose convergence with <code>HasSum</code> and then state
+the corresponding value identity, rather than relying on a totalized infinite
+sum.</p>
+                  </div>
+                </article><p>
+                The normalized spherical-Bessel interface records the two initial values and
+the three-term recurrence, including the nonzero argument condition.  The
+modified-family recurrence is recorded in
+<a href="https://dlmf.nist.gov/10.51#ii">§10.51(ii)</a>, while the notation and
+normalization are given in <a href="https://dlmf.nist.gov/10.47#ii">§10.47(ii)</a>.
+Thus a formula below cannot silently substitute an unrelated spherical-Bessel
+sequence.</p>
+              <details class="lmlf-lean" open=""><summary>6.10 normalized spherical-Bessel family</summary><div class="lmlf-lean__body">
+                  <code class="hl lean block" data-lean-context="examples"><span class="keyword token" data-binding="kw-occ-Lean.Parser.Command.structureTk-1867">structure</span><span class="inter-text"> </span><span class="const token" data-binding="const-LMLF.Blueprint.ExponentialIntegrals.Section610.SphericalBesselFamily" data-verso-hover="2740" id="LMLF___Blueprint___ExponentialIntegrals___Section610___SphericalBesselFamily">SphericalBesselFamily</span><span class="inter-text"> </span><span class="keyword token" data-binding="kw-occ-Lean.Parser.Command.structure-1867">where</span><span class="inter-text">
+  </span><span class="const token" data-binding="const-LMLF.Blueprint.ExponentialIntegrals.Section610.SphericalBesselFamily.value" data-verso-hover="2741" id="LMLF___Blueprint___ExponentialIntegrals___Section610___SphericalBesselFamily___value">value</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeSpec-1913">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Nat" data-verso-hover="34">ℕ</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-Lean.Parser.Term.arrow-1915">→</span><span class="inter-text"> </span><span class="const token" data-binding="const-Complex" data-verso-hover="165">ℂ</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-Lean.Parser.Term.arrow-1923">→</span><span class="inter-text"> </span><span class="const token" data-binding="const-Complex" data-verso-hover="165">ℂ</span><span class="inter-text">
+  </span><span class="const token" data-binding="const-LMLF.Blueprint.ExponentialIntegrals.Section610.SphericalBesselFamily.value_zero" data-verso-hover="2742" id="LMLF___Blueprint___ExponentialIntegrals___Section610___SphericalBesselFamily___value_zero">value_zero</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeSpec-1948">:</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.1130" data-verso-hover="2743">value</span><span class="inter-text"> </span><span class="literal number token" data-binding="" data-verso-hover="37">0</span><span class="inter-text"> </span><span class="literal number token" data-binding="" data-verso-hover="171">0</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_=_»-1950">=</span><span class="inter-text"> </span><span class="literal number token" data-binding="" data-verso-hover="171">1</span><span class="inter-text">
+  </span><span class="const token" data-binding="const-LMLF.Blueprint.ExponentialIntegrals.Section610.SphericalBesselFamily.higher_at_zero" data-verso-hover="2744" id="LMLF___Blueprint___ExponentialIntegrals___Section610___SphericalBesselFamily___higher_at_zero">higher_at_zero</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeSpec-1981">:</span><span class="inter-text"> </span><span class="unknown token" data-binding="">∀</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.1199" data-verso-hover="37">n</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeSpec-1989">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Nat" data-verso-hover="34">ℕ</span><span class="punctuation separator token" data-binding="kw-occ-Lean.Parser.Term.forall-1983">,</span><span class="inter-text"> </span><span class="literal number token" data-binding="" data-verso-hover="37">0</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_<_»-1996">&lt;</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.1199" data-verso-hover="37">n</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-Lean.Parser.Term.arrow-1996">→</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.1130" data-verso-hover="2743">value</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.1199" data-verso-hover="37">n</span><span class="inter-text"> </span><span class="literal number token" data-binding="" data-verso-hover="171">0</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_=_»-2006">=</span><span class="inter-text"> </span><span class="literal number token" data-binding="" data-verso-hover="171">0</span><span class="inter-text">
+  </span><span class="const token" data-binding="const-LMLF.Blueprint.ExponentialIntegrals.Section610.SphericalBesselFamily.initial_zero" data-verso-hover="2745" id="LMLF___Blueprint___ExponentialIntegrals___Section610___SphericalBesselFamily___initial_zero">initial_zero</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeSpec-2035">:</span><span class="inter-text"> </span><span class="unknown token" data-binding="">∀</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.1289" data-verso-hover="171">z</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeSpec-2043">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Complex" data-verso-hover="165">ℂ</span><span class="punctuation separator token" data-binding="kw-occ-Lean.Parser.Term.forall-2037">,</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.1289" data-verso-hover="171">z</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_≠_»-2050">≠</span><span class="inter-text"> </span><span class="literal number token" data-binding="" data-verso-hover="171">0</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-Lean.Parser.Term.arrow-2050">→</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.1130" data-verso-hover="2743">value</span><span class="inter-text"> </span><span class="literal number token" data-binding="" data-verso-hover="37">0</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.1289" data-verso-hover="171">z</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_=_»-2062">=</span><span class="inter-text"> </span><span class="const token" data-binding="const-Complex.sin" data-verso-hover="735">Complex.sin</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.1289" data-verso-hover="171">z</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_/_»-2074">/</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.1289" data-verso-hover="171">z</span><span class="inter-text">
+  </span><span class="const token" data-binding="const-LMLF.Blueprint.ExponentialIntegrals.Section610.SphericalBesselFamily.initial_one" data-verso-hover="2746" id="LMLF___Blueprint___ExponentialIntegrals___Section610___SphericalBesselFamily___initial_one">initial_one</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeSpec-2106">:</span><span class="inter-text"> </span><span class="unknown token" data-binding="">∀</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.1400" data-verso-hover="171">z</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeSpec-2114">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Complex" data-verso-hover="165">ℂ</span><span class="punctuation separator token" data-binding="kw-occ-Lean.Parser.Term.forall-2108">,</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.1400" data-verso-hover="171">z</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_≠_»-2121">≠</span><span class="inter-text"> </span><span class="literal number token" data-binding="" data-verso-hover="171">0</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-Lean.Parser.Term.arrow-2121">→</span><span class="inter-text">
+    </span><span class="var token" data-binding="var-_uniq.1130" data-verso-hover="2743">value</span><span class="inter-text"> </span><span class="literal number token" data-binding="" data-verso-hover="37">1</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.1400" data-verso-hover="171">z</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_=_»-2137">=</span><span class="inter-text"> </span><span class="const token" data-binding="const-Complex.sin" data-verso-hover="735">Complex.sin</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.1400" data-verso-hover="171">z</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_/_»-2149">/</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.1400" data-verso-hover="171">z</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_^_»-2165">^</span><span class="inter-text"> </span><span class="literal number token" data-binding="" data-verso-hover="37">2</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_-_»-2149">-</span><span class="inter-text"> </span><span class="const token" data-binding="const-Complex.cos" data-verso-hover="736">Complex.cos</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.1400" data-verso-hover="171">z</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_/_»-2173">/</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.1400" data-verso-hover="171">z</span><span class="inter-text">
+  </span><span class="const token" data-binding="const-LMLF.Blueprint.ExponentialIntegrals.Section610.SphericalBesselFamily.recurrence" data-verso-hover="2747" id="LMLF___Blueprint___ExponentialIntegrals___Section610___SphericalBesselFamily___recurrence">recurrence</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeSpec-2204">:</span><span class="inter-text"> </span><span class="unknown token" data-binding="">∀</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-2210">(</span><span class="var token" data-binding="var-_uniq.1875" data-verso-hover="37">n</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-2210">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Nat" data-verso-hover="34">ℕ</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-2210">)</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-2220">(</span><span class="var token" data-binding="var-_uniq.1877" data-verso-hover="171">z</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-2220">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Complex" data-verso-hover="165">ℂ</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-2220">)</span><span class="punctuation separator token" data-binding="kw-occ-Lean.Parser.Term.forall-2206">,</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.1877" data-verso-hover="171">z</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_≠_»-2231">≠</span><span class="inter-text"> </span><span class="literal number token" data-binding="" data-verso-hover="171">0</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-Lean.Parser.Term.arrow-2231">→</span><span class="inter-text">
+    </span><span class="var token" data-binding="var-_uniq.1130" data-verso-hover="2743">value</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-2253">(</span><span class="var token" data-binding="var-_uniq.1875" data-verso-hover="37">n</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_+_»-2254">+</span><span class="inter-text"> </span><span class="literal number token" data-binding="" data-verso-hover="37">2</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.paren-2253">)</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.1877" data-verso-hover="171">z</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_=_»-2247">=</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-2265">(</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-2266">(</span><span class="literal number token" data-binding="" data-verso-hover="171">2</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_*_»-2267">*</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-2271">(</span><span class="var token" data-binding="var-_uniq.1875" data-verso-hover="37">n</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_+_»-2272">+</span><span class="inter-text"> </span><span class="literal number token" data-binding="" data-verso-hover="171">1</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.paren-2271">)</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_+_»-2267">+</span><span class="inter-text"> </span><span class="literal number token" data-binding="" data-verso-hover="171">1</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeAscription-2266">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Complex" data-verso-hover="165">ℂ</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.typeAscription-2266">)</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_/_»-2266">/</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.1877" data-verso-hover="171">z</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.paren-2265">)</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_*_»-2265">*</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.1130" data-verso-hover="2743">value</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-2303">(</span><span class="var token" data-binding="var-_uniq.1875" data-verso-hover="37">n</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_+_»-2304">+</span><span class="inter-text"> </span><span class="literal number token" data-binding="" data-verso-hover="37">1</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.paren-2303">)</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.1877" data-verso-hover="171">z</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_-_»-2265">-</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.1130" data-verso-hover="2743">value</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.1875" data-verso-hover="37">n</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.1877" data-verso-hover="171">z</span></code></div>
+                </details><details class="lmlf-lean" open=""><summary>6.10 normalized modified spherical-Bessel family</summary><div class="lmlf-lean__body">
+                  <code class="hl lean block" data-lean-context="examples"><span class="keyword token" data-binding="kw-occ-Lean.Parser.Command.structureTk-2507">structure</span><span class="inter-text"> </span><span class="const token" data-binding="const-LMLF.Blueprint.ExponentialIntegrals.Section610.ModifiedSphericalBesselFamily" data-verso-hover="2748" id="LMLF___Blueprint___ExponentialIntegrals___Section610___ModifiedSphericalBesselFamily">ModifiedSphericalBesselFamily</span><span class="inter-text"> </span><span class="keyword token" data-binding="kw-occ-Lean.Parser.Command.structure-2507">where</span><span class="inter-text">
+  </span><span class="const token" data-binding="const-LMLF.Blueprint.ExponentialIntegrals.Section610.ModifiedSphericalBesselFamily.value" data-verso-hover="2749" id="LMLF___Blueprint___ExponentialIntegrals___Section610___ModifiedSphericalBesselFamily___value">value</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeSpec-2561">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Nat" data-verso-hover="34">ℕ</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-Lean.Parser.Term.arrow-2563">→</span><span class="inter-text"> </span><span class="const token" data-binding="const-Complex" data-verso-hover="165">ℂ</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-Lean.Parser.Term.arrow-2571">→</span><span class="inter-text"> </span><span class="const token" data-binding="const-Complex" data-verso-hover="165">ℂ</span><span class="inter-text">
+  </span><span class="const token" data-binding="const-LMLF.Blueprint.ExponentialIntegrals.Section610.ModifiedSphericalBesselFamily.value_zero" data-verso-hover="2750" id="LMLF___Blueprint___ExponentialIntegrals___Section610___ModifiedSphericalBesselFamily___value_zero">value_zero</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeSpec-2596">:</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.3266" data-verso-hover="2743">value</span><span class="inter-text"> </span><span class="literal number token" data-binding="" data-verso-hover="37">0</span><span class="inter-text"> </span><span class="literal number token" data-binding="" data-verso-hover="171">0</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_=_»-2598">=</span><span class="inter-text"> </span><span class="literal number token" data-binding="" data-verso-hover="171">1</span><span class="inter-text">
+  </span><span class="const token" data-binding="const-LMLF.Blueprint.ExponentialIntegrals.Section610.ModifiedSphericalBesselFamily.higher_at_zero" data-verso-hover="2751" id="LMLF___Blueprint___ExponentialIntegrals___Section610___ModifiedSphericalBesselFamily___higher_at_zero">higher_at_zero</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeSpec-2629">:</span><span class="inter-text"> </span><span class="unknown token" data-binding="">∀</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.3335" data-verso-hover="37">n</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeSpec-2637">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Nat" data-verso-hover="34">ℕ</span><span class="punctuation separator token" data-binding="kw-occ-Lean.Parser.Term.forall-2631">,</span><span class="inter-text"> </span><span class="literal number token" data-binding="" data-verso-hover="37">0</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_<_»-2644">&lt;</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.3335" data-verso-hover="37">n</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-Lean.Parser.Term.arrow-2644">→</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.3266" data-verso-hover="2743">value</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.3335" data-verso-hover="37">n</span><span class="inter-text"> </span><span class="literal number token" data-binding="" data-verso-hover="171">0</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_=_»-2654">=</span><span class="inter-text"> </span><span class="literal number token" data-binding="" data-verso-hover="171">0</span><span class="inter-text">
+  </span><span class="const token" data-binding="const-LMLF.Blueprint.ExponentialIntegrals.Section610.ModifiedSphericalBesselFamily.initial_zero" data-verso-hover="2752" id="LMLF___Blueprint___ExponentialIntegrals___Section610___ModifiedSphericalBesselFamily___initial_zero">initial_zero</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeSpec-2683">:</span><span class="inter-text"> </span><span class="unknown token" data-binding="">∀</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.3425" data-verso-hover="171">z</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeSpec-2691">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Complex" data-verso-hover="165">ℂ</span><span class="punctuation separator token" data-binding="kw-occ-Lean.Parser.Term.forall-2685">,</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.3425" data-verso-hover="171">z</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_≠_»-2698">≠</span><span class="inter-text"> </span><span class="literal number token" data-binding="" data-verso-hover="171">0</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-Lean.Parser.Term.arrow-2698">→</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.3266" data-verso-hover="2743">value</span><span class="inter-text"> </span><span class="literal number token" data-binding="" data-verso-hover="37">0</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.3425" data-verso-hover="171">z</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_=_»-2710">=</span><span class="inter-text"> </span><span class="const token" data-binding="const-Complex.sinh" data-verso-hover="1351">Complex.sinh</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.3425" data-verso-hover="171">z</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_/_»-2722">/</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.3425" data-verso-hover="171">z</span><span class="inter-text">
+  </span><span class="const token" data-binding="const-LMLF.Blueprint.ExponentialIntegrals.Section610.ModifiedSphericalBesselFamily.initial_one" data-verso-hover="2753" id="LMLF___Blueprint___ExponentialIntegrals___Section610___ModifiedSphericalBesselFamily___initial_one">initial_one</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeSpec-2755">:</span><span class="inter-text"> </span><span class="unknown token" data-binding="">∀</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.3520" data-verso-hover="171">z</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeSpec-2763">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Complex" data-verso-hover="165">ℂ</span><span class="punctuation separator token" data-binding="kw-occ-Lean.Parser.Term.forall-2757">,</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.3520" data-verso-hover="171">z</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_≠_»-2770">≠</span><span class="inter-text"> </span><span class="literal number token" data-binding="" data-verso-hover="171">0</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-Lean.Parser.Term.arrow-2770">→</span><span class="inter-text">
+    </span><span class="var token" data-binding="var-_uniq.3266" data-verso-hover="2743">value</span><span class="inter-text"> </span><span class="literal number token" data-binding="" data-verso-hover="37">1</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.3520" data-verso-hover="171">z</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_=_»-2786">=</span><span class="inter-text"> </span><span class="const token" data-binding="const-Complex.cosh" data-verso-hover="1353">Complex.cosh</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.3520" data-verso-hover="171">z</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_/_»-2798">/</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.3520" data-verso-hover="171">z</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_-_»-2798">-</span><span class="inter-text"> </span><span class="const token" data-binding="const-Complex.sinh" data-verso-hover="1351">Complex.sinh</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.3520" data-verso-hover="171">z</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_/_»-2819">/</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.3520" data-verso-hover="171">z</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_^_»-2836">^</span><span class="inter-text"> </span><span class="literal number token" data-binding="" data-verso-hover="37">2</span><span class="inter-text">
+  </span><span class="const token" data-binding="const-LMLF.Blueprint.ExponentialIntegrals.Section610.ModifiedSphericalBesselFamily.recurrence" data-verso-hover="2754" id="LMLF___Blueprint___ExponentialIntegrals___Section610___ModifiedSphericalBesselFamily___recurrence">recurrence</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeSpec-2855">:</span><span class="inter-text"> </span><span class="unknown token" data-binding="">∀</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-2861">(</span><span class="var token" data-binding="var-_uniq.3995" data-verso-hover="37">n</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-2861">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Nat" data-verso-hover="34">ℕ</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-2861">)</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-2871">(</span><span class="var token" data-binding="var-_uniq.3997" data-verso-hover="171">z</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-2871">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Complex" data-verso-hover="165">ℂ</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-2871">)</span><span class="punctuation separator token" data-binding="kw-occ-Lean.Parser.Term.forall-2857">,</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.3997" data-verso-hover="171">z</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_≠_»-2882">≠</span><span class="inter-text"> </span><span class="literal number token" data-binding="" data-verso-hover="171">0</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-Lean.Parser.Term.arrow-2882">→</span><span class="inter-text">
+    </span><span class="var token" data-binding="var-_uniq.3266" data-verso-hover="2743">value</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-2904">(</span><span class="var token" data-binding="var-_uniq.3995" data-verso-hover="37">n</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_+_»-2905">+</span><span class="inter-text"> </span><span class="literal number token" data-binding="" data-verso-hover="37">2</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.paren-2904">)</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.3997" data-verso-hover="171">z</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_=_»-2898">=</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.3266" data-verso-hover="2743">value</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.3995" data-verso-hover="37">n</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.3997" data-verso-hover="171">z</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_-_»-2916">-</span><span class="inter-text">
+      </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-2934">(</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-2935">(</span><span class="literal number token" data-binding="" data-verso-hover="171">2</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_*_»-2936">*</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-2940">(</span><span class="var token" data-binding="var-_uniq.3995" data-verso-hover="37">n</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_+_»-2941">+</span><span class="inter-text"> </span><span class="literal number token" data-binding="" data-verso-hover="171">1</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.paren-2940">)</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_+_»-2936">+</span><span class="inter-text"> </span><span class="literal number token" data-binding="" data-verso-hover="171">1</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeAscription-2935">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Complex" data-verso-hover="165">ℂ</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.typeAscription-2935">)</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_/_»-2935">/</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.3997" data-verso-hover="171">z</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.paren-2934">)</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_*_»-2934">*</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.3266" data-verso-hover="2743">value</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-2972">(</span><span class="var token" data-binding="var-_uniq.3995" data-verso-hover="37">n</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_+_»-2973">+</span><span class="inter-text"> </span><span class="literal number token" data-binding="" data-verso-hover="37">1</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.paren-2972">)</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.3997" data-verso-hover="171">z</span></code></div>
+                </details><details class="lmlf-lean" open=""><summary>6.10 coefficient map from digamma</summary><div class="lmlf-lean__body">
+                  <code class="hl lean block" data-lean-context="examples"><span class="keyword token" data-binding="kw-occ-Lean.Parser.Command.definition-3203">def</span><span class="inter-text"> </span><span class="const token" data-binding="const-LMLF.Blueprint.ExponentialIntegrals.Section610.modifiedSphericalCoeff" data-verso-hover="2755" id="LMLF___Blueprint___ExponentialIntegrals___Section610___modifiedSphericalCoeff">modifiedSphericalCoeff</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-3230">(</span><span class="var token" data-binding="var-_uniq.5369" data-verso-hover="37">n</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-3230">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Nat" data-verso-hover="34">ℕ</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-3230">)</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeSpec-3240">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Real" data-verso-hover="11">ℝ</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Command.declValSimple-3246">:=</span><span class="inter-text">
+  </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-3251">(</span><span class="literal number token" data-binding="" data-verso-hover="19">2</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_*_»-3252">*</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.5369" data-verso-hover="37">n</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_+_»-3252">+</span><span class="inter-text"> </span><span class="literal number token" data-binding="" data-verso-hover="19">1</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeAscription-3251">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Real" data-verso-hover="11">ℝ</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.typeAscription-3251">)</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_*_»-3251">*</span><span class="inter-text">
+    </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-3275">(</span><span class="literal number token" data-binding="" data-verso-hover="19">1</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_-_»-3276">-</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-3280">(</span><span class="punctuation operator token" data-binding="kw-occ-«term-_»-3281">-</span><span class="literal number token" data-binding="" data-verso-hover="19">1</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeAscription-3280">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Real" data-verso-hover="11">ℝ</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.typeAscription-3280">)</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_^_»-3280">^</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.5369" data-verso-hover="37">n</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_+_»-3276">+</span><span class="inter-text">
+      </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-3303">(</span><span class="const token" data-binding="const-Complex.digamma" data-verso-hover="1765">Complex.digamma</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-3320">(</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-3321">(</span><span class="var token" data-binding="var-_uniq.5369" data-verso-hover="37">n</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_+_»-3322">+</span><span class="inter-text"> </span><span class="literal number token" data-binding="" data-verso-hover="37">1</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeAscription-3321">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Nat" data-verso-hover="34">ℕ</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.typeAscription-3321">)</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeAscription-3320">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Complex" data-verso-hover="165">ℂ</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.typeAscription-3320">)</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.paren-3303">)</span><span class="built-in delim token" data-binding="">.</span><span class="const token" data-binding="const-Complex.re" data-verso-hover="287">re</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_-_»-3276">-</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-3348">(</span><span class="const token" data-binding="const-Complex.digamma" data-verso-hover="1765">Complex.digamma</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-3365">(</span><span class="literal number token" data-binding="" data-verso-hover="171">1</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeAscription-3365">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Complex" data-verso-hover="165">ℂ</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.typeAscription-3365">)</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.paren-3348">)</span><span class="built-in delim token" data-binding="">.</span><span class="const token" data-binding="const-Complex.re" data-verso-hover="287">re</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.paren-3275">)</span></code></div>
+                </details><article class="lmlf-dlmf-entry"><div class="lmlf-dlmf-entry__source">
+                  <a href="https://dlmf.nist.gov/6.10.E4">DLMF Sine integral ↗</a></div>
+                <div class="lmlf-dlmf-entry__body">
+                  <p>
+                    The sine integral has the spherical-Bessel expansion</p>
+                  <p>
+                    <code class="math display">\operatorname{Si}(z)=z\sum_{n=0}^{\infty}\left(\mathsf{j}_{n}\left(\tfrac{1}{2}z\right)\right)^{2}.</code>$$</p>
+                  <details class="lmlf-lean" open=""><summary>6.10.E4 sine-integral expansion</summary><div class="lmlf-lean__body">
+                      <code class="hl lean block" data-lean-context="examples"><span class="keyword token" data-binding="kw-occ-Lean.Parser.Command.theorem-4567">theorem</span><span class="inter-text"> </span><span class="has-info warning"><span class="hover-container"><span class="hover-info messages"><code class="verso-message warning"><span class="text"></span><span class="text">declaration uses `</span><span class="highlighted"><span class="inter-text"></span><span class="unknown token" data-binding="">sorry</span><span class="inter-text"></span></span><span class="text">`</span></code></span></span><span class="const token" data-binding="const-LMLF.Blueprint.ExponentialIntegrals.Section610.dlmf_6_10_4" data-verso-hover="2756" id="LMLF___Blueprint___ExponentialIntegrals___Section610___dlmf_6_10_4">dlmf_6_10_4</span></span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-4587">(</span><span class="var token" data-binding="var-_uniq.7013" data-verso-hover="2757">J</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-4587">:</span><span class="inter-text"> </span><a href="Exponential___-Logarithmic___-Sine___-and-Cosine-Integrals/___6___10-Other-Series-Expansions/#LMLF___Blueprint___ExponentialIntegrals___Section610___SphericalBesselFamily" title="Definition of example"><span class="const token" data-binding="const-LMLF.Blueprint.ExponentialIntegrals.Section610.SphericalBesselFamily" data-verso-hover="2740">SphericalBesselFamily</span></a><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-4587">)</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-4615">(</span><span class="var token" data-binding="var-_uniq.7015" data-verso-hover="171">z</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-4615">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Complex" data-verso-hover="165">ℂ</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-4615">)</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeSpec-4625">:</span><span class="inter-text">
+    </span><span class="unknown token" data-binding="">∃</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.7020" data-verso-hover="171">s</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.unbracketedExplicitBinders-4635">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Complex" data-verso-hover="165">ℂ</span><span class="punctuation separator token" data-binding="kw-occ-«term∃_,_»-4631">,</span><span class="inter-text">
+      </span><span class="const token" data-binding="const-HasSum" data-verso-hover="336">HasSum</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-4657">(</span><span class="keyword token" data-binding="kw-occ-Lean.Parser.Term.fun-4658">fun</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.7028" data-verso-hover="37">n</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeSpec-4664">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Nat" data-verso-hover="34">ℕ</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.basicFun-4662">=&gt;</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-4673">(</span><span class="var token" data-binding="var-_uniq.7013" data-verso-hover="2757">J</span><span class="built-in delim token" data-binding="">.</span><a href="Exponential___-Logarithmic___-Sine___-and-Cosine-Integrals/___6___10-Other-Series-Expansions/#LMLF___Blueprint___ExponentialIntegrals___Section610___SphericalBesselFamily___value" title="Definition of example"><span class="const token" data-binding="const-LMLF.Blueprint.ExponentialIntegrals.Section610.SphericalBesselFamily.value" data-verso-hover="2741">value</span></a><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.7028" data-verso-hover="37">n</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-4684">(</span><span class="var token" data-binding="var-_uniq.7015" data-verso-hover="171">z</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_/_»-4685">/</span><span class="inter-text"> </span><span class="literal number token" data-binding="" data-verso-hover="171">2</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.paren-4684">)</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.paren-4673">)</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_^_»-4673">^</span><span class="inter-text"> </span><span class="literal number token" data-binding="" data-verso-hover="37">2</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.paren-4657">)</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.7020" data-verso-hover="171">s</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_∧_»-4650">∧</span><span class="inter-text">
+        </span><a href="Exponential___-Logarithmic___-Sine___-and-Cosine-Integrals/___6___2-Definitions-and-Interrelations/#LMLF___Blueprint___ExponentialIntegrals___Section62___principalSi" title="Definition of example"><span class="const token" data-binding="const-LMLF.Blueprint.ExponentialIntegrals.Section62.principalSi" data-verso-hover="2590">LMLF.Blueprint.ExponentialIntegrals.Section62.principalSi</span></a><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.7015" data-verso-hover="171">z</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_=_»-4712">=</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.7015" data-verso-hover="171">z</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_*_»-4774">*</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.7020" data-verso-hover="171">s</span></code></div>
+                    </details></div>
+                </article><article class="lmlf-dlmf-entry"><div class="lmlf-dlmf-entry__source">
+                  <a href="https://dlmf.nist.gov/6.10.E5">DLMF Cosine integral ↗</a></div>
+                <div class="lmlf-dlmf-entry__body">
+                  <p>
+                    The cosine integral is expanded as</p>
+                  <p>
+                    <code class="math display">\operatorname{Cin}(z)=\sum_{n=1}^{\infty}a_{n}\left(\mathsf{j}_{n}\left(\tfrac{1}{2}z\right)\right)^{2}.</code>$$</p>
+                  <details class="lmlf-lean" open=""><summary>6.10.E5 cosine-integral expansion</summary><div class="lmlf-lean__body">
+                      <code class="hl lean block" data-lean-context="examples"><span class="keyword token" data-binding="kw-occ-Lean.Parser.Command.theorem-4927">theorem</span><span class="inter-text"> </span><span class="has-info warning"><span class="hover-container"><span class="hover-info messages"><code class="verso-message warning"><span class="text"></span><span class="text">declaration uses `</span><span class="highlighted"><span class="inter-text"></span><span class="unknown token" data-binding="">sorry</span><span class="inter-text"></span></span><span class="text">`</span></code></span></span><span class="const token" data-binding="const-LMLF.Blueprint.ExponentialIntegrals.Section610.dlmf_6_10_5" data-verso-hover="2758" id="LMLF___Blueprint___ExponentialIntegrals___Section610___dlmf_6_10_5">dlmf_6_10_5</span></span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-4947">(</span><span class="var token" data-binding="var-_uniq.7456" data-verso-hover="2757">J</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-4947">:</span><span class="inter-text"> </span><a href="Exponential___-Logarithmic___-Sine___-and-Cosine-Integrals/___6___10-Other-Series-Expansions/#LMLF___Blueprint___ExponentialIntegrals___Section610___SphericalBesselFamily" title="Definition of example"><span class="const token" data-binding="const-LMLF.Blueprint.ExponentialIntegrals.Section610.SphericalBesselFamily" data-verso-hover="2740">SphericalBesselFamily</span></a><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-4947">)</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-4975">(</span><span class="var token" data-binding="var-_uniq.7458" data-verso-hover="171">z</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-4975">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Complex" data-verso-hover="165">ℂ</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-4975">)</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeSpec-4985">:</span><span class="inter-text">
+    </span><span class="const token" data-binding="const-HasSum" data-verso-hover="336">HasSum</span><span class="inter-text">
+        </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-5006">(</span><span class="keyword token" data-binding="kw-occ-Lean.Parser.Term.fun-5007">fun</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.7685" data-verso-hover="37">n</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeSpec-5013">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Nat" data-verso-hover="34">ℕ</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.basicFun-5011">=&gt;</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-5022">(</span><a href="Exponential___-Logarithmic___-Sine___-and-Cosine-Integrals/___6___10-Other-Series-Expansions/#LMLF___Blueprint___ExponentialIntegrals___Section610___modifiedSphericalCoeff" title="Definition of example"><span class="const token" data-binding="const-LMLF.Blueprint.ExponentialIntegrals.Section610.modifiedSphericalCoeff" data-verso-hover="2755">modifiedSphericalCoeff</span></a><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-5046">(</span><span class="var token" data-binding="var-_uniq.7685" data-verso-hover="37">n</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_+_»-5047">+</span><span class="inter-text"> </span><span class="literal number token" data-binding="" data-verso-hover="37">1</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.paren-5046">)</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeAscription-5022">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Complex" data-verso-hover="165">ℂ</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.typeAscription-5022">)</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_*_»-5022">*</span><span class="inter-text">
+          </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-5073">(</span><span class="var token" data-binding="var-_uniq.7456" data-verso-hover="2757">J</span><span class="built-in delim token" data-binding="">.</span><a href="Exponential___-Logarithmic___-Sine___-and-Cosine-Integrals/___6___10-Other-Series-Expansions/#LMLF___Blueprint___ExponentialIntegrals___Section610___SphericalBesselFamily___value" title="Definition of example"><span class="const token" data-binding="const-LMLF.Blueprint.ExponentialIntegrals.Section610.SphericalBesselFamily.value" data-verso-hover="2741">value</span></a><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-5082">(</span><span class="var token" data-binding="var-_uniq.7685" data-verso-hover="37">n</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_+_»-5083">+</span><span class="inter-text"> </span><span class="literal number token" data-binding="" data-verso-hover="37">1</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.paren-5082">)</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-5090">(</span><span class="var token" data-binding="var-_uniq.7458" data-verso-hover="171">z</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_/_»-5091">/</span><span class="inter-text"> </span><span class="literal number token" data-binding="" data-verso-hover="171">2</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.paren-5090">)</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.paren-5073">)</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_^_»-5073">^</span><span class="inter-text"> </span><span class="literal number token" data-binding="" data-verso-hover="37">2</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.paren-5006">)</span><span class="inter-text">
+        </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-5112">(</span><a href="Exponential___-Logarithmic___-Sine___-and-Cosine-Integrals/___6___2-Definitions-and-Interrelations/#LMLF___Blueprint___ExponentialIntegrals___Section62___principalCin" title="Definition of example"><span class="const token" data-binding="const-LMLF.Blueprint.ExponentialIntegrals.Section62.principalCin" data-verso-hover="2598">LMLF.Blueprint.ExponentialIntegrals.Section62.principalCin</span></a><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.7458" data-verso-hover="171">z</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.paren-5112">)</span></code></div>
+                    </details></div>
+                </article><article class="lmlf-dlmf-entry"><div class="lmlf-dlmf-entry__source">
+                  <a href="https://dlmf.nist.gov/6.10.E6">DLMF Exponential integral ↗</a></div>
+                <div class="lmlf-dlmf-entry__body">
+                  <p>
+                    For real x≠0, the modified spherical-Bessel expansion is stated directly for
+the canonical §6.2 map <code>realEi</code>:</p>
+                  <p>
+                    <code class="math display">\operatorname{Ei}(x)=\gamma+\ln|x|+\sum_{n=0}^{\infty}(-1)^{n}(x-a_{n})\left({\mathsf{i}^{(1)}_{n}}\left(\tfrac{1}{2}x\right)\right)^{2}.</code>$$</p>
+                  <details class="lmlf-lean" open=""><summary>6.10.E6 exponential-integral expansion</summary><div class="lmlf-lean__body">
+                      <code class="hl lean block" data-lean-context="examples"><span class="keyword token" data-binding="kw-occ-Lean.Parser.Command.theorem-5368">theorem</span><span class="inter-text"> </span><span class="has-info warning"><span class="hover-container"><span class="hover-info messages"><code class="verso-message warning"><span class="text"></span><span class="text">declaration uses `</span><span class="highlighted"><span class="inter-text"></span><span class="unknown token" data-binding="">sorry</span><span class="inter-text"></span></span><span class="text">`</span></code></span></span><span class="const token" data-binding="const-LMLF.Blueprint.ExponentialIntegrals.Section610.dlmf_6_10_6" data-verso-hover="2759" id="LMLF___Blueprint___ExponentialIntegrals___Section610___dlmf_6_10_6">dlmf_6_10_6</span></span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-5388">(</span><span class="var token" data-binding="var-_uniq.8326" data-verso-hover="2760">I</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-5388">:</span><span class="inter-text"> </span><a href="Exponential___-Logarithmic___-Sine___-and-Cosine-Integrals/___6___10-Other-Series-Expansions/#LMLF___Blueprint___ExponentialIntegrals___Section610___ModifiedSphericalBesselFamily" title="Definition of example"><span class="const token" data-binding="const-LMLF.Blueprint.ExponentialIntegrals.Section610.ModifiedSphericalBesselFamily" data-verso-hover="2748">ModifiedSphericalBesselFamily</span></a><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-5388">)</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-5424">(</span><span class="var token" data-binding="var-_uniq.8328" data-verso-hover="19">x</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-5424">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Real" data-verso-hover="11">ℝ</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-5424">)</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-5434">(</span><span class="var token" data-binding="var-_uniq.8373" data-verso-hover="409">hx</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-5434">:</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.8328" data-verso-hover="19">x</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_≠_»-5440">≠</span><span class="inter-text"> </span><span class="literal number token" data-binding="" data-verso-hover="19">0</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-5434">)</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeSpec-5449">:</span><span class="inter-text">
+    </span><span class="const token" data-binding="const-HasSum" data-verso-hover="336">HasSum</span><span class="inter-text">
+        </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-5470">(</span><span class="keyword token" data-binding="kw-occ-Lean.Parser.Term.fun-5471">fun</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.8600" data-verso-hover="37">n</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeSpec-5477">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Nat" data-verso-hover="34">ℕ</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.basicFun-5475">=&gt;</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-5486">(</span><span class="punctuation operator token" data-binding="kw-occ-«term-_»-5487">-</span><span class="literal number token" data-binding="" data-verso-hover="171">1</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeAscription-5486">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Complex" data-verso-hover="165">ℂ</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.typeAscription-5486">)</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_^_»-5486">^</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.8600" data-verso-hover="37">n</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_*_»-5486">*</span><span class="inter-text">
+          </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-5513">(</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-5514">(</span><span class="var token" data-binding="var-_uniq.8328" data-verso-hover="19">x</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeAscription-5514">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Complex" data-verso-hover="165">ℂ</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.typeAscription-5514">)</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_-_»-5514">-</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-5526">(</span><a href="Exponential___-Logarithmic___-Sine___-and-Cosine-Integrals/___6___10-Other-Series-Expansions/#LMLF___Blueprint___ExponentialIntegrals___Section610___modifiedSphericalCoeff" title="Definition of example"><span class="const token" data-binding="const-LMLF.Blueprint.ExponentialIntegrals.Section610.modifiedSphericalCoeff" data-verso-hover="2755">modifiedSphericalCoeff</span></a><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.8600" data-verso-hover="37">n</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeAscription-5526">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Complex" data-verso-hover="165">ℂ</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.typeAscription-5526">)</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.paren-5513">)</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_*_»-5486">*</span><span class="inter-text">
+          </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-5572">(</span><span class="var token" data-binding="var-_uniq.8326" data-verso-hover="2760">I</span><span class="built-in delim token" data-binding="">.</span><a href="Exponential___-Logarithmic___-Sine___-and-Cosine-Integrals/___6___10-Other-Series-Expansions/#LMLF___Blueprint___ExponentialIntegrals___Section610___ModifiedSphericalBesselFamily___value" title="Definition of example"><span class="const token" data-binding="const-LMLF.Blueprint.ExponentialIntegrals.Section610.ModifiedSphericalBesselFamily.value" data-verso-hover="2749">value</span></a><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.8600" data-verso-hover="37">n</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-5583">(</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-5584">(</span><span class="var token" data-binding="var-_uniq.8328" data-verso-hover="19">x</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeAscription-5584">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Complex" data-verso-hover="165">ℂ</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.typeAscription-5584">)</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_/_»-5584">/</span><span class="inter-text"> </span><span class="literal number token" data-binding="" data-verso-hover="171">2</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.paren-5583">)</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.paren-5572">)</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_^_»-5572">^</span><span class="inter-text"> </span><span class="literal number token" data-binding="" data-verso-hover="37">2</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.paren-5470">)</span><span class="inter-text">
+        </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-5613">(</span><span class="const token" data-binding="const-LMLF.Blueprint.ExponentialIntegrals.Section62.realEi" data-verso-hover="2582">LMLF.Blueprint.ExponentialIntegrals.Section62.realEi</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.8328" data-verso-hover="19">x</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_-_»-5614">-</span><span class="inter-text">
+          </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-5681">(</span><span class="const token" data-binding="const-Real.eulerMascheroniConstant" data-verso-hover="406">Real.eulerMascheroniConstant</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeAscription-5681">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Complex" data-verso-hover="165">ℂ</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.typeAscription-5681">)</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_-_»-5614">-</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-5720">(</span><span class="const token" data-binding="const-Real.log" data-verso-hover="258">Real.log</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-group-5730">|</span><span class="var token" data-binding="var-_uniq.8328" data-verso-hover="19">x</span><span class="built-in delim token" data-binding="kw-occ-«term|___|»-5730">|</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeAscription-5720">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Complex" data-verso-hover="165">ℂ</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.typeAscription-5720">)</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.paren-5613">)</span></code></div>
+                    </details></div>
+                </article><article class="lmlf-dlmf-entry"><div class="lmlf-dlmf-entry__source">
+                  <a href="https://dlmf.nist.gov/6.10.E7">DLMF Coefficient formula ↗</a></div>
+                <div class="lmlf-dlmf-entry__body">
+                  <p>
+                    The coefficients in the preceding expansion are</p>
+                  <p>
+                    <code class="math display">a_{n}=(2n+1)\left(1-(-1)^{n}+\psi(n+1)-\psi(1)\right).</code>$$</p>
+                  <details class="lmlf-lean" open=""><summary>6.10.E7 coefficient formula</summary><div class="lmlf-lean__body">
+                      <code class="hl lean block" data-lean-context="examples"><span class="keyword token" data-binding="kw-occ-Lean.Parser.Command.theorem-5891">theorem</span><span class="inter-text"> </span><span class="has-info warning"><span class="hover-container"><span class="hover-info messages"><code class="verso-message warning"><span class="text"></span><span class="text">declaration uses `</span><span class="highlighted"><span class="inter-text"></span><span class="unknown token" data-binding="">sorry</span><span class="inter-text"></span></span><span class="text">`</span></code></span></span><span class="const token" data-binding="const-LMLF.Blueprint.ExponentialIntegrals.Section610.dlmf_6_10_7" data-verso-hover="2761" id="LMLF___Blueprint___ExponentialIntegrals___Section610___dlmf_6_10_7">dlmf_6_10_7</span></span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-5911">(</span><span class="var token" data-binding="var-_uniq.9705" data-verso-hover="37">n</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-5911">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Nat" data-verso-hover="34">ℕ</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-5911">)</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeSpec-5921">:</span><span class="inter-text">
+    </span><a href="Exponential___-Logarithmic___-Sine___-and-Cosine-Integrals/___6___10-Other-Series-Expansions/#LMLF___Blueprint___ExponentialIntegrals___Section610___modifiedSphericalCoeff" title="Definition of example"><span class="const token" data-binding="const-LMLF.Blueprint.ExponentialIntegrals.Section610.modifiedSphericalCoeff" data-verso-hover="2755">modifiedSphericalCoeff</span></a><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.9705" data-verso-hover="37">n</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_=_»-5927">=</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-5954">(</span><span class="literal number token" data-binding="" data-verso-hover="19">2</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_*_»-5955">*</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.9705" data-verso-hover="37">n</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_+_»-5955">+</span><span class="inter-text"> </span><span class="literal number token" data-binding="" data-verso-hover="19">1</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeAscription-5954">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Real" data-verso-hover="11">ℝ</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.typeAscription-5954">)</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_*_»-5954">*</span><span class="inter-text">
+      </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-5980">(</span><span class="literal number token" data-binding="" data-verso-hover="19">1</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_-_»-5981">-</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-5985">(</span><span class="punctuation operator token" data-binding="kw-occ-«term-_»-5986">-</span><span class="literal number token" data-binding="" data-verso-hover="19">1</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeAscription-5985">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Real" data-verso-hover="11">ℝ</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.typeAscription-5985">)</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_^_»-5985">^</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.9705" data-verso-hover="37">n</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_+_»-5981">+</span><span class="inter-text">
+        </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-6010">(</span><span class="const token" data-binding="const-Complex.digamma" data-verso-hover="1765">Complex.digamma</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-6027">(</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-6028">(</span><span class="var token" data-binding="var-_uniq.9705" data-verso-hover="37">n</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_+_»-6029">+</span><span class="inter-text"> </span><span class="literal number token" data-binding="" data-verso-hover="37">1</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeAscription-6028">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Nat" data-verso-hover="34">ℕ</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.typeAscription-6028">)</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeAscription-6027">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Complex" data-verso-hover="165">ℂ</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.typeAscription-6027">)</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.paren-6010">)</span><span class="built-in delim token" data-binding="">.</span><span class="const token" data-binding="const-Complex.re" data-verso-hover="287">re</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_-_»-5981">-</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-6055">(</span><span class="const token" data-binding="const-Complex.digamma" data-verso-hover="1765">Complex.digamma</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-6072">(</span><span class="literal number token" data-binding="" data-verso-hover="171">1</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeAscription-6072">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Complex" data-verso-hover="165">ℂ</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.typeAscription-6072">)</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.paren-6055">)</span><span class="built-in delim token" data-binding="">.</span><span class="const token" data-binding="const-Complex.re" data-verso-hover="287">re</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.paren-5980">)</span></code></div>
+                    </details></div>
+                </article><article class="lmlf-dlmf-entry"><div class="lmlf-dlmf-entry__source">
+                  <a href="https://dlmf.nist.gov/6.10.E8">DLMF Complementary exponential integral ↗</a></div>
+                <div class="lmlf-dlmf-entry__body">
+                  <p>
+                    Finally,</p>
+                  <p>
+                    <code class="math display">\operatorname{Ein}(z)=ze^{-z/2}\left({\mathsf{i}^{(1)}_{0}}\left(\tfrac{1}{2}z\right)+\sum_{n=1}^{\infty}\frac{2n+1}{n(n+1)}{\mathsf{i}^{(1)}_{n}}\left(\tfrac{1}{2}z\right)\right).</code>$$</p>
+                  <details class="lmlf-lean" open=""><summary>6.10.E8 complementary exponential-integral expansion</summary><div class="lmlf-lean__body">
+                      <code class="hl lean block" data-lean-context="examples"><span class="keyword token" data-binding="kw-occ-Lean.Parser.Command.theorem-6272">theorem</span><span class="inter-text"> </span><span class="has-info warning"><span class="hover-container"><span class="hover-info messages"><code class="verso-message warning"><span class="text"></span><span class="text">declaration uses `</span><span class="highlighted"><span class="inter-text"></span><span class="unknown token" data-binding="">sorry</span><span class="inter-text"></span></span><span class="text">`</span></code></span></span><span class="const token" data-binding="const-LMLF.Blueprint.ExponentialIntegrals.Section610.dlmf_6_10_8" data-verso-hover="2762" id="LMLF___Blueprint___ExponentialIntegrals___Section610___dlmf_6_10_8">dlmf_6_10_8</span></span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-6292">(</span><span class="var token" data-binding="var-_uniq.10324" data-verso-hover="2760">I</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-6292">:</span><span class="inter-text"> </span><a href="Exponential___-Logarithmic___-Sine___-and-Cosine-Integrals/___6___10-Other-Series-Expansions/#LMLF___Blueprint___ExponentialIntegrals___Section610___ModifiedSphericalBesselFamily" title="Definition of example"><span class="const token" data-binding="const-LMLF.Blueprint.ExponentialIntegrals.Section610.ModifiedSphericalBesselFamily" data-verso-hover="2748">ModifiedSphericalBesselFamily</span></a><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-6292">)</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-6328">(</span><span class="var token" data-binding="var-_uniq.10326" data-verso-hover="171">z</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-6328">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Complex" data-verso-hover="165">ℂ</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-6328">)</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeSpec-6338">:</span><span class="inter-text">
+    </span><span class="unknown token" data-binding="">∃</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.10331" data-verso-hover="171">s</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.unbracketedExplicitBinders-6348">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Complex" data-verso-hover="165">ℂ</span><span class="punctuation separator token" data-binding="kw-occ-«term∃_,_»-6344">,</span><span class="inter-text">
+      </span><span class="const token" data-binding="const-HasSum" data-verso-hover="336">HasSum</span><span class="inter-text">
+          </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-6380">(</span><span class="keyword token" data-binding="kw-occ-Lean.Parser.Term.fun-6381">fun</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.10339" data-verso-hover="37">n</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeSpec-6387">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Nat" data-verso-hover="34">ℕ</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.basicFun-6385">=&gt;</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-6396">(</span><span class="literal number token" data-binding="" data-verso-hover="171">2</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_*_»-6397">*</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-6401">(</span><span class="var token" data-binding="var-_uniq.10339" data-verso-hover="37">n</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_+_»-6402">+</span><span class="inter-text"> </span><span class="literal number token" data-binding="" data-verso-hover="171">1</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.paren-6401">)</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_+_»-6397">+</span><span class="inter-text"> </span><span class="literal number token" data-binding="" data-verso-hover="171">1</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeAscription-6396">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Complex" data-verso-hover="165">ℂ</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.typeAscription-6396">)</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_/_»-6396">/</span><span class="inter-text">
+            </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-6434">(</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-6435">(</span><span class="var token" data-binding="var-_uniq.10339" data-verso-hover="37">n</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_+_»-6436">+</span><span class="inter-text"> </span><span class="literal number token" data-binding="" data-verso-hover="171">1</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeAscription-6435">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Complex" data-verso-hover="165">ℂ</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.typeAscription-6435">)</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_*_»-6435">*</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-6451">(</span><span class="var token" data-binding="var-_uniq.10339" data-verso-hover="37">n</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_+_»-6452">+</span><span class="inter-text"> </span><span class="literal number token" data-binding="" data-verso-hover="171">2</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.paren-6451">)</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.paren-6434">)</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_*_»-6396">*</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.10324" data-verso-hover="2760">I</span><span class="built-in delim token" data-binding="">.</span><a href="Exponential___-Logarithmic___-Sine___-and-Cosine-Integrals/___6___10-Other-Series-Expansions/#LMLF___Blueprint___ExponentialIntegrals___Section610___ModifiedSphericalBesselFamily___value" title="Definition of example"><span class="const token" data-binding="const-LMLF.Blueprint.ExponentialIntegrals.Section610.ModifiedSphericalBesselFamily.value" data-verso-hover="2749">value</span></a><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-6470">(</span><span class="var token" data-binding="var-_uniq.10339" data-verso-hover="37">n</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_+_»-6471">+</span><span class="inter-text"> </span><span class="literal number token" data-binding="" data-verso-hover="37">1</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.paren-6470">)</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-6478">(</span><span class="var token" data-binding="var-_uniq.10326" data-verso-hover="171">z</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_/_»-6479">/</span><span class="inter-text"> </span><span class="literal number token" data-binding="" data-verso-hover="171">2</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.paren-6478">)</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.paren-6380">)</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.10331" data-verso-hover="171">s</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_∧_»-6363">∧</span><span class="inter-text">
+        </span><a href="Exponential___-Logarithmic___-Sine___-and-Cosine-Integrals/___6___2-Definitions-and-Interrelations/#LMLF___Blueprint___ExponentialIntegrals___Section62___principalEin" title="Definition of example"><span class="const token" data-binding="const-LMLF.Blueprint.ExponentialIntegrals.Section62.principalEin" data-verso-hover="2578">LMLF.Blueprint.ExponentialIntegrals.Section62.principalEin</span></a><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.10326" data-verso-hover="171">z</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_=_»-6501">=</span><span class="inter-text">
+          </span><span class="var token" data-binding="var-_uniq.10326" data-verso-hover="171">z</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_*_»-6574">*</span><span class="inter-text"> </span><span class="const token" data-binding="const-Complex.exp" data-verso-hover="239">Complex.exp</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-6590">(</span><span class="punctuation operator token" data-binding="kw-occ-«term-_»-6591">-</span><span class="var token" data-binding="var-_uniq.10326" data-verso-hover="171">z</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_/_»-6591">/</span><span class="inter-text"> </span><span class="literal number token" data-binding="" data-verso-hover="171">2</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.paren-6590">)</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_*_»-6574">*</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-6601">(</span><span class="var token" data-binding="var-_uniq.10324" data-verso-hover="2760">I</span><span class="built-in delim token" data-binding="">.</span><a href="Exponential___-Logarithmic___-Sine___-and-Cosine-Integrals/___6___10-Other-Series-Expansions/#LMLF___Blueprint___ExponentialIntegrals___Section610___ModifiedSphericalBesselFamily___value" title="Definition of example"><span class="const token" data-binding="const-LMLF.Blueprint.ExponentialIntegrals.Section610.ModifiedSphericalBesselFamily.value" data-verso-hover="2749">value</span></a><span class="inter-text"> </span><span class="literal number token" data-binding="" data-verso-hover="37">0</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-6612">(</span><span class="var token" data-binding="var-_uniq.10326" data-verso-hover="171">z</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_/_»-6613">/</span><span class="inter-text"> </span><span class="literal number token" data-binding="" data-verso-hover="171">2</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.paren-6612">)</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_+_»-6602">+</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.10331" data-verso-hover="171">s</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.paren-6601">)</span></code></div>
+                    </details></div>
+                </article><article class="lmlf-dlmf-entry"><div class="lmlf-dlmf-entry__source">
+                  <a href="https://dlmf.nist.gov/6.10#ii.p2">DLMF Spherical-Bessel references ↗</a></div>
+                <div class="lmlf-dlmf-entry__body">
+                  <p>
+                    For E4--E8 and further results, the source cites Harris (2000) and Luke
+(1969b, pp. 56--57).  It also notes that an expansion for <code>E₁(z)</code> follows by
+combining <a href="https://dlmf.nist.gov/6.2.E4">§6.2.E4</a> with E8, and points to the
+related expansions in §6.18(i).</p>
+                  </div>
+                </article><p>
+                end LMLFManual.Chapter6
+</p>
+              </section>
+            </section>
+          <nav class="prev-next-buttons">
+            <a class="local-button active" href="Exponential___-Logarithmic___-Sine___-and-Cosine-Integrals/___6___9-Continued-Fraction/#chapter-6-section-9" rel="prev" title="6.9. §6.9 Continued Fraction"><span class="arrow">←</span><span class="where">6.9. §6.9 Continued Fraction</span></a><a class="local-button active" href="Exponential___-Logarithmic___-Sine___-and-Cosine-Integrals/___6___11-Relations-to-Other-Functions/#chapter-6-section-11" rel="next" title="6.11. §6.11 Relations to Other Functions"><span class="where">6.11. §6.11 Relations to Other Functions</span><span class="arrow">→</span></a></nav>
+          </div>
+        </main></div>
+    </body>
+  </html>
+

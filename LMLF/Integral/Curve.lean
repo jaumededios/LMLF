@@ -45,6 +45,176 @@ def C1Contour.Integrable (γ : C1Contour) (f : ℂ → ℂ) : Prop :=
   IntervalIntegrable (fun t => f (γ t) * γ.tangent t) volume 0 1
 -- ANCHOR_END: C1Contour.Integrable
 
+/-! A piecewise C¹ contour keeps the path continuous at its finite joins while
+allowing the tangent to jump there.  The finite break set and its interval
+membership make the piece decomposition explicit; the endpoint equations are
+the compatibility laws used by concatenated contour formulas. -/
+
+/-- DLMF 5.12.12: a continuous piecewise-C¹ complex contour on `[0,1]`.
+
+The finite break set records all possible tangent jumps.  Away from it, the
+stored tangent is the derivative and is continuous on each remaining piece. -/
+-- ANCHOR: PiecewiseC1Contour
+structure PiecewiseC1Contour where
+  point : ℝ → ℂ
+  tangent : ℝ → ℂ
+  start : ℂ
+  finish : ℂ
+  breaks : Finset ℝ
+  breaks_mem : ∀ t ∈ breaks, t ∈ Icc (0 : ℝ) 1
+  point_zero : point 0 = start
+  point_one : point 1 = finish
+  point_continuous : ContinuousOn point (Icc (0 : ℝ) 1)
+  hasDerivOffBreaks : ∀ t ∈ Icc (0 : ℝ) 1, t ∉ breaks →
+    HasDerivAt point (tangent t) t
+  tangent_continuous_off_breaks :
+    ContinuousOn tangent (Icc (0 : ℝ) 1 \ (breaks : Set ℝ))
+-- ANCHOR_END: PiecewiseC1Contour
+
+/-- DLMF 5.12.12: integrate a two-branch integrand on a piecewise-C¹ contour. -/
+-- ANCHOR: PiecewiseC1Contour.integral₂
+def PiecewiseC1Contour.integral₂ (γ : PiecewiseC1Contour)
+    (f : ℂ → ℂ → ℂ → ℂ) (log₁ log₂ : ℝ → ℂ) : ℂ :=
+  ∫ t in (0 : ℝ)..1, f (γ.point t) (log₁ t) (log₂ t) * γ.tangent t
+-- ANCHOR_END: PiecewiseC1Contour.integral₂
+
+/-- DLMF 5.12.12: branch-aware integrability on a piecewise-C¹ contour. -/
+-- ANCHOR: PiecewiseC1Contour.Integrable₂
+def PiecewiseC1Contour.Integrable₂ (γ : PiecewiseC1Contour)
+    (f : ℂ → ℂ → ℂ → ℂ) (log₁ log₂ : ℝ → ℂ) : Prop :=
+  IntervalIntegrable
+    (fun t => f (γ.point t) (log₁ t) (log₂ t) * γ.tangent t) volume 0 1
+-- ANCHOR_END: PiecewiseC1Contour.Integrable₂
+
+/-! A vertical line is a reusable contour object rather than a section-local
+parameterization.  The whole-line and symmetric finite-segment interfaces are
+kept distinct: the former is an ordinary Bochner integral, while the latter is
+the ordered finite-cutoff interface used by Mellin--Barnes formulas. -/
+
+/-- DLMF 5.13.1: the upward vertical contour `s = c + i t`. -/
+-- ANCHOR: VerticalLine
+structure VerticalLine where
+  offset : ℝ
+-- ANCHOR_END: VerticalLine
+
+/-- DLMF 5.13.1: the point on a vertical line at height `t`. -/
+-- ANCHOR: VerticalLine.point
+def VerticalLine.point (γ : VerticalLine) (t : ℝ) : ℂ :=
+  (γ.offset : ℂ) + (t : ℂ) * Complex.I
+-- ANCHOR_END: VerticalLine.point
+
+/-- DLMF 5.13.1: the upward tangent of a vertical line. -/
+-- ANCHOR: VerticalLine.tangent
+def VerticalLine.tangent (_γ : VerticalLine) : ℂ := Complex.I
+-- ANCHOR_END: VerticalLine.tangent
+
+/-- DLMF 5.13.1: the pulled-back integrand on a vertical line. -/
+-- ANCHOR: VerticalLine.integrand
+def VerticalLine.integrand (γ : VerticalLine) (f : ℂ → ℂ) : ℝ → ℂ := fun t ↦
+  f (γ.point t) * γ.tangent
+-- ANCHOR_END: VerticalLine.integrand
+
+/-- DLMF 5.13.1: the ordinary whole-line integral along a vertical line. -/
+-- ANCHOR: VerticalLine.integral
+noncomputable def VerticalLine.integral (γ : VerticalLine) (f : ℂ → ℂ) : ℂ :=
+  ∫ t : ℝ, γ.integrand f t
+-- ANCHOR_END: VerticalLine.integral
+
+/-- DLMF 5.13.1: absolute convergence of a whole-line vertical integral. -/
+-- ANCHOR: VerticalLine.Integrable
+def VerticalLine.Integrable (γ : VerticalLine) (f : ℂ → ℂ) : Prop :=
+  MeasureTheory.Integrable (γ.integrand f)
+-- ANCHOR_END: VerticalLine.Integrable
+
+/-- DLMF 5.13.1: the canonical vertical line at real part `c`. -/
+-- ANCHOR: verticalLine
+def verticalLine (c : ℝ) : VerticalLine := ⟨c⟩
+-- ANCHOR_END: verticalLine
+
+/-- DLMF 5.9.11 and 5.9.17: a symmetric finite cutoff on a vertical line. -/
+-- ANCHOR: VerticalLine.symmetricSegment
+noncomputable def VerticalLine.symmetricSegment (γ : VerticalLine) (L : ℝ) : C1Contour where
+  point u := γ.point (-L + 2 * L * u)
+  tangent _ := (2 * L : ℂ) * Complex.I
+  start := γ.point (-L)
+  finish := γ.point L
+  point_zero := by sorry
+  point_one := by sorry
+  hasDeriv := by sorry
+  tangent_continuous := by fun_prop
+-- ANCHOR_END: VerticalLine.symmetricSegment
+
+/-- DLMF 5.9.11 and 5.9.17: the finite symmetric-segment integral. -/
+-- ANCHOR: VerticalLine.symmetricSegmentIntegral
+noncomputable def VerticalLine.symmetricSegmentIntegral
+    (γ : VerticalLine) (L : ℝ) (f : ℂ → ℂ) : ℂ :=
+  (γ.symmetricSegment L).integral f
+-- ANCHOR_END: VerticalLine.symmetricSegmentIntegral
+
+/-- DLMF 5.9.11 and 5.9.17: finite-cutoff integrability on every symmetric segment. -/
+-- ANCHOR: VerticalLine.symmetricSegmentIntegrable
+def VerticalLine.symmetricSegmentIntegrable
+    (γ : VerticalLine) (f : ℂ → ℂ) : Prop :=
+  ∀ L : ℝ, 0 < L → (γ.symmetricSegment L).Integrable f
+-- ANCHOR_END: VerticalLine.symmetricSegmentIntegrable
+
+/- DLMF 5.9.11 and 5.9.17: the totalized candidate value of the cutoff family. -/
+-- ANCHOR: VerticalLine.symmetricSegmentValue
+noncomputable def VerticalLine.symmetricSegmentValue
+    (γ : VerticalLine) (f : ℂ → ℂ) : ℂ :=
+  limUnder atTop (fun L : ℝ => γ.symmetricSegmentIntegral L f)
+-- ANCHOR_END: VerticalLine.symmetricSegmentValue
+
+/-- DLMF 5.9.11 and 5.9.17: ordered convergence of symmetric cutoffs. -/
+-- ANCHOR: VerticalLine.symmetricSegmentConverges
+def VerticalLine.symmetricSegmentConverges
+    (γ : VerticalLine) (f : ℂ → ℂ) : Prop :=
+  Tendsto (fun L : ℝ => γ.symmetricSegmentIntegral L f) atTop
+    (𝓝 (γ.symmetricSegmentValue f))
+-- ANCHOR_END: VerticalLine.symmetricSegmentConverges
+
+/-! An improper ray uses the same point/tangent discipline as a finite contour,
+but its parameter runs forward from `0` to infinity. -/
+
+/-- A continuously differentiable complex ray with a stored tangent and escape
+to infinity.  The tangent is data, so improper integration never calls the
+totalized ambient `deriv`. -/
+-- ANCHOR: ImproperC1Ray
+structure ImproperC1Ray where
+  point : ℝ → ℂ
+  tangent : ℝ → ℂ
+  start : ℂ
+  point_zero : point 0 = start
+  hasDeriv : ∀ t : ℝ, 0 ≤ t → HasDerivWithinAt point (tangent t) (Set.Ici 0) t
+  tangent_continuous : ContinuousOn tangent (Set.Ici 0)
+  escape : Tendsto (fun t : ℝ => ‖point t‖) atTop atTop
+-- ANCHOR_END: ImproperC1Ray
+
+instance : CoeFun ImproperC1Ray (fun _ => ℝ → ℂ) :=
+  ⟨ImproperC1Ray.point⟩
+
+/-- Finite integration along an improper C¹ ray up to parameter `R`. -/
+-- ANCHOR: ImproperC1Ray.HasIntegral
+def ImproperC1Ray.HasIntegral
+    (γ : ImproperC1Ray) (f : ℂ → ℂ) (R : ℝ) (value : ℂ) : Prop :=
+  0 ≤ R ∧
+    IntervalIntegrable
+        (fun t : ℝ => f (γ.point t) * γ.tangent t) volume 0 R ∧
+    value = ∫ t in (0 : ℝ)..R, f (γ.point t) * γ.tangent t
+-- ANCHOR_END: ImproperC1Ray.HasIntegral
+
+/-- The forward improper integral along a typed C¹ ray. -/
+-- ANCHOR: ImproperC1Ray.HasImproperIntegral
+def ImproperC1Ray.HasImproperIntegral
+    (γ : ImproperC1Ray) (f : ℂ → ℂ) (value : ℂ) : Prop :=
+  (∀ R : ℝ, 0 ≤ R →
+      IntervalIntegrable
+        (fun t : ℝ => f (γ.point t) * γ.tangent t) volume 0 R) ∧
+    Tendsto
+      (fun R : ℝ => ∫ t in (0 : ℝ)..R, f (γ.point t) * γ.tangent t)
+      atTop (𝓝 value)
+-- ANCHOR_END: ImproperC1Ray.HasImproperIntegral
+
 /-- A C¹ contour together with a continuous logarithm along it. This is the
 data needed for powers on contours that wind around zero. -/
 -- ANCHOR: LogLiftedC1Contour
@@ -87,8 +257,10 @@ abbrev PositiveRadius := {ε : ℝ // 0 < ε}
 abbrev OuterRadius (ε : PositiveRadius) := {R : ℝ // ε.1 < R}
 
 /-- Package a positive inner radius and an admissible outer radius. -/
+-- ANCHOR: HankelRadii.of
 def HankelRadii.of (ε : PositiveRadius) (R : OuterRadius ε) : HankelRadii :=
   ⟨ε, R, ε.property, R.property⟩
+-- ANCHOR_END: HankelRadii.of
 
 /-- The filter of positive radii tending to zero. -/
 def positiveRadiusAtZero : Filter PositiveRadius :=
@@ -208,7 +380,9 @@ structure HankelContour where
 
 /-- The explicitly oriented finite Hankel contour for admissible radii. -/
 -- ANCHOR: hankelContour
-noncomputable def hankelContour (ρ : HankelRadii) : HankelContour where
+noncomputable def hankelContour (ρ : HankelRadii) : HankelContour
+-- ANCHOR_END: hankelContour
+where
   lowerBank := hankelLowerBank ρ
   innerCircle := hankelInnerCircle ρ
   upperBank := hankelUpperBank ρ
@@ -221,7 +395,6 @@ noncomputable def hankelContour (ρ : HankelRadii) : HankelContour where
   upper_log_join := by
     simp [hankelInnerCircle, hankelUpperBank]
     ring
--- ANCHOR_END: hankelContour
 
 /-- Sum the branch-aware integrals over the three pieces of a Hankel contour. -/
 -- ANCHOR: HankelContour.integral

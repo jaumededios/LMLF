@@ -1,0 +1,102 @@
+{
+  "section_range": ["6.21"],
+  "numbered_formula_ids_expected": [],
+  "numbered_formula_ids_stated": [],
+  "numbered_formula_ids_omitted": [],
+  "extra_statement_ids": [
+    "6.21#i.p1",
+    "6.21#i.p2",
+    "6.21#ii.info@editorial-change-note-1",
+    "6.21#ii.p1",
+    "6.21#I1.i1.p1",
+    "6.21#I1.i2.p1",
+    "6.21#I1.i3.p1",
+    "6.21#iii.p1",
+    "6.21#I2.i1.p1"
+  ],
+  "declarations": [
+    {
+      "source_id": "6.21#i.p1",
+      "source_url": "https://dlmf.nist.gov/6.21#i.p1",
+      "names": [],
+      "relation": "related",
+      "proof_status": "not_applicable",
+      "quantitative_analogue": "not_applicable",
+      "notes": "Introductory prose describing the software-literature scope and the distinction between Web-downloadable and separately available software; preserved in the page prose."
+    },
+    {
+      "source_id": "6.21#i.p2",
+      "source_url": "https://dlmf.nist.gov/6.21#i.p2",
+      "names": ["LMLF.Blueprint.ExponentialIntegrals.Section621.softwareDirectories"],
+      "relation": "related",
+      "proof_status": "not_applicable",
+      "quantitative_analogue": "not_applicable",
+      "notes": "Typed list records the DLMF Software Index and GAMS class C5 directory pointers."
+    },
+    {
+      "source_id": "6.21#ii.info@editorial-change-note-1",
+      "source_url": "https://dlmf.nist.gov/6.21#ii.info",
+      "names": [],
+      "relation": "related",
+      "proof_status": "not_applicable",
+      "quantitative_analogue": "not_applicable",
+      "notes": "Editorial note preserved in the manual prose: Smith (2011) was added effective with DLMF version 1.0.9; no additional mathematical statement is claimed."
+    },
+    {
+      "source_id": "6.21#ii.p1",
+      "source_url": "https://dlmf.nist.gov/6.21#ii.p1",
+      "names": ["LMLF.Blueprint.ExponentialIntegrals.Section621.realVariableSoftware"],
+      "relation": "related",
+      "proof_status": "not_applicable",
+      "quantitative_analogue": "not_applicable",
+      "notes": "Typed list preserves the source order Amos (1980a), Cody (1993b), Smith (2011) for real arguments; all are identified as Fortran."
+    },
+    {
+      "source_id": "6.21#I1.i1.p1",
+      "source_url": "https://dlmf.nist.gov/6.21#I1.i1.p1",
+      "names": ["LMLF.Blueprint.ExponentialIntegrals.Section621.realVariableSoftware"],
+      "relation": "related",
+      "proof_status": "not_applicable",
+      "quantitative_analogue": "not_applicable",
+      "notes": "Amos (1980a), the first real-variable downloadable entry."
+    },
+    {
+      "source_id": "6.21#I1.i2.p1",
+      "source_url": "https://dlmf.nist.gov/6.21#I1.i2.p1",
+      "names": ["LMLF.Blueprint.ExponentialIntegrals.Section621.realVariableSoftware"],
+      "relation": "related",
+      "proof_status": "not_applicable",
+      "quantitative_analogue": "not_applicable",
+      "notes": "Cody (1993b), the second real-variable downloadable entry."
+    },
+    {
+      "source_id": "6.21#I1.i3.p1",
+      "source_url": "https://dlmf.nist.gov/6.21#I1.i3.p1",
+      "names": ["LMLF.Blueprint.ExponentialIntegrals.Section621.realVariableSoftware"],
+      "relation": "related",
+      "proof_status": "not_applicable",
+      "quantitative_analogue": "not_applicable",
+      "notes": "Smith (2011), the third real-variable downloadable entry."
+    },
+    {
+      "source_id": "6.21#iii.p1",
+      "source_url": "https://dlmf.nist.gov/6.21#iii.p1",
+      "names": ["LMLF.Blueprint.ExponentialIntegrals.Section621.complexVariableSoftware"],
+      "relation": "related",
+      "proof_status": "not_applicable",
+      "quantitative_analogue": "not_applicable",
+      "notes": "Typed list records Amos (1990), the Fortran entry for complex arguments."
+    },
+    {
+      "source_id": "6.21#I2.i1.p1",
+      "source_url": "https://dlmf.nist.gov/6.21#I2.i1.p1",
+      "names": ["LMLF.Blueprint.ExponentialIntegrals.Section621.complexVariableSoftware"],
+      "relation": "related",
+      "proof_status": "not_applicable",
+      "quantitative_analogue": "not_applicable",
+      "notes": "Amos (1990), the sole complex-variable downloadable entry."
+    }
+  ],
+  "shared_vocabulary_requests": [],
+  "known_gaps": []
+}

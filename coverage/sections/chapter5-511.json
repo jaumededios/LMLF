@@ -16,9 +16,13 @@
   "extra_statement_ids": [
     "5.11.E1.remainder-bound", "5.11.E2.remainder-bound",
     "5.11.E1.complex-remainder-bound", "5.11.E2.complex-remainder-bound",
-    "5.11.aCoeff-initial", "5.11.risingFactorial", "5.11.generalizedBinomial",
-    "5.11.generalizedBernoulli", "5.11.generalizedBernoulli-generating",
+    "5.11.aCoeff-initial", "5.11.aCoeff-step", "5.11.aCoeff-state",
+    "5.11.aCoeff-unique", "5.11.aCoeff-prefix", "5.11.risingFactorial",
+    "5.11.generalizedBinomial", "5.11.generalizedBernoulli",
+    "5.11.generalizedBernoulli-formal", "5.11.generalizedBernoulli-generating",
+    "5.11.generalizedBernoulli-prefix",
     "5.11.lnGamma-datum", "5.11.scaledGammaReal-factorization",
+    "5.11.scaledGammaReal-asymptotic-one", "5.11.gammaRemainder-tendsto-zero",
     "5.11.uniform-bounded-x"
   ],
   "declarations": [
@@ -32,7 +36,7 @@
       "relation": "specialization",
       "proof_status": "missing",
       "quantitative_analogue": "present",
-      "notes": "Positive-real specialization of the branch-sensitive logarithmic formula; the selected sectorial LnGammaDatum is analytic, overlap-consistent, and normalized to the positive-real log-Gamma, supplying the general-logarithm E1 residual while the explicit terms retain principal Complex.log. The separate first-neglected-term sign/magnitude bound and the distinct complex sector bound with sec^(2n)(ph z/2) are supplied by DLMF §5.11(ii). Complex terms use the source's one-based index n, with truncation through n-1."
+      "notes": "Positive-real specialization of the branch-sensitive logarithmic formula; complex residual bounds take an explicit LnGammaDatum carrying analyticity, overlap consistency, and positive-real normalization, while the explicit terms retain principal Complex.log. The separate first-neglected-term sign/magnitude bound and the distinct complex sector bound with sec^(2n)(ph z/2) are supplied by DLMF §5.11(ii). Complex terms use the source's one-based index n, with truncation through n-1."
     },
     {
       "source_id": "5.11.E2",
@@ -52,7 +56,7 @@
       "relation": "specialization",
       "proof_status": "missing",
       "quantitative_analogue": "not_applicable",
-      "notes": "Positive-real scaled-Gamma specialization; scaledGammaReal_factorization states the exact positive-real prefactor identity, while gCoeff is the projection of an explicit StirlingCoefficientSpec carrying the initial values and coefficient equations."
+      "notes": "Positive-real scaled-Gamma specialization; scaledGammaReal_factorization states the exact positive-real prefactor identity, scaledGammaReal_asymptotic_one makes Γ*(x) ∼ 1 explicit, and gCoeff is reconstructed from the canonical finite-state aCoeff map."
     },
     {
       "source_id": "5.11.E4",
@@ -170,7 +174,7 @@
       "relation": "specialization",
       "proof_status": "missing",
       "quantitative_analogue": "not_applicable",
-      "notes": "Generalized Bernoulli polynomial vocabulary is selected by GeneralizedBernoulliSpec's local generating-function identity and projected into the ratio coefficient definition."
+      "notes": "Generalized Bernoulli polynomial vocabulary is defined by canonical coefficients of a formal binomial/exponential generating series; generalizedBernoulli_generating states the analytic generating-function identity."
     },
     {
       "source_id": "5.11.E18",
@@ -178,7 +182,7 @@
       "relation": "specialization",
       "proof_status": "missing",
       "quantitative_analogue": "not_applicable",
-      "notes": "Generalized Bernoulli representation of the centered coefficients through the selected generating-function specification."
+      "notes": "Generalized Bernoulli representation of the centered coefficients through the same canonical formal generating series."
     },
     {
       "source_id": "5.11.E19",
@@ -196,6 +200,6 @@
   "known_gaps": [
     "All theorem proofs are intentionally proof-pending (`by sorry`).",
     "The declarations for 5.11.1, 5.11.2, 5.11.3, 5.11.7, 5.11.8, and 5.11.12–5.11.19 are explicit positive-real specializations of the source's complex sector statements.",
-    "The pinned project has no canonical generalized Bernoulli-polynomial API; §5.11.17–5.11.18 therefore expose a named GeneralizedBernoulliSpec with the local §24.16(i) generating-function relation and a proof-pending existence boundary."
+    "The generalized Bernoulli analytic generating-function theorem and the recurrence uniqueness theorem remain proof-pending; the public data maps themselves are canonical formal/finite-state constructions rather than selected witnesses."
   ]
 }

@@ -1,351 +1,57 @@
 {
-  "section_range": [
-    "5.9"
-  ],
+  "section_range": ["5.9"],
   "numbered_formula_ids_expected": [
-    "5.9.E1",
-    "5.9.E2",
-    "5.9.E2_5",
-    "5.9.E3",
-    "5.9.E4",
-    "5.9.E5",
-    "5.9.E6",
-    "5.9.E7",
-    "5.9.E8",
-    "5.9.E9",
-    "5.9.E10",
-    "5.9.E10_1",
-    "5.9.E10_2",
-    "5.9.E11",
-    "5.9.E11_1",
-    "5.9.E11_2",
-    "5.9.E12",
-    "5.9.E13",
-    "5.9.E14",
-    "5.9.E15",
-    "5.9.E16",
-    "5.9.E17",
-    "5.9.E18",
-    "5.9.E19",
-    "5.9.E20"
+    "5.9.E1", "5.9.E2", "5.9.E2_5", "5.9.E3", "5.9.E4", "5.9.E5",
+    "5.9.E6", "5.9.E7", "5.9.E8", "5.9.E9", "5.9.E10", "5.9.E10_1",
+    "5.9.E10_2", "5.9.E11", "5.9.E11_1", "5.9.E11_2", "5.9.E12",
+    "5.9.E13", "5.9.E14", "5.9.E15", "5.9.E16", "5.9.E17", "5.9.E18",
+    "5.9.E19", "5.9.E20"
   ],
   "numbered_formula_ids_stated": [
-    "5.9.E1",
-    "5.9.E2",
-    "5.9.E2_5",
-    "5.9.E3",
-    "5.9.E4",
-    "5.9.E5",
-    "5.9.E6",
-    "5.9.E7",
-    "5.9.E8",
-    "5.9.E9",
-    "5.9.E10",
-    "5.9.E10_1",
-    "5.9.E10_2",
-    "5.9.E11",
-    "5.9.E11_1",
-    "5.9.E11_2",
-    "5.9.E12",
-    "5.9.E13",
-    "5.9.E14",
-    "5.9.E15",
-    "5.9.E16",
-    "5.9.E17",
-    "5.9.E18",
-    "5.9.E19",
-    "5.9.E20"
+    "5.9.E1", "5.9.E2", "5.9.E2_5", "5.9.E3", "5.9.E4", "5.9.E5",
+    "5.9.E6", "5.9.E7", "5.9.E8", "5.9.E9", "5.9.E10", "5.9.E10_1",
+    "5.9.E10_2", "5.9.E11", "5.9.E11_1", "5.9.E11_2", "5.9.E12",
+    "5.9.E13", "5.9.E14", "5.9.E15", "5.9.E16", "5.9.E17", "5.9.E18",
+    "5.9.E19", "5.9.E20"
   ],
   "numbered_formula_ids_omitted": [],
   "extra_statement_ids": [
-    "complexSegmentIntegral",
-    "C1Contour",
-    "LogLiftedC1Contour",
-    "HankelRadii",
-    "hankelLowerBank_spec",
-    "hankelInnerCircle_spec",
-    "hankelUpperBank_spec",
-    "HankelContour",
-    "hankelContour",
-    "HankelContour.integral",
-    "HasHankelIntegral",
-    "HasHankelRepresentation",
-    "temmePhase",
-    "verticalLineIntegral",
-    "scaledGamma"
+    "complexSegmentContour", "complexSegmentIntegral", "verticalSegment",
+    "verticalLineIntegral", "verticalLineIntegrable", "verticalLineConverges",
+    "temmePhase", "scaledGamma"
   ],
   "declarations": [
-    {
-      "source_id": "5.9.E1",
-      "names": [
-        "LMLF.Blueprint.Gamma.Section59.dlmf_5_9_1"
-      ],
-      "relation": "exact",
-      "proof_status": "missing",
-      "quantitative_analogue": "not_applicable",
-      "notes": ""
-    },
-    {
-      "source_id": "5.9.E2",
-      "names": [
-        "LMLF.Integral.C1Contour",
-        "LMLF.Integral.C1Contour.integral",
-        "LMLF.Integral.LogLiftedC1Contour",
-        "LMLF.Integral.LogLiftedC1Contour.integral",
-        "LMLF.Integral.HankelRadii",
-        "LMLF.Integral.hankelLowerBank_spec",
-        "LMLF.Integral.hankelInnerCircle_spec",
-        "LMLF.Integral.hankelUpperBank_spec",
-        "LMLF.Integral.HankelContour",
-        "LMLF.Integral.hankelContour",
-        "LMLF.Integral.HankelContour.integral",
-        "LMLF.Integral.HankelContour.Integrable",
-        "LMLF.Integral.HasHankelIntegral",
-        "LMLF.Integral.HasHankelRepresentation",
-        "LMLF.Blueprint.Gamma.Section59.dlmf_5_9_2"
-      ],
-      "relation": "exact",
-      "proof_status": "missing",
-      "quantitative_analogue": "not_applicable",
-      "notes": "The reusable API specifies the lower bank, counterclockwise inner circle, upper bank, their ±π logarithm lifts, and admissible radii. HasHankelIntegral requires integrability on every finite three-piece contour and records the outer-radius limit followed by the inner-radius limit; HasHankelRepresentation preserves the source normalization 1/Γ(z) = (1/(2πi)) integral."
-    },
-    {
-      "source_id": "5.9.E2_5",
-      "names": [
-        "LMLF.Blueprint.Gamma.Section59.dlmf_5_9_2_5"
-      ],
-      "relation": "exact",
-      "proof_status": "missing",
-      "quantitative_analogue": "not_applicable",
-      "notes": ""
-    },
-    {
-      "source_id": "5.9.E3",
-      "names": [
-        "LMLF.Blueprint.Gamma.Section59.dlmf_5_9_3"
-      ],
-      "relation": "exact",
-      "proof_status": "missing",
-      "quantitative_analogue": "not_applicable",
-      "notes": ""
-    },
-    {
-      "source_id": "5.9.E4",
-      "names": [
-        "LMLF.Blueprint.Gamma.Section59.dlmf_5_9_4"
-      ],
-      "relation": "exact",
-      "proof_status": "missing",
-      "quantitative_analogue": "not_applicable",
-      "notes": ""
-    },
-    {
-      "source_id": "5.9.E5",
-      "names": [
-        "LMLF.Blueprint.Gamma.Section59.dlmf_5_9_5"
-      ],
-      "relation": "exact",
-      "proof_status": "missing",
-      "quantitative_analogue": "not_applicable",
-      "notes": ""
-    },
-    {
-      "source_id": "5.9.E6",
-      "names": [
-        "LMLF.Blueprint.Gamma.Section59.dlmf_5_9_6"
-      ],
-      "relation": "exact",
-      "proof_status": "missing",
-      "quantitative_analogue": "not_applicable",
-      "notes": ""
-    },
-    {
-      "source_id": "5.9.E7",
-      "names": [
-        "LMLF.Blueprint.Gamma.Section59.dlmf_5_9_7"
-      ],
-      "relation": "exact",
-      "proof_status": "missing",
-      "quantitative_analogue": "not_applicable",
-      "notes": ""
-    },
-    {
-      "source_id": "5.9.E8",
-      "names": [
-        "LMLF.Blueprint.Gamma.Section59.dlmf_5_9_8"
-      ],
-      "relation": "exact",
-      "proof_status": "missing",
-      "quantitative_analogue": "not_applicable",
-      "notes": ""
-    },
-    {
-      "source_id": "5.9.E9",
-      "names": [
-        "LMLF.Blueprint.Gamma.Section59.dlmf_5_9_9"
-      ],
-      "relation": "exact",
-      "proof_status": "missing",
-      "quantitative_analogue": "not_applicable",
-      "notes": ""
-    },
-    {
-      "source_id": "5.9.E10",
-      "names": [
-        "LMLF.Blueprint.Gamma.Section59.dlmf_5_9_10"
-      ],
-      "relation": "specialization",
-      "proof_status": "missing",
-      "quantitative_analogue": "not_applicable",
-      "notes": "Positive-real specialization; branch and contour conditions are stated in the documentation and Lean signature."
-    },
-    {
-      "source_id": "5.9.E10_1",
-      "names": [
-        "LMLF.Blueprint.Gamma.Section59.dlmf_5_9_10_1"
-      ],
-      "relation": "specialization",
-      "proof_status": "missing",
-      "quantitative_analogue": "not_applicable",
-      "notes": "Positive-real specialization; branch and contour conditions are stated in the documentation and Lean signature."
-    },
-    {
-      "source_id": "5.9.E10_2",
-      "names": [
-        "LMLF.Blueprint.Gamma.Section59.dlmf_5_9_10_2"
-      ],
-      "relation": "specialization",
-      "proof_status": "missing",
-      "quantitative_analogue": "not_applicable",
-      "notes": "Positive-real specialization; branch and contour conditions are stated in the documentation and Lean signature."
-    },
-    {
-      "source_id": "5.9.E11",
-      "names": [
-        "LMLF.Blueprint.Gamma.Section59.dlmf_5_9_11"
-      ],
-      "relation": "specialization",
-      "proof_status": "missing",
-      "quantitative_analogue": "not_applicable",
-      "notes": "Positive-real specialization; branch and contour conditions are stated in the documentation and Lean signature."
-    },
-    {
-      "source_id": "5.9.E11_1",
-      "names": [
-        "LMLF.Blueprint.Gamma.Section59.dlmf_5_9_11_1"
-      ],
-      "relation": "specialization",
-      "proof_status": "missing",
-      "quantitative_analogue": "not_applicable",
-      "notes": "Positive-real specialization; branch and contour conditions are stated in the documentation and Lean signature."
-    },
-    {
-      "source_id": "5.9.E11_2",
-      "names": [
-        "LMLF.Blueprint.Gamma.Section59.dlmf_5_9_11_2"
-      ],
-      "relation": "specialization",
-      "proof_status": "missing",
-      "quantitative_analogue": "not_applicable",
-      "notes": "Positive-real specialization; branch and contour conditions are stated in the documentation and Lean signature."
-    },
-    {
-      "source_id": "5.9.E12",
-      "names": [
-        "LMLF.Blueprint.Gamma.Section59.dlmf_5_9_12"
-      ],
-      "relation": "specialization",
-      "proof_status": "missing",
-      "quantitative_analogue": "not_applicable",
-      "notes": "Positive-real specialization; branch and contour conditions are stated in the documentation and Lean signature."
-    },
-    {
-      "source_id": "5.9.E13",
-      "names": [
-        "LMLF.Blueprint.Gamma.Section59.dlmf_5_9_13"
-      ],
-      "relation": "specialization",
-      "proof_status": "missing",
-      "quantitative_analogue": "not_applicable",
-      "notes": "Positive-real specialization; branch and contour conditions are stated in the documentation and Lean signature."
-    },
-    {
-      "source_id": "5.9.E14",
-      "names": [
-        "LMLF.Blueprint.Gamma.Section59.dlmf_5_9_14"
-      ],
-      "relation": "specialization",
-      "proof_status": "missing",
-      "quantitative_analogue": "not_applicable",
-      "notes": "Positive-real specialization; branch and contour conditions are stated in the documentation and Lean signature."
-    },
-    {
-      "source_id": "5.9.E15",
-      "names": [
-        "LMLF.Blueprint.Gamma.Section59.dlmf_5_9_15"
-      ],
-      "relation": "specialization",
-      "proof_status": "missing",
-      "quantitative_analogue": "not_applicable",
-      "notes": "Positive-real specialization; branch and contour conditions are stated in the documentation and Lean signature."
-    },
-    {
-      "source_id": "5.9.E16",
-      "names": [
-        "LMLF.Blueprint.Gamma.Section59.dlmf_5_9_16"
-      ],
-      "relation": "specialization",
-      "proof_status": "missing",
-      "quantitative_analogue": "not_applicable",
-      "notes": "Positive-real specialization; branch and contour conditions are stated in the documentation and Lean signature."
-    },
-    {
-      "source_id": "5.9.E17",
-      "names": [
-        "LMLF.Blueprint.Gamma.Section59.dlmf_5_9_17"
-      ],
-      "relation": "specialization",
-      "proof_status": "missing",
-      "quantitative_analogue": "not_applicable",
-      "notes": "Positive-real specialization; branch and contour conditions are stated in the documentation and Lean signature."
-    },
-    {
-      "source_id": "5.9.E18",
-      "names": [
-        "LMLF.Blueprint.Gamma.Section59.dlmf_5_9_18"
-      ],
-      "relation": "exact",
-      "proof_status": "missing",
-      "quantitative_analogue": "not_applicable",
-      "notes": ""
-    },
-    {
-      "source_id": "5.9.E19",
-      "names": [
-        "LMLF.Blueprint.Gamma.Section59.dlmf_5_9_19"
-      ],
-      "relation": "exact",
-      "proof_status": "missing",
-      "quantitative_analogue": "not_applicable",
-      "notes": ""
-    },
-    {
-      "source_id": "5.9.E20",
-      "names": [
-        "LMLF.Blueprint.Gamma.Section59.dlmf_5_9_20"
-      ],
-      "relation": "exact",
-      "proof_status": "missing",
-      "quantitative_analogue": "not_applicable",
-      "notes": ""
-    }
+    {"source_id":"5.9.E1","names":["LMLF.Blueprint.Gamma.Section59.dlmf_5_9_1_integrable","LMLF.Blueprint.Gamma.Section59.dlmf_5_9_1"],"relation":"exact","proof_status":"missing","quantitative_analogue":"not_applicable","notes":"Convergence and value are separate declarations."},
+    {"source_id":"5.9.E2","names":["LMLF.Blueprint.Gamma.Section59.dlmf_5_9_2","LMLF.Integral.C1Contour","LMLF.Integral.LogLiftedC1Contour","LMLF.Integral.HankelContour","LMLF.Integral.HasHankelIntegral","LMLF.Integral.HasHankelRepresentation"],"relation":"exact","proof_status":"missing","quantitative_analogue":"not_applicable","notes":"Reuses the existing branch-aware Hankel API; its convergence/value fields remain distinct."},
+    {"source_id":"5.9.E2_5","names":["LMLF.Blueprint.Gamma.Section59.dlmf_5_9_2_5_integrable","LMLF.Blueprint.Gamma.Section59.dlmf_5_9_2_5"],"relation":"exact","proof_status":"missing","quantitative_analogue":"not_applicable","notes":"Finite interval convergence and value are separate declarations."},
+    {"source_id":"5.9.E3","names":["LMLF.Blueprint.Gamma.Section59.dlmf_5_9_3_integrable","LMLF.Blueprint.Gamma.Section59.dlmf_5_9_3"],"relation":"exact","proof_status":"missing","quantitative_analogue":"not_applicable","notes":""},
+    {"source_id":"5.9.E4","names":["LMLF.Blueprint.Gamma.Section59.dlmf_5_9_4_integrable","LMLF.Blueprint.Gamma.Section59.dlmf_5_9_4_summable","LMLF.Blueprint.Gamma.Section59.dlmf_5_9_4"],"relation":"exact","proof_status":"missing","quantitative_analogue":"not_applicable","notes":"Tail integrability and correction-series summability are separately exposed."},
+    {"source_id":"5.9.E5","names":["LMLF.Blueprint.Gamma.Section59.dlmf_5_9_5_integrable","LMLF.Blueprint.Gamma.Section59.dlmf_5_9_5"],"relation":"exact","proof_status":"missing","quantitative_analogue":"not_applicable","notes":""},
+    {"source_id":"5.9.E6","names":["LMLF.Blueprint.Gamma.Section59.dlmf_5_9_6"],"relation":"exact","proof_status":"missing","quantitative_analogue":"not_applicable","notes":"The source's conditional improper convergence is one Tendsto claim."},
+    {"source_id":"5.9.E7","names":["LMLF.Blueprint.Gamma.Section59.dlmf_5_9_7"],"relation":"exact","proof_status":"missing","quantitative_analogue":"not_applicable","notes":"The source's conditional improper convergence is one Tendsto claim."},
+    {"source_id":"5.9.E8","names":["LMLF.Blueprint.Gamma.Section59.dlmf_5_9_8"],"relation":"exact","proof_status":"missing","quantitative_analogue":"not_applicable","notes":""},
+    {"source_id":"5.9.E9","names":["LMLF.Blueprint.Gamma.Section59.dlmf_5_9_9"],"relation":"exact","proof_status":"missing","quantitative_analogue":"not_applicable","notes":""},
+    {"source_id":"5.9.E10","names":["LMLF.Blueprint.Gamma.Section59.dlmf_5_9_10_integrable","LMLF.Blueprint.Gamma.Section59.dlmf_5_9_10"],"relation":"specialization","proof_status":"missing","quantitative_analogue":"not_applicable","notes":"Positive-real specialization of the branch-sensitive complex formula; convergence and value are separate."},
+    {"source_id":"5.9.E10_1","names":["LMLF.Blueprint.Gamma.Section59.dlmf_5_9_10_1_integrable","LMLF.Blueprint.Gamma.Section59.dlmf_5_9_10_1"],"relation":"specialization","proof_status":"missing","quantitative_analogue":"not_applicable","notes":"Positive-real specialization; convergence and value are separate."},
+    {"source_id":"5.9.E10_2","names":["LMLF.Blueprint.Gamma.Section59.dlmf_5_9_10_2_integrable","LMLF.Blueprint.Gamma.Section59.dlmf_5_9_10_2"],"relation":"specialization","proof_status":"missing","quantitative_analogue":"not_applicable","notes":"Positive-real specialization; convergence and value are separate."},
+    {"source_id":"5.9.E11","names":["LMLF.Blueprint.Gamma.Section59.dlmf_5_9_11_integrable","LMLF.Blueprint.Gamma.Section59.dlmf_5_9_11_converges","LMLF.Blueprint.Gamma.Section59.dlmf_5_9_11"],"relation":"specialization","proof_status":"missing","quantitative_analogue":"not_applicable","notes":"Positive-real specialization using typed vertical C¹ segments and an explicit improper-limit declaration."},
+    {"source_id":"5.9.E11_1","names":["LMLF.Blueprint.Gamma.Section59.dlmf_5_9_11_1_left_integrable","LMLF.Blueprint.Gamma.Section59.dlmf_5_9_11_1_right_integrable","LMLF.Blueprint.Gamma.Section59.dlmf_5_9_11_1"],"relation":"specialization","proof_status":"missing","quantitative_analogue":"not_applicable","notes":"Positive-real specialization; the two ray convergence assertions are separate from the value identity."},
+    {"source_id":"5.9.E11_2","names":["LMLF.Blueprint.Gamma.Section59.dlmf_5_9_11_2_left_integrable","LMLF.Blueprint.Gamma.Section59.dlmf_5_9_11_2_right_integrable","LMLF.Blueprint.Gamma.Section59.dlmf_5_9_11_2"],"relation":"specialization","proof_status":"missing","quantitative_analogue":"not_applicable","notes":"Positive-real specialization; the two ray convergence assertions are separate from the value identity."},
+    {"source_id":"5.9.E12","names":["LMLF.Blueprint.Gamma.Section59.dlmf_5_9_12_integrable","LMLF.Blueprint.Gamma.Section59.dlmf_5_9_12"],"relation":"specialization","proof_status":"missing","quantitative_analogue":"not_applicable","notes":"Positive-real specialization; convergence and value are separate."},
+    {"source_id":"5.9.E13","names":["LMLF.Blueprint.Gamma.Section59.dlmf_5_9_13_integrable","LMLF.Blueprint.Gamma.Section59.dlmf_5_9_13"],"relation":"specialization","proof_status":"missing","quantitative_analogue":"not_applicable","notes":"Positive-real specialization; convergence and value are separate."},
+    {"source_id":"5.9.E14","names":["LMLF.Blueprint.Gamma.Section59.dlmf_5_9_14_integrable","LMLF.Blueprint.Gamma.Section59.dlmf_5_9_14"],"relation":"specialization","proof_status":"missing","quantitative_analogue":"not_applicable","notes":"Positive-real specialization; convergence and value are separate."},
+    {"source_id":"5.9.E15","names":["LMLF.Blueprint.Gamma.Section59.dlmf_5_9_15_integrable","LMLF.Blueprint.Gamma.Section59.dlmf_5_9_15"],"relation":"specialization","proof_status":"missing","quantitative_analogue":"not_applicable","notes":"Positive-real specialization; convergence and value are separate."},
+    {"source_id":"5.9.E16","names":["LMLF.Blueprint.Gamma.Section59.dlmf_5_9_16_laplace_integrable","LMLF.Blueprint.Gamma.Section59.dlmf_5_9_16_unit_integrable","LMLF.Blueprint.Gamma.Section59.dlmf_5_9_16_laplace","LMLF.Blueprint.Gamma.Section59.dlmf_5_9_16_unit"],"relation":"specialization","proof_status":"missing","quantitative_analogue":"not_applicable","notes":"Positive-real specialization; each of the two convergence facts is separate from its value identity."},
+    {"source_id":"5.9.E17","names":["LMLF.Blueprint.Gamma.Section59.dlmf_5_9_17_integrable","LMLF.Blueprint.Gamma.Section59.dlmf_5_9_17_converges","LMLF.Blueprint.Gamma.Section59.dlmf_5_9_17"],"relation":"specialization","proof_status":"missing","quantitative_analogue":"not_applicable","notes":"Positive-real specialization using the typed vertical contour."},
+    {"source_id":"5.9.E18","names":["LMLF.Blueprint.Gamma.Section59.dlmf_5_9_18_first_integrable","LMLF.Blueprint.Gamma.Section59.dlmf_5_9_18_second_integrable","LMLF.Blueprint.Gamma.Section59.dlmf_5_9_18_third_integrable","LMLF.Blueprint.Gamma.Section59.dlmf_5_9_18_fourth_integrable","LMLF.Blueprint.Gamma.Section59.dlmf_5_9_18_fifth_integrable","LMLF.Blueprint.Gamma.Section59.dlmf_5_9_18_first","LMLF.Blueprint.Gamma.Section59.dlmf_5_9_18_second","LMLF.Blueprint.Gamma.Section59.dlmf_5_9_18_third","LMLF.Blueprint.Gamma.Section59.dlmf_5_9_18_fourth"],"relation":"exact","proof_status":"missing","quantitative_analogue":"not_applicable","notes":"The five convergence facts and four value identities are distinct source claims."},
+    {"source_id":"5.9.E19","names":["LMLF.Blueprint.Gamma.Section59.dlmf_5_9_19_integrable","LMLF.Blueprint.Gamma.Section59.dlmf_5_9_19"],"relation":"exact","proof_status":"missing","quantitative_analogue":"not_applicable","notes":""},
+    {"source_id":"5.9.E20","names":["LMLF.Blueprint.Gamma.Section59.dlmf_5_9_20_integrable","LMLF.Blueprint.Gamma.Section59.dlmf_5_9_20"],"relation":"exact","proof_status":"missing","quantitative_analogue":"not_applicable","notes":"The path is the reusable typed C¹ straight segment."}
   ],
   "shared_vocabulary_requests": [
-    "Consolidate straight-segment and vertical-line integration vocabulary with the reusable contour interface.",
-    "Consolidate the scaled Gamma normalization with §5.11 when that section receives a complex-variable treatment."
+    "Keep the complex scaled-Gamma normalization local until a second page consumes the same complex-valued object; §5.11 currently uses a distinct positive-real asymptotic object."
   ],
   "known_gaps": [
-    "All 25 statements are proof-pending (`by sorry`).",
-    "DLMF 5.9.E10, E10_1, E10_2, E11, E11_1, E11_2, and E12–E17 are represented by positive-real specializations rather than their full branch-sensitive complex forms."
+    "All declarations remain proof-pending (`by sorry`).",
+    "DLMF 5.9.E10, E10_1, E10_2, E11, E11_1, E11_2, and E12–E17 are represented by positive-real specializations rather than full branch-sensitive complex forms."
   ]
 }

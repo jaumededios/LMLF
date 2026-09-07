@@ -1,0 +1,19 @@
+{
+  "section_range": ["6.1"],
+  "numbered_formula_ids_expected": [],
+  "numbered_formula_ids_stated": [],
+  "numbered_formula_ids_omitted": [],
+  "extra_statement_ids": ["6.1#p1.t1.r1","6.1#p1.t1.r2","6.1#p1.t1.r3","6.1#p1.t1.r4","6.1#p1.t1.r5","6.1#p1","6.1#p2","6.1#p3"],
+  "declarations": [
+    {"source_id":"6.1#p1.t1.r1","names":["LMLF.Blueprint.ExponentialIntegrals.Section61.RealVariable"],"relation":"related","proof_status":"not_applicable","quantitative_analogue":"not_applicable","notes":"Real-variable type vocabulary x : ℝ."},
+    {"source_id":"6.1#p1.t1.r2","names":["LMLF.Blueprint.ExponentialIntegrals.Section61.ComplexVariable"],"relation":"related","proof_status":"not_applicable","quantitative_analogue":"not_applicable","notes":"Complex-variable type vocabulary z : ℂ."},
+    {"source_id":"6.1#p1.t1.r3","names":["LMLF.Blueprint.ExponentialIntegrals.Section61.NonnegativeIndex"],"relation":"related","proof_status":"not_applicable","quantitative_analogue":"not_applicable","notes":"Nonnegative-index vocabulary n : ℕ."},
+    {"source_id":"6.1#p1.t1.r4","names":["LMLF.Blueprint.ExponentialIntegrals.Section61.SmallPositive"],"relation":"related","proof_status":"not_applicable","quantitative_analogue":"not_applicable","notes":"δ is represented by the explicit condition 0 < δ."},
+    {"source_id":"6.1#p1.t1.r5","names":["LMLF.Blueprint.ExponentialIntegrals.Section61.eulerConstant"],"relation":"related","proof_status":"not_applicable","quantitative_analogue":"not_applicable","notes":"Uses Mathlib's Euler–Mascheroni constant."},
+    {"source_id":"6.1#p1","names":["LMLF.Blueprint.ExponentialIntegrals.Section61.argumentDerivative"],"relation":"related","proof_status":"not_applicable","quantitative_analogue":"not_applicable","notes":"Prime notation is represented by the derivative at an argument."},
+    {"source_id":"6.1#p2","names":["LMLF.Blueprint.ExponentialIntegrals.Section61.Chapter6Function"],"relation":"related","proof_status":"not_applicable","quantitative_analogue":"not_applicable","notes":"Enumerates the eight principal Chapter 6 function names; definitions are deferred to later sections."},
+    {"source_id":"6.1#p3","names":["LMLF.Blueprint.ExponentialIntegrals.Section61.ExternalNotation"],"relation":"related","proof_status":"not_applicable","quantitative_analogue":"not_applicable","notes":"Explicit marker for notation delegated to the DLMF notation index."}
+  ],
+  "shared_vocabulary_requests": [],
+  "known_gaps": []
+}

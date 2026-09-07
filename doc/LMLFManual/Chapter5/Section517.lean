@@ -39,10 +39,47 @@ noncomputable def barnesGProductPrefactor (z : ℂ) : ℂ :=
       (1 / 2) * (Real.eulerMascheroniConstant : ℂ) * z ^ 2)
 ```
 
+The finite canonical products and their infinite product value are separate
+objects.  The `HasProd` and `Tendsto` declarations below record convergence;
+the Barnes function itself is then defined using the named product value.
+
+```anchor barnesGProductPartialProduct (module := LMLF.Blueprint.Gamma.Section517) -showProofStates
+noncomputable def barnesGProductPartialProduct (z : ℂ) (N : ℕ) : ℂ :=
+  ∏ k ∈ Finset.range N,
+    barnesGProductTerm z ⟨k + 1, Nat.succ_le_succ (Nat.zero_le k)⟩
+```
+
+```anchor barnesGProduct (module := LMLF.Blueprint.Gamma.Section517) -showProofStates
+noncomputable def barnesGProduct (z : ℂ) : ℂ :=
+  ∏' k : {n : ℕ // 1 ≤ n}, barnesGProductTerm z k
+```
+
+The Glaisher data used by the later asymptotic panel are also named here.  The
+logarithmic constant is anchored to the zeta-derivative value, while the
+renormalized finite expression is retained as the sequence whose convergence
+is stated in (5.17.7).
+
+```anchor glaisherPartialExpression (module := LMLF.Blueprint.Gamma.Section517) -showProofStates
+noncomputable def glaisherPartialExpression (n : ℕ) : ℝ :=
+  (∑ k ∈ Finset.Icc 1 n, (k : ℝ) * Real.log (k : ℝ)) -
+    ((1 / 2 : ℝ) * (n : ℝ) ^ 2 + (1 / 2 : ℝ) * (n : ℝ) + 1 / 12) *
+      Real.log (n : ℝ) +
+    (1 / 4 : ℝ) * (n : ℝ) ^ 2
+```
+
+```anchor glaisherLogConstant (module := LMLF.Blueprint.Gamma.Section517) -showProofStates
+noncomputable def glaisherLogConstant : ℝ :=
+  ((1 / 12 : ℂ) - deriv riemannZeta (-1 : ℂ)).re
+```
+
+```anchor glaisherConstant (module := LMLF.Blueprint.Gamma.Section517) -showProofStates
+noncomputable def glaisherConstant : ℝ := Real.exp glaisherLogConstant
+```
+
 ```anchor barnesG (module := LMLF.Blueprint.Gamma.Section517) -showProofStates
 noncomputable def barnesG (z : ℂ) : ℂ :=
   barnesGProductPrefactor (z - 1) *
-    ∏' k : {n : ℕ // 1 ≤ n}, barnesGProductTerm (z - 1) k
+    barnesGProduct (z - 1)
 ```
 
 ::::dlmfEntry "5.17.1" "https://dlmf.nist.gov/5.17.E1"
@@ -101,14 +138,25 @@ G(z+1)=(2\pi)^{z/2}\exp\!\left(-\frac12z(z+1)-\frac12\gamma z^2\right)
 
 For complex `z`, the canonical product multiplies the exponential prefactor
 by the factors indexed from `k=1`.  The index `{n : ℕ // 1 ≤ n}` records that
-lower limit directly, while `∏'` denotes the infinite product.
+lower limit directly.  Convergence of the product is stated independently
+from the value identity.
 
 :::leanStatement "Lean statement · canonical product"
+```anchor barnesGProduct_hasProd (module := LMLF.Blueprint.Gamma.Section517) -showProofStates
+theorem barnesGProduct_hasProd (z : ℂ) :
+    HasProd (fun k : {n : ℕ // 1 ≤ n} ↦ barnesGProductTerm z k) (barnesGProduct z)
+```
+
+```anchor barnesGProduct_partialProduct_tendsto (module := LMLF.Blueprint.Gamma.Section517) -showProofStates
+theorem barnesGProduct_partialProduct_tendsto (z : ℂ) :
+    Tendsto (barnesGProductPartialProduct z) atTop (nhds (barnesGProduct z))
+```
+
 ```anchor dlmf_5_17_3 (module := LMLF.Blueprint.Gamma.Section517) -showProofStates
 theorem dlmf_5_17_3 (z : ℂ) :
     barnesG (z + 1) =
       barnesGProductPrefactor z *
-        ∏' k : {n : ℕ // 1 ≤ n}, barnesGProductTerm z k
+        barnesGProduct z
 ```
 :::
 ::::
@@ -185,23 +233,6 @@ Glaisher's constant `A` is the exponential of the constant `C`; the displayed
 digits give its decimal expansion.
 
 :::leanStatement "Lean statement · Glaisher constant"
-```anchor glaisherPartialExpression (module := LMLF.Blueprint.Gamma.Section517) -showProofStates
-noncomputable def glaisherPartialExpression (n : ℕ) : ℝ :=
-  (∑ k ∈ Finset.Icc 1 n, (k : ℝ) * Real.log (k : ℝ)) -
-    ((1 / 2 : ℝ) * (n : ℝ) ^ 2 + (1 / 2 : ℝ) * (n : ℝ) + 1 / 12) *
-      Real.log (n : ℝ) +
-    (1 / 4 : ℝ) * (n : ℝ) ^ 2
-```
-
-```anchor glaisherLogConstant (module := LMLF.Blueprint.Gamma.Section517) -showProofStates
-noncomputable def glaisherLogConstant : ℝ :=
-  limUnder atTop glaisherPartialExpression
-```
-
-```anchor glaisherConstant (module := LMLF.Blueprint.Gamma.Section517) -showProofStates
-noncomputable def glaisherConstant : ℝ := Real.exp glaisherLogConstant
-```
-
 ```anchor dlmf_5_17_6 (module := LMLF.Blueprint.Gamma.Section517) -showProofStates
 theorem dlmf_5_17_6 :
     glaisherConstant = Real.exp glaisherLogConstant
@@ -223,10 +254,14 @@ Riemann zeta function.  The finite sum uses `Finset.Icc 1 n`, preserving the
 source lower limit, and the two derivatives are taken at `2` and `−1`.
 
 :::leanStatement "Lean statement · Glaisher logarithm"
+```anchor glaisherPartialExpression_tendsto (module := LMLF.Blueprint.Gamma.Section517) -showProofStates
+theorem glaisherPartialExpression_tendsto :
+    Tendsto glaisherPartialExpression atTop (nhds glaisherLogConstant)
+```
+
 ```anchor dlmf_5_17_7 (module := LMLF.Blueprint.Gamma.Section517) -showProofStates
 theorem dlmf_5_17_7 :
-    Tendsto glaisherPartialExpression atTop (nhds glaisherLogConstant) ∧
-      (glaisherLogConstant : ℂ) =
+    (glaisherLogConstant : ℂ) =
         ((Real.eulerMascheroniConstant : ℂ) + Complex.log (2 * Real.pi)) / 12 -
           deriv riemannZeta (2 : ℂ) / (2 * (Real.pi : ℂ) ^ 2) ∧
       (glaisherLogConstant : ℂ) =

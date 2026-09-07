@@ -1,0 +1,42 @@
+{
+  "section_range": ["6.9"],
+  "numbered_formula_ids_expected": ["6.9.E1"],
+  "numbered_formula_ids_stated": ["6.9.E1"],
+  "numbered_formula_ids_omitted": [],
+  "extra_statement_ids": ["e1PartialNumerator","e1PartialDenominator","e1Convergent","dlmf:6.9#info@annotation-note-1","dlmf:6.9#p1","dlmf:6.9#p2"],
+  "declarations": [
+    {
+      "source_id": "6.9.E1",
+      "names": ["LMLF.Blueprint.ExponentialIntegrals.Section69.dlmf_6_9_1"],
+      "relation": "specialization",
+      "proof_status": "missing",
+      "quantitative_analogue": "not_applicable",
+      "notes": "Canonical principalE1 convergence on z ≠ 0 and |arg z| < pi, represented by shared continuedFractionConvergent with the exact alternating coefficient streams and a Tendsto convergence statement."
+    },
+    {
+      "source_id": "dlmf:6.9#info@annotation-note-1",
+      "source_url": "https://dlmf.nist.gov/6.9#info",
+      "names": [], "relation": "related", "proof_status": "not_applicable",
+      "quantitative_analogue": "not_applicable",
+      "notes": "Nielsen and Lorentzen continued-fraction references are reproduced at https://dlmf.nist.gov/6.9#info."
+    },
+    {
+      "source_id": "dlmf:6.9#p1",
+      "source_url": "https://dlmf.nist.gov/6.9#p1",
+      "names": [], "relation": "related", "proof_status": "not_applicable",
+      "quantitative_analogue": "not_applicable",
+      "notes": "The §6.9 continued-fraction context and principal-domain prose are reproduced at https://dlmf.nist.gov/6.9#p1."
+    },
+    {
+      "source_id": "dlmf:6.9#p2",
+      "source_url": "https://dlmf.nist.gov/6.9#p2",
+      "names": [], "relation": "related", "proof_status": "not_applicable",
+      "quantitative_analogue": "not_applicable",
+      "notes": "The Cuyt et al. reference and surrounding source note are reproduced at https://dlmf.nist.gov/6.9#p2."
+    }
+  ],
+  "shared_vocabulary_requests": [],
+  "known_gaps": [
+    "The DLMF page gives the infinite continued fraction but no separate truncation-error bound; finite continuants are formalized without an error estimate."
+  ]
+}

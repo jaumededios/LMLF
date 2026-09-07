@@ -1,0 +1,1423 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script>
+      (function(){
+  const {protocol:proto, host:hostName, pathname:path, search:srch, hash:hsh} = window.location;
+  if (!(path.endsWith("/") || path.endsWith(".html"))) {
+    window.location.replace(`${proto}//${hostName}${path}/${srch}${hsh}`);
+  }
+})()</script>
+    <script>
+      // Enable TypeScript checking.
+// @ts-check
+
+// Applies a saved table-of-contents width before the first paint.
+//
+// This is a tiny inline counterpart to toc-resize.js: it runs in the page head so that
+// returning desktop readers do not see the default width flash to their saved width.
+// It only records the width in the --verso-toc-user-width custom property; the
+// stylesheet clamps it and ignores it on mobile, and toc-resize.js then takes over the
+// interactive resizing. Keep the storage key in sync with toc-resize.js.
+
+(function () {
+    try {
+        const saved = localStorage.getItem("verso-toc-width");
+        // Parse to a number (as toc-resize.js does) and write that back, so a stored
+        // value with stray whitespace becomes a valid length rather than `" 420 px"`.
+        const width = saved === null ? NaN : Number(saved);
+        if (Number.isFinite(width)) {
+            document.documentElement.style.setProperty("--verso-toc-user-width", `${width}px`);
+        }
+    } catch (_) {
+        // Leave the default width in place when local storage is unavailable.
+    }
+})();
+</script>
+    <base href="./../../"><meta charset="utf-8">
+    <meta name="viewport" content="height=device-height, width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
+    <title>§6.4 Analytic Continuation</title><link rel="stylesheet" href="book.css">
+    <link rel="stylesheet" href="verso-vars.css">
+    <script src="https://cdn.jsdelivr.net/npm/marked@11.1.1/marked.min.js" integrity="sha384-zbcZAIxlvJtNE3Dp5nxLXdXtXyxwOdnILY1TDPVmKFhl4r4nSUG1r8bcFXGVa4Te" crossorigin="anonymous"></script>
+    <script defer="defer" src="-verso-search/elasticlunr.min.js"></script>
+    <script defer="defer" src="-verso-search/fuzzysort.min.js"></script>
+    <script defer="defer" src="-verso-search/searchIndex.js"></script>
+    <script defer="defer" src="-verso-search/search-config.js"></script>
+    <script type="module" src="-verso-search/search-init.js"></script>
+    <link rel="stylesheet" href="-verso-search/search-box.css">
+    <link rel="stylesheet" href="-verso-search/search-page.css">
+    <link rel="stylesheet" href="-verso-search/search-highlight.css">
+    <link rel="stylesheet" href="-verso-search/domain-display.css">
+    <script src="-verso-search/search-highlight.js" defer="defer"></script>
+    <script src="toc-resize.js" defer="defer"></script>
+    <script src="-verso-data/katex/katex.js"></script>
+    <script src="-verso-data/katex/math.js"></script>
+    <script src="-verso-data/popper.min.js"></script>
+    <script src="-verso-data/tippy-bundle.umd.min.js"></script>
+    <link rel="stylesheet" href="-verso-data/tippy-border.css">
+    <link rel="stylesheet" href="-verso-data/katex/katex.css">
+    <style>
+:root {
+  --verso-text-font-family: Georgia, "Times New Roman", serif;
+  --verso-content-max-width: 64rem;
+  --lmlf-ink: #111;
+  --lmlf-muted: #555;
+  --lmlf-link: #0645ad;
+  --lmlf-heading: #d3dce6;
+  --lmlf-heading-dark: #bcc4cc;
+  --lmlf-rule: #a4abb2;
+  --lmlf-lean: #f4f8fc;
+  --lmlf-lean-rule: #9bb7d3;
+}
+
+body {
+  background: #fff;
+  color: var(--lmlf-ink);
+  font-family: Georgia, "Times New Roman", serif;
+}
+
+main { max-width: 74rem; }
+
+h1, h2, h3, h4,
+.lmlf-source-link,
+.lmlf-dlmf-entry__source,
+.lmlf-lean > summary {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+h2 {
+  background: var(--lmlf-heading-dark);
+  border-top: .28rem double var(--lmlf-rule);
+  color: #111;
+  padding: .38rem .55rem;
+}
+
+h3 {
+  background: var(--lmlf-heading);
+  color: #111;
+  padding: .28rem .48rem;
+}
+
+h4 { color: #222; }
+a { color: var(--lmlf-link); }
+
+.lmlf-source-link {
+  border-bottom: 1px solid #c8cdd2;
+  margin: .3rem 0 1.35rem;
+  padding: 0 0 .6rem;
+}
+
+.lmlf-source-link a { font-weight: 700; }
+
+.lmlf-dlmf-entry {
+  border-bottom: 1px solid #c8cdd2;
+  border-top: 1px solid #c8cdd2;
+  margin: 1.2rem 0 1.7rem;
+  padding: .75rem 0 .95rem;
+}
+
+.lmlf-dlmf-entry__body {
+  display: grid;
+  gap: .15rem;
+}
+
+.lmlf-dlmf-entry__source {
+  font-size: .86rem;
+  font-weight: 700;
+  margin-bottom: .65rem;
+}
+
+.lmlf-dlmf-entry__body > :first-child { margin-top: 0; }
+
+.lmlf-lean {
+  background: var(--lmlf-lean);
+  border: 1px solid var(--lmlf-lean-rule);
+  margin: .85rem 0 .15rem;
+}
+
+.lmlf-lean > summary {
+  color: #174f80;
+  cursor: pointer;
+  font-size: .86rem;
+  font-weight: 700;
+  padding: .55rem .7rem;
+}
+
+.lmlf-lean[open] > summary { border-bottom: 1px solid var(--lmlf-lean-rule); }
+.lmlf-lean__body { padding: .2rem .7rem .65rem; }
+
+/* Blueprint declarations elaborate with `sorry`, but proof status is not part of the
+   reader-facing statement. Verso attaches that warning to the theorem name; suppress only
+   its popover and warning decoration inside LMLF statement disclosures. */
+.lmlf-lean .has-info.warning { text-decoration: none; }
+.lmlf-lean .has-info.warning > .hover-container { display: none; }
+
+.lmlf-section-list > ul {
+  list-style: none;
+  margin-left: 0;
+  padding-left: 0;
+}
+
+.lmlf-section-list li {
+  border-bottom: 1px dotted #b7bcc1;
+  padding: .24rem .15rem;
+}
+
+.lmlf-section-list li::before {
+  color: #5f6770;
+  content: "\203A";
+  display: inline-block;
+  margin-right: .48rem;
+}
+
+.lmlf-coverage {
+  border-collapse: collapse;
+  font-family: Arial, Helvetica, sans-serif;
+  margin: 1rem 0 1.4rem;
+  width: 100%;
+}
+
+.lmlf-coverage th,
+.lmlf-coverage td {
+  border-bottom: 1px solid #c8cdd2;
+  padding: .42rem .55rem;
+  text-align: right;
+}
+
+.lmlf-coverage th:first-child,
+.lmlf-coverage td:first-child { text-align: left; }
+.lmlf-coverage thead { background: var(--lmlf-heading); }
+</style><style>
+
+.hl.lean {
+  white-space: pre;
+  font-weight: normal;
+  font-style: normal;
+  font-size: inherit;
+}
+
+.hl.lean .keyword {
+  color: var(--verso-code-keyword-color,);
+  font-weight: var(--verso-code-keyword-weight, bold);
+  font-style: var(--verso-code-keyword-style, normal);
+  font-family: var(--verso-code-keyword-font-family,);
+}
+
+.hl.lean .const {
+  color: var(--verso-code-const-color,);
+  font-weight: var(--verso-code-const-weight, normal);
+  font-style: var(--verso-code-const-style, normal);
+  font-family: var(--verso-code-const-font-family,);
+}
+
+.hl.lean .var {
+  color: var(--verso-code-var-color,);
+  font-weight: var(--verso-code-var-weight, normal);
+  font-style: var(--verso-code-var-style, italic);
+  font-family: var(--verso-code-var-font-family,);
+
+  position: relative;
+}
+
+.hl.lean .literal, .hl.lean .unknown {
+  color: var(--verso-code-color,);
+  font-weight: normal;
+  font-style: normal;
+  font-family: var(--verso-code-font-family,);
+}
+
+/* These lexically-classified token kinds default to the `.unknown` appearance. The rule follows
+   `.const` so it wins for the `anon-ctor` tokens, which also carry the `const` class. */
+.hl.lean .anon-ctor,
+.hl.lean .number,
+.hl.lean .char,
+.hl.lean .comment,
+.hl.lean .punctuation,
+.hl.lean .delim,
+.hl.lean .wildcard {
+  color: var(--verso-code-color,);
+  font-weight: normal;
+  font-style: normal;
+  font-family: var(--verso-code-font-family,);
+}
+
+.hover-container {
+  width: 0;
+  height: 0;
+  position: relative;
+  display: inline;
+}
+
+.hl.lean a {
+  color: inherit;
+  text-decoration: currentcolor underline dotted;
+}
+
+.hl.lean a:hover {
+  text-decoration: currentcolor underline solid;
+}
+
+.hl.lean .hover-info {
+  white-space: normal;
+}
+
+.hl.lean .token .hover-info {
+  display: none;
+  position: absolute;
+  background-color: #e5e5e5;
+  border: 1px solid black;
+  padding: 0.5rem;
+  z-index: 300;
+}
+
+.hl.lean .hover-info.messages {
+  max-height: 10rem;
+  overflow-y: auto;
+  overflow-x: hidden;
+  scrollbar-gutter: stable;
+  padding: 0 0.5rem 0 0;
+  display: block;
+}
+
+.hl.lean .hover-info code {
+  white-space: pre-wrap;
+  background: none;
+  color: black;
+}
+
+.hl.lean .hover-info.messages > code {
+  padding: 0.5rem;
+  display: block;
+  width: fit-content;
+}
+
+.hl.lean .hover-info.messages > code:only-child {
+  margin: 0;
+}
+
+.hl.lean .hover-info.messages > code {
+  margin: 0.1rem;
+}
+
+.hl.lean .hover-info.messages > code:not(:first-child) {
+  margin-top: 0rem;
+}
+
+.hl.lean {
+}
+
+.hl.lean.block {
+  display: block;
+}
+
+.hl.lean.inline {
+  display: inline;
+  white-space: pre-wrap;
+}
+
+.hl.lean * {
+}
+
+.hl.lean .token {
+  transition: all 0.25s; /* Slight fade for highlights */
+}
+
+@media (hover: hover) {
+  .hl.lean .token.binding-hl, .hl.lean .literal:hover, .hl.lean .token.typed:hover {
+    background-color: #eee;
+    border-radius: 2px;
+    transition: none;
+  }
+}
+
+
+.hl.lean .has-info .token:not(.tactic-state):not(.tactic-state *), .hl.lean .has-info .inter-text:not(.tactic-state):not(.tactic-state *) {
+  text-decoration-style: wavy;
+  text-decoration-line: underline;
+  text-decoration-thickness: from-font;
+  text-decoration-skip-ink: none;
+}
+
+.hl.lean .has-info .hover-info {
+  display: none;
+  position: absolute;
+  transform: translate(0.25rem, 0.3rem);
+  border: 1px solid black;
+  padding: 0.5rem;
+  z-index: 400;
+  text-align: left;
+}
+
+.hl.lean .has-info.error :not(.tactic-state):not(.tactic-state *){
+  text-decoration-color: red;
+}
+
+@media (hover: hover) {
+  .hl.lean .has-info.error:hover {
+    background-color: #ffb3b3;
+  }
+}
+
+.hl.lean .hover-info.messages > code.error {
+  background-color: #e5e5e5;
+  border-left: 0.2rem solid #ffb3b3;
+}
+
+.tippy-box[data-theme~='error'] .hl.lean .hover-info.messages > code.error {
+  background: none;
+  border: none;
+}
+
+.error .verso-message, .error .verso-message .token, .error .verso-message label {
+  color: var(--verso-error-color);
+}
+
+.error .verso-message .case-label:has(input[type="checkbox"])::before {
+  background-color: var(--verso-error-color) !important;
+}
+
+.hl.lean .has-info.warning :not(.tactic-state):not(.tactic-state *) {
+  text-decoration-color: var(--verso-warning-indicator-color);
+}
+
+@media (hover: hover) {
+  .hl.lean .has-info.warning:hover {
+    background-color:var(--verso-warning-color);
+  }
+}
+
+.hl.lean .hover-info.messages > code.warning {
+  background-color: var(--verso-warning-color);
+}
+
+.lean-output {
+  border-left: 0.2em solid transparent;
+  padding: 0 0 0 0.5em;
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+.lean-output.error {
+  border-color: var(--verso-error-indicator-color);
+}
+
+.lean-output.information {
+  border-color: var(--verso-info-indicator-color);
+}
+
+.lean-output.warning {
+  border-color: var(--verso-warning-indicator-color);
+}
+
+.hl.lean .hover-info.messages > code.error {
+  background-color: #e5e5e5;
+  border-left: 0.2rem solid var(--verso-warning-color);
+}
+
+.tippy-box[data-theme~='warning'] .hl.lean .hover-info.messages > code.warning {
+  background: none;
+  border: none;
+}
+
+
+.hl.lean .has-info.information :not(.tactic-state):not(.tactic-state *) {
+  text-decoration-color: var(--verso-info-indicator-color, blue);
+}
+
+@media (hover: hover) {
+  .hl.lean .has-info.information:hover {
+    background-color: #4777ff;
+  }
+}
+
+
+.hl.lean .hover-info.messages > code.information {
+  background-color: #e5e5e5;
+  border-left: 0.2rem solid #4777ff;
+}
+
+.tippy-box[data-theme~='info'] .hl.lean .hover-info.messages > code.information {
+  background: none;
+  border: none;
+}
+
+.hl.lean div.docstring {
+  font-family: var(--verso-text-font-family, sans-serif);
+  white-space: normal;
+  max-width: calc(min(40rem, 90vw));
+  width: max-content;
+}
+
+.hl.lean div.docstring > :last-child {
+  margin-bottom: 0;
+}
+
+.hl.lean div.docstring > :first-child {
+  margin-top: 0;
+}
+
+.hl.lean .hover-info .sep {
+  display: block;
+  width: auto;
+  margin-left: 1rem;
+  margin-right: 1rem;
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+  padding: 0;
+  height: 1px;
+  border-top: 1px solid #ccc;
+}
+
+.hl.lean code {
+  font-family: var(--verso-code-font-family);
+}
+
+.hl.lean .tactic-state {
+  display: none;
+  position: relative;
+  width: fit-content;
+  border: 1px solid #888888;
+  border-radius: 0.1rem;
+  padding: 0.5rem;
+  font-family: sans-serif;
+  background-color: #ffffff;
+}
+
+.hl.lean.popup .tactic-state {
+  position: static;
+  display: block;
+  width: auto;
+  border: none;
+  padding: 0.5rem;
+  font-family: sans-serif;
+  background-color: #ffffff;
+}
+
+
+.hl.lean .tactic {
+  position: relative;
+  display: inline;
+  vertical-align: top;
+  /* Without these, mobile Safari will start making font sizes inconsistent when its text size adjustment feature is triggered.*/
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+.hl.lean .tactic:has(> .tactic-toggle:checked) {
+  display: inline-grid;
+  grid-template-columns: 1fr;
+}
+
+.hl.lean .tactic-toggle:checked ~ .tactic-state {
+  display: inline-block;
+  vertical-align: top;
+  grid-row: 2;
+  justify-self: start;
+}
+
+.hl.lean .tactic > label {
+  position: relative;
+  grid-row: 1;
+  display: inline;
+}
+
+@media (hover: hover) {
+  /* Highlight a region on hover only when its own toggle is unchecked, and only the innermost
+     hovered region: `label:hover` bubbles to ancestor labels, so suppress the highlight on a region
+     whose label contains a more deeply nested hovered tactic label. */
+  .hl.lean .tactic:has(> .tactic-toggle:not(:checked)) > label:hover:not(:has(.tactic > label:hover)) {
+    background-color: #eeeeee;
+  }
+}
+
+.hl.lean .tactic-toggle {
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0;
+  height: 0;
+  width: 0;
+  z-index: -10;
+}
+
+.hl.lean .tactic > label::after {
+  content: "";
+  border: 1px solid #bbbbbb;
+  /* These need to be em, not rem, to scale with the font */
+  border-radius: 1em;
+  height: 0.25em;
+  vertical-align: middle;
+  width: 0.6em;
+  margin-left: 0.1em;
+  margin-right: 0.1em;
+  display: inline-block;
+  transition: all 0.5s;
+}
+
+/*
+@media (hover: hover) {
+  .hl.lean .tactic > label:hover::after {
+    border: 1px solid #aaaaaa;
+    background-color: #aaaaaa;
+    transition: all 0.5s;
+  }
+}
+*/
+
+.hl.lean .tactic > label:has(+ .tactic-toggle:checked)::after {
+  border: 1px solid #999999;
+  background-color: #999999;
+  transition: all 0.5s;
+}
+
+.hl.lean .tactic-state .goal + .goal {
+  margin-top: 1.5em;
+}
+
+/*
+Some CSS frameworks customize details/summary in ways not compatible with Verso's output.
+*/
+
+.hl.lean details {
+  display: block !important;
+  margin: 0;
+}
+
+.hl.lean details summary {
+  display: list-item !important;
+  margin: 0;
+}
+
+.hl.lean details summary:focus {
+  outline: none;
+  outline-offset: none;
+  color: inherit;
+}
+
+.hl.lean ul > li {
+  margin-bottom: 0;
+}
+
+.hl.lean details summary::marker {
+  display: inline !important;
+}
+
+.hl.lean details > summary:first-of-type {
+  list-style-type: disclosure-closed;
+  list-style-position: inside;
+}
+
+.hl.lean details[open] > summary:first-of-type {
+  list-style-type: disclosure-open;
+}
+
+.hl.lean details summary::before, .hl.lean details summary::after {
+  content: "" !important;
+  background: none;
+  display: none;
+}
+
+.hl.lean .tactic-state summary {
+  /* These need to be em, not rem, to scale with the font */
+  margin-left: -0.5em;
+}
+
+.hl.lean .tactic-state details {
+  /* These need to be em, not rem, to scale with the font */
+  padding-left: 0.5em;
+}
+
+.hl.lean .case-label {
+  display: block;
+  position: relative;
+}
+
+.hl.lean .case-label input[type="checkbox"] {
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0;
+  height: 0;
+  width: 0;
+  z-index: -10;
+}
+
+.hl.lean .case-label:has(input[type="checkbox"])::before {
+  display: inline-block;
+  background-color: black;
+  content: ' ';
+  transition: ease 0.2s;
+  margin-right: 0.7em;
+  clip-path: polygon(100% 0, 0 0, 50% 100%);
+  width: 0.6em;
+  height: 0.6em;
+  vertical-align: middle;
+}
+
+.hl.lean .case-label:has(input[type="checkbox"]:not(:checked))::before {
+  transform: rotate(-90deg);
+}
+
+.hl.lean .case-label:has(input[type="checkbox"]) {
+
+}
+
+.hl.lean .case-label:has(input[type="checkbox"]:checked) {
+
+}
+
+
+.hl.lean .labeled-case > :not(:first-child) {
+  max-height: 0px;
+  display: block;
+  overflow: hidden;
+  transition: max-height 0.1s ease-in;
+  /* These need to be em, not rem, to scale with the font */
+  margin-left: 0.5em;
+  margin-top: 0.1em;
+}
+
+.hl.lean .labeled-case:has(.case-label input[type="checkbox"]:checked) > :not(:first-child) {
+  max-height: 100%;
+}
+
+
+.hl.lean .goal-name::before {
+  font-style: normal;
+  content: "case ";
+}
+
+.hl.lean .goal-name {
+  font-style: italic;
+  font-family: var(--verso-code-font-family);
+  color: inherit;
+}
+
+.hl.lean .hypotheses {
+  display: table;
+}
+
+.hl.lean .hypothesis {
+  display: table-row;
+}
+
+.hl.lean .hypothesis > * {
+  display: table-cell;
+}
+
+
+.hl.lean .hypotheses .colon {
+  text-align: center;
+  /* This needs to be em, not rem, to scale with the font */
+  min-width: 1em;
+}
+
+.hl.lean .hypotheses .name {
+  text-align: right;
+}
+
+.hl.lean .hypotheses .name,
+.hl.lean .hypotheses .type,
+.hl.lean .conclusion .type {
+  font-family: var(--verso-code-font-family);
+}
+
+.tippy-box {
+  /* Without these, mobile Safari will start making font sizes inconsistent when its text size adjustment feature is triggered.*/
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+.tippy-box[data-theme~='lean'] {
+  background-color: #e5e5e5;
+  color: black;
+  border: 1px solid black;
+}
+.tippy-box[data-theme~='lean'][data-placement^='top'] > .tippy-arrow::before {
+  border-top-color: #e5e5e5;
+}
+.tippy-box[data-theme~='lean'][data-placement^='bottom'] > .tippy-arrow::before {
+  border-bottom-color: #e5e5e5;
+}
+.tippy-box[data-theme~='lean'][data-placement^='left'] > .tippy-arrow::before {
+  border-left-color: #e5e5e5;
+}
+.tippy-box[data-theme~='lean'][data-placement^='right'] > .tippy-arrow::before {
+  border-right-color: #e5e5e5;
+}
+
+.tippy-box[data-theme~='message'][data-placement^='top'] > .tippy-arrow::before {
+  border-top-color: #e5e5e5;
+  border-width: 11px 11px 0;
+}
+.tippy-box[data-theme~='message'][data-placement^='top'] > .tippy-arrow::after {
+  bottom: -11px;
+  border-width: 11px 11px 0;
+}
+.tippy-box[data-theme~='message'][data-placement^='bottom'] > .tippy-arrow::before {
+  border-width: 0 11px 11px;
+}
+.tippy-box[data-theme~='message'][data-placement^='bottom'] > .tippy-arrow::after {
+  top: -11px;
+  border-width: 0 11px 11px;
+}
+.tippy-box[data-theme~='message'][data-placement^='left'] > .tippy-arrow::before {
+  border-left-color: #e5e5e5;
+  border-width: 11px 0 11px 11px;
+}
+.tippy-box[data-theme~='message'][data-placement^='left'] > .tippy-arrow::after {
+  right: -11px;
+  border-width: 11px 0 11px 11px;
+}
+
+.tippy-box[data-theme~='message'][data-placement^='right'] > .tippy-arrow::before {
+  border-right-color: #e5e5e5;
+  border-width: 11px 11px 11px 0;
+}
+.tippy-box[data-theme~='message'][data-placement^='right'] > .tippy-arrow::after {
+  left: -11px;
+  border-width: 11px 11px 11px 0;
+}
+
+
+
+.tippy-box[data-theme~='warning'] {
+  background-color: #e5e5e5;
+  color: black;
+  border: 3px solid var(--verso-warning-color);
+}
+
+.tippy-box[data-theme~='error'] {
+  background-color: #e5e5e5;
+  color: black;
+  border: 3px solid #f7a7af;
+}
+
+.tippy-box[data-theme~='info'] {
+  background-color: #e5e5e5;
+  color: black;
+  border: 3px solid #99b3c2;
+}
+
+.tippy-box[data-theme~='tactic'] {
+  background-color: white;
+  color: black;
+  border: 1px solid black;
+}
+.tippy-box[data-theme~='tactic'][data-placement^='top'] > .tippy-arrow::before {
+  border-top-color: white;
+}
+.tippy-box[data-theme~='tactic'][data-placement^='bottom'] > .tippy-arrow::before {
+  border-bottom-color: white;
+}
+.tippy-box[data-theme~='tactic'][data-placement^='left'] > .tippy-arrow::before {
+  border-left-color: white;
+}
+.tippy-box[data-theme~='tactic'][data-placement^='right'] > .tippy-arrow::before {
+  border-right-color: white;
+}
+
+.extra-doc-links {
+  list-style-type: none;
+  margin-left: 0;
+  padding: 0;
+}
+
+.extra-doc-links > li {
+  display: inline-block;
+}
+
+.extra-doc-links > li:not(:last-child)::after {
+  content: '|';
+  display: inline-block;
+  margin: 0 0.25em;
+}
+
+.verso-message .trace {
+  display: block;
+}
+
+.verso-message .trace > summary::marker {
+  color: var(--verso-text-color);
+}
+
+.verso-message .trace-children {
+  margin: 0;
+  padding: 0;
+}
+
+.verso-message .trace-children > li {
+  list-style-type: none;
+  margin-left: 1.5em;
+}
+
+.verso-message .trace-children > li:not(:has(.trace)) {
+  margin-left: 0;
+}
+
+.verso-message .trace-class {
+  color: color-mix(in srgb, currentColor 70%, transparent);
+  font-weight: bold;
+  margin: 0;
+  padding: 0;
+}
+
+.verso-message .text {
+  white-space: pre-wrap;
+}
+
+</style><script>
+      
+document.addEventListener("DOMContentLoaded", () => {
+  document.querySelectorAll(".lmlf-lean .has-info.warning").forEach(element => {
+    const message = element.querySelector(".verso-message.warning");
+    if (message?.textContent.trim() === "declaration uses `sorry`") {
+      if (element._tippy) element._tippy.destroy();
+      element.classList.remove("warning");
+      element.querySelector(":scope > .hover-container")?.remove();
+    }
+  });
+});
+</script>
+    <script>
+      
+window.onload = async () => {
+
+    // Don't show hovers inside of closed tactic states
+    function blockedByTactic(elem) {
+      let parent = elem.parentNode;
+      while (parent && "classList" in parent) {
+        if (parent.classList.contains("tactic")) {
+          const toggle = parent.querySelector(":scope > input.tactic-toggle");
+          if (toggle) {
+            return !toggle.checked;
+          }
+        }
+        parent = parent.parentNode;
+      }
+      return false;
+    }
+
+    // Track whether any tippy is visible (O(1) check instead of DOM scan)
+    let visibleTippyCount = 0;
+    function blockedByTippy(elem) {
+      return visibleTippyCount > 0;
+    }
+
+    // Binding highlights via event delegation with cached lookups
+    const bindingCache = new Map(); // context+binding -> [token elements]
+    let highlightedTokens = [];
+    function getBindingTokens(context, binding) {
+      const key = context + "\0" + binding;
+      let tokens = bindingCache.get(key);
+      if (!tokens) {
+        tokens = [];
+        for (const example of document.querySelectorAll(".hl.lean")) {
+          if (example.dataset.leanContext == context) {
+            for (const tok of example.querySelectorAll(".token[data-binding=\"" + CSS.escape(binding) + "\"]")) {
+              tokens.push(tok);
+            }
+          }
+        }
+        bindingCache.set(key, tokens);
+      }
+      return tokens;
+    }
+    for (const container of document.querySelectorAll(".hl.lean")) {
+      container.addEventListener("mouseover", (event) => {
+        const c = event.target.closest(".token");
+        if (!c || !c.dataset.binding || c.dataset.binding === "" || !container.contains(c)) return;
+        if (blockedByTactic(c)) return;
+        const tokens = getBindingTokens(container.dataset.leanContext, c.dataset.binding);
+        for (const tok of tokens) {
+          tok.classList.add("binding-hl");
+        }
+        highlightedTokens = tokens;
+      });
+      container.addEventListener("mouseout", (event) => {
+        const c = event.target.closest(".token");
+        if (!c || !container.contains(c)) return;
+        for (const tok of highlightedTokens) {
+          tok.classList.remove("binding-hl");
+        }
+        highlightedTokens = [];
+      });
+    }
+    /* Render docstrings */
+    if ('undefined' !== typeof marked) {
+        for (const d of document.querySelectorAll("code.docstring, pre.docstring")) {
+            const str = d.innerText;
+            const html = marked.parse(str);
+            const rendered = document.createElement("div");
+            rendered.classList.add("docstring");
+            rendered.innerHTML = html;
+            d.parentNode.replaceChild(rendered, d);
+        }
+    }
+    // Add hovers
+    const versoDocData = await (fetch("-verso-docs.json").then((resp) => resp.json()));
+
+    function hideParentTooltips(element) {
+      let parent = element.parentElement;
+      while (parent) {
+        const tippyInstance = parent._tippy;
+        if (tippyInstance) {
+          tippyInstance.hide();
+        }
+        parent = parent.parentElement;
+      }
+    }
+
+
+
+    const defaultTippyProps = {
+      /* DEBUG -- remove the space: * /
+      onHide(any) { return false; },
+      trigger: "click",
+      // */
+      /* theme: "lean", */
+      maxWidth: "none",
+      appendTo: () => document.body,
+      interactive: true,
+      delay: [100, null],
+      /* ignoreAttributes: true, */
+      followCursor: 'initial',
+      onShow(inst) {
+        if (inst.reference.className == 'tactic') {
+          const toggle = inst.reference.querySelector(":scope > input.tactic-toggle");
+          if (toggle && toggle.checked) {
+            return false;
+          }
+          hideParentTooltips(inst.reference);
+          if (blockedByTippy(inst.reference)) { return false; }
+
+        } else if (inst.reference.querySelector(".hover-info") || "versoHover" in inst.reference.dataset) {
+          if (blockedByTactic(inst.reference)) { return false };
+          if (blockedByTippy(inst.reference)) { return false; }
+        } else { // Nothing to show here!
+          return false;
+        }
+      },
+      onShown(inst) { visibleTippyCount++; },
+      onHidden(inst) { visibleTippyCount = Math.max(0, visibleTippyCount - 1); },
+      content (tgt) {
+        const content = document.createElement("span");
+        if (tgt.className == 'tactic') {
+          const state = tgt.querySelector(":scope > .tactic-state").cloneNode(true);
+          state.style.display = "block";
+          content.appendChild(state);
+          content.style.display = "block";
+          content.className = "hl lean popup";
+        } else {
+          content.className = "hl lean";
+          content.style.display = "block";
+          content.style.maxHeight = "300px";
+          content.style.overflowY = "auto";
+          content.style.overflowX = "hidden";
+          const hoverId = tgt.dataset.versoHover;
+          const hoverInfo = tgt.querySelector(".hover-info");
+          if (hoverId) { // Docstrings from the table
+            // TODO stop doing an implicit conversion from string to number here
+            let data = versoDocData[hoverId];
+            if (data) {
+              const info = document.createElement("span");
+              info.className = "hover-info";
+              info.style.display = "block";
+              info.innerHTML = data;
+              content.appendChild(info);
+              /* Render docstrings - TODO server-side */
+              if ('undefined' !== typeof marked) {
+                  for (const d of content.querySelectorAll("code.docstring, pre.docstring")) {
+                      const str = d.innerText;
+                      const html = marked.parse(str);
+                      const rendered = document.createElement("div");
+                      rendered.classList.add("docstring");
+                      rendered.innerHTML = html;
+                      d.parentNode.replaceChild(rendered, d);
+                  }
+              }
+            } else {
+              content.innerHTML = "Failed to load doc ID: " + hoverId;
+            }
+          } else if (hoverInfo) { // The inline info, still used for compiler messages
+            content.appendChild(hoverInfo.cloneNode(true));
+          }
+          const extraLinks = tgt.parentElement.dataset['versoLinks'];
+          if (extraLinks) {
+            try {
+              const extras = JSON.parse(extraLinks);
+              const links = document.createElement('ul');
+              links.className = 'extra-doc-links';
+              extras.forEach((l) => {
+                const li = document.createElement('li');
+                li.innerHTML = "<a href=\"" + l['href'] + "\" title=\"" + l.long + "\">" + l.short + "</a>";
+                links.appendChild(li);
+              });
+              content.appendChild(links);
+            } catch (error) {
+              console.error(error);
+            }
+          }
+        }
+        return content;
+      }
+    };
+
+
+    document.querySelectorAll('.hl.lean .const.token, .hl.lean .keyword.token, .hl.lean .literal.token, .hl.lean .option.token, .hl.lean .var.token, .hl.lean .typed.token, .hl.lean .level-var, .hl.lean .level-const, .hl.lean .level-op, .hl.lean .sort').forEach(element => {
+      element.setAttribute('data-tippy-theme', 'lean');
+    });
+    document.querySelectorAll('.hl.lean .has-info.warning').forEach(element => {
+      element.setAttribute('data-tippy-theme', 'warning message');
+    });
+    document.querySelectorAll('.hl.lean .has-info.information').forEach(element => {
+      element.setAttribute('data-tippy-theme', 'info message');
+    });
+    document.querySelectorAll('.hl.lean .has-info.error').forEach(element => {
+      element.setAttribute('data-tippy-theme', 'error message');
+    });
+    document.querySelectorAll('.hl.lean .tactic').forEach(element => {
+      element.setAttribute('data-tippy-theme', 'tactic');
+    });
+    // Skip tokens inside closed tactics — they interfere with tactic tippys
+    const closedTactics = new Set();
+    document.querySelectorAll('.hl.lean .tactic').forEach(tactic => {
+      const toggle = tactic.querySelector(':scope > input.tactic-toggle');
+      if (toggle && !toggle.checked) closedTactics.add(tactic);
+    });
+    function isInsideClosedTactic(el) {
+      const tactic = el.closest('.tactic');
+      return tactic && tactic !== el && closedTactics.has(tactic);
+    }
+
+    const tokenSelector = '.hl.lean .const.token, .hl.lean .keyword.token, .hl.lean .literal.token, .hl.lean .option.token, .hl.lean .var.token, .hl.lean .typed.token, .hl.lean .has-info, .hl.lean .tactic, .hl.lean .level-var, .hl.lean .level-const, .hl.lean .level-op, .hl.lean .sort';
+    tippy(Array.from(document.querySelectorAll(tokenSelector)).filter(el => !isInsideClosedTactic(el)), defaultTippyProps);
+
+    // Create/destroy token tippys when tactic checkbox toggles
+    const tacticTippySelector = '.const.token, .keyword.token, .literal.token, .option.token, .var.token, .typed.token, .has-info, .level-var, .level-const, .level-op, .sort';
+    document.querySelectorAll('.hl.lean .tactic').forEach(tactic => {
+      const toggle = tactic.querySelector(':scope > input.tactic-toggle');
+      if (toggle) toggle.addEventListener('change', () => {
+        if (toggle.checked) {
+          closedTactics.delete(tactic);
+          tactic.querySelectorAll('.token').forEach(tok => {
+            if (!tok._tippy && tok.matches(tacticTippySelector)) {
+              tippy(tok, defaultTippyProps);
+            }
+          });
+        } else {
+          closedTactics.add(tactic);
+          tactic.querySelectorAll('.token').forEach(tok => {
+            if (tok._tippy) tok._tippy.destroy();
+          });
+        }
+      });
+  });
+}
+</script>
+    </head>
+  <body>
+    <header>
+      <div class="header-logo-wrapper"></div>
+      <div class="header-title-wrapper">
+        <a href="" class="header-title"><h1>
+            LMLF</h1>
+          </a></div>
+      </header>
+    <label for="toggle-toc" id="toggle-toc-click"><span class="line line1"></span><span class="line line2"></span><span class="line line3"></span></label><div class="with-toc">
+      <div class="toc-backdrop" onclick="document.getElementById('toggle-toc-click')?.click()"></div>
+      <nav id="toc">
+        <input type="checkbox" id="toggle-toc"><div class="first">
+          <a href="" class="toc-title"><h1>
+              LMLF</h1>
+            </a><div class="split-tocs">
+            <div class="split-toc book">
+              <div class="title">
+                <label for="--verso-manual-toc-----bookRoot" class="toggle-split-toc"><input type="checkbox" class="toggle-split-toc" id="--verso-manual-toc-----bookRoot"></label><span class="">Table of Contents</span></div>
+              <table><tr class="unnumbered"><td class="num"><td><a href="Coverage/#coverage">Coverage</a></td></tr><tr class="numbered"><td class="num">1.</td><td><a href="Finite-error-bounds/#chapter-1">Finite error bounds</a></td></tr><tr class="numbered"><td class="num">2.</td><td><a href="Approximants-and-series/#chapter-2">Approximants and series</a></td></tr><tr class="numbered"><td class="num">3.</td><td><a href="Improper-integrals/#chapter-3">Improper integrals</a></td></tr><tr class="numbered"><td class="num">4.</td><td><a href="Elementary-Functions/#chapter-4">Elementary Functions</a></td></tr><tr class="numbered"><td class="num">5.</td><td><a href="Gamma-Function/#chapter-5">Gamma Function</a></td></tr><tr class="current numbered"><td class="num">6.</td><td><a href="Exponential___-Logarithmic___-Sine___-and-Cosine-Integrals/#chapter-6">Exponential, Logarithmic, Sine, and Cosine Integrals</a></td></tr><tr class="numbered"><td class="num">7.</td><td><a href="Error-Functions___-Dawson___s-and-Fresnel-Integrals/#chapter-7">Error Functions, Dawson's and Fresnel Integrals</a></td></tr><tr class="numbered"><td class="num">8.</td><td><a href="Incomplete-Gamma-and-Related-Functions/#chapter-8">Incomplete Gamma and Related Functions</a></td></tr><tr class="numbered"><td class="num">9.</td><td><a href="Airy-and-Related-Functions/#chapter-9">Airy and Related Functions</a></td></tr><tr class="numbered"><td class="num">10.</td><td><a href="Bessel-Functions/#chapter-10">Bessel Functions</a></td></tr></table></div>
+            <div class="split-toc">
+              <div class="title">
+                <label for="--verso-manual-toc-chapter-6" class="toggle-split-toc"><input type="checkbox" class="toggle-split-toc" id="--verso-manual-toc-chapter-6" checked="checked"></label><span class="number">6.</span> <span class=""><a href="Exponential___-Logarithmic___-Sine___-and-Cosine-Integrals/#chapter-6">Exponential, Logarithmic, Sine, and Cosine Integrals</a></span></div>
+              <table><tr class="unnumbered"><td class="num"><td><a href="Exponential___-Logarithmic___-Sine___-and-Cosine-Integrals/Chapter-contents/#LMLF-___-DLMF-with-Lean--Exponential___-Logarithmic___-Sine___-and-Cosine-Integrals--Chapter-contents">Chapter contents</a></td></tr><tr class="numbered"><td class="num">6.1.</td><td><a href="Exponential___-Logarithmic___-Sine___-and-Cosine-Integrals/___6___1-Special-Notation/#chapter-6-section-1">§6.1 Special Notation</a></td></tr><tr class="numbered"><td class="num">6.2.</td><td><a href="Exponential___-Logarithmic___-Sine___-and-Cosine-Integrals/___6___2-Definitions-and-Interrelations/#chapter-6-section-2">§6.2 Definitions and Interrelations</a></td></tr><tr class="numbered"><td class="num">6.3.</td><td><a href="Exponential___-Logarithmic___-Sine___-and-Cosine-Integrals/___6___3-Graphics/#chapter-6-section-3">§6.3 Graphics</a></td></tr><tr class="current numbered"><td class="num">6.4.</td><td><a href="Exponential___-Logarithmic___-Sine___-and-Cosine-Integrals/___6___4-Analytic-Continuation/#chapter-6-section-4">§6.4 Analytic Continuation</a></td></tr><tr class="numbered"><td class="num">6.5.</td><td><a href="Exponential___-Logarithmic___-Sine___-and-Cosine-Integrals/___6___5-Further-Interrelations/#chapter-6-section-5">§6.5 Further Interrelations</a></td></tr><tr class="numbered"><td class="num">6.6.</td><td><a href="Exponential___-Logarithmic___-Sine___-and-Cosine-Integrals/___6___6-Power-Series/#chapter-6-section-6">§6.6 Power Series</a></td></tr><tr class="numbered"><td class="num">6.7.</td><td><a href="Exponential___-Logarithmic___-Sine___-and-Cosine-Integrals/___6___7-Relations-to-Other-Functions/#chapter-6-section-7">§6.7 Relations to Other Functions</a></td></tr><tr class="numbered"><td class="num">6.8.</td><td><a href="Exponential___-Logarithmic___-Sine___-and-Cosine-Integrals/___6___8-Inequalities/#chapter-6-section-8">§6.8 Inequalities</a></td></tr><tr class="numbered"><td class="num">6.9.</td><td><a href="Exponential___-Logarithmic___-Sine___-and-Cosine-Integrals/___6___9-Continued-Fraction/#chapter-6-section-9">§6.9 Continued Fraction</a></td></tr><tr class="numbered"><td class="num">6.10.</td><td><a href="Exponential___-Logarithmic___-Sine___-and-Cosine-Integrals/___6___10-Other-Series-Expansions/#chapter-6-section-10">§6.10 Other Series Expansions</a></td></tr><tr class="numbered"><td class="num">6.11.</td><td><a href="Exponential___-Logarithmic___-Sine___-and-Cosine-Integrals/___6___11-Relations-to-Other-Functions/#chapter-6-section-11">§6.11 Relations to Other Functions</a></td></tr><tr class="numbered"><td class="num">6.12.</td><td><a href="Exponential___-Logarithmic___-Sine___-and-Cosine-Integrals/___6___12-Asymptotic-Expansions/#chapter-6-section-12">§6.12 Asymptotic Expansions</a></td></tr><tr class="numbered"><td class="num">6.13.</td><td><a href="Exponential___-Logarithmic___-Sine___-and-Cosine-Integrals/___6___13-Zeros/#chapter-6-section-13">§6.13 Zeros</a></td></tr><tr class="numbered"><td class="num">6.14.</td><td><a href="Exponential___-Logarithmic___-Sine___-and-Cosine-Integrals/___6___14-Integrals/#chapter-6-section-14">§6.14 Integrals</a></td></tr><tr class="numbered"><td class="num">6.15.</td><td><a href="Exponential___-Logarithmic___-Sine___-and-Cosine-Integrals/___6___15-Sums/#chapter-6-section-15">§6.15 Sums</a></td></tr><tr class="numbered"><td class="num">6.16.</td><td><a href="Exponential___-Logarithmic___-Sine___-and-Cosine-Integrals/___6___16-Mathematical-Applications/#chapter-6-section-16">§6.16 Mathematical Applications</a></td></tr><tr class="numbered"><td class="num">6.17.</td><td><a href="Exponential___-Logarithmic___-Sine___-and-Cosine-Integrals/___6___17-Physical-Applications/#chapter-6-section-17">§6.17 Physical Applications</a></td></tr><tr class="numbered"><td class="num">6.18.</td><td><a href="Exponential___-Logarithmic___-Sine___-and-Cosine-Integrals/___6___18-Methods-of-Computation/#chapter-6-section-18">§6.18 Methods of Computation</a></td></tr><tr class="numbered"><td class="num">6.19.</td><td><a href="Exponential___-Logarithmic___-Sine___-and-Cosine-Integrals/___6___19-Tables/#chapter-6-section-19">§6.19 Tables</a></td></tr><tr class="numbered"><td class="num">6.20.</td><td><a href="Exponential___-Logarithmic___-Sine___-and-Cosine-Integrals/___6___20-Approximations/#chapter-6-section-20">§6.20 Approximations</a></td></tr><tr class="numbered"><td class="num">6.21.</td><td><a href="Exponential___-Logarithmic___-Sine___-and-Cosine-Integrals/___6___21-Software/#chapter-6-section-21">§6.21 Software</a></td></tr></table></div>
+            <div class="split-toc">
+              <div class="title">
+                <label for="--verso-manual-toc-chapter-6-section-4" class="toggle-split-toc"><input type="checkbox" class="toggle-split-toc" id="--verso-manual-toc-chapter-6-section-4" checked="checked"></label><span class="number">6.4.</span> <span class="current"><a href="Exponential___-Logarithmic___-Sine___-and-Cosine-Integrals/___6___4-Analytic-Continuation/#chapter-6-section-4">§6.4 Analytic Continuation</a></span></div>
+              <table><tr class="unnumbered"><td class="num"><td><a href="Exponential___-Logarithmic___-Sine___-and-Cosine-Integrals/___6___4-Analytic-Continuation/#LMLF-___-DLMF-with-Lean--Exponential___-Logarithmic___-Sine___-and-Cosine-Integrals--___6___4-Analytic-Continuation--___6___4-Analytic-Continuation">§6.4 Analytic Continuation</a></td></tr></table></div>
+            </div>
+          </div>
+        <div class="last"></div>
+        </nav>
+      <div class="toc-resize-handle"></div>
+      <main><div class="content-wrapper">
+          <nav class="prev-next-buttons">
+            <a class="local-button active" href="Exponential___-Logarithmic___-Sine___-and-Cosine-Integrals/___6___3-Graphics/#chapter-6-section-3" rel="prev" title="6.3. §6.3 Graphics"><span class="arrow">←</span><span class="where">6.3. §6.3 Graphics</span></a><a class="local-button active" href="Exponential___-Logarithmic___-Sine___-and-Cosine-Integrals/___6___5-Further-Interrelations/#chapter-6-section-5" rel="next" title="6.5. §6.5 Further Interrelations"><span class="where">6.5. §6.5 Further Interrelations</span><span class="arrow">→</span></a></nav>
+          <section>
+            <h1>
+              6.4. §6.4 Analytic Continuation<span class="permalink-widget inline"><a href="find/?domain=Verso.Genre.Manual.section&amp;name=chapter-6-section-4" title="Permalink">🔗</a></span></h1>
+            <div class="lmlf-source-link">
+              <p>
+                Source: NIST Digital Library of Mathematical Functions, §6.4.</p>
+              <a href="https://dlmf.nist.gov/6.4">Open this chapter in the DLMF ↗</a></div>
+            <section>
+              <h2 id="LMLF-___-DLMF-with-Lean--Exponential___-Logarithmic___-Sine___-and-Cosine-Integrals--___6___4-Analytic-Continuation--___6___4-Analytic-Continuation">
+                §6.4 Analytic Continuation<span class="permalink-widget inline"><a href="find/?domain=Verso.Genre.Manual.section&amp;name=LMLF-___-DLMF-with-Lean--Exponential___-Logarithmic___-Sine___-and-Cosine-Integrals--___6___4-Analytic-Continuation--___6___4-Analytic-Continuation" title="Permalink">🔗</a></span></h2>
+              <p>
+                Analytic continuation of the principal value of E1 has branch points at zero
+and infinity.  The general value is indexed by the integer winding of the
+general logarithm.  A <code>CutSide</code> records the upper or lower boundary side of
+the negative-real-axis cut.  The <code>HalfTurnLift</code> object retains that side,
+along with its source, nonzero condition, oriented path, endpoint limit,
+continuity, and a continuous lifted logarithm whose endpoint records exactly
+the signed half-turn.  Thus the ordinary endpoint may be the same point <code>-z</code>
+for both sides while the branch data remain distinct.  <code>GeneralE1Continuation</code> separately
+stores a lifted logarithm and its continuation limit, so the displayed
+identities are laws about canonical continuation objects rather than aliases
+for their right-hand sides.</p>
+              <article class="lmlf-dlmf-entry"><div class="lmlf-dlmf-entry__source">
+                  <a href="https://dlmf.nist.gov/6.4#p1">DLMF General-value setup ↗</a></div>
+                <div class="lmlf-dlmf-entry__body">
+                  <p>
+                    The DLMF introduces the multi-valued continuation of E1 and its branch points
+at zero and infinity before giving the general-value formula below.</p>
+                  </div>
+                </article><details class="lmlf-lean" open=""><summary>6.4 typed half-turn lift</summary><div class="lmlf-lean__body">
+                  <code class="hl lean block" data-lean-context="examples"><span class="keyword token" data-binding="kw-occ-Lean.Parser.Command.structureTk-1401">structure</span><span class="inter-text"> </span><span class="const token" data-binding="const-LMLF.Blueprint.ExponentialIntegrals.Section64.HalfTurnLift" data-verso-hover="2614" id="LMLF___Blueprint___ExponentialIntegrals___Section64___HalfTurnLift">HalfTurnLift</span><span class="inter-text"> </span><span class="keyword token" data-binding="kw-occ-Lean.Parser.Command.structure-1401">where</span><span class="inter-text">
+  </span><span class="const token" data-binding="const-LMLF.Blueprint.ExponentialIntegrals.Section64.HalfTurnLift.source" data-verso-hover="2615" id="LMLF___Blueprint___ExponentialIntegrals___Section64___HalfTurnLift___source">source</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeSpec-1439">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Complex" data-verso-hover="165">ℂ</span><span class="inter-text">
+  </span><span class="const token" data-binding="const-LMLF.Blueprint.ExponentialIntegrals.Section64.HalfTurnLift.side" data-verso-hover="2616" id="LMLF___Blueprint___ExponentialIntegrals___Section64___HalfTurnLift___side">side</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeSpec-1452">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-LMLF.Blueprint.ExponentialIntegrals.Section64.CutSide" data-verso-hover="2617">CutSide</span><span class="inter-text">
+  </span><span class="const token" data-binding="const-LMLF.Blueprint.ExponentialIntegrals.Section64.HalfTurnLift.nonzero" data-verso-hover="2618" id="LMLF___Blueprint___ExponentialIntegrals___Section64___HalfTurnLift___nonzero">nonzero</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeSpec-1472">:</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.1093" data-verso-hover="171">source</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_≠_»-1474">≠</span><span class="inter-text"> </span><span class="literal number token" data-binding="" data-verso-hover="171">0</span><span class="inter-text">
+  </span><span class="const token" data-binding="const-LMLF.Blueprint.ExponentialIntegrals.Section64.HalfTurnLift.path" data-verso-hover="2619" id="LMLF___Blueprint___ExponentialIntegrals___Section64___HalfTurnLift___path">path</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeSpec-1494">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Real" data-verso-hover="11">ℝ</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-Lean.Parser.Term.arrow-1496">→</span><span class="inter-text"> </span><span class="const token" data-binding="const-Complex" data-verso-hover="165">ℂ</span><span class="inter-text">
+  </span><span class="const token" data-binding="const-LMLF.Blueprint.ExponentialIntegrals.Section64.HalfTurnLift.path_start" data-verso-hover="2620" id="LMLF___Blueprint___ExponentialIntegrals___Section64___HalfTurnLift___path_start">path_start</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeSpec-1521">:</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.1144" data-verso-hover="170">path</span><span class="inter-text"> </span><span class="literal number token" data-binding="" data-verso-hover="19">0</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_=_»-1523">=</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.1093" data-verso-hover="171">source</span><span class="inter-text">
+  </span><span class="const token" data-binding="const-LMLF.Blueprint.ExponentialIntegrals.Section64.HalfTurnLift.path_endpoint" data-verso-hover="2621" id="LMLF___Blueprint___ExponentialIntegrals___Section64___HalfTurnLift___path_endpoint">path_endpoint</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeSpec-1555">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Filter.Tendsto" data-verso-hover="111">Tendsto</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.1144" data-verso-hover="170">path</span><span class="inter-text"> </span><span class="const token" data-binding="const-Filter.atTop" data-verso-hover="116">atTop</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-1576">(</span><span class="unknown token" data-binding="">𝓝</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-1582">(</span><span class="punctuation operator token" data-binding="kw-occ-«term-_»-1583">-</span><span class="var token" data-binding="var-_uniq.1093" data-verso-hover="171">source</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.paren-1582">)</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.paren-1576">)</span><span class="inter-text">
+  </span><span class="const token" data-binding="const-LMLF.Blueprint.ExponentialIntegrals.Section64.HalfTurnLift.path_continuous" data-verso-hover="2622" id="LMLF___Blueprint___ExponentialIntegrals___Section64___HalfTurnLift___path_continuous">path_continuous</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeSpec-1611">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Continuous" data-verso-hover="1070">Continuous</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.1144" data-verso-hover="170">path</span><span class="inter-text">
+  </span><span class="const token" data-binding="const-LMLF.Blueprint.ExponentialIntegrals.Section64.HalfTurnLift.path_nonzero" data-verso-hover="2623" id="LMLF___Blueprint___ExponentialIntegrals___Section64___HalfTurnLift___path_nonzero">path_nonzero</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeSpec-1644">:</span><span class="inter-text"> </span><span class="unknown token" data-binding="">∀</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.1526" data-verso-hover="19">t</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeSpec-1652">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Real" data-verso-hover="11">ℝ</span><span class="punctuation separator token" data-binding="kw-occ-Lean.Parser.Term.forall-1646">,</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.1144" data-verso-hover="170">path</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.1526" data-verso-hover="19">t</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_≠_»-1659">≠</span><span class="inter-text"> </span><span class="literal number token" data-binding="" data-verso-hover="171">0</span><span class="inter-text">
+  </span><span class="const token" data-binding="const-LMLF.Blueprint.ExponentialIntegrals.Section64.HalfTurnLift.liftedLog" data-verso-hover="2624" id="LMLF___Blueprint___ExponentialIntegrals___Section64___HalfTurnLift___liftedLog">liftedLog</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeSpec-1684">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Real" data-verso-hover="11">ℝ</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-Lean.Parser.Term.arrow-1686">→</span><span class="inter-text"> </span><span class="const token" data-binding="const-Complex" data-verso-hover="165">ℂ</span><span class="inter-text">
+  </span><span class="const token" data-binding="const-LMLF.Blueprint.ExponentialIntegrals.Section64.HalfTurnLift.liftedLog_continuous" data-verso-hover="2625" id="LMLF___Blueprint___ExponentialIntegrals___Section64___HalfTurnLift___liftedLog_continuous">liftedLog_continuous</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeSpec-1721">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Continuous" data-verso-hover="1070">Continuous</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.1576" data-verso-hover="170">liftedLog</span><span class="inter-text">
+  </span><span class="const token" data-binding="const-LMLF.Blueprint.ExponentialIntegrals.Section64.HalfTurnLift.liftedLog_exp" data-verso-hover="2626" id="LMLF___Blueprint___ExponentialIntegrals___Section64___HalfTurnLift___liftedLog_exp">liftedLog_exp</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeSpec-1760">:</span><span class="inter-text"> </span><span class="unknown token" data-binding="">∀</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.1736" data-verso-hover="19">t</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeSpec-1768">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Real" data-verso-hover="11">ℝ</span><span class="punctuation separator token" data-binding="kw-occ-Lean.Parser.Term.forall-1762">,</span><span class="inter-text"> </span><span class="const token" data-binding="const-Complex.exp" data-verso-hover="239">Complex.exp</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-1787">(</span><span class="var token" data-binding="var-_uniq.1576" data-verso-hover="170">liftedLog</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.1736" data-verso-hover="19">t</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.paren-1787">)</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_=_»-1775">=</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.1144" data-verso-hover="170">path</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.1736" data-verso-hover="19">t</span><span class="inter-text">
+  </span><span class="const token" data-binding="const-LMLF.Blueprint.ExponentialIntegrals.Section64.HalfTurnLift.liftedLog_start" data-verso-hover="2627" id="LMLF___Blueprint___ExponentialIntegrals___Section64___HalfTurnLift___liftedLog_start">liftedLog_start</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeSpec-1828">:</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.1576" data-verso-hover="170">liftedLog</span><span class="inter-text"> </span><span class="literal number token" data-binding="" data-verso-hover="19">0</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_=_»-1830">=</span><span class="inter-text"> </span><span class="const token" data-binding="const-Complex.log" data-verso-hover="296">Complex.log</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.1093" data-verso-hover="171">source</span><span class="inter-text">
+  </span><span class="const token" data-binding="const-LMLF.Blueprint.ExponentialIntegrals.Section64.HalfTurnLift.liftedLog_endpoint" data-verso-hover="2628" id="LMLF___Blueprint___ExponentialIntegrals___Section64___HalfTurnLift___liftedLog_endpoint">liftedLog_endpoint</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeSpec-1884">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Filter.Tendsto" data-verso-hover="111">Tendsto</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.1576" data-verso-hover="170">liftedLog</span><span class="inter-text"> </span><span class="const token" data-binding="const-Filter.atTop" data-verso-hover="116">atTop</span><span class="inter-text">
+    </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-1914">(</span><span class="unknown token" data-binding="">𝓝</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-1920">(</span><span class="const token" data-binding="const-Complex.log" data-verso-hover="296">Complex.log</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.1093" data-verso-hover="171">source</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_+_»-1921">+</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-1942">(</span><span class="const token" data-binding="const-LMLF.Blueprint.ExponentialIntegrals.Section64.sideSign" data-verso-hover="2629">sideSign</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.1095" data-verso-hover="1549">side</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeAscription-1942">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Complex" data-verso-hover="165">ℂ</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.typeAscription-1942">)</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_*_»-1942">*</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-1966">(</span><span class="const token" data-binding="const-Real.pi" data-verso-hover="259">Real.pi</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeAscription-1966">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Complex" data-verso-hover="165">ℂ</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.typeAscription-1966">)</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_*_»-1942">*</span><span class="inter-text"> </span><span class="const token" data-binding="const-Complex.I" data-verso-hover="201">Complex.I</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.paren-1920">)</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.paren-1914">)</span></code></div>
+                </details><details class="lmlf-lean" open=""><summary>6.4 lifted general E₁ continuation</summary><div class="lmlf-lean__body">
+                  <code class="hl lean block" data-lean-context="examples"><span class="keyword token" data-binding="kw-occ-Lean.Parser.Command.structureTk-2133">structure</span><span class="inter-text"> </span><span class="const token" data-binding="const-LMLF.Blueprint.ExponentialIntegrals.Section64.GeneralE1Continuation" data-verso-hover="2630" id="LMLF___Blueprint___ExponentialIntegrals___Section64___GeneralE1Continuation">GeneralE1Continuation</span><span class="inter-text"> </span><span class="keyword token" data-binding="kw-occ-Lean.Parser.Command.structure-2133">where</span><span class="inter-text">
+  </span><span class="const token" data-binding="const-LMLF.Blueprint.ExponentialIntegrals.Section64.GeneralE1Continuation.source" data-verso-hover="2631" id="LMLF___Blueprint___ExponentialIntegrals___Section64___GeneralE1Continuation___source">source</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeSpec-2180">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Complex" data-verso-hover="165">ℂ</span><span class="inter-text">
+  </span><span class="const token" data-binding="const-LMLF.Blueprint.ExponentialIntegrals.Section64.GeneralE1Continuation.winding" data-verso-hover="2632" id="LMLF___Blueprint___ExponentialIntegrals___Section64___GeneralE1Continuation___winding">winding</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeSpec-2196">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Int" data-verso-hover="282">ℤ</span><span class="inter-text">
+  </span><span class="const token" data-binding="const-LMLF.Blueprint.ExponentialIntegrals.Section64.GeneralE1Continuation.nonzero" data-verso-hover="2633" id="LMLF___Blueprint___ExponentialIntegrals___Section64___GeneralE1Continuation___nonzero">nonzero</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeSpec-2212">:</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.3853" data-verso-hover="171">source</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_≠_»-2214">≠</span><span class="inter-text"> </span><span class="literal number token" data-binding="" data-verso-hover="171">0</span><span class="inter-text">
+  </span><span class="const token" data-binding="const-LMLF.Blueprint.ExponentialIntegrals.Section64.GeneralE1Continuation.path" data-verso-hover="2634" id="LMLF___Blueprint___ExponentialIntegrals___Section64___GeneralE1Continuation___path">path</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeSpec-2234">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Real" data-verso-hover="11">ℝ</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-Lean.Parser.Term.arrow-2236">→</span><span class="inter-text"> </span><span class="const token" data-binding="const-Complex" data-verso-hover="165">ℂ</span><span class="inter-text">
+  </span><span class="const token" data-binding="const-LMLF.Blueprint.ExponentialIntegrals.Section64.GeneralE1Continuation.path_start" data-verso-hover="2635" id="LMLF___Blueprint___ExponentialIntegrals___Section64___GeneralE1Continuation___path_start">path_start</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeSpec-2261">:</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.3904" data-verso-hover="170">path</span><span class="inter-text"> </span><span class="literal number token" data-binding="" data-verso-hover="19">0</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_=_»-2263">=</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.3853" data-verso-hover="171">source</span><span class="inter-text">
+  </span><span class="const token" data-binding="const-LMLF.Blueprint.ExponentialIntegrals.Section64.GeneralE1Continuation.path_endpoint" data-verso-hover="2636" id="LMLF___Blueprint___ExponentialIntegrals___Section64___GeneralE1Continuation___path_endpoint">path_endpoint</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeSpec-2295">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Filter.Tendsto" data-verso-hover="111">Tendsto</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.3904" data-verso-hover="170">path</span><span class="inter-text"> </span><span class="const token" data-binding="const-Filter.atTop" data-verso-hover="116">atTop</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-2316">(</span><span class="unknown token" data-binding="">𝓝</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.3853" data-verso-hover="171">source</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.paren-2316">)</span><span class="inter-text">
+  </span><span class="const token" data-binding="const-LMLF.Blueprint.ExponentialIntegrals.Section64.GeneralE1Continuation.path_nonzero" data-verso-hover="2637" id="LMLF___Blueprint___ExponentialIntegrals___Section64___GeneralE1Continuation___path_nonzero">path_nonzero</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeSpec-2345">:</span><span class="inter-text"> </span><span class="unknown token" data-binding="">∀</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.4101" data-verso-hover="19">t</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeSpec-2353">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Real" data-verso-hover="11">ℝ</span><span class="punctuation separator token" data-binding="kw-occ-Lean.Parser.Term.forall-2347">,</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.3904" data-verso-hover="170">path</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.4101" data-verso-hover="19">t</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_≠_»-2360">≠</span><span class="inter-text"> </span><span class="literal number token" data-binding="" data-verso-hover="171">0</span><span class="inter-text">
+  </span><span class="const token" data-binding="const-LMLF.Blueprint.ExponentialIntegrals.Section64.GeneralE1Continuation.liftedLog" data-verso-hover="2638" id="LMLF___Blueprint___ExponentialIntegrals___Section64___GeneralE1Continuation___liftedLog">liftedLog</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeSpec-2385">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Real" data-verso-hover="11">ℝ</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-Lean.Parser.Term.arrow-2387">→</span><span class="inter-text"> </span><span class="const token" data-binding="const-Complex" data-verso-hover="165">ℂ</span><span class="inter-text">
+  </span><span class="const token" data-binding="const-LMLF.Blueprint.ExponentialIntegrals.Section64.GeneralE1Continuation.liftedLog_continuous" data-verso-hover="2639" id="LMLF___Blueprint___ExponentialIntegrals___Section64___GeneralE1Continuation___liftedLog_continuous">liftedLog_continuous</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeSpec-2422">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Continuous" data-verso-hover="1070">Continuous</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.4140" data-verso-hover="170">liftedLog</span><span class="inter-text">
+  </span><span class="const token" data-binding="const-LMLF.Blueprint.ExponentialIntegrals.Section64.GeneralE1Continuation.liftedLog_exp" data-verso-hover="2640" id="LMLF___Blueprint___ExponentialIntegrals___Section64___GeneralE1Continuation___liftedLog_exp">liftedLog_exp</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeSpec-2461">:</span><span class="inter-text"> </span><span class="unknown token" data-binding="">∀</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.4319" data-verso-hover="19">t</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeSpec-2469">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Real" data-verso-hover="11">ℝ</span><span class="punctuation separator token" data-binding="kw-occ-Lean.Parser.Term.forall-2463">,</span><span class="inter-text"> </span><span class="const token" data-binding="const-Complex.exp" data-verso-hover="239">Complex.exp</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-2488">(</span><span class="var token" data-binding="var-_uniq.4140" data-verso-hover="170">liftedLog</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.4319" data-verso-hover="19">t</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.paren-2488">)</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_=_»-2476">=</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.3904" data-verso-hover="170">path</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.4319" data-verso-hover="19">t</span><span class="inter-text">
+  </span><span class="const token" data-binding="const-LMLF.Blueprint.ExponentialIntegrals.Section64.GeneralE1Continuation.liftedLog_start" data-verso-hover="2641" id="LMLF___Blueprint___ExponentialIntegrals___Section64___GeneralE1Continuation___liftedLog_start">liftedLog_start</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeSpec-2529">:</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.4140" data-verso-hover="170">liftedLog</span><span class="inter-text"> </span><span class="literal number token" data-binding="" data-verso-hover="19">0</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_=_»-2531">=</span><span class="inter-text"> </span><span class="const token" data-binding="const-Complex.log" data-verso-hover="296">Complex.log</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.3853" data-verso-hover="171">source</span><span class="inter-text">
+  </span><span class="const token" data-binding="const-LMLF.Blueprint.ExponentialIntegrals.Section64.GeneralE1Continuation.liftedLog_endpoint" data-verso-hover="2642" id="LMLF___Blueprint___ExponentialIntegrals___Section64___GeneralE1Continuation___liftedLog_endpoint">liftedLog_endpoint</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeSpec-2585">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Filter.Tendsto" data-verso-hover="111">Tendsto</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.4140" data-verso-hover="170">liftedLog</span><span class="inter-text"> </span><span class="const token" data-binding="const-Filter.atTop" data-verso-hover="116">atTop</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-2611">(</span><span class="unknown token" data-binding="">𝓝</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-2617">(</span><span class="const token" data-binding="const-LMLF.Blueprint.ExponentialIntegrals.Section64.branchLog" data-verso-hover="2643">branchLog</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.3853" data-verso-hover="171">source</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.3855" data-verso-hover="313">winding</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.paren-2617">)</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.paren-2611">)</span><span class="inter-text">
+  </span><span class="const token" data-binding="const-LMLF.Blueprint.ExponentialIntegrals.Section64.GeneralE1Continuation.value" data-verso-hover="2644" id="LMLF___Blueprint___ExponentialIntegrals___Section64___GeneralE1Continuation___value">value</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeSpec-2653">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Complex" data-verso-hover="165">ℂ</span><span class="inter-text">
+  </span><span class="const token" data-binding="const-LMLF.Blueprint.ExponentialIntegrals.Section64.GeneralE1Continuation.value_limit" data-verso-hover="2645" id="LMLF___Blueprint___ExponentialIntegrals___Section64___GeneralE1Continuation___value_limit">value_limit</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeSpec-2673">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Filter.Tendsto" data-verso-hover="111">Tendsto</span><span class="inter-text">
+    </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-2687">(</span><span class="keyword token" data-binding="kw-occ-Lean.Parser.Term.fun-2688">fun</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.4479" data-verso-hover="19">t</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.basicFun-2692">=&gt;</span><span class="inter-text"> </span><a href="Exponential___-Logarithmic___-Sine___-and-Cosine-Integrals/___6___2-Definitions-and-Interrelations/#LMLF___Blueprint___ExponentialIntegrals___Section62___principalEin" title="Definition of example"><span class="const token" data-binding="const-LMLF.Blueprint.ExponentialIntegrals.Section62.principalEin" data-verso-hover="2578">LMLF.Blueprint.ExponentialIntegrals.Section62.principalEin</span></a><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-2756">(</span><span class="var token" data-binding="var-_uniq.3904" data-verso-hover="170">path</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.4479" data-verso-hover="19">t</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.paren-2756">)</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_-_»-2697">-</span><span class="inter-text">
+      </span><span class="var token" data-binding="var-_uniq.4140" data-verso-hover="170">liftedLog</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.4479" data-verso-hover="19">t</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_-_»-2697">-</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-2787">(</span><span class="const token" data-binding="const-Real.eulerMascheroniConstant" data-verso-hover="406">Real.eulerMascheroniConstant</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeAscription-2787">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Complex" data-verso-hover="165">ℂ</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.typeAscription-2787">)</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.paren-2687">)</span><span class="inter-text">
+    </span><span class="const token" data-binding="const-Filter.atTop" data-verso-hover="116">atTop</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-2835">(</span><span class="unknown token" data-binding="">𝓝</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.4471" data-verso-hover="171">value</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.paren-2835">)</span></code></div>
+                </details><details class="lmlf-lean" open=""><summary>6.4 canonical half-turn boundary limit</summary><div class="lmlf-lean__body">
+                  <code class="hl lean block" data-lean-context="examples"><span class="keyword token" data-binding="kw-occ-Lean.Parser.Command.definition-3021">def</span><span class="inter-text"> </span><span class="const token" data-binding="const-LMLF.Blueprint.ExponentialIntegrals.Section64.HasHalfTurnLimit" data-verso-hover="2646" id="LMLF___Blueprint___ExponentialIntegrals___Section64___HasHalfTurnLimit">HasHalfTurnLimit</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-3042">(</span><span class="var token" data-binding="var-_uniq.6676" data-verso-hover="242">f</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-3042">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Complex" data-verso-hover="165">ℂ</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-Lean.Parser.Term.arrow-3047">→</span><span class="inter-text"> </span><span class="const token" data-binding="const-Complex" data-verso-hover="165">ℂ</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-Lean.Parser.Term.arrow-3055">→</span><span class="inter-text"> </span><span class="const token" data-binding="const-Complex" data-verso-hover="165">ℂ</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-3042">)</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-3068">(</span><span class="var token" data-binding="var-_uniq.6678" data-verso-hover="2647">P</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-3068">:</span><span class="inter-text"> </span><a href="Exponential___-Logarithmic___-Sine___-and-Cosine-Integrals/___6___4-Analytic-Continuation/#LMLF___Blueprint___ExponentialIntegrals___Section64___HalfTurnLift" title="Definition of example"><span class="const token" data-binding="const-LMLF.Blueprint.ExponentialIntegrals.Section64.HalfTurnLift" data-verso-hover="2614">HalfTurnLift</span></a><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-3068">)</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-3087">(</span><span class="var token" data-binding="var-_uniq.6680" data-verso-hover="171">v</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-3087">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Complex" data-verso-hover="165">ℂ</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-3087">)</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeSpec-3097">:</span><span class="inter-text"> </span><span class="sort token" data-binding="sort-14430969920833713138" data-verso-hover="12">Prop</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Command.declValSimple-3104">:=</span><span class="inter-text">
+  </span><span class="const token" data-binding="const-Filter.Tendsto" data-verso-hover="111">Tendsto</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-3117">(</span><span class="keyword token" data-binding="kw-occ-Lean.Parser.Term.fun-3118">fun</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.6691" data-verso-hover="19">t</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeSpec-3124">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Real" data-verso-hover="11">ℝ</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.basicFun-3122">=&gt;</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.6676" data-verso-hover="242">f</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-3135">(</span><span class="var token" data-binding="var-_uniq.6678" data-verso-hover="2647">P</span><span class="built-in delim token" data-binding="">.</span><a href="Exponential___-Logarithmic___-Sine___-and-Cosine-Integrals/___6___4-Analytic-Continuation/#LMLF___Blueprint___ExponentialIntegrals___Section64___HalfTurnLift___path" title="Definition of example"><span class="const token" data-binding="const-LMLF.Blueprint.ExponentialIntegrals.Section64.HalfTurnLift.path" data-verso-hover="2619">path</span></a><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.6691" data-verso-hover="19">t</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.paren-3135">)</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-3146">(</span><span class="var token" data-binding="var-_uniq.6678" data-verso-hover="2647">P</span><span class="built-in delim token" data-binding="">.</span><a href="Exponential___-Logarithmic___-Sine___-and-Cosine-Integrals/___6___4-Analytic-Continuation/#LMLF___Blueprint___ExponentialIntegrals___Section64___HalfTurnLift___liftedLog" title="Definition of example"><span class="const token" data-binding="const-LMLF.Blueprint.ExponentialIntegrals.Section64.HalfTurnLift.liftedLog" data-verso-hover="2624">liftedLog</span></a><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.6691" data-verso-hover="19">t</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.paren-3146">)</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.paren-3117">)</span><span class="inter-text"> </span><span class="const token" data-binding="const-Filter.atTop" data-verso-hover="116">atTop</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-3169">(</span><span class="unknown token" data-binding="">𝓝</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.6680" data-verso-hover="171">v</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.paren-3169">)</span></code></div>
+                </details><details class="lmlf-lean" open=""><summary>6.4 lower-case sine-integral tail</summary><div class="lmlf-lean__body">
+                  <code class="hl lean block" data-lean-context="examples"><span class="keyword token" data-binding="kw-occ-Lean.Parser.Command.definition-4197">def</span><span class="inter-text"> </span><span class="const token" data-binding="const-LMLF.Blueprint.ExponentialIntegrals.Section64.principalSiTailValue" data-verso-hover="2648" id="LMLF___Blueprint___ExponentialIntegrals___Section64___principalSiTailValue">principalSiTailValue</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-4222">(</span><span class="var token" data-binding="var-_uniq.7247" data-verso-hover="171">z</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-4222">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Complex" data-verso-hover="165">ℂ</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-4222">)</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeSpec-4232">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Complex" data-verso-hover="165">ℂ</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Command.declValSimple-4238">:=</span><span class="inter-text">
+  </span><a href="Exponential___-Logarithmic___-Sine___-and-Cosine-Integrals/___6___2-Definitions-and-Interrelations/#LMLF___Blueprint___ExponentialIntegrals___Section62___principalSi" title="Definition of example"><span class="const token" data-binding="const-LMLF.Blueprint.ExponentialIntegrals.Section62.principalSi" data-verso-hover="2590">LMLF.Blueprint.ExponentialIntegrals.Section62.principalSi</span></a><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.7247" data-verso-hover="171">z</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_-_»-4243">-</span><span class="inter-text">
+    </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-4309">(</span><span class="const token" data-binding="const-Real.pi" data-verso-hover="259">Real.pi</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeAscription-4309">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Complex" data-verso-hover="165">ℂ</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.typeAscription-4309">)</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_/_»-4309">/</span><span class="inter-text"> </span><span class="literal number token" data-binding="" data-verso-hover="171">2</span></code></div>
+                </details><p>
+                The continuation-side reconstructions of the auxiliary functions are named
+separately from the canonical §6.2 pair.  The bridge statements below identify
+them on the principal-cut domain; outside that domain the continuation-side
+name keeps its branch context visible.</p>
+              <details class="lmlf-lean" open=""><summary>6.4 branch-side auxiliary f value</summary><div class="lmlf-lean__body">
+                  <code class="hl lean block" data-lean-context="examples"><span class="keyword token" data-binding="kw-occ-Lean.Parser.Command.definition-4484">def</span><span class="inter-text"> </span><span class="const token" data-binding="const-LMLF.Blueprint.ExponentialIntegrals.Section64.principalContinuationFValue" data-verso-hover="2649" id="LMLF___Blueprint___ExponentialIntegrals___Section64___principalContinuationFValue">principalContinuationFValue</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-4516">(</span><span class="var token" data-binding="var-_uniq.7445" data-verso-hover="171">z</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-4516">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Complex" data-verso-hover="165">ℂ</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-4516">)</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeSpec-4526">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Complex" data-verso-hover="165">ℂ</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Command.declValSimple-4532">:=</span><span class="inter-text">
+  </span><span class="const token" data-binding="const-LMLF.Blueprint.ExponentialIntegrals.Section64.principalCiValue" data-verso-hover="2650">principalCiValue</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.7445" data-verso-hover="171">z</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_*_»-4537">*</span><span class="inter-text"> </span><span class="const token" data-binding="const-Complex.sin" data-verso-hover="735">Complex.sin</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.7445" data-verso-hover="171">z</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_-_»-4537">-</span><span class="inter-text">
+    </span><a href="Exponential___-Logarithmic___-Sine___-and-Cosine-Integrals/___6___4-Analytic-Continuation/#LMLF___Blueprint___ExponentialIntegrals___Section64___principalSiTailValue" title="Definition of example"><span class="const token" data-binding="const-LMLF.Blueprint.ExponentialIntegrals.Section64.principalSiTailValue" data-verso-hover="2648">principalSiTailValue</span></a><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.7445" data-verso-hover="171">z</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_*_»-4578">*</span><span class="inter-text"> </span><span class="const token" data-binding="const-Complex.cos" data-verso-hover="736">Complex.cos</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.7445" data-verso-hover="171">z</span></code></div>
+                </details><details class="lmlf-lean" open=""><summary>6.4 branch-side auxiliary g value</summary><div class="lmlf-lean__body">
+                  <code class="hl lean block" data-lean-context="examples"><span class="keyword token" data-binding="kw-occ-Lean.Parser.Command.definition-4781">def</span><span class="inter-text"> </span><span class="const token" data-binding="const-LMLF.Blueprint.ExponentialIntegrals.Section64.principalContinuationGValue" data-verso-hover="2651" id="LMLF___Blueprint___ExponentialIntegrals___Section64___principalContinuationGValue">principalContinuationGValue</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-4813">(</span><span class="var token" data-binding="var-_uniq.7547" data-verso-hover="171">z</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-4813">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Complex" data-verso-hover="165">ℂ</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-4813">)</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeSpec-4823">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Complex" data-verso-hover="165">ℂ</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Command.declValSimple-4829">:=</span><span class="inter-text">
+  </span><span class="punctuation operator token" data-binding="kw-occ-«term-_»-4834">-</span><span class="const token" data-binding="const-LMLF.Blueprint.ExponentialIntegrals.Section64.principalCiValue" data-verso-hover="2650">principalCiValue</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.7547" data-verso-hover="171">z</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_*_»-4834">*</span><span class="inter-text"> </span><span class="const token" data-binding="const-Complex.cos" data-verso-hover="736">Complex.cos</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.7547" data-verso-hover="171">z</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_-_»-4834">-</span><span class="inter-text">
+    </span><a href="Exponential___-Logarithmic___-Sine___-and-Cosine-Integrals/___6___4-Analytic-Continuation/#LMLF___Blueprint___ExponentialIntegrals___Section64___principalSiTailValue" title="Definition of example"><span class="const token" data-binding="const-LMLF.Blueprint.ExponentialIntegrals.Section64.principalSiTailValue" data-verso-hover="2648">principalSiTailValue</span></a><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.7547" data-verso-hover="171">z</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_*_»-4876">*</span><span class="inter-text"> </span><span class="const token" data-binding="const-Complex.sin" data-verso-hover="735">Complex.sin</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.7547" data-verso-hover="171">z</span></code></div>
+                </details><details class="lmlf-lean" open=""><summary>6.4 principal-domain f bridge</summary><div class="lmlf-lean__body">
+                  <code class="hl lean block" data-lean-context="examples"><span class="doc-comment token" data-binding="">/-- DLMF 6.4.E6: principal-domain bridge for the branch-side f value. -/</span><span class="inter-text">
+</span><span class="keyword token" data-binding="kw-occ-Lean.Parser.Command.theorem-5312">theorem</span><span class="inter-text"> </span><span class="has-info warning"><span class="hover-container"><span class="hover-info messages"><code class="verso-message warning"><span class="text"></span><span class="text">declaration uses `</span><span class="highlighted"><span class="inter-text"></span><span class="unknown token" data-binding="">sorry</span><span class="inter-text"></span></span><span class="text">`</span></code></span></span><span class="const token" data-binding="const-LMLF.Blueprint.ExponentialIntegrals.Section64.principalContinuationFValue_eq_principalAuxiliaryF" data-verso-hover="2652" id="LMLF___Blueprint___ExponentialIntegrals___Section64___principalContinuationFValue_eq_principalAuxiliaryF">principalContinuationFValue_eq_principalAuxiliaryF</span></span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-5371">(</span><span class="var token" data-binding="var-_uniq.7658" data-verso-hover="171">z</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-5371">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Complex" data-verso-hover="165">ℂ</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-5371">)</span><span class="inter-text">
+    </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-5385">(</span><span class="var token" data-binding="var-_uniq.7660" data-verso-hover="2653">hz</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-5385">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-LMLF.Blueprint.ExponentialIntegrals.Section62.principalCutDomain" data-verso-hover="2569">Section62.principalCutDomain</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.7658" data-verso-hover="171">z</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-5385">)</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeSpec-5423">:</span><span class="inter-text">
+    </span><a href="Exponential___-Logarithmic___-Sine___-and-Cosine-Integrals/___6___4-Analytic-Continuation/#LMLF___Blueprint___ExponentialIntegrals___Section64___principalContinuationFValue" title="Definition of example"><span class="const token" data-binding="const-LMLF.Blueprint.ExponentialIntegrals.Section64.principalContinuationFValue" data-verso-hover="2649">principalContinuationFValue</span></a><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.7658" data-verso-hover="171">z</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_=_»-5429">=</span><span class="inter-text"> </span><a href="Exponential___-Logarithmic___-Sine___-and-Cosine-Integrals/___6___2-Definitions-and-Interrelations/#LMLF___Blueprint___ExponentialIntegrals___Section62___principalAuxiliaryF" title="Definition of example"><span class="const token" data-binding="const-LMLF.Blueprint.ExponentialIntegrals.Section62.principalAuxiliaryF" data-verso-hover="2605">Section62.principalAuxiliaryF</span></a><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.7658" data-verso-hover="171">z</span></code></div>
+                </details><details class="lmlf-lean" open=""><summary>6.4 principal-domain g bridge</summary><div class="lmlf-lean__body">
+                  <code class="hl lean block" data-lean-context="examples"><span class="doc-comment token" data-binding="">/-- DLMF 6.4.E7: principal-domain bridge for the branch-side g value. -/</span><span class="inter-text">
+</span><span class="keyword token" data-binding="kw-occ-Lean.Parser.Command.theorem-5679">theorem</span><span class="inter-text"> </span><span class="has-info warning"><span class="hover-container"><span class="hover-info messages"><code class="verso-message warning"><span class="text"></span><span class="text">declaration uses `</span><span class="highlighted"><span class="inter-text"></span><span class="unknown token" data-binding="">sorry</span><span class="inter-text"></span></span><span class="text">`</span></code></span></span><span class="const token" data-binding="const-LMLF.Blueprint.ExponentialIntegrals.Section64.principalContinuationGValue_eq_principalAuxiliaryG" data-verso-hover="2654" id="LMLF___Blueprint___ExponentialIntegrals___Section64___principalContinuationGValue_eq_principalAuxiliaryG">principalContinuationGValue_eq_principalAuxiliaryG</span></span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-5738">(</span><span class="var token" data-binding="var-_uniq.7668" data-verso-hover="171">z</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-5738">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Complex" data-verso-hover="165">ℂ</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-5738">)</span><span class="inter-text">
+    </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-5752">(</span><span class="var token" data-binding="var-_uniq.7670" data-verso-hover="2653">hz</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-5752">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-LMLF.Blueprint.ExponentialIntegrals.Section62.principalCutDomain" data-verso-hover="2569">Section62.principalCutDomain</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.7668" data-verso-hover="171">z</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-5752">)</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeSpec-5790">:</span><span class="inter-text">
+    </span><a href="Exponential___-Logarithmic___-Sine___-and-Cosine-Integrals/___6___4-Analytic-Continuation/#LMLF___Blueprint___ExponentialIntegrals___Section64___principalContinuationGValue" title="Definition of example"><span class="const token" data-binding="const-LMLF.Blueprint.ExponentialIntegrals.Section64.principalContinuationGValue" data-verso-hover="2651">principalContinuationGValue</span></a><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.7668" data-verso-hover="171">z</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_=_»-5796">=</span><span class="inter-text"> </span><a href="Exponential___-Logarithmic___-Sine___-and-Cosine-Integrals/___6___2-Definitions-and-Interrelations/#LMLF___Blueprint___ExponentialIntegrals___Section62___principalAuxiliaryG" title="Definition of example"><span class="const token" data-binding="const-LMLF.Blueprint.ExponentialIntegrals.Section62.principalAuxiliaryG" data-verso-hover="2606">Section62.principalAuxiliaryG</span></a><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.7668" data-verso-hover="171">z</span></code></div>
+                </details><details class="lmlf-lean" open=""><summary>6.4 branch-aware continuation expressions</summary><div class="lmlf-lean__body">
+                  <code class="hl lean block" data-lean-context="examples"><span class="keyword token" data-binding="kw-occ-Lean.Parser.Command.definition-6045">def</span><span class="inter-text"> </span><span class="const token" data-binding="const-LMLF.Blueprint.ExponentialIntegrals.Section64.halfTurnE1Continuation" data-verso-hover="2655" id="LMLF___Blueprint___ExponentialIntegrals___Section64___halfTurnE1Continuation">halfTurnE1Continuation</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-6072">(</span><span class="var token" data-binding="var-_uniq.7678" data-verso-hover="171">z</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.7680" data-verso-hover="171">logz</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-6072">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Complex" data-verso-hover="165">ℂ</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-6072">)</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeSpec-6087">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Complex" data-verso-hover="165">ℂ</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Command.declValSimple-6093">:=</span><span class="inter-text">
+  </span><a href="Exponential___-Logarithmic___-Sine___-and-Cosine-Integrals/___6___2-Definitions-and-Interrelations/#LMLF___Blueprint___ExponentialIntegrals___Section62___principalEin" title="Definition of example"><span class="const token" data-binding="const-LMLF.Blueprint.ExponentialIntegrals.Section62.principalEin" data-verso-hover="2578">LMLF.Blueprint.ExponentialIntegrals.Section62.principalEin</span></a><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.7678" data-verso-hover="171">z</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_-_»-6098">-</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.7680" data-verso-hover="171">logz</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_-_»-6098">-</span><span class="inter-text">
+    </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-6172">(</span><span class="const token" data-binding="const-Real.eulerMascheroniConstant" data-verso-hover="406">Real.eulerMascheroniConstant</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeAscription-6172">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Complex" data-verso-hover="165">ℂ</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.typeAscription-6172">)</span></code><code class="hl lean block" data-lean-context="examples"><span class="keyword token" data-binding="kw-occ-Lean.Parser.Command.definition-6364">def</span><span class="inter-text"> </span><span class="const token" data-binding="const-LMLF.Blueprint.ExponentialIntegrals.Section64.halfTurnCiContinuation" data-verso-hover="2656" id="LMLF___Blueprint___ExponentialIntegrals___Section64___halfTurnCiContinuation">halfTurnCiContinuation</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-6391">(</span><span class="var token" data-binding="var-_uniq.7799" data-verso-hover="171">z</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.7801" data-verso-hover="171">logz</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-6391">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Complex" data-verso-hover="165">ℂ</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-6391">)</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeSpec-6406">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Complex" data-verso-hover="165">ℂ</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Command.declValSimple-6412">:=</span><span class="inter-text">
+  </span><span class="punctuation operator token" data-binding="kw-occ-«term-_»-6417">-</span><a href="Exponential___-Logarithmic___-Sine___-and-Cosine-Integrals/___6___2-Definitions-and-Interrelations/#LMLF___Blueprint___ExponentialIntegrals___Section62___principalCin" title="Definition of example"><span class="const token" data-binding="const-LMLF.Blueprint.ExponentialIntegrals.Section62.principalCin" data-verso-hover="2598">LMLF.Blueprint.ExponentialIntegrals.Section62.principalCin</span></a><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.7799" data-verso-hover="171">z</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_+_»-6417">+</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.7801" data-verso-hover="171">logz</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_+_»-6417">+</span><span class="inter-text">
+    </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-6492">(</span><span class="const token" data-binding="const-Real.eulerMascheroniConstant" data-verso-hover="406">Real.eulerMascheroniConstant</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeAscription-6492">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Complex" data-verso-hover="165">ℂ</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.typeAscription-6492">)</span></code><code class="hl lean block" data-lean-context="examples"><span class="keyword token" data-binding="kw-occ-Lean.Parser.Command.definition-6686">def</span><span class="inter-text"> </span><span class="const token" data-binding="const-LMLF.Blueprint.ExponentialIntegrals.Section64.halfTurnChiContinuation" data-verso-hover="2657" id="LMLF___Blueprint___ExponentialIntegrals___Section64___halfTurnChiContinuation">halfTurnChiContinuation</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-6714">(</span><span class="var token" data-binding="var-_uniq.7935" data-verso-hover="171">z</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.7937" data-verso-hover="171">logz</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-6714">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Complex" data-verso-hover="165">ℂ</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-6714">)</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeSpec-6729">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Complex" data-verso-hover="165">ℂ</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Command.declValSimple-6735">:=</span><span class="inter-text">
+  </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-6740">(</span><span class="const token" data-binding="const-Real.eulerMascheroniConstant" data-verso-hover="406">Real.eulerMascheroniConstant</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeAscription-6740">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Complex" data-verso-hover="165">ℂ</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.typeAscription-6740">)</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_+_»-6740">+</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.7937" data-verso-hover="171">logz</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_+_»-6740">+</span><span class="inter-text">
+    </span><span class="const token" data-binding="const-LMLF.Blueprint.ExponentialIntegrals.Section62.principalChiRegular" data-verso-hover="2604">LMLF.Blueprint.ExponentialIntegrals.Section62.principalChiRegular</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.7935" data-verso-hover="171">z</span></code><code class="hl lean block" data-lean-context="examples"><span class="keyword token" data-binding="kw-occ-Lean.Parser.Command.definition-7012">def</span><span class="inter-text"> </span><span class="const token" data-binding="const-LMLF.Blueprint.ExponentialIntegrals.Section64.halfTurnFContinuation" data-verso-hover="2658" id="LMLF___Blueprint___ExponentialIntegrals___Section64___halfTurnFContinuation">halfTurnFContinuation</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-7038">(</span><span class="var token" data-binding="var-_uniq.8062" data-verso-hover="171">z</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.8064" data-verso-hover="171">logz</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-7038">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Complex" data-verso-hover="165">ℂ</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-7038">)</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeSpec-7053">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Complex" data-verso-hover="165">ℂ</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Command.declValSimple-7059">:=</span><span class="inter-text">
+  </span><a href="Exponential___-Logarithmic___-Sine___-and-Cosine-Integrals/___6___4-Analytic-Continuation/#LMLF___Blueprint___ExponentialIntegrals___Section64___halfTurnCiContinuation" title="Definition of example"><span class="const token" data-binding="const-LMLF.Blueprint.ExponentialIntegrals.Section64.halfTurnCiContinuation" data-verso-hover="2656">halfTurnCiContinuation</span></a><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.8062" data-verso-hover="171">z</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.8064" data-verso-hover="171">logz</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_*_»-7064">*</span><span class="inter-text"> </span><span class="const token" data-binding="const-Complex.sin" data-verso-hover="735">Complex.sin</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.8062" data-verso-hover="171">z</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_-_»-7064">-</span><span class="inter-text">
+    </span><a href="Exponential___-Logarithmic___-Sine___-and-Cosine-Integrals/___6___4-Analytic-Continuation/#LMLF___Blueprint___ExponentialIntegrals___Section64___principalSiTailValue" title="Definition of example"><span class="const token" data-binding="const-LMLF.Blueprint.ExponentialIntegrals.Section64.principalSiTailValue" data-verso-hover="2648">principalSiTailValue</span></a><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.8062" data-verso-hover="171">z</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_*_»-7116">*</span><span class="inter-text"> </span><span class="const token" data-binding="const-Complex.cos" data-verso-hover="736">Complex.cos</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.8062" data-verso-hover="171">z</span></code><code class="hl lean block" data-lean-context="examples"><span class="keyword token" data-binding="kw-occ-Lean.Parser.Command.definition-7307">def</span><span class="inter-text"> </span><span class="const token" data-binding="const-LMLF.Blueprint.ExponentialIntegrals.Section64.halfTurnGContinuation" data-verso-hover="2659" id="LMLF___Blueprint___ExponentialIntegrals___Section64___halfTurnGContinuation">halfTurnGContinuation</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-7333">(</span><span class="var token" data-binding="var-_uniq.8168" data-verso-hover="171">z</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.8170" data-verso-hover="171">logz</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-7333">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Complex" data-verso-hover="165">ℂ</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-7333">)</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeSpec-7348">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Complex" data-verso-hover="165">ℂ</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Command.declValSimple-7354">:=</span><span class="inter-text">
+  </span><span class="punctuation operator token" data-binding="kw-occ-«term-_»-7359">-</span><a href="Exponential___-Logarithmic___-Sine___-and-Cosine-Integrals/___6___4-Analytic-Continuation/#LMLF___Blueprint___ExponentialIntegrals___Section64___halfTurnCiContinuation" title="Definition of example"><span class="const token" data-binding="const-LMLF.Blueprint.ExponentialIntegrals.Section64.halfTurnCiContinuation" data-verso-hover="2656">halfTurnCiContinuation</span></a><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.8168" data-verso-hover="171">z</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.8170" data-verso-hover="171">logz</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_*_»-7359">*</span><span class="inter-text"> </span><span class="const token" data-binding="const-Complex.cos" data-verso-hover="736">Complex.cos</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.8168" data-verso-hover="171">z</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_-_»-7359">-</span><span class="inter-text">
+    </span><a href="Exponential___-Logarithmic___-Sine___-and-Cosine-Integrals/___6___4-Analytic-Continuation/#LMLF___Blueprint___ExponentialIntegrals___Section64___principalSiTailValue" title="Definition of example"><span class="const token" data-binding="const-LMLF.Blueprint.ExponentialIntegrals.Section64.principalSiTailValue" data-verso-hover="2648">principalSiTailValue</span></a><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.8168" data-verso-hover="171">z</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_*_»-7412">*</span><span class="inter-text"> </span><span class="const token" data-binding="const-Complex.sin" data-verso-hover="735">Complex.sin</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.8168" data-verso-hover="171">z</span></code></div>
+                </details><article class="lmlf-dlmf-entry"><div class="lmlf-dlmf-entry__source">
+                  <a href="https://dlmf.nist.gov/6.4.E1">DLMF General value of E1 ↗</a></div>
+                <div class="lmlf-dlmf-entry__body">
+                  <p>
+                    The DLMF writes the general value as</p>
+                  <p>
+                    <code class="math display">E_{1}(z)=\operatorname{Ein}(z)-\operatorname{Ln}z-\gamma,\qquad
+\operatorname{Ln}z=\ln z+2m\pi i,\quad m\in\mathbb Z.</code>$$</p>
+                  <p>
+                    Here <code>generalE1Value</code> uses the canonical <code>principalEin</code> from §6.2, the
+principal logarithm, Euler's constant, and the explicit integer branch index.</p>
+                  <details class="lmlf-lean" open=""><summary>6.4.E1 general logarithmic value</summary><div class="lmlf-lean__body">
+                      <code class="hl lean block" data-lean-context="examples"><span class="keyword token" data-binding="kw-occ-Lean.Parser.Command.theorem-7641">theorem</span><span class="inter-text"> </span><span class="has-info warning"><span class="hover-container"><span class="hover-info messages"><code class="verso-message warning"><span class="text"></span><span class="text">declaration uses `</span><span class="highlighted"><span class="inter-text"></span><span class="unknown token" data-binding="">sorry</span><span class="inter-text"></span></span><span class="text">`</span></code></span></span><span class="const token" data-binding="const-LMLF.Blueprint.ExponentialIntegrals.Section64.dlmf_6_4_E1" data-verso-hover="2660" id="LMLF___Blueprint___ExponentialIntegrals___Section64___dlmf_6_4_E1">dlmf_6_4_E1</span></span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-7661">(</span><span class="var token" data-binding="var-_uniq.8283" data-verso-hover="2661">L</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-7661">:</span><span class="inter-text"> </span><a href="Exponential___-Logarithmic___-Sine___-and-Cosine-Integrals/___6___4-Analytic-Continuation/#LMLF___Blueprint___ExponentialIntegrals___Section64___GeneralE1Continuation" title="Definition of example"><span class="const token" data-binding="const-LMLF.Blueprint.ExponentialIntegrals.Section64.GeneralE1Continuation" data-verso-hover="2630">GeneralE1Continuation</span></a><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-7661">)</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeSpec-7689">:</span><span class="inter-text">
+    </span><span class="var token" data-binding="var-_uniq.8283" data-verso-hover="2661">L</span><span class="built-in delim token" data-binding="">.</span><a href="Exponential___-Logarithmic___-Sine___-and-Cosine-Integrals/___6___4-Analytic-Continuation/#LMLF___Blueprint___ExponentialIntegrals___Section64___GeneralE1Continuation___value" title="Definition of example"><span class="const token" data-binding="const-LMLF.Blueprint.ExponentialIntegrals.Section64.GeneralE1Continuation.value" data-verso-hover="2644">value</span></a><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_=_»-7695">=</span><span class="inter-text"> </span><span class="const token" data-binding="const-LMLF.Blueprint.ExponentialIntegrals.Section64.generalE1Value" data-verso-hover="2662">generalE1Value</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.8283" data-verso-hover="2661">L</span><span class="built-in delim token" data-binding="">.</span><a href="Exponential___-Logarithmic___-Sine___-and-Cosine-Integrals/___6___4-Analytic-Continuation/#LMLF___Blueprint___ExponentialIntegrals___Section64___GeneralE1Continuation___source" title="Definition of example"><span class="const token" data-binding="const-LMLF.Blueprint.ExponentialIntegrals.Section64.GeneralE1Continuation.source" data-verso-hover="2631">source</span></a><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.8283" data-verso-hover="2661">L</span><span class="built-in delim token" data-binding="">.</span><a href="Exponential___-Logarithmic___-Sine___-and-Cosine-Integrals/___6___4-Analytic-Continuation/#LMLF___Blueprint___ExponentialIntegrals___Section64___GeneralE1Continuation___winding" title="Definition of example"><span class="const token" data-binding="const-LMLF.Blueprint.ExponentialIntegrals.Section64.GeneralE1Continuation.winding" data-verso-hover="2632">winding</span></a></code></div>
+                    </details></div>
+                </article><article class="lmlf-dlmf-entry"><div class="lmlf-dlmf-entry__source">
+                  <a href="https://dlmf.nist.gov/6.4.E2">DLMF Full-turn monodromy ↗</a></div>
+                <div class="lmlf-dlmf-entry__body">
+                  <p>
+                    For a full turn, the endpoint is written using z multiplied by the exponential
+of 2m times pi times the imaginary unit, while the continuation retains the
+integer winding and changes by the corresponding 2m pi i term:</p>
+                  <p>
+                    <code class="math display">E_{1}(ze^{2m\pi i})=E_{1}(z)-2m\pi i,\qquad m\in\mathbb Z.</code>$$</p>
+                  <p>
+                    The Lean statement uses a lifted path with an explicit endpoint and continuous
+logarithm.  Its theorem records the branch change directly; the path and its
+winding data remain in <code>GeneralE1Continuation</code> rather than being reconstructed
+from an ordinary complex endpoint.</p>
+                  <details class="lmlf-lean" open=""><summary>6.4.E2 full-turn branch change</summary><div class="lmlf-lean__body">
+                      <code class="hl lean block" data-lean-context="examples"><span class="keyword token" data-binding="kw-occ-Lean.Parser.Command.theorem-7959">theorem</span><span class="inter-text"> </span><span class="has-info warning"><span class="hover-container"><span class="hover-info messages"><code class="verso-message warning"><span class="text"></span><span class="text">declaration uses `</span><span class="highlighted"><span class="inter-text"></span><span class="unknown token" data-binding="">sorry</span><span class="inter-text"></span></span><span class="text">`</span></code></span></span><span class="const token" data-binding="const-LMLF.Blueprint.ExponentialIntegrals.Section64.dlmf_6_4_E2" data-verso-hover="2663" id="LMLF___Blueprint___ExponentialIntegrals___Section64___dlmf_6_4_E2">dlmf_6_4_E2</span></span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-7979">(</span><span class="var token" data-binding="var-_uniq.8291" data-verso-hover="2661">L</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-7979">:</span><span class="inter-text"> </span><a href="Exponential___-Logarithmic___-Sine___-and-Cosine-Integrals/___6___4-Analytic-Continuation/#LMLF___Blueprint___ExponentialIntegrals___Section64___GeneralE1Continuation" title="Definition of example"><span class="const token" data-binding="const-LMLF.Blueprint.ExponentialIntegrals.Section64.GeneralE1Continuation" data-verso-hover="2630">GeneralE1Continuation</span></a><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-7979">)</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeSpec-8007">:</span><span class="inter-text">
+    </span><span class="var token" data-binding="var-_uniq.8291" data-verso-hover="2661">L</span><span class="built-in delim token" data-binding="">.</span><a href="Exponential___-Logarithmic___-Sine___-and-Cosine-Integrals/___6___4-Analytic-Continuation/#LMLF___Blueprint___ExponentialIntegrals___Section64___GeneralE1Continuation___value" title="Definition of example"><span class="const token" data-binding="const-LMLF.Blueprint.ExponentialIntegrals.Section64.GeneralE1Continuation.value" data-verso-hover="2644">value</span></a><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_=_»-8013">=</span><span class="inter-text"> </span><span class="const token" data-binding="const-LMLF.Blueprint.ExponentialIntegrals.Section64.generalE1Value" data-verso-hover="2662">generalE1Value</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.8291" data-verso-hover="2661">L</span><span class="built-in delim token" data-binding="">.</span><a href="Exponential___-Logarithmic___-Sine___-and-Cosine-Integrals/___6___4-Analytic-Continuation/#LMLF___Blueprint___ExponentialIntegrals___Section64___GeneralE1Continuation___source" title="Definition of example"><span class="const token" data-binding="const-LMLF.Blueprint.ExponentialIntegrals.Section64.GeneralE1Continuation.source" data-verso-hover="2631">source</span></a><span class="inter-text"> </span><span class="literal number token" data-binding="" data-verso-hover="313">0</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_-_»-8023">-</span><span class="inter-text">
+      </span><span class="literal number token" data-binding="" data-verso-hover="171">2</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_*_»-8057">*</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-8061">(</span><span class="var token" data-binding="var-_uniq.8291" data-verso-hover="2661">L</span><span class="built-in delim token" data-binding="">.</span><a href="Exponential___-Logarithmic___-Sine___-and-Cosine-Integrals/___6___4-Analytic-Continuation/#LMLF___Blueprint___ExponentialIntegrals___Section64___GeneralE1Continuation___winding" title="Definition of example"><span class="const token" data-binding="const-LMLF.Blueprint.ExponentialIntegrals.Section64.GeneralE1Continuation.winding" data-verso-hover="2632">winding</span></a><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeAscription-8061">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Complex" data-verso-hover="165">ℂ</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.typeAscription-8061">)</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_*_»-8057">*</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-8081">(</span><span class="const token" data-binding="const-Real.pi" data-verso-hover="259">Real.pi</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeAscription-8081">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Complex" data-verso-hover="165">ℂ</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.typeAscription-8081">)</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_*_»-8057">*</span><span class="inter-text"> </span><span class="const token" data-binding="const-Complex.I" data-verso-hover="201">Complex.I</span></code></div>
+                    </details></div>
+                </article><article class="lmlf-dlmf-entry"><div class="lmlf-dlmf-entry__source">
+                  <a href="https://dlmf.nist.gov/6.4.E3">DLMF Half-turn boundary values ↗</a></div>
+                <div class="lmlf-dlmf-entry__body">
+                  <p>
+                    For a source point with phase bounded by pi, the two half-turns give the two
+sides of the cut:</p>
+                  <p>
+                    <code class="math display">E_{1}(ze^{\pm\pi i})=\operatorname{Ein}(-z)-\ln z-\gamma
+\mp\pi i,\qquad |\operatorname{ph}z|\leq\pi.</code>$$</p>
+                  <p>
+                    <code>HalfTurnLift.side</code> supplies the paired signs, while its continuous lifted
+logarithm makes the continuation branch explicit. The Lean declaration states
+the limit directly at the canonical right-hand side; a reader does not need to
+introduce a separate variable for the value of the limit.</p>
+                  <details class="lmlf-lean" open=""><summary>6.4.E3 half-turn sides</summary><div class="lmlf-lean__body">
+                      <code class="hl lean block" data-lean-context="examples"><span class="keyword token" data-binding="kw-occ-Lean.Parser.Command.theorem-8285">theorem</span><span class="inter-text"> </span><span class="has-info warning"><span class="hover-container"><span class="hover-info messages"><code class="verso-message warning"><span class="text"></span><span class="text">declaration uses `</span><span class="highlighted"><span class="inter-text"></span><span class="unknown token" data-binding="">sorry</span><span class="inter-text"></span></span><span class="text">`</span></code></span></span><span class="const token" data-binding="const-LMLF.Blueprint.ExponentialIntegrals.Section64.dlmf_6_4_E3" data-verso-hover="2664" id="LMLF___Blueprint___ExponentialIntegrals___Section64___dlmf_6_4_E3">dlmf_6_4_E3</span></span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-8305">(</span><span class="var token" data-binding="var-_uniq.8541" data-verso-hover="2647">P</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-8305">:</span><span class="inter-text"> </span><a href="Exponential___-Logarithmic___-Sine___-and-Cosine-Integrals/___6___4-Analytic-Continuation/#LMLF___Blueprint___ExponentialIntegrals___Section64___HalfTurnLift" title="Definition of example"><span class="const token" data-binding="const-LMLF.Blueprint.ExponentialIntegrals.Section64.HalfTurnLift" data-verso-hover="2614">HalfTurnLift</span></a><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-8305">)</span><span class="inter-text">
+    </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeSpec-8328">:</span><span class="inter-text"> </span><a href="Exponential___-Logarithmic___-Sine___-and-Cosine-Integrals/___6___4-Analytic-Continuation/#LMLF___Blueprint___ExponentialIntegrals___Section64___HasHalfTurnLimit" title="Definition of example"><span class="const token" data-binding="const-LMLF.Blueprint.ExponentialIntegrals.Section64.HasHalfTurnLimit" data-verso-hover="2646">HasHalfTurnLimit</span></a><span class="inter-text">
+      </span><a href="Exponential___-Logarithmic___-Sine___-and-Cosine-Integrals/___6___4-Analytic-Continuation/#LMLF___Blueprint___ExponentialIntegrals___Section64___halfTurnE1Continuation" title="Definition of example"><span class="const token" data-binding="const-LMLF.Blueprint.ExponentialIntegrals.Section64.halfTurnE1Continuation" data-verso-hover="2655">halfTurnE1Continuation</span></a><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.8541" data-verso-hover="2647">P</span><span class="inter-text">
+      </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-8384">(</span><a href="Exponential___-Logarithmic___-Sine___-and-Cosine-Integrals/___6___2-Definitions-and-Interrelations/#LMLF___Blueprint___ExponentialIntegrals___Section62___principalEin" title="Definition of example"><span class="const token" data-binding="const-LMLF.Blueprint.ExponentialIntegrals.Section62.principalEin" data-verso-hover="2578">LMLF.Blueprint.ExponentialIntegrals.Section62.principalEin</span></a><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-8444">(</span><span class="punctuation operator token" data-binding="kw-occ-«term-_»-8445">-</span><span class="var token" data-binding="var-_uniq.8541" data-verso-hover="2647">P</span><span class="built-in delim token" data-binding="">.</span><a href="Exponential___-Logarithmic___-Sine___-and-Cosine-Integrals/___6___4-Analytic-Continuation/#LMLF___Blueprint___ExponentialIntegrals___Section64___HalfTurnLift___source" title="Definition of example"><span class="const token" data-binding="const-LMLF.Blueprint.ExponentialIntegrals.Section64.HalfTurnLift.source" data-verso-hover="2615">source</span></a><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.paren-8444">)</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_-_»-8385">-</span><span class="inter-text">
+        </span><span class="const token" data-binding="const-Complex.log" data-verso-hover="296">Complex.log</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.8541" data-verso-hover="2647">P</span><span class="built-in delim token" data-binding="">.</span><a href="Exponential___-Logarithmic___-Sine___-and-Cosine-Integrals/___6___4-Analytic-Continuation/#LMLF___Blueprint___ExponentialIntegrals___Section64___HalfTurnLift___source" title="Definition of example"><span class="const token" data-binding="const-LMLF.Blueprint.ExponentialIntegrals.Section64.HalfTurnLift.source" data-verso-hover="2615">source</span></a><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_-_»-8385">-</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-8489">(</span><span class="const token" data-binding="const-Real.eulerMascheroniConstant" data-verso-hover="406">Real.eulerMascheroniConstant</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeAscription-8489">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Complex" data-verso-hover="165">ℂ</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.typeAscription-8489">)</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_-_»-8385">-</span><span class="inter-text">
+          </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-8538">(</span><span class="const token" data-binding="const-LMLF.Blueprint.ExponentialIntegrals.Section64.sideSign" data-verso-hover="2629">sideSign</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.8541" data-verso-hover="2647">P</span><span class="built-in delim token" data-binding="">.</span><a href="Exponential___-Logarithmic___-Sine___-and-Cosine-Integrals/___6___4-Analytic-Continuation/#LMLF___Blueprint___ExponentialIntegrals___Section64___HalfTurnLift___side" title="Definition of example"><span class="const token" data-binding="const-LMLF.Blueprint.ExponentialIntegrals.Section64.HalfTurnLift.side" data-verso-hover="2616">side</span></a><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeAscription-8538">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Complex" data-verso-hover="165">ℂ</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.typeAscription-8538">)</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_*_»-8538">*</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-8564">(</span><span class="const token" data-binding="const-Real.pi" data-verso-hover="259">Real.pi</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeAscription-8564">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Complex" data-verso-hover="165">ℂ</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.typeAscription-8564">)</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_*_»-8538">*</span><span class="inter-text"> </span><span class="const token" data-binding="const-Complex.I" data-verso-hover="201">Complex.I</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.paren-8384">)</span></code></div>
+                    </details></div>
+                </article><article class="lmlf-dlmf-entry"><div class="lmlf-dlmf-entry__source">
+                  <a href="https://dlmf.nist.gov/6.4.E4">DLMF Ci continuation ↗</a></div>
+                <div class="lmlf-dlmf-entry__body">
+                  <p>
+                    The cosine integral has the signed jump</p>
+                  <p>
+                    <code class="math display">\operatorname{Ci}(ze^{\pm\pi i})=\pm\pi i+\operatorname{Ci}(z).</code>$$</p>
+                  <p>
+                    <code>principalCiValue</code> is reconstructed from the canonical <code>Cin</code> and logarithm
+relations in §6.2. The theorem identifies the side-indexed half-turn limit of
+the branch-aware half-turn continuation expression, whose source-side value is
+<code>principalCiValue</code>.</p>
+                  <details class="lmlf-lean" open=""><summary>6.4.E4 Ci cut sides</summary><div class="lmlf-lean__body">
+                      <code class="hl lean block" data-lean-context="examples"><span class="keyword token" data-binding="kw-occ-Lean.Parser.Command.theorem-8730">theorem</span><span class="inter-text"> </span><span class="has-info warning"><span class="hover-container"><span class="hover-info messages"><code class="verso-message warning"><span class="text"></span><span class="text">declaration uses `</span><span class="highlighted"><span class="inter-text"></span><span class="unknown token" data-binding="">sorry</span><span class="inter-text"></span></span><span class="text">`</span></code></span></span><span class="const token" data-binding="const-LMLF.Blueprint.ExponentialIntegrals.Section64.dlmf_6_4_E4" data-verso-hover="2665" id="LMLF___Blueprint___ExponentialIntegrals___Section64___dlmf_6_4_E4">dlmf_6_4_E4</span></span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-8750">(</span><span class="var token" data-binding="var-_uniq.8820" data-verso-hover="2647">P</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-8750">:</span><span class="inter-text"> </span><a href="Exponential___-Logarithmic___-Sine___-and-Cosine-Integrals/___6___4-Analytic-Continuation/#LMLF___Blueprint___ExponentialIntegrals___Section64___HalfTurnLift" title="Definition of example"><span class="const token" data-binding="const-LMLF.Blueprint.ExponentialIntegrals.Section64.HalfTurnLift" data-verso-hover="2614">HalfTurnLift</span></a><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-8750">)</span><span class="inter-text">
+    </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeSpec-8773">:</span><span class="inter-text"> </span><a href="Exponential___-Logarithmic___-Sine___-and-Cosine-Integrals/___6___4-Analytic-Continuation/#LMLF___Blueprint___ExponentialIntegrals___Section64___HasHalfTurnLimit" title="Definition of example"><span class="const token" data-binding="const-LMLF.Blueprint.ExponentialIntegrals.Section64.HasHalfTurnLimit" data-verso-hover="2646">HasHalfTurnLimit</span></a><span class="inter-text"> </span><a href="Exponential___-Logarithmic___-Sine___-and-Cosine-Integrals/___6___4-Analytic-Continuation/#LMLF___Blueprint___ExponentialIntegrals___Section64___halfTurnCiContinuation" title="Definition of example"><span class="const token" data-binding="const-LMLF.Blueprint.ExponentialIntegrals.Section64.halfTurnCiContinuation" data-verso-hover="2656">halfTurnCiContinuation</span></a><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.8820" data-verso-hover="2647">P</span><span class="inter-text">
+      </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-8823">(</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-8824">(</span><span class="const token" data-binding="const-LMLF.Blueprint.ExponentialIntegrals.Section64.sideSign" data-verso-hover="2629">sideSign</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.8820" data-verso-hover="2647">P</span><span class="built-in delim token" data-binding="">.</span><a href="Exponential___-Logarithmic___-Sine___-and-Cosine-Integrals/___6___4-Analytic-Continuation/#LMLF___Blueprint___ExponentialIntegrals___Section64___HalfTurnLift___side" title="Definition of example"><span class="const token" data-binding="const-LMLF.Blueprint.ExponentialIntegrals.Section64.HalfTurnLift.side" data-verso-hover="2616">side</span></a><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeAscription-8824">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Complex" data-verso-hover="165">ℂ</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.typeAscription-8824">)</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_*_»-8824">*</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-8850">(</span><span class="const token" data-binding="const-Real.pi" data-verso-hover="259">Real.pi</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeAscription-8850">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Complex" data-verso-hover="165">ℂ</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.typeAscription-8850">)</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_*_»-8824">*</span><span class="inter-text"> </span><span class="const token" data-binding="const-Complex.I" data-verso-hover="201">Complex.I</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_+_»-8824">+</span><span class="inter-text"> </span><span class="const token" data-binding="const-LMLF.Blueprint.ExponentialIntegrals.Section64.principalCiValue" data-verso-hover="2650">principalCiValue</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.8820" data-verso-hover="2647">P</span><span class="built-in delim token" data-binding="">.</span><a href="Exponential___-Logarithmic___-Sine___-and-Cosine-Integrals/___6___4-Analytic-Continuation/#LMLF___Blueprint___ExponentialIntegrals___Section64___HalfTurnLift___source" title="Definition of example"><span class="const token" data-binding="const-LMLF.Blueprint.ExponentialIntegrals.Section64.HalfTurnLift.source" data-verso-hover="2615">source</span></a><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.paren-8823">)</span></code></div>
+                    </details></div>
+                </article><article class="lmlf-dlmf-entry"><div class="lmlf-dlmf-entry__source">
+                  <a href="https://dlmf.nist.gov/6.4.E5">DLMF Chi continuation ↗</a></div>
+                <div class="lmlf-dlmf-entry__body">
+                  <p>
+                    Likewise,</p>
+                  <p>
+                    <code class="math display">\operatorname{Chi}(ze^{\pm\pi i})=\pm\pi i+\operatorname{Chi}(z).</code>$$</p>
+                  <p>
+                    The canonical principal value comes from the §6.2.E16 logarithmic relation.
+The theorem identifies the side-indexed half-turn limit of the branch-aware
+half-turn continuation expression, whose source-side value is
+<code>principalChiValue</code>.</p>
+                  <details class="lmlf-lean" open=""><summary>6.4.E5 Chi cut sides</summary><div class="lmlf-lean__body">
+                      <code class="hl lean block" data-lean-context="examples"><span class="keyword token" data-binding="kw-occ-Lean.Parser.Command.theorem-9035">theorem</span><span class="inter-text"> </span><span class="has-info warning"><span class="hover-container"><span class="hover-info messages"><code class="verso-message warning"><span class="text"></span><span class="text">declaration uses `</span><span class="highlighted"><span class="inter-text"></span><span class="unknown token" data-binding="">sorry</span><span class="inter-text"></span></span><span class="text">`</span></code></span></span><span class="const token" data-binding="const-LMLF.Blueprint.ExponentialIntegrals.Section64.dlmf_6_4_E5" data-verso-hover="2666" id="LMLF___Blueprint___ExponentialIntegrals___Section64___dlmf_6_4_E5">dlmf_6_4_E5</span></span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-9055">(</span><span class="var token" data-binding="var-_uniq.9012" data-verso-hover="2647">P</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-9055">:</span><span class="inter-text"> </span><a href="Exponential___-Logarithmic___-Sine___-and-Cosine-Integrals/___6___4-Analytic-Continuation/#LMLF___Blueprint___ExponentialIntegrals___Section64___HalfTurnLift" title="Definition of example"><span class="const token" data-binding="const-LMLF.Blueprint.ExponentialIntegrals.Section64.HalfTurnLift" data-verso-hover="2614">HalfTurnLift</span></a><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-9055">)</span><span class="inter-text">
+    </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeSpec-9078">:</span><span class="inter-text"> </span><a href="Exponential___-Logarithmic___-Sine___-and-Cosine-Integrals/___6___4-Analytic-Continuation/#LMLF___Blueprint___ExponentialIntegrals___Section64___HasHalfTurnLimit" title="Definition of example"><span class="const token" data-binding="const-LMLF.Blueprint.ExponentialIntegrals.Section64.HasHalfTurnLimit" data-verso-hover="2646">HasHalfTurnLimit</span></a><span class="inter-text"> </span><a href="Exponential___-Logarithmic___-Sine___-and-Cosine-Integrals/___6___4-Analytic-Continuation/#LMLF___Blueprint___ExponentialIntegrals___Section64___halfTurnChiContinuation" title="Definition of example"><span class="const token" data-binding="const-LMLF.Blueprint.ExponentialIntegrals.Section64.halfTurnChiContinuation" data-verso-hover="2657">halfTurnChiContinuation</span></a><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.9012" data-verso-hover="2647">P</span><span class="inter-text">
+      </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-9129">(</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-9130">(</span><span class="const token" data-binding="const-LMLF.Blueprint.ExponentialIntegrals.Section64.sideSign" data-verso-hover="2629">sideSign</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.9012" data-verso-hover="2647">P</span><span class="built-in delim token" data-binding="">.</span><a href="Exponential___-Logarithmic___-Sine___-and-Cosine-Integrals/___6___4-Analytic-Continuation/#LMLF___Blueprint___ExponentialIntegrals___Section64___HalfTurnLift___side" title="Definition of example"><span class="const token" data-binding="const-LMLF.Blueprint.ExponentialIntegrals.Section64.HalfTurnLift.side" data-verso-hover="2616">side</span></a><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeAscription-9130">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Complex" data-verso-hover="165">ℂ</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.typeAscription-9130">)</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_*_»-9130">*</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-9156">(</span><span class="const token" data-binding="const-Real.pi" data-verso-hover="259">Real.pi</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeAscription-9156">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Complex" data-verso-hover="165">ℂ</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.typeAscription-9156">)</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_*_»-9130">*</span><span class="inter-text"> </span><span class="const token" data-binding="const-Complex.I" data-verso-hover="201">Complex.I</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_+_»-9130">+</span><span class="inter-text"> </span><span class="const token" data-binding="const-LMLF.Blueprint.ExponentialIntegrals.Section64.principalChiValue" data-verso-hover="2667">principalChiValue</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.9012" data-verso-hover="2647">P</span><span class="built-in delim token" data-binding="">.</span><a href="Exponential___-Logarithmic___-Sine___-and-Cosine-Integrals/___6___4-Analytic-Continuation/#LMLF___Blueprint___ExponentialIntegrals___Section64___HalfTurnLift___source" title="Definition of example"><span class="const token" data-binding="const-LMLF.Blueprint.ExponentialIntegrals.Section64.HalfTurnLift.source" data-verso-hover="2615">source</span></a><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.paren-9129">)</span></code></div>
+                    </details></div>
+                </article><article class="lmlf-dlmf-entry"><div class="lmlf-dlmf-entry__source">
+                  <a href="https://dlmf.nist.gov/6.4.E6">DLMF Auxiliary sine-integral continuation ↗</a></div>
+                <div class="lmlf-dlmf-entry__body">
+                  <p>
+                    For the auxiliary function f, the side-dependent exponential term is</p>
+                  <p>
+                    <code class="math display">f(ze^{\pm\pi i})=\pi e^{\mp iz}-f(z).</code>$$</p>
+                  <p>
+                    The source-side principal value is the §6.2.E17 combination of canonical Ci
+and the lower-case tail <code>si(z)=Si(z)-π/2</code>. The theorem identifies the
+side-indexed half-turn limit of the corresponding branch-aware half-turn
+continuation expression.</p>
+                  <details class="lmlf-lean" open=""><summary>6.4.E6 f cut sides</summary><div class="lmlf-lean__body">
+                      <code class="hl lean block" data-lean-context="examples"><span class="keyword token" data-binding="kw-occ-Lean.Parser.Command.theorem-9409">theorem</span><span class="inter-text"> </span><span class="has-info warning"><span class="hover-container"><span class="hover-info messages"><code class="verso-message warning"><span class="text"></span><span class="text">declaration uses `</span><span class="highlighted"><span class="inter-text"></span><span class="unknown token" data-binding="">sorry</span><span class="inter-text"></span></span><span class="text">`</span></code></span></span><span class="const token" data-binding="const-LMLF.Blueprint.ExponentialIntegrals.Section64.dlmf_6_4_E6" data-verso-hover="2668" id="LMLF___Blueprint___ExponentialIntegrals___Section64___dlmf_6_4_E6">dlmf_6_4_E6</span></span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-9429">(</span><span class="var token" data-binding="var-_uniq.9204" data-verso-hover="2647">P</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-9429">:</span><span class="inter-text"> </span><a href="Exponential___-Logarithmic___-Sine___-and-Cosine-Integrals/___6___4-Analytic-Continuation/#LMLF___Blueprint___ExponentialIntegrals___Section64___HalfTurnLift" title="Definition of example"><span class="const token" data-binding="const-LMLF.Blueprint.ExponentialIntegrals.Section64.HalfTurnLift" data-verso-hover="2614">HalfTurnLift</span></a><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-9429">)</span><span class="inter-text">
+    </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeSpec-9452">:</span><span class="inter-text"> </span><a href="Exponential___-Logarithmic___-Sine___-and-Cosine-Integrals/___6___4-Analytic-Continuation/#LMLF___Blueprint___ExponentialIntegrals___Section64___HasHalfTurnLimit" title="Definition of example"><span class="const token" data-binding="const-LMLF.Blueprint.ExponentialIntegrals.Section64.HasHalfTurnLimit" data-verso-hover="2646">HasHalfTurnLimit</span></a><span class="inter-text"> </span><a href="Exponential___-Logarithmic___-Sine___-and-Cosine-Integrals/___6___4-Analytic-Continuation/#LMLF___Blueprint___ExponentialIntegrals___Section64___halfTurnFContinuation" title="Definition of example"><span class="const token" data-binding="const-LMLF.Blueprint.ExponentialIntegrals.Section64.halfTurnFContinuation" data-verso-hover="2658">halfTurnFContinuation</span></a><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.9204" data-verso-hover="2647">P</span><span class="inter-text">
+      </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-9501">(</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-9502">(</span><span class="const token" data-binding="const-Real.pi" data-verso-hover="259">Real.pi</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeAscription-9502">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Complex" data-verso-hover="165">ℂ</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.typeAscription-9502">)</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_*_»-9502">*</span><span class="inter-text"> </span><span class="const token" data-binding="const-Complex.exp" data-verso-hover="239">Complex.exp</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-9532">(</span><span class="punctuation operator token" data-binding="kw-occ-«term-_»-9533">-</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-9534">(</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-9535">(</span><span class="const token" data-binding="const-LMLF.Blueprint.ExponentialIntegrals.Section64.sideSign" data-verso-hover="2629">sideSign</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.9204" data-verso-hover="2647">P</span><span class="built-in delim token" data-binding="">.</span><a href="Exponential___-Logarithmic___-Sine___-and-Cosine-Integrals/___6___4-Analytic-Continuation/#LMLF___Blueprint___ExponentialIntegrals___Section64___HalfTurnLift___side" title="Definition of example"><span class="const token" data-binding="const-LMLF.Blueprint.ExponentialIntegrals.Section64.HalfTurnLift.side" data-verso-hover="2616">side</span></a><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeAscription-9535">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Complex" data-verso-hover="165">ℂ</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.typeAscription-9535">)</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_*_»-9535">*</span><span class="inter-text"> </span><span class="const token" data-binding="const-Complex.I" data-verso-hover="201">Complex.I</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_*_»-9535">*</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.9204" data-verso-hover="2647">P</span><span class="built-in delim token" data-binding="">.</span><a href="Exponential___-Logarithmic___-Sine___-and-Cosine-Integrals/___6___4-Analytic-Continuation/#LMLF___Blueprint___ExponentialIntegrals___Section64___HalfTurnLift___source" title="Definition of example"><span class="const token" data-binding="const-LMLF.Blueprint.ExponentialIntegrals.Section64.HalfTurnLift.source" data-verso-hover="2615">source</span></a><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.paren-9534">)</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.paren-9532">)</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_-_»-9502">-</span><span class="inter-text">
+        </span><a href="Exponential___-Logarithmic___-Sine___-and-Cosine-Integrals/___6___4-Analytic-Continuation/#LMLF___Blueprint___ExponentialIntegrals___Section64___principalContinuationFValue" title="Definition of example"><span class="const token" data-binding="const-LMLF.Blueprint.ExponentialIntegrals.Section64.principalContinuationFValue" data-verso-hover="2649">principalContinuationFValue</span></a><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.9204" data-verso-hover="2647">P</span><span class="built-in delim token" data-binding="">.</span><a href="Exponential___-Logarithmic___-Sine___-and-Cosine-Integrals/___6___4-Analytic-Continuation/#LMLF___Blueprint___ExponentialIntegrals___Section64___HalfTurnLift___source" title="Definition of example"><span class="const token" data-binding="const-LMLF.Blueprint.ExponentialIntegrals.Section64.HalfTurnLift.source" data-verso-hover="2615">source</span></a><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.paren-9501">)</span></code></div>
+                    </details></div>
+                </article><article class="lmlf-dlmf-entry"><div class="lmlf-dlmf-entry__source">
+                  <a href="https://dlmf.nist.gov/6.4.E7">DLMF Auxiliary cosine-integral continuation ↗</a></div>
+                <div class="lmlf-dlmf-entry__body">
+                  <p>
+                    For the auxiliary function g,</p>
+                  <p>
+                    <code class="math display">g(ze^{\pm\pi i})=\mp\pi i e^{\mp iz}+g(z).</code>$$</p>
+                  <p>
+                    The corresponding §6.2.E18 principal combination uses the same lower-case
+tail and the typed half-turn limit is displayed by the following declaration.</p>
+                  <details class="lmlf-lean" open=""><summary>6.4.E7 g cut sides</summary><div class="lmlf-lean__body">
+                      <code class="hl lean block" data-lean-context="examples"><span class="keyword token" data-binding="kw-occ-Lean.Parser.Command.theorem-9794">theorem</span><span class="inter-text"> </span><span class="has-info warning"><span class="hover-container"><span class="hover-info messages"><code class="verso-message warning"><span class="text"></span><span class="text">declaration uses `</span><span class="highlighted"><span class="inter-text"></span><span class="unknown token" data-binding="">sorry</span><span class="inter-text"></span></span><span class="text">`</span></code></span></span><span class="const token" data-binding="const-LMLF.Blueprint.ExponentialIntegrals.Section64.dlmf_6_4_E7" data-verso-hover="2669" id="LMLF___Blueprint___ExponentialIntegrals___Section64___dlmf_6_4_E7">dlmf_6_4_E7</span></span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-9814">(</span><span class="var token" data-binding="var-_uniq.9412" data-verso-hover="2647">P</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-9814">:</span><span class="inter-text"> </span><a href="Exponential___-Logarithmic___-Sine___-and-Cosine-Integrals/___6___4-Analytic-Continuation/#LMLF___Blueprint___ExponentialIntegrals___Section64___HalfTurnLift" title="Definition of example"><span class="const token" data-binding="const-LMLF.Blueprint.ExponentialIntegrals.Section64.HalfTurnLift" data-verso-hover="2614">HalfTurnLift</span></a><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-9814">)</span><span class="inter-text">
+    </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeSpec-9837">:</span><span class="inter-text"> </span><a href="Exponential___-Logarithmic___-Sine___-and-Cosine-Integrals/___6___4-Analytic-Continuation/#LMLF___Blueprint___ExponentialIntegrals___Section64___HasHalfTurnLimit" title="Definition of example"><span class="const token" data-binding="const-LMLF.Blueprint.ExponentialIntegrals.Section64.HasHalfTurnLimit" data-verso-hover="2646">HasHalfTurnLimit</span></a><span class="inter-text"> </span><a href="Exponential___-Logarithmic___-Sine___-and-Cosine-Integrals/___6___4-Analytic-Continuation/#LMLF___Blueprint___ExponentialIntegrals___Section64___halfTurnGContinuation" title="Definition of example"><span class="const token" data-binding="const-LMLF.Blueprint.ExponentialIntegrals.Section64.halfTurnGContinuation" data-verso-hover="2659">halfTurnGContinuation</span></a><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.9412" data-verso-hover="2647">P</span><span class="inter-text">
+      </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-9886">(</span><span class="punctuation operator token" data-binding="kw-occ-«term-_»-9887">-</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-9888">(</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-9889">(</span><span class="const token" data-binding="const-LMLF.Blueprint.ExponentialIntegrals.Section64.sideSign" data-verso-hover="2629">sideSign</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.9412" data-verso-hover="2647">P</span><span class="built-in delim token" data-binding="">.</span><a href="Exponential___-Logarithmic___-Sine___-and-Cosine-Integrals/___6___4-Analytic-Continuation/#LMLF___Blueprint___ExponentialIntegrals___Section64___HalfTurnLift___side" title="Definition of example"><span class="const token" data-binding="const-LMLF.Blueprint.ExponentialIntegrals.Section64.HalfTurnLift.side" data-verso-hover="2616">side</span></a><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeAscription-9889">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Complex" data-verso-hover="165">ℂ</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.typeAscription-9889">)</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_*_»-9889">*</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-9915">(</span><span class="const token" data-binding="const-Real.pi" data-verso-hover="259">Real.pi</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeAscription-9915">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Complex" data-verso-hover="165">ℂ</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.typeAscription-9915">)</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_*_»-9889">*</span><span class="inter-text"> </span><span class="const token" data-binding="const-Complex.I" data-verso-hover="201">Complex.I</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.paren-9888">)</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_*_»-9887">*</span><span class="inter-text">
+          </span><span class="const token" data-binding="const-Complex.exp" data-verso-hover="239">Complex.exp</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-9968">(</span><span class="punctuation operator token" data-binding="kw-occ-«term-_»-9969">-</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-9970">(</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-9971">(</span><span class="const token" data-binding="const-LMLF.Blueprint.ExponentialIntegrals.Section64.sideSign" data-verso-hover="2629">sideSign</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.9412" data-verso-hover="2647">P</span><span class="built-in delim token" data-binding="">.</span><a href="Exponential___-Logarithmic___-Sine___-and-Cosine-Integrals/___6___4-Analytic-Continuation/#LMLF___Blueprint___ExponentialIntegrals___Section64___HalfTurnLift___side" title="Definition of example"><span class="const token" data-binding="const-LMLF.Blueprint.ExponentialIntegrals.Section64.HalfTurnLift.side" data-verso-hover="2616">side</span></a><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeAscription-9971">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Complex" data-verso-hover="165">ℂ</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.typeAscription-9971">)</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_*_»-9971">*</span><span class="inter-text"> </span><span class="const token" data-binding="const-Complex.I" data-verso-hover="201">Complex.I</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_*_»-9971">*</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.9412" data-verso-hover="2647">P</span><span class="built-in delim token" data-binding="">.</span><a href="Exponential___-Logarithmic___-Sine___-and-Cosine-Integrals/___6___4-Analytic-Continuation/#LMLF___Blueprint___ExponentialIntegrals___Section64___HalfTurnLift___source" title="Definition of example"><span class="const token" data-binding="const-LMLF.Blueprint.ExponentialIntegrals.Section64.HalfTurnLift.source" data-verso-hover="2615">source</span></a><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.paren-9970">)</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.paren-9968">)</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_+_»-9887">+</span><span class="inter-text">
+          </span><a href="Exponential___-Logarithmic___-Sine___-and-Cosine-Integrals/___6___4-Analytic-Continuation/#LMLF___Blueprint___ExponentialIntegrals___Section64___principalContinuationGValue" title="Definition of example"><span class="const token" data-binding="const-LMLF.Blueprint.ExponentialIntegrals.Section64.principalContinuationGValue" data-verso-hover="2651">principalContinuationGValue</span></a><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.9412" data-verso-hover="2647">P</span><span class="built-in delim token" data-binding="">.</span><a href="Exponential___-Logarithmic___-Sine___-and-Cosine-Integrals/___6___4-Analytic-Continuation/#LMLF___Blueprint___ExponentialIntegrals___Section64___HalfTurnLift___source" title="Definition of example"><span class="const token" data-binding="const-LMLF.Blueprint.ExponentialIntegrals.Section64.HalfTurnLift.source" data-verso-hover="2615">source</span></a><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.paren-9886">)</span></code></div>
+                    </details></div>
+                </article><article class="lmlf-dlmf-entry"><div class="lmlf-dlmf-entry__source">
+                  <a href="https://dlmf.nist.gov/6.4#info">DLMF Continuation dependencies and source note ↗</a></div>
+                <div class="lmlf-dlmf-entry__body">
+                  <p>
+                    The source note cites Olver (1997b, p. 40).  It also records the dependency
+split: E3 follows the continuation material in §§6.6(ii) and 6.6(iv), E4 and
+E5 use the Ci and Chi relations in §§6.2(ii) and 6.2(iii), and E6 and E7 use
+the auxiliary-function relations in §§6.2(iii), together with E4.</p>
+                  </div>
+                </article><article class="lmlf-dlmf-entry"><div class="lmlf-dlmf-entry__source">
+                  <a href="https://dlmf.nist.gov/6.4#p2">DLMF Neighboring definitions ↗</a></div>
+                <div class="lmlf-dlmf-entry__body">
+                  <p>
+                    The formulas above therefore use the canonical §6.2 definitions and retain
+their source dependencies rather than introducing arbitrary carrier
+functions.  The branch-side object is local vocabulary for the continuation
+boundary and does not assert that the two sides are equal as complex numbers.</p>
+                  </div>
+                </article><article class="lmlf-dlmf-entry"><div class="lmlf-dlmf-entry__source">
+                  <a href="https://dlmf.nist.gov/6.4#p3">DLMF Principal-value convention ↗</a></div>
+                <div class="lmlf-dlmf-entry__body">
+                  <p>
+                    Unless indicated otherwise, E1, Ci, Chi, f, and g mean their principal values:
+the branches real on the positive real axis, with the two boundary values
+retained on the negative real axis. See also <a href="https://dlmf.nist.gov/6.3">§6.3</a>
+and <a href="https://dlmf.nist.gov/6.5">§6.5</a>.</p>
+                  </div>
+                </article><p>
+                end LMLFManual.Chapter6
+</p>
+              </section>
+            </section>
+          <nav class="prev-next-buttons">
+            <a class="local-button active" href="Exponential___-Logarithmic___-Sine___-and-Cosine-Integrals/___6___3-Graphics/#chapter-6-section-3" rel="prev" title="6.3. §6.3 Graphics"><span class="arrow">←</span><span class="where">6.3. §6.3 Graphics</span></a><a class="local-button active" href="Exponential___-Logarithmic___-Sine___-and-Cosine-Integrals/___6___5-Further-Interrelations/#chapter-6-section-5" rel="next" title="6.5. §6.5 Further Interrelations"><span class="where">6.5. §6.5 Further Interrelations</span><span class="arrow">→</span></a></nav>
+          </div>
+        </main></div>
+    </body>
+  </html>
+

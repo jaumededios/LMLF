@@ -1,0 +1,23 @@
+{
+  "section_range":["6.14"],
+  "numbered_formula_ids_expected":["6.14.E1","6.14.E2","6.14.E3","6.14.E4","6.14.E5","6.14.E6","6.14.E7"],
+  "numbered_formula_ids_stated":["6.14.E1","6.14.E2","6.14.E3","6.14.E4","6.14.E5","6.14.E6","6.14.E7"],
+  "numbered_formula_ids_omitted":[],
+  "extra_statement_ids":["6.14#i.info@annotation-note-1","6.14#i.p1","6.14#ii.info@annotation-note-1","6.14#ii.p1","6.14#iii.p1"],
+  "declarations":[
+    {"source_id":"6.14.E1","names":["LMLF.Blueprint.ExponentialIntegrals.Section614.logOnePlusOver","LMLF.Blueprint.ExponentialIntegrals.Section614.dlmf_6_14_1"],"relation":"specialization","proof_status":"missing","quantitative_analogue":"not_applicable","notes":"Canonical §6.2 realE1 map and HasImproperIntegral formulation for Re a > -1; logOnePlusOver supplies the removable value at a=0."},
+    {"source_id":"6.14.E2","names":["LMLF.Blueprint.ExponentialIntegrals.Section614.dlmf_6_14_2"],"relation":"specialization","proof_status":"missing","quantitative_analogue":"not_applicable","notes":"Canonical principalCiPositive transform with Re a > 0, principal logarithm, exact factor 1/2, and explicit improper-integral convergence."},
+    {"source_id":"6.14.E3","names":["LMLF.Blueprint.ExponentialIntegrals.Section614.dlmf_6_14_3"],"relation":"specialization","proof_status":"missing","quantitative_analogue":"not_applicable","notes":"Canonical principalSi - pi/2 transform with Re a > 0, principal complex arctangent, and explicit improper-integral convergence."},
+    {"source_id":"6.14.E4","names":["LMLF.Blueprint.ExponentialIntegrals.Section614.dlmf_6_14_4"],"relation":"specialization","proof_status":"missing","quantitative_analogue":"not_applicable","notes":"Canonical §6.2 realE1 map and explicit improper square-integral value."},
+    {"source_id":"6.14.E5","names":["LMLF.Blueprint.ExponentialIntegrals.Section614.dlmf_6_14_5"],"relation":"specialization","proof_status":"missing","quantitative_analogue":"not_applicable","notes":"Canonical principalCiPositive and principalSi - pi/2 oscillatory integrals, each with explicit improper convergence and value -pi/4."},
+    {"source_id":"6.14.E6","names":["LMLF.Blueprint.ExponentialIntegrals.Section614.dlmf_6_14_6"],"relation":"specialization","proof_status":"missing","quantitative_analogue":"not_applicable","notes":"Canonical principalCiPositive and principalSi - pi/2 square integrals, each with explicit improper convergence and value pi/2."},
+    {"source_id":"6.14.E7","names":["LMLF.Blueprint.ExponentialIntegrals.Section614.dlmf_6_14_7"],"relation":"specialization","proof_status":"missing","quantitative_analogue":"not_applicable","notes":"Canonical principalCiPositive and principalSi - pi/2 mixed improper integral with value log 2."},
+    {"source_id":"6.14#i.info@annotation-note-1","names":[],"relation":"related","proof_status":"not_applicable","quantitative_analogue":"not_applicable","notes":"Historical factor-1/2 note reproduced at https://dlmf.nist.gov/6.14#i.info."},
+    {"source_id":"6.14#i.p1","names":[],"relation":"related","proof_status":"not_applicable","quantitative_analogue":"not_applicable","notes":"Laplace-transform context reproduced at https://dlmf.nist.gov/6.14#i.p1."},
+    {"source_id":"6.14#ii.info@annotation-note-1","names":[],"relation":"related","proof_status":"not_applicable","quantitative_analogue":"not_applicable","notes":"Historical sign-error note reproduced at https://dlmf.nist.gov/6.14#ii.info."},
+    {"source_id":"6.14#ii.p1","names":[],"relation":"related","proof_status":"not_applicable","quantitative_analogue":"not_applicable","notes":"Other-integrals context reproduced at https://dlmf.nist.gov/6.14#ii.p1."},
+    {"source_id":"6.14#iii.p1","names":[],"relation":"related","proof_status":"not_applicable","quantitative_analogue":"not_applicable","notes":"Compendia bibliography reproduced at https://dlmf.nist.gov/6.14#iii.p1; no numbered formula."}
+  ],
+  "shared_vocabulary_requests":[],
+  "known_gaps":[]
+}

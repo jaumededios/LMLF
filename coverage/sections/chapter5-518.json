@@ -30,7 +30,10 @@
   ],
   "numbered_formula_ids_omitted": [],
   "extra_statement_ids": [
-    "5.18.qGammaPoleFree",
+    "5.18.qGammaDenomNeZero",
+    "5.18.qGammaProducts",
+    "5.18.qBetaJacksonConvergence",
+    "5.18.qBetaPoleFree",
     "5.18.ii.qGammaRealBridge",
     "5.18.ii.Convexity",
     "5.18.ii.BohrMollerup"
@@ -38,11 +41,11 @@
   "declarations": [
     {
       "source_id": "5.18.E1",
-      "names": ["LMLF.Blueprint.Gamma.Section518.dlmf_5_18_1"],
+      "names": ["LMLF.Blueprint.Gamma.Section518.qPochhammer"],
       "relation": "exact",
       "proof_status": "missing",
       "quantitative_analogue": "not_applicable",
-      "notes": "Finite q-Pochhammer product, valid for complex a, q, and every nonnegative n."
+      "notes": "The source formula is the canonical finite-product definition, valid for complex a, q, and every nonnegative n."
     },
     {
       "source_id": "5.18.E2",
@@ -62,11 +65,11 @@
     },
     {
       "source_id": "5.18.E4",
-      "names": ["LMLF.Blueprint.Gamma.Section518.dlmf_5_18_4"],
+      "names": ["LMLF.Blueprint.Gamma.Section518.qGamma"],
       "relation": "specialization",
       "proof_status": "missing",
       "quantitative_analogue": "not_applicable",
-      "notes": "Uses the source real-base domain 0 < q < 1 and complex z, with principal Complex.cpow; qGamma is a totalized quotient at a zero denominator, with qGammaPoleFree naming the meromorphic finite-value domain."
+      "notes": "The source formula is the canonical product definition for real 0 < q < 1 and complex z, with principal Complex.cpow; QGammaPoint/qGammaValue provide the pole-free finite-value interface."
     },
     {
       "source_id": "5.18.E5",
@@ -90,7 +93,7 @@
       "relation": "specialization",
       "proof_status": "missing",
       "quantitative_analogue": "not_applicable",
-      "notes": "Complex argument recurrence with real 0 < q < 1 and principal Complex.cpow; both q-Gamma denominator products are required nonzero via qGammaPoleFree, excluding z = 0 and all totalized poles."
+      "notes": "Complex argument recurrence with real 0 < q < 1 and principal Complex.cpow; QGammaPoint packages both nonzero denominator products, excluding z = 0 and all totalized poles."
     },
     {
       "source_id": "5.18.E8",
@@ -118,11 +121,11 @@
     },
     {
       "source_id": "5.18.E11",
-      "names": ["LMLF.Blueprint.Gamma.Section518.dlmf_5_18_11"],
+      "names": ["LMLF.Blueprint.Gamma.Section518.qBeta"],
       "relation": "specialization",
       "proof_status": "missing",
       "quantitative_analogue": "not_applicable",
-      "notes": "Complex a, b with real q in 0 < q < 1; this is a totalized quotient identity, with the meromorphic q-Beta reading restricted to nonzero displayed q-Gamma denominators."
+      "notes": "The source formula is the canonical quotient definition; QBetaPoint/qBetaValue restrict the ordinary meromorphic reading to three pole-free q-Gamma arguments."
     },
     {
       "source_id": "5.18.E12",
@@ -133,15 +136,55 @@
       "notes": "Jackson q-integral specialization with real q, Re(a) > 0, and Re(b) > 0; principal Complex.cpow is evaluated at positive sampled points."
     },
     {
-      "source_id": "5.18.qGammaPoleFree",
+      "source_id": "5.18.qGammaDenomNeZero",
       "names": [
         "LMLF.Blueprint.Gamma.Section518.qGammaDenom",
-        "LMLF.Blueprint.Gamma.Section518.qGammaPoleFree"
+        "LMLF.Blueprint.Gamma.Section518.qGammaDenomNeZero",
+        "LMLF.Blueprint.Gamma.Section518.QGammaPoint",
+        "LMLF.Blueprint.Gamma.Section518.qGammaValue"
       ],
       "relation": "related",
       "proof_status": "missing",
       "quantitative_analogue": "not_applicable",
-      "notes": "Minimal denominator and pole-free-domain vocabulary needed to state the source recurrence without Lean's totalized pole values."
+      "notes": "Denominator-only guard; QGammaPoint separately carries the source base range and uses this predicate for its pole condition."
+    },
+    {
+      "source_id": "5.18.qGammaProducts",
+      "names": [
+        "LMLF.Blueprint.Gamma.Section518.qPochhammerTerm",
+        "LMLF.Blueprint.Gamma.Section518.qGammaNumerator",
+        "LMLF.Blueprint.Gamma.Section518.qGammaNumeratorTerm",
+        "LMLF.Blueprint.Gamma.Section518.qGammaDenominatorTerm",
+        "LMLF.Blueprint.Gamma.Section518.qGamma_products_hasProd"
+      ],
+      "relation": "related",
+      "proof_status": "missing",
+      "quantitative_analogue": "not_applicable",
+      "notes": "Named product terms and paired HasProd convergence precede q-Gamma value identities."
+    },
+    {
+      "source_id": "5.18.qBetaJacksonConvergence",
+      "names": [
+        "LMLF.Blueprint.Gamma.Section518.qJacksonIntegral",
+        "LMLF.Blueprint.Gamma.Section518.qBetaJacksonIntegrand",
+        "LMLF.Blueprint.Gamma.Section518.qBetaJacksonTerm",
+        "LMLF.Blueprint.Gamma.Section518.qBeta_jackson_hasSum"
+      ],
+      "relation": "related",
+      "proof_status": "missing",
+      "quantitative_analogue": "not_applicable",
+      "notes": "The Jackson summand and semantic HasSum layer depend only on 0 < q < 1 and positive real parts, independently of the later q-Beta value domain."
+    },
+    {
+      "source_id": "5.18.qBetaPoleFree",
+      "names": [
+        "LMLF.Blueprint.Gamma.Section518.QBetaPoint",
+        "LMLF.Blueprint.Gamma.Section518.qBetaValue"
+      ],
+      "relation": "related",
+      "proof_status": "missing",
+      "quantitative_analogue": "not_applicable",
+      "notes": "Three pole-free q-Gamma arguments are packaged for the ordinary q-Beta value."
     },
     {
       "source_id": "5.18.ii.qGammaRealBridge",

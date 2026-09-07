@@ -206,9 +206,19 @@ def cfracRemainder (s : OddAsymptoticSeries) : ℕ → OddAsymptoticSeries
   | k + 1 => cfracStep (cfracRemainder s k)
 ```
 
+```anchor cfracCoeffRaw (module := LMLF.Definitions.ContinuedFraction) -showProofStates
+def cfracCoeffRaw (s : OddAsymptoticSeries) (k : ℕ) : ℚ :=
+  cfracRemainder s k 0
+```
+
 ```anchor cfracCoeffValue (module := LMLF.Definitions.ContinuedFraction) -showProofStates
 def cfracCoeffValue (s : OddAsymptoticSeries) (k : ℕ) : ℚ :=
   if ∃ j ≤ k, cfracCoeffRaw s j = 0 then 0 else cfracCoeffRaw s k
+```
+
+```anchor cfracCoeffValue_zeroTerminated (module := LMLF.Definitions.ContinuedFraction) -showProofStates
+theorem cfracCoeffValue_zeroTerminated (s : OddAsymptoticSeries) :
+    ZeroTerminated (cfracCoeffValue s)
 ```
 :::
 
@@ -228,6 +238,28 @@ def CFracRegular (s : OddAsymptoticSeries) : Prop :=
 ```anchor cfracCoeff (module := LMLF.Definitions.ContinuedFraction) -showProofStates
 def cfracCoeff (s : OddAsymptoticSeries) : CFCoefficients :=
   ⟨cfracCoeffValue s, cfracCoeffValue_zeroTerminated s⟩
+```
+
+```anchor formalContinuedFractionFrom (module := LMLF.Definitions.ContinuedFraction) -showProofStates
+noncomputable def formalContinuedFractionFrom
+    (a : CFCoefficients) (offset : ℕ) : ℕ → ℚ⟦X⟧
+  | 0 => 0
+  | depth + 1 =>
+      PowerSeries.C (a offset) *
+        (1 + PowerSeries.X *
+          formalContinuedFractionFrom a (offset + 1) depth)⁻¹
+```
+
+```anchor formalContinuedFractionConvergent (module := LMLF.Definitions.ContinuedFraction) -showProofStates
+noncomputable def formalContinuedFractionConvergent
+    (a : CFCoefficients) (depth : ℕ) (offset : ℕ := 0) : ℚ⟦X⟧ :=
+  formalContinuedFractionFrom a offset depth
+```
+
+```anchor formalContinuedFraction (module := LMLF.Definitions.ContinuedFraction) -showProofStates
+noncomputable def formalContinuedFraction (a : CFCoefficients) : ℚ⟦X⟧ :=
+  PowerSeries.mk fun n =>
+    PowerSeries.coeff n (formalContinuedFractionConvergent a (n + 1))
 ```
 
 ```anchor formalContinuedFraction_cfracCoeff (module := LMLF.Definitions.ContinuedFraction) -showProofStates

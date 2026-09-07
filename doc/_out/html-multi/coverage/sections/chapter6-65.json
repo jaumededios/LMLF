@@ -1,0 +1,21 @@
+{
+  "section_range":["6.5"],
+  "numbered_formula_ids_expected":["6.5.E1","6.5.E2","6.5.E3","6.5.E4","6.5.E5","6.5.E6","6.5.E7"],
+  "numbered_formula_ids_stated":["6.5.E1","6.5.E2","6.5.E3","6.5.E4","6.5.E5","6.5.E6","6.5.E7"],
+  "numbered_formula_ids_omitted":[],
+  "extra_statement_ids":["6.5#info@annotation-note-1","6.5#p1","6.5#p2"],
+  "declarations":[
+    {"source_id":"6.5.E1","names":["LMLF.Blueprint.ExponentialIntegrals.Section65.E1Boundary","LMLF.Blueprint.ExponentialIntegrals.Section65.e1CutBoundary","LMLF.Blueprint.ExponentialIntegrals.Section65.dlmf_6_5_1"],"relation":"specialization","proof_status":"missing","quantitative_analogue":"not_applicable","notes":"Genuine Tendsto side limits of the canonical §6.2 principalE1 map along -x+iσt as t→0+, with σ=1 upper and σ=-1 lower; the named e1CutBoundary gives the canonical realEi boundary value directly."},
+    {"source_id":"6.5.E2","names":["LMLF.Blueprint.ExponentialIntegrals.Section65.principalCutAverage","LMLF.Blueprint.ExponentialIntegrals.Section65.dlmf_6_5_2"],"relation":"specialization","proof_status":"missing","quantitative_analogue":"not_applicable","notes":"The two canonical e1CutBoundary side limits are stated directly and their principalCutAverage is identified with canonical realEi; no arbitrary upper/lower output witnesses are exposed."},
+    {"source_id":"6.5.E3","names":["LMLF.Blueprint.ExponentialIntegrals.Section65.dlmf_6_5_3"],"relation":"specialization","proof_status":"missing","quantitative_analogue":"not_applicable","notes":"Positive-real Shi/Si interrelation using the canonical realEi, realE1, principalShi, and principalSi maps directly."},
+    {"source_id":"6.5.E4","names":["LMLF.Blueprint.ExponentialIntegrals.Section65.dlmf_6_5_4"],"relation":"specialization","proof_status":"missing","quantitative_analogue":"not_applicable","notes":"Positive-real Chi/Ci interrelation using canonical realEi, realE1, principalChi, and principalCi maps directly."},
+    {"source_id":"6.5.E5","names":["LMLF.Blueprint.ExponentialIntegrals.Section65.dlmf_6_5_5"],"relation":"specialization","proof_status":"missing","quantitative_analogue":"not_applicable","notes":"Canonical principalSi relation with z ≠ 0 and |arg z| < π/2, using the canonical principalE1 map directly at both rotated arguments."},
+    {"source_id":"6.5.E6","names":["LMLF.Blueprint.ExponentialIntegrals.Section65.dlmf_6_5_6"],"relation":"specialization","proof_status":"missing","quantitative_analogue":"not_applicable","notes":"Canonical principalCi relation with z ≠ 0 and |arg z| < π/2, using the canonical principalE1 map directly at both rotated arguments."},
+    {"source_id":"6.5.E7","names":["LMLF.Blueprint.ExponentialIntegrals.Section65.dlmf_6_5_7"],"relation":"specialization","proof_status":"missing","quantitative_analogue":"not_applicable","notes":"Conjunction of both signed identities for canonical principalAuxiliaryF/principalAuxiliaryG and direct principalE1 values at the rotated arguments, under the source phase condition |ph z| < π/2; the honest Lean endpoint specialization also adds z ≠ 0 because arg is totalized at zero."},
+    {"source_id":"6.5#info@annotation-note-1","names":[],"relation":"related","proof_status":"not_applicable","quantitative_analogue":"not_applicable","notes":"The reader-facing disclosure at https://dlmf.nist.gov/6.5#info preserves Olver (1997b, pp. 41–42) via https://dlmf.nist.gov/bib/O#bib1809, and links the exact dependencies 6.6.E1, 6.6.E2, 6.6.E5, 6.6.E6, 6.2.E10, 6.2.E17, 6.2.E18, https://dlmf.nist.gov/6.5.E5, and https://dlmf.nist.gov/6.5.E6."},
+    {"source_id":"6.5#p1","names":[],"relation":"related","proof_status":"not_applicable","quantitative_analogue":"not_applicable","notes":"The reader-facing disclosure at https://dlmf.nist.gov/6.5#p1 states the positive-real x context and separate upper/lower cut values for E1–E4."},
+    {"source_id":"6.5#p2","names":[],"relation":"related","proof_status":"not_applicable","quantitative_analogue":"not_applicable","notes":"The reader-facing disclosure at https://dlmf.nist.gov/6.5#p2 links the source |ph z| < π/2 condition for E5–E7 and explains E7's additional honest Lean z ≠ 0 endpoint condition."}
+  ],
+  "shared_vocabulary_requests":[],
+  "known_gaps":[]
+}

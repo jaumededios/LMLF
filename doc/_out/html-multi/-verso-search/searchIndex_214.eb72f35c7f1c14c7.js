@@ -1,0 +1,1 @@
+window.docContents[214].resolve({"/Gamma-Function/___5___1-Special-Notation/#chapter-5-section-1":{"contents":"Source: NIST Digital Library of Mathematical Functions, §5.1.\n\n\n\n","context":"LMLF · DLMF with Lean\u0009Gamma Function","header":"5.1. §5.1 Special Notation","id":"/Gamma-Function/___5___1-Special-Notation/#chapter-5-section-1"}});

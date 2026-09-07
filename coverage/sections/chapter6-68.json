@@ -1,0 +1,16 @@
+{
+  "section_range": ["6.8"],
+  "numbered_formula_ids_expected": ["6.8.E1", "6.8.E2", "6.8.E3"],
+  "numbered_formula_ids_stated": ["6.8.E1", "6.8.E2", "6.8.E3"],
+  "numbered_formula_ids_omitted": [],
+  "extra_statement_ids": ["6.8#info@annotation-note-1", "6.8#p1"],
+  "declarations": [
+    {"source_id":"6.8.E1","names":["LMLF.Blueprint.ExponentialIntegrals.Section68.dlmf_6_8_1"],"relation":"specialization","proof_status":"missing","quantitative_analogue":"not_applicable","notes":"Strict logarithmic lower and upper bounds for exp(x) times the real part of canonical §6.2 realE1 x, for x > 0."},
+    {"source_id":"6.8.E2","names":["LMLF.Blueprint.ExponentialIntegrals.Section68.dlmf_6_8_2"],"relation":"specialization","proof_status":"missing","quantitative_analogue":"not_applicable","notes":"Strict first rational enclosure for the direct positive-real specialization of canonical §6.2 realE1, for x > 0."},
+    {"source_id":"6.8.E3","names":["LMLF.Blueprint.ExponentialIntegrals.Section68.dlmf_6_8_3"],"relation":"specialization","proof_status":"missing","quantitative_analogue":"not_applicable","notes":"Strict sharper rational enclosure for the direct positive-real specialization of canonical §6.2 realE1, for x > 0."},
+    {"source_id":"6.8#info@annotation-note-1","names":[],"relation":"related","proof_status":"not_applicable","quantitative_analogue":"not_applicable","notes":"Bibliographic source notes are reproduced in the manual."},
+    {"source_id":"6.8#p1","names":[],"relation":"related","proof_status":"not_applicable","quantitative_analogue":"not_applicable","notes":"The standing hypothesis x > 0 is stated before the formulas."}
+  ],
+  "shared_vocabulary_requests": [],
+  "known_gaps": []
+}
