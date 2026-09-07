@@ -10,23 +10,35 @@ specifications, and release gates.
 
 The current programme targets source-statement coverage of Olver's book,
 starting with Chapter 5. See the [current direction](blueprint/current_direction.md),
-the [Chapter 5 checklist](blueprint/olver/chapter05.md), and the approved
-[Wronskian/Abel natural-language blueprint](blueprint/olver/chapter05-wronskians.md).
+the [Chapter 5 checklist](blueprint/olver/chapter05.md), the approved
+[Wronskian/Abel blueprint](blueprint/olver/chapter05-wronskians.md), and the accepted
+[global-IVP](blueprint/olver/chapter05-global-ivp.md) and
+[fundamental-pair](blueprint/olver/chapter05-fundamental-pairs.md) blueprints.
 The first accepted Lean slice checks exactly `C05-01-08`–`C05-01-11`: the
 Wronskian derivative, Abel identity, zero/nowhere-zero alternative, and
 constant-Wronskian corollary. The accepted Theorem 1.1 slice now also checks
 `C05-01-02` and `C05-01-03`: global `C²` existence, uniqueness for arbitrary
-initial value and derivative, and infinitely many solutions. Chapter 5 therefore
-stands at `6/108 = 5.56%` of the disclosed claim-component inventory, `1/13 = 7.69%`
-whole numbered theorems, and `0/44` exercises.
+initial value and derivative, and infinitely many solutions. The accepted Theorem 1.2 slice checks
+`C05-01-04`--`C05-01-07`: interval-relative spanning and linear independence, the existing
+Wronskian definition, the full three-way equivalence, explicit Cramer representations, and the
+normalized canonical pair. Chapter 5 therefore stands at `10/108 = 9.26%` of the disclosed
+claim-component inventory, `2/13 = 15.38%` whole numbered theorems, and `0/44` exercises.
 
 The [accepted global-IVP blueprint](blueprint/olver/chapter05-global-ivp.md) records the proof and
 its correspondence with the six public real/complex phase, `C²`, uniqueness, and infinitude
 declarations in [`LMLF/ODE/LinearSecondOrder.lean`](LMLF/ODE/LinearSecondOrder.lean), together with
 the two Wronskian-reuse consumers in
-[`LMLFTest/ODE/LinearSecondOrder.lean`](LMLFTest/ODE/LinearSecondOrder.lean). The next target is the
-full fundamental-pair equivalence in Theorem 1.2; its natural-language proof packet is under two
-fresh reviews and remains pending.
+[`LMLFTest/ODE/LinearSecondOrder.lean`](LMLFTest/ODE/LinearSecondOrder.lean).
+
+The accepted [fundamental-pair blueprint](blueprint/olver/chapter05-fundamental-pairs.md) records the
+reviewed mathematics, the root-resolved spanning-predicate name, the accepted real/complex API,
+and its verification evidence. The implementation and focused consumers are in
+[`LMLF/ODE/FundamentalPair.lean`](LMLF/ODE/FundamentalPair.lean) and
+[`LMLFTest/ODE/FundamentalPair.lean`](LMLFTest/ODE/FundamentalPair.lean).
+
+The next target is `C05-01-01`, the first-order homogeneous scalar equation. Its
+[approved natural-language blueprint](blueprint/olver/chapter05-first-order.md) is ready, but its
+Lean implementation remains pending and earns no coverage credit yet.
 
 Both bounded A/B candidates were mathematically correct and built
 successfully. The Sol candidate was selected because it had cleaner public
@@ -76,6 +88,10 @@ Planning and review artifacts are kept explicit:
   real and complex linear-IVP API in phase and source forms, plus infinitude.
 - [`LMLFTest/ODE/LinearSecondOrder.lean`](LMLFTest/ODE/LinearSecondOrder.lean) provides its nonpublic
   real and complex Wronskian-reuse consumers.
+- [`LMLF/ODE/FundamentalPair.lean`](LMLF/ODE/FundamentalPair.lean) provides the accepted real and
+  complex fundamental-pair equivalences, Cramer representations, and normalized canonical pairs.
+- [`LMLFTest/ODE/FundamentalPair.lean`](LMLFTest/ODE/FundamentalPair.lean) provides its nonpublic
+  off-domain-invariance and canonical-pair consumers.
 - `LMLF/Definitions.lean` and `LMLF/Results.lean` are the public semantic umbrellas.
 - `LMLF/Audit/Definitions.lean` is a separately built regression consumer and is not imported by
   `LMLF.lean`.

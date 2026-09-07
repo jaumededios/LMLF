@@ -495,7 +495,9 @@ nonvanishing Wronskian, not the full three-way equivalence of Theorem 1.2.
 
 - Natural-language mathematics completed here: `C05-01-02` and `C05-01-03`.
 - Checked Lean coverage: `C05-01-02`, `C05-01-03`, and the whole of `T05-1.1`.
-- Current Chapter 5 checked claim-component count: `6/108 = 5.56%`.
-- Current whole-numbered-theorem count: `1/13 = 7.69%`.
+- Current Chapter 5 checked claim-component count: `10/108 = 9.26%`.
+- Current whole-numbered-theorem count: `2/13 = 15.38%`.
 - Current exercise count: `0/44 = 0%`.
-- Theorem 1.2 remains pending and receives no coverage credit here.
+- Theorem 1.2 is now independently accepted and documented in the
+  [fundamental-pair blueprint](chapter05-fundamental-pairs.md); none of its additional credit is
+  claimed by this historical Theorem 1.1 slice.

@@ -24,6 +24,7 @@ globs = [
   "LMLF.Definitions",
   "LMLF.Definitions.Gamma",
   "LMLF.ODE.LinearSecondOrder",
+  "LMLF.ODE.FundamentalPair",
   "LMLF.ODE.Wronskian",
   "LMLF.Quantitative.Basic",
   "LMLF.Results",
@@ -34,6 +35,7 @@ globs = [
 name = "LMLFTest"
 globs = [
   "LMLFTest.ODE.LinearSecondOrder",
+  "LMLFTest.ODE.FundamentalPair",
   "LMLFTest.ODE.Wronskian",
   "LMLFTest.Integral.Improper.IMP001PublicUse",
   "LMLFTest.Integral.Improper.IMP001Regressions",

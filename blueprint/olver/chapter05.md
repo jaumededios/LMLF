@@ -6,14 +6,14 @@ This is bookkeeping for implementations, not an implementation framework. It doe
 
 ## Denominators and counting rule
 
-- **Whole-numbered-theorem metric:** `1 / 13 = 7.69%`. The denominator is the thirteen items explicitly headed “Theorem” in Chapter 5. A theorem counts only when its complete printed statement, including all cases and hypotheses, has a checked Lean implementation. Lemma 14.1 is not silently promoted into this denominator.
-- **Claim-component metric:** `6 / 108 = 5.56%`. The denominator is the 108 rows in “Claim components.” Each row is one independently reusable definition, formula/result family, or mathematical-prose conclusion. Equivalent displayed forms and contiguous formulas proved as one family are deliberately bundled; routine algebraic lines used only inside a proof are excluded.
+- **Whole-numbered-theorem metric:** `2 / 13 = 15.38%`. The denominator is the thirteen items explicitly headed “Theorem” in Chapter 5. A theorem counts only when its complete printed statement, including all cases and hypotheses, has a checked Lean implementation. Lemma 14.1 is not silently promoted into this denominator.
+- **Claim-component metric:** `10 / 108 = 9.26%`. The denominator is the 108 rows in “Claim components.” Each row is one independently reusable definition, formula/result family, or mathematical-prose conclusion. Equivalent displayed forms and contiguous formulas proved as one family are deliberately bundled; routine algebraic lines used only inside a proof are excluded.
 - **Exercises:** `0 / 44 = 0%`, reported separately. Exercises are not in either denominator above.
 - Percentages are Chapter-5-only unit coverage, not estimates of proof effort or of the whole book. Later chapters should add their own audited denominators rather than extrapolating from this chapter.
 
 Independent review verified the 13 theorem headings and 44 exercise headings and mechanically checked the table totals and subsection sums. It did not independently re-decompose every mathematical sentence and display into the 108 editorial claim rows. Accordingly, `108` is a disclosed editorial inventory, not a canonical or effort-weighted count.
 
-The accepted first slice (Wronskian derivative, Abel identity, zero/nonzero dichotomy, and the constant-Wronskian corollary on pp. 141–142) corresponds only to `C05-01-08`–`C05-01-11`. Those four rows remain checked below. The accepted Theorem 1.1 slice adds exactly `C05-01-02` and `C05-01-03` and supplies the initial-value dependency needed by Theorem 1.2. Theorem 1.2 remains pending until its full three-way equivalence (`C05-01-07`) is implemented.
+The accepted first slice (Wronskian derivative, Abel identity, zero/nonzero dichotomy, and the constant-Wronskian corollary on pp. 141–142) corresponds only to `C05-01-08`–`C05-01-11`. Those four rows remain checked below. The accepted Theorem 1.1 slice adds exactly `C05-01-02` and `C05-01-03`. The accepted Theorem 1.2 slice adds exactly `C05-01-04`–`C05-01-07`, using that initial-value dependency and the existing Wronskian API. The next target is the still-pending `C05-01-01`; its [approved natural-language blueprint](chapter05-first-order.md) earns no Lean credit by itself.
 
 ## Subsection counts
 
@@ -41,7 +41,7 @@ The accepted first slice (Wronskian derivative, Abel identity, zero/nonzero dich
 | Label | Page | Short source paraphrase | Status | Future Lean link |
 |---|---:|---|---|---|
 | T05-1.1 | 139 | Continuous real coefficients give global `C²` solutions on the interval and unique solutions for prescribed value and derivative. | checked | [`exists_unique_realSecondOrderLinear`](../../LMLF/ODE/LinearSecondOrder.lean#L847), [`infinite_realSecondOrderLinearSolutions`](../../LMLF/ODE/LinearSecondOrder.lean#L900) |
-| T05-1.2 | 141–142 | Fundamental pair, nowhere-zero Wronskian, and linear independence are equivalent. | pending | unassigned |
+| T05-1.2 | 141–142 | Fundamental pair, nowhere-zero Wronskian, and linear independence are equivalent. | checked | [`complexFundamentalPair_iff`](../../LMLF/ODE/FundamentalPair.lean#L353), [`realFundamentalPair_iff`](../../LMLF/ODE/FundamentalPair.lean#L373), [`complexSecondOrderFundamentalPair_iff`](../../LMLF/ODE/FundamentalPair.lean#L485), [`realSecondOrderFundamentalPair_iff`](../../LMLF/ODE/FundamentalPair.lean#L510) |
 | T05-2.1 | 143–144 | Real-parameter solutions and specified mixed derivatives depend continuously on parameter and variable. | pending | unassigned |
 | T05-2.2 | 144–145 | Holomorphic parameter dependence of coefficients and initial data gives holomorphic dependence of the solution and its first two `x`-derivatives. | pending | unassigned |
 | T05-3.1 | 145–146 | Holomorphic coefficients on a simply connected domain give holomorphic solutions and a unique solution for prescribed initial data. | pending | unassigned |
@@ -60,13 +60,13 @@ The accepted first slice (Wronskian derivative, Abel identity, zero/nonzero dich
 
 | Label | Page | Short source paraphrase | Status | Future Lean link |
 |---|---:|---|---|---|
-| C05-01-01 | 139 | The first-order homogeneous scalar equation has the exponential-of-an-integral general solution (1.02). | pending | unassigned |
+| C05-01-01 | 139 | The first-order homogeneous scalar equation has the exponential-of-an-integral general solution (1.02). | pending | [approved natural-language blueprint](chapter05-first-order.md); Lean pending |
 | C05-01-02 | 139 | Under continuous coefficients, the second-order equation has infinitely many twice-continuously-differentiable solutions. | checked | [`infinite_realSecondOrderLinearSolutions`](../../LMLF/ODE/LinearSecondOrder.lean#L900), [`infinite_complexSecondOrderLinearSolutions`](../../LMLF/ODE/LinearSecondOrder.lean#L890) |
 | C05-01-03 | 139–141 | Prescribing `w(x₀)` and `w′(x₀)` selects a unique solution on the interval. | checked | [`exists_unique_realSecondOrderLinear`](../../LMLF/ODE/LinearSecondOrder.lean#L847), [`exists_unique_complexSecondOrderLinear`](../../LMLF/ODE/LinearSecondOrder.lean#L829), [`exists_unique_realLinearIVP`](../../LMLF/ODE/LinearSecondOrder.lean#L778), [`exists_unique_complexLinearIVP`](../../LMLF/ODE/LinearSecondOrder.lean#L761) |
-| C05-01-04 | 141 | A fundamental pair is a pair spanning every solution by constant linear combination; the canonical IVP pair is an example. | pending | unassigned |
-| C05-01-05 | 141–142 | Define the Wronskian of two solutions by `w₁ w₂′ − w₂ w₁′`. | pending | unassigned |
-| C05-01-06 | 142 | Define linear independence by vanishing of a constant linear combination only for zero coefficients. | pending | unassigned |
-| C05-01-07 | 141–142 | Fundamental-pair, nowhere-zero-Wronskian, and linear-independence conditions are equivalent in full. | pending | unassigned |
+| C05-01-04 | 141 | A fundamental pair is a pair spanning every solution by constant linear combination; the canonical IVP pair is an example. | checked | [`SpansSecondOrderLinearSolutionsOn`](../../LMLF/ODE/FundamentalPair.lean#L22), [`complexLinearSolution_eqOn_cramer`](../../LMLF/ODE/FundamentalPair.lean#L143), [`realLinearSolution_eqOn_cramer`](../../LMLF/ODE/FundamentalPair.lean#L163), [`exists_complexCanonicalFundamentalPair`](../../LMLF/ODE/FundamentalPair.lean#L535), [`exists_realCanonicalFundamentalPair`](../../LMLF/ODE/FundamentalPair.lean#L576) |
+| C05-01-05 | 141–142 | Define the Wronskian of two solutions by `w₁ w₂′ − w₂ w₁′`. | checked | [`wronskian`](../../LMLF/ODE/Wronskian.lean#L19), [`realWronskian`](../../LMLF/ODE/Wronskian.lean#L24) |
+| C05-01-06 | 142 | Define linear independence by vanishing of a constant linear combination only for zero coefficients. | checked | [`linearIndependent_restrict_pair_iff`](../../LMLF/ODE/FundamentalPair.lean#L31) |
+| C05-01-07 | 141–142 | Fundamental-pair, nowhere-zero-Wronskian, and linear-independence conditions are equivalent in full. | checked | [`complexFundamentalPair_iff`](../../LMLF/ODE/FundamentalPair.lean#L353), [`realFundamentalPair_iff`](../../LMLF/ODE/FundamentalPair.lean#L373), [`complexSecondOrderFundamentalPair_iff`](../../LMLF/ODE/FundamentalPair.lean#L485), [`realSecondOrderFundamentalPair_iff`](../../LMLF/ODE/FundamentalPair.lean#L510) |
 | C05-01-08 | 142 | Along two solutions of `w″+fw′+gw=0`, the Wronskian satisfies `W′ = −fW`. | checked | [`hasDerivAt_wronskian`](../../LMLF/ODE/Wronskian.lean#L38), [`hasDerivAt_realWronskian`](../../LMLF/ODE/Wronskian.lean#L154) |
 | C05-01-09 | 142 | Abel’s identity integrates the Wronskian equation to `W = C exp(−∫f)`. | checked | [`wronskian_eq_mul_cexp_integral`](../../LMLF/ODE/Wronskian.lean#L50), [`realWronskian_eq_mul_exp_integral`](../../LMLF/ODE/Wronskian.lean#L166) |
 | C05-01-10 | 142 | The Wronskian of two solutions either vanishes everywhere or nowhere in the interval interior. | checked | [`wronskian_zero_or_nowhere_zero`](../../LMLF/ODE/Wronskian.lean#L100), [`realWronskian_zero_or_nowhere_zero`](../../LMLF/ODE/Wronskian.lean#L215) |
