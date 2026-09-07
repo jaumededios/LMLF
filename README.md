@@ -8,54 +8,42 @@ specifications, and release gates.
 
 ## Current status
 
-The reviewed BOOTSTRAP-0 implementation at commit
-`515b742f7ad5472c17cfdf0fda7cbc83c5585da1` exposes foundational finite-error predicates and
-transport lemmas and transparent wrappers around Mathlib's Gamma function. Its external evidence
-records the exact accepted candidate; later planning commits do not alter those Lean declarations.
+The current programme targets source-statement coverage of Olver's book,
+starting with Chapter 5. See the [current direction](blueprint/current_direction.md),
+the [Chapter 5 checklist](blueprint/olver/chapter05.md), and the approved
+[Wronskian/Abel natural-language blueprint](blueprint/olver/chapter05-wronskians.md).
+The first accepted Lean slice checks exactly `C05-01-08`–`C05-01-11`: the
+Wronskian derivative, Abel identity, zero/nowhere-zero alternative, and
+constant-Wronskian corollary. Chapter 5 therefore stands at `4/108 = 3.70%`
+of the disclosed claim-component inventory, `0/13` whole numbered theorems,
+and `0/44` exercises. The full fundamental-pair equivalence in Theorem 1.2
+remains pending.
 
-The exact 1997 Olver PDF was previously inspected and hash-bound outside version control, and its
-mathematical transcriptions survive. The original uploaded bytes are not present in this restarted
-environment; any new source-image audit requires reattachment or recovery. This does not block the
-source-independent IMP/QL work. Theorem 3.1 on Watson's lemma has a mathematical transcription.
-The source-free IMP layer is now bounded by frozen card revision 7, the new
-metadata-only proof successor `NLP-IMP-001-R7`, and work-packet revision 1 in
-the separate closed `IMPROPER-0` manifest. The successor preserves the R6
-mathematical proof and equations while updating only lifecycle/binding/status
-metadata; canonical `blueprint/proofs/IMP-001.md` R6 remains unchanged
-historical mathematical input and the dependency recorded by the QL/OLV
-drafts. The frozen specification also binds the accepted eight-signature, three-module
-[IMP R6 signature proposal revision 2](blueprint/theorem_cards/IMP-001-signatures-R6.md),
-SHA-256 `0e220214233fec5f2f95608789b139900e7dfddef8a6b824b8d54bce37e74f2d`.
-Fresh exact-byte referees C and D approved only that signature proposal at
-`9e6e038871ac66f80534626d3deade0b27af6752`; the root negative-guard finding
-was resolved only for those bytes. The records are archived at private
-[`review-evidence` commit `d0d4fb4`](https://github.com/jaumededios/LMLF/commit/d0d4fb4895733b5de8396794e81cbe1a19657bdb).
-This is prerequisite-stage evidence, not final-packet quorum. `execution_ready`
-means only that the source-free specification is closed and fully bounded.
-The compiled-unreviewed prototype uses temporary axiomatic theorem stubs only;
-it is not production Lean.
-Fresh final pre-Lean reviews and an external envelope are still pending; no
-`lean_ready`, implementation, PDF-fidelity, or source-coverage claim follows.
-QL-001 and OLV-001 remain unchanged revision-4 planning drafts. The old IMP
-revision-3 signature artifact remains superseded evidence. The eight-target IMP surface preserves
-independent endpoint semantics and exposes only the primitive-equivalence, arbitrary-exception
-Bochner, continuous-linear-map, local-splitting, and Abel bridges needed to close the QL/OLV
-consumer route; its finite-piece Abel engine remains private. Bounded Airy,
-Euler--Maclaurin/Bernoulli, and Bessel source transcriptions are also present, together with
-unregistered Bernoulli identification drafts. Two independent source referees approved the exact
-revision-2 Bessel transcriptions, and all 119 proposed Bessel occurrences are now integrated
-one-for-one into the normalized inventory. Those rows remain `transcribed_unreconciled`: no Bessel
-notation or entity association, theorem card, manifest membership, coverage credit, reconciliation,
-or Lean work is authorized. The source ledgers are still far from a complete book inventory, and the
-project claims no quantitative Olver theorem or source coverage yet.
+Both bounded A/B candidates were mathematically correct and built
+successfully. The Sol candidate was selected because it had cleaner public
+hypotheses and helper boundaries, explicit `Or` and `Xor` forms of the global
+alternative, and zero warnings. The Luna candidate had two linter warnings and
+would have required additional API and cleanup work. This is a comparison of
+those two implementations, not a broader model ranking.
 
-Current planning classifications use version 3, which records the classical QL-001 mathematics as
-`non_novel`; frozen version-2 artifacts remain unchanged, and this metadata correction grants no
-review or implementation approval.
+The corrected 1997 A K Peters DjVu of Olver's *Asymptotics and Special
+Functions* has been restored, identified, and retained privately outside the
+repository. Public files contain only source citations and original
+mathematical exposition, not book scans, OCR, or page renderings.
 
-Historical review reports are preserved at the private repository's
-[`review-evidence` commit `5c8ec1b`](https://github.com/jaumededios/LMLF/commit/5c8ec1b301f656df35ffa8850e002639807995cd).
-Those records bind only their own recorded commits and do not determine the status of later drafts.
+At the current baseline commit `b8d2f731fcfd5cd0889d0732f13699eb94681c86`,
+the accepted Lean library already contains the improper-integral core and its
+regression consumers, together with the foundational finite-error predicates,
+transport lemmas, and transparent Mathlib Gamma wrappers. These are real Lean
+implementations rather than axiomatic placeholders. Their historical proof
+plans and signature records remain available, including
+[IMP-001](blueprint/proofs/IMP-001.md) and the
+[IMP R6 signature proposal](blueprint/theorem_cards/IMP-001-signatures-R6.md).
+
+Earlier DLMF-oriented, E0, schema, manifest, and authority plans are preserved
+as historical records, not as prerequisites for current mathematics. Relevant
+records are linked below. Older source transcriptions remain available for
+their own scopes but do not establish present Chapter 5 coverage.
 
 Planning and review artifacts are kept explicit:
 
@@ -71,6 +59,10 @@ Planning and review artifacts are kept explicit:
 - `LMLF/Basic.lean` provides narrow shared imports for foundational quantitative algebra.
 - `LMLF/Definitions/Gamma.lean` provides the four candidate wrappers around `Complex.Gamma`.
 - `LMLF/Quantitative/Basic.lean` provides the eight candidate finite-error declarations.
+- [`LMLF/ODE/Wronskian.lean`](LMLF/ODE/Wronskian.lean) provides the accepted real-variable
+  Wronskian and Abel API for complex- and real-valued solutions.
+- [`LMLFTest/ODE/Wronskian.lean`](LMLFTest/ODE/Wronskian.lean) provides the nonpublic
+  hypergeometric and associated-Legendre equation consumers.
 - `LMLF/Definitions.lean` and `LMLF/Results.lean` are the public semantic umbrellas.
 - `LMLF/Audit/Definitions.lean` is a separately built regression consumer and is not imported by
   `LMLF.lean`.
@@ -95,17 +87,25 @@ The `lean-toolchain` file selects the supported Lean release. The mathlib revisi
 
 ## Development workflow
 
-1. Start from a frozen, bounded work packet whose externally stored review envelope records `lean_ready: pass` under the [review workflow](review/README.md).
-2. Create a focused branch and add declarations in the narrowest suitable module.
-3. Import public semantic modules through the appropriate umbrella; keep audit modules separate.
-4. Run `lake build` and
-   `python3 scripts/validate_inventory.py --negative-tests` locally before
-   opening a pull request.
-5. Keep commits small enough that definitions, statements, and proofs can be reviewed together.
+1. Start from an identified source statement and record its exact hypotheses,
+   conventions, and coverage boundary.
+2. Reuse the pinned Mathlib where its verified declaration, domain, and
+   hypotheses match. Before attempting genuinely new mathematics in Lean,
+   write a complete natural-language proof and obtain multiple fresh,
+   independent reviews.
+3. Implement on a focused branch in the narrowest suitable module. Keep public
+   semantic imports flowing through the appropriate umbrella and keep
+   regression consumers outside the public dependency cone.
+4. Demonstrate reuse with real downstream consumers where natural, and map
+   accepted declarations back to the corresponding source-checklist rows.
+5. Run focused builds and regression tests locally, followed by a full
+   `lake build` before integration. Verification for this programme is local;
+   GitHub CI is not part of the acceptance path.
+6. Keep implementation and review units small enough that statements, proofs,
+   assumptions, and consumers can be assessed together.
 
-GitHub Actions is explicit manual-only via `workflow_dispatch`; it does not
-run on pushes or pull requests. Routine checks are the local `lake build` and
-`python3 scripts/validate_inventory.py --negative-tests` commands.
+The older E0/schema and authority workflows remain historical documentation;
+they do not gate current source mathematics.
 
 ## License
 
