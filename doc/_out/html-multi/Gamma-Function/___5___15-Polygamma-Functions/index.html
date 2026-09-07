@@ -1170,8 +1170,8 @@ fixed <code>0 &lt; δ ≤ π</code>.</p>
                 <a href="https://dlmf.nist.gov/5.15.E1">DLMF 5.15.1 ↗</a></div>
               <div class="lmlf-dlmf-entry__body">
                 <p>
-                  <code class="math display">\[\psi ^\prime (z)=\sum _{k=0}^{\infty }\frac{1}{(k+z)^2},\qquad
-z\ne 0,-1,-2,\ldots .\]</code></p>
+                  <code class="math display">\psi ^\prime (z)=\sum _{k=0}^{\infty }\frac{1}{(k+z)^2},\qquad
+z\ne 0,-1,-2,\ldots .</code></p>
                 <p>
                   For a complex argument away from the nonpositive integers, the trigamma value is
 the reciprocal-square series beginning at <code>k=0</code>.  The Lean statement uses
@@ -1184,7 +1184,7 @@ the reciprocal-square series beginning at <code>k=0</code>.  The Lean statement 
                 <a href="https://dlmf.nist.gov/5.15.E2">DLMF 5.15.2 ↗</a></div>
               <div class="lmlf-dlmf-entry__body">
                 <p>
-                  <code class="math display">\[\psi ^{(n)}(1)=(-1)^{n+1}n!\,\zeta (n+1),\qquad n=1,2,3,\ldots .\]</code></p>
+                  <code class="math display">\psi ^{(n)}(1)=(-1)^{n+1}n!\,\zeta (n+1),\qquad n=1,2,3,\ldots .</code></p>
                 <p>
                   At the unit argument, every positive-order polygamma is a signed factorial
 multiple of the Riemann zeta value one order higher.  The natural-number
@@ -1198,7 +1198,7 @@ parameter is constrained by <code>1 ≤ n</code>, exactly expressing the source 
                 <a href="https://dlmf.nist.gov/5.15.E3">DLMF 5.15.3 ↗</a></div>
               <div class="lmlf-dlmf-entry__body">
                 <p>
-                  <code class="math display">\[\psi ^{(n)}\!\left(\frac12\right)=(-1)^{n+1}n!\,(2^{n+1}-1)\zeta (n+1),\qquad n=1,2,3,\ldots .\]</code></p>
+                  <code class="math display">\psi ^{(n)}\!\left(\frac12\right)=(-1)^{n+1}n!\,(2^{n+1}-1)\zeta (n+1),\qquad n=1,2,3,\ldots .</code></p>
                 <p>
                   At one half, the same signed factorial and zeta factor is multiplied by the
 odd-part factor <code>2ⁿ⁺¹−1</code>.  The Lean expression keeps the value complex, as does
@@ -1213,7 +1213,7 @@ the surrounding polygamma vocabulary.</p>
                 <a href="https://dlmf.nist.gov/5.15.E4">DLMF 5.15.4 ↗</a></div>
               <div class="lmlf-dlmf-entry__body">
                 <p>
-                  <code class="math display">\[\psi ^\prime \!\left(n-\frac12\right)=\frac12\pi ^2-4\sum _{k=1}^{n-1}\frac{1}{(2k-1)^2},\qquad n=1,2,3,\ldots .\]</code></p>
+                  <code class="math display">\psi ^\prime \!\left(n-\frac12\right)=\frac12\pi ^2-4\sum _{k=1}^{n-1}\frac{1}{(2k-1)^2},\qquad n=1,2,3,\ldots .</code></p>
                 <p>
                   The trigamma value at a positive half-integer is a finite correction to
 <code>π²/2</code>: the correction contains the odd reciprocal squares through <code>2n−3</code>.
@@ -1228,7 +1228,7 @@ For <code>n=1</code> the indexed sum is empty, as prescribed by the source limit
                 <a href="https://dlmf.nist.gov/5.15.E5">DLMF 5.15.5 ↗</a></div>
               <div class="lmlf-dlmf-entry__body">
                 <p>
-                  <code class="math display">\[\psi ^{(n)}(z+1)=\psi ^{(n)}(z)+(-1)^n n!z^{-n-1},\qquad n=1,2,3,\ldots .\]</code></p>
+                  <code class="math display">\psi ^{(n)}(z+1)=\psi ^{(n)}(z)+(-1)^n n!z^{-n-1},\qquad n=1,2,3,\ldots .</code></p>
                 <p>
                   Shifting the argument by one adds the signed reciprocal power shown in the
 source.  The displayed domain excludes every nonpositive integer, so both the
@@ -1243,7 +1243,7 @@ polygamma values and the reciprocal power are evaluated away from their poles.</
                 <a href="https://dlmf.nist.gov/5.15.E6">DLMF 5.15.6 ↗</a></div>
               <div class="lmlf-dlmf-entry__body">
                 <p>
-                  <code class="math display">\[\psi ^{(n)}(1-z)+(-1)^{n-1}\psi ^{(n)}(z)=(-1)^n\pi \,\frac{d^n}{dz^n}\cot (\pi z),\qquad n=1,2,3,\ldots .\]</code></p>
+                  <code class="math display">\psi ^{(n)}(1-z)+(-1)^{n-1}\psi ^{(n)}(z)=(-1)^n\pi \,\frac{d^n}{dz^n}\cot (\pi z),\qquad n=1,2,3,\ldots .</code></p>
                 <p>
                   Reflection pairs the values at <code>z</code> and <code>1−z</code>.  The right side is the <code>n</code>-th
 derivative, with respect to <code>z</code>, of <code>cot(πz)</code>, multiplied by the source factor
@@ -1259,7 +1259,7 @@ corresponding polygamma terms.</p>
                 <a href="https://dlmf.nist.gov/5.15.E7">DLMF 5.15.7 ↗</a></div>
               <div class="lmlf-dlmf-entry__body">
                 <p>
-                  <code class="math display">\[\psi ^{(n)}(mz)=\frac{1}{m^{n+1}}\sum _{k=0}^{m-1}\psi ^{(n)}\!\left(z+\frac{k}{m}\right),\qquad m,n=1,2,3,\ldots .\]</code></p>
+                  <code class="math display">\psi ^{(n)}(mz)=\frac{1}{m^{n+1}}\sum _{k=0}^{m-1}\psi ^{(n)}\!\left(z+\frac{k}{m}\right),\qquad m,n=1,2,3,\ldots .</code></p>
                 <p>
                   The multiplication formula averages the <code>m</code> translated residue classes, with
 the factor <code>m⁻⁽ⁿ⁺¹⁾</code>.  Requiring that <code>mz</code> avoid the nonpositive integers also
@@ -1276,7 +1276,7 @@ translated pole equation by <code>m</code> produces a pole of the left-hand argu
                 <a href="https://dlmf.nist.gov/5.15.E8">DLMF 5.15.8 ↗</a></div>
               <div class="lmlf-dlmf-entry__body">
                 <p>
-                  <code class="math display">\[\psi ^\prime (z)\sim \frac1z+\frac{1}{2z^2}+\sum _{k=1}^{\infty }\frac{B_{2k}}{z^{2k+1}},\qquad z\to\infty ,\quad |\operatorname{ph}z|\leq\pi-\delta .\]</code></p>
+                  <code class="math display">\psi ^\prime (z)\sim \frac1z+\frac{1}{2z^2}+\sum _{k=1}^{\infty }\frac{B_{2k}}{z^{2k+1}},\qquad z\to\infty ,\quad |\operatorname{ph}z|\leq\pi-\delta .</code></p>
                 <p>
                   This is a Poincaré expansion in the source sector.  The Lean declaration
 specializes to <code>x → +∞</code> on the positive real axis, where <code>ph x = 0</code>; its
@@ -1291,7 +1291,7 @@ the source index <code>j=1</code>.</p>
                 <a href="https://dlmf.nist.gov/5.15.E9">DLMF 5.15.9 ↗</a></div>
               <div class="lmlf-dlmf-entry__body">
                 <p>
-                  <code class="math display">\[\psi ^{(n)}(z)\sim (-1)^{n-1}\!\left(\frac{(n-1)!}{z^n}+\frac{n!}{2z^{n+1}}+\sum _{k=1}^{\infty }\frac{(2k+n-1)!}{(2k)!}\frac{B_{2k}}{z^{2k+n}}\right),\quad z\to\infty ,\quad |\operatorname{ph}z|\leq\pi-\delta .\]</code></p>
+                  <code class="math display">\psi ^{(n)}(z)\sim (-1)^{n-1}\!\left(\frac{(n-1)!}{z^n}+\frac{n!}{2z^{n+1}}+\sum _{k=1}^{\infty }\frac{(2k+n-1)!}{(2k)!}\frac{B_{2k}}{z^{2k+n}}\right),\quad z\to\infty ,\quad |\operatorname{ph}z|\leq\pi-\delta .</code></p>
                 <p>
                   For every positive order <code>n</code>, the same sectorial convention gives the general
 polygamma expansion.  On the positive real axis the Lean term function records

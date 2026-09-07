@@ -30,7 +30,7 @@ number := false
 %%%
 
 ::::dlmfEntry "4.4.1" "https://dlmf.nist.gov/4.4.E1"
-$$`\[\ln 1=0.\]`
+$$`\ln 1=0.`
 
 The principal logarithm at one is zero.
 
@@ -42,7 +42,7 @@ theorem dlmf_4_4_1 : Complex.log 1 = 0
 ::::
 
 ::::dlmfEntry "4.4.2" "https://dlmf.nist.gov/4.4.E2"
-$$`\[\ln(-1\mathbin{\pm}i0)=\mathbin{\pm}\pi i.\]`
+$$`\ln(-1\mathbin{\pm}i0)=\mathbin{\pm}\pi i.`
 
 Approaching the negative real axis from above or below gives the two boundary
 values of the principal logarithm, with arguments `+π` and `−π`.
@@ -59,7 +59,7 @@ theorem dlmf_4_4_2 :
 ::::
 
 ::::dlmfEntry "4.4.3" "https://dlmf.nist.gov/4.4.E3"
-$$`\[\ln(\mathord{\pm}i)=\mathord{\pm}\tfrac12\pi i.\]`
+$$`\ln(\mathord{\pm}i)=\mathord{\pm}\tfrac12\pi i.`
 
 The principal logarithm of the positive and negative imaginary units has
 argument `±π/2`.
@@ -79,7 +79,7 @@ number := false
 %%%
 
 ::::dlmfEntry "4.4.4" "https://dlmf.nist.gov/4.4.E4"
-$$`\[e^0=1.\]`
+$$`e^0=1.`
 
 The exponential at zero is one.
 
@@ -91,7 +91,7 @@ theorem dlmf_4_4_4 : Complex.exp 0 = 1
 ::::
 
 ::::dlmfEntry "4.4.5" "https://dlmf.nist.gov/4.4.E5"
-$$`\[e^{\mathord{\pm}\pi i}=-1.\]`
+$$`e^{\mathord{\pm}\pi i}=-1.`
 
 Both half-turns on the unit circle map to `−1`.
 
@@ -105,7 +105,7 @@ theorem dlmf_4_4_5 :
 ::::
 
 ::::dlmfEntry "4.4.6" "https://dlmf.nist.gov/4.4.E6"
-$$`\[e^{\mathord{\pm}\pi i/2}=\mathord{\pm}i.\]`
+$$`e^{\mathord{\pm}\pi i/2}=\mathord{\pm}i.`
 
 The quarter-turn values are the two imaginary units.
 
@@ -119,7 +119,7 @@ theorem dlmf_4_4_6 :
 ::::
 
 ::::dlmfEntry "4.4.7" "https://dlmf.nist.gov/4.4.E7"
-$$`\[e^{2\pi k i}=1,\qquad k\in\mathbb Z.\]`
+$$`e^{2\pi k i}=1,\qquad k\in\mathbb Z.`
 
 Every integral number of full turns returns to one.
 
@@ -131,7 +131,7 @@ theorem dlmf_4_4_7 (k : ℤ) : Complex.exp (2 * Real.pi * k * Complex.I) = 1
 ::::
 
 ::::dlmfEntry "4.4.8" "https://dlmf.nist.gov/4.4.E8"
-$$`\[e^{\mathord{\pm}\pi i/3}=\tfrac12\mathbin{\pm}\tfrac12\sqrt3 i.\]`
+$$`e^{\mathord{\pm}\pi i/3}=\tfrac12\mathbin{\pm}\tfrac12\sqrt3 i.`
 
 The sixth-turn values have real part `1/2` and imaginary part `±√3/2`.
 
@@ -145,7 +145,7 @@ theorem dlmf_4_4_8 :
 ::::
 
 ::::dlmfEntry "4.4.9" "https://dlmf.nist.gov/4.4.E9"
-$$`\[e^{\mathord{\pm}2\pi i/3}=-\tfrac12\mathbin{\pm}\tfrac12\sqrt3 i.\]`
+$$`e^{\mathord{\pm}2\pi i/3}=-\tfrac12\mathbin{\pm}\tfrac12\sqrt3 i.`
 
 The third-turn values have real part `−1/2` and imaginary part `±√3/2`.
 
@@ -159,7 +159,7 @@ theorem dlmf_4_4_9 :
 ::::
 
 ::::dlmfEntry "4.4.10" "https://dlmf.nist.gov/4.4.E10"
-$$`\[e^{\mathord{\pm}\pi i/4}=\tfrac1{\sqrt2}\mathbin{\pm}\tfrac1{\sqrt2}i.\]`
+$$`e^{\mathord{\pm}\pi i/4}=\tfrac1{\sqrt2}\mathbin{\pm}\tfrac1{\sqrt2}i.`
 
 The eighth-turn values have equal real and imaginary magnitudes.
 
@@ -173,7 +173,7 @@ theorem dlmf_4_4_10 :
 ::::
 
 ::::dlmfEntry "4.4.11" "https://dlmf.nist.gov/4.4.E11"
-$$`\[e^{\mathord{\pm}3\pi i/4}=-\tfrac1{\sqrt2}\mathbin{\pm}\tfrac1{\sqrt2}i.\]`
+$$`e^{\mathord{\pm}3\pi i/4}=-\tfrac1{\sqrt2}\mathbin{\pm}\tfrac1{\sqrt2}i.`
 
 At three eighths of a turn, the real part is negative and the imaginary part
 has sign matching the direction of rotation.
@@ -188,7 +188,7 @@ theorem dlmf_4_4_11 :
 ::::
 
 ::::dlmfEntry "4.4.12" "https://dlmf.nist.gov/4.4.E12"
-$$`\[i^{\mathord{\pm}i}=e^{\mp\pi/2}.\]`
+$$`i^{\mathord{\pm}i}=e^{\mp\pi/2}.`
 
 Using the principal complex power, the two imaginary-unit bases give the
 displayed real exponentials.
@@ -208,7 +208,7 @@ number := false
 %%%
 
 ::::dlmfEntry "4.4.13" "https://dlmf.nist.gov/4.4.E13"
-$$`\[\lim_{x\to\infty}x^{-a}\ln x=0,\qquad \Re a>0.\]`
+$$`\lim_{x\to\infty}x^{-a}\ln x=0,\qquad \Re a>0.`
 
 For positive real `x`, every complex power with positive real exponent part
 dominates the logarithm at infinity.
@@ -222,7 +222,7 @@ theorem dlmf_4_4_13 {a : ℂ} (ha : 0 < a.re) :
 ::::
 
 ::::dlmfEntry "4.4.14" "https://dlmf.nist.gov/4.4.E14"
-$$`\[\lim_{x\to0^+}x^a\ln x=0,\qquad \Re a>0.\]`
+$$`\lim_{x\to0^+}x^a\ln x=0,\qquad \Re a>0.`
 
 At the positive endpoint, a positive-real-part power suppresses the logarithmic
 singularity.
@@ -236,7 +236,7 @@ theorem dlmf_4_4_14 {a : ℂ} (ha : 0 < a.re) :
 ::::
 
 ::::dlmfEntry "4.4.15" "https://dlmf.nist.gov/4.4.E15"
-$$`\[\lim_{x\to\infty}x^ae^{-x}=0.\]`
+$$`\lim_{x\to\infty}x^ae^{-x}=0.`
 
 Exponential decay dominates every fixed complex power on the positive real
 axis.
@@ -250,7 +250,7 @@ theorem dlmf_4_4_15 {a : ℂ} :
 ::::
 
 ::::dlmfEntry "4.4.16" "https://dlmf.nist.gov/4.4.E16"
-$$`\[\lim_{z\to\infty}z^ae^{-z}=0,\qquad |\operatorname{ph}z|\le\tfrac12\pi-\delta.\]`
+$$`\lim_{z\to\infty}z^ae^{-z}=0,\qquad |\operatorname{ph}z|\le\tfrac12\pi-\delta.`
 
 In a closed sector strictly inside the right half-plane, the exponential factor
 dominates the complex power. The declaration fixes one admissible boundary ray,
@@ -267,7 +267,7 @@ theorem dlmf_4_4_16 {a : ℂ} {δ : ℝ} (hδ₀ : 0 < δ) (hδ₁ : δ ≤ Real
 ::::
 
 ::::dlmfEntry "4.4.17" "https://dlmf.nist.gov/4.4.E17"
-$$`\[\lim_{n\to\infty}\left(1+\frac zn\right)^n=e^z.\]`
+$$`\lim_{n\to\infty}\left(1+\frac zn\right)^n=e^z.`
 
 For fixed complex `z`, the binomial sequence converges to the complex
 exponential.
@@ -281,7 +281,7 @@ theorem dlmf_4_4_17 (z : ℂ) :
 ::::
 
 ::::dlmfEntry "4.4.18" "https://dlmf.nist.gov/4.4.E18"
-$$`\[\lim_{n\to\infty}\left(1+\frac1n\right)^n=e.\]`
+$$`\lim_{n\to\infty}\left(1+\frac1n\right)^n=e.`
 
 The classical real sequence gives Euler's number.
 
@@ -294,7 +294,7 @@ theorem dlmf_4_4_18 :
 ::::
 
 ::::dlmfEntry "4.4.19" "https://dlmf.nist.gov/4.4.E19"
-$$`\[\lim_{n\to\infty}\left(\sum_{k=1}^n\frac1k-\ln n\right)=\gamma.\]`
+$$`\lim_{n\to\infty}\left(\sum_{k=1}^n\frac1k-\ln n\right)=\gamma.`
 
 The harmonic numbers minus the logarithm converge to the Euler–Mascheroni
 constant.

@@ -29,7 +29,7 @@ second display is absolutely convergent, so its default `HasSum` records the
 same value independently of the ordering.
 
 ::::dlmfEntry "5.16.1" "https://dlmf.nist.gov/5.16.E1"
-$$`\[\sum_{k=1}^{\infty}(-1)^k\psi'(k)=-\frac{\pi^2}{8}.\]`
+$$`\sum_{k=1}^{\infty}(-1)^k\psi'(k)=-\frac{\pi^2}{8}.`
 
 The alternating trigamma values at the positive integers have sum `−π²/8`.
 
@@ -45,7 +45,7 @@ theorem dlmf_5_16_1 :
 ::::
 
 ::::dlmfEntry "5.16.2" "https://dlmf.nist.gov/5.16.E2"
-$$`\[\sum_{k=1}^{\infty}\frac{1}{k}\psi'(k+1)=\zeta(3)=-\frac12\psi''(1).\]`
+$$`\sum_{k=1}^{\infty}\frac{1}{k}\psi'(k+1)=\zeta(3)=-\frac12\psi''(1).`
 
 Weighting the trigamma value at `k+1` by `1/k` gives the Riemann zeta value
 `ζ(3)`, which is also `−ψ''(1)/2`.

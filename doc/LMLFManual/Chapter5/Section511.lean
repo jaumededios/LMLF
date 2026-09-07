@@ -75,11 +75,11 @@ uses the general logarithm on the left and the principal logarithm in the
 explicit terms.
 
 ::::dlmfEntry "5.11.1" "https://dlmf.nist.gov/5.11.E1"
-$$`\[
+$$`
 \operatorname{Ln}\Gamma(z)\sim
 \left(z-\frac12\right)\ln z-z+\frac12\ln(2\pi)
 +\sum_{k=1}^{\infty}\frac{B_{2k}}{2k(2k-1)z^{2k-1}}.
-\]`
+`
 
 On the positive real axis, `stirlingLogMain` is the elementary part and
 `stirlingLogTerm` supplies the Bernoulli terms. Chapter 2's Poincaré relation
@@ -127,9 +127,9 @@ theorem dlmf_5_11_1_remainder_bound (n : ℕ) {x : ℝ} (hx : 0 < x) :
 ::::
 
 ::::dlmfEntry "5.11.2" "https://dlmf.nist.gov/5.11.E2"
-$$`\[
+$$`
 \psi(z)\sim\ln z-\frac{1}{2z}-\sum_{k=1}^{\infty}\frac{B_{2k}}{2kz^{2k}}.
-\]`
+`
 
 The statement below restricts `ψ` to the real axis through the real part of
 Mathlib's complex digamma function. The term indexed zero is `-1/(2x)` and
@@ -175,11 +175,11 @@ theorem dlmf_5_11_2_remainder_bound (n : ℕ) {x : ℝ} (hx : 0 < x) :
 
 
 ::::dlmfEntry "5.11.3" "https://dlmf.nist.gov/5.11.E3"
-$$`\[
+$$`
 \Gamma(z)=e^{-z}z^z\left(\frac{2\pi}{z}\right)^{1/2}\Gamma^*(z)
 \sim e^{-z}z^z\left(\frac{2\pi}{z}\right)^{1/2}
 \sum_{k=0}^{\infty}\frac{g_k}{z^k}.
-\]`
+`
 
 For positive real `x`, `scaledGammaReal` is `Γ*(x)` and its formal series is
 represented by `scaledGammaTerm`.
@@ -215,11 +215,11 @@ theorem dlmf_5_11_3 :
 ::::
 
 ::::dlmfEntry "5.11.4" "https://dlmf.nist.gov/5.11.E4"
-$$`\[
+$$`
 g_0=1,\quad g_1=\frac1{12},\quad g_2=\frac1{288},\quad
 g_3=-\frac{139}{51840},\quad g_4=-\frac{571}{2488320},\quad
 g_5=\frac{163879}{209018880},\quad g_6=\frac{5246819}{75246796800}.
-\]`
+`
 
 The seven displayed coefficients are recorded exactly as real equalities.
 
@@ -236,7 +236,7 @@ theorem dlmf_5_11_4 :
 ::::
 
 ::::dlmfEntry "5.11.5" "https://dlmf.nist.gov/5.11.E5"
-$$`\[g_k=\sqrt{2}\left(\frac12\right)_k a_{2k}.\]`
+$$`g_k=\sqrt{2}\left(\frac12\right)_k a_{2k}.`
 
 Here `(1/2)_k` is the finite rising factorial, exposed as `risingFactorial`.
 
@@ -252,10 +252,10 @@ theorem dlmf_5_11_5 (k : ℕ) :
 ::::
 
 ::::dlmfEntry "5.11.6" "https://dlmf.nist.gov/5.11.E6"
-$$`\[
+$$`
 a_0a_k+\frac12a_1a_{k-1}+\cdots+\frac1{k+1}a_ka_0=\frac1k a_{k-1},
 \qquad k\ge1,
-\]`
+`
 
 The displayed recurrence is written as a finite sum, with the initial value
 `a₀=√2/2` stated separately.
@@ -272,10 +272,10 @@ theorem dlmf_5_11_6_initial : aCoeff 0 = Real.sqrt 2 / 2
 ::::
 
 ::::dlmfEntry "5.11.7" "https://dlmf.nist.gov/5.11.E7"
-$$`\[
+$$`
 \Gamma(az+b)\sim\sqrt{2\pi}\,e^{-az}(az)^{az+b-1/2},
 \qquad a>0,
-\]`
+`
 
 For fixed real `a>0` and real `b`, the positive-real specialization uses
 Mathlib's asymptotic-equivalence relation along `atTop`.
@@ -289,11 +289,11 @@ theorem dlmf_5_11_7 {a b : ℝ} (ha : 0 < a) :
 ::::
 
 ::::dlmfEntry "5.11.8" "https://dlmf.nist.gov/5.11.E8"
-$$`\[
+$$`
 \operatorname{Ln}\Gamma(z+h)\sim\left(z+h-\frac12\right)\ln z-z
 +\frac12\ln(2\pi)+\sum_{k=2}^{\infty}
 \frac{(-1)^kB_k(h)}{k(k-1)z^{k-1}}.
-\]`
+`
 
 With fixed real `h` and positive real `x`, `shiftedLogGammaMain` and
 `shiftedLogGammaTerm` give the corresponding specialization. The source now
@@ -319,9 +319,9 @@ theorem dlmf_5_11_8 (h : ℝ) :
 ::::
 
 ::::dlmfEntry "5.11.9" "https://dlmf.nist.gov/5.11.E9"
-$$`\[
+$$`
 |\Gamma(x+iy)|\sim\sqrt{2\pi}|y|^{x-1/2}e^{-\pi|y|/2},
-\]`
+`
 
 The source asserts this uniformly for bounded real `x`. The predicate
 `UniformAsymptoticOnBounded` expresses that assertion as uniform convergence
@@ -450,11 +450,11 @@ The first bound uses `sec^(2n)(ph z/2)` for E1 and the second uses the
 different exponent `sec^(2n+1)(ph z/2)` for E2.
 
 ::::dlmfEntry "5.11.10" "https://dlmf.nist.gov/5.11.E10"
-$$`\[
+$$`
 \Gamma(z)=e^{-z}z^z\left(\frac{2\pi}{z}\right)^{1/2}
 \left(\sum_{k=0}^{K-1}\frac{g_k}{z^k}+R_K(z)\right),
 \qquad K=1,2,3,\ldots.
-\]`
+`
 
 The finite expansion inherits the preceding principal-branch convention and
 the sector `|arg z| ≤ π − δ`, with `δ > 0` and `z ≠ 0`. The finite sum and
@@ -486,12 +486,12 @@ theorem dlmf_5_11_10 {δ : ℝ} (hδ : 0 < δ) {K : ℕ} (hK : 1 ≤ K)
 ::::
 
 ::::dlmfEntry "5.11.11" "https://dlmf.nist.gov/5.11.E11"
-$$`\[
+$$`
 |R_K(z)|\le
 \frac{(1+\zeta(K))\Gamma(K)}{2(2\pi)^{K+1}|z|^K}
 \left(1+\min\left(\sec(\operatorname{ph}z),2K^{1/2}\right)\right),
 \quad |\operatorname{ph}z|\le\frac\pi2.
-\]`
+`
 
 The Lean bound uses the norm of complex quantities. Its `cappedSecant` agrees
 with `min (sec (arg z), 2√K)` in the open sector and takes the cap value when
@@ -553,9 +553,9 @@ noncomputable def generalizedBernoulli : ℝ → ℝ → ℕ → ℝ :=
 ```
 
 ::::dlmfEntry "5.11.12" "https://dlmf.nist.gov/5.11.E12"
-$$`\[
+$$`
 \frac{\Gamma(z+a)}{\Gamma(z+b)}\sim z^{a-b}.
-\]`
+`
 
 ```anchor dlmf_5_11_12 (module := LMLF.Blueprint.Gamma.Section511) -showProofStates
 theorem dlmf_5_11_12 (a b : ℝ) :
@@ -565,10 +565,10 @@ theorem dlmf_5_11_12 (a b : ℝ) :
 ::::
 
 ::::dlmfEntry "5.11.13" "https://dlmf.nist.gov/5.11.E13"
-$$`\[
+$$`
 \frac{\Gamma(z+a)}{\Gamma(z+b)}\sim z^{a-b}
 \sum_{k=0}^{\infty}\frac{G_k(a,b)}{z^k}.
-\]`
+`
 
 ```anchor ratioCoeff (module := LMLF.Blueprint.Gamma.Section511) -showProofStates
 noncomputable def ratioCoeff (a b : ℝ) (k : ℕ) : ℝ :=
@@ -588,11 +588,11 @@ theorem dlmf_5_11_13 (a b : ℝ) :
 ::::
 
 ::::dlmfEntry "5.11.14" "https://dlmf.nist.gov/5.11.E14"
-$$`\[
+$$`
 \frac{\Gamma(z+a)}{\Gamma(z+b)}\sim
 \left(z+\frac{a+b-1}{2}\right)^{a-b}
 \sum_{k=0}^{\infty}\frac{H_k(a,b)}{(z+(a+b-1)/2)^{2k}}.
-\]`
+`
 
 ```anchor centeredRatioCoeff (module := LMLF.Blueprint.Gamma.Section511) -showProofStates
 noncomputable def centeredRatioCoeff (a b : ℝ) (k : ℕ) : ℝ :=
@@ -613,10 +613,10 @@ theorem dlmf_5_11_14 (a b : ℝ) :
 ::::
 
 ::::dlmfEntry "5.11.15" "https://dlmf.nist.gov/5.11.E15"
-$$`\[
+$$`
 G_0=1,\quad G_1=\frac12(a-b)(a+b-1),\quad
 G_2=\frac1{12}{a-b\choose2}\left(3(a+b-1)^2-(a-b+1)\right).
-\]`
+`
 
 The generalized binomial coefficient is written as a finite falling product.
 
@@ -636,10 +636,10 @@ theorem dlmf_5_11_15 (a b : ℝ) :
 ::::
 
 ::::dlmfEntry "5.11.16" "https://dlmf.nist.gov/5.11.E16"
-$$`\[
+$$`
 H_0=1,\quad H_1=-\frac1{12}{a-b\choose2}(a-b+1),\quad
 H_2=\frac1{240}{a-b\choose4}\left(2(a-b+1)+5(a-b+1)^2\right).
-\]`
+`
 
 ```anchor dlmf_5_11_16 (module := LMLF.Blueprint.Gamma.Section511) -showProofStates
 theorem dlmf_5_11_16 (a b : ℝ) :
@@ -653,9 +653,9 @@ theorem dlmf_5_11_16 (a b : ℝ) :
 ::::
 
 ::::dlmfEntry "5.11.17" "https://dlmf.nist.gov/5.11.E17"
-$$`\[
+$$`
 G_k(a,b)={a-b\choose k}B_k^{(a-b+1)}(a).
-\]`
+`
 
 ```anchor dlmf_5_11_17 (module := LMLF.Blueprint.Gamma.Section511) -showProofStates
 theorem dlmf_5_11_17 (a b : ℝ) (k : ℕ) :
@@ -665,9 +665,9 @@ theorem dlmf_5_11_17 (a b : ℝ) (k : ℕ) :
 ::::
 
 ::::dlmfEntry "5.11.18" "https://dlmf.nist.gov/5.11.E18"
-$$`\[
+$$`
 H_k(a,b)={a-b\choose 2k}B_{2k}^{(a-b+1)}\left(\frac{a-b+1}{2}\right).
-\]`
+`
 
 ```anchor dlmf_5_11_18 (module := LMLF.Blueprint.Gamma.Section511) -showProofStates
 theorem dlmf_5_11_18 (a b : ℝ) (k : ℕ) :
@@ -677,11 +677,11 @@ theorem dlmf_5_11_18 (a b : ℝ) (k : ℕ) :
 ::::
 
 ::::dlmfEntry "5.11.19" "https://dlmf.nist.gov/5.11.E19"
-$$`\[
+$$`
 \frac{\Gamma(z+a)\Gamma(z+b)}{\Gamma(z+c)}\sim
 \sum_{k=0}^{\infty}(-1)^k\frac{(c-a)_k(c-b)_k}{k!}
 \Gamma(a+b-c+z-k).
-\]`
+`
 
 On positive real `z`, the summand is exposed as `gammaProductTerm`, using the
 same finite rising factorial as 5.11.5.

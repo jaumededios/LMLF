@@ -64,7 +64,7 @@ number := false
 %%%
 
 ::::dlmfEntry "4.6.1" "https://dlmf.nist.gov/4.6.E1"
-$$`\[ \ln(1+z)=z-\frac{z^2}{2}+\frac{z^3}{3}-\cdots,\qquad |z|\leq1,\quad z\ne-1.\]`
+$$` \ln(1+z)=z-\frac{z^2}{2}+\frac{z^3}{3}-\cdots,\qquad |z|\leq1,\quad z\ne-1.`
 
 This is the alternating logarithm series at `1`.  It converges throughout the
 closed unit disk except at the singular endpoint `z = -1`.
@@ -79,7 +79,7 @@ theorem dlmf_4_6_1 {z : ℂ} (hz : ‖z‖ ≤ 1) (hz1 : z ≠ -1) :
 ::::
 
 ::::dlmfEntry "4.6.2" "https://dlmf.nist.gov/4.6.E2"
-$$`\[ \ln z=\frac{z-1}{z}+\frac12\left(\frac{z-1}{z}\right)^2+\frac13\left(\frac{z-1}{z}\right)^3+\cdots,\qquad \mathop{\rm Re}z\geq\frac12.\]`
+$$` \ln z=\frac{z-1}{z}+\frac12\left(\frac{z-1}{z}\right)^2+\frac13\left(\frac{z-1}{z}\right)^3+\cdots,\qquad \mathop{\rm Re}z\geq\frac12.`
 
 Writing `w = (z−1)/z`, this is the geometric logarithm series
 `Σₙ₌₁^∞ wⁿ/n`.  The half-plane `Re z ≥ 1/2` keeps `w` in the closed unit
@@ -95,7 +95,7 @@ theorem dlmf_4_6_2 {z : ℂ} (hz : 1 / 2 ≤ z.re) :
 ::::
 
 ::::dlmfEntry "4.6.3" "https://dlmf.nist.gov/4.6.E3"
-$$`\[ \ln z=(z-1)-\frac12(z-1)^2+\frac13(z-1)^3-\cdots,\qquad |z-1|\leq1,\quad z\ne0.\]`
+$$` \ln z=(z-1)-\frac12(z-1)^2+\frac13(z-1)^3-\cdots,\qquad |z-1|\leq1,\quad z\ne0.`
 
 This is the alternating expansion about `z = 1`.  Its closed-disk domain
 excludes `z = 0`, the logarithmic singularity at the opposite endpoint.
@@ -110,7 +110,7 @@ theorem dlmf_4_6_3 {z : ℂ} (hz : ‖z - 1‖ ≤ 1) (hz0 : z ≠ 0) :
 ::::
 
 ::::dlmfEntry "4.6.4" "https://dlmf.nist.gov/4.6.E4"
-$$`\[ \ln z=2\left(\frac{z-1}{z+1}+\frac13\left(\frac{z-1}{z+1}\right)^3+\frac15\left(\frac{z-1}{z+1}\right)^5+\cdots\right),\qquad \mathop{\rm Re}z\geq0,\quad z\ne0.\]`
+$$` \ln z=2\left(\frac{z-1}{z+1}+\frac13\left(\frac{z-1}{z+1}\right)^3+\frac15\left(\frac{z-1}{z+1}\right)^5+\cdots\right),\qquad \mathop{\rm Re}z\geq0,\quad z\ne0.`
 
 The odd-power expansion uses `w = (z−1)/(z+1)` and converges in the right
 half-plane, including its boundary away from the origin.
@@ -125,7 +125,7 @@ theorem dlmf_4_6_4 {z : ℂ} (hz : 0 ≤ z.re) (hz0 : z ≠ 0) :
 ::::
 
 ::::dlmfEntry "4.6.5" "https://dlmf.nist.gov/4.6.E5"
-$$`\[ \ln\left(\frac{z+1}{z-1}\right)=2\left(\frac1z+\frac1{3z^3}+\frac1{5z^5}+\cdots\right),\qquad |z|\geq1,\quad z\ne\pm1.\]`
+$$` \ln\left(\frac{z+1}{z-1}\right)=2\left(\frac1z+\frac1{3z^3}+\frac1{5z^5}+\cdots\right),\qquad |z|\geq1,\quad z\ne\pm1.`
 
 This is the inverse odd-power form of the preceding symmetric expansion.  The
 closed exterior disk excludes the two points where the displayed quotient has
@@ -141,7 +141,7 @@ theorem dlmf_4_6_5 {z : ℂ} (hz : 1 ≤ ‖z‖) (hz1 : z ≠ 1) (hzneg1 : z �
 ::::
 
 ::::dlmfEntry "4.6.6" "https://dlmf.nist.gov/4.6.E6"
-$$`\[ \ln(z+a)=\ln a+2\left(\frac{z}{2a+z}+\frac13\left(\frac{z}{2a+z}\right)^3+\cdots\right),\quad a>0,\quad \mathop{\rm Re}z\geq-a,\quad z\ne-a.\]`
+$$` \ln(z+a)=\ln a+2\left(\frac{z}{2a+z}+\frac13\left(\frac{z}{2a+z}\right)^3+\cdots\right),\quad a>0,\quad \mathop{\rm Re}z\geq-a,\quad z\ne-a.`
 
 For the readable real-variable specialization used here, `a` is positive and
 `z` is real with `z ≥ −a`; the same odd-power expression then expands the
@@ -168,7 +168,7 @@ number := false
 %%%
 
 ::::dlmfEntry "4.6.7" "https://dlmf.nist.gov/4.6.E7"
-$$`\[ (1+z)^a=1+\frac{a}{1!}z+\frac{a(a-1)}{2!}z^2+\frac{a(a-1)(a-2)}{3!}z^3+\cdots.\]`
+$$` (1+z)^a=1+\frac{a}{1!}z+\frac{a(a-1)}{2!}z^2+\frac{a(a-1)(a-2)}{3!}z^3+\cdots.`
 
 For arbitrary real or complex `a`, the principal complex power has its binomial
 series on `|z| < 1`.  When `a` is a nonnegative integer the coefficients vanish

@@ -39,7 +39,7 @@ denominators.  The recurrence E7 carries the explicit pole-free hypotheses
 needed for its pointwise source reading.
 
 ::::dlmfEntry "5.18.1" "https://dlmf.nist.gov/5.18.E1"
-$$`\[ (a;q)_n=\prod_{k=0}^{n-1}(1-aq^k),\qquad n=0,1,2,\ldots .\]`
+$$` (a;q)_n=\prod_{k=0}^{n-1}(1-aq^k),\qquad n=0,1,2,\ldots .`
 
 The finite q-Pochhammer symbol is the product of the first `n` factors
 `1 − aqᵏ`; for `n = 0` the range is empty and the product is `1`.  This finite
@@ -55,7 +55,7 @@ theorem dlmf_5_18_1 (a q : ℂ) (n : ℕ) :
 ::::
 
 ::::dlmfEntry "5.18.2" "https://dlmf.nist.gov/5.18.E2"
-$$`\[ n!_q=1(1+q)\cdots(1+q+\cdots+q^{n-1})=(q;q)_n(1-q)^{-n}.\]`
+$$` n!_q=1(1+q)\cdots(1+q+\cdots+q^{n-1})=(q;q)_n(1-q)^{-n}.`
 
 The q-factorial is the product of the q-integers `1 + q + ⋯ + qᵏ` for
 `k = 0, …, n−1`, and equals the q-Pochhammer expression.  The displayed
@@ -71,7 +71,7 @@ theorem dlmf_5_18_2 (q : ℂ) (n : ℕ) (hq : q ≠ 1) :
 ::::
 
 ::::dlmfEntry "5.18.3" "https://dlmf.nist.gov/5.18.E3"
-$$`\[ (a;q)_\infty=\prod_{k=0}^{\infty}(1-aq^k),\qquad |q|<1.\]`
+$$` (a;q)_\infty=\prod_{k=0}^{\infty}(1-aq^k),\qquad |q|<1.`
 
 For a complex base with norm below one, the infinite q-Pochhammer product is
 convergent, with value denoted by `qPochhammerInf`.  This condition is
@@ -103,7 +103,7 @@ for a finite meromorphic value.
 :::
 
 ::::dlmfEntry "5.18.4" "https://dlmf.nist.gov/5.18.E4"
-$$`\[ \Gamma_q(z)=(q;q)_\infty(1-q)^{1-z}/(q^z;q)_\infty,\qquad 0<q<1.\]`
+$$` \Gamma_q(z)=(q;q)_\infty(1-q)^{1-z}/(q^z;q)_\infty,\qquad 0<q<1.`
 
 For a real base strictly between zero and one, q-Gamma is given by the ratio of
 two q-Pochhammer products and the complex power `(1−q)^{1−z}`.  The function
@@ -124,7 +124,7 @@ theorem dlmf_5_18_4 {q : ℝ} (hq₀ : 0 < q) (hq₁ : q < 1) (z : ℂ) :
 ::::
 
 ::::dlmfEntry "5.18.5" "https://dlmf.nist.gov/5.18.E5"
-$$`\[ \Gamma_q(1)=\Gamma_q(2)=1.\]`
+$$` \Gamma_q(1)=\Gamma_q(2)=1.`
 
 At the first two positive integer arguments, q-Gamma has value one.  The base
 is kept in the source range `0 < q < 1`.
@@ -138,7 +138,7 @@ theorem dlmf_5_18_5 {q : ℝ} (hq₀ : 0 < q) (hq₁ : q < 1) :
 ::::
 
 ::::dlmfEntry "5.18.6" "https://dlmf.nist.gov/5.18.E6"
-$$`\[ n!_q=\Gamma_q(n+1),\qquad n=0,1,2,\ldots .\]`
+$$` n!_q=\Gamma_q(n+1),\qquad n=0,1,2,\ldots .`
 
 Every q-factorial is the q-Gamma value at the corresponding positive integer.
 The natural parameter is unrestricted because the source convention already
@@ -153,7 +153,7 @@ theorem dlmf_5_18_6 {q : ℝ} (hq₀ : 0 < q) (hq₁ : q < 1) (n : ℕ) :
 ::::
 
 ::::dlmfEntry "5.18.7" "https://dlmf.nist.gov/5.18.E7"
-$$`\[ \Gamma_q(z+1)=\frac{1-q^z}{1-q}\Gamma_q(z),\qquad 0<q<1.\]`
+$$` \Gamma_q(z+1)=\frac{1-q^z}{1-q}\Gamma_q(z),\qquad 0<q<1.`
 
 Shifting the complex argument by one multiplies q-Gamma by the q-integer
 factor `(1−qᶻ)/(1−q)`.  Because the quotient is totalized at a zero
@@ -217,7 +217,7 @@ theorem dlmf_5_18_bohr_mollerup {q : ℝ} (hq₀ : 0 < q) (hq₁ : q < 1) {f : �
 ::::
 
 ::::dlmfEntry "5.18.8" "https://dlmf.nist.gov/5.18.E8"
-$$`\[ \Gamma_q(x)<\Gamma_r(x),\qquad 0<q<r<1,\quad 0<x<1\ \text{or}\ x>2.\]`
+$$` \Gamma_q(x)<\Gamma_r(x),\qquad 0<q<r<1,\quad 0<x<1\ \text{or}\ x>2.`
 
 When the bases satisfy `0 < q < r < 1`, q-Gamma is strictly smaller at base
 `q` than at base `r` for `0 < x < 1` and again for `x > 2`.  `qGammaReal`
@@ -236,7 +236,7 @@ theorem dlmf_5_18_8 {q r x : ℝ} (hq : 0 < q) (hqr : q < r) (hr : r < 1)
 ::::
 
 ::::dlmfEntry "5.18.9" "https://dlmf.nist.gov/5.18.E9"
-$$`\[ \Gamma_q(x)>\Gamma_r(x),\qquad 0<q<r<1,\quad 1<x<2.\]`
+$$` \Gamma_q(x)>\Gamma_r(x),\qquad 0<q<r<1,\quad 1<x<2.`
 
 On the intervening interval `1 < x < 2`, the inequality reverses: the value at
 the smaller base is strictly larger.  As in 5.18.8, this is the real-axis
@@ -253,7 +253,7 @@ theorem dlmf_5_18_9 {q r x : ℝ} (hq : 0 < q) (hqr : q < r) (hr : r < 1)
 ::::
 
 ::::dlmfEntry "5.18.10" "https://dlmf.nist.gov/5.18.E10"
-$$`\[ \lim_{q\to1^-}\Gamma_q(z)=\Gamma(z).\]`
+$$` \lim_{q\to1^-}\Gamma_q(z)=\Gamma(z).`
 
 As the real base approaches one from below, q-Gamma converges to the ordinary
 complex Gamma function at each complex argument.  `nhdsWithin 1 (Iio 1)` is the
@@ -275,7 +275,7 @@ The source also gives generalized asymptotic expansions of `ln Γ_q(z)` as
 `ψ_q(z)=Γ'_q(z)/Γ_q(z)`; these results are not developed here.
 
 ::::dlmfEntry "5.18.11" "https://dlmf.nist.gov/5.18.E11"
-$$`\[ B_q(a,b)=\frac{\Gamma_q(a)\Gamma_q(b)}{\Gamma_q(a+b)}.\]`
+$$` B_q(a,b)=\frac{\Gamma_q(a)\Gamma_q(b)}{\Gamma_q(a+b)}.`
 
 The q-Beta function is the quotient of the two q-Gamma values at `a` and `b`
 by the value at their sum.  The notation keeps `a` and `b` complex and
@@ -292,8 +292,8 @@ theorem dlmf_5_18_11 {q : ℝ} (hq₀ : 0 < q) (hq₁ : q < 1) (a b : ℂ) :
 ::::
 
 ::::dlmfEntry "5.18.12" "https://dlmf.nist.gov/5.18.E12"
-$$`\[ B_q(a,b)=\int_0^1\frac{t^{a-1}(tq;q)_\infty}{(tq^b;q)_\infty}\,d_qt,
-\qquad 0<q<1,\quad \operatorname{Re}a>0,\quad \operatorname{Re}b>0.\]`
+$$` B_q(a,b)=\int_0^1\frac{t^{a-1}(tq;q)_\infty}{(tq^b;q)_\infty}\,d_qt,
+\qquad 0<q<1,\quad \operatorname{Re}a>0,\quad \operatorname{Re}b>0.`
 
 For positive real base and positive real parts of both parameters, q-Beta has a
 Jackson q-integral representation.  The local `qJacksonIntegral` is the

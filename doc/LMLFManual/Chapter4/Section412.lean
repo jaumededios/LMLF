@@ -92,7 +92,7 @@ structure GeneralizedFunctionPair where
 :::
 
 ::::dlmfEntry "4.12.1" "https://dlmf.nist.gov/4.12.E1"
-$$`\[\varphi(x+1)=\exp(\varphi(x)),\qquad -1<x<\infty.\]`
+$$`\varphi(x+1)=\exp(\varphi(x)),\qquad -1<x<\infty.`
 
 The generalized exponential satisfies this recurrence for every real `x` in
 the interval `(-1,∞)`.
@@ -137,7 +137,7 @@ theorem generalized_functions_contDiff (φ : GeneralizedExponential)
 :::
 
 ::::dlmfEntry "4.12.2" "https://dlmf.nist.gov/4.12.E2"
-$$`\[\varphi(0)=0.\]`
+$$`\varphi(0)=0.`
 
 The normalization fixes the generalized exponential at the origin.
 
@@ -149,7 +149,7 @@ theorem dlmf_4_12_2 (φ : GeneralizedExponential) : φ.toFun 0 = 0
 ::::
 
 ::::dlmfEntry "4.12.3" "https://dlmf.nist.gov/4.12.E3"
-$$`\[\psi(e^x)=1+\psi(x),\qquad -\infty<x<\infty.\]`
+$$`\psi(e^x)=1+\psi(x),\qquad -\infty<x<\infty.`
 
 The inverse generalized logarithm obeys the corresponding unit-shift relation
 for every real `x`.
@@ -163,7 +163,7 @@ theorem dlmf_4_12_3 (ψ : GeneralizedLogarithm) (x : ℝ) :
 ::::
 
 ::::dlmfEntry "4.12.4" "https://dlmf.nist.gov/4.12.E4"
-$$`\[\psi(0)=0.\]`
+$$`\psi(0)=0.`
 
 The generalized logarithm has the matching origin normalization.
 
@@ -175,7 +175,7 @@ theorem dlmf_4_12_4 (ψ : GeneralizedLogarithm) : ψ.toFun 0 = 0
 ::::
 
 ::::dlmfEntry "4.12.5" "https://dlmf.nist.gov/4.12.E5"
-$$`\[\varphi(x)=\psi(x)=x,\qquad 0\le x\le1.\]`
+$$`\varphi(x)=\psi(x)=x,\qquad 0\le x\le1.`
 
 The simplest admissible choice takes both functions to be the identity on the
 unit interval.  The Lean form permits the two functions to be named while
@@ -191,7 +191,7 @@ theorem dlmf_4_12_5 (φ : GeneralizedExponential) (ψ : GeneralizedLogarithm)
 ::::
 
 ::::dlmfEntry "4.12.6" "https://dlmf.nist.gov/4.12.E6"
-$$`\[\varphi(x)=\ln(x+1),\qquad -1<x<0.\]`
+$$`\varphi(x)=\ln(x+1),\qquad -1<x<0.`
 
 On the interval `(-1,0)`, the simplest generalized exponential continues as
 the principal real logarithm of `x+1`.
@@ -206,8 +206,8 @@ theorem dlmf_4_12_6 (φ : GeneralizedExponential)
 ::::
 
 ::::dlmfEntry "4.12.7" "https://dlmf.nist.gov/4.12.E7"
-$$`\[\varphi(x)=\underbrace{\exp\cdots\exp}_{\lfloor x\rfloor\ \mathrm{times}}
-(x-\lfloor x\rfloor),\qquad x>1.\]`
+$$`\varphi(x)=\underbrace{\exp\cdots\exp}_{\lfloor x\rfloor\ \mathrm{times}}
+(x-\lfloor x\rfloor),\qquad x>1.`
 
 For `x>1`, let `⌊x⌋` be the natural-number floor.  Apply the ordinary
 exponential exactly that many times to the fractional part `x−⌊x⌋`; the
@@ -223,7 +223,7 @@ theorem dlmf_4_12_7 (φ : GeneralizedExponential)
 ::::
 
 ::::dlmfEntry "4.12.8" "https://dlmf.nist.gov/4.12.E8"
-$$`\[\psi(x)=e^x-1,\qquad -\infty<x<0.\]`
+$$`\psi(x)=e^x-1,\qquad -\infty<x<0.`
 
 The inverse continuation on the negative half-line is the ordinary
 exponential shifted down by one.
@@ -238,7 +238,7 @@ theorem dlmf_4_12_8 (ψ : GeneralizedLogarithm)
 ::::
 
 ::::dlmfEntry "4.12.9" "https://dlmf.nist.gov/4.12.E9"
-$$`\[\psi(x)=\ell+\underbrace{\ln\cdots\ln}_{\ell\ \mathrm{times}}x,qquad x>1.\]`
+$$`\psi(x)=\ell+\underbrace{\ln\cdots\ln}_{\ell\ \mathrm{times}}x,qquad x>1.`
 
 For `x>1`, the generalized logarithm is a positive integer `ℓ` plus `ℓ`
 successive principal logarithms.  The existential Lean statement records that
@@ -254,7 +254,7 @@ theorem dlmf_4_12_9 (ψ : GeneralizedLogarithm)
 ::::
 
 ::::dlmfEntry "4.12.10" "https://dlmf.nist.gov/4.12.E10"
-$$`\[0\le\underbrace{\ln\cdots\ln}_{\ell\ \mathrm{times}}x<1.\]`
+$$`0\le\underbrace{\ln\cdots\ln}_{\ell\ \mathrm{times}}x<1.`
 
 The positive integer `ℓ` is selected so that the `ℓ`-fold logarithm lands in
 the half-open unit interval.  Every intermediate input to those principal

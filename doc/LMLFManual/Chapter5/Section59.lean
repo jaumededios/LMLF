@@ -25,7 +25,7 @@ number := false
 %%%
 
 ::::dlmfEntry "5.9.1" "https://dlmf.nist.gov/5.9.E1"
-$$`\[\frac{1}{\mu}\Gamma\left(\frac{\nu}{\mu}\right)\frac{1}{z^{\nu/\mu}}=\int_{0}^ {\infty}\exp\left(-zt^{\mu}\right)t^{\nu-1}\,\mathrm{d}t,\]`
+$$`\frac{1}{\mu}\Gamma\left(\frac{\nu}{\mu}\right)\frac{1}{z^{\nu/\mu}}=\int_{0}^ {\infty}\exp\left(-zt^{\mu}\right)t^{\nu-1}\,\mathrm{d}t,`
 
 For real μ>0 and complex ν,z in their right half-planes, the integrand is absolutely integrable on (0,∞), and the displayed scaled Gamma value is its Bochner integral. Complex powers use their principal values.
 
@@ -43,7 +43,7 @@ theorem dlmf_5_9_1 {z ν : ℂ} {μ : ℝ} (hμ : 0 < μ) (hν : 0 < ν.re) (hz 
 ::::
 
 ::::dlmfEntry "5.9.2" "https://dlmf.nist.gov/5.9.E2"
-$$`\[\frac{1}{\Gamma\left(z\right)}=\frac{1}{2\pi i}\int_{-\infty}^{(0+)}e^{t}t^{-z }\,\mathrm{d}t,\]`
+$$`\frac{1}{\Gamma\left(z\right)}=\frac{1}{2\pi i}\int_{-\infty}^{(0+)}e^{t}t^{-z }\,\mathrm{d}t,`
 
 The Lean statement makes Hankel convergence explicit: first the finite loop grows to infinity at fixed inner radius, then that radius tends to zero. `hankelTruncation` fixes the orientation and carries the continuous branch argument explicitly: the lower bank uses `-π`, the circle uses `θ ∈ [-π,π]`, and the upper bank uses `+π`.
 
@@ -77,7 +77,7 @@ theorem dlmf_5_9_2 (z : ℂ) :
 ::::
 
 ::::dlmfEntry "5.9.2_5" "https://dlmf.nist.gov/5.9.E2_5"
-$$`\[\frac{1}{\Gamma\left(z\right)}=\frac{{\mathrm{e}}^{z}z^{1-z}}{2\pi}\int_{-\pi} ^{\pi}{\mathrm{e}}^{-z\Phi(t)}\,\mathrm{d}t,\]`
+$$`\frac{1}{\Gamma\left(z\right)}=\frac{{\mathrm{e}}^{z}z^{1-z}}{2\pi}\int_{-\pi} ^{\pi}{\mathrm{e}}^{-z\Phi(t)}\,\mathrm{d}t,`
 
 For $`\Re z>0`, Temme’s phase `temmePhase` turns reciprocal Gamma into an ordinary
 integrable expression on the finite interval $`[-\pi,\pi]`$. Its totalized value at the
@@ -101,7 +101,7 @@ theorem dlmf_5_9_2_5 {z : ℂ} (hz : 0 < z.re) :
 ::::
 
 ::::dlmfEntry "5.9.3" "https://dlmf.nist.gov/5.9.E3"
-$$`\[c^{-z}\Gamma\left(z\right)=\int_{-\infty}^{\infty}|t|^{2z-1}e^{-ct^{2}}\, \mathrm{d}t,\]`
+$$`c^{-z}\Gamma\left(z\right)=\int_{-\infty}^{\infty}|t|^{2z-1}e^{-ct^{2}}\, \mathrm{d}t,`
 
 For c>0 and Re z>0, this is an absolutely convergent complex-valued integral over the whole real axis; the path and the principal complex power are therefore explicit.
 
@@ -116,7 +116,7 @@ theorem dlmf_5_9_3 {z : ℂ} {c : ℝ} (hc : 0 < c) (hz : 0 < z.re) :
 ::::
 
 ::::dlmfEntry "5.9.4" "https://dlmf.nist.gov/5.9.E4"
-$$`\[\Gamma\left(z\right)=\int_{1}^{\infty}t^{z-1}e^{-t}\,\mathrm{d}t+\sum_{k=0}^{ \infty}\frac{(-1)^{k}}{(z+k)k!},\]`
+$$`\Gamma\left(z\right)=\int_{1}^{\infty}t^{z-1}e^{-t}\,\mathrm{d}t+\sum_{k=0}^{ \infty}\frac{(-1)^{k}}{(z+k)k!},`
 
 Away from the nonpositive integers, Gamma is the sum of an absolutely convergent tail integral and a summable correction series. The Lean hypothesis excludes exactly the listed poles.
 
@@ -133,7 +133,7 @@ theorem dlmf_5_9_4 {z : ℂ} (hz : ∀ k : ℕ, z ≠ -(k : ℂ)) :
 ::::
 
 ::::dlmfEntry "5.9.5" "https://dlmf.nist.gov/5.9.E5"
-$$`\[\Gamma\left(z\right)=\int_{0}^{\infty}t^{z-1}\left(e^{-t}-\sum_{k=0}^{n}\frac{ (-1)^{k}t^{k}}{k!}\right)\,\mathrm{d}t,\]`
+$$`\Gamma\left(z\right)=\int_{0}^{\infty}t^{z-1}\left(e^{-t}-\sum_{k=0}^{n}\frac{ (-1)^{k}t^{k}}{k!}\right)\,\mathrm{d}t,`
 
 For n≥0 and −n−1<Re z<−n, subtracting the degree-n exponential Taylor polynomial removes the singular behavior at zero. Lean records absolute integrability as part of the result.
 
@@ -151,7 +151,7 @@ theorem dlmf_5_9_5 (n : ℕ) {z : ℂ} (hl : -(n : ℝ) - 1 < z.re) (hu : z.re <
 ::::
 
 ::::dlmfEntry "5.9.6" "https://dlmf.nist.gov/5.9.E6"
-$$`\[\Gamma\left(z\right)\cos\left(\tfrac{1}{2}\pi z\right)=\int_{0}^{\infty}t^{z-1 }\cos t\,\mathrm{d}t,\]`
+$$`\Gamma\left(z\right)\cos\left(\tfrac{1}{2}\pi z\right)=\int_{0}^{\infty}t^{z-1 }\cos t\,\mathrm{d}t,`
 
 When $`0<\Re z<1`, the cosine integral is generally conditional. Lean states convergence as the
 limit of integrals over $`[0,R]`, rather than using a totalized infinite integral.
@@ -166,7 +166,7 @@ theorem dlmf_5_9_6 {z : ℂ} (hl : 0 < z.re) (hu : z.re < 1) :
 ::::
 
 ::::dlmfEntry "5.9.7" "https://dlmf.nist.gov/5.9.E7"
-$$`\[\Gamma\left(z\right)\sin\left(\tfrac{1}{2}\pi z\right)=\int_{0}^{\infty}t^{z-1 }\sin t\,\mathrm{d}t,\]`
+$$`\Gamma\left(z\right)\sin\left(\tfrac{1}{2}\pi z\right)=\int_{0}^{\infty}t^{z-1 }\sin t\,\mathrm{d}t,`
 
 When −1<Re z<1, the sine factor also gives a conditionally convergent improper integral, represented by its finite-cutoff limit.
 
@@ -180,7 +180,7 @@ theorem dlmf_5_9_7 {z : ℂ} (hl : -1 < z.re) (hu : z.re < 1) :
 ::::
 
 ::::dlmfEntry "5.9.8" "https://dlmf.nist.gov/5.9.E8"
-$$`\[\Gamma\left(1+\frac{1}{n}\right)\cos\left(\frac{\pi}{2n}\right)=\int_{0}^{ \infty}\cos\left(t^{n}\right)\,\mathrm{d}t,\]`
+$$`\Gamma\left(1+\frac{1}{n}\right)\cos\left(\frac{\pi}{2n}\right)=\int_{0}^{ \infty}\cos\left(t^{n}\right)\,\mathrm{d}t,`
 
 For every integer n≥2, the oscillatory cosine integral converges to the displayed real Gamma value. The bound n≥2 is represented directly.
 
@@ -194,7 +194,7 @@ theorem dlmf_5_9_8 {n : ℕ} (hn : 2 ≤ n) :
 ::::
 
 ::::dlmfEntry "5.9.9" "https://dlmf.nist.gov/5.9.E9"
-$$`\[\Gamma\left(1+\frac{1}{n}\right)\sin\left(\frac{\pi}{2n}\right)=\int_{0}^{ \infty}\sin\left(t^{n}\right)\,\mathrm{d}t,\]`
+$$`\Gamma\left(1+\frac{1}{n}\right)\sin\left(\frac{\pi}{2n}\right)=\int_{0}^{ \infty}\sin\left(t^{n}\right)\,\mathrm{d}t,`
 
 For every integer n≥2, the matching sine power-phase integral converges to the displayed real Gamma value.
 
@@ -208,7 +208,7 @@ theorem dlmf_5_9_9 {n : ℕ} (hn : 2 ≤ n) :
 ::::
 
 ::::dlmfEntry "5.9.10" "https://dlmf.nist.gov/5.9.E10"
-$$`\[\operatorname{Ln}\Gamma\left(z\right)=\left(z-\tfrac{1}{2}\right)\ln z-z+ \tfrac{1}{2}\ln\left(2\pi\right)+2\int_{0}^{\infty}\frac{\operatorname{arctan} \left(t/z\right)}{e^{2\pi t}-1}\,\mathrm{d}t,\]`
+$$`\operatorname{Ln}\Gamma\left(z\right)=\left(z-\tfrac{1}{2}\right)\ln z-z+ \tfrac{1}{2}\ln\left(2\pi\right)+2\int_{0}^{\infty}\frac{\operatorname{arctan} \left(t/z\right)}{e^{2\pi t}-1}\,\mathrm{d}t,`
 
 On the positive real axis this specializes Binet’s first formula without a logarithm-branch choice. The integral is asserted absolutely convergent before its value is identified.
 
@@ -225,7 +225,7 @@ theorem dlmf_5_9_10 {x : ℝ} (hx : 0 < x) :
 ::::
 
 ::::dlmfEntry "5.9.10_1" "https://dlmf.nist.gov/5.9.E10_1"
-$$`\[\operatorname{Ln}\Gamma\left(z\right)=\left(z-\tfrac{1}{2}\right)\ln z-z+ \tfrac{1}{2}\ln\left(2\pi\right)-\frac{z}{\pi}\int_{0}^{\infty}\frac{\ln\left( 1-{\mathrm{e}}^{-2\pi t}\right)}{t^{2}+z^{2}}\,\mathrm{d}t,\]`
+$$`\operatorname{Ln}\Gamma\left(z\right)=\left(z-\tfrac{1}{2}\right)\ln z-z+ \tfrac{1}{2}\ln\left(2\pi\right)-\frac{z}{\pi}\int_{0}^{\infty}\frac{\ln\left( 1-{\mathrm{e}}^{-2\pi t}\right)}{t^{2}+z^{2}}\,\mathrm{d}t,`
 
 This positive-real specialization is the integration-by-parts form of Binet’s formula; its logarithmic kernel is recorded as an integrable function on (0,∞).
 
@@ -243,7 +243,7 @@ theorem dlmf_5_9_10_1 {x : ℝ} (hx : 0 < x) :
 ::::
 
 ::::dlmfEntry "5.9.10_2" "https://dlmf.nist.gov/5.9.E10_2"
-$$`\[\operatorname{Ln}\Gamma\left(z\right)=\left(z-\tfrac{1}{2}\right)\ln z-z+ \tfrac{1}{2}\ln\left(2\pi\right)+\int_{0}^{\infty}{\mathrm{e}}^{-zt}\left( \frac{1}{{\mathrm{e}}^{t}-1}-\frac{1}{t}+\frac{1}{2}\right)\frac{\,\mathrm{d}t }{t},\]`
+$$`\operatorname{Ln}\Gamma\left(z\right)=\left(z-\tfrac{1}{2}\right)\ln z-z+ \tfrac{1}{2}\ln\left(2\pi\right)+\int_{0}^{\infty}{\mathrm{e}}^{-zt}\left( \frac{1}{{\mathrm{e}}^{t}-1}-\frac{1}{t}+\frac{1}{2}\right)\frac{\,\mathrm{d}t }{t},`
 
 This positive-real Laplace form isolates the cancellation at t=0 inside one integrand and states its convergence explicitly.
 
@@ -261,7 +261,7 @@ theorem dlmf_5_9_10_2 {x : ℝ} (hx : 0 < x) :
 ::::
 
 ::::dlmfEntry "5.9.11" "https://dlmf.nist.gov/5.9.E11"
-$$`\[\operatorname{Ln}\Gamma\left(z+1\right)=-\gamma z-\frac{1}{2\pi i}\int_{-c- \infty i}^{-c+\infty i}\frac{\pi z^{-s}}{s\sin\left(\pi s\right)}\zeta\left(-s \right)\,\mathrm{d}s,\]`
+$$`\operatorname{Ln}\Gamma\left(z+1\right)=-\gamma z-\frac{1}{2\pi i}\int_{-c- \infty i}^{-c+\infty i}\frac{\pi z^{-s}}{s\sin\left(\pi s\right)}\zeta\left(-s \right)\,\mathrm{d}s,`
 
 For x>0 and 1<c<2, the Mellin–Barnes integral is taken upward on Re s=−c. `verticalLineIntegral` is an actual real-line Bochner integral, and integrability is a separate conjunct.
 
@@ -287,7 +287,7 @@ theorem dlmf_5_9_11 {x c : ℝ} (hx : 0 < x) (hc1 : 1 < c) (hc2 : c < 2) :
 ::::
 
 ::::dlmfEntry "5.9.11_1" "https://dlmf.nist.gov/5.9.E11_1"
-$$`\[\Gamma^{*}\left(z\right)=1-\frac{1}{2\pi\mathrm{i}}\int_{0}^{\infty}\frac{{ \mathrm{e}}^{-2\pi t}\Gamma^{*}\left(t{\mathrm{e}}^{\mathrm{i}\pi/2}\right)}{t +\mathrm{i}z}\,\mathrm{d}t+\frac{1}{2\pi\mathrm{i}}\int_{0}^{\infty}\frac{{ \mathrm{e}}^{-2\pi t}\Gamma^{*}\left(t{\mathrm{e}}^{-\mathrm{i}\pi/2}\right)}{ t-\mathrm{i}z}\,\mathrm{d}t,\]`
+$$`\Gamma^{*}\left(z\right)=1-\frac{1}{2\pi\mathrm{i}}\int_{0}^{\infty}\frac{{ \mathrm{e}}^{-2\pi t}\Gamma^{*}\left(t{\mathrm{e}}^{\mathrm{i}\pi/2}\right)}{t +\mathrm{i}z}\,\mathrm{d}t+\frac{1}{2\pi\mathrm{i}}\int_{0}^{\infty}\frac{{ \mathrm{e}}^{-2\pi t}\Gamma^{*}\left(t{\mathrm{e}}^{-\mathrm{i}\pi/2}\right)}{ t-\mathrm{i}z}\,\mathrm{d}t,`
 
 For positive real x, the two scaled-Gamma kernels are absolutely integrable and their values combine exactly as displayed. `scaledGamma` spells out the normalization used by DLMF.
 
@@ -315,7 +315,7 @@ theorem dlmf_5_9_11_1 {x : ℝ} (hx : 0 < x) :
 ::::
 
 ::::dlmfEntry "5.9.11_2" "https://dlmf.nist.gov/5.9.E11_2"
-$$`\[\frac{1}{\Gamma^{*}\left(z\right)}=1-\frac{1}{2\pi\mathrm{i}}\int_{0}^{\infty} \frac{{\mathrm{e}}^{-2\pi t}\Gamma^{*}\left(t{\mathrm{e}}^{\mathrm{i}\pi/2} \right)}{t-\mathrm{i}z}\,\mathrm{d}t+\frac{1}{2\pi\mathrm{i}}\int_{0}^{\infty} \frac{{\mathrm{e}}^{-2\pi t}\Gamma^{*}\left(t{\mathrm{e}}^{-\mathrm{i}\pi/2} \right)}{t+\mathrm{i}z}\,\mathrm{d}t,\]`
+$$`\frac{1}{\Gamma^{*}\left(z\right)}=1-\frac{1}{2\pi\mathrm{i}}\int_{0}^{\infty} \frac{{\mathrm{e}}^{-2\pi t}\Gamma^{*}\left(t{\mathrm{e}}^{\mathrm{i}\pi/2} \right)}{t-\mathrm{i}z}\,\mathrm{d}t+\frac{1}{2\pi\mathrm{i}}\int_{0}^{\infty} \frac{{\mathrm{e}}^{-2\pi t}\Gamma^{*}\left(t{\mathrm{e}}^{-\mathrm{i}\pi/2} \right)}{t+\mathrm{i}z}\,\mathrm{d}t,`
 
 The reciprocal scaled-Gamma representation uses the same two rays with the denominator signs interchanged; both convergence assertions remain visible.
 
@@ -342,7 +342,7 @@ number := false
 %%%
 
 ::::dlmfEntry "5.9.12" "https://dlmf.nist.gov/5.9.E12"
-$$`\[\psi\left(z\right)=\int_{0}^{\infty}\left(\frac{e^{-t}}{t}-\frac{e^{-zt}}{1-e^ {-t}}\right)\,\mathrm{d}t,\]`
+$$`\psi\left(z\right)=\int_{0}^{\infty}\left(\frac{e^{-t}}{t}-\frac{e^{-zt}}{1-e^ {-t}}\right)\,\mathrm{d}t,`
 
 For x>0, Mathlib’s complex digamma at the real argument x equals this absolutely convergent integral.
 
@@ -358,7 +358,7 @@ theorem dlmf_5_9_12 {x : ℝ} (hx : 0 < x) :
 ::::
 
 ::::dlmfEntry "5.9.13" "https://dlmf.nist.gov/5.9.E13"
-$$`\[\psi\left(z\right)=\ln z+\int_{0}^{\infty}\left(\frac{1}{t}-\frac{1}{1-e^{-t}} \right)e^{-tz}\,\mathrm{d}t,\]`
+$$`\psi\left(z\right)=\ln z+\int_{0}^{\infty}\left(\frac{1}{t}-\frac{1}{1-e^{-t}} \right)e^{-tz}\,\mathrm{d}t,`
 
 For x>0, this separates log x from an absolutely convergent Laplace correction and identifies their sum with digamma.
 
@@ -374,7 +374,7 @@ theorem dlmf_5_9_13 {x : ℝ} (hx : 0 < x) :
 ::::
 
 ::::dlmfEntry "5.9.14" "https://dlmf.nist.gov/5.9.E14"
-$$`\[\psi\left(z\right)=\int_{0}^{\infty}\left(e^{-t}-\frac{1}{(1+t)^{z}}\right) \frac{\,\mathrm{d}t}{t},\]`
+$$`\psi\left(z\right)=\int_{0}^{\infty}\left(e^{-t}-\frac{1}{(1+t)^{z}}\right) \frac{\,\mathrm{d}t}{t},`
 
 For $`x>0`, the cancellation between $`e^{-t}` and $`(1+t)^{-x}` makes the quotient integrable at
 the origin.
@@ -389,7 +389,7 @@ theorem dlmf_5_9_14 {x : ℝ} (hx : 0 < x) :
 ::::
 
 ::::dlmfEntry "5.9.15" "https://dlmf.nist.gov/5.9.E15"
-$$`\[\psi\left(z\right)=\ln z-\frac{1}{2z}-2\int_{0}^{\infty}\frac{t\,\mathrm{d}t}{ (t^{2}+z^{2})(e^{2\pi t}-1)}.\]`
+$$`\psi\left(z\right)=\ln z-\frac{1}{2z}-2\int_{0}^{\infty}\frac{t\,\mathrm{d}t}{ (t^{2}+z^{2})(e^{2\pi t}-1)}.`
 
 For x>0, the differentiated Binet kernel is absolutely integrable and gives the displayed correction to log x−1/(2x).
 
@@ -406,7 +406,7 @@ theorem dlmf_5_9_15 {x : ℝ} (hx : 0 < x) :
 ::::
 
 ::::dlmfEntry "5.9.16" "https://dlmf.nist.gov/5.9.E16"
-$$`\[\psi\left(z\right)+\gamma=\int_{0}^{\infty}\frac{e^{-t}-e^{-zt}}{1-e^{-t}}\, \mathrm{d}t=\int_{0}^{1}\frac{1-t^{z-1}}{1-t}\,\mathrm{d}t.\]`
+$$`\psi\left(z\right)+\gamma=\int_{0}^{\infty}\frac{e^{-t}-e^{-zt}}{1-e^{-t}}\, \mathrm{d}t=\int_{0}^{1}\frac{1-t^{z-1}}{1-t}\,\mathrm{d}t.`
 
 For x>0, both integrands are absolutely integrable and give the same value ψ(x)+γ. Lean records the two equalities independently.
 
@@ -425,7 +425,7 @@ theorem dlmf_5_9_16 {x : ℝ} (hx : 0 < x) :
 ::::
 
 ::::dlmfEntry "5.9.17" "https://dlmf.nist.gov/5.9.E17"
-$$`\[\psi\left(z+1\right)=-\gamma+\frac{1}{2\pi i}\int_{-c-\infty i}^{-c+\infty i} \frac{\pi z^{-s-1}}{\sin\left(\pi s\right)}\zeta\left(-s\right)\,\mathrm{d}s,\]`
+$$`\psi\left(z+1\right)=-\gamma+\frac{1}{2\pi i}\int_{-c-\infty i}^{-c+\infty i} \frac{\pi z^{-s-1}}{\sin\left(\pi s\right)}\zeta\left(-s\right)\,\mathrm{d}s,`
 
 For x>0 and 1<c<2, this is the differentiated Mellin–Barnes formula along the upward vertical line Re s=−c.
 
@@ -443,7 +443,7 @@ theorem dlmf_5_9_17 {x c : ℝ} (hx : 0 < x) (hc1 : 1 < c) (hc2 : c < 2) :
 ::::
 
 ::::dlmfEntry "5.9.18" "https://dlmf.nist.gov/5.9.E18"
-$$`\[\gamma=-\int_{0}^{\infty}e^{-t}\ln t\,\mathrm{d}t=\int_{0}^{\infty}\left(\frac {1}{1+t}-e^{-t}\right)\frac{\,\mathrm{d}t}{t}=\int_{0}^{1}(1-e^{-t})\frac{\, \mathrm{d}t}{t}-\int_{1}^{\infty}e^{-t}\frac{\,\mathrm{d}t}{t}=\int_{0}^{ \infty}\left(\frac{e^{-t}}{1-e^{-t}}-\frac{e^{-t}}{t}\right)\,\mathrm{d}t.\]`
+$$`\gamma=-\int_{0}^{\infty}e^{-t}\ln t\,\mathrm{d}t=\int_{0}^{\infty}\left(\frac {1}{1+t}-e^{-t}\right)\frac{\,\mathrm{d}t}{t}=\int_{0}^{1}(1-e^{-t})\frac{\, \mathrm{d}t}{t}-\int_{1}^{\infty}e^{-t}\frac{\,\mathrm{d}t}{t}=\int_{0}^{ \infty}\left(\frac{e^{-t}}{1-e^{-t}}-\frac{e^{-t}}{t}\right)\,\mathrm{d}t.`
 
 The potentially singular expressions are paired with the convergence facts needed to read them as genuine integrals.
 
@@ -468,7 +468,7 @@ theorem dlmf_5_9_18 :
 ::::
 
 ::::dlmfEntry "5.9.19" "https://dlmf.nist.gov/5.9.E19"
-$$`\[{\Gamma}^{(n)}\left(z\right)=\int_{0}^{\infty}(\ln t)^{n}e^{-t}t^{z-1}\, \mathrm{d}t,\]`
+$$`{\Gamma}^{(n)}\left(z\right)=\int_{0}^{\infty}(\ln t)^{n}e^{-t}t^{z-1}\, \mathrm{d}t,`
 
 For n≥0 and Re z>0, the nth complex derivative of Gamma is obtained by differentiating Euler’s integral under the integral sign; the logarithmic kernel is absolutely integrable.
 
@@ -484,7 +484,7 @@ theorem dlmf_5_9_19 (n : ℕ) {z : ℂ} (hz : 0 < z.re) :
 ::::
 
 ::::dlmfEntry "5.9.20" "https://dlmf.nist.gov/5.9.E20"
-$$`\[\int_{c}^{z}\Gamma\left(t\right)\,\mathrm{d}t=\int_{0}^{\infty}\frac{t^{z-1}-t ^{c-1}}{\ln t}{\mathrm{e}}^{-t}\,\mathrm{d}t,\]`
+$$`\int_{c}^{z}\Gamma\left(t\right)\,\mathrm{d}t=\int_{0}^{\infty}\frac{t^{z-1}-t ^{c-1}}{\ln t}{\mathrm{e}}^{-t}\,\mathrm{d}t,`
 
 For c and z in the right half-plane, Gamma integrated along their straight segment equals the absolutely convergent real integral on the right. `complexSegmentIntegral` fixes the path explicitly. The quotient at the removable point $`t=1`$ is totalized in Lean; changing a single point does not affect the integral.
 

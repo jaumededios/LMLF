@@ -30,7 +30,7 @@ number := false
 %%%
 
 ::::dlmfEntry "4.10.1" "https://dlmf.nist.gov/4.10.E1"
-$$`\[\int\frac{dz}{z}=\ln z.\]`
+$$`\int\frac{dz}{z}=\ln z.`
 
 On a region avoiding zero and the principal branch cut, the derivative of the
 principal logarithm is `1/z`.
@@ -45,7 +45,7 @@ theorem dlmf_4_10_1 {z : ℂ}
 ::::
 
 ::::dlmfEntry "4.10.2" "https://dlmf.nist.gov/4.10.E2"
-$$`\[\int\ln z\,dz=z\ln z-z.\]`
+$$`\int\ln z\,dz=z\ln z-z.`
 
 Differentiating `z ln z − z` gives the principal logarithm on the same branch
 domain.
@@ -60,7 +60,7 @@ theorem dlmf_4_10_2 {z : ℂ}
 ::::
 
 ::::dlmfEntry "4.10.3" "https://dlmf.nist.gov/4.10.E3"
-$$`\[\int z^n\ln z\,dz=\frac{z^{n+1}}{n+1}\ln z-\frac{z^{n+1}}{(n+1)^2},\qquad n\ne-1.\]`
+$$`\int z^n\ln z\,dz=\frac{z^{n+1}}{n+1}\ln z-\frac{z^{n+1}}{(n+1)^2},\qquad n\ne-1.`
 
 For an integer exponent other than `−1`, integration by parts yields the
 displayed logarithmic power antiderivative on a chosen principal branch.
@@ -78,7 +78,7 @@ theorem dlmf_4_10_3 (n : ℤ) (hn : n ≠ -1) {z : ℂ}
 ::::
 
 ::::dlmfEntry "4.10.4" "https://dlmf.nist.gov/4.10.E4"
-$$`\[\int\frac{dz}{z\ln z}=\ln(\ln z).\]`
+$$`\int\frac{dz}{z\ln z}=\ln(\ln z).`
 
 Where both `z` and its principal logarithm are nonzero, the iterated logarithm
 has derivative `1/(z ln z)` on the selected branch.
@@ -95,7 +95,7 @@ theorem dlmf_4_10_4 {z : ℂ}
 ::::
 
 ::::dlmfEntry "4.10.5" "https://dlmf.nist.gov/4.10.E5"
-$$`\[\int_0^1\frac{\ln t}{1-t}\,dt=-\frac{\pi^2}{6}.\]`
+$$`\int_0^1\frac{\ln t}{1-t}\,dt=-\frac{\pi^2}{6}.`
 
 The improper endpoint integral over `(0,1)` has the stated negative zeta-value.
 
@@ -108,7 +108,7 @@ theorem dlmf_4_10_5 :
 ::::
 
 ::::dlmfEntry "4.10.6" "https://dlmf.nist.gov/4.10.E6"
-$$`\[\int_0^1\frac{\ln t}{1+t}\,dt=-\frac{\pi^2}{12}.\]`
+$$`\int_0^1\frac{\ln t}{1+t}\,dt=-\frac{\pi^2}{12}.`
 
 The corresponding improper integral with denominator `1+t` equals
 `−π²/12`.
@@ -122,7 +122,7 @@ theorem dlmf_4_10_6 :
 ::::
 
 ::::dlmfEntry "4.10.7" "https://dlmf.nist.gov/4.10.E7"
-$$`\[\dashint_0^x\frac{dt}{\ln t}=\operatorname{li}(x),\qquad x>1.\]`
+$$`\operatorname{PV}\!\int_0^x\frac{dt}{\ln t}=\operatorname{li}(x),\qquad x>1.`
 
 For `x>1`, the logarithmic integral is interpreted as a Cauchy principal value
 at the interior singularity `t=1`; the local vocabulary records that symmetric
@@ -145,7 +145,7 @@ number := false
 %%%
 
 ::::dlmfEntry "4.10.8" "https://dlmf.nist.gov/4.10.E8"
-$$`\[\int e^{az}\,dz=\frac{e^{az}}a,\qquad a\ne0.\]`
+$$`\int e^{az}\,dz=\frac{e^{az}}a,\qquad a\ne0.`
 
 For nonzero complex `a`, the displayed quotient is an antiderivative.
 
@@ -158,7 +158,7 @@ theorem dlmf_4_10_8 {a z : ℂ} (ha : a ≠ 0) :
 ::::
 
 ::::dlmfEntry "4.10.9" "https://dlmf.nist.gov/4.10.E9"
-$$`\[\int\frac{dz}{e^{az}+b}=\frac{az-\ln(e^{az}+b)}{ab},\qquad a,b\ne0.\]`
+$$`\int\frac{dz}{e^{az}+b}=\frac{az-\ln(e^{az}+b)}{ab},\qquad a,b\ne0.`
 
 Away from zero and the nonpositive-real branch cut of the logarithm argument,
 the principal-logarithm expression is an antiderivative for nonzero complex
@@ -178,7 +178,7 @@ theorem dlmf_4_10_9 {a b z : ℂ} (ha : a ≠ 0) (hb : b ≠ 0)
 ::::
 
 ::::dlmfEntry "4.10.10" "https://dlmf.nist.gov/4.10.E10"
-$$`\[\int\frac{e^{az}-1}{e^{az}+1}\,dz=\frac2a\ln(e^{az/2}+e^{-az/2}),\qquad a\ne0.\]`
+$$`\int\frac{e^{az}-1}{e^{az}+1}\,dz=\frac2a\ln(e^{az/2}+e^{-az/2}),\qquad a\ne0.`
 
 On a branch avoiding zero and the nonpositive-real cut of the logarithm
 argument, the principal-logarithm expression differentiates to the displayed
@@ -200,7 +200,7 @@ theorem dlmf_4_10_10 {a z : ℂ} (ha : a ≠ 0)
 ::::
 
 ::::dlmfEntry "4.10.11" "https://dlmf.nist.gov/4.10.E11"
-$$`\[\int_{-\infty}^{\infty}e^{-cx^2}\,dx=\sqrt{\frac\pi c},\qquad \Re c>0.\]`
+$$`\int_{-\infty}^{\infty}e^{-cx^2}\,dx=\sqrt{\frac\pi c},\qquad \Re c>0.`
 
 The Gaussian integral converges for complex `c` with positive real part; the
 principal complex square root gives the value.
@@ -215,7 +215,7 @@ theorem dlmf_4_10_11 {c : ℂ} (hc : 0 < c.re) :
 ::::
 
 ::::dlmfEntry "4.10.12" "https://dlmf.nist.gov/4.10.E12"
-$$`\[\int_0^{\ln2}\frac{x e^x}{e^x-1}\,dx=\frac{\pi^2}{12}.\]`
+$$`\int_0^{\ln2}\frac{x e^x}{e^x-1}\,dx=\frac{\pi^2}{12}.`
 
 The finite integral up to `ln 2` has value `π²/12`; its endpoint behavior is
 understood through the improper integral represented by the interval integral.
@@ -230,7 +230,7 @@ theorem dlmf_4_10_12 :
 ::::
 
 ::::dlmfEntry "4.10.13" "https://dlmf.nist.gov/4.10.E13"
-$$`\[\int_0^\infty\frac{dx}{e^x+1}=\ln2.\]`
+$$`\int_0^\infty\frac{dx}{e^x+1}=\ln2.`
 
 The improper integral over the positive half-line equals `ln 2`.
 

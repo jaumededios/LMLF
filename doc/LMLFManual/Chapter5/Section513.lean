@@ -25,10 +25,10 @@ Mathlib's principal complex-power operation; the second identity is stated for i
 parameters, as in the source inequalities.
 
 ::::dlmfEntry "5.13.1" "https://dlmf.nist.gov/5.13.E1"
-$$`\[\frac{1}{2\pi i}\int_{c-i\infty}^{c+i\infty}
+$$`\frac{1}{2\pi i}\int_{c-i\infty}^{c+i\infty}
 \Gamma(s+a)\Gamma(b-s)z^{-s}\,\mathrm{d}s
 =\frac{\Gamma(a+b)z^a}{(1+z)^{a+b}},\qquad
-\Re(a+b)>0,\quad-\Re a<c<\Re b,\quad|\mathrm{ph}\,z|<\pi.\]`
+\Re(a+b)>0,\quad-\Re a<c<\Re b,\quad|\mathrm{ph}\,z|<\pi.`
 
 The path is the straight line parallel to the imaginary axis with real part `c`, oriented
 upward.  Writing `s=c+it` contributes `ds=i,dt`, which is exposed by
@@ -59,9 +59,9 @@ theorem dlmf_5_13_1 {a b z : ℂ} {c : ℝ}
 ::::
 
 ::::dlmfEntry "5.13.2" "https://dlmf.nist.gov/5.13.E2"
-$$`\[\frac{1}{2\pi}\int_{-\infty}^{\infty}
+$$`\frac{1}{2\pi}\int_{-\infty}^{\infty}
 |\Gamma(a+it)|^2e^{(2b-\pi)t}\,\mathrm{d}t
-=\frac{\Gamma(2a)}{(2\sin b)^{2a}},\qquad a>0,\quad0<b<\pi.\]`
+=\frac{\Gamma(2a)}{(2\sin b)^{2a}},\qquad a>0,\quad0<b<\pi.`
 
 For real `a` and `b` in the stated ranges, the modulus square is an ordinary real-valued
 integrand.  The whole-line integral converges in the ordinary (absolutely integrable)
@@ -91,11 +91,11 @@ number := false
 %%%
 
 ::::dlmfEntry "5.13.3" "https://dlmf.nist.gov/5.13.E3"
-$$`\[\frac{1}{2\pi}\int_{-\infty}^{\infty}
+$$`\frac{1}{2\pi}\int_{-\infty}^{\infty}
 \Gamma(a+it)\Gamma(b+it)\Gamma(c-it)\Gamma(d-it)\,\mathrm{d}t
 =\frac{\Gamma(a+c)\Gamma(a+d)\Gamma(b+c)\Gamma(b+d)}
 {\Gamma(a+b+c+d)},\qquad
-\Re a,\Re b,\Re c,\Re d>0.\]`
+\Re a,\Re b,\Re c,\Re d>0.`
 
 All four parameters may be complex.  Positivity of each real part is the source
 condition; under it the product of four Gamma factors is ordinarily integrable on the
@@ -129,11 +129,11 @@ number := false
 %%%
 
 ::::dlmfEntry "5.13.4" "https://dlmf.nist.gov/5.13.E4"
-$$`\[\int_{-\infty}^{\infty}
+$$`\int_{-\infty}^{\infty}
 \frac{\mathrm{d}t}{\Gamma(a+t)\Gamma(b+t)\Gamma(c-t)\Gamma(d-t)}
 =\frac{\Gamma(a+b+c+d-3)}
 {\Gamma(a+c-1)\Gamma(a+d-1)\Gamma(b+c-1)\Gamma(b+d-1)},\qquad
-\Re(a+b+c+d)>3.\]`
+\Re(a+b+c+d)>3.`
 
 The reciprocal Gamma product is integrated ordinarily over the real line.  The source
 requires only the displayed real-part inequality on the sum.
@@ -160,11 +160,11 @@ number := false
 %%%
 
 ::::dlmfEntry "5.13.5" "https://dlmf.nist.gov/5.13.E5"
-$$`\[\frac{1}{4\pi}\int_{-\infty}^{\infty}
+$$`\frac{1}{4\pi}\int_{-\infty}^{\infty}
 \frac{\prod_{k=1}^{4}\Gamma(a_k+it)\Gamma(a_k-it)}
 {\Gamma(2it)\Gamma(-2it)}\,\mathrm{d}t
 =\frac{\prod_{1\le j<k\le4}\Gamma(a_j+a_k)}
-{\Gamma(a_1+a_2+a_3+a_4)},\qquad\Re(a_k)>0.\]`
+{\Gamma(a_1+a_2+a_3+a_4)},\qquad\Re(a_k)>0.`
 
 The four parameters are represented by `a : Fin 4 → ℂ`; the finite products therefore
 retain all four factors and all six pairwise Gamma factors.  The positivity condition is

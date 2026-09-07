@@ -1,0 +1,1 @@
+window.docContents[68].resolve({"/Gamma-Function/Gamma-Function-Inequalities/#chapter-5-section-6":{"contents":"Source: NIST Digital Library of Mathematical Functions, §5.6.\n\n\n\n","context":"LMLF · DLMF with Lean\u0009Gamma Function","header":"5.6. Gamma-Function Inequalities","id":"/Gamma-Function/Gamma-Function-Inequalities/#chapter-5-section-6"}});

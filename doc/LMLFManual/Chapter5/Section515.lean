@@ -28,8 +28,8 @@ phase is zero and the source sector condition is automatically met for every
 fixed `0 < δ ≤ π`.
 
 ::::dlmfEntry "5.15.1" "https://dlmf.nist.gov/5.15.E1"
-$$`\[\psi ^\prime (z)=\sum _{k=0}^{\infty }\frac{1}{(k+z)^2},\qquad
-z\ne 0,-1,-2,\ldots .\]`
+$$`\psi ^\prime (z)=\sum _{k=0}^{\infty }\frac{1}{(k+z)^2},\qquad
+z\ne 0,-1,-2,\ldots .`
 
 For a complex argument away from the nonpositive integers, the trigamma value is
 the reciprocal-square series beginning at `k=0`.  The Lean statement uses
@@ -44,7 +44,7 @@ theorem dlmf_5_15_1 {z : ℂ} (hz : ∀ k : ℕ, z ≠ -(k : ℂ)) :
 ::::
 
 ::::dlmfEntry "5.15.2" "https://dlmf.nist.gov/5.15.E2"
-$$`\[\psi ^{(n)}(1)=(-1)^{n+1}n!\,\zeta (n+1),\qquad n=1,2,3,\ldots .\]`
+$$`\psi ^{(n)}(1)=(-1)^{n+1}n!\,\zeta (n+1),\qquad n=1,2,3,\ldots .`
 
 At the unit argument, every positive-order polygamma is a signed factorial
 multiple of the Riemann zeta value one order higher.  The natural-number
@@ -60,7 +60,7 @@ theorem dlmf_5_15_2 (n : ℕ) (hn : 1 ≤ n) :
 ::::
 
 ::::dlmfEntry "5.15.3" "https://dlmf.nist.gov/5.15.E3"
-$$`\[\psi ^{(n)}\!\left(\frac12\right)=(-1)^{n+1}n!\,(2^{n+1}-1)\zeta (n+1),\qquad n=1,2,3,\ldots .\]`
+$$`\psi ^{(n)}\!\left(\frac12\right)=(-1)^{n+1}n!\,(2^{n+1}-1)\zeta (n+1),\qquad n=1,2,3,\ldots .`
 
 At one half, the same signed factorial and zeta factor is multiplied by the
 odd-part factor `2ⁿ⁺¹−1`.  The Lean expression keeps the value complex, as does
@@ -77,7 +77,7 @@ theorem dlmf_5_15_3 (n : ℕ) (hn : 1 ≤ n) :
 ::::
 
 ::::dlmfEntry "5.15.4" "https://dlmf.nist.gov/5.15.E4"
-$$`\[\psi ^\prime \!\left(n-\frac12\right)=\frac12\pi ^2-4\sum _{k=1}^{n-1}\frac{1}{(2k-1)^2},\qquad n=1,2,3,\ldots .\]`
+$$`\psi ^\prime \!\left(n-\frac12\right)=\frac12\pi ^2-4\sum _{k=1}^{n-1}\frac{1}{(2k-1)^2},\qquad n=1,2,3,\ldots .`
 
 The trigamma value at a positive half-integer is a finite correction to
 `π²/2`: the correction contains the odd reciprocal squares through `2n−3`.
@@ -94,7 +94,7 @@ theorem dlmf_5_15_4 (n : ℕ) (hn : 1 ≤ n) :
 ::::
 
 ::::dlmfEntry "5.15.5" "https://dlmf.nist.gov/5.15.E5"
-$$`\[\psi ^{(n)}(z+1)=\psi ^{(n)}(z)+(-1)^n n!z^{-n-1},\qquad n=1,2,3,\ldots .\]`
+$$`\psi ^{(n)}(z+1)=\psi ^{(n)}(z)+(-1)^n n!z^{-n-1},\qquad n=1,2,3,\ldots .`
 
 Shifting the argument by one adds the signed reciprocal power shown in the
 source.  The displayed domain excludes every nonpositive integer, so both the
@@ -111,7 +111,7 @@ theorem dlmf_5_15_5 (n : ℕ) (hn : 1 ≤ n) {z : ℂ}
 ::::
 
 ::::dlmfEntry "5.15.6" "https://dlmf.nist.gov/5.15.E6"
-$$`\[\psi ^{(n)}(1-z)+(-1)^{n-1}\psi ^{(n)}(z)=(-1)^n\pi \,\frac{d^n}{dz^n}\cot (\pi z),\qquad n=1,2,3,\ldots .\]`
+$$`\psi ^{(n)}(1-z)+(-1)^{n-1}\psi ^{(n)}(z)=(-1)^n\pi \,\frac{d^n}{dz^n}\cot (\pi z),\qquad n=1,2,3,\ldots .`
 
 Reflection pairs the values at `z` and `1−z`.  The right side is the `n`-th
 derivative, with respect to `z`, of `cot(πz)`, multiplied by the source factor
@@ -129,7 +129,7 @@ theorem dlmf_5_15_6 (n : ℕ) (hn : 1 ≤ n) {z : ℂ}
 ::::
 
 ::::dlmfEntry "5.15.7" "https://dlmf.nist.gov/5.15.E7"
-$$`\[\psi ^{(n)}(mz)=\frac{1}{m^{n+1}}\sum _{k=0}^{m-1}\psi ^{(n)}\!\left(z+\frac{k}{m}\right),\qquad m,n=1,2,3,\ldots .\]`
+$$`\psi ^{(n)}(mz)=\frac{1}{m^{n+1}}\sum _{k=0}^{m-1}\psi ^{(n)}\!\left(z+\frac{k}{m}\right),\qquad m,n=1,2,3,\ldots .`
 
 The multiplication formula averages the `m` translated residue classes, with
 the factor `m⁻⁽ⁿ⁺¹⁾`.  Requiring that `mz` avoid the nonpositive integers also
@@ -148,7 +148,7 @@ theorem dlmf_5_15_7 (n m : ℕ) (hn : 1 ≤ n) (hm : 1 ≤ m) {z : ℂ}
 ::::
 
 ::::dlmfEntry "5.15.8" "https://dlmf.nist.gov/5.15.E8"
-$$`\[\psi ^\prime (z)\sim \frac1z+\frac{1}{2z^2}+\sum _{k=1}^{\infty }\frac{B_{2k}}{z^{2k+1}},\qquad z\to\infty ,\quad |\operatorname{ph}z|\leq\pi-\delta .\]`
+$$`\psi ^\prime (z)\sim \frac1z+\frac{1}{2z^2}+\sum _{k=1}^{\infty }\frac{B_{2k}}{z^{2k+1}},\qquad z\to\infty ,\quad |\operatorname{ph}z|\leq\pi-\delta .`
 
 This is a Poincaré expansion in the source sector.  The Lean declaration
 specializes to `x → +∞` on the positive real axis, where `ph x = 0`; its
@@ -165,7 +165,7 @@ theorem dlmf_5_15_8 :
 ::::
 
 ::::dlmfEntry "5.15.9" "https://dlmf.nist.gov/5.15.E9"
-$$`\[\psi ^{(n)}(z)\sim (-1)^{n-1}\!\left(\frac{(n-1)!}{z^n}+\frac{n!}{2z^{n+1}}+\sum _{k=1}^{\infty }\frac{(2k+n-1)!}{(2k)!}\frac{B_{2k}}{z^{2k+n}}\right),\quad z\to\infty ,\quad |\operatorname{ph}z|\leq\pi-\delta .\]`
+$$`\psi ^{(n)}(z)\sim (-1)^{n-1}\!\left(\frac{(n-1)!}{z^n}+\frac{n!}{2z^{n+1}}+\sum _{k=1}^{\infty }\frac{(2k+n-1)!}{(2k)!}\frac{B_{2k}}{z^{2k+n}}\right),\quad z\to\infty ,\quad |\operatorname{ph}z|\leq\pi-\delta .`
 
 For every positive order `n`, the same sectorial convention gives the general
 polygamma expansion.  On the positive real axis the Lean term function records

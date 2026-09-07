@@ -38,7 +38,7 @@ number := false
 Source: [DLMF §4.3(i)](https://dlmf.nist.gov/4.3.i).
 
 ::::dlmfEntry "4.3.F1" "https://dlmf.nist.gov/4.3.F1"
-$$`\[\ln x\quad\text{and}\quad {\mathrm e}^{x}.\]`
+$$`\ln x\quad\text{and}\quad {\mathrm e}^{x}.`
 
 ![Figure 4.3.1: ln x and e^x](https://dlmf.nist.gov/4.3.F1.png)
 
@@ -66,7 +66,7 @@ number := false
 Source: [DLMF §4.3(ii)](https://dlmf.nist.gov/4.3.ii).
 
 ::::dlmfEntry "4.3.F2" "https://dlmf.nist.gov/4.3.F2"
-$$`\[w={\mathrm e}^{z},\qquad z=\ln w.\]`
+$$`w={\mathrm e}^{z},\qquad z=\ln w.`
 
 ![Figure 4.3.2: Conformal mapping of exponential and logarithm](https://dlmf.nist.gov/4.3.F2.png)
 
@@ -139,7 +139,7 @@ In these graphics, height is the absolute value of the function and color is
 its phase.  The principal logarithm has a branch cut on the negative real axis.
 
 ::::dlmfEntry "4.3.F3" "https://dlmf.nist.gov/4.3.F3"
-$$`\[\left|\ln(x+\mathrm{i}y)\right|.\]`
+$$`\left|\ln(x+\mathrm{i}y)\right|.`
 
 ![Figure 4.3.3: ln(x+iy), principal value](https://dlmf.nist.gov/4.3.F3.png)
 
@@ -169,7 +169,7 @@ theorem principal_log_surface_height {x y : ℝ}
 ::::
 
 ::::dlmfEntry "4.3.F4" "https://dlmf.nist.gov/4.3.F4"
-$$`\[\left|{\mathrm e}^{x+\mathrm{i}y}\right|.\]`
+$$`\left|{\mathrm e}^{x+\mathrm{i}y}\right|.`
 
 ![Figure 4.3.4: e^(x+iy)](https://dlmf.nist.gov/4.3.F4.png)
 

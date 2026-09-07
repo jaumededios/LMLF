@@ -46,9 +46,9 @@ noncomputable def barnesG (z : ℂ) : ℂ :=
 ```
 
 ::::dlmfEntry "5.17.1" "https://dlmf.nist.gov/5.17.E1"
-$$`\[
+$$`
 G(z+1)=\Gamma(z)G(z),\qquad G(1)=1.
-\]`
+`
 
 Away from the nonpositive integers, Barnes' function satisfies the first-order
 recurrence with the Gamma function; its normalization at one is one.  The
@@ -70,9 +70,9 @@ theorem barnesG_one : barnesG 1 = 1
 ::::
 
 ::::dlmfEntry "5.17.2" "https://dlmf.nist.gov/5.17.E2"
-$$`\[
+$$`
 G(n)=(n-2)!(n-3)!\cdots1!,\qquad n=2,3,\ldots.
-\]`
+`
 
 At each integer `n ≥ 2`, repeated use of the recurrence gives the finite
 factorial product beginning with `(n−2)!` and ending with `1!`.  The finite
@@ -93,11 +93,11 @@ theorem dlmf_5_17_2 {n : ℕ} (hn : 2 ≤ n) :
 ::::
 
 ::::dlmfEntry "5.17.3" "https://dlmf.nist.gov/5.17.E3"
-$$`\[
+$$`
 G(z+1)=(2\pi)^{z/2}\exp\!\left(-\frac12z(z+1)-\frac12\gamma z^2\right)
 \prod_{k=1}^{\infty}\left(\left(1+\frac zk\right)^k
 \exp\!\left(-z+\frac{z^2}{2k}\right)\right).
-\]`
+`
 
 For complex `z`, the canonical product multiplies the exponential prefactor
 by the factors indexed from `k=1`.  The index `{n : ℕ // 1 ≤ n}` records that
@@ -114,10 +114,10 @@ theorem dlmf_5_17_3 (z : ℂ) :
 ::::
 
 ::::dlmfEntry "5.17.4" "https://dlmf.nist.gov/5.17.E4"
-$$`\[
+$$`
 \operatorname{Ln}G(z+1)=\frac12z\ln(2\pi)-\frac12z(z+1)
 +z\operatorname{Ln}\Gamma(z+1)-\int_0^z\operatorname{Ln}\Gamma(t+1)\,dt.
-\]`
+`
 
 The source identity is complex and uses a path from `0` to `z`, with the
 specified continuation of the general logarithms.  For real `x>0`, the path
@@ -137,11 +137,11 @@ theorem dlmf_5_17_4 {x : ℝ} (hx : 0 < x) :
 ::::
 
 ::::dlmfEntry "5.17.5" "https://dlmf.nist.gov/5.17.E5"
-$$`\[
+$$`
 \operatorname{Ln}G(z+1)\sim\frac14z^2+z\operatorname{Ln}\Gamma(z+1)
 -\left(\frac12z(z+1)+\frac1{12}\right)\ln z-\ln A
 +\sum_{k=1}^{\infty}\frac{B_{2k+2}}{2k(2k+1)(2k+2)z^{2k}}.
-\]`
+`
 
 As `z` tends to infinity in `|ph z| ≤ π−δ` with `δ>0`, DLMF gives a
 Poincaré expansion in Bernoulli numbers, with `A` Glaisher's constant.  On
@@ -177,9 +177,9 @@ theorem dlmf_5_17_5 :
 ::::
 
 ::::dlmfEntry "5.17.6" "https://dlmf.nist.gov/5.17.E6"
-$$`\[
+$$`
 A=e^C=1.28242\,71291\,00622\,63687\ldots.
-\]`
+`
 
 Glaisher's constant `A` is the exponential of the constant `C`; the displayed
 digits give its decimal expansion.
@@ -210,12 +210,12 @@ theorem dlmf_5_17_6 :
 ::::
 
 ::::dlmfEntry "5.17.7" "https://dlmf.nist.gov/5.17.E7"
-$$`\[
+$$`
 C=\lim_{n\to\infty}\left(\sum_{k=1}^n k\ln k-
 \left(\frac12n^2+\frac12n+\frac1{12}\right)\ln n+\frac14n^2\right)
 =\frac{\gamma+\ln(2\pi)}{12}-\frac{\zeta'(2)}{2\pi^2}
 =\frac1{12}-\zeta'(-1).
-\]`
+`
 
 The constant `C` is the limit of the renormalized weighted logarithmic sum,
 and the source gives two equivalent forms in terms of derivatives of the
