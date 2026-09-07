@@ -4,6 +4,7 @@ import LMLF.Integral.Improper.Bochner
 import LMLF.ODE.LinearFirstOrder
 import LMLF.ODE.LinearSecondOrder
 import LMLF.ODE.FundamentalPair
+import LMLF.ODE.Hypergeometric
 import LMLF.ODE.Wronskian
 import LMLF.Quantitative.Basic
 

@@ -1,8 +1,10 @@
 # Chapter 5: local Gauss hypergeometric series
 
-**Status: accepted.** The reviewed natural-language proof and Lean implementation close exactly
-`C05-09-01`. They provide partial local-series evidence for `C05-09-02`, which remains pending
-because its all-parameter differential-equation assertion is not proved.
+**Status: accepted historical series slice.** The reviewed natural-language proof and Lean
+implementation close exactly `C05-09-01`. They also provide the local definition, coefficient,
+convergence, origin-value, analyticity, and Gamma-bridge part of `C05-09-02`; the separately
+accepted [local Gauss-ODE slice](chapter05-hypergeometric-ode.md) now supplies the missing
+all-parameter differential equation and closes that row.
 
 ## Source, scope, and review record
 
@@ -46,17 +48,19 @@ The accepted scope is deliberately local.
 - `C05-09-01` is checked: the ordinary Gauss coefficient, its nonexceptional denominator
   hypothesis, genuine convergence and summation for `‖z‖ < 1`, its named local sum, normalization
   at zero, and point-variable analyticity on the open unit disk are implemented.
-- `C05-09-02` remains pending/partial. The regularized local definition, Gamma-denominator
-  coefficients, all-parameter unit-disk summation, origin value, and ordinary/regularized bridge
-  are implemented. The assertion that this function solves the hypergeometric equation for every
-  parameter is missing.
+- This historical slice contributed partial evidence to `C05-09-02`: the regularized local
+  definition, Gamma-denominator coefficients, all-parameter unit-disk summation, origin value,
+  analyticity, and ordinary/regularized bridge. The separately accepted
+  [local Gauss-ODE implementation](chapter05-hypergeometric-ode.md) proves the remaining
+  all-parameter differential equation, so the combined evidence now checks that row.
 - No result here constructs analytic continuation, a principal cut-plane branch, a value on the
   unit circle, parameter analyticity, a transformation identity, or a derivative formula.
-- A separate private hypergeometric-ODE proof packet has passed two independent mathematical
-  reviews. Its Lean implementation remains pending and earns no present coverage credit.
+- `C05-09-03` remains pending. Its separate natural-language packet is not a Lean implementation
+  and earns no coverage credit.
 
-Thus this slice adds exactly one claim component. Current Chapter 5 coverage is
-`12/108 = 11.11%` claim components, `2/13 = 15.38%` whole numbered theorems, and
+This historical slice itself added exactly one claim component; the separately accepted ODE slice
+adds one more. Current Chapter 5 coverage is `13/108 = 12.04%` claim components,
+`2/13 = 15.38%` whole numbered theorems, and
 `0/44 = 0%` exercises.
 
 ## Local objects and totalization discipline
@@ -214,8 +218,8 @@ under `hc`. The regularized constant coefficient is
 \]
 
 for all parameters. In particular, if `c` is a nonpositive integer, Mathlib's Gamma value and its
-inverse are zero, matching the regularized constant coefficient. This all-parameter local fact
-does not supply the missing hypergeometric differential equation.
+inverse are zero, matching the regularized constant coefficient. This all-parameter local fact was
+partial evidence only; the separately accepted ODE module now supplies the differential equation.
 
 ## Analyticity and consumers
 

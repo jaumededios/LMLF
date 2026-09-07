@@ -15,7 +15,8 @@ the [Chapter 5 checklist](blueprint/olver/chapter05.md), the approved
 [global-IVP](blueprint/olver/chapter05-global-ivp.md) and
 [fundamental-pair](blueprint/olver/chapter05-fundamental-pairs.md) blueprints, the accepted
 [first-order blueprint](blueprint/olver/chapter05-first-order.md), and the accepted
-[local Gauss-series blueprint](blueprint/olver/chapter05-hypergeometric-series.md).
+[local Gauss-series](blueprint/olver/chapter05-hypergeometric-series.md) and
+[local Gauss-ODE](blueprint/olver/chapter05-hypergeometric-ode.md) blueprints.
 The first accepted Lean slice checks exactly `C05-01-08`–`C05-01-11`: the
 Wronskian derivative, Abel identity, zero/nowhere-zero alternative, and
 constant-Wronskian corollary. The accepted Theorem 1.1 slice now also checks
@@ -24,8 +25,8 @@ initial value and derivative, and infinitely many solutions. The accepted Theore
 `C05-01-04`--`C05-01-07`: interval-relative spanning and linear independence, the existing
 Wronskian definition, the full three-way equivalence, explicit Cramer representations, and the
 normalized canonical pair. The accepted first-order slice completes `C05-01-01`, and the accepted
-local Gauss-series slice completes `C05-09-01`. Chapter 5 therefore stands at
-`12/108 = 11.11%` of the disclosed claim-component inventory, `2/13 = 15.38%` whole numbered
+local Gauss-series and ODE slices complete `C05-09-01` and `C05-09-02`. Chapter 5 therefore stands
+at `13/108 = 12.04%` of the disclosed claim-component inventory, `2/13 = 15.38%` whole numbered
 theorems, and `0/44` exercises. All eleven claim components in §1 are now checked; its two
 exercises remain unproved.
 
@@ -50,10 +51,13 @@ statements.
 The accepted local-series implementation and tests are in
 [`LMLF/Definitions/Hypergeometric.lean`](LMLF/Definitions/Hypergeometric.lean) and
 [`LMLFTest/Definitions/Hypergeometric.lean`](LMLFTest/Definitions/Hypergeometric.lean).
-`C05-09-02` remains pending/partial: the regularized definition, coefficients, convergence, and
-origin value are present, but the all-parameter hypergeometric ODE is not. A separate private ODE
-proof packet has passed two independent mathematical reviews; its Lean implementation remains
-pending and earns no coverage credit.
+The accepted local ODE implementation and tests are in
+[`LMLF/ODE/Hypergeometric.lean`](LMLF/ODE/Hypergeometric.lean) and
+[`LMLFTest/ODE/Hypergeometric.lean`](LMLFTest/ODE/Hypergeometric.lean). They complete `C05-09-02`
+by proving the unnormalized Gauss equation for the regularized series at every parameter and for
+the ordinary series under its denominator hypothesis, throughout the open unit disk and including
+the origin. `C05-09-03` remains pending; its separate natural-language packet is not a Lean
+implementation and earns no coverage credit.
 
 Both bounded A/B candidates were mathematically correct and built
 successfully. The Sol candidate was selected because it had cleaner public
@@ -98,6 +102,11 @@ Planning and review artifacts are kept explicit:
   accepted ordinary and regularized local Gauss-series API on the open unit disk.
 - [`LMLFTest/Definitions/Hypergeometric.lean`](LMLFTest/Definitions/Hypergeometric.lean) provides
   its nonpublic coefficient, convergence, exceptional-parameter, and analyticity consumers.
+- [`LMLF/ODE/Hypergeometric.lean`](LMLF/ODE/Hypergeometric.lean) provides the accepted ordinary and
+  all-parameter regularized Gauss differential equations on the open unit disk.
+- [`LMLFTest/ODE/Hypergeometric.lean`](LMLFTest/ODE/Hypergeometric.lean) provides local consumers at
+  the origin, exceptional denominator parameters, and terminating numerator parameters, including
+  a combined analyticity, twice-differentiability, and ODE consumer at `c = -N`.
 - `LMLF/Quantitative/Basic.lean` provides the eight candidate finite-error declarations.
 - [`LMLF/ODE/LinearFirstOrder.lean`](LMLF/ODE/LinearFirstOrder.lean) provides the accepted real and
   complex exponential-of-an-integral solution and classification API.
