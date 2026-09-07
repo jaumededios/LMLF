@@ -98,6 +98,12 @@ a { color: var(--lmlf-link); }
 .lmlf-lean[open] > summary { border-bottom: 1px solid var(--lmlf-lean-rule); }
 .lmlf-lean__body { padding: .2rem .7rem .65rem; }
 
+/* Blueprint declarations elaborate with `sorry`, but proof status is not part of the
+   reader-facing statement. Verso attaches that warning to the theorem name; suppress only
+   its popover and warning decoration inside LMLF statement disclosures. */
+.lmlf-lean .has-info.warning { text-decoration: none; }
+.lmlf-lean .has-info.warning > .hover-container { display: none; }
+
 .lmlf-section-list > ul {
   list-style: none;
   margin-left: 0;
@@ -135,6 +141,19 @@ a { color: var(--lmlf-link); }
 .lmlf-coverage thead { background: var(--lmlf-heading); }
 "#
 
+private def lmlfJs : String := r#"
+document.addEventListener("DOMContentLoaded", () => {
+  document.querySelectorAll(".lmlf-lean .has-info.warning").forEach(element => {
+    const message = element.querySelector(".verso-message.warning");
+    if (message?.textContent.trim() === "declaration uses `sorry`") {
+      if (element._tippy) element._tippy.destroy();
+      element.classList.remove("warning");
+      element.querySelector(":scope > .hover-container")?.remove();
+    }
+  });
+});
+"#
+
 block_extension LeanDisclosure (label : String) where
   data := .str label
   traverse _ _ _ := pure none
@@ -150,6 +169,7 @@ block_extension LeanDisclosure (label : String) where
       </details>
     }}
   extraCss := [lmlfCss]
+  extraJs := [lmlfJs]
 
 block_extension DLMFEntry (number : String) (sourceUrl : String) where
   data := .arr #[.str number, .str sourceUrl]
