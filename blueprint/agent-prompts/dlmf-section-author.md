@@ -114,9 +114,11 @@ Before finishing:
 2. build `LEAN_FILE` with the pinned project;
 3. build `DOC_FILE` if its standalone shape permits it;
 4. search both files for `#check` and reject any hit;
-5. when the page is integrated, run `node scripts/check_rendered_tex.mjs` and
-   reject any KaTeX parse failure;
-6. report counts, build results, specialization decisions, vocabulary requests,
+5. run `node scripts/check_source_tex.mjs DOC_FILE` and reject any KaTeX parse
+   failure;
+6. when the page is integrated, run `node scripts/check_rendered_tex.mjs` and
+   reject any generated-site KaTeX parse failure;
+7. report counts, build results, specialization decisions, vocabulary requests,
    and every remaining gap.
 
 Do not claim the section is complete unless expected and stated ID sets are equal

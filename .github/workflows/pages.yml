@@ -26,6 +26,9 @@ jobs:
       - name: Configure GitHub Pages
         uses: actions/configure-pages@983d7736d9b0ae728b81ab479565c72886d7745b # v5
 
+      - name: Validate source TeX
+        run: node scripts/check_source_tex.mjs
+
       - name: Validate generated TeX
         run: node scripts/check_rendered_tex.mjs
 

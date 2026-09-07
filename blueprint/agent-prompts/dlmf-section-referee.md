@@ -31,8 +31,9 @@ For every numbered DLMF formula in `SECTION_RANGE`, check:
 10. neither source file contains `#check`, filler status prose, or proof work that
     displaced statement coverage;
 11. every Verso math block contains raw KaTeX input without redundant `\[...\]`
-    delimiters or unsupported commands; when integrated, the generated site passes
-    `node scripts/check_rendered_tex.mjs`.
+    delimiters or unsupported commands; the source passes
+    `node scripts/check_source_tex.mjs DOC_FILE`, and when integrated the generated
+    site passes `node scripts/check_rendered_tex.mjs`.
 
 Also sample non-formula statement candidates—prose assertions, tables, captions,
 and notes—and flag mathematically substantive claims missing from the authored
