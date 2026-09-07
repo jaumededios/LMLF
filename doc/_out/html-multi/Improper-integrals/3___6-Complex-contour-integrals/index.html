@@ -1,0 +1,1268 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script>
+      (function(){
+  const {protocol:proto, host:hostName, pathname:path, search:srch, hash:hsh} = window.location;
+  if (!(path.endsWith("/") || path.endsWith(".html"))) {
+    window.location.replace(`${proto}//${hostName}${path}/${srch}${hsh}`);
+  }
+})()</script>
+    <script>
+      // Enable TypeScript checking.
+// @ts-check
+
+// Applies a saved table-of-contents width before the first paint.
+//
+// This is a tiny inline counterpart to toc-resize.js: it runs in the page head so that
+// returning desktop readers do not see the default width flash to their saved width.
+// It only records the width in the --verso-toc-user-width custom property; the
+// stylesheet clamps it and ignores it on mobile, and toc-resize.js then takes over the
+// interactive resizing. Keep the storage key in sync with toc-resize.js.
+
+(function () {
+    try {
+        const saved = localStorage.getItem("verso-toc-width");
+        // Parse to a number (as toc-resize.js does) and write that back, so a stored
+        // value with stray whitespace becomes a valid length rather than `" 420 px"`.
+        const width = saved === null ? NaN : Number(saved);
+        if (Number.isFinite(width)) {
+            document.documentElement.style.setProperty("--verso-toc-user-width", `${width}px`);
+        }
+    } catch (_) {
+        // Leave the default width in place when local storage is unavailable.
+    }
+})();
+</script>
+    <base href="./../../"><meta charset="utf-8">
+    <meta name="viewport" content="height=device-height, width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
+    <title>3.6 Complex contour integrals</title><link rel="stylesheet" href="book.css">
+    <link rel="stylesheet" href="verso-vars.css">
+    <script src="https://cdn.jsdelivr.net/npm/marked@11.1.1/marked.min.js" integrity="sha384-zbcZAIxlvJtNE3Dp5nxLXdXtXyxwOdnILY1TDPVmKFhl4r4nSUG1r8bcFXGVa4Te" crossorigin="anonymous"></script>
+    <script defer="defer" src="-verso-search/elasticlunr.min.js"></script>
+    <script defer="defer" src="-verso-search/fuzzysort.min.js"></script>
+    <script defer="defer" src="-verso-search/searchIndex.js"></script>
+    <script defer="defer" src="-verso-search/search-config.js"></script>
+    <script type="module" src="-verso-search/search-init.js"></script>
+    <link rel="stylesheet" href="-verso-search/search-box.css">
+    <link rel="stylesheet" href="-verso-search/search-page.css">
+    <link rel="stylesheet" href="-verso-search/search-highlight.css">
+    <link rel="stylesheet" href="-verso-search/domain-display.css">
+    <script src="-verso-search/search-highlight.js" defer="defer"></script>
+    <script src="toc-resize.js" defer="defer"></script>
+    <script src="-verso-data/katex/katex.js"></script>
+    <script src="-verso-data/katex/math.js"></script>
+    <script src="-verso-data/popper.min.js"></script>
+    <script src="-verso-data/tippy-bundle.umd.min.js"></script>
+    <link rel="stylesheet" href="-verso-data/tippy-border.css">
+    <link rel="stylesheet" href="-verso-data/katex/katex.css">
+    <style>
+:root {
+  --verso-text-font-family: Georgia, "Times New Roman", serif;
+  --verso-content-max-width: 64rem;
+  --lmlf-ink: #111;
+  --lmlf-muted: #555;
+  --lmlf-link: #0645ad;
+  --lmlf-heading: #d3dce6;
+  --lmlf-heading-dark: #bcc4cc;
+  --lmlf-rule: #a4abb2;
+  --lmlf-lean: #f4f8fc;
+  --lmlf-lean-rule: #9bb7d3;
+}
+
+body {
+  background: #fff;
+  color: var(--lmlf-ink);
+  font-family: Georgia, "Times New Roman", serif;
+}
+
+main { max-width: 74rem; }
+
+h1, h2, h3, h4,
+.lmlf-source-link,
+.lmlf-dlmf-entry__source,
+.lmlf-lean > summary {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+h2 {
+  background: var(--lmlf-heading-dark);
+  border-top: .28rem double var(--lmlf-rule);
+  color: #111;
+  padding: .38rem .55rem;
+}
+
+h3 {
+  background: var(--lmlf-heading);
+  color: #111;
+  padding: .28rem .48rem;
+}
+
+h4 { color: #222; }
+a { color: var(--lmlf-link); }
+
+.lmlf-source-link {
+  border-bottom: 1px solid #c8cdd2;
+  margin: .3rem 0 1.35rem;
+  padding: 0 0 .6rem;
+}
+
+.lmlf-source-link a { font-weight: 700; }
+
+.lmlf-dlmf-entry {
+  border-bottom: 1px solid #c8cdd2;
+  border-top: 1px solid #c8cdd2;
+  margin: 1.2rem 0 1.7rem;
+  padding: .75rem 0 .95rem;
+}
+
+.lmlf-dlmf-entry__body {
+  display: grid;
+  gap: .15rem;
+}
+
+.lmlf-dlmf-entry__source {
+  font-size: .86rem;
+  font-weight: 700;
+  margin-bottom: .65rem;
+}
+
+.lmlf-dlmf-entry__body > :first-child { margin-top: 0; }
+
+.lmlf-lean {
+  background: var(--lmlf-lean);
+  border: 1px solid var(--lmlf-lean-rule);
+  margin: .85rem 0 .15rem;
+}
+
+.lmlf-lean > summary {
+  color: #174f80;
+  cursor: pointer;
+  font-size: .86rem;
+  font-weight: 700;
+  padding: .55rem .7rem;
+}
+
+.lmlf-lean[open] > summary { border-bottom: 1px solid var(--lmlf-lean-rule); }
+.lmlf-lean__body { padding: .2rem .7rem .65rem; }
+
+/* Blueprint declarations elaborate with `sorry`, but proof status is not part of the
+   reader-facing statement. Verso attaches that warning to the theorem name; suppress only
+   its popover and warning decoration inside LMLF statement disclosures. */
+.lmlf-lean .has-info.warning { text-decoration: none; }
+.lmlf-lean .has-info.warning > .hover-container { display: none; }
+
+.lmlf-section-list > ul {
+  list-style: none;
+  margin-left: 0;
+  padding-left: 0;
+}
+
+.lmlf-section-list li {
+  border-bottom: 1px dotted #b7bcc1;
+  padding: .24rem .15rem;
+}
+
+.lmlf-section-list li::before {
+  color: #5f6770;
+  content: "\203A";
+  display: inline-block;
+  margin-right: .48rem;
+}
+
+.lmlf-coverage {
+  border-collapse: collapse;
+  font-family: Arial, Helvetica, sans-serif;
+  margin: 1rem 0 1.4rem;
+  width: 100%;
+}
+
+.lmlf-coverage th,
+.lmlf-coverage td {
+  border-bottom: 1px solid #c8cdd2;
+  padding: .42rem .55rem;
+  text-align: right;
+}
+
+.lmlf-coverage th:first-child,
+.lmlf-coverage td:first-child { text-align: left; }
+.lmlf-coverage thead { background: var(--lmlf-heading); }
+</style><style>
+
+.hl.lean {
+  white-space: pre;
+  font-weight: normal;
+  font-style: normal;
+  font-size: inherit;
+}
+
+.hl.lean .keyword {
+  color: var(--verso-code-keyword-color,);
+  font-weight: var(--verso-code-keyword-weight, bold);
+  font-style: var(--verso-code-keyword-style, normal);
+  font-family: var(--verso-code-keyword-font-family,);
+}
+
+.hl.lean .const {
+  color: var(--verso-code-const-color,);
+  font-weight: var(--verso-code-const-weight, normal);
+  font-style: var(--verso-code-const-style, normal);
+  font-family: var(--verso-code-const-font-family,);
+}
+
+.hl.lean .var {
+  color: var(--verso-code-var-color,);
+  font-weight: var(--verso-code-var-weight, normal);
+  font-style: var(--verso-code-var-style, italic);
+  font-family: var(--verso-code-var-font-family,);
+
+  position: relative;
+}
+
+.hl.lean .literal, .hl.lean .unknown {
+  color: var(--verso-code-color,);
+  font-weight: normal;
+  font-style: normal;
+  font-family: var(--verso-code-font-family,);
+}
+
+/* These lexically-classified token kinds default to the `.unknown` appearance. The rule follows
+   `.const` so it wins for the `anon-ctor` tokens, which also carry the `const` class. */
+.hl.lean .anon-ctor,
+.hl.lean .number,
+.hl.lean .char,
+.hl.lean .comment,
+.hl.lean .punctuation,
+.hl.lean .delim,
+.hl.lean .wildcard {
+  color: var(--verso-code-color,);
+  font-weight: normal;
+  font-style: normal;
+  font-family: var(--verso-code-font-family,);
+}
+
+.hover-container {
+  width: 0;
+  height: 0;
+  position: relative;
+  display: inline;
+}
+
+.hl.lean a {
+  color: inherit;
+  text-decoration: currentcolor underline dotted;
+}
+
+.hl.lean a:hover {
+  text-decoration: currentcolor underline solid;
+}
+
+.hl.lean .hover-info {
+  white-space: normal;
+}
+
+.hl.lean .token .hover-info {
+  display: none;
+  position: absolute;
+  background-color: #e5e5e5;
+  border: 1px solid black;
+  padding: 0.5rem;
+  z-index: 300;
+}
+
+.hl.lean .hover-info.messages {
+  max-height: 10rem;
+  overflow-y: auto;
+  overflow-x: hidden;
+  scrollbar-gutter: stable;
+  padding: 0 0.5rem 0 0;
+  display: block;
+}
+
+.hl.lean .hover-info code {
+  white-space: pre-wrap;
+  background: none;
+  color: black;
+}
+
+.hl.lean .hover-info.messages > code {
+  padding: 0.5rem;
+  display: block;
+  width: fit-content;
+}
+
+.hl.lean .hover-info.messages > code:only-child {
+  margin: 0;
+}
+
+.hl.lean .hover-info.messages > code {
+  margin: 0.1rem;
+}
+
+.hl.lean .hover-info.messages > code:not(:first-child) {
+  margin-top: 0rem;
+}
+
+.hl.lean {
+}
+
+.hl.lean.block {
+  display: block;
+}
+
+.hl.lean.inline {
+  display: inline;
+  white-space: pre-wrap;
+}
+
+.hl.lean * {
+}
+
+.hl.lean .token {
+  transition: all 0.25s; /* Slight fade for highlights */
+}
+
+@media (hover: hover) {
+  .hl.lean .token.binding-hl, .hl.lean .literal:hover, .hl.lean .token.typed:hover {
+    background-color: #eee;
+    border-radius: 2px;
+    transition: none;
+  }
+}
+
+
+.hl.lean .has-info .token:not(.tactic-state):not(.tactic-state *), .hl.lean .has-info .inter-text:not(.tactic-state):not(.tactic-state *) {
+  text-decoration-style: wavy;
+  text-decoration-line: underline;
+  text-decoration-thickness: from-font;
+  text-decoration-skip-ink: none;
+}
+
+.hl.lean .has-info .hover-info {
+  display: none;
+  position: absolute;
+  transform: translate(0.25rem, 0.3rem);
+  border: 1px solid black;
+  padding: 0.5rem;
+  z-index: 400;
+  text-align: left;
+}
+
+.hl.lean .has-info.error :not(.tactic-state):not(.tactic-state *){
+  text-decoration-color: red;
+}
+
+@media (hover: hover) {
+  .hl.lean .has-info.error:hover {
+    background-color: #ffb3b3;
+  }
+}
+
+.hl.lean .hover-info.messages > code.error {
+  background-color: #e5e5e5;
+  border-left: 0.2rem solid #ffb3b3;
+}
+
+.tippy-box[data-theme~='error'] .hl.lean .hover-info.messages > code.error {
+  background: none;
+  border: none;
+}
+
+.error .verso-message, .error .verso-message .token, .error .verso-message label {
+  color: var(--verso-error-color);
+}
+
+.error .verso-message .case-label:has(input[type="checkbox"])::before {
+  background-color: var(--verso-error-color) !important;
+}
+
+.hl.lean .has-info.warning :not(.tactic-state):not(.tactic-state *) {
+  text-decoration-color: var(--verso-warning-indicator-color);
+}
+
+@media (hover: hover) {
+  .hl.lean .has-info.warning:hover {
+    background-color:var(--verso-warning-color);
+  }
+}
+
+.hl.lean .hover-info.messages > code.warning {
+  background-color: var(--verso-warning-color);
+}
+
+.lean-output {
+  border-left: 0.2em solid transparent;
+  padding: 0 0 0 0.5em;
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+.lean-output.error {
+  border-color: var(--verso-error-indicator-color);
+}
+
+.lean-output.information {
+  border-color: var(--verso-info-indicator-color);
+}
+
+.lean-output.warning {
+  border-color: var(--verso-warning-indicator-color);
+}
+
+.hl.lean .hover-info.messages > code.error {
+  background-color: #e5e5e5;
+  border-left: 0.2rem solid var(--verso-warning-color);
+}
+
+.tippy-box[data-theme~='warning'] .hl.lean .hover-info.messages > code.warning {
+  background: none;
+  border: none;
+}
+
+
+.hl.lean .has-info.information :not(.tactic-state):not(.tactic-state *) {
+  text-decoration-color: var(--verso-info-indicator-color, blue);
+}
+
+@media (hover: hover) {
+  .hl.lean .has-info.information:hover {
+    background-color: #4777ff;
+  }
+}
+
+
+.hl.lean .hover-info.messages > code.information {
+  background-color: #e5e5e5;
+  border-left: 0.2rem solid #4777ff;
+}
+
+.tippy-box[data-theme~='info'] .hl.lean .hover-info.messages > code.information {
+  background: none;
+  border: none;
+}
+
+.hl.lean div.docstring {
+  font-family: var(--verso-text-font-family, sans-serif);
+  white-space: normal;
+  max-width: calc(min(40rem, 90vw));
+  width: max-content;
+}
+
+.hl.lean div.docstring > :last-child {
+  margin-bottom: 0;
+}
+
+.hl.lean div.docstring > :first-child {
+  margin-top: 0;
+}
+
+.hl.lean .hover-info .sep {
+  display: block;
+  width: auto;
+  margin-left: 1rem;
+  margin-right: 1rem;
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+  padding: 0;
+  height: 1px;
+  border-top: 1px solid #ccc;
+}
+
+.hl.lean code {
+  font-family: var(--verso-code-font-family);
+}
+
+.hl.lean .tactic-state {
+  display: none;
+  position: relative;
+  width: fit-content;
+  border: 1px solid #888888;
+  border-radius: 0.1rem;
+  padding: 0.5rem;
+  font-family: sans-serif;
+  background-color: #ffffff;
+}
+
+.hl.lean.popup .tactic-state {
+  position: static;
+  display: block;
+  width: auto;
+  border: none;
+  padding: 0.5rem;
+  font-family: sans-serif;
+  background-color: #ffffff;
+}
+
+
+.hl.lean .tactic {
+  position: relative;
+  display: inline;
+  vertical-align: top;
+  /* Without these, mobile Safari will start making font sizes inconsistent when its text size adjustment feature is triggered.*/
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+.hl.lean .tactic:has(> .tactic-toggle:checked) {
+  display: inline-grid;
+  grid-template-columns: 1fr;
+}
+
+.hl.lean .tactic-toggle:checked ~ .tactic-state {
+  display: inline-block;
+  vertical-align: top;
+  grid-row: 2;
+  justify-self: start;
+}
+
+.hl.lean .tactic > label {
+  position: relative;
+  grid-row: 1;
+  display: inline;
+}
+
+@media (hover: hover) {
+  /* Highlight a region on hover only when its own toggle is unchecked, and only the innermost
+     hovered region: `label:hover` bubbles to ancestor labels, so suppress the highlight on a region
+     whose label contains a more deeply nested hovered tactic label. */
+  .hl.lean .tactic:has(> .tactic-toggle:not(:checked)) > label:hover:not(:has(.tactic > label:hover)) {
+    background-color: #eeeeee;
+  }
+}
+
+.hl.lean .tactic-toggle {
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0;
+  height: 0;
+  width: 0;
+  z-index: -10;
+}
+
+.hl.lean .tactic > label::after {
+  content: "";
+  border: 1px solid #bbbbbb;
+  /* These need to be em, not rem, to scale with the font */
+  border-radius: 1em;
+  height: 0.25em;
+  vertical-align: middle;
+  width: 0.6em;
+  margin-left: 0.1em;
+  margin-right: 0.1em;
+  display: inline-block;
+  transition: all 0.5s;
+}
+
+/*
+@media (hover: hover) {
+  .hl.lean .tactic > label:hover::after {
+    border: 1px solid #aaaaaa;
+    background-color: #aaaaaa;
+    transition: all 0.5s;
+  }
+}
+*/
+
+.hl.lean .tactic > label:has(+ .tactic-toggle:checked)::after {
+  border: 1px solid #999999;
+  background-color: #999999;
+  transition: all 0.5s;
+}
+
+.hl.lean .tactic-state .goal + .goal {
+  margin-top: 1.5em;
+}
+
+/*
+Some CSS frameworks customize details/summary in ways not compatible with Verso's output.
+*/
+
+.hl.lean details {
+  display: block !important;
+  margin: 0;
+}
+
+.hl.lean details summary {
+  display: list-item !important;
+  margin: 0;
+}
+
+.hl.lean details summary:focus {
+  outline: none;
+  outline-offset: none;
+  color: inherit;
+}
+
+.hl.lean ul > li {
+  margin-bottom: 0;
+}
+
+.hl.lean details summary::marker {
+  display: inline !important;
+}
+
+.hl.lean details > summary:first-of-type {
+  list-style-type: disclosure-closed;
+  list-style-position: inside;
+}
+
+.hl.lean details[open] > summary:first-of-type {
+  list-style-type: disclosure-open;
+}
+
+.hl.lean details summary::before, .hl.lean details summary::after {
+  content: "" !important;
+  background: none;
+  display: none;
+}
+
+.hl.lean .tactic-state summary {
+  /* These need to be em, not rem, to scale with the font */
+  margin-left: -0.5em;
+}
+
+.hl.lean .tactic-state details {
+  /* These need to be em, not rem, to scale with the font */
+  padding-left: 0.5em;
+}
+
+.hl.lean .case-label {
+  display: block;
+  position: relative;
+}
+
+.hl.lean .case-label input[type="checkbox"] {
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0;
+  height: 0;
+  width: 0;
+  z-index: -10;
+}
+
+.hl.lean .case-label:has(input[type="checkbox"])::before {
+  display: inline-block;
+  background-color: black;
+  content: ' ';
+  transition: ease 0.2s;
+  margin-right: 0.7em;
+  clip-path: polygon(100% 0, 0 0, 50% 100%);
+  width: 0.6em;
+  height: 0.6em;
+  vertical-align: middle;
+}
+
+.hl.lean .case-label:has(input[type="checkbox"]:not(:checked))::before {
+  transform: rotate(-90deg);
+}
+
+.hl.lean .case-label:has(input[type="checkbox"]) {
+
+}
+
+.hl.lean .case-label:has(input[type="checkbox"]:checked) {
+
+}
+
+
+.hl.lean .labeled-case > :not(:first-child) {
+  max-height: 0px;
+  display: block;
+  overflow: hidden;
+  transition: max-height 0.1s ease-in;
+  /* These need to be em, not rem, to scale with the font */
+  margin-left: 0.5em;
+  margin-top: 0.1em;
+}
+
+.hl.lean .labeled-case:has(.case-label input[type="checkbox"]:checked) > :not(:first-child) {
+  max-height: 100%;
+}
+
+
+.hl.lean .goal-name::before {
+  font-style: normal;
+  content: "case ";
+}
+
+.hl.lean .goal-name {
+  font-style: italic;
+  font-family: var(--verso-code-font-family);
+  color: inherit;
+}
+
+.hl.lean .hypotheses {
+  display: table;
+}
+
+.hl.lean .hypothesis {
+  display: table-row;
+}
+
+.hl.lean .hypothesis > * {
+  display: table-cell;
+}
+
+
+.hl.lean .hypotheses .colon {
+  text-align: center;
+  /* This needs to be em, not rem, to scale with the font */
+  min-width: 1em;
+}
+
+.hl.lean .hypotheses .name {
+  text-align: right;
+}
+
+.hl.lean .hypotheses .name,
+.hl.lean .hypotheses .type,
+.hl.lean .conclusion .type {
+  font-family: var(--verso-code-font-family);
+}
+
+.tippy-box {
+  /* Without these, mobile Safari will start making font sizes inconsistent when its text size adjustment feature is triggered.*/
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+.tippy-box[data-theme~='lean'] {
+  background-color: #e5e5e5;
+  color: black;
+  border: 1px solid black;
+}
+.tippy-box[data-theme~='lean'][data-placement^='top'] > .tippy-arrow::before {
+  border-top-color: #e5e5e5;
+}
+.tippy-box[data-theme~='lean'][data-placement^='bottom'] > .tippy-arrow::before {
+  border-bottom-color: #e5e5e5;
+}
+.tippy-box[data-theme~='lean'][data-placement^='left'] > .tippy-arrow::before {
+  border-left-color: #e5e5e5;
+}
+.tippy-box[data-theme~='lean'][data-placement^='right'] > .tippy-arrow::before {
+  border-right-color: #e5e5e5;
+}
+
+.tippy-box[data-theme~='message'][data-placement^='top'] > .tippy-arrow::before {
+  border-top-color: #e5e5e5;
+  border-width: 11px 11px 0;
+}
+.tippy-box[data-theme~='message'][data-placement^='top'] > .tippy-arrow::after {
+  bottom: -11px;
+  border-width: 11px 11px 0;
+}
+.tippy-box[data-theme~='message'][data-placement^='bottom'] > .tippy-arrow::before {
+  border-width: 0 11px 11px;
+}
+.tippy-box[data-theme~='message'][data-placement^='bottom'] > .tippy-arrow::after {
+  top: -11px;
+  border-width: 0 11px 11px;
+}
+.tippy-box[data-theme~='message'][data-placement^='left'] > .tippy-arrow::before {
+  border-left-color: #e5e5e5;
+  border-width: 11px 0 11px 11px;
+}
+.tippy-box[data-theme~='message'][data-placement^='left'] > .tippy-arrow::after {
+  right: -11px;
+  border-width: 11px 0 11px 11px;
+}
+
+.tippy-box[data-theme~='message'][data-placement^='right'] > .tippy-arrow::before {
+  border-right-color: #e5e5e5;
+  border-width: 11px 11px 11px 0;
+}
+.tippy-box[data-theme~='message'][data-placement^='right'] > .tippy-arrow::after {
+  left: -11px;
+  border-width: 11px 11px 11px 0;
+}
+
+
+
+.tippy-box[data-theme~='warning'] {
+  background-color: #e5e5e5;
+  color: black;
+  border: 3px solid var(--verso-warning-color);
+}
+
+.tippy-box[data-theme~='error'] {
+  background-color: #e5e5e5;
+  color: black;
+  border: 3px solid #f7a7af;
+}
+
+.tippy-box[data-theme~='info'] {
+  background-color: #e5e5e5;
+  color: black;
+  border: 3px solid #99b3c2;
+}
+
+.tippy-box[data-theme~='tactic'] {
+  background-color: white;
+  color: black;
+  border: 1px solid black;
+}
+.tippy-box[data-theme~='tactic'][data-placement^='top'] > .tippy-arrow::before {
+  border-top-color: white;
+}
+.tippy-box[data-theme~='tactic'][data-placement^='bottom'] > .tippy-arrow::before {
+  border-bottom-color: white;
+}
+.tippy-box[data-theme~='tactic'][data-placement^='left'] > .tippy-arrow::before {
+  border-left-color: white;
+}
+.tippy-box[data-theme~='tactic'][data-placement^='right'] > .tippy-arrow::before {
+  border-right-color: white;
+}
+
+.extra-doc-links {
+  list-style-type: none;
+  margin-left: 0;
+  padding: 0;
+}
+
+.extra-doc-links > li {
+  display: inline-block;
+}
+
+.extra-doc-links > li:not(:last-child)::after {
+  content: '|';
+  display: inline-block;
+  margin: 0 0.25em;
+}
+
+.verso-message .trace {
+  display: block;
+}
+
+.verso-message .trace > summary::marker {
+  color: var(--verso-text-color);
+}
+
+.verso-message .trace-children {
+  margin: 0;
+  padding: 0;
+}
+
+.verso-message .trace-children > li {
+  list-style-type: none;
+  margin-left: 1.5em;
+}
+
+.verso-message .trace-children > li:not(:has(.trace)) {
+  margin-left: 0;
+}
+
+.verso-message .trace-class {
+  color: color-mix(in srgb, currentColor 70%, transparent);
+  font-weight: bold;
+  margin: 0;
+  padding: 0;
+}
+
+.verso-message .text {
+  white-space: pre-wrap;
+}
+
+</style><script>
+
+document.addEventListener("DOMContentLoaded", () => {
+  document.querySelectorAll(".lmlf-lean .has-info.warning").forEach(element => {
+    const message = element.querySelector(".verso-message.warning");
+    if (message?.textContent.trim() === "declaration uses `sorry`") {
+      if (element._tippy) element._tippy.destroy();
+      element.classList.remove("warning");
+      element.querySelector(":scope > .hover-container")?.remove();
+    }
+  });
+});
+</script>
+    <script>
+
+window.onload = async () => {
+
+    // Don't show hovers inside of closed tactic states
+    function blockedByTactic(elem) {
+      let parent = elem.parentNode;
+      while (parent && "classList" in parent) {
+        if (parent.classList.contains("tactic")) {
+          const toggle = parent.querySelector(":scope > input.tactic-toggle");
+          if (toggle) {
+            return !toggle.checked;
+          }
+        }
+        parent = parent.parentNode;
+      }
+      return false;
+    }
+
+    // Track whether any tippy is visible (O(1) check instead of DOM scan)
+    let visibleTippyCount = 0;
+    function blockedByTippy(elem) {
+      return visibleTippyCount > 0;
+    }
+
+    // Binding highlights via event delegation with cached lookups
+    const bindingCache = new Map(); // context+binding -> [token elements]
+    let highlightedTokens = [];
+    function getBindingTokens(context, binding) {
+      const key = context + "\0" + binding;
+      let tokens = bindingCache.get(key);
+      if (!tokens) {
+        tokens = [];
+        for (const example of document.querySelectorAll(".hl.lean")) {
+          if (example.dataset.leanContext == context) {
+            for (const tok of example.querySelectorAll(".token[data-binding=\"" + CSS.escape(binding) + "\"]")) {
+              tokens.push(tok);
+            }
+          }
+        }
+        bindingCache.set(key, tokens);
+      }
+      return tokens;
+    }
+    for (const container of document.querySelectorAll(".hl.lean")) {
+      container.addEventListener("mouseover", (event) => {
+        const c = event.target.closest(".token");
+        if (!c || !c.dataset.binding || c.dataset.binding === "" || !container.contains(c)) return;
+        if (blockedByTactic(c)) return;
+        const tokens = getBindingTokens(container.dataset.leanContext, c.dataset.binding);
+        for (const tok of tokens) {
+          tok.classList.add("binding-hl");
+        }
+        highlightedTokens = tokens;
+      });
+      container.addEventListener("mouseout", (event) => {
+        const c = event.target.closest(".token");
+        if (!c || !container.contains(c)) return;
+        for (const tok of highlightedTokens) {
+          tok.classList.remove("binding-hl");
+        }
+        highlightedTokens = [];
+      });
+    }
+    /* Render docstrings */
+    if ('undefined' !== typeof marked) {
+        for (const d of document.querySelectorAll("code.docstring, pre.docstring")) {
+            const str = d.innerText;
+            const html = marked.parse(str);
+            const rendered = document.createElement("div");
+            rendered.classList.add("docstring");
+            rendered.innerHTML = html;
+            d.parentNode.replaceChild(rendered, d);
+        }
+    }
+    // Add hovers
+    const versoDocData = await (fetch("-verso-docs.json").then((resp) => resp.json()));
+
+    function hideParentTooltips(element) {
+      let parent = element.parentElement;
+      while (parent) {
+        const tippyInstance = parent._tippy;
+        if (tippyInstance) {
+          tippyInstance.hide();
+        }
+        parent = parent.parentElement;
+      }
+    }
+
+
+
+    const defaultTippyProps = {
+      /* DEBUG -- remove the space: * /
+      onHide(any) { return false; },
+      trigger: "click",
+      // */
+      /* theme: "lean", */
+      maxWidth: "none",
+      appendTo: () => document.body,
+      interactive: true,
+      delay: [100, null],
+      /* ignoreAttributes: true, */
+      followCursor: 'initial',
+      onShow(inst) {
+        if (inst.reference.className == 'tactic') {
+          const toggle = inst.reference.querySelector(":scope > input.tactic-toggle");
+          if (toggle && toggle.checked) {
+            return false;
+          }
+          hideParentTooltips(inst.reference);
+          if (blockedByTippy(inst.reference)) { return false; }
+
+        } else if (inst.reference.querySelector(".hover-info") || "versoHover" in inst.reference.dataset) {
+          if (blockedByTactic(inst.reference)) { return false };
+          if (blockedByTippy(inst.reference)) { return false; }
+        } else { // Nothing to show here!
+          return false;
+        }
+      },
+      onShown(inst) { visibleTippyCount++; },
+      onHidden(inst) { visibleTippyCount = Math.max(0, visibleTippyCount - 1); },
+      content (tgt) {
+        const content = document.createElement("span");
+        if (tgt.className == 'tactic') {
+          const state = tgt.querySelector(":scope > .tactic-state").cloneNode(true);
+          state.style.display = "block";
+          content.appendChild(state);
+          content.style.display = "block";
+          content.className = "hl lean popup";
+        } else {
+          content.className = "hl lean";
+          content.style.display = "block";
+          content.style.maxHeight = "300px";
+          content.style.overflowY = "auto";
+          content.style.overflowX = "hidden";
+          const hoverId = tgt.dataset.versoHover;
+          const hoverInfo = tgt.querySelector(".hover-info");
+          if (hoverId) { // Docstrings from the table
+            // TODO stop doing an implicit conversion from string to number here
+            let data = versoDocData[hoverId];
+            if (data) {
+              const info = document.createElement("span");
+              info.className = "hover-info";
+              info.style.display = "block";
+              info.innerHTML = data;
+              content.appendChild(info);
+              /* Render docstrings - TODO server-side */
+              if ('undefined' !== typeof marked) {
+                  for (const d of content.querySelectorAll("code.docstring, pre.docstring")) {
+                      const str = d.innerText;
+                      const html = marked.parse(str);
+                      const rendered = document.createElement("div");
+                      rendered.classList.add("docstring");
+                      rendered.innerHTML = html;
+                      d.parentNode.replaceChild(rendered, d);
+                  }
+              }
+            } else {
+              content.innerHTML = "Failed to load doc ID: " + hoverId;
+            }
+          } else if (hoverInfo) { // The inline info, still used for compiler messages
+            content.appendChild(hoverInfo.cloneNode(true));
+          }
+          const extraLinks = tgt.parentElement.dataset['versoLinks'];
+          if (extraLinks) {
+            try {
+              const extras = JSON.parse(extraLinks);
+              const links = document.createElement('ul');
+              links.className = 'extra-doc-links';
+              extras.forEach((l) => {
+                const li = document.createElement('li');
+                li.innerHTML = "<a href=\"" + l['href'] + "\" title=\"" + l.long + "\">" + l.short + "</a>";
+                links.appendChild(li);
+              });
+              content.appendChild(links);
+            } catch (error) {
+              console.error(error);
+            }
+          }
+        }
+        return content;
+      }
+    };
+
+
+    document.querySelectorAll('.hl.lean .const.token, .hl.lean .keyword.token, .hl.lean .literal.token, .hl.lean .option.token, .hl.lean .var.token, .hl.lean .typed.token, .hl.lean .level-var, .hl.lean .level-const, .hl.lean .level-op, .hl.lean .sort').forEach(element => {
+      element.setAttribute('data-tippy-theme', 'lean');
+    });
+    document.querySelectorAll('.hl.lean .has-info.warning').forEach(element => {
+      element.setAttribute('data-tippy-theme', 'warning message');
+    });
+    document.querySelectorAll('.hl.lean .has-info.information').forEach(element => {
+      element.setAttribute('data-tippy-theme', 'info message');
+    });
+    document.querySelectorAll('.hl.lean .has-info.error').forEach(element => {
+      element.setAttribute('data-tippy-theme', 'error message');
+    });
+    document.querySelectorAll('.hl.lean .tactic').forEach(element => {
+      element.setAttribute('data-tippy-theme', 'tactic');
+    });
+    // Skip tokens inside closed tactics — they interfere with tactic tippys
+    const closedTactics = new Set();
+    document.querySelectorAll('.hl.lean .tactic').forEach(tactic => {
+      const toggle = tactic.querySelector(':scope > input.tactic-toggle');
+      if (toggle && !toggle.checked) closedTactics.add(tactic);
+    });
+    function isInsideClosedTactic(el) {
+      const tactic = el.closest('.tactic');
+      return tactic && tactic !== el && closedTactics.has(tactic);
+    }
+
+    const tokenSelector = '.hl.lean .const.token, .hl.lean .keyword.token, .hl.lean .literal.token, .hl.lean .option.token, .hl.lean .var.token, .hl.lean .typed.token, .hl.lean .has-info, .hl.lean .tactic, .hl.lean .level-var, .hl.lean .level-const, .hl.lean .level-op, .hl.lean .sort';
+    tippy(Array.from(document.querySelectorAll(tokenSelector)).filter(el => !isInsideClosedTactic(el)), defaultTippyProps);
+
+    // Create/destroy token tippys when tactic checkbox toggles
+    const tacticTippySelector = '.const.token, .keyword.token, .literal.token, .option.token, .var.token, .typed.token, .has-info, .level-var, .level-const, .level-op, .sort';
+    document.querySelectorAll('.hl.lean .tactic').forEach(tactic => {
+      const toggle = tactic.querySelector(':scope > input.tactic-toggle');
+      if (toggle) toggle.addEventListener('change', () => {
+        if (toggle.checked) {
+          closedTactics.delete(tactic);
+          tactic.querySelectorAll('.token').forEach(tok => {
+            if (!tok._tippy && tok.matches(tacticTippySelector)) {
+              tippy(tok, defaultTippyProps);
+            }
+          });
+        } else {
+          closedTactics.add(tactic);
+          tactic.querySelectorAll('.token').forEach(tok => {
+            if (tok._tippy) tok._tippy.destroy();
+          });
+        }
+      });
+  });
+}
+</script>
+    </head>
+  <body>
+    <header>
+      <div class="header-logo-wrapper"></div>
+      <div class="header-title-wrapper">
+        <a href="" class="header-title"><h1>
+            LMLF</h1>
+          </a></div>
+      </header>
+    <label for="toggle-toc" id="toggle-toc-click"><span class="line line1"></span><span class="line line2"></span><span class="line line3"></span></label><div class="with-toc">
+      <div class="toc-backdrop" onclick="document.getElementById('toggle-toc-click')?.click()"></div>
+      <nav id="toc">
+        <input type="checkbox" id="toggle-toc"><div class="first">
+          <a href="" class="toc-title"><h1>
+              LMLF</h1>
+            </a><div class="split-tocs">
+            <div class="split-toc book">
+              <div class="title">
+                <label for="--verso-manual-toc-----bookRoot" class="toggle-split-toc"><input type="checkbox" class="toggle-split-toc" id="--verso-manual-toc-----bookRoot"></label><span class="">Table of Contents</span></div>
+              <table><tr class="unnumbered"><td class="num"><td><a href="Coverage/#coverage">Coverage</a></td></tr><tr class="numbered"><td class="num">1.</td><td><a href="Finite-error-bounds/#chapter-1">Finite error bounds</a></td></tr><tr class="numbered"><td class="num">2.</td><td><a href="Approximants-and-series/#chapter-2">Approximants and series</a></td></tr><tr class="current numbered"><td class="num">3.</td><td><a href="Improper-integrals/#chapter-3">Improper integrals</a></td></tr><tr class="numbered"><td class="num">4.</td><td><a href="Elementary-Functions/#chapter-4">Elementary Functions</a></td></tr><tr class="numbered"><td class="num">5.</td><td><a href="Gamma-Function/#chapter-5">Gamma Function</a></td></tr><tr class="numbered"><td class="num">6.</td><td><a href="Exponential___-Logarithmic___-Sine___-and-Cosine-Integrals/#chapter-6">Exponential, Logarithmic, Sine, and Cosine Integrals</a></td></tr><tr class="numbered"><td class="num">7.</td><td><a href="Error-Functions___-Dawson___s-and-Fresnel-Integrals/#chapter-7">Error Functions, Dawson's and Fresnel Integrals</a></td></tr><tr class="numbered"><td class="num">8.</td><td><a href="Incomplete-Gamma-and-Related-Functions/#chapter-8">Incomplete Gamma and Related Functions</a></td></tr><tr class="numbered"><td class="num">9.</td><td><a href="Airy-and-Related-Functions/#chapter-9">Airy and Related Functions</a></td></tr><tr class="numbered"><td class="num">10.</td><td><a href="Bessel-Functions/#chapter-10">Bessel Functions</a></td></tr></table></div>
+            <div class="split-toc">
+              <div class="title">
+                <label for="--verso-manual-toc-chapter-3" class="toggle-split-toc"><input type="checkbox" class="toggle-split-toc" id="--verso-manual-toc-chapter-3" checked="checked"></label><span class="number">3.</span> <span class=""><a href="Improper-integrals/#chapter-3">Improper integrals</a></span></div>
+              <table><tr class="unnumbered"><td class="num"><td><a href="Improper-integrals/3___1-Improper-integrals-with-finitely-many-exceptional-points/#LMLF-___-DLMF-with-Lean--Improper-integrals--3___1-Improper-integrals-with-finitely-many-exceptional-points">3.1 Improper integrals with finitely many exceptional points</a></td></tr><tr class="unnumbered"><td class="num"><td><a href="Improper-integrals/3___2-Continuous-primitives-across-the-exceptional-set/#LMLF-___-DLMF-with-Lean--Improper-integrals--3___2-Continuous-primitives-across-the-exceptional-set">3.2 Continuous primitives across the exceptional set</a></td></tr><tr class="unnumbered"><td class="num"><td><a href="Improper-integrals/3___3-Algebra-and-a-change-of-starting-point/#LMLF-___-DLMF-with-Lean--Improper-integrals--3___3-Algebra-and-a-change-of-starting-point">3.3 Algebra and a change of starting point</a></td></tr><tr class="unnumbered"><td class="num"><td><a href="Improper-integrals/3___4-Absolutely-integrable-functions/#LMLF-___-DLMF-with-Lean--Improper-integrals--3___4-Absolutely-integrable-functions">3.4 Absolutely integrable functions</a></td></tr><tr class="unnumbered"><td class="num"><td><a href="Improper-integrals/3___5-Abel-reweighting/#LMLF-___-DLMF-with-Lean--Improper-integrals--3___5-Abel-reweighting">3.5 Abel reweighting</a></td></tr><tr class="current unnumbered"><td class="num"><td><a href="Improper-integrals/3___6-Complex-contour-integrals/#LMLF-___-DLMF-with-Lean--Improper-integrals--3___6-Complex-contour-integrals">3.6 Complex contour integrals</a></td></tr></table></div>
+            <div class="split-toc">
+              <div class="title">
+                <span class="no-toggle"></span><span class="unnumbered"></span><span class="current"><a href="Improper-integrals/3___6-Complex-contour-integrals/#LMLF-___-DLMF-with-Lean--Improper-integrals--3___6-Complex-contour-integrals">3.6 Complex contour integrals</a></span></div>
+              </div>
+            </div>
+          </div>
+        <div class="last"></div>
+        </nav>
+      <div class="toc-resize-handle"></div>
+      <main><div class="content-wrapper">
+          <nav class="prev-next-buttons">
+            <a class="local-button active" href="Improper-integrals/3___5-Abel-reweighting/#LMLF-___-DLMF-with-Lean--Improper-integrals--3___5-Abel-reweighting" rel="prev" title="3.5 Abel reweighting"><span class="arrow">←</span><span class="where">3.5 Abel reweighting</span></a><a class="local-button active" href="Elementary-Functions/#chapter-4" rel="next" title="4. Elementary Functions"><span class="where">4. Elementary Functions</span><span class="arrow">→</span></a></nav>
+          <section>
+            <h1>
+              3.6 Complex contour integrals<span class="permalink-widget inline"><a href="find/?domain=Verso.Genre.Manual.section&amp;name=LMLF-___-DLMF-with-Lean--Improper-integrals--3___6-Complex-contour-integrals" title="Permalink">🔗</a></span></h1>
+            <p>
+              A <code>C1Contour</code> is a continuously differentiable map <code class="math inline">\gamma:[0,1]\to\mathbb C</code>
+with named endpoints and a continuous tangent <code class="math inline">\gamma'</code>. Storing the tangent
+and its within-interval derivative law avoids using a totalized derivative at
+the endpoints. Its integral is the familiar parameterized integral
+<code class="math display">\int_\gamma f(z)\,\mathrm dz
+  =\int_0^1 f(\gamma(t))\gamma'(t)\,\mathrm dt.</code></p>
+            <details class="lmlf-lean" open=""><summary>Lean · C¹ contours and dγ</summary><div class="lmlf-lean__body">
+                <code class="hl lean block" data-lean-context="examples"><span class="keyword token" data-binding="kw-occ-Lean.Parser.Command.structureTk-559">structure</span><span class="inter-text"> </span><span class="const token" data-binding="const-LMLF.Integral.C1Contour" data-verso-hover="144" id="LMLF___Integral___C1Contour">C1Contour</span><span class="inter-text"> </span><span class="keyword token" data-binding="kw-occ-Lean.Parser.Command.structure-559">where</span><span class="inter-text">
+  </span><span class="const token" data-binding="const-LMLF.Integral.C1Contour.point" data-verso-hover="145" id="LMLF___Integral___C1Contour___point">point</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeSpec-593">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Real" data-verso-hover="11">ℝ</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-Lean.Parser.Term.arrow-595">→</span><span class="inter-text"> </span><span class="const token" data-binding="const-Complex" data-verso-hover="146">ℂ</span><span class="inter-text">
+  </span><span class="const token" data-binding="const-LMLF.Integral.C1Contour.tangent" data-verso-hover="147" id="LMLF___Integral___C1Contour___tangent">tangent</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeSpec-617">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Real" data-verso-hover="11">ℝ</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-Lean.Parser.Term.arrow-619">→</span><span class="inter-text"> </span><span class="const token" data-binding="const-Complex" data-verso-hover="146">ℂ</span><span class="inter-text">
+  </span><span class="const token" data-binding="const-LMLF.Integral.C1Contour.start" data-verso-hover="148" id="LMLF___Integral___C1Contour___start">start</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeSpec-639">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Complex" data-verso-hover="146">ℂ</span><span class="inter-text">
+  </span><span class="const token" data-binding="const-LMLF.Integral.C1Contour.finish" data-verso-hover="149" id="LMLF___Integral___C1Contour___finish">finish</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeSpec-654">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Complex" data-verso-hover="146">ℂ</span><span class="inter-text">
+  </span><span class="const token" data-binding="const-LMLF.Integral.C1Contour.point_zero" data-verso-hover="150" id="LMLF___Integral___C1Contour___point_zero">point_zero</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeSpec-673">:</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.12" data-verso-hover="151">point</span><span class="inter-text"> </span><span class="literal number token" data-binding="" data-verso-hover="19">0</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_=_»-675">=</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.18" data-verso-hover="152">start</span><span class="inter-text">
+  </span><span class="const token" data-binding="const-LMLF.Integral.C1Contour.point_one" data-verso-hover="153" id="LMLF___Integral___C1Contour___point_one">point_one</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeSpec-703">:</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.12" data-verso-hover="151">point</span><span class="inter-text"> </span><span class="literal number token" data-binding="" data-verso-hover="19">1</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_=_»-705">=</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.20" data-verso-hover="152">finish</span><span class="inter-text">
+  </span><span class="const token" data-binding="const-LMLF.Integral.C1Contour.hasDeriv" data-verso-hover="154" id="LMLF___Integral___C1Contour___hasDeriv">hasDeriv</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeSpec-733">:</span><span class="inter-text"> </span><span class="unknown token" data-binding="">∀</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.59" data-verso-hover="19">t</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-Lean.«binderPred∈_»-741">∈</span><span class="inter-text"> </span><span class="const token" data-binding="const-Set.Icc" data-verso-hover="120">Icc</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-749">(</span><span class="literal number token" data-binding="" data-verso-hover="19">0</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeAscription-749">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Real" data-verso-hover="11">ℝ</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.typeAscription-749">)</span><span class="inter-text"> </span><span class="literal number token" data-binding="" data-verso-hover="19">1</span><span class="punctuation separator token" data-binding="kw-occ-Lean.«term∀__,_»-735">,</span><span class="inter-text">
+    </span><span class="const token" data-binding="const-HasDerivWithinAt" data-verso-hover="155">HasDerivWithinAt</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.12" data-verso-hover="151">point</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-789">(</span><span class="var token" data-binding="var-_uniq.16" data-verso-hover="151">tangent</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.59" data-verso-hover="19">t</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.paren-789">)</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-801">(</span><span class="const token" data-binding="const-Set.Icc" data-verso-hover="120">Icc</span><span class="inter-text"> </span><span class="literal number token" data-binding="" data-verso-hover="19">0</span><span class="inter-text"> </span><span class="literal number token" data-binding="" data-verso-hover="19">1</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.paren-801">)</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.59" data-verso-hover="19">t</span><span class="inter-text">
+  </span><span class="const token" data-binding="const-LMLF.Integral.C1Contour.tangent_continuous" data-verso-hover="156" id="LMLF___Integral___C1Contour___tangent_continuous">tangent_continuous</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeSpec-834">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-ContinuousOn" data-verso-hover="117">ContinuousOn</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.16" data-verso-hover="151">tangent</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-857">(</span><span class="const token" data-binding="const-Set.Icc" data-verso-hover="120">Icc</span><span class="inter-text"> </span><span class="literal number token" data-binding="" data-verso-hover="19">0</span><span class="inter-text"> </span><span class="literal number token" data-binding="" data-verso-hover="19">1</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.paren-857">)</span></code><code class="hl lean block" data-lean-context="examples"><span class="keyword token" data-binding="kw-occ-Lean.Parser.Command.definition-1065">def</span><span class="inter-text"> </span><span class="const token" data-binding="const-LMLF.Integral.C1Contour.integral" data-verso-hover="157" id="LMLF___Integral___C1Contour___integral">C1Contour.integral</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-1088">(</span><span class="var token" data-binding="var-_uniq.2883" data-verso-hover="158">γ</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-1088">:</span><span class="inter-text"> </span><a href="Improper-integrals/3___6-Complex-contour-integrals/#LMLF___Integral___C1Contour" title="Definition of example"><span class="const token" data-binding="const-LMLF.Integral.C1Contour" data-verso-hover="144">C1Contour</span></a><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-1088">)</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-1105">(</span><span class="var token" data-binding="var-_uniq.2887" data-verso-hover="159">f</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-1105">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Complex" data-verso-hover="146">ℂ</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-Lean.Parser.Term.arrow-1110">→</span><span class="inter-text"> </span><span class="const token" data-binding="const-Complex" data-verso-hover="146">ℂ</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-1105">)</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeSpec-1123">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Complex" data-verso-hover="146">ℂ</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Command.declValSimple-1129">:=</span><span class="inter-text">
+  </span><span class="unknown token" data-binding="">∫</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.3044" data-verso-hover="19">t</span><span class="inter-text"> </span><span class="keyword token" data-binding="kw-occ-«term∫_In_.._,_»-1134" data-verso-hover="101">in</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-1143">(</span><span class="literal number token" data-binding="" data-verso-hover="19">0</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeAscription-1143">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Real" data-verso-hover="11">ℝ</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.typeAscription-1143">)</span><span class="built-in delim token" data-binding="kw-occ-«term∫_In_.._,_»-1134">..</span><span class="literal number token" data-binding="" data-verso-hover="19">1</span><span class="punctuation separator token" data-binding="kw-occ-«term∫_In_.._,_»-1134">,</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.2887" data-verso-hover="159">f</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-1159">(</span><span class="var token" data-binding="var-_uniq.2883" data-verso-hover="158">γ</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.3044" data-verso-hover="19">t</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.paren-1159">)</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_*_»-1157">*</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.2883" data-verso-hover="158">γ</span><span class="built-in delim token" data-binding="">.</span><a href="Improper-integrals/3___6-Complex-contour-integrals/#LMLF___Integral___C1Contour___tangent" title="Definition of example"><span class="const token" data-binding="const-LMLF.Integral.C1Contour.tangent" data-verso-hover="147">tangent</span></a><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.3044" data-verso-hover="19">t</span></code><code class="hl lean block" data-lean-context="examples"><span class="keyword token" data-binding="kw-occ-Lean.Parser.Command.definition-1309">def</span><span class="inter-text"> </span><span class="const token" data-binding="const-LMLF.Integral.C1Contour.Integrable" data-verso-hover="160" id="LMLF___Integral___C1Contour___Integrable">C1Contour.Integrable</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-1334">(</span><span class="var token" data-binding="var-_uniq.3188" data-verso-hover="158">γ</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-1334">:</span><span class="inter-text"> </span><a href="Improper-integrals/3___6-Complex-contour-integrals/#LMLF___Integral___C1Contour" title="Definition of example"><span class="const token" data-binding="const-LMLF.Integral.C1Contour" data-verso-hover="144">C1Contour</span></a><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-1334">)</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-1351">(</span><span class="var token" data-binding="var-_uniq.3192" data-verso-hover="159">f</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-1351">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Complex" data-verso-hover="146">ℂ</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-Lean.Parser.Term.arrow-1356">→</span><span class="inter-text"> </span><span class="const token" data-binding="const-Complex" data-verso-hover="146">ℂ</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-1351">)</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeSpec-1369">:</span><span class="inter-text"> </span><span class="sort token" data-binding="sort-14430969920833713138" data-verso-hover="12">Prop</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Command.declValSimple-1376">:=</span><span class="inter-text">
+  </span><span class="const token" data-binding="const-IntervalIntegrable" data-verso-hover="98">IntervalIntegrable</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-1400">(</span><span class="keyword token" data-binding="kw-occ-Lean.Parser.Term.fun-1401">fun</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.3203" data-verso-hover="19">t</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.basicFun-1405">=&gt;</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.3192" data-verso-hover="159">f</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-1412">(</span><span class="var token" data-binding="var-_uniq.3188" data-verso-hover="158">γ</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.3203" data-verso-hover="19">t</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.paren-1412">)</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_*_»-1410">*</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.3188" data-verso-hover="158">γ</span><span class="built-in delim token" data-binding="">.</span><a href="Improper-integrals/3___6-Complex-contour-integrals/#LMLF___Integral___C1Contour___tangent" title="Definition of example"><span class="const token" data-binding="const-LMLF.Integral.C1Contour.tangent" data-verso-hover="147">tangent</span></a><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.3203" data-verso-hover="19">t</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.paren-1400">)</span><span class="inter-text"> </span><span class="const token" data-binding="const-MeasureTheory.MeasureSpace.volume" data-verso-hover="99">volume</span><span class="inter-text"> </span><span class="literal number token" data-binding="" data-verso-hover="19">0</span><span class="inter-text"> </span><span class="literal number token" data-binding="" data-verso-hover="19">1</span></code></div>
+              </details><p>
+              Expressions such as <code class="math inline">z^s</code> or <code class="math inline">\log z</code> need more data when the contour winds
+around zero. A <code>LogLiftedC1Contour</code> carries a continuous
+choice of logarithm along the path. Its integral may depend on both the point
+<code class="math inline">\gamma(t)</code> and the selected lift <code class="math inline">\operatorname{Log}_\gamma(t)</code>.</p>
+            <details class="lmlf-lean" open=""><summary>Lean · branch-aware contours</summary><div class="lmlf-lean__body">
+                <code class="hl lean block" data-lean-context="examples"><span class="keyword token" data-binding="kw-occ-Lean.Parser.Command.structureTk-1651">structure</span><span class="inter-text"> </span><span class="const token" data-binding="const-LMLF.Integral.LogLiftedC1Contour" data-verso-hover="161" id="LMLF___Integral___LogLiftedC1Contour">LogLiftedC1Contour</span><span class="inter-text"> </span><span class="keyword token" data-binding="kw-occ-Lean.Parser.Command.extends-1680">extends</span><span class="inter-text"> </span><a href="Improper-integrals/3___6-Complex-contour-integrals/#LMLF___Integral___C1Contour" title="Definition of example"><span class="const token" data-binding="const-LMLF.Integral.C1Contour" data-verso-hover="144">C1Contour</span></a><span class="inter-text"> </span><span class="keyword token" data-binding="kw-occ-Lean.Parser.Command.structure-1651">where</span><span class="inter-text">
+  </span><span class="const token" data-binding="const-LMLF.Integral.LogLiftedC1Contour.logLift" data-verso-hover="162" id="LMLF___Integral___LogLiftedC1Contour___logLift">logLift</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeSpec-1714">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Real" data-verso-hover="11">ℝ</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-Lean.Parser.Term.arrow-1716">→</span><span class="inter-text"> </span><span class="const token" data-binding="const-Complex" data-verso-hover="146">ℂ</span><span class="inter-text">
+  </span><span class="const token" data-binding="const-LMLF.Integral.LogLiftedC1Contour.logLift_continuous" data-verso-hover="163" id="LMLF___Integral___LogLiftedC1Contour___logLift_continuous">logLift_continuous</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeSpec-1749">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-ContinuousOn" data-verso-hover="117">ContinuousOn</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.3402" data-verso-hover="151">logLift</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-1772">(</span><span class="const token" data-binding="const-Set.Icc" data-verso-hover="120">Icc</span><span class="inter-text"> </span><span class="literal number token" data-binding="" data-verso-hover="19">0</span><span class="inter-text"> </span><span class="literal number token" data-binding="" data-verso-hover="19">1</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.paren-1772">)</span><span class="inter-text">
+  </span><span class="const token" data-binding="const-LMLF.Integral.LogLiftedC1Contour.exp_logLift" data-verso-hover="164" id="LMLF___Integral___LogLiftedC1Contour___exp_logLift">exp_logLift</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeSpec-1796">:</span><span class="inter-text"> </span><span class="unknown token" data-binding="">∀</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.3701" data-verso-hover="19">t</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-Lean.«binderPred∈_»-1804">∈</span><span class="inter-text"> </span><span class="const token" data-binding="const-Set.Icc" data-verso-hover="120">Icc</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-1812">(</span><span class="literal number token" data-binding="" data-verso-hover="19">0</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeAscription-1812">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Real" data-verso-hover="11">ℝ</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.typeAscription-1812">)</span><span class="inter-text"> </span><span class="literal number token" data-binding="" data-verso-hover="19">1</span><span class="punctuation separator token" data-binding="kw-occ-Lean.«term∀__,_»-1798">,</span><span class="inter-text"> </span><span class="const token" data-binding="const-Complex.exp" data-verso-hover="165">Complex.exp</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-1837">(</span><span class="var token" data-binding="var-_uniq.3402" data-verso-hover="151">logLift</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.3701" data-verso-hover="19">t</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.paren-1837">)</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_=_»-1825">=</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.3385" data-verso-hover="151">point</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.3701" data-verso-hover="19">t</span></code><code class="hl lean block" data-lean-context="examples"><span class="keyword token" data-binding="kw-occ-Lean.Parser.Command.definition-2041">def</span><span class="inter-text"> </span><span class="const token" data-binding="const-LMLF.Integral.LogLiftedC1Contour.integral" data-verso-hover="166" id="LMLF___Integral___LogLiftedC1Contour___integral">LogLiftedC1Contour.integral</span><span class="inter-text">
+    </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-2077">(</span><span class="var token" data-binding="var-_uniq.4527" data-verso-hover="167">γ</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-2077">:</span><span class="inter-text"> </span><a href="Improper-integrals/3___6-Complex-contour-integrals/#LMLF___Integral___LogLiftedC1Contour" title="Definition of example"><span class="const token" data-binding="const-LMLF.Integral.LogLiftedC1Contour" data-verso-hover="161">LogLiftedC1Contour</span></a><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-2077">)</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-2103">(</span><span class="var token" data-binding="var-_uniq.4533" data-verso-hover="168">f</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-2103">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Complex" data-verso-hover="146">ℂ</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-Lean.Parser.Term.arrow-2108">→</span><span class="inter-text"> </span><span class="const token" data-binding="const-Complex" data-verso-hover="146">ℂ</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-Lean.Parser.Term.arrow-2116">→</span><span class="inter-text"> </span><span class="const token" data-binding="const-Complex" data-verso-hover="146">ℂ</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-2103">)</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeSpec-2129">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Complex" data-verso-hover="146">ℂ</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Command.declValSimple-2135">:=</span><span class="inter-text">
+  </span><span class="unknown token" data-binding="">∫</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.4690" data-verso-hover="19">t</span><span class="inter-text"> </span><span class="keyword token" data-binding="kw-occ-«term∫_In_.._,_»-2140" data-verso-hover="101">in</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-2149">(</span><span class="literal number token" data-binding="" data-verso-hover="19">0</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeAscription-2149">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Real" data-verso-hover="11">ℝ</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.typeAscription-2149">)</span><span class="built-in delim token" data-binding="kw-occ-«term∫_In_.._,_»-2140">..</span><span class="literal number token" data-binding="" data-verso-hover="19">1</span><span class="punctuation separator token" data-binding="kw-occ-«term∫_In_.._,_»-2140">,</span><span class="inter-text">
+    </span><span class="var token" data-binding="var-_uniq.4533" data-verso-hover="168">f</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-2169">(</span><span class="var token" data-binding="var-_uniq.4527" data-verso-hover="167">γ</span><span class="built-in delim token" data-binding="">.</span><a href="Improper-integrals/3___6-Complex-contour-integrals/#LMLF___Integral___C1Contour___point" title="Definition of example"><span class="const token" data-binding="const-LMLF.Integral.C1Contour.point" data-verso-hover="145">point</span></a><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.4690" data-verso-hover="19">t</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.paren-2169">)</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-2182">(</span><span class="var token" data-binding="var-_uniq.4527" data-verso-hover="167">γ</span><span class="built-in delim token" data-binding="">.</span><a href="Improper-integrals/3___6-Complex-contour-integrals/#LMLF___Integral___LogLiftedC1Contour___logLift" title="Definition of example"><span class="const token" data-binding="const-LMLF.Integral.LogLiftedC1Contour.logLift" data-verso-hover="162">logLift</span></a><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.4690" data-verso-hover="19">t</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.paren-2182">)</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_*_»-2167">*</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.4527" data-verso-hover="167">γ</span><span class="built-in delim token" data-binding="">.</span><a href="Improper-integrals/3___6-Complex-contour-integrals/#LMLF___Integral___C1Contour___tangent" title="Definition of example"><span class="const token" data-binding="const-LMLF.Integral.C1Contour.tangent" data-verso-hover="147">tangent</span></a><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.4690" data-verso-hover="19">t</span></code><code class="hl lean block" data-lean-context="examples"><span class="keyword token" data-binding="kw-occ-Lean.Parser.Command.definition-2371">def</span><span class="inter-text"> </span><span class="const token" data-binding="const-LMLF.Integral.LogLiftedC1Contour.Integrable" data-verso-hover="169" id="LMLF___Integral___LogLiftedC1Contour___Integrable">LogLiftedC1Contour.Integrable</span><span class="inter-text">
+    </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-2409">(</span><span class="var token" data-binding="var-_uniq.4811" data-verso-hover="167">γ</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-2409">:</span><span class="inter-text"> </span><a href="Improper-integrals/3___6-Complex-contour-integrals/#LMLF___Integral___LogLiftedC1Contour" title="Definition of example"><span class="const token" data-binding="const-LMLF.Integral.LogLiftedC1Contour" data-verso-hover="161">LogLiftedC1Contour</span></a><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-2409">)</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-2435">(</span><span class="var token" data-binding="var-_uniq.4817" data-verso-hover="168">f</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-2435">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Complex" data-verso-hover="146">ℂ</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-Lean.Parser.Term.arrow-2440">→</span><span class="inter-text"> </span><span class="const token" data-binding="const-Complex" data-verso-hover="146">ℂ</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-Lean.Parser.Term.arrow-2448">→</span><span class="inter-text"> </span><span class="const token" data-binding="const-Complex" data-verso-hover="146">ℂ</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-2435">)</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeSpec-2461">:</span><span class="inter-text"> </span><span class="sort token" data-binding="sort-14430969920833713138" data-verso-hover="12">Prop</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Command.declValSimple-2468">:=</span><span class="inter-text">
+  </span><span class="const token" data-binding="const-IntervalIntegrable" data-verso-hover="98">IntervalIntegrable</span><span class="inter-text">
+    </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-2496">(</span><span class="keyword token" data-binding="kw-occ-Lean.Parser.Term.fun-2497">fun</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.4828" data-verso-hover="19">t</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.basicFun-2501">=&gt;</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.4817" data-verso-hover="168">f</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-2508">(</span><span class="var token" data-binding="var-_uniq.4811" data-verso-hover="167">γ</span><span class="built-in delim token" data-binding="">.</span><a href="Improper-integrals/3___6-Complex-contour-integrals/#LMLF___Integral___C1Contour___point" title="Definition of example"><span class="const token" data-binding="const-LMLF.Integral.C1Contour.point" data-verso-hover="145">point</span></a><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.4828" data-verso-hover="19">t</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.paren-2508">)</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-2521">(</span><span class="var token" data-binding="var-_uniq.4811" data-verso-hover="167">γ</span><span class="built-in delim token" data-binding="">.</span><a href="Improper-integrals/3___6-Complex-contour-integrals/#LMLF___Integral___LogLiftedC1Contour___logLift" title="Definition of example"><span class="const token" data-binding="const-LMLF.Integral.LogLiftedC1Contour.logLift" data-verso-hover="162">logLift</span></a><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.4828" data-verso-hover="19">t</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.paren-2521">)</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_*_»-2506">*</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.4811" data-verso-hover="167">γ</span><span class="built-in delim token" data-binding="">.</span><a href="Improper-integrals/3___6-Complex-contour-integrals/#LMLF___Integral___C1Contour___tangent" title="Definition of example"><span class="const token" data-binding="const-LMLF.Integral.C1Contour.tangent" data-verso-hover="147">tangent</span></a><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.4828" data-verso-hover="19">t</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.paren-2496">)</span><span class="inter-text"> </span><span class="const token" data-binding="const-MeasureTheory.MeasureSpace.volume" data-verso-hover="99">volume</span><span class="inter-text"> </span><span class="literal number token" data-binding="" data-verso-hover="19">0</span><span class="inter-text"> </span><span class="literal number token" data-binding="" data-verso-hover="19">1</span></code></div>
+              </details><p>
+              The standard finite Hankel contour has radii <code class="math inline">0&lt;\varepsilon&lt;R</code> and three C¹
+pieces. For <code class="math inline">0\le u\le1</code>, write
+<code class="math display">r_-(u)=R+u(\varepsilon-R),\qquad
+  \theta(u)=-\pi+2\pi u,\qquad
+  r_+(u)=\varepsilon+u(R-\varepsilon).</code>
+The lower bank uses <code class="math inline">\gamma_-(u)=-r_-(u)</code> and
+<code class="math inline">\operatorname{Log}_{\gamma_-}=\log r_-(u)-\pi i</code>; the inner circle uses
+<code class="math inline">\gamma_0(u)=\varepsilon e^{i\theta(u)}</code> and
+<code class="math inline">\operatorname{Log}_{\gamma_0}=\log\varepsilon+i\theta(u)</code>; the upper bank
+uses <code class="math inline">\gamma_+(u)=-r_+(u)</code> and
+<code class="math inline">\operatorname{Log}_{\gamma_+}=\log r_+(u)+\pi i</code>. Thus the circle is
+counterclockwise and the two bank values of the logarithm are fixed in the
+data.</p>
+            <details class="lmlf-lean" open=""><summary>Lean · explicit Hankel geometry</summary><div class="lmlf-lean__body">
+                <code class="hl lean block" data-lean-context="examples"><span class="keyword token" data-binding="kw-occ-Lean.Parser.Command.structureTk-2701">structure</span><span class="inter-text"> </span><span class="const token" data-binding="const-LMLF.Integral.HankelRadii" data-verso-hover="170" id="LMLF___Integral___HankelRadii">HankelRadii</span><span class="inter-text"> </span><span class="keyword token" data-binding="kw-occ-Lean.Parser.Command.structure-2701">where</span><span class="inter-text">
+  </span><span class="const token" data-binding="const-LMLF.Integral.HankelRadii.inner" data-verso-hover="171" id="LMLF___Integral___HankelRadii___inner">inner</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeSpec-2737">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Real" data-verso-hover="11">ℝ</span><span class="inter-text">
+  </span><span class="const token" data-binding="const-LMLF.Integral.HankelRadii.outer" data-verso-hover="172" id="LMLF___Integral___HankelRadii___outer">outer</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeSpec-2751">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Real" data-verso-hover="11">ℝ</span><span class="inter-text">
+  </span><span class="const token" data-binding="const-LMLF.Integral.HankelRadii.inner_pos" data-verso-hover="173" id="LMLF___Integral___HankelRadii___inner_pos">inner_pos</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeSpec-2769">:</span><span class="inter-text"> </span><span class="literal number token" data-binding="" data-verso-hover="19">0</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_<_»-2771">&lt;</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.4977" data-verso-hover="19">inner</span><span class="inter-text">
+  </span><span class="const token" data-binding="const-LMLF.Integral.HankelRadii.inner_lt_outer" data-verso-hover="174" id="LMLF___Integral___HankelRadii___inner_lt_outer">inner_lt_outer</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeSpec-2798">:</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.4977" data-verso-hover="19">inner</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_<_»-2800">&lt;</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.4979" data-verso-hover="19">outer</span></code><code class="hl lean block" data-lean-context="examples"><span class="keyword token" data-binding="kw-occ-Lean.Parser.Command.theorem-4239">theorem</span><span class="inter-text"> </span><span class="has-info warning"><span class="hover-container"><span class="hover-info messages"><code class="verso-message warning"><span class="text"></span><span class="text">declaration uses `</span><span class="highlighted"><span class="inter-text"></span><span class="unknown token" data-binding="">sorry</span><span class="inter-text"></span></span><span class="text">`</span></code></span></span><span class="const token" data-binding="const-LMLF.Integral.hankelLowerBank_spec" data-verso-hover="175">hankelLowerBank_spec</span></span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-4268">(</span><span class="var token" data-binding="var-_uniq.7319" data-verso-hover="176">ρ</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-4268">:</span><span class="inter-text"> </span><a href="Improper-integrals/3___6-Complex-contour-integrals/#LMLF___Integral___HankelRadii" title="Definition of example"><span class="const token" data-binding="const-LMLF.Integral.HankelRadii" data-verso-hover="170">HankelRadii</span></a><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-4268">)</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeSpec-4287">:</span><span class="inter-text">
+    </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-4293">(</span><span class="unknown token" data-binding="">∀</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.7323" data-verso-hover="19">u</span><span class="punctuation separator token" data-binding="kw-occ-Lean.Parser.Term.forall-4294">,</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-4301">(</span><span class="const token" data-binding="const-LMLF.Integral.hankelLowerBank" data-verso-hover="177">hankelLowerBank</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.7319" data-verso-hover="176">ρ</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.paren-4301">)</span><span class="built-in delim token" data-binding="">.</span><a href="Improper-integrals/3___6-Complex-contour-integrals/#LMLF___Integral___C1Contour___point" title="Definition of example"><span class="const token" data-binding="const-LMLF.Integral.C1Contour.point" data-verso-hover="145">point</span></a><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.7323" data-verso-hover="19">u</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_=_»-4301">=</span><span class="inter-text">
+      </span><span class="punctuation operator token" data-binding="kw-occ-«term-_»-4338">-</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-4339">(</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-4340">(</span><span class="var token" data-binding="var-_uniq.7319" data-verso-hover="176">ρ</span><span class="built-in delim token" data-binding="">.</span><a href="Improper-integrals/3___6-Complex-contour-integrals/#LMLF___Integral___HankelRadii___outer" title="Definition of example"><span class="const token" data-binding="const-LMLF.Integral.HankelRadii.outer" data-verso-hover="172">outer</span></a><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_+_»-4341">+</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.7323" data-verso-hover="19">u</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_*_»-4352">*</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-4356">(</span><span class="var token" data-binding="var-_uniq.7319" data-verso-hover="176">ρ</span><span class="built-in delim token" data-binding="">.</span><a href="Improper-integrals/3___6-Complex-contour-integrals/#LMLF___Integral___HankelRadii___inner" title="Definition of example"><span class="const token" data-binding="const-LMLF.Integral.HankelRadii.inner" data-verso-hover="171">inner</span></a><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_-_»-4357">-</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.7319" data-verso-hover="176">ρ</span><span class="built-in delim token" data-binding="">.</span><a href="Improper-integrals/3___6-Complex-contour-integrals/#LMLF___Integral___HankelRadii___outer" title="Definition of example"><span class="const token" data-binding="const-LMLF.Integral.HankelRadii.outer" data-verso-hover="172">outer</span></a><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.paren-4356">)</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeAscription-4340">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Real" data-verso-hover="11">ℝ</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.typeAscription-4340">)</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeAscription-4339">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Complex" data-verso-hover="146">ℂ</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.typeAscription-4339">)</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.paren-4293">)</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_∧_»-4293">∧</span><span class="inter-text">
+    </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-4401">(</span><span class="unknown token" data-binding="">∀</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.7521" data-verso-hover="19">u</span><span class="punctuation separator token" data-binding="kw-occ-Lean.Parser.Term.forall-4402">,</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-4409">(</span><span class="const token" data-binding="const-LMLF.Integral.hankelLowerBank" data-verso-hover="177">hankelLowerBank</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.7319" data-verso-hover="176">ρ</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.paren-4409">)</span><span class="built-in delim token" data-binding="">.</span><a href="Improper-integrals/3___6-Complex-contour-integrals/#LMLF___Integral___C1Contour___tangent" title="Definition of example"><span class="const token" data-binding="const-LMLF.Integral.C1Contour.tangent" data-verso-hover="147">tangent</span></a><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.7521" data-verso-hover="19">u</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_=_»-4409">=</span><span class="inter-text">
+      </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-4448">(</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-4449">(</span><span class="var token" data-binding="var-_uniq.7319" data-verso-hover="176">ρ</span><span class="built-in delim token" data-binding="">.</span><a href="Improper-integrals/3___6-Complex-contour-integrals/#LMLF___Integral___HankelRadii___outer" title="Definition of example"><span class="const token" data-binding="const-LMLF.Integral.HankelRadii.outer" data-verso-hover="172">outer</span></a><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_-_»-4450">-</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.7319" data-verso-hover="176">ρ</span><span class="built-in delim token" data-binding="">.</span><a href="Improper-integrals/3___6-Complex-contour-integrals/#LMLF___Integral___HankelRadii___inner" title="Definition of example"><span class="const token" data-binding="const-LMLF.Integral.HankelRadii.inner" data-verso-hover="171">inner</span></a><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeAscription-4449">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Real" data-verso-hover="11">ℝ</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.typeAscription-4449">)</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeAscription-4448">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Complex" data-verso-hover="146">ℂ</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.typeAscription-4448">)</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.paren-4401">)</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_∧_»-4401">∧</span><span class="inter-text">
+    </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-4493">(</span><span class="unknown token" data-binding="">∀</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.7600" data-verso-hover="19">u</span><span class="punctuation separator token" data-binding="kw-occ-Lean.Parser.Term.forall-4494">,</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-4501">(</span><span class="const token" data-binding="const-LMLF.Integral.hankelLowerBank" data-verso-hover="177">hankelLowerBank</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.7319" data-verso-hover="176">ρ</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.paren-4501">)</span><span class="built-in delim token" data-binding="">.</span><a href="Improper-integrals/3___6-Complex-contour-integrals/#LMLF___Integral___LogLiftedC1Contour___logLift" title="Definition of example"><span class="const token" data-binding="const-LMLF.Integral.LogLiftedC1Contour.logLift" data-verso-hover="162">logLift</span></a><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.7600" data-verso-hover="19">u</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_=_»-4501">=</span><span class="inter-text">
+      </span><span class="const token" data-binding="const-Real.log" data-verso-hover="178">Real.log</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-4549">(</span><span class="var token" data-binding="var-_uniq.7319" data-verso-hover="176">ρ</span><span class="built-in delim token" data-binding="">.</span><a href="Improper-integrals/3___6-Complex-contour-integrals/#LMLF___Integral___HankelRadii___outer" title="Definition of example"><span class="const token" data-binding="const-LMLF.Integral.HankelRadii.outer" data-verso-hover="172">outer</span></a><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_+_»-4550">+</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.7600" data-verso-hover="19">u</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_*_»-4561">*</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-4565">(</span><span class="var token" data-binding="var-_uniq.7319" data-verso-hover="176">ρ</span><span class="built-in delim token" data-binding="">.</span><a href="Improper-integrals/3___6-Complex-contour-integrals/#LMLF___Integral___HankelRadii___inner" title="Definition of example"><span class="const token" data-binding="const-LMLF.Integral.HankelRadii.inner" data-verso-hover="171">inner</span></a><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_-_»-4566">-</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.7319" data-verso-hover="176">ρ</span><span class="built-in delim token" data-binding="">.</span><a href="Improper-integrals/3___6-Complex-contour-integrals/#LMLF___Integral___HankelRadii___outer" title="Definition of example"><span class="const token" data-binding="const-LMLF.Integral.HankelRadii.outer" data-verso-hover="172">outer</span></a><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.paren-4565">)</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.paren-4549">)</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_-_»-4540">-</span><span class="inter-text"> </span><span class="const token" data-binding="const-Real.pi" data-verso-hover="179">Real.pi</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_*_»-4590">*</span><span class="inter-text"> </span><span class="const token" data-binding="const-Complex.I" data-verso-hover="180">Complex.I</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.paren-4493">)</span></code><code class="hl lean block" data-lean-context="examples"><span class="keyword token" data-binding="kw-occ-Lean.Parser.Command.theorem-5604">theorem</span><span class="inter-text"> </span><span class="has-info warning"><span class="hover-container"><span class="hover-info messages"><code class="verso-message warning"><span class="text"></span><span class="text">declaration uses `</span><span class="highlighted"><span class="inter-text"></span><span class="unknown token" data-binding="">sorry</span><span class="inter-text"></span></span><span class="text">`</span></code></span></span><span class="const token" data-binding="const-LMLF.Integral.hankelInnerCircle_spec" data-verso-hover="181">hankelInnerCircle_spec</span></span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-5635">(</span><span class="var token" data-binding="var-_uniq.10360" data-verso-hover="176">ρ</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-5635">:</span><span class="inter-text"> </span><a href="Improper-integrals/3___6-Complex-contour-integrals/#LMLF___Integral___HankelRadii" title="Definition of example"><span class="const token" data-binding="const-LMLF.Integral.HankelRadii" data-verso-hover="170">HankelRadii</span></a><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-5635">)</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeSpec-5654">:</span><span class="inter-text">
+    </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-5660">(</span><span class="unknown token" data-binding="">∀</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.10364" data-verso-hover="19">u</span><span class="punctuation separator token" data-binding="kw-occ-Lean.Parser.Term.forall-5661">,</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-5668">(</span><span class="const token" data-binding="const-LMLF.Integral.hankelInnerCircle" data-verso-hover="182">hankelInnerCircle</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.10360" data-verso-hover="176">ρ</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.paren-5668">)</span><span class="built-in delim token" data-binding="">.</span><a href="Improper-integrals/3___6-Complex-contour-integrals/#LMLF___Integral___C1Contour___point" title="Definition of example"><span class="const token" data-binding="const-LMLF.Integral.C1Contour.point" data-verso-hover="145">point</span></a><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.10364" data-verso-hover="19">u</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_=_»-5668">=</span><span class="inter-text">
+      </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-5707">(</span><span class="var token" data-binding="var-_uniq.10360" data-verso-hover="176">ρ</span><span class="built-in delim token" data-binding="">.</span><a href="Improper-integrals/3___6-Complex-contour-integrals/#LMLF___Integral___HankelRadii___inner" title="Definition of example"><span class="const token" data-binding="const-LMLF.Integral.HankelRadii.inner" data-verso-hover="171">inner</span></a><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeAscription-5707">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Complex" data-verso-hover="146">ℂ</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.typeAscription-5707">)</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_*_»-5707">*</span><span class="inter-text">
+        </span><span class="const token" data-binding="const-Complex.exp" data-verso-hover="165">Complex.exp</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-5746">(</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-5747">(</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-5748">(</span><span class="punctuation operator token" data-binding="kw-occ-«term-_»-5749">-</span><span class="const token" data-binding="const-Real.pi" data-verso-hover="179">Real.pi</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_+_»-5749">+</span><span class="inter-text"> </span><span class="literal number token" data-binding="" data-verso-hover="19">2</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_*_»-5760">*</span><span class="inter-text"> </span><span class="const token" data-binding="const-Real.pi" data-verso-hover="179">Real.pi</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_*_»-5760">*</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.10364" data-verso-hover="19">u</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeAscription-5748">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Real" data-verso-hover="11">ℝ</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.typeAscription-5748">)</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeAscription-5747">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Complex" data-verso-hover="146">ℂ</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.typeAscription-5747">)</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_*_»-5747">*</span><span class="inter-text"> </span><span class="const token" data-binding="const-Complex.I" data-verso-hover="180">Complex.I</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.paren-5746">)</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.paren-5660">)</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_∧_»-5660">∧</span><span class="inter-text">
+    </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-5812">(</span><span class="unknown token" data-binding="">∀</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.10695" data-verso-hover="19">u</span><span class="punctuation separator token" data-binding="kw-occ-Lean.Parser.Term.forall-5813">,</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-5820">(</span><span class="const token" data-binding="const-LMLF.Integral.hankelInnerCircle" data-verso-hover="182">hankelInnerCircle</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.10360" data-verso-hover="176">ρ</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.paren-5820">)</span><span class="built-in delim token" data-binding="">.</span><a href="Improper-integrals/3___6-Complex-contour-integrals/#LMLF___Integral___C1Contour___tangent" title="Definition of example"><span class="const token" data-binding="const-LMLF.Integral.C1Contour.tangent" data-verso-hover="147">tangent</span></a><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.10695" data-verso-hover="19">u</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_=_»-5820">=</span><span class="inter-text">
+      </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-5861">(</span><span class="var token" data-binding="var-_uniq.10360" data-verso-hover="176">ρ</span><span class="built-in delim token" data-binding="">.</span><a href="Improper-integrals/3___6-Complex-contour-integrals/#LMLF___Integral___HankelRadii___inner" title="Definition of example"><span class="const token" data-binding="const-LMLF.Integral.HankelRadii.inner" data-verso-hover="171">inner</span></a><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeAscription-5861">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Complex" data-verso-hover="146">ℂ</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.typeAscription-5861">)</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_*_»-5861">*</span><span class="inter-text">
+        </span><span class="const token" data-binding="const-Complex.exp" data-verso-hover="165">Complex.exp</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-5900">(</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-5901">(</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-5902">(</span><span class="punctuation operator token" data-binding="kw-occ-«term-_»-5903">-</span><span class="const token" data-binding="const-Real.pi" data-verso-hover="179">Real.pi</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_+_»-5903">+</span><span class="inter-text"> </span><span class="literal number token" data-binding="" data-verso-hover="19">2</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_*_»-5914">*</span><span class="inter-text"> </span><span class="const token" data-binding="const-Real.pi" data-verso-hover="179">Real.pi</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_*_»-5914">*</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.10695" data-verso-hover="19">u</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeAscription-5902">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Real" data-verso-hover="11">ℝ</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.typeAscription-5902">)</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeAscription-5901">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Complex" data-verso-hover="146">ℂ</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.typeAscription-5901">)</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_*_»-5901">*</span><span class="inter-text"> </span><span class="const token" data-binding="const-Complex.I" data-verso-hover="180">Complex.I</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.paren-5900">)</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_*_»-5861">*</span><span class="inter-text">
+        </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-5967">(</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-5968">(</span><span class="literal number token" data-binding="" data-verso-hover="19">2</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_*_»-5969">*</span><span class="inter-text"> </span><span class="const token" data-binding="const-Real.pi" data-verso-hover="179">Real.pi</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeAscription-5968">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Real" data-verso-hover="11">ℝ</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.typeAscription-5968">)</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeAscription-5967">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Complex" data-verso-hover="146">ℂ</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.typeAscription-5967">)</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_*_»-5861">*</span><span class="inter-text"> </span><span class="const token" data-binding="const-Complex.I" data-verso-hover="180">Complex.I</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.paren-5812">)</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_∧_»-5812">∧</span><span class="inter-text">
+    </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-6016">(</span><span class="unknown token" data-binding="">∀</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.10984" data-verso-hover="19">u</span><span class="punctuation separator token" data-binding="kw-occ-Lean.Parser.Term.forall-6017">,</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-6024">(</span><span class="const token" data-binding="const-LMLF.Integral.hankelInnerCircle" data-verso-hover="182">hankelInnerCircle</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.10360" data-verso-hover="176">ρ</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.paren-6024">)</span><span class="built-in delim token" data-binding="">.</span><a href="Improper-integrals/3___6-Complex-contour-integrals/#LMLF___Integral___LogLiftedC1Contour___logLift" title="Definition of example"><span class="const token" data-binding="const-LMLF.Integral.LogLiftedC1Contour.logLift" data-verso-hover="162">logLift</span></a><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.10984" data-verso-hover="19">u</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_=_»-6024">=</span><span class="inter-text">
+      </span><span class="const token" data-binding="const-Real.log" data-verso-hover="178">Real.log</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.10360" data-verso-hover="176">ρ</span><span class="built-in delim token" data-binding="">.</span><a href="Improper-integrals/3___6-Complex-contour-integrals/#LMLF___Integral___HankelRadii___inner" title="Definition of example"><span class="const token" data-binding="const-LMLF.Integral.HankelRadii.inner" data-verso-hover="171">inner</span></a><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_+_»-6065">+</span><span class="inter-text">
+        </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-6093">(</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-6094">(</span><span class="punctuation operator token" data-binding="kw-occ-«term-_»-6095">-</span><span class="const token" data-binding="const-Real.pi" data-verso-hover="179">Real.pi</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_+_»-6095">+</span><span class="inter-text"> </span><span class="literal number token" data-binding="" data-verso-hover="19">2</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_*_»-6106">*</span><span class="inter-text"> </span><span class="const token" data-binding="const-Real.pi" data-verso-hover="179">Real.pi</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_*_»-6106">*</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.10984" data-verso-hover="19">u</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeAscription-6094">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Real" data-verso-hover="11">ℝ</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.typeAscription-6094">)</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeAscription-6093">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Complex" data-verso-hover="146">ℂ</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.typeAscription-6093">)</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_*_»-6093">*</span><span class="inter-text"> </span><span class="const token" data-binding="const-Complex.I" data-verso-hover="180">Complex.I</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.paren-6016">)</span></code><code class="hl lean block" data-lean-context="examples"><span class="keyword token" data-binding="kw-occ-Lean.Parser.Command.theorem-7008">theorem</span><span class="inter-text"> </span><span class="has-info warning"><span class="hover-container"><span class="hover-info messages"><code class="verso-message warning"><span class="text"></span><span class="text">declaration uses `</span><span class="highlighted"><span class="inter-text"></span><span class="unknown token" data-binding="">sorry</span><span class="inter-text"></span></span><span class="text">`</span></code></span></span><span class="const token" data-binding="const-LMLF.Integral.hankelUpperBank_spec" data-verso-hover="183">hankelUpperBank_spec</span></span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-7037">(</span><span class="var token" data-binding="var-_uniq.12326" data-verso-hover="176">ρ</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-7037">:</span><span class="inter-text"> </span><a href="Improper-integrals/3___6-Complex-contour-integrals/#LMLF___Integral___HankelRadii" title="Definition of example"><span class="const token" data-binding="const-LMLF.Integral.HankelRadii" data-verso-hover="170">HankelRadii</span></a><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-7037">)</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeSpec-7056">:</span><span class="inter-text">
+    </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-7062">(</span><span class="unknown token" data-binding="">∀</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.12330" data-verso-hover="19">u</span><span class="punctuation separator token" data-binding="kw-occ-Lean.Parser.Term.forall-7063">,</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-7070">(</span><span class="const token" data-binding="const-LMLF.Integral.hankelUpperBank" data-verso-hover="184">hankelUpperBank</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.12326" data-verso-hover="176">ρ</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.paren-7070">)</span><span class="built-in delim token" data-binding="">.</span><a href="Improper-integrals/3___6-Complex-contour-integrals/#LMLF___Integral___C1Contour___point" title="Definition of example"><span class="const token" data-binding="const-LMLF.Integral.C1Contour.point" data-verso-hover="145">point</span></a><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.12330" data-verso-hover="19">u</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_=_»-7070">=</span><span class="inter-text">
+      </span><span class="punctuation operator token" data-binding="kw-occ-«term-_»-7107">-</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-7108">(</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-7109">(</span><span class="var token" data-binding="var-_uniq.12326" data-verso-hover="176">ρ</span><span class="built-in delim token" data-binding="">.</span><a href="Improper-integrals/3___6-Complex-contour-integrals/#LMLF___Integral___HankelRadii___inner" title="Definition of example"><span class="const token" data-binding="const-LMLF.Integral.HankelRadii.inner" data-verso-hover="171">inner</span></a><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_+_»-7110">+</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.12330" data-verso-hover="19">u</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_*_»-7121">*</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-7125">(</span><span class="var token" data-binding="var-_uniq.12326" data-verso-hover="176">ρ</span><span class="built-in delim token" data-binding="">.</span><a href="Improper-integrals/3___6-Complex-contour-integrals/#LMLF___Integral___HankelRadii___outer" title="Definition of example"><span class="const token" data-binding="const-LMLF.Integral.HankelRadii.outer" data-verso-hover="172">outer</span></a><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_-_»-7126">-</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.12326" data-verso-hover="176">ρ</span><span class="built-in delim token" data-binding="">.</span><a href="Improper-integrals/3___6-Complex-contour-integrals/#LMLF___Integral___HankelRadii___inner" title="Definition of example"><span class="const token" data-binding="const-LMLF.Integral.HankelRadii.inner" data-verso-hover="171">inner</span></a><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.paren-7125">)</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeAscription-7109">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Real" data-verso-hover="11">ℝ</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.typeAscription-7109">)</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeAscription-7108">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Complex" data-verso-hover="146">ℂ</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.typeAscription-7108">)</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.paren-7062">)</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_∧_»-7062">∧</span><span class="inter-text">
+    </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-7170">(</span><span class="unknown token" data-binding="">∀</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.12528" data-verso-hover="19">u</span><span class="punctuation separator token" data-binding="kw-occ-Lean.Parser.Term.forall-7171">,</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-7178">(</span><span class="const token" data-binding="const-LMLF.Integral.hankelUpperBank" data-verso-hover="184">hankelUpperBank</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.12326" data-verso-hover="176">ρ</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.paren-7178">)</span><span class="built-in delim token" data-binding="">.</span><a href="Improper-integrals/3___6-Complex-contour-integrals/#LMLF___Integral___C1Contour___tangent" title="Definition of example"><span class="const token" data-binding="const-LMLF.Integral.C1Contour.tangent" data-verso-hover="147">tangent</span></a><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.12528" data-verso-hover="19">u</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_=_»-7178">=</span><span class="inter-text">
+      </span><span class="punctuation operator token" data-binding="kw-occ-«term-_»-7217">-</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-7218">(</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-7219">(</span><span class="var token" data-binding="var-_uniq.12326" data-verso-hover="176">ρ</span><span class="built-in delim token" data-binding="">.</span><a href="Improper-integrals/3___6-Complex-contour-integrals/#LMLF___Integral___HankelRadii___outer" title="Definition of example"><span class="const token" data-binding="const-LMLF.Integral.HankelRadii.outer" data-verso-hover="172">outer</span></a><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_-_»-7220">-</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.12326" data-verso-hover="176">ρ</span><span class="built-in delim token" data-binding="">.</span><a href="Improper-integrals/3___6-Complex-contour-integrals/#LMLF___Integral___HankelRadii___inner" title="Definition of example"><span class="const token" data-binding="const-LMLF.Integral.HankelRadii.inner" data-verso-hover="171">inner</span></a><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeAscription-7219">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Real" data-verso-hover="11">ℝ</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.typeAscription-7219">)</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeAscription-7218">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Complex" data-verso-hover="146">ℂ</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.typeAscription-7218">)</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.paren-7170">)</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_∧_»-7170">∧</span><span class="inter-text">
+    </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-7263">(</span><span class="unknown token" data-binding="">∀</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.12610" data-verso-hover="19">u</span><span class="punctuation separator token" data-binding="kw-occ-Lean.Parser.Term.forall-7264">,</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-7271">(</span><span class="const token" data-binding="const-LMLF.Integral.hankelUpperBank" data-verso-hover="184">hankelUpperBank</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.12326" data-verso-hover="176">ρ</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.paren-7271">)</span><span class="built-in delim token" data-binding="">.</span><a href="Improper-integrals/3___6-Complex-contour-integrals/#LMLF___Integral___LogLiftedC1Contour___logLift" title="Definition of example"><span class="const token" data-binding="const-LMLF.Integral.LogLiftedC1Contour.logLift" data-verso-hover="162">logLift</span></a><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.12610" data-verso-hover="19">u</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_=_»-7271">=</span><span class="inter-text">
+      </span><span class="const token" data-binding="const-Real.log" data-verso-hover="178">Real.log</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-7319">(</span><span class="var token" data-binding="var-_uniq.12326" data-verso-hover="176">ρ</span><span class="built-in delim token" data-binding="">.</span><a href="Improper-integrals/3___6-Complex-contour-integrals/#LMLF___Integral___HankelRadii___inner" title="Definition of example"><span class="const token" data-binding="const-LMLF.Integral.HankelRadii.inner" data-verso-hover="171">inner</span></a><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_+_»-7320">+</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.12610" data-verso-hover="19">u</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_*_»-7331">*</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-7335">(</span><span class="var token" data-binding="var-_uniq.12326" data-verso-hover="176">ρ</span><span class="built-in delim token" data-binding="">.</span><a href="Improper-integrals/3___6-Complex-contour-integrals/#LMLF___Integral___HankelRadii___outer" title="Definition of example"><span class="const token" data-binding="const-LMLF.Integral.HankelRadii.outer" data-verso-hover="172">outer</span></a><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_-_»-7336">-</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.12326" data-verso-hover="176">ρ</span><span class="built-in delim token" data-binding="">.</span><a href="Improper-integrals/3___6-Complex-contour-integrals/#LMLF___Integral___HankelRadii___inner" title="Definition of example"><span class="const token" data-binding="const-LMLF.Integral.HankelRadii.inner" data-verso-hover="171">inner</span></a><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.paren-7335">)</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.paren-7319">)</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_+_»-7310">+</span><span class="inter-text"> </span><span class="const token" data-binding="const-Real.pi" data-verso-hover="179">Real.pi</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_*_»-7360">*</span><span class="inter-text"> </span><span class="const token" data-binding="const-Complex.I" data-verso-hover="180">Complex.I</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.paren-7263">)</span></code><code class="hl lean block" data-lean-context="examples"><span class="keyword token" data-binding="kw-occ-Lean.Parser.Command.structureTk-7539">structure</span><span class="inter-text"> </span><span class="const token" data-binding="const-LMLF.Integral.HankelContour" data-verso-hover="185" id="LMLF___Integral___HankelContour">HankelContour</span><span class="inter-text"> </span><span class="keyword token" data-binding="kw-occ-Lean.Parser.Command.structure-7539">where</span><span class="inter-text">
+  </span><span class="const token" data-binding="const-LMLF.Integral.HankelContour.lowerBank" data-verso-hover="186" id="LMLF___Integral___HankelContour___lowerBank">lowerBank</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeSpec-7581">:</span><span class="inter-text"> </span><a href="Improper-integrals/3___6-Complex-contour-integrals/#LMLF___Integral___LogLiftedC1Contour" title="Definition of example"><span class="const token" data-binding="const-LMLF.Integral.LogLiftedC1Contour" data-verso-hover="161">LogLiftedC1Contour</span></a><span class="inter-text">
+  </span><span class="const token" data-binding="const-LMLF.Integral.HankelContour.innerCircle" data-verso-hover="187" id="LMLF___Integral___HankelContour___innerCircle">innerCircle</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeSpec-7616">:</span><span class="inter-text"> </span><a href="Improper-integrals/3___6-Complex-contour-integrals/#LMLF___Integral___LogLiftedC1Contour" title="Definition of example"><span class="const token" data-binding="const-LMLF.Integral.LogLiftedC1Contour" data-verso-hover="161">LogLiftedC1Contour</span></a><span class="inter-text">
+  </span><span class="const token" data-binding="const-LMLF.Integral.HankelContour.upperBank" data-verso-hover="188" id="LMLF___Integral___HankelContour___upperBank">upperBank</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeSpec-7649">:</span><span class="inter-text"> </span><a href="Improper-integrals/3___6-Complex-contour-integrals/#LMLF___Integral___LogLiftedC1Contour" title="Definition of example"><span class="const token" data-binding="const-LMLF.Integral.LogLiftedC1Contour" data-verso-hover="161">LogLiftedC1Contour</span></a><span class="inter-text">
+  </span><span class="const token" data-binding="const-LMLF.Integral.HankelContour.lower_join" data-verso-hover="189" id="LMLF___Integral___HankelContour___lower_join">lower_join</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeSpec-7683">:</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.12977" data-verso-hover="167">lowerBank</span><span class="built-in delim token" data-binding="">.</span><a href="Improper-integrals/3___6-Complex-contour-integrals/#LMLF___Integral___C1Contour___finish" title="Definition of example"><span class="const token" data-binding="const-LMLF.Integral.C1Contour.finish" data-verso-hover="149">finish</span></a><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_=_»-7685">=</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.12979" data-verso-hover="167">innerCircle</span><span class="built-in delim token" data-binding="">.</span><a href="Improper-integrals/3___6-Complex-contour-integrals/#LMLF___Integral___C1Contour___start" title="Definition of example"><span class="const token" data-binding="const-LMLF.Integral.C1Contour.start" data-verso-hover="148">start</span></a><span class="inter-text">
+  </span><span class="const token" data-binding="const-LMLF.Integral.HankelContour.upper_join" data-verso-hover="190" id="LMLF___Integral___HankelContour___upper_join">upper_join</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeSpec-7735">:</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.12979" data-verso-hover="167">innerCircle</span><span class="built-in delim token" data-binding="">.</span><a href="Improper-integrals/3___6-Complex-contour-integrals/#LMLF___Integral___C1Contour___finish" title="Definition of example"><span class="const token" data-binding="const-LMLF.Integral.C1Contour.finish" data-verso-hover="149">finish</span></a><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_=_»-7737">=</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.12981" data-verso-hover="167">upperBank</span><span class="built-in delim token" data-binding="">.</span><a href="Improper-integrals/3___6-Complex-contour-integrals/#LMLF___Integral___C1Contour___start" title="Definition of example"><span class="const token" data-binding="const-LMLF.Integral.C1Contour.start" data-verso-hover="148">start</span></a><span class="inter-text">
+  </span><span class="const token" data-binding="const-LMLF.Integral.HankelContour.closed" data-verso-hover="191" id="LMLF___Integral___HankelContour___closed">closed</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeSpec-7783">:</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.12977" data-verso-hover="167">lowerBank</span><span class="built-in delim token" data-binding="">.</span><a href="Improper-integrals/3___6-Complex-contour-integrals/#LMLF___Integral___C1Contour___start" title="Definition of example"><span class="const token" data-binding="const-LMLF.Integral.C1Contour.start" data-verso-hover="148">start</span></a><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_=_»-7785">=</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.12981" data-verso-hover="167">upperBank</span><span class="built-in delim token" data-binding="">.</span><a href="Improper-integrals/3___6-Complex-contour-integrals/#LMLF___Integral___C1Contour___finish" title="Definition of example"><span class="const token" data-binding="const-LMLF.Integral.C1Contour.finish" data-verso-hover="149">finish</span></a><span class="inter-text">
+  </span><span class="const token" data-binding="const-LMLF.Integral.HankelContour.lower_log_join" data-verso-hover="192" id="LMLF___Integral___HankelContour___lower_log_join">lower_log_join</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeSpec-7837">:</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.12977" data-verso-hover="167">lowerBank</span><span class="built-in delim token" data-binding="">.</span><a href="Improper-integrals/3___6-Complex-contour-integrals/#LMLF___Integral___LogLiftedC1Contour___logLift" title="Definition of example"><span class="const token" data-binding="const-LMLF.Integral.LogLiftedC1Contour.logLift" data-verso-hover="162">logLift</span></a><span class="inter-text"> </span><span class="literal number token" data-binding="" data-verso-hover="19">1</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_=_»-7839">=</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.12979" data-verso-hover="167">innerCircle</span><span class="built-in delim token" data-binding="">.</span><a href="Improper-integrals/3___6-Complex-contour-integrals/#LMLF___Integral___LogLiftedC1Contour___logLift" title="Definition of example"><span class="const token" data-binding="const-LMLF.Integral.LogLiftedC1Contour.logLift" data-verso-hover="162">logLift</span></a><span class="inter-text"> </span><span class="literal number token" data-binding="" data-verso-hover="19">0</span><span class="inter-text">
+  </span><span class="const token" data-binding="const-LMLF.Integral.HankelContour.upper_log_join" data-verso-hover="193" id="LMLF___Integral___HankelContour___upper_log_join">upper_log_join</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeSpec-7900">:</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.12979" data-verso-hover="167">innerCircle</span><span class="built-in delim token" data-binding="">.</span><a href="Improper-integrals/3___6-Complex-contour-integrals/#LMLF___Integral___LogLiftedC1Contour___logLift" title="Definition of example"><span class="const token" data-binding="const-LMLF.Integral.LogLiftedC1Contour.logLift" data-verso-hover="162">logLift</span></a><span class="inter-text"> </span><span class="literal number token" data-binding="" data-verso-hover="19">1</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_=_»-7902">=</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.12981" data-verso-hover="167">upperBank</span><span class="built-in delim token" data-binding="">.</span><a href="Improper-integrals/3___6-Complex-contour-integrals/#LMLF___Integral___LogLiftedC1Contour___logLift" title="Definition of example"><span class="const token" data-binding="const-LMLF.Integral.LogLiftedC1Contour.logLift" data-verso-hover="162">logLift</span></a><span class="inter-text"> </span><span class="literal number token" data-binding="" data-verso-hover="19">0</span></code><code class="hl lean block" data-lean-context="examples"><span class="keyword token" data-binding="kw-occ-Lean.Parser.Command.definition-8612">def</span><span class="inter-text"> </span><span class="const token" data-binding="const-LMLF.Integral.HankelContour.integral" data-verso-hover="194">HankelContour.integral</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-8639">(</span><span class="var token" data-binding="var-_uniq.24118" data-verso-hover="195">γ</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-8639">:</span><span class="inter-text"> </span><a href="Improper-integrals/3___6-Complex-contour-integrals/#LMLF___Integral___HankelContour" title="Definition of example"><span class="const token" data-binding="const-LMLF.Integral.HankelContour" data-verso-hover="185">HankelContour</span></a><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-8639">)</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-8660">(</span><span class="var token" data-binding="var-_uniq.24124" data-verso-hover="168">f</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-8660">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Complex" data-verso-hover="146">ℂ</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-Lean.Parser.Term.arrow-8665">→</span><span class="inter-text"> </span><span class="const token" data-binding="const-Complex" data-verso-hover="146">ℂ</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-Lean.Parser.Term.arrow-8673">→</span><span class="inter-text"> </span><span class="const token" data-binding="const-Complex" data-verso-hover="146">ℂ</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-8660">)</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeSpec-8686">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Complex" data-verso-hover="146">ℂ</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Command.declValSimple-8692">:=</span><span class="inter-text">
+  </span><span class="var token" data-binding="var-_uniq.24118" data-verso-hover="195">γ</span><span class="built-in delim token" data-binding="">.</span><a href="Improper-integrals/3___6-Complex-contour-integrals/#LMLF___Integral___HankelContour___lowerBank" title="Definition of example"><span class="const token" data-binding="const-LMLF.Integral.HankelContour.lowerBank" data-verso-hover="186">lowerBank</span></a><span class="built-in delim token" data-binding="">.</span><a href="Improper-integrals/3___6-Complex-contour-integrals/#LMLF___Integral___LogLiftedC1Contour___integral" title="Definition of example"><span class="const token" data-binding="const-LMLF.Integral.LogLiftedC1Contour.integral" data-verso-hover="166">integral</span></a><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.24124" data-verso-hover="168">f</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_+_»-8697">+</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.24118" data-verso-hover="195">γ</span><span class="built-in delim token" data-binding="">.</span><a href="Improper-integrals/3___6-Complex-contour-integrals/#LMLF___Integral___HankelContour___innerCircle" title="Definition of example"><span class="const token" data-binding="const-LMLF.Integral.HankelContour.innerCircle" data-verso-hover="187">innerCircle</span></a><span class="built-in delim token" data-binding="">.</span><a href="Improper-integrals/3___6-Complex-contour-integrals/#LMLF___Integral___LogLiftedC1Contour___integral" title="Definition of example"><span class="const token" data-binding="const-LMLF.Integral.LogLiftedC1Contour.integral" data-verso-hover="166">integral</span></a><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.24124" data-verso-hover="168">f</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_+_»-8697">+</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.24118" data-verso-hover="195">γ</span><span class="built-in delim token" data-binding="">.</span><a href="Improper-integrals/3___6-Complex-contour-integrals/#LMLF___Integral___HankelContour___upperBank" title="Definition of example"><span class="const token" data-binding="const-LMLF.Integral.HankelContour.upperBank" data-verso-hover="188">upperBank</span></a><span class="built-in delim token" data-binding="">.</span><a href="Improper-integrals/3___6-Complex-contour-integrals/#LMLF___Integral___LogLiftedC1Contour___integral" title="Definition of example"><span class="const token" data-binding="const-LMLF.Integral.LogLiftedC1Contour.integral" data-verso-hover="166">integral</span></a><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.24124" data-verso-hover="168">f</span></code></div>
+              </details><p>
+              The improper integral has two stages. Every admissible finite contour must be
+integrable. At fixed positive inner radius its outer radius tends to infinity;
+only then does the inner radius tend to zero. The radius subtypes ensure that
+no invalid finite contour enters either limit.</p>
+            <details class="lmlf-lean" open=""><summary>Lean · Hankel convergence</summary><div class="lmlf-lean__body">
+                <code class="hl lean block" data-lean-context="examples"><span class="keyword token" data-binding="kw-occ-Lean.Parser.Command.definition-9388">def</span><span class="inter-text"> </span><span class="const token" data-binding="const-LMLF.Integral.HasHankelIntegral" data-verso-hover="196">HasHankelIntegral</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-9410">(</span><span class="var token" data-binding="var-_uniq.24240" data-verso-hover="168">f</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-9410">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Complex" data-verso-hover="146">ℂ</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-Lean.Parser.Term.arrow-9415">→</span><span class="inter-text"> </span><span class="const token" data-binding="const-Complex" data-verso-hover="146">ℂ</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-Lean.Parser.Term.arrow-9423">→</span><span class="inter-text"> </span><span class="const token" data-binding="const-Complex" data-verso-hover="146">ℂ</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-9410">)</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-9436">(</span><span class="var token" data-binding="var-_uniq.24242" data-verso-hover="152">value</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-9436">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Complex" data-verso-hover="146">ℂ</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-9436">)</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeSpec-9450">:</span><span class="inter-text"> </span><span class="sort token" data-binding="sort-14430969920833713138" data-verso-hover="12">Prop</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Command.declValSimple-9457">:=</span><span class="inter-text">
+  </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-9462">(</span><span class="unknown token" data-binding="">∀</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.24248" data-verso-hover="197">ε</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeSpec-9470">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-LMLF.Integral.PositiveRadius" data-verso-hover="198">PositiveRadius</span><span class="punctuation separator token" data-binding="kw-occ-Lean.Parser.Term.forall-9463">,</span><span class="inter-text"> </span><span class="unknown token" data-binding="">∀</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.24251" data-verso-hover="199">R</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeSpec-9494">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-LMLF.Integral.OuterRadius" data-verso-hover="200">OuterRadius</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.24248" data-verso-hover="197">ε</span><span class="punctuation separator token" data-binding="kw-occ-Lean.Parser.Term.forall-9488">,</span><span class="inter-text">
+      </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-9518">(</span><span class="const token" data-binding="const-LMLF.Integral.hankelContour" data-verso-hover="201">hankelContour</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-9533">(</span><span class="const token" data-binding="const-LMLF.Integral.HankelRadii.of" data-verso-hover="202">HankelRadii.of</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.24248" data-verso-hover="197">ε</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.24251" data-verso-hover="199">R</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.paren-9533">)</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.paren-9518">)</span><span class="built-in delim token" data-binding="">.</span><span class="const token" data-binding="const-LMLF.Integral.HankelContour.Integrable" data-verso-hover="203">Integrable</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.24240" data-verso-hover="168">f</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.paren-9462">)</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_∧_»-9462">∧</span><span class="inter-text">
+    </span><span class="unknown token" data-binding="">∃</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.24264" data-verso-hover="204">outerLimit</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.unbracketedExplicitBinders-9582">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-LMLF.Integral.PositiveRadius" data-verso-hover="198">PositiveRadius</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-Lean.Parser.Term.arrow-9595">→</span><span class="inter-text"> </span><span class="const token" data-binding="const-Complex" data-verso-hover="146">ℂ</span><span class="punctuation separator token" data-binding="kw-occ-«term∃_,_»-9578">,</span><span class="inter-text">
+      </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-9625">(</span><span class="unknown token" data-binding="">∀</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.24267" data-verso-hover="197">ε</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeSpec-9633">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-LMLF.Integral.PositiveRadius" data-verso-hover="198">PositiveRadius</span><span class="punctuation separator token" data-binding="kw-occ-Lean.Parser.Term.forall-9626">,</span><span class="inter-text">
+        </span><span class="const token" data-binding="const-Filter.Tendsto" data-verso-hover="100">Tendsto</span><span class="inter-text">
+          </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-9677">(</span><span class="keyword token" data-binding="kw-occ-Lean.Parser.Term.fun-9678">fun</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.24274" data-verso-hover="199">R</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeSpec-9684">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-LMLF.Integral.OuterRadius" data-verso-hover="200">OuterRadius</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.24267" data-verso-hover="197">ε</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.basicFun-9682">=&gt;</span><span class="inter-text">
+            </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-9716">(</span><span class="const token" data-binding="const-LMLF.Integral.hankelContour" data-verso-hover="201">hankelContour</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-9731">(</span><span class="const token" data-binding="const-LMLF.Integral.HankelRadii.of" data-verso-hover="202">HankelRadii.of</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.24267" data-verso-hover="197">ε</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.24274" data-verso-hover="199">R</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.paren-9731">)</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.paren-9716">)</span><span class="built-in delim token" data-binding="">.</span><span class="const token" data-binding="const-LMLF.Integral.HankelContour.integral" data-verso-hover="194">integral</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.24240" data-verso-hover="168">f</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.paren-9677">)</span><span class="inter-text">
+          </span><span class="const token" data-binding="const-Filter.atTop" data-verso-hover="105">atTop</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-9782">(</span><span class="const token" data-binding="const-nhds" data-verso-hover="104">nhds</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-9788">(</span><span class="var token" data-binding="var-_uniq.24264" data-verso-hover="204">outerLimit</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.24267" data-verso-hover="197">ε</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.paren-9788">)</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.paren-9782">)</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.paren-9625">)</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_∧_»-9625">∧</span><span class="inter-text">
+      </span><span class="const token" data-binding="const-Filter.Tendsto" data-verso-hover="100">Tendsto</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.24264" data-verso-hover="204">outerLimit</span><span class="inter-text"> </span><span class="const token" data-binding="const-LMLF.Integral.positiveRadiusAtZero" data-verso-hover="205">positiveRadiusAtZero</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.hygienicLParen-9856">(</span><span class="const token" data-binding="const-nhds" data-verso-hover="104">nhds</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.24242" data-verso-hover="152">value</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.paren-9856">)</span></code><code class="hl lean block" data-lean-context="examples"><span class="keyword token" data-binding="kw-occ-Lean.Parser.Command.definition-10080">def</span><span class="inter-text"> </span><span class="const token" data-binding="const-LMLF.Integral.HasHankelRepresentation" data-verso-hover="206" id="LMLF___Integral___HasHankelRepresentation">HasHankelRepresentation</span><span class="inter-text">
+    </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-10112">(</span><span class="var token" data-binding="var-_uniq.24560" data-verso-hover="168">f</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-10112">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Complex" data-verso-hover="146">ℂ</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-Lean.Parser.Term.arrow-10117">→</span><span class="inter-text"> </span><span class="const token" data-binding="const-Complex" data-verso-hover="146">ℂ</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-Lean.Parser.Term.arrow-10125">→</span><span class="inter-text"> </span><span class="const token" data-binding="const-Complex" data-verso-hover="146">ℂ</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-10112">)</span><span class="inter-text"> </span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-10138">(</span><span class="var token" data-binding="var-_uniq.24562" data-verso-hover="152">normalization</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.24564" data-verso-hover="152">value</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-10138">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Complex" data-verso-hover="146">ℂ</span><span class="punctuation bracket token" data-binding="kw-occ-Lean.Parser.Term.explicitBinder-10138">)</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Term.typeSpec-10166">:</span><span class="inter-text"> </span><span class="sort token" data-binding="sort-14430969920833713138" data-verso-hover="12">Prop</span><span class="inter-text"> </span><span class="built-in delim token" data-binding="kw-occ-Lean.Parser.Command.declValSimple-10173">:=</span><span class="inter-text">
+  </span><span class="unknown token" data-binding="">∃</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.24574" data-verso-hover="152">integral</span><span class="punctuation separator token" data-binding="kw-occ-«term∃_,_»-10178">,</span><span class="inter-text"> </span><span class="const token" data-binding="const-LMLF.Integral.HasHankelIntegral" data-verso-hover="196">HasHankelIntegral</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.24560" data-verso-hover="168">f</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.24574" data-verso-hover="152">integral</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_∧_»-10192">∧</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.24564" data-verso-hover="152">value</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_=_»-10225">=</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.24562" data-verso-hover="152">normalization</span><span class="inter-text"> </span><span class="punctuation operator token" data-binding="kw-occ-«term_*_»-10233">*</span><span class="inter-text"> </span><span class="unknown token" data-binding="">integral</span></code></div>
+              </details></section>
+          <nav class="prev-next-buttons">
+            <a class="local-button active" href="Improper-integrals/3___5-Abel-reweighting/#LMLF-___-DLMF-with-Lean--Improper-integrals--3___5-Abel-reweighting" rel="prev" title="3.5 Abel reweighting"><span class="arrow">←</span><span class="where">3.5 Abel reweighting</span></a><a class="local-button active" href="Elementary-Functions/#chapter-4" rel="next" title="4. Elementary Functions"><span class="where">4. Elementary Functions</span><span class="arrow">→</span></a></nav>
+          </div>
+        </main></div>
+    </body>
+  </html>
