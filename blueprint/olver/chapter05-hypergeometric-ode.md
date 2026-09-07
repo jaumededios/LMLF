@@ -24,6 +24,10 @@ required or optional findings; its 202-line report has SHA-256
 - `lakefile.toml`, SHA-256
   `8175f3184d7ed673f05c9312413ad09af3d0ef2b50042a68a39f666d49495fb0`.
 
+The `LMLF/Results.lean` and `lakefile.toml` hashes above identify the historical ODE-acceptance
+snapshot published at `a3682edf0fd1cfdbfa88d3606bf26a254eedbd82`; later accepted result leaves
+may update those two integration files without changing the frozen ODE core or test.
+
 The 263-line pre-acceptance public blueprint had SHA-256
 `bf3c3125a5c1381e5bd28af745ca13000a87dd3fcd7b4de4b4d26959cabc66ee`. The code referee reviewed
 the frozen Lean outputs rather than that blueprint; the publication-status and evidence updates on
@@ -301,8 +305,9 @@ referee independently passed a 2,803-job affected build and clean local checks. 
 were local; no CI was run.
 
 This slice adds exactly `C05-09-02`. Current Chapter 5 coverage is
-`13/108 = 12.04%` claim components, `2/13 = 15.38%` whole numbered theorems, and
+`14/108 = 12.96%` claim components, `2/13 = 15.38%` whole numbered theorems, and
 `0/44 = 0%` exercises. No §8 component, numbered theorem, or exercise receives credit from this
 slice. It supplies no analytic continuation, cut-plane or boundary values, parameter analyticity,
-transformation formulas, or numerics. `C05-09-03` remains pending; its separate natural-language
-packet is not a Lean implementation and earns no coverage credit.
+transformation formulas, or numerics. The later accepted
+[exceptional-shift slice](chapter05-hypergeometric-exceptional-shift.md) checks `C05-09-03`; that
+additional credit does not belong to this historical ODE slice.

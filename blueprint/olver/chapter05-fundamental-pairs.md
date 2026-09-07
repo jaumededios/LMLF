@@ -433,11 +433,13 @@ Wronskian, or duplicate Abel proof.
 Natural-language and checked Lean scope completed here is `C05-01-04`--`C05-01-07`, including all
 of Theorem 1.2:
 
-- claim components: `13/108 = 12.04%`;
+- claim components: `14/108 = 12.96%`;
 - whole numbered theorems: `2/13 = 15.38%`;
 - exercises: `0/44 = 0%`.
 
 The later [first-order](chapter05-first-order.md),
-[local Gauss-series](chapter05-hypergeometric-series.md), and
-[local Gauss-ODE](chapter05-hypergeometric-ode.md) slices are now independently accepted; their
-three additional claim-component credits do not belong to this historical Theorem 1.2 slice.
+[local Gauss-series](chapter05-hypergeometric-series.md),
+[local Gauss-ODE](chapter05-hypergeometric-ode.md), and
+[exceptional-shift](chapter05-hypergeometric-exceptional-shift.md) slices are now independently
+accepted; their four additional claim-component credits do not belong to this historical Theorem
+1.2 slice.

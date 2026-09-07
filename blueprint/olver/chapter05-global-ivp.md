@@ -495,13 +495,14 @@ nonvanishing Wronskian, not the full three-way equivalence of Theorem 1.2.
 
 - Natural-language mathematics completed here: `C05-01-02` and `C05-01-03`.
 - Checked Lean coverage: `C05-01-02`, `C05-01-03`, and the whole of `T05-1.1`.
-- Current Chapter 5 checked claim-component count: `13/108 = 12.04%`.
+- Current Chapter 5 checked claim-component count: `14/108 = 12.96%`.
 - Current whole-numbered-theorem count: `2/13 = 15.38%`.
 - Current exercise count: `0/44 = 0%`.
 - Theorem 1.2 is now independently accepted and documented in the
   [fundamental-pair blueprint](chapter05-fundamental-pairs.md); none of its additional credit is
   claimed by this historical Theorem 1.1 slice.
 - The later [first-order](chapter05-first-order.md),
-  [local Gauss-series](chapter05-hypergeometric-series.md), and
-  [local Gauss-ODE](chapter05-hypergeometric-ode.md) slices are also independently accepted; their
-  three claim-component credits likewise do not belong to this page.
+  [local Gauss-series](chapter05-hypergeometric-series.md),
+  [local Gauss-ODE](chapter05-hypergeometric-ode.md), and
+  [exceptional-shift](chapter05-hypergeometric-exceptional-shift.md) slices are also independently
+  accepted; their four claim-component credits likewise do not belong to this page.

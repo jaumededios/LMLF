@@ -4,7 +4,8 @@
 implementation close exactly `C05-09-01`. They also provide the local definition, coefficient,
 convergence, origin-value, analyticity, and Gamma-bridge part of `C05-09-02`; the separately
 accepted [local Gauss-ODE slice](chapter05-hypergeometric-ode.md) now supplies the missing
-all-parameter differential equation and closes that row.
+all-parameter differential equation and closes that row. The later accepted
+[exceptional-shift slice](chapter05-hypergeometric-exceptional-shift.md) closes `C05-09-03`.
 
 ## Source, scope, and review record
 
@@ -55,11 +56,13 @@ The accepted scope is deliberately local.
   all-parameter differential equation, so the combined evidence now checks that row.
 - No result here constructs analytic continuation, a principal cut-plane branch, a value on the
   unit circle, parameter analyticity, a transformation identity, or a derivative formula.
-- `C05-09-03` remains pending. Its separate natural-language packet is not a Lean implementation
-  and earns no coverage credit.
+- The later [exceptional-shift implementation](chapter05-hypergeometric-exceptional-shift.md)
+  combines these definitions and analytic facts with its two shift identities and the existing
+  ODE API to check `C05-09-03`; that additional credit does not belong to this historical slice.
 
 This historical slice itself added exactly one claim component; the separately accepted ODE slice
-adds one more. Current Chapter 5 coverage is `13/108 = 12.04%` claim components,
+and exceptional-shift slice add two more. Current Chapter 5 coverage is
+`14/108 = 12.96%` claim components,
 `2/13 = 15.38%` whole numbered theorems, and
 `0/44 = 0%` exercises.
 

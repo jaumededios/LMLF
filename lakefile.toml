@@ -31,6 +31,7 @@ globs = [
   "LMLF.ODE.Wronskian",
   "LMLF.Quantitative.Basic",
   "LMLF.Results",
+  "LMLF.Results.Hypergeometric",
   "LMLF.Audit.Definitions",
 ]
 
@@ -43,6 +44,7 @@ globs = [
   "LMLFTest.ODE.FundamentalPair",
   "LMLFTest.ODE.Hypergeometric",
   "LMLFTest.ODE.Wronskian",
+  "LMLFTest.Results.Hypergeometric",
   "LMLFTest.Integral.Improper.IMP001PublicUse",
   "LMLFTest.Integral.Improper.IMP001Regressions",
   "LMLFTest.Integral.Improper.IMP001EndpointAE",

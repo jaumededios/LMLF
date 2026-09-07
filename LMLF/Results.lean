@@ -7,6 +7,7 @@ import LMLF.ODE.FundamentalPair
 import LMLF.ODE.Hypergeometric
 import LMLF.ODE.Wronskian
 import LMLF.Quantitative.Basic
+import LMLF.Results.Hypergeometric
 
 /-!
 # LMLF.Results
